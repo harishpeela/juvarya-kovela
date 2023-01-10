@@ -1,5 +1,5 @@
 import {View, Image, TouchableOpacity, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -10,8 +10,15 @@ import RadioForm from 'react-native-simple-radio-button';
 import {UploadPhoto} from '../../utils/svgs';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
+import SelectDropdown from 'react-native-select-dropdown';
 
-export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
+export const AddTampleStep1 = ({
+  onNextBtnPress,
+  data,
+  image,
+  setImage,
+  dropData,
+}) => {
   const {
     buttonTexts: {next},
     placeHolders: {tampleNameP, descriptionP, communityP},
@@ -19,6 +26,9 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
       inputTitles: {tName, tDescription, tCommunity},
     },
   } = allTexts;
+  const [isRoleSelected, setIsRoleSelected] = useState();
+  const [dropDownError, setDropDownError] = useState(false);
+
   const uploadPhoto = () => {
     // setImageLoading(true);
     try {
@@ -28,9 +38,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
           if (!res.didCancel && !res.errorCode) {
             setImage(res.assets[0]);
             setimageUploaded(false);
-            // console.log(res.assets[0]);
-            // setIsImageAvailable(true);
-            // setImageLoading(false);
           } else {
             console.log(res.errorMessage);
           }
@@ -48,6 +55,8 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   ];
   const [isRegular, setIsRegular] = useState(data.type);
   const [imageUploaded, setimageUploaded] = useState(false);
+  const [isCommunity, setIsCommunity] = useState(false);
+
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView
@@ -95,6 +104,7 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
               return;
             }
             onNextBtnPress(values, isRegular);
+            console.log('commite', values.community);
           }}
           validationSchema={AddTampleSchema}
           initialValues={{

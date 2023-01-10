@@ -102,4 +102,10 @@ export const styles = StyleSheet.create({
     width: 150,
     borderRadius: 75,
   },
+  DTextStyle: {
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 15,
+    color: colors.gray,
+    textTransform: 'capitalize',
+  },
 });

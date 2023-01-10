@@ -32,7 +32,7 @@ export const allTexts = {
       line2: 'Line 2',
       line1: 'Line 1',
       line3: 'Line 3',
-      addEmployeeId: 'Add Employee',
+      addEmployeeId: 'Add Employee Id',
     },
     accountItems: {
       profile: 'profile',

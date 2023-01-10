@@ -1,3 +1,4 @@
+import {yupToFormErrors} from 'formik';
 import * as Yup from 'yup';
 
 export const RegisterValidationSchema = Yup.object({
@@ -32,7 +33,7 @@ export const UpdatePasswordValidation = Yup.object({
 export const AddTampleSchema = Yup.object({
   tampleName: Yup.string().trim().required('Tample Name is required'),
   description: Yup.string().trim().required('Description  is required'),
-  // community: Yup.string().trim().required('Community is required'),
+  // community: Yup.string().trim().required('you are not a admin to Add'),
 });
 
 export const AddTampleSchemaS2 = Yup.object({
@@ -42,7 +43,10 @@ export const AddTampleSchemaS2 = Yup.object({
   line3: Yup.string().trim().required('line3 is required'),
 });
 export const AddTampleSchemaS3 = Yup.object({
-  employeId: Yup.string().trim().required('employee Id is required'),
+  // employeId: Yup.string().trim().required('employee Id is required'),
+  employeId: Yup.string()
+    .email('Invalid EmployeeId')
+    .required('Employee id is required'),
 });
 export const LoginValidationSchema = Yup.object({
   email: Yup.string()

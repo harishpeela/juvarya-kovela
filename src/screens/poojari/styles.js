@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
   textContainer: {flex: 1},
   profileItemsContainer: {
     marginTop: '20%',
-    marginLeft: '10%',
   },
   toogleContainer: {},
   addpujari: {
@@ -27,7 +26,6 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   addPoojariView: {
-    marginLeft: '10%',
     marginTop: '10%',
   },
   buttonContainer: {

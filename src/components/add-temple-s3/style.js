@@ -97,4 +97,11 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 5,
   },
+  admin: {
+    color: colors.red2,
+    textTransform: 'capitalize',
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 12,
+    marginTop: 5,
+  },
 });

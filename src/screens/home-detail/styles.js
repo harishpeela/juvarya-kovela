@@ -115,26 +115,31 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   plusContainer: {
-    backgroundColor: colors.blue3,
+    backgroundColor: colors.white,
     padding: 10,
     borderRadius: 10,
-  },
-  todoView: {
-    padding: 10,
-    top: 2,
-    left: '55%',
-    width: 150,
-    borderRadius: 10,
-    backgroundColor: colors.green4,
-    overflow: 'visible',
   },
   postView: {
     flexDirection: 'row',
-    margin: 2,
+    margin: 10,
   },
   todoText: {
     marginLeft: '10%',
-    fontSize: fontSize.medium,
-    color: colors.green,
+    fontSize: fontSize.h4,
+    color: colors.white,
+    fontWeight: 'bold',
+  },
+  modal: {
+    height: 300,
+    width: '90%',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    borderRadius: 20,
+  },
+  model: {
+    flex: 1,
+    margin: '10%',
+    backgroundColor: colors.black,
+    borderRadius: 25,
   }
 });

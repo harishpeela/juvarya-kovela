@@ -1,31 +1,18 @@
-import {
-  View,
-  Text,
-  Button,
-  SafeAreaView,
-  TouchableOpacity,
-  NativeModules,
-  Image,
-} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import React, {useContext} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import {BackHeader, PrimaryButton, ProfileInfo} from '../../components';
-import {
-  AccountIcon1,
-  AccountIcon2,
-  AccountIcon3,
-  AccountIcon4,
-  Demo,
-} from '../../utils/svgs';
+import {AccountIcon1, AccountIcon2, AccountIcon4, Demo} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {
     headings: {
-      accountItems: {profile, bookings, donations, temple, occasion},
+      accountItems: {bookings, donations, temple},
     },
     tabNames: {home},
     constants: {role},
@@ -49,7 +36,6 @@ const Profile = ({navigation}) => {
         />
       </View>
       <View style={styles.profileItemsContainer}>
-        {/* <Item svg={<AccountIcon1 />} text={profile} /> */}
         <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} />
         {(userDetails?.role == role.admin ||
@@ -62,16 +48,6 @@ const Profile = ({navigation}) => {
             }}
           />
         )}
-        {/* {(userDetails?.role == role.admin ||
-          userDetails?.role == role.agent) && (
-          <Item
-            svg={<AccountIcon4 />}
-            text={occasion}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.occasions);
-            }}
-          />
-        )} */}
 
         <Item
           svg={<AccountIcon1 />}
@@ -83,7 +59,7 @@ const Profile = ({navigation}) => {
         {(userDetails?.role == role.admin ||
           userDetails?.role == role.agent) && (
           <Item1
-            svg={require('../../../assets/images/poojari.png')}
+            svg={require('../../../assets/images/priest.webp')}
             text={'Poojari'}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.poojari);
@@ -115,8 +91,9 @@ const Item = ({text, svg, onPress}) => (
 );
 const Item1 = ({text, svg, onPress}) => (
   <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-    {/* <View style={styles.iconContainer}>{svg}</View> */}
-    <Image source={svg} style={{height: 25, width: 25}} />
+    <View style={{borderWidth: 2, borderRadius: 20, padding: 2}}>
+      <Image source={svg} style={{height: 20, width: 20}} />
+    </View>
     <View style={styles.textContainer}>
       <Text style={styles.itemText1}>{text}</Text>
     </View>
@@ -124,12 +101,3 @@ const Item1 = ({text, svg, onPress}) => (
 );
 
 export default Profile;
-
-// Hint: Logout button here
-// <Button
-// title="Logout"
-// onPress={async () => {
-//   await removeLoginSessionDetails();
-//   setLoginDetails(null);
-// }}
-// />

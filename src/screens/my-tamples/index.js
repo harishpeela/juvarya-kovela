@@ -36,7 +36,7 @@ const MyTamples = ({navigation, route}) => {
         // console.log('My Temples 786', items?.length);
         setTempleList(items);
         setfilteredArray(items);
-        console.log('list of visible arrays', items);
+        // console.log('list of visible arrays', items);
         setLoading(false);
       } else {
         setLoading(false);
@@ -118,7 +118,6 @@ const MyTamples = ({navigation, route}) => {
                             {
                               id: item.id,
                               title: item.name,
-                              // checked: checked || false,
                             },
                           );
                         }}

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
 // import {CustomIcon} from '../../components';

@@ -20,11 +20,13 @@ import {
   AddTempleAdmin,
   createTemple,
   UploadTemplePicture,
+  getAddTempId,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const AddTample = ({navigation}) => {
   const [screenNo, setScreenNo] = useState(1);
+  const [empId, setEmpId] = useState();
   const [step1Data, setStep1Data] = useState({
     tampleName: '',
     description: '',
@@ -47,7 +49,7 @@ const AddTample = ({navigation}) => {
   const [userID, setUserID] = useState(1);
 
   const {userDetails} = useContext(ApplicationContext);
-
+  // console.log('userDetails', userDetails);
   const getImageObj = img => {
     let newUri =
       Platform.OS === 'ios' ? img.uri : img.uri.replace('file://', 'file:');
@@ -58,6 +60,7 @@ const AddTample = ({navigation}) => {
     };
     return imageObj;
   };
+
   const createTempleHandler = async showCard => {
     let creatTemplePayload = {
       name: step1Data.tampleName,
@@ -74,7 +77,6 @@ const AddTample = ({navigation}) => {
     setaddBtnLoading(true);
     createTemple(creatTemplePayload).then(createRes => {
       if (createRes && createRes.status === 200) {
-        // console.log(response);
         let id = createRes?.data?.id;
         setUserID(id);
         let img = getImageObj(image);
@@ -90,19 +92,20 @@ const AddTample = ({navigation}) => {
             };
             AddTempleAdmin(templeAdminPayload).then(async res => {
               if (res && res.status === 200) {
-                console.log('templeAdminResponse---2', res);
-                await setaddBtnLoading(false);
+                // console.log('templeAdminResponse---2', res);
+                setaddBtnLoading(false);
                 showCard();
               }
             });
           }
         });
-        // console.log('uploadPhotoResponse', uploadPhotoResponse);
       }
     });
-    // console.log('responses', response);
   };
 
+  useEffect(() => {
+    // IdVerify();
+  }, []);
   const CountNo = ({no, selectedNo, onPress}) => {
     return (
       <TouchableOpacity

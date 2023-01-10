@@ -45,7 +45,7 @@ const Home = ({navigation}) => {
         const {
           data: {feeds},
         } = response || {};
-        console.log('Home Response 786', feeds);
+        // console.log('Home Response 786', feeds);
         setHomeFeedList(feeds);
         setloader(false);
         setRefrsh(false);

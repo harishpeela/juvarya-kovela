@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text} from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {styles} from './style';
 import {AddTampleSchemaS3} from '../../common/schemas';
@@ -11,6 +11,7 @@ import {Formik} from 'formik';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/AntDesign';
+import ApplicationContext from '../../utils/context-api/Context';
 
 export const AddTampleStep3 = ({
   onAddBtnPress,
@@ -24,9 +25,42 @@ export const AddTampleStep3 = ({
 }) => {
   const [isRoleSelected, setIsRoleSelected] = useState(data.role);
   const [dropDownError, setDropDownError] = useState(false);
-  const [isAvailable, setIsAvailable] = useState(false);
-  const [addEmp, setAddEmp] = useState('');
-  console.log('pop up finish', isAllDataAvailable);
+  const [admin, setAdmin] = useState(false);
+  const IdVerify = emp => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Bearer a1f3e922-b087-4875-8875-e3d1b068f4d3',
+    );
+    myHeaders.append(
+      'Cookie',
+      'JSESSIONID=4FCEA1E39BECF5B9FC5231C32008AB5C; JSESSIONID=330F19244CD9B975D668E6F2716435EF',
+    );
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}`,
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        console.log('bhjsbhjhbj', result);
+        if (result?.validCustomer) {
+          onAddBtnPress(emp, isRoleSelected, () => {
+            setIsAllDataAvailable(true);
+          });
+        } else {
+          setAdmin(true);
+          setIsAllDataAvailable(false);
+        }
+      })
+      .catch(error => console.log('errorrrrwe', error));
+  };
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView
@@ -35,15 +69,12 @@ export const AddTampleStep3 = ({
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
+            console.log('statevalue', values);
             formikActions.setSubmitting(true);
             if (isRoleSelected == '') {
               setDropDownError(true);
             } else {
-              // setIsAllDataAvailable(true);
-              onAddBtnPress(values, isRoleSelected, () => {
-                setIsAllDataAvailable(true);
-              });
-              console.log('Data Added successfully !');
+              IdVerify(values);
             }
           }}
           validationSchema={AddTampleSchemaS3}
@@ -56,7 +87,6 @@ export const AddTampleStep3 = ({
             handleChange,
             handleBlur,
             handleSubmit,
-            isSubmitting,
             values,
           }) => {
             return (
@@ -68,7 +98,13 @@ export const AddTampleStep3 = ({
                   error={touched.employeId && errors.employeId}
                   onBlur={handleBlur('employeId')}
                   setState={handleChange('employeId')}
+                  maxLength={25}
                 />
+                {admin && (
+                  <Text style={styles.admin}>
+                    you are not a valid user to add employee
+                  </Text>
+                )}
                 <View style={styles.dropDownContianer}>
                   <SelectDropdown
                     data={['admin', 'super admin']}

@@ -3,8 +3,7 @@ import {
   authAxiousInstance,
   axiousInstance,
   axiosMultiPartFormData,
-  OccationInstance,
-  serviceCategorie,
+  authAxiosAddTempId,
 } from './api';
 
 const endpoints = {
@@ -19,7 +18,7 @@ const endpoints = {
   GET_CURRENT_USER: 'v1/jtcustomer',
   GET_TEMPLE_DETAILS: 'v1/jtitem/details/',
   GET_POPULAR_TEMPLES: 'v1/jtitem/popular/list',
-  OCCATIONS: 'v1/occasion/save',
+  ADD_TEMP_ID: 'v1/jtcustomer/search/',
   GET_FEED_LIST_IN_DETAILS: 'v1/feed/item',
   SERVICE_CATEGORY_ITEMS: 'api/v1/jtitemservicecategorytoitem/save',
   MORE_TO_EXPLORE: 'v1/jtitem/list',
@@ -65,6 +64,15 @@ export const getPopularTemples = async pgNo => {
       `${endpoints.GET_POPULAR_TEMPLES}?page=${pgNo}&pageSize=20&popular=true`,
       {retry: 5, retryDelay: 3000},
     );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getAddTempId = async email => {
+  try {
+    let result = await axiousInstance.get(`${endpoints.ADD_TEMP_ID}/${email}`);
     return result;
   } catch (error) {
     return error;
@@ -166,7 +174,6 @@ export const getTempleList = async (pageNo, pageSize) => {
       `${endpoints.GET_TEMPLE_LIST}?pageNumber=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
-    console.log('pageno', result?.data?.items?.length);
     return result;
   } catch (error) {
     return error;
@@ -258,28 +265,6 @@ export const getUserInfo = async () => {
 export const createNewInvoice = async data => {
   try {
     let result = await axiousInstance.post(endpoints.Create_Invoice, data);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
-};
-
-export const createOccation = async data => {
-  try {
-    let result = await OccationInstance.post(endpoints.OCCATIONS, data);
-    console.log('createoccation', result);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
-};
-export const seviceCategoryItems = async data => {
-  try {
-    let result = await serviceCategorie.post(
-      endpoints.SERVICE_CATEGORY_ITEMS,
-      data,
-    );
-    console.log('serviceCategorie', result);
     return result;
   } catch (error) {
     return error.response.data;

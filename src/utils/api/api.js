@@ -21,17 +21,8 @@ export const authAxiousInstance = axios.create({
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
   },
 });
-export const serviceCategorie = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
-  },
-});
 
-export const OccationInstance = axios.create({
+export const authAxiosAddTempId = axios.create({
   baseURL: BASE_URL,
   Accept: 'application/json',
   'Content-Type': 'application/json',

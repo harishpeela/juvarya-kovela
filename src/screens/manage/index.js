@@ -75,12 +75,3 @@ const Item1 = ({text, svg, onPress}) => (
 );
 
 export default Manage;
-
-// Hint: Logout button here
-// <Button
-// title="Logout"
-// onPress={async () => {
-//   await removeLoginSessionDetails();
-//   setLoginDetails(null);
-// }}
-// />
