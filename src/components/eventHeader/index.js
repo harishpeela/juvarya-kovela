@@ -1,12 +1,12 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, Text, TouchableOpacity} from 'react-native';
 import {colors} from '../../common';
-import React, {useState} from 'react';
+import React from 'react';
 import {styles} from './styles';
-import EntypoIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
 import CalenderIcon from 'react-native-vector-icons/AntDesign';
 
-export const BackHeader = ({
+export const EventHeader = ({
   txt,
   onBackPress,
   isOption,
@@ -28,14 +28,14 @@ export const BackHeader = ({
         </Text>
       </View>
       {isOption && (
-        <View style={styles.icon}>
-          <EntypoIcon
-            name="dots-two-vertical"
-            color={colors.black}
+        <TouchableOpacity style={styles.icon}>
+          <CalenderIcon
+            name="calendar"
+            color={colors.white}
             size={22}
             onPress={onDotsPress}
           />
-        </View>
+        </TouchableOpacity>
       )}
       {plusButton && (
         <TouchableOpacity onPress={onPlusPress}>

@@ -49,7 +49,7 @@ const Manage = ({navigation, route}) => {
             svg={require('../../../assets/images/poojari.png')}
             text={'Events'}
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.poojari);
+              navigation.navigate(allTexts.screenNames.events);
             }}
           />
         )}

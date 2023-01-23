@@ -53,6 +53,7 @@ export const AddTampleStep3 = ({
         if (result?.validCustomer) {
           onAddBtnPress(emp, isRoleSelected, () => {
             setIsAllDataAvailable(true);
+            console.log('emp', emp);
           });
         } else {
           setAdmin(true);
@@ -61,6 +62,7 @@ export const AddTampleStep3 = ({
       })
       .catch(error => console.log('errorrrrwe', error));
   };
+
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView

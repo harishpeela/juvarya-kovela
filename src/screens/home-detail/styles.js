@@ -125,21 +125,35 @@ export const styles = StyleSheet.create({
   },
   todoText: {
     marginLeft: '10%',
-    fontSize: fontSize.h4,
+    fontSize: fontSize.h6,
     color: colors.white,
-    fontWeight: 'bold',
+    fontWeight: '600',
   },
   modal: {
-    height: 300,
+    height: 250,
     width: '90%',
     alignItems: 'center',
     backgroundColor: 'black',
     borderRadius: 20,
   },
   model: {
-    flex: 1,
-    margin: '10%',
-    backgroundColor: colors.black,
-    borderRadius: 25,
-  }
+    backgroundColor: '#1c2f3e',
+    height: '40%',
+    position: 'absolute',
+    width: '100%',
+    top: '60%',
+    borderTopLeftRadius: 10,
+    borderTopEndRadius: 10,
+  },
+  border: {
+    borderWidth: 0.7,
+    borderColor: 'gray',
+  },
+  modelview: {
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#344853',
+    marginTop: 65,
+    margin: 20,
+  },
 });

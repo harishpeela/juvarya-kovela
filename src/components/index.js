@@ -18,8 +18,11 @@ import {ImageLoader} from './image-loader';
 import {SearchCard} from './search-card';
 export {SweetAlert} from './alert-popup';
 import {Input} from './poojariInput';
-import { InputTypeAddTemp3 } from './inputFieldAddTemple3';
-import { OccasionBackHeader } from './backHeaderOccasion';
+import {InputTypeAddTemp3} from './inputFieldAddTemple3';
+import {OccasionBackHeader} from './backHeaderOccasion';
+import {EventHeader} from './eventHeader';
+import {AddEvent} from './add-events-comp';
+import { PrimaryEventButton } from './eventbutton';
 
 export {
   Loader,
@@ -43,4 +46,7 @@ export {
   Input,
   InputTypeAddTemp3,
   OccasionBackHeader,
+  EventHeader,
+  AddEvent,
+  PrimaryEventButton,
 };

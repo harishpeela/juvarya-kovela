@@ -27,17 +27,11 @@ export const InputField = ({
         <View style={styles.fieldContainer}>
           {isFlag && (
             <View style={styles.imgContainer}>
-              {/* <Image
-                resizeMode="contain"
-                style={styles.image}
-                source={require('../../utils/assets/images/flag.png')}
-              /> */}
               <PhoneIcon name="phone" style={styles.image} size={20} />
               <Text style={styles.code}>+91</Text>
             </View>
           )}
           <TextInput
-            // placeholder={placeholder}
             value={value}
             placeholderTextColor={colors.gray2}
             onChangeText={val => setState(val)}

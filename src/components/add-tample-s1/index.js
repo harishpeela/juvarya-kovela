@@ -8,17 +8,10 @@ import {AddTampleSchema} from '../../common/schemas';
 import {styles} from './styles';
 import RadioForm from 'react-native-simple-radio-button';
 import {UploadPhoto} from '../../utils/svgs';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
-import SelectDropdown from 'react-native-select-dropdown';
 
-export const AddTampleStep1 = ({
-  onNextBtnPress,
-  data,
-  image,
-  setImage,
-  dropData,
-}) => {
+export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   const {
     buttonTexts: {next},
     placeHolders: {tampleNameP, descriptionP, communityP},
@@ -26,8 +19,6 @@ export const AddTampleStep1 = ({
       inputTitles: {tName, tDescription, tCommunity},
     },
   } = allTexts;
-  const [isRoleSelected, setIsRoleSelected] = useState();
-  const [dropDownError, setDropDownError] = useState(false);
 
   const uploadPhoto = () => {
     // setImageLoading(true);
@@ -55,7 +46,6 @@ export const AddTampleStep1 = ({
   ];
   const [isRegular, setIsRegular] = useState(data.type);
   const [imageUploaded, setimageUploaded] = useState(false);
-  const [isCommunity, setIsCommunity] = useState(false);
 
   return (
     <View style={styles.wrapper}>

@@ -17,13 +17,7 @@ import PostIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import StoryIcon from 'react-native-vector-icons/MaterialIcons';
 import GoBackIcon from 'react-native-vector-icons/AntDesign';
 import React, {useContext, useEffect, useState} from 'react';
-import {
-  InfoHeader,
-  PrimaryButton,
-  Loader,
-  SweetAlert,
-  ImageLoader,
-} from '../../components';
+import {InfoHeader, PrimaryButton, Loader, SweetAlert} from '../../components';
 import {colors} from '../../common';
 import {styles} from './styles';
 import {allTexts} from '../../common';
@@ -52,7 +46,7 @@ const HomeDetail = ({navigation, route}) => {
   const {
     params: {id, title},
   } = route || {};
-
+  console.log('details', id, title);
   const getData = async () => {
     try {
       let result = await getTempleDetails(id);
@@ -171,19 +165,27 @@ const HomeDetail = ({navigation, route}) => {
             animationType={'slide'}
             transparent={false}
             visible={open}
-            onRequestClose={() => {
-              console.log('Modal has been closed.');
-            }}>
+            onRequestClose={() => setOpen(!open)}>
             <View style={styles.model}>
-              <View style={{margin: 20}}>
+              <View style={styles.modelview}>
                 <View style={styles.postView}>
                   <PostIcon name="post" color={'white'} size={30} />
-                  <Text style={styles.todoText}>{'Post'} </Text>
+                  <TouchableOpacity>
+                    <Text style={[styles.todoText, {marginLeft: 28}]}>
+                      {'Post'}{' '}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
+                <View style={styles.border} />
                 <View style={styles.postView}>
                   <StoryIcon name="auto-stories" color={'white'} size={30} />
-                  <Text style={styles.todoText}>{'Story'} </Text>
+                  <TouchableOpacity>
+                    <Text style={[styles.todoText, {marginLeft: 28}]}>
+                      {'Story'}{' '}
+                    </Text>
+                  </TouchableOpacity>
                 </View>
+                <View style={styles.border} />
                 <View style={styles.postView}>
                   <EntypoIcon name="yelp" color={'white'} size={30} />
                   <TouchableOpacity
@@ -195,14 +197,15 @@ const HomeDetail = ({navigation, route}) => {
                       })
                     }>
                     <Text style={[styles.todoText, {marginLeft: 28}]}>
-                      {'Manage'}{' '}
+                      {'Manage'}
                     </Text>
                   </TouchableOpacity>
                 </View>
+                <View style={styles.border} />
                 <TouchableOpacity
                   onPress={() => setOpen(!open)}
-                  style={{marginTop: '160%', alignSelf: 'flex-end'}}>
-                  <GoBackIcon name="back" color={'white'} size={30} />
+                  style={{alignSelf: 'flex-end'}}>
+                  <GoBackIcon name="back" color={'red'} size={30} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -298,29 +301,6 @@ const BackHeader1 = ({
         </View>
       )}
     </View>
-  );
-};
-
-const Model = ({show}) => {
-  const [open, setOpen] = useState(false);
-  return (
-    <Modal
-      animationType={'slide'}
-      transparent={false}
-      visible={show}
-      onRequestClose={() => {
-        console.log('Modal has been closed.');
-      }}>
-      <View style={styles.modal}>
-        <Text style={styles.text}>Modal is open!</Text>
-        <Button
-          title="Click To Close Modal"
-          onPress={() => {
-            setOpen(!open);
-          }}
-        />
-      </View>
-    </Modal>
   );
 };
 export default HomeDetail;

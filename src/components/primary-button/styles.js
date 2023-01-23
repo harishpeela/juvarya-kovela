@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {colors, fontFamily} from '../../common';
-import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 
 export const styles = (bgColor, radius, paddidng, width) =>
   StyleSheet.create({

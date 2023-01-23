@@ -92,7 +92,7 @@ const Item = ({text, svg, onPress}) => (
 const Item1 = ({text, svg, onPress}) => (
   <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
     <View style={{borderWidth: 2, borderRadius: 20, padding: 2}}>
-      <Image source={svg} style={{height: 20, width: 20}} />
+      <Image source={svg} style={{height: 20, width: 20, tintColor: 'black'}} />
     </View>
     <View style={styles.textContainer}>
       <Text style={styles.itemText1}>{text}</Text>

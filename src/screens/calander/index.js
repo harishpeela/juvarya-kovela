@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import DatePicker from 'react-native-modern-datepicker';
+// import DatePicker from 'react-native-modern-datepicker';
 import {View} from 'react-native';
 import {allTexts, colors} from '../../common';
 import {BackHeader} from '../../components';
-
 const Calender = ({navigation}) => {
   // const [selectedDate, setSelectedDate] = useState('');
 
@@ -20,7 +19,7 @@ const Calender = ({navigation}) => {
           marginTop: '20%',
         }}>
         {/* <DatePicker onSelectedChange={date => setSelectedDate(date)} /> */}
-        <DatePicker
+        {/* <DatePicker
           options={{
             backgroundColor: colors.green2,
             textHeaderColor: colors.white,
@@ -35,7 +34,7 @@ const Calender = ({navigation}) => {
           mode="calendar"
           minuteInterval={30}
           style={{borderRadius: 10}}
-        />
+        /> */}
       </View>
     </View>
   );

@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   Platform,
 } from 'react-native';
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   AddTampleStep1,
   AddTampleStep2,
@@ -14,19 +14,16 @@ import {
   BackHeader,
 } from '../../components';
 import {allTexts, colors} from '../../common';
-// import {styles} from './style';
 import {styles} from './styles';
 import {
   AddTempleAdmin,
   createTemple,
   UploadTemplePicture,
-  getAddTempId,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const AddTample = ({navigation}) => {
   const [screenNo, setScreenNo] = useState(1);
-  const [empId, setEmpId] = useState();
   const [step1Data, setStep1Data] = useState({
     tampleName: '',
     description: '',
@@ -49,7 +46,6 @@ const AddTample = ({navigation}) => {
   const [userID, setUserID] = useState(1);
 
   const {userDetails} = useContext(ApplicationContext);
-  // console.log('userDetails', userDetails);
   const getImageObj = img => {
     let newUri =
       Platform.OS === 'ios' ? img.uri : img.uri.replace('file://', 'file:');
@@ -92,7 +88,6 @@ const AddTample = ({navigation}) => {
             };
             AddTempleAdmin(templeAdminPayload).then(async res => {
               if (res && res.status === 200) {
-                // console.log('templeAdminResponse---2', res);
                 setaddBtnLoading(false);
                 showCard();
               }
@@ -102,10 +97,6 @@ const AddTample = ({navigation}) => {
       }
     });
   };
-
-  useEffect(() => {
-    // IdVerify();
-  }, []);
   const CountNo = ({no, selectedNo, onPress}) => {
     return (
       <TouchableOpacity

@@ -10,6 +10,7 @@ export const allTexts = {
     next: 'Next',
     updatePassword: 'Update Password',
     add: 'Add',
+    addevents: 'Add Event',
   },
 
   headings: {
@@ -33,6 +34,9 @@ export const allTexts = {
       line1: 'Line 1',
       line3: 'Line 3',
       addEmployeeId: 'Add Employee Id',
+      eventname: 'Event Name',
+      pickadate: 'Pick a date for darshan',
+      feedevent: 'Add this Event to the Feed',
     },
     accountItems: {
       profile: 'profile',
@@ -115,6 +119,7 @@ export const allTexts = {
     occasions: 'Occasions',
     manage: 'Manage',
     calender: 'Calender',
+    addevents: 'AddEvents',
   },
   homeHeader: {
     welcome: 'Welcome ',

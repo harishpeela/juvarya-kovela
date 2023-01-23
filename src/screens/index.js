@@ -19,6 +19,7 @@ import Events from './events';
 import Occasions from './occasions';
 import Manage from './manage';
 import Calender from './calander';
+import AddEvents from './add-events';
 export {
   CreatePost,
   Seemore,
@@ -41,4 +42,5 @@ export {
   Occasions,
   Manage,
   Calender,
+  AddEvents,
 };

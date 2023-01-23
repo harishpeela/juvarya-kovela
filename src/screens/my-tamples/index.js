@@ -48,7 +48,6 @@ const MyTamples = ({navigation, route}) => {
   useEffect(() => {
     getTemples();
   }, [isFocused]);
-  // console.log('filtered aeeay', filteredArray);
   const performFilter = value => {
     setfilteredArray(
       templeList.filter(item =>

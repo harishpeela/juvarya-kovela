@@ -19,6 +19,7 @@ import {
   Occasions,
   Manage,
   Calender,
+  AddEvents,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -32,7 +33,6 @@ import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getFavoritesList, getUserInfo} from './src/utils/api';
 
-// Ignore log notification by message:
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -42,7 +42,6 @@ const App = () => {
       signin,
       otpScreen,
       signup,
-      signup2,
       splash,
       bottomTab,
       homeDetails,
@@ -58,8 +57,8 @@ const App = () => {
       occasions,
       manage,
       calender,
+      addevents,
     },
-    tabNames: {home},
   } = allTexts;
 
   useEffect(() => {
@@ -205,6 +204,13 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={addevents}
+          component={AddEvents}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -283,10 +289,6 @@ const App = () => {
         setUserDetails,
         favoriteList,
         setFavoriteList,
-        condition,
-        setCondition,
-        donationId,
-        setDonationId,
       }}>
       <SafeAreaProvider>
         <NavigationContainer>

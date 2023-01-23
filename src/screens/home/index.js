@@ -45,7 +45,6 @@ const Home = ({navigation}) => {
         const {
           data: {feeds},
         } = response || {};
-        // console.log('Home Response 786', feeds);
         setHomeFeedList(feeds);
         setloader(false);
         setRefrsh(false);
@@ -57,8 +56,8 @@ const Home = ({navigation}) => {
   useEffect(() => {
     getFollowedTempleList();
     favoriteTemplesList.length;
-    console.log('num of favourates', favoriteTemplesList.length);
-  },[]);
+    // console.log('num of favourates', favoriteTemplesList.length);
+  }, []);
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.topContainer}>
@@ -68,7 +67,8 @@ const Home = ({navigation}) => {
           img={require('../../utils/assets/images/avatar.png')}
           name={userDetails?.username}
           plusVisible={userDetails?.role === allTexts.constants.role.admin}
-          onBellPress={() => navigation.navigate(allTexts.screenNames.events)}
+          // onBellPress={() => navigation.navigate(allTexts.screenNames.events)}
+          onBellPress={() => alert('page under development')}
         />
         {/* <HomeTabs /> */}
       </View>
@@ -97,16 +97,13 @@ const Home = ({navigation}) => {
             renderItem={({item, index}) => (
               <HomeCard
                 heading={item?.itemDetails?.name}
-                // date={'Aug 31. 2022'}
                 text={item.description}
-                // hashTag={'#srinookambikatemple'}
                 icon={item?.itemDetails?.profilePicture}
                 img={item?.mediaList[0]?.url}
                 likes={item?.likesCount}
                 isLikeTrue={item?.like}
                 id={item?.id}
                 followId={item?.itemDetails?.id}
-                // saved={'3.233'}
                 isFollowing={item?.itemDetails?.following}
                 onCardPress={() => {
                   navigation.navigate(allTexts.screenNames.homeDetails, {
