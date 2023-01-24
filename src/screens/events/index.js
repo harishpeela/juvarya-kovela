@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
@@ -14,35 +14,39 @@ import {styles} from './styles';
 import Icon from 'react-native-vector-icons/Entypo';
 import PencilIcon from 'react-native-vector-icons/EvilIcons';
 import DeleteIcon from 'react-native-vector-icons/AntDesign';
+import ApplicationContext from '../../utils/context-api/Context';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
-const Events = ({navigation}) => {
+const Events = ({navigation, route}) => {
   const [events, setEvents] = useState();
-  const EventsList = () => {
+  const {id} = useContext(ApplicationContext);
+  const {idparam} = route?.params || {};
+  console.log('params id', idparam);
+  const EventsList = async () => {
     var myHeaders = new Headers();
-    myHeaders.append('Cookie', 'JSESSIONID=0D469B0BD0A128F1E53151840D1B03F5');
-
     var requestOptions = {
       method: 'GET',
       headers: myHeaders,
       redirect: 'follow',
     };
-
+    let token = await getAuthTokenDetails();
+    let string_Access_Token = token.replace('bearer ', '');
+    console.log('tocj------', string_Access_Token);
     fetch(
-      'http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=1200&pageNo=0&pageSize=20&access_token=ef4bc0c1-cc28-4e11-a1ec-b43ea1269533',
+      `http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=${id}&pageNo=0&pageSize=20&access_token=${string_Access_Token}`,
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
         if (result) {
+          console.log('t', result);
           setEvents(result.occasion);
-          console.log('ressss', events);
         }
       })
       .catch(error => console.log('error', error));
   };
   useEffect(() => {
     EventsList();
-    events;
   }, []);
   return (
     <SafeAreaView style={styles.container}>
@@ -50,7 +54,9 @@ const Events = ({navigation}) => {
         onBackPress={() => navigation.goBack()}
         txt={allTexts.screenNames.events}
         plusButton
-        onPlusPress={() => navigation.navigate(allTexts.screenNames.addevents)}
+        onPlusPress={() =>
+          navigation.navigate(allTexts.screenNames.addevents, {id: idparam})
+        }
         isOption={true}
       />
       {events === 0 ? (
@@ -71,26 +77,6 @@ const Events = ({navigation}) => {
             );
           })}
         </ScrollView>
-        // <FlatList
-        //   data={events}
-        //   // showsHorizontalScrollIndicator={false}
-        //   // contentContainerStyle={styles.flatListStyle}
-        //   // keyboardShouldPersistTaps="handled"
-        //   // keyExtractor={(item, index) => item?.id}
-        //   // renderItem={({item}) => {
-        //   //   <EventsCard name={item.name} />;
-        //   // }}
-        //   keyExtractor={(item, index) => index.id}
-        //   renderItem={({item}) => (
-        //     <View>
-        //       <EventsCard
-        //         name={item?.occasion[72]?.name}
-        //         date={item?.occasion[72]?.date}
-        //         description={item?.occasion[72]?.description}
-        //       />
-        //     </View>
-        //   )}
-        // />
       )}
     </SafeAreaView>
   );

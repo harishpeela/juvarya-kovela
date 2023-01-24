@@ -219,9 +219,7 @@ const App = () => {
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
   const [favoriteList, setFavoriteList] = useState([]);
-  const [condition, setCondition] = useState(false);
-  const [donationId, setDonationId] = useState();
-
+  const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
     setLoginDetails(authDetails);
@@ -289,6 +287,8 @@ const App = () => {
         setUserDetails,
         favoriteList,
         setFavoriteList,
+        id,
+        setId,
       }}>
       <SafeAreaProvider>
         <NavigationContainer>

@@ -9,14 +9,13 @@ import {
 import React, {useEffect, useState} from 'react';
 import {BackHeader, Loader, SearchBar} from '../../components';
 import {styles} from './styles';
-import {BellSVG, SearchFilter} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {getTempleList} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 
 const MyTamples = ({navigation, route}) => {
   const {
-    screenNames: {addTample, service, occasions},
+    screenNames: {addTample},
   } = allTexts;
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);

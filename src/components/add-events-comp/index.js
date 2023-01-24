@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, Modal} from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {InputField, PrimaryEventButton, EventHeader} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -12,8 +12,11 @@ import {TextInput, TouchableOpacity} from 'react-native';
 import CalenderIcon from 'react-native-vector-icons/AntDesign';
 import RadioForm from 'react-native-simple-radio-button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-
+import moment from 'moment/moment';
+import ApplicationContext from '../../utils/context-api/Context';
 export const AddEvent = ({onNextBtnPress, data, navigation}) => {
+  const {id} = useContext(ApplicationContext);
+  console.log('iiiiiidddddddddddd', navigation);
   const {
     buttonTexts: {addevents},
     placeHolders: {tampleNameP, descriptionP},
@@ -32,8 +35,8 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
   const HideDatePicker = () => {
     setDatePickerVisible(false);
   };
-  const HandleCnfrm = date => {
-    setDate(date);
+  const HandleCnfrm = datedata => {
+    setDate(datedata);
     HideDatePicker();
   };
   const GetDate = () => {
@@ -42,15 +45,7 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
       ? ` ${TempDate[3]} ${TempDate[4]} ${TempDate[5]} ${TempDate[6]} ${TempDate[7]} ${TempDate[8]} ${TempDate[9]} ${TempDate[10]} ${TempDate[11]} ${TempDate[12]} ${TempDate[13]} ${TempDate[14]}`
       : '';
   };
-  const DateData = GetDate();
-  const GetFromDate = () => {
-    let TempDate = date.toString().split(' /s ');
-    console.log('date', date);
-    return date !== ''
-      ? ` ${TempDate[3]} ${TempDate[4]} ${TempDate[5]} ${TempDate[6]} ${TempDate[7]} ${TempDate[8]} ${TempDate[9]} ${TempDate[10]} ${TempDate[11]} ${TempDate[12]} ${TempDate[13]} ${TempDate[14]}`
-      : '';
-  };
-  const FromDate = GetFromDate();
+  // const FromDate = GetFromDate();
   // const [selectedDate, setSelectedDate] = useState(new Date());
   // console.log('selecteddate', selectedDate, isRegular);
   var radio_props = [{label: 'Add this Event to the Feed', value: 0}];
@@ -75,7 +70,7 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
     formdata.append('regionWide', 'true');
     formdata.append('country', 'IN');
     formdata.append('description', occasionData?.description);
-    formdata.append('itemId', '1200');
+    formdata.append('itemId', id);
     // formdata.append(
     //   'files',
     //   fileInput.files[0],
@@ -93,19 +88,22 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
     };
 
     fetch(
-      'http://20.255.59.150:8082/api/v1/occasion/save?access_token=ef4bc0c1-cc28-4e11-a1ec-b43ea1269533',
+      'http://20.255.59.150:8082/api/v1/occasion/save?access_token=a05d62bb-ab02-4790-91df-0079abab3be4',
       requestOptions,
     )
       .then(response => response.json())
-      .then(result => console.log('resultss', result))
+      .then(result => {
+        console.log("injnhjnh", result);
+        if (result?.id) {
+          navigation.navigate(allTexts.screenNames.events);
+        }
+      })
       .catch(error => console.log('error', error));
   };
+  // var dates = moment('2016-05-12').format('YYYY/MMM/DD');
+  // console.log('dates', dates);
   useEffect(() => {
-    CreateEvent();
     occasionData;
-    DateData;
-    FromDate;
-    console.log('isvisible value', DateData);
   }, []);
 
   return (
@@ -120,7 +118,12 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
             setOccasionData(values);
             console.log('valuesssss', occasionData);
             CreateEvent();
-            navigation.navigate(allTexts.screenNames.events);
+            if (values === '') {
+              setOccasionData(null);
+            } else if (values) {
+              setOccasionData(values);
+              CreateEvent();
+            }
           }}
           validationSchema={AddEventSchema}
           initialValues={{
@@ -177,13 +180,13 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
                     }}
                   />
                 </View>
-                {isRegular === 0 ? (
+                {!isRegular ? (
                   <View>
                     <View style={{height: 20}} />
                     <Text style={styles.pickDateTxt}>{pickadate} </Text>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                       <InputField1
-                        value={data.date}
+                        value={data.date || GetDate()}
                         titleColor={colors.green2}
                         placeholder="yyyy/mm/dd"
                         error={touched.date && errors.date}
@@ -216,7 +219,7 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
                       <InputField1
                         value={values.fromDate}
                         titleColor={colors.green2}
-                        placeholder="fromDate"
+                        placeholder="from-Date"
                         error={touched.fromDate && errors.fromDate}
                         onBlur={handleBlur('fromDate')}
                         setState={handleChange('fromDate')}
@@ -240,7 +243,7 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
                       <InputField1
                         value={values.toDate}
                         titleColor={colors.green2}
-                        placeholder="toDate"
+                        placeholder="to-Date"
                         error={touched.toDate && errors.toDate}
                         onBlur={handleBlur('toDate')}
                         setState={handleChange('toDate')}
@@ -327,3 +330,16 @@ const InputField1 = ({
     </>
   );
 };
+
+
+
+
+
+
+
+
+
+
+
+// access_token=a05d62bb-ab02-4790-91df-0079abab3be4
+// access_token=ef4bc0c1-cc28-4e11-a1ec-b43ea1269533

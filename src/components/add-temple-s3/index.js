@@ -11,8 +11,7 @@ import {Formik} from 'formik';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/AntDesign';
-import ApplicationContext from '../../utils/context-api/Context';
-
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 export const AddTampleStep3 = ({
   onAddBtnPress,
   data,
@@ -26,16 +25,11 @@ export const AddTampleStep3 = ({
   const [isRoleSelected, setIsRoleSelected] = useState(data.role);
   const [dropDownError, setDropDownError] = useState(false);
   const [admin, setAdmin] = useState(false);
-  const IdVerify = emp => {
+  const IdVerify = async emp => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer a1f3e922-b087-4875-8875-e3d1b068f4d3',
-    );
-    myHeaders.append(
-      'Cookie',
-      'JSESSIONID=4FCEA1E39BECF5B9FC5231C32008AB5C; JSESSIONID=330F19244CD9B975D668E6F2716435EF',
-    );
+    myHeaders.append('Authorization', token);
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Accept', 'application/json');
 
     var requestOptions = {
       method: 'GET',
@@ -43,14 +37,16 @@ export const AddTampleStep3 = ({
       redirect: 'follow',
     };
 
+    let token = await getAuthTokenDetails();
+    let string = token.replace('bearer ', '');
+    console.log('tocj------', string);
     fetch(
-      `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}`,
+      `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}?access_token=${string}`,
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
-        console.log('bhjsbhjhbj', result);
-        if (result?.validCustomer) {
+        if (result.validCustomer) {
           onAddBtnPress(emp, isRoleSelected, () => {
             setIsAllDataAvailable(true);
             console.log('emp', emp);
@@ -60,9 +56,9 @@ export const AddTampleStep3 = ({
           setIsAllDataAvailable(false);
         }
       })
-      .catch(error => console.log('errorrrrwe', error));
+      .catch(error => console.log('error', error));
   };
-
+  useEffect(() => {}, []);
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView

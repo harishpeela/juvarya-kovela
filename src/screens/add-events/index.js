@@ -1,17 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
 import {allTexts} from '../../common';
 import {AddEvent, EventHeader} from '../../components';
 import {styles} from './styles';
-const AddEvents = ({navigation}) => {
+import ApplicationContext from '../../utils/context-api/Context';
+const AddEvents = ({navigation, route}) => {
   const [data, setdata] = useState('');
-
+  const {
+    params: {id},
+  } = route || {};
+  console.log('add eventsid', id);
+  const {setId} = useContext(ApplicationContext);
+  useEffect(() => {
+    if (id) {
+      setId(id);
+    }
+  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <EventHeader txt={'Add Events'} onBackPress={() => navigation.goBack()} />
       <AddEvent
         data={data}
-        // navigation={() => navigation.navigate(allTexts.screenNames.events)}
+        navigation={navigation}
       />
     </SafeAreaView>
   );

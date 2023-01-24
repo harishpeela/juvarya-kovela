@@ -13,7 +13,7 @@ export const SearchBar = ({
   bgColor,
   placeHolder,
   loading,
-  onCrossPress
+  onCrossPress,
 }) => {
   return (
     <View>
