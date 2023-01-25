@@ -9,7 +9,6 @@ import {
   SafeAreaView,
   ToastAndroid,
   Modal,
-  Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
@@ -30,7 +29,7 @@ import Snackbar from 'react-native-snackbar';
 import ApplicationContext from '../../utils/context-api/Context';
 const HomeDetail = ({navigation, route}) => {
   const [loader, setloader] = useState(true);
-  const {userDetails} = useContext(ApplicationContext);
+  const {userDetails, setId} = useContext(ApplicationContext);
   const [isFollow, setisFollow] = useState(false);
   const [alertVible, setAlertVible] = useState(false);
   const [feedListData, setFeedListData] = useState([]);
@@ -73,6 +72,7 @@ const HomeDetail = ({navigation, route}) => {
             textColor: 'green',
             onPress: () => {
               getData();
+
             },
           },
         });

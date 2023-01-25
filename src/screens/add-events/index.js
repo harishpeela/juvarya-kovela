@@ -9,7 +9,7 @@ const AddEvents = ({navigation, route}) => {
   const {
     params: {id},
   } = route || {};
-  console.log('add eventsid', id);
+  console.log('add eventid', id);
   const {setId} = useContext(ApplicationContext);
   useEffect(() => {
     if (id) {
@@ -19,10 +19,7 @@ const AddEvents = ({navigation, route}) => {
   return (
     <SafeAreaView style={styles.container}>
       <EventHeader txt={'Add Events'} onBackPress={() => navigation.goBack()} />
-      <AddEvent
-        data={data}
-        navigation={navigation}
-      />
+      <AddEvent data={data} navigation={navigation} />
     </SafeAreaView>
   );
 };

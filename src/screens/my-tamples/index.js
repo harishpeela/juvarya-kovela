@@ -53,6 +53,7 @@ const MyTamples = ({navigation, route}) => {
         item.name.toLowerCase().includes(value.toLowerCase()),
       ),
     );
+    console.log('filter', filteredArray);
   };
   return (
     <SafeAreaView style={styles.wrapper}>

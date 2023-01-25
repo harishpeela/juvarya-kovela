@@ -106,17 +106,17 @@ const Search = ({navigation}) => {
       </TouchableOpacity>
     </View>
   );
- 
-const debounce = (callback, time) => {
-  clearTimeout(debounceTimer);
-  debounceTimer = setTimeout(callback, time);
-};
 
-useEffect(()=>{
-  if(searchText) {
-    debounce(searchedTextHandler, 300);
-  }
-}, [searchText]);
+  const debounce = (callback, time) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(callback, time);
+  };
+
+  useEffect(() => {
+    if (searchText) {
+      debounce(searchedTextHandler, 300);
+    }
+  }, [searchText]);
   return (
     <ScrollView
       contentContainerStyle={{paddingBottom: 100}}
@@ -152,19 +152,10 @@ useEffect(()=>{
           <View style={{flex: 1}}>
             <Loader color={colors.green2} size={30} />
           </View>
-        )
-        //  : (
-        //   <TouchableOpacity style={styles.bellContainer}>
-        //     <SearchFilter style={styles.bell} />
-        //   </TouchableOpacity>
-        // )
-        }
+        )}
       </View>
       {!searchContentVisible ? (
         <>
-          {/* <View style={styles.tabContainer}>
-            <HomeTabs />
-          </View> */}
           <CardHeader
             onPress={() => {
               navigation.navigate(allTexts.screenNames.seemore, {

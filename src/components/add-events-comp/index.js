@@ -14,8 +14,11 @@ import RadioForm from 'react-native-simple-radio-button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment/moment';
 import ApplicationContext from '../../utils/context-api/Context';
-export const AddEvent = ({onNextBtnPress, data, navigation}) => {
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+
+export const AddEvent = ({data, navigation}) => {
   const {id} = useContext(ApplicationContext);
+  console.log('-=========-=-=-=-=-=-', id);
   console.log('iiiiiidddddddddddd', navigation);
   const {
     buttonTexts: {addevents},
@@ -53,16 +56,13 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
     {label: 'Single day', value: 0},
     {label: 'more days', value: 1},
   ];
-  const CreateEvent = () => {
+  const CreateEvent = async () => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer 58b19305-666a-413d-9469-ebca24cc87c0',
-    );
-    myHeaders.append(
-      'Cookie',
-      'JSESSIONID=2AB4491840A3A812D8D609CA08A72DB9; JSESSIONID=C0B3560ECCBD3F2A87CD067628658EDD',
-    );
+    myHeaders.append('Authorization', token);
+    let token = await getAuthTokenDetails();
+    let Access_Token = token.replace('bearer ', '');
+    console.log('acess_Tocken------', Access_Token);
+
     var formdata = new FormData();
     formdata.append('name', occasionData?.eventName);
     formdata.append('fromDate', occasionData?.fromDate);
@@ -88,14 +88,14 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
     };
 
     fetch(
-      'http://20.255.59.150:8082/api/v1/occasion/save?access_token=a05d62bb-ab02-4790-91df-0079abab3be4',
+      `http://20.255.59.150:8082/api/v1/occasion/save?access_token=${Access_Token}`,
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
-        console.log("injnhjnh", result);
+        console.log('injnhjnh', result);
         if (result?.id) {
-          navigation.navigate(allTexts.screenNames.events);
+          navigation.navigate(allTexts.screenNames.events, {idparam: id});
         }
       })
       .catch(error => console.log('error', error));
@@ -104,6 +104,8 @@ export const AddEvent = ({onNextBtnPress, data, navigation}) => {
   // console.log('dates', dates);
   useEffect(() => {
     occasionData;
+    id;
+    console.log('--------------------------------------', id);
   }, []);
 
   return (
@@ -330,16 +332,3 @@ const InputField1 = ({
     </>
   );
 };
-
-
-
-
-
-
-
-
-
-
-
-// access_token=a05d62bb-ab02-4790-91df-0079abab3be4
-// access_token=ef4bc0c1-cc28-4e11-a1ec-b43ea1269533

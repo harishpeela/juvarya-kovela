@@ -19,9 +19,11 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
 const Events = ({navigation, route}) => {
   const [events, setEvents] = useState();
+  const [idData, setIdData] = useState();
   const {id} = useContext(ApplicationContext);
+  console.log(JSON.stringify(route));
   const {idparam} = route?.params || {};
-  console.log('params id', idparam);
+  console.log(idparam);
   const EventsList = async () => {
     var myHeaders = new Headers();
     var requestOptions = {
@@ -30,24 +32,38 @@ const Events = ({navigation, route}) => {
       redirect: 'follow',
     };
     let token = await getAuthTokenDetails();
-    let string_Access_Token = token.replace('bearer ', '');
-    console.log('tocj------', string_Access_Token);
+    let Access_Token = token.replace('bearer ', '');
+    console.log('acess_Tocken------', Access_Token);
+    setEvents([]);
     fetch(
-      `http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=${id}&pageNo=0&pageSize=20&access_token=${string_Access_Token}`,
+      `http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=${
+        idparam || id
+      }&pageNo=0&pageSize=20&access_token=${Access_Token}`,
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
         if (result) {
-          console.log('t', result);
+          console.log('events list', result);
           setEvents(result.occasion);
         }
       })
       .catch(error => console.log('error', error));
   };
+  const Api = () => {
+    let ids = id;
+    let idparams = idparam;
+    if (ids) {
+      setIdData(ids);
+    } else if (idparams) {
+      setIdData(idparams);
+    }
+  };
   useEffect(() => {
     EventsList();
-  }, []);
+    Api();
+    console.log('sdkjcnkajsdnckjnadcnjkajsdnkjan', idData);
+  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <EventHeader
@@ -55,13 +71,18 @@ const Events = ({navigation, route}) => {
         txt={allTexts.screenNames.events}
         plusButton
         onPlusPress={() =>
-          navigation.navigate(allTexts.screenNames.addevents, {id: idparam})
+          navigation.navigate(allTexts.screenNames.addevents, {
+            id: idparam,
+          })
         }
         isOption={true}
       />
-      {events === 0 ? (
-        <View>
-          <Text> No Events are available to Display</Text>
+      {!events?.length ? (
+        <View style={styles.nodata}>
+          <Text style={styles.nodataText}>
+            {' '}
+            No Events are available to Display
+          </Text>
         </View>
       ) : (
         <ScrollView showsHorizontalScrollIndicator={false}>
@@ -106,6 +127,7 @@ const EventsCard = ({
             fontWeight: 'bold',
             color: 'black',
             textTransform: 'capitalize',
+            maxWidth: 190,
           }}>
           {name}
         </Text>

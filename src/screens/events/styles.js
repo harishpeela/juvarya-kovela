@@ -8,4 +8,15 @@ export const styles = StyleSheet.create({
   flatListStyle: {
     paddingBottom: 200,
   },
+  nodata: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  nodataText: {
+    fontSize: 20,
+    textTransform: 'capitalize',
+    fontWeight: '800',
+    color: 'black',
+  },
 });
