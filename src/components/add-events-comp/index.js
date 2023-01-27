@@ -1,8 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Modal} from 'react-native';
+import {View, Text} from 'react-native';
 import React, {useState, useEffect, useContext} from 'react';
-import {InputField, PrimaryEventButton, EventHeader} from '../../components';
+import {InputField, PrimaryEventButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
@@ -102,11 +102,6 @@ export const AddEvent = ({data, navigation}) => {
   };
   // var dates = moment('2016-05-12').format('YYYY/MMM/DD');
   // console.log('dates', dates);
-  useEffect(() => {
-    occasionData;
-    id;
-    console.log('--------------------------------------', id);
-  }, []);
 
   return (
     <View style={styles.wrapper}>
@@ -116,9 +111,7 @@ export const AddEvent = ({data, navigation}) => {
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            // onNextBtnPress(values, isRegular);
             setOccasionData(values);
-            console.log('valuesssss', occasionData);
             CreateEvent();
             if (values === '') {
               setOccasionData(null);
@@ -221,7 +214,7 @@ export const AddEvent = ({data, navigation}) => {
                       <InputField1
                         value={values.fromDate}
                         titleColor={colors.green2}
-                        placeholder="from-Date"
+                        placeholder="from-Date - yyyy/mm/dd"
                         error={touched.fromDate && errors.fromDate}
                         onBlur={handleBlur('fromDate')}
                         setState={handleChange('fromDate')}
@@ -245,7 +238,7 @@ export const AddEvent = ({data, navigation}) => {
                       <InputField1
                         value={values.toDate}
                         titleColor={colors.green2}
-                        placeholder="to-Date"
+                        placeholder="to-Date - yyyy/mm/dd"
                         error={touched.toDate && errors.toDate}
                         onBlur={handleBlur('toDate')}
                         setState={handleChange('toDate')}

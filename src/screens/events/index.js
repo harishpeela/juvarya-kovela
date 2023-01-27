@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useMemo} from 'react';
 import {
   View,
   Text,
@@ -17,13 +17,11 @@ import DeleteIcon from 'react-native-vector-icons/AntDesign';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
-const Events = ({navigation, route}) => {
+function Events({navigation, route}) {
   const [events, setEvents] = useState();
-  const [idData, setIdData] = useState();
+  // const [idData, setIdData] = useState();
   const {id} = useContext(ApplicationContext);
-  console.log(JSON.stringify(route));
   const {idparam} = route?.params || {};
-  console.log(idparam);
   const EventsList = async () => {
     var myHeaders = new Headers();
     var requestOptions = {
@@ -50,20 +48,18 @@ const Events = ({navigation, route}) => {
       })
       .catch(error => console.log('error', error));
   };
-  const Api = () => {
-    let ids = id;
-    let idparams = idparam;
-    if (ids) {
-      setIdData(ids);
-    } else if (idparams) {
-      setIdData(idparams);
-    }
-  };
+  // const Api = () => {
+  //   let ids = id;
+  //   let idparams = idparam;
+  //   if (ids) {
+  //     setIdData(ids);
+  //   } else if (idparams) {
+  //     setIdData(idparams);
+  //   }
+  // };
   useEffect(() => {
     EventsList();
-    Api();
-    console.log('sdkjcnkajsdnckjnadcnjkajsdnkjan', idData);
-  }, [id]);
+  }, [ ]);
   return (
     <SafeAreaView style={styles.container}>
       <EventHeader
