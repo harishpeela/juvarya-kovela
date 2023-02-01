@@ -36,30 +36,20 @@ function Events({navigation, route}) {
     fetch(
       `http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=${
         idparam || id
-      }&pageNo=0&pageSize=20&access_token=${Access_Token}`,
+      }&pageNo=0&pageSize=40&access_token=${Access_Token}`,
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
         if (result) {
-          console.log('events list', result);
           setEvents(result.occasion);
         }
       })
       .catch(error => console.log('error', error));
   };
-  // const Api = () => {
-  //   let ids = id;
-  //   let idparams = idparam;
-  //   if (ids) {
-  //     setIdData(ids);
-  //   } else if (idparams) {
-  //     setIdData(idparams);
-  //   }
-  // };
   useEffect(() => {
     EventsList();
-  }, [ ]);
+  }, [route]);
   return (
     <SafeAreaView style={styles.container}>
       <EventHeader

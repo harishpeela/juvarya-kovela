@@ -22,7 +22,8 @@ import {InputTypeAddTemp3} from './inputFieldAddTemple3';
 import {OccasionBackHeader} from './backHeaderOccasion';
 import {EventHeader} from './eventHeader';
 import {AddEvent} from './add-events-comp';
-import { PrimaryEventButton } from './eventbutton';
+import {PrimaryEventButton} from './eventbutton';
+import {InputField1} from './inputfield';
 
 export {
   Loader,
@@ -49,4 +50,5 @@ export {
   EventHeader,
   AddEvent,
   PrimaryEventButton,
+  InputField1,
 };

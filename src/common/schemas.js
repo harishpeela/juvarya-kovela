@@ -32,7 +32,7 @@ export const UpdatePasswordValidation = Yup.object({
 export const AddTampleSchema = Yup.object({
   tampleName: Yup.string().trim().required('Tample Name is required'),
   description: Yup.string().trim().required('Description  is required'),
-  // community: Yup.string().trim().required('you are not a admin to Add'),
+  // community: Yup.string().trim().required('Community is requires'),
 });
 
 export const AddEventSchema = Yup.object({

@@ -74,4 +74,20 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.green3,
     textAlign: 'center',
   },
+  checkView: {
+    // alignSelf: 'center',
+    flexDirection: 'row',
+    marginBottom: 10,
+    marginTop: 20,
+  },
+  rememberMeText: {
+    color: '#444444',
+    fontSize: 18,
+    // fontFamily: ,
+  },
+  checkIcon: {
+    color: 'blue',
+    fontSize: 20,
+    marginRight: 5,
+  },
 });

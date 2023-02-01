@@ -1,11 +1,11 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text} from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {styles} from './style';
 import {AddTampleSchemaS3} from '../../common/schemas';
-import {InputField, PrimaryButton, InputTypeAddTemp3} from '../../components';
+import {InputField, PrimaryButton} from '../../components';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -38,10 +38,10 @@ export const AddTampleStep3 = ({
     };
 
     let token = await getAuthTokenDetails();
-    let string = token.replace('bearer ', '');
-    console.log('tocj------', string);
+    let access_token = token.replace('bearer ', '');
+    console.log('tocj------', access_token);
     fetch(
-      `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}?access_token=${string}`,
+      `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}?access_token=${access_token}`,
       requestOptions,
     )
       .then(response => response.json())

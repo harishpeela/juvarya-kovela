@@ -15,6 +15,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment/moment';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const AddEvent = ({data, navigation}) => {
   const {id} = useContext(ApplicationContext);
@@ -31,6 +32,7 @@ export const AddEvent = ({data, navigation}) => {
   const [isRegular, setIsRegular] = useState(data.type);
   const [occasionData, setOccasionData] = useState();
   const [date, setDate] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
@@ -51,7 +53,6 @@ export const AddEvent = ({data, navigation}) => {
   // const FromDate = GetFromDate();
   // const [selectedDate, setSelectedDate] = useState(new Date());
   // console.log('selecteddate', selectedDate, isRegular);
-  var radio_props = [{label: 'Add this Event to the Feed', value: 0}];
   var radio_prop = [
     {label: 'Single day', value: 0},
     {label: 'more days', value: 1},
@@ -254,24 +255,18 @@ export const AddEvent = ({data, navigation}) => {
                     </View>
                   </View>
                 )}
-
-                <View style={styles.radioContainer}>
-                  <RadioForm
-                    radio_props={radio_props}
-                    initial={isRegular}
-                    formHorizontal={true}
-                    labelHorizontal={true}
-                    buttonColor={colors.blue3}
-                    selectedButtonColor={colors.blue3}
-                    animation={false}
-                    buttonSize={8}
-                    buttonOuterSize={30}
-                    labelStyle={styles.radioLabelStyle}
-                    onPress={value => {
-                      setIsRegular(value);
-                    }}
+                <TouchableOpacity
+                  onPress={() => setIsChecked(!isChecked)}
+                  style={styles.checkView}>
+                  <Ionicons
+                    name={isChecked ? 'checkbox' : 'square-outline'}
+                    style={styles.checkIcon}
                   />
-                </View>
+                  <Text style={styles.rememberMeText}>
+                    Add this Event to the Feed
+                  </Text>
+                </TouchableOpacity>
+
                 <View style={styles.buttonContainer}>
                   <PrimaryEventButton
                     bgColor={colors.blue3}

@@ -46,7 +46,6 @@ const Search = ({navigation}) => {
 
   const getLatestTemples = async () => {
     try {
-      // console.log('Latest Temples API Calling');
       setPopTempleLoader(true);
       let response = await getPopularTemples(0);
       if (response && response.status === 200) {
@@ -75,12 +74,15 @@ const Search = ({navigation}) => {
     try {
       setmoreExploreLoader(true);
       let moreTempleResponse = await getMoreExploreAPI(0, 10);
+      // console.log('more exam', moreTempleResponse);
       if (moreTempleResponse && moreTempleResponse.status === 200) {
         setmoreExploreLoader(false);
         const {
           data: {items: moreTemple},
         } = moreTempleResponse || {};
         setMoreExploreTemples(moreTemple);
+        // console.log('55555555555555555555555555', moreTemple);
+        // console.log('temppppppppppp', moreExploreTemples);
       }
     } catch (error) {
       console.log('Newtwork Error  786 --->', error);

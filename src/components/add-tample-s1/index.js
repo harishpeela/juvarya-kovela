@@ -1,4 +1,5 @@
-import {View, Image, TouchableOpacity, Text} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, Image, TouchableOpacity, Text, FlatList} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -10,6 +11,7 @@ import RadioForm from 'react-native-simple-radio-button';
 import {UploadPhoto} from '../../utils/svgs';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
 export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   const {
@@ -46,7 +48,93 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   ];
   const [isRegular, setIsRegular] = useState(data.type);
   const [imageUploaded, setimageUploaded] = useState(false);
+  const [filterdData, setFilterdData] = useState([]);
+  const [apiSearch, setApiSearch] = useState([]);
+  const [search, setSearch] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [input, setInput] = useState('');
+  const [apiData, setApiData] = useState([]);
 
+  const CommunityGetApi = async () => {
+    var myHeaders = new Headers();
+    let token = await getAuthTokenDetails();
+    myHeaders.append('Authorization', token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+    fetch(
+      'http://20.255.59.150:8082/api/v1/community/list?query&page=0&pageSize=50',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        setFilterdData(result.communities);
+        setApiSearch(result.communities);
+        // console.log('getapiresult', filterdData, apiSearch);
+      })
+      .catch(error => console.log('error in get', error));
+  };
+
+  const searchFilter = text => {
+    const newData = apiSearch?.filter(item =>
+      item.name?.toUpperCase()?.includes(text?.toUpperCase()),
+    );
+    setFilterdData(newData);
+    setSearch(text);
+  };
+  const ItemView = ({item, onPress}) => {
+    return (
+      <TouchableOpacity onPress={() => onPress(item)}>
+        <Text style={{padding: 10, color: 'black', fontWeight: '600'}}>
+          {item}
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+  const CommunityData = text => {
+    setSearch(text);
+    setFilterdData([]);
+  };
+  const CommunityPostApi = async () => {
+    var myHeaders = new Headers();
+    let token = await getAuthTokenDetails();
+    myHeaders.append('Authorization', token);
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Accept', 'application/json');
+
+    var raw = JSON.stringify({
+      name: search,
+    });
+    console.log('raw', raw);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+    let Access_Token = token.replace('bearer ', '');
+    console.log('acess_Tocken------', Access_Token);
+    fetch(
+      `http://20.255.59.150:8082/api/v1/community/save?access_token=${Access_Token}`,
+      requestOptions,
+    )
+      .then(response => console.log('222222222222', response))
+      .then(result => {
+        if (result?.status === 200) {
+          console.log('78888888888');
+        } else {
+          console.log('jmbb');
+        }
+      })
+      .catch(error => console.log('error in post api', error));
+  };
+  useEffect(() => {
+    CommunityGetApi();
+    CommunityPostApi();
+  }, []);
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView
@@ -94,13 +182,15 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
               return;
             }
             onNextBtnPress(values, isRegular);
-            console.log('commite', values.community);
+            CommunityGetApi();
+            CommunityPostApi();
+            console.log('commite', values);
           }}
           validationSchema={AddTampleSchema}
           initialValues={{
             tampleName: data.tampleName,
             description: data.description,
-            community: data.community,
+            community: search,
           }}>
           {({
             errors,
@@ -133,14 +223,28 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
                 />
                 <View style={{height: 20}} />
                 <InputField
-                  value={values.community}
+                  value={search}
                   title={tCommunity}
                   titleColor={colors.green2}
                   placeholder={communityP}
+                  onChangeText={text => searchFilter(text)}
                   error={touched.community && errors.community}
                   onBlur={handleBlur('community')}
                   setState={handleChange('community')}
                 />
+                {filterdData?.length > 1 && search?.length > 1 && (
+                  <FlatList
+                    data={filterdData}
+                    keyboardShouldPersistTaps="handled"
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item, index}) => (
+                      <ItemView
+                        item={item.name.toUpperCase()}
+                        onPress={CommunityData}
+                      />
+                    )}
+                  />
+                )}
                 <View style={styles.radioContainer}>
                   <RadioForm
                     radio_props={radio_props}

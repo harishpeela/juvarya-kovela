@@ -3,7 +3,6 @@ import {
   authAxiousInstance,
   axiousInstance,
   axiosMultiPartFormData,
-  authAxiosAddTempId,
 } from './api';
 
 const endpoints = {
