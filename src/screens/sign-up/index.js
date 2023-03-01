@@ -49,6 +49,7 @@ const Signup = ({navigation}) => {
       const {
         data: {emailAddress, otp, statusCode},
       } = response || {};
+      console.log('data', emailAddress, otp, statusCode);
       console.log(emailAddress, statusCode);
       if (response && emailAddress) {
         let otpPayload = {

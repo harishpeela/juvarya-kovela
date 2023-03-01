@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {SafeAreaView, View, Text, TouchableOpacity} from 'react-native';
-import {allTexts} from '../../common';
+import {SafeAreaView} from 'react-native';
 import {AddEvent, EventHeader} from '../../components';
 import {styles} from './styles';
 import ApplicationContext from '../../utils/context-api/Context';

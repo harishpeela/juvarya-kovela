@@ -94,7 +94,7 @@ axiousInstance.interceptors.response.use(
     }
     // retry while Network timeout or Network Error
     if (!(message.includes('timeout') || message.includes('Network Error'))) {
-      return Promise.reject(err);
+      return Promise.reject(error);
     }
     config.retry -= 1;
     const delayRetryRequest = new Promise(resolve => {

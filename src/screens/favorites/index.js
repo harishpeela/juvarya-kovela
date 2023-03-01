@@ -18,7 +18,7 @@ const Favorite = ({navigation}) => {
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
-      console.log('responce of favourate list', response);
+      // console.log('responce of favourate list', response);
       if (response && response.status === 200) {
         const {
           data: {followingObjects},

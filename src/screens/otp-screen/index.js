@@ -197,7 +197,7 @@ const OTPScreen = ({navigation, route}) => {
         inputCount={6}
         tintColor={colors.green2}
         textInputStyle={styles.textInput}
-        containerStyle={{
+        containerStyle={{ 
           marginTop: 15,
         }}
       />

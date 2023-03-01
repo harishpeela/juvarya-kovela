@@ -41,7 +41,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
       console.error(error);
     }
   };
-
   var radio_props = [
     {label: 'Regular', value: 0},
     {label: 'Seasonal', value: 1},
@@ -51,9 +50,7 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   const [filterdData, setFilterdData] = useState([]);
   const [apiSearch, setApiSearch] = useState([]);
   const [search, setSearch] = useState('');
-  const [isVisible, setIsVisible] = useState(false);
-  const [input, setInput] = useState('');
-  const [apiData, setApiData] = useState([]);
+  const [mappingData, setMappingData] = useState();
 
   const CommunityGetApi = async () => {
     var myHeaders = new Headers();
@@ -66,14 +63,24 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
       redirect: 'follow',
     };
     fetch(
-      'http://20.255.59.150:8082/api/v1/community/list?query&page=0&pageSize=50',
+      'http://20.255.59.150:8082/api/v1/community/list?query&page=0&pageSize=10',
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
+        // console.log('api filter', result);
+
         setFilterdData(result.communities);
         setApiSearch(result.communities);
-        // console.log('getapiresult', filterdData, apiSearch);
+        let filteredCommunityData = filterdData
+          .filter(item => item.name)
+          .map(({id, name}) => ({id, name}));
+        // console.log('filteredCommunityData', filteredCommunityData);
+        if (filteredCommunityData) {
+          setMappingData(filteredCommunityData);
+        } else {
+          setMappingData(null);
+        }
       })
       .catch(error => console.log('error in get', error));
   };
@@ -98,42 +105,41 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
     setSearch(text);
     setFilterdData([]);
   };
-  const CommunityPostApi = async () => {
-    var myHeaders = new Headers();
-    let token = await getAuthTokenDetails();
-    myHeaders.append('Authorization', token);
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append('Accept', 'application/json');
+  // const CommunityPostApi = async () => {
+  //   var myHeaders = new Headers();
+  //   let token = await getAuthTokenDetails();
+  //   myHeaders.append('Authorization', token);
+  //   myHeaders.append('Content-Type', 'application/json');
+  //   myHeaders.append('Accept', 'application/json');
 
-    var raw = JSON.stringify({
-      name: search,
-    });
-    console.log('raw', raw);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-    let Access_Token = token.replace('bearer ', '');
-    console.log('acess_Tocken------', Access_Token);
-    fetch(
-      `http://20.255.59.150:8082/api/v1/community/save?access_token=${Access_Token}`,
-      requestOptions,
-    )
-      .then(response => console.log('222222222222', response))
-      .then(result => {
-        if (result?.status === 200) {
-          console.log('78888888888');
-        } else {
-          console.log('jmbb');
-        }
-      })
-      .catch(error => console.log('error in post api', error));
-  };
+  //   var raw = JSON.stringify({
+  //     name: search,
+  //   });
+  //   console.log('raw', raw);
+  //   var requestOptions = {
+  //     method: 'POST',
+  //     headers: myHeaders,
+  //     body: raw,
+  //     redirect: 'follow',
+  //   };
+  //   let Access_Token = token.replace('bearer ', '');
+  //   console.log('acess_Tocken------', Access_Token);
+  //   fetch(
+  //     `http://20.255.59.150:8082/api/v1/community/save?access_token=${Access_Token}`,
+  //     requestOptions,
+  //   )
+  //     .then(response => console.log('222222222222', response))
+  //     .then(result => {
+  //       if (result?.status === 200) {
+  //         console.log('78888888888');
+  //       } else {
+  //         console.log('jmbb');
+  //       }
+  //     })
+  //     .catch(error => console.log('error in post api', error));
+  // };
   useEffect(() => {
     CommunityGetApi();
-    CommunityPostApi();
   }, []);
   return (
     <View style={styles.wrapper}>
@@ -183,7 +189,7 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
             }
             onNextBtnPress(values, isRegular);
             CommunityGetApi();
-            CommunityPostApi();
+            // CommunityPostApi();
             console.log('commite', values);
           }}
           validationSchema={AddTampleSchema}

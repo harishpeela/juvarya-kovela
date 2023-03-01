@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext, useMemo} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
