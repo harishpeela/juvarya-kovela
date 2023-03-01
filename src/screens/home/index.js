@@ -60,7 +60,7 @@ const Home = ({navigation}) => {
   }, []);
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={styles.topContainer}>
+      {/* <View style={styles.topContainer}>
         <HomeHeader
           text={`${favoriteTemplesList.length}`}
           onPress={() => navigation.navigate(allTexts.tabNames.favorites)}
@@ -70,9 +70,9 @@ const Home = ({navigation}) => {
           // onBellPress={() => navigation.navigate(allTexts.screenNames.events)}
           onBellPress={() => alert('page under development')}
         />
-        {/* <HomeTabs /> */}
-      </View>
-      <View style={styles.cardContainer}>
+        <HomeTabs />
+      </View> */}
+      {/* <View style={styles.cardContainer}>
         {loader ? (
           <View style={styles.loaderContainer}>
             <Loader color={colors.green2} />
@@ -115,7 +115,8 @@ const Home = ({navigation}) => {
             )}
           />
         )}
-      </View>
+      </View> */}
+      
     </SafeAreaView>
   );
 };

@@ -32,7 +32,7 @@ import {
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getFavoritesList, getUserInfo} from './src/utils/api';
-
+import Splash2 from './src/screens/splash2';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -291,13 +291,14 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
-        <NavigationContainer>
+        {/* <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />
           ) : (
             <HomeStack />
           )}
-        </NavigationContainer>
+        </NavigationContainer> */}
+        <Splash2 />
       </SafeAreaProvider>
     </ApplicationContext.Provider>
   );
