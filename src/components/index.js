@@ -24,7 +24,13 @@ import {EventHeader} from './eventHeader';
 import {AddEvent} from './add-events-comp';
 import {PrimaryEventButton} from './eventbutton';
 import {InputField1} from './inputfield';
-
+import {
+  NearBy,
+  NearByMainTab,
+  NearByServices,
+  NearByProducts,
+  UpComingEvents,
+} from './NearBy';
 export {
   Loader,
   SearchBar,
@@ -51,4 +57,9 @@ export {
   AddEvent,
   PrimaryEventButton,
   InputField1,
+  NearBy,
+  NearByMainTab,
+  NearByServices,
+  NearByProducts,
+  UpComingEvents,
 };

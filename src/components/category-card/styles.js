@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
       height: 2,
     },
     shadowOpacity: 0.23,
-    shadowRadius: 2.62,
-    elevation: 4,
+    shadowRadius: 0.62,
+    elevation: 1,
   },
   header: {
     flexDirection: 'row',
@@ -27,16 +27,18 @@ export const styles = StyleSheet.create({
     height: undefined,
     flex: 1,
     justifyContent: 'center',
+    // borderRadius: 10,
   },
   imgContainer: {
-    height: 180,
+    height: 220,
     // borderWidth: 2,
+    width: '100%',
   },
   borderRadiusIcon: {
-    borderRadius: 2,
+    borderRadius: 25,
   },
   borderRadiusImg: {
-    borderRadius: 10,
+    // borderRadius: 10,
   },
   date: {
     fontFamily: fontFamily.popinRegular,
@@ -72,8 +74,8 @@ export const styles = StyleSheet.create({
     // borderWidth: 2,
   },
   footerItem: {
-    flexDirection: 'row',
-    flex: 1,
+    // flexDirection: 'row',
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

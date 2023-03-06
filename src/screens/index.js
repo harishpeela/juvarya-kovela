@@ -20,6 +20,8 @@ import Occasions from './occasions';
 import Manage from './manage';
 import Calender from './calander';
 import AddEvents from './add-events';
+import NearByProducts from './nearByProducts';
+import NearByServices from './nearByServices';
 export {
   CreatePost,
   Seemore,
@@ -43,4 +45,6 @@ export {
   Manage,
   Calender,
   AddEvents,
+  NearByProducts,
+  NearByServices,
 };

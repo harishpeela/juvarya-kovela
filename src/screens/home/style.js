@@ -6,22 +6,27 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     width: '100%',
-    alignItems: 'center',
-    paddingHorizontal: 10,
+    // alignItems: 'center',
+    // paddingHorizontal: 10,
   },
   topContainer: {
     marginTop: 5,
     paddingHorizontal: 8,
   },
   flatListStyle: {
-    paddingBottom: 200,
+    // paddingBottom: 200,
   },
   cardContainer: {
     width: '100%',
+    // marginTop: '15%',
   },
   loaderContainer: {
     alignItems: 'center',
     justifyContent: 'center',
     height: '90%',
+  },
+  tabText: {
+    fontSize: 24,
+    fontWeight: '800',
   },
 });

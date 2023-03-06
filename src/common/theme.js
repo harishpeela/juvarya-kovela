@@ -47,6 +47,8 @@ const fontFamily = {
   popinLight: 'Poppins-Light',
   popinSemi: 'Poppins-SemiBold',
   PoetsenOneRegular: 'PoetsenOne-Regular',
+  pacificoRegular: 'Pacifico-Regular',
+  yellowtailRegular: 'Yellowtail-Regular',
 };
 
 const window = {

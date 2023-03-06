@@ -4,11 +4,11 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {flex: 1},
   imgBackGround: {
-    height: undefined,
-    width: undefined,
+    height: '100%',
+    width: '100%',
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    // justifyContent: 'flex-end',
   },
   textContainer: {
     marginBottom: 30,

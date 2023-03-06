@@ -20,6 +20,8 @@ import {
   Manage,
   Calender,
   AddEvents,
+  NearByProducts,
+  NearByServices,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -32,7 +34,6 @@ import {
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getFavoritesList, getUserInfo} from './src/utils/api';
-import Splash2 from './src/screens/splash2';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -58,6 +59,8 @@ const App = () => {
       manage,
       calender,
       addevents,
+      nearByProducts,
+      nearByServices,
     },
   } = allTexts;
 
@@ -211,6 +214,20 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={nearByProducts}
+          component={NearByProducts}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={nearByServices}
+          component={NearByServices}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -291,14 +308,13 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
-        {/* <NavigationContainer>
+        <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />
           ) : (
             <HomeStack />
           )}
-        </NavigationContainer> */}
-        <Splash2 />
+        </NavigationContainer>
       </SafeAreaProvider>
     </ApplicationContext.Provider>
   );
