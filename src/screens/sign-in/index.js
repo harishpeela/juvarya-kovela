@@ -31,7 +31,7 @@ const Signin = ({navigation}) => {
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfo();
-      console.log('login res', response);
+      // console.log('login res', response);
       if (response && response.status === 200) {
         const {
           data: {

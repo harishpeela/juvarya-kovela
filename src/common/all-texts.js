@@ -120,6 +120,8 @@ export const allTexts = {
     manage: 'Manage',
     calender: 'Calender',
     addevents: 'AddEvents',
+    nearByProducts: 'NearByProducts',
+    nearByServices: 'NearByServices',
   },
   homeHeader: {
     welcome: 'Welcome ',
