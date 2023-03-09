@@ -122,6 +122,8 @@ export const allTexts = {
     addevents: 'AddEvents',
     nearByProducts: 'NearByProducts',
     nearByServices: 'NearByServices',
+    userFeedScreen: 'UserFeedScreen',
+    templeProfile: 'TempleProfile',
   },
   homeHeader: {
     welcome: 'Welcome ',

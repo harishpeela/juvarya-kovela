@@ -15,7 +15,10 @@ import styles from './styles';
 import {BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
-const UserFeedScreen = () => {
+import {likeOrUnlikeFeed} from '../../utils/api';
+import {UserFeedCompList} from '../../components';
+import {allTexts} from '../../common';
+const UserFeedScreen = ({navigation}) => {
   const {userDetails, favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
   const [favoriteTemplesList, setfavoriteTemplesList] = useState(favoriteList);
@@ -24,6 +27,7 @@ const UserFeedScreen = () => {
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  // const [likeCount, setLikeCount] = useState(likes);
 
   const posts = [
     {
@@ -131,14 +135,46 @@ const UserFeedScreen = () => {
       return null;
     }
   };
-
+  const renderImage = post => {
+    if (!post?.mediaList === '') {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={{uri: post.image}}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+      );
+    } else if (post?.itemDetails?.profilePicture) {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={{uri: post?.itemDetails?.profilePicture}}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={require('../../../assets/images/islamabad.jpg')}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+      );
+    }
+  };
   useEffect(() => {
     getHomeResponse();
     getFollowedTempleList();
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-
+  // console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -159,9 +195,9 @@ const UserFeedScreen = () => {
                 <Text style={styles.buttonText}>Feed</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            {/* <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText2}>Reels</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity style={styles.button}>
               <Text style={styles.buttonText2}>Nearby</Text>
             </TouchableOpacity>
@@ -175,7 +211,14 @@ const UserFeedScreen = () => {
             />
           </View>
         </View>
-
+        {/* <ScrollView>
+          <UserFeedCompList
+            data={homeFeedList}
+            post={homeFeedList}
+            renderMedia={() => renderImage(homeFeedList)}
+            getHomeResponse={() => getHomeResponse()}
+          />
+        </ScrollView> */}
         {/* feed portion  */}
 
         {homeFeedList.map(post => (
@@ -193,14 +236,17 @@ const UserFeedScreen = () => {
                 <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
               </TouchableOpacity>
             </View>
-            {/* {renderMedia(post)} */}
-            <View style={styles.mediaContainer}>
-              <Image
-                source={{uri: post?.itemDetails?.profilePicture}}
-                style={styles.image}
-                resizeMode="cover"
-              />
-            </View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.templeProfile, {
+                  // id: post?.itemDetails?.id,
+                  // title: post?.itemDetails?.name,
+                  // profileImg: post?.itemDetails?.profilePicture,
+                  data: post,
+                });
+              }}>
+              {renderImage(post)}
+            </TouchableOpacity>
             <View style={styles.postFooter}>
               <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
                 <Icon

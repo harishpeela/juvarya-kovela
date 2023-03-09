@@ -72,7 +72,6 @@ const HomeDetail = ({navigation, route}) => {
             textColor: 'green',
             onPress: () => {
               getData();
-
             },
           },
         });
@@ -92,7 +91,6 @@ const HomeDetail = ({navigation, route}) => {
       let results = await followUnfollowTemple(payload);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
-        // console.log('results', results.json());
         if (results && results.status === 200) {
           setFollowBtnDisable(false);
 
