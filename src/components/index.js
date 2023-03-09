@@ -31,6 +31,7 @@ import {
   NearByProducts,
   UpComingEvents,
 } from './NearBy';
+import {BackgroundImage} from './backgroundImage';
 export {
   Loader,
   SearchBar,
@@ -62,4 +63,5 @@ export {
   NearByServices,
   NearByProducts,
   UpComingEvents,
+  BackgroundImage,
 };

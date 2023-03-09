@@ -22,6 +22,7 @@ import Calender from './calander';
 import AddEvents from './add-events';
 import NearByProducts from './nearByProducts';
 import NearByServices from './nearByServices';
+import UserFeedScreen from './home-feed';
 export {
   CreatePost,
   Seemore,
@@ -47,4 +48,5 @@ export {
   AddEvents,
   NearByProducts,
   NearByServices,
+  UserFeedScreen,
 };
