@@ -23,6 +23,7 @@ import AddEvents from './add-events';
 import NearByProducts from './nearByProducts';
 import NearByServices from './nearByServices';
 import UserFeedScreen from './home-feed';
+import TempleProfile from './newprofile';
 export {
   CreatePost,
   Seemore,
@@ -49,4 +50,5 @@ export {
   NearByProducts,
   NearByServices,
   UserFeedScreen,
+  TempleProfile,
 };

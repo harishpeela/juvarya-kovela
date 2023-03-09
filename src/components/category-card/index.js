@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -6,6 +7,8 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Pressable,
+  FlatList,
+  RefreshControl,
 } from 'react-native';
 import {allTexts, colors} from '../../common';
 import React, {useState} from 'react';
@@ -17,6 +20,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ImageLoader} from '..';
 import {followUnfollowTemple, likeOrUnlikeFeed} from '../../utils/api';
 import Snackbar from 'react-native-snackbar';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import MatrialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 export const HomeCard = ({
   heading,
   date,
@@ -202,5 +208,113 @@ export const HomeCard = ({
         </View>
       </View>
     </View>
+  );
+};
+
+export const UserFeedCompList = ({
+  bookmarkPress,
+  data,
+  getHomeResponse,
+  post,
+  isLikeTrue,
+  likes,
+  id,
+  saveOnPress,
+  renderMedia,
+}) => {
+  const [refrsh, setRefrsh] = useState(false);
+  const [isLiked, setIsLiked] = useState(isLikeTrue);
+  const [likeCount, setLikeCount] = useState(likes);
+
+  const likeUnLikeHandler = async () => {
+    if (isLiked) {
+      setLikeCount(likeCount - 1);
+    } else {
+      setLikeCount(likeCount + 1);
+    }
+    setIsLiked(!isLiked);
+
+    const payloadLike = {
+      feedId: id,
+      like: !isLiked,
+    };
+    try {
+      console.log('payloadLike', payloadLike);
+      let result = await likeOrUnlikeFeed(payloadLike);
+      if (result && result.status === 200 && result.data.statusCode === 200) {
+        return;
+      }
+      // console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <FlatList
+      data={data}
+      showsVerticalScrollIndicator={false}
+      refreshControl={
+        <RefreshControl
+          refreshing={refrsh}
+          onRefresh={() => {
+            setRefrsh(true);
+            getHomeResponse();
+          }}
+        />
+      }
+      contentContainerStyle={styles.flatListStyle}
+      keyboardShouldPersistTaps="handled"
+      decelerationRate={0.7}
+      keyExtractor={(item, index) => index}
+      renderItem={({item, index}) => (
+        <View style={styles.postContainer} key={post.id}>
+          <View style={styles.postHeader}>
+            <Image
+              source={{uri: post?.itemDetails?.profilePicture}}
+              style={styles.profileImage}
+            />
+            <View>
+              <Text style={styles.username}>{post?.itemDetails?.name}</Text>
+              <Text style={styles.sponsorNameText}>Sponsored</Text>
+            </View>
+            <TouchableOpacity style={styles.postMenuButton}>
+              <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
+            </TouchableOpacity>
+          </View>
+          {renderMedia}
+          {/* <View style={styles.mediaContainer}>
+            <Image
+              source={{uri: post?.itemDetails?.profilePicture}}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View> */}
+          <View style={styles.postFooter}>
+            <TouchableOpacity onPress={() => likeUnLikeHandler()}>
+              <Icon
+                name={isLiked ? 'heart' : 'heart-o'}
+                size={20}
+                color={isLiked ? 'blue' : 'black'}
+              />
+            </TouchableOpacity>
+            <View style={styles.postFooterLeft}>
+              <TouchableOpacity onPress={saveOnPress}>
+                <FeatherIcon name="send" size={20} color="black" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => bookmarkPress}
+                style={styles.icon}>
+                <Icon name="bookmark-o" size={20} color="black" />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={{paddingHorizontal: 10}}>
+            <Text style={styles.likes}>{post?.likesCount} Likes</Text>
+            <Text style={styles.caption}>{post.sdt}</Text>
+          </View>
+        </View>
+      )}
+    />
   );
 };

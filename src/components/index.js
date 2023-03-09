@@ -32,6 +32,7 @@ import {
   UpComingEvents,
 } from './NearBy';
 import {BackgroundImage} from './backgroundImage';
+import {UserFeedCompList} from './category-card';
 export {
   Loader,
   SearchBar,
@@ -64,4 +65,5 @@ export {
   NearByProducts,
   UpComingEvents,
   BackgroundImage,
+  UserFeedCompList,
 };
