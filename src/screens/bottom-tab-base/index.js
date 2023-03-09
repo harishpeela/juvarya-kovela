@@ -3,16 +3,15 @@ import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
 // import {CustomIcon} from '../../components';
-import {Favorite, Home, Profile, Search, TicketConfirmation} from '..';
+import {Favorite, Home, Profile, Search, TicketConfirmation, UserFeedScreen} from '..';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
-
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
-  const GetHomeScreen = () => <Home navigation={navigation} />;
+  const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
