@@ -38,7 +38,7 @@ const Search = ({navigation}) => {
       getDetails();
     }
   }, []);
-
+  console.log('popTemples', popTemples);
   const getDetails = async () => {
     let result = await getUserDetails();
     setUserDetails(result);
@@ -189,9 +189,10 @@ const Search = ({navigation}) => {
                     id={item?.id}
                     img={require('../../../assets/images/bigTamle.png')}
                     onCardPress={() => {
-                      navigation.navigate(allTexts.screenNames.homeDetails, {
+                      navigation.navigate(allTexts.screenNames.templeProfile, {
                         id: item.id,
                         title: item.name,
+                        profileImg: item?.profilePicture?.url,
                       });
                     }}
                   />
@@ -227,9 +228,11 @@ const Search = ({navigation}) => {
                     name={item.name}
                     img={item?.profilePicture?.url}
                     onPress={() => {
-                      navigation.navigate(allTexts.screenNames.homeDetails, {
+                      navigation.navigate(allTexts.screenNames.templeProfile, {
                         id: item.id,
                         title: item.name,
+                        // searchData: item,
+                        profileImg: item?.profilePicture?.url,
                       });
                     }}
                   />

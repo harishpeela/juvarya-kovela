@@ -245,9 +245,9 @@ const UserFeedScreen = ({navigation}) => {
                 isLikeTrue={item?.like}
                 onPressTitle={() =>
                   navigation.navigate(allTexts.screenNames.templeProfile, {
-                    // id: post?.itemDetails?.id,
-                    // title: post?.itemDetails?.name,
-                    // profileImg: post?.itemDetails?.profilePicture,
+                    id: item?.itemDetails?.id,
+                    title: item?.itemDetails?.name,
+                    profileImg: item?.itemDetails?.profilePicture,
                     data: item,
                   })
                 }
