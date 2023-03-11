@@ -24,6 +24,7 @@ import NearByProducts from './nearByProducts';
 import NearByServices from './nearByServices';
 import UserFeedScreen from './home-feed';
 import TempleProfile from './newprofile';
+import ViewProfile from './view-profile';
 export {
   CreatePost,
   Seemore,
@@ -51,4 +52,5 @@ export {
   NearByServices,
   UserFeedScreen,
   TempleProfile,
+  ViewProfile,
 };

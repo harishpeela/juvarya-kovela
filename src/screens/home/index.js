@@ -60,14 +60,14 @@ const Home = ({navigation}) => {
   console.log('my listsss', favoriteTemplesList.length);
   const getHomeResponse = async () => {
     try {
-      setloader(true);
+      // setloader(true);
       let response = await getHomeFeedList(0, 100);
       if (response && response.status === 200) {
         const {
           data: {feeds},
         } = response || {};
         setHomeFeedList(feeds);
-        setloader(false);
+        // setloader(false);
         setRefrsh(false);
       }
     } catch (error) {

@@ -51,7 +51,7 @@ const templeData = {
   ],
 };
 
-const TempleProfile = ({route}) => {
+const TempleProfile = ({route, navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState(false);
@@ -62,7 +62,6 @@ const TempleProfile = ({route}) => {
     discription: '',
   });
   const {data} = route.params || {};
-  console.log('id', data);
   const getData = async () => {
     try {
       let result = await getTempleDetails(data?.itemDetails?.id);
@@ -100,7 +99,6 @@ const TempleProfile = ({route}) => {
       console.log(error.message);
     }
   };
-  console.log('details', details);
   const followTemples = async () => {
     const payload = {
       itemId: data?.itemDetails?.id,
@@ -144,7 +142,8 @@ const TempleProfile = ({route}) => {
     }
   };
   useEffect(() => {
-    getData();
+    // getData();
+    data;
   }, [route]);
   return (
     <ImageBackground
@@ -192,7 +191,11 @@ const TempleProfile = ({route}) => {
               </Text>
             </Text>
 
-            <Pressable style={styles.circularButton}>
+            <Pressable
+              style={styles.circularButton}
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.viewProfile)
+              }>
               <Text style={styles.circularButton.text}>View Profile</Text>
             </Pressable>
           </View>
@@ -240,7 +243,7 @@ const TempleProfile = ({route}) => {
             />
 
             <Pressable style={styles.voidButton}>
-              <Text style={styles.voidButton.text}>Message</Text>
+              <Text style={styles.voidButton.text}>Contact</Text>
             </Pressable>
 
             <Pressable style={styles.voidButton}>
