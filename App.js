@@ -24,6 +24,7 @@ import {
   NearByServices,
   UserFeedScreen,
   TempleProfile,
+  ViewProfile,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -63,8 +64,8 @@ const App = () => {
       addevents,
       nearByProducts,
       nearByServices,
-      userFeedScreen,
       templeProfile,
+      viewProfile,
     },
   } = allTexts;
 
@@ -235,6 +236,13 @@ const App = () => {
         <Stack.Screen
           name={templeProfile}
           component={TempleProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={viewProfile}
+          component={ViewProfile}
           options={{
             headerShown: false,
           }}

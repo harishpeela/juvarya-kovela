@@ -6,6 +6,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  RefreshControl,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MatrialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,7 +18,9 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
 import {likeOrUnlikeFeed} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
-import {allTexts} from '../../common';
+import {Loader} from '../../components';
+import {allTexts, colors} from '../../common';
+import {FlatList} from 'react-native-gesture-handler';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails, favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
@@ -26,9 +29,7 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
-  // const [likeCount, setLikeCount] = useState(likes);
-
+  const [bookMark, setBookMark] = useState(false);
   const posts = [
     {
       id: 1,
@@ -174,7 +175,7 @@ const UserFeedScreen = ({navigation}) => {
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  // console.log('homefeed', homeFeedList);
+  console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -211,42 +212,65 @@ const UserFeedScreen = ({navigation}) => {
             />
           </View>
         </View>
-        {/* <ScrollView>
-          <UserFeedCompList
-            data={homeFeedList}
-            post={homeFeedList}
-            renderMedia={() => renderImage(homeFeedList)}
-            getHomeResponse={() => getHomeResponse()}
-          />
-        </ScrollView> */}
-        {/* feed portion  */}
 
-        {homeFeedList.map(post => (
+        {loader && (
+          <View style={{flex: 1}}>
+            <Loader color={colors.green2} size={30} />
+          </View>
+        )}
+        <ScrollView>
+          <FlatList
+            data={homeFeedList}
+            showsVerticalScrollIndicator={false}
+            refreshControl={
+              <RefreshControl
+                refreshing={refrsh}
+                onRefresh={() => {
+                  setRefrsh(true);
+                  getHomeResponse();
+                }}
+              />
+            }
+            contentContainerStyle={styles.flatListStyle}
+            keyboardShouldPersistTaps="handled"
+            decelerationRate={0.7}
+            keyExtractor={(item, index) => index}
+            renderItem={({item, index}) => (
+              <UserFeedCompList
+                // id={item?.itemDetails?.id}
+                id={item?.id}
+                post={item}
+                likes={item?.likesCount}
+                isLikeTrue={item?.like}
+              />
+            )}
+          />
+        </ScrollView>
+        {/* feed portion  */}
+        {/* {homeFeedList.map(post => (
           <View style={styles.postContainer} key={post.id}>
             <View style={styles.postHeader}>
               <Image
                 source={{uri: post?.itemDetails?.profilePicture}}
                 style={styles.profileImage}
               />
-              <View>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.templeProfile, {
+                    // id: post?.itemDetails?.id,
+                    // title: post?.itemDetails?.name,
+                    // profileImg: post?.itemDetails?.profilePicture,
+                    data: post,
+                  });
+                }}>
                 <Text style={styles.username}>{post?.itemDetails?.name}</Text>
                 <Text style={styles.sponsorNameText}>Sponsored</Text>
-              </View>
+              </TouchableOpacity>
               <TouchableOpacity style={styles.postMenuButton}>
                 <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.templeProfile, {
-                  // id: post?.itemDetails?.id,
-                  // title: post?.itemDetails?.name,
-                  // profileImg: post?.itemDetails?.profilePicture,
-                  data: post,
-                });
-              }}>
-              {renderImage(post)}
-            </TouchableOpacity>
+            <TouchableOpacity>{renderImage(post)}</TouchableOpacity>
             <View style={styles.postFooter}>
               <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
                 <Icon
@@ -271,7 +295,7 @@ const UserFeedScreen = ({navigation}) => {
               <Text style={styles.caption}>{post.sdt}</Text>
             </View>
           </View>
-        ))}
+        ))} */}
       </View>
     </ScrollView>
   );

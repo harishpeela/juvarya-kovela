@@ -124,6 +124,7 @@ export const allTexts = {
     nearByServices: 'NearByServices',
     userFeedScreen: 'UserFeedScreen',
     templeProfile: 'TempleProfile',
+    viewProfile: 'ViewProfile',
   },
   homeHeader: {
     welcome: 'Welcome ',

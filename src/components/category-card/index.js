@@ -1,16 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ToastAndroid,
-  Pressable,
-  FlatList,
-  RefreshControl,
-} from 'react-native';
-import {allTexts, colors} from '../../common';
+import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import IconSimple from 'react-native-vector-icons/Feather';
@@ -18,8 +9,7 @@ import IconDots from 'react-native-vector-icons/Entypo';
 import IconBookMark from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ImageLoader} from '..';
-import {followUnfollowTemple, likeOrUnlikeFeed} from '../../utils/api';
-import Snackbar from 'react-native-snackbar';
+import {likeOrUnlikeFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MatrialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -31,19 +21,13 @@ export const HomeCard = ({
   icon,
   img,
   likes,
-  saved,
   onCardPress,
   isLikeTrue,
   id,
-  followId,
-  isFollowing,
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
-  const [isFollow, setisFollow] = useState(isFollowing);
-  const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-  const [savedCount, setSavedCount] = useState();
 
   const likeUnLikeHandler = async () => {
     if (isLiked) {
@@ -69,45 +53,6 @@ export const HomeCard = ({
     }
   };
 
-  const followTemples = async () => {
-    const payload = {
-      itemId: followId,
-      itemType: 'ITEM',
-      follow: !isFollow,
-    };
-    try {
-      setFollowBtnDisable(true);
-      let results = await followUnfollowTemple(payload);
-      console.log(results);
-      if (results && results.status === 200) {
-        setisFollow(!isFollow);
-        if (results && results.status === 200) {
-          setFollowBtnDisable(false);
-          ToastAndroid.show(
-            `Successfully${
-              !isFollow ? ' added to' : ' removed from '
-            } favorites!`,
-            ToastAndroid.SHORT,
-          );
-        }
-      } else {
-        Snackbar.show({
-          text: allTexts.constants.noInternet,
-          duration: Snackbar.LENGTH_INDEFINITE,
-          action: {
-            text: 'Try again',
-            textColor: 'green',
-            onPress: () => {
-              followTemples();
-            },
-          },
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -127,17 +72,7 @@ export const HomeCard = ({
               style={[styles.colorBlack, styles.boldText]}>
               {text}
             </Text>
-            {/* <Text style={styles.date}>{date}</Text> */}
           </TouchableOpacity>
-          {/* <TouchableOpacity
-            disabled={followBtnDisable}
-            onPress={followTemples}
-            style={styles.followContainer}>
-            <Text style={[styles.greenColor, styles.boldText]}>
-              {isFollow ? allTexts.other.unfollow : allTexts.other.follow}
-            </Text>
-               // follow un follow //
-          </TouchableOpacity> */}
           <TouchableOpacity style={styles.followContainer}>
             <IconDots name="dots-three-horizontal" size={25} color={'black'} />
           </TouchableOpacity>
@@ -151,15 +86,9 @@ export const HomeCard = ({
       </View>
       <View style={styles.imgContainer}>
         <ImageLoader
-          // resizeMode={'contain'}
           imageStyle={[styles.borderRadiusImg, styles.img]}
           url={img}
         />
-        {/* <Image
-          resizeMode="contain"
-          style={[styles.borderRadiusImg, styles.img]}
-          source={img}
-        /> */}
       </View>
       <View style={styles.iconsContainer}>
         <TouchableOpacity onPress={likeUnLikeHandler} style={styles.footerItem}>
@@ -191,7 +120,6 @@ export const HomeCard = ({
               style={{marginRight: 3}}
               size={20}
             />
-            {/* <Text style={styles.iconText}>Share</Text> */}
           </TouchableOpacity>
           <TouchableOpacity
             style={{...styles.footerItem1, marginLeft: 10}}
@@ -201,9 +129,6 @@ export const HomeCard = ({
               color={isSaved ? colors.blue : colors.black}
               size={20}
             />
-            {/* <Text style={[styles.iconText, {marginTop: 5}]}>
-              {likeCount} saved
-            </Text> */}
           </TouchableOpacity>
         </View>
       </View>
@@ -220,9 +145,7 @@ export const UserFeedCompList = ({
   likes,
   id,
   saveOnPress,
-  renderMedia,
 }) => {
-  const [refrsh, setRefrsh] = useState(false);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
 
@@ -249,72 +172,76 @@ export const UserFeedCompList = ({
       console.log(error);
     }
   };
-
-  return (
-    <FlatList
-      data={data}
-      showsVerticalScrollIndicator={false}
-      refreshControl={
-        <RefreshControl
-          refreshing={refrsh}
-          onRefresh={() => {
-            setRefrsh(true);
-            getHomeResponse();
-          }}
-        />
-      }
-      contentContainerStyle={styles.flatListStyle}
-      keyboardShouldPersistTaps="handled"
-      decelerationRate={0.7}
-      keyExtractor={(item, index) => index}
-      renderItem={({item, index}) => (
-        <View style={styles.postContainer} key={post.id}>
-          <View style={styles.postHeader}>
-            <Image
-              source={{uri: post?.itemDetails?.profilePicture}}
-              style={styles.profileImage}
-            />
-            <View>
-              <Text style={styles.username}>{post?.itemDetails?.name}</Text>
-              <Text style={styles.sponsorNameText}>Sponsored</Text>
-            </View>
-            <TouchableOpacity style={styles.postMenuButton}>
-              <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
-            </TouchableOpacity>
-          </View>
-          {renderMedia}
-          {/* <View style={styles.mediaContainer}>
-            <Image
-              source={{uri: post?.itemDetails?.profilePicture}}
-              style={styles.image}
-              resizeMode="cover"
-            />
-          </View> */}
-          <View style={styles.postFooter}>
-            <TouchableOpacity onPress={() => likeUnLikeHandler()}>
-              <Icon
-                name={isLiked ? 'heart' : 'heart-o'}
-                size={20}
-                color={isLiked ? 'blue' : 'black'}
-              />
-            </TouchableOpacity>
-            <View style={styles.postFooterLeft}>
-              <TouchableOpacity onPress={saveOnPress}>
-                <FeatherIcon name="send" size={20} color="black" />
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => bookmarkPress}
-                style={styles.icon}>
-                <Icon name="bookmark-o" size={20} color="black" />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={{paddingHorizontal: 10}}>
-            <Text style={styles.likes}>{post?.likesCount} Likes</Text>
-            <Text style={styles.caption}>{post.sdt}</Text>
-          </View>
+  const renderImage = post => {
+    if (!post?.mediaList === '') {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={{uri: post.image}}
+            style={styles.image}
+            resizeMode="cover"
+          />
         </View>
-      )}
-    />
+      );
+    } else if (post?.itemDetails?.profilePicture) {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={{uri: post?.itemDetails?.profilePicture}}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.mediaContainer}>
+          <Image
+            source={require('../../../assets/images/islamabad.jpg')}
+            style={styles.image}
+            resizeMode="cover"
+          />
+        </View>
+      );
+    }
+  };
+  return (
+    <View style={styles.postContainer} key={post?.itemDetails?.id}>
+      <View style={styles.postHeader}>
+        <Image
+          source={{uri: post?.itemDetails?.profilePicture}}
+          style={styles.profileImage}
+        />
+        <View>
+          <Text style={styles.username}>{post?.itemDetails?.name}</Text>
+          <Text style={styles.sponsorNameText}>Sponsored</Text>
+        </View>
+        <TouchableOpacity style={styles.postMenuButton}>
+          <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
+        </TouchableOpacity>
+      </View>
+      {renderImage(post)}
+      <View style={styles.postFooter}>
+        <TouchableOpacity onPress={() => likeUnLikeHandler()}>
+          <Icon
+            name={isLiked ? 'heart' : 'heart-o'}
+            size={20}
+            color={isLiked ? 'blue' : 'black'}
+          />
+        </TouchableOpacity>
+        <View style={styles.postFooterLeft}>
+          <TouchableOpacity onPress={saveOnPress}>
+            <FeatherIcon name="send" size={20} color="black" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={bookmarkPress} style={styles.icon}>
+            <Icon name="bookmark-o" size={20} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{paddingHorizontal: 10}}>
+        <Text style={styles.likes}>{likeCount} Likes</Text>
+        {/* <Text style={styles.caption}>{post.sdt}</Text> */}
+      </View>
+    </View>
   );
 };
