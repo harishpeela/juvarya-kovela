@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   footerContainer: {
     paddingHorizontal: 30,
-    paddingTop: 70,
+    paddingTop: 20,
   },
   header: {
     marginBottom: 20,

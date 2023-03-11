@@ -145,10 +145,11 @@ export const UserFeedCompList = ({
   likes,
   id,
   saveOnPress,
+  onPressTitle,
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
-
+  const [saveFeed, setSaveFeed] = useState(false);
   const likeUnLikeHandler = async () => {
     if (isLiked) {
       setLikeCount(likeCount - 1);
@@ -212,10 +213,10 @@ export const UserFeedCompList = ({
           source={{uri: post?.itemDetails?.profilePicture}}
           style={styles.profileImage}
         />
-        <View>
+        <TouchableOpacity onPress={onPressTitle}>
           <Text style={styles.username}>{post?.itemDetails?.name}</Text>
           <Text style={styles.sponsorNameText}>Sponsored</Text>
-        </View>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.postMenuButton}>
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
         </TouchableOpacity>
@@ -233,8 +234,15 @@ export const UserFeedCompList = ({
           <TouchableOpacity onPress={saveOnPress}>
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={bookmarkPress} style={styles.icon}>
-            <Icon name="bookmark-o" size={20} color="black" />
+          <TouchableOpacity
+            onPress={() => setSaveFeed(!saveFeed)}
+            style={styles.icon}>
+            <Icon
+              name={saveFeed ? 'bookmark' : 'bookmark-o'}
+              color={saveFeed ? colors.blue : colors.black}
+              size={20}
+            />
+            {/* <Icon name="bookmark-o" size={20} color="black" /> */}
           </TouchableOpacity>
         </View>
       </View>

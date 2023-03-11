@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
 import {
@@ -18,8 +19,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext} from 'react';
 import Snackbar from 'react-native-snackbar';
+import ApplicationContext from '../../utils/context-api/Context';
 import {
   followUnfollowTemple,
   getTempleDetails,
@@ -62,6 +64,7 @@ const TempleProfile = ({route, navigation}) => {
     discription: '',
   });
   const {data} = route.params || {};
+  console.log('data', data);
   const getData = async () => {
     try {
       let result = await getTempleDetails(data?.itemDetails?.id);
@@ -141,6 +144,8 @@ const TempleProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
+  const {userDetails} = useContext(ApplicationContext);
+  console.log('role', userDetails);
   useEffect(() => {
     // getData();
     data;
@@ -191,13 +196,15 @@ const TempleProfile = ({route, navigation}) => {
               </Text>
             </Text>
 
-            <Pressable
+            <TouchableOpacity
               style={styles.circularButton}
               onPress={() =>
-                navigation.navigate(allTexts.screenNames.viewProfile)
+                navigation.navigate(allTexts.screenNames.viewProfile, {
+                  id: data,
+                })
               }>
               <Text style={styles.circularButton.text}>View Profile</Text>
-            </Pressable>
+            </TouchableOpacity>
           </View>
 
           <View style={styles.subFooterHead}>
@@ -249,6 +256,11 @@ const TempleProfile = ({route, navigation}) => {
             <Pressable style={styles.voidButton}>
               <Text style={styles.voidButton.text}>Directions</Text>
             </Pressable>
+            {userDetails.role === 'ROLE_AGENT' && (
+              <TouchableOpacity onPress={() => alert('under development')}>
+                <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
+              </TouchableOpacity>
+            )}
           </View>
 
           <View style={styles.controlPanel}>

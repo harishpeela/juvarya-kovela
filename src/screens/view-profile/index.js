@@ -1,12 +1,15 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-sparse-arrays */
 /* eslint-disable react/react-in-jsx-scope */
+import React, {useState, useEffect, useContext} from 'react';
 import {Pressable, Image, Text, View, TouchableOpacity} from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {styles} from './styles';
+import ApplicationContext from '../../utils/context-api/Context';
 
 const templeData = {
   name: 'Temple 123',
@@ -40,7 +43,21 @@ const templeData = {
   ],
 };
 
-const ViewProfile = ({navigation}) => {
+const ViewProfile = ({navigation, route}) => {
+  const {userDetails} = useContext(ApplicationContext);
+  const {id} = route.params || {};
+  const [isFollow, setisFollow] = useState('');
+  console.log('id', id);
+  const follow = () => {
+    if (id.itemDetails?.following) {
+      setisFollow('unFollow');
+    } else {
+      setisFollow('Follow');
+    }
+  };
+  useEffect(() => {
+    follow();
+  }, []);
   return (
     <View>
       <View style={styles.footerBackground}>
@@ -58,7 +75,7 @@ const ViewProfile = ({navigation}) => {
           </View>
           <View style={styles.infoContainer}>
             <Image
-              source={{uri: templeData.images[0].uri}}
+              source={{uri: id.itemDetails.profilePicture}}
               style={{
                 width: 80,
                 height: 80,
@@ -98,7 +115,7 @@ const ViewProfile = ({navigation}) => {
           <View style={styles.footerHead}>
             <Text>
               <Text style={styles.boldText}>
-                {templeData.name} &nbsp;&nbsp;
+                {id?.itemDetails?.name} &nbsp;&nbsp;
               </Text>
               <Text style={styles.ratingText}>
                 <AntDesign name={'star'} color={'#FFA001'} size={20} />{' '}
@@ -107,7 +124,7 @@ const ViewProfile = ({navigation}) => {
             </Text>
           </View>
           <View style={styles.subFooterHead}>
-            <Text style={{color: 'grey', fontSize: 18}}>{templeData.city}</Text>
+            <Text style={{color: 'grey', fontSize: 18}}>{id.description}</Text>
           </View>
           <View style={styles.footerBody}>
             {templeData.points.map((item, index) => {
@@ -120,7 +137,7 @@ const ViewProfile = ({navigation}) => {
           </View>
           <View style={styles.footerAction}>
             <Pressable style={styles.button}>
-              <Text style={styles.button.text}>Follow</Text>
+              <Text style={styles.button.text}>{isFollow}</Text>
             </Pressable>
             <Pressable style={styles.voidButton}>
               <Text style={styles.voidButton.text}>Contact</Text>
@@ -128,6 +145,11 @@ const ViewProfile = ({navigation}) => {
             <Pressable style={styles.voidButton}>
               <Text style={styles.voidButton.text}>Directions</Text>
             </Pressable>
+            {userDetails.role === 'ROLE_AGENT' && (
+              <TouchableOpacity onPress={() => alert('under development')}>
+                <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
+              </TouchableOpacity>
+            )}
           </View>
           <View style={styles.controlPanel}>
             <Pressable style={styles.controlPanel.item}>
