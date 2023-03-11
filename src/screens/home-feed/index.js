@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
 import {
   StyleSheet,
@@ -175,7 +176,7 @@ const UserFeedScreen = ({navigation}) => {
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  console.log('homefeed', homeFeedList);
+  // console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -242,12 +243,28 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 likes={item?.likesCount}
                 isLikeTrue={item?.like}
+                onPressTitle={() =>
+                  navigation.navigate(allTexts.screenNames.templeProfile, {
+                    // id: post?.itemDetails?.id,
+                    // title: post?.itemDetails?.name,
+                    // profileImg: post?.itemDetails?.profilePicture,
+                    data: item,
+                  })
+                }
               />
             )}
           />
         </ScrollView>
         {/* feed portion  */}
-        {/* {homeFeedList.map(post => (
+      </View>
+    </ScrollView>
+  );
+};
+
+export default UserFeedScreen;
+
+{
+  /* {homeFeedList.map(post => (
           <View style={styles.postContainer} key={post.id}>
             <View style={styles.postHeader}>
               <Image
@@ -295,10 +312,5 @@ const UserFeedScreen = ({navigation}) => {
               <Text style={styles.caption}>{post.sdt}</Text>
             </View>
           </View>
-        ))} */}
-      </View>
-    </ScrollView>
-  );
-};
-
-export default UserFeedScreen;
+        ))} */
+}
