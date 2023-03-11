@@ -45,9 +45,9 @@ const templeData = {
 
 const ViewProfile = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
-  const {id} = route.params || {};
+  const {id, title, profileImg} = route.params || {};
   const [isFollow, setisFollow] = useState('');
-  console.log('id', id);
+  console.log('id', id, title, profileImg);
   const follow = () => {
     if (id.itemDetails?.following) {
       setisFollow('unFollow');
@@ -75,7 +75,7 @@ const ViewProfile = ({navigation, route}) => {
           </View>
           <View style={styles.infoContainer}>
             <Image
-              source={{uri: id.itemDetails.profilePicture}}
+              source={{uri: profileImg}}
               style={{
                 width: 80,
                 height: 80,
@@ -114,9 +114,7 @@ const ViewProfile = ({navigation, route}) => {
           </View>
           <View style={styles.footerHead}>
             <Text>
-              <Text style={styles.boldText}>
-                {id?.itemDetails?.name} &nbsp;&nbsp;
-              </Text>
+              <Text style={styles.boldText}>{title} &nbsp;&nbsp;</Text>
               <Text style={styles.ratingText}>
                 <AntDesign name={'star'} color={'#FFA001'} size={20} />{' '}
                 {templeData.rating}

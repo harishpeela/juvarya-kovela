@@ -63,8 +63,8 @@ const TempleProfile = ({route, navigation}) => {
   const [details, setDetails] = useState({
     discription: '',
   });
-  const {data} = route.params || {};
-  console.log('data', data);
+  const {id, title, profileImg, data} = route.params || {};
+  console.log('data', id, title, profileImg);
   const getData = async () => {
     try {
       let result = await getTempleDetails(data?.itemDetails?.id);
@@ -148,7 +148,6 @@ const TempleProfile = ({route, navigation}) => {
   console.log('role', userDetails);
   useEffect(() => {
     // getData();
-    data;
   }, [route]);
   return (
     <ImageBackground
@@ -187,9 +186,7 @@ const TempleProfile = ({route, navigation}) => {
         <View style={styles.footerContainer}>
           <View style={styles.footerHead}>
             <Text>
-              <Text style={styles.boldText}>
-                {data?.itemDetails?.name} &nbsp;&nbsp;
-              </Text>
+              <Text style={styles.boldText}>{title} &nbsp;&nbsp;</Text>
               <Text style={styles.ratingText}>
                 <AntDesign name={'star'} color={'#FFA001'} size={14} />
                 <Text> {templeData.rating}</Text>
@@ -200,7 +197,9 @@ const TempleProfile = ({route, navigation}) => {
               style={styles.circularButton}
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.viewProfile, {
-                  id: data,
+                  id: id,
+                  title: title,
+                  profileImg: profileImg,
                 })
               }>
               <Text style={styles.circularButton.text}>View Profile</Text>
