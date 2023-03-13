@@ -57,7 +57,7 @@ const Home = ({navigation}) => {
   useEffect(() => {
     getHomeResponse();
   }, []);
-  console.log('my listsss', favoriteTemplesList.length);
+  // console.log('my listsss', favoriteTemplesList.length);
   const getHomeResponse = async () => {
     try {
       // setloader(true);

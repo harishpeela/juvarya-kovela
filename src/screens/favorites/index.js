@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/jsx-no-duplicate-props */
 import {View, Text, TouchableOpacity, FlatList, Pressable} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
@@ -114,9 +115,10 @@ const Favorite = ({navigation}) => {
                 name={item?.jtItem?.name}
                 isFollow={item?.jtItem?.following}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.homeDetails, {
+                  navigation.navigate(allTexts.screenNames.templeProfile, {
                     id: item?.jtItem?.id,
                     title: item?.jtItem?.name,
+                    profileImg: item?.jtItem?.profilePicture?.url,
                   });
                 }}
               />

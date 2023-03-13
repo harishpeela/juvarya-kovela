@@ -27,7 +27,7 @@ export const PopularCard = ({
     try {
       // console.log(payload);
       let results = await followUnfollowTemple(payload);
-      console.log('Follow unfollow API response ', results);
+      // console.log('Follow unfollow API response ', results);
       if (results && results.status === 200) {
         ToastAndroid.show(
           `Successfully${

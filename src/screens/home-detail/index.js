@@ -45,7 +45,7 @@ const HomeDetail = ({navigation, route}) => {
   const {
     params: {id, title},
   } = route || {};
-  console.log('details', id, title);
+  // console.log('details', id, title);
   const getData = async () => {
     try {
       let result = await getTempleDetails(id);

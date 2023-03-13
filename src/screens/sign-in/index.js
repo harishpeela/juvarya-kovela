@@ -68,7 +68,7 @@ const Signin = ({navigation}) => {
     };
     try {
       let result = await loginUser(payload);
-      console.log('signinhand login res', result);
+      // console.log('signinhand login res', result);
       if (result && result.status === 200) {
         const {
           data: {access_token, refresh_token, token_type, expires_in},

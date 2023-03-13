@@ -38,7 +38,7 @@ const Search = ({navigation}) => {
       getDetails();
     }
   }, []);
-  console.log('popTemples', popTemples);
+  // console.log('popTemples', popTemples);
   const getDetails = async () => {
     let result = await getUserDetails();
     setUserDetails(result);

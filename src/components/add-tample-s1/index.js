@@ -190,7 +190,7 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
             onNextBtnPress(values, isRegular);
             CommunityGetApi();
             // CommunityPostApi();
-            console.log('commite', values);
+            // console.log('commite', values);
           }}
           validationSchema={AddTampleSchema}
           initialValues={{

@@ -53,8 +53,9 @@ const MyTamples = ({navigation, route}) => {
         item.name.toLowerCase().includes(value.toLowerCase()),
       ),
     );
-    // console.log('filter', filteredArray);
   };
+  // console.log('filter', filteredArray);
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.headerContainer}>
@@ -113,10 +114,11 @@ const MyTamples = ({navigation, route}) => {
                         date={item.creationTime}
                         onPress={() => {
                           navigation.navigate(
-                            allTexts.screenNames.homeDetails,
+                            allTexts.screenNames.templeProfile,
                             {
                               id: item.id,
                               title: item.name,
+                              profileImg: item?.profilePicture?.url,
                             },
                           );
                         }}
