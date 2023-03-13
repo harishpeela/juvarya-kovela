@@ -42,7 +42,7 @@ export const HomeCard = ({
       like: !isLiked,
     };
     try {
-      console.log('payloadLike', payloadLike);
+      // console.log('payloadLike', payloadLike);
       let result = await likeOrUnlikeFeed(payloadLike);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;
@@ -163,7 +163,7 @@ export const UserFeedCompList = ({
       like: !isLiked,
     };
     try {
-      console.log('payloadLike', payloadLike);
+      // console.log('payloadLike', payloadLike);
       let result = await likeOrUnlikeFeed(payloadLike);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;

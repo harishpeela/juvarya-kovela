@@ -17,7 +17,7 @@ const Services = ({navigation, route}) => {
     params: {id, title, name},
   } = route || {};
   const [servicesData, setServicesData] = useState(name);
-  console.log('servicedata', name.id);
+  // console.log('servicedata', name.id);
 
   const ActiveData = () => {
     let data = servicesData?.serviceCategories;
@@ -38,7 +38,6 @@ const Services = ({navigation, route}) => {
       },
       serviceCategory: mappedData,
     });
-    console.log('  ', raw);
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,

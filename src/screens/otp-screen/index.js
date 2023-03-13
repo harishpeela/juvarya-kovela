@@ -159,7 +159,7 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await RegistesrUser(registerPayload);
-      console.log('register user result', result?.data);
+      // console.log('register user result', result?.data);
       const {
         data: {emailAddress, otp, statusCode},
       } = result || {};

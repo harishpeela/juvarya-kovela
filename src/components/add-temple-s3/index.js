@@ -49,7 +49,7 @@ export const AddTampleStep3 = ({
         if (result.validCustomer) {
           onAddBtnPress(emp, isRoleSelected, () => {
             setIsAllDataAvailable(true);
-            console.log('emp', emp);
+            // console.log('emp', emp);
           });
         } else {
           setAdmin(true);
@@ -67,7 +67,7 @@ export const AddTampleStep3 = ({
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            console.log('statevalue', values);
+            // console.log('statevalue', values);
             formikActions.setSubmitting(true);
             if (isRoleSelected == '') {
               setDropDownError(true);

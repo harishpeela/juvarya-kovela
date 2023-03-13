@@ -19,8 +19,8 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const AddEvent = ({data, navigation}) => {
   const {id} = useContext(ApplicationContext);
-  console.log('-=========-=-=-=-=-=-', id);
-  console.log('iiiiiidddddddddddd', navigation);
+  // console.log('-=========-=-=-=-=-=-', id);
+  // console.log('iiiiiidddddddddddd', navigation);
   const {
     buttonTexts: {addevents},
     placeHolders: {tampleNameP, descriptionP},
@@ -94,7 +94,7 @@ export const AddEvent = ({data, navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        console.log('injnhjnh', result);
+        // console.log('injnhjnh', result);
         if (result?.id) {
           navigation.navigate(allTexts.screenNames.events, {idparam: id});
         }

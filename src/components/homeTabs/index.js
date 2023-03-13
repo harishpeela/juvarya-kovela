@@ -6,7 +6,7 @@ import {styles} from './styles';
 export const HomeTabs = ({}) => {
   const [id, setId] = useState(1);
   useEffect(() => {
-    console.log(id);
+    // console.log(id);
   }, [id]);
   let tabList = [
     {

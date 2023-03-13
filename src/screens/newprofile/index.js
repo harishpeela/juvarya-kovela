@@ -12,6 +12,7 @@ import {
   ToastAndroid,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import {colors} from '../../common';
 import {textStyles, style} from './styles';
@@ -55,6 +56,7 @@ const templeData = {
 
 const TempleProfile = ({route, navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentTab, setCurrentTab] = useState(0);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState(false);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
@@ -108,7 +110,7 @@ const TempleProfile = ({route, navigation}) => {
       itemType: 'ITEM',
       follow: !isFollow,
     };
-    console.log('pay', payload);
+    // console.log('pay', payload);
     try {
       setFollowBtnDisable(true);
       let results = await followUnfollowTemple(payload);
@@ -127,7 +129,7 @@ const TempleProfile = ({route, navigation}) => {
           );
         }
       } else {
-        console.log('err');
+        // console.log('err');
         // Snackbar.show({
         //   text: allTexts.constants.noInternet,
         //   duration: Snackbar.LENGTH_INDEFINITE,
@@ -255,7 +257,7 @@ const TempleProfile = ({route, navigation}) => {
             <Pressable style={styles.voidButton}>
               <Text style={styles.voidButton.text}>Directions</Text>
             </Pressable>
-            {userDetails.role === 'ROLE_AGENT' && (
+            {userDetails.role === 'ROLE_ADMIN' && (
               <TouchableOpacity onPress={() => alert('under development')}>
                 <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
               </TouchableOpacity>
@@ -263,12 +265,16 @@ const TempleProfile = ({route, navigation}) => {
           </View>
 
           <View style={styles.controlPanel}>
-            <Pressable style={styles.controlPanel.item}>
+            <Pressable
+              style={styles.controlPanel.item}
+              onPress={() => setCurrentTab(1)}>
               <Feather name="grid" color={'#585858'} size={24} />
               <Text style={styles.controlPanel.item.text}>Posts</Text>
             </Pressable>
 
-            <Pressable style={styles.controlPanel.item}>
+            <Pressable
+              style={styles.controlPanel.item}
+              onPress={() => setCurrentTab(2)}>
               <MaterialCommunityIcons
                 name="movie-open-outline"
                 color={'#585858'}
@@ -300,6 +306,8 @@ const TempleProfile = ({route, navigation}) => {
               <Text style={styles.controlPanel.item.text}>Donate</Text>
             </Pressable>
           </View>
+          {currentTab == 1 && <View>{/* <Text>hi</Text> */}</View>}
+          {currentTab == 2 && <Text>hi</Text>}
         </View>
       </View>
     </ImageBackground>
