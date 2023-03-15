@@ -57,6 +57,14 @@ const Favorite = ({navigation}) => {
       console.log(error);
     }
   };
+  console.log(
+    'id: ',
+    filterFavTemple[4]?.jtItem?.id,
+    'title: ',
+    filterFavTemple[4]?.jtItem?.name,
+    'picture: ',
+    filterFavTemple?.jtItem?.profilePicture?.url,
+  );
   return (
     <View style={styles.wrapper}>
       <BackHeader
@@ -115,11 +123,22 @@ const Favorite = ({navigation}) => {
                 name={item?.jtItem?.name}
                 isFollow={item?.jtItem?.following}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.templeProfile, {
-                    id: item?.jtItem?.id,
-                    title: item?.jtItem?.name,
-                    profileImg: item?.jtItem?.profilePicture?.url,
-                  });
+                  navigation.navigate(
+                    allTexts.screenNames.templeProfile,
+                    {
+                      id: item?.jtItem?.id,
+                      title: item?.jtItem?.name,
+                      profileImg: item?.jtItem?.profilePicture?.url,
+                    },
+                    console.log(
+                      'id: ',
+                      item?.jtItem?.id,
+                      'title',
+                      item?.jtItem?.name,
+                      'profimg',
+                      item?.jtItem?.profilePicture?.url,
+                    ),
+                  );
                 }}
               />
             )}

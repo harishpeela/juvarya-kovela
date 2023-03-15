@@ -62,10 +62,9 @@ export const styles = StyleSheet.create({
       justifyContent: 'space-between',
       marginVertical: 5,
       col: {
-        width: 160,
-        height: 200,
-        backgroundColor: 'rgba(88, 88, 88, 0.6)',
-        // margin: 10,
+        width: 100,
+        height: 100,
+        backgroundColor: 'rgba(88, 88, 88, 0.2)',
         borderRadius: 20,
       },
     },
@@ -147,11 +146,9 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       text: {
         paddingVertical: 5,
-        color: '#585858',
       },
       selectedText: {
         paddingVertical: 5,
-        color: '#FFA001',
       },
     },
   },

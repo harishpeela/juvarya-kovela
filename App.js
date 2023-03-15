@@ -25,6 +25,7 @@ import {
   UserFeedScreen,
   TempleProfile,
   ViewProfile,
+  Menu,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -66,6 +67,7 @@ const App = () => {
       nearByServices,
       templeProfile,
       viewProfile,
+      menu,
     },
   } = allTexts;
 
@@ -243,6 +245,13 @@ const App = () => {
         <Stack.Screen
           name={viewProfile}
           component={ViewProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={menu}
+          component={Menu}
           options={{
             headerShown: false,
           }}

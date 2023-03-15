@@ -125,6 +125,7 @@ export const allTexts = {
     userFeedScreen: 'UserFeedScreen',
     templeProfile: 'TempleProfile',
     viewProfile: 'ViewProfile',
+    menu: 'Menu',
   },
   homeHeader: {
     welcome: 'Welcome ',

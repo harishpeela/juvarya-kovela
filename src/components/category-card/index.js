@@ -146,6 +146,7 @@ export const UserFeedCompList = ({
   id,
   saveOnPress,
   onPressTitle,
+  onDotsPress,
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
@@ -217,7 +218,7 @@ export const UserFeedCompList = ({
           <Text style={styles.username}>{post?.itemDetails?.name}</Text>
           <Text style={styles.sponsorNameText}>Sponsored</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.postMenuButton}>
+        <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress} >
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
         </TouchableOpacity>
       </View>
