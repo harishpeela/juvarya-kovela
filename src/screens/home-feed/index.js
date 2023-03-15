@@ -1,7 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   Image,
@@ -9,15 +8,12 @@ import {
   TouchableOpacity,
   RefreshControl,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import MatrialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import Video from 'react-native-video';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
-import {likeOrUnlikeFeed} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -100,83 +96,83 @@ const UserFeedScreen = ({navigation}) => {
       console.log(error);
     }
   };
-  const handleLike = postId => {
-    // console.log(`Liked post ${postId}`);
-  };
+  // const handleLike = postId => {
+  //   // console.log(`Liked post ${postId}`);
+  // };
 
-  const handleShare = postId => {
-    // console.log(`Shared post ${postId}`);
-  };
+  // const handleShare = postId => {
+  //   // console.log(`Shared post ${postId}`);
+  // };
 
-  const handleSave = postId => {
-    // console.log(`Saved post ${postId}`);
-  };
+  // const handleSave = postId => {
+  //   // console.log(`Saved post ${postId}`);
+  // };
 
-  const renderMedia = post => {
-    if (post?.mediaList?.url) {
-      return (
-        <View style={styles.mediaContainer}>
-          <Video
-            source={{uri: post.video}}
-            style={styles.video}
-            resizeMode="cover"
-          />
-        </View>
-      );
-    } else if (post?.mediaList?.url) {
-      return (
-        <View style={styles.mediaContainer}>
-          <Image
-            source={{uri: post.image}}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-      );
-    } else {
-      return null;
-    }
-  };
-  const renderImage = post => {
-    if (!post?.mediaList === '') {
-      return (
-        <View style={styles.mediaContainer}>
-          <Image
-            source={{uri: post.image}}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-      );
-    } else if (post?.itemDetails?.profilePicture) {
-      return (
-        <View style={styles.mediaContainer}>
-          <Image
-            source={{uri: post?.itemDetails?.profilePicture}}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-      );
-    } else {
-      return (
-        <View style={styles.mediaContainer}>
-          <Image
-            source={require('../../../assets/images/islamabad.jpg')}
-            style={styles.image}
-            resizeMode="cover"
-          />
-        </View>
-      );
-    }
-  };
+  // const renderMedia = post => {
+  //   if (post?.mediaList?.url) {
+  //     return (
+  //       <View style={styles.mediaContainer}>
+  //         <Video
+  //           source={{uri: post.video}}
+  //           style={styles.video}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   } else if (post?.mediaList?.url) {
+  //     return (
+  //       <View style={styles.mediaContainer}>
+  //         <Image
+  //           source={{uri: post.image}}
+  //           style={styles.image}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   } else {
+  //     return null;
+  //   }
+  // };
+  // const renderImage = post => {
+  //   if (!post?.mediaList === '') {
+  //     return (
+  //       <View style={styles.mediaContainer}>
+  //         <Image
+  //           source={{uri: post.image}}
+  //           style={styles.image}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   } else if (post?.itemDetails?.profilePicture) {
+  //     return (
+  //       <View style={styles.mediaContainer}>
+  //         <Image
+  //           source={{uri: post?.itemDetails?.profilePicture}}
+  //           style={styles.image}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   } else {
+  //     return (
+  //       <View style={styles.mediaContainer}>
+  //         <Image
+  //           source={require('../../../assets/images/islamabad.jpg')}
+  //           style={styles.image}
+  //           resizeMode="cover"
+  //         />
+  //       </View>
+  //     );
+  //   }
+  // };
   useEffect(() => {
     getHomeResponse();
     getFollowedTempleList();
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  // console.log('homefeed', homeFeedList);
+  console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -243,13 +239,27 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 likes={item?.likesCount}
                 isLikeTrue={item?.like}
+                onDotsPress={() =>
+                  navigation.navigate(allTexts.screenNames.menu)
+                }
                 onPressTitle={() =>
-                  navigation.navigate(allTexts.screenNames.templeProfile, {
-                    id: item?.itemDetails?.id,
-                    title: item?.itemDetails?.name,
-                    profileImg: item?.itemDetails?.profilePicture,
-                    data: item,
-                  })
+                  navigation.navigate(
+                    allTexts.screenNames.templeProfile,
+                    {
+                      id: item?.itemDetails?.id,
+                      title: item?.itemDetails?.name,
+                      profileImg: item?.itemDetails?.profilePicture,
+                      data: item,
+                    },
+                    console.log(
+                      'id: ',
+                      item?.itemDetails?.id,
+                      'title',
+                      item?.itemDetails?.name,
+                      'profileimg',
+                      item?.itemDetails?.profilePicturel,
+                    ),
+                  )
                 }
               />
             )}

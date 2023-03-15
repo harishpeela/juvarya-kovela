@@ -48,6 +48,7 @@ const Search = ({navigation}) => {
     try {
       setPopTempleLoader(true);
       let response = await getPopularTemples(0);
+      console.log('response', response?.data);
       if (response && response.status === 200) {
         // console.log('Latest Temples API Calling response', response);
         setPopTempleLoader(false);
@@ -74,7 +75,7 @@ const Search = ({navigation}) => {
     try {
       setmoreExploreLoader(true);
       let moreTempleResponse = await getMoreExploreAPI(0, 10);
-      // console.log('more exam', moreTempleResponse);
+      console.log('more exam', moreTempleResponse?.data);
       if (moreTempleResponse && moreTempleResponse.status === 200) {
         setmoreExploreLoader(false);
         const {
@@ -113,7 +114,7 @@ const Search = ({navigation}) => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(callback, time);
   };
-
+// console.log('pop', popTemples);
   useEffect(() => {
     if (searchText) {
       debounce(searchedTextHandler, 300);
@@ -189,11 +190,22 @@ const Search = ({navigation}) => {
                     id={item?.id}
                     img={require('../../../assets/images/bigTamle.png')}
                     onCardPress={() => {
-                      navigation.navigate(allTexts.screenNames.templeProfile, {
-                        id: item.id,
-                        title: item.name,
-                        profileImg: item?.profilePicture?.url,
-                      });
+                      navigation.navigate(
+                        allTexts.screenNames.templeProfile,
+                        {
+                          id: item.id,
+                          title: item.name,
+                          profileImg: item?.profilePicture?.url,
+                        },
+                        console.log(
+                          'id: ',
+                          item.id,
+                          'title',
+                          item.name,
+                          'profileimg',
+                          item?.profilePicture?.url,
+                        ),
+                      );
                     }}
                   />
                 )}
@@ -212,7 +224,7 @@ const Search = ({navigation}) => {
           <View>
             {moreExploreLoader ? (
               <View style={styles.popTempleLoader}>
-                <Loader color={colors.green} />
+                <Loader color={colors.green} size={'small'} />
               </View>
             ) : (
               <FlatList
@@ -228,12 +240,23 @@ const Search = ({navigation}) => {
                     name={item.name}
                     img={item?.profilePicture?.url}
                     onPress={() => {
-                      navigation.navigate(allTexts.screenNames.templeProfile, {
-                        id: item.id,
-                        title: item.name,
-                        // searchData: item,
-                        profileImg: item?.profilePicture?.url,
-                      });
+                      navigation.navigate(
+                        allTexts.screenNames.templeProfile,
+                        {
+                          id: item.id,
+                          title: item.name,
+                          // searchData: item,
+                          profileImg: item?.profilePicture?.url,
+                        },
+                        console.log(
+                          'id: ',
+                          item.id,
+                          'title',
+                          item.name,
+                          'profileimg',
+                          item?.profilePicture?.url,
+                        ),
+                      );
                     }}
                   />
                 )}

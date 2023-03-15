@@ -12,8 +12,8 @@ import {
   ToastAndroid,
   TouchableOpacity,
   ActivityIndicator,
-  ScrollView,
 } from 'react-native';
+import {Loader} from '../../components';
 import {colors} from '../../common';
 import {textStyles, style} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -56,48 +56,51 @@ const templeData = {
 
 const TempleProfile = ({route, navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentTab, setCurrentTab] = useState(0);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState(false);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [feedListData, setFeedListData] = useState([]);
+  const [followVisible, setFollowVisible] = useState(false);
   const [nameData, setNameData] = useState();
   const [details, setDetails] = useState({
     discription: '',
   });
   const {id, title, profileImg, data} = route.params || {};
-  console.log('data', id, title, profileImg);
+  console.log('data', id, title, data, profileImg);
   const getData = async () => {
+    console.log('idid', id);
     try {
-      let result = await getTempleDetails(data?.itemDetails?.id);
-      // console.log('res', result?.data);
-      let feedList = await getFeedList(0, 20, data?.itemDetails?.id);
+      setFollowVisible(true);
+      let result = await getTempleDetails(id);
+      console.log('res', result?.data);
+      let feedList = await getFeedList(0, 20, id);
       // console.log('feedlist', feedList?.data);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);
+        setFollowVisible(false);
         const {
           data: {discription},
         } = result || {};
         setFeedListData(feedList?.data);
         setNameData(result.data);
-        setisFollow(data?.itemDetails?.following);
+        setisFollow(result?.data?.following);
         setDetails({
           discription: discription,
-          image: data?.itemDetails?.profilePicture?.url,
-          id: data?.itemDetails?.id,
+          image: profileImg,
+          id: id,
         });
       } else {
-        console.log('errors');
+
         // Snackbar.show({
-        //   text: allTexts.constants.noInternet,
-        //   duration: Snackbar.LENGTH_INDEFINITE,
-        //   action: {
-        //     text: 'Try again',
-        //     textColor: 'green',
-        //     onPress: () => {
-        //       getData();
-        //     },
+        // text: allTexts.constants.noInternet,
+        // duration: Snackbar.LENGTH_INDEFINITE,
+        // action: {
+        //   text: 'Try again',
+        //   textColor: 'red',
+        //   onPress: () => {
+        //     getData();
         //   },
+        // },
         // });
       }
     } catch (error) {
@@ -106,7 +109,7 @@ const TempleProfile = ({route, navigation}) => {
   };
   const followTemples = async () => {
     const payload = {
-      itemId: data?.itemDetails?.id,
+      itemId: id,
       itemType: 'ITEM',
       follow: !isFollow,
     };
@@ -118,24 +121,21 @@ const TempleProfile = ({route, navigation}) => {
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         // console.log('results', results.json());
-        if (results && results.status === 200) {
-          setFollowBtnDisable(false);
+        setFollowBtnDisable(false);
 
-          ToastAndroid.show(
-            `Successfully you are${
-              !isFollow ? ' following' : ' unFollowing'
-            } temple!`,
-            ToastAndroid.SHORT,
-          );
-        }
+        ToastAndroid.show(
+          `Successfully you are${
+            !isFollow ? ' following' : ' unFollowing'
+          } temple!`,
+          ToastAndroid.SHORT,
+        );
       } else {
-        // console.log('err');
         // Snackbar.show({
         //   text: allTexts.constants.noInternet,
         //   duration: Snackbar.LENGTH_INDEFINITE,
         //   action: {
         //     text: 'Try again',
-        //     textColor: 'green',
+        //     textColor: 'red',
         //     onPress: () => {
         //       followTemples();
         //     },
@@ -147,10 +147,10 @@ const TempleProfile = ({route, navigation}) => {
     }
   };
   const {userDetails} = useContext(ApplicationContext);
-  console.log('role', userDetails);
+  // console.log('role', userDetails);
   useEffect(() => {
-    // getData();
-  }, [route]);
+    getData();
+  }, []);
   return (
     <ImageBackground
       source={{uri: templeData.images[currentIndex].uri}}
@@ -236,19 +236,37 @@ const TempleProfile = ({route, navigation}) => {
               </Text>
             </Pressable> */}
             {/* {followingData()} */}
-
-            <PrimaryButton1
-              bgColor={'#FFA001'}
-              disabled={followBtnDisable}
-              radius={10}
-              padding={7}
-              onPress={followTemples}
-              text={
-                isFollow
-                  ? allTexts.buttonTexts.unFollow
-                  : allTexts.buttonTexts.follow
-              }
-            />
+            {/* {followVisible && <Loader color={'blue'} />} */}
+            {followVisible ? (
+              <View
+                style={{
+                  width: 105,
+                  padding: 10,
+                  height: 38,
+                  backgroundColor: '#FFA001',
+                  borderRadius: 10,
+                  marginRight: 4,
+                }}>
+                <Loader
+                  color={'white'}
+                  size={'small'}
+                  dynmicStyle={styles.loader}
+                />
+              </View>
+            ) : (
+              <PrimaryButton1
+                bgColor={'#FFA001'}
+                disabled={followBtnDisable}
+                radius={10}
+                padding={7}
+                onPress={followTemples}
+                text={
+                  isFollow
+                    ? allTexts.buttonTexts.unFollow
+                    : allTexts.buttonTexts.follow
+                }
+              />
+            )}
 
             <Pressable style={styles.voidButton}>
               <Text style={styles.voidButton.text}>Contact</Text>
@@ -265,16 +283,12 @@ const TempleProfile = ({route, navigation}) => {
           </View>
 
           <View style={styles.controlPanel}>
-            <Pressable
-              style={styles.controlPanel.item}
-              onPress={() => setCurrentTab(1)}>
+            <Pressable style={styles.controlPanel.item}>
               <Feather name="grid" color={'#585858'} size={24} />
               <Text style={styles.controlPanel.item.text}>Posts</Text>
             </Pressable>
 
-            <Pressable
-              style={styles.controlPanel.item}
-              onPress={() => setCurrentTab(2)}>
+            <Pressable style={styles.controlPanel.item}>
               <MaterialCommunityIcons
                 name="movie-open-outline"
                 color={'#585858'}
@@ -306,8 +320,6 @@ const TempleProfile = ({route, navigation}) => {
               <Text style={styles.controlPanel.item.text}>Donate</Text>
             </Pressable>
           </View>
-          {currentTab == 1 && <View>{/* <Text>hi</Text> */}</View>}
-          {currentTab == 2 && <Text>hi</Text>}
         </View>
       </View>
     </ImageBackground>
