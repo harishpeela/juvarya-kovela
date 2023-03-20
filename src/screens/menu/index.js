@@ -3,16 +3,19 @@
 import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import {styles} from './styles';
 import {allTexts} from '../../common';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import set from 'date-fns/esm/set/index';
 const templeData = {
   petalImage: 'https://www.linkpicture.com/q/hello.png',
 };
 
 const Menu = ({navigation}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const OnClick = () => {
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const NearBy = () => {
     setCurrentIndex(3);
     if (currentIndex == 3) {
+      navigation.navigate(allTexts.screenNames.nearByServices);
+    } else {
       navigation.navigate(allTexts.screenNames.nearByServices);
     }
   };
@@ -31,14 +34,13 @@ const Menu = ({navigation}) => {
               </View>
             </TouchableOpacity>
             <View style={{marginVertical: '10%'}}>
-              <TouchableOpacity
-                onPress={(() => setCurrentIndex(1), alert('2'))}>
+              <TouchableOpacity onPress={() => setCurrentIndex(1)}>
                 <Text
                   style={{
                     ...styles.tabs,
                     borderBottomWidth: currentIndex == 1 ? 2 : 0,
                     fontWeight: currentIndex == 1 ? 'bold' : '400',
-                    width: 70,
+                    width: 60,
                     borderBottomColor: currentIndex == 1 ? 'red' : 'white',
                   }}>
                   Feed{' '}
@@ -56,14 +58,14 @@ const Menu = ({navigation}) => {
                   Reels
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={(() => setCurrentIndex(3), OnClick())}>
+              <TouchableOpacity onPress={() => NearBy()}>
                 <Text
                   style={{
                     ...styles.tabs,
                     borderBottomColor: currentIndex == 3 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 3 ? 2 : 0,
                     fontWeight: currentIndex == 3 ? 'bold' : '400',
-                    width: 110,
+                    width: 90,
                   }}>
                   NearBy{' '}
                 </Text>
@@ -75,7 +77,7 @@ const Menu = ({navigation}) => {
                     borderBottomColor: currentIndex == 4 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 4 ? 2 : 0,
                     fontWeight: currentIndex == 4 ? 'bold' : '400',
-                    width: 140,
+                    width: 110,
                   }}>
                   Upcoming{' '}
                 </Text>
@@ -87,7 +89,7 @@ const Menu = ({navigation}) => {
                     borderBottomColor: currentIndex == 5 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 5 ? 2 : 0,
                     fontWeight: currentIndex == 5 ? 'bold' : '400',
-                    width: 190,
+                    width: 160,
                   }}>
                   Past Bookings{' '}
                 </Text>
@@ -99,7 +101,7 @@ const Menu = ({navigation}) => {
                     borderBottomColor: currentIndex == 6 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 6 ? 2 : 0,
                     fontWeight: currentIndex == 6 ? 'bold' : '400',
-                    width: 90,
+                    width: 70,
                   }}>
                   Music{' '}
                 </Text>
@@ -111,9 +113,9 @@ const Menu = ({navigation}) => {
                     borderBottomColor: currentIndex == 7 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 7 ? 2 : 0,
                     fontWeight: currentIndex == 7 ? 'bold' : '400',
-                    width: 120,
+                    width: 100,
                   }}>
-                  Accounts{' '}
+                  Festivals{' '}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setCurrentIndex(8)}>
@@ -123,7 +125,19 @@ const Menu = ({navigation}) => {
                     borderBottomColor: currentIndex == 8 ? 'red' : 'white',
                     borderBottomWidth: currentIndex == 8 ? 2 : 0,
                     fontWeight: currentIndex == 8 ? 'bold' : '400',
-                    width: 250,
+                    width: 110,
+                  }}>
+                  Accounts{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setCurrentIndex(9)}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor: currentIndex == 9 ? 'red' : 'white',
+                    borderBottomWidth: currentIndex == 9 ? 2 : 0,
+                    fontWeight: currentIndex == 9 ? 'bold' : '400',
+                    width: 220,
                   }}>
                   Terms & Conditions{' '}
                 </Text>

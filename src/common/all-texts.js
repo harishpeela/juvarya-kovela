@@ -126,6 +126,7 @@ export const allTexts = {
     templeProfile: 'TempleProfile',
     viewProfile: 'ViewProfile',
     menu: 'Menu',
+    addtemplenew: 'AddTempleNew',
   },
   homeHeader: {
     welcome: 'Welcome ',
