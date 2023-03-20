@@ -24,6 +24,9 @@ import {EventHeader} from './eventHeader';
 import {AddEvent} from './add-events-comp';
 import {PrimaryEventButton} from './eventbutton';
 import {InputField1} from './inputfield';
+import {RadioButton} from './RadioButton';
+import {PageHeader} from './PageHeader';
+import {TempleInput} from './InputText';
 import {
   NearBy,
   NearByMainTab,
@@ -66,4 +69,7 @@ export {
   UpComingEvents,
   BackgroundImage,
   UserFeedCompList,
+  RadioButton,
+  PageHeader,
+  TempleInput,
 };

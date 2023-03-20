@@ -26,6 +26,7 @@ import UserFeedScreen from './home-feed';
 import TempleProfile from './newprofile';
 import ViewProfile from './view-profile';
 import Menu from './menu';
+import AddTempleNew from './addtemplenew';
 export {
   CreatePost,
   Seemore,
@@ -55,4 +56,5 @@ export {
   TempleProfile,
   ViewProfile,
   Menu,
+  AddTempleNew,
 };

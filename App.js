@@ -26,6 +26,7 @@ import {
   TempleProfile,
   ViewProfile,
   Menu,
+  AddTempleNew,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -68,6 +69,7 @@ const App = () => {
       templeProfile,
       viewProfile,
       menu,
+      addtemplenew,
     },
   } = allTexts;
 
@@ -252,6 +254,13 @@ const App = () => {
         <Stack.Screen
           name={menu}
           component={Menu}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addtemplenew}
+          component={AddTempleNew}
           options={{
             headerShown: false,
           }}

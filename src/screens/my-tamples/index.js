@@ -15,7 +15,7 @@ import {useIsFocused} from '@react-navigation/native';
 
 const MyTamples = ({navigation, route}) => {
   const {
-    screenNames: {addTample},
+    screenNames: {addTample, addtemplenew},
   } = allTexts;
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -66,7 +66,7 @@ const MyTamples = ({navigation, route}) => {
           txt={'My Temples'}
           plusButton
           onPlusPress={() => {
-            navigation.navigate(addTample);
+            navigation.navigate(addtemplenew);
           }}
         />
       </View>

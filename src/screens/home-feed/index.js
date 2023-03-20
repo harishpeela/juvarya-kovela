@@ -180,7 +180,8 @@ const UserFeedScreen = ({navigation}) => {
         {/* side bar port?ion  */}
         <View style={styles.navBarContainer}>
           <View style={styles.buttonContainer}>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.navigate(allTexts.screenNames.menu)}>
               <View style={styles.sidebarIcon}>
                 <View style={[styles.bar, styles.shortestBar]} />
                 <View style={[styles.bar, styles.mediumBar]} />
@@ -239,9 +240,6 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 likes={item?.likesCount}
                 isLikeTrue={item?.like}
-                onDotsPress={() =>
-                  navigation.navigate(allTexts.screenNames.menu)
-                }
                 onPressTitle={() =>
                   navigation.navigate(
                     allTexts.screenNames.templeProfile,

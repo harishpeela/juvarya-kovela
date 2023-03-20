@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 export const styles = StyleSheet.create({
   sidebarIcon: {
     width: 24,
@@ -27,7 +26,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   tabs: {
-    fontSize: 28,
+    fontSize: 24,
     color: 'black',
     marginVertical: 10,
   },

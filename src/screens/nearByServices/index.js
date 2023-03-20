@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,12 +7,17 @@ import {
   Text,
   TextInput,
   Image,
+  Modal,
 } from 'react-native';
 import {styles} from './styles';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import BackIcon from 'react-native-vector-icons/Ionicons';
 import {Data1} from '../../components/NearBy';
 const NearByServices = ({navigation}) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ChangeModel = bool => {
+    setIsVisible(bool);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.heading}>
@@ -29,7 +34,9 @@ const NearByServices = ({navigation}) => {
           <IconSearch name="search1" size={25} style={{marginHorizontal: 10}} />
           <TextInput placeholder="SearchHere" style={styles.searchTextInput} />
         </View>
-        <TouchableOpacity style={styles.iconfeed}>
+        <TouchableOpacity
+          style={styles.iconfeed}
+          onPress={() => ChangeModel(true)}>
           <Image
             source={require('../../../assets/images/feedback.png')}
             height={30}
@@ -37,6 +44,16 @@ const NearByServices = ({navigation}) => {
             style={{marginTop: 5}}
           />
         </TouchableOpacity>
+        <Modal
+          visible={isVisible}
+          transparent={true}
+          animationType="fade"
+          nRequestClose={() => ChangeModel(false)}>
+          <Text>helo</Text>
+          <TouchableOpacity onPress={() => ChangeModel(false)}>
+            <Text> ok</Text>
+          </TouchableOpacity>
+        </Modal>
       </View>
       <View style={{marginRight: 10, width: '100%'}}>
         <FlatList
