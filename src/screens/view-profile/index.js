@@ -17,6 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ApplicationContext from '../../utils/context-api/Context';
+import {allTexts} from '../../common';
 
 const templeData = {
   name: 'Temple 123',
@@ -162,7 +163,10 @@ const ViewProfile = ({route, navigation}) => {
                 <Text style={styles.voidButton.text}>Directions</Text>
               </Pressable>
               {userDetails.role === 'ROLE_ADMIN' && (
-                <TouchableOpacity onPress={() => alert('under development')}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames.addTample)
+                  }>
                   <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
                 </TouchableOpacity>
               )}

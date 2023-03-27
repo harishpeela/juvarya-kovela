@@ -27,11 +27,12 @@ import {
   ViewProfile,
   Menu,
   AddTempleNew,
+  Splash_Screen,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from 'react-native-splash-screen';
+// import SplashScreen from 'react-native-splash-screen';
 import {
   getAuthTokenDetails,
   saveUserDetails,
@@ -70,19 +71,24 @@ const App = () => {
       viewProfile,
       menu,
       addtemplenew,
+      splashscreen,
     },
   } = allTexts;
 
   useEffect(() => {
     getLoginDetails();
-    setTimeout(() => {
-      SplashScreen.hide();
-    }, 1000);
   }, []);
 
   const AuthStack = () => {
     return (
       <Stack.Navigator>
+        <Stack.Screen
+          name={splashscreen}
+          component={Splash_Screen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={splash}
           component={Splash}
