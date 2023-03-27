@@ -72,12 +72,12 @@ const AddTample = ({navigation}) => {
     };
     setaddBtnLoading(true);
     createTemple(creatTemplePayload).then(createRes => {
-      // console.log('createtemp', createRes);
+      console.log('createtemp', createRes);
       if (createRes && createRes.status === 200) {
         let id = createRes?.data?.id;
         setUserID(id);
         let img = getImageObj(image);
-        // console.log('img', img);
+        console.log('img', img);
         let formData = new FormData();
         formData.append('jtItemId', id);
         formData.append('profilePicture', img);

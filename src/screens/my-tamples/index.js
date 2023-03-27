@@ -66,7 +66,7 @@ const MyTamples = ({navigation, route}) => {
           txt={'My Temples'}
           plusButton
           onPlusPress={() => {
-            navigation.navigate(addtemplenew);
+            navigation.navigate(addTample);
           }}
         />
       </View>

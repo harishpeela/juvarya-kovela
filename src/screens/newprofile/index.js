@@ -90,7 +90,7 @@ const TempleProfile = ({route, navigation}) => {
           id: id,
         });
       } else {
-
+        setFollowVisible(false);
         // Snackbar.show({
         // text: allTexts.constants.noInternet,
         // duration: Snackbar.LENGTH_INDEFINITE,
@@ -104,6 +104,7 @@ const TempleProfile = ({route, navigation}) => {
         // });
       }
     } catch (error) {
+      setFollowVisible(false);
       console.log(error.message);
     }
   };

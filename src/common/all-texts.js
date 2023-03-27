@@ -127,6 +127,7 @@ export const allTexts = {
     viewProfile: 'ViewProfile',
     menu: 'Menu',
     addtemplenew: 'AddTempleNew',
+    splashscreen: 'Splash_Screen',
   },
   homeHeader: {
     welcome: 'Welcome ',

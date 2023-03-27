@@ -26,42 +26,42 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [bookMark, setBookMark] = useState(false);
-  const posts = [
-    {
-      id: 1,
-      name: 'temple123',
-      type: 'image',
-      image:
-        'https://thumbs.dreamstime.com/b/hindu-temple-flag-trees-hindu-small-temple-flag-trees-151501180.jpg',
-      liked: false,
-      shared: false,
-      sdt: '1 hour ago',
-      likes: '4',
-    },
-    {
-      id: 2,
-      name: 'temple123',
-      type: 'video',
-      video:
-        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-      liked: false,
-      shared: false,
-      sdt: '2 hours ago',
-      likes: '2',
-    },
-    {
-      id: 3,
-      name: 'temple123',
-      type: 'image',
-      image:
-        'https://upload.wikimedia.org/wikipedia/commons/4/47/Nadi_Sri_Siva_Subramaniya_Temple.jpg',
-      liked: false,
-      shared: false,
-      sdt: '1 day ago',
-      likes: '24',
-    },
-  ];
+  // const [bookMark, setBookMark] = useState(false);
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     name: 'temple123',
+  //     type: 'image',
+  //     image:
+  //       'https://thumbs.dreamstime.com/b/hindu-temple-flag-trees-hindu-small-temple-flag-trees-151501180.jpg',
+  //     liked: false,
+  //     shared: false,
+  //     sdt: '1 hour ago',
+  //     likes: '4',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'temple123',
+  //     type: 'video',
+  //     video:
+  //       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  //     liked: false,
+  //     shared: false,
+  //     sdt: '2 hours ago',
+  //     likes: '2',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'temple123',
+  //     type: 'image',
+  //     image:
+  //       'https://upload.wikimedia.org/wikipedia/commons/4/47/Nadi_Sri_Siva_Subramaniya_Temple.jpg',
+  //     liked: false,
+  //     shared: false,
+  //     sdt: '1 day ago',
+  //     likes: '24',
+  //   },
+  // ];
 
   const getFollowedTempleList = async () => {
     try {

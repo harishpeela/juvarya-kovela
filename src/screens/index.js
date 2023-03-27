@@ -27,6 +27,7 @@ import TempleProfile from './newprofile';
 import ViewProfile from './view-profile';
 import Menu from './menu';
 import AddTempleNew from './addtemplenew';
+import Splash_Screen from './splash_screen';
 export {
   CreatePost,
   Seemore,
@@ -57,4 +58,5 @@ export {
   ViewProfile,
   Menu,
   AddTempleNew,
+  Splash_Screen,
 };
