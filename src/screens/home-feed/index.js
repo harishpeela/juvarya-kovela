@@ -1,15 +1,15 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Text,
-  Image,
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  StatusBar,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import Video from 'react-native-video';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -19,49 +19,13 @@ import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 const UserFeedScreen = ({navigation}) => {
-  const {userDetails, favoriteList} = useContext(ApplicationContext);
+  const {favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
   const [favoriteTemplesList, setfavoriteTemplesList] = useState(favoriteList);
   const [filterFavTemple, setfilterFavTemple] = useState(favoriteList);
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  // const [bookMark, setBookMark] = useState(false);
-  // const posts = [
-  //   {
-  //     id: 1,
-  //     name: 'temple123',
-  //     type: 'image',
-  //     image:
-  //       'https://thumbs.dreamstime.com/b/hindu-temple-flag-trees-hindu-small-temple-flag-trees-151501180.jpg',
-  //     liked: false,
-  //     shared: false,
-  //     sdt: '1 hour ago',
-  //     likes: '4',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'temple123',
-  //     type: 'video',
-  //     video:
-  //       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-  //     liked: false,
-  //     shared: false,
-  //     sdt: '2 hours ago',
-  //     likes: '2',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'temple123',
-  //     type: 'image',
-  //     image:
-  //       'https://upload.wikimedia.org/wikipedia/commons/4/47/Nadi_Sri_Siva_Subramaniya_Temple.jpg',
-  //     liked: false,
-  //     shared: false,
-  //     sdt: '1 day ago',
-  //     likes: '24',
-  //   },
-  // ];
 
   const getFollowedTempleList = async () => {
     try {
@@ -172,7 +136,7 @@ const UserFeedScreen = ({navigation}) => {
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  console.log('homefeed', homeFeedList);
+  // console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -270,55 +234,3 @@ const UserFeedScreen = ({navigation}) => {
 };
 
 export default UserFeedScreen;
-
-{
-  /* {homeFeedList.map(post => (
-          <View style={styles.postContainer} key={post.id}>
-            <View style={styles.postHeader}>
-              <Image
-                source={{uri: post?.itemDetails?.profilePicture}}
-                style={styles.profileImage}
-              />
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(allTexts.screenNames.templeProfile, {
-                    // id: post?.itemDetails?.id,
-                    // title: post?.itemDetails?.name,
-                    // profileImg: post?.itemDetails?.profilePicture,
-                    data: post,
-                  });
-                }}>
-                <Text style={styles.username}>{post?.itemDetails?.name}</Text>
-                <Text style={styles.sponsorNameText}>Sponsored</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.postMenuButton}>
-                <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity>{renderImage(post)}</TouchableOpacity>
-            <View style={styles.postFooter}>
-              <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
-                <Icon
-                  name={isLiked ? 'heart' : 'heart-o'}
-                  size={20}
-                  color={isLiked ? 'blue' : 'black'}
-                />
-              </TouchableOpacity>
-              <View style={styles.postFooterLeft}>
-                <TouchableOpacity onPress={() => handleShare(post.id)}>
-                  <FeatherIcon name="send" size={20} color="black" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => handleLike(post.id)}
-                  style={styles.icon}>
-                  <Icon name="bookmark-o" size={20} color="black" />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={{paddingHorizontal: 10}}>
-              <Text style={styles.likes}>{post?.likesCount} Likes</Text>
-              <Text style={styles.caption}>{post.sdt}</Text>
-            </View>
-          </View>
-        ))} */
-}

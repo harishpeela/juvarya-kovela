@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     margin: 10,
+    marginTop: '10%',
   },
   icon: {
     height: 20,

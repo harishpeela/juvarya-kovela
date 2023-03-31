@@ -4,6 +4,7 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   headerContainer: {
     padding: 10,
+    marginTop: '10%'
   },
   loaderContainer: {
     flex: 1,

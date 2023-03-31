@@ -1,6 +1,7 @@
 import {StyleSheet} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 import {Dimensions} from 'react-native';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
@@ -42,10 +43,12 @@ export const styles = StyleSheet.create({
   footerBackground: {
     backgroundColor: '#fff',
     borderRadius: 25,
+    flex: 1,
   },
   footerContainer: {
     paddingHorizontal: 30,
     paddingTop: 20,
+    marginTop: '5%',
   },
   header: {
     marginBottom: 20,
@@ -88,13 +91,15 @@ export const styles = StyleSheet.create({
     },
   },
   button: {
-    paddingVertical: 8,
+    width: 90,
+    paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 10,
     backgroundColor: '#FFA001',
+    alignItems: 'center',
     marginRight: 7,
     text: {
-      fontSize: 13,
+      fontSize: 12,
       fontWeight: '600',
       color: 'white',
     },
@@ -140,8 +145,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingTop: 20,
-    borderBottomColor: '#585858',
-    borderBottomWidth: 0.5,
+    // borderBottomWidth: 0.5,
     item: {
       alignItems: 'center',
       text: {
@@ -153,3 +157,25 @@ export const styles = StyleSheet.create({
     },
   },
 });
+
+export const textStyles = (textColor, fontSize) =>
+  StyleSheet.create({
+    textTitle: {
+      fontSize: fontSize || 14,
+      color: textColor || colors.white,
+      fontFamily: fontFamily.popinBold,
+      textTransform: 'uppercase',
+    },
+  });
+export const style = (bgColor, radius, paddidng, width) =>
+  StyleSheet.create({
+    wrapper: {
+      width: width || '30%',
+      padding: paddidng || 15,
+      borderRadius: radius || 10,
+      backgroundColor: bgColor || colors.blue,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginRight: 6,
+    },
+  });

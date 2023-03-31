@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    marginRight: 15,
+    marginRight: 25,
   },
   bellIcon: {
     alignSelf: 'center',

@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, ScrollView, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+  StatusBar,
+} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {
   PopularCard,
@@ -48,7 +55,7 @@ const Search = ({navigation}) => {
     try {
       setPopTempleLoader(true);
       let response = await getPopularTemples(0);
-      console.log('response', response?.data);
+      // console.log('response', response?.data);
       if (response && response.status === 200) {
         // console.log('Latest Temples API Calling response', response);
         setPopTempleLoader(false);
@@ -75,7 +82,7 @@ const Search = ({navigation}) => {
     try {
       setmoreExploreLoader(true);
       let moreTempleResponse = await getMoreExploreAPI(0, 10);
-      console.log('more exam', moreTempleResponse?.data);
+      // console.log('more exam', moreTempleResponse?.data);
       if (moreTempleResponse && moreTempleResponse.status === 200) {
         setmoreExploreLoader(false);
         const {
@@ -114,7 +121,7 @@ const Search = ({navigation}) => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(callback, time);
   };
-// console.log('pop', popTemples);
+  // console.log('pop', popTemples);
   useEffect(() => {
     if (searchText) {
       debounce(searchedTextHandler, 300);
@@ -124,6 +131,8 @@ const Search = ({navigation}) => {
     <ScrollView
       contentContainerStyle={{paddingBottom: 100}}
       style={styles.wrapper}>
+      <StatusBar backgroundColor="transparent" translucent={true} />
+
       <View style={styles.topContainer}>
         <HomeHeader
           img={require('../../utils/assets/images/avatar.png')}

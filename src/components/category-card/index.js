@@ -210,15 +210,17 @@ export const UserFeedCompList = ({
   return (
     <View style={styles.postContainer} key={post?.itemDetails?.id}>
       <View style={styles.postHeader}>
-        <Image
-          source={{uri: post?.itemDetails?.profilePicture}}
-          style={styles.profileImage}
-        />
+        <TouchableOpacity onPress={onPressTitle}>
+          <Image
+            source={{uri: post?.itemDetails?.profilePicture}}
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={onPressTitle}>
           <Text style={styles.username}>{post?.itemDetails?.name}</Text>
           <Text style={styles.sponsorNameText}>Sponsored</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress} >
+        <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
         </TouchableOpacity>
       </View>
@@ -247,7 +249,7 @@ export const UserFeedCompList = ({
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{paddingHorizontal: 10}}>
+      <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
         {/* <Text style={styles.caption}>{post.sdt}</Text> */}
       </View>
