@@ -7,8 +7,13 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
+  StatusBar,
+  ToastAndroid,
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
 } from 'react-native';
-import {styles} from './styles';
+import {styles, textStyles, style} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -18,7 +23,12 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import ApplicationContext from '../../utils/context-api/Context';
 import {allTexts} from '../../common';
-
+import {Loader} from '../../components';
+import {
+  followUnfollowTemple,
+  getTempleDetails,
+  getFeedList,
+} from '../../utils/api';
 const templeData = {
   name: 'Temple 123',
   rating: 4.8,
@@ -50,23 +60,150 @@ const templeData = {
   ],
   petalImage: 'https://www.linkpicture.com/q/hello.png',
 };
-
+const Data = [
+  {
+    id: 1,
+    name: 'pooja',
+    cost: '250',
+  },
+  {
+    id: 2,
+    name: 'dharsanam',
+    cost: '100',
+  },
+  {
+    id: 3,
+    name: 'alaya pravesam',
+    cost: '50',
+  },
+  {
+    id: 4,
+    name: 'prasadam',
+    cost: '20',
+  },
+  {
+    id: 5,
+    name: 'prasadam',
+    cost: '20',
+  },
+  {
+    id: 6,
+    name: 'prasadam',
+    cost: '20',
+  },
+];
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {id, title, profileImg} = route.params || {};
-  const [isFollow, setisFollow] = useState('');
+  const [loader, setloader] = useState(true);
+  const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [followBtnDisable, setFollowBtnDisable] = useState(false);
+  const [followVisible, setFollowVisible] = useState(false);
+  const [feedListData, setFeedListData] = useState([]);
+  const [nameData, setNameData] = useState();
+  const [itemDetails, setItemDetails] = useState([]);
+  const [details, setDetails] = useState({
+    discription: '',
+  });
   //   // console.log('id', id, title, profileImg);
-  const follow = () => {
-    if (id.itemDetails?.following) {
-      setisFollow('unFollow');
-    } else {
-      setisFollow('Follow');
+  const getData = async () => {
+    console.log('idid', id);
+    try {
+      setFollowVisible(true);
+      let result = await getTempleDetails(id);
+      // console.log('res', result?.data);
+      let feedList = await getFeedList(0, 20, id);
+      // console.log('feedlist', feedList?.data);
+      if (result && result.status === 200 && feedList.status === 200) {
+        setloader(false);
+        setFollowVisible(false);
+        const {
+          data: {discription},
+        } = result || {};
+        setFeedListData(feedList?.data);
+        setNameData(result.data);
+        setisFollow(result?.data?.following);
+        setDetails({
+          discription: discription,
+          image: profileImg,
+          id: id,
+        });
+      } else {
+        setFollowVisible(false);
+      }
+    } catch (error) {
+      setFollowVisible(false);
+      console.log(error.message);
     }
   };
+  const followTemples = async () => {
+    const payload = {
+      itemId: id,
+      itemType: 'ITEM',
+      follow: !isFollow,
+    };
+    // console.log('pay', payload);
+    try {
+      setFollowBtnDisable(true);
+      let results = await followUnfollowTemple(payload);
+      // console.log('results', results?.data);
+      if (results && results.status === 200) {
+        setisFollow(!isFollow);
+        // console.log('results', results.json());
+        setFollowBtnDisable(false);
+
+        ToastAndroid.show(
+          `Successfully you are${
+            !isFollow ? ' following' : ' unFollowing'
+          } temple!`,
+          ToastAndroid.SHORT,
+        );
+      } else {
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getFeedLIst = (tempId, pgfrm, pgto) => {
+    console.log(tempId, pgfrm, pgto);
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Bearer a63cc4b9-a3f3-46c2-b3a6-57a3b3221e1e',
+    );
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      `http://20.255.59.150:8082/api/v1/feed/item?itemId=${tempId}&page=${pgfrm}&pageSize=${pgto}&popular=true`,
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          // setItemDetails(result);
+          let filteredFeedList = result
+            .filter(item => item)
+            .map(({mediaList, description}) => ({mediaList, description}));
+          setItemDetails(filteredFeedList);
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
+
   useEffect(() => {
-    follow();
-  }, []);
+    getData();
+    getFeedLIst(id, 0, 50);
+  }, [route]);
+  console.log('console', itemDetails);
+
+  // console.log('items', feedListData);
+  // console.log('itemslist', feedListData[1]?.mediaList);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
@@ -126,7 +263,12 @@ const ViewProfile = ({route, navigation}) => {
 
             <View style={styles.footerHead}>
               <Text>
-                <Text style={styles.boldText}>{title} &nbsp;&nbsp;</Text>
+                <Text style={styles.boldText} numberOfLines={1}>
+                  {title.length < 17
+                    ? `${title}`
+                    : `${title.substring(0, 17)}...`}{' '}
+                  &nbsp;&nbsp;
+                </Text>
                 <Text style={styles.ratingText}>
                   <AntDesign name={'star'} color={'#FFA001'} size={20} />{' '}
                   {templeData.rating}
@@ -135,7 +277,7 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.subFooterHead}>
-              <Text style={{color: 'grey', color: '#FFA001', fontSize: 18}}>
+              <Text style={{color: '#FFA001', fontSize: 18}}>
                 {templeData.city}
               </Text>
             </View>
@@ -151,12 +293,39 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.footerAction}>
-              <Pressable style={styles.button}>
-                <Text style={styles.button.text}>Follow</Text>
-              </Pressable>
+              {followVisible ? (
+                <View
+                  style={{
+                    width: 105,
+                    padding: 10,
+                    height: 38,
+                    backgroundColor: '#FFA001',
+                    borderRadius: 10,
+                    marginRight: 4,
+                  }}>
+                  <Loader
+                    color={'white'}
+                    size={'small'}
+                    dynmicStyle={styles.loader}
+                  />
+                </View>
+              ) : (
+                <PrimaryButton1
+                  bgColor={'#FFA001'}
+                  disabled={followBtnDisable}
+                  radius={10}
+                  padding={7}
+                  onPress={followTemples}
+                  text={
+                    isFollow
+                      ? allTexts.buttonTexts.unFollow
+                      : allTexts.buttonTexts.follow
+                  }
+                />
+              )}
 
               <Pressable style={styles.voidButton}>
-                <Text style={styles.voidButton.text}>Message</Text>
+                <Text style={styles.voidButton.text}>Contact</Text>
               </Pressable>
 
               <Pressable style={styles.voidButton}>
@@ -171,7 +340,6 @@ const ViewProfile = ({route, navigation}) => {
                 </TouchableOpacity>
               )}
             </View>
-
             <View style={styles.controlPanel}>
               <Pressable
                 style={styles.controlPanel.item}
@@ -262,129 +430,91 @@ const ViewProfile = ({route, navigation}) => {
               <View style={styles.contentDisplay}>
                 <View style={styles.contentDisplay.row}>
                   <Text style={{fontSize: 20}}>Posts</Text>
-                  <Text style={{color: '#FFA001', fontSize: 14}}>See all</Text>
+                  <TouchableOpacity>
+                    <Text style={{color: '#FFA001', fontSize: 14}}>
+                      See all
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-                <View style={styles.contentDisplay.row}>
-                  <View>
-                    <View style={styles.contentDisplay.row.col} />
-                    <Text style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                      Incense Sticks
-                    </Text>
-                    <Text
-                      style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                      $ 250
+                {itemDetails.length === 0 ? (
+                  <View style={{alignItems: 'center', marginTop: '15%'}}>
+                    <Text style={{fontSize: 16, fontWeight: '700'}}>
+                      Posts not created for this temple
                     </Text>
                   </View>
-                  <View>
-                    <View style={styles.contentDisplay.row.col} />
-                    <Text style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                      Incense Sticks
-                    </Text>
-                    <Text
-                      style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                      $ 250
-                    </Text>
-                  </View>
-                  <View>
-                    <View style={styles.contentDisplay.row.col} />
-                    <Text style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                      Incense Sticks
-                    </Text>
-                    <Text
-                      style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                      $ 250
-                    </Text>
-                  </View>
-                </View>
+                ) : (
+                  <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    data={itemDetails}
+                    keyExtractor={({item, index}) => index}
+                    renderItem={({item, index}) => (
+                      <View style={{marginRight: 20}}>
+                        {/* <Text style={{fontSize: 16, marginLeft: 5}}>
+                        {item?.mediaList[0]?.id}
+                      </Text> */}
+                        <Image
+                          source={{
+                            uri: item?.mediaList?.url
+                              ? item?.mediaList?.url
+                              : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
+                          }}
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 100 / 3,
+                          }}
+                        />
+                        <Text
+                          style={{
+                            alignSelf: 'center',
+                            fontSize: 18,
+                            marginTop: 2,
+                          }}>
+                          {item?.description ? item?.description : 'Kovela'}{' '}
+                        </Text>
+                      </View>
+                    )}
+                  />
+                )}
               </View>
             )}
             {currentIndex === 3 && (
               <>
                 <View style={styles.contentDisplay}>
                   <View style={styles.contentDisplay.row}>
-                    <Text style={{fontSize: 20}}>Products</Text>
-                    <Text style={{color: '#FFA001', fontSize: 14}}>
-                      See all
-                    </Text>
-                  </View>
-                  <View style={styles.contentDisplay.row}>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-                <View style={styles.contentDisplay}>
-                  <View style={styles.contentDisplay.row}>
                     <Text style={{fontSize: 20}}>Services</Text>
-                    <Text style={{color: '#FFA001', fontSize: 14}}>
-                      See all
-                    </Text>
+                    <TouchableOpacity>
+                      <Text style={{color: '#FFA001', fontSize: 14}}>
+                        See all
+                      </Text>
+                    </TouchableOpacity>
                   </View>
-                  <View style={styles.contentDisplay.row}>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                    <View>
-                      <View style={styles.contentDisplay.row.col} />
-                      <Text
-                        style={{fontSize: 12, lineHeight: 22, marginLeft: 4}}>
-                        Incense Sticks
-                      </Text>
-                      <Text
-                        style={{fontSize: 12, marginLeft: 4, color: '#FFA001'}}>
-                        $ 250
-                      </Text>
-                    </View>
-                  </View>
+                  <FlatList
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    data={itemDetails}
+                    keyExtractor={({item, index}) => index}
+                    renderItem={({item, index}) => (
+                      <View style={{marginRight: 20}}>
+                        <Text style={{fontSize: 16, marginLeft: 5}}>
+                          {item?.mediaList?.id}
+                        </Text>
+                        <Image
+                          source={{
+                            uri: item?.mediaList[0]?.url
+                              ? item?.mediaList[0]?.url
+                              : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
+                          }}
+                          style={{
+                            height: 100,
+                            width: 100,
+                            borderRadius: 100 / 2,
+                          }}
+                        />
+                      </View>
+                    )}
+                  />
                 </View>
               </>
             )}
@@ -395,3 +525,30 @@ const ViewProfile = ({route, navigation}) => {
   );
 };
 export default ViewProfile;
+const PrimaryButton1 = ({
+  bgColor,
+  textColor,
+  radius,
+  text,
+  onPress,
+  loading,
+  padding,
+  fontsize,
+  width,
+  ...props
+}) => {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+      style={style(bgColor, radius, padding, width).wrapper}
+      {...props}>
+      <Text style={textStyles(textColor, fontsize).textTitle}>
+        {loading == true ? (
+          <ActivityIndicator size={'small'} color={colors.white} />
+        ) : (
+          text
+        )}
+      </Text>
+    </TouchableOpacity>
+  );
+};

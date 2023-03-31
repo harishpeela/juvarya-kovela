@@ -234,7 +234,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   postFooterLeft: {
     flexDirection: 'row',

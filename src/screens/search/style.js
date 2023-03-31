@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   },
   topContainer: {
     // borderWidth: 1,
+    marginTop: '5%',
   },
   popTempleLoader: {
     height: 150,

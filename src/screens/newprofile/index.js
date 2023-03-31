@@ -2,20 +2,19 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
 import {
-  StyleSheet,
   Pressable,
   Image,
   Text,
-  Dimensions,
   View,
   ImageBackground,
   ToastAndroid,
   TouchableOpacity,
   ActivityIndicator,
+  StatusBar,
 } from 'react-native';
 import {Loader} from '../../components';
 import {colors} from '../../common';
-import {textStyles, style} from './styles';
+import {textStyles, style, styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,7 +28,6 @@ import {
   getFeedList,
 } from '../../utils/api';
 import {allTexts} from '../../common';
-const windowWidth = Dimensions.get('window').width;
 
 const templeData = {
   name: 'Temple 123',
@@ -62,6 +60,7 @@ const TempleProfile = ({route, navigation}) => {
   const [feedListData, setFeedListData] = useState([]);
   const [followVisible, setFollowVisible] = useState(false);
   const [nameData, setNameData] = useState();
+  const [tab, setTab] = useState(false);
   const [details, setDetails] = useState({
     discription: '',
   });
@@ -74,7 +73,8 @@ const TempleProfile = ({route, navigation}) => {
       let result = await getTempleDetails(id);
       console.log('res', result?.data);
       let feedList = await getFeedList(0, 20, id);
-      // console.log('feedlist', feedList?.data);
+      console.log('id', id);
+      console.log('feedlistssss', feedList?.data[1]?.mediaList);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);
         setFollowVisible(false);
@@ -160,6 +160,7 @@ const TempleProfile = ({route, navigation}) => {
       <View style={styles.container} />
 
       <View style={styles.container}>
+        <StatusBar backgroundColor="transparent" translucent={true} />
         <View style={styles.imagePanel}>
           {templeData.images.map((image, index) => {
             return (
@@ -184,12 +185,23 @@ const TempleProfile = ({route, navigation}) => {
       </View>
 
       <View style={styles.footerBackground}>
-        <View style={styles.sliderTooltip} />
+        <TouchableOpacity
+          style={{
+            ...styles.sliderTooltip,
+            borderColor: tab ? '#FFA001' : 'black',
+          }}
+          onPress={() => setTab(!tab)}
+        />
 
         <View style={styles.footerContainer}>
           <View style={styles.footerHead}>
             <Text>
-              <Text style={styles.boldText}>{title} &nbsp;&nbsp;</Text>
+              <Text style={styles.boldText} numberOfLines={1}>
+                {title.length < 17
+                  ? `${title}`
+                  : `${title.substring(0, 17)}...`}
+                &nbsp;&nbsp;
+              </Text>
               <Text style={styles.ratingText}>
                 <AntDesign name={'star'} color={'#FFA001'} size={14} />
                 <Text> {templeData.rating}</Text>
@@ -231,13 +243,6 @@ const TempleProfile = ({route, navigation}) => {
           </View>
 
           <View style={styles.footerAction}>
-            {/* <Pressable style={styles.button} onPress={() => followTemples()}>
-              <Text style={styles.button.text}>
-                {isFollow ? 'follow     ' : 'following'}
-              </Text>
-            </Pressable> */}
-            {/* {followingData()} */}
-            {/* {followVisible && <Loader color={'blue'} />} */}
             {followVisible ? (
               <View
                 style={{
@@ -327,126 +332,6 @@ const TempleProfile = ({route, navigation}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  backgroundImage: {
-    flex: 1,
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '15%',
-  },
-  imagePanel: {
-    backgroundColor: 'rgba(88, 88, 88, 0.8)',
-    borderRadius: 15,
-    paddingVertical: 8,
-    paddingHorizontal: 4,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    item: {
-      marginHorizontal: 4,
-    },
-  },
-  boldText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  ratingText: {
-    fontSize: 14,
-  },
-  footerBackground: {
-    backgroundColor: '#fff',
-    borderRadius: 25,
-  },
-  footerContainer: {
-    padding: 30,
-  },
-  sliderTooltip: {
-    borderColor: '#FFA001',
-    borderWidth: 8 * StyleSheet.hairlineWidth,
-    borderRadius: 10 * StyleSheet.hairlineWidth,
-    marginHorizontal: 0.43 * windowWidth,
-    marginVertical: 17,
-  },
-  circularButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: '#FFA001',
-    text: {
-      fontSize: 13,
-      fontWeight: '400',
-      color: 'white',
-    },
-  },
-  button: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    backgroundColor: '#FFA001',
-    marginRight: 7,
-    text: {
-      fontSize: 13,
-      fontWeight: '600',
-      color: 'white',
-    },
-  },
-  voidButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    borderColor: '#585858',
-    borderWidth: 1,
-    marginRight: 7,
-    text: {
-      fontSize: 13,
-      fontWeight: '600',
-      color: '#000',
-    },
-  },
-  footerHead: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  footerBody: {
-    paddingTop: 20,
-  },
-  subFooterHead: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-  },
-  footerAction: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    paddingTop: 20,
-  },
-  controlPanel: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingTop: 20,
-    borderBottomColor: '#585858',
-    borderBottomWidth: 0.5,
-    item: {
-      alignItems: 'center',
-      text: {
-        paddingVertical: 5,
-        color: '#585858',
-      },
-    },
-  },
-});
 export default TempleProfile;
 
 const PrimaryButton1 = ({
