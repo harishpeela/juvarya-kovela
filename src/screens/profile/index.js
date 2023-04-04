@@ -9,7 +9,8 @@ import {AccountIcon1, AccountIcon2, AccountIcon4, Demo} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 
 const Profile = ({navigation}) => {
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+  const {userDetails, setLoginDetails, loginDetails} =
+    useContext(ApplicationContext);
   const {
     headings: {
       accountItems: {bookings, donations, temple},
@@ -17,7 +18,7 @@ const Profile = ({navigation}) => {
     tabNames: {home},
     constants: {role},
   } = allTexts;
-
+  console.log('details', userDetails);
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.headerContainer}>
@@ -72,6 +73,7 @@ const Profile = ({navigation}) => {
           onPress={async () => {
             await removeLoginSessionDetails();
             setLoginDetails(null);
+            console.log('logindetails', loginDetails);
           }}
           bgColor={colors.blue3}
           radius={25}

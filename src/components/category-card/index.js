@@ -101,10 +101,6 @@ export const HomeCard = ({
             {likeCount} Likes
           </Text>
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.footerItem}>
-          <Ionicons name="bookmark-outline" color={colors.black} size={20} />
-          <Text style={styles.iconText}>{saved} Saved</Text>
-        </TouchableOpacity> */}
         <View
           style={{
             flexDirection: 'row',
@@ -164,7 +160,7 @@ export const UserFeedCompList = ({
       like: !isLiked,
     };
     try {
-      // console.log('payloadLike', payloadLike);
+      console.log('payloadLike', payloadLike);
       let result = await likeOrUnlikeFeed(payloadLike);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;
@@ -245,13 +241,11 @@ export const UserFeedCompList = ({
               color={saveFeed ? colors.blue : colors.black}
               size={20}
             />
-            {/* <Icon name="bookmark-o" size={20} color="black" /> */}
           </TouchableOpacity>
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
-        {/* <Text style={styles.caption}>{post.sdt}</Text> */}
       </View>
     </View>
   );
