@@ -48,6 +48,7 @@ const UserFeedScreen = ({navigation}) => {
     try {
       setloader(true);
       let response = await getHomeFeedList(0, 100);
+      console.log('log', response?.data?.feed);
       if (response && response.status === 200) {
         const {
           data: {feeds},
@@ -220,6 +221,10 @@ const UserFeedScreen = ({navigation}) => {
                       item?.itemDetails?.name,
                       'profileimg',
                       item?.itemDetails?.profilePicturel,
+                      'count:',
+                      item?.likesCount,
+                      'det',
+                      item,
                     ),
                   )
                 }

@@ -235,7 +235,7 @@ const ViewProfile = ({route, navigation}) => {
 
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: '600', fontSize: 16}}>
-                  {templeData.posts}
+                  {itemDetails?.length}
                 </Text>
                 <Text style={{fontSize: 12, color: '#585858', lineHeight: 18}}>
                   Posts

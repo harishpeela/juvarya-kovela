@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 11,
     paddingHorizontal: 4,
+    marginLeft: 5
   },
   buttonText: {
     fontSize: 24,
@@ -46,6 +47,7 @@ const styles = StyleSheet.create({
     height: 13,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginLeft: 10,
   },
   bar: {
     height: 2,
