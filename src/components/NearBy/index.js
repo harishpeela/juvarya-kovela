@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TextInput,
@@ -8,51 +8,129 @@ import {
   FlatList,
   ImageBackground,
   Image,
+  ScrollView,
 } from 'react-native';
 import {styles} from './styles';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import IconHeart from 'react-native-vector-icons/FontAwesome';
 import IconDots from 'react-native-vector-icons/Entypo';
+import {Loader} from '../loader';
+import {getPopularTemples} from '../../utils/api';
+import {colors} from '../../common';
+
 export const NearBy = ({data, myData}) => {
-  const [isLiked, setIsLiked] = useState(false);
+  const [templeList, setTempleList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [filteredArray, setfilteredArray] = useState([]);
+
+  const getTemples = async () => {
+    try {
+      let response = await getPopularTemples(0);
+      const {
+        status,
+        data: {items},
+      } = response || {};
+      if (response && status === 200) {
+        setTempleList(items);
+        setfilteredArray(items);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getTemples();
+  }, []);
+
   return (
-    <View style={styles.searchTab}>
-      <IconSearch name="search1" size={25} style={{marginHorizontal: 10}} />
-      <TextInput placeholder="SearchHere" style={styles.searchTextInput} />
-      <TouchableOpacity style={{marginLeft: '90%', position: 'absolute'}}>
-        <IconVoice name="keyboard-voice" size={25} />
-      </TouchableOpacity>
+    <View>
+      <View style={styles.searchTab}>
+        <IconSearch name="search1" size={25} style={styles.iconsearch} />
+        <TextInput placeholder="Search Here" style={styles.searchTextInput} />
+        <TouchableOpacity style={styles.touchable}>
+          <IconVoice name="keyboard-voice" size={25} />
+        </TouchableOpacity>
+      </View>
+      <View>
+        <ScrollView>
+          <View>
+            {loading === true ? (
+              <View style={styles.loaderContainer}>
+                <Loader color={colors.orangeColor} />
+              </View>
+            ) : (
+              [
+                filteredArray.length === 0 ? (
+                  <View style={styles.loaderContainer}>
+                    <Text style={styles.noAvailable}>
+                      {'No Temples Available'}
+                    </Text>
+                  </View>
+                ) : (
+                  <FlatList
+                    data={filteredArray}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                    keyExtractor={({item, index}) => item?.id}
+                    renderItem={({item, index}) => (
+                      <TempleListCard
+                        img={{
+                          uri: item?.profilePicture?.url,
+                        }}
+                        post={item}
+                        name={item.name}
+                        location={item.line1}
+                        date={item.creationTime}
+                      />
+                    )}
+                  />
+                ),
+              ]
+            )}
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
 
-export const data = [
-  {
-    key: 1,
-    tempName: 'Temple1',
-    img: require('../../../assets/images/tempimg4.jpg'),
-    distance: '1.02km',
-  },
-  {
-    key: 2,
-    tempName: 'Temple2',
-    img: require('../../../assets/images/tempimg3.webp'),
-    distance: '1.02km',
-  },
-  {
-    key: 3,
-    tempName: 'Temple3',
-    img: require('../../../assets/images/tempimg2.jpg'),
-    distance: '1.02km',
-  },
-  {
-    key: 4,
-    tempName: 'Temple4',
-    img: require('../../../assets/images/tempimg1.jpg'),
-    distance: '1.02km',
-  },
-];
+const TempleListCard = ({name, location, onPress, img, post}) => {
+  const renderImage = post => {
+    if (post?.profilePicture?.url) {
+      return (
+        <View style={{}}>
+          <Image
+            source={{uri: post?.profilePicture?.url}}
+            style={styles.imageContainer}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <Image
+          source={require('../../../assets/images/islamabad.jpg')}
+          style={styles.imageContainer}
+        />
+      );
+    }
+  };
+  return (
+    <View>
+      <View style={{marginLeft: 20}}>
+        {renderImage(post)}
+        <Text style={styles.textCard} numberOfLines={1}>
+          {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
+        </Text>
+      </View>
+    </View>
+  );
+};
 
 export const Data1 = [
   {
