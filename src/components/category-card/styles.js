@@ -199,7 +199,7 @@ export const styles = StyleSheet.create({
   postMenuButton: {
     position: 'absolute',
     top: 10,
-    right: 10,
+    right: 15,
   },
   profileImage: {
     width: 40,

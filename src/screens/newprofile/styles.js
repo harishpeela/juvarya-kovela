@@ -24,7 +24,6 @@ export const style = (bgColor, radius, paddidng, width) =>
   });
 export const styles = StyleSheet.create({
   backgroundImage: {
-    flex: 1,
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
@@ -60,7 +59,7 @@ export const styles = StyleSheet.create({
     borderRadius: 25,
   },
   footerContainer: {
-    padding: 30,
+    paddingHorizontal: 30,
   },
   sliderTooltip: {
     borderWidth: 8 * StyleSheet.hairlineWidth,
@@ -140,4 +139,19 @@ export const styles = StyleSheet.create({
       },
     },
   },
-})
+  contentDisplay: {
+    row: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginVertical: 15,
+      col: {
+        width: 100,
+        height: 100,
+        backgroundColor: 'rgba(88, 88, 88, 0.2)',
+        borderRadius: 20,
+      },
+    },
+  },
+});

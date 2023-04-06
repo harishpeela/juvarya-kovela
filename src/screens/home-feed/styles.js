@@ -24,16 +24,12 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomColor: '#ccc',
     paddingHorizontal: 10,
+    justifyContent: 'center',
   },
   button: {
     paddingVertical: 11,
     paddingHorizontal: 4,
-  },
-  buttonText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
-    textDecorationColor: 'red',
+    marginLeft: 5
   },
   buttonText2: {
     fontSize: 16,
@@ -46,6 +42,7 @@ const styles = StyleSheet.create({
     height: 13,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginLeft: 10,
   },
   bar: {
     height: 2,
@@ -66,11 +63,6 @@ const styles = StyleSheet.create({
     height: 2,
     width: '70%',
     alignSelf: 'center',
-  },
-  buttonText: {
-    fontSize: 21,
-    fontWeight: '600',
-    color: '#000',
   },
   circle: {
     width: 25,

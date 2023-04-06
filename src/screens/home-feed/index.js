@@ -166,7 +166,8 @@ const UserFeedScreen = ({navigation}) => {
               onPress={() => setTab(1)}>
               <Text
                 style={{
-                  color: tab === 1 ? 'black' : 'black',
+                  color: tab === 1 ? 'red' : 'black',
+
                   fontSize: tab === 1 ? 20 : 18,
                 }}>
                 Feed
@@ -181,7 +182,9 @@ const UserFeedScreen = ({navigation}) => {
               }}>
               <Text
                 style={{
-                  color: tab === 2 ? 'black' : 'black',
+
+                  color: tab === 2 ? 'red' : 'black',
+
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
