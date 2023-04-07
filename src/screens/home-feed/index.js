@@ -21,7 +21,6 @@ import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import NearByProducts from '../nearByProducts';
 import NearByServices from '../nearByServices';
-import New_NearBy from '../new_nearBy';
 const UserFeedScreen = ({navigation}) => {
   const {favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
