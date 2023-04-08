@@ -64,8 +64,10 @@ export const styles = StyleSheet.create({
   sliderTooltip: {
     borderWidth: 8 * StyleSheet.hairlineWidth,
     borderRadius: 10 * StyleSheet.hairlineWidth,
-    marginHorizontal: 0.43 * windowWidth,
+    // marginHorizontal: 0.43 * windowWidth,
     marginVertical: 17,
+    width: 50,
+    marginLeft: '40%',
   },
   circularButton: {
     paddingVertical: 8,

@@ -31,7 +31,7 @@ const Signin = ({navigation}) => {
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfo();
-      // console.log('login res', response);
+      console.log('login res', response);
       if (response && response.status === 200) {
         const {
           data: {
@@ -66,6 +66,7 @@ const Signin = ({navigation}) => {
       username: data.email,
       password: data.password,
     };
+    console.log('payload load of signin', payload);
     try {
       let result = await loginUser(payload);
       // console.log('signinhand login res', result);

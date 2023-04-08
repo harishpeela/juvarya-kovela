@@ -7,7 +7,6 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
-  StatusBar,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
@@ -137,7 +136,7 @@ const UserFeedScreen = ({navigation}) => {
     favoriteTemplesList.length;
     // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  // console.log('homefeed', homeFeedList);
+  // console.log('homefeed kovela', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
