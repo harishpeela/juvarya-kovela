@@ -20,7 +20,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useState, useEffect, useContext} from 'react';
-import Snackbar from 'react-native-snackbar';
 import ApplicationContext from '../../utils/context-api/Context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -153,7 +152,7 @@ const TempleProfile = ({route, navigation}) => {
     }
   };
   const getFeedLIst = (tempId, pgfrm, pgto) => {
-    console.log(tempId, pgfrm, pgto);
+    // console.log(tempId, pgfrm, pgto);
     var myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
@@ -184,8 +183,11 @@ const TempleProfile = ({route, navigation}) => {
   };
   const {userDetails} = useContext(ApplicationContext);
   // console.log('role', userDetails);
+  let feeddata = getFeedLIst(id, 0, 50);
+  // console.log('feed :', feedListData);
   useEffect(() => {
     getData();
+    // feeddata;
     if (viewIndex === 2) {
       setTabIndex(1);
       getFeedLIst(id, 0, 50);
@@ -199,7 +201,16 @@ const TempleProfile = ({route, navigation}) => {
       style={{...styles.backgroundImage, flex: viewIndex === 1 ? 1 : 0}}>
       <View style={styles.container} />
       <View style={styles.container} />
-
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={{position: 'absolute', top: '5%'}}>
+        <Feather
+          name="arrow-left-circle"
+          color={'#FFA001'}
+          size={28}
+          style={{marginLeft: '15%'}}
+        />
+      </TouchableOpacity>
       {viewIndex === 1 && (
         <View style={styles.container}>
           <View style={styles.imagePanel}>
@@ -229,12 +240,16 @@ const TempleProfile = ({route, navigation}) => {
       {viewIndex == 1 && (
         <View style={styles.footerBackground}>
           <TouchableOpacity
-            style={{
-              ...styles.sliderTooltip,
-              borderColor: tab ? '#FFA001' : 'black',
-            }}
-            onPress={() => setViewIndex(2)}
-          />
+            style={{width: 120, alignSelf: 'center'}}
+            onPress={() => setViewIndex(2)}>
+            <TouchableOpacity
+              style={{
+                ...styles.sliderTooltip,
+                borderColor: tab ? '#FFA001' : 'black',
+              }}
+              onPress={() => setViewIndex(2)}
+            />
+          </TouchableOpacity>
 
           <View style={styles.footerContainer}>
             <View style={styles.footerHead}>

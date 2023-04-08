@@ -335,7 +335,9 @@ const App = () => {
       getAndSaveUserInfo();
       getFollowedTempleList();
     }
+    console.log('user', userDetails);
   }, [loginDetails]);
+  console.log('userDe', userDetails);
 
   return (
     <ApplicationContext.Provider
