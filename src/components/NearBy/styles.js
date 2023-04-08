@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors, fontFamily, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   currentPlanView: {
     marginTop: 10,
@@ -27,11 +28,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     marginVertical: 15,
     width: '90%',
-  },
-  planTitleText: {
-    color: '#1D1D1B',
-    fontSize: 20,
-    marginBottom: 2,
   },
   followContainer: {
     marginLeft: 20,
@@ -97,5 +93,27 @@ export const styles = StyleSheet.create({
     fontWeight: '800',
     color: 'black',
   },
-  
+  iconsearch: {
+    marginHorizontal: 10,
+  },
+  touchable: {marginLeft: '90%', position: 'absolute'},
+  imageContainer: {
+    height: 250,
+    width: 250,
+    borderRadius: 35,
+  },
+  noAvailable: {
+    color: colors.black,
+    fontFamily: fontFamily.popinBold,
+  },
+  loaderContainer: {
+    height: '90%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textCard: {
+    top: '-20%',
+    color: 'white',
+    marginLeft: 10,
+  },
 });

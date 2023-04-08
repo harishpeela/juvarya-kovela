@@ -10,13 +10,15 @@ import {
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
-import {BackgroundImage} from '../../components';
+import {BackgroundImage, NearBy, NearByMainTab, UpComingEvents} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
+import NearByProducts from '../nearByProducts';
+import NearByServices from '../nearByServices';
 const UserFeedScreen = ({navigation}) => {
   const {favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
@@ -162,6 +164,7 @@ const UserFeedScreen = ({navigation}) => {
               <Text
                 style={{
                   color: tab === 1 ? 'red' : 'black',
+
                   fontSize: tab === 1 ? 20 : 18,
                 }}>
                 Feed
@@ -176,7 +179,9 @@ const UserFeedScreen = ({navigation}) => {
               }}>
               <Text
                 style={{
+
                   color: tab === 2 ? 'red' : 'black',
+
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
@@ -253,9 +258,11 @@ const UserFeedScreen = ({navigation}) => {
           </>
         )}
         {tab === 2 && (
-          <View>
-            <Text>under Development </Text>
-          </View>
+          <SafeAreaView>
+            <View>
+              <NearBy />
+            </View>
+          </SafeAreaView>
         )}
       </View>
     </ScrollView>
