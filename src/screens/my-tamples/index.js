@@ -64,10 +64,10 @@ const MyTamples = ({navigation, route}) => {
             navigation.goBack();
           }}
           txt={'My Temples'}
-          plusButton
-          onPlusPress={() => {
-            navigation.navigate(addTample);
-          }}
+          // plusButton
+          // onPlusPress={() => {
+          //   navigation.navigate(addTample);
+          // }}
         />
       </View>
       <View style={styles.searchbarContainer}>

@@ -64,88 +64,15 @@ const UserFeedScreen = ({navigation}) => {
       console.log(error);
     }
   };
-  // const handleLike = postId => {
-  //   // console.log(`Liked post ${postId}`);
-  // };
-
-  // const handleShare = postId => {
-  //   // console.log(`Shared post ${postId}`);
-  // };
-
-  // const handleSave = postId => {
-  //   // console.log(`Saved post ${postId}`);
-  // };
-
-  // const renderMedia = post => {
-  //   if (post?.mediaList?.url) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Video
-  //           source={{uri: post.video}}
-  //           style={styles.video}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else if (post?.mediaList?.url) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post.image}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else {
-  //     return null;
-  //   }
-  // };
-  // const renderImage = post => {
-  //   if (!post?.mediaList === '') {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post.image}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else if (post?.itemDetails?.profilePicture) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post?.itemDetails?.profilePicture}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={require('../../../assets/images/islamabad.jpg')}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   }
-  // };
   useEffect(() => {
     getHomeResponse();
     getFollowedTempleList();
     favoriteTemplesList.length;
-    // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  // console.log('homefeed', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
         <BackgroundImage />
-        {/* side bar port?ion  */}
         <View style={styles.navBarContainer}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -232,7 +159,7 @@ const UserFeedScreen = ({navigation}) => {
                     isLikeTrue={item?.like}
                     onPressTitle={() =>
                       navigation.navigate(
-                        allTexts.screenNames.templeProfile,
+                        allTexts.screenNames.viewProfile,
                         {
                           id: item?.itemDetails?.id,
                           title: item?.itemDetails?.name,

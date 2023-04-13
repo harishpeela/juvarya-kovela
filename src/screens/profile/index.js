@@ -33,12 +33,12 @@ const Profile = ({navigation}) => {
         <ProfileInfo
           name={userDetails?.username}
           email={userDetails?.email}
-          img={require('../../utils/assets/images/avatar.png')}
+          // img={require('../../utils/assets/images/avatar.png')}
         />
       </View>
       <View style={styles.profileItemsContainer}>
-        <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} />
+        {/* <Item svg={<Demo />} text={bookings} />
+        <Item svg={<AccountIcon2 />} text={donations} /> */}
         {(userDetails?.role == role.admin ||
           userDetails?.role == role.agent) && (
           <Item

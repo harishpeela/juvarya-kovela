@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flex: 0.8,
   },
   wrapper: {
-    backgroundColor: colors.blue3,
+    // backgroundColor: colors.blue3,
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
@@ -29,12 +29,12 @@ export const styles = StyleSheet.create({
   nameText: {
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
-    color: colors.white,
+    color: colors.black,
   },
   emailText: {
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
-    color: colors.white,
+    color: colors.black,
     marginLeft: 9,
   },
 });
