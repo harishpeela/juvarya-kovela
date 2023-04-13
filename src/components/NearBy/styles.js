@@ -98,8 +98,8 @@ export const styles = StyleSheet.create({
   },
   touchable: {marginLeft: '90%', position: 'absolute'},
   imageContainer: {
-    height: 250,
-    width: 250,
+    height: 200,
+    width: 200,
     borderRadius: 35,
   },
   noAvailable: {
@@ -114,6 +114,12 @@ export const styles = StyleSheet.create({
   textCard: {
     top: '-20%',
     color: 'white',
+    fontWeight: 'bold',
     marginLeft: 10,
+  },
+  popularTextContainer: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });

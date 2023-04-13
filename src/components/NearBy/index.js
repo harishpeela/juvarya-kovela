@@ -16,7 +16,7 @@ import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import IconHeart from 'react-native-vector-icons/FontAwesome';
 import IconDots from 'react-native-vector-icons/Entypo';
 import {Loader} from '../loader';
-import {getPopularTemples} from '../../utils/api';
+import {getPopularTemples, upcomingOccasions} from '../../utils/api';
 import {colors} from '../../common';
 
 export const NearBy = ({data, myData}) => {
@@ -55,6 +55,10 @@ export const NearBy = ({data, myData}) => {
         <TouchableOpacity style={styles.touchable}>
           <IconVoice name="keyboard-voice" size={25} />
         </TouchableOpacity>
+      </View>
+      <View style={styles.upComingTextTab}>
+        <Text style={styles.popularTextContainer}>Popular Temples</Text>
+        <Text style={{color: '#DD1E0C', fontSize: 18}}>See all</Text>
       </View>
       <View>
         <ScrollView>
@@ -215,23 +219,63 @@ export const NearByMainTab = ({ProductsData}) => {
     </View>
   );
 };
-export const UpComingEvents = ({upcomingData}) => {
+export const UpComingEvents = ({navigation}) => {
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [eventsArray, setEventsArry] = useState();
+
+  const UpcomingEvents = async () => {
+    try {
+      let currentDate = new Date();
+
+      let year = new Date(currentDate).getFullYear();
+      let month = new Date(currentDate).getMonth() + 1;
+      let day = new Date(currentDate).getDay();
+      let date = `${year}-${month}-${day}`;
+
+      let response = await upcomingOccasions(0, 100);
+      // console.log('res', response?.data);
+      // console.log('occasions', response?.data?.occasion);
+      const {
+        status,
+        data: {occasion},
+      } = response || {};
+      console.log('occ1', occasion);
+
+      if (response && status === 200) {
+        console.log('occ', occasion);
+        setEvents(occasion);
+        setEventsArry(occasion);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log('events', eventsArray);
+
+  useEffect(() => {
+    UpcomingEvents();
+  }, []);
+
   return (
     <View>
       <View style={styles.upComingTextTab}>
-        <Text style={{fontSize: 24, fontWeight: 'bold', color: 'black'}}>
-          Upcoming Events
-        </Text>
+        <Text style={styles.popularTextContainer}>Upcoming Events</Text>
         <TouchableOpacity>
-          <Text style={{fontSize: 18}}>see all</Text>
+          <Text style={{fontSize: 18, color: '#DD1E0C'}}>see all</Text>
         </TouchableOpacity>
       </View>
       <View>
         <FlatList
-          data={upcomingData}
+          data={eventsArray}
           horizontal
           showsHorizontalScrollIndicator={false}
-          keyExtractor={({item, index}) => index}
+          keyboardShouldPersistTaps="handled"
+          keyExtractor={({item, index}) => item?.id}
           renderItem={({item, index}) => (
             <View>
               <View>

@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  SafeAreaView,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
@@ -163,7 +164,7 @@ const UserFeedScreen = ({navigation}) => {
               onPress={() => setTab(1)}>
               <Text
                 style={{
-                  color: tab === 1 ? 'red' : 'black',
+                  color: tab === 1 ? 'black' : 'black',
 
                   fontSize: tab === 1 ? 20 : 18,
                 }}>
@@ -180,13 +181,30 @@ const UserFeedScreen = ({navigation}) => {
               <Text
                 style={{
 
-                  color: tab === 2 ? 'red' : 'black',
+                  color: tab === 2 ? 'black' : 'black',
 
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
               </Text>
             </TouchableOpacity>
+            {/* <TouchableOpacity     // uder to develop any time
+              onPress={() => setTab(3)}
+              style={{
+                ...styles.button,
+                borderBottomWidth: tab === 3 ? 2 : 0,
+                borderBottomColor: 'red',
+              }}>
+              <Text
+                style={{
+
+                  color: tab === 2 ? 'black' : 'black',
+
+                  fontSize: tab === 3 ? 20 : 18,
+                }}>
+                Reels
+              </Text>
+            </TouchableOpacity> */}
           </View>
           <View style={styles.circle}>
             <FeatherIcon
@@ -261,9 +279,18 @@ const UserFeedScreen = ({navigation}) => {
           <SafeAreaView>
             <View>
               <NearBy />
+              <UpComingEvents />
             </View>
           </SafeAreaView>
         )}
+        {/* {tab === 3 && (
+          <SafeAreaView>
+            <View>
+              <Text>Hello World</Text>
+            </View>
+          </SafeAreaView>
+        )} */}
+
       </View>
     </ScrollView>
   );
