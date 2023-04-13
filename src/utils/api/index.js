@@ -25,6 +25,7 @@ const endpoints = {
   CREATE_POST_FEED: 'v1/feed/post',
   GET_FOLLOW_LIST: 'v1/follow/list',
   LIKE_UNLIKE_HOME_FEED: 'v1/review/like',
+  GET_UPCOMING_OCCASIONS: 'v1/occasion/upcoming',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   LOGIN:
@@ -267,5 +268,17 @@ export const createNewInvoice = async data => {
     return result;
   } catch (error) {
     return error.response.data;
+  }
+};
+
+export const upcomingOccasions = async (pageNo, pageSize) => {
+  try {
+    let result = await axiousInstance.get(
+      `${endpoints.GET_FOLLOW_LIST}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    return error;
   }
 };

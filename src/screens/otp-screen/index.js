@@ -81,6 +81,13 @@ const OTPScreen = ({navigation, route}) => {
             roles: {customerRoles},
           },
         } = response;
+        console.log(
+          'userdetaiks',
+          firstName,
+          lastName,
+          emailAddress,
+          customerRoles,
+        );
         let userRole = customerRoles[0];
         const {
           role: {roleName},
@@ -90,6 +97,8 @@ const OTPScreen = ({navigation, route}) => {
           email: emailAddress,
           role: roleName,
         });
+        console.log('saveuserdetails', saveUserDetails);
+
         setUserDetails({
           username: `${firstName} ${lastName}`,
           email: emailAddress,
@@ -197,7 +206,7 @@ const OTPScreen = ({navigation, route}) => {
         inputCount={6}
         tintColor={colors.green2}
         textInputStyle={styles.textInput}
-        containerStyle={{ 
+        containerStyle={{
           marginTop: 15,
         }}
       />
