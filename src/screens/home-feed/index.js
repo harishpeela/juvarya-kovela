@@ -7,10 +7,16 @@ import {
   ScrollView,
   TouchableOpacity,
   RefreshControl,
+  SafeAreaView,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
-import {BackgroundImage, NearBy, NearByMainTab, UpComingEvents} from '../../components';
+import {
+  BackgroundImage,
+  NearBy,
+  NearByMainTab,
+  UpComingEvents,
+} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
@@ -62,76 +68,6 @@ const UserFeedScreen = ({navigation}) => {
       console.log(error);
     }
   };
-  // const handleLike = postId => {
-  //   // console.log(`Liked post ${postId}`);
-  // };
-
-  // const handleShare = postId => {
-  //   // console.log(`Shared post ${postId}`);
-  // };
-
-  // const handleSave = postId => {
-  //   // console.log(`Saved post ${postId}`);
-  // };
-
-  // const renderMedia = post => {
-  //   if (post?.mediaList?.url) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Video
-  //           source={{uri: post.video}}
-  //           style={styles.video}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else if (post?.mediaList?.url) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post.image}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else {
-  //     return null;
-  //   }
-  // };
-  // const renderImage = post => {
-  //   if (!post?.mediaList === '') {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post.image}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else if (post?.itemDetails?.profilePicture) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post?.itemDetails?.profilePicture}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={require('../../../assets/images/islamabad.jpg')}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   }
-  // };
   useEffect(() => {
     getHomeResponse();
     getFollowedTempleList();
@@ -154,7 +90,7 @@ const UserFeedScreen = ({navigation}) => {
                 <View style={[styles.bar, styles.longestBar]} />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 ...styles.button,
                 borderBottomWidth: tab === 1 ? 2 : 0,
@@ -169,8 +105,8 @@ const UserFeedScreen = ({navigation}) => {
                 }}>
                 Feed
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity
               onPress={() => setTab(2)}
               style={{
                 ...styles.button,
@@ -179,91 +115,90 @@ const UserFeedScreen = ({navigation}) => {
               }}>
               <Text
                 style={{
-
                   color: tab === 2 ? 'red' : 'black',
 
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
           <View style={styles.circle}>
             <FeatherIcon
               name="bell"
               size={14}
-              color="#000"
+              color={colors.orangeColor}
               style={styles.bellIcon}
             />
           </View>
         </View>
-        {tab === 1 && (
-          <>
-            {loader && (
-              <View style={{flex: 1}}>
-                <Loader color={colors.green2} size={30} />
-              </View>
-            )}
-            <ScrollView>
-              <FlatList
-                data={homeFeedList}
-                showsVerticalScrollIndicator={false}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refrsh}
-                    onRefresh={() => {
-                      setRefrsh(true);
-                      getHomeResponse();
-                    }}
-                  />
-                }
-                contentContainerStyle={styles.flatListStyle}
-                keyboardShouldPersistTaps="handled"
-                decelerationRate={0.7}
-                keyExtractor={(item, index) => index}
-                renderItem={({item, index}) => (
-                  <UserFeedCompList
-                    // id={item?.itemDetails?.id}
-                    id={item?.id}
-                    post={item}
-                    likes={item?.likesCount}
-                    isLikeTrue={item?.like}
-                    onPressTitle={() =>
-                      navigation.navigate(
-                        allTexts.screenNames.templeProfile,
-                        {
-                          id: item?.itemDetails?.id,
-                          title: item?.itemDetails?.name,
-                          profileImg: item?.itemDetails?.profilePicture,
-                          data: item,
-                        },
-                        console.log(
-                          'id: ',
-                          item?.itemDetails?.id,
-                          'title',
-                          item?.itemDetails?.name,
-                          'profileimg',
-                          item?.itemDetails?.profilePicturel,
-                          'count:',
-                          item?.likesCount,
-                          'det',
-                          item,
-                        ),
-                      )
-                    }
-                  />
-                )}
-              />
-            </ScrollView>
-          </>
-        )}
-        {tab === 2 && (
+        {/* {tab === 1 && ( */}
+        <>
+          {loader && (
+            <View style={{flex: 1}}>
+              <Loader color={colors.green2} size={30} />
+            </View>
+          )}
+          <ScrollView>
+            <FlatList
+              data={homeFeedList}
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refrsh}
+                  onRefresh={() => {
+                    setRefrsh(true);
+                    getHomeResponse();
+                  }}
+                />
+              }
+              contentContainerStyle={styles.flatListStyle}
+              keyboardShouldPersistTaps="handled"
+              decelerationRate={0.7}
+              keyExtractor={(item, index) => index}
+              renderItem={({item, index}) => (
+                <UserFeedCompList
+                  // id={item?.itemDetails?.id}
+                  id={item?.id}
+                  post={item}
+                  likes={item?.likesCount}
+                  isLikeTrue={item?.like}
+                  onPressTitle={() =>
+                    navigation.navigate(
+                      allTexts.screenNames.viewProfile,
+                      {
+                        id: item?.itemDetails?.id,
+                        title: item?.itemDetails?.name,
+                        profileImg: item?.itemDetails?.profilePicture,
+                        data: item,
+                      },
+                      console.log(
+                        'id: ',
+                        item?.itemDetails?.id,
+                        'title',
+                        item?.itemDetails?.name,
+                        'profileimg',
+                        item?.itemDetails?.profilePicturel,
+                        'count:',
+                        item?.likesCount,
+                        'det',
+                        item,
+                      ),
+                    )
+                  }
+                />
+              )}
+            />
+          </ScrollView>
+        </>
+        {/* )} */}
+        {/* {tab === 2 && (
           <SafeAreaView>
             <View>
               <NearBy />
             </View>
           </SafeAreaView>
-        )}
+        )} */}
       </View>
     </ScrollView>
   );

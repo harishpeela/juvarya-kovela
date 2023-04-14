@@ -131,7 +131,7 @@ const Search = ({navigation}) => {
     <ScrollView
       contentContainerStyle={{paddingBottom: 100}}
       style={styles.wrapper}>
-      <StatusBar backgroundColor="transparent" translucent={true} />
+      {/* <StatusBar backgroundColor="transparent" translucent={true} /> */}
 
       <View style={styles.topContainer}>
         <HomeHeader

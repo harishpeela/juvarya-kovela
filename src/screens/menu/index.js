@@ -3,6 +3,7 @@
 import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import {styles} from './styles';
 import {allTexts} from '../../common';
+import Feather from 'react-native-vector-icons/Feather';
 import React, {useState, useEffect} from 'react';
 import set from 'date-fns/esm/set/index';
 const templeData = {
@@ -26,12 +27,15 @@ const Menu = ({navigation}) => {
           source={{uri: templeData.petalImage}}
           style={{height: 400}}>
           <View style={{margin: '10%'}}>
-            <TouchableOpacity>
+            {/* <TouchableOpacity>
               <View style={styles.sidebarIcon}>
                 <View style={[styles.bar, styles.shortestBar]} />
                 <View style={[styles.bar, styles.mediumBar]} />
                 <View style={[styles.bar, styles.longestBar]} />
               </View>
+            </TouchableOpacity> */}
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <View style={{marginVertical: '10%'}}>
               <TouchableOpacity onPress={() => setCurrentIndex(1)}>

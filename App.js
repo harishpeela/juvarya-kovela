@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
 import {
@@ -352,6 +353,7 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
+        <StatusBar backgroundColor="transparent" translucent={true} />
         <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />

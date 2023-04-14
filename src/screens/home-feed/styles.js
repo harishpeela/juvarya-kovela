@@ -1,4 +1,5 @@
 import {StyleSheet, Platform} from 'react-native';
+import { colors } from '../../common';
 
 const styles = StyleSheet.create({
   postContainer: {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     height: 2,
-    backgroundColor: '#000',
+    backgroundColor: colors.orangeColor,
   },
   shortestBar: {
     width: 12,
@@ -72,6 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     marginRight: 25,
+    borderColor: colors.orangeColor,
   },
   bellIcon: {
     alignSelf: 'center',
