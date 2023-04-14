@@ -3,7 +3,13 @@
 import {View, Text, TouchableOpacity, FlatList, Pressable} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {styles} from './style';
-import {BackHeader, ImageLoader, Loader, SearchBar} from '../../components';
+import {
+  BackHeader,
+  ImageLoader,
+  Loader,
+  SearchBar,
+  BackgroundImage,
+} from '../../components';
 import {allTexts, colors} from '../../common';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getFavoritesList, getFollowSearchList} from '../../utils/api';
@@ -57,16 +63,17 @@ const Favorite = ({navigation}) => {
       console.log(error);
     }
   };
-  console.log(
-    'id: ',
-    filterFavTemple[4]?.jtItem?.id,
-    'title: ',
-    filterFavTemple[4]?.jtItem?.name,
-    'picture: ',
-    filterFavTemple?.jtItem?.profilePicture?.url,
-  );
+  // console.log(
+  //   'id: ',
+  //   filterFavTemple[4]?.jtItem?.id,
+  //   'title: ',
+  //   filterFavTemple[4]?.jtItem?.name,
+  //   'picture: ',
+  //   filterFavTemple?.jtItem?.profilePicture?.url,
+  // );
   return (
     <View style={styles.wrapper}>
+      <BackgroundImage />
       <BackHeader
         onBackPress={() => {
           navigation.navigate(allTexts.tabNames.home);
@@ -92,7 +99,7 @@ const Favorite = ({navigation}) => {
             getFollowedTempleList();
           }}
           onSubmit={performFilter}
-          bgColor={colors.green4}
+          bgColor={'lightgray'}
           placeHolder={'Search'}
         />
       </View>

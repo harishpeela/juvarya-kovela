@@ -1,5 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  Image,
+  ImageBackground,
+} from 'react-native';
+import {BackgroundImage} from '../../components';
 import React, {useContext} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -21,6 +29,7 @@ const Profile = ({navigation}) => {
   console.log('details', userDetails);
   return (
     <SafeAreaView style={styles.wrapper}>
+      <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {
