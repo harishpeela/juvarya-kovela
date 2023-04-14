@@ -72,14 +72,11 @@ const UserFeedScreen = ({navigation}) => {
     getHomeResponse();
     getFollowedTempleList();
     favoriteTemplesList.length;
-    // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
-  // console.log('homefeed kovela', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
         <BackgroundImage />
-        {/* side bar port?ion  */}
         <View style={styles.navBarContainer}>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
@@ -99,7 +96,7 @@ const UserFeedScreen = ({navigation}) => {
               onPress={() => setTab(1)}>
               <Text
                 style={{
-                  color: tab === 1 ? 'red' : 'black',
+                  color: tab === 1 ? 'black' : 'black',
 
                   fontSize: tab === 1 ? 20 : 18,
                 }}>
@@ -115,11 +112,29 @@ const UserFeedScreen = ({navigation}) => {
               }}>
               <Text
                 style={{
-                  color: tab === 2 ? 'red' : 'black',
+
 
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
+              </Text>
+
+            </TouchableOpacity>
+            {/* <TouchableOpacity     // uder to develop any time
+              onPress={() => setTab(3)}
+              style={{
+                ...styles.button,
+                borderBottomWidth: tab === 3 ? 2 : 0,
+                borderBottomColor: 'red',
+              }}>
+              <Text
+                style={{
+
+                  color: tab === 2 ? 'black' : 'black',
+
+                  fontSize: tab === 3 ? 20 : 18,
+                }}>
+                Reels
               </Text>
             </TouchableOpacity> */}
           </View>
@@ -132,6 +147,7 @@ const UserFeedScreen = ({navigation}) => {
             />
           </View>
         </View>
+
         {/* {tab === 1 && ( */}
         <>
           {loader && (
@@ -193,9 +209,78 @@ const UserFeedScreen = ({navigation}) => {
         </>
         {/* )} */}
         {/* {tab === 2 && (
+        {tab === 1 && (
+          <>
+            {loader && (
+              <View style={{flex: 1}}>
+                <Loader color={colors.green2} size={30} />
+              </View>
+            )}
+            <ScrollView>
+              <FlatList
+                data={homeFeedList}
+                showsVerticalScrollIndicator={false}
+                refreshControl={
+                  <RefreshControl
+                    refreshing={refrsh}
+                    onRefresh={() => {
+                      setRefrsh(true);
+                      getHomeResponse();
+                    }}
+                  />
+                }
+                contentContainerStyle={styles.flatListStyle}
+                keyboardShouldPersistTaps="handled"
+                decelerationRate={0.7}
+                keyExtractor={(item, index) => index}
+                renderItem={({item, index}) => (
+                  <UserFeedCompList
+                    // id={item?.itemDetails?.id}
+                    id={item?.id}
+                    post={item}
+                    likes={item?.likesCount}
+                    isLikeTrue={item?.like}
+                    onPressTitle={() =>
+                      navigation.navigate(
+                        allTexts.screenNames.viewProfile,
+                        {
+                          id: item?.itemDetails?.id,
+                          title: item?.itemDetails?.name,
+                          profileImg: item?.itemDetails?.profilePicture,
+                          data: item,
+                        },
+                        console.log(
+                          'id: ',
+                          item?.itemDetails?.id,
+                          'title',
+                          item?.itemDetails?.name,
+                          'profileimg',
+                          item?.itemDetails?.profilePicturel,
+                          'count:',
+                          item?.likesCount,
+                          'det',
+                          item,
+                        ),
+                      )
+                    }
+                  />
+                )}
+              />
+            </ScrollView>
+          </>
+        )}
+        {tab === 2 && (
           <SafeAreaView>
             <View>
               <NearBy />
+              <UpComingEvents />
+            </View>
+          </SafeAreaView>
+        )}
+        {/* {tab === 3 && (
+          <SafeAreaView>
+            <View>
+              <Text>Hello World</Text>
             </View>
           </SafeAreaView>
         )} */}

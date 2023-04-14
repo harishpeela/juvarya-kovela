@@ -15,6 +15,9 @@ import {
   HomeTabs,
   Loader,
   SearchCard,
+  BackgroundImage,
+  NearBy,
+  UpComingEvents,
 } from '../../components';
 import {styles} from './style';
 import {SearchFilter} from '../../utils/svgs';
@@ -128,6 +131,7 @@ const Search = ({navigation}) => {
     }
   }, [searchText]);
   return (
+
     <ScrollView
       contentContainerStyle={{paddingBottom: 100}}
       style={styles.wrapper}>
@@ -165,153 +169,13 @@ const Search = ({navigation}) => {
             <Loader color={colors.green2} size={30} />
           </View>
         )}
+    <View style={{flex: 1}}>
+      <BackgroundImage />
+      <View>
+        <NearBy />
+        <UpComingEvents />
       </View>
-      {!searchContentVisible ? (
-        <>
-          <CardHeader
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.seemore, {
-                screenTitle: 'Popular Destination',
-                type: 1,
-              });
-            }}
-            title={'Popular Destination'}
-          />
-          <View>
-            {popTempleLoader ? (
-              <View style={styles.popTempleLoader}>
-                <Loader color={colors.green} />
-              </View>
-            ) : (
-              <FlatList
-                horizontal
-                data={popTemples}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{}}
-                keyboardShouldPersistTaps="handled"
-                keyExtractor={(item, index) => index}
-                renderItem={({item, index}) => (
-                  <PopularCard
-                    title={item.name}
-                    location={`${item.line1}, ${item.line2} ${item.line3}`}
-                    review={'5.0'}
-                    isFollowTemple={item?.following}
-                    id={item?.id}
-                    img={require('../../../assets/images/bigTamle.png')}
-                    onCardPress={() => {
-                      navigation.navigate(
-                        allTexts.screenNames.templeProfile,
-                        {
-                          id: item.id,
-                          title: item.name,
-                          profileImg: item?.profilePicture?.url,
-                        },
-                        console.log(
-                          'id: ',
-                          item.id,
-                          'title',
-                          item.name,
-                          'profileimg',
-                          item?.profilePicture?.url,
-                        ),
-                      );
-                    }}
-                  />
-                )}
-              />
-            )}
-          </View>
-          <CardHeader
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.seemore, {
-                screenTitle: 'More to explore',
-                type: 2,
-              });
-            }}
-            title={'More to explore'}
-          />
-          <View>
-            {moreExploreLoader ? (
-              <View style={styles.popTempleLoader}>
-                <Loader color={colors.green} size={'small'} />
-              </View>
-            ) : (
-              <FlatList
-                horizontal
-                data={moreExploreTemples}
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={{}}
-                keyboardShouldPersistTaps="handled"
-                keyExtractor={(item, index) => index}
-                renderItem={({item, index}) => (
-                  <ExploreCard
-                    location={item.desciption}
-                    name={item.name}
-                    img={item?.profilePicture?.url}
-                    onPress={() => {
-                      navigation.navigate(
-                        allTexts.screenNames.templeProfile,
-                        {
-                          id: item.id,
-                          title: item.name,
-                          // searchData: item,
-                          profileImg: item?.profilePicture?.url,
-                        },
-                        console.log(
-                          'id: ',
-                          item.id,
-                          'title',
-                          item.name,
-                          'profileimg',
-                          item?.profilePicture?.url,
-                        ),
-                      );
-                    }}
-                  />
-                )}
-              />
-            )}
-          </View>
-        </>
-      ) : (
-        <View>
-          {searchedContent.length !== 0 ? (
-            <FlatList
-              data={searchedContent}
-              // data={[1, 2, 3, 4, 5, 6, 7]}
-              showsHorizontalScrollIndicator={false}
-              style={{}}
-              contentContainerStyle={{
-                flex: 1,
-              }}
-              keyboardShouldPersistTaps="handled"
-              keyExtractor={(item, index) => index}
-              renderItem={({item, index}) => (
-                <SearchCard
-                  name={item.name}
-                  location={`${item.line1}, ${item.line2} ${item.line3}`}
-                  id={item?.id}
-                  img={item?.profilePicture?.url}
-                  item={item}
-                  isFollowTemple={item?.following}
-                  id={item?.id}
-                  onPress={() => {
-                    navigation.navigate(allTexts.screenNames.homeDetails, {
-                      id: item?.id,
-                      title: item?.name,
-                    });
-                  }}
-                />
-              )}
-            />
-          ) : (
-            <View style={styles.noItemAvailabe}>
-              <Text style={styles.noItemText}>No Temples Available!</Text>
-            </View>
-          )}
-        </View>
-      )}
-    </ScrollView>
+    </View>
   );
 };
 

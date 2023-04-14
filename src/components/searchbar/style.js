@@ -5,8 +5,9 @@ export const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 20,
     height: 50,
+    marginHorizontal: 10,
   },
 
   field: {

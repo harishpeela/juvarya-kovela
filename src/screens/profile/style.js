@@ -4,7 +4,6 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: colors.white,
     padding: 10,
   },
   profileContainer: {
