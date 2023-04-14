@@ -87,7 +87,7 @@ const UserFeedScreen = ({navigation}) => {
                 <View style={[styles.bar, styles.longestBar]} />
               </View>
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={{
                 ...styles.button,
                 borderBottomWidth: tab === 1 ? 2 : 0,
@@ -102,8 +102,8 @@ const UserFeedScreen = ({navigation}) => {
                 }}>
                 Feed
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity
               onPress={() => setTab(2)}
               style={{
                 ...styles.button,
@@ -112,12 +112,13 @@ const UserFeedScreen = ({navigation}) => {
               }}>
               <Text
                 style={{
-                  color: tab === 2 ? 'black' : 'black',
+
 
                   fontSize: tab === 2 ? 20 : 18,
                 }}>
                 Nearby
               </Text>
+
             </TouchableOpacity>
             {/* <TouchableOpacity     // uder to develop any time
               onPress={() => setTab(3)}
@@ -141,11 +142,73 @@ const UserFeedScreen = ({navigation}) => {
             <FeatherIcon
               name="bell"
               size={14}
-              color="#000"
+              color={colors.orangeColor}
               style={styles.bellIcon}
             />
           </View>
         </View>
+
+        {/* {tab === 1 && ( */}
+        <>
+          {loader && (
+            <View style={{flex: 1}}>
+              <Loader color={colors.green2} size={30} />
+            </View>
+          )}
+          <ScrollView>
+            <FlatList
+              data={homeFeedList}
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refrsh}
+                  onRefresh={() => {
+                    setRefrsh(true);
+                    getHomeResponse();
+                  }}
+                />
+              }
+              contentContainerStyle={styles.flatListStyle}
+              keyboardShouldPersistTaps="handled"
+              decelerationRate={0.7}
+              keyExtractor={(item, index) => index}
+              renderItem={({item, index}) => (
+                <UserFeedCompList
+                  // id={item?.itemDetails?.id}
+                  id={item?.id}
+                  post={item}
+                  likes={item?.likesCount}
+                  isLikeTrue={item?.like}
+                  onPressTitle={() =>
+                    navigation.navigate(
+                      allTexts.screenNames.viewProfile,
+                      {
+                        id: item?.itemDetails?.id,
+                        title: item?.itemDetails?.name,
+                        profileImg: item?.itemDetails?.profilePicture,
+                        data: item,
+                      },
+                      console.log(
+                        'id: ',
+                        item?.itemDetails?.id,
+                        'title',
+                        item?.itemDetails?.name,
+                        'profileimg',
+                        item?.itemDetails?.profilePicturel,
+                        'count:',
+                        item?.likesCount,
+                        'det',
+                        item,
+                      ),
+                    )
+                  }
+                />
+              )}
+            />
+          </ScrollView>
+        </>
+        {/* )} */}
+        {/* {tab === 2 && (
         {tab === 1 && (
           <>
             {loader && (

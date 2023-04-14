@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors} from '../../common';
 export const styles = StyleSheet.create({
   sidebarIcon: {
     width: 24,
@@ -12,6 +13,7 @@ export const styles = StyleSheet.create({
   },
   shortestBar: {
     width: 12,
+    color: colors.orangeColor,
   },
   mediumBar: {
     width: 16,
