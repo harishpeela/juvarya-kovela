@@ -59,6 +59,7 @@ const window = {
 // updated colors being used in all ober the project
 const colors = {
   orangeColor: '#FF3400',
+  orange2: '#F9491F',
   red1: '#FF2E01',
   red2: '#CB0000',
   red3: '#EE6C4D',
@@ -80,6 +81,7 @@ const colors = {
   darkBrown: '#3F2117',
   blue2: '#0098FD',
   blue3: '#06B3C4',
+  red4: '#DD1E0C',
 };
 
 export {fontSize, fontFamily, window, colors};
