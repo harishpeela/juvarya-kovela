@@ -129,53 +129,64 @@ const Search = ({navigation}) => {
     if (searchText) {
       debounce(searchedTextHandler, 300);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchText]);
   return (
-
-    <ScrollView
-      contentContainerStyle={{paddingBottom: 100}}
-      style={styles.wrapper}>
-      {/* <StatusBar backgroundColor="transparent" translucent={true} /> */}
-
-      <View style={styles.topContainer}>
-        <HomeHeader
-          img={require('../../utils/assets/images/avatar.png')}
-          name={userDetails?.username}
-        />
-        <Text style={styles.heading}>
-          {'Explore and Find your Best Temple'}
-        </Text>
+    <ScrollView>
+      <View>
+        <BackgroundImage />
       </View>
-      <View style={styles.searchbarContainer}>
-        <View style={{width: searchLoader ? '80%' : '100%'}}>
-          <SearchBar
-            value={searchText}
-            onCrossPress={() => {
-              setSearchContentVisible(false);
-              getLatestTemples();
-              setSearchText('');
-            }}
-            // onSubmit={searchedTextHandler}
-            onTextChange={e => {
-              setSearchText(e);
-              if (e === '') {
-                setSearchContentVisible(false);
-              }
-            }}
-          />
-        </View>
-        {searchLoader && (
-          <View style={{flex: 1}}>
-            <Loader color={colors.green2} size={30} />
-          </View>
-        )}
-    <View style={{flex: 1}}>
-      <BackgroundImage />
       <View>
         <NearBy />
         <UpComingEvents />
       </View>
-    </View>
+    </ScrollView>
+    // <ScrollView
+    //   contentContainerStyle={{paddingBottom: 100}}
+    //   style={styles.wrapper}>
+    //   {/* <StatusBar backgroundColor="transparent" translucent={true} /> */}
+
+    //   <View style={styles.topContainer}>
+    //     <HomeHeader
+    //       img={require('../../utils/assets/images/avatar.png')}
+    //       name={userDetails?.username}
+    //     />
+    //     <Text style={styles.heading}>
+    //       {'Explore and Find your Best Temple'}
+    //     </Text>
+    //   </View>
+    //   <View style={styles.searchbarContainer}>
+    //     <View style={{width: searchLoader ? '80%' : '100%'}}>
+    //       <SearchBar
+    //         value={searchText}
+    //         onCrossPress={() => {
+    //           setSearchContentVisible(false);
+    //           getLatestTemples();
+    //           setSearchText('');
+    //         }}
+    //         // onSubmit={searchedTextHandler}
+    //         onTextChange={e => {
+    //           setSearchText(e);
+    //           if (e === '') {
+    //             setSearchContentVisible(false);
+    //           }
+    //         }}
+    //       />
+    //     </View>
+    //     {searchLoader && (
+    //       <View style={{flex: 1}}>
+    //         <Loader color={colors.green2} size={30} />
+    //       </View>
+    //     )}
+    //     <View style={{flex: 1}}>
+    //       <BackgroundImage />
+    //       <View>
+    //         <NearBy />
+    //         <UpComingEvents />
+    //       </View>
+    //     </View>
+    //   </View>
+    // </ScrollView>
   );
 };
 

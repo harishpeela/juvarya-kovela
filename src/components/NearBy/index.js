@@ -17,7 +17,8 @@ import IconHeart from 'react-native-vector-icons/FontAwesome';
 import IconDots from 'react-native-vector-icons/Entypo';
 import {Loader} from '../loader';
 import {getPopularTemples, upcomingOccasions} from '../../utils/api';
-import {colors} from '../../common';
+import {colors, fontFamily} from '../../common';
+import Moment from 'moment';
 
 export const NearBy = ({data, myData}) => {
   const [templeList, setTempleList] = useState([]);
@@ -219,7 +220,8 @@ export const NearByMainTab = ({ProductsData}) => {
     </View>
   );
 };
-export const UpComingEvents = ({navigation}) => {
+
+export const UpComingEvents = ({}) => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [eventsArray, setEventsArry] = useState();
@@ -231,19 +233,19 @@ export const UpComingEvents = ({navigation}) => {
       let year = new Date(currentDate).getFullYear();
       let month = new Date(currentDate).getMonth() + 1;
       let day = new Date(currentDate).getDay();
-      let date = `${year}-${month}-${day}`;
+      let date = `${year}-${month}-${day}`; 
 
-      let response = await upcomingOccasions(0, 100);
-      // console.log('res', response?.data);
-      // console.log('occasions', response?.data?.occasion);
+      let response = await upcomingOccasions(0, 1000);
+      console.log('occgvdfnv', response?.data);
+      console.log('occasions', response?.data?.occasion[9].mediaList);
       const {
         status,
         data: {occasion},
       } = response || {};
-      console.log('occ1', occasion);
+      // console.log('occ1', occasion);
 
       if (response && status === 200) {
-        console.log('occ', occasion);
+        // console.log('occ', occasion);
         setEvents(occasion);
         setEventsArry(occasion);
         setLoading(false);
@@ -255,7 +257,7 @@ export const UpComingEvents = ({navigation}) => {
     }
   };
 
-  console.log('events', eventsArray);
+  // console.log('events', eventsArray);
 
   useEffect(() => {
     UpcomingEvents();
@@ -266,7 +268,7 @@ export const UpComingEvents = ({navigation}) => {
       <View style={styles.upComingTextTab}>
         <Text style={styles.popularTextContainer}>Upcoming Events</Text>
         <TouchableOpacity>
-          <Text style={{fontSize: 18, color: '#DD1E0C'}}>see all</Text>
+          <Text style={{fontSize: 18, color: colors.red4}}>See all</Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -275,16 +277,20 @@ export const UpComingEvents = ({navigation}) => {
           horizontal
           showsHorizontalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
-          keyExtractor={({item, index}) => item?.id}
+          keyExtractor={({item, index}) => item?.index}
           renderItem={({item, index}) => (
             <View>
               <View>
                 <View style={styles.currentPlanView}>
-                  <Text style={styles.currentPlanText}>{item.day}</Text>
+                  <Text style={styles.currentPlanText}>Today</Text>
                 </View>
                 <View style={styles.planCardView}>
                   <View style={styles.upComingCardTextView}>
-                    <Text style={styles.upComingCardTextName}>{item.name}</Text>
+                    <Text style={styles.upComingCardTextName} numberOfLines={1}>
+                      {item.name.length < 10
+                        ? `${item.name}`
+                        : `${item.name.substring(0, 10)}...`}
+                    </Text>
                     <TouchableOpacity style={styles.followContainer}>
                       <IconDots
                         name="dots-three-vertical"
@@ -300,34 +306,18 @@ export const UpComingEvents = ({navigation}) => {
                         fontSize: 18,
                         color: 'black',
                       }}>
-                      {item.location}{' '}
+                      {item.description}{' '}
                     </Text>
-                    <Text style={{fontSize: 16, color: 'black'}}>
-                      {item.fromTime} Pm to {item.toTime} Am
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        color: '#DD1E0C',
+                        fontFamily: fontFamily.raleway,
+                      }}>
+                      {Moment(item.fromDate).format('hh:mm')} AM to{' '}
+                      {Moment(item.toDate).format('hh:mm')} PM
                     </Text>
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                      marginHorizontal: 20,
-                    }}>
-                    <Image
-                      source={item.image1}
-                      style={{height: 50, width: 50, borderRadius: 20}}
-                    />
-                    <Image
-                      source={item.image2}
-                      style={{height: 50, width: 50, borderRadius: 20}}
-                    />
-                    <Image
-                      source={item.image3}
-                      style={{height: 50, width: 50, borderRadius: 20}}
-                    />
-                    <Image
-                      source={item.image4}
-                      style={{height: 50, width: 50, borderRadius: 20}}
-                    />
+                    <EventListCard data={item?.mediaList} />
                   </View>
                 </View>
               </View>
@@ -338,6 +328,26 @@ export const UpComingEvents = ({navigation}) => {
     </View>
   );
 };
+
+const EventListCard = ({data}) => {
+  return (
+    <View style={{width: 100}}>
+      <FlatList
+        data={data}
+        //horizontal
+        showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        keyExtractor={({item, index}) => item?.key}
+        renderItem={({item, index}) => (
+          <View>
+            <Image source={{uri: item?.url}} style={styles.eventImage} />
+          </View>
+        )}
+      />
+    </View>
+  );
+};
+
 export const NearByProducts = ({productsData, onPress}) => {
   return (
     <View>
@@ -430,3 +440,30 @@ export const NearByServices = ({servicesData, onPress}) => {
     </View>
   );
 };
+
+// export const data = [
+//   {
+//     key: 1,
+//     name: 'Kovela',
+//     day: 'Today',
+//     image: require('../../../assets/images/islamabad.jpg'),
+//   },
+//   {
+//     key: 2,
+//     name: 'Kovela',
+//     day: 'Today',
+//     image: require('../../../assets/images/islamabad.jpg'),
+//   },
+//   {
+//     key: 2,
+//     name: 'Kovela',
+//     day: 'Today',
+//     image: require('../../../assets/images/islamabad.jpg'),
+//   },
+//   {
+//     key: 2,
+//     name: 'Kovela',
+//     day: 'Today',
+//     image: require('../../../assets/images/islamabad.jpg'),
+//   },
+// ]
