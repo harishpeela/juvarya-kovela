@@ -283,7 +283,7 @@ export const createNewInvoice = async data => {
 export const upcomingOccasions = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
-      `${endpoints.GET_FOLLOW_LIST}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
+      `${endpoints.GET_UPCOMING_OCCASIONS}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
       {retry: 5, retryDelay: 3000},
     );
     return result;

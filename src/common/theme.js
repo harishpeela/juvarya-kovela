@@ -80,6 +80,7 @@ const colors = {
   darkBrown: '#3F2117',
   blue2: '#0098FD',
   blue3: '#06B3C4',
+  red4: '#DD1E0C',
 };
 
 export {fontSize, fontFamily, window, colors};
