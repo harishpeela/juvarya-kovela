@@ -20,7 +20,7 @@ export const BackHeader = ({
         <Icon
           onPress={onBackPress}
           name="arrow-left-circle"
-          color={colors.green2}
+          color={colors.orangeColor}
           size={35}
         />
         <Text style={[styles.title, {marginLeft: !isOption ? 30 : 15}]}>
@@ -31,7 +31,7 @@ export const BackHeader = ({
         <View style={styles.icon}>
           <EntypoIcon
             name="dots-two-vertical"
-            color={colors.black}
+            color={colors.orangeColor}
             size={22}
             onPress={onDotsPress}
           />

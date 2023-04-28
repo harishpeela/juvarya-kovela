@@ -12,6 +12,7 @@ const endpoints = {
   GET_TEMPLE_LIST: 'v1/agent/item/list',
   GET_HOME_FEED_LIST: 'v1/feed/list',
   CREATE_TEMPLE: 'v1/agent/item/create',
+  CREATE_FEED: 'v1/feed/post',
   UPLOAD_TEMPLE_PICTURE: 'v1/jtitem/picture',
   ADD_TEMPLE_ADMIN: 'v1/agent/role/update',
   GET_CURRENT_USER: 'v1/jtcustomer',
@@ -163,6 +164,14 @@ export const UpdateUserPassword = async data => {
 export const createTemple = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_TEMPLE}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const createFeed = async data => {
+  try {
+    let result = await axiousInstance.post(`${endpoints.CREATE_FEED}`, data);
     return result;
   } catch (error) {
     return error;

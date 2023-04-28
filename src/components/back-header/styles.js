@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
   title: {
     fontSize: fontSize.normal,
     fontFamily: fontFamily.popinMedium,
-    color: colors.black,
+    color: colors.orangeColor,
     marginLeft: 15,
   },
   iconContainer: {

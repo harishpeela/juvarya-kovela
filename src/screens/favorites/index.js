@@ -100,7 +100,7 @@ const Favorite = ({navigation}) => {
           }}
           onSubmit={performFilter}
           bgColor={'lightgray'}
-          placeHolder={'Search'}
+          placeHolder={'Search here'}
         />
       </View>
       <View style={styles.followCardContainer}>
@@ -131,7 +131,7 @@ const Favorite = ({navigation}) => {
                 isFollow={item?.jtItem?.following}
                 onPress={() => {
                   navigation.navigate(
-                    allTexts.screenNames.templeProfile,
+                    allTexts.screenNames.viewProfile,
                     {
                       id: item?.jtItem?.id,
                       title: item?.jtItem?.name,

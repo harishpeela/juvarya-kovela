@@ -18,7 +18,6 @@ import IconDots from 'react-native-vector-icons/Entypo';
 import {Loader} from '../loader';
 import {getPopularTemples, upcomingOccasions} from '../../utils/api';
 import {colors} from '../../common';
-
 export const NearBy = ({data, myData}) => {
   const [templeList, setTempleList] = useState([]);
   const [loading, setLoading] = useState(true);

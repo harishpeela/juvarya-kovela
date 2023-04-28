@@ -58,7 +58,7 @@ const window = {
 
 // updated colors being used in all ober the project
 const colors = {
-  orangeColor: '#FF3400',
+  orangeColor: '#FFA001',
   red1: '#FF2E01',
   red2: '#CB0000',
   red3: '#EE6C4D',

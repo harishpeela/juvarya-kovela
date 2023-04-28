@@ -106,15 +106,14 @@ const ViewProfile = ({route, navigation}) => {
   const [details, setDetails] = useState({
     discription: '',
   });
-  //   // console.log('id', id, title, profileImg);
+    console.log('id', id, title, profileImg);
   const getData = async () => {
     console.log('idid', id);
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
-      // console.log('res', result?.data);
+      console.log('res', result?.data);
       let feedList = await getFeedList(0, 20, id);
-      // console.log('feedlist', feedList?.data);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);
         setFollowVisible(false);
@@ -165,7 +164,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
-  const getFeedLIst = (tempId, pgfrm, pgto) => {
+  const getFeedLIsts = (tempId, pgfrm, pgto) => {
     console.log(tempId, pgfrm, pgto);
     var myHeaders = new Headers();
     myHeaders.append(
@@ -195,15 +194,12 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('error', error));
   };
-
+  console.log('medialist', itemDetails);
   useEffect(() => {
     getData();
-    getFeedLIst(id, 0, 50);
+    getFeedLIsts(id, 0, 50);
   }, [route]);
-  console.log('console', itemDetails);
 
-  // console.log('items', feedListData);
-  // console.log('itemslist', feedListData[1]?.mediaList);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
@@ -244,7 +240,7 @@ const ViewProfile = ({route, navigation}) => {
 
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: '600', fontSize: 16}}>
-                  {templeData.followers}
+                  {nameData?.followersCount}
                 </Text>
                 <Text style={{fontSize: 12, color: '#585858', lineHeight: 18}}>
                   Followers
@@ -334,7 +330,10 @@ const ViewProfile = ({route, navigation}) => {
               {userDetails.role === 'ROLE_ADMIN' && (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate(allTexts?.screenNames.addTample)
+                    navigation.navigate(allTexts?.screenNames.createfeed, {
+                      id: id,
+                      title: title,
+                    })
                   }>
                   <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
                 </TouchableOpacity>
@@ -450,9 +449,6 @@ const ViewProfile = ({route, navigation}) => {
                     keyExtractor={({item, index}) => index}
                     renderItem={({item, index}) => (
                       <View style={{marginRight: 20}}>
-                        {/* <Text style={{fontSize: 16, marginLeft: 5}}>
-                        {item?.mediaList[0]?.id}
-                      </Text> */}
                         <Image
                           source={{
                             uri: item?.mediaList?.url

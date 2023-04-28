@@ -2,7 +2,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import {styles} from './styles';
-import {allTexts} from '../../common';
+import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
 import React, {useState, useEffect} from 'react';
 import set from 'date-fns/esm/set/index';
@@ -26,7 +26,7 @@ const Menu = ({navigation}) => {
         <ImageBackground
           source={{uri: templeData.petalImage}}
           style={{height: 400}}>
-          <View style={{margin: '10%'}}>
+          <View style={{margin: '5%', marginTop: '10%'}}>
             {/* <TouchableOpacity>
               <View style={styles.sidebarIcon}>
                 <View style={[styles.bar, styles.shortestBar]} />
@@ -45,7 +45,8 @@ const Menu = ({navigation}) => {
                     borderBottomWidth: currentIndex == 1 ? 2 : 0,
                     fontWeight: currentIndex == 1 ? 'bold' : '400',
                     width: 60,
-                    borderBottomColor: currentIndex == 1 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 1 ? colors.orangeColor : 'white',
                   }}>
                   Feed{' '}
                 </Text>
@@ -54,7 +55,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 2 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 2 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 2 ? 2 : 0,
                     fontWeight: currentIndex == 2 ? 'bold' : '400',
                     width: 70,
@@ -66,7 +68,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 3 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 3 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 3 ? 2 : 0,
                     fontWeight: currentIndex == 3 ? 'bold' : '400',
                     width: 90,
@@ -78,7 +81,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 4 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 4 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 4 ? 2 : 0,
                     fontWeight: currentIndex == 4 ? 'bold' : '400',
                     width: 110,
@@ -90,7 +94,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 5 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 5 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 5 ? 2 : 0,
                     fontWeight: currentIndex == 5 ? 'bold' : '400',
                     width: 160,
@@ -102,7 +107,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 6 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 6 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 6 ? 2 : 0,
                     fontWeight: currentIndex == 6 ? 'bold' : '400',
                     width: 70,
@@ -114,7 +120,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 7 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 7 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 7 ? 2 : 0,
                     fontWeight: currentIndex == 7 ? 'bold' : '400',
                     width: 100,
@@ -126,7 +133,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 8 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 8 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 8 ? 2 : 0,
                     fontWeight: currentIndex == 8 ? 'bold' : '400',
                     width: 110,
@@ -138,7 +146,8 @@ const Menu = ({navigation}) => {
                 <Text
                   style={{
                     ...styles.tabs,
-                    borderBottomColor: currentIndex == 9 ? 'red' : 'white',
+                    borderBottomColor:
+                      currentIndex == 9 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 9 ? 2 : 0,
                     fontWeight: currentIndex == 9 ? 'bold' : '400',
                     width: 220,

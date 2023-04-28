@@ -73,6 +73,7 @@ const UserFeedScreen = ({navigation}) => {
     getFollowedTempleList();
     favoriteTemplesList.length;
   }, []);
+  // console.log('home', homeFeedList[0]?.mediaList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>

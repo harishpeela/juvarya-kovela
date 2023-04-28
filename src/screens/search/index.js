@@ -1,47 +1,23 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-  StatusBar,
-} from 'react-native';
+import {View} from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
-import {
-  PopularCard,
-  ExploreCard,
-  HomeHeader,
-  SearchBar,
-  HomeTabs,
-  Loader,
-  SearchCard,
-  BackgroundImage,
-  NearBy,
-  UpComingEvents,
-} from '../../components';
+import {BackgroundImage, NearBy, UpComingEvents} from '../../components';
 import {styles} from './style';
-import {SearchFilter} from '../../utils/svgs';
 import ApplicationContext from '../../utils/context-api/Context';
 import {
   getMoreExploreAPI,
   getPopularTemples,
   getSearchedTemple,
 } from '../../utils/api';
-import {allTexts, colors} from '../../common';
+import {allTexts} from '../../common';
 import {getUserDetails} from '../../utils/preferences/localStorage';
 import Snackbar from 'react-native-snackbar';
 
 const Search = ({navigation}) => {
-  let debounceTimer;
   const {userDetails, setUserDetails} = useContext(ApplicationContext);
   const [popTemples, setPopTemples] = useState([]);
   const [moreExploreTemples, setMoreExploreTemples] = useState([]);
-  const [searchedContent, setSearchedContent] = useState([]);
   const [popTempleLoader, setPopTempleLoader] = useState(false);
   const [moreExploreLoader, setmoreExploreLoader] = useState(false);
-  const [searchLoader, setSearchLoader] = useState(false);
-  const [searchText, setSearchText] = useState('');
-  const [searchContentVisible, setSearchContentVisible] = useState(false);
   useEffect(() => {
     getLatestTemples();
     if (!userDetails?.username) {
@@ -99,79 +75,11 @@ const Search = ({navigation}) => {
       console.log('Newtwork Error  786 --->', error);
     }
   };
-  const searchedTextHandler = async () => {
-    setSearchLoader(true);
-    let response = await getSearchedTemple(searchText);
-    if (response && response.status === 200) {
-      setSearchLoader(false);
-      setSearchContentVisible(true);
-      // console.log(response.data.items);
-      setSearchedContent(response.data.items);
-    }
-    // alert(JSON.stringify(response.data.items));
-  };
 
-  const CardHeader = ({title, onPress}) => (
-    <View style={styles.cardHeader}>
-      <Text style={styles.cardHeading}>{title}</Text>
-      <TouchableOpacity onPress={onPress}>
-        <Text style={styles.seemore}> {'See more'}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
-  const debounce = (callback, time) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(callback, time);
-  };
-  // console.log('pop', popTemples);
-  useEffect(() => {
-    if (searchText) {
-      debounce(searchedTextHandler, 300);
-    }
-  }, [searchText]);
   return (
-
-    <ScrollView
-      contentContainerStyle={{paddingBottom: 100}}
-      style={styles.wrapper}>
-      {/* <StatusBar backgroundColor="transparent" translucent={true} /> */}
-
-      <View style={styles.topContainer}>
-        <HomeHeader
-          img={require('../../utils/assets/images/avatar.png')}
-          name={userDetails?.username}
-        />
-        <Text style={styles.heading}>
-          {'Explore and Find your Best Temple'}
-        </Text>
-      </View>
-      <View style={styles.searchbarContainer}>
-        <View style={{width: searchLoader ? '80%' : '100%'}}>
-          <SearchBar
-            value={searchText}
-            onCrossPress={() => {
-              setSearchContentVisible(false);
-              getLatestTemples();
-              setSearchText('');
-            }}
-            // onSubmit={searchedTextHandler}
-            onTextChange={e => {
-              setSearchText(e);
-              if (e === '') {
-                setSearchContentVisible(false);
-              }
-            }}
-          />
-        </View>
-        {searchLoader && (
-          <View style={{flex: 1}}>
-            <Loader color={colors.green2} size={30} />
-          </View>
-        )}
     <View style={{flex: 1}}>
       <BackgroundImage />
-      <View>
+      <View style={{marginTop: '10%'}}>
         <NearBy />
         <UpComingEvents />
       </View>

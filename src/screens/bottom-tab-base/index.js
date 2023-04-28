@@ -34,7 +34,8 @@ export default BottomTabBase = ({navigation}) => {
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
-          GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
+          allTexts.screenNames.userFeedScreen
+          // GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
         }
         tabBarOptions={{
           activeTintColor: colors.blue,

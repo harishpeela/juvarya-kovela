@@ -26,7 +26,7 @@ const MyTamples = ({navigation, route}) => {
   const getTemples = async () => {
     try {
       let response = await getTempleList(1, 100);
-      // console.log('get temp list', response);
+      // console.log('get temp list', response?.data);
       const {
         status,
         data: {items},
@@ -114,7 +114,7 @@ const MyTamples = ({navigation, route}) => {
                         date={item.creationTime}
                         onPress={() => {
                           navigation.navigate(
-                            allTexts.screenNames.templeProfile,
+                            allTexts.screenNames.viewProfile,
                             {
                               id: item.id,
                               title: item.name,

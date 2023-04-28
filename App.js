@@ -29,6 +29,7 @@ import {
   Menu,
   AddTempleNew,
   Splash_Screen,
+  CreateFeed
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -72,6 +73,8 @@ const App = () => {
       menu,
       addtemplenew,
       splashscreen,
+      createfeed,
+      userFeedScreen,
     },
   } = allTexts;
 
@@ -188,6 +191,13 @@ const App = () => {
           }}
         />
         <Stack.Screen
+          name={userFeedScreen}
+          component={UserFeedScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name={events}
           component={Events}
           options={{
@@ -267,6 +277,13 @@ const App = () => {
         <Stack.Screen
           name={addtemplenew}
           component={AddTempleNew}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={createfeed}
+          component={CreateFeed}
           options={{
             headerShown: false,
           }}
