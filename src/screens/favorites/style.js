@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   },
   fontTxtCont: {
     padding: 10,
+    marginLeft: '3%'
   },
   searchContainer: {
     paddingHorizontal: 10,
@@ -20,7 +21,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 5,
     padding: 5,
-    backgroundColor: colors.green4,
+    // backgroundColor: colors.green4,
     borderRadius: 5,
   },
   imgContainer: {

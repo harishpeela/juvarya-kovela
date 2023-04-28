@@ -128,6 +128,7 @@ export const allTexts = {
     menu: 'Menu',
     addtemplenew: 'AddTempleNew',
     splashscreen: 'Splash_Screen',
+    createfeed: 'CreateFeed',
   },
   homeHeader: {
     welcome: 'Welcome ',

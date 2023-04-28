@@ -5,6 +5,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {colors} from '../../common';
 import {styles} from './style';
 import {Loader} from '..';
+import IconVoice from 'react-native-vector-icons/MaterialIcons';
 
 export const SearchBar = ({
   value,
@@ -34,6 +35,7 @@ export const SearchBar = ({
             // maxLength={25}
             onSubmitEditing={onSubmit}
           />
+
           {loading && <Loader size={25} color={colors.green2} />}
           {value !== '' && !loading && (
             <Feather
@@ -43,6 +45,7 @@ export const SearchBar = ({
               size={25}
             />
           )}
+          <IconVoice name="keyboard-voice" size={25} />
         </View>
       </View>
     </View>

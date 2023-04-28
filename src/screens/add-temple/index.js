@@ -72,7 +72,7 @@ const AddTample = ({navigation}) => {
     };
     setaddBtnLoading(true);
     createTemple(creatTemplePayload).then(createRes => {
-      console.log('createtemp', createRes);
+      // console.log('createtemp', createRes);
       if (createRes && createRes.status === 200) {
         let id = createRes?.data?.id;
         setUserID(id);
@@ -167,12 +167,11 @@ const AddTample = ({navigation}) => {
               hideCard();
               setImage(null);
             }}
-            onAddBtnPress={(values, designation, showCard) => {
+            onAddBtnPress={(values, designation) => {
               setStep3Data({
                 employeId: values.employeId,
                 role: designation,
               });
-              createTempleHandler(showCard);
             }}
             onAllDataCollected={() => {
               navigation.goBack();

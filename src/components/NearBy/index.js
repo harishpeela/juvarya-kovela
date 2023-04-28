@@ -17,9 +17,7 @@ import IconHeart from 'react-native-vector-icons/FontAwesome';
 import IconDots from 'react-native-vector-icons/Entypo';
 import {Loader} from '../loader';
 import {getPopularTemples, upcomingOccasions} from '../../utils/api';
-import {colors, fontFamily} from '../../common';
-import Moment from 'moment';
-
+import {colors} from '../../common';
 export const NearBy = ({data, myData}) => {
   const [templeList, setTempleList] = useState([]);
   const [loading, setLoading] = useState(true);
