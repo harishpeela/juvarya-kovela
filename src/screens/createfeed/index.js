@@ -24,7 +24,6 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {UploadTemplePicture, createFeed} from '../../utils/api';
 const CreateFeed = ({route, navigation}) => {
   const {id, title} = route.params || {};
-  console.log('9999999999', id, title);
   const [image, setImage] = useState(null);
   const [imageUpload, setimageUploaded] = useState(false);
   const [titleName, setTitleName] = useState('');
@@ -44,10 +43,10 @@ const CreateFeed = ({route, navigation}) => {
       console.log('img', img);
       createFeed(formdata).then(res => {
         console.log('responce', res.data);
-        if (res && res.data?.status === 200) {
+        if (res.data.description) {
           navigation.navigate(allTexts.screenNames.userFeedScreen);
         } else {
-          Alert.alert('error', 'You dont have an access to the item', [
+          Alert.alert('error', `${'You dont have an access to create feed'}`, [
             {
               text: 'ok',
               onPress: () =>

@@ -38,6 +38,7 @@ const UserFeedScreen = ({navigation}) => {
     try {
       let response = await getFavoritesList(0, 100);
       if (response && response.status === 200) {
+        // console.log('response', response);
         const {
           data: {followingObjects},
         } = response;
@@ -55,7 +56,7 @@ const UserFeedScreen = ({navigation}) => {
     try {
       setloader(true);
       let response = await getHomeFeedList(0, 100);
-      console.log('log', response?.data?.feed);
+      console.log('log', response?.data);
       if (response && response.status === 200) {
         const {
           data: {feeds},
@@ -189,18 +190,18 @@ const UserFeedScreen = ({navigation}) => {
                         profileImg: item?.itemDetails?.profilePicture,
                         data: item,
                       },
-                      console.log(
-                        'id: ',
-                        item?.itemDetails?.id,
-                        'title',
-                        item?.itemDetails?.name,
-                        'profileimg',
-                        item?.itemDetails?.profilePicturel,
-                        'count:',
-                        item?.likesCount,
-                        'det',
-                        item,
-                      ),
+                      // console.log(
+                      //   'id: ',
+                      //   item?.itemDetails?.id,
+                      //   'title',
+                      //   item?.itemDetails?.name,
+                      //   'profileimg',
+                      //   item?.itemDetails?.profilePicturel,
+                      //   'count:',
+                      //   item?.likesCount,
+                      //   'det',
+                      //   item,
+                      // ),
                     )
                   }
                 />
