@@ -5,11 +5,11 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: -28,
     zIndex: 3,
-    borderRadius: 5,
+    borderRadius: 22,
     paddingHorizontal: 5,
-    marginLeft: 40,
+    marginLeft: 25, 
     paddingVertical: 5,
-    backgroundColor: 'blue',
+    backgroundColor: colors.orange2,
     width: 100,
     alignItems: 'center',
   },
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 30,
     backgroundColor: 'white',
     elevation: 3,
-    shadowOffset: {height: 1, width: 1},
+    shadowOffset: {height: 2, width: 2},
     shadowOpacity: 0.2,
     marginVertical: 15,
     width: '90%',
@@ -122,4 +122,9 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
   },
+  eventImage:{
+    height: 44,
+    width: 44,
+    borderRadius: 8,
+  }
 });
