@@ -94,7 +94,7 @@ const Data = [
 ];
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
-  const {id, title, profileImg} = route.params || {};
+  const {id, title, profileImg, data} = route.params || {};
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -106,7 +106,7 @@ const ViewProfile = ({route, navigation}) => {
   const [details, setDetails] = useState({
     discription: '',
   });
-    console.log('id', id, title, profileImg);
+    console.log('id', id, title, profileImg, data);
   const getData = async () => {
     console.log('idid', id);
     try {

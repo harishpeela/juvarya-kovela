@@ -86,5 +86,4 @@ const Search = ({navigation}) => {
     </View>
   );
 };
-
 export default Search;
