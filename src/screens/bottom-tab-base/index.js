@@ -38,7 +38,7 @@ export default BottomTabBase = ({navigation}) => {
           // GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
         }
         tabBarOptions={{
-          activeTintColor: colors.blue,
+          activeTintColor: colors.orangeColor,
           keyboardHidesTabBar: true,
           showLabel: false,
         }}>

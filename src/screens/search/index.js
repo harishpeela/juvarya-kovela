@@ -83,7 +83,7 @@ const Search = ({navigation}) => {
         <NearBy />
         <UpComingEvents />
       </View>
-    </ScrollView>
+    </View>
   );
 };
 export default Search;

@@ -17,7 +17,7 @@ import IconHeart from 'react-native-vector-icons/FontAwesome';
 import IconDots from 'react-native-vector-icons/Entypo';
 import {Loader} from '../loader';
 import {getPopularTemples, upcomingOccasions} from '../../utils/api';
-import {colors} from '../../common';
+import {colors, fontFamily} from '../../common';
 export const NearBy = ({data, myData}) => {
   const [templeList, setTempleList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -57,7 +57,7 @@ export const NearBy = ({data, myData}) => {
       </View>
       <View style={styles.upComingTextTab}>
         <Text style={styles.popularTextContainer}>Popular Temples</Text>
-        <Text style={{color: '#DD1E0C', fontSize: 18}}>See all</Text>
+        <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
       </View>
       <View>
         <ScrollView>
@@ -231,7 +231,7 @@ export const UpComingEvents = ({}) => {
       let year = new Date(currentDate).getFullYear();
       let month = new Date(currentDate).getMonth() + 1;
       let day = new Date(currentDate).getDay();
-      let date = `${year}-${month}-${day}`; 
+      let date = `${year}-${month}-${day}`;
 
       let response = await upcomingOccasions(0, 1000);
       console.log('occgvdfnv', response?.data);
@@ -266,7 +266,7 @@ export const UpComingEvents = ({}) => {
       <View style={styles.upComingTextTab}>
         <Text style={styles.popularTextContainer}>Upcoming Events</Text>
         <TouchableOpacity>
-          <Text style={{fontSize: 18, color: colors.red4}}>See all</Text>
+          <Text style={{fontSize: 18, color: colors.orangeColor}}>See all</Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -306,15 +306,15 @@ export const UpComingEvents = ({}) => {
                       }}>
                       {item.description}{' '}
                     </Text>
-                    <Text
+                    {/* <Text
                       style={{
                         fontSize: 16,
                         color: '#DD1E0C',
                         fontFamily: fontFamily.raleway,
                       }}>
-                      {Moment(item.fromDate).format('hh:mm')} AM to{' '}
-                      {Moment(item.toDate).format('hh:mm')} PM
-                    </Text>
+                      {moment(item.fromDate).format('hh:mm')} AM to{' '}
+                      {moment(item.toDate).format('hh:mm')} PM
+                    </Text> */}
                     <EventListCard data={item?.mediaList} />
                   </View>
                 </View>

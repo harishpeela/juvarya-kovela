@@ -226,7 +226,7 @@ export const UserFeedCompList = ({
           <Icon
             name={isLiked ? 'heart' : 'heart-o'}
             size={20}
-            color={isLiked ? 'blue' : 'black'}
+            color={isLiked ? colors.orangeColor : 'black'}
           />
         </TouchableOpacity>
         <View style={styles.postFooterLeft}>
@@ -238,7 +238,7 @@ export const UserFeedCompList = ({
             style={styles.icon}>
             <Icon
               name={saveFeed ? 'bookmark' : 'bookmark-o'}
-              color={saveFeed ? colors.blue : colors.black}
+              color={saveFeed ? colors.orangeColor : colors.black}
               size={20}
             />
           </TouchableOpacity>

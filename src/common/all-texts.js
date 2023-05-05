@@ -5,7 +5,7 @@ export const allTexts = {
     sigup: 'sign up',
     login: 'Log in',
     follow: 'Follow',
-    unFollow: 'Un Follow',
+    unFollow: 'Following',
     contactUs: 'Contact Us',
     next: 'Next',
     updatePassword: 'Update Password',
