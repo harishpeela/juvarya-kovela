@@ -84,7 +84,7 @@ const Profile = ({navigation}) => {
             setLoginDetails(null);
             console.log('logindetails', loginDetails);
           }}
-          bgColor={colors.blue3}
+          bgColor={colors.orangeColor}
           radius={25}
           text={'Log Out'}
         />
@@ -102,8 +102,17 @@ const Item = ({text, svg, onPress}) => (
 );
 const Item1 = ({text, svg, onPress}) => (
   <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-    <View style={{borderWidth: 2, borderRadius: 20, padding: 2}}>
-      <Image source={svg} style={{height: 20, width: 20, tintColor: 'black'}} />
+    <View
+      style={{
+        borderWidth: 2,
+        borderRadius: 20,
+        padding: 2,
+        borderColor: colors.orangeColor,
+      }}>
+      <Image
+        source={svg}
+        style={{height: 20, width: 20, tintColor: colors.orangeColor}}
+      />
     </View>
     <View style={styles.textContainer}>
       <Text style={styles.itemText1}>{text}</Text>
