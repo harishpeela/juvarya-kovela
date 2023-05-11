@@ -279,6 +279,12 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.footerBody}>
+              <Text style={{fontSize: 14, lineHeight: 18}}>
+                {nameData?.desciption}
+              </Text>
+            </View>
+
+            {/* <View style={styles.footerBody}>
               {templeData.points.map((item, index) => {
                 return (
                   <Text key={index} style={{fontSize: 14, lineHeight: 18}}>
@@ -286,7 +292,7 @@ const ViewProfile = ({route, navigation}) => {
                   </Text>
                 );
               })}
-            </View>
+            </View> */}
 
             <View style={styles.footerAction}>
               {followVisible ? (
