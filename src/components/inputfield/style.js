@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   error: {
-    color: colors.red2,
+    color: colors.orangeColor,
     textTransform: 'capitalize',
     fontFamily: fontFamily.popinRegular,
     fontSize: 12,
