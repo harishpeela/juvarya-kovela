@@ -8,7 +8,7 @@ import {Formik} from 'formik';
 import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
 import {getUserInfo, RegistesrUser, VerifyOTP} from '../../utils/api';
-import { PasswordField } from '../../components/inputfield';
+import {PasswordField} from '../../components/inputfield';
 
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
@@ -99,6 +99,7 @@ const Signup = ({navigation}) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            values,
           }) => {
             return (
               <View style={styles.fieldContainer}>
@@ -135,16 +136,15 @@ const Signup = ({navigation}) => {
                   autoCapitalize="none"
                 />
                 <PasswordField
-                  vlaue={showPassword}
+                  value={values.password}
                   title={password}
                   placeholder={passwordPlace}
                   error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
-                  onChangeText={text => setShowPassword(text)}
                 />
                 <PasswordField
-                  value={cnfrPasswordp}
+                  value={values.confirmPassword}
                   title={confirmPassword}
                   placeholder={confirmPasswordPlace}
                   error={touched.confirmPassword && errors.confirmPassword}
@@ -154,7 +154,7 @@ const Signup = ({navigation}) => {
                 />
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
-                    bgColor={colors.red3}
+                    bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={sigup}

@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
   },
   login: {
     fontFamily: fontFamily.popinBold,
-    color: colors.red3,
+    color: colors.orangeColor,
     paddingLeft: 50,
   },
   signinTextContainer: {

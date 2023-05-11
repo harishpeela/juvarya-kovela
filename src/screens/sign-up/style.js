@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   keyBoardStyle: {
     width: '100%',
     flex: 1,
+    marginTop: 10
   },
   scrollContainer: {
     alignItems: 'center',
@@ -50,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   isLogin: {
     fontFamily: fontFamily.popinBold,
-    color: colors.red3,
+    color: colors.orangeColor,
     paddingLeft: 50,
   },
   alreadyAcc: {

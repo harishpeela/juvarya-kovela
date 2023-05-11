@@ -15,7 +15,7 @@ import {
 } from '../../utils/preferences/localStorage';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
-import { PasswordField } from '../../components/inputfield';
+import {PasswordField} from '../../components/inputfield';
 
 const Signin = ({navigation}) => {
   const {
@@ -23,7 +23,7 @@ const Signin = ({navigation}) => {
     paragraphs: {loginDescription, dontHaveAccount},
     placeHolders: {emailPlace, passwordPlace},
     headings: {
-      inputTitles: {email, password},
+      inputTitles: {email},
     },
     screenNames: {bottomTab},
   } = allTexts;
@@ -98,7 +98,7 @@ const Signin = ({navigation}) => {
             navigation.goBack();
           }}
           name="arrow-left-circle"
-          color={colors.green2}
+          color={colors.orangeColor}
           size={30}
         />
         <Text style={styles.signinText}>{login}</Text>
@@ -125,6 +125,7 @@ const Signin = ({navigation}) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            values,
           }) => {
             return (
               <View style={styles.inputContainer}>
@@ -139,18 +140,17 @@ const Signin = ({navigation}) => {
                 <View style={{height: 20}} />
                 <View>
                   <PasswordField
-                    value={passwords}
-                    title={password}
+                    value={values.password}
+                    title={'password'}
                     placeholder={passwordPlace}
                     error={touched.password && errors.password}
                     onBlur={handleBlur('password')}
                     setState={handleChange('password')}
-                    onChangeText={text => setPasswords(text)}
                   />
                 </View>
                 <View style={styles.btnContainer}>
                   <PrimaryButton
-                    bgColor={colors.red3}
+                    bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
