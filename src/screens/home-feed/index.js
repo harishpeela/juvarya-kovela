@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   RefreshControl,
   SafeAreaView,
+  Modal,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
@@ -33,7 +34,7 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [tab, setTab] = useState(1);
+  const [modelVisible, setModelVisible] = useState(false);
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
@@ -56,7 +57,7 @@ const UserFeedScreen = ({navigation}) => {
     try {
       setloader(true);
       let response = await getHomeFeedList(0, 100);
-      console.log('log', response?.data);
+      // console.log('log', response?.data);
       if (response && response.status === 200) {
         const {
           data: {feeds},
@@ -74,7 +75,7 @@ const UserFeedScreen = ({navigation}) => {
     getFollowedTempleList();
     favoriteTemplesList.length;
   }, []);
-  // console.log('home', homeFeedList[0]?.mediaList);
+  console.log('home', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -179,8 +180,10 @@ const UserFeedScreen = ({navigation}) => {
                   // id={item?.itemDetails?.id}
                   id={item?.id}
                   post={item}
+                  // onDotsPress={() => setModelVisible(true)}
                   likes={item?.likesCount}
                   isLikeTrue={item?.like}
+                  // onDotsPress={() => setModelVisible(true)}
                   onPressTitle={() =>
                     navigation.navigate(
                       allTexts.screenNames.viewProfile,

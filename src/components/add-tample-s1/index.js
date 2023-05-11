@@ -105,39 +105,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
     setSearch(text);
     setFilterdData([]);
   };
-  // const CommunityPostApi = async () => {
-  //   var myHeaders = new Headers();
-  //   let token = await getAuthTokenDetails();
-  //   myHeaders.append('Authorization', token);
-  //   myHeaders.append('Content-Type', 'application/json');
-  //   myHeaders.append('Accept', 'application/json');
-
-  //   var raw = JSON.stringify({
-  //     name: search,
-  //   });
-  //   console.log('raw', raw);
-  //   var requestOptions = {
-  //     method: 'POST',
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: 'follow',
-  //   };
-  //   let Access_Token = token.replace('bearer ', '');
-  //   console.log('acess_Tocken------', Access_Token);
-  //   fetch(
-  //     `http://20.255.59.150:8082/api/v1/community/save?access_token=${Access_Token}`,
-  //     requestOptions,
-  //   )
-  //     .then(response => console.log('222222222222', response))
-  //     .then(result => {
-  //       if (result?.status === 200) {
-  //         console.log('78888888888');
-  //       } else {
-  //         console.log('jmbb');
-  //       }
-  //     })
-  //     .catch(error => console.log('error in post api', error));
-  // };
   useEffect(() => {
     CommunityGetApi();
   }, []);
