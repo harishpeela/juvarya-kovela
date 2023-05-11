@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -13,7 +13,9 @@ import {
   saveLoginSessionDetails,
   saveUserDetails,
 } from '../../utils/preferences/localStorage';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
+import { PasswordField } from '../../components/inputfield';
 
 const Signin = ({navigation}) => {
   const {
@@ -27,6 +29,7 @@ const Signin = ({navigation}) => {
   } = allTexts;
 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
+  const [passwords, setPasswords] = useState('');
 
   const getAndSaveUserInfo = async () => {
     try {
@@ -134,14 +137,17 @@ const Signin = ({navigation}) => {
                   autoCapitalize="none"
                 />
                 <View style={{height: 20}} />
-                <InputField
-                  title={password}
-                  placeholder={passwordPlace}
-                  secureTextEntry={true}
-                  error={touched.password && errors.password}
-                  onBlur={handleBlur('password')}
-                  setState={handleChange('password')}
-                />
+                <View>
+                  <PasswordField
+                    value={passwords}
+                    title={password}
+                    placeholder={passwordPlace}
+                    error={touched.password && errors.password}
+                    onBlur={handleBlur('password')}
+                    setState={handleChange('password')}
+                    onChangeText={text => setPasswords(text)}
+                  />
+                </View>
                 <View style={styles.btnContainer}>
                   <PrimaryButton
                     bgColor={colors.red3}
