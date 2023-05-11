@@ -150,7 +150,6 @@ const Signup = ({navigation}) => {
                   error={touched.confirmPassword && errors.confirmPassword}
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
-                  onChangeText={text => setConfirmPassword(text)}
                 />
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
