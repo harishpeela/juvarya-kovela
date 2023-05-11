@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -8,6 +8,7 @@ import {Formik} from 'formik';
 import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
 import {getUserInfo, RegistesrUser, VerifyOTP} from '../../utils/api';
+import { PasswordField } from '../../components/inputfield';
 
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
@@ -36,6 +37,9 @@ const Signup = ({navigation}) => {
       inputTitles: {fName, phoneNo, lastName, email, password, confirmPassword},
     },
   } = allTexts;
+
+  const [showPassword, setShowPassword] = useState('');
+  const [cnfrPasswordp, setConfirmPassword] = useState('');
 
   const UserRegisterHandler = async (data, action) => {
     const otpPayload = {
@@ -130,21 +134,23 @@ const Signup = ({navigation}) => {
                   setState={handleChange('email')}
                   autoCapitalize="none"
                 />
-                <InputField
-                  secureTextEntry
+                <PasswordField
+                  vlaue={showPassword}
                   title={password}
                   placeholder={passwordPlace}
                   error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
+                  onChangeText={text => setShowPassword(text)}
                 />
-                <InputField
-                  secureTextEntry
+                <PasswordField
+                  value={cnfrPasswordp}
                   title={confirmPassword}
                   placeholder={confirmPasswordPlace}
                   error={touched.confirmPassword && errors.confirmPassword}
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
+                  onChangeText={text => setConfirmPassword(text)}
                 />
                 <View style={styles.buttonContainer}>
                   <PrimaryButton

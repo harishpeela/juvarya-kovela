@@ -1,8 +1,9 @@
-import {View, Text, TextInput} from 'react-native';
-import React from 'react';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
 import {colors} from '../../common';
 import {styles} from './style';
 import PhoneIcon from 'react-native-vector-icons/Feather';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const InputField = ({
   title,
@@ -12,6 +13,7 @@ export const InputField = ({
   error,
   titleColor,
   value,
+  onCardPress,
   ...props
 }) => {
   return (
@@ -79,6 +81,62 @@ export const InputField1 = ({
             style={styles.inputText}
             {...props}
           />
+        </View>
+      </View>
+      {error && <Text style={styles.error}>{error}</Text>}
+    </>
+  );
+};
+
+export const PasswordField = ({
+  title,
+  placeholder,
+  setState,
+  isFlag,
+  error,
+  titleColor,
+  value,
+  onCardPress,
+  ...props
+}) => {
+  const [isShowPassword, setIsShowPassword] = useState(true);
+
+  return (
+    <>
+      <View style={styles.wrapper}>
+        <Text
+          style={[
+            styles.title,
+            {color: titleColor ? titleColor : colors.darkBrown},
+          ]}>
+          {title}
+        </Text>
+        <View style={styles.fieldContainer}>
+          {isFlag && (
+            <View style={styles.imgContainer}>
+              <PhoneIcon name="phone" style={styles.image} size={20} />
+              <Text style={styles.code}>+91</Text>
+            </View>
+          )}
+          <TextInput
+            value={value}
+            placeholderTextColor={colors.gray2}
+            onChangeText={val => setState(val)}
+            style={styles.inputText}
+            secureTextEntry={isShowPassword}
+            {...props}
+          />
+          {value?.length > 0 && (
+            <TouchableOpacity
+              style={{marginLeft: '-10%'}}
+              onPress={() => setIsShowPassword(!isShowPassword)}>
+              <MaterialCommunityIcon
+                name={!isShowPassword ? 'eye' : 'eye-off'}
+                style={{fontSize: 22,}}
+                color={colors.orangeColor}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       {error && <Text style={styles.error}>{error}</Text>}
