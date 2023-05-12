@@ -106,7 +106,7 @@ const ViewProfile = ({route, navigation}) => {
   const [details, setDetails] = useState({
     discription: '',
   });
-    console.log('id', id, title, profileImg, data);
+  console.log('id', id, title, profileImg, data);
   const getData = async () => {
     console.log('idid', id);
     try {
@@ -279,20 +279,23 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.footerBody}>
-              <Text style={{fontSize: 14, lineHeight: 18}}>
-                {nameData?.desciption}
-              </Text>
-            </View>
-
-            {/* <View style={styles.footerBody}>
-              {templeData.points.map((item, index) => {
+              {/* {templeData.points.map((item, index) => {
                 return (
                   <Text key={index} style={{fontSize: 14, lineHeight: 18}}>
                     • {item}
                   </Text>
                 );
-              })}
-            </View> */}
+              })} */}
+
+              <Text
+                style={{
+                  fontSize: 16,
+                  lineHeight: 18,
+                  textTransform: 'capitalize',
+                }}>
+                • {data?.desciption}
+              </Text>
+            </View>
 
             <View style={styles.footerAction}>
               {followVisible ? (
