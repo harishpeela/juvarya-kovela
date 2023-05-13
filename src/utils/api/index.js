@@ -27,6 +27,7 @@ const endpoints = {
   GET_FOLLOW_LIST: 'v1/follow/list',
   LIKE_UNLIKE_HOME_FEED: 'v1/review/like',
   GET_UPCOMING_OCCASIONS: 'v1/occasion/upcoming',
+  GET_ITEM_COMMUNITIES: '/v1/itemcommunity/list',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   LOGIN:
@@ -284,6 +285,18 @@ export const upcomingOccasions = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
       `${endpoints.GET_UPCOMING_OCCASIONS}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getItemCommunities = async (id, pageNo, pageSize) => {
+  try {
+    let result = await axiousInstance.get(
+      `${endpoints.GET_ITEM_COMMUNITIES}?itemId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
     return result;

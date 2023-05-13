@@ -28,6 +28,7 @@ import {
   followUnfollowTemple,
   getTempleDetails,
   getFeedList,
+  getItemCommunities,
 } from '../../utils/api';
 const templeData = {
   name: 'Temple 123',
@@ -103,6 +104,9 @@ const ViewProfile = ({route, navigation}) => {
   const [feedListData, setFeedListData] = useState([]);
   const [nameData, setNameData] = useState();
   const [itemDetails, setItemDetails] = useState([]);
+  const [loading, setLoading] = useState('');
+  const [community, setCommunity] = useState('');
+  const [itemCommunity, setItemCommunity] = useState([]);
   const [details, setDetails] = useState({
     discription: '',
   });
@@ -112,7 +116,7 @@ const ViewProfile = ({route, navigation}) => {
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
-      console.log('res', result?.data);
+      console.log('res', result);
       let feedList = await getFeedList(0, 20, id);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);
@@ -121,7 +125,7 @@ const ViewProfile = ({route, navigation}) => {
           data: {discription},
         } = result || {};
         setFeedListData(feedList?.data);
-        setNameData(result.data);
+        setNameData(result?.data);
         setisFollow(result?.data?.following);
         setDetails({
           discription: discription,
@@ -136,6 +140,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error.message);
     }
   };
+  console.log('nameData', nameData);
   const followTemples = async () => {
     const payload = {
       itemId: id,
@@ -194,10 +199,33 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('error', error));
   };
-  console.log('medialist', itemDetails);
+  //console.log('medialist', itemDetails);
+
+  const getTempleCommunities = async itemId => {
+    try {
+      let response = await getItemCommunities(itemId, 0, 100);
+      console.log('community', response?.data);
+      const {
+        status,
+        data: {itemCommunities},
+      } = response || {};
+      if (response && status === 200) {
+        setItemCommunity(itemCommunities);
+        setLoading(false);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  console.log('Item Community', itemCommunity?.length);
+
   useEffect(() => {
     getData();
     getFeedLIsts(id, 0, 50);
+    getTempleCommunities(id, 0, 100);
   }, [route]);
 
   return (
@@ -249,10 +277,10 @@ const ViewProfile = ({route, navigation}) => {
 
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: '600', fontSize: 16}}>
-                  {templeData.products}
+                  {itemCommunity?.length}
                 </Text>
                 <Text style={{fontSize: 12, color: '#585858', lineHeight: 18}}>
-                  Products
+                  Communities
                 </Text>
               </View>
             </View>
@@ -279,23 +307,25 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.footerBody}>
-              {/* {templeData.points.map((item, index) => {
+              <Text
+                style={{
+                  fontSize: 14,
+                  lineHeight: 18,
+                  textTransform: 'capitalize',
+                }}>
+                • {nameData?.desciption}
+              </Text>
+            </View>
+
+            {/* <View style={styles.footerBody}>
+              {templeData.points.map((item, index) => {
                 return (
                   <Text key={index} style={{fontSize: 14, lineHeight: 18}}>
                     • {item}
                   </Text>
                 );
-              })} */}
-
-              <Text
-                style={{
-                  fontSize: 16,
-                  lineHeight: 18,
-                  textTransform: 'capitalize',
-                }}>
-                • {data?.desciption}
-              </Text>
-            </View>
+              })}
+            </View> */}
 
             <View style={styles.footerAction}>
               {followVisible ? (
