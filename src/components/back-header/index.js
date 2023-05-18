@@ -32,7 +32,7 @@ export const BackHeader = ({
           <EntypoIcon
             name="dots-three-vertical"
             color={colors.orangeColor}
-            size={22}
+            size={20}
             onPress={onDotsPress}
           />
         </View>
