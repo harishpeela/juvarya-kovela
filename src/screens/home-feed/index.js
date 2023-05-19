@@ -1,31 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  TouchableOpacity,
-  RefreshControl,
-  SafeAreaView,
-  Modal,
-} from 'react-native';
+import {View, ScrollView, TouchableOpacity, RefreshControl} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
-import {
-  BackgroundImage,
-  NearBy,
-  NearByMainTab,
-  UpComingEvents,
-} from '../../components';
+import {BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
-import NearByProducts from '../nearByProducts';
-import NearByServices from '../nearByServices';
 const UserFeedScreen = ({navigation}) => {
   const {favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
@@ -34,7 +19,6 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [modelVisible, setModelVisible] = useState(false);
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
@@ -90,56 +74,6 @@ const UserFeedScreen = ({navigation}) => {
                 <View style={[styles.bar, styles.longestBar]} />
               </View>
             </TouchableOpacity>
-            {/* <TouchableOpacity
-              style={{
-                ...styles.button,
-                borderBottomWidth: tab === 1 ? 2 : 0,
-                borderBottomColor: 'red',
-              }}
-              onPress={() => setTab(1)}>
-              <Text
-                style={{
-                  color: tab === 1 ? 'black' : 'black',
-
-                  fontSize: tab === 1 ? 20 : 18,
-                }}>
-                Feed
-              </Text>
-            </TouchableOpacity> */}
-            {/* <TouchableOpacity
-              onPress={() => setTab(2)}
-              style={{
-                ...styles.button,
-                borderBottomWidth: tab === 2 ? 2 : 0,
-                borderBottomColor: 'red',
-              }}>
-              <Text
-                style={{
-
-
-                  fontSize: tab === 2 ? 20 : 18,
-                }}>
-                Nearby
-              </Text>
-
-            </TouchableOpacity>
-            {/* <TouchableOpacity     // uder to develop any time
-              onPress={() => setTab(3)}
-              style={{
-                ...styles.button,
-                borderBottomWidth: tab === 3 ? 2 : 0,
-                borderBottomColor: 'red',
-              }}>
-              <Text
-                style={{
-
-                  color: tab === 2 ? 'black' : 'black',
-
-                  fontSize: tab === 3 ? 20 : 18,
-                }}>
-                Reels
-              </Text>
-            </TouchableOpacity> */}
           </View>
           <View style={styles.circle}>
             <FeatherIcon
@@ -212,83 +146,6 @@ const UserFeedScreen = ({navigation}) => {
             />
           </ScrollView>
         </>
-        {/* )} */}
-        {/* {tab === 2 && (
-        {tab === 1 && (
-          <>
-            {loader && (
-              <View style={{flex: 1}}>
-                <Loader color={colors.green2} size={30} />
-              </View>
-            )}
-            <ScrollView>
-              <FlatList
-                data={homeFeedList}
-                showsVerticalScrollIndicator={false}
-                refreshControl={
-                  <RefreshControl
-                    refreshing={refrsh}
-                    onRefresh={() => {
-                      setRefrsh(true);
-                      getHomeResponse();
-                    }}
-                  />
-                }
-                contentContainerStyle={styles.flatListStyle}
-                keyboardShouldPersistTaps="handled"
-                decelerationRate={0.7}
-                keyExtractor={(item, index) => index}
-                renderItem={({item, index}) => (
-                  <UserFeedCompList
-                    // id={item?.itemDetails?.id}
-                    id={item?.id}
-                    post={item}
-                    likes={item?.likesCount}
-                    isLikeTrue={item?.like}
-                    onPressTitle={() =>
-                      navigation.navigate(
-                        allTexts.screenNames.viewProfile,
-                        {
-                          id: item?.itemDetails?.id,
-                          title: item?.itemDetails?.name,
-                          profileImg: item?.itemDetails?.profilePicture,
-                          data: item,
-                        },
-                        console.log(
-                          'id: ',
-                          item?.itemDetails?.id,
-                          'title',
-                          item?.itemDetails?.name,
-                          'profileimg',
-                          item?.itemDetails?.profilePicturel,
-                          'count:',
-                          item?.likesCount,
-                          'det',
-                          item,
-                        ),
-                      )
-                    }
-                  />
-                )}
-              />
-            </ScrollView>
-          </>
-        )}
-        {tab === 2 && (
-          <SafeAreaView>
-            <View>
-              <NearBy />
-              <UpComingEvents />
-            </View>
-          </SafeAreaView>
-        )}
-        {/* {tab === 3 && (
-          <SafeAreaView>
-            <View>
-              <Text>Hello World</Text>
-            </View>
-          </SafeAreaView>
-        )} */}
       </View>
     </ScrollView>
   );
