@@ -1,11 +1,11 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react/react-in-jsx-scope */
 import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
-import React, {useState, useEffect} from 'react';
-import set from 'date-fns/esm/set/index';
+import React, {useState} from 'react';
 const templeData = {
   petalImage: 'https://www.linkpicture.com/q/hello.png',
 };
@@ -18,6 +18,70 @@ const Menu = ({navigation}) => {
       navigation.navigate(allTexts.screenNames.nearByServices);
     } else {
       navigation.navigate(allTexts.screenNames.nearByServices);
+    }
+  };
+  const Feed = () => {
+    setCurrentIndex(1);
+    if (currentIndex === 1) {
+      navigation.navigate(allTexts.screenNames.feed);
+    } else {
+      navigation.navigate(allTexts.screenNames.feed);
+    }
+  };
+  const Reels = () => {
+    setCurrentIndex(2);
+    if (currentIndex === 2) {
+      alert('reels under development');
+    } else {
+      alert('reels under development');
+    }
+  };
+  const UpcomingEvents = () => {
+    setCurrentIndex(4);
+    if (currentIndex === 4) {
+      alert(' UpcomingEvents under development');
+    } else {
+      alert('UpcomingEvents under development');
+    }
+  };
+  const PastBookings = () => {
+    setCurrentIndex(5);
+    if (currentIndex === 5) {
+      alert('PastBookings under development');
+    } else {
+      alert('PastBookings under development');
+    }
+  };
+  const Music = () => {
+    setCurrentIndex(6);
+    if (currentIndex === 6) {
+      alert('Music under development');
+    } else {
+      alert('Music under development');
+    }
+  };
+  const Festivals = () => {
+    setCurrentIndex(7);
+    if (currentIndex === 7) {
+      alert('Festivals under development');
+    } else {
+      alert('Festivals under development');
+    }
+  };
+  const Accounts = () => {
+    setCurrentIndex(8);
+    if (currentIndex === 8) {
+      alert('Accounts under development');
+    } else {
+      alert('Accounts under development');
+    }
+  };
+  const TC = () => {
+    setCurrentIndex(9);
+    if (currentIndex === 9) {
+      alert('T & C under development');
+    } else {
+      alert('T & C under development');
     }
   };
   return (
@@ -38,7 +102,7 @@ const Menu = ({navigation}) => {
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <View style={{marginVertical: '10%'}}>
-              <TouchableOpacity onPress={() => setCurrentIndex(1)}>
+              <TouchableOpacity onPress={() => Feed()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -51,7 +115,7 @@ const Menu = ({navigation}) => {
                   Feed{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(2)}>
+              <TouchableOpacity onPress={() => Reels()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -77,7 +141,7 @@ const Menu = ({navigation}) => {
                   NearBy{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(4)}>
+              <TouchableOpacity onPress={() => UpcomingEvents()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -90,7 +154,7 @@ const Menu = ({navigation}) => {
                   Upcoming Events{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(5)}>
+              <TouchableOpacity onPress={() => PastBookings()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -103,7 +167,7 @@ const Menu = ({navigation}) => {
                   Past Bookings{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(6)}>
+              <TouchableOpacity onPress={() => Music()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -116,7 +180,7 @@ const Menu = ({navigation}) => {
                   Music{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(7)}>
+              <TouchableOpacity onPress={() => Festivals()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -129,7 +193,7 @@ const Menu = ({navigation}) => {
                   Festivals{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(8)}>
+              <TouchableOpacity onPress={() => Accounts()}>
                 <Text
                   style={{
                     ...styles.tabs,
@@ -142,7 +206,7 @@ const Menu = ({navigation}) => {
                   Accounts{' '}
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setCurrentIndex(9)}>
+              <TouchableOpacity onPress={() => TC()}>
                 <Text
                   style={{
                     ...styles.tabs,

@@ -29,7 +29,8 @@ import {
   Menu,
   AddTempleNew,
   Splash_Screen,
-  CreateFeed
+  CreateFeed,
+  Feed,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -75,6 +76,7 @@ const App = () => {
       splashscreen,
       createfeed,
       userFeedScreen,
+      feed,
     },
   } = allTexts;
 
@@ -284,6 +286,13 @@ const App = () => {
         <Stack.Screen
           name={createfeed}
           component={CreateFeed}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={feed}
+          component={Feed}
           options={{
             headerShown: false,
           }}
