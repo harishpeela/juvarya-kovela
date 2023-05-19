@@ -106,7 +106,7 @@ const ViewProfile = ({route, navigation}) => {
   const [details, setDetails] = useState({
     discription: '',
   });
-    console.log('id', id, title, profileImg, data);
+  console.log('id', id, title, profileImg, data);
   const getData = async () => {
     console.log('idid', id);
     try {
