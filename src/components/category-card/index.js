@@ -203,6 +203,31 @@ export const UserFeedCompList = ({
       );
     }
   };
+  const SaveFeed = () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Bearer a63cc4b9-a3f3-46c2-b3a6-57a3b3221e1e',
+    );
+
+    var formdata = new FormData();
+    formdata.append('itemId', id);
+    formdata.append('description', 'kovela');
+    formdata.append('city', 'IN-AP');
+    formdata.append('files', post?.itemDetails?.profilePicture);
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.255.59.150:8082/api/v1/feed/post', requestOptions)
+      .then(response => response.json())
+      .then(result => console.log('result of save feed', result))
+      .catch(error => console.log('error', error));
+  };
   return (
     <View style={styles.postContainer} key={post?.itemDetails?.id}>
       <View style={styles.postHeader}>
@@ -234,7 +259,10 @@ export const UserFeedCompList = ({
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => setSaveFeed(!saveFeed)}
+            onPress={() => {
+              SaveFeed();
+              setSaveFeed(!saveFeed);
+            }}
             style={styles.icon}>
             <Icon
               name={saveFeed ? 'bookmark' : 'bookmark-o'}
