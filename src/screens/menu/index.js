@@ -85,9 +85,9 @@ const Menu = ({navigation}) => {
                       currentIndex == 4 ? colors.orangeColor : 'white',
                     borderBottomWidth: currentIndex == 4 ? 2 : 0,
                     fontWeight: currentIndex == 4 ? 'bold' : '400',
-                    width: 110,
+                    width: 190,
                   }}>
-                  Upcoming{' '}
+                  Upcoming Events{' '}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => setCurrentIndex(5)}>
