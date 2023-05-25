@@ -314,6 +314,7 @@ const App = () => {
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfo();
+      // console.log('userInfoo', response);
       if (response && response.status === 200) {
         const {
           data: {
