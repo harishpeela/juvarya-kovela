@@ -21,7 +21,7 @@ import {
 import {UploadPhoto} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {UploadTemplePicture, createFeed} from '../../utils/api';
+import {createFeed} from '../../utils/api';
 const CreateFeed = ({route, navigation}) => {
   const {id, title} = route.params || {};
   const [image, setImage] = useState(null);
@@ -38,11 +38,11 @@ const CreateFeed = ({route, navigation}) => {
       let formdata = new FormData();
       formdata.append('itemId', id);
       formdata.append('description', description);
-      formdata.append('city', 'IN-AP');
+      formdata.append('city', city);
       formdata.append('files', img);
       console.log('img', img);
       createFeed(formdata).then(res => {
-        console.log('responce', res.data);
+        // console.log('responce', res);
         if (res.data.description) {
           navigation.navigate(allTexts.screenNames.userFeedScreen);
         } else {

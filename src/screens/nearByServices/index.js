@@ -9,9 +9,10 @@ import {
   Image,
   Modal,
 } from 'react-native';
+import { BackgroundImage } from '../../components';
 import {styles} from './styles';
 import IconSearch from 'react-native-vector-icons/AntDesign';
-import BackIcon from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import {Data1} from '../../components/NearBy';
 const NearByServices = ({navigation}) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,11 +21,10 @@ const NearByServices = ({navigation}) => {
   };
   return (
     <View style={styles.container}>
+      <BackgroundImage />
       <View style={styles.heading}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backArrowButton}>
-          <BackIcon name="arrow-back" size={35} color={'orange'} />
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
         </TouchableOpacity>
         <Text style={styles.headText}>NearBy Services</Text>
       </View>
@@ -44,16 +44,6 @@ const NearByServices = ({navigation}) => {
             style={{marginTop: 5}}
           />
         </TouchableOpacity>
-        <Modal
-          visible={isVisible}
-          transparent={true}
-          animationType="fade"
-          nRequestClose={() => ChangeModel(false)}>
-          <Text>helo</Text>
-          <TouchableOpacity onPress={() => ChangeModel(false)}>
-            <Text> ok</Text>
-          </TouchableOpacity>
-        </Modal>
       </View>
       <View style={{marginRight: 10, width: '100%'}}>
         <FlatList

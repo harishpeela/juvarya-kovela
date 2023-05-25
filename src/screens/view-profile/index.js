@@ -29,6 +29,7 @@ import {
   getTempleDetails,
   getFeedList,
   getItemCommunities,
+  getUserInfo,
 } from '../../utils/api';
 const templeData = {
   name: 'Temple 123',
@@ -61,41 +62,11 @@ const templeData = {
   ],
   petalImage: 'https://www.linkpicture.com/q/hello.png',
 };
-const Data = [
-  {
-    id: 1,
-    name: 'pooja',
-    cost: '250',
-  },
-  {
-    id: 2,
-    name: 'dharsanam',
-    cost: '100',
-  },
-  {
-    id: 3,
-    name: 'alaya pravesam',
-    cost: '50',
-  },
-  {
-    id: 4,
-    name: 'prasadam',
-    cost: '20',
-  },
-  {
-    id: 5,
-    name: 'prasadam',
-    cost: '20',
-  },
-  {
-    id: 6,
-    name: 'prasadam',
-    cost: '20',
-  },
-];
+
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {id, title, profileImg, data} = route.params || {};
+  // console.log('data', data);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -105,20 +76,32 @@ const ViewProfile = ({route, navigation}) => {
   const [nameData, setNameData] = useState();
   const [itemDetails, setItemDetails] = useState([]);
   const [loading, setLoading] = useState('');
-  const [community, setCommunity] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
+  const [role, setRole] = useState('');
   const [details, setDetails] = useState({
     discription: '',
   });
-  console.log('id', id, title, profileImg, data);
+  const Role_Id = async () => {
+    let Info = await getUserInfo();
+    // console.log('infodata', Info?.data?.roles?.customerItems[0]?.roles[0]);
+    // console.log('infodata22', Info?.data?.roles?.customerItems);
+    let ROLES = await Info?.data?.roles?.customerItems;
+    // console.log('roles111', ROLES);
+    setRole(ROLES);
+  };
   const getData = async () => {
     console.log('idid', id);
+    // console.log('1');
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
-      console.log('res', result);
+      // console.log('2');
+      // console.log('res', result);
       let feedList = await getFeedList(0, 20, id);
+      // console.log('feedlist', feedList);
+      // console.log('4');
       if (result && result.status === 200 && feedList.status === 200) {
+        // console.log('3');
         setloader(false);
         setFollowVisible(false);
         const {
@@ -126,7 +109,9 @@ const ViewProfile = ({route, navigation}) => {
         } = result || {};
         setFeedListData(feedList?.data);
         setNameData(result?.data);
+        // console.log('namedata', result?.data);
         setisFollow(result?.data?.following);
+        // console.log('follo', result?.data?.following);
         setDetails({
           discription: discription,
           image: profileImg,
@@ -140,7 +125,6 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error.message);
     }
   };
-  console.log('nameData', nameData);
   const followTemples = async () => {
     const payload = {
       itemId: id,
@@ -170,7 +154,6 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
   const getFeedLIsts = (tempId, pgfrm, pgto) => {
-    console.log(tempId, pgfrm, pgto);
     var myHeaders = new Headers();
     myHeaders.append(
       'Authorization',
@@ -199,12 +182,11 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('error', error));
   };
-  //console.log('medialist', itemDetails);
 
   const getTempleCommunities = async itemId => {
     try {
       let response = await getItemCommunities(itemId, 0, 100);
-      console.log('community', response?.data);
+      // console.log('community', response?.data);
       const {
         status,
         data: {itemCommunities},
@@ -219,15 +201,16 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
-
-  console.log('Item Community', itemCommunity?.length);
-
+  // console.log('Item Community', itemCommunity?.length);
+  // console.log('check', role);
   useEffect(() => {
     getData();
-    getFeedLIsts(id, 0, 50);
+    getFeedLIsts(id, 0, 100);
     getTempleCommunities(id, 0, 100);
-  }, [route]);
-
+    // followTemples();
+    Role_Id();
+   }, [route]);
+   console.log('media', itemDetails[0]?.mediaList[0]?.url);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
@@ -316,17 +299,6 @@ const ViewProfile = ({route, navigation}) => {
                 • {nameData?.desciption}
               </Text>
             </View>
-
-            {/* <View style={styles.footerBody}>
-              {templeData.points.map((item, index) => {
-                return (
-                  <Text key={index} style={{fontSize: 14, lineHeight: 18}}>
-                    • {item}
-                  </Text>
-                );
-              })}
-            </View> */}
-
             <View style={styles.footerAction}>
               {followVisible ? (
                 <View
@@ -490,8 +462,8 @@ const ViewProfile = ({route, navigation}) => {
                       <View style={{marginRight: 20}}>
                         <Image
                           source={{
-                            uri: item?.mediaList?.url
-                              ? item?.mediaList?.url
+                            uri: item?.mediaList[0]?.url
+                              ? item?.mediaList[0]?.url
                               : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
                           }}
                           style={{
@@ -532,9 +504,6 @@ const ViewProfile = ({route, navigation}) => {
                     keyExtractor={({item, index}) => index}
                     renderItem={({item, index}) => (
                       <View style={{marginRight: 20}}>
-                        <Text style={{fontSize: 16, marginLeft: 5}}>
-                          {item?.mediaList?.id}
-                        </Text>
                         <Image
                           source={{
                             uri: item?.mediaList[0]?.url

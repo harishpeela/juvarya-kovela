@@ -40,8 +40,10 @@ const UserFeedScreen = ({navigation}) => {
   const getHomeResponse = async () => {
     try {
       setloader(true);
-      let response = await getHomeFeedList(0, 100);
-      // console.log('log', response?.data);
+      let response = await getHomeFeedList(0, 200);
+      // console.log('log data', response?.data);
+
+      // console.log('log res', response);
       if (response && response.status === 200) {
         const {
           data: {feeds},
@@ -59,7 +61,7 @@ const UserFeedScreen = ({navigation}) => {
     getFollowedTempleList();
     favoriteTemplesList.length;
   }, []);
-  console.log('home', homeFeedList);
+  // console.log('home', homeFeedList);
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <View style={{flex: 1}}>
@@ -114,6 +116,7 @@ const UserFeedScreen = ({navigation}) => {
                   // id={item?.itemDetails?.id}
                   id={item?.id}
                   post={item}
+                  saveid={item.id}
                   // onDotsPress={() => setModelVisible(true)}
                   likes={item?.likesCount}
                   isLikeTrue={item?.like}
