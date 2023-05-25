@@ -178,4 +178,11 @@ export const style = (bgColor, radius, paddidng, width) =>
       justifyContent: 'center',
       marginRight: 6,
     },
+    profileView: {
+      width: 80,
+      height: 80,
+      borderColor: '#FFA001',
+      borderWidth: 2,
+      borderRadius: 40,
+    },
   });

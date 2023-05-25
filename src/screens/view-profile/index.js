@@ -209,8 +209,8 @@ const ViewProfile = ({route, navigation}) => {
     getTempleCommunities(id, 0, 100);
     // followTemples();
     Role_Id();
-   }, [route]);
-   console.log('media', itemDetails[0]?.mediaList[0]?.url);
+  }, [route]);
+  console.log('media', itemDetails[0]?.mediaList[0]?.url);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
@@ -229,16 +229,7 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.infoContainer}>
-              <Image
-                source={{uri: profileImg}}
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderColor: '#FFA001',
-                  borderWidth: 2,
-                  borderRadius: 40,
-                }}
-              />
+              <Image source={{uri: profileImg}} style={styles.profileView} />
 
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: '600', fontSize: 16}}>
@@ -440,7 +431,12 @@ const ViewProfile = ({route, navigation}) => {
               <View style={styles.contentDisplay}>
                 <View style={styles.contentDisplay.row}>
                   <Text style={{fontSize: 20}}>Posts</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate(allTexts.screenNames.posts, {
+                        posts: itemDetails,
+                      })
+                    }>
                     <Text style={{color: '#FFA001', fontSize: 14}}>
                       See all
                     </Text>

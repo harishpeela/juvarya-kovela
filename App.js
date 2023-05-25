@@ -31,6 +31,7 @@ import {
   Splash_Screen,
   CreateFeed,
   Feed,
+  Posts,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -77,6 +78,7 @@ const App = () => {
       createfeed,
       userFeedScreen,
       feed,
+      posts,
     },
   } = allTexts;
 
@@ -293,6 +295,13 @@ const App = () => {
         <Stack.Screen
           name={feed}
           component={Feed}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={posts}
+          component={Posts}
           options={{
             headerShown: false,
           }}
