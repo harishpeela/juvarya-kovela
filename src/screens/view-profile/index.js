@@ -229,7 +229,7 @@ const ViewProfile = ({route, navigation}) => {
   }, [route]);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{flex: 1, backgroundColor: 'white'}} >
       <View style={styles.footerBackground}>
         <ImageBackground
           source={{uri: templeData.petalImage}}

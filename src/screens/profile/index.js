@@ -66,6 +66,13 @@ const Profile = ({navigation}) => {
             navigation.navigate(allTexts.screenNames.updatePassword);
           }}
         />
+        <Item
+          svg={<AccountIcon1 />}
+          text={'My Saved Posts'}
+          onPress={() => {
+            navigation.navigate(allTexts.screenNames.mySavedPosts);
+          }}
+        />
         {(userDetails?.role == role.admin ||
           userDetails?.role == role.agent) && (
           <Item1

@@ -71,9 +71,9 @@ const Menu = ({navigation}) => {
   const Accounts = () => {
     setCurrentIndex(8);
     if (currentIndex === 8) {
-      alert('Accounts under development');
+      navigation.navigate(allTexts.screenNames.profile);
     } else {
-      alert('Accounts under development');
+      navigation.navigate(allTexts.screenNames.profile);
     }
   };
   const TC = () => {
@@ -203,7 +203,7 @@ const Menu = ({navigation}) => {
                     fontWeight: currentIndex == 8 ? 'bold' : '400',
                     width: 110,
                   }}>
-                  Accounts{' '}
+                  Account{' '}
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => TC()}>
