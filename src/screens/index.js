@@ -30,6 +30,7 @@ import AddTempleNew from './addtemplenew';
 import Splash_Screen from './splash_screen';
 import CreateFeed from './createfeed';
 import Feed from './feed';
+import Posts from './posts';
 export {
   CreatePost,
   Seemore,
@@ -63,4 +64,5 @@ export {
   Splash_Screen,
   CreateFeed,
   Feed,
+  Posts,
 };

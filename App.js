@@ -32,6 +32,7 @@ import {
   CreateFeed,
   Profile,
   Feed,
+  Posts,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -81,6 +82,7 @@ const App = () => {
       feed,
       profile,
       mySavedPosts,
+      posts,
     },
   } = allTexts;
 
@@ -315,6 +317,13 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={posts}
+          component={Posts}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -332,6 +341,7 @@ const App = () => {
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfo();
+      // console.log('userInfoo', response);
       if (response && response.status === 200) {
         const {
           data: {

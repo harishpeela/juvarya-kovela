@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     margin: 30,
     flexDirection: 'row',
     alignItems: 'center',
+    marginTop: '15%'
   },
   container: {flex: 1},
   backArrowButton: {

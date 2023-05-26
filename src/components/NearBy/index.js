@@ -234,8 +234,8 @@ export const UpComingEvents = ({}) => {
       let date = `${year}-${month}-${day}`;
 
       let response = await upcomingOccasions(0, 1000);
-      console.log('occgvdfnv', response?.data);
-      console.log('occasions', response?.data?.occasion[9].mediaList);
+      // console.log('occgvdfnv', response?.data);
+      // console.log('occasions', response?.data?.occasion[9].mediaList);
       const {
         status,
         data: {occasion},

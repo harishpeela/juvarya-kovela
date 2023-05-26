@@ -1,3 +1,4 @@
+/* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, Image, TouchableOpacity} from 'react-native';
@@ -143,6 +144,7 @@ export const UserFeedCompList = ({
   saveOnPress,
   onPressTitle,
   onDotsPress,
+  saveid,
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
@@ -203,29 +205,30 @@ export const UserFeedCompList = ({
       );
     }
   };
-  const SaveFeed = () => {
+  const SaveFeedApi = () => {
     var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
     myHeaders.append(
       'Authorization',
       'Bearer a63cc4b9-a3f3-46c2-b3a6-57a3b3221e1e',
     );
 
-    var formdata = new FormData();
-    formdata.append('itemId', id);
-    formdata.append('description', 'kovela');
-    formdata.append('city', 'IN-AP');
-    formdata.append('files', post?.itemDetails?.profilePicture);
-
+    var raw = JSON.stringify({
+      feedId: saveid,
+    });
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: formdata,
+      body: raw,
       redirect: 'follow',
     };
 
-    fetch('http://20.255.59.150:8082/api/v1/feed/post', requestOptions)
+    fetch(
+      'http://20.255.59.150:8082/api/v1/jtfeedtocustomer/save',
+      requestOptions,
+    )
       .then(response => response.json())
-      .then(result => console.log('result of save feed', result))
+      .then(result => console.log('result', result))
       .catch(error => console.log('error', error));
   };
   return (
@@ -259,9 +262,15 @@ export const UserFeedCompList = ({
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => {
-              SaveFeed();
+            onPress={async () => {
               setSaveFeed(!saveFeed);
+              {
+                if (!saveFeed) {
+                  await SaveFeedApi();
+                } else {
+                  setSaveFeed(!saveFeed);
+                }
+              }
             }}
             style={styles.icon}>
             <Icon
