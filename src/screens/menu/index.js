@@ -72,9 +72,9 @@ const Menu = ({navigation}) => {
   const Accounts = () => {
     setCurrentIndex(8);
     if (currentIndex === 8) {
-      alert('Accounts under development');
+      navigation.navigate(allTexts.screenNames.profile);
     } else {
-      alert('Accounts under development');
+      navigation.navigate(allTexts.screenNames.profile);
     }
   };
   const TC = () => {
@@ -230,6 +230,125 @@ const Menu = ({navigation}) => {
                 Terms & Conditions{' '}
               </Text>
             </TouchableOpacity>
+            <View style={{marginVertical: '10%'}}>
+              <TouchableOpacity onPress={() => Feed()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomWidth: currentIndex == 1 ? 2 : 0,
+                    fontWeight: currentIndex == 1 ? 'bold' : '400',
+                    width: 60,
+                    borderBottomColor:
+                      currentIndex == 1 ? colors.orangeColor : 'white',
+                  }}>
+                  Feed{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Reels()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 2 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 2 ? 2 : 0,
+                    fontWeight: currentIndex == 2 ? 'bold' : '400',
+                    width: 70,
+                  }}>
+                  Reels
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => NearBy()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 3 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 3 ? 2 : 0,
+                    fontWeight: currentIndex == 3 ? 'bold' : '400',
+                    width: 90,
+                  }}>
+                  NearBy{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => UpcomingEvents()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 4 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 4 ? 2 : 0,
+                    fontWeight: currentIndex == 4 ? 'bold' : '400',
+                    width: 190,
+                  }}>
+                  Upcoming Events{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => PastBookings()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 5 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 5 ? 2 : 0,
+                    fontWeight: currentIndex == 5 ? 'bold' : '400',
+                    width: 160,
+                  }}>
+                  Past Bookings{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Music()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 6 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 6 ? 2 : 0,
+                    fontWeight: currentIndex == 6 ? 'bold' : '400',
+                    width: 70,
+                  }}>
+                  Music{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Festivals()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 7 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 7 ? 2 : 0,
+                    fontWeight: currentIndex == 7 ? 'bold' : '400',
+                    width: 100,
+                  }}>
+                  Festivals{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => Accounts()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 8 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 8 ? 2 : 0,
+                    fontWeight: currentIndex == 8 ? 'bold' : '400',
+                    width: 110,
+                  }}>
+                  Account{' '}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => TC()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    borderBottomColor:
+                      currentIndex == 9 ? colors.orangeColor : 'white',
+                    borderBottomWidth: currentIndex == 9 ? 2 : 0,
+                    fontWeight: currentIndex == 9 ? 'bold' : '400',
+                    width: 220,
+                  }}>
+                  Terms & Conditions{' '}
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>

@@ -130,6 +130,8 @@ export const allTexts = {
     splashscreen: 'Splash_Screen',
     createfeed: 'CreateFeed',
     feed: 'Feed',
+    profile: 'Profile',
+    mySavedPosts: 'My Saved Posts',
     posts: 'Posts',
   },
   homeHeader: {
