@@ -6,7 +6,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import {styles} from './styles';
 const Posts = ({navigation, route}) => {
   const {posts} = route.params || {};
-  console.log('data', posts[0].mediaList);
+  console.log('data', posts[0]?.mediaList);
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
       <BackgroundImage />
@@ -18,23 +18,29 @@ const Posts = ({navigation, route}) => {
           Posts
         </Text>
       </View>
-      <FlatList
-        data={posts}
-        keyExtractor={({item, index}) => index}
-        renderItem={({item, index}) => (
-          <View style={styles.postView}>
-            <Image
-              source={{
-                uri: item?.mediaList[0]?.url
-                  ? item?.mediaList[0]?.url
-                  : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
-              }}
-              style={styles.image}
-            />
-            <Text style={styles.description}>{item.description} </Text>
-          </View>
-        )}
-      />
+      {!posts?.length ? (
+        <View style={styles.noposts}>
+          <Text style={styles.noposttext}> no posts to display</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={posts}
+          keyExtractor={({item, index}) => index}
+          renderItem={({item, index}) => (
+            <View style={styles.postView}>
+              <Image
+                source={{
+                  uri: item?.mediaList[0]?.url
+                    ? item?.mediaList[0]?.url
+                    : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
+                }}
+                style={styles.image}
+              />
+              <Text style={styles.description}>{item?.description} </Text>
+            </View>
+          )}
+        />
+      )}
     </View>
   );
 };

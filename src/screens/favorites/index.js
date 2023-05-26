@@ -63,14 +63,6 @@ const Favorite = ({navigation}) => {
       console.log(error);
     }
   };
-  // console.log(
-  //   'id: ',
-  //   filterFavTemple[4]?.jtItem?.id,
-  //   'title: ',
-  //   filterFavTemple[4]?.jtItem?.name,
-  //   'picture: ',
-  //   filterFavTemple?.jtItem?.profilePicture?.url,
-  // );
   return (
     <View style={styles.wrapper}>
       <BackgroundImage />
@@ -137,14 +129,14 @@ const Favorite = ({navigation}) => {
                       title: item?.jtItem?.name,
                       profileImg: item?.jtItem?.profilePicture?.url,
                     },
-                    console.log(
-                      'id: ',
-                      item?.jtItem?.id,
-                      'title',
-                      item?.jtItem?.name,
-                      'profimg',
-                      item?.jtItem?.profilePicture?.url,
-                    ),
+                    // console.log(
+                    //   'id: ',
+                    //   item?.jtItem?.id,
+                    //   'title',
+                    //   item?.jtItem?.name,
+                    //   'profimg',
+                    //   item?.jtItem?.profilePicture?.url,
+                    // ),
                   );
                 }}
               />
@@ -152,7 +144,7 @@ const Favorite = ({navigation}) => {
           />
         ) : (
           <View style={styles.notAvailable}>
-            <Text style={styles.name}>{'No Temple Available'}</Text>
+            <Text style={styles.name}>{'No Temple vailable'}</Text>
           </View>
         )}
       </View>
