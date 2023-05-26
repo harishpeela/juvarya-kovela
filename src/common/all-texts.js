@@ -132,6 +132,7 @@ export const allTexts = {
     feed: 'Feed',
     profile: 'Profile',
     mySavedPosts: 'My Saved Posts',
+    posts: 'Posts',
   },
   homeHeader: {
     welcome: 'Welcome ',

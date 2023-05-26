@@ -5,6 +5,7 @@ import {TouchableOpacity, Text, View, ImageBackground} from 'react-native';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
+import {BackgroundImage} from '../../components';
 import React, {useState} from 'react';
 const templeData = {
   petalImage: 'https://www.linkpicture.com/q/hello.png',
@@ -85,21 +86,149 @@ const Menu = ({navigation}) => {
     }
   };
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
-        <ImageBackground
-          source={{uri: templeData.petalImage}}
-          style={{height: 400}}>
-          <View style={{margin: '5%', marginTop: '10%'}}>
-            {/* <TouchableOpacity>
-              <View style={styles.sidebarIcon}>
-                <View style={[styles.bar, styles.shortestBar]} />
-                <View style={[styles.bar, styles.mediumBar]} />
-                <View style={[styles.bar, styles.longestBar]} />
-              </View>
-            </TouchableOpacity> */}
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+        <BackgroundImage />
+        <View style={{margin: '5%', marginTop: '10%'}}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+          </TouchableOpacity>
+          <View style={{marginVertical: '10%'}}>
+            <TouchableOpacity onPress={() => Feed()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  textDecorationLine: currentIndex === 1 ? 'underline' : 'none',
+                  color: currentIndex === 1 ? colors.orangeColor : 'gray',
+                  // borderBottomWidth: currentIndex == 1 ? 2 : 0,
+                  fontWeight: currentIndex == 1 ? 'bold' : '400',
+                  // width: 60,
+                  // borderBottomColor:
+                  //   currentIndex == 1 ? colors.orangeColor : 'white',
+                }}>
+                Feed{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Reels()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 2 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 2 ? 'underline' : 'none',
+
+                  // borderBottomColor:
+                  //   currentIndex == 2 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 2 ? 2 : 0,
+                  fontWeight: currentIndex == 2 ? 'bold' : '400',
+                  // width: 70,
+                }}>
+                Reels
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => NearBy()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 3 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 3 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 3 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 3 ? 2 : 0,
+                  fontWeight: currentIndex == 3 ? 'bold' : '400',
+                  // width: 90,
+                }}>
+                NearBy{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => UpcomingEvents()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 4 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 4 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 4 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 4 ? 2 : 0,
+                  fontWeight: currentIndex == 4 ? 'bold' : '400',
+                  // width: 200,
+                }}>
+                Upcoming Events{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => PastBookings()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 5 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 5 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 5 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 5 ? 2 : 0,
+                  fontWeight: currentIndex === 5 ? 'bold' : '400',
+                  // width: 180,
+                }}>
+                Past Bookings{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Music()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 6 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 6 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 6 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 6 ? 2 : 0,
+                  fontWeight: currentIndex == 6 ? 'bold' : '400',
+                  // width: 80,
+                }}>
+                Music{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Festivals()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 7 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 7 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 7 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 7 ? 2 : 0,
+                  fontWeight: currentIndex == 7 ? 'bold' : '400',
+                  // width: 110,
+                }}>
+                Festivals{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Accounts()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 8 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 8 ? 'underline' : 'none',
+                  // borderBottomColor:
+                  //   currentIndex == 8 ? colors.orangeColor : 'white',
+                  // borderBottomWidth: currentIndex == 8 ? 2 : 0,
+                  fontWeight: currentIndex == 8 ? 'bold' : '400',
+                  // width: 115,
+                }}>
+                Accounts{' '}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => TC()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: currentIndex === 9 ? colors.orangeColor : 'gray',
+                  // borderBottomColor:
+                  //   currentIndex == 9 ? colors.orangeColor : 'gray',
+                  textDecorationLine: currentIndex === 9 ? 'underline' : 'none',
+                  // borderBottomWidth: currentIndex == 9 ? 2 : 0,
+                  fontWeight: currentIndex == 9 ? 'bold' : '400',
+                  // width: 260,
+                }}>
+                Terms & Conditions{' '}
+              </Text>
             </TouchableOpacity>
             <View style={{marginVertical: '10%'}}>
               <TouchableOpacity onPress={() => Feed()}>
@@ -221,7 +350,7 @@ const Menu = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-        </ImageBackground>
+        </View>
       </View>
     </View>
   );

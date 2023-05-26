@@ -25,16 +25,14 @@ const Signin = ({navigation}) => {
     headings: {
       inputTitles: {email},
     },
-    screenNames: {bottomTab},
   } = allTexts;
 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
-  const [passwords, setPasswords] = useState('');
 
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfo();
-      console.log('login res', response);
+      // console.log('login res', response?.data?.roles?.customerItems[0].roles);
       if (response && response.status === 200) {
         const {
           data: {

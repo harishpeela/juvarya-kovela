@@ -29,7 +29,6 @@ export const styles = StyleSheet.create({
   },
   tabs: {
     fontSize: 24,
-    color: 'black',
     marginVertical: 10,
   },
 });
