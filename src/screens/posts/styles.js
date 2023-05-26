@@ -26,6 +26,16 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     textTransform: 'uppercase',
     fontWeight: '800',
+  },
+  noposts: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noposttext: {
+    fontSize: 20,
+    fontWeight: '800',
+    textTransform: 'capitalize',
   }
 
 });

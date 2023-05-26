@@ -432,7 +432,7 @@ const ViewProfile = ({route, navigation}) => {
               <View style={styles.contentDisplay}>
                 <View style={styles.contentDisplay.row}>
                   <Text style={{fontSize: 20}}>Posts</Text>
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     onPress={() =>
                       navigation.navigate(allTexts.screenNames.posts, {
                         posts: itemDetails,
@@ -441,45 +441,51 @@ const ViewProfile = ({route, navigation}) => {
                     <Text style={{color: '#FFA001', fontSize: 14}}>
                       See all
                     </Text>
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                 </View>
                 {itemDetails.length === 0 ? (
                   <View style={{alignItems: 'center', marginTop: '15%'}}>
-                    <Text style={{fontSize: 16, fontWeight: '700'}}>
-                      Posts not created for this temple
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontWeight: '700',
+                        textTransform: 'capitalize',
+                      }}>
+                      no posts for this temple
                     </Text>
                   </View>
                 ) : (
-                  <FlatList
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    data={itemDetails}
-                    keyExtractor={({item, index}) => index}
-                    renderItem={({item, index}) => (
-                      <View style={{marginRight: 20}}>
-                        <Image
-                          source={{
-                            uri: item?.mediaList[0]?.url
-                              ? item?.mediaList[0]?.url
-                              : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
-                          }}
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 100 / 3,
-                          }}
-                        />
-                        <Text
+                  <ScrollView style={{height: '60%'}}>
+                    <FlatList
+                      numColumns={2}
+                      showsVerticalScrollIndicator={false}
+                      data={itemDetails}
+                      keyExtractor={({item, index}) => index}
+                      renderItem={({item, index}) => (
+                        <View style={{marginRight: 10, marginTop: '2%'}}>
+                          <Image
+                            source={{
+                              uri: item?.mediaList[0]?.url
+                                ? item?.mediaList[0]?.url
+                                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
+                            }}
+                            style={{
+                              height: 170,
+                              width: 170,
+                            }}
+                          />
+                          {/* <Text
                           style={{
                             alignSelf: 'center',
                             fontSize: 18,
                             marginTop: 2,
                           }}>
                           {item?.description ? item?.description : 'Kovela'}{' '}
-                        </Text>
-                      </View>
-                    )}
-                  />
+                        </Text> */}
+                        </View>
+                      )}
+                    />
+                  </ScrollView>
                 )}
               </View>
             )}
