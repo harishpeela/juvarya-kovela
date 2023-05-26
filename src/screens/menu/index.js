@@ -10,6 +10,7 @@ const templeData = {
   petalImage: 'https://www.linkpicture.com/q/hello.png',
 };
 
+
 const Menu = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const NearBy = () => {
