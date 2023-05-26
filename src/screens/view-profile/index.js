@@ -166,6 +166,7 @@ const ViewProfile = ({route, navigation}) => {
       redirect: 'follow',
     };
 
+    
     fetch(
       `http://20.255.59.150:8082/api/v1/feed/item?itemId=${tempId}&page=${pgfrm}&pageSize=${pgto}&popular=true`,
       requestOptions,

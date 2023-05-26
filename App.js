@@ -30,6 +30,7 @@ import {
   AddTempleNew,
   Splash_Screen,
   CreateFeed,
+  Profile,
   Feed,
   Posts,
 } from './src/screens';
@@ -43,6 +44,7 @@ import {
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getFavoritesList, getUserInfo} from './src/utils/api';
+import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -78,6 +80,8 @@ const App = () => {
       createfeed,
       userFeedScreen,
       feed,
+      profile,
+      mySavedPosts,
       posts,
     },
   } = allTexts;
@@ -134,6 +138,20 @@ const App = () => {
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profile}
+          component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={mySavedPosts}
+          component={MySavedPosts}
           options={{
             headerShown: false,
           }}

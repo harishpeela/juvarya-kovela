@@ -316,4 +316,5 @@ export const getSavedPostsList = async (pageNo, pageSize) => {
   } catch (error) {
     return error;
   }
+  
 };

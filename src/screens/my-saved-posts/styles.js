@@ -18,4 +18,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30
   },
+  
 });

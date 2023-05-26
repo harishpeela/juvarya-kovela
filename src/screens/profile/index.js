@@ -36,6 +36,7 @@ const Profile = ({navigation}) => {
             navigation.navigate(home);
           }}
           txt={'Account'}
+          
         />
       </View>
       <View style={styles.profileContainer}>

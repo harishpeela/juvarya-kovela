@@ -73,6 +73,7 @@ const MySavedPosts = ({navigation}) => {
               keyExtractor={(item, index) => item?.id}
               renderItem={({item, index}) => {
                 return <View>{item?.profilePicture?.url}</View>;
+                
               }}
             />
           </View>
