@@ -205,6 +205,14 @@ export const UserFeedCompList = ({
       );
     }
   };
+  const FeedStatus = () => {
+    let status = !saveFeed;
+    if (status) {
+      SaveFeedApi();
+    } else {
+      console.log('feed not saved');
+    }
+  };
   const SaveFeedApi = () => {
     var myHeaders = new Headers();
     myHeaders.append('Content-Type', 'application/json');
@@ -262,15 +270,9 @@ export const UserFeedCompList = ({
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={async () => {
+            onPress={() => {
               setSaveFeed(!saveFeed);
-              {
-                if (!saveFeed) {
-                  await SaveFeedApi();
-                } else {
-                  setSaveFeed(!saveFeed);
-                }
-              }
+              FeedStatus();
             }}
             style={styles.icon}>
             <Icon

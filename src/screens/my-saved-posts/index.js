@@ -1,16 +1,8 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-  FlatList,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
 import {BackgroundImage} from '../../components';
-import {BackHeader, PrimaryButton, ProfileInfo} from '../../components';
 import {styles} from './styles';
-import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList} from '../../utils/api';
 
@@ -19,16 +11,13 @@ const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
 
-  const templeData = {
-    petalImage: 'https://www.linkpicture.com/q/hello.png',
-  };
-
   const getPostsList = async () => {
     try {
       let response = await getSavedPostsList(0, 100);
+      // console.log('responce', response);
       console.log('get feeds list', response?.data?.feedToCustomers[0]?.jtFeed);
       const {
-        status, 
+        status,
         data: {feedToCustomers},
       } = response || {};
       if (response && status === 200) {
@@ -43,7 +32,7 @@ const MySavedPosts = ({navigation}) => {
     }
   };
 
-  // console.log('filter', filteredArray);
+  console.log('filter', filteredArray);
 
   useEffect(() => {
     getPostsList();
@@ -51,33 +40,38 @@ const MySavedPosts = ({navigation}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
+      <BackgroundImage />
       <View style={styles.footerBackground}>
-        <ImageBackground
-          source={{uri: templeData.petalImage}}
-          style={{height: 400}}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
-            </TouchableOpacity>
-            <Text
-              style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
-              My Saved Posts
-            </Text>
-          </View>
-          <View>
-            <FlatList
-              data={filteredArray}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.flatListStyle}
-              keyboardShouldPersistTaps="handled"
-              keyExtractor={(item, index) => item?.id}
-              renderItem={({item, index}) => {
-                return <View>{item?.profilePicture?.url}</View>;
-                
-              }}
-            />
-          </View>
-        </ImageBackground>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+          </TouchableOpacity>
+          <Text style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
+            Saved Posts
+          </Text>
+        </View>
+        <View>
+          <FlatList
+            data={filteredArray}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.flatListStyle}
+            keyboardShouldPersistTaps="handled"
+            keyExtractor={(item, index) => item?.id}
+            renderItem={({item, index}) => {
+              return (
+                <View style={styles.container}>
+                  <Image
+                    source={{uri: item?.jtFeedDTO?.mediaList[0]?.url}}
+                    style={{height: 100, width: 100, borderRadius: 10}}
+                  />
+                  <Text style={styles.saveddescription}>
+                    {item?.jtFeedDTO?.description}{' '}
+                  </Text>
+                </View>
+              );
+            }}
+          />
+        </View>
       </View>
     </View>
   );

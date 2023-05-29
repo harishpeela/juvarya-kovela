@@ -36,7 +36,6 @@ const Profile = ({navigation}) => {
             navigation.navigate(home);
           }}
           txt={'Account'}
-          
         />
       </View>
       <View style={styles.profileContainer}>
@@ -69,7 +68,7 @@ const Profile = ({navigation}) => {
         />
         <Item
           svg={<AccountIcon1 />}
-          text={'My Saved Posts'}
+          text={'Saved Posts'}
           onPress={() => {
             navigation.navigate(allTexts.screenNames.mySavedPosts);
           }}
