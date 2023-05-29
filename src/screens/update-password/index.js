@@ -1,16 +1,14 @@
-import {View, Text, Image, ToastAndroid} from 'react-native';
-import React, {useEffect, useContext} from 'react';
-import {InputField, PrimaryButton} from '../../components';
+import {View, ToastAndroid} from 'react-native';
+import React, {useContext} from 'react';
+import {PrimaryButton} from '../../components';
+import {PasswordField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
-import {
-  RegisterValidationSchema,
-  UpdatePasswordValidation,
-} from '../../common/schemas';
+import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader} from '../../components';
-import {RegistesrUser, UpdateUserPassword} from '../../utils/api';
+import {UpdateUserPassword} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const UpdatePassword = ({navigation}) => {
@@ -81,23 +79,24 @@ const UpdatePassword = ({navigation}) => {
             handleBlur,
             handleSubmit,
             isSubmitting,
+            values,
           }) => {
             return (
               <View style={styles.fieldContainer}>
-                <InputField
-                  secureTextEntry
+                <PasswordField
                   title={password}
-                  titleColor={colors.green2}
+                  value={values.password}
+                  titleColor={colors.orangeColor}
                   placeholder={passwordPlace}
                   error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
                 />
                 <View style={{height: 30}} />
-                <InputField
-                  secureTextEntry
+                <PasswordField
                   title={confirmPassword}
-                  titleColor={colors.green2}
+                  value={values.confirmPassword}
+                  titleColor={colors.orangeColor}
                   placeholder={confirmPasswordPlace}
                   error={touched.confirmPassword && errors.confirmPassword}
                   onBlur={handleBlur('confirmPassword')}
@@ -105,7 +104,7 @@ const UpdatePassword = ({navigation}) => {
                 />
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
-                    bgColor={colors.blue3}
+                    bgColor={colors.orangeColor}
                     radius={25}
                     width={190}
                     loading={isSubmitting}

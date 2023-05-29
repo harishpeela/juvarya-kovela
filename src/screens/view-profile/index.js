@@ -66,7 +66,6 @@ const templeData = {
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {id, title, profileImg, data} = route.params || {};
-  // console.log('data', data);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -78,6 +77,7 @@ const ViewProfile = ({route, navigation}) => {
   const [loading, setLoading] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
   const [role, setRole] = useState('');
+  const [followCount, setFollowCount] = useState();
   const [details, setDetails] = useState({
     discription: '',
   });
@@ -111,7 +111,9 @@ const ViewProfile = ({route, navigation}) => {
         setNameData(result?.data);
         // console.log('namedata', result?.data);
         setisFollow(result?.data?.following);
+        setFollowCount(result?.data?.followersCount);
         // console.log('follo', result?.data?.following);
+
         setDetails({
           discription: discription,
           image: profileImg,
@@ -131,16 +133,13 @@ const ViewProfile = ({route, navigation}) => {
       itemType: 'ITEM',
       follow: !isFollow,
     };
-    // console.log('pay', payload);
     try {
       setFollowBtnDisable(true);
       let results = await followUnfollowTemple(payload);
-      // console.log('results', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
-        // console.log('results', results.json());
         setFollowBtnDisable(false);
-
+        FollowingCount();
         ToastAndroid.show(
           `Successfully you are${
             !isFollow ? ' following' : ' unFollowing'
@@ -151,6 +150,15 @@ const ViewProfile = ({route, navigation}) => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+  console.log('count', followCount);
+  console.log('numv', nameData?.followersCount);
+  const FollowingCount = () => {
+    if (!isFollow === true) {
+      setFollowCount(followCount + 1);
+    } else if (isFollow) {
+      setFollowCount(nameData?.followersCount - 1);
     }
   };
   const getFeedLIsts = (tempId, pgfrm, pgto) => {
@@ -166,7 +174,6 @@ const ViewProfile = ({route, navigation}) => {
       redirect: 'follow',
     };
 
-    
     fetch(
       `http://20.255.59.150:8082/api/v1/feed/item?itemId=${tempId}&page=${pgfrm}&pageSize=${pgto}&popular=true`,
       requestOptions,
@@ -202,18 +209,15 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
-  // console.log('Item Community', itemCommunity?.length);
-  // console.log('check', role);
   useEffect(() => {
     getData();
     getFeedLIsts(id, 0, 100);
     getTempleCommunities(id, 0, 100);
-    // followTemples();
+    nameData;
     Role_Id();
   }, [route]);
-  console.log('media', itemDetails[0]?.mediaList[0]?.url);
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}} >
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
         <ImageBackground
           source={{uri: templeData.petalImage}}
@@ -243,7 +247,7 @@ const ViewProfile = ({route, navigation}) => {
 
               <View style={{alignItems: 'center'}}>
                 <Text style={{fontWeight: '600', fontSize: 16}}>
-                  {nameData?.followersCount}
+                  {followCount}
                 </Text>
                 <Text style={{fontSize: 12, color: '#585858', lineHeight: 18}}>
                   Followers
@@ -462,7 +466,7 @@ const ViewProfile = ({route, navigation}) => {
                       data={itemDetails}
                       keyExtractor={({item, index}) => index}
                       renderItem={({item, index}) => (
-                        <View style={{marginRight: 10, marginTop: '2%'}}>
+                        <View style={{marginRight: '2%', marginTop: '2%'}}>
                           <Image
                             source={{
                               uri: item?.mediaList[0]?.url
@@ -470,8 +474,8 @@ const ViewProfile = ({route, navigation}) => {
                                 : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
                             }}
                             style={{
-                              height: 170,
-                              width: 170,
+                              height: 150,
+                              width: 150,
                             }}
                           />
                           {/* <Text
@@ -491,37 +495,12 @@ const ViewProfile = ({route, navigation}) => {
             )}
             {currentIndex === 3 && (
               <>
-                <View style={styles.contentDisplay}>
-                  <View style={styles.contentDisplay.row}>
-                    <Text style={{fontSize: 20}}>Services</Text>
-                    <TouchableOpacity>
-                      <Text style={{color: '#FFA001', fontSize: 14}}>
-                        See all
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <FlatList
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    data={itemDetails}
-                    keyExtractor={({item, index}) => index}
-                    renderItem={({item, index}) => (
-                      <View style={{marginRight: 20}}>
-                        <Image
-                          source={{
-                            uri: item?.mediaList[0]?.url
-                              ? item?.mediaList[0]?.url
-                              : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
-                          }}
-                          style={{
-                            height: 100,
-                            width: 100,
-                            borderRadius: 100 / 2,
-                          }}
-                        />
-                      </View>
-                    )}
-                  />
+                <View
+                  style={{
+                    alignItems: 'center',
+                    marginTop: '25%',
+                  }}>
+                  <Text style={{fontSize: 16}}> page under development</Text>
                 </View>
               </>
             )}
