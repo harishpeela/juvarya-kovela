@@ -27,12 +27,13 @@ const endpoints = {
   GET_FOLLOW_LIST: 'v1/follow/list',
   LIKE_UNLIKE_HOME_FEED: 'v1/review/like',
   GET_UPCOMING_OCCASIONS: 'v1/occasion/upcoming',
-  GET_ITEM_COMMUNITIES: '/v1/itemcommunity/list',
-  GET_SAVED_POSTS_LIST: '/v1/jtfeedtocustomer/list',
+  GET_ITEM_COMMUNITIES: 'v1/itemcommunity/list',
+  GET_SAVED_POSTS_LIST: 'v1/jtfeedtocustomer/list',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   LOGIN:
     'v1/oauth/token?grant_type=password&client_id=skillrat-client&client_secret=skillrat@2021',
+  SAVE_FEED: 'v1/jtfeedtocustomer/save',
 };
 export const getHomeResponse = async () => {
   try {
@@ -95,6 +96,14 @@ export const getTempleDetails = async id => {
 export const RegistesrUser = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SIGN_UP}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const SaveFeed = async data => {
+  try {
+    let result = await axiousInstance.post(`${endpoints.SAVE_FEED}`, data);
     return result;
   } catch (error) {
     return error;
@@ -316,5 +325,4 @@ export const getSavedPostsList = async (pageNo, pageSize) => {
   } catch (error) {
     return error;
   }
-  
 };
