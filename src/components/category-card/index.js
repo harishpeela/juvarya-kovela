@@ -10,7 +10,7 @@ import IconDots from 'react-native-vector-icons/Entypo';
 import IconBookMark from 'react-native-vector-icons/FontAwesome';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ImageLoader} from '..';
-import {likeOrUnlikeFeed} from '../../utils/api';
+import {likeOrUnlikeFeed, SaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MatrialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -134,9 +134,6 @@ export const HomeCard = ({
 };
 
 export const UserFeedCompList = ({
-  bookmarkPress,
-  data,
-  getHomeResponse,
   post,
   isLikeTrue,
   likes,
@@ -213,31 +210,12 @@ export const UserFeedCompList = ({
       console.log('feed not saved');
     }
   };
-  const SaveFeedApi = () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append(
-      'Authorization',
-      'Bearer a63cc4b9-a3f3-46c2-b3a6-57a3b3221e1e',
-    );
-
-    var raw = JSON.stringify({
+  const SaveFeedApi = async () => {
+    let payload = {
       feedId: saveid,
-    });
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch(
-      'http://20.255.59.150:8082/api/v1/jtfeedtocustomer/save',
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => console.log('result', result))
-      .catch(error => console.log('error', error));
+    }
+    let result = await SaveFeed(payload);
+    console.log('result', result?.data);
   };
   return (
     <View style={styles.postContainer} key={post?.itemDetails?.id}>
