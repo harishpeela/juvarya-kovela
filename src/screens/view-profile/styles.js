@@ -139,6 +139,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
   },
+  followLoader: {
+    width: 105,
+    padding: 10,
+    height: 38,
+    backgroundColor: '#FFA001',
+    borderRadius: 10,
+    marginRight: 4,
+  },
+  desciption: {
+    fontSize: 14,
+    lineHeight: 18,
+    textTransform: 'capitalize',
+  },
   controlPanel: {
     flexDirection: 'row',
     flexWrap: 'wrap',

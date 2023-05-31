@@ -210,10 +210,10 @@ export const getFeedList = async (pageNo, pageSize, id) => {
     return error;
   }
 };
-export const getHomeFeedList = async (pageNo, pageSize) => {
+export const getHomeFeedList = async (pageNo, pageSize, id) => {
   try {
     let result = await axiousInstance.get(
-      `${endpoints.GET_HOME_FEED_LIST}?page=${pageNo}&pageSize=${pageSize}&itemId=434`,
+      `${endpoints.GET_HOME_FEED_LIST}?page=${pageNo}&pageSize=${pageSize}&itemId=${id}`,
       {retry: 5, retryDelay: 3000},
     );
     return result;

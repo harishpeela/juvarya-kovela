@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import {
@@ -7,7 +8,6 @@ import {
   View,
   ImageBackground,
   TouchableOpacity,
-  StatusBar,
   ToastAndroid,
   ActivityIndicator,
   FlatList,
@@ -30,7 +30,9 @@ import {
   getFeedList,
   getItemCommunities,
   getUserInfo,
+  getTempleList,
 } from '../../utils/api';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const templeData = {
   name: 'Temple 123',
   rating: 4.8,
@@ -66,6 +68,7 @@ const templeData = {
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {id, title, profileImg, data} = route.params || {};
+  console.log('=============================>', id);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -78,16 +81,25 @@ const ViewProfile = ({route, navigation}) => {
   const [itemCommunity, setItemCommunity] = useState([]);
   const [role, setRole] = useState('');
   const [followCount, setFollowCount] = useState();
+  const [templeDetails, setTempleDetails] = useState('');
+  const [roleId, setRoleId] = useState('');
   const [details, setDetails] = useState({
     discription: '',
   });
   const Role_Id = async () => {
     let Info = await getUserInfo();
-    // console.log('infodata', Info?.data?.roles?.customerItems[0]?.roles[0]);
-    // console.log('infodata22', Info?.data?.roles?.customerItems);
+    // console.log('infodata', Info?.data);
     let ROLES = await Info?.data?.roles?.customerItems;
-    // console.log('roles111', ROLES);
-    setRole(ROLES);
+    console.log('roles111', ROLES);
+    let ID = ROLES.find(itemId => itemId.id === id);
+    //4330 example id //
+    console.log('iiiiiiiiidddddddddddddddddd', ID);
+    if (ID) {
+      setRoleId(ID.roles[0]?.roleName);
+    } else {
+      console.log('u r not admin to create a post');
+    }
+    // setRole(ROLES);
   };
   const getData = async () => {
     console.log('idid', id);
@@ -95,13 +107,8 @@ const ViewProfile = ({route, navigation}) => {
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
-      // console.log('2');
-      // console.log('res', result);
       let feedList = await getFeedList(0, 20, id);
-      // console.log('feedlist', feedList);
-      // console.log('4');
       if (result && result.status === 200 && feedList.status === 200) {
-        // console.log('3');
         setloader(false);
         setFollowVisible(false);
         const {
@@ -109,11 +116,8 @@ const ViewProfile = ({route, navigation}) => {
         } = result || {};
         setFeedListData(feedList?.data);
         setNameData(result?.data);
-        // console.log('namedata', result?.data);
         setisFollow(result?.data?.following);
         setFollowCount(result?.data?.followersCount);
-        // console.log('follo', result?.data?.following);
-
         setDetails({
           discription: discription,
           image: profileImg,
@@ -152,8 +156,6 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
-  console.log('count', followCount);
-  console.log('numv', nameData?.followersCount);
   const FollowingCount = () => {
     if (!isFollow === true) {
       setFollowCount(followCount + 1);
@@ -161,12 +163,10 @@ const ViewProfile = ({route, navigation}) => {
       setFollowCount(nameData?.followersCount - 1);
     }
   };
-  const getFeedLIsts = (tempId, pgfrm, pgto) => {
+  const getFeedLIsts = async (tempId, pgfrm, pgto) => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer a63cc4b9-a3f3-46c2-b3a6-57a3b3221e1e',
-    );
+    let token = await getAuthTokenDetails();
+    myHeaders.append('Authorization', token);
 
     var requestOptions = {
       method: 'GET',
@@ -191,10 +191,9 @@ const ViewProfile = ({route, navigation}) => {
       .catch(error => console.log('error', error));
   };
 
-  const getTempleCommunities = async itemId => {
+  const getTempleCommunities = async () => {
     try {
-      let response = await getItemCommunities(itemId, 0, 100);
-      // console.log('community', response?.data);
+      let response = await getItemCommunities(id, 0, 100);
       const {
         status,
         data: {itemCommunities},
@@ -209,12 +208,24 @@ const ViewProfile = ({route, navigation}) => {
       console.log(error);
     }
   };
+  const getTemple = async () => {
+    let result = await getTempleList(0, 400);
+    // console.log('-------------->', result?.data?.items);
+    let templeId = result.data.items.find(itemid => itemid?.id === id);
+    // console.log('templeId', templeId);
+    if (templeId) {
+      setTempleDetails(templeId);
+    } else {
+      // console.log('templedetaile are ==>', templeId);
+    }
+  };
   useEffect(() => {
     getData();
     getFeedLIsts(id, 0, 100);
-    getTempleCommunities(id, 0, 100);
+    getTempleCommunities();
     nameData;
     Role_Id();
+    getTemple();
   }, [route]);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -286,26 +297,11 @@ const ViewProfile = ({route, navigation}) => {
             </View>
 
             <View style={styles.footerBody}>
-              <Text
-                style={{
-                  fontSize: 14,
-                  lineHeight: 18,
-                  textTransform: 'capitalize',
-                }}>
-                • {nameData?.desciption}
-              </Text>
+              <Text style={styles.desciption}>• {nameData?.desciption}</Text>
             </View>
             <View style={styles.footerAction}>
               {followVisible ? (
-                <View
-                  style={{
-                    width: 105,
-                    padding: 10,
-                    height: 38,
-                    backgroundColor: '#FFA001',
-                    borderRadius: 10,
-                    marginRight: 4,
-                  }}>
+                <View style={styles.followLoader}>
                   <Loader
                     color={'white'}
                     size={'small'}
@@ -334,7 +330,7 @@ const ViewProfile = ({route, navigation}) => {
               <Pressable style={styles.voidButton}>
                 <Text style={styles.voidButton.text}>Directions</Text>
               </Pressable>
-              {userDetails.role === 'ROLE_ADMIN' && (
+              {roleId === 'ROLE_ITEM_ADMIN' && (
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate(allTexts?.screenNames.createfeed, {
@@ -364,73 +360,79 @@ const ViewProfile = ({route, navigation}) => {
                 </Text>
               </Pressable>
 
-              <Pressable
-                style={{...styles.controlPanel.item}}
-                onPress={() => setCurrentIndex(2)}>
-                <MaterialCommunityIcons
-                  name="movie-open-outline"
-                  color={currentIndex == 2 ? '#FFA001' : '#585858'}
-                  size={24}
-                />
-                <Text
-                  style={{
-                    ...styles.controlPanel.item.text,
-                    color: currentIndex == 2 ? '#FFA001' : '#585858',
-                  }}>
-                  Reels
-                </Text>
-              </Pressable>
+              {templeDetails?.reelsEnabled && (
+                <Pressable
+                  style={{...styles.controlPanel.item}}
+                  onPress={() => setCurrentIndex(2)}>
+                  <MaterialCommunityIcons
+                    name="movie-open-outline"
+                    color={currentIndex == 2 ? '#FFA001' : '#585858'}
+                    size={24}
+                  />
+                  <Text
+                    style={{
+                      ...styles.controlPanel.item.text,
+                      color: currentIndex == 2 ? '#FFA001' : '#585858',
+                    }}>
+                    Reels
+                  </Text>
+                </Pressable>
+              )}
+              {templeDetails?.servicesEnabled && (
+                <Pressable
+                  style={styles.controlPanel.item}
+                  onPress={() => setCurrentIndex(3)}>
+                  <Entypo
+                    name="shop"
+                    color={currentIndex == 3 ? '#FFA001' : '#585858'}
+                    size={24}
+                  />
+                  <Text
+                    style={{
+                      ...styles.controlPanel.item.selectedText,
+                      color: currentIndex == 3 ? '#FFA001' : '#585858',
+                    }}>
+                    Services
+                  </Text>
+                </Pressable>
+              )}
+              {templeDetails?.ecommerceEnabled && (
+                <Pressable
+                  style={styles.controlPanel.item}
+                  onPress={() => setCurrentIndex(4)}>
+                  <FontAwesome
+                    name="calendar-plus-o"
+                    color={currentIndex == 4 ? '#FFA001' : '#585858'}
+                    size={24}
+                  />
+                  <Text
+                    style={{
+                      ...styles.controlPanel.item.text,
+                      color: currentIndex == 4 ? '#FFA001' : '#585858',
+                    }}>
+                    Events
+                  </Text>
+                </Pressable>
+              )}
 
-              <Pressable
-                style={styles.controlPanel.item}
-                onPress={() => setCurrentIndex(3)}>
-                <Entypo
-                  name="shop"
-                  color={currentIndex == 3 ? '#FFA001' : '#585858'}
-                  size={24}
-                />
-                <Text
-                  style={{
-                    ...styles.controlPanel.item.selectedText,
-                    color: currentIndex == 3 ? '#FFA001' : '#585858',
-                  }}>
-                  Services
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={styles.controlPanel.item}
-                onPress={() => setCurrentIndex(4)}>
-                <FontAwesome
-                  name="calendar-plus-o"
-                  color={currentIndex == 4 ? '#FFA001' : '#585858'}
-                  size={24}
-                />
-                <Text
-                  style={{
-                    ...styles.controlPanel.item.text,
-                    color: currentIndex == 4 ? '#FFA001' : '#585858',
-                  }}>
-                  Events
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={styles.controlPanel.item}
-                onPress={() => setCurrentIndex(5)}>
-                <FontAwesome5
-                  name="hand-holding-heart"
-                  color={currentIndex == 5 ? '#FFA001' : '#585858'}
-                  size={24}
-                />
-                <Text
-                  style={{
-                    ...styles.controlPanel.item.text,
-                    color: currentIndex == 5 ? '#FFA001' : '#585858',
-                  }}>
-                  Donate
-                </Text>
-              </Pressable>
+              {templeDetails?.donationsEnabled && (
+                <Pressable
+                  style={styles.controlPanel.item}
+                  onPress={() => setCurrentIndex(5)}>
+                  <FontAwesome5
+                    name="hand-holding-heart"
+                    color={currentIndex == 5 ? '#FFA001' : '#585858'}
+                    size={24}
+                  />
+                  <Text
+                    style={{
+                      ...styles.controlPanel.item.text,
+                      color: currentIndex == 5 ? '#FFA001' : '#585858',
+                    }}>
+                    Donate
+                  </Text>
+                </Pressable>
+              )}
             </View>
             {currentIndex === 1 && (
               <View style={styles.contentDisplay}>
@@ -459,9 +461,10 @@ const ViewProfile = ({route, navigation}) => {
                     </Text>
                   </View>
                 ) : (
-                  <ScrollView style={{height: '60%'}}>
+                  <View style={{height: '75%'}}>
                     <FlatList
                       numColumns={2}
+                      showsHorizontalScrollIndicator={false}
                       showsVerticalScrollIndicator={false}
                       data={itemDetails}
                       keyExtractor={({item, index}) => index}
@@ -474,8 +477,8 @@ const ViewProfile = ({route, navigation}) => {
                                 : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
                             }}
                             style={{
-                              height: 150,
-                              width: 150,
+                              height: 160,
+                              width: 160,
                             }}
                           />
                           {/* <Text
@@ -489,7 +492,7 @@ const ViewProfile = ({route, navigation}) => {
                         </View>
                       )}
                     />
-                  </ScrollView>
+                  </View>
                 )}
               </View>
             )}

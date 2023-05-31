@@ -5,20 +5,24 @@ import {View, ScrollView, TouchableOpacity, RefreshControl} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import ApplicationContext from '../../utils/context-api/Context';
-import {getHomeFeedList, getFavoritesList} from '../../utils/api';
+import {getHomeFeedList, getFavoritesList, getUserInfo} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 const UserFeedScreen = ({navigation}) => {
-  const {favoriteList} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
-  const [favoriteTemplesList, setfavoriteTemplesList] = useState(favoriteList);
-  const [filterFavTemple, setfilterFavTemple] = useState(favoriteList);
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
+  const [id, setId] = useState();
+  const USERINFO = async () => {
+    let info = await getUserInfo();
+    console.log('info', info?.data);
+    if (info) {
+      setId(info?.data?.id);
+    }
+  };
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
@@ -29,19 +33,18 @@ const UserFeedScreen = ({navigation}) => {
         } = response;
         setloading(false);
         if (followingObjects.length > 0) {
-          setfavoriteTemplesList(followingObjects);
-          setfilterFavTemple(followingObjects);
         }
       }
     } catch (error) {
       console.log(error);
     }
   };
+  console.log('id', id);
   const getHomeResponse = async () => {
     try {
       setloader(true);
-      let response = await getHomeFeedList(0, 200);
-      // console.log('log data', response?.data);
+      let response = await getHomeFeedList(0, 200, id);
+      console.log('log data', response?.data);
 
       // console.log('log res', response);
       if (response && response.status === 200) {
@@ -57,9 +60,9 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   useEffect(() => {
+    USERINFO();
     getHomeResponse();
     getFollowedTempleList();
-    favoriteTemplesList.length;
   }, []);
   // console.log('home', homeFeedList);
   return (
@@ -113,36 +116,18 @@ const UserFeedScreen = ({navigation}) => {
               keyExtractor={(item, index) => index}
               renderItem={({item, index}) => (
                 <UserFeedCompList
-                  // id={item?.itemDetails?.id}
                   id={item?.id}
                   post={item}
                   saveid={item.id}
-                  // onDotsPress={() => setModelVisible(true)}
                   likes={item?.likesCount}
                   isLikeTrue={item?.like}
-                  // onDotsPress={() => setModelVisible(true)}
                   onPressTitle={() =>
-                    navigation.navigate(
-                      allTexts.screenNames.viewProfile,
-                      {
-                        id: item?.itemDetails?.id,
-                        title: item?.itemDetails?.name,
-                        profileImg: item?.itemDetails?.profilePicture,
-                        data: item,
-                      },
-                      // console.log(
-                      //   'id: ',
-                      //   item?.itemDetails?.id,
-                      //   'title',
-                      //   item?.itemDetails?.name,
-                      //   'profileimg',
-                      //   item?.itemDetails?.profilePicturel,
-                      //   'count:',
-                      //   item?.likesCount,
-                      //   'det',
-                      //   item,
-                      // ),
-                    )
+                    navigation.navigate(allTexts.screenNames.viewProfile, {
+                      id: item?.itemDetails?.id,
+                      title: item?.itemDetails?.name,
+                      profileImg: item?.itemDetails?.profilePicture,
+                      data: item,
+                    })
                   }
                 />
               )}
