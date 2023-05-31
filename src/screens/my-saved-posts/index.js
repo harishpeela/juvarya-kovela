@@ -14,7 +14,6 @@ const MySavedPosts = ({navigation}) => {
   const getPostsList = async () => {
     try {
       let response = await getSavedPostsList(0, 100);
-      // console.log('responce', response);
       console.log('get feeds list', response?.data?.feedToCustomers[0]?.jtFeed);
       const {
         status,
@@ -50,7 +49,7 @@ const MySavedPosts = ({navigation}) => {
             Saved Posts
           </Text>
         </View>
-        <View>
+        <View style={{height: '85%'}}>
           <FlatList
             data={filteredArray}
             showsVerticalScrollIndicator={false}

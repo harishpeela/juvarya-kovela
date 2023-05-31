@@ -142,13 +142,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={profile}
           component={Profile}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={mySavedPosts}
           component={MySavedPosts}

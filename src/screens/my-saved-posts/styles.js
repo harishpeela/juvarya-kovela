@@ -1,16 +1,11 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    padding: 10,
-  },
   footerBackground: {
-    // backgroundColor: '#fff',
     borderRadius: 25,
     flex: 1,
   },
   header: {
-    marginBottom: 20,
+    marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',

@@ -194,8 +194,8 @@ export const UserFeedCompList = ({
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={require('../../../assets/images/islamabad.jpg')}
-            style={styles.image}
+            source={require('../../../assets/images/noimg.png')}
+            style={styles.image1}
             resizeMode="cover"
           />
         </View>
