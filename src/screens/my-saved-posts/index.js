@@ -5,7 +5,7 @@ import {BackgroundImage} from '../../components';
 import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList} from '../../utils/api';
-
+import {SaveFeedComp} from '../../components';
 const MySavedPosts = ({navigation}) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -56,19 +56,7 @@ const MySavedPosts = ({navigation}) => {
             contentContainerStyle={styles.flatListStyle}
             keyboardShouldPersistTaps="handled"
             keyExtractor={(item, index) => item?.id}
-            renderItem={({item, index}) => {
-              return (
-                <View style={styles.container}>
-                  <Image
-                    source={{uri: item?.jtFeedDTO?.mediaList[0]?.url}}
-                    style={{height: 100, width: 100, borderRadius: 10}}
-                  />
-                  <Text style={styles.saveddescription}>
-                    {item?.jtFeedDTO?.description}{' '}
-                  </Text>
-                </View>
-              );
-            }}
+            renderItem={({item, index}) => <SaveFeedComp post={item} />}
           />
         </View>
       </View>

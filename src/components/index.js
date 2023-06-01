@@ -27,6 +27,7 @@ import {InputField1} from './inputfield';
 import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
+import {SaveFeedComp} from './savefeedcomp';
 import {
   NearBy,
   NearByMainTab,
@@ -72,4 +73,5 @@ export {
   RadioButton,
   PageHeader,
   TempleInput,
+  SaveFeedComp,
 };
