@@ -18,7 +18,7 @@ const UserFeedScreen = ({navigation}) => {
   const [id, setId] = useState();
   const USERINFO = async () => {
     let info = await getUserInfo();
-    console.log('info', info?.data);
+    // console.log('info', info?.data);
     if (info) {
       setId(info?.data?.id);
     }
@@ -44,7 +44,7 @@ const UserFeedScreen = ({navigation}) => {
     try {
       setloader(true);
       let response = await getHomeFeedList(0, 200, id);
-      console.log('log data', response?.data);
+      // console.log('log data', response?.data);
 
       // console.log('log res', response);
       if (response && response.status === 200) {

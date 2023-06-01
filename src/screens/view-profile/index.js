@@ -68,7 +68,7 @@ const templeData = {
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {id, title, profileImg, data} = route.params || {};
-  console.log('=============================>', id);
+  console.log('=============================>', profileImg);
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -90,10 +90,10 @@ const ViewProfile = ({route, navigation}) => {
     let Info = await getUserInfo();
     // console.log('infodata', Info?.data);
     let ROLES = await Info?.data?.roles?.customerItems;
-    console.log('roles111', ROLES);
+    // console.log('roles111', ROLES);
     let ID = ROLES.find(itemId => itemId.id === id);
     //4330 example id //
-    console.log('iiiiiiiiidddddddddddddddddd', ID);
+    // console.log('iiiiiiiiidddddddddddddddddd', ID);
     if (ID) {
       setRoleId(ID.roles[0]?.roleName);
     } else {
@@ -451,12 +451,7 @@ const ViewProfile = ({route, navigation}) => {
                 </View>
                 {itemDetails.length === 0 ? (
                   <View style={{alignItems: 'center', marginTop: '15%'}}>
-                    <Text
-                      style={{
-                        fontSize: 16,
-                        fontWeight: '700',
-                        textTransform: 'capitalize',
-                      }}>
+                    <Text style={styles.noposttext}>
                       no posts for this temple
                     </Text>
                   </View>
@@ -481,14 +476,6 @@ const ViewProfile = ({route, navigation}) => {
                               width: 160,
                             }}
                           />
-                          {/* <Text
-                          style={{
-                            alignSelf: 'center',
-                            fontSize: 18,
-                            marginTop: 2,
-                          }}>
-                          {item?.description ? item?.description : 'Kovela'}{' '}
-                        </Text> */}
                         </View>
                       )}
                     />

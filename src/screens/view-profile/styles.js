@@ -9,6 +9,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  profileView: {
+    width: 80,
+    height: 80,
+    borderColor: '#FFA001',
+    borderWidth: 2,
+    borderRadius: 40,
+  },
+  noposttext: {
+    fontSize: 16,
+    fontWeight: '700',
+    textTransform: 'capitalize',
+  },
   backgroundImage: {
     flex: 1,
     backgroundPosition: 'center',
