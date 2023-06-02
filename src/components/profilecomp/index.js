@@ -88,6 +88,7 @@ export const ProfileThiredTab = ({
   isFollow,
   roleId,
   onPress,
+  onPlusPress,
 }) => {
   return (
     <View style={styles.footerAction}>
@@ -118,14 +119,7 @@ export const ProfileThiredTab = ({
         <Text style={styles.voidButton.text}>Directions</Text>
       </Pressable>
       {roleId === 'ROLE_ITEM_ADMIN' && (
-        <TouchableOpacity
-          onPress={
-            () => onPress
-            // navigation.navigate(allTexts?.screenNames.createfeed, {
-            //   id: id,
-            //   title: title,
-            // })
-          }>
+        <TouchableOpacity onPress={onPlusPress}>
           <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
         </TouchableOpacity>
       )}

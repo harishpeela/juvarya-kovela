@@ -47,17 +47,17 @@ export const SaveFeedComp = ({
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post.jtFeedDTO?.mediaList[0].url}}
+            source={{uri: post.jtFeedDTO?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />
         </View>
       );
-    } else if (post?.jtFeedDTO?.mediaList[0].url) {
+    } else if (post?.jtFeedDTO?.mediaList[0]?.url) {
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post?.jtFeedDTO?.mediaList[0].url}}
+            source={{uri: post?.jtFeedDTO?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />

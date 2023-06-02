@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ToastAndroid,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import {BackgroundImage} from '../../components';
 import {styles} from './styles';
@@ -216,7 +217,7 @@ const ViewProfile = ({route, navigation}) => {
             followTemples={followTemples}
             followVisible={followVisible}
             isFollow={isFollow}
-            onPress={() =>
+            onPlusPress={() =>
               navigation.navigate(allTexts?.screenNames.createfeed, {
                 id: id,
                 title: title,
@@ -241,10 +242,10 @@ const ViewProfile = ({route, navigation}) => {
                   </Text>
                 </View>
               ) : (
-                <View style={{height: '75%'}}>
+                <ScrollView style={{height: '45%'}}>
                   <FlatList
                     numColumns={2}
-                    showsHorizontalScrollIndicator={false}
+                    // showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     data={itemDetails}
                     keyExtractor={({item, index}) => index}
@@ -264,7 +265,7 @@ const ViewProfile = ({route, navigation}) => {
                       </View>
                     )}
                   />
-                </View>
+                </ScrollView>
               )}
             </View>
           )}
