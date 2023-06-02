@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {StatusBar} from 'react-native';
-import {LogBox} from 'react-native';
-import {allTexts} from './src/common';
+import React, { useEffect, useState } from 'react';
+import { StatusBar } from 'react-native';
+import { LogBox } from 'react-native';
+import { allTexts } from './src/common';
 import {
   Splash,
   SignUp,
@@ -34,16 +34,16 @@ import {
   Feed,
   Posts,
 } from './src/screens';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
   saveUserDetails,
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getFavoritesList, getUserInfo} from './src/utils/api';
+import { getFavoritesList, getUserInfo } from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -142,13 +142,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name={profile}
           component={Profile}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name={mySavedPosts}
           component={MySavedPosts}
@@ -348,12 +348,12 @@ const App = () => {
             firstName,
             lastName,
             emailAddress,
-            roles: {customerRoles},
+            roles: { customerRoles },
           },
         } = response;
         let userRole = customerRoles[0];
         const {
-          role: {roleName},
+          role: { roleName },
         } = userRole;
         saveUserDetails({
           username: `${firstName} ${lastName}`,
@@ -376,7 +376,7 @@ const App = () => {
       let response = await getFavoritesList(0, 100);
       if (response && response.status === 200) {
         const {
-          data: {followingObjects},
+          data: { followingObjects },
         } = response;
         setFavoriteList(followingObjects);
       }

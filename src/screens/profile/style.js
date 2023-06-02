@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     padding: 10,
+    backgroundColor: 'white',
   },
   profileContainer: {
     marginTop: 20,

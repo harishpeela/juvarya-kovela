@@ -27,6 +27,7 @@ import {InputField1} from './inputfield';
 import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
+import {SaveFeedComp} from './savefeedcomp';
 import {
   NearBy,
   NearByMainTab,
@@ -36,6 +37,12 @@ import {
 } from './NearBy';
 import {BackgroundImage} from './backgroundImage';
 import {UserFeedCompList} from './category-card';
+import {
+  ProfileFirstTab,
+  ProfileSeconTab,
+  ProfileThiredTab,
+  ProfileFourthTab,
+} from './profilecomp';
 export {
   Loader,
   SearchBar,
@@ -72,4 +79,9 @@ export {
   RadioButton,
   PageHeader,
   TempleInput,
+  SaveFeedComp,
+  ProfileFirstTab,
+  ProfileSeconTab,
+  ProfileThiredTab,
+  ProfileFourthTab,
 };
