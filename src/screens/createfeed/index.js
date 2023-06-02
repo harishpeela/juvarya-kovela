@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
 import {
@@ -24,38 +25,47 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {createFeed} from '../../utils/api';
 const CreateFeed = ({route, navigation}) => {
   const {id, title} = route.params || {};
+  console.log('id', id);
   const [image, setImage] = useState(null);
   const [imageUpload, setimageUploaded] = useState(false);
   const [titleName, setTitleName] = useState('');
   const [description, setDescription] = useState('');
   const [city, setCity] = useState('');
-
-  const Feed = () => {
+  const Valid = () => {
     if (image === null) {
-      alert('img was empty');
+      alert('please upload a image');
+    } else if (titleName === '') {
+      alert('name must be entered');
+    } else if (description === '') {
+      alert('description mast be entered');
+    } else if (city === '') {
+      alert('city must be entered');
     } else {
-      let img = getImageObj(image);
-      let formdata = new FormData();
-      formdata.append('itemId', id);
-      formdata.append('description', description);
-      formdata.append('city', city);
-      formdata.append('files', img);
-      console.log('img', img);
-      createFeed(formdata).then(res => {
-        // console.log('responce', res);
-        if (res.data.description) {
-          navigation.navigate(allTexts.screenNames.userFeedScreen);
-        } else {
-          Alert.alert('error', `${'You dont have an access to create feed'}`, [
-            {
-              text: 'ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.userFeedScreen),
-            },
-          ]);
-        }
-      });
+      Feed();
     }
+  };
+  const Feed = () => {
+    let img = getImageObj(image);
+    let formdata = new FormData();
+    formdata.append('itemId', id);
+    formdata.append('description', description);
+    formdata.append('city', city);
+    formdata.append('files', img);
+    console.log('img', img);
+    createFeed(formdata).then(res => {
+      console.log('responce', res);
+      if (res) {
+        navigation.navigate(allTexts.screenNames.home);
+      } else {
+        Alert.alert('error', `${'You dont have an access to create feed'}`, [
+          {
+            text: 'ok',
+            onPress: () =>
+              navigation.navigate(allTexts.screenNames.home),
+          },
+        ]);
+      }
+    });
   };
   const uploadPhoto = () => {
     try {
@@ -156,7 +166,7 @@ const CreateFeed = ({route, navigation}) => {
           <PrimaryButton
             text={'submit'}
             bgColor={colors.orangeColor}
-            onPress={() => Feed()}
+            onPress={() => Valid()}
           />
         </View>
       </View>
