@@ -209,6 +209,7 @@ export const styles = StyleSheet.create({
   },
   username: {
     fontWeight: 'bold',
+    color: 'black',
   },
   sponsorNameText: {
     fontWeight: '500',
@@ -219,7 +220,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     marginTop: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   image: {
     width: '100%',

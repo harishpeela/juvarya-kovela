@@ -37,6 +37,12 @@ import {
 } from './NearBy';
 import {BackgroundImage} from './backgroundImage';
 import {UserFeedCompList} from './category-card';
+import {
+  ProfileFirstTab,
+  ProfileSeconTab,
+  ProfileThiredTab,
+  ProfileFourthTab,
+} from './profilecomp';
 export {
   Loader,
   SearchBar,
@@ -74,4 +80,8 @@ export {
   PageHeader,
   TempleInput,
   SaveFeedComp,
+  ProfileFirstTab,
+  ProfileSeconTab,
+  ProfileThiredTab,
+  ProfileFourthTab,
 };
