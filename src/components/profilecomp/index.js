@@ -126,7 +126,7 @@ export const ProfileThiredTab = ({
     </View>
   );
 };
-const PrimaryButton1 = ({
+export const PrimaryButton1 = ({
   bgColor,
   textColor,
   radius,
@@ -165,13 +165,13 @@ export const ProfileFourthTab = ({
         onPress={() => setCurrentIndex(1)}>
         <Feather
           name="grid"
-          color={currentIndex == 1 ? '#FFA001' : '#585858'}
+          color={currentIndex === 1 ? '#FFA001' : '#585858'}
           size={24}
         />
         <Text
           style={{
             ...styles.controlPanel.item.text,
-            color: currentIndex == 1 ? '#FFA001' : '#585858',
+            color: currentIndex === 1 ? '#FFA001' : '#585858',
           }}>
           Posts
         </Text>
@@ -183,13 +183,13 @@ export const ProfileFourthTab = ({
           onPress={() => setCurrentIndex(2)}>
           <MaterialCommunityIcons
             name="movie-open-outline"
-            color={currentIndex == 2 ? '#FFA001' : '#585858'}
+            color={currentIndex === 2 ? '#FFA001' : '#585858'}
             size={24}
           />
           <Text
             style={{
               ...styles.controlPanel.item.text,
-              color: currentIndex == 2 ? '#FFA001' : '#585858',
+              color: currentIndex === 2 ? '#FFA001' : '#585858',
             }}>
             Reels
           </Text>
@@ -201,13 +201,13 @@ export const ProfileFourthTab = ({
           onPress={() => setCurrentIndex(3)}>
           <Entypo
             name="shop"
-            color={currentIndex == 3 ? '#FFA001' : '#585858'}
+            color={currentIndex === 3 ? '#FFA001' : '#585858'}
             size={24}
           />
           <Text
             style={{
               ...styles.controlPanel.item.selectedText,
-              color: currentIndex == 3 ? '#FFA001' : '#585858',
+              color: currentIndex === 3 ? '#FFA001' : '#585858',
             }}>
             Services
           </Text>
@@ -219,13 +219,13 @@ export const ProfileFourthTab = ({
           onPress={() => setCurrentIndex(4)}>
           <FontAwesome
             name="calendar-plus-o"
-            color={currentIndex == 4 ? '#FFA001' : '#585858'}
+            color={currentIndex === 4 ? '#FFA001' : '#585858'}
             size={24}
           />
           <Text
             style={{
               ...styles.controlPanel.item.text,
-              color: currentIndex == 4 ? '#FFA001' : '#585858',
+              color: currentIndex === 4 ? '#FFA001' : '#585858',
             }}>
             Events
           </Text>
@@ -238,13 +238,13 @@ export const ProfileFourthTab = ({
           onPress={() => setCurrentIndex(5)}>
           <FontAwesome5
             name="hand-holding-heart"
-            color={currentIndex == 5 ? '#FFA001' : '#585858'}
+            color={currentIndex === 5 ? '#FFA001' : '#585858'}
             size={24}
           />
           <Text
             style={{
               ...styles.controlPanel.item.text,
-              color: currentIndex == 5 ? '#FFA001' : '#585858',
+              color: currentIndex === 5 ? '#FFA001' : '#585858',
             }}>
             Donate
           </Text>

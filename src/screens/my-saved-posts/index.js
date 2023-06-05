@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {BackgroundImage} from '../../components';
 import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
