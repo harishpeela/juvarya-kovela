@@ -31,6 +31,7 @@ import Splash_Screen from './splash_screen';
 import CreateFeed from './createfeed';
 import Feed from './feed';
 import Posts from './posts';
+import FollowersMembership from './profileFollowers';
 export {
   CreatePost,
   Seemore,
@@ -65,4 +66,5 @@ export {
   CreateFeed,
   Feed,
   Posts,
+  FollowersMembership,
 };

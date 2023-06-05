@@ -133,6 +133,7 @@ export const allTexts = {
     profile: 'Profile',
     mySavedPosts: 'My Saved Posts',
     posts: 'Posts',
+    followersmembership: 'FollowersMembership',
   },
   homeHeader: {
     welcome: 'Welcome ',

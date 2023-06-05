@@ -42,7 +42,18 @@ import {
   ProfileSeconTab,
   ProfileThiredTab,
   ProfileFourthTab,
+  PrimaryButton1,
 } from './profilecomp';
+import {
+  ProfileComp,
+  CommunityComp,
+  FollowersComp,
+  PostsComp,
+  ContactTabcomp,
+  CreateFeedTabComp,
+  DirectionsTabComp,
+  FolloUnfollowComp,
+} from './profilecompnew';
 export {
   Loader,
   SearchBar,
@@ -84,4 +95,13 @@ export {
   ProfileSeconTab,
   ProfileThiredTab,
   ProfileFourthTab,
+  ProfileComp,
+  CommunityComp,
+  FollowersComp,
+  PostsComp,
+  PrimaryButton1,
+  ContactTabcomp,
+  CreateFeedTabComp,
+  DirectionsTabComp,
+  FolloUnfollowComp,
 };

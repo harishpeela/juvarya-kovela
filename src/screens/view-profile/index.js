@@ -21,11 +21,16 @@ import {
   getUserInfo,
   getTempleList,
 } from '../../utils/api';
+import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
-  ProfileFirstTab,
-  ProfileSeconTab,
-  ProfileThiredTab,
-  ProfileFourthTab,
+  ProfileComp,
+  CommunityComp,
+  FollowersComp,
+  PostsComp,
+  ContactTabcomp,
+  CreateFeedTabComp,
+  FolloUnfollowComp,
+  DirectionsTabComp,
 } from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
@@ -42,10 +47,10 @@ const ViewProfile = ({route, navigation}) => {
   const [itemDetails, setItemDetails] = useState([]);
   const [loading, setLoading] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
-  const [role, setRole] = useState('');
   const [followCount, setFollowCount] = useState();
   const [templeDetails, setTempleDetails] = useState('');
   const [roleId, setRoleId] = useState('');
+  const [posts, setPosts] = useState(false);
   const [details, setDetails] = useState({
     discription: '',
   });
@@ -157,10 +162,12 @@ const ViewProfile = ({route, navigation}) => {
   const getTempleCommunities = async () => {
     try {
       let response = await getItemCommunities(id, 0, 100);
+      console.log('res', response);
       const {
         status,
         data: {itemCommunities},
       } = response || {};
+      console.log('community', itemCommunities);
       if (response && status === 200) {
         setItemCommunity(itemCommunities);
         setLoading(false);
@@ -182,6 +189,7 @@ const ViewProfile = ({route, navigation}) => {
       // console.log('templedetaile are ==>', templeId);
     }
   };
+
   useEffect(() => {
     getData();
     getFeedLIsts(id, 0, 100);
@@ -191,7 +199,7 @@ const ViewProfile = ({route, navigation}) => {
     getTemple();
   }, [route]);
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <ScrollView style={styles.maincontainer}>
       <View style={styles.footerBackground}>
         <BackgroundImage />
         <View style={styles.footerContainer}>
@@ -204,27 +212,49 @@ const ViewProfile = ({route, navigation}) => {
               Profile
             </Text>
           </View>
-
-          <ProfileFirstTab
-            profileImg={profileImg}
-            itemDetails={itemDetails}
-            itemCommunity={itemCommunity}
-            followCount={followCount}
-          />
+          <View style={styles.firstTabView}>
+            <ProfileComp profileImg={profileImg} />
+            <PostsComp
+              itemDetails={itemDetails}
+              onPress={() => setPosts(!posts)}
+            />
+            <FollowersComp
+              followCount={followCount}
+              onPressFollowers={() =>
+                navigation.navigate(allTexts.screenNames.followersmembership, {
+                  id: id,
+                })
+              }
+            />
+            <CommunityComp
+              itemCommunity={itemCommunity}
+              onPressmembership={() =>
+                navigation.navigate(allTexts.screenNames.followersmembership, {
+                  id: id,
+                })
+              }
+            />
+          </View>
           <ProfileSeconTab nameData={nameData} title={title} />
-          <ProfileThiredTab
-            followBtnDisable={followBtnDisable}
-            followTemples={followTemples}
-            followVisible={followVisible}
-            isFollow={isFollow}
-            onPlusPress={() =>
-              navigation.navigate(allTexts?.screenNames.createfeed, {
-                id: id,
-                title: title,
-              })
-            }
-            roleId={roleId}
-          />
+          <View style={styles.followtab}>
+            <FolloUnfollowComp
+              followBtnDisable={followBtnDisable}
+              followTemples={followTemples}
+              followVisible={followVisible}
+              isFollow={isFollow}
+            />
+            <ContactTabcomp />
+            <DirectionsTabComp />
+            <CreateFeedTabComp
+              roleId={roleId}
+              onPlusPress={() =>
+                navigation.navigate(allTexts?.screenNames.createfeed, {
+                  id: id,
+                  title: title,
+                })
+              }
+            />
+          </View>
           <ProfileFourthTab
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
@@ -242,11 +272,13 @@ const ViewProfile = ({route, navigation}) => {
                   </Text>
                 </View>
               ) : (
-                <ScrollView style={{height: '45%'}}>
+                <ScrollView
+                  showsVerticalScrollIndicator={false}
+                  style={{height: '45%'}}>
                   <FlatList
-                    numColumns={2}
-                    // showsHorizontalScrollIndicator={false}
+                    numColumns={3}
                     showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                     data={itemDetails}
                     keyExtractor={({item, index}) => index}
                     renderItem={({item, index}) => (
@@ -258,8 +290,8 @@ const ViewProfile = ({route, navigation}) => {
                               : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
                           }}
                           style={{
-                            height: 160,
-                            width: 160,
+                            height: 110,
+                            width: 110,
                           }}
                         />
                       </View>
@@ -282,7 +314,7 @@ const ViewProfile = ({route, navigation}) => {
           )}
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default ViewProfile;
