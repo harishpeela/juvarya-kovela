@@ -11,11 +11,15 @@ import {
   loginUser,
   VerifyOTP,
   RegistesrUser,
+  loginUser1,
+  NewRegistesrUser,
+  getUserInfoNew,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
+  getAuthTokenDetails,
 } from '../../utils/preferences/localStorage';
 
 const OTPScreen = ({navigation, route}) => {
@@ -61,68 +65,86 @@ const OTPScreen = ({navigation, route}) => {
   };
 
   let otpInput = useRef(null);
+  // console.log('outinpity', otpInput?.current?.state?.otpText);
   const {
-    params: {otp, email, password, data},
+    params: {otp, email, password, data, username},
   } = route || {};
+  // console.log('parms', data, username);
   const setText = () => {
     otpInput?.current?.setValue(otp);
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
 
+  const ApiData = async () => {
+    let Token = await getAuthTokenDetails();
+    console.log('token ====================> ', Token);
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('result of apidata otpscreen', result);
+        if (result) {
+          saveUserDetails({
+            // username: `${result?.firstName}${result?.lastName}`,
+            username: result?.username,
+            password: result?.password,
+            email: result?.email,
+            id: result?.id,
+          });
+          console.log(
+            'saveuserdetails',
+            result?.firstName,
+            result?.lastName,
+            result?.email,
+            result?.id,
+          );
+          setUserDetails({
+            // username: `${result?.firstName}${result?.lastName}`,
+            username: result?.username,
+            email: result?.email,
+            role: result.roles,
+            id: result?.id,
+          });
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
+
   const getAndSaveUserInfo = async () => {
     try {
-      let response = await getUserInfo();
-      if (response && response.status === 200) {
-        const {
-          data: {
-            firstName,
-            lastName,
-            emailAddress,
-            roles: {customerRoles},
-          },
-        } = response;
-        console.log(
-          'userdetaiks',
-          firstName,
-          lastName,
-          emailAddress,
-          customerRoles,
-        );
-        let userRole = customerRoles[0];
-        const {
-          role: {roleName},
-        } = userRole;
-        saveUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-        console.log('saveuserdetails', saveUserDetails);
-
-        setUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-      }
+      let response = await getUserInfoNew();
+      console.log('response ============>', response?.data);
     } catch (error) {
       alert(error.message);
     }
   };
   const signinHandler = async () => {
     let payload = {
-      username: email,
+      username: data?.userName,
       password: password,
     };
     try {
-      let result = await loginUser(payload);
+      let result = await loginUser1(payload);
+      console.log('payload', payload);
+      // console.log('result of loginuser', result?.data);
+      // console.log('result.status', result?.status);
       if (result && result.status === 200) {
         const {
-          data: {access_token, refresh_token, token_type, expires_in},
+          data: {accessToken, refreshToken, tokenType, email},
         } = result;
-        await saveLoginSessionDetails(token_type, access_token);
-        getAndSaveUserInfo();
-        setLoginDetails(access_token);
+        // console.log('accesstoken', tokenType, accessToken);
+        await saveLoginSessionDetails(tokenType, accessToken);
+        await ApiData();
+        // getAndSaveUserInfo();
+        setLoginDetails(accessToken);
         setLoading(false);
       }
     } catch (error) {
@@ -130,55 +152,36 @@ const OTPScreen = ({navigation, route}) => {
       setLoading(false);
     }
   };
-  const verifyUserOtp = async () => {
-    const otpPayload = {
-      otpType: 'SIGNUP',
-      channel: 'MOBILE',
-      emailAddress: email,
-    };
-    try {
-      setLoading(true);
-      let response = await VerifyOTP(otpPayload);
-      if (response.status === 200) {
-        //verified otp
-        signinHandler();
-      } else {
-        setLoading(false);
-        alert('otp not matched');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     startTime(getDeadTime());
     setText();
+    // getAndSaveUserInfo();
   }, []);
 
   const UserRegisterHandler = async () => {
     let registerPayload = {
-      lastName: data.lastName, // Hint: temoprary it is static
       firstName: data.firstName,
-      emailAddress: data.email.toLowerCase(),
-      password: data.confirmPassword,
+      lastName: data.lastName,
       primaryContact: data.phone,
-      registered: true,
+      username: data?.userName,
+      email: email.toLowerCase(),
+      password: data?.password,
       otp: otp,
     };
+    console.log('regi pay', registerPayload);
     try {
-      let result = await RegistesrUser(registerPayload);
-      // console.log('register user result', result?.data);
-      const {
-        data: {emailAddress, otp, statusCode},
-      } = result || {};
-      // console.log(emailAddress, otp, statusCode);
-      if (result && result?.data?.otp != undefined) {
+      let result = await NewRegistesrUser(registerPayload);
+      console.log('register user result', result);
+      // console.log('register user data', result?.status);
+      if (result.status === 200) {
+        // console.log('mesage', result?.data?.message);
         signinHandler();
-      } else if (statusCode == 403) {
-        alert(result?.data?.message);
+      } else {
+        console.log(result?.data?.message);
       }
     } catch (error) {
+      console.log('5');
+      console.log('errerer', error);
       alert(error);
     }
   };

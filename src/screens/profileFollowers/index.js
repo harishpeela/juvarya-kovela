@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import {BackgroundImage} from '../../components';
-import {BackHeader} from '../../components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles} from './styles';
 import {colors} from '../../common';

@@ -8,10 +8,16 @@ import {LoginValidationSchema} from '../../common/schemas';
 import {styles} from './styles.js';
 import {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
-import {getUserInfo, loginUser} from '../../utils/api';
+import {
+  getUserInfo,
+  getUserInfoNew,
+  loginUser,
+  loginUser1,
+} from '../../utils/api';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
+  getAuthTokenDetails,
 } from '../../utils/preferences/localStorage';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -29,39 +35,47 @@ const Signin = ({navigation}) => {
 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
 
+  const ApiData = async () => {
+    let Token = await getAuthTokenDetails();
+    console.log('token============>', Token);
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('result of currentcustomer', result);
+        console.log('role', result?.roles);
+        if (result) {
+          saveUserDetails({
+            username: result?.username,
+            email: result.email,
+            role: result?.roles,
+          });
+          setUserDetails({
+            username: result?.username,
+            email: result.email,
+            role: result?.roles,
+          });
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
+
   const getAndSaveUserInfo = async () => {
     try {
-      let response = await getUserInfo();
-      // console.log('login res', response?.data?.roles?.customerItems[0].roles);
-      if (response && response.status === 200) {
-        const {
-          data: {
-            firstName,
-            lastName,
-            emailAddress,
-            roles: {customerRoles},
-          },
-        } = response;
-        let userRole = customerRoles[0];
-        const {
-          role: {roleName},
-        } = userRole;
-        saveUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-        setUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-      }
+      let response = await getUserInfoNew();
+      console.log('login res in signin', response?.data);
     } catch (error) {
       alert(error.message);
     }
   };
-
   const signinHandler = async (data, actions) => {
     let payload = {
       username: data.email,
@@ -69,15 +83,18 @@ const Signin = ({navigation}) => {
     };
     console.log('payload load of signin', payload);
     try {
-      let result = await loginUser(payload);
-      // console.log('signinhand login res', result);
+      let result = await loginUser1(payload);
+      console.log('signinhand login res', result?.data);
       if (result && result.status === 200) {
         const {
-          data: {access_token, refresh_token, token_type, expires_in},
+          data: {accessToken, refreshtoken, tokenType, username},
         } = result;
-        await saveLoginSessionDetails(token_type, access_token);
-        getAndSaveUserInfo();
-        setLoginDetails(access_token);
+        await saveLoginSessionDetails(tokenType, accessToken);
+        // getAndSaveUserInfo();
+        ApiData();
+        console.log('accesstoken', tokenType, accessToken);
+        console.log('username', username);
+        setLoginDetails(accessToken);
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
@@ -110,8 +127,9 @@ const Signin = ({navigation}) => {
           onSubmit={(values, formikActions) => {
             const {email, password} = values;
             signinHandler(values, formikActions);
+            // newlogin(values, formikActions);
           }}
-          validationSchema={LoginValidationSchema}
+          // validationSchema={LoginValidationSchema}
           initialValues={{
             email: '',
             password: '',
@@ -130,7 +148,7 @@ const Signin = ({navigation}) => {
                 <InputField
                   title={email}
                   placeholder={emailPlace}
-                  error={touched.email && errors.email}
+                  // error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
                   autoCapitalize="none"
