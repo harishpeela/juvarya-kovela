@@ -20,6 +20,7 @@ export const allTexts = {
     kovela: 'kovela',
     Addpoojari: 'Add Poojari',
     inputTitles: {
+      username: 'userName',
       fName: 'First name',
       phoneNo: 'phone number',
       lastName: 'last name',
@@ -67,6 +68,7 @@ export const allTexts = {
     poojarimailid: 'place holder email id',
     templeSearc: 'Temple search',
     poojariname: 'Poojari Name',
+    username: 'user Name',
   },
   paragraphs: {
     alreadyAccount: 'Already have an account?',

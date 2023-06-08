@@ -8,7 +8,8 @@ import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader} from '../../components';
-import {UpdateUserPassword} from '../../utils/api';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+import {UpdateUserPassword, NewUpdateUserPassword} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const UpdatePassword = ({navigation}) => {
@@ -22,28 +23,67 @@ const UpdatePassword = ({navigation}) => {
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
 
+  const PasswordUpdate = async (values, formikActions) => {
+    let token = await getAuthTokenDetails();
+    var myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', token);
+
+    var raw = JSON.stringify({
+      username: userDetails?.username,
+      password: values.password,
+    });
+    console.log('raw', raw);
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.255.59.150:9092/api/customer/password', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        formikActions.setSubmitting(false);
+        if (result) {
+          ToastAndroid.show(
+            'Successfully Updated your Password!',
+            ToastAndroid.SHORT,
+          );
+          navigation.goBack();
+        } else {
+          ToastAndroid.show(
+            'Error in Updating your Password!',
+            ToastAndroid.SHORT,
+          );
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
+
   const updatePasswordHandler = async (values, formikActions) => {
     let payload = {
-      userName: userDetails.email,
+      userName: userDetails.username,
       password: values.password,
-      confirmPassword: values.confirmPassword,
-      updatePassword: true,
+      // confirmPassword: values.confirmPassword,
+      // updatePassword: true,
     };
     try {
-      let result = await UpdateUserPassword(payload);
-      formikActions.setSubmitting(false);
-      if (result && result.status === 200) {
-        ToastAndroid.show(
-          'Successfully Updated your Password!',
-          ToastAndroid.SHORT,
-        );
-        navigation.goBack();
-      } else {
-        ToastAndroid.show(
-          'Error in Updating your Password!',
-          ToastAndroid.SHORT,
-        );
-      }
+      let result = await NewUpdateUserPassword(payload);
+      console.log('res', result);
+      // formikActions.setSubmitting(false);
+      // if (result && result.status === 200) {
+      //   ToastAndroid.show(
+      //     'Successfully Updated your Password!',
+      //     ToastAndroid.SHORT,
+      //   );
+      //   navigation.goBack();
+      // } else {
+      //   ToastAndroid.show(
+      //     'Error in Updating your Password!',
+      //     ToastAndroid.SHORT,
+      //   );
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +105,7 @@ const UpdatePassword = ({navigation}) => {
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            updatePasswordHandler(values, formikActions);
+            PasswordUpdate(values, formikActions);
           }}
           validationSchema={UpdatePasswordValidation}
           initialValues={{

@@ -7,6 +7,7 @@ export const RegisterValidationSchema = Yup.object({
     .max(25, 'Maximum 25 Charachers Allow')
     .required('First Name is required'),
   lastName: Yup.string().trim().required('Last Name  is required'),
+  userName: Yup.string().trim().required('user Name  is required'),
   phone: Yup.string().trim().required('phone number is required'),
   email: Yup.string()
     .email('Invalid Email Address')

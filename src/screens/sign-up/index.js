@@ -7,7 +7,12 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
-import {getUserInfo, RegistesrUser, VerifyOTP} from '../../utils/api';
+import {
+  getUserInfo,
+  RegistesrUser,
+  VerifyOTP,
+  NewVerifyOTP,
+} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 
 export const KovelaIcon = () => (
@@ -34,12 +39,17 @@ const Signup = ({navigation}) => {
     },
     headings: {
       kovela,
-      inputTitles: {fName, phoneNo, lastName, email, password, confirmPassword},
+      inputTitles: {
+        fName,
+        phoneNo,
+        lastName,
+        email,
+        password,
+        confirmPassword,
+        username,
+      },
     },
   } = allTexts;
-
-  const [showPassword, setShowPassword] = useState('');
-  const [cnfrPasswordp, setConfirmPassword] = useState('');
 
   const UserRegisterHandler = async (data, action) => {
     const otpPayload = {
@@ -47,23 +57,26 @@ const Signup = ({navigation}) => {
       channel: 'MOBILE',
       emailAddress: data.email.toLowerCase(),
     };
+    console.log(otpPayload, 'otp');
     try {
-      let response = await VerifyOTP(otpPayload);
+      let response = await NewVerifyOTP(otpPayload);
       // console.log('register user result', response?.data);
       const {
-        data: {emailAddress, otp, statusCode},
+        data: {emailAddress, otp},
       } = response || {};
-      // console.log('data', emailAddress, otp, statusCode);
-      // console.log(emailAddress, statusCode);
+      // console.log('data', emailAddress, otp, response?.status);
+      console.log('999999999999999999999', emailAddress);
       if (response && emailAddress) {
         let otpPayload = {
           otp,
           data,
           email: emailAddress,
           password: data?.confirmPassword,
+          username: data?.userName,
         };
         navigation.navigate(otpScreen, otpPayload);
-      } else if (statusCode == 403) {
+      } else if (response?.status == 403) {
+        console.log('2');
         alert(response?.data?.message);
       }
       action.setSubmitting(false);
@@ -82,6 +95,7 @@ const Signup = ({navigation}) => {
         <Formik
           onSubmit={(values, formikActions) => {
             UserRegisterHandler(values, formikActions);
+            console.log('values', values);
           }}
           validationSchema={RegisterValidationSchema}
           initialValues={{
@@ -91,6 +105,7 @@ const Signup = ({navigation}) => {
             password: '',
             confirmPassword: '',
             lastName: '',
+            userName: '',
           }}>
           {({
             errors,
@@ -116,6 +131,13 @@ const Signup = ({navigation}) => {
                   error={touched.lastName && errors.lastName}
                   onBlur={handleBlur('lastName')}
                   setState={handleChange('lastName')}
+                />
+                <InputField
+                  title={username}
+                  placeholder={'user Name'}
+                  error={touched.userName && errors.userName}
+                  onBlur={handleBlur('userName')}
+                  setState={handleChange('userName')}
                 />
                 <InputField
                   title={phoneNo}

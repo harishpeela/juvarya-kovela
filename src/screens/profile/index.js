@@ -1,14 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  View,
-  Text,
-  SafeAreaView,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity, Image} from 'react-native';
 import {BackgroundImage} from '../../components';
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
@@ -27,6 +20,24 @@ const Profile = ({navigation}) => {
     constants: {role},
   } = allTexts;
   console.log('details', userDetails);
+  const [roleType, setRoleType] = useState();
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var value = 'ROLE_AGENT' || 'ROLE_ADMIN' || 'ROLE_USER';
+    let val = ROLES?.find(str => str === value);
+    console.log('val', val);
+    if (val === 'ROLE_AGENT') {
+      setRoleType(val);
+    } else if (val === 'ROLE_ADMIN') {
+      setRoleType(val);
+    } else if (val === 'ROLE_USER') {
+      setRoleType(val);
+    }
+  };
+  useEffect(() => {
+    Type();
+  }, []);
+  console.log('roletype', roleType);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
@@ -48,8 +59,7 @@ const Profile = ({navigation}) => {
       <View style={styles.profileItemsContainer}>
         {/* <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} /> */}
-        {(userDetails?.role == role.admin ||
-          userDetails?.role == role.agent) && (
+        {(roleType === role.admin || roleType === role.agent) && (
           <Item
             svg={<AccountIcon4 />}
             text={temple}
@@ -73,8 +83,7 @@ const Profile = ({navigation}) => {
             navigation.navigate(allTexts.screenNames.mySavedPosts);
           }}
         />
-        {(userDetails?.role == role.admin ||
-          userDetails?.role == role.agent) && (
+        {(roleType === role.admin || roleType === role.agent) && (
           <Item1
             svg={require('../../../assets/images/priest.webp')}
             text={'Poojari'}

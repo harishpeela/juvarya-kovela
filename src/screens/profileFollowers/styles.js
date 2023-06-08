@@ -1,11 +1,10 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../common';
 export const styles = StyleSheet.create({
   tabView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderBottomWidth: 1,
-    borderBottomColor: 'lightgray'
+    borderBottomColor: 'lightgray',
   },
   tabtext: {
     textTransform: 'capitalize',

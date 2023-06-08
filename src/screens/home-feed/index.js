@@ -1,15 +1,22 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, ScrollView, TouchableOpacity, RefreshControl} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {getHomeFeedList, getFavoritesList, getUserInfo} from '../../utils/api';
+import {
+  getHomeFeedList,
+  getFavoritesList,
+  getUserInfo,
+  getUserInfoNew,
+} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
+import {Button} from '@react-native-material/core';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const UserFeedScreen = ({navigation}) => {
   const [loading, setloading] = useState(false);
   const [loader, setloader] = useState(false);
@@ -17,8 +24,8 @@ const UserFeedScreen = ({navigation}) => {
   const [refrsh, setRefrsh] = useState(false);
   const [id, setId] = useState();
   const USERINFO = async () => {
-    let info = await getUserInfo();
-    // console.log('info', info?.data);
+    let info = await getUserInfoNew();
+    // console.log('info', info);
     if (info) {
       setId(info?.data?.id);
     }
@@ -26,43 +33,63 @@ const UserFeedScreen = ({navigation}) => {
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
-      if (response && response.status === 200) {
-        // console.log('response', response);
-        const {
-          data: {followingObjects},
-        } = response;
-        setloading(false);
-        if (followingObjects.length > 0) {
-        }
-      }
+      console.log('responce of get temple list', response);
+      // if (response && response.status === 200) {
+      //   // console.log('response', response);
+      //   const {
+      //     data: {followingObjects},
+      //   } = response;
+      //   setloading(false);
+      //   if (followingObjects.length > 0) {
+      //   }
+      // }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log('id', id);
+  const createFeedAccess = () => {
+    let Token = getAuthTokenDetails();
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://20.255.59.150:9096/jtprofile/admin/verify?profileId=1&customerId=2',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => console.log('result----> api', result))
+      .catch(error => console.log('error', error));
+  };
   const getHomeResponse = async () => {
     try {
-      setloader(true);
-      let response = await getHomeFeedList(0, 200, id);
-      // console.log('log data', response?.data);
+      // setloader(true);
+      let response = await getHomeFeedList(0, 200, 25);
+      console.log('log data', response);
 
       // console.log('log res', response);
-      if (response && response.status === 200) {
-        const {
-          data: {feeds},
-        } = response || {};
-        setHomeFeedList(feeds);
-        setloader(false);
-        setRefrsh(false);
-      }
+      // if (response && response.status === 200) {
+      //   const {
+      //     data: {feeds},
+      //   } = response || {};
+      //   setHomeFeedList(feeds);
+      //   setloader(false);
+      //   setRefrsh(false);
+      // }
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
     USERINFO();
-    getHomeResponse();
-    getFollowedTempleList();
+    // getHomeResponse();
+    // getFollowedTempleList();
+    createFeedAccess();
   }, []);
   // console.log('home', homeFeedList);
   return (
@@ -89,7 +116,12 @@ const UserFeedScreen = ({navigation}) => {
             />
           </View>
         </View>
-
+        <Button
+          title="click"
+          onPress={() => {
+            createFeedAccess();
+          }}
+        />
         {/* {tab === 1 && ( */}
         <>
           {loader && (

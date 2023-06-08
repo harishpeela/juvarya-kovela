@@ -33,7 +33,7 @@ import {
   DirectionsTabComp,
 } from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-
+import {createFeedAccess} from '../../utils/newApiIntigrations';
 const ViewProfile = ({route, navigation}) => {
   const {id, title, profileImg, data} = route.params || {};
   // console.log('=============================>', profileImg);
@@ -131,9 +131,10 @@ const ViewProfile = ({route, navigation}) => {
       setFollowCount(nameData?.followersCount - 1);
     }
   };
+  let token = getAuthTokenDetails();
+
   const getFeedLIsts = async (tempId, pgfrm, pgto) => {
     var myHeaders = new Headers();
-    let token = await getAuthTokenDetails();
     myHeaders.append('Authorization', token);
 
     var requestOptions = {
@@ -189,7 +190,10 @@ const ViewProfile = ({route, navigation}) => {
       // console.log('templedetaile are ==>', templeId);
     }
   };
-
+const feedCheck = () => {
+  let res = createFeedAccess(2, 2);
+  console.log('rerer', res);
+}
   useEffect(() => {
     getData();
     getFeedLIsts(id, 0, 100);

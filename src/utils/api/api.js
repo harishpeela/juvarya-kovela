@@ -11,7 +11,8 @@ import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
 
 export const BASE_URL = 'http://20.255.59.150:8082/api/';
-
+export const BASEURL = 'http://20.255.59.150:9092/api/';
+export const BASE = 'http://20.255.59.150:9092/';
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
@@ -19,6 +20,13 @@ export const authAxiousInstance = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
+  },
+});
+
+export const authAxiousInstance1 = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    'Content-Type': 'application/json',
   },
 });
 
@@ -39,6 +47,30 @@ export const axiousInstance = axios.create({
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
   },
 });
+
+export const axiousInstanceFeed = axios.create({
+  baseURL: BASE,
+  headers: {
+    Authorization: 'Bearer Token',
+  },
+});
+
+export const axiousInstanceNew = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    Authorization: 'Bearer Token',
+  },
+});
+export const axiousInstanceNewSignIn = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    // Accept: 'application/json',
+    'Content-Type': 'application/json',
+    // 'Access-Control-Allow-Origin': '*',
+    // Authorization: 'Bearer token',
+  },
+});
+let bearer_token = getAuthTokenDetails();
 axiousInstance.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();

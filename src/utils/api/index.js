@@ -3,9 +3,19 @@ import {
   authAxiousInstance,
   axiousInstance,
   axiosMultiPartFormData,
+  authAxiousInstance1,
+  axiousInstanceNew,
+  axiousInstanceNewSignIn,
+  axiousInstanceFeed,
 } from './api';
 
 const endpoints = {
+  NEW_SIGN_IN: 'auth/signin',
+  NEW_SIGN_UP: 'auth/signup',
+  NEW_OTP: 'auth/jtuserotp/trigger',
+  NEW_GET_CURRENT_USER: 'auth/currentCustomer',
+  NEW_UPDATE_PASSWORD: 'customer/password',
+  NEW_ADMIN_VERIFY: 'jtprofile/admin/verify',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
@@ -62,6 +72,19 @@ export const loginUser = async data => {
     return error;
   }
 };
+export const loginUser1 = async data => {
+  try {
+    let result = await authAxiousInstance1.post(
+      `${endpoints.NEW_SIGN_IN}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    Alert.alert('Error', 'Invalid credentials!');
+    return error;
+  }
+};
 export const getPopularTemples = async pgNo => {
   try {
     let result = await axiousInstance.get(
@@ -74,6 +97,17 @@ export const getPopularTemples = async pgNo => {
   }
 };
 
+export const verifyAdminProfile = async (profileId, custId) => {
+  try {
+    let result = await axiousInstanceFeed.get(
+      `${endpoints.NEW_ADMIN_VERIFY}?profileId${profileId}&customerId=${custId}`,
+      // {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
 export const getAddTempId = async email => {
   try {
     let result = await axiousInstance.get(`${endpoints.ADD_TEMP_ID}/${email}`);
@@ -96,6 +130,17 @@ export const getTempleDetails = async id => {
 export const RegistesrUser = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SIGN_UP}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewRegistesrUser = async data => {
+  try {
+    let result = await axiousInstanceNewSignIn.post(
+      `${endpoints.NEW_SIGN_UP}`,
+      data,
+    );
     return result;
   } catch (error) {
     return error;
@@ -161,10 +206,29 @@ export const VerifyOTP = async data => {
     return error;
   }
 };
+export const NewVerifyOTP = async data => {
+  try {
+    let result = await axiousInstanceNew.post(`${endpoints.NEW_OTP}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
 export const UpdateUserPassword = async data => {
   try {
     let result = await axiousInstance.post(
       `${endpoints.UPDATE_PASSWORD}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewUpdateUserPassword = async data => {
+  try {
+    let result = await axiousInstanceNew.post(
+      `${endpoints.NEW_UPDATE_PASSWORD}`,
       data,
     );
     return result;
@@ -281,7 +345,16 @@ export const getUserInfo = async () => {
     return error;
   }
 };
-
+export const getUserInfoNew = async () => {
+  try {
+    let result = await axiousInstanceNew.get(
+      `${endpoints.NEW_GET_CURRENT_USER}`,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
 export const createNewInvoice = async data => {
   try {
     let result = await axiousInstance.post(endpoints.Create_Invoice, data);

@@ -44,7 +44,7 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getFavoritesList, getUserInfo} from './src/utils/api';
+import {getFavoritesList, getUserInfo, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -344,42 +344,51 @@ const App = () => {
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
+    console.log('auth token', authDetails);
     setLoginDetails(authDetails);
   };
 
   const getAndSaveUserInfo = async () => {
     try {
-      let response = await getUserInfo();
-      // console.log('userInfoo', response);
-      if (response && response.status === 200) {
-        const {
-          data: {
-            firstName,
-            lastName,
-            emailAddress,
-            roles: {customerRoles},
-          },
-        } = response;
-        let userRole = customerRoles[0];
-        const {
-          role: {roleName},
-        } = userRole;
-        saveUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-        setUserDetails({
-          username: `${firstName} ${lastName}`,
-          email: emailAddress,
-          role: roleName,
-        });
-      }
+      let response = await getUserInfoNew();
+      console.log('userInfoo', response?.data);
     } catch (error) {
       console.log('Error 786' + error.message);
     }
   };
 
+  const ApiData = async () => {
+    let Token = await getAuthTokenDetails();
+    // console.log('token ====================> ', Token);
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('res curent customer in app.js', result);
+        saveUserDetails({
+          // username: `${result?.firstName}${result?.lastName}`,
+          username: result?.username,
+          password: result?.password,
+          email: result?.email,
+        });
+        setUserDetails({
+          // username: `${result?.firstName}${result?.lastName}`,
+          username: result?.username,
+          email: result?.email,
+          role: result.roles,
+          id: result?.id,
+        });
+      })
+      .catch(error => console.log('error', error));
+  };
   const getFollowedTempleList = async () => {
     try {
       let response = await getFavoritesList(0, 100);
@@ -397,11 +406,12 @@ const App = () => {
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       getAndSaveUserInfo();
-      getFollowedTempleList();
+      ApiData();
+      // getFollowedTempleList();
     }
     console.log('user', userDetails);
   }, [loginDetails]);
-  console.log('userDe', userDetails);
+  console.log('setLoginDetails', loginDetails);
 
   return (
     <ApplicationContext.Provider
