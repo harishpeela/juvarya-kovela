@@ -23,9 +23,10 @@ import {UploadPhoto} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {createFeed} from '../../utils/api';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const CreateFeed = ({route, navigation}) => {
-  const {id, title} = route.params || {};
-  console.log('id', id);
+  const {data} = route.params || {};
+  // console.log('id', data);
   const [image, setImage] = useState(null);
   const [imageUpload, setimageUploaded] = useState(false);
   const [titleName, setTitleName] = useState('');
@@ -41,31 +42,41 @@ const CreateFeed = ({route, navigation}) => {
     } else if (city === '') {
       alert('city must be entered');
     } else {
-      Feed();
+      NewFeed();
     }
   };
-  const Feed = () => {
+  const NewFeed = async () => {
+    let Token = await getAuthTokenDetails();
+    var myHeaders = new Headers();
     let img = getImageObj(image);
-    let formdata = new FormData();
-    formdata.append('itemId', id);
-    formdata.append('description', description);
-    formdata.append('city', city);
+    myHeaders.append('Authorization', Token);
+
+    var formdata = new FormData();
+    formdata.append('description', 'kovela');
+    formdata.append('feedType', 'profile ');
+    formdata.append('jtProfile', data?.id);
     formdata.append('files', img);
-    console.log('img', img);
-    createFeed(formdata).then(res => {
-      console.log('responce', res);
-      if (res) {
-        navigation.navigate(allTexts.screenNames.home);
-      } else {
-        Alert.alert('error', `${'You dont have an access to create feed'}`, [
-          {
-            text: 'ok',
-            onPress: () =>
-              navigation.navigate(allTexts.screenNames.home),
-          },
-        ]);
-      }
-    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+    console.log('formdata', formdata);
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9094/jtfeed/create',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result?.message === 'Feed created') {
+          navigation.navigate(allTexts.screenNames.userFeedScreen);
+        } else {
+          alert('somet thing went wrong');
+        }
+      })
+      .catch(error => console.log('error', error));
   };
   const uploadPhoto = () => {
     try {

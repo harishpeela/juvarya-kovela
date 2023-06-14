@@ -87,7 +87,10 @@ const OTPScreen = ({navigation, route}) => {
       redirect: 'follow',
     };
 
-    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
+      requestOptions,
+    )
       .then(response => response.json())
       .then(result => {
         console.log('result of apidata otpscreen', result);

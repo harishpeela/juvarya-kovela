@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {BackgroundImage} from '../../components';
 import {styles} from './styles';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {allTexts} from '../../common';
 import {
@@ -21,6 +21,7 @@ import {
   getUserInfo,
   getTempleList,
 } from '../../utils/api';
+import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
   ProfileComp,
@@ -35,8 +36,14 @@ import {
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {createFeedAccess} from '../../utils/newApiIntigrations';
 const ViewProfile = ({route, navigation}) => {
-  const {id, title, profileImg, data} = route.params || {};
-  // console.log('=============================>', profileImg);
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
+  console.log(
+    '=============================>',
+    data,
+    'userdetails',
+    userDetails,
+  );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -49,56 +56,61 @@ const ViewProfile = ({route, navigation}) => {
   const [itemCommunity, setItemCommunity] = useState([]);
   const [followCount, setFollowCount] = useState();
   const [templeDetails, setTempleDetails] = useState('');
-  const [roleId, setRoleId] = useState('');
+  const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
+  const [customerId, setCustomerId] = useState(userDetails?.id);
   const [details, setDetails] = useState({
     discription: '',
   });
-  const Role_Id = async () => {
-    let Info = await getUserInfo();
-    // console.log('infodata', Info?.data);
-    let ROLES = await Info?.data?.roles?.customerItems;
-    // console.log('roles111', ROLES);
-    let ID = ROLES.find(itemId => itemId.id === id);
-    //4330 example id //
-    // console.log('iiiiiiiiidddddddddddddddddd', ID);
-    if (ID) {
-      setRoleId(ID.roles[0]?.roleName);
-    } else {
-      console.log('u r not admin to create a post');
-    }
-    // setRole(ROLES);
+  const ROLE = () => {
+    let USERROLE = userDetails?.role;
+    console.log('role', USERROLE);
   };
-  const getData = async () => {
-    console.log('idid', id);
-    // console.log('1');
-    try {
-      setFollowVisible(true);
-      let result = await getTempleDetails(id);
-      let feedList = await getFeedList(0, 20, id);
-      if (result && result.status === 200 && feedList.status === 200) {
-        setloader(false);
-        setFollowVisible(false);
-        const {
-          data: {discription},
-        } = result || {};
-        setFeedListData(feedList?.data);
-        setNameData(result?.data);
-        setisFollow(result?.data?.following);
-        setFollowCount(result?.data?.followersCount);
-        setDetails({
-          discription: discription,
-          image: profileImg,
-          id: id,
-        });
-      } else {
-        setFollowVisible(false);
-      }
-    } catch (error) {
-      setFollowVisible(false);
-      console.log(error.message);
-    }
-  };
+  // const Role_Id = async () => {
+  //   let Info = await getUserInfo();
+  //   // console.log('infodata', Info?.data);
+  //   let ROLES = await Info?.data?.roles?.customerItems;
+  //   // console.log('roles111', ROLES);
+  //   let ID = ROLES.find(itemId => itemId.id === id);
+  //   //4330 example id //
+  //   // console.log('iiiiiiiiidddddddddddddddddd', ID);
+  //   if (ID) {
+  //     setRoleId(ID.roles[0]?.roleName);
+  //   } else {
+  //     console.log('u r not admin to create a post');
+  //   }
+  //   // setRole(ROLES);
+  // };
+  // const getData = async () => {
+  //   console.log('idid', id);
+  //   // console.log('1');
+  //   try {
+  //     setFollowVisible(true);
+  //     let result = await getTempleDetails(id);
+  //     let feedList = await getFeedList(0, 20, id);
+  //     if (result && result.status === 200 && feedList.status === 200) {
+  //       setloader(false);
+  //       setFollowVisible(false);
+  //       const {
+  //         data: {discription},
+  //       } = result || {};
+  //       setFeedListData(feedList?.data);
+  //       setNameData(result?.data);
+  //       setisFollow(result?.data?.following);
+  //       setFollowCount(result?.data?.followersCount);
+  //       setDetails({
+  //         discription: discription,
+  //         image: profileImg,
+  //         id: id,
+  //       });
+  //     } else {
+  //       setFollowVisible(false);
+  //     }
+  //   } catch (error) {
+  //     setFollowVisible(false);
+  //     console.log(error.message);
+  //   }
+  // };
   const followTemples = async () => {
     const payload = {
       itemId: id,
@@ -160,25 +172,25 @@ const ViewProfile = ({route, navigation}) => {
       .catch(error => console.log('error', error));
   };
 
-  const getTempleCommunities = async () => {
-    try {
-      let response = await getItemCommunities(id, 0, 100);
-      console.log('res', response);
-      const {
-        status,
-        data: {itemCommunities},
-      } = response || {};
-      console.log('community', itemCommunities);
-      if (response && status === 200) {
-        setItemCommunity(itemCommunities);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getTempleCommunities = async () => {
+  //   try {
+  //     let response = await getItemCommunities(id, 0, 100);
+  //     console.log('res', response);
+  //     const {
+  //       status,
+  //       data: {itemCommunities},
+  //     } = response || {};
+  //     console.log('community', itemCommunities);
+  //     if (response && status === 200) {
+  //       setItemCommunity(itemCommunities);
+  //       setLoading(false);
+  //     } else {
+  //       setLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const getTemple = async () => {
     let result = await getTempleList(0, 400);
     // console.log('-------------->', result?.data?.items);
@@ -190,17 +202,60 @@ const ViewProfile = ({route, navigation}) => {
       // console.log('templedetaile are ==>', templeId);
     }
   };
-const feedCheck = () => {
-  let res = createFeedAccess(2, 2);
-  console.log('rerer', res);
-}
+  let Token = getAuthTokenDetails();
+  const createFeedAccess = () => {
+    var myHeaders = new Headers();
+    myHeaders.append('Authorization', Token);
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://20.255.59.150:9096/jtprofile/admin/verify?profileId=1&customerId=2',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => console.log('result----> api', result))
+      .catch(error => console.log('error', error));
+  };
+  const TempleRoleSearchWithId = () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XG4gIFwiaWRcIiA6IDM4LFxuICBcInVzZXJuYW1lXCIgOiBcInZhbXNpa05NMTIzNFwiLFxuICBcImVtYWlsXCIgOiBcInZhbXNpa05NMTIzNEBqdXZhcnlhLmNvbVwiLFxuICBcInBhc3N3b3JkXCIgOiBudWxsLFxuICBcImZpcnN0TmFtZVwiIDogXCJWYW1zaVwiLFxuICBcImxhc3ROYW1lXCIgOiBcIkNIXCIsXG4gIFwicm9sZXNcIiA6IFsgXCJST0xFX1VTRVJcIiwgXCJST0xFX0FETUlOXCIgXVxufSIsInJvbGVzIjpbIlJPTEVfVVNFUiIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjg2MzA4NTM2LCJleHAiOjE2ODYzOTQ5MzZ9.gEQKUEvv4qoEhuo6-7p0zwSNAKbrl3LMlgeGpp6P4dfqi5AaoQkS7aW8bIQhaP0ggauevugWWJU6GvruHMpCfQ',
+    );
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=22',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          setRoleId(result?.roles[0]);
+        }
+      })
+      .catch(error => console.log('error', error));
+  };
+  console.log('roleid', roleId);
   useEffect(() => {
-    getData();
-    getFeedLIsts(id, 0, 100);
-    getTempleCommunities();
+    // getData();
+    // getFeedLIsts(id, 0, 100);
+    // getTempleCommunities();
     nameData;
-    Role_Id();
-    getTemple();
+    // Role_Id();
+    // getTemple();
+    ROLE();
+    TempleRoleSearchWithId();
   }, [route]);
   return (
     <ScrollView style={styles.maincontainer}>
@@ -217,7 +272,7 @@ const feedCheck = () => {
             </Text>
           </View>
           <View style={styles.firstTabView}>
-            <ProfileComp profileImg={profileImg} />
+            <ProfileComp profileImg={data?.mediaList?.url} />
             <PostsComp
               itemDetails={itemDetails}
               onPress={() => setPosts(!posts)}
@@ -226,20 +281,20 @@ const feedCheck = () => {
               followCount={followCount}
               onPressFollowers={() =>
                 navigation.navigate(allTexts.screenNames.followersmembership, {
-                  id: id,
+                  id: data?.id,
                 })
               }
             />
             <CommunityComp
               itemCommunity={itemCommunity}
-              onPressmembership={() =>
-                navigation.navigate(allTexts.screenNames.followersmembership, {
-                  id: id,
-                })
-              }
+              // onPressmembership={() =>
+              //   navigation.navigate(allTexts.screenNames.followersmembership, {
+              //     id: id,
+              //   })
+              // }
             />
           </View>
-          <ProfileSeconTab nameData={nameData} title={title} />
+          <ProfileSeconTab nameData={data} title={data?.description} />
           <View style={styles.followtab}>
             <FolloUnfollowComp
               followBtnDisable={followBtnDisable}
@@ -253,18 +308,17 @@ const feedCheck = () => {
               roleId={roleId}
               onPlusPress={() =>
                 navigation.navigate(allTexts?.screenNames.createfeed, {
-                  id: id,
-                  title: title,
+                  data: data,
                 })
               }
             />
           </View>
-          <ProfileFourthTab
+          {/* <ProfileFourthTab
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
             templeDetails={templeDetails}
-          />
-          {currentIndex === 1 && (
+          /> */}
+          {/* {currentIndex === 1 && (
             <View style={styles.contentDisplay}>
               <View style={styles.contentDisplay.row}>
                 <Text style={{fontSize: 20}}>Posts</Text>
@@ -304,8 +358,8 @@ const feedCheck = () => {
                 </ScrollView>
               )}
             </View>
-          )}
-          {currentIndex === 3 && (
+          )} */}
+          {/* {currentIndex === 3 && (
             <>
               <View
                 style={{
@@ -315,7 +369,7 @@ const feedCheck = () => {
                 <Text style={{fontSize: 16}}> page under development</Text>
               </View>
             </>
-          )}
+          )} */}
         </View>
       </View>
     </ScrollView>

@@ -10,16 +10,19 @@ import Snackbar from 'react-native-snackbar';
 import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
 
-export const BASE_URL = 'http://20.255.59.150:8082/api/';
-export const BASEURL = 'http://20.255.59.150:9092/api/';
-export const BASE = 'http://20.255.59.150:9092/';
+export const BASE_URL =
+  'http://fanfundev.eastasia.cloudapp.azure.com:8082/api/';
+export const BASEURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/';
+export const BASE = 'http://fanfundev.eastasia.cloudapp.azure.com:9094';
+let bearer_token = getAuthTokenDetails();
+
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-    Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
+    Authorization: 'Basic' + base64.encode('skillrat-client:skillrat@2021'),
   },
 });
 
@@ -48,29 +51,30 @@ export const axiousInstance = axios.create({
   },
 });
 
-export const axiousInstanceFeed = axios.create({
+export const axiosMultiPartFormData1 = axios.create({
   baseURL: BASE,
   headers: {
-    Authorization: 'Bearer Token',
+    Authorization: bearer_token,
   },
 });
-
+axiosMultiPartFormData1.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
 export const axiousInstanceNew = axios.create({
   baseURL: BASEURL,
   headers: {
-    Authorization: 'Bearer Token',
+    Authorization: bearer_token,
   },
 });
 export const axiousInstanceNewSignIn = axios.create({
   baseURL: BASEURL,
   headers: {
-    // Accept: 'application/json',
     'Content-Type': 'application/json',
-    // 'Access-Control-Allow-Origin': '*',
-    // Authorization: 'Bearer token',
   },
 });
-let bearer_token = getAuthTokenDetails();
 axiousInstance.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();

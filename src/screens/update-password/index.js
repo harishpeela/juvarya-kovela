@@ -9,13 +9,12 @@ import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-import {UpdateUserPassword, NewUpdateUserPassword} from '../../utils/api';
+import {NewUpdateUserPassword} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const UpdatePassword = ({navigation}) => {
   const {
     buttonTexts: {updatePassword},
-    screenNames: {signin, otpScreen},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
       inputTitles: {password, confirmPassword},
@@ -41,7 +40,10 @@ const UpdatePassword = ({navigation}) => {
       redirect: 'follow',
     };
 
-    fetch('http://20.255.59.150:9092/api/customer/password', requestOptions)
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/customer/password',
+      requestOptions,
+    )
       .then(response => response.json())
       .then(result => {
         formikActions.setSubmitting(false);
@@ -59,34 +61,6 @@ const UpdatePassword = ({navigation}) => {
         }
       })
       .catch(error => console.log('error', error));
-  };
-
-  const updatePasswordHandler = async (values, formikActions) => {
-    let payload = {
-      userName: userDetails.username,
-      password: values.password,
-      // confirmPassword: values.confirmPassword,
-      // updatePassword: true,
-    };
-    try {
-      let result = await NewUpdateUserPassword(payload);
-      console.log('res', result);
-      // formikActions.setSubmitting(false);
-      // if (result && result.status === 200) {
-      //   ToastAndroid.show(
-      //     'Successfully Updated your Password!',
-      //     ToastAndroid.SHORT,
-      //   );
-      //   navigation.goBack();
-      // } else {
-      //   ToastAndroid.show(
-      //     'Error in Updating your Password!',
-      //     ToastAndroid.SHORT,
-      //   );
-      // }
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

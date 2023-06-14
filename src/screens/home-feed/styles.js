@@ -140,6 +140,17 @@ const styles = StyleSheet.create({
     marginTop: 1,
     fontSize: 10,
   },
+  nodataView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '30%',
+  },
+  nodatatext: {
+    fontSize: 24,
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+  }
 });
 
 export default styles;

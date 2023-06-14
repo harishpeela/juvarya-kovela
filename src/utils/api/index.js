@@ -7,6 +7,7 @@ import {
   axiousInstanceNew,
   axiousInstanceNewSignIn,
   axiousInstanceFeed,
+  axiosMultiPartFormData1,
 } from './api';
 
 const endpoints = {
@@ -16,6 +17,7 @@ const endpoints = {
   NEW_GET_CURRENT_USER: 'auth/currentCustomer',
   NEW_UPDATE_PASSWORD: 'customer/password',
   NEW_ADMIN_VERIFY: 'jtprofile/admin/verify',
+  NEW_FEED_INFO: '/jtfeed/feedsOfProfile',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
@@ -100,8 +102,19 @@ export const getPopularTemples = async pgNo => {
 export const verifyAdminProfile = async (profileId, custId) => {
   try {
     let result = await axiousInstanceFeed.get(
-      `${endpoints.NEW_ADMIN_VERIFY}?profileId${profileId}&customerId=${custId}`,
-      // {retry: 5, retryDelay: 3000},
+      `${endpoints.NEW_ADMIN_VERIFY}?profileId=${profileId}&customerId=${custId}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    console.log('result of verify admin profile', result);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewFeedHome = async (id, pgfrm, pgto) => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.NEW_FEED_INFO}?id=${id}&pageNo=${pgfrm}&pageSize=${pgto}`,
     );
     return result;
   } catch (error) {
