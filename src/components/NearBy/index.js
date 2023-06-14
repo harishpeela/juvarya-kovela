@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {styles} from './styles';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import IconHeart from 'react-native-vector-icons/FontAwesome';
@@ -23,27 +24,36 @@ export const NearBy = ({data, myData}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
 
-  const getTemples = async () => {
-    try {
-      let response = await getPopularTemples(0);
-      const {
-        status,
-        data: {items},
-      } = response || {};
-      if (response && status === 200) {
-        setTempleList(items);
-        setfilteredArray(items);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  const PopularTemples = () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      'Authorization',
+      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XG4gIFwiaWRcIiA6IDEsXG4gIFwidXNlcm5hbWVcIiA6IFwidmFtc2lhZG1pbjEyNFwiLFxuICBcImVtYWlsXCIgOiBcInZhbXNpYWRtaW4xMjRAanV2YXJ5YS5jb21cIixcbiAgXCJwYXNzd29yZFwiIDogbnVsbCxcbiAgXCJmaXJzdE5hbWVcIiA6IG51bGwsXG4gIFwibGFzdE5hbWVcIiA6IG51bGwsXG4gIFwicm9sZXNcIiA6IFsgXCJST0xFX0FETUlOXCIgXSxcbiAgXCJwcm9maWxlVG9DdXN0b21lcklkXCIgOiBudWxsXG59Iiwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE2ODY3MTY3NzAsImV4cCI6MTY4NjgwMzE3MH0.zVbOOqHEiWvqExBkAS_EBq_Ru5tj1k_H7a7Lpkyd9wgF0ZNpcJ12f1yfTrhoN9bDTWgXWabLgr_IhhnlJTVChA',
+    );
+
+    var requestOptions = {
+      method: 'GET',
+      headers: myHeaders,
+      redirect: 'follow',
+    };
+
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/popular?page=0&pageSize=20',
+      requestOptions,
+    )
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          setLoading(false);
+          setfilteredArray(result?.data);
+          console.log('jhasxjbasx', result?.data);
+        }
+      })
+      .catch(error => console.log('error', error));
   };
 
   useEffect(() => {
-    getTemples();
+    PopularTemples();
   }, []);
 
   return (
@@ -56,7 +66,7 @@ export const NearBy = ({data, myData}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.upComingTextTab}>
-        <Text style={styles.popularTextContainer}>Popular Temples</Text>
+        <Text style={styles.popularTextContainer}>Popular Temple</Text>
         <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
       </View>
       <View>
@@ -83,13 +93,14 @@ export const NearBy = ({data, myData}) => {
                     keyExtractor={({item, index}) => item?.id}
                     renderItem={({item, index}) => (
                       <TempleListCard
-                        img={{
-                          uri: item?.profilePicture?.url,
-                        }}
+                        // img={{
+                        //   uri: item?.profilePicture?.url,
+                        // }}
                         post={item}
                         name={item.name}
-                        location={item.line1}
+                        // location={item.line1}
                         date={item.creationTime}
+                        data={Data1}
                       />
                     )}
                   />
@@ -103,9 +114,9 @@ export const NearBy = ({data, myData}) => {
   );
 };
 
-const TempleListCard = ({name, location, onPress, img, post}) => {
+const TempleListCard = ({name, location, onPress, img, post, data}) => {
   const renderImage = post => {
-    if (post?.profilePicture?.url) {
+    if (post?.profilePicture) {
       return (
         <View style={{}}>
           <Image
@@ -123,14 +134,35 @@ const TempleListCard = ({name, location, onPress, img, post}) => {
       );
     }
   };
+  const [isLiked, setIsLiked] = useState(false);
+
   return (
-    <View>
-      <View style={{marginLeft: 20}}>
-        {renderImage(post)}
-        <Text style={styles.textCard} numberOfLines={1}>
-          {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
-        </Text>
-      </View>
+    <View style={{marginLeft: 20}}>
+      {/* {renderImage(post)} */}
+      <ImageBackground
+        source={require('../../../assets/images/tempimg1.jpg')}
+        style={{height: 200, width: 200, borderRadius: 60}}
+        imageStyle={{borderRadius: 20}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: '80%',
+          }}>
+          <Text style={styles.textCard} numberOfLines={1}>
+            {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
+          </Text>
+          <TouchableOpacity onPress={() => setIsLiked(!isLiked)}>
+            <Icon
+              name={isLiked ? 'heart' : 'heart-o'}
+              size={20}
+              color={isLiked ? colors.red1 : 'black'}
+              style={{marginRight: 20}}
+            />
+          </TouchableOpacity>
+        </View>
+      </ImageBackground>
     </View>
   );
 };
@@ -233,7 +265,7 @@ export const UpComingEvents = ({}) => {
       let day = new Date(currentDate).getDay();
       let date = `${year}-${month}-${day}`;
 
-      let response = await upcomingOccasions(0, 1000);
+      // let response = await upcomingOccasions(0, 1000);
       // console.log('occgvdfnv', response?.data);
       // console.log('occasions', response?.data?.occasion[9].mediaList);
       const {
@@ -258,7 +290,7 @@ export const UpComingEvents = ({}) => {
   // console.log('events', eventsArray);
 
   useEffect(() => {
-    UpcomingEvents();
+    // UpcomingEvents();
   }, []);
 
   return (
@@ -329,16 +361,19 @@ export const UpComingEvents = ({}) => {
 
 const EventListCard = ({data}) => {
   return (
-    <View style={{width: 100}}>
+    <View>
       <FlatList
         data={data}
-        //horizontal
+        // horizontal
         showsHorizontalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
         keyExtractor={({item, index}) => item?.key}
         renderItem={({item, index}) => (
           <View>
-            <Image source={{uri: item?.url}} style={styles.eventImage} />
+            <Image source={item?.image1} style={styles.eventImage} />
+            <Image source={item?.image2} style={styles.eventImage} />
+            {/* <Image source={item?.image3} style={styles.eventImage} />
+            <Image source={item?.image4} style={styles.eventImage} /> */}
           </View>
         )}
       />
@@ -438,30 +473,3 @@ export const NearByServices = ({servicesData, onPress}) => {
     </View>
   );
 };
-
-// export const data = [
-//   {
-//     key: 1,
-//     name: 'Kovela',
-//     day: 'Today',
-//     image: require('../../../assets/images/islamabad.jpg'),
-//   },
-//   {
-//     key: 2,
-//     name: 'Kovela',
-//     day: 'Today',
-//     image: require('../../../assets/images/islamabad.jpg'),
-//   },
-//   {
-//     key: 2,
-//     name: 'Kovela',
-//     day: 'Today',
-//     image: require('../../../assets/images/islamabad.jpg'),
-//   },
-//   {
-//     key: 2,
-//     name: 'Kovela',
-//     day: 'Today',
-//     image: require('../../../assets/images/islamabad.jpg'),
-//   },
-// ]

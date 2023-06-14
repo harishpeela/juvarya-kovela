@@ -112,10 +112,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textCard: {
-    top: '-20%',
     color: 'white',
     fontWeight: 'bold',
-    marginLeft: 10,
+    marginLeft: 15,
+    fontSize: 20,
   },
   popularTextContainer: {
     fontSize: 24,
@@ -126,5 +126,6 @@ export const styles = StyleSheet.create({
     height: 44,
     width: 44,
     borderRadius: 8,
+    margin: 5,
   }
 });

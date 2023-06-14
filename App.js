@@ -351,7 +351,7 @@ const App = () => {
   const getAndSaveUserInfo = async () => {
     try {
       let response = await getUserInfoNew();
-      console.log('userInfoo', response?.data);
+      // console.log('userInfoo', response);
     } catch (error) {
       console.log('Error 786' + error.message);
     }
@@ -369,18 +369,20 @@ const App = () => {
       redirect: 'follow',
     };
 
-    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
+      requestOptions,
+    )
       .then(response => response.json())
       .then(result => {
         console.log('res curent customer in app.js', result);
         saveUserDetails({
-          // username: `${result?.firstName}${result?.lastName}`,
           username: result?.username,
           password: result?.password,
           email: result?.email,
+          id: result?.id,
         });
         setUserDetails({
-          // username: `${result?.firstName}${result?.lastName}`,
           username: result?.username,
           email: result?.email,
           role: result.roles,

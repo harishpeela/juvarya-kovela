@@ -143,8 +143,8 @@ export const UserFeedCompList = ({
   onDotsPress,
   saveid,
 }) => {
-  const [isLiked, setIsLiked] = useState(isLikeTrue);
-  const [likeCount, setLikeCount] = useState(likes);
+  const [isLiked, setIsLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(0);
   const [saveFeed, setSaveFeed] = useState(false);
   const likeUnLikeHandler = async () => {
     if (isLiked) {
@@ -154,37 +154,37 @@ export const UserFeedCompList = ({
     }
     setIsLiked(!isLiked);
 
-    const payloadLike = {
-      feedId: id,
-      like: !isLiked,
-    };
-    try {
-      console.log('payloadLike', payloadLike);
-      let result = await likeOrUnlikeFeed(payloadLike);
-      if (result && result.status === 200 && result.data.statusCode === 200) {
-        return;
-      }
-      // console.log(result);
-    } catch (error) {
-      console.log(error);
-    }
+    // const payloadLike = {
+    //   feedId: id,
+    //   like: !isLiked,
+    // };
+    // try {
+    //   console.log('payloadLike', payloadLike);
+    //   let result = await likeOrUnlikeFeed(payloadLike);
+    //   if (result && result.status === 200 && result.data.statusCode === 200) {
+    //     return;
+    //   }
+    //   // console.log(result);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
-  const renderImage = post => {
+  const renderImage = () => {
     if (!post?.mediaList === '') {
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post.image}}
+            source={{uri: post?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />
         </View>
       );
-    } else if (post?.itemDetails?.profilePicture) {
+    } else if (post?.mediaList) {
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post?.itemDetails?.profilePicture}}
+            source={{uri: post?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />
@@ -218,21 +218,21 @@ export const UserFeedCompList = ({
     console.log('result', result?.data);
   };
   return (
-    <View style={styles.postContainer} key={post?.itemDetails?.id}>
+    <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
         <TouchableOpacity onPress={onPressTitle}>
           <Image
-            source={{uri: post?.itemDetails?.profilePicture}}
+            source={{uri: post?.mediaList?.url}}
             style={styles.profileImage}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressTitle}>
-          <Text style={styles.username}>{post?.itemDetails?.name}</Text>
+          <Text style={styles.username}>{post?.description}</Text>
           <Text style={styles.sponsorNameText}>Sponsored</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
+        {/* <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       {renderImage(post)}
       <View style={styles.postFooter}>
@@ -250,7 +250,7 @@ export const UserFeedCompList = ({
           <TouchableOpacity
             onPress={() => {
               setSaveFeed(!saveFeed);
-              FeedStatus();
+              // FeedStatus();
             }}
             style={styles.icon}>
             <Icon

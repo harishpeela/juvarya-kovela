@@ -47,7 +47,10 @@ const Signin = ({navigation}) => {
       redirect: 'follow',
     };
 
-    fetch('http://20.255.59.150:9092/api/auth/currentCustomer', requestOptions)
+    fetch(
+      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
+      requestOptions,
+    )
       .then(response => response.json())
       .then(result => {
         console.log('result of currentcustomer', result);
@@ -57,6 +60,7 @@ const Signin = ({navigation}) => {
             username: result?.username,
             email: result.email,
             role: result?.roles,
+            id: result?.id,
           });
           setUserDetails({
             username: result?.username,
@@ -83,11 +87,12 @@ const Signin = ({navigation}) => {
     };
     console.log('payload load of signin', payload);
     try {
+      console.log('343');
       let result = await loginUser1(payload);
       console.log('signinhand login res', result?.data);
       if (result && result.status === 200) {
         const {
-          data: {accessToken, refreshtoken, tokenType, username},
+          data: {accessToken, tokenType, username},
         } = result;
         await saveLoginSessionDetails(tokenType, accessToken);
         // getAndSaveUserInfo();
@@ -127,7 +132,6 @@ const Signin = ({navigation}) => {
           onSubmit={(values, formikActions) => {
             const {email, password} = values;
             signinHandler(values, formikActions);
-            // newlogin(values, formikActions);
           }}
           // validationSchema={LoginValidationSchema}
           initialValues={{

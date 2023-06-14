@@ -71,11 +71,13 @@ export const ProfileSeconTab = ({title, nameData}) => {
       </View>
 
       <View style={styles.subFooterHead}>
-        <Text style={{color: '#FFA001', fontSize: 18}}>{'Hudekeshwar'}</Text>
+        <Text style={{color: '#FFA001', fontSize: 18}}>
+          {nameData?.feedType}
+        </Text>
       </View>
 
       <View style={styles.footerBody}>
-        <Text style={styles.desciption}>• {nameData?.desciption}</Text>
+        <Text style={styles.desciption}>• {nameData?.description}</Text>
       </View>
     </>
   );

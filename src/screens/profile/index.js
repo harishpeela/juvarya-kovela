@@ -14,7 +14,7 @@ const Profile = ({navigation}) => {
     useContext(ApplicationContext);
   const {
     headings: {
-      accountItems: {bookings, donations, temple},
+      accountItems: {temple},
     },
     tabNames: {home},
     constants: {role},
@@ -23,16 +23,26 @@ const Profile = ({navigation}) => {
   const [roleType, setRoleType] = useState();
   const Type = () => {
     let ROLES = userDetails?.role;
-    var value = 'ROLE_AGENT' || 'ROLE_ADMIN' || 'ROLE_USER';
-    let val = ROLES?.find(str => str === value);
-    console.log('val', val);
-    if (val === 'ROLE_AGENT') {
-      setRoleType(val);
-    } else if (val === 'ROLE_ADMIN') {
-      setRoleType(val);
-    } else if (val === 'ROLE_USER') {
-      setRoleType(val);
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    var roleAgent = ROLES?.indexOf('ROLE_AGENT') > -1;
+    console.log('role', roleAdmin, roleAgent);
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    } else if (roleAgent) {
+      setRoleType('ROLE_AGENT');
     }
+    // var value = ROLES;
+    // console.log('value', value);
+    // setRoleType(ROLES);
+    // let val = ROLES?.find(str => str === value);
+    // console.log('val', val);
+    // if (val === 'ROLE_AGENT') {
+    //   setRoleType(val);
+    // } else if (val === 'ROLE_ADMIN') {
+    //   setRoleType(val);
+    // } else {
+    //   setRoleType('ROLE_USER');
+    // }
   };
   useEffect(() => {
     Type();
