@@ -5,7 +5,6 @@ import {BackgroundImage, NearBy, UpComingEvents} from '../../components';
 import {styles} from './style';
 
 const Search = ({navigation}) => {
-
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />

@@ -8,6 +8,8 @@ import {
   axiousInstanceNewSignIn,
   axiousInstanceFeed,
   axiosMultiPartFormData1,
+  axiosNewData,
+  axiosNewData1,
 } from './api';
 
 const endpoints = {
@@ -18,6 +20,9 @@ const endpoints = {
   NEW_UPDATE_PASSWORD: 'customer/password',
   NEW_ADMIN_VERIFY: 'jtprofile/admin/verify',
   NEW_FEED_INFO: '/jtfeed/feedsOfProfile',
+  NEW_POPULAR_TEMPLES: 'jtprofile/popular',
+  NEW_PROFIL_PICTURE: '/picture/profile?profileId',
+  NEW_FOLLOW_UMFOLLOW: '/jtfollwer/create',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
@@ -63,17 +68,6 @@ export const getInitialToken = async () => {
     return error.response.data;
   }
 };
-export const loginUser = async data => {
-  try {
-    let result = await authAxiousInstance.post(
-      `${endpoints.LOGIN}&username=${data.username}&password=${data.password}`,
-    );
-    return result;
-  } catch (error) {
-    Alert.alert('Error', 'Invalid credentials!');
-    return error;
-  }
-};
 export const loginUser1 = async data => {
   try {
     let result = await authAxiousInstance1.post(
@@ -87,18 +81,39 @@ export const loginUser1 = async data => {
     return error;
   }
 };
-export const getPopularTemples = async pgNo => {
+export const PopularTemples = async (pgfrm, pgto) => {
   try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_POPULAR_TEMPLES}?page=${pgNo}&pageSize=20&popular=true`,
+    let result = await axiosNewData.get(
+      `${endpoints.NEW_POPULAR_TEMPLES}?page=${pgfrm}&pageSize=${pgto}`,
       {retry: 5, retryDelay: 3000},
     );
     return result;
   } catch (error) {
-    return error;
+    console.log(error);
   }
 };
 
+export const GetProfilePicture = async id => {
+  try {
+    let result = await axiosNewData1.get(
+      `${endpoints.NEW_PROFIL_PICTURE}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const FollowUnFollow = async data => {
+  try {
+    let result = await axiosNewData1.post(
+      `${endpoints.NEW_FOLLOW_UMFOLLOW}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in followunfollow', error);
+  }
+};
 export const verifyAdminProfile = async (profileId, custId) => {
   try {
     let result = await axiousInstanceFeed.get(
