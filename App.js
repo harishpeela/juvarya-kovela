@@ -391,23 +391,23 @@ const App = () => {
       })
       .catch(error => console.log('error', error));
   };
-  const getFollowedTempleList = async () => {
-    try {
-      let response = await getFavoritesList(0, 100);
-      if (response && response.status === 200) {
-        const {
-          data: {followingObjects},
-        } = response;
-        setFavoriteList(followingObjects);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getFollowedTempleList = async () => {
+  //   try {
+  //     let response = await getFavoritesList(0, 100);
+  //     if (response && response.status === 200) {
+  //       const {
+  //         data: {followingObjects},
+  //       } = response;
+  //       setFavoriteList(followingObjects);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
-      getAndSaveUserInfo();
+      // getAndSaveUserInfo();
       ApiData();
       // getFollowedTempleList();
     }
