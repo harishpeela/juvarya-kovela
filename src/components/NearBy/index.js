@@ -11,22 +11,22 @@ import {
   ToastAndroid,
 } from 'react-native';
 import {styles} from './styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import {Loader} from '../loader';
 import {colors, allTexts} from '../../common';
+import {TempleListCard} from '../TempleListCard';
 import {
   PopularTemples,
   GetProfilePicture,
   FollowUnFollow,
+  NewGetFollowUmFollowById,
 } from '../../utils/api';
-import ApplicationContext from '../../utils/context-api/Context';
 export const NearBy = () => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
+  const [isFollow, setIsFollow] = useState();
 
-  const [isLiked, setIsLiked] = useState(false);
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples(0, 20);
@@ -36,7 +36,6 @@ export const NearBy = () => {
         setLoading(false);
         dty?.map(d => {
           profilePicture(d);
-          // pop(d);
         });
       }
     } catch (error) {
@@ -46,7 +45,16 @@ export const NearBy = () => {
   const profilePicture = async d => {
     try {
       let result = await GetProfilePicture(d?.id);
-      const obj = {...result?.data, ...d};
+      // console.log('989u99', result?.data);
+      let responce = await NewGetFollowUmFollowById(d?.id);
+      // console.log('responce', responce);
+      if (responce) {
+        setIsFollow(responce?.data);
+      } else {
+        setIsFollow(undefined);
+      }
+      let Following = responce?.data;
+      const obj = {...result?.data, ...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
     } catch (error) {
       console.log('error', error);
@@ -55,7 +63,7 @@ export const NearBy = () => {
   useEffect(() => {
     PopularTemplesss();
   }, []);
-  console.log('kength ===> ', filteredArray?.length);
+  // console.log('kength ===> ', filteredArray);
   return (
     <View>
       <View style={styles.searchTab}>
@@ -97,6 +105,7 @@ export const NearBy = () => {
                         name={item.name}
                         templeId={item.id}
                         date={item.creationTime}
+                        isFollowingTrue={isFollow}
                       />
                     )}
                   />
@@ -107,90 +116,5 @@ export const NearBy = () => {
         </ScrollView>
       </View>
     </View>
-  );
-};
-
-const TempleListCard = ({
-  name,
-  location,
-  onPress,
-  img,
-  post,
-  data,
-  pageNav,
-  templeId,
-  likePress,
-}) => {
-  const {userDetails} = useContext(ApplicationContext);
-  const [isLiked, setIsLiked] = useState(false);
-  const [isFollow, setisFollow] = useState();
-
-  const followTemples = async d => {
-    console.log(d, '===========?>>');
-    const payload = {
-      jtCustomer: userDetails?.id,
-      type: 'ITEM',
-      jtProfile: d,
-      following: !isFollow,
-    };
-    console.log('fole', payload);
-    try {
-      let results = await FollowUnFollow(payload);
-      console.log('result of follow un follow =========>', results?.data);
-      if (results && results.status === 200) {
-        setisFollow(!isFollow);
-        setIsLiked(!isLiked);
-        ToastAndroid.show(
-          `Successfully you are${
-            !isFollow ? ' following' : ' unFollowing'
-          } temple!`,
-          ToastAndroid.SHORT,
-        );
-      } else {
-        if (results === undefined) {
-          ToastAndroid.show(
-            'you are not a valid user to follow this temple',
-            ToastAndroid.SHORT,
-          );
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  return (
-    <TouchableOpacity
-      style={{marginLeft: 20}}
-      onPress={() => {
-        pageNav?.navigate(allTexts.screenNames.homeDetails, {
-          id: templeId,
-          title: name,
-        });
-      }}>
-      <ImageBackground
-        source={{uri: post?.url}}
-        style={{height: 200, width: 200, borderRadius: 60}}
-        imageStyle={{borderRadius: 20}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '80%',
-          }}>
-          <Text style={styles.textCard} numberOfLines={1}>
-            {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
-          </Text>
-          <TouchableOpacity onPress={() => followTemples(templeId)}>
-            <Icon
-              name={isLiked ? 'heart' : 'heart-o'}
-              size={20}
-              color={isLiked ? colors.red1 : 'black'}
-              style={{marginRight: 20}}
-            />
-          </TouchableOpacity>
-        </View>
-      </ImageBackground>
-    </TouchableOpacity>
   );
 };

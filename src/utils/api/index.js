@@ -10,6 +10,7 @@ import {
   axiosMultiPartFormData1,
   axiosNewData,
   axiosNewData1,
+  axiosNewDataSave,
 } from './api';
 
 const endpoints = {
@@ -23,6 +24,8 @@ const endpoints = {
   NEW_POPULAR_TEMPLES: 'jtprofile/popular',
   NEW_PROFIL_PICTURE: '/picture/profile?profileId',
   NEW_FOLLOW_UMFOLLOW: '/jtfollwer/create',
+  NEW_SAVE_FEED: '/jtfeedtocustomer/save',
+  NEW_FOLLOW_UNFOLLOW_BY_ID: '/jtfollwer/profile',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
@@ -130,6 +133,27 @@ export const NewFeedHome = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.NEW_FEED_INFO}?id=${id}&pageNo=${pgfrm}&pageSize=${pgto}`,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewGetFollowUmFollowById = async feedId => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.NEW_FOLLOW_UNFOLLOW_BY_ID}/${feedId}`,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewSaveFeed = async data => {
+  try {
+    let result = await axiosNewDataSave.post(
+      `${endpoints.NEW_SAVE_FEED}`,
+      data,
     );
     return result;
   } catch (error) {
