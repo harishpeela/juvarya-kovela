@@ -1,11 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  Image,
   Text,
   View,
   TouchableOpacity,
   ToastAndroid,
-  FlatList,
   ScrollView,
 } from 'react-native';
 import {BackgroundImage} from '../../components';
@@ -13,16 +11,9 @@ import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {allTexts} from '../../common';
-import {
-  followUnfollowTemple,
-  getTempleDetails,
-  getFeedList,
-  getItemCommunities,
-  getUserInfo,
-  getTempleList,
-} from '../../utils/api';
+import {getTempleList, FollowUnFollow} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import {ProfileSeconTab, ProfileFourthTab} from '../../components';
+import {ProfileSeconTab} from '../../components';
 import {
   ProfileComp,
   CommunityComp,
@@ -34,18 +25,17 @@ import {
   DirectionsTabComp,
 } from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-import {createFeedAccess} from '../../utils/newApiIntigrations';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '=============================>',
-    data,
-    'userdetails',
-    userDetails,
-  );
+  // console.log(
+  //   '=============================>',
+  //   data,
+  //   'userdetails',
+  //   userDetails,
+  // );
   const [loader, setloader] = useState(true);
-  const [isFollow, setisFollow] = useState();
+  const [isFollow, setisFollow] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [followVisible, setFollowVisible] = useState(false);
@@ -54,72 +44,23 @@ const ViewProfile = ({route, navigation}) => {
   const [itemDetails, setItemDetails] = useState([]);
   const [loading, setLoading] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
-  const [followCount, setFollowCount] = useState();
+  const [followCount, setFollowCount] = useState(0);
   const [templeDetails, setTempleDetails] = useState('');
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
-  const [customerId, setCustomerId] = useState(userDetails?.id);
-  const [details, setDetails] = useState({
-    discription: '',
-  });
   const ROLE = () => {
     let USERROLE = userDetails?.role;
     console.log('role', USERROLE);
   };
-  // const Role_Id = async () => {
-  //   let Info = await getUserInfo();
-  //   // console.log('infodata', Info?.data);
-  //   let ROLES = await Info?.data?.roles?.customerItems;
-  //   // console.log('roles111', ROLES);
-  //   let ID = ROLES.find(itemId => itemId.id === id);
-  //   //4330 example id //
-  //   // console.log('iiiiiiiiidddddddddddddddddd', ID);
-  //   if (ID) {
-  //     setRoleId(ID.roles[0]?.roleName);
-  //   } else {
-  //     console.log('u r not admin to create a post');
-  //   }
-  //   // setRole(ROLES);
-  // };
-  // const getData = async () => {
-  //   console.log('idid', id);
-  //   // console.log('1');
-  //   try {
-  //     setFollowVisible(true);
-  //     let result = await getTempleDetails(id);
-  //     let feedList = await getFeedList(0, 20, id);
-  //     if (result && result.status === 200 && feedList.status === 200) {
-  //       setloader(false);
-  //       setFollowVisible(false);
-  //       const {
-  //         data: {discription},
-  //       } = result || {};
-  //       setFeedListData(feedList?.data);
-  //       setNameData(result?.data);
-  //       setisFollow(result?.data?.following);
-  //       setFollowCount(result?.data?.followersCount);
-  //       setDetails({
-  //         discription: discription,
-  //         image: profileImg,
-  //         id: id,
-  //       });
-  //     } else {
-  //       setFollowVisible(false);
-  //     }
-  //   } catch (error) {
-  //     setFollowVisible(false);
-  //     console.log(error.message);
-  //   }
-  // };
   const followTemples = async () => {
     const payload = {
-      itemId: id,
+      itemId: data?.id,
       itemType: 'ITEM',
       follow: !isFollow,
     };
     try {
       setFollowBtnDisable(true);
-      let results = await followUnfollowTemple(payload);
+      let results = await FollowUnFollow(payload);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -140,7 +81,7 @@ const ViewProfile = ({route, navigation}) => {
     if (!isFollow === true) {
       setFollowCount(followCount + 1);
     } else if (isFollow) {
-      setFollowCount(nameData?.followersCount - 1);
+      setFollowCount(followCount - 1);
     }
   };
   let token = getAuthTokenDetails();

@@ -60,11 +60,22 @@ export const axiosMultiPartFormData1 = axios.create({
 });
 axiosMultiPartFormData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
-  console.log('Sending req with this token', token);
+  // console.log('Sending req with this token', token);
   config.headers.Authorization = token;
   return config;
 });
-
+export const axiosNewDataSave = axios.create({
+  baseURL: BASE,
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: bearer_token,
+  },
+});
+axiosNewDataSave.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  config.headers.Authorization = token;
+  return config;
+});
 export const axiosNewData = axios.create({
   baseURL: POPULARURL,
   headers: {

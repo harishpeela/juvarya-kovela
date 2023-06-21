@@ -34,8 +34,8 @@ const UserFeedScreen = ({navigation}) => {
   const [apiPageNo, setApiPageNo] = useState(0);
   console.log('user', userDetails);
   const FeedInfo = async () => {
-    let responce = await NewFeedHome(1, 0, 20);
-    console.log('res of axios ===========>', 1, responce?.data);
+    let responce = await NewFeedHome(id, 0, 20);
+    console.log('res of axios ===========>', id, responce?.data);
     try {
       if (responce && responce?.statu === 200) {
         console.log('result', responce?.data?.data);
@@ -66,16 +66,17 @@ const UserFeedScreen = ({navigation}) => {
         if (result) {
           setloader(false);
           console.log('data....');
-          setHomeFeedList(existedFeedList => [
-            ...existedFeedList,
-            ...result?.jtFeeds,
-          ]);
+          setHomeFeedList(result?.jtFeeds);
+          // setHomeFeedList(existedFeedList => [
+          //   ...existedFeedList,
+          //   ...result?.jtFeeds,
+          // ]);
         } else {
           setloader(false);
           console.log('no data');
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('error ===>', error));
   };
 
   useEffect(() => {
@@ -139,6 +140,7 @@ const UserFeedScreen = ({navigation}) => {
               <UserFeedCompList
                 id={item?.id}
                 post={item}
+                saveid={item?.id}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,

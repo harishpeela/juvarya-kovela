@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, ToastAndroid} from 'react-native';
 import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
-import {SaveFeed} from '../../utils/api';
+import {SaveFeed, NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
@@ -80,29 +80,36 @@ export const UserFeedCompList = ({
     let status = !saveFeed;
     if (status) {
       SaveFeedApi();
+      ToastAndroid.show('Successfully saved the Post', ToastAndroid.SHORT);
     } else {
       console.log('feed not saved');
+      ToastAndroid.show('Successfully unsaved the Post', ToastAndroid.SHORT);
     }
   };
   const SaveFeedApi = async () => {
     let payload = {
       feedId: saveid,
     };
-    let result = await SaveFeed(payload);
-    console.log('result', result?.data);
+    console.log('pay', payload);
+    let result = await NewSaveFeed(payload);
+    console.log('result =====>', result?.data);
   };
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
         <TouchableOpacity onPress={onPressTitle}>
           <Image
-            source={{uri: post?.mediaList?.url}}
+            source={{
+              uri:
+                post?.mediaList?.url ||
+                'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
+            }}
             style={styles.profileImage}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressTitle}>
           <Text style={styles.username}>{post?.description}</Text>
-          <Text style={styles.sponsorNameText}>Sponsored</Text>
+          {/* <Text style={styles.sponsorNameText}>Sponsored</Text> */}
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
@@ -123,13 +130,13 @@ export const UserFeedCompList = ({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setSaveFeed(isFeed => !isFeed);
-              // FeedStatus();
+              setSaveFeed(!saveFeed);
+              FeedStatus();
             }}
             style={styles.icon}>
             <Icon
               name={saveFeed ? 'bookmark' : 'bookmark-o'}
-              // color={saveFeed ? colors.orangeColor : colors.black}
+              color={saveFeed ? colors.orangeColor : colors.black}
               size={20}
             />
           </TouchableOpacity>
