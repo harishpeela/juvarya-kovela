@@ -26,6 +26,9 @@ const endpoints = {
   NEW_FOLLOW_UMFOLLOW: '/jtfollwer/create',
   NEW_SAVE_FEED: '/jtfeedtocustomer/save',
   NEW_FOLLOW_UNFOLLOW_BY_ID: '/jtfollwer/profile',
+  NEW_LIKE_UNLIKE_HOME_FEED: '/jtfeedreview/like',
+  NEW_LIKES_COUNT: '/jtfeedreview/likes?feedId',
+  NEW_FOLLOW_COUNT: '/jtfollwer/count',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
@@ -154,6 +157,37 @@ export const NewSaveFeed = async data => {
     let result = await axiosNewDataSave.post(
       `${endpoints.NEW_SAVE_FEED}`,
       data,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewLikeOrUnlikeFeed = async data => {
+  try {
+    let result = await axiosNewDataSave.post(
+      `${endpoints.NEW_LIKE_UNLIKE_HOME_FEED}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewLikesCount = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.NEW_LIKES_COUNT}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewFollowCount = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.NEW_FOLLOW_COUNT}/${id}`,
     );
     return result;
   } catch (error) {

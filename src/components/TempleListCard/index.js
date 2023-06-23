@@ -44,6 +44,7 @@ export const TempleListCard = ({
       jtProfile: d,
       following: !isLiked,
     };
+    console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
       console.log('result of follow un follow =========>', results?.data);
@@ -72,9 +73,8 @@ export const TempleListCard = ({
     <TouchableOpacity
       style={{marginLeft: 20}}
       onPress={() => {
-        pageNav?.navigate(allTexts.screenNames.homeDetails, {
-          id: templeId,
-          title: name,
+        pageNav?.navigate(allTexts.screenNames.viewProfile, {
+          data: post,
         });
       }}>
       <ImageBackground

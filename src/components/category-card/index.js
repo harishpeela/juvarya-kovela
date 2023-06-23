@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, Image, TouchableOpacity, ToastAndroid} from 'react-native';
 import {colors} from '../../common';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
 import {SaveFeed, NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
 export const UserFeedCompList = ({
   post,
@@ -16,9 +17,10 @@ export const UserFeedCompList = ({
   onPressTitle,
   onDotsPress,
   saveid,
+  onSharePress,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState();
   const [saveFeed, setSaveFeed] = useState(false);
   const likeUnLikeHandler = async () => {
     if (isLiked) {
@@ -28,54 +30,22 @@ export const UserFeedCompList = ({
     }
     setIsLiked(!isLiked);
 
-    // const payloadLike = {
-    //   feedId: id,
-    //   like: !isLiked,
-    // };
-    // try {
-    //   console.log('payloadLike', payloadLike);
-    //   let result = await likeOrUnlikeFeed(payloadLike);
-    //   if (result && result.status === 200 && result.data.statusCode === 200) {
-    //     return;
-    //   }
-    //   // console.log(result);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const payloadLike = {
+      feedId: id,
+      like: !isLiked,
+    };
+    try {
+      console.log('payloadLike', payloadLike);
+      let result = await NewLikeOrUnlikeFeed(payloadLike);
+      if (result && result.status === 200 && result.data.statusCode === 200) {
+        return;
+      }
+      // console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   };
-  // const renderImage = () => {
-  //   if (!post?.mediaList === '') {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post?.mediaList[0]?.url}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else if (post?.mediaList) {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={{uri: post?.mediaList[0]?.url}}
-  //           style={styles.image}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   } else {
-  //     return (
-  //       <View style={styles.mediaContainer}>
-  //         <Image
-  //           source={require('../../../assets/images/noimg.png')}
-  //           style={styles.image1}
-  //           resizeMode="cover"
-  //         />
-  //       </View>
-  //     );
-  //   }
-  // };
+
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
@@ -94,6 +64,23 @@ export const UserFeedCompList = ({
     let result = await NewSaveFeed(payload);
     console.log('result =====>', result?.data);
   };
+  const likesCount = async () => {
+    try {
+      let result = await NewLikesCount(id);
+      if (result) {
+        setLikeCount(result?.data?.count);
+      } else {
+        setLikeCount(0);
+      }
+      console.log('mAHSbjh,jashxkjaSKXJB,Kjabsxkjbdsdjbjzdscjn', id);
+      console.log('res of likes count', result?.data);
+    } catch (error) {
+      console.log('error in likes count', error);
+    }
+  };
+  useEffect(() => {
+    likesCount();
+  }, []);
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -101,7 +88,7 @@ export const UserFeedCompList = ({
           <Image
             source={{
               uri:
-                post?.mediaList?.url ||
+                post[0]?.mediaList?.url ||
                 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
             }}
             style={styles.profileImage}
@@ -125,7 +112,7 @@ export const UserFeedCompList = ({
           />
         </TouchableOpacity>
         <View style={styles.postFooterLeft}>
-          <TouchableOpacity onPress={saveOnPress}>
+          <TouchableOpacity onPress={onSharePress}>
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
           <TouchableOpacity

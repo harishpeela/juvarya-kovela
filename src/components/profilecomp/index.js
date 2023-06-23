@@ -61,8 +61,7 @@ export const ProfileSeconTab = ({title, nameData}) => {
       <View style={styles.footerHead}>
         <Text>
           <Text style={styles.boldText} numberOfLines={1}>
-            {title.length < 17 ? `${title}` : `${title.substring(0, 17)}...`}{' '}
-            &nbsp;&nbsp;
+            {title?.length < 17 ? `${title}` : `${title?.substring(0, 17)}...`}
           </Text>
           <Text style={styles.ratingText}>
             <AntDesign name={'star'} color={'#FFA001'} size={20} /> {'4.8'}
@@ -72,7 +71,7 @@ export const ProfileSeconTab = ({title, nameData}) => {
 
       <View style={styles.subFooterHead}>
         <Text style={{color: '#FFA001', fontSize: 18}}>
-          {nameData?.feedType}
+          {/* {nameData?.feedType} */}
         </Text>
       </View>
 
