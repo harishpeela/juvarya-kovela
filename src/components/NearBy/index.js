@@ -14,15 +14,14 @@ import {styles} from './styles';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import {Loader} from '../loader';
-import {colors, allTexts} from '../../common';
+import {colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {
   PopularTemples,
   GetProfilePicture,
-  FollowUnFollow,
   NewGetFollowUmFollowById,
 } from '../../utils/api';
-export const NearBy = () => {
+export const NearBy = ({pageNav}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const [isFollow, setIsFollow] = useState();
@@ -63,7 +62,7 @@ export const NearBy = () => {
   useEffect(() => {
     PopularTemplesss();
   }, []);
-  // console.log('kength ===> ', filteredArray);
+  console.log('kength ===> ', filteredArray);
   return (
     <View>
       <View style={styles.searchTab}>
@@ -106,6 +105,7 @@ export const NearBy = () => {
                         templeId={item.id}
                         date={item.creationTime}
                         isFollowingTrue={isFollow}
+                        pageNav={pageNav}
                       />
                     )}
                   />

@@ -34,7 +34,7 @@ export const getClientCredentials = async () => {
 
 export const getAuthTokenDetails = async () => {
   let authToken = await getValue(PreferencesKeys.authToken);
-  console.log('autht---', authToken.value);
+  // console.log('autht---', authToken.value);
   let bearerToken = authToken.value || '';
   return bearerToken;
 };

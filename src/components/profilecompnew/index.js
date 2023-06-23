@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';
@@ -7,7 +7,28 @@ import {PrimaryButton1} from '../profilecomp';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 export const ProfileComp = ({profileImg}) => {
-  return <Image source={{uri: profileImg}} style={styles.profileView} />;
+  const renderImage = () => {
+    if (!profileImg?.url) {
+      return (
+        <Image
+          source={{
+            uri: 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+          }}
+          style={styles.profileView}
+        />
+      );
+    } else if (profileImg?.url) {
+      return (
+        <Image
+          source={{
+            uri: profileImg?.url,
+          }}
+          style={styles.profileView}
+        />
+      );
+    }
+  };
+  return renderImage(profileImg);
 };
 export const PostsComp = ({itemDetails, onPress}) => {
   return (
@@ -39,6 +60,7 @@ export const FolloUnfollowComp = ({
   followTemples,
   isFollow,
 }) => {
+  // const [isFollow, setIsFollow] = useState();
   return (
     <>
       {followVisible ? (

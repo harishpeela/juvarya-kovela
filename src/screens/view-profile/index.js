@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
   Text,
@@ -11,9 +12,14 @@ import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import {allTexts} from '../../common';
-import {getTempleList, FollowUnFollow} from '../../utils/api';
+import {Data} from '../home-feed/formateDetails';
+import {
+  FollowUnFollow,
+  NewGetFollowUmFollowById,
+  NewFollowCount,
+} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import {ProfileSeconTab} from '../../components';
+import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
   ProfileComp,
   CommunityComp,
@@ -28,14 +34,16 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '=============================>',
-  //   data,
-  //   'userdetails',
-  //   userDetails,
-  // );
+  console.log(
+    '=============================>',
+    data,
+    '<==============',
+    userDetails,
+  );
   const [loader, setloader] = useState(true);
-  const [isFollow, setisFollow] = useState(false);
+  const [isFollow, setisFollow] = useState();
+  const [trfData, setTrfData] = useState();
+  const [isFollowValue, setIsFollowValue] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [followVisible, setFollowVisible] = useState(false);
@@ -48,19 +56,50 @@ const ViewProfile = ({route, navigation}) => {
   const [templeDetails, setTempleDetails] = useState('');
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
-  const ROLE = () => {
-    let USERROLE = userDetails?.role;
-    console.log('role', USERROLE);
+  const FOLLOW = () => {
+    if (isFollow) {
+      followTemples();
+    } else if (!isFollow) {
+      console.log('jasx');
+      followTemples();
+      setisFollow(!isFollow);
+    }
+  };
+  useEffect(async () => {
+    if (data) {
+      let result = Data(data);
+      // console.log('restttsyysys', result);
+      if (result) {
+        setTrfData(result);
+      }
+    }
+  }, [data]);
+  console.log('trfdata', trfData);
+  const followingCount = async () => {
+    try {
+      let result = await NewFollowCount(data?.id);
+      if (result) {
+        setFollowCount(result?.data);
+      } else {
+        setFollowCount(0);
+      }
+      // console.log('res of follow count', result?.data);
+    } catch (error) {
+      console.log('error in follow count', error);
+    }
   };
   const followTemples = async () => {
     const payload = {
-      itemId: data?.id,
-      itemType: 'ITEM',
-      follow: !isFollow,
+      jtCustomer: userDetails?.id,
+      type: 'ITEM',
+      jtProfile: data?.id,
+      following: !isFollow,
     };
+    // console.log('pYLOfd', payload);
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
+      // console.log('========><------------', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -84,67 +123,17 @@ const ViewProfile = ({route, navigation}) => {
       setFollowCount(followCount - 1);
     }
   };
-  let token = getAuthTokenDetails();
 
-  const getFeedLIsts = async (tempId, pgfrm, pgto) => {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch(
-      `http://20.255.59.150:8082/api/v1/feed/item?itemId=${tempId}&page=${pgfrm}&pageSize=${pgto}&popular=true`,
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => {
-        if (result) {
-          // setItemDetails(result);
-          let filteredFeedList = result
-            .filter(item => item)
-            .map(({mediaList, description}) => ({mediaList, description}));
-          setItemDetails(filteredFeedList);
-        }
-      })
-      .catch(error => console.log('error', error));
-  };
-
-  // const getTempleCommunities = async () => {
-  //   try {
-  //     let response = await getItemCommunities(id, 0, 100);
-  //     console.log('res', response);
-  //     const {
-  //       status,
-  //       data: {itemCommunities},
-  //     } = response || {};
-  //     console.log('community', itemCommunities);
-  //     if (response && status === 200) {
-  //       setItemCommunity(itemCommunities);
-  //       setLoading(false);
-  //     } else {
-  //       setLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  const getTemple = async () => {
-    let result = await getTempleList(0, 400);
-    // console.log('-------------->', result?.data?.items);
-    let templeId = result.data.items.find(itemid => itemid?.id === id);
-    // console.log('templeId', templeId);
-    if (templeId) {
-      setTempleDetails(templeId);
-    } else {
-      // console.log('templedetaile are ==>', templeId);
+  const getFollowValue = async () => {
+    let result = await NewGetFollowUmFollowById(data?.id);
+    // console.log('res of follow', result?.data);
+    if (result) {
+      setisFollow(result?.data);
     }
   };
-  let Token = getAuthTokenDetails();
-  const createFeedAccess = () => {
+
+  const TempleRoleSearchWithId = async () => {
+    let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
     myHeaders.append('Authorization', Token);
 
@@ -155,48 +144,22 @@ const ViewProfile = ({route, navigation}) => {
     };
 
     fetch(
-      'http://20.255.59.150:9096/jtprofile/admin/verify?profileId=1&customerId=2',
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => console.log('result----> api', result))
-      .catch(error => console.log('error', error));
-  };
-  const TempleRoleSearchWithId = () => {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      'Authorization',
-      'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XG4gIFwiaWRcIiA6IDM4LFxuICBcInVzZXJuYW1lXCIgOiBcInZhbXNpa05NMTIzNFwiLFxuICBcImVtYWlsXCIgOiBcInZhbXNpa05NMTIzNEBqdXZhcnlhLmNvbVwiLFxuICBcInBhc3N3b3JkXCIgOiBudWxsLFxuICBcImZpcnN0TmFtZVwiIDogXCJWYW1zaVwiLFxuICBcImxhc3ROYW1lXCIgOiBcIkNIXCIsXG4gIFwicm9sZXNcIiA6IFsgXCJST0xFX1VTRVJcIiwgXCJST0xFX0FETUlOXCIgXVxufSIsInJvbGVzIjpbIlJPTEVfVVNFUiIsIlJPTEVfQURNSU4iXSwiaWF0IjoxNjg2MzA4NTM2LCJleHAiOjE2ODYzOTQ5MzZ9.gEQKUEvv4qoEhuo6-7p0zwSNAKbrl3LMlgeGpp6P4dfqi5AaoQkS7aW8bIQhaP0ggauevugWWJU6GvruHMpCfQ',
-    );
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=22',
+      'http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=60',
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
+        console.log('res odf role id', result);
         if (result) {
           setRoleId(result?.roles[0]);
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('errorrr', error));
   };
-  console.log('roleid', roleId);
   useEffect(() => {
-    // getData();
-    // getFeedLIsts(id, 0, 100);
-    // getTempleCommunities();
-    nameData;
-    // Role_Id();
-    // getTemple();
-    ROLE();
     TempleRoleSearchWithId();
+    getFollowValue();
+    followingCount();
   }, [route]);
   return (
     <ScrollView style={styles.maincontainer}>
@@ -213,7 +176,7 @@ const ViewProfile = ({route, navigation}) => {
             </Text>
           </View>
           <View style={styles.firstTabView}>
-            <ProfileComp profileImg={data?.mediaList?.url} />
+            <ProfileComp profileImg={trfData} />
             <PostsComp
               itemDetails={itemDetails}
               onPress={() => setPosts(!posts)}
@@ -235,11 +198,11 @@ const ViewProfile = ({route, navigation}) => {
               // }
             />
           </View>
-          <ProfileSeconTab nameData={data} title={data?.description} />
+          <ProfileSeconTab nameData={trfData} title={trfData?.name} />
           <View style={styles.followtab}>
             <FolloUnfollowComp
               followBtnDisable={followBtnDisable}
-              followTemples={followTemples}
+              followTemples={FOLLOW}
               followVisible={followVisible}
               isFollow={isFollow}
             />
@@ -254,11 +217,11 @@ const ViewProfile = ({route, navigation}) => {
               }
             />
           </View>
-          {/* <ProfileFourthTab
+          <ProfileFourthTab
             currentIndex={currentIndex}
             setCurrentIndex={setCurrentIndex}
-            templeDetails={templeDetails}
-          /> */}
+            templeDetails={trfData}
+          />
           {/* {currentIndex === 1 && (
             <View style={styles.contentDisplay}>
               <View style={styles.contentDisplay.row}>

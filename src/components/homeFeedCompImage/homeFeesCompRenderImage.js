@@ -23,16 +23,6 @@ export const RenderImage = ({post}) => {
           />
         </View>
       );
-    } else {
-      return (
-        <View style={styles.mediaContainer}>
-          <Image
-            source={require('../../../assets/images/noimg.png')}
-            style={styles.image1}
-            resizeMode="cover"
-          />
-        </View>
-      );
     }
   };
   return <View>{renderImage(post)}</View>;

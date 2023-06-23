@@ -1,29 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  ScrollView,
-  TouchableOpacity,
-  RefreshControl,
-  Text,
-} from 'react-native';
+import {View, TouchableOpacity, RefreshControl, Text} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {
-  getHomeFeedList,
-  getFavoritesList,
-  getUserInfo,
-  getUserInfoNew,
-  NewFeedHome,
-} from '../../utils/api';
+import {NewFeedHome, NewLikesCount} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
+import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
@@ -46,6 +35,16 @@ const UserFeedScreen = ({navigation}) => {
       console.log(error);
     }
   };
+  const MyCustShare = async () => {
+    const ShareOptions = {
+      message: 'hello this is kovela',
+    };
+    try {
+      const shareResponce = await Share.open(ShareOptions);
+    } catch (error) {
+      console.log('error in share', error);
+    }
+  };
   const FeedList = async () => {
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -62,15 +61,15 @@ const UserFeedScreen = ({navigation}) => {
       requestOptions,
     )
       .then(response => response.json())
-      .then(result => {
+      .then(async result => {
         if (result) {
           setloader(false);
           console.log('data....');
-          setHomeFeedList(result?.jtFeeds);
-          // setHomeFeedList(existedFeedList => [
-          //   ...existedFeedList,
-          //   ...result?.jtFeeds,
-          // ]);
+          // setHomeFeedList(result?.jtFeeds);
+          setHomeFeedList(existedFeedList => [
+            ...existedFeedList,
+            ...result?.jtFeeds,
+          ]);
         } else {
           setloader(false);
           console.log('no data');
@@ -89,7 +88,7 @@ const UserFeedScreen = ({navigation}) => {
       FeedList();
     }
   }, [apiPageNo]);
-  console.log('home', homeFeedList);
+  // console.log('home', homeFeedList);
   return (
     <View style={{flex: 1}}>
       <BackgroundImage />
@@ -140,7 +139,9 @@ const UserFeedScreen = ({navigation}) => {
               <UserFeedCompList
                 id={item?.id}
                 post={item}
+                onSharePress={MyCustShare}
                 saveid={item?.id}
+                // likes={}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,

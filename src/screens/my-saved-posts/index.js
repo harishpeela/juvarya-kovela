@@ -34,7 +34,7 @@ const MySavedPosts = ({navigation}) => {
   console.log('filter', filteredArray);
 
   useEffect(() => {
-    getPostsList();
+    // getPostsList();
   }, []);
 
   return (
