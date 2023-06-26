@@ -44,7 +44,12 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getFavoritesList, getUserInfo, getUserInfoNew} from './src/utils/api';
+import {
+  getFavoritesList,
+  getUserInfo,
+  getUserInfoNew,
+  getHomeFeedList,
+} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -341,20 +346,12 @@ const App = () => {
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
   const [favoriteList, setFavoriteList] = useState([]);
+  const [homeFeedListData, getHomeFeedListData] = useState([]);
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
     console.log('auth token', authDetails);
     setLoginDetails(authDetails);
-  };
-
-  const getAndSaveUserInfo = async () => {
-    try {
-      let response = await getUserInfoNew();
-      // console.log('userInfoo', response);
-    } catch (error) {
-      console.log('Error 786' + error.message);
-    }
   };
 
   const ApiData = async () => {
@@ -391,25 +388,25 @@ const App = () => {
       })
       .catch(error => console.log('error', error));
   };
-  // const getFollowedTempleList = async () => {
-  //   try {
-  //     let response = await getFavoritesList(0, 100);
-  //     if (response && response.status === 200) {
-  //       const {
-  //         data: {followingObjects},
-  //       } = response;
-  //       setFavoriteList(followingObjects);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
+  const getFollowedTempleList = async () => {
+    try {
+      let response = await getHomeFeedList(0, 100);
+      if (response && response.status === 200) {
+        const {
+          data: {jtFeeds},
+        } = response;
+        getHomeFeedListData(jtFeeds);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log('length', homeFeedListData?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       // getAndSaveUserInfo();
       ApiData();
-      // getFollowedTempleList();
+      getFollowedTempleList();
     }
     console.log('user', userDetails);
   }, [loginDetails]);
@@ -424,6 +421,8 @@ const App = () => {
         setUserDetails,
         favoriteList,
         setFavoriteList,
+        homeFeedListData,
+        getHomeFeedListData,
         id,
         setId,
       }}>

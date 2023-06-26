@@ -144,7 +144,7 @@ const ViewProfile = ({route, navigation}) => {
     };
 
     fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=60',
+      `http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=${data?.id}`,
       requestOptions,
     )
       .then(response => response.json())

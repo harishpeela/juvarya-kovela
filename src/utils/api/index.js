@@ -29,11 +29,12 @@ const endpoints = {
   NEW_LIKE_UNLIKE_HOME_FEED: '/jtfeedreview/like',
   NEW_LIKES_COUNT: '/jtfeedreview/likes?feedId',
   NEW_FOLLOW_COUNT: '/jtfollwer/count',
+  NEW_FAVORITES: '/jtfollwer/profile',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
   UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
   GET_TEMPLE_LIST: 'v1/agent/item/list',
-  GET_HOME_FEED_LIST: 'v1/feed/list',
+  GET_HOME_FEED_LIST: '/jtfeed/list',
   CREATE_TEMPLE: 'v1/agent/item/create',
   CREATE_FEED: 'v1/feed/post',
   UPLOAD_TEMPLE_PICTURE: 'v1/jtitem/picture',
@@ -83,7 +84,6 @@ export const loginUser1 = async data => {
     return result;
   } catch (error) {
     console.log('error in login', error);
-    Alert.alert('Error', 'Invalid credentials!');
     return error;
   }
 };
@@ -126,7 +126,17 @@ export const verifyAdminProfile = async (profileId, custId) => {
       `${endpoints.NEW_ADMIN_VERIFY}?profileId=${profileId}&customerId=${custId}`,
       {retry: 5, retryDelay: 3000},
     );
-    console.log('result of verify admin profile', result);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const NewFavFollowersList = async (profileId, pgno, pgsze) => {
+  try {
+    let result = await axiosNewData1.get(
+      `${endpoints.NEW_FAVORITES}?page=${pgno}&pageSize=${pgsze}&profileId=${profileId}`,
+      {retry: 5, retryDelay: 3000},
+    );
     return result;
   } catch (error) {
     return error;
@@ -360,10 +370,10 @@ export const getFeedList = async (pageNo, pageSize, id) => {
     return error;
   }
 };
-export const getHomeFeedList = async (pageNo, pageSize, id) => {
+export const getHomeFeedList = async (pageNo, pageSize) => {
   try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_HOME_FEED_LIST}?page=${pageNo}&pageSize=${pageSize}&itemId=${id}`,
+    let result = await axiosNewData1.get(
+      `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
     return result;

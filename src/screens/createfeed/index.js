@@ -52,7 +52,7 @@ const CreateFeed = ({route, navigation}) => {
     myHeaders.append('Authorization', Token);
 
     var formdata = new FormData();
-    formdata.append('description', 'kovela');
+    formdata.append('description', description);
     formdata.append('feedType', 'profile ');
     formdata.append('jtProfile', data?.id);
     formdata.append('files', img);

@@ -27,15 +27,16 @@ export default BottomTabBase = ({navigation}) => {
   const GetFavoriteScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
   const GetFavList = () => {
-    const {favoriteList} = useContext(ApplicationContext);
-    return favoriteList.length > 0 ? true : false;
+    const {homeFeedListData} = useContext(ApplicationContext);
+    console.log('listkjsx', homeFeedListData?.length);
+    return homeFeedListData?.length > 0 ? true : false;
   };
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
-          allTexts.screenNames.userFeedScreen
-          // GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
+          // allTexts.screenNames.userFeedScreen
+          !GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
         }
         tabBarOptions={{
           activeTintColor: colors.orangeColor,

@@ -12,6 +12,7 @@ import {
   RegistesrUser,
   VerifyOTP,
   NewVerifyOTP,
+  loginUser1,
 } from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 
@@ -52,6 +53,11 @@ const Signup = ({navigation}) => {
   } = allTexts;
 
   const UserRegisterHandler = async (data, action) => {
+    let signupPayload = {
+      username: data.userName,
+      password: data.password,
+    };
+    console.log('---> ======>', signupPayload);
     const otpPayload = {
       otpType: 'SIGNUP',
       channel: 'MOBILE',
@@ -64,22 +70,29 @@ const Signup = ({navigation}) => {
       const {
         data: {emailAddress, otp},
       } = response || {};
+      let result = await loginUser1(signupPayload);
+      console.log('result of login in signuo', result);
       // console.log('data', emailAddress, otp, response?.status);
-      console.log('999999999999999999999', emailAddress);
-      if (response && emailAddress) {
-        let otpPayload = {
-          otp,
-          data,
-          email: emailAddress,
-          password: data?.confirmPassword,
-          username: data?.userName,
-        };
-        navigation.navigate(otpScreen, otpPayload);
-      } else if (response?.status == 403) {
-        console.log('2');
-        alert(response?.data?.message);
+      // console.log('999999999999999999999', emailAddress);
+      if (result?.status === 200) {
+        alert('user already registered');
+        action.setSubmitting(false);
+      } else {
+        if (response && emailAddress) {
+          let otpPayload = {
+            otp,
+            data,
+            email: emailAddress,
+            password: data?.confirmPassword,
+            username: data?.userName,
+          };
+          navigation.navigate(otpScreen, otpPayload);
+        } else if (response?.status == 403) {
+          console.log('2');
+          alert(response?.data?.message);
+        }
+        action.setSubmitting(false);
       }
-      action.setSubmitting(false);
     } catch (error) {
       alert(error);
     }

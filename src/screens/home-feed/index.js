@@ -5,7 +5,7 @@ import {View, TouchableOpacity, RefreshControl, Text} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {NewFeedHome, NewLikesCount} from '../../utils/api';
+import {NewFeedHome, NewLikesCount, getHomeFeedList} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -14,30 +14,17 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
-  const {userDetails} = useContext(ApplicationContext);
+  const {userDetails, setHomeFeedListData} = useContext(ApplicationContext);
   const [loading, setloading] = useState(false);
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
   const [id, setId] = useState(userDetails?.id);
   const [apiPageNo, setApiPageNo] = useState(0);
-  console.log('user', userDetails);
-  const FeedInfo = async () => {
-    let responce = await NewFeedHome(id, 0, 20);
-    console.log('res of axios ===========>', id, responce?.data);
-    try {
-      if (responce && responce?.statu === 200) {
-        console.log('result', responce?.data?.data);
-      } else {
-        console.log('error in data');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // console.log('user', userDetails);
   const MyCustShare = async () => {
     const ShareOptions = {
-      message: 'hello this is kovela',
+      message: 'Hello Welcome to kovela App',
     };
     try {
       const shareResponce = await Share.open(ShareOptions);
@@ -45,50 +32,33 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
-  const FeedList = async () => {
-    let Token = await getAuthTokenDetails();
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', Token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-    setloader(true);
-    fetch(
-      `http://fanfundev.eastasia.cloudapp.azure.com:9094/jtfeed/list?pageNo=${apiPageNo}&pageSize=${20}`,
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(async result => {
-        if (result) {
-          setloader(false);
-          console.log('data....');
-          // setHomeFeedList(result?.jtFeeds);
-          setHomeFeedList(existedFeedList => [
-            ...existedFeedList,
-            ...result?.jtFeeds,
-          ]);
-        } else {
-          setloader(false);
-          console.log('no data');
-        }
-      })
-      .catch(error => console.log('error ===>', error));
+  const listFeed = async () => {
+    try {
+      let result = await getHomeFeedList(apiPageNo, 20);
+      console.log('feed list', result?.data);
+      if (result && result?.status === 200) {
+        setloader(false);
+        setHomeFeedList(result?.data?.jtFeeds);
+        // setHomeFeedList(existedFeedList => [
+        //   ...existedFeedList,
+        //   ...result?.data?.jtFeeds,
+        // ]);
+        setHomeFeedListData(result?.data?.jtFeeds);
+      }
+    } catch (error) {
+      console.log('error', error);
+    }
   };
-
   useEffect(() => {
-    FeedInfo();
-    FeedList();
+    listFeed();
   }, [userDetails]);
 
   useEffect(() => {
     if (apiPageNo) {
-      FeedList();
+      listFeed();
     }
   }, [apiPageNo]);
-  // console.log('home', homeFeedList);
+  console.log('home', homeFeedList?.lenght);
   return (
     <View style={{flex: 1}}>
       <BackgroundImage />
@@ -122,7 +92,8 @@ const UserFeedScreen = ({navigation}) => {
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
-            showsVerticalScrollIndicator={false}
+            // horizontal
+            // showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
                 refreshing={refrsh}
@@ -141,7 +112,7 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 onSharePress={MyCustShare}
                 saveid={item?.id}
-                // likes={}
+                mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,
@@ -149,8 +120,8 @@ const UserFeedScreen = ({navigation}) => {
                 }}
               />
             )}
-            onEndReached={() => setApiPageNo(pageNo => pageNo + 1)}
-            onEndReachedThreshold={0.5}
+            // onEndReached={() => setApiPageNo(pageNo => pageNo + 1)}
+            // onEndReachedThreshold={0.5}
           />
         ) : (
           <View style={styles.nodataView}>
