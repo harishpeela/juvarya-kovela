@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -103,6 +103,8 @@ const Signin = ({navigation}) => {
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
+        Alert.alert('Error', 'Invaliddd credentials!');
+
       }
     } catch (error) {
       console.log(error);

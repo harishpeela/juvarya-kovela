@@ -3,10 +3,10 @@ export const Data = d => {
     name: d?.name ? d?.name : 'No Name',
     description: d?.description ? d?.description : 'No description',
     url: d?.url ? d?.url : '',
-    eventsEnabled: d?.eventsEnabled ? d?.eventsEnabled : '',
-    popular: d?.popular ? d?.popular : '',
-    seasonal: d?.seasonal ? d?.seasonal : '',
-    servicesEnabled: d?.servicesEnabled ? d?.servicesEnabled : '',
+    eventsEnabled: d?.eventsEnabled ? d?.eventsEnabled : false,
+    popular: d?.popular ? d?.popular : false,
+    seasonal: d?.seasonal ? d?.seasonal : false,
+    servicesEnabled: d?.servicesEnabled ? d?.servicesEnabled : false,
     templeClass: d?.templeClass ? d?.templeClass : '',
   };
   return myDataDetails;

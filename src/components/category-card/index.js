@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
+import {FlatList} from 'react-native-gesture-handler';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -18,6 +19,7 @@ export const UserFeedCompList = ({
   onDotsPress,
   saveid,
   onSharePress,
+  mediaData,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState();
@@ -52,7 +54,7 @@ export const UserFeedCompList = ({
       SaveFeedApi();
       ToastAndroid.show('Successfully saved the Post', ToastAndroid.SHORT);
     } else {
-      console.log('feed not saved');
+      // console.log('feed not saved');
       ToastAndroid.show('Successfully unsaved the Post', ToastAndroid.SHORT);
     }
   };
@@ -60,9 +62,9 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
-    console.log('pay', payload);
+    // console.log('pay', payload);
     let result = await NewSaveFeed(payload);
-    console.log('result =====>', result?.data);
+    // console.log('result =====>', result?.data);
   };
   const likesCount = async () => {
     try {
@@ -72,8 +74,7 @@ export const UserFeedCompList = ({
       } else {
         setLikeCount(0);
       }
-      console.log('mAHSbjh,jashxkjaSKXJB,Kjabsxkjbdsdjbjzdscjn', id);
-      console.log('res of likes count', result?.data);
+      // console.log('res of likes count', result?.data);
     } catch (error) {
       console.log('error in likes count', error);
     }
@@ -102,7 +103,21 @@ export const UserFeedCompList = ({
           <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
         </TouchableOpacity> */}
       </View>
-      <RenderImage post={post} />
+      {/* <RenderImage post={post} /> */}
+      <FlatList
+        data={mediaData}
+        // horizontal
+        keyExtractor={({item, index}) => index}
+        renderItem={({item, index}) => (
+          <View style={styles.mediaContainer}>
+            <Image
+              source={{uri: item?.url}}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
+        )}
+      />
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
           <Icon

@@ -12,55 +12,67 @@ import {
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import ApplicationContext from '../../utils/context-api/Context';
-import {getFavoritesList, getFollowSearchList} from '../../utils/api';
+import {
+  getFavoritesList,
+  getFollowSearchList,
+  NewFavFollowersList,
+} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
-
 const Favorite = ({navigation}) => {
-  const {favoriteList} = useContext(ApplicationContext);
+  const {favoriteList, userDetails} = useContext(ApplicationContext);
   const [favoriteTemplesList, setfavoriteTemplesList] = useState(favoriteList);
   const [filterFavTemple, setfilterFavTemple] = useState(favoriteList);
   const [searchedText, setSearchedText] = useState('');
   const [loading, setloading] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
-  const getFollowedTempleList = async () => {
-    try {
-      let response = await getFavoritesList(0, 100);
-      // console.log('responce of favourate list', response);
-      if (response && response.status === 200) {
-        const {
-          data: {followingObjects},
-        } = response;
-        setloading(false);
-        if (followingObjects.length > 0) {
-          setfavoriteTemplesList(followingObjects);
-          setfilterFavTemple(followingObjects);
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getFollowedTempleList = async () => {
+  //   try {
+  //     let response = await getFavoritesList(0, 100);
+  //     // console.log('responce of favourate list', response);
+  //     if (response && response.status === 200) {
+  //       const {
+  //         data: {followingObjects},
+  //       } = response;
+  //       setloading(false);
+  //       if (followingObjects.length > 0) {
+  //         setfavoriteTemplesList(followingObjects);
+  //         setfilterFavTemple(followingObjects);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   let isFocused = useIsFocused();
   useEffect(() => {
-    setloading(true);
-    getFollowedTempleList();
+    // setloading(true);
+    Favorites();
+    // getFollowedTempleList();
   }, [isFocused]);
 
   const performFilter = async () => {
+    // try {
+    //   setSearchLoading(true);
+    //   let result = await getFollowSearchList(searchedText);
+    //   if (result && result.status === 200) {
+    //     const {
+    //       data: {followingObjects},
+    //     } = result;
+    //     setSearchLoading(false);
+    //     // console.log('Searched List TEXT', followingObjects);
+    //     setfavoriteTemplesList(followingObjects);
+    //     setfilterFavTemple(followingObjects);
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
+  };
+  const Favorites = async () => {
     try {
-      setSearchLoading(true);
-      let result = await getFollowSearchList(searchedText);
-      if (result && result.status === 200) {
-        const {
-          data: {followingObjects},
-        } = result;
-        setSearchLoading(false);
-        // console.log('Searched List TEXT', followingObjects);
-        setfavoriteTemplesList(followingObjects);
-        setfilterFavTemple(followingObjects);
-      }
+      let result = await NewFavFollowersList(22, 0, 20);
+      console.log('result of fav lisr', result?.data);
     } catch (error) {
-      console.log(error);
+      console.log('error in fav list', error);
     }
   };
   return (
@@ -88,7 +100,7 @@ const Favorite = ({navigation}) => {
           onCrossPress={() => {
             setSearchedText('');
             setloading(true);
-            getFollowedTempleList();
+            // getFollowedTempleList();
           }}
           onSubmit={performFilter}
           bgColor={'lightgray'}
@@ -122,22 +134,11 @@ const Favorite = ({navigation}) => {
                 name={item?.jtItem?.name}
                 isFollow={item?.jtItem?.following}
                 onPress={() => {
-                  navigation.navigate(
-                    allTexts.screenNames.viewProfile,
-                    {
-                      id: item?.jtItem?.id,
-                      title: item?.jtItem?.name,
-                      profileImg: item?.jtItem?.profilePicture?.url,
-                    },
-                    // console.log(
-                    //   'id: ',
-                    //   item?.jtItem?.id,
-                    //   'title',
-                    //   item?.jtItem?.name,
-                    //   'profimg',
-                    //   item?.jtItem?.profilePicture?.url,
-                    // ),
-                  );
+                  navigation.navigate(allTexts.screenNames.viewProfile, {
+                    id: item?.jtItem?.id,
+                    title: item?.jtItem?.name,
+                    profileImg: item?.jtItem?.profilePicture?.url,
+                  });
                 }}
               />
             )}

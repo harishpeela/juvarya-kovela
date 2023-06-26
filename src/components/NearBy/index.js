@@ -62,7 +62,7 @@ export const NearBy = ({pageNav}) => {
   useEffect(() => {
     PopularTemplesss();
   }, []);
-  console.log('kength ===> ', filteredArray);
+  // console.log('kength ===> ', filteredArray);
   return (
     <View>
       <View style={styles.searchTab}>
