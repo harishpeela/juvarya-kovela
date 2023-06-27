@@ -46,7 +46,6 @@ const Favorite = ({navigation}) => {
   let isFocused = useIsFocused();
   useEffect(() => {
     // setloading(true);
-    Favorites();
     // getFollowedTempleList();
   }, [isFocused]);
 
@@ -66,14 +65,6 @@ const Favorite = ({navigation}) => {
     // } catch (error) {
     //   console.log(error);
     // }
-  };
-  const Favorites = async () => {
-    try {
-      let result = await NewFavFollowersList(22, 0, 20);
-      console.log('result of fav lisr', result?.data);
-    } catch (error) {
-      console.log('error in fav list', error);
-    }
   };
   return (
     <View style={styles.wrapper}>

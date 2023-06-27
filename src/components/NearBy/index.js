@@ -6,11 +6,11 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
-  ImageBackground,
   ScrollView,
   ToastAndroid,
 } from 'react-native';
 import {styles} from './styles';
+import {SearchBar} from '../searchbar';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import {Loader} from '../loader';
@@ -20,11 +20,16 @@ import {
   PopularTemples,
   GetProfilePicture,
   NewGetFollowUmFollowById,
+  GetsearchPopularTemples,
 } from '../../utils/api';
 export const NearBy = ({pageNav}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const [isFollow, setIsFollow] = useState();
+  const [searchedText, setSearchedText] = useState('');
+  const [loader, setLoader] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [filteredList, setFilteredList] = useState([]);
 
   const PopularTemplesss = async () => {
     try {
@@ -55,6 +60,7 @@ export const NearBy = ({pageNav}) => {
       let Following = responce?.data;
       const obj = {...result?.data, ...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
+      setFilteredList(hg => [...hg, obj]);
     } catch (error) {
       console.log('error', error);
     }
@@ -63,58 +69,93 @@ export const NearBy = ({pageNav}) => {
     PopularTemplesss();
   }, []);
   // console.log('kength ===> ', filteredArray);
+  const FilteredList = async value => {
+    setFilteredList(
+      filteredArray.filter(item =>
+        item.name.toLowerCase().includes(value.toLowerCase()),
+      ),
+    );
+  };
+  console.log(filteredList, '==========================================>');
   return (
     <View>
-      <View style={styles.searchTab}>
-        <IconSearch name="search1" size={25} style={styles.iconsearch} />
-        <TextInput placeholder="Search Here" style={styles.searchTextInput} />
-        <TouchableOpacity style={styles.touchable}>
-          <IconVoice name="keyboard-voice" size={25} />
-        </TouchableOpacity>
+      <View style={styles.searchContainer}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSearchedText(e);
+            FilteredList(e);
+          }}
+          loading={searchLoading}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss();
+          }}
+          // onSubmit={FilteredList}
+          bgColor={'lightgray'}
+          placeHolder={'Search here'}
+        />
       </View>
-      <View style={styles.upComingTextTab}>
-        <Text style={styles.popularTextContainer}>Popular Temple</Text>
-        <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
-      </View>
-      <View>
-        <ScrollView>
-          <View>
-            {loading === true ? (
-              <View style={styles.loaderContainer}>
-                <Loader color={colors.orangeColor} />
-              </View>
-            ) : (
-              [
-                filteredArray?.length === 0 ? (
-                  <View style={styles.loaderContainer}>
-                    <Text style={styles.noAvailable}>
-                      {'No Temples Available'}
-                    </Text>
-                  </View>
-                ) : (
-                  <FlatList
-                    data={filteredArray}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    keyboardShouldPersistTaps="handled"
-                    keyExtractor={({item, index}) => item?.id}
-                    renderItem={({item, index}) => (
-                      <TempleListCard
-                        post={item}
-                        name={item.name}
-                        templeId={item.id}
-                        date={item.creationTime}
-                        isFollowingTrue={isFollow}
-                        pageNav={pageNav}
-                      />
-                    )}
-                  />
-                ),
-              ]
-            )}
+      <>
+        {loader ? (
+          <View
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '100%',
+            }}>
+            <Loader color={colors.green2} />
           </View>
-        </ScrollView>
-      </View>
+        ) : (
+          <>
+            <View style={styles.upComingTextTab}>
+              <Text style={styles.popularTextContainer}>Popular Temple</Text>
+              <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                See all
+              </Text>
+            </View>
+            <View>
+              <ScrollView>
+                <View>
+                  {loading === true ? (
+                    <View style={styles.loaderContainer}>
+                      <Loader color={colors.orangeColor} />
+                    </View>
+                  ) : (
+                    [
+                      filteredList?.length === 0 ? (
+                        <View style={styles.loaderContainer}>
+                          <Text style={styles.noAvailable}>
+                            {'No Temples Available'}
+                          </Text>
+                        </View>
+                      ) : (
+                        <FlatList
+                          data={filteredList}
+                          horizontal
+                          showsHorizontalScrollIndicator={false}
+                          keyboardShouldPersistTaps="handled"
+                          keyExtractor={({item, index}) => item?.id}
+                          renderItem={({item, index}) => (
+                            <TempleListCard
+                              post={item}
+                              name={item.name}
+                              templeId={item.id}
+                              date={item.creationTime}
+                              isFollowingTrue={isFollow}
+                              pageNav={pageNav}
+                            />
+                          )}
+                        />
+                      ),
+                    ]
+                  )}
+                </View>
+              </ScrollView>
+            </View>
+          </>
+        )}
+      </>
     </View>
   );
 };
