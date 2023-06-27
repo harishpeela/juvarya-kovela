@@ -66,14 +66,11 @@ const Signup = ({navigation}) => {
     console.log(otpPayload, 'otp');
     try {
       let response = await NewVerifyOTP(otpPayload);
-      // console.log('register user result', response?.data);
       const {
         data: {emailAddress, otp},
       } = response || {};
       let result = await loginUser1(signupPayload);
       console.log('result of login in signuo', result);
-      // console.log('data', emailAddress, otp, response?.status);
-      // console.log('999999999999999999999', emailAddress);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);

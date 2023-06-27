@@ -9,6 +9,9 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: 'lightgray',
   },
+  searchContainer: {
+    paddingHorizontal: 10,
+  },
   searchTextInput: {fontSize: 18, maxWidth: '75%'},
   upComingTextTab: {
     flexDirection: 'row',
