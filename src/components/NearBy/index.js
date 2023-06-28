@@ -1,18 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext} from 'react';
-import {
-  View,
-  TextInput,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  ScrollView,
-  ToastAndroid,
-} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList, ScrollView} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
-import IconSearch from 'react-native-vector-icons/AntDesign';
-import IconVoice from 'react-native-vector-icons/MaterialIcons';
 import {Loader} from '../loader';
 import {colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
@@ -20,7 +10,6 @@ import {
   PopularTemples,
   GetProfilePicture,
   NewGetFollowUmFollowById,
-  GetsearchPopularTemples,
 } from '../../utils/api';
 export const NearBy = ({pageNav}) => {
   const [loading, setLoading] = useState(true);
@@ -49,9 +38,7 @@ export const NearBy = ({pageNav}) => {
   const profilePicture = async d => {
     try {
       let result = await GetProfilePicture(d?.id);
-      // console.log('989u99', result?.data);
       let responce = await NewGetFollowUmFollowById(d?.id);
-      // console.log('responce', responce);
       if (responce) {
         setIsFollow(responce?.data);
       } else {
@@ -68,7 +55,6 @@ export const NearBy = ({pageNav}) => {
   useEffect(() => {
     PopularTemplesss();
   }, []);
-  // console.log('kength ===> ', filteredArray);
   const FilteredList = async value => {
     setFilteredList(
       filteredArray.filter(item =>
@@ -76,7 +62,6 @@ export const NearBy = ({pageNav}) => {
       ),
     );
   };
-  console.log(filteredList, '==========================================>');
   return (
     <View>
       <View style={styles.searchContainer}>
@@ -125,9 +110,10 @@ export const NearBy = ({pageNav}) => {
                     [
                       filteredList?.length === 0 ? (
                         <View style={styles.loaderContainer}>
-                          <Text style={styles.noAvailable}>
+                          {/* <Text style={styles.noAvailable}>
                             {'No Temples Available'}
-                          </Text>
+                          </Text> */}
+                          <Loader color={colors.orangeColor} />
                         </View>
                       ) : (
                         <FlatList
