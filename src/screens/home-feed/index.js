@@ -33,6 +33,7 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async () => {
+    setloader(true);
     try {
       let result = await getHomeFeedList(apiPageNo, 20);
       console.log('feed list', result?.data);
@@ -112,7 +113,7 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 onSharePress={MyCustShare}
                 saveid={item?.id}
-                mediaData={item?.mediaList}
+                // mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,

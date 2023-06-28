@@ -74,7 +74,6 @@ export const UserFeedCompList = ({
       } else {
         setLikeCount(0);
       }
-      // console.log('res of likes count', result?.data);
     } catch (error) {
       console.log('error in likes count', error);
     }
@@ -85,7 +84,7 @@ export const UserFeedCompList = ({
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
-        <TouchableOpacity onPress={onPressTitle}>
+        <TouchableOpacity style={{marginBottom: 5}} onPress={onPressTitle}>
           <Image
             source={{
               uri:
@@ -105,16 +104,40 @@ export const UserFeedCompList = ({
       </View>
       {/* <RenderImage post={post} /> */}
       <FlatList
-        data={mediaData}
-        // horizontal
+        data={post?.mediaList}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
-          <View style={styles.mediaContainer}>
+          // <View style={styles.mediaContainer}>
+          //   <Image
+          //     source={{uri: item?.url}}
+          //     style={styles.image}
+          //     resizeMode="cover"
+          //   />
+          // </View>
+          <View style={{flex: 1, marginLeft: 8}}>
             <Image
               source={{uri: item?.url}}
-              style={styles.image}
-              resizeMode="cover"
+              style={{height: 400, width: 400}}
             />
+            {/* <Text
+              style={{
+                fontSize: 12,
+                color: 'black',
+                marginBottom: 8,
+                marginLeft: 8,
+              }}
+              onPress={() => {
+                return (
+                  <View>
+                    <Image source={{uri: item.url}} style={{marginTop: 20}} />
+                  </View>
+                );
+              }}>
+              {index + 1} {item.text}
+            </Text> */}
           </View>
         )}
       />
