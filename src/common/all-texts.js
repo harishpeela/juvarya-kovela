@@ -24,7 +24,7 @@ export const allTexts = {
       fName: 'First name',
       phoneNo: 'phone number',
       lastName: 'last name',
-      email: 'email',
+      email: 'User Name',
       password: 'password',
       tName: 'Enter Temple Name',
       tDescription: 'Description',

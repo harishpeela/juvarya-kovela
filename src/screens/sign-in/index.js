@@ -6,7 +6,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {LoginValidationSchema} from '../../common/schemas';
 import {styles} from './styles.js';
-import {KovelaIcon} from '../sign-up';
+import Signup, {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
 import {
   getUserInfo,
@@ -181,7 +181,7 @@ const Signin = ({navigation}) => {
                 </View>
                 <TouchableOpacity
                   onPress={() => {
-                    navigation.goBack();
+                    navigation.navigate(allTexts.screenNames.signup);
                   }}>
                   <Text style={styles.navLinkText}>
                     {dontHaveAccount}

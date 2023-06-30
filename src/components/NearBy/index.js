@@ -6,6 +6,7 @@ import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
 import {colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
+import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
 import {
   PopularTemples,
   GetProfilePicture,
@@ -81,67 +82,132 @@ export const NearBy = ({pageNav}) => {
           placeHolder={'Search here'}
         />
       </View>
-      <>
-        {loader ? (
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-            }}>
-            <Loader color={colors.green2} />
-          </View>
-        ) : (
-          <>
-            <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Popular Temple</Text>
-              <Text style={{color: colors.orangeColor, fontSize: 18}}>
-                See all
-              </Text>
+      {searchedText === '' && (
+        <>
+          {loader ? (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+              }}>
+              <Loader color={colors.green2} />
             </View>
-            <View>
-              <ScrollView>
-                <View>
-                  {loading === true ? (
-                    <View style={styles.loaderContainer}>
-                      <Loader color={colors.orangeColor} />
-                    </View>
-                  ) : (
-                    [
-                      filteredList?.length === 0 ? (
-                        <View style={styles.loaderContainer}>
-                          {/* <Text style={styles.noAvailable}>
+          ) : (
+            <>
+              <View style={styles.upComingTextTab}>
+                <Text style={styles.popularTextContainer}>Popular Temple</Text>
+                <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                  See all
+                </Text>
+              </View>
+              <View>
+                <ScrollView>
+                  <View>
+                    {loading === true ? (
+                      <View style={styles.loaderContainer}>
+                        <Loader color={colors.orangeColor} />
+                      </View>
+                    ) : (
+                      [
+                        filteredList?.length === 0 ? (
+                          <View style={styles.loaderContainer}>
+                            {/* <Text style={styles.noAvailable}>
                             {'No Temples Available'}
                           </Text> */}
-                          <Loader color={colors.orangeColor} />
-                        </View>
-                      ) : (
-                        <FlatList
-                          data={filteredList}
-                          horizontal
-                          showsHorizontalScrollIndicator={false}
-                          keyboardShouldPersistTaps="handled"
-                          keyExtractor={({item, index}) => item?.id}
-                          renderItem={({item, index}) => (
-                            <TempleListCard
-                              post={item}
-                              name={item.name}
-                              templeId={item.id}
-                              date={item.creationTime}
-                              isFollowingTrue={isFollow}
-                              pageNav={pageNav}
-                            />
-                          )}
-                        />
-                      ),
-                    ]
-                  )}
-                </View>
-              </ScrollView>
+                            <Loader color={colors.orangeColor} />
+                          </View>
+                        ) : (
+                          <FlatList
+                            data={filteredList}
+                            horizontal
+                            showsHorizontalScrollIndicator={false}
+                            keyboardShouldPersistTaps="handled"
+                            keyExtractor={({item, index}) => item?.id}
+                            renderItem={({item, index}) => (
+                              <TempleListCard
+                                post={item}
+                                name={item.name}
+                                templeId={item.id}
+                                date={item.creationTime}
+                                isFollowingTrue={isFollow}
+                                pageNav={pageNav}
+                              />
+                            )}
+                          />
+                        ),
+                      ]
+                    )}
+                  </View>
+                </ScrollView>
+              </View>
+            </>
+          )}
+        </>
+      )}
+      {searchedText.length > 0 && (
+        <>
+          {loader ? (
+            <View
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '100%',
+              }}>
+              <Loader color={colors.green2} />
             </View>
-          </>
-        )}
-      </>
+          ) : (
+            <>
+              <View style={styles.upComingTextTab}>
+                <Text style={styles.popularTextContainer}>Popular Temple</Text>
+                <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                  See all
+                </Text>
+              </View>
+              <View>
+                <ScrollView>
+                  <View>
+                    {loading === true ? (
+                      <View style={styles.loaderContainer}>
+                        <Loader color={colors.orangeColor} />
+                      </View>
+                    ) : (
+                      [
+                        filteredList?.length === 0 ? (
+                          <View style={styles.loaderContainer}>
+                            {/* <Text style={styles.noAvailable}>
+                          {'No Temples Available'}
+                        </Text> */}
+                            <Loader color={colors.orangeColor} />
+                          </View>
+                        ) : (
+                          <FlatList
+                            data={filteredList}
+                            // horizontal
+                            showsHorizontalScrollIndicator={false}
+                            keyboardShouldPersistTaps="handled"
+                            keyExtractor={({item, index}) => item?.id}
+                            renderItem={({item, index}) => (
+                              <PopularTemplesVerticalList
+                                post={item}
+                                name={item.name}
+                                templeId={item.id}
+                                date={item.creationTime}
+                                isFollowingTrue={isFollow}
+                                pageNav={pageNav}
+                              />
+                            )}
+                          />
+                        ),
+                      ]
+                    )}
+                  </View>
+                </ScrollView>
+              </View>
+            </>
+          )}
+        </>
+      )}
     </View>
   );
 };

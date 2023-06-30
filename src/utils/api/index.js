@@ -30,6 +30,7 @@ const endpoints = {
   NEW_LIKES_COUNT: '/jtfeedreview/likes?feedId',
   NEW_FOLLOW_COUNT: '/jtfollwer/count',
   NEW_FAVORITES: '/jtfollwer/profile',
+  GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
@@ -114,6 +115,16 @@ export const GetProfilePicture = async id => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_PROFIL_PICTURE}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const GetPosts = async (id, pgfrm, pgto) => {
+  try {
+    let result = await axiosNewData1.get(
+      `${endpoints.GET_POSTS}?id=${id}&pageNo=${pgfrm}pageSize=${pgto}`,
     );
     return result;
   } catch (error) {

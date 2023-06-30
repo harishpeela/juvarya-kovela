@@ -177,7 +177,24 @@ export const ProfileFourthTab = ({
           Posts
         </Text>
       </Pressable>
-
+      {templeDetails?.ecommerceEnabled && (
+        <Pressable
+          style={styles.controlPanel.item}
+          onPress={() => setCurrentIndex(4)}>
+          <FontAwesome
+            name="calendar-plus-o"
+            color={currentIndex === 4 ? '#FFA001' : '#585858'}
+            size={24}
+          />
+          <Text
+            style={{
+              ...styles.controlPanel.item.text,
+              color: currentIndex === 4 ? '#FFA001' : '#585858',
+            }}>
+            Events
+          </Text>
+        </Pressable>
+      )}
       {templeDetails?.reelsEnabled && (
         <Pressable
           style={{...styles.controlPanel.item}}
@@ -211,24 +228,6 @@ export const ProfileFourthTab = ({
               color: currentIndex === 3 ? '#FFA001' : '#585858',
             }}>
             Services
-          </Text>
-        </Pressable>
-      )}
-      {templeDetails?.ecommerceEnabled && (
-        <Pressable
-          style={styles.controlPanel.item}
-          onPress={() => setCurrentIndex(4)}>
-          <FontAwesome
-            name="calendar-plus-o"
-            color={currentIndex === 4 ? '#FFA001' : '#585858'}
-            size={24}
-          />
-          <Text
-            style={{
-              ...styles.controlPanel.item.text,
-              color: currentIndex === 4 ? '#FFA001' : '#585858',
-            }}>
-            Events
           </Text>
         </Pressable>
       )}

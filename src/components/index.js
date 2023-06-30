@@ -54,6 +54,7 @@ import {
   DirectionsTabComp,
   FolloUnfollowComp,
 } from './profilecompnew';
+import { PopularTemplesVerticalList } from './popularVerticalFlatList';
 export {
   Loader,
   SearchBar,
@@ -104,4 +105,5 @@ export {
   CreateFeedTabComp,
   DirectionsTabComp,
   FolloUnfollowComp,
+  PopularTemplesVerticalList,
 };
