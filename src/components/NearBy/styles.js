@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinBold,
   },
   loaderContainer: {
-    height: '90%',
+    height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
   },

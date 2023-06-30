@@ -1,5 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, TouchableOpacity, ToastAndroid} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ToastAndroid,
+  Dimensions,
+} from 'react-native';
 import {colors} from '../../common';
 import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
@@ -9,6 +16,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
 import {FlatList} from 'react-native-gesture-handler';
+const {height, width} = Dimensions.get('window');
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -48,6 +56,15 @@ export const UserFeedCompList = ({
     }
   };
 
+  const renderItem = mediaList => {
+    return (
+      // <View style={{flex: 1, marginLeft: 8}}>
+      <TouchableOpacity activeOpacity={1}>
+        <Image source={{uri: mediaList?.url}} style={{height: 250, width}} />
+      </TouchableOpacity>
+      // </View>
+    );
+  };
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
@@ -88,14 +105,21 @@ export const UserFeedCompList = ({
           <Image
             source={{
               uri:
-                post[0]?.mediaList?.url ||
+                post?.mediaList?.url ||
                 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
             }}
             style={styles.profileImage}
           />
         </TouchableOpacity>
         <TouchableOpacity onPress={onPressTitle}>
-          <Text style={styles.username}>{post?.description}</Text>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: 'bold',
+              marginBottom: 10,
+            }}>
+            {'No Name'}
+          </Text>
           {/* <Text style={styles.sponsorNameText}>Sponsored</Text> */}
         </TouchableOpacity>
         {/* <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
@@ -110,18 +134,10 @@ export const UserFeedCompList = ({
         keyboardShouldPersistTaps="handled"
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
-          // <View style={styles.mediaContainer}>
-          //   <Image
-          //     source={{uri: item?.url}}
-          //     style={styles.image}
-          //     resizeMode="cover"
-          //   />
-          // </View>
-          <View style={{flex: 1, marginLeft: 8}}>
-            <Image
-              source={{uri: item?.url}}
-              style={{height: 400, width: 400}}
-            />
+          <View>
+            <TouchableOpacity activeOpacity={1}>
+              <Image source={{uri: item?.url}} style={{height: 400, width}} />
+            </TouchableOpacity>
             {/* <Text
               style={{
                 fontSize: 12,
@@ -136,7 +152,7 @@ export const UserFeedCompList = ({
                   </View>
                 );
               }}>
-              {index + 1} {item.text}
+              {index + 1} .
             </Text> */}
           </View>
         )}
@@ -170,6 +186,7 @@ export const UserFeedCompList = ({
       <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
       </View>
+      <Text style={styles.username}>{post?.description}</Text>
     </View>
   );
 };
