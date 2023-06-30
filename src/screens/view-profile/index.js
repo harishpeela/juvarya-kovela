@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   ToastAndroid,
   ScrollView,
+  FlatList,
+  Image,
 } from 'react-native';
-import {BackgroundImage} from '../../components';
+import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -17,6 +19,7 @@ import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
   NewFollowCount,
+  GetPosts,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -34,12 +37,12 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '=============================>',
-    data,
-    '<==============',
-    userDetails,
-  );
+  // console.log(
+  //   '=============================>',
+  //   data,
+  //   '<==============',
+  //   userDetails,
+  // );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -53,28 +56,27 @@ const ViewProfile = ({route, navigation}) => {
   const [loading, setLoading] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
   const [followCount, setFollowCount] = useState(0);
-  const [templeDetails, setTempleDetails] = useState('');
+  const [templeDetails, setTempleDetails] = useState([]);
+  const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
   const FOLLOW = () => {
     if (isFollow) {
       followTemples();
     } else if (!isFollow) {
-      console.log('jasx');
       followTemples();
       setisFollow(!isFollow);
     }
   };
-  useEffect(async () => {
-    if (data) {
-      let result = Data(data);
-      // console.log('restttsyysys', result);
-      if (result) {
-        setTrfData(result);
-      }
+  useEffect(() => {
+    let result = Data(data);
+    if (result) {
+      setTrfData(result);
+    } else {
+      setTrfData();
     }
   }, [data]);
-  console.log('trfdata', trfData);
+  // console.log('trfdata', trfData);
   const followingCount = async () => {
     try {
       let result = await NewFollowCount(data?.id);
@@ -132,6 +134,30 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
 
+  const Posts = async () => {
+    try {
+      let result = await GetPosts(data?.id, 0, 20);
+      // console.log('result', result?.data);
+      let PostsArray = [];
+      let postsData = result?.data?.data;
+      let urls = postsData
+        ?.filter(item => item?.mediaList)
+        ?.map(({mediaList}) => ({mediaList}));
+      urls?.map(({mediaList}) =>
+        mediaList?.map(s => PostsArray?.push({image: s?.url})),
+      );
+      if (PostsArray?.length > 0) {
+        setloader(false);
+        setPostImages(PostsArray);
+        console.log('array', PostsArray);
+      } else {
+        setPostImages([]);
+        setloader(false);
+      }
+    } catch (error) {
+      console.log('error in posts', error);
+    }
+  };
   const TempleRoleSearchWithId = async () => {
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -149,7 +175,7 @@ const ViewProfile = ({route, navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        console.log('res odf role id', result);
+        // console.log('res odf role id', result);
         if (result) {
           setRoleId(result?.roles[0]);
         }
@@ -160,9 +186,10 @@ const ViewProfile = ({route, navigation}) => {
     TempleRoleSearchWithId();
     getFollowValue();
     followingCount();
+    Posts();
   }, [route]);
   return (
-    <ScrollView style={styles.maincontainer}>
+    <View style={styles.maincontainer}>
       <View style={styles.footerBackground}>
         <BackgroundImage />
         <View style={styles.footerContainer}>
@@ -222,47 +249,42 @@ const ViewProfile = ({route, navigation}) => {
             setCurrentIndex={setCurrentIndex}
             templeDetails={trfData}
           />
-          {/* {currentIndex === 1 && (
-            <View style={styles.contentDisplay}>
-              <View style={styles.contentDisplay.row}>
-                <Text style={{fontSize: 20}}>Posts</Text>
-              </View>
-              {itemDetails.length === 0 ? (
-                <View style={{alignItems: 'center', marginTop: '15%'}}>
-                  <Text style={styles.noposttext}>
-                    no posts for this temple
-                  </Text>
+          {currentIndex === 1 && (
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={styles.contentDisplay}>
+              {loader && (
+                <View style={{flex: 1}}>
+                  <Loader color={'green'} size={30} />
+                </View>
+              )}
+              {!postImages?.length > 0 ? (
+                <View>
+                  <Feather name="camera-off" size={40} style={styles.noPosts} />
+                  <Text style={styles.noPosts.text}>No Posts Yet</Text>
                 </View>
               ) : (
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  style={{height: '45%'}}>
-                  <FlatList
-                    numColumns={3}
-                    showsVerticalScrollIndicator={false}
-                    showsHorizontalScrollIndicator={false}
-                    data={itemDetails}
-                    keyExtractor={({item, index}) => index}
-                    renderItem={({item, index}) => (
-                      <View style={{marginRight: '2%', marginTop: '2%'}}>
-                        <Image
-                          source={{
-                            uri: item?.mediaList[0]?.url
-                              ? item?.mediaList[0]?.url
-                              : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1670905787229_shiva pic 2.png',
-                          }}
-                          style={{
-                            height: 110,
-                            width: 110,
-                          }}
-                        />
-                      </View>
-                    )}
-                  />
-                </ScrollView>
+                <FlatList
+                  numColumns={3}
+                  data={postImages}
+                  keyExtractor={({item, index}) => index}
+                  renderItem={({item, index}) => (
+                    <TouchableOpacity>
+                      <Image
+                        source={{uri: item?.image}}
+                        style={{
+                          height: 150,
+                          width: 105,
+                          margin: 5,
+                          borderRadius: 20,
+                        }}
+                      />
+                    </TouchableOpacity>
+                  )}
+                />
               )}
-            </View>
-          )} */}
+            </ScrollView>
+          )}
           {/* {currentIndex === 3 && (
             <>
               <View
@@ -276,7 +298,7 @@ const ViewProfile = ({route, navigation}) => {
           )} */}
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
 export default ViewProfile;

@@ -54,19 +54,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentDisplay: {
-    paddingVertical: 10,
-    row: {
-      flexDirection: 'row',
-      flexWrap: 'wrap',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      marginVertical: 5,
-      col: {
-        width: 100,
-        height: 100,
-        backgroundColor: 'rgba(88, 88, 88, 0.2)',
-        borderRadius: 20,
-      },
+    height: '52%',
+  },
+  noPosts: {
+    borderWidth: 1,
+    alignSelf: 'center',
+    padding: 20,
+    borderRadius: 100 / 2,
+    marginTop: '20%',
+    text: {
+      fontSize: 18,
+      alignSelf: 'center',
+      marginTop: 10,
     },
   },
   followtab: {

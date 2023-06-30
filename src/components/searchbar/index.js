@@ -41,7 +41,7 @@ export const SearchBar = ({
             <Feather
               onPress={onCrossPress}
               name="x-circle"
-              color={colors.green2}
+              color={colors.orangeColor}
               size={25}
             />
           )}

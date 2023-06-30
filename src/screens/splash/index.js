@@ -8,7 +8,7 @@ import {saveClientCredentials} from '../../utils/preferences/localStorage';
 
 const Splash = ({navigation}) => {
   const {
-    screenNames: {signup},
+    screenNames: {signin},
   } = allTexts;
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Splash = ({navigation}) => {
           alignSelf: 'center',
           marginLeft: '50%',
         }}
-        onPress={() => navigation.replace(signup)}>
+        onPress={() => navigation.replace(signin)}>
         <Image
           source={require('../../utils/assets/images/splashButton.png')}
           style={{

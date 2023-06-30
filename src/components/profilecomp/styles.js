@@ -73,10 +73,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     paddingTop: 20,
     item: {
       alignItems: 'center',
+      marginRight: '10%',
       text: {
         paddingVertical: 5,
       },
@@ -85,7 +86,6 @@ export const styles = StyleSheet.create({
       },
     },
   },
-
 });
 
 export const style = (bgColor, radius, paddidng, width) =>

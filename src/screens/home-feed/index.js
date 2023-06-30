@@ -10,7 +10,6 @@ import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
@@ -61,7 +60,7 @@ const UserFeedScreen = ({navigation}) => {
   }, [apiPageNo]);
   console.log('home', homeFeedList?.lenght);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
       <View style={styles.navBarContainer}>
         <View style={styles.buttonContainer}>
