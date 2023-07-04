@@ -34,6 +34,8 @@ import {
   Feed,
   Posts,
   FollowersMembership,
+  ProfileMembership,
+  SeeAll,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -90,6 +92,8 @@ const App = () => {
       mySavedPosts,
       posts,
       followersmembership,
+      profilemembership,
+      seeall,
     },
   } = allTexts;
 
@@ -334,6 +338,20 @@ const App = () => {
         <Stack.Screen
           name={followersmembership}
           component={FollowersMembership}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profilemembership}
+          component={ProfileMembership}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={seeall}
+          component={SeeAll}
           options={{
             headerShown: false,
           }}

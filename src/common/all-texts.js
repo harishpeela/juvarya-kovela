@@ -24,7 +24,7 @@ export const allTexts = {
       fName: 'First name',
       phoneNo: 'phone number',
       lastName: 'last name',
-      email: 'User Name',
+      email: 'Email',
       password: 'password',
       tName: 'Enter Temple Name',
       tDescription: 'Description',
@@ -136,6 +136,8 @@ export const allTexts = {
     mySavedPosts: 'My Saved Posts',
     posts: 'Posts',
     followersmembership: 'FollowersMembership',
+    profilemembership: 'ProfileMembership',
+    seeall: 'SeeAll',
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -1,18 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ScrollView} from 'react-native';
+import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
-import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
+import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {
   PopularTemples,
   GetProfilePicture,
   NewGetFollowUmFollowById,
 } from '../../utils/api';
-export const NearBy = ({pageNav}) => {
+export const NearBy = ({pageNav, seeallnav}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const [isFollow, setIsFollow] = useState();
@@ -97,9 +97,16 @@ export const NearBy = ({pageNav}) => {
             <>
               <View style={styles.upComingTextTab}>
                 <Text style={styles.popularTextContainer}>Popular Temple</Text>
-                <Text style={{color: colors.orangeColor, fontSize: 18}}>
-                  See all
-                </Text>
+                <TouchableOpacity
+                  onPress={() =>
+                    seeallnav.navigate(allTexts.screenNames.seeall, {
+                      data: filteredList,
+                    })
+                  }>
+                  <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                    See all
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View>
                 <ScrollView>
