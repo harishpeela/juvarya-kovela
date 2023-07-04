@@ -30,6 +30,7 @@ const endpoints = {
   NEW_LIKES_COUNT: '/jtfeedreview/likes?feedId',
   NEW_FOLLOW_COUNT: '/jtfollwer/count',
   NEW_FAVORITES: '/jtfollwer/profile',
+  NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
   SIGN_UP: 'v1/jtcustomer/create',
@@ -54,7 +55,7 @@ const endpoints = {
   LIKE_UNLIKE_HOME_FEED: 'v1/review/like',
   GET_UPCOMING_OCCASIONS: 'v1/occasion/upcoming',
   GET_ITEM_COMMUNITIES: 'v1/itemcommunity/list',
-  GET_SAVED_POSTS_LIST: 'v1/jtfeedtocustomer/list',
+  GET_SAVED_POSTS_LIST: '/jtfeedtocustomer/list',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   LOGIN:
@@ -100,7 +101,17 @@ export const PopularTemples = async (pgfrm, pgto) => {
     console.log(error);
   }
 };
-
+export const getTempledetailsWithId = async id => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.NEW_GET_TEMPLESDETAILS_WITH_TEMPID}/${id}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const GetsearchPopularTemples = async name => {
   try {
     let result = await axiosNewData.get(
@@ -506,11 +517,14 @@ export const getItemCommunities = async (id, pageNo, pageSize) => {
   }
 };
 
-export const getSavedPostsList = async (pageNo, pageSize) => {
+export const getSavedPostsList = async () => {
   try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_SAVED_POSTS_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
-      {retry: 5, retryDelay: 3000},
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.GET_SAVED_POSTS_LIST}`,
+      {
+        // retry: 5,
+        // retryDelay: 3000,
+      },
     );
     return result;
   } catch (error) {

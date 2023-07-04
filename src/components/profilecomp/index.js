@@ -162,7 +162,11 @@ export const ProfileFourthTab = ({
   return (
     <View style={styles.controlPanel}>
       <Pressable
-        style={styles.controlPanel.item}
+        style={{
+          ...styles.controlPanel.item,
+          borderBottomWidth: currentIndex === 1 ? 1 : 0,
+          borderColor: currentIndex === 1 ? colors.orangeColor : null,
+        }}
         onPress={() => setCurrentIndex(1)}>
         <Feather
           name="grid"
@@ -179,8 +183,11 @@ export const ProfileFourthTab = ({
       </Pressable>
       {templeDetails?.ecommerceEnabled && (
         <Pressable
-          style={styles.controlPanel.item}
-          onPress={() => setCurrentIndex(4)}>
+          style={{
+            ...styles.controlPanel.item,
+            borderBottomWidth: currentIndex === 4 ? 1 : 0,
+            borderColor: currentIndex === 4 ? colors.orangeColor : null,
+          }}>
           <FontAwesome
             name="calendar-plus-o"
             color={currentIndex === 4 ? '#FFA001' : '#585858'}
@@ -197,8 +204,11 @@ export const ProfileFourthTab = ({
       )}
       {templeDetails?.reelsEnabled && (
         <Pressable
-          style={{...styles.controlPanel.item}}
-          onPress={() => setCurrentIndex(2)}>
+          style={{
+            ...styles.controlPanel.item,
+            borderBottomWidth: currentIndex === 2 ? 1 : 0,
+            borderColor: currentIndex === 2 ? colors.orangeColor : null,
+          }}>
           <MaterialCommunityIcons
             name="movie-open-outline"
             color={currentIndex === 2 ? '#FFA001' : '#585858'}
@@ -215,7 +225,11 @@ export const ProfileFourthTab = ({
       )}
       {templeDetails?.servicesEnabled && (
         <Pressable
-          style={styles.controlPanel.item}
+          style={{
+            ...styles.controlPanel.item,
+            borderBottomWidth: currentIndex === 3 ? 1 : 0,
+            borderColor: currentIndex === 3 ? colors.orangeColor : null,
+          }}
           onPress={() => setCurrentIndex(3)}>
           <Entypo
             name="shop"
@@ -234,8 +248,11 @@ export const ProfileFourthTab = ({
 
       {templeDetails?.donationsEnabled && (
         <Pressable
-          style={styles.controlPanel.item}
-          onPress={() => setCurrentIndex(5)}>
+          style={{
+            ...styles.controlPanel.item,
+            borderBottomWidth: currentIndex === 5 ? 1 : 0,
+            borderColor: currentIndex === 5 ? colors.orangeColor : null,
+          }}>
           <FontAwesome5
             name="hand-holding-heart"
             color={currentIndex === 5 ? '#FFA001' : '#585858'}

@@ -5,7 +5,14 @@ import {View, TouchableOpacity, RefreshControl, Text} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {NewFeedHome, NewLikesCount, getHomeFeedList} from '../../utils/api';
+import {
+  NewFeedHome,
+  NewLikesCount,
+  getHomeFeedList,
+  getAddTempId,
+  getTempledetailsWithId,
+  GetProfilePicture,
+} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -13,12 +20,10 @@ import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
-  const {userDetails, setHomeFeedListData} = useContext(ApplicationContext);
-  const [loading, setloading] = useState(false);
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [id, setId] = useState(userDetails?.id);
   const [apiPageNo, setApiPageNo] = useState(0);
   // console.log('user', userDetails);
   const MyCustShare = async () => {
@@ -35,18 +40,36 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(apiPageNo, 20);
-      console.log('feed list', result?.data);
+      // console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
-        setHomeFeedList(result?.data?.jtFeeds);
         // setHomeFeedList(existedFeedList => [
         //   ...existedFeedList,
         //   ...result?.data?.jtFeeds,
         // ]);
-        setHomeFeedListData(result?.data?.jtFeeds);
+        let details = result?.data?.jtFeeds || [];
+        details?.map(t => {
+          TempleDetails(t);
+        });
       }
     } catch (error) {
-      console.log('error', error);
+      console.log('errorrrd', error);
+    }
+  };
+  const TempleDetails = async jtId => {
+    // console.log('ajshbx', jtId);
+    try {
+      let responce = await getTempledetailsWithId(jtId?.jtProfile);
+      let result = await GetProfilePicture(jtId?.jtProfile);
+      // console.log('res', result?.data);
+      if (responce) {
+        const fullData = {...jtId, ...responce?.data, ...result?.data};
+        setHomeFeedList(idData => [...idData, fullData]);
+      } else {
+        console.log('msbmabsmbams');
+      }
+    } catch (error) {
+      console.log('error in temple details with id api', error);
     }
   };
   useEffect(() => {
@@ -58,7 +81,7 @@ const UserFeedScreen = ({navigation}) => {
       listFeed();
     }
   }, [apiPageNo]);
-  console.log('home', homeFeedList?.lenght);
+  // console.log('home', homeFeedList);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -92,8 +115,6 @@ const UserFeedScreen = ({navigation}) => {
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
-            // horizontal
-            // showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
                 refreshing={refrsh}

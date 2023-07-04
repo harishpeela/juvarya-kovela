@@ -9,7 +9,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import {BackgroundImage, Loader} from '../../components';
+import {BackgroundImage, Loader, BackHeaderNew} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -40,23 +40,18 @@ const ViewProfile = ({route, navigation}) => {
   // console.log(
   //   '=============================>',
   //   data,
-  //   '<==============',
-  //   userDetails,
+  //   // '<==============',
+  //   // userDetails,
   // );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
-  const [isFollowValue, setIsFollowValue] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [followVisible, setFollowVisible] = useState(false);
-  const [feedListData, setFeedListData] = useState([]);
-  const [nameData, setNameData] = useState();
   const [itemDetails, setItemDetails] = useState([]);
-  const [loading, setLoading] = useState('');
   const [itemCommunity, setItemCommunity] = useState([]);
   const [followCount, setFollowCount] = useState(0);
-  const [templeDetails, setTempleDetails] = useState([]);
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
@@ -135,6 +130,7 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async () => {
+    console.log('data?.id', data?.id);
     try {
       let result = await GetPosts(data?.id, 0, 20);
       // console.log('result', result?.data);
@@ -198,14 +194,22 @@ const ViewProfile = ({route, navigation}) => {
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <Text
-              style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
-              Profile
+              numberOfLines={1}
+              style={{
+                fontSize: 16,
+                fontWeight: '500',
+                marginHorizontal: '30%',
+                alignSelf: 'center',
+              }}>
+              {trfData?.name?.length < 17
+                ? `${trfData?.name}`
+                : `${trfData?.name?.substring(0, 17)}...`}
             </Text>
           </View>
           <View style={styles.firstTabView}>
             <ProfileComp profileImg={trfData} />
             <PostsComp
-              itemDetails={itemDetails}
+              itemDetails={postImages}
               onPress={() => setPosts(!posts)}
             />
             <FollowersComp
@@ -218,11 +222,9 @@ const ViewProfile = ({route, navigation}) => {
             />
             <CommunityComp
               itemCommunity={itemCommunity}
-              // onPressmembership={() =>
-              //   navigation.navigate(allTexts.screenNames.followersmembership, {
-              //     id: id,
-              //   })
-              // }
+              onPressmembership={() =>
+                navigation.navigate(allTexts.screenNames.profilemembership)
+              }
             />
           </View>
           <ProfileSeconTab nameData={trfData} title={trfData?.name} />
@@ -273,10 +275,8 @@ const ViewProfile = ({route, navigation}) => {
                       <Image
                         source={{uri: item?.image}}
                         style={{
-                          height: 150,
-                          width: 105,
-                          margin: 5,
-                          borderRadius: 20,
+                          height: 120,
+                          width: 120,
                         }}
                       />
                     </TouchableOpacity>
@@ -285,17 +285,6 @@ const ViewProfile = ({route, navigation}) => {
               )}
             </ScrollView>
           )}
-          {/* {currentIndex === 3 && (
-            <>
-              <View
-                style={{
-                  alignItems: 'center',
-                  marginTop: '25%',
-                }}>
-                <Text style={{fontSize: 16}}> page under development</Text>
-              </View>
-            </>
-          )} */}
         </View>
       </View>
     </View>

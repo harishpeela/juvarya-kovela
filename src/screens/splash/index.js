@@ -21,7 +21,7 @@ const Splash = ({navigation}) => {
       // console.log(result);
       if (result.status === 200) {
         const {
-          data: {access_token, expires_in, scope, token_type},
+          data: {access_token, token_type},
         } = result;
         saveClientCredentials(token_type, access_token);
       }

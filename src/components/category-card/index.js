@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
   ToastAndroid,
   Dimensions,
+  Animated,
 } from 'react-native';
 import {colors} from '../../common';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {styles} from './styles';
 import {SaveFeed, NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,6 +18,8 @@ import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
 import {FlatList} from 'react-native-gesture-handler';
 const {height, width} = Dimensions.get('window');
+import {DotsNation} from '../dotsNation';
+import {Posts} from '../../screens';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -32,6 +35,7 @@ export const UserFeedCompList = ({
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState();
   const [saveFeed, setSaveFeed] = useState(false);
+  const [dotIndex, setIndex] = useState(0);
   const likeUnLikeHandler = async () => {
     if (isLiked) {
       setLikeCount(likeCount - 1);
@@ -54,16 +58,6 @@ export const UserFeedCompList = ({
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const renderItem = mediaList => {
-    return (
-      // <View style={{flex: 1, marginLeft: 8}}>
-      <TouchableOpacity activeOpacity={1}>
-        <Image source={{uri: mediaList?.url}} style={{height: 250, width}} />
-      </TouchableOpacity>
-      // </View>
-    );
   };
   const FeedStatus = () => {
     let status = !saveFeed;
@@ -95,6 +89,31 @@ export const UserFeedCompList = ({
       console.log('error in likes count', error);
     }
   };
+  const scrollX = useRef(new Animated.Value(0)).current;
+  const handleOnScroll = event => {
+    Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              x: scrollX,
+            },
+          },
+        },
+      ],
+      {
+        useNativeDriver: false,
+      },
+    )(event);
+  };
+  const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
+    setIndex(viewableItems[0]?.index);
+  }).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+  }).current;
+
   useEffect(() => {
     likesCount();
   }, []);
@@ -105,7 +124,7 @@ export const UserFeedCompList = ({
           <Image
             source={{
               uri:
-                post?.mediaList?.url ||
+                post?.url ||
                 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
             }}
             style={styles.profileImage}
@@ -114,49 +133,38 @@ export const UserFeedCompList = ({
         <TouchableOpacity onPress={onPressTitle}>
           <Text
             style={{
-              fontSize: 18,
+              fontSize: 14,
               fontWeight: 'bold',
               marginBottom: 10,
             }}>
-            {'No Name'}
+            {post?.name}
           </Text>
-          {/* <Text style={styles.sponsorNameText}>Sponsored</Text> */}
         </TouchableOpacity>
-        {/* <TouchableOpacity style={styles.postMenuButton} onPress={onDotsPress}>
-          <MatrialIcon name="dots-horizontal" size={25} color="#919191" />
-        </TouchableOpacity> */}
       </View>
       {/* <RenderImage post={post} /> */}
-      <FlatList
-        data={post?.mediaList}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-        keyExtractor={({item, index}) => index}
-        renderItem={({item, index}) => (
-          <View>
-            <TouchableOpacity activeOpacity={1}>
-              <Image source={{uri: item?.url}} style={{height: 400, width}} />
-            </TouchableOpacity>
-            {/* <Text
-              style={{
-                fontSize: 12,
-                color: 'black',
-                marginBottom: 8,
-                marginLeft: 8,
-              }}
-              onPress={() => {
-                return (
-                  <View>
-                    <Image source={{uri: item.url}} style={{marginTop: 20}} />
-                  </View>
-                );
-              }}>
-              {index + 1} .
-            </Text> */}
-          </View>
-        )}
-      />
+      <View>
+        <FlatList
+          data={post?.mediaList}
+          horizontal
+          pagingEnabled
+          snapToAlignment="center"
+          showsHorizontalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          onScroll={handleOnScroll}
+          onViewableItemsChanged={handleOnViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
+          keyExtractor={({item, index}) => index}
+          renderItem={({item, index}) => {
+            return (
+              <View>
+                {/* <TouchableOpacity> */}
+                <Image source={{uri: item?.url}} style={{height: 400, width}} />
+                {/* </TouchableOpacity> */}
+              </View>
+            );
+          }}
+        />
+      </View>
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
           <Icon
@@ -165,6 +173,13 @@ export const UserFeedCompList = ({
             color={isLiked ? colors.orangeColor : 'black'}
           />
         </TouchableOpacity>
+        {post?.mediaList?.length > 1 && (
+          <DotsNation
+            data={post?.mediaList}
+            scrollX={scrollX}
+            index={dotIndex}
+          />
+        )}
         <View style={styles.postFooterLeft}>
           <TouchableOpacity onPress={onSharePress}>
             <FeatherIcon name="send" size={20} color="black" />

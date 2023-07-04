@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   contentDisplay: {
-    height: '52%',
+    height: '55%',
   },
   noPosts: {
     borderWidth: 1,
