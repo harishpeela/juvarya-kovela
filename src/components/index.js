@@ -54,7 +54,9 @@ import {
   DirectionsTabComp,
   FolloUnfollowComp,
 } from './profilecompnew';
-import { PopularTemplesVerticalList } from './popularVerticalFlatList';
+import {PopularTemplesVerticalList} from './popularVerticalFlatList';
+import {DotsNation} from './dotsNation';
+import {BackHeaderNew} from './backHeaders';
 export {
   Loader,
   SearchBar,
@@ -106,4 +108,6 @@ export {
   DirectionsTabComp,
   FolloUnfollowComp,
   PopularTemplesVerticalList,
+  DotsNation,
+  BackHeaderNew,
 };

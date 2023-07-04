@@ -1,7 +1,7 @@
 /* eslint-disable no-lone-blocks */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
 import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
@@ -42,22 +42,22 @@ export const SaveFeedComp = ({
       console.log(error);
     }
   };
-  const renderImage = post => {
-    if (!post?.jtFeedDTO?.mediaList === '') {
+  const renderImage = () => {
+    if (!post?.mediaList === '') {
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post.jtFeedDTO?.mediaList[0]?.url}}
+            source={{uri: post?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />
         </View>
       );
-    } else if (post?.jtFeedDTO?.mediaList[0]?.url) {
+    } else if (post?.mediaList?.url) {
       return (
         <View style={styles.mediaContainer}>
           <Image
-            source={{uri: post?.jtFeedDTO?.mediaList[0]?.url}}
+            source={{uri: post?.mediaList[0]?.url}}
             style={styles.image}
             resizeMode="cover"
           />
@@ -91,13 +91,28 @@ export const SaveFeedComp = ({
   //     console.log('result', result?.data);
   //   };
   return (
-    <View style={styles.postContainer} key={post?.itemDetails?.id}>
+    <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
         <TouchableOpacity onPress={onPressTitle}>
-          <Text style={styles.username}>{post?.jtFeedDTO?.description}</Text>
+          <Text style={styles.username}>{post?.jtFeed?.description}</Text>
         </TouchableOpacity>
       </View>
-      {renderImage(post)}
+      {/* {renderImage(post)} */}
+      <FlatList
+        data={post?.mediaList}
+        horizontal
+        pagingEnabled
+        keyExtractor={({item, index}) => index}
+        renderItem={({item, index}) => (
+          <View style={styles.mediaContainer}>
+            <Image
+              source={{uri: item?.url}}
+              style={styles.image}
+              resizeMode="cover"
+            />
+          </View>
+        )}
+      />
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
           <Icon
@@ -106,7 +121,7 @@ export const SaveFeedComp = ({
             color={isLiked ? colors.orangeColor : 'black'}
           />
         </TouchableOpacity>
-        <View style={styles.postFooterLeft}>
+        {/* <View style={styles.postFooterLeft}>
           <TouchableOpacity onPress={saveOnPress}>
             <FeatherIcon name="send" size={20} color="black" />
           </TouchableOpacity>
@@ -121,7 +136,7 @@ export const SaveFeedComp = ({
               size={20}
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
       <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
