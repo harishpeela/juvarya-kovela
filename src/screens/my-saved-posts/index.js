@@ -1,11 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
-import {BackgroundImage} from '../../components';
+import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
+import { colors } from '../../common';
 const MySavedPosts = ({navigation}) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,18 +14,11 @@ const MySavedPosts = ({navigation}) => {
 
   const getPostsList = async () => {
     try {
-      let response = await getSavedPostsList(0, 100);
-      console.log('get feeds list', response?.data?.feedToCustomers[0]?.jtFeed);
-      const {
-        status,
-        data: {feedToCustomers},
-      } = response || {};
-      if (response && status === 200) {
-        setPosts(feedToCustomers);
-        setfilteredArray(feedToCustomers);
+      let result = await getSavedPostsList();
+      console.log('res of saved posts', result?.data);
+      if (result.status === 200) {
         setLoading(false);
-      } else {
-        setLoading(false);
+        setfilteredArray(result?.data?.data);
       }
     } catch (error) {
       console.log(error);
@@ -34,7 +28,7 @@ const MySavedPosts = ({navigation}) => {
   console.log('filter', filteredArray);
 
   useEffect(() => {
-    // getPostsList();
+    getPostsList();
   }, []);
 
   return (
@@ -50,14 +44,20 @@ const MySavedPosts = ({navigation}) => {
           </Text>
         </View>
         <View style={{height: '85%'}}>
-          <FlatList
-            data={filteredArray}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.flatListStyle}
-            keyboardShouldPersistTaps="handled"
-            keyExtractor={(item, index) => item?.id}
-            renderItem={({item, index}) => <SaveFeedComp post={item} />}
-          />
+          {loading ? (
+            <View>
+              <Loader color={colors.orangeColor} />
+            </View>
+          ) : (
+            <FlatList
+              data={filteredArray}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.flatListStyle}
+              keyboardShouldPersistTaps="handled"
+              keyExtractor={(item, index) => item?.id}
+              renderItem={({item, index}) => <SaveFeedComp post={item} />}
+            />
+          )}
         </View>
       </View>
     </View>
