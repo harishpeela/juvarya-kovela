@@ -21,7 +21,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
-  const [loader, setloader] = useState(false);
+  const [loader, setloader] = useState(true);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
@@ -37,9 +37,8 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async () => {
-    setloader(true);
     try {
-      let result = await getHomeFeedList(apiPageNo, 20);
+      let result = await getHomeFeedList(apiPageNo, 100);
       // console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
@@ -144,9 +143,13 @@ const UserFeedScreen = ({navigation}) => {
             // onEndReached={() => setApiPageNo(pageNo => pageNo + 1)}
             // onEndReachedThreshold={0.5}
           />
-        ) : (
+        ) : homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
+          </View>
+        ) : (
+          <View style={{flex: 1}}>
+            <Loader color={colors.green2} size={30} />
           </View>
         )}
       </>

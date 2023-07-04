@@ -8,6 +8,7 @@ export const Data = d => {
     seasonal: d?.seasonal ? d?.seasonal : false,
     servicesEnabled: d?.servicesEnabled ? d?.servicesEnabled : false,
     templeClass: d?.templeClass ? d?.templeClass : '',
+    jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
   };
   return myDataDetails;
 };

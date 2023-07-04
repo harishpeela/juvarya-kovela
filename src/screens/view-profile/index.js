@@ -9,7 +9,7 @@ import {
   FlatList,
   Image,
 } from 'react-native';
-import {BackgroundImage, Loader, BackHeaderNew} from '../../components';
+import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -49,7 +49,6 @@ const ViewProfile = ({route, navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [followVisible, setFollowVisible] = useState(false);
-  const [itemDetails, setItemDetails] = useState([]);
   const [itemCommunity, setItemCommunity] = useState([]);
   const [followCount, setFollowCount] = useState(0);
   const [postImages, setPostImages] = useState([]);
@@ -65,13 +64,19 @@ const ViewProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     let result = Data(data);
+    console.log('jtProfile', result);
     if (result) {
       setTrfData(result);
+      if (result?.jtProfile) {
+        // setId(result?.jtProfile);
+        Posts(result?.jtProfile);
+      } else {
+        console.log('nope');
+      }
     } else {
       setTrfData();
     }
   }, [data]);
-  // console.log('trfdata', trfData);
   const followingCount = async () => {
     try {
       let result = await NewFollowCount(data?.id);
@@ -129,11 +134,10 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
 
-  const Posts = async () => {
-    console.log('data?.id', data?.id);
+  const Posts = async id => {
     try {
-      let result = await GetPosts(data?.id, 0, 20);
-      // console.log('result', result?.data);
+      let result = await GetPosts(id, 0, 20);
+      console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
       let urls = postsData
@@ -171,18 +175,26 @@ const ViewProfile = ({route, navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        // console.log('res odf role id', result);
+        console.log('res odf role id', result);
         if (result) {
-          setRoleId(result?.roles[0]);
+          console.log('1');
+          let val = result?.roles;
+          var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
+          console.log('id', roleAdmin);
+          if (roleAdmin) {
+            setRoleId('ROLE_ITEM_ADMIN');
+          }
+        } else {
+          console.log('2');
+          setRoleId(null);
         }
       })
-      .catch(error => console.log('errorrr', error));
+      .catch(error => console.log('errorrr in id', error));
   };
   useEffect(() => {
     TempleRoleSearchWithId();
     getFollowValue();
     followingCount();
-    Posts();
   }, [route]);
   return (
     <View style={styles.maincontainer}>
@@ -194,16 +206,17 @@ const ViewProfile = ({route, navigation}) => {
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <Text
-              numberOfLines={1}
+              // numberOfLines={1}
               style={{
                 fontSize: 16,
                 fontWeight: '500',
-                marginHorizontal: '30%',
+                marginHorizontal: '25%',
                 alignSelf: 'center',
+                textTransform: 'capitalize',
               }}>
-              {trfData?.name?.length < 17
+              {trfData?.name?.length < 15
                 ? `${trfData?.name}`
-                : `${trfData?.name?.substring(0, 17)}...`}
+                : `${trfData?.name?.substring(0, 15)}...`}
             </Text>
           </View>
           <View style={styles.firstTabView}>

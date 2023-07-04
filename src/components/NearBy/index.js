@@ -24,7 +24,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples(0, 20);
-      console.log('iuhkmnSzmn =>', result?.data);
+      // console.log('iuhkmnSzmn =>', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);

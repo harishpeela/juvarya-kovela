@@ -73,9 +73,9 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
-    // console.log('pay', payload);
+    console.log('pay', payload);
     let result = await NewSaveFeed(payload);
-    // console.log('result =====>', result?.data);
+    console.log('result =====>', result?.data);
   };
   const likesCount = async () => {
     try {
@@ -136,6 +136,7 @@ export const UserFeedCompList = ({
               fontSize: 14,
               fontWeight: 'bold',
               marginBottom: 10,
+              textTransform: 'uppercase',
             }}>
             {post?.name}
           </Text>

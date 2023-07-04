@@ -6,7 +6,7 @@ import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
-import { colors } from '../../common';
+import {colors} from '../../common';
 const MySavedPosts = ({navigation}) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,9 +19,11 @@ const MySavedPosts = ({navigation}) => {
       if (result.status === 200) {
         setLoading(false);
         setfilteredArray(result?.data?.data);
+      } else {
+        setLoading(false);
       }
     } catch (error) {
-      console.log(error);
+      console.log('error in api', error);
     }
   };
 
@@ -48,7 +50,7 @@ const MySavedPosts = ({navigation}) => {
             <View>
               <Loader color={colors.orangeColor} />
             </View>
-          ) : (
+          ) : filteredArray?.length > 0 ? (
             <FlatList
               data={filteredArray}
               showsVerticalScrollIndicator={false}
@@ -57,6 +59,10 @@ const MySavedPosts = ({navigation}) => {
               keyExtractor={(item, index) => item?.id}
               renderItem={({item, index}) => <SaveFeedComp post={item} />}
             />
+          ) : (
+            <View style={{alignItems: 'center', marginTop: '65%'}}>
+              <Text> Yet Not saved any post ...!</Text>
+            </View>
           )}
         </View>
       </View>
