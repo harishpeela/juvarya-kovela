@@ -32,10 +32,10 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    marginTop: 10,
+    // marginTop: 10,
   },
   footerBody: {
-    paddingTop: 20,
+    // paddingTop: 20,
   },
   desciption: {
     fontSize: 14,
@@ -73,11 +73,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    // justifyContent: 'space-between',
     paddingTop: 20,
+    marginLeft: 10,
+    marginBottom: 10,
+    borderBottomWidth: 0.2,
     item: {
       alignItems: 'center',
       marginRight: '10%',
+      width: 100,
+
       text: {
         paddingVertical: 5,
       },

@@ -47,9 +47,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: '3%',
     marginTop: 5,
-    fontSize: 20,
+    fontSize: 14,
     textTransform: 'capitalize',
-    // color: colors.orangeColor,
   },
   sponsorNameText: {
     fontWeight: '500',

@@ -10,7 +10,7 @@ const Search = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
       <View style={{marginTop: '10%'}}>
-        <NearBy pageNav={navigation} />
+        <NearBy pageNav={navigation} seeallnav={navigation} />
         {/* <UpComingEvents /> */}
       </View>
     </View>
