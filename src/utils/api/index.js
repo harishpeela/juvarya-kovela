@@ -31,6 +31,7 @@ const endpoints = {
   NEW_FOLLOW_COUNT: '/jtfollwer/count',
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
+  NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
   SIGN_UP: 'v1/jtcustomer/create',
@@ -116,6 +117,16 @@ export const GetsearchPopularTemples = async name => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.GET_SEARCHED_POPULAR_TEMPELS}?query=${name}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const GetMyTemples = async custId => {
+  try {
+    let result = await axiosNewData1.get(
+      `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}`,
     );
     return result;
   } catch (error) {
