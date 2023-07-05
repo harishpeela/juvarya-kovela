@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   View,
@@ -6,14 +7,17 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
-import {getTempleList} from '../../utils/api';
+import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
+import ApplicationContext from '../../utils/context-api/Context';
 
 const MyTamples = ({navigation, route}) => {
+  const {userDetails} = useContext(ApplicationContext);
+  // console.log('userdetails', userDetails);
   const {
     screenNames: {addTample, addtemplenew},
   } = allTexts;
@@ -25,32 +29,55 @@ const MyTamples = ({navigation, route}) => {
   let isFocused = useIsFocused();
   const getTemples = async () => {
     try {
-      let response = await getTempleList(1, 100);
-      // console.log('get temp list', response?.data);
-      const {
-        status,
-        data: {items},
-      } = response || {};
-      if (response && status === 200) {
-        // console.log('My Temples 786', items?.length);
-        setTempleList(items);
-        setfilteredArray(items);
-        // console.log('list of visible arrays', items);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
+      let response = await GetMyTemples(userDetails?.id);
+      console.log('get temp list', response?.data);
+      let data = response?.data?.data;
+      data?.map(a => {
+        TempleDetails(a);
+      });
+      // const {
+      //   status,
+      //   data: {items},
+      // } = response || {};
+      // if (response && status === 200) {
+      //   // console.log('My Temples 786', items?.length);
+      //   setTempleList(items);
+      //   setfilteredArray(items);
+      //   // console.log('list of visible arrays', items);
+      //   setLoading(false);
+      // } else {
+      //   setLoading(false);
+      // }
     } catch (error) {
       console.log(error);
     }
   };
-  // useEffect(() => {
-  //   getTemples();
-  // }, [isFocused]);
+  const TempleDetails = async d => {
+    // console.log('d', d);
+    try {
+      let result = await getTempledetailsWithId(d?.jtProfile);
+      // console.log(result?.data, '------>');
+      if (result) {
+        let templesArray = {...d, ...result?.data};
+        // console.log('templesArray', templesArray);
+        setLoading(false);
+        setTempleList(array => [...array, templesArray]);
+        setfilteredArray(array => [...array, templesArray]);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log('error in templedetails api is ==>', error);
+    }
+  };
+  useEffect(() => {
+    getTemples();
+  }, [isFocused]);
   const performFilter = value => {
+    console.log(value, '==>');
     setfilteredArray(
       templeList.filter(item =>
-        item.name.toLowerCase().includes(value.toLowerCase()),
+        item?.name?.toLowerCase().includes(value?.toLowerCase()),
       ),
     );
   };
