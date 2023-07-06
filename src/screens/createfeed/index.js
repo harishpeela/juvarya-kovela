@@ -24,6 +24,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {createFeed} from '../../utils/api';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+
 const CreateFeed = ({route, navigation}) => {
   const {data} = route.params || {};
   // console.log('id', data);
@@ -63,25 +64,74 @@ const CreateFeed = ({route, navigation}) => {
       body: formdata,
       redirect: 'follow',
     };
-    console.log('formdata', formdata);
+    console.log('formdata', formdata?.files);
     fetch(
       'http://fanfundev.eastasia.cloudapp.azure.com:9094/jtfeed/create',
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
+        console.log('uijjij', result);
         if (result?.message === 'Feed created') {
           navigation.navigate(allTexts.screenNames.home);
         } else {
           alert('somet thing went wrong');
         }
       })
-      .catch(error => console.log('error', error));
+      .catch(error => alert(error));
   };
+  // const UploadingImage = () => {
+  //   ImagePicker.openPicker({
+  //     multiple: true,
+  //     waitAnimationEnd: false,
+  //     includeExif: true,
+  //     forceJpg: true,
+  //     maxFiles: 10,
+  //     compressImageQuality: 0.8,
+  //     mediaType: 'photo',
+  //   })
+  //     .then(images => {
+  //       images.map((item, index) => {
+  //         imageData.append('doc[]', {
+  //           uri: item.path,
+  //           type: 'image/jpeg',
+  //           name: item.filename || `temp_image_${index}.jpg`,
+  //         });
+  //       });
+  //     })
+  //     .catch(e => alert(e));
+  // };
+
+  // let imgArray = [];
+  // const uploadPhoto = () => {
+  //   let options = {
+  //     mediaType: 'photo',
+  //     saveToPhotos: true,
+  //     includeBase64: true,
+  //     selectionLimit: 10,
+  //   };
+  //   launchImageLibrary(options, response => {
+  //     response.assets.forEach(function (item, index) {
+  //       console.log('item', item);
+  //       if (item[index] != null) {
+  //         imgArray.push(item[0].uri);
+  //         setImageArray(filePathArray => [...filePathArray, imgArray]);
+  //         setimageUploaded(false);
+  //       }
+  //     });
+  //     ///Loop through responses
+  //     setImage(response.assets[0]);
+  //   });
+  // };
   const uploadPhoto = () => {
     try {
       launchImageLibrary(
-        {mediaType: 'photo', saveToPhotos: true, includeBase64: true},
+        {
+          mediaType: 'photo',
+          saveToPhotos: true,
+          includeBase64: true,
+          selectionLimit: 10,
+        },
         res => {
           if (!res.didCancel && !res.errorCode) {
             setImage(res.assets[0]);
@@ -95,6 +145,8 @@ const CreateFeed = ({route, navigation}) => {
       console.error(error);
     }
   };
+  // console.log('image', image);
+  // console.log('array', imageArray);
   const getImageObj = img => {
     let newUri =
       Platform.OS === 'ios' ? img.uri : img.uri.replace('file://', 'file:');

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';

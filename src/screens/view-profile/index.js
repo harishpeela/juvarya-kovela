@@ -8,6 +8,7 @@ import {
   ScrollView,
   FlatList,
   Image,
+  Dimensions,
 } from 'react-native';
 import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
@@ -35,14 +36,16 @@ import {
 } from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -64,12 +67,13 @@ const ViewProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     let result = Data(data);
-    console.log('jtProfile', result);
+    // console.log('jtProfile', result);
     if (result) {
       setTrfData(result);
       if (result?.jtProfile) {
         // setId(result?.jtProfile);
         Posts(result?.jtProfile);
+        TempleRoleSearchWithId(result?.jtProfile);
       } else {
         console.log('nope');
       }
@@ -137,7 +141,7 @@ const ViewProfile = ({route, navigation}) => {
   const Posts = async id => {
     try {
       let result = await GetPosts(id, 0, 20);
-      console.log('result', result?.data);
+      // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
       let urls = postsData
@@ -149,7 +153,7 @@ const ViewProfile = ({route, navigation}) => {
       if (PostsArray?.length > 0) {
         setloader(false);
         setPostImages(PostsArray);
-        console.log('array', PostsArray);
+        // console.log('array', PostsArray);
       } else {
         setPostImages([]);
         setloader(false);
@@ -158,7 +162,8 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
-  const TempleRoleSearchWithId = async () => {
+  const TempleRoleSearchWithId = async profileId => {
+    console.log('data.id', data?.id);
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
     myHeaders.append('Authorization', Token);
@@ -170,7 +175,7 @@ const ViewProfile = ({route, navigation}) => {
     };
 
     fetch(
-      `http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=${data?.id}`,
+      `http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=${profileId}`,
       requestOptions,
     )
       .then(response => response.json())
@@ -192,7 +197,7 @@ const ViewProfile = ({route, navigation}) => {
       .catch(error => console.log('errorrr in id', error));
   };
   useEffect(() => {
-    TempleRoleSearchWithId();
+    // TempleRoleSearchWithId();
     getFollowValue();
     followingCount();
   }, [route]);
@@ -288,8 +293,8 @@ const ViewProfile = ({route, navigation}) => {
                       <Image
                         source={{uri: item?.image}}
                         style={{
-                          height: 120,
-                          width: 120,
+                          height: 110,
+                          width: 110,
                         }}
                       />
                     </TouchableOpacity>

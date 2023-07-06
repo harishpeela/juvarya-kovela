@@ -12,7 +12,9 @@ const TicketConfirmation = () => {
         backgroundColor: 'white',
       }}>
       <BackgroundImage />
-      <Text style={{color: 'black'}}>Ticket Confirmation is Coming soon!</Text>
+      <Text style={{color: 'black'}}>
+        Ticket Confirmation is Coming soon ...!
+      </Text>
     </View>
   );
 };

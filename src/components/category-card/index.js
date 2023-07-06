@@ -11,11 +11,10 @@ import {
 import {colors} from '../../common';
 import React, {useState, useEffect, useRef} from 'react';
 import {styles} from './styles';
-import {SaveFeed, NewSaveFeed} from '../../utils/api';
+import {NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
-import {RenderImage} from '../homeFeedCompImage/homeFeesCompRenderImage';
 import {FlatList} from 'react-native-gesture-handler';
 const {height, width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
@@ -62,21 +61,21 @@ export const UserFeedCompList = ({
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
-      SaveFeedApi();
+      // SaveFeedApi();
       ToastAndroid.show('Successfully saved the Post', ToastAndroid.SHORT);
     } else {
       // console.log('feed not saved');
       ToastAndroid.show('Successfully unsaved the Post', ToastAndroid.SHORT);
     }
   };
-  const SaveFeedApi = async () => {
-    let payload = {
-      feedId: saveid,
-    };
-    console.log('pay', payload);
-    let result = await NewSaveFeed(payload);
-    console.log('result =====>', result?.data);
-  };
+  // const SaveFeedApi = async () => {
+  //   let payload = {
+  //     feedId: saveid,
+  //   };
+  //   console.log('pay', payload);
+  //   let result = await NewSaveFeed(payload);
+  //   console.log('result =====>', result?.data);
+  // };
   const likesCount = async () => {
     try {
       let result = await NewLikesCount(id);
@@ -188,7 +187,7 @@ export const UserFeedCompList = ({
           <TouchableOpacity
             onPress={() => {
               setSaveFeed(!saveFeed);
-              FeedStatus();
+              // FeedStatus();
             }}
             style={styles.icon}>
             <Icon

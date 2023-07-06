@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 import React, {useContext} from 'react';
 import {SafeAreaView} from 'react-native';

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, ImageBackground, TouchableOpacity, Image} from 'react-native';
+import {ImageBackground, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect} from 'react';
 import {allTexts} from '../../common';
 import {styles} from './styles';

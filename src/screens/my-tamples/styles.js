@@ -39,28 +39,23 @@ export const styles = StyleSheet.create({
     paddingBottom: 200,
   },
   listItemContainer: {
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    backgroundColor: colors.green3,
+    // backgroundColor: '#f7dbc1',
     borderRadius: 10,
     padding: 12,
     margin: 10,
-    // borderWidth: 1,
-    borderColor: 'red',
+    // borderColor: 'red',
+    borderWidth: 1,
   },
   secondaryContainer: {
-    // borderWidth: 1,
     borderColor: 'blue',
-    // flexWrap: 'wrap',
     marginRight: 2,
 
     flexDirection: 'row',
   },
   listFirstItem: {
     flexDirection: 'row',
-    // borderWidth: 1,
     flex: 0.7,
-    marginRight: 2,
+    marginLeft: '10%',
   },
   bulletConatianer: {
     marginRight: 10,
@@ -76,7 +71,6 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontSize: fontSize.large,
     fontFamily: fontFamily.popinMedium,
-    // maxLines: 1,
   },
   itemAdmin: {
     color: colors.green2,
@@ -94,7 +88,6 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
   },
   dateContainer: {
-    // borderWidth: 1,
     flex: 0.3,
     alignItems: 'flex-end',
   },

@@ -10,7 +10,7 @@ export const BackHeaderNew = ({onPress, txt}) => {
         <TouchableOpacity onPress={onPress}>
           <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
         </TouchableOpacity>
-        <Text style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
+        <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10}}>
           {txt}
         </Text>
       </View>

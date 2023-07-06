@@ -13,12 +13,14 @@ import {
   getTempledetailsWithId,
   GetProfilePicture,
 } from '../../utils/api';
+import {useIsFocused} from '@react-navigation/native';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
+import {useField} from 'formik';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState(true);
@@ -36,6 +38,7 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
+  let isFocused = useIsFocused();
   const listFeed = async () => {
     try {
       let result = await getHomeFeedList(apiPageNo, 100);
@@ -73,7 +76,8 @@ const UserFeedScreen = ({navigation}) => {
   };
   useEffect(() => {
     listFeed();
-  }, [userDetails]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userDetails, isFocused]);
 
   useEffect(() => {
     if (apiPageNo) {
