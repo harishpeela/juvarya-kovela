@@ -7,7 +7,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
-import {BackHeader} from '../../components';
+import {BackHeader, BackgroundImage} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {NewUpdateUserPassword} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -65,6 +65,7 @@ const UpdatePassword = ({navigation}) => {
 
   return (
     <View style={styles.wrapper}>
+      <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {

@@ -55,6 +55,7 @@ export const styles = StyleSheet.create({
   },
   contentDisplay: {
     height: '55%',
+    marginLeft: 20,
   },
   noPosts: {
     borderWidth: 1,
