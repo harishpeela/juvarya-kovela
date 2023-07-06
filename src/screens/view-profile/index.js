@@ -293,8 +293,8 @@ const ViewProfile = ({route, navigation}) => {
                       <Image
                         source={{uri: item?.image}}
                         style={{
-                          height: 110,
-                          width: 110,
+                          height: 100,
+                          width: 100,
                         }}
                       />
                     </TouchableOpacity>
