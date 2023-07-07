@@ -13,6 +13,7 @@ import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FollowUnFollow} from '../../utils/api';
+import { Loader } from '../loader';
 export const TempleListCard = ({
   name,
   post,

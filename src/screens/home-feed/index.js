@@ -26,6 +26,7 @@ const UserFeedScreen = ({navigation}) => {
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
+  const [loaderimg, setLoaderImg] = useState(false);
   // console.log('user', userDetails);
   const MyCustShare = async () => {
     const ShareOptions = {
@@ -60,16 +61,20 @@ const UserFeedScreen = ({navigation}) => {
   const TempleDetails = async jtId => {
     // console.log('ajshbx', jtId);
     try {
+      setLoaderImg(true);
       let responce = await getTempledetailsWithId(jtId?.jtProfile);
       let result = await GetProfilePicture(jtId?.jtProfile);
       // console.log('res', result?.data);
       if (responce) {
+        setLoaderImg(false);
         const fullData = {...jtId, ...responce?.data, ...result?.data};
         setHomeFeedList(idData => [...idData, fullData]);
       } else {
         console.log('msbmabsmbams');
+        setLoaderImg(false);
       }
     } catch (error) {
+      setLoaderImg(false);
       console.log('error in temple details with id api', error);
     }
   };
@@ -135,6 +140,7 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 onSharePress={MyCustShare}
                 saveid={item?.id}
+                loader={loaderimg}
                 // mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
