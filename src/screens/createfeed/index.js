@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   SafeAreaView,
@@ -24,16 +24,17 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {createFeed} from '../../utils/api';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-
+import {Data} from '../home-feed/formateDetails';
 const CreateFeed = ({route, navigation}) => {
   const {data} = route.params || {};
-  // console.log('id', data);
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
   const [titleName, setTitleName] = useState('');
   const [description, setDescription] = useState('');
   const [city, setCity] = useState('');
-  const Valid = () => {
+  const [trfData, setTrfData] = useState();
+  const Valid = id => {
     if (image === null) {
       alert('please upload a image');
     } else if (titleName === '') {
@@ -43,10 +44,11 @@ const CreateFeed = ({route, navigation}) => {
     } else if (city === '') {
       alert('city must be entered');
     } else {
-      NewFeed();
+      NewFeed(id);
     }
   };
-  const NewFeed = async () => {
+  const NewFeed = async id => {
+    setLoading(true);
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
     let img = getImageObj(image);
@@ -55,23 +57,24 @@ const CreateFeed = ({route, navigation}) => {
     var formdata = new FormData();
     formdata.append('description', description);
     formdata.append('feedType', 'profile ');
-    formdata.append('jtProfile', data?.id);
-    formdata.append('files', img);
-
+    formdata.append('jtProfile', id);
+    img.forEach(element => {
+      formdata.append('files', element);
+    });
+    console.log('formdata', formdata);
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow',
     };
-    console.log('formdata', formdata?.files);
+    console.log('formdata', formdata);
     fetch(
       'http://fanfundev.eastasia.cloudapp.azure.com:9094/jtfeed/create',
       requestOptions,
     )
       .then(response => response.json())
       .then(result => {
-        console.log('uijjij', result);
         if (result?.message === 'Feed created') {
           navigation.navigate(allTexts.screenNames.home);
         } else {
@@ -80,49 +83,7 @@ const CreateFeed = ({route, navigation}) => {
       })
       .catch(error => alert(error));
   };
-  // const UploadingImage = () => {
-  //   ImagePicker.openPicker({
-  //     multiple: true,
-  //     waitAnimationEnd: false,
-  //     includeExif: true,
-  //     forceJpg: true,
-  //     maxFiles: 10,
-  //     compressImageQuality: 0.8,
-  //     mediaType: 'photo',
-  //   })
-  //     .then(images => {
-  //       images.map((item, index) => {
-  //         imageData.append('doc[]', {
-  //           uri: item.path,
-  //           type: 'image/jpeg',
-  //           name: item.filename || `temp_image_${index}.jpg`,
-  //         });
-  //       });
-  //     })
-  //     .catch(e => alert(e));
-  // };
 
-  // let imgArray = [];
-  // const uploadPhoto = () => {
-  //   let options = {
-  //     mediaType: 'photo',
-  //     saveToPhotos: true,
-  //     includeBase64: true,
-  //     selectionLimit: 10,
-  //   };
-  //   launchImageLibrary(options, response => {
-  //     response.assets.forEach(function (item, index) {
-  //       console.log('item', item);
-  //       if (item[index] != null) {
-  //         imgArray.push(item[0].uri);
-  //         setImageArray(filePathArray => [...filePathArray, imgArray]);
-  //         setimageUploaded(false);
-  //       }
-  //     });
-  //     ///Loop through responses
-  //     setImage(response.assets[0]);
-  //   });
-  // };
   const uploadPhoto = () => {
     try {
       launchImageLibrary(
@@ -134,7 +95,7 @@ const CreateFeed = ({route, navigation}) => {
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
-            setImage(res.assets[0]);
+            setImage(res.assets);
             setimageUploaded(false);
           } else {
             console.log(res.errorMessage);
@@ -145,18 +106,26 @@ const CreateFeed = ({route, navigation}) => {
       console.error(error);
     }
   };
-  // console.log('image', image);
-  // console.log('array', imageArray);
   const getImageObj = img => {
-    let newUri =
-      Platform.OS === 'ios' ? img.uri : img.uri.replace('file://', 'file:');
-    let imageObj = {
-      uri: newUri,
-      name: `${Date.now()}.jpg`,
-      type: 'image/jpeg',
-    };
-    return imageObj;
+    return img.map(oImg => {
+      let newUri =
+        Platform.OS === 'ios' ? oImg.uri : oImg.uri.replace('file://', 'file:');
+      let imageObj = {
+        uri: newUri,
+        name: `${Date.now()}.jpg`,
+        type: 'image/jpeg',
+      };
+      return imageObj;
+    });
   };
+  useEffect(() => {
+    let result = Data(data);
+    if (result) {
+      setTrfData(result);
+    } else {
+      console.log('nope');
+    }
+  }, [data]);
   return (
     <SafeAreaView>
       <BackgroundImage />
@@ -183,7 +152,7 @@ const CreateFeed = ({route, navigation}) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{uri: image?.uri}}
+                source={{uri: image[0]?.uri}}
               />
             </View>
           ) : (
@@ -229,7 +198,8 @@ const CreateFeed = ({route, navigation}) => {
           <PrimaryButton
             text={'submit'}
             bgColor={colors.orangeColor}
-            onPress={() => Valid()}
+            loading={loading}
+            onPress={() => Valid(trfData?.jtProfile)}
           />
         </View>
       </View>
