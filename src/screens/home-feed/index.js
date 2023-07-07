@@ -20,7 +20,6 @@ import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
-import {useField} from 'formik';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState(true);
