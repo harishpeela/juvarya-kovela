@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
@@ -100,17 +101,29 @@ const App = () => {
   useEffect(() => {
     getLoginDetails();
   }, []);
-
+  useEffect(() => {
+    async function prepare() {
+      try {
+        // our api calls will be here.
+        new Promise(resolve => setTimeout(resolve, 5000)); // wait for 5 secs
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        SplashScreen.hide();
+      }
+    }
+    prepare();
+  }, []);
   const AuthStack = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name={splashscreen}
           component={Splash_Screen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={splash}
           component={Splash}

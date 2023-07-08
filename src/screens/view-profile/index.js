@@ -57,11 +57,11 @@ const ViewProfile = ({route, navigation}) => {
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
-  const FOLLOW = () => {
+  const FOLLOW = id => {
     if (isFollow) {
-      followTemples();
+      followTemples(id);
     } else if (!isFollow) {
-      followTemples();
+      followTemples(id);
       setisFollow(!isFollow);
     }
   };
@@ -72,6 +72,8 @@ const ViewProfile = ({route, navigation}) => {
       setTrfData(result);
       if (result?.jtProfile) {
         // setId(result?.jtProfile);
+        getFollowValue(result?.jtProfile);
+        followingCount(result?.jtProfile);
         Posts(result?.jtProfile);
         TempleRoleSearchWithId(result?.jtProfile);
       } else {
@@ -81,9 +83,9 @@ const ViewProfile = ({route, navigation}) => {
       setTrfData();
     }
   }, [data]);
-  const followingCount = async () => {
+  const followingCount = async id => {
     try {
-      let result = await NewFollowCount(data?.id);
+      let result = await NewFollowCount(id);
       if (result) {
         setFollowCount(result?.data);
       } else {
@@ -94,11 +96,11 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in follow count', error);
     }
   };
-  const followTemples = async () => {
+  const followTemples = async id => {
     const payload = {
       jtCustomer: userDetails?.id,
       type: 'ITEM',
-      jtProfile: data?.id,
+      jtProfile: id,
       following: !isFollow,
     };
     // console.log('pYLOfd', payload);
@@ -130,8 +132,8 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
 
-  const getFollowValue = async () => {
-    let result = await NewGetFollowUmFollowById(data?.id);
+  const getFollowValue = async id => {
+    let result = await NewGetFollowUmFollowById(id);
     // console.log('res of follow', result?.data);
     if (result) {
       setisFollow(result?.data);
@@ -198,8 +200,6 @@ const ViewProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     // TempleRoleSearchWithId();
-    getFollowValue();
-    followingCount();
   }, [route]);
   return (
     <View style={styles.maincontainer}>
@@ -249,7 +249,7 @@ const ViewProfile = ({route, navigation}) => {
           <View style={styles.followtab}>
             <FolloUnfollowComp
               followBtnDisable={followBtnDisable}
-              followTemples={FOLLOW}
+              followTemples={() => FOLLOW(trfData?.jtProfile)}
               followVisible={followVisible}
               isFollow={isFollow}
             />
