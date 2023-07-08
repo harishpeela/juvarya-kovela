@@ -126,6 +126,7 @@ const CreateFeed = ({route, navigation}) => {
       console.log('nope');
     }
   }, [data]);
+  console.log('trfData', trfData);
   return (
     <SafeAreaView>
       <BackgroundImage />

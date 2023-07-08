@@ -29,6 +29,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
         const dty = result?.data?.data || [];
         setLoading(false);
         dty?.map(d => {
+          console.log('dddddddd', d);
           profilePicture(d);
         });
       }
@@ -47,6 +48,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
         setIsFollow(undefined);
       }
       let Following = responce?.data;
+      console.log('follow', Following);
       const obj = {...result?.data, ...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
@@ -64,6 +66,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
       ),
     );
   };
+  // console.log('filttered', filteredList);
   return (
     <View>
       <View style={styles.searchContainer}>

@@ -55,8 +55,8 @@ const ViewProfile = ({route, navigation}) => {
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
-  const FOLLOW = (id) => {
-    console.log('id =====>', id);
+
+  const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
     } else if (!isFollow) {
@@ -82,7 +82,9 @@ const ViewProfile = ({route, navigation}) => {
       setTrfData();
     }
   }, [data]);
-  const followingCount = async (id) => {
+
+  const followingCount = async id => {
+
     try {
       let result = await NewFollowCount(id);
       if (result) {
@@ -95,8 +97,8 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in follow count', error);
     }
   };
-  console.log('trfdt', trfData);
-  const followTemples = async (id) => {
+
+  const followTemples = async id => {
     const payload = {
       jtCustomer: userDetails?.id,
       type: 'ITEM',
@@ -132,7 +134,8 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
 
-  const getFollowValue = async (id) => {
+
+  const getFollowValue = async id => {
     let result = await NewGetFollowUmFollowById(id);
     // console.log('res of follow', result?.data);
     if (result) {
@@ -199,7 +202,6 @@ const ViewProfile = ({route, navigation}) => {
       .catch(error => console.log('errorrr in id', error));
   };
   useEffect(() => {
-    // followingCount();
   }, [route]);
   return (
     <View style={styles.maincontainer}>

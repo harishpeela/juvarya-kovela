@@ -160,13 +160,15 @@ export const UserFeedCompList = ({
             return (
               <View>
                 {/* <TouchableOpacity> */}
-               {item?.uri ? (
-                <View> 
-                  <Loader size={16} color={colors.orangeColor} />
-                </View>
-               ): (
-                <Image source={{uri: item?.url}} style={{height: 400, width}} />
-               )}
+
+                <Image
+                  source={{uri: item?.url}}
+                  style={{
+                    height: 400,
+                    width,
+                    resizeMode: 'stretch',
+                  }}
+                />
                 {/* </TouchableOpacity> */}
               </View>
             );

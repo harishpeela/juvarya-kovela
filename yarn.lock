@@ -6759,9 +6759,9 @@
     "shell-quote" "^1.6.1"
     "ws" "^7"
 
-"react-facebook-login@^4.1.1":
-  "integrity" "sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw=="
-  "resolved" "https://registry.npmjs.org/react-facebook-login/-/react-facebook-login-4.1.1.tgz"
+
+"react-facebook-login@file:C:/Users/vamsi/AppData/Roaming/npm/node_modules/react-facebook-login":
+  "resolved" "file:C:/Users/vamsi/AppData/Roaming/npm/node_modules/react-facebook-login"
   "version" "4.1.1"
 
 "react-fast-compare@^2.0.1":
