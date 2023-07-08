@@ -19,6 +19,7 @@ import {FlatList} from 'react-native-gesture-handler';
 const {height, width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
 import {Posts} from '../../screens';
+import { Loader } from '../loader';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -30,6 +31,7 @@ export const UserFeedCompList = ({
   saveid,
   onSharePress,
   mediaData,
+  loader,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState();
@@ -158,14 +160,13 @@ export const UserFeedCompList = ({
             return (
               <View>
                 {/* <TouchableOpacity> */}
+
                 <Image
                   source={{uri: item?.url}}
                   style={{
                     height: 400,
                     width,
                     resizeMode: 'stretch',
-                    // alignSelf: 'center',
-                    // resizeMode: 'contain',
                   }}
                 />
                 {/* </TouchableOpacity> */}

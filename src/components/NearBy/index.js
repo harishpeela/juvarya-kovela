@@ -41,6 +41,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
     try {
       let result = await GetProfilePicture(d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
+      console.log('follow status', responce?.data);
       if (responce) {
         setIsFollow(responce?.data);
       } else {

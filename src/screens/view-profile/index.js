@@ -36,16 +36,14 @@ import {
 } from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
-  const windowWidth = Dimensions.get('window').width;
-  const windowHeight = Dimensions.get('window').height;
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -57,6 +55,7 @@ const ViewProfile = ({route, navigation}) => {
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
+
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -73,9 +72,9 @@ const ViewProfile = ({route, navigation}) => {
       if (result?.jtProfile) {
         // setId(result?.jtProfile);
         getFollowValue(result?.jtProfile);
-        followingCount(result?.jtProfile);
         Posts(result?.jtProfile);
         TempleRoleSearchWithId(result?.jtProfile);
+        followingCount(result?.jtProfile);
       } else {
         console.log('nope');
       }
@@ -83,7 +82,9 @@ const ViewProfile = ({route, navigation}) => {
       setTrfData();
     }
   }, [data]);
+
   const followingCount = async id => {
+
     try {
       let result = await NewFollowCount(id);
       if (result) {
@@ -96,6 +97,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in follow count', error);
     }
   };
+
   const followTemples = async id => {
     const payload = {
       jtCustomer: userDetails?.id,
@@ -103,7 +105,7 @@ const ViewProfile = ({route, navigation}) => {
       jtProfile: id,
       following: !isFollow,
     };
-    // console.log('pYLOfd', payload);
+    console.log('pYLOfd', payload);
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
@@ -132,6 +134,7 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
 
+
   const getFollowValue = async id => {
     let result = await NewGetFollowUmFollowById(id);
     // console.log('res of follow', result?.data);
@@ -142,7 +145,7 @@ const ViewProfile = ({route, navigation}) => {
 
   const Posts = async id => {
     try {
-      let result = await GetPosts(id, 0, 20);
+      let result = await GetPosts(id, 0, 60);
       // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
@@ -199,7 +202,6 @@ const ViewProfile = ({route, navigation}) => {
       .catch(error => console.log('errorrr in id', error));
   };
   useEffect(() => {
-    // TempleRoleSearchWithId();
   }, [route]);
   return (
     <View style={styles.maincontainer}>
