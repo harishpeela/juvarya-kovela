@@ -8,7 +8,6 @@ import {
   ScrollView,
   FlatList,
   Image,
-  Dimensions,
 } from 'react-native';
 import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
@@ -25,15 +24,16 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
-  ProfileComp,
   CommunityComp,
   FollowersComp,
-  PostsComp,
   ContactTabcomp,
   CreateFeedTabComp,
   FolloUnfollowComp,
   DirectionsTabComp,
 } from '../../components';
+import {ProfileImage} from '../../components';
+import {colors} from '../../common';
+import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
@@ -84,7 +84,6 @@ const ViewProfile = ({route, navigation}) => {
   }, [data]);
 
   const followingCount = async id => {
-
     try {
       let result = await NewFollowCount(id);
       if (result) {
@@ -133,12 +132,12 @@ const ViewProfile = ({route, navigation}) => {
       setFollowCount(followCount - 1);
     }
   };
-
-
   const getFollowValue = async id => {
+    setFollowVisible(true);
     let result = await NewGetFollowUmFollowById(id);
     // console.log('res of follow', result?.data);
     if (result) {
+      setFollowVisible(false);
       setisFollow(result?.data);
     }
   };
@@ -201,8 +200,7 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('errorrr in id', error));
   };
-  useEffect(() => {
-  }, [route]);
+  useEffect(() => {}, [route]);
   return (
     <View style={styles.maincontainer}>
       <View style={styles.footerBackground}>
@@ -227,7 +225,7 @@ const ViewProfile = ({route, navigation}) => {
             </Text>
           </View>
           <View style={styles.firstTabView}>
-            <ProfileComp profileImg={trfData} />
+            <ProfileImage profileImg={trfData} />
             <PostsComp
               itemDetails={postImages}
               onPress={() => setPosts(!posts)}
@@ -271,41 +269,42 @@ const ViewProfile = ({route, navigation}) => {
             setCurrentIndex={setCurrentIndex}
             templeDetails={trfData}
           />
-          {currentIndex === 1 && (
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              style={styles.contentDisplay}>
-              {loader && (
-                <View style={{flex: 1}}>
-                  <Loader color={'green'} size={30} />
-                </View>
-              )}
-              {!postImages?.length > 0 ? (
-                <View>
-                  <Feather name="camera-off" size={40} style={styles.noPosts} />
-                  <Text style={styles.noPosts.text}>No Posts Yet</Text>
-                </View>
-              ) : (
-                <FlatList
-                  numColumns={3}
-                  data={postImages}
-                  keyExtractor={({item, index}) => index}
-                  renderItem={({item, index}) => (
-                    <TouchableOpacity>
-                      <Image
-                        source={{uri: item?.image}}
-                        style={{
-                          height: 100,
-                          width: 100,
-                        }}
-                      />
-                    </TouchableOpacity>
-                  )}
-                />
-              )}
-            </ScrollView>
-          )}
         </View>
+        {currentIndex === 1 && (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.contentDisplay}>
+            {loader && (
+              <View style={{flex: 1}}>
+                <Loader color={colors.orangeColor} size={30} />
+              </View>
+            )}
+            {!postImages?.length > 0 ? (
+              <View>
+                <Feather name="camera-off" size={40} style={styles.noPosts} />
+                <Text style={styles.noPosts.text}>No Posts Yet</Text>
+              </View>
+            ) : (
+              <FlatList
+                numColumns={3}
+                data={postImages}
+                keyExtractor={({item, index}) => index}
+                renderItem={({item, index}) => (
+                  <TouchableOpacity style={{height: '100%', width: '34%'}}>
+                    <Image
+                      source={{uri: item?.image}}
+                      style={{
+                        height: 140,
+                        width: 140,
+                        resizeMode: 'stretch',
+                      }}
+                    />
+                  </TouchableOpacity>
+                )}
+              />
+            )}
+          </ScrollView>
+        )}
       </View>
     </View>
   );

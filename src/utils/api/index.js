@@ -99,7 +99,7 @@ export const PopularTemples = async (pgfrm, pgto) => {
     );
     return result;
   } catch (error) {
-    console.log(error);
+    console.log('error in popular temples', error);
   }
 };
 export const getTempledetailsWithId = async id => {

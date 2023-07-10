@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
@@ -12,7 +13,8 @@ import {
   GetProfilePicture,
   NewGetFollowUmFollowById,
 } from '../../utils/api';
-export const NearBy = ({pageNav, seeallnav}) => {
+import {useIsFocused, useFocusEffect} from '@react-navigation/native';
+export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const [isFollow, setIsFollow] = useState();
@@ -20,7 +22,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
   const [loader, setLoader] = useState(false);
   const [searchLoading, setSearchLoading] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
-
+  let isFocused = useIsFocused();
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples(0, 20);
@@ -41,7 +43,7 @@ export const NearBy = ({pageNav, seeallnav}) => {
     try {
       let result = await GetProfilePicture(d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
-      console.log('follow status', responce?.data);
+      // console.log('follow status', responce?.data);
       if (responce) {
         setIsFollow(responce?.data);
       } else {
@@ -56,8 +58,11 @@ export const NearBy = ({pageNav, seeallnav}) => {
       console.log('error', error);
     }
   };
+  console.log('following.......', isFollow);
   useEffect(() => {
+    // isFocused && PopularTemplesss();
     PopularTemplesss();
+    console.log('1');
   }, []);
   const FilteredList = async value => {
     setFilteredList(

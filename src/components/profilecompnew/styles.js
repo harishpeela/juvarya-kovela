@@ -1,21 +1,5 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
-  profileView: {
-    width: 80,
-    height: 80,
-    borderColor: '#FFA001',
-    borderWidth: 1,
-    borderRadius: 40,
-  },
-  postsView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  postText: {
-    fontSize: 14,
-    color: '#585858',
-    lineHeight: 18,
-  },
   followersView: {
     alignItems: 'center',
     justifyContent: 'center',

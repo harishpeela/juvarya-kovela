@@ -116,7 +116,7 @@ const UserFeedScreen = ({navigation}) => {
       <>
         {loader && (
           <View style={{flex: 1}}>
-            <Loader color={colors.green2} size={30} />
+            <Loader color={colors.orangeColor} size={30} />
           </View>
         )}
         {homeFeedList?.length > 0 ? (
@@ -158,7 +158,7 @@ const UserFeedScreen = ({navigation}) => {
           </View>
         ) : (
           <View style={{flex: 1}}>
-            <Loader color={colors.green2} size={30} />
+            <Loader color={colors.orangeColor} size={30} />
           </View>
         )}
       </>

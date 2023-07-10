@@ -45,18 +45,19 @@ import {
   PrimaryButton1,
 } from './profilecomp';
 import {
-  ProfileComp,
   CommunityComp,
   FollowersComp,
-  PostsComp,
   ContactTabcomp,
   CreateFeedTabComp,
   DirectionsTabComp,
   FolloUnfollowComp,
 } from './profilecompnew';
+import {ProfileImage} from './profilecompnew/profileImage';
 import {PopularTemplesVerticalList} from './popularVerticalFlatList';
 import {DotsNation} from './dotsNation';
 import {BackHeaderNew} from './backHeaders';
+import {PopularTemplesList} from './NearBy';
+import {PostsComp} from './profilecompnew';
 export {
   Loader,
   SearchBar,
@@ -98,10 +99,8 @@ export {
   ProfileSeconTab,
   ProfileThiredTab,
   ProfileFourthTab,
-  ProfileComp,
   CommunityComp,
   FollowersComp,
-  PostsComp,
   PrimaryButton1,
   ContactTabcomp,
   CreateFeedTabComp,
@@ -110,4 +109,7 @@ export {
   PopularTemplesVerticalList,
   DotsNation,
   BackHeaderNew,
+  PopularTemplesList,
+  ProfileImage,
+  PostsComp,
 };
