@@ -72,7 +72,7 @@ export const TempleListCard = ({
   };
   return (
     <TouchableOpacity
-      style={{marginLeft: 20}}
+      style={{marginLeft: 10}}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewProfile, {
           data: post,

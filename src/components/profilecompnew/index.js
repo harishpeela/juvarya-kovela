@@ -2,42 +2,10 @@ import React from 'react';
 import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';
-import {allTexts} from '../../common';
+import {allTexts, colors} from '../../common';
 import {PrimaryButton1} from '../profilecomp';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
-export const ProfileComp = ({profileImg}) => {
-  const renderImage = () => {
-    if (!profileImg?.url) {
-      return (
-        <Image
-          source={{
-            uri: 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
-          }}
-          style={styles.profileView}
-        />
-      );
-    } else if (profileImg?.url) {
-      return (
-        <Image
-          source={{
-            uri: profileImg?.url,
-          }}
-          style={styles.profileView}
-        />
-      );
-    }
-  };
-  return renderImage(profileImg);
-};
-export const PostsComp = ({itemDetails, onPress}) => {
-  return (
-    <TouchableOpacity onPress={onPress} style={styles.postsView}>
-      <Text>{itemDetails?.length}</Text>
-      <Text style={styles.postText}>Posts </Text>
-    </TouchableOpacity>
-  );
-};
 export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
     <TouchableOpacity onPress={onPressFollowers} style={styles.followersView}>
@@ -65,7 +33,11 @@ export const FolloUnfollowComp = ({
     <>
       {followVisible ? (
         <View style={styles.followLoader}>
-          <Loader color={'white'} size={'small'} dynmicStyle={styles.loader} />
+          <Loader
+            color={colors.white}
+            size={'small'}
+            dynmicStyle={styles.loader}
+          />
         </View>
       ) : (
         <PrimaryButton1

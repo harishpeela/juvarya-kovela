@@ -19,7 +19,7 @@ import {FlatList} from 'react-native-gesture-handler';
 const {height, width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
 import {Posts} from '../../screens';
-import { Loader } from '../loader';
+import {Loader} from '../loader';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -137,7 +137,7 @@ export const UserFeedCompList = ({
               fontSize: 14,
               fontWeight: 'bold',
               marginBottom: 10,
-              textTransform: 'uppercase',
+              textTransform: 'capitalize',
             }}>
             {post?.name}
           </Text>
@@ -211,7 +211,11 @@ export const UserFeedCompList = ({
       <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
       </View>
-      <Text style={styles.username}>{post?.description}</Text>
+      <Text style={styles.username}>
+        {post?.name}
+        {''}
+        {''} <Text style={{color: 'gray'}}>{post?.description}</Text>
+      </Text>
     </View>
   );
 };
