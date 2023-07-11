@@ -31,7 +31,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
         const dty = result?.data?.data || [];
         setLoading(false);
         dty?.map(d => {
-          console.log('dddddddd', d);
+          // console.log('dddddddd', d);
           profilePicture(d);
         });
       }
@@ -50,7 +50,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
         setIsFollow(undefined);
       }
       let Following = responce?.data;
-      console.log('follow', Following);
+      // console.log('follow', Following);
       const obj = {...result?.data, ...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
@@ -58,11 +58,9 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       console.log('error', error);
     }
   };
-  console.log('following.......', isFollow);
+  // console.log('following.......', isFollow);
   useEffect(() => {
-    // isFocused && PopularTemplesss();
     PopularTemplesss();
-    console.log('1');
   }, []);
   const FilteredList = async value => {
     setFilteredList(
