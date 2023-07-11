@@ -66,11 +66,9 @@ const ViewProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     let result = Data(data);
-    // console.log('jtProfile', result);
     if (result) {
       setTrfData(result);
       if (result?.jtProfile) {
-        // setId(result?.jtProfile);
         getFollowValue(result?.jtProfile);
         Posts(result?.jtProfile);
         TempleRoleSearchWithId(result?.jtProfile);
@@ -144,15 +142,19 @@ const ViewProfile = ({route, navigation}) => {
 
   const Posts = async id => {
     try {
-      let result = await GetPosts(id, 0, 60);
-      // console.log('result', result?.data);
+      let result = await GetPosts(id, 0, 40);
+      console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
+      // console.log('postsdata', postsData);
       let urls = postsData
         ?.filter(item => item?.mediaList)
         ?.map(({mediaList}) => ({mediaList}));
+      // console.log('urls', urls);
       urls?.map(({mediaList}) =>
-        mediaList?.map(s => PostsArray?.push({image: s?.url})),
+        mediaList?.map(s => {
+          PostsArray?.push({image: s?.url}), console.log('s', s);
+        }),
       );
       if (PostsArray?.length > 0) {
         setloader(false);
@@ -166,6 +168,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
+  // console.log('postimgs', postImages);
   const TempleRoleSearchWithId = async profileId => {
     console.log('data.id', data?.id);
     let Token = await getAuthTokenDetails();

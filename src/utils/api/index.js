@@ -146,7 +146,8 @@ export const GetProfilePicture = async id => {
 export const GetPosts = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosNewData1.get(
-      `${endpoints.GET_POSTS}?id=${id}&pageNo=${pgfrm}pageSize=${pgto}`,
+      `${endpoints.GET_POSTS}?page=${pgfrm}&pageSize=${pgto}&id=${id}`,
+      // {retry: 5, retryDelay: 3000},
     );
     return result;
   } catch (error) {
