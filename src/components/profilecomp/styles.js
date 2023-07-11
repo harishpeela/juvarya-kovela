@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { colors, fontFamily } from '../../common';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   infoContainer: {
     flexDirection: 'row',
@@ -24,6 +24,7 @@ export const styles = StyleSheet.create({
   boldText: {
     fontSize: 24,
     fontWeight: '600',
+    textTransform: 'capitalize',
   },
   ratingText: {
     fontSize: 20,

@@ -38,6 +38,7 @@ export const InputField = ({
             placeholderTextColor={colors.gray2}
             onChangeText={val => setState(val)}
             style={styles.inputText}
+            multiline={true}
             {...props}
           />
         </View>
