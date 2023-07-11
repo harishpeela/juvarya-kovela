@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
@@ -14,7 +15,6 @@ import {
   MyTamples,
   Service,
   Seemore,
-  CreatePost,
   Poojari,
   Events,
   Favorite,
@@ -29,7 +29,6 @@ import {
   ViewProfile,
   Menu,
   AddTempleNew,
-  Splash_Screen,
   CreateFeed,
   Profile,
   Feed,
@@ -47,12 +46,7 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {
-  getFavoritesList,
-  getUserInfo,
-  getUserInfoNew,
-  getHomeFeedList,
-} from './src/utils/api';
+import {getHomeFeedList} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -71,7 +65,6 @@ const App = () => {
       addTample,
       service,
       seemore,
-      createPost,
       poojari,
       events,
       favlist,
@@ -85,7 +78,6 @@ const App = () => {
       viewProfile,
       menu,
       addtemplenew,
-      splashscreen,
       createfeed,
       userFeedScreen,
       feed,
@@ -104,8 +96,7 @@ const App = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        // our api calls will be here.
-        new Promise(resolve => setTimeout(resolve, 5000)); // wait for 5 secs
+        new Promise(resolve => setTimeout(resolve, 5000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -117,13 +108,6 @@ const App = () => {
   const AuthStack = () => {
     return (
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name={splashscreen}
-          component={Splash_Screen}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen
           name={splash}
           component={Splash}
@@ -218,13 +202,6 @@ const App = () => {
         <Stack.Screen
           name={seemore}
           component={Seemore}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={createPost}
-          component={CreatePost}
           options={{
             headerShown: false,
           }}
@@ -432,7 +409,6 @@ const App = () => {
       console.log(error);
     }
   };
-  console.log('length', homeFeedListData?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       // getAndSaveUserInfo();
@@ -441,7 +417,6 @@ const App = () => {
     }
     console.log('user', userDetails);
   }, [loginDetails]);
-  console.log('setLoginDetails', loginDetails);
 
   return (
     <ApplicationContext.Provider

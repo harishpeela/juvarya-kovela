@@ -46,7 +46,6 @@ const MyTamples = ({navigation, route}) => {
     }
   };
   const TempleDetails = async d => {
-    // console.log('d', d);
     try {
       let result = await getTempledetailsWithId(d?.jtProfile);
       let responce = await GetProfilePicture(d?.jtProfile);

@@ -1,4 +1,3 @@
-import {Alert} from 'react-native';
 import {
   authAxiousInstance,
   axiousInstance,
@@ -20,7 +19,6 @@ const endpoints = {
   NEW_GET_CURRENT_USER: 'auth/currentCustomer',
   NEW_UPDATE_PASSWORD: 'customer/password',
   NEW_ADMIN_VERIFY: 'jtprofile/admin/verify',
-  NEW_FEED_INFO: '/jtfeed/feedsOfProfile',
   NEW_POPULAR_TEMPLES: 'jtprofile/popular',
   NEW_PROFIL_PICTURE: '/picture/profile?profileId',
   NEW_FOLLOW_UMFOLLOW: '/jtfollwer/create',
@@ -36,7 +34,6 @@ const endpoints = {
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
   SIGN_UP: 'v1/jtcustomer/create',
   CHECK_OTP: 'v1/jtUserOTP/trigger',
-  UPDATE_PASSWORD: 'v1/jtcustomer/resetPassword',
   GET_TEMPLE_LIST: 'v1/agent/item/list',
   GET_HOME_FEED_LIST: '/jtfeed/list',
   CREATE_TEMPLE: 'v1/agent/item/create',
@@ -181,16 +178,6 @@ export const NewFavFollowersList = async (profileId, pgno, pgsze) => {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_FAVORITES}?page=${pgno}&pageSize=${pgsze}&profileId=${profileId}`,
       {retry: 5, retryDelay: 3000},
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-export const NewFeedHome = async (id, pgfrm, pgto) => {
-  try {
-    let result = await axiosMultiPartFormData1.get(
-      `${endpoints.NEW_FEED_INFO}?id=${id}&pageNo=${pgfrm}&pageSize=${pgto}`,
     );
     return result;
   } catch (error) {
@@ -350,17 +337,6 @@ export const VerifyOTP = async data => {
 export const NewVerifyOTP = async data => {
   try {
     let result = await axiousInstanceNew.post(`${endpoints.NEW_OTP}`, data);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-export const UpdateUserPassword = async data => {
-  try {
-    let result = await axiousInstance.post(
-      `${endpoints.UPDATE_PASSWORD}`,
-      data,
-    );
     return result;
   } catch (error) {
     return error;

@@ -6,10 +6,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import {
-  NewFeedHome,
-  NewLikesCount,
   getHomeFeedList,
-  getAddTempId,
   getTempledetailsWithId,
   GetProfilePicture,
 } from '../../utils/api';

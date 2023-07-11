@@ -27,7 +27,6 @@ import TempleProfile from './newprofile';
 import ViewProfile from './view-profile';
 import Menu from './menu';
 import AddTempleNew from './addtemplenew';
-import Splash_Screen from './splash_screen';
 import CreateFeed from './createfeed';
 import Feed from './feed';
 import Posts from './posts';
@@ -64,7 +63,6 @@ export {
   ViewProfile,
   Menu,
   AddTempleNew,
-  Splash_Screen,
   CreateFeed,
   Feed,
   Posts,

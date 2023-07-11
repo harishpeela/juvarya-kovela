@@ -25,7 +25,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   let isFocused = useIsFocused();
   const PopularTemplesss = async () => {
     try {
-      let result = await PopularTemples(0, 20);
+      let result = await PopularTemples(0, 200);
       // console.log('iuhkmnSzmn =>', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
