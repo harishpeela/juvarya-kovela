@@ -3,7 +3,7 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 export const ProfileImage = ({profileImg}) => {
   const renderImage = () => {
-    if (!profileImg?.url) {
+    if (!profileImg?.jtProfileDTO?.logo) {
       return (
         <Image
           source={{
@@ -12,11 +12,11 @@ export const ProfileImage = ({profileImg}) => {
           style={styles.profileView}
         />
       );
-    } else if (profileImg?.url) {
+    } else if (profileImg?.jtProfileDTO?.logo) {
       return (
         <Image
           source={{
-            uri: profileImg?.url,
+            uri: profileImg?.jtProfileDTO?.logo,
           }}
           style={styles.profileView}
         />

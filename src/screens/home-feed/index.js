@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
@@ -39,45 +40,21 @@ const UserFeedScreen = ({navigation}) => {
   const listFeed = async () => {
     try {
       let result = await getHomeFeedList(apiPageNo, 100);
-      // console.log('feed list', result?.data);
+      console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
+        setHomeFeedList(result?.data?.jtFeeds);
         // setHomeFeedList(existedFeedList => [
         //   ...existedFeedList,
         //   ...result?.data?.jtFeeds,
         // ]);
-        let details = result?.data?.jtFeeds || [];
-        details?.map(t => {
-          TempleDetails(t);
-        });
       }
     } catch (error) {
       console.log('errorrrd', error);
     }
   };
-  const TempleDetails = async jtId => {
-    // console.log('ajshbx', jtId);
-    try {
-      setLoaderImg(true);
-      let responce = await getTempledetailsWithId(jtId?.jtProfile);
-      let result = await GetProfilePicture(jtId?.jtProfile);
-      // console.log('res', result?.data);
-      if (responce) {
-        setLoaderImg(false);
-        const fullData = {...jtId, ...responce?.data, ...result?.data};
-        setHomeFeedList(idData => [...idData, fullData]);
-      } else {
-        console.log('msbmabsmbams');
-        setLoaderImg(false);
-      }
-    } catch (error) {
-      setLoaderImg(false);
-      console.log('error in temple details with id api', error);
-    }
-  };
   useEffect(() => {
     listFeed();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userDetails, isFocused]);
 
   useEffect(() => {

@@ -125,7 +125,7 @@ export const UserFeedCompList = ({
           <Image
             source={{
               uri:
-                post?.url ||
+                post?.jtProfileDTO?.logo ||
                 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
             }}
             style={styles.profileImage}
@@ -139,11 +139,10 @@ export const UserFeedCompList = ({
               marginBottom: 10,
               textTransform: 'capitalize',
             }}>
-            {post?.name}
+            {post?.jtProfileDTO?.name}
           </Text>
         </TouchableOpacity>
       </View>
-      {/* <RenderImage post={post} /> */}
       <View>
         <FlatList
           data={post?.mediaList}
@@ -160,7 +159,6 @@ export const UserFeedCompList = ({
             return (
               <View>
                 {/* <TouchableOpacity> */}
-
                 <Image
                   source={{uri: item?.url}}
                   style={{
@@ -212,9 +210,10 @@ export const UserFeedCompList = ({
         <Text style={styles.likes}>{likeCount} Likes</Text>
       </View>
       <Text style={styles.username}>
-        {post?.name}
+        {post?.jtProfileDTO?.name}
         {''}
-        {''} <Text style={{color: 'gray'}}>{post?.description}</Text>
+        {''}{' '}
+        <Text style={{color: 'gray'}}>{post?.jtProfileDTO?.desciption}</Text>
       </Text>
     </View>
   );
