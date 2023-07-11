@@ -45,7 +45,7 @@ const ViewProfile = ({route, navigation}) => {
   //   // userDetails,
   // );
   const [loader, setloader] = useState(true);
-  const [isFollow, setisFollow] = useState(false);
+  const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
@@ -67,6 +67,7 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
+      console?.log('================>', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -141,6 +142,7 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
+    console.log('id====>', id);
     try {
       let result = await GetPosts(id, 0, 40);
       console.log('result', result?.data);

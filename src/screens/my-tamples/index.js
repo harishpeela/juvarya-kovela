@@ -50,11 +50,10 @@ const MyTamples = ({navigation, route}) => {
       let result = await getTempledetailsWithId(d?.jtProfile);
       let responce = await GetProfilePicture(d?.jtProfile);
       // console.log('res', responce?.data);
-
       // console.log(result?.data, '------>');
       if (result) {
         let templesArray = {...d, ...result?.data, ...responce?.data};
-        // console.log('templesArray', templesArray);
+        console.log('templesArray', templesArray);
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
