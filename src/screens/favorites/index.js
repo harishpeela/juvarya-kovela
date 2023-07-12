@@ -1,196 +1,146 @@
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable react/jsx-no-duplicate-props */
-import {View, Text, TouchableOpacity, FlatList, Pressable} from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import {
+  View,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+  Text,
+  Image,
+} from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
+import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {
-  BackHeader,
-  ImageLoader,
-  Loader,
-  SearchBar,
-  BackgroundImage,
-} from '../../components';
-import {allTexts, colors} from '../../common';
-import ApplicationContext from '../../utils/context-api/Context';
-import {
-  getFavoritesList,
-  getFollowSearchList,
-  NewFavFollowersList,
+  GetMyTemples,
+  getTempledetailsWithId,
+  GetProfilePicture,
 } from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
+import ApplicationContext from '../../utils/context-api/Context';
+import { FavTempleListCard } from '../../components';
 const Favorite = ({navigation}) => {
-  const {favoriteList, userDetails} = useContext(ApplicationContext);
-  const [favoriteTemplesList, setfavoriteTemplesList] = useState(favoriteList);
-  const [filterFavTemple, setfilterFavTemple] = useState(favoriteList);
-  const [searchedText, setSearchedText] = useState('');
-  const [loading, setloading] = useState(false);
-  const [searchLoading, setSearchLoading] = useState(false);
-  // const getFollowedTempleList = async () => {
-  //   try {
-  //     let response = await getFavoritesList(0, 100);
-  //     // console.log('responce of favourate list', response);
-  //     if (response && response.status === 200) {
-  //       const {
-  //         data: {followingObjects},
-  //       } = response;
-  //       setloading(false);
-  //       if (followingObjects.length > 0) {
-  //         setfavoriteTemplesList(followingObjects);
-  //         setfilterFavTemple(followingObjects);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  let isFocused = useIsFocused();
-  useEffect(() => {
-    // setloading(true);
-    // getFollowedTempleList();
-  }, [isFocused]);
+  const {userDetails} = useContext(ApplicationContext);
+  const [templeList, setTempleList] = useState([]);
+  const [filteredArray, setfilteredArray] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [seracherdText, setSeracherdText] = useState('');
 
-  const performFilter = async () => {
-    // try {
-    //   setSearchLoading(true);
-    //   let result = await getFollowSearchList(searchedText);
-    //   if (result && result.status === 200) {
-    //     const {
-    //       data: {followingObjects},
-    //     } = result;
-    //     setSearchLoading(false);
-    //     // console.log('Searched List TEXT', followingObjects);
-    //     setfavoriteTemplesList(followingObjects);
-    //     setfilterFavTemple(followingObjects);
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+  let isFocused = useIsFocused();
+  const getTemples = async () => {
+    try {
+      let response = await GetMyTemples(userDetails?.id);
+      let data = response?.data?.data;
+      data?.map(a => {
+        TempleDetails(a);
+      });
+    } catch (error) {
+      console.log('error in mytemplesapi', error);
+    }
   };
+  const TempleDetails = async d => {
+    try {
+      let result = await getTempledetailsWithId(d?.jtProfile);
+      let responce = await GetProfilePicture(d?.jtProfile);
+      if (result) {
+        let templesArray = {...d, ...result?.data, ...responce?.data};
+        setLoading(false);
+        setTempleList(array => [...array, templesArray]);
+        setfilteredArray(array => [...array, templesArray]);
+      } else {
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log('error in templedetails api is ==>', error);
+    }
+  };
+  useEffect(() => {
+    getTemples();
+  }, [isFocused]);
+  const performFilter = value => {
+    setfilteredArray(
+      templeList.filter(item =>
+        item?.name?.toLowerCase().includes(value?.toLowerCase()),
+      ),
+    );
+  };
+
   return (
-    <View style={styles.wrapper}>
+    <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
-      <BackHeader
-        onBackPress={() => {
-          navigation.navigate(allTexts.tabNames.home);
-        }}
-        isOption
-        txt={'Following'}
-      />
-      <View style={styles.fontTxtCont}>
-        <Text style={styles.followingText}>
-          {`${favoriteTemplesList?.length} Following `}
-        </Text>
-      </View>
-      <View style={styles.searchContainer}>
-        <SearchBar
-          value={searchedText}
-          onTextChange={e => {
-            setSearchedText(e);
+      <View style={styles.headerContainer}>
+        <BackHeader
+          onBackPress={() => {
+            navigation.goBack();
           }}
-          loading={searchLoading}
-          onCrossPress={() => {
-            setSearchedText('');
-            setloading(true);
-            // getFollowedTempleList();
-          }}
-          onSubmit={performFilter}
-          bgColor={'lightgray'}
-          placeHolder={'Search here'}
+          txt={'Following'}
         />
       </View>
-      <View style={styles.followCardContainer}>
-        {loading ? (
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100%',
-            }}>
-            <Loader color={colors.green2} />
-          </View>
-        ) : filterFavTemple.length !== 0 ? (
-          <FlatList
-            keyboardShouldPersistTaps="handled"
-            data={filterFavTemple}
-            showsHorizontalScrollIndicator={false}
-            style={{}}
-            contentContainerStyle={{
-              paddingBottom: 200,
+      <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
+        {filteredArray?.length} Following{' '}
+      </Text>
+      <View style={styles.searchbarContainer}>
+        <View style={{width: '100%'}}>
+          <SearchBar
+            value={seracherdText}
+            onCrossPress={() => {
+              setSeracherdText('');
+              getTemples();
             }}
-            keyboardShouldPersistTaps="handled"
-            keyExtractor={(item, index) => index}
-            renderItem={({item, index}) => (
-              <FollowCard
-                url={item?.jtItem?.profilePicture?.url}
-                name={item?.jtItem?.name}
-                isFollow={item?.jtItem?.following}
-                onPress={() => {
-                  navigation.navigate(allTexts.screenNames.viewProfile, {
-                    id: item?.jtItem?.id,
-                    title: item?.jtItem?.name,
-                    profileImg: item?.jtItem?.profilePicture?.url,
-                  });
+            onTextChange={e => {
+              // console.log(e);
+              setSeracherdText(e);
+              performFilter(e);
+            }}
+          />
+        </View>
+      </View>
+
+      <View style={styles.cardContainer}>
+        {loading === true ? (
+          <View style={styles.loaderContainer}>
+            <Loader color={colors.orangeColor} />
+          </View>
+        ) : (
+          [
+            filteredArray.length === 0 ? (
+              <View style={styles.loaderContainer}>
+                <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
+              </View>
+            ) : (
+              <FlatList
+                data={filteredArray}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.flatListStyle}
+                keyboardShouldPersistTaps="handled"
+                keyExtractor={(item, index) => item?.id}
+                renderItem={({item, index}) => {
+                  if (item?.name) {
+                    return (
+                      <FavTempleListCard
+                        name={item.name}
+                        location={item.line1}
+                        date={item.creationTime}
+                        img={item?.url}
+                        onPress={() => {
+                          navigation.navigate(
+                            allTexts.screenNames.viewProfile,
+                            {
+                              data: item,
+                            },
+                          );
+                        }}
+                      />
+                    );
+                  }
                 }}
               />
-            )}
-          />
-        ) : (
-          <View style={styles.notAvailable}>
-            <Text style={styles.name}>{'No Temple vailable'}</Text>
-          </View>
+            ),
+          ]
         )}
       </View>
-    </View>
-  );
-};
-
-const FollowCard = ({name, url, isFollow, onPress}) => {
-  return (
-    <Pressable onPress={onPress} style={styles.containerWrapper}>
-      <View style={styles.imgContainer}>
-        <ImageLoader
-          resizeMode={'contain'}
-          imageStyle={{
-            height: undefined,
-            width: undefined,
-            flex: 1,
-            borderRadius: 25,
-          }}
-          url={url}
-        />
-      </View>
-      <View style={styles.nameContainer}>
-        <Text numberOfLines={1} style={styles.name}>
-          {name}
-        </Text>
-      </View>
-      <TouchableOpacity>
-        <View
-          style={[
-            styles.followBtnContainer,
-            {
-              backgroundColor: isFollow ? colors.blue : null,
-              borderWidth: isFollow ? 0 : 1,
-              paddingHorizontal: isFollow ? 15 : 8,
-            },
-          ]}>
-          <Text
-            style={[
-              styles.followBtnText,
-              {color: isFollow ? colors.white : colors.black},
-            ]}>
-            {!isFollow ? 'Following' : 'follow'}
-          </Text>
-        </View>
-      </TouchableOpacity>
-      {/* <View style={styles.optionContainer}>
-        <SimpleLineIcons
-          name="options-vertical"
-          color={colors.black}
-          size={20}
-        />
-      </View> */}
-    </Pressable>
+    </SafeAreaView>
   );
 };
 

@@ -58,6 +58,7 @@ import {DotsNation} from './dotsNation';
 import {BackHeaderNew} from './backHeaders';
 import {PopularTemplesList} from './NearBy';
 import {PostsComp} from './profilecompnew';
+import { FavTempleListCard } from './favouritesListCard';
 export {
   Loader,
   SearchBar,
@@ -112,4 +113,5 @@ export {
   PopularTemplesList,
   ProfileImage,
   PostsComp,
+  FavTempleListCard,
 };

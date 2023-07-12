@@ -67,7 +67,7 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      console?.log('================><==========', result);
+      // console?.log('================><==========', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -143,13 +143,13 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
-    console.log('id====>', id);
+    // console.log('id====>', id);
     try {
       let result = await GetPosts(id, 0, 40);
       // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
-      console.log('postsdata', postsData);
+      // console.log('postsdata', postsData);
       let urls = postsData
         ?.filter(item => item?.mediaList)
         ?.map(({mediaList}) => ({mediaList}));
@@ -171,7 +171,6 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
-  // console.log('postimgs', postImages);
   const TempleRoleSearchWithId = async profileId => {
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -212,7 +211,6 @@ const ViewProfile = ({route, navigation}) => {
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
-                console.log('clicked back');
                 navigation.goBack();
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />

@@ -30,6 +30,7 @@ const endpoints = {
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
+  ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
   SIGN_UP: 'v1/jtcustomer/create',
@@ -94,6 +95,14 @@ export const PopularTemples = async (pgfrm, pgto) => {
       `${endpoints.NEW_POPULAR_TEMPLES}?page=${pgfrm}&pageSize=${pgto}`,
       {retry: 5, retryDelay: 3000},
     );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const AdminTemples = async () => {
+  try {
+    let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);
     return result;
   } catch (error) {
     console.log('error in popular temples', error);

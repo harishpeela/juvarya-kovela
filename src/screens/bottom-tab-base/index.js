@@ -4,7 +4,6 @@ import React, {useContext} from 'react';
 import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
-// import {CustomIcon} from '../../components';
 import {
   Favorite,
   Home,
@@ -29,7 +28,7 @@ export default BottomTabBase = ({navigation}) => {
   const GetProfileScreen = () => <Profile navigation={navigation} />;
   const GetFavList = () => {
     const {homeFeedListData} = useContext(ApplicationContext);
-    console.log('listkjsx', homeFeedListData?.length);
+    // console.log('listkjsx', homeFeedListData?.length);
     return homeFeedListData?.length > 0 ? true : false;
   };
   return (
