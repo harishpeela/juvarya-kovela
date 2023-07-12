@@ -67,7 +67,7 @@ axiosMultiPartFormData1.interceptors.request.use(async function (config) {
 export const axiosNewDataSave = axios.create({
   baseURL: BASE,
   headers: {
-    'Content-Type': 'application/json',
+    // 'Content-Type': 'application/json',
     Authorization: bearer_token,
   },
 });

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
@@ -6,11 +7,7 @@ import {View, TouchableOpacity, RefreshControl, Text} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {
-  getHomeFeedList,
-  getTempledetailsWithId,
-  GetProfilePicture,
-} from '../../utils/api';
+import {getHomeFeedList, NewLikesCount} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
@@ -39,29 +36,38 @@ const UserFeedScreen = ({navigation}) => {
   let isFocused = useIsFocused();
   const listFeed = async () => {
     try {
-      let result = await getHomeFeedList(apiPageNo, 100);
-      console.log('feed list', result?.data);
+      let result = await getHomeFeedList(0, 100);
+      // console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
-        setHomeFeedList(result?.data?.jtFeeds);
-        // setHomeFeedList(existedFeedList => [
-        //   ...existedFeedList,
-        //   ...result?.data?.jtFeeds,
-        // ]);
+        let likesId = result?.data?.jtFeeds;
+        likesId.map(d => {
+          LikesStatus(d);
+        });
       }
     } catch (error) {
       console.log('errorrrd', error);
+    }
+  };
+  const LikesStatus = async d => {
+    try {
+      let result = await NewLikesCount(d?.id);
+      let like = [result?.data];
+      let likeStatus = [];
+      like.map(likes => {
+        likeStatus.push({like: likes?.like});
+      });
+      let responce = {...d, likeStatus};
+      // console.log('res========>', responce);
+      setHomeFeedList(res => [...res, responce]);
+    } catch (error) {
+      console.log('error in likes status and count api', error);
     }
   };
   useEffect(() => {
     listFeed();
   }, [userDetails, isFocused]);
 
-  useEffect(() => {
-    if (apiPageNo) {
-      listFeed();
-    }
-  }, [apiPageNo]);
   // console.log('home', homeFeedList);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -86,7 +92,6 @@ const UserFeedScreen = ({navigation}) => {
           />
         </View>
       </View>
-      {/* {tab === 1 && ( */}
       <>
         {loader && (
           <View style={{flex: 1}}>
@@ -114,7 +119,9 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 onSharePress={MyCustShare}
                 saveid={item?.id}
-                loader={loaderimg}
+                // loader={loaderimg}
+                likes={item?.likesCount}
+                isLikeTrue={item?.likeStatus[0]?.like}
                 // mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {

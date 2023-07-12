@@ -1,9 +1,9 @@
 export const Data = d => {
   let myDataDetails = {
-    name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : 'No Name',
+    name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
     description: d?.jtProfileDTO?.desciption
       ? d?.jtProfileDTO?.desciption
-      : 'No description',
+      : d?.desciption || 'no description',
     url: d?.url ? d?.url : '',
     eventsEnabled: d?.jtProfileDTO?.eventsEnabled
       ? d?.jtProfileDTO?.eventsEnabled
@@ -17,7 +17,7 @@ export const Data = d => {
       ? d?.jtProfileDTO?.templeClass
       : '',
     jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
-    logo: d?.jtProfileDTO?.logo ? d?.jtProfileDTO?.logo : '',
+    logo: d?.jtProfileDTO?.logo ? d?.jtProfileDTO?.logo : d?.url,
   };
   return myDataDetails;
 };

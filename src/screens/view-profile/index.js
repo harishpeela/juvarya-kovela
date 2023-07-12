@@ -38,12 +38,12 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -67,7 +67,7 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      console?.log('================>', result);
+      console?.log('================><==========', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -85,6 +85,7 @@ const ViewProfile = ({route, navigation}) => {
   const followingCount = async id => {
     try {
       let result = await NewFollowCount(id);
+      // console.log('res of follow count', result);
       if (result) {
         setFollowCount(result?.data);
       } else {
@@ -145,17 +146,17 @@ const ViewProfile = ({route, navigation}) => {
     console.log('id====>', id);
     try {
       let result = await GetPosts(id, 0, 40);
-      console.log('result', result?.data);
+      // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
-      // console.log('postsdata', postsData);
+      console.log('postsdata', postsData);
       let urls = postsData
         ?.filter(item => item?.mediaList)
         ?.map(({mediaList}) => ({mediaList}));
       // console.log('urls', urls);
       urls?.map(({mediaList}) =>
         mediaList?.map(s => {
-          PostsArray?.push({image: s?.url}), console.log('s', s);
+          PostsArray?.push({image: s?.url});
         }),
       );
       if (PostsArray?.length > 0) {
@@ -172,7 +173,6 @@ const ViewProfile = ({route, navigation}) => {
   };
   // console.log('postimgs', postImages);
   const TempleRoleSearchWithId = async profileId => {
-    console.log('data.id', data?.id);
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
     myHeaders.append('Authorization', Token);
@@ -189,17 +189,15 @@ const ViewProfile = ({route, navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        console.log('res odf role id', result);
+        // console.log('res odf role id', result);
         if (result) {
-          console.log('1');
           let val = result?.roles;
           var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
-          console.log('id', roleAdmin);
+          // console.log('id', roleAdmin);
           if (roleAdmin) {
             setRoleId('ROLE_ITEM_ADMIN');
           }
         } else {
-          console.log('2');
           setRoleId(null);
         }
       })
@@ -212,7 +210,11 @@ const ViewProfile = ({route, navigation}) => {
         <BackgroundImage />
         <View style={styles.footerContainer}>
           <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() => {
+                console.log('clicked back');
+                navigation.goBack();
+              }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <Text

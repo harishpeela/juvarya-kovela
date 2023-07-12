@@ -33,8 +33,8 @@ export const UserFeedCompList = ({
   mediaData,
   loader,
 }) => {
-  const [isLiked, setIsLiked] = useState(false);
-  const [likeCount, setLikeCount] = useState();
+  const [isLiked, setIsLiked] = useState(isLikeTrue);
+  const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(false);
   const [dotIndex, setIndex] = useState(0);
   const likeUnLikeHandler = async () => {
@@ -46,7 +46,7 @@ export const UserFeedCompList = ({
     setIsLiked(!isLiked);
 
     const payloadLike = {
-      feedId: id,
+      jtFeedId: id,
       like: !isLiked,
     };
     try {
