@@ -13,7 +13,7 @@ import {
   GetProfilePicture,
   NewGetFollowUmFollowById,
 } from '../../utils/api';
-import {useIsFocused, useFocusEffect} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -26,42 +26,37 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples(0, 200);
-      // console.log('iuhkmnSzmn =>', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
         dty?.map(d => {
-          // console.log('dddddddd', d);
           profilePicture(d);
         });
       }
     } catch (error) {
-      console.log('error', error);
+      console.log('error in popular temples', error);
     }
   };
   const profilePicture = async d => {
     try {
       let result = await GetProfilePicture(d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
-      // console.log('follow status', responce?.data);
       if (responce) {
         setIsFollow(responce?.data);
       } else {
         setIsFollow(undefined);
       }
       let Following = responce?.data;
-      // console.log('follow', Following);
       const obj = {...result?.data, ...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
     } catch (error) {
-      console.log('error', error);
+      console.log('error in profile pic', error);
     }
   };
-  // console.log('following.......', isFollow);
   useEffect(() => {
     PopularTemplesss();
-  }, []);
+  }, [isFocused]);
   const FilteredList = async value => {
     setFilteredList(
       filteredArray.filter(item =>

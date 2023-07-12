@@ -53,7 +53,7 @@ const Signin = ({navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        console.log('result of currentcustomer', result);
+        // console.log('result of currentcustomer', result);
         console.log('role', result?.roles);
         if (result) {
           saveUserDetails({
@@ -62,23 +62,23 @@ const Signin = ({navigation}) => {
             role: result?.roles,
             id: result?.id,
           });
+          console.log(
+            'saveuserdetails',
+            result?.firstName,
+            result?.lastName,
+            result?.email,
+            result?.id,
+          );
           setUserDetails({
             username: result?.username,
             email: result.email,
             role: result?.roles,
+            id: result?.id,
+
           });
         }
       })
       .catch(error => console.log('error', error));
-  };
-
-  const getAndSaveUserInfo = async () => {
-    try {
-      let response = await getUserInfoNew();
-      console.log('login res in signin', response?.data);
-    } catch (error) {
-      alert(error.message);
-    }
   };
   const signinHandler = async (data, actions) => {
     let payload = {
@@ -89,7 +89,7 @@ const Signin = ({navigation}) => {
     try {
       console.log('343');
       let result = await loginUser1(payload);
-      console.log('signinhand login res', result?.data);
+      console.log('signinhand login res', result);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType, username},
@@ -103,7 +103,7 @@ const Signin = ({navigation}) => {
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
-        Alert.alert('Error', 'Invaliddd credentials!');
+        Alert.alert('Error', 'Invalid credentials....!');
 
       }
     } catch (error) {
