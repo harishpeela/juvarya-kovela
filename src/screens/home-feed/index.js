@@ -115,7 +115,7 @@ const UserFeedScreen = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: isDarkMode ? 'white' : 'blackS',
+        backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <BackgroundImage />
       <View style={styles.navBarContainer}>
