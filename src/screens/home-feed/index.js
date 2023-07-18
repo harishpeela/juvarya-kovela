@@ -3,7 +3,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
-import {View, TouchableOpacity, RefreshControl, Text} from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  RefreshControl,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
@@ -20,8 +26,8 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(true);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [apiPageNo, setApiPageNo] = useState(0);
-  const [loaderimg, setLoaderImg] = useState(false);
+  const [apiPageNo, setApiPageNo] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
   // console.log('user', userDetails);
   const MyCustShare = async () => {
     const ShareOptions = {
@@ -34,41 +40,64 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   let isFocused = useIsFocused();
-  const listFeed = async () => {
+  const listFeed = async (pgNo, pgSize) => {
     try {
-      let result = await getHomeFeedList(0, 100);
+      let result = await getHomeFeedList(pgNo, pgSize);
       // console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
-        let likesId = result?.data?.jtFeeds;
-        likesId.map(d => {
-          LikesStatus(d);
-        });
+        let responce = result.data.jtFeeds;
+        // console.log('res', responce);
+        setHomeFeedList([...homeFeedList, ...responce]);
+        // let likesId = result?.data?.jtFeeds;
+        // likesId.map(d => {
+        //   LikesStatus(d);
+        // });
       }
     } catch (error) {
       console.log('errorrrd', error);
     }
   };
-  const LikesStatus = async d => {
-    try {
-      let result = await NewLikesCount(d?.id);
-      let like = [result?.data];
-      let likeStatus = [];
-      like.map(likes => {
-        likeStatus.push({like: likes?.like});
-      });
-      let responce = {...d, likeStatus};
-      // console.log('res========>', responce);
-      setHomeFeedList(res => [...res, responce]);
-    } catch (error) {
-      console.log('error in likes status and count api', error);
+  // const LikesStatus = async d => {
+  //   try {
+  //     let result = await NewLikesCount(d?.id);
+  //     let like = [result?.data];
+  //     let likeStatus = [];
+  //     like.map(likes => {
+  //       likeStatus.push({like: likes?.like});
+  //     });
+  //     let responce = {...d, likeStatus};
+  //     // console.log('res========>', responce);
+  //     setHomeFeedList(res => [...res, responce]);
+  //   } catch (error) {
+  //     console.log('error in likes status and count api', error);
+  //   }
+  // };
+
+  const renderLoder = () => {
+    if (isLoading) {
+      return null;
     }
+    return (
+      <View>
+        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+      </View>
+    );
+  };
+  const loadMoreItems = () => {
+    setApiPageNo(apiPageNo + 1);
+    setIsLoading(false);
   };
   useEffect(() => {
-    listFeed();
-  }, [userDetails, isFocused]);
-
-  // console.log('home', homeFeedList);
+    // listFeed();
+  }, [userDetails]);
+  useEffect(() => {
+    if (apiPageNo > 0) {
+      listFeed(apiPageNo, 20);
+      console.log(apiPageNo);
+    }
+  }, [apiPageNo]);
+  // console.log('home ======>', homeFeedList);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -111,7 +140,7 @@ const UserFeedScreen = ({navigation}) => {
             }
             contentContainerStyle={styles.flatListStyle}
             keyboardShouldPersistTaps="handled"
-            // decelerationRate={0.7}
+            // decelerationRate={0.5}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <UserFeedCompList
@@ -119,9 +148,8 @@ const UserFeedScreen = ({navigation}) => {
                 post={item}
                 onSharePress={MyCustShare}
                 saveid={item?.id}
-                // loader={loaderimg}
                 likes={item?.likesCount}
-                isLikeTrue={item?.likeStatus[0]?.like}
+                // isLikeTrue={item?.likeStatus[0]?.like}
                 // mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
@@ -130,8 +158,9 @@ const UserFeedScreen = ({navigation}) => {
                 }}
               />
             )}
-            // onEndReached={() => setApiPageNo(pageNo => pageNo + 1)}
-            // onEndReachedThreshold={0.5}
+            ListFooterComponent={renderLoder}
+            onEndReached={() => loadMoreItems()}
+            onEndReachedThreshold={0.5}
           />
         ) : homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>

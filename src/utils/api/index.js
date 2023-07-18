@@ -30,6 +30,7 @@ const endpoints = {
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
+  TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
@@ -106,6 +107,16 @@ export const AdminTemples = async () => {
     return result;
   } catch (error) {
     console.log('error in popular temples', error);
+  }
+};
+export const TempleFollowersList = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.TEMPLE_FOLLOWERS_LIST}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in temple follwers lit', error);
   }
 };
 export const getTempledetailsWithId = async id => {

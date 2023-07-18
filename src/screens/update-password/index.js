@@ -9,7 +9,6 @@ import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader, BackgroundImage} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-import {NewUpdateUserPassword} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const UpdatePassword = ({navigation}) => {

@@ -20,6 +20,7 @@ import {
   NewGetFollowUmFollowById,
   NewFollowCount,
   GetPosts,
+  TempleFollowersList,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -239,7 +240,7 @@ const ViewProfile = ({route, navigation}) => {
               followCount={followCount}
               onPressFollowers={() =>
                 navigation.navigate(allTexts.screenNames.followersmembership, {
-                  id: data?.id,
+                  id: trfData?.jtProfile,
                 })
               }
             />

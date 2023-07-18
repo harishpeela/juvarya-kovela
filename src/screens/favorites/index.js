@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  View,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-  Text,
-  Image,
-} from 'react-native';
+import {View, SafeAreaView, FlatList, Text} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -19,7 +12,7 @@ import {
 } from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
-import { FavTempleListCard } from '../../components';
+import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
