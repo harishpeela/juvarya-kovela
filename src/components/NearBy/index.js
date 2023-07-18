@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -15,11 +15,7 @@ import {Loader} from '../loader';
 import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
-import {
-  PopularTemples,
-  GetProfilePicture,
-  NewGetFollowUmFollowById,
-} from '../../utils/api';
+import {PopularTemples, NewGetFollowUmFollowById} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [loading, setLoading] = useState(true);
@@ -63,7 +59,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   const profilePicture = async d => {
     try {
-      let result = await GetProfilePicture(d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
       if (responce) {
         setIsFollow(responce?.data);
@@ -71,7 +66,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
         setIsFollow(undefined);
       }
       let Following = responce?.data;
-      const obj = {...result?.data, ...d, ...Following};
+      const obj = {...d, ...Following};
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
     } catch (error) {

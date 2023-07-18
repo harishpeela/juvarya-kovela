@@ -13,7 +13,6 @@ import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FollowUnFollow} from '../../utils/api';
-import { Loader } from '../loader';
 export const TempleListCard = ({
   name,
   post,
@@ -79,7 +78,7 @@ export const TempleListCard = ({
         });
       }}>
       <ImageBackground
-        source={{uri: post?.url}}
+        source={{uri: post?.logo}}
         style={{height: 200, width: 200, borderRadius: 60}}
         imageStyle={{borderRadius: 20}}>
         <View

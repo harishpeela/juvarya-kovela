@@ -140,10 +140,10 @@ export const GetsearchPopularTemples = async name => {
     console.log('error', error);
   }
 };
-export const GetMyTemples = async custId => {
+export const GetMyTemples = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosNewData1.get(
-      `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}`,
+      `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}&page=${pgno}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {

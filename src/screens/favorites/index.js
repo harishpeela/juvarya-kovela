@@ -19,12 +19,13 @@ const Favorite = ({navigation}) => {
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [seracherdText, setSeracherdText] = useState('');
-
+  const [followingCount, setFollowingCount] = useState();
   let isFocused = useIsFocused();
   const getTemples = async () => {
     try {
-      let response = await GetMyTemples(userDetails?.id);
+      let response = await GetMyTemples(userDetails?.id, 0, 40);
       let data = response?.data?.data;
+      setFollowingCount(data);
       data?.map(a => {
         TempleDetails(a);
       });
@@ -35,9 +36,8 @@ const Favorite = ({navigation}) => {
   const TempleDetails = async d => {
     try {
       let result = await getTempledetailsWithId(d?.jtProfile);
-      let responce = await GetProfilePicture(d?.jtProfile);
       if (result) {
-        let templesArray = {...d, ...result?.data, ...responce?.data};
+        let templesArray = {...d, ...result?.data};
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
@@ -71,7 +71,7 @@ const Favorite = ({navigation}) => {
         />
       </View>
       <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
-        {filteredArray?.length} Following{' '}
+        {followingCount?.length} Following{' '}
       </Text>
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
@@ -115,7 +115,7 @@ const Favorite = ({navigation}) => {
                         name={item.name}
                         location={item.line1}
                         date={item.creationTime}
-                        img={item?.url}
+                        img={item?.jtProfileDTO?.logo}
                         onPress={() => {
                           navigation.navigate(
                             allTexts.screenNames.viewProfile,
