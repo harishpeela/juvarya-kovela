@@ -7,7 +7,9 @@ import {
   ToastAndroid,
   Dimensions,
   Animated,
+  useColorScheme,
 } from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {colors} from '../../common';
 import React, {useState, useEffect, useRef} from 'react';
 import {styles} from './styles';
@@ -16,10 +18,12 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
-const {height, width} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
 import {Posts} from '../../screens';
 import {Loader} from '../loader';
+import {useTranslation} from 'react-i18next';
+import Snackbar from 'react-native-snackbar';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -33,10 +37,12 @@ export const UserFeedCompList = ({
   mediaData,
   loader,
 }) => {
+  const {tel, i18n} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(false);
   const [dotIndex, setIndex] = useState(0);
+  const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
     if (isLiked) {
       setLikeCount(likeCount - 1);
@@ -64,10 +70,16 @@ export const UserFeedCompList = ({
     let status = !saveFeed;
     if (status) {
       SaveFeedApi();
-      ToastAndroid.show('Successfully saved the Post', ToastAndroid.SHORT);
+      ToastAndroid.show(
+        'మీరు ఫీడ్‌ని విజయవంతంగా సేవ్ చేసారు',
+        ToastAndroid.SHORT,
+      );
+      // Snackbar.show({
+      //   text: `${tel('dummyNamespace.saved')}`,
+      // });
     } else {
       // console.log('feed not saved');
-      ToastAndroid.show('Successfully unsaved the Post', ToastAndroid.SHORT);
+      ToastAndroid.show('మీరు ఫీడ్‌ని సేవ్ చేయలేదు', ToastAndroid.SHORT);
     }
   };
   const SaveFeedApi = async () => {
@@ -171,7 +183,6 @@ export const UserFeedCompList = ({
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
                 )}
-                {/* </TouchableOpacity> */}
               </View>
             );
           }}
@@ -217,7 +228,9 @@ export const UserFeedCompList = ({
         {post?.jtProfileDTO?.name}
         {''}
         {''}{' '}
-        <Text style={{color: 'gray'}}>{post?.jtProfileDTO?.desciption}</Text>
+        <Text style={{color: !isDarkMode ? Colors.darker : Colors.lighter}}>
+          {post?.jtProfileDTO?.desciption}
+        </Text>
       </Text>
     </View>
   );

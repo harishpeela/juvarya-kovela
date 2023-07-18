@@ -39,12 +39,12 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(true);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -115,15 +115,15 @@ const ViewProfile = ({route, navigation}) => {
         setFollowBtnDisable(false);
         FollowingCount();
         ToastAndroid.show(
-          `Successfully you are${
-            !isFollow ? ' following' : ' unFollowing'
-          } temple!`,
+          `మీరు విజయవంతంగా ఆలయాన్ని ${
+            !isFollow ? ' అనుసరిస్తున్నారు' : ' అనుసరించడం లేదు'
+          } !`,
           ToastAndroid.SHORT,
         );
       } else {
       }
     } catch (error) {
-      console.log(error);
+      console.log('error in folow temples api in view profile page', error);
     }
   };
   const FollowingCount = () => {

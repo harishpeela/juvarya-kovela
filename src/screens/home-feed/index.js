@@ -9,6 +9,7 @@ import {
   RefreshControl,
   Text,
   ActivityIndicator,
+  useColorScheme,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
@@ -21,6 +22,7 @@ import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState(true);
@@ -28,13 +30,24 @@ const UserFeedScreen = ({navigation}) => {
   const [refrsh, setRefrsh] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const isDarkMode = useColorScheme() === 'dark';
+
   // console.log('user', userDetails);
-  const MyCustShare = async () => {
+  const MyCustShare = async item => {
     const ShareOptions = {
-      message: 'Hello Welcome to kovela App',
+      message: item?.jtProfileDTO?.name,
+      URL: item?.jtProfileDTO?.logo,
+      title: item?.jtProfileDTO?.desciption,
     };
+    const options = {
+      message: item?.jtProfileDTO?.name,
+      URL: item?.jtProfileDTO?.logo,
+      title: item?.jtProfileDTO?.desciption,
+    };
+    console.log('jhjjhbmjn ,jm n,m , , ,========>', ShareOptions);
     try {
-      const shareResponce = await Share.open(ShareOptions);
+      const shareResponce = await Share.open(ShareOptions, options);
+      return shareResponce;
     } catch (error) {
       console.log('error in share', error);
     }
@@ -99,7 +112,11 @@ const UserFeedScreen = ({navigation}) => {
   }, [apiPageNo]);
   // console.log('home ======>', homeFeedList);
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: isDarkMode ? 'white' : 'blackS',
+      }}>
       <BackgroundImage />
       <View style={styles.navBarContainer}>
         <View style={styles.buttonContainer}>
@@ -146,7 +163,7 @@ const UserFeedScreen = ({navigation}) => {
               <UserFeedCompList
                 id={item?.id}
                 post={item}
-                onSharePress={MyCustShare}
+                onSharePress={() => MyCustShare(item)}
                 saveid={item?.id}
                 likes={item?.likesCount}
                 // isLikeTrue={item?.likeStatus[0]?.like}
