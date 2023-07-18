@@ -15,10 +15,10 @@ const MySavedPosts = ({navigation}) => {
   const getPostsList = async () => {
     try {
       let result = await getSavedPostsList();
-      console.log('res of saved posts', result?.data);
+      console.log('res of saved posts', result?.data?.feeds);
       if (result.status === 200) {
         setLoading(false);
-        setfilteredArray(result?.data?.data);
+        setfilteredArray(result?.data?.feeds);
       } else {
         setLoading(false);
       }

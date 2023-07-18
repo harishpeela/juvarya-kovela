@@ -63,21 +63,21 @@ export const UserFeedCompList = ({
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
-      // SaveFeedApi();
+      SaveFeedApi();
       ToastAndroid.show('Successfully saved the Post', ToastAndroid.SHORT);
     } else {
       // console.log('feed not saved');
       ToastAndroid.show('Successfully unsaved the Post', ToastAndroid.SHORT);
     }
   };
-  // const SaveFeedApi = async () => {
-  //   let payload = {
-  //     feedId: saveid,
-  //   };
-  //   console.log('pay', payload);
-  //   let result = await NewSaveFeed(payload);
-  //   console.log('result =====>', result?.data);
-  // };
+  const SaveFeedApi = async () => {
+    let payload = {
+      feedId: saveid,
+    };
+    console.log('pay', payload);
+    let result = await NewSaveFeed(payload);
+    console.log('result =====>', result?.data);
+  };
   const likesCount = async () => {
     try {
       let result = await NewLikesCount(id);
@@ -159,14 +159,18 @@ export const UserFeedCompList = ({
             return (
               <View>
                 {/* <TouchableOpacity> */}
-                <Image
-                  source={{uri: item?.url}}
-                  style={{
-                    height: 400,
-                    width,
-                    resizeMode: 'stretch',
-                  }}
-                />
+                {!item?.uri ? (
+                  <Image
+                    source={{uri: item?.url}}
+                    style={{
+                      height: 400,
+                      width,
+                      resizeMode: 'stretch',
+                    }}
+                  />
+                ) : (
+                  <Loader color={colors.orangeColor} size={'small'} />
+                )}
                 {/* </TouchableOpacity> */}
               </View>
             );
@@ -195,7 +199,7 @@ export const UserFeedCompList = ({
           <TouchableOpacity
             onPress={() => {
               setSaveFeed(!saveFeed);
-              // FeedStatus();
+              FeedStatus();
             }}
             style={styles.icon}>
             <Icon

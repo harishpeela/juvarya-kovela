@@ -37,4 +37,15 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'black',
   },
+  nodataView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '10%',
+  },
+  nodatatext: {
+    fontSize: 24,
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+  }
 });

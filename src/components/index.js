@@ -59,6 +59,7 @@ import {BackHeaderNew} from './backHeaders';
 import {PopularTemplesList} from './NearBy';
 import {PostsComp} from './profilecompnew';
 import { FavTempleListCard } from './favouritesListCard';
+import { FollowersListCard } from './followersLIstCard';
 export {
   Loader,
   SearchBar,
@@ -114,4 +115,5 @@ export {
   ProfileImage,
   PostsComp,
   FavTempleListCard,
+  FollowersListCard,
 };
