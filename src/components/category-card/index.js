@@ -183,6 +183,7 @@ export const UserFeedCompList = ({
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
                 )}
+                {/* </TouchableOpacity> */}
               </View>
             );
           }}
@@ -228,7 +229,7 @@ export const UserFeedCompList = ({
         {post?.jtProfileDTO?.name}
         {''}
         {''}{' '}
-        <Text style={{color: !isDarkMode ? Colors.darker : Colors.lighter}}>
+        <Text style={{color: !isDarkMode ? 'gray' : 'white'}}>
           {post?.jtProfileDTO?.desciption}
         </Text>
       </Text>
