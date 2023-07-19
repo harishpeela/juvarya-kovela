@@ -58,6 +58,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     setIsLoading(false);
   };
   const profilePicture = async d => {
+    console.log('loading');
     try {
       let responce = await NewGetFollowUmFollowById(d?.id);
       if (responce) {
@@ -86,7 +87,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       ),
     );
   };
-  // console.log('filttered', filteredList);
   return (
     <View>
       <View style={styles.searchContainer}>
@@ -122,11 +122,12 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
               <View style={styles.upComingTextTab}>
                 <Text style={styles.popularTextContainer}>Popular Temple</Text>
                 <TouchableOpacity
-                  onPress={() =>
-                    seeallnav.navigate(allTexts.screenNames.seeall, {
-                      data: filteredList,
-                    })
-                  }>
+                  onPress={() => {
+                    console.log('see all clicked'),
+                      seeallnav.navigate(allTexts.screenNames.seeall, {
+                        data: filteredList,
+                      });
+                  }}>
                   <Text style={{color: colors.orangeColor, fontSize: 18}}>
                     See all
                   </Text>

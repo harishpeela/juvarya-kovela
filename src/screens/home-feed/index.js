@@ -22,7 +22,6 @@ import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState(true);
@@ -30,9 +29,10 @@ const UserFeedScreen = ({navigation}) => {
   const [refrsh, setRefrsh] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const [state, setState] = useState([]);
+
   const isDarkMode = useColorScheme() === 'dark';
 
-  // console.log('user', userDetails);
   const MyCustShare = async item => {
     const ShareOptions = {
       message: item?.jtProfileDTO?.name,
@@ -56,12 +56,11 @@ const UserFeedScreen = ({navigation}) => {
   const listFeed = async (pgNo, pgSize) => {
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('feed list', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
-        // console.log('res', responce);
         setHomeFeedList([...homeFeedList, ...responce]);
+        // setloader(false);
         // let likesId = result?.data?.jtFeeds;
         // likesId.map(d => {
         //   LikesStatus(d);
@@ -89,7 +88,7 @@ const UserFeedScreen = ({navigation}) => {
 
   const renderLoder = () => {
     if (isLoading) {
-      return null;
+      return <Text> no items</Text>;
     }
     return (
       <View>
@@ -101,13 +100,11 @@ const UserFeedScreen = ({navigation}) => {
     setApiPageNo(apiPageNo + 1);
     setIsLoading(false);
   };
+  useEffect(() => {}, [userDetails]);
   useEffect(() => {
-    // listFeed();
-  }, [userDetails]);
-  useEffect(() => {
-    if (apiPageNo > 0) {
+    if (apiPageNo >= 0) {
       listFeed(apiPageNo, 20);
-      console.log(apiPageNo);
+      console.log('apiPageNo', apiPageNo);
     }
   }, [apiPageNo]);
   // console.log('home ======>', homeFeedList);
@@ -139,11 +136,11 @@ const UserFeedScreen = ({navigation}) => {
         </View>
       </View>
       <>
-        {loader && (
+        {/* {loader && (
           <View style={{flex: 1}}>
             <Loader color={colors.orangeColor} size={30} />
           </View>
-        )}
+        )} */}
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
@@ -167,7 +164,6 @@ const UserFeedScreen = ({navigation}) => {
                 saveid={item?.id}
                 likes={item?.likesCount}
                 // isLikeTrue={item?.likeStatus[0]?.like}
-                // mediaData={item?.mediaList}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,

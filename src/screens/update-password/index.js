@@ -48,7 +48,7 @@ const UpdatePassword = ({navigation}) => {
         formikActions.setSubmitting(false);
         if (result) {
           ToastAndroid.show(
-            'Successfully Updated your Password!',
+            'మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది ..!',
             ToastAndroid.SHORT,
           );
           navigation.goBack();
