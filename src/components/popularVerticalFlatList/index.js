@@ -83,7 +83,7 @@ export const PopularTemplesVerticalList = ({
         });
       }}>
       <ImageBackground
-        source={{uri: post?.url}}
+        source={{uri: post?.logo}}
         style={{height: '100%', width: '100%', borderRadius: 60}}
         imageStyle={{borderRadius: 20, height: '100%', width: '100%'}}>
         <View

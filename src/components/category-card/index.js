@@ -24,6 +24,7 @@ import {Posts} from '../../screens';
 import {Loader} from '../loader';
 import {useTranslation} from 'react-i18next';
 import Snackbar from 'react-native-snackbar';
+import '../../../languages/language';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -37,11 +38,15 @@ export const UserFeedCompList = ({
   mediaData,
   loader,
 }) => {
-  const {tel, i18n} = useTranslation();
+  const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(false);
   const [dotIndex, setIndex] = useState(0);
+  const [items, setItems] = useState([
+    {label: 'English', value: 'en'},
+    {label: 'Telugu', value: 'tel'},
+  ]);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
     if (isLiked) {
@@ -231,6 +236,7 @@ export const UserFeedCompList = ({
         {''}{' '}
         <Text style={{color: !isDarkMode ? 'gray' : 'white'}}>
           {post?.jtProfileDTO?.desciption}
+          {/* <Text>{t('dummyNamespace.follwing')}</Text> */}
         </Text>
       </Text>
     </View>
