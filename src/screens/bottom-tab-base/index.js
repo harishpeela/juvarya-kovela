@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
@@ -28,6 +29,9 @@ export default BottomTabBase = ({navigation}) => {
   const GetProfileScreen = () => <Profile navigation={navigation} />;
   const GetFavList = () => {
     const {homeFeedListData} = useContext(ApplicationContext);
+    useEffect(() => {
+      homeFeedListData;
+    }, [ApplicationContext]);
     // console.log('listkjsx', homeFeedListData?.length);
     return homeFeedListData?.length > 0 ? true : false;
   };
@@ -45,7 +49,7 @@ export default BottomTabBase = ({navigation}) => {
         }}>
         <Tab.Screen
           name={allTexts.tabNames.home}
-          component={GetHomeScreen}
+          component={UserFeedScreen}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
@@ -56,7 +60,7 @@ export default BottomTabBase = ({navigation}) => {
         />
         <Tab.Screen
           name={allTexts.tabNames.search}
-          component={GetSearchScreen}
+          component={Search}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
@@ -67,7 +71,7 @@ export default BottomTabBase = ({navigation}) => {
         />
         <Tab.Screen
           name={allTexts.tabNames.ticket}
-          component={GetTicketConfirmScreen}
+          component={TicketConfirmation}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
@@ -82,7 +86,7 @@ export default BottomTabBase = ({navigation}) => {
         />
         <Tab.Screen
           name={allTexts.tabNames.favorites}
-          component={GetFavoriteScreen}
+          component={Favorite}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
@@ -93,7 +97,7 @@ export default BottomTabBase = ({navigation}) => {
         />
         <Tab.Screen
           name={allTexts.tabNames.profile}
-          component={GetProfileScreen}
+          component={Profile}
           options={{
             tabBarIcon: ({color, size}) => (
               <>

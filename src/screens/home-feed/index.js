@@ -27,7 +27,8 @@ const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState(true);
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(false);
-  const [apiPageNo, setApiPageNo] = useState(1);
+  const [apiPageNo, setApiPageNo] = useState(0);
+  const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
 
   const isDarkMode = useColorScheme() === 'dark';
@@ -59,6 +60,7 @@ const UserFeedScreen = ({navigation}) => {
         setloader(false);
         let responce = result.data.jtFeeds;
         setHomeFeedList([...homeFeedList, ...responce]);
+        console.log('result', result?.data?.jtFeeds);
         // setloader(false);
         // let likesId = result?.data?.jtFeeds;
         // likesId.map(d => {
@@ -88,21 +90,22 @@ const UserFeedScreen = ({navigation}) => {
   const renderLoder = () => {
     if (isLoading) {
       return <Text> no items</Text>;
+    } else {
+      return (
+        <View>
+          <ActivityIndicator size={'large'} color={colors.orangeColor} />
+        </View>
+      );
     }
-    return (
-      <View>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
-      </View>
-    );
   };
   const loadMoreItems = () => {
-    setApiPageNo(apiPageNo + 1);
+    setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
   };
   useEffect(() => {}, [userDetails]);
   useEffect(() => {
     if (apiPageNo >= 0) {
-      listFeed(apiPageNo, 20);
+      listFeed(apiPageNo, apiPageSize);
       console.log('apiPageNo', apiPageNo);
     }
   }, [apiPageNo]);

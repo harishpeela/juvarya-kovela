@@ -403,6 +403,7 @@ const App = () => {
         const {
           data: {jtFeeds},
         } = response;
+        // console.log('feedlist', jtFeeds);
         getHomeFeedListData(jtFeeds);
       }
     } catch (error) {
@@ -415,7 +416,12 @@ const App = () => {
       ApiData();
       getFollowedTempleList();
     }
-    console.log('user', userDetails);
+    console.log(
+      'userdetails',
+      userDetails,
+      'logindetails ======>',
+      loginDetails,
+    );
   }, [loginDetails]);
 
   return (
