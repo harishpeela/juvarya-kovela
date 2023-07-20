@@ -29,7 +29,6 @@ const UserFeedScreen = ({navigation}) => {
   const [refrsh, setRefrsh] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [state, setState] = useState([]);
 
   const isDarkMode = useColorScheme() === 'dark';
 

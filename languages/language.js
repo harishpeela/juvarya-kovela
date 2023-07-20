@@ -2,7 +2,8 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import en from './en.json';
 import tel from './tel.json';
-const resources = {
+import i18next from 'i18next';
+export const resources = {
   en: {
     translation: en,
   },
@@ -20,3 +21,4 @@ i18n.use(initReactI18next).init({
     escapeValue: false,
   },
 });
+export default i18next;

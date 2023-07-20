@@ -7,6 +7,12 @@ export const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: 'white',
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: '5%',
+  },
   profileContainer: {
     marginTop: 20,
     paddingBottom: 30,

@@ -1,0 +1,14 @@
+{
+    "tel": {
+        "posts": "పోస్ట్‌లు",
+        "myTemple": "నా దేవాలయాలు",
+        "poojari": "పూజారి",
+        "lan": "తెలుగు"
+    },
+    "en": {
+        "posts": "Posts",
+        "myTemple": "MyTemples",
+        "poojari": "Poojari",
+        "lan": "English"
+    }
+}

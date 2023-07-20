@@ -1,5 +1,7 @@
 {
-    "dummyNamespace": {
-      "medium": "medium is great!"
+  "posts": "Saved Posts",
+  "myTemple": "MyTemples",
+  "poojari": "Poojari",
+  "updatepassword": "Update Password",
+  "account": "Account"
     }
-  }
