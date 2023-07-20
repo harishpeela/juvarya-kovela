@@ -1,15 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {View, SafeAreaView, FlatList, Text} from 'react-native';
+import {
+  View,
+  SafeAreaView,
+  FlatList,
+  Text,
+  ActivityIndicator,
+} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
-import {
-  GetMyTemples,
-  getTempledetailsWithId,
-  GetProfilePicture,
-} from '../../utils/api';
+import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
@@ -18,12 +20,15 @@ const Favorite = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
   const [followingCount, setFollowingCount] = useState();
+  const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
-  const getTemples = async () => {
+  const getTemples = async (userid, pgno, pgsz) => {
+    setIsLoading(true);
     try {
-      let response = await GetMyTemples(userDetails?.id, 0, 40);
+      let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
       setFollowingCount(data);
       data?.map(a => {
@@ -41,6 +46,7 @@ const Favorite = ({navigation}) => {
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
+        setIsLoading(false);
       } else {
         setLoading(false);
       }
@@ -58,7 +64,27 @@ const Favorite = ({navigation}) => {
       ),
     );
   };
-
+  const renderLoder = () => {
+    return isLoading ? (
+      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
+        {' '}
+        No Items to display
+      </Text>
+    ) : (
+      <View>
+        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+      </View>
+    );
+  };
+  const loadMoreItems = () => {
+    setPageNo(pageNo + 1);
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    if (pageNo >= 0) {
+      getTemples(userDetails?.id, pageNo, 20);
+    }
+  }, [pageNo]);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
@@ -107,6 +133,10 @@ const Favorite = ({navigation}) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
+                ListFooterComponent={renderLoder}
+                onEndReached={() => loadMoreItems()}
+                onEndReachedThreshold={0.5}
+                decelerationRate={0.5}
                 keyExtractor={(item, index) => item?.id}
                 renderItem={({item, index}) => {
                   if (item?.name) {
