@@ -54,6 +54,7 @@ const UserFeedScreen = ({navigation}) => {
   };
   let isFocused = useIsFocused();
   const listFeed = async (pgNo, pgSize) => {
+    setIsLoading(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
       if (result && result?.status === 200) {
@@ -61,6 +62,7 @@ const UserFeedScreen = ({navigation}) => {
         let responce = result.data.jtFeeds;
         setHomeFeedList([...homeFeedList, ...responce]);
         console.log('result', result?.data?.jtFeeds);
+        setIsLoading(false);
         // setloader(false);
         // let likesId = result?.data?.jtFeeds;
         // likesId.map(d => {
@@ -88,15 +90,16 @@ const UserFeedScreen = ({navigation}) => {
   // };
 
   const renderLoder = () => {
-    if (isLoading) {
-      return <Text> no items</Text>;
-    } else {
-      return (
-        <View>
-          <ActivityIndicator size={'large'} color={colors.orangeColor} />
-        </View>
-      );
-    }
+    return isLoading ? (
+      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
+        {' '}
+        No Items to display
+      </Text>
+    ) : (
+      <View>
+        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+      </View>
+    );
   };
   const loadMoreItems = () => {
     setApiPageNo(apiPageNo + apiPageSize);
@@ -106,7 +109,7 @@ const UserFeedScreen = ({navigation}) => {
   useEffect(() => {
     if (apiPageNo >= 0) {
       listFeed(apiPageNo, apiPageSize);
-      console.log('apiPageNo', apiPageNo);
+      console.log('apiPageNo', apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
   // console.log('home ======>', homeFeedList);
@@ -156,7 +159,7 @@ const UserFeedScreen = ({navigation}) => {
             }
             contentContainerStyle={styles.flatListStyle}
             keyboardShouldPersistTaps="handled"
-            // decelerationRate={0.5}
+            decelerationRate={0.5}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <UserFeedCompList

@@ -18,7 +18,7 @@ import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, NewGetFollowUmFollowById} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [filteredArray, setfilteredArray] = useState([]);
   const [isFollow, setIsFollow] = useState();
@@ -29,14 +29,16 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
   const PopularTemplesss = async (frm, toNo) => {
+    setLoader(true);
     try {
       let result = await PopularTemples(frm, toNo);
-      // console?.log('res of popular temples', result?.data);
+      console?.log('res of popular temples', result?.data?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
         dty?.map(d => {
           profilePicture(d);
+          setLoader(false);
         });
       }
     } catch (error) {
@@ -44,14 +46,21 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     }
   };
   const renderLoder = () => {
-    if (isLoading) {
-      return null;
-    }
-    return (
-      <View style={{marginTop: 50}}>
+    return loader ? (
+      <Text>no temples to watch</Text>
+    ) : (
+      <View style={{marginTop: 90}}>
         <ActivityIndicator size={'large'} color={colors.orangeColor} />
       </View>
     );
+    // if (isLoading) {
+    //   return null;
+    // }
+    // return (
+    //   <View style={{marginTop: 50}}>
+    //     <ActivityIndicator size={'large'} color={colors.orangeColor} />
+    //   </View>
+    // );
   };
   const loadMoreItems = () => {
     setPageNo(pageNo + 1);
@@ -115,7 +124,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                 justifyContent: 'center',
                 height: '100%',
               }}>
-              <Loader color={colors.green2} />
+              <Loader color={colors.orangeColor} />
             </View>
           ) : (
             <>
