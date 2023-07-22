@@ -1,0 +1,91 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-native/no-inline-styles */
+import React, {useEffect, useState} from 'react';
+import {View, Text, FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {
+  BackgroundImage,
+  BackHeaderNew,
+  Loader,
+  UserFeedCompList,
+} from '../../components';
+import {Feed, GetPosts} from '../../utils/api';
+import {colors} from '../../common';
+const Feeds = ({route, navigation}) => {
+  const {itemDetails} = route.params || {};
+  console.log('itemDetails', itemDetails);
+  const [feedData, setFeedData] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const [postsData, setPostsData] = useState([]);
+  //   console.log('item =========>', itemDetails);
+  const feedDetails = async () => {
+    try {
+      let result = await Feed(itemDetails.id);
+      //   console.log('feed', result);
+      if (result.status === 200) {
+        setFeedData(result.data);
+      }
+    } catch (error) {
+      console.log('error in feed details ==>', error);
+    }
+  };
+  const tempProfilefeeddetails = async () => {
+    try {
+      let result = await GetPosts(itemDetails?.jtProfile, 0, 60);
+      //   console.log('result of pot', result);
+      let Data = result.data.data;
+      console.log('======', Data);
+      if (Data) {
+        console.log('detaiolskans', itemDetails.id);
+
+        let fil = Data.filter(item => item.mediaList);
+        let arey = await removeObjectWithId(fil, itemDetails.id);
+        console.log('filll =====>', arey);
+        setPostsData(arey);
+      }
+    } catch (error) {
+      console.log('error in getposts in feed details pagee', error);
+    }
+  };
+  function removeObjectWithId(arr, id) {
+
+    const objWithIdIndex = arr.findIndex(obj => obj.id === id);
+
+    if (objWithIdIndex > -1) {
+      arr.splice(objWithIdIndex, 1);
+    }
+
+    return arr;
+  }
+  console.log('posts daya ==========>', postsData);
+  useEffect(() => {
+    feedDetails();
+    tempProfilefeeddetails();
+  }, [itemDetails]);
+  return (
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <BackgroundImage />
+      <View style={{margin: '10%'}}>
+        <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} />
+      </View>
+      {loader ? (
+        <Loader size={'small'} color={colors.orangeColor} />
+      ) : (
+        <ScrollView>
+          <UserFeedCompList id={feedData.id} post={feedData} />
+          <ScrollView>
+            <FlatList
+              data={postsData}
+              keyExtractor={({item, index}) => index}
+              renderItem={({item, index}) =>
+                item?.mediaList && (
+                  <UserFeedCompList id={item?.id} post={item} />
+                )
+              }
+            />
+          </ScrollView>
+        </ScrollView>
+      )}
+    </SafeAreaView>
+  );
+};
+export default Feeds;

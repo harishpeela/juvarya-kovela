@@ -33,6 +33,7 @@ import Posts from './posts';
 import FollowersMembership from './profileFollowers';
 import ProfileMembership from './profile_memberShip';
 import SeeAll from './popularTemplesSeeAll';
+import Feeds from './feed-details';
 export {
   CreatePost,
   Seemore,
@@ -69,4 +70,5 @@ export {
   FollowersMembership,
   ProfileMembership,
   SeeAll,
+  Feeds,
 };

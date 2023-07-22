@@ -21,27 +21,23 @@ const SeeAll = ({route, navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
   const PopularSeeAllTemples = async (pgNo, pgToNo) => {
+    setIsLoading(true);
     try {
       let result = await PopularTemples(pgNo, pgToNo);
       if (result.status === 200) {
         let PopData = result?.data?.data;
         setPopTemples([...popTemples, ...PopData]);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log('error in see all popular temples api', error);
     }
   };
   const renderLoder = () => {
-    if (isLoading) {
-      return null;
-      // (
-      //   <View style={styles.nodataView}>
-      //     <Text style={styles.nodatatext}>no items to display</Text>
-      //   </View>
-      // );
-    }
-    return (
-      <View>
+    return isLoading ? (
+      <Text style={{alignSelf: 'center'}}>no temples to watch</Text>
+    ) : (
+      <View style={{marginTop: 10}}>
         <ActivityIndicator size={'large'} color={colors.orangeColor} />
       </View>
     );
