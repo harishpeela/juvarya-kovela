@@ -159,7 +159,7 @@ const UserFeedScreen = ({navigation}) => {
             }
             contentContainerStyle={styles.flatListStyle}
             keyboardShouldPersistTaps="handled"
-            decelerationRate={0.5}
+            // decelerationRate={0.3}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <UserFeedCompList

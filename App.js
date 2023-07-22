@@ -36,6 +36,7 @@ import {
   FollowersMembership,
   ProfileMembership,
   SeeAll,
+  Feeds,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -87,6 +88,7 @@ const App = () => {
       followersmembership,
       profilemembership,
       seeall,
+      feeds,
     },
   } = allTexts;
 
@@ -312,8 +314,8 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={feed}
-          component={Feed}
+          name={feeds}
+          component={Feeds}
           options={{
             headerShown: false,
           }}
@@ -342,6 +344,13 @@ const App = () => {
         <Stack.Screen
           name={seeall}
           component={SeeAll}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={feed}
+          component={Feeds}
           options={{
             headerShown: false,
           }}

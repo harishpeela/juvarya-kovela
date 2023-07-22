@@ -138,6 +138,7 @@ export const allTexts = {
     followersmembership: 'FollowersMembership',
     profilemembership: 'ProfileMembership',
     seeall: 'SeeAll',
+    feeds: 'Feeds',
   },
   homeHeader: {
     welcome: 'Welcome ',

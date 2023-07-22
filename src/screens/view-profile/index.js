@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
@@ -56,6 +57,7 @@ const ViewProfile = ({route, navigation}) => {
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
+  const [feedId, setFeedsId] = useState([]);
 
   const FOLLOW = id => {
     if (isFollow) {
@@ -150,20 +152,28 @@ const ViewProfile = ({route, navigation}) => {
       // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
-      // console.log('postsdata', postsData);
+      console.log('postsdata', postsData);
       let urls = postsData
-        ?.filter(item => item?.mediaList)
-        ?.map(({mediaList}) => ({mediaList}));
+        ?.filter(item => item)
+        ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       // console.log('urls', urls);
-      urls?.map(({mediaList}) =>
+      urls?.map(({id, jtProfile, mediaList}) =>
         mediaList?.map(s => {
-          PostsArray?.push({image: s?.url});
+          // console.log('s=========>', s);
+          PostsArray?.push({
+            image: s?.url,
+            imgid: s?.id,
+            id: id,
+            jtProfile: jtProfile,
+          });
         }),
       );
+      // let feedsData = [...urls, ...PostsArray];
+      // console.log('feeds data', feedsData);
       if (PostsArray?.length > 0) {
         setloader(false);
         setPostImages(PostsArray);
-        // console.log('array', PostsArray);
+        console.log('array', PostsArray);
       } else {
         setPostImages([]);
         setloader(false);
@@ -296,7 +306,13 @@ const ViewProfile = ({route, navigation}) => {
                 data={postImages}
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
-                  <TouchableOpacity style={{height: '100%', width: '34%'}}>
+                  <TouchableOpacity
+                    style={{height: '100%', width: '34%'}}
+                    onPress={() =>
+                      navigation.navigate(allTexts.screenNames.feeds, {
+                        itemDetails: item,
+                      })
+                    }>
                     <Image
                       source={{uri: item?.image}}
                       style={{

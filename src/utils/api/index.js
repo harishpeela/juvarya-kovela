@@ -30,6 +30,7 @@ const endpoints = {
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
+  FEED: '/jtfeed/',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
@@ -114,6 +115,14 @@ export const TempleFollowersList = async id => {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.TEMPLE_FOLLOWERS_LIST}=${id}`,
     );
+    return result;
+  } catch (error) {
+    console.log('error in temple follwers lit', error);
+  }
+};
+export const Feed = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.get(`${endpoints.FEED}${id}`);
     return result;
   } catch (error) {
     console.log('error in temple follwers lit', error);
