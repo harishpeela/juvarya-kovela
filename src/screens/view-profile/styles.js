@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
-  maincontainer: {flex: 1, backgroundColor: 'white'},
-  scrolledcontainer: {flex: 1, backgroundColor: 'white'},
+  maincontainer: {flex: 1},
+  scrolledcontainer: {flex: 1},
   infoContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -38,7 +38,6 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   footerBackground: {
-    backgroundColor: '#fff',
     borderRadius: 25,
     flex: 1,
   },

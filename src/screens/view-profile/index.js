@@ -9,6 +9,7 @@ import {
   ScrollView,
   FlatList,
   Image,
+  useColorScheme,
 } from 'react-native';
 import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
@@ -39,6 +40,7 @@ import {colors} from '../../common';
 import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 const ViewProfile = ({route, navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
   // console.log(
@@ -59,6 +61,7 @@ const ViewProfile = ({route, navigation}) => {
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
   const [memberShip, setMemberShip] = useState(0);
+  const [postsCount, setPostsCount] = useState(0);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -171,6 +174,13 @@ const ViewProfile = ({route, navigation}) => {
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       // console.log('urls', urls);
+      let count = postsData?.filter(item => item.mediaList);
+      if (count) {
+        setPostsCount(count);
+      } else {
+        setPostsCount(0);
+      }
+      console.log('===============>', count?.length);
       urls?.map(({id, jtProfile, mediaList}) =>
         mediaList?.map(s => {
           // console.log('s=========>', s);
@@ -229,7 +239,11 @@ const ViewProfile = ({route, navigation}) => {
   };
   useEffect(() => {}, [route]);
   return (
-    <View style={styles.maincontainer}>
+    <View
+      style={{
+        ...styles.maincontainer,
+        backgroundColor: isDarkMode ? 'white' : 'white',
+      }}>
       <View style={styles.footerBackground}>
         <BackgroundImage />
         <View style={styles.footerContainer}>
@@ -257,7 +271,7 @@ const ViewProfile = ({route, navigation}) => {
           <View style={styles.firstTabView}>
             <ProfileImage profileImg={trfData} />
             <PostsComp
-              itemDetails={postImages}
+              itemDetails={postsCount}
               onPress={() => setPosts(!posts)}
             />
             <FollowersComp

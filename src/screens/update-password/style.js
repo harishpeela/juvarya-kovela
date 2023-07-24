@@ -1,10 +1,8 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, useColorScheme} from 'react-native';
 import {colors, fontFamily} from '../../common';
-
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: colors.white,
   },
   headerContainer: {
     padding: 10,

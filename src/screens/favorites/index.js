@@ -6,6 +6,7 @@ import {
   FlatList,
   Text,
   ActivityIndicator,
+  useColorScheme,
 } from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
@@ -16,6 +17,7 @@ import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -86,7 +88,11 @@ const Favorite = ({navigation}) => {
     }
   }, [pageNo]);
   return (
-    <SafeAreaView style={styles.wrapper}>
+    <SafeAreaView
+      style={{
+        ...styles.wrapper,
+        backgroundColor: isDarkMode ? 'white' : 'white',
+      }}>
       <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader

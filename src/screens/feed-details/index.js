@@ -58,21 +58,29 @@ const Feeds = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{margin: '10%'}}>
+      <View style={{margin: '5%', marginVertical: '10%'}}>
         <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} />
       </View>
       {loader ? (
         <Loader size={'small'} color={colors.orangeColor} />
       ) : (
         <ScrollView>
-          <UserFeedCompList id={feedData.id} post={feedData} />
+          <UserFeedCompList
+            id={feedData.id}
+            post={feedData}
+            likes={feedData?.likesCount}
+          />
           <ScrollView>
             <FlatList
               data={postsData}
               keyExtractor={({item, index}) => index}
               renderItem={({item, index}) =>
                 item?.mediaList && (
-                  <UserFeedCompList id={item?.id} post={item} />
+                  <UserFeedCompList
+                    id={item?.id}
+                    post={item}
+                    likes={item?.likesCount}
+                  />
                 )
               }
             />

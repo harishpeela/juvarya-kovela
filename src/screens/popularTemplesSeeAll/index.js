@@ -9,6 +9,7 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator,
+  useColorScheme,
 } from 'react-native';
 import {styles} from './styles';
 import {colors} from '../../common';
@@ -16,6 +17,7 @@ import {PopularTemples} from '../../utils/api';
 import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
 
 const SeeAll = ({route, navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const {data} = route.params || {};
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -54,11 +56,11 @@ const SeeAll = ({route, navigation}) => {
   }, [data, apiPageNo]);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <BackgroundImage />
       <View style={{margin: '5%', marginTop: '10%', marginLeft: '10%'}}>
         <BackHeaderNew
-          txt={'Popural Tempels'}
+          txt={'Popular Tempels'}
           onPress={() => navigation.goBack()}
         />
       </View>

@@ -1,11 +1,10 @@
+/* eslint-disable react-native/no-inline-styles */
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
-import CalenderIcon from 'react-native-vector-icons/AntDesign';
-
 export const BackHeader = ({
   txt,
   onBackPress,

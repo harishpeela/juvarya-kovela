@@ -15,7 +15,6 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import {getHomeFeedList, NewLikesCount} from '../../utils/api';
-import {useIsFocused} from '@react-navigation/native';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -30,6 +29,7 @@ const UserFeedScreen = ({navigation}) => {
   const [apiPageNo, setApiPageNo] = useState(0);
   const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
+  const [noData, setNoData] = useState(false);
 
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -44,7 +44,6 @@ const UserFeedScreen = ({navigation}) => {
       URL: item?.jtProfileDTO?.logo,
       title: item?.jtProfileDTO?.desciption,
     };
-    console.log('jhjjhbmjn ,jm n,m , , ,========>', ShareOptions);
     try {
       const shareResponce = await Share.open(ShareOptions, options);
       return shareResponce;
@@ -52,7 +51,6 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
-  let isFocused = useIsFocused();
   const listFeed = async (pgNo, pgSize) => {
     setIsLoading(true);
     try {
@@ -60,8 +58,11 @@ const UserFeedScreen = ({navigation}) => {
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
-        setHomeFeedList([...homeFeedList, ...responce]);
-        console.log('result', result?.data?.jtFeeds);
+        console.log('tresponce ==========>', responce);
+        responce === null ? setNoData(true) : setNoData(false);
+        responce && setHomeFeedList([...homeFeedList, ...responce]);
+
+        // console.log('result', result?.data?.jtFeeds);
         setIsLoading(false);
         // setloader(false);
         // let likesId = result?.data?.jtFeeds;
@@ -91,19 +92,20 @@ const UserFeedScreen = ({navigation}) => {
 
   const renderLoder = () => {
     return isLoading ? (
+      <View>
+        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+      </View>
+    ) : noData ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
         {' '}
         No Items to display
       </Text>
-    ) : (
-      <View>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
-      </View>
-    );
+    ) : null;
   };
   const loadMoreItems = () => {
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
+    // console.log('pageno', apiPageNo, apiPageSize);
   };
   useEffect(() => {}, [userDetails]);
   useEffect(() => {
