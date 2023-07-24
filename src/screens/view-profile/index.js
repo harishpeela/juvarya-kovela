@@ -22,6 +22,7 @@ import {
   NewFollowCount,
   GetPosts,
   TempleFollowersList,
+  MemberShipCount,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -57,14 +58,26 @@ const ViewProfile = ({route, navigation}) => {
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
   const [posts, setPosts] = useState(false);
-  const [feedId, setFeedsId] = useState([]);
-
+  const [memberShip, setMemberShip] = useState(0);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
     } else if (!isFollow) {
       followTemples(id);
       setisFollow(!isFollow);
+    }
+  };
+  const MemberShip = async id => {
+    try {
+      let result = await MemberShipCount(id);
+      console.log('res of count', result?.data);
+      if (result) {
+        setMemberShip(result?.data);
+      } else {
+        setMemberShip(0);
+      }
+    } catch (error) {
+      console.log('error in membership count', error);
     }
   };
   useEffect(() => {
@@ -77,6 +90,7 @@ const ViewProfile = ({route, navigation}) => {
         Posts(result?.jtProfile);
         TempleRoleSearchWithId(result?.jtProfile);
         followingCount(result?.jtProfile);
+        MemberShip(result?.jtProfile);
       } else {
         console.log('nope');
       }
@@ -255,9 +269,11 @@ const ViewProfile = ({route, navigation}) => {
               }
             />
             <CommunityComp
-              itemCommunity={itemCommunity}
+              itemCommunity={memberShip?.membershipCount}
               onPressmembership={() =>
-                navigation.navigate(allTexts.screenNames.profilemembership)
+                navigation.navigate(allTexts.screenNames.profilemembership, {
+                  id: trfData?.jtProfile,
+                })
               }
             />
           </View>

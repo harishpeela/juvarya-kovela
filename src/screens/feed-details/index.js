@@ -12,7 +12,6 @@ import {Feed, GetPosts} from '../../utils/api';
 import {colors} from '../../common';
 const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
-  console.log('itemDetails', itemDetails);
   const [feedData, setFeedData] = useState([]);
   const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
@@ -33,13 +32,12 @@ const Feeds = ({route, navigation}) => {
       let result = await GetPosts(itemDetails?.jtProfile, 0, 60);
       //   console.log('result of pot', result);
       let Data = result.data.data;
-      console.log('======', Data);
+      // console.log('======', Data);
       if (Data) {
-        console.log('detaiolskans', itemDetails.id);
+        // console.log('detaiolskans', itemDetails.id);
 
         let fil = Data.filter(item => item.mediaList);
         let arey = await removeObjectWithId(fil, itemDetails.id);
-        console.log('filll =====>', arey);
         setPostsData(arey);
       }
     } catch (error) {
@@ -47,16 +45,12 @@ const Feeds = ({route, navigation}) => {
     }
   };
   function removeObjectWithId(arr, id) {
-
     const objWithIdIndex = arr.findIndex(obj => obj.id === id);
-
     if (objWithIdIndex > -1) {
       arr.splice(objWithIdIndex, 1);
     }
-
     return arr;
   }
-  console.log('posts daya ==========>', postsData);
   useEffect(() => {
     feedDetails();
     tempProfilefeeddetails();
