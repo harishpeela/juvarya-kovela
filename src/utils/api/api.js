@@ -15,6 +15,8 @@ export const BASE_URL =
 export const BASEURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/';
 export const BASE = 'http://fanfundev.eastasia.cloudapp.azure.com:9094';
 export const POPULARURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9096/';
+export const MEMBER_SHIP_URL =
+  'http://fanfundev.eastasia.cloudapp.azure.com:9095';
 let bearer_token = getAuthTokenDetails();
 
 export const authAxiousInstance = axios.create({
@@ -59,6 +61,19 @@ export const axiosMultiPartFormData1 = axios.create({
   },
 });
 axiosMultiPartFormData1.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
+
+export const axiosMultiPartFormDataMem = axios.create({
+  baseURL: MEMBER_SHIP_URL,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosMultiPartFormDataMem.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   // console.log('Sending req with this token', token);
   config.headers.Authorization = token;

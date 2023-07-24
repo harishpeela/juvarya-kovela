@@ -10,6 +10,7 @@ import {
   axiosNewData,
   axiosNewData1,
   axiosNewDataSave,
+  axiosMultiPartFormDataMem,
 } from './api';
 
 const endpoints = {
@@ -30,6 +31,8 @@ const endpoints = {
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
+  MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
+  MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
@@ -163,6 +166,26 @@ export const GetProfilePicture = async id => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_PROFIL_PICTURE}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipCount = async id => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_COUNT}=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipDetails = async id => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
     );
     return result;
   } catch (error) {

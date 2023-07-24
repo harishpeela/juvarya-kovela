@@ -1,14 +1,12 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
-  footerContainer: {
-    paddingHorizontal: 30,
-    paddingTop: 20,
-    marginTop: '5%',
+  card: {
+    borderWidth: 1,
+    padding: 10,
+    borderColor: 'lightgray',
   },
-  header: {
-    marginBottom: 20,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
+  nomemship: {
+    alignSelf: 'center',
+    marginTop: '40%',
   },
 });
