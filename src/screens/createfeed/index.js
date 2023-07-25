@@ -22,7 +22,6 @@ import {
 import {UploadPhoto} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {createFeed} from '../../utils/api';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {Data} from '../home-feed/formateDetails';
 const CreateFeed = ({route, navigation}) => {

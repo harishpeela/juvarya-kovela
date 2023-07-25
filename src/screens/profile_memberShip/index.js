@@ -7,6 +7,7 @@ import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
 import {colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const ProfileMembership = ({route, navigation}) => {
   const {id} = route.params || {};
   const [data, setData] = useState([]);
@@ -45,8 +46,16 @@ const ProfileMembership = ({route, navigation}) => {
               keyExtractor={({item, index}) => index}
               renderItem={({item, index}) => (
                 <TouchableOpacity style={styles.card}>
-                  <Text>MemberShip: {item?.name} </Text>
-                  <Text>Temple Id: {item?.profileId} </Text>
+                  <MaterialCommunityIcons
+                    name="wallet-membership"
+                    size={22}
+                    color={colors.orangeColor}
+                  />
+                  <Text style={styles.type}>{item?.name} </Text>
+                  <Text style={{...styles.type, color: colors.orangeColor}}>
+                    {' '}
+                    $ 250{' '}
+                  </Text>
                 </TouchableOpacity>
               )}
             />

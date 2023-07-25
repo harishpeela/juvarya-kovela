@@ -34,6 +34,7 @@ const endpoints = {
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
+  CUSTOMER_PROFILE_PICTURE: '/picture/customer',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
@@ -108,6 +109,27 @@ export const PopularTemples = async (pgfrm, pgto) => {
 export const AdminTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const GetProfilePic = async () => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const PostProfilePic = async data => {
+  try {
+    let result = await axiosMultiPartFormData1.post(
+      `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+      data,
+    );
     return result;
   } catch (error) {
     console.log('error in popular temples', error);
