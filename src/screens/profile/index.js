@@ -58,12 +58,9 @@ const Profile = ({navigation}) => {
   }, []);
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
-    console.log('img =====', img);
     let formdata = new FormData();
     formdata.append('profilePicture', img);
-    console.log('form', formdata);
     let result = await PostProfilePic(formdata);
-    // console.log('result of image update', result);
     if (result) {
       setIsCross(false);
     }

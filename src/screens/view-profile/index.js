@@ -163,17 +163,14 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
-    // console.log('id====>', id);
     try {
       let result = await GetPosts(id, 0, 40);
-      // console.log('result', result?.data);
       let PostsArray = [];
       let postsData = result?.data?.data;
       console.log('postsdata', postsData);
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
-      // console.log('urls', urls);
       let count = postsData?.filter(item => item.mediaList);
       if (count) {
         setPostsCount(count);
@@ -192,8 +189,6 @@ const ViewProfile = ({route, navigation}) => {
           });
         }),
       );
-      // let feedsData = [...urls, ...PostsArray];
-      // console.log('feeds data', feedsData);
       if (PostsArray?.length > 0) {
         setloader(false);
         setPostImages(PostsArray);
