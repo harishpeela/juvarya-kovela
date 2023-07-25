@@ -12,16 +12,17 @@ import {Feed, GetPosts} from '../../utils/api';
 import {colors} from '../../common';
 const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
-  const [feedData, setFeedData] = useState([]);
+  const [feedData, setFeedData] = useState();
   const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
-  //   console.log('item =========>', itemDetails);
+  const [liked, setLiked] = useState(false);
+  // console.log('item =========>', itemDetails);
   const feedDetails = async () => {
     try {
       let result = await Feed(itemDetails.id);
       //   console.log('feed', result);
-      if (result.status === 200) {
-        setFeedData(result.data);
+      if (result) {
+        setFeedData(result?.data);
       }
     } catch (error) {
       console.log('error in feed details ==>', error);
@@ -55,24 +56,35 @@ const Feeds = ({route, navigation}) => {
     feedDetails();
     tempProfilefeeddetails();
   }, [itemDetails]);
+  console.log(feedData, '=============>');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{margin: '10%'}}>
+      <View style={{margin: '5%', marginVertical: '10%'}}>
         <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} />
       </View>
       {loader ? (
-        <Loader size={'small'} color={colors.orangeColor} />
+        <Loader size={'medium'} color={colors.orangeColor} />
       ) : (
         <ScrollView>
-          <UserFeedCompList id={feedData.id} post={feedData} />
+          <UserFeedCompList
+            id={feedData?.id}
+            post={feedData}
+            likes={feedData?.likesCount}
+            isLikeTrue={() => setLiked(!liked)}
+          />
           <ScrollView>
             <FlatList
               data={postsData}
               keyExtractor={({item, index}) => index}
               renderItem={({item, index}) =>
                 item?.mediaList && (
-                  <UserFeedCompList id={item?.id} post={item} />
+                  <UserFeedCompList
+                    id={item?.id}
+                    post={item}
+                    likes={item?.likesCount}
+                    isLikeTrue={() => setLiked(!liked)}
+                  />
                 )
               }
             />

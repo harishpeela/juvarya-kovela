@@ -8,12 +8,8 @@ export const styles = StyleSheet.create({
     flex: 0.8,
   },
   wrapper: {
-    // backgroundColor: colors.blue3,
     padding: 15,
     borderRadius: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
   },
   imageContainer: {
     width: 70,

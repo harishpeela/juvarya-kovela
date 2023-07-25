@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';

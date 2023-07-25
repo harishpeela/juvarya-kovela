@@ -1,4 +1,5 @@
-import {View, ToastAndroid} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, ToastAndroid, useColorScheme} from 'react-native';
 import React, {useContext} from 'react';
 import {PrimaryButton} from '../../components';
 import {PasswordField} from '../../components/inputfield';
@@ -12,6 +13,8 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const UpdatePassword = ({navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
   const {
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
@@ -63,7 +66,11 @@ const UpdatePassword = ({navigation}) => {
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View
+      style={{
+        ...styles.wrapper,
+        backgroundColor: isDarkMode ? 'white' : 'white',
+      }}>
       <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
