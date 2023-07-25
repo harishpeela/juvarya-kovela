@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Svg, {Path, Rect, Circle} from 'react-native-svg';
-
+import { colors } from '../../common';
 export function PlusButton() {
   return (
     <Svg width={38} height={38} fill="none">

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
@@ -34,7 +35,12 @@ const ProfileMembership = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
       <View style={{marginHorizontal: '5%', marginVertical: 10}}>
-        <BackHeaderNew txt={'Membership'} onPress={() => navigation.goBack()} />
+        <BackHeaderNew
+          txt={'Membership'}
+          onPress={() => navigation.goBack()}
+          isPlus
+          onPlusPress={() => alert('under development')}
+        />
         <View>
           {loader ? (
             <View>
