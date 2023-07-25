@@ -73,7 +73,7 @@ const ViewProfile = ({route, navigation}) => {
   const MemberShip = async id => {
     try {
       let result = await MemberShipCount(id);
-      console.log('res of count', result?.data);
+      // console.log('res of count', result?.data);
       if (result) {
         setMemberShip(result?.data);
       } else {
@@ -124,7 +124,7 @@ const ViewProfile = ({route, navigation}) => {
       jtProfile: id,
       following: !isFollow,
     };
-    console.log('pYLOfd', payload);
+    // console.log('pYLOfd', payload);
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
@@ -171,7 +171,7 @@ const ViewProfile = ({route, navigation}) => {
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       // PostsArray.push(urls);
-      if(urls){
+      if (urls) {
         setPostImages(urls);
         setloader(false);
       } else {
@@ -237,7 +237,7 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('errorrr in id', error));
   };
-  console.log('posts ======>', postImages[0]?.mediaList[0].url);
+  // console.log('posts ======>', postImages[0]?.mediaList[0].url);
   useEffect(() => {}, [route]);
   return (
     <View

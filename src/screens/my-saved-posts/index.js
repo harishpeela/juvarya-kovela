@@ -15,7 +15,7 @@ const MySavedPosts = ({navigation}) => {
   const getPostsList = async () => {
     try {
       let result = await getSavedPostsList();
-      console.log('res of saved posts', result?.data?.feeds);
+      // console.log('res of saved posts', result?.data);
       if (result.status === 200) {
         setLoading(false);
         setfilteredArray(result?.data?.feeds);
@@ -57,7 +57,9 @@ const MySavedPosts = ({navigation}) => {
               contentContainerStyle={styles.flatListStyle}
               keyboardShouldPersistTaps="handled"
               keyExtractor={(item, index) => item?.id}
-              renderItem={({item, index}) => <SaveFeedComp post={item} />}
+              renderItem={({item, index}) => (
+                <SaveFeedComp post={item} likes={item?.feedDTO?.likesCount} />
+              )}
             />
           ) : (
             <View style={{alignItems: 'center', marginTop: '65%'}}>
