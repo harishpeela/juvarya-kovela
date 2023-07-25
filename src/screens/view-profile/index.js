@@ -167,36 +167,41 @@ const ViewProfile = ({route, navigation}) => {
       let result = await GetPosts(id, 0, 40);
       let PostsArray = [];
       let postsData = result?.data?.data;
-      console.log('postsdata', postsData);
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
+      // PostsArray.push(urls);
+      if(urls){
+        setPostImages(urls);
+        setloader(false);
+      } else {
+        setPostImages(null);
+      }
       let count = postsData?.filter(item => item.mediaList);
       if (count) {
         setPostsCount(count);
       } else {
         setPostsCount(0);
       }
-      console.log('===============>', count?.length);
-      urls?.map(({id, jtProfile, mediaList}) =>
-        mediaList?.map(s => {
-          // console.log('s=========>', s);
-          PostsArray?.push({
-            image: s?.url,
-            imgid: s?.id,
-            id: id,
-            jtProfile: jtProfile,
-          });
-        }),
-      );
-      if (PostsArray?.length > 0) {
-        setloader(false);
-        setPostImages(PostsArray);
-        console.log('array', PostsArray);
-      } else {
-        setPostImages([]);
-        setloader(false);
-      }
+      // urls?.map(({id, jtProfile, mediaList}) =>
+      //   mediaList?.map(s => {
+      //     // console.log('s=========>', s);
+      //     PostsArray?.push({
+      //       image: s?.url,
+      //       imgid: s?.id,
+      //       id: id,
+      //       jtProfile: jtProfile,
+      //     });
+      //   }),
+      // );
+      // if (PostsArray?.length > 0) {
+      //   setloader(false);
+      //   setPostImages(PostsArray);
+      //   console.log('array', PostsArray);
+      // } else {
+      //   setPostImages([]);
+      //   setloader(false);
+      // }
     } catch (error) {
       console.log('error in posts', error);
     }
@@ -232,6 +237,7 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('errorrr in id', error));
   };
+  console.log('posts ======>', postImages[0]?.mediaList[0].url);
   useEffect(() => {}, [route]);
   return (
     <View
@@ -339,7 +345,7 @@ const ViewProfile = ({route, navigation}) => {
                       })
                     }>
                     <Image
-                      source={{uri: item?.image}}
+                      source={{uri: item?.mediaList[0]?.url}}
                       style={{
                         height: 140,
                         width: 140,
