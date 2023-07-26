@@ -38,7 +38,6 @@ export const UserFeedCompList = ({
   mediaData,
   loader,
 }) => {
-  console.log('likes count=========>', likes);
   const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);

@@ -15,8 +15,11 @@ import {Loader} from '../loader';
 import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
-import {PopularTemples, NewGetFollowUmFollowById} from '../../utils/api';
-import {useIsFocused} from '@react-navigation/native';
+import {
+  PopularTemples,
+  NewGetFollowUmFollowById,
+  SearchPopularTemples,
+} from '../../utils/api';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -27,12 +30,12 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [pageNo, setPageNo] = useState(0);
-  let isFocused = useIsFocused();
+  const [filteredData, setFilteredData] = useState();
+  const [filterLoader, setFilterLoader] = useState(false);
   const PopularTemplesss = async (frm, toNo) => {
-    setLoader(true);
+    // setLoader(true);
     try {
       let result = await PopularTemples(frm, toNo);
-      console?.log('res of popular temples', result?.data?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -50,24 +53,15 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       <Text>no temples to watch</Text>
     ) : (
       <View style={{marginTop: 90}}>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+        <Loader size={'large'} color={colors.orangeColor} />
       </View>
     );
-    // if (isLoading) {
-    //   return null;
-    // }
-    // return (
-    //   <View style={{marginTop: 50}}>
-    //     <ActivityIndicator size={'large'} color={colors.orangeColor} />
-    //   </View>
-    // );
   };
   const loadMoreItems = () => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
   const profilePicture = async d => {
-    console.log('loading');
     try {
       let responce = await NewGetFollowUmFollowById(d?.id);
       if (responce) {
@@ -90,12 +84,24 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     }
   }, [pageNo]);
   const FilteredList = async value => {
-    console.log('val ====>', value);
     setFilteredList(
       filteredArray.filter(item =>
         item.name.toLowerCase().includes(value.toLowerCase()),
       ),
     );
+  };
+  const SearchPopTemp = async txt => {
+    setFilterLoader(true);
+    try {
+      let result = await SearchPopularTemples(txt);
+      console.log('res', result);
+      if (result?.status === 200) {
+        setFilteredData(result?.data?.data);
+        setFilterLoader(false);
+      }
+    } catch (error) {
+      console.log('error in search pop temp', error);
+    }
   };
   return (
     <View>
@@ -104,13 +110,13 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
           value={searchedText}
           onTextChange={e => {
             setSearchedText(e);
-            FilteredList(e);
+            // FilteredList(e);
+            SearchPopTemp(e);
           }}
           loading={searchLoading}
           onCrossPress={async () => {
             setSearchedText('');
             await PopularTemplesss(pageNo, 20);
-            console.log('pageno ===>', pageNo);
           }}
           // onSubmit={FilteredList}
           bgColor={'lightgray'}
@@ -133,58 +139,67 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
               <Text style={styles.popularTextContainer}>Popular Temple</Text>
               <TouchableOpacity
                 onPress={() => {
-                  console.log('see all clicked'),
-                    seeallnav.navigate(allTexts.screenNames.seeall, {
-                      data: filteredList,
-                    });
+                  seeallnav.navigate(allTexts.screenNames.seeall, {
+                    data: filteredList,
+                  });
                 }}>
                 <Text style={{color: colors.orangeColor, fontSize: 18}}>
                   See all
                 </Text>
               </TouchableOpacity>
             </View>
-            <View>
-              <ScrollView>
-                <View>
-                  {loading && (
-                    <View style={styles.loaderContainer}>
-                      <Loader color={colors.orangeColor} />
-                    </View>
-                  )}
-                  {filteredList?.length >= 0 ? (
-                    <FlatList
-                      data={filteredList}
-                      horizontal={searchedText === '' ? true : false}
-                      showsHorizontalScrollIndicator={false}
-                      keyboardShouldPersistTaps="handled"
-                      keyExtractor={({item, index}) => item?.id}
-                      renderItem={({item, index}) => (
-                        <TempleListCard
-                          post={item}
-                          name={item.name}
-                          templeId={item.id}
-                          date={item.creationTime}
-                          isFollowingTrue={isFollow}
-                          pageNav={pageNav}
-                        />
-                      )}
-                      ListFooterComponent={renderLoder}
-                      onEndReached={() => loadMoreItems()}
-                      onEndReachedThreshold={0.5}
-                      decelerationRate={0.8}
+            <ScrollView>
+              {searchedText === '' && (
+                <FlatList
+                  data={filteredList}
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyboardShouldPersistTaps="handled"
+                  keyExtractor={({item, index}) => item?.id}
+                  renderItem={({item, index}) => (
+                    <TempleListCard
+                      post={item}
+                      name={item.name}
+                      templeId={item.id}
+                      date={item.creationTime}
+                      isFollowingTrue={isFollow}
+                      pageNav={pageNav}
                     />
-                  ) : filteredList.length > 0 ? (
-                    <View style={styles.nodataView}>
-                      <Text style={styles.nodatatext}>no items to display</Text>
-                    </View>
-                  ) : (
-                    <View style={styles.loaderContainer}>
-                      <Loader color={colors.orangeColor} />
-                    </View>
                   )}
-                </View>
-              </ScrollView>
-            </View>
+                  ListFooterComponent={renderLoder}
+                  onEndReached={() => loadMoreItems()}
+                  onEndReachedThreshold={0.5}
+                  decelerationRate={0.8}
+                />
+              )}
+            </ScrollView>
+            <ScrollView style={{height: searchedText ? '85%' : 0}}>
+              {searchedText ? (
+                <FlatList
+                  data={filteredData}
+                  keyboardShouldPersistTaps="handled"
+                  keyExtractor={({item, index}) => item?.id}
+                  renderItem={({item, index}) => (
+                    <PopularTemplesVerticalList
+                      post={item}
+                      name={item.name}
+                      templeId={item.id}
+                      date={item.creationTime}
+                      isFollowingTrue={isFollow}
+                      pageNav={pageNav}
+                    />
+                  )}
+                  onEndReachedThreshold={0.5}
+                  decelerationRate={0.8}
+                />
+              ) : (
+                filterLoader && (
+                  <View>
+                    <Loader size={'small'} color={'green'} />
+                  </View>
+                )
+              )}
+            </ScrollView>
           </>
         )}
       </>

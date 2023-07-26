@@ -1,20 +1,17 @@
-/* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-lone-blocks */
 import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   TouchableOpacity,
   RefreshControl,
   Text,
-  ActivityIndicator,
   useColorScheme,
 } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {getHomeFeedList, NewLikesCount} from '../../utils/api';
+import {getHomeFeedList} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -58,42 +55,19 @@ const UserFeedScreen = ({navigation}) => {
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
-        console.log('tresponce ==========>', responce);
         responce === null ? setNoData(true) : setNoData(false);
         responce && setHomeFeedList([...homeFeedList, ...responce]);
-
-        // console.log('result', result?.data?.jtFeeds);
         setIsLoading(false);
-        // setloader(false);
-        // let likesId = result?.data?.jtFeeds;
-        // likesId.map(d => {
-        //   LikesStatus(d);
-        // });
       }
     } catch (error) {
       console.log('errorrrd', error);
     }
   };
-  // const LikesStatus = async d => {
-  //   try {
-  //     let result = await NewLikesCount(d?.id);
-  //     let like = [result?.data];
-  //     let likeStatus = [];
-  //     like.map(likes => {
-  //       likeStatus.push({like: likes?.like});
-  //     });
-  //     let responce = {...d, likeStatus};
-  //     // console.log('res========>', responce);
-  //     setHomeFeedList(res => [...res, responce]);
-  //   } catch (error) {
-  //     console.log('error in likes status and count api', error);
-  //   }
-  // };
 
   const renderLoder = () => {
     return isLoading ? (
       <View>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+        <Loader size={'large'} color={colors.orangeColor} />
       </View>
     ) : noData ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
@@ -105,7 +79,6 @@ const UserFeedScreen = ({navigation}) => {
   const loadMoreItems = () => {
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
-    // console.log('pageno', apiPageNo, apiPageSize);
   };
   useEffect(() => {}, [userDetails]);
   useEffect(() => {
@@ -114,7 +87,6 @@ const UserFeedScreen = ({navigation}) => {
       console.log('apiPageNo', apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
-  // console.log('home ======>', homeFeedList);
   return (
     <View
       style={{
@@ -143,11 +115,6 @@ const UserFeedScreen = ({navigation}) => {
         </View>
       </View>
       <>
-        {/* {loader && (
-          <View style={{flex: 1}}>
-            <Loader color={colors.orangeColor} size={30} />
-          </View>
-        )} */}
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}

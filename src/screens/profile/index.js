@@ -15,9 +15,15 @@ import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
-import {PrimaryButton, ProfileInfo} from '../../components';
+import {
+  PrimaryButton,
+  ProfileInfo,
+  Loader,
+  Item,
+  Item1,
+} from '../../components';
 import {UploadPhoto} from '../../utils/svgs';
-import {AccountIcon1, AccountIcon2, AccountIcon4, Demo} from '../../utils/svgs';
+import {AccountIcon1, AccountIcon4} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
@@ -33,7 +39,6 @@ const Profile = ({navigation}) => {
   const {
     constants: {role},
   } = allTexts;
-  // console.log('details', userDetails);
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState(null);
@@ -41,6 +46,7 @@ const Profile = ({navigation}) => {
   const [profPic, setProfPic] = useState(null);
   const [isModal, setIsModal] = useState(false);
   const [isCross, setIsCross] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -66,11 +72,13 @@ const Profile = ({navigation}) => {
     }
   };
   const GetCustProfilePic = async () => {
+    setIsLoading(true);
     try {
       let result = await GetProfilePic();
       console.log('data pic', result?.data);
       if (result) {
         setProfPic(result?.data?.url);
+        setIsLoading(false);
       }
     } catch (error) {
       console.log('error in get profile picture', error);
@@ -112,7 +120,6 @@ const Profile = ({navigation}) => {
     i18next.changeLanguage(lang);
     setIsVisible(false);
   };
-  console.log('roletype', roleType);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
@@ -164,6 +171,10 @@ const Profile = ({navigation}) => {
                 source={{uri: image?.uri}}
               />
             </View>
+          ) : isLoading ? (
+            <View style={styles.loader}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
           ) : (
             <TouchableOpacity
               style={styles.uploadPic}
@@ -181,11 +192,7 @@ const Profile = ({navigation}) => {
             </TouchableOpacity>
           )}
         </View>
-        <ProfileInfo
-          name={userDetails?.username}
-          email={userDetails?.email}
-          // img={require('../../utils/assets/images/avatar.png')}
-        />
+        <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
       </View>
       <View style={styles.profileItemsContainer}>
         {/* <Item svg={<Demo />} text={bookings} />
@@ -229,7 +236,6 @@ const Profile = ({navigation}) => {
           onPress={async () => {
             await removeLoginSessionDetails();
             setLoginDetails(null);
-            console.log('logindetails', loginDetails);
           }}
           bgColor={colors.orangeColor}
           radius={25}
@@ -283,32 +289,4 @@ const Profile = ({navigation}) => {
     </SafeAreaView>
   );
 };
-const Item = ({text, svg, onPress}) => (
-  <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-    <View style={styles.iconContainer}>{svg}</View>
-    <View style={styles.textContainer}>
-      <Text style={styles.itemText}>{text}</Text>
-    </View>
-  </TouchableOpacity>
-);
-const Item1 = ({text, svg, onPress}) => (
-  <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-    <View
-      style={{
-        borderWidth: 2,
-        borderRadius: 20,
-        padding: 2,
-        borderColor: colors.orangeColor,
-      }}>
-      <Image
-        source={svg}
-        style={{height: 20, width: 20, tintColor: colors.orangeColor}}
-      />
-    </View>
-    <View style={styles.textContainer}>
-      <Text style={styles.itemText1}>{text}</Text>
-    </View>
-  </TouchableOpacity>
-);
-
 export default Profile;
