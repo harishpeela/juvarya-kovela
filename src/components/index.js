@@ -60,6 +60,7 @@ import {PopularTemplesList} from './NearBy';
 import {PostsComp} from './profilecompnew';
 import { FavTempleListCard } from './favouritesListCard';
 import { FollowersListCard } from './followersLIstCard';
+import { Item, Item1 } from './profile-card-item/item';
 export {
   Loader,
   SearchBar,
@@ -116,4 +117,6 @@ export {
   PostsComp,
   FavTempleListCard,
   FollowersListCard,
+  Item,
+  Item1,
 };

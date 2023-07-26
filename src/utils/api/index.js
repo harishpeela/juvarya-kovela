@@ -106,6 +106,17 @@ export const PopularTemples = async (pgfrm, pgto) => {
     console.log('error in popular temples', error);
   }
 };
+export const SearchPopularTemples = async txt => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.NEW_POPULAR_TEMPLES}?query=${txt}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
 export const AdminTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);

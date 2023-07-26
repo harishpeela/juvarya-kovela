@@ -4,29 +4,22 @@ import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
-import {LoginValidationSchema} from '../../common/schemas';
 import {styles} from './styles.js';
 import Signup, {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
-import {
-  getUserInfo,
-  getUserInfoNew,
-  loginUser,
-  loginUser1,
-} from '../../utils/api';
+import {loginUser1} from '../../utils/api';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
   getAuthTokenDetails,
 } from '../../utils/preferences/localStorage';
-import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 
 const Signin = ({navigation}) => {
   const {
     buttonTexts: {login, sigup},
-    paragraphs: {loginDescription, dontHaveAccount},
+    paragraphs: {dontHaveAccount},
     placeHolders: {emailPlace, passwordPlace},
     headings: {
       inputTitles: {email},
@@ -62,19 +55,11 @@ const Signin = ({navigation}) => {
             role: result?.roles,
             id: result?.id,
           });
-          console.log(
-            'saveuserdetails',
-            result?.firstName,
-            result?.lastName,
-            result?.email,
-            result?.id,
-          );
           setUserDetails({
             username: result?.username,
             email: result.email,
             role: result?.roles,
             id: result?.id,
-
           });
         }
       })
@@ -85,26 +70,19 @@ const Signin = ({navigation}) => {
       username: data.email,
       password: data.password,
     };
-    console.log('payload load of signin', payload);
     try {
-      console.log('343');
       let result = await loginUser1(payload);
-      console.log('signinhand login res', result);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType, username},
         } = result;
         await saveLoginSessionDetails(tokenType, accessToken);
-        // getAndSaveUserInfo();
         ApiData();
-        console.log('accesstoken', tokenType, accessToken);
-        console.log('username', username);
         setLoginDetails(accessToken);
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
         Alert.alert('Error', 'Invalid credentials....!');
-
       }
     } catch (error) {
       console.log(error);
