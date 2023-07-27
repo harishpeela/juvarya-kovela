@@ -31,9 +31,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [filteredList, setFilteredList] = useState([]);
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
-  const [filterLoader, setFilterLoader] = useState(false);
   const PopularTemplesss = async (frm, toNo) => {
-    // setLoader(true);
     try {
       let result = await PopularTemples(frm, toNo);
       if (result) {
@@ -91,13 +89,11 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     );
   };
   const SearchPopTemp = async txt => {
-    setFilterLoader(true);
     try {
       let result = await SearchPopularTemples(txt);
       console.log('res', result);
       if (result?.status === 200) {
         setFilteredData(result?.data?.data);
-        setFilterLoader(false);
       }
     } catch (error) {
       console.log('error in search pop temp', error);
@@ -174,7 +170,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
               )}
             </ScrollView>
             <ScrollView style={{height: searchedText ? '85%' : 0}}>
-              {searchedText ? (
+              {searchedText && filteredData ? (
                 <FlatList
                   data={filteredData}
                   keyboardShouldPersistTaps="handled"
@@ -193,11 +189,11 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                   decelerationRate={0.8}
                 />
               ) : (
-                filterLoader && (
-                  <View>
-                    <Loader size={'small'} color={'green'} />
-                  </View>
-                )
+                <View style={{alignItems: 'center'}}>
+                  <Text style={{fontSize: 18, color: 'black'}}>
+                    no Temples to Display
+                  </Text>
+                </View>
               )}
             </ScrollView>
           </>

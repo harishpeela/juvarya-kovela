@@ -8,7 +8,6 @@ import {colors, allTexts} from './../../common/index';
 import {Loader} from '../../components';
 import {
   Favorite,
-  Home,
   Profile,
   Search,
   TicketConfirmation,
@@ -21,25 +20,15 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
-  const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
-  const GetSearchScreen = () => <Search navigation={navigation} />;
-  const GetTicketConfirmScreen = () => (
-    <TicketConfirmation navigation={navigation} />
-  );
-  const GetFavoriteScreen = () => <Favorite navigation={navigation} />;
-  const GetProfileScreen = () => <Profile navigation={navigation} />;
   const GetFavList = () => {
     const {homeFeedListData} = useContext(ApplicationContext);
-    useEffect(() => {
-      homeFeedListData;
-    }, [ApplicationContext]);
+    useEffect(() => {}, [ApplicationContext]);
     // console.log('listkjsx', homeFeedListData?.length);
     return homeFeedListData?.length > 0 ? true : false;
   };
   const {homeFeedListData} = useContext(ApplicationContext);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    console.log('1 =>');
     setLoading(true);
     if (homeFeedListData?.length > 0) {
       setLoading(false);
@@ -47,13 +36,11 @@ export default BottomTabBase = ({navigation}) => {
       setLoading(false);
     }
   }, [homeFeedListData]);
-  console.log('2 =>');
-
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       {loading ? (
         <View>
-          <Loader size={'large'} color={colors.green} />
+          <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
         <Tab.Navigator

@@ -236,7 +236,6 @@ export const UserFeedCompList = ({
         {''}{' '}
         <Text style={{color: !isDarkMode ? 'gray' : 'white'}}>
           {post?.jtProfileDTO?.desciption}
-          {/* <Text>{t('dummyNamespace.follwing')}</Text> */}
         </Text>
       </Text>
     </View>

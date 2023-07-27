@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-new */
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
