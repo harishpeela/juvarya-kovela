@@ -1,14 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  ScrollView,
-  TouchableOpacity,
-  ActivityIndicator,
-} from 'react-native';
+import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
@@ -20,7 +13,9 @@ import {
   NewGetFollowUmFollowById,
   SearchPopularTemples,
 } from '../../utils/api';
+import {useIsFocused} from '@react-navigation/native';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
+  let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -48,7 +43,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   const renderLoder = () => {
     return loader ? (
-      <Text>no temples to watch</Text>
+      <Text>no temples to Display</Text>
     ) : (
       <View style={{marginTop: 90}}>
         <Loader size={'large'} color={colors.orangeColor} />
@@ -61,20 +56,24 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   const profilePicture = async d => {
     try {
+      console.log('0000000', d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
+      console.log(responce?.data, '==========>--------->');
       if (responce) {
         setIsFollow(responce?.data);
       } else {
-        setIsFollow(undefined);
       }
       let Following = responce?.data;
       const obj = {...d, ...Following};
+      // console.log('sxjahbxkjakxjnkajx', obj);
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
     } catch (error) {
       console.log('error in profile pic', error);
     }
   };
+  // console.log('isfollw', isFollow);
+  useEffect(() => {}, [isFocused]);
   useEffect(() => {
     if (pageNo >= 0) {
       PopularTemplesss(pageNo, 20);
