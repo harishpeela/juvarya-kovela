@@ -406,7 +406,7 @@ const App = () => {
           id: result?.id,
         });
       })
-      .catch(error => console.log('error', error));
+      .catch(error => console.log('error in api data app.js', error));
   };
   const getFollowedTempleList = async () => {
     try {

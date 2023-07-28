@@ -244,7 +244,7 @@ export const FollowUnFollow = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in followunfollow', error);
+    console.log('error in followunfollow api', error);
   }
 };
 export const verifyAdminProfile = async (profileId, custId) => {
