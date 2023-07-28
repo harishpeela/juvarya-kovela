@@ -46,7 +46,7 @@ export const TempleListCard = ({
     }
   };
   const onSelect = data => {
-    setIsLiked(data.selected);
+    setIsLiked(data?.selected);
     // FollowandUnFollow(data?.selectedId);
   };
   const followTemples = async d => {

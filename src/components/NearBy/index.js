@@ -56,37 +56,29 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   const profilePicture = async d => {
     try {
-      console.log('0000000', d?.id);
       let responce = await NewGetFollowUmFollowById(d?.id);
-      console.log(responce?.data, '==========>--------->');
       if (responce) {
         setIsFollow(responce?.data);
       } else {
       }
       let Following = responce?.data;
       const obj = {...d, ...Following};
-      // console.log('sxjahbxkjakxjnkajx', obj);
       setfilteredArray(hg => [...hg, obj]);
       setFilteredList(hg => [...hg, obj]);
     } catch (error) {
       console.log('error in profile pic', error);
     }
   };
-  // console.log('isfollw', isFollow);
-  useEffect(() => {}, [isFocused]);
+  useEffect(() => {
+    console.log('isFollow', isFollow);
+
+  }, [isFocused]);
   useEffect(() => {
     if (pageNo >= 0) {
       PopularTemplesss(pageNo, 20);
       console.log('pg', pageNo);
     }
   }, [pageNo]);
-  const FilteredList = async value => {
-    setFilteredList(
-      filteredArray.filter(item =>
-        item.name.toLowerCase().includes(value.toLowerCase()),
-      ),
-    );
-  };
   const SearchPopTemp = async txt => {
     try {
       let result = await SearchPopularTemples(txt);

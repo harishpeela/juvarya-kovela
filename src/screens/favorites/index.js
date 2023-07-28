@@ -56,6 +56,9 @@ const Favorite = ({navigation}) => {
       console.log('error in templedetails api is ==>', error);
     }
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
   useEffect(() => {
     getTemples();
   }, [isFocused]);
@@ -157,6 +160,7 @@ const Favorite = ({navigation}) => {
                             allTexts.screenNames.viewProfile,
                             {
                               data: item,
+                              onSelect: onSelect,
                             },
                           );
                         }}
