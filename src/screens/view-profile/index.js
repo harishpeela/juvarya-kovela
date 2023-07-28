@@ -252,6 +252,10 @@ const ViewProfile = ({route, navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.goBack();
+                route.params.onSelect({
+                  selectedId: trfData?.jtProfile,
+                  selected: isFollow,
+                });
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
@@ -344,14 +348,16 @@ const ViewProfile = ({route, navigation}) => {
                         itemDetails: item,
                       })
                     }>
-                    <Image
-                      source={{uri: item?.mediaList[0]?.url}}
-                      style={{
-                        height: 140,
-                        width: 140,
-                        resizeMode: 'stretch',
-                      }}
-                    />
+                    {item?.mediaList ? (
+                      <Image
+                        source={{uri: item?.mediaList[0]?.url}}
+                        style={{
+                          height: 140,
+                          width: 140,
+                          resizeMode: 'stretch',
+                        }}
+                      />
+                    ) : null}
                   </TouchableOpacity>
                 )}
               />

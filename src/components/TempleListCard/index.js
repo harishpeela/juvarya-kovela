@@ -13,6 +13,7 @@ import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FollowUnFollow} from '../../utils/api';
+
 export const TempleListCard = ({
   name,
   post,
@@ -36,6 +37,10 @@ export const TempleListCard = ({
         ToastAndroid.SHORT,
       );
     }
+  };
+  const onSelect = data => {
+    setIsLiked(data.selected);
+    // FollowandUnFollow(data?.selectedId);
   };
   const followTemples = async d => {
     const payload = {
@@ -74,6 +79,7 @@ export const TempleListCard = ({
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewProfile, {
           data: post,
+          onSelect: onSelect,
         });
       }}>
       <ImageBackground

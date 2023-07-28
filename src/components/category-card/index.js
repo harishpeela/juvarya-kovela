@@ -38,6 +38,7 @@ export const UserFeedCompList = ({
   mediaData,
   loader,
 }) => {
+  // console.log('likes count=========>', likes);
   const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
@@ -99,6 +100,7 @@ export const UserFeedCompList = ({
     try {
       let result = await NewLikesCount(id);
       if (result) {
+        console.log('new likes count', result?.data?.count);
         setLikeCount(result?.data?.count);
       } else {
         setLikeCount(0);
@@ -228,7 +230,7 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount} Likes</Text>
+        <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text>
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}
