@@ -116,7 +116,6 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in follow count', error);
     }
   };
-
   const followTemples = async id => {
     const payload = {
       jtCustomer: userDetails?.id,
@@ -124,11 +123,11 @@ const ViewProfile = ({route, navigation}) => {
       jtProfile: id,
       following: !isFollow,
     };
-    // console.log('pYLOfd', payload);
+    console.log('pYLOfd', payload);
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
-      // console.log('========><------------', results?.data);
+      console.log('========><------------', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -165,14 +164,14 @@ const ViewProfile = ({route, navigation}) => {
   const Posts = async id => {
     try {
       let result = await GetPosts(id, 0, 40);
-      let PostsArray = [];
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       // PostsArray.push(urls);
       if (urls) {
-        setPostImages(urls);
+        let media = urls?.filter(item => item?.mediaList);
+        setPostImages(media);
         setloader(false);
       } else {
         setPostImages(null);
@@ -183,25 +182,6 @@ const ViewProfile = ({route, navigation}) => {
       } else {
         setPostsCount(0);
       }
-      // urls?.map(({id, jtProfile, mediaList}) =>
-      //   mediaList?.map(s => {
-      //     // console.log('s=========>', s);
-      //     PostsArray?.push({
-      //       image: s?.url,
-      //       imgid: s?.id,
-      //       id: id,
-      //       jtProfile: jtProfile,
-      //     });
-      //   }),
-      // );
-      // if (PostsArray?.length > 0) {
-      //   setloader(false);
-      //   setPostImages(PostsArray);
-      //   console.log('array', PostsArray);
-      // } else {
-      //   setPostImages([]);
-      //   setloader(false);
-      // }
     } catch (error) {
       console.log('error in posts', error);
     }
@@ -237,7 +217,7 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('errorrr in id', error));
   };
-  // console.log('posts ======>', postImages[0]?.mediaList[0].url);
+  // console.log('posts ======>', postImages);
   useEffect(() => {}, [route]);
   return (
     <View

@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {styles} from './styles';
 import {
   ToastAndroid,
@@ -8,6 +8,7 @@ import {
   View,
   Text,
 } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import {allTexts} from '../../common';
 import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,18 +24,24 @@ export const TempleListCard = ({
   const {userDetails} = useContext(ApplicationContext);
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
   const [isFollow, setisFollow] = useState();
+  let isFocused = useIsFocused();
   const FollowandUnFollow = d => {
     console.log('ksj', d, isLiked);
     setIsLiked(!isLiked);
     if (!isLiked) {
+      console.log('if');
       followTemples(d);
+      // ToastAndroid.show(
+      //   'successfully you are following the temple',
+      //   ToastAndroid.SHORT,
+      // );
     } else if (isLiked) {
-      setIsLiked(!isLiked);
+      console.log('else');
       followTemples(d);
-      ToastAndroid.show(
-        'successfully you are unfollowing the temple',
-        ToastAndroid.SHORT,
-      );
+      // ToastAndroid.show(
+      //   'successfully you are unfollowing the temple',
+      //   ToastAndroid.SHORT,
+      // );
     }
   };
   const followTemples = async d => {
@@ -47,8 +54,9 @@ export const TempleListCard = ({
     console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
+      console.log('77777777777', results?.data);
       if (results && results.status === 200) {
-        setIsLiked(!isLiked);
+        // setIsLiked(!isLiked);
         ToastAndroid.show(
           `Successfully you are${
             !isFollow ? ' following' : ' unFollowing'
@@ -56,18 +64,14 @@ export const TempleListCard = ({
           ToastAndroid.SHORT,
         );
       } else {
-        if (results === undefined) {
-          ToastAndroid.show(
-            'successfully you are following the temple',
-            ToastAndroid.SHORT,
-          );
-          setIsLiked(!isLiked);
-        }
       }
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    setisFollow(isFollowingTrue);
+  }, [isFollowingTrue, isFocused]);
   return (
     <TouchableOpacity
       style={{marginLeft: 10}}
