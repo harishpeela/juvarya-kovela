@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {View, FlatList, SafeAreaView, ScrollView} from 'react-native';
 import {
   BackgroundImage,
   BackHeaderNew,
@@ -31,12 +31,8 @@ const Feeds = ({route, navigation}) => {
   const tempProfilefeeddetails = async () => {
     try {
       let result = await GetPosts(itemDetails?.jtProfile, 0, 60);
-      //   console.log('result of pot', result);
       let Data = result.data.data;
-      // console.log('======', Data);
       if (Data) {
-        // console.log('detaiolskans', itemDetails.id);
-
         let fil = Data.filter(item => item.mediaList);
         let arey = await removeObjectWithId(fil, itemDetails.id);
         setPostsData(arey);

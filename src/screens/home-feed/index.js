@@ -76,6 +76,9 @@ const UserFeedScreen = ({navigation}) => {
       </Text>
     ) : null;
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
   const loadMoreItems = () => {
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
@@ -141,6 +144,8 @@ const UserFeedScreen = ({navigation}) => {
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,
+                    onSelect: onSelect,
+
                   });
                 }}
               />

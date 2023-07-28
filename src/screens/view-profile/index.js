@@ -1,5 +1,4 @@
 /* eslint-disable no-shadow */
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import {
   Text,
@@ -22,7 +21,6 @@ import {
   NewGetFollowUmFollowById,
   NewFollowCount,
   GetPosts,
-  TempleFollowersList,
   MemberShipCount,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -55,7 +53,6 @@ const ViewProfile = ({route, navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [followBtnDisable, setFollowBtnDisable] = useState(false);
   const [followVisible, setFollowVisible] = useState(false);
-  const [itemCommunity, setItemCommunity] = useState([]);
   const [followCount, setFollowCount] = useState(0);
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState(false);
@@ -73,7 +70,6 @@ const ViewProfile = ({route, navigation}) => {
   const MemberShip = async id => {
     try {
       let result = await MemberShipCount(id);
-      // console.log('res of count', result?.data);
       if (result) {
         setMemberShip(result?.data);
       } else {
@@ -86,7 +82,6 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      // console?.log('================><==========', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -105,13 +100,11 @@ const ViewProfile = ({route, navigation}) => {
   const followingCount = async id => {
     try {
       let result = await NewFollowCount(id);
-      // console.log('res of follow count', result);
       if (result) {
         setFollowCount(result?.data);
       } else {
         setFollowCount(0);
       }
-      // console.log('res of follow count', result?.data);
     } catch (error) {
       console.log('error in follow count', error);
     }
@@ -123,11 +116,9 @@ const ViewProfile = ({route, navigation}) => {
       jtProfile: id,
       following: !isFollow,
     };
-    console.log('pYLOfd', payload);
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
-      console.log('========><------------', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -154,7 +145,6 @@ const ViewProfile = ({route, navigation}) => {
   const getFollowValue = async id => {
     setFollowVisible(true);
     let result = await NewGetFollowUmFollowById(id);
-    // console.log('res of follow', result?.data);
     if (result) {
       setFollowVisible(false);
       setisFollow(result?.data);
@@ -168,7 +158,6 @@ const ViewProfile = ({route, navigation}) => {
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
-      // PostsArray.push(urls);
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
@@ -217,7 +206,6 @@ const ViewProfile = ({route, navigation}) => {
       })
       .catch(error => console.log('errorrr in id', error));
   };
-  // console.log('posts ======>', postImages);
   useEffect(() => {}, [route]);
   return (
     <View
@@ -231,16 +219,16 @@ const ViewProfile = ({route, navigation}) => {
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
+                console.log('route', route);
                 navigation.goBack();
-                route.params.onSelect({
-                  selectedId: trfData?.jtProfile,
+                route?.params?.onSelect({
+                  // selectedId: trfData?.jtProfile,
                   selected: isFollow,
                 });
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
             <Text
-              // numberOfLines={1}
               style={{
                 fontSize: 16,
                 fontWeight: '500',

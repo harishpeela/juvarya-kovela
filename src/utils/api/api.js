@@ -18,7 +18,6 @@ export const POPULARURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9096/';
 export const MEMBER_SHIP_URL =
   'http://fanfundev.eastasia.cloudapp.azure.com:9095';
 let bearer_token = getAuthTokenDetails();
-
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
   headers: {
