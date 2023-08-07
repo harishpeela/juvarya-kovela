@@ -42,10 +42,7 @@ const UpdatePassword = ({navigation}) => {
       redirect: 'follow',
     };
 
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/customer/password',
-      requestOptions,
-    )
+    fetch('http://20.235.89.214:9092/api/customer/password', requestOptions)
       .then(response => response.json())
       .then(result => {
         formikActions.setSubmitting(false);

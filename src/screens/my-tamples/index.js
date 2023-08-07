@@ -49,6 +49,9 @@ const MyTamples = ({navigation}) => {
       console.log('error in admin temples', error);
     }
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
   useEffect(() => {
     AdminTempleDetails();
   }, [isFocused]);
@@ -118,6 +121,7 @@ const MyTamples = ({navigation}) => {
                             allTexts.screenNames.viewProfile,
                             {
                               data: item,
+                              onSelect: onSelect,
                             },
                           );
                         }}
