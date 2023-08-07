@@ -21,7 +21,7 @@ const Favorite = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
   const [followingCount, setFollowingCount] = useState();
@@ -33,6 +33,7 @@ const Favorite = ({navigation}) => {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
       setFollowingCount(data);
+      setLoading(false);
       data?.map(a => {
         TempleDetails(a);
       });
@@ -129,7 +130,7 @@ const Favorite = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray.length === 0 ? (
+            filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
                 <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
               </View>

@@ -67,11 +67,7 @@ const CreateFeed = ({route, navigation}) => {
       body: formdata,
       redirect: 'follow',
     };
-    console.log('formdata', formdata);
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9094/jtfeed/create',
-      requestOptions,
-    )
+    fetch('http://20.235.89.214:9094/jtfeed/create', requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.message === 'Feed created') {

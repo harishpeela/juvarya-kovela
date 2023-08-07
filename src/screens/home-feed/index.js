@@ -154,7 +154,7 @@ const UserFeedScreen = ({navigation}) => {
             onEndReached={() => loadMoreItems()}
             onEndReachedThreshold={0.5}
           />
-        ) : homeFeedList?.length > 0 ? (
+        ) : !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>

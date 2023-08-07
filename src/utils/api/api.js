@@ -117,6 +117,19 @@ export const axiousInstanceNew = axios.create({
     Authorization: bearer_token,
   },
 });
+export const axiousInstanceNew1 = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiousInstanceNew1.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  let clientToken = await getClientCredentials();
+  config.headers.Authorization = token || clientToken.clientToken;
+  return config;
+});
+
 export const axiousInstanceNewSignIn = axios.create({
   baseURL: BASEURL,
   headers: {
@@ -126,10 +139,6 @@ export const axiousInstanceNewSignIn = axios.create({
 axiousInstance.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
-  console.log(
-    'Sending req with this token is',
-    token || clientToken.clientToken,
-  );
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
 });

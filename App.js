@@ -32,7 +32,6 @@ import {
   AddTempleNew,
   CreateFeed,
   Profile,
-  Feed,
   Posts,
   FollowersMembership,
   ProfileMembership,
@@ -48,7 +47,7 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getHomeFeedList} from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -375,35 +374,25 @@ const App = () => {
   };
 
   const ApiData = async () => {
-    let Token = await getAuthTokenDetails();
-    // console.log('token ====================> ', Token);
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', Token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('res curent customer in app.js', result);
+    let result = await getUserInfoNew();
+    try {
+      if (result) {
         saveUserDetails({
-          username: result?.username,
-          password: result?.password,
-          email: result?.email,
-          id: result?.id,
+          username: result?.data?.username,
+          email: result.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
         });
         setUserDetails({
-          username: result?.username,
-          email: result?.email,
-          role: result.roles,
-          id: result?.id,
+          username: result?.data?.username,
+          email: result.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
         });
-      })
-      .catch(error => console.log('error in api data app.js', error));
+      }
+    } catch (error) {
+      console.log('error in get current customer details api', error);
+    }
   };
   const getFollowedTempleList = async () => {
     try {
@@ -425,12 +414,12 @@ const App = () => {
       ApiData();
       getFollowedTempleList();
     }
-    console.log(
-      'userdetails',
-      userDetails,
-      'logindetails ======>',
-      loginDetails,
-    );
+    // console.log(
+    //   'userdetails',
+    //   userDetails,
+    //   'logindetails ======>',
+    //   loginDetails,
+    // );
   }, [loginDetails]);
 
   return (
