@@ -386,10 +386,7 @@ const App = () => {
       redirect: 'follow',
     };
 
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
-      requestOptions,
-    )
+    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log('res curent customer in app.js', result);

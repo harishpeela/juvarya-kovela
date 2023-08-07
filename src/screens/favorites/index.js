@@ -59,9 +59,7 @@ const Favorite = ({navigation}) => {
   const onSelect = data => {
     // setIsLiked(data?.selected);
   };
-  useEffect(() => {
-    getTemples();
-  }, [isFocused]);
+  useEffect(() => {}, [isFocused]);
   const performFilter = value => {
     setfilteredArray(
       templeList.filter(item =>
@@ -117,7 +115,6 @@ const Favorite = ({navigation}) => {
               getTemples();
             }}
             onTextChange={e => {
-              // console.log(e);
               setSeracherdText(e);
               performFilter(e);
             }}
@@ -162,6 +159,7 @@ const Favorite = ({navigation}) => {
                               data: item,
                               onSelect: onSelect,
                             },
+                            console.log('onselect', onSelect),
                           );
                         }}
                       />

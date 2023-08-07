@@ -95,12 +95,23 @@ export const loginUser1 = async data => {
     return error;
   }
 };
-export const PopularTemples = async (pgfrm, pgto) => {
+// export const PopularTemples = async (pgfrm, pgto) => {
+//   try {
+//     let result = await axiosNewData.get(
+//       `${endpoints.NEW_POPULAR_TEMPLES}?page=${pgfrm}&pageSize=${pgto}`,
+//       {retry: 5, retryDelay: 3000},
+//     );
+//     return result;
+//   } catch (error) {
+//     console.log('error in popular temples', error);
+//   }
+// };
+export const PopularTemples = async () => {
   try {
-    let result = await axiosNewData.get(
-      `${endpoints.NEW_POPULAR_TEMPLES}?page=${pgfrm}&pageSize=${pgto}`,
-      {retry: 5, retryDelay: 3000},
-    );
+    let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
+      // retry: 5,
+      // retryDelay: 3000,
+    });
     return result;
   } catch (error) {
     console.log('error in popular temples', error);

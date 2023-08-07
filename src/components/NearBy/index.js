@@ -26,9 +26,10 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [filteredList, setFilteredList] = useState([]);
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
-  const PopularTemplesss = async (frm, toNo) => {
+  const PopularTemplesss = async () => {
     try {
-      let result = await PopularTemples(frm, toNo);
+      let result = await PopularTemples();
+      console.log('res', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -71,13 +72,12 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   useEffect(() => {
     console.log('isFollow', isFollow);
-
   }, [isFocused]);
   useEffect(() => {
-    if (pageNo >= 0) {
-      PopularTemplesss(pageNo, 20);
-      console.log('pg', pageNo);
-    }
+    // if (pageNo >= 0) {
+    PopularTemplesss();
+    //   console.log('pg', pageNo);
+    // }
   }, [pageNo]);
   const SearchPopTemp = async txt => {
     try {
@@ -153,8 +153,8 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       pageNav={pageNav}
                     />
                   )}
-                  ListFooterComponent={renderLoder}
-                  onEndReached={() => loadMoreItems()}
+                  // ListFooterComponent={renderLoder}
+                  // onEndReached={() => loadMoreItems()}
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />

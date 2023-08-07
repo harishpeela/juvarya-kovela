@@ -7,13 +7,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
-import {
-  getUserInfo,
-  RegistesrUser,
-  VerifyOTP,
-  NewVerifyOTP,
-  loginUser1,
-} from '../../utils/api';
+import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 
 export const KovelaIcon = () => (

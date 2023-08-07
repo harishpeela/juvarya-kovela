@@ -10,13 +10,11 @@ import Snackbar from 'react-native-snackbar';
 import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
 
-export const BASE_URL =
-  'http://fanfundev.eastasia.cloudapp.azure.com:8082/api/';
-export const BASEURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/';
-export const BASE = 'http://fanfundev.eastasia.cloudapp.azure.com:9094';
-export const POPULARURL = 'http://fanfundev.eastasia.cloudapp.azure.com:9096/';
-export const MEMBER_SHIP_URL =
-  'http://fanfundev.eastasia.cloudapp.azure.com:9095';
+export const BASE_URL = 'http://20.235.89.214:8082/api/';
+export const BASEURL = 'http://20.235.89.214:9092/api/';
+export const BASE = 'http://20.235.89.214:9094/';
+export const POPULARURL = 'http://20.235.89.214:9096/';
+export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,

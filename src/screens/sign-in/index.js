@@ -8,6 +8,7 @@ import {styles} from './styles.js';
 import Signup, {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
 import {loginUser1} from '../../utils/api';
+import {LoginValidationSchema} from '../../common/schemas';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
@@ -40,10 +41,7 @@ const Signin = ({navigation}) => {
       redirect: 'follow',
     };
 
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
-      requestOptions,
-    )
+    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
       .then(response => response.json())
       .then(result => {
         // console.log('result of currentcustomer', result);
@@ -113,7 +111,7 @@ const Signin = ({navigation}) => {
             const {email, password} = values;
             signinHandler(values, formikActions);
           }}
-          // validationSchema={LoginValidationSchema}
+          validationSchema={LoginValidationSchema}
           initialValues={{
             email: '',
             password: '',
@@ -132,7 +130,7 @@ const Signin = ({navigation}) => {
                 <InputField
                   title={email}
                   placeholder={emailPlace}
-                  // error={touched.email && errors.email}
+                  error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
                   autoCapitalize="none"

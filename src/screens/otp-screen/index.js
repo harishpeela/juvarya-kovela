@@ -87,10 +87,7 @@ const OTPScreen = ({navigation, route}) => {
       redirect: 'follow',
     };
 
-    fetch(
-      'http://fanfundev.eastasia.cloudapp.azure.com:9092/api/auth/currentCustomer',
-      requestOptions,
-    )
+    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
       .then(response => response.json())
       .then(result => {
         console.log('result of apidata otpscreen', result);
@@ -121,14 +118,6 @@ const OTPScreen = ({navigation, route}) => {
       .catch(error => console.log('error', error));
   };
 
-  const getAndSaveUserInfo = async () => {
-    try {
-      let response = await getUserInfoNew();
-      console.log('response ============>', response?.data);
-    } catch (error) {
-      alert(error.message);
-    }
-  };
   const signinHandler = async () => {
     let payload = {
       username: data?.userName,

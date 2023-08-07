@@ -47,7 +47,7 @@ const ViewProfile = ({route, navigation}) => {
   //   // '<==============',
   //   // userDetails,
   // );
-  const [loader, setloader] = useState(true);
+  const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
