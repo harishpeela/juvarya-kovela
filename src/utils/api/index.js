@@ -11,6 +11,7 @@ import {
   axiosNewData1,
   axiosNewDataSave,
   axiosMultiPartFormDataMem,
+  axiousInstanceNew1,
 } from './api';
 
 const endpoints = {
@@ -31,6 +32,7 @@ const endpoints = {
   NEW_FAVORITES: '/jtfollwer/profile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
+  NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
@@ -39,15 +41,12 @@ const endpoints = {
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
-  SIGN_UP: 'v1/jtcustomer/create',
-  CHECK_OTP: 'v1/jtUserOTP/trigger',
   GET_TEMPLE_LIST: 'v1/agent/item/list',
   GET_HOME_FEED_LIST: '/jtfeed/list',
   CREATE_TEMPLE: 'v1/agent/item/create',
   CREATE_FEED: 'v1/feed/post',
   UPLOAD_TEMPLE_PICTURE: 'v1/jtitem/picture',
   ADD_TEMPLE_ADMIN: 'v1/agent/role/update',
-  GET_CURRENT_USER: 'v1/jtcustomer',
   GET_TEMPLE_DETAILS: 'v1/jtitem/details/',
   GET_POPULAR_TEMPLES: 'v1/jtitem/popular/list',
   ADD_TEMP_ID: 'v1/jtcustomer/search/',
@@ -95,17 +94,6 @@ export const loginUser1 = async data => {
     return error;
   }
 };
-// export const PopularTemples = async (pgfrm, pgto) => {
-//   try {
-//     let result = await axiosNewData.get(
-//       `${endpoints.NEW_POPULAR_TEMPLES}?page=${pgfrm}&pageSize=${pgto}`,
-//       {retry: 5, retryDelay: 3000},
-//     );
-//     return result;
-//   } catch (error) {
-//     console.log('error in popular temples', error);
-//   }
-// };
 export const PopularTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
@@ -121,6 +109,17 @@ export const SearchPopularTemples = async txt => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.NEW_POPULAR_TEMPLES}?query=${txt}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const SearchTempleRoleWithId = async profId => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.NEW_TEMPLE_ROLE_WITH_ID}=${profId}`,
       {retry: 5, retryDelay: 3000},
     );
     return result;
@@ -550,17 +549,9 @@ export const followUnfollowTemple = async data => {
     return error;
   }
 };
-export const getUserInfo = async () => {
-  try {
-    let result = await axiousInstance.get(`${endpoints.GET_CURRENT_USER}`);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
 export const getUserInfoNew = async () => {
   try {
-    let result = await axiousInstanceNew.get(
+    let result = await axiousInstanceNew1.get(
       `${endpoints.NEW_GET_CURRENT_USER}`,
     );
     return result;

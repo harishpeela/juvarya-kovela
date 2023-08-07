@@ -37,6 +37,7 @@ import {ProfileImage} from '../../components';
 import {colors} from '../../common';
 import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+import {SearchTempleRoleWithId} from '../../utils/api';
 const ViewProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
@@ -176,35 +177,20 @@ const ViewProfile = ({route, navigation}) => {
     }
   };
   const TempleRoleSearchWithId = async profileId => {
-    let Token = await getAuthTokenDetails();
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', Token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch(
-      `http://fanfundev.eastasia.cloudapp.azure.com:9096/jtprofile/customer-roles?profileId=${profileId}`,
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => {
-        // console.log('res odf role id', result);
-        if (result) {
-          let val = result?.roles;
-          var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
-          // console.log('id', roleAdmin);
-          if (roleAdmin) {
-            setRoleId('ROLE_ITEM_ADMIN');
-          }
-        } else {
-          setRoleId(null);
+    let result = await SearchTempleRoleWithId(profileId);
+    try {
+      if (result) {
+        let val = result?.data?.roles;
+        var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
+        if (roleAdmin) {
+          setRoleId('ROLE_ITEM_ADMIN');
         }
-      })
-      .catch(error => console.log('errorrr in id', error));
+      } else {
+        setRoleId(null);
+      }
+    } catch (error) {
+      console.log('error in temple role api', error);
+    }
   };
   useEffect(() => {}, [route]);
   return (

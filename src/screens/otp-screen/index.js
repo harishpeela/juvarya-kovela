@@ -6,20 +6,11 @@ import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
 import {PrimaryButton} from '../../components';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {
-  getUserInfo,
-  loginUser,
-  VerifyOTP,
-  RegistesrUser,
-  loginUser1,
-  NewRegistesrUser,
-  getUserInfoNew,
-} from '../../utils/api';
+import {loginUser1, NewRegistesrUser, getUserInfoNew} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
-  getAuthTokenDetails,
 } from '../../utils/preferences/localStorage';
 
 const OTPScreen = ({navigation, route}) => {
@@ -65,59 +56,35 @@ const OTPScreen = ({navigation, route}) => {
   };
 
   let otpInput = useRef(null);
-  // console.log('outinpity', otpInput?.current?.state?.otpText);
   const {
-    params: {otp, email, password, data, username},
+    params: {otp, email, password, data},
   } = route || {};
-  // console.log('parms', data, username);
   const setText = () => {
     otpInput?.current?.setValue(otp);
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
 
   const ApiData = async () => {
-    let Token = await getAuthTokenDetails();
-    console.log('token ====================> ', Token);
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', Token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('result of apidata otpscreen', result);
-        if (result) {
-          saveUserDetails({
-            // username: `${result?.firstName}${result?.lastName}`,
-            username: result?.username,
-            password: result?.password,
-            email: result?.email,
-            id: result?.id,
-          });
-          console.log(
-            'saveuserdetails',
-            result?.firstName,
-            result?.lastName,
-            result?.email,
-            result?.id,
-          );
-          setUserDetails({
-            // username: `${result?.firstName}${result?.lastName}`,
-            username: result?.username,
-            email: result?.email,
-            role: result.roles,
-            id: result?.id,
-          });
-        }
-      })
-      .catch(error => console.log('error', error));
+    let result = await getUserInfoNew();
+    try {
+      if (result) {
+        saveUserDetails({
+          username: result?.data?.username,
+          email: result.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
+        });
+        setUserDetails({
+          username: result?.data?.username,
+          email: result?.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
+        });
+      }
+    } catch (error) {
+      console.log('error in get current customer details api', error);
+    }
   };
-
   const signinHandler = async () => {
     let payload = {
       username: data?.userName,
@@ -126,16 +93,12 @@ const OTPScreen = ({navigation, route}) => {
     try {
       let result = await loginUser1(payload);
       console.log('payload', payload);
-      // console.log('result of loginuser', result?.data);
-      // console.log('result.status', result?.status);
       if (result && result.status === 200) {
         const {
-          data: {accessToken, refreshToken, tokenType, email},
+          data: {accessToken, tokenType},
         } = result;
-        // console.log('accesstoken', tokenType, accessToken);
         await saveLoginSessionDetails(tokenType, accessToken);
         await ApiData();
-        // getAndSaveUserInfo();
         setLoginDetails(accessToken);
         setLoading(false);
       }

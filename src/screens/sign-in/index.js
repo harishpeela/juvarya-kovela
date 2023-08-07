@@ -7,7 +7,7 @@ import {Formik} from 'formik';
 import {styles} from './styles.js';
 import Signup, {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
-import {loginUser1} from '../../utils/api';
+import {loginUser1, getUserInfoNew} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
   saveLoginSessionDetails,
@@ -30,38 +30,25 @@ const Signin = ({navigation}) => {
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
 
   const ApiData = async () => {
-    let Token = await getAuthTokenDetails();
-    console.log('token============>', Token);
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', Token);
-
-    var requestOptions = {
-      method: 'GET',
-      headers: myHeaders,
-      redirect: 'follow',
-    };
-
-    fetch('http://20.235.89.214:9092/api/auth/currentCustomer', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        // console.log('result of currentcustomer', result);
-        console.log('role', result?.roles);
-        if (result) {
-          saveUserDetails({
-            username: result?.username,
-            email: result.email,
-            role: result?.roles,
-            id: result?.id,
-          });
-          setUserDetails({
-            username: result?.username,
-            email: result.email,
-            role: result?.roles,
-            id: result?.id,
-          });
-        }
-      })
-      .catch(error => console.log('error', error));
+    let result = await getUserInfoNew();
+    try {
+      if (result) {
+        saveUserDetails({
+          username: result?.data?.username,
+          email: result.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
+        });
+        setUserDetails({
+          username: result?.data?.username,
+          email: result.data?.email,
+          role: result?.data?.roles,
+          id: result?.data?.id,
+        });
+      }
+    } catch (error) {
+      console.log('error in get current customer details api', error);
+    }
   };
   const signinHandler = async (data, actions) => {
     let payload = {
@@ -72,7 +59,7 @@ const Signin = ({navigation}) => {
       let result = await loginUser1(payload);
       if (result && result.status === 200) {
         const {
-          data: {accessToken, tokenType, username},
+          data: {accessToken, tokenType},
         } = result;
         await saveLoginSessionDetails(tokenType, accessToken);
         ApiData();
