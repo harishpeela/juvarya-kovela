@@ -36,18 +36,17 @@ import {
 import {ProfileImage} from '../../components';
 import {colors} from '../../common';
 import {PostsComp} from '../../components/profilecompnew/postsComp';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {SearchTempleRoleWithId} from '../../utils/api';
 const ViewProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -83,6 +82,7 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
+      console.log('----------------------------------------------->', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -176,6 +176,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
+  console.log('trfdata,', trfData);
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {

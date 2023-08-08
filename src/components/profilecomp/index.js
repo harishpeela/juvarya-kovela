@@ -187,7 +187,8 @@ export const ProfileFourthTab = ({
             ...styles.controlPanel.item,
             borderBottomWidth: currentIndex === 4 ? 1 : 0,
             borderColor: currentIndex === 4 ? colors.orangeColor : null,
-          }}>
+          }}
+          onPress={() => setCurrentIndex(4)}>
           <FontAwesome
             name="calendar-plus-o"
             color={currentIndex === 4 ? '#FFA001' : '#585858'}

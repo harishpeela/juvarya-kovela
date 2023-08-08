@@ -5,11 +5,8 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  Text,
   Platform,
   Image,
-  TextInput,
-  Alert,
 } from 'react-native';
 import {allTexts, colors} from '../../common';
 import {styles} from './styles';

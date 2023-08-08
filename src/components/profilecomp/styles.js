@@ -80,7 +80,6 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 0.2,
     item: {
       alignItems: 'center',
-      marginRight: '10%',
       width: 100,
 
       text: {

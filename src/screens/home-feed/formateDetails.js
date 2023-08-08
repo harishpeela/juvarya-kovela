@@ -5,19 +5,14 @@ export const Data = d => {
       ? d?.jtProfileDTO?.desciption
       : d?.desciption || 'no description',
     url: d?.url ? d?.url : '',
-    eventsEnabled: d?.jtProfileDTO?.eventsEnabled
-      ? d?.jtProfileDTO?.eventsEnabled
-      : false,
-    popular: d?.jtProfileDTO?.popular ? d?.jtProfileDTO?.popular : false,
-    seasonal: d?.jtProfileDTO?.seasonal ? d?.jtProfileDTO?.seasonal : false,
-    servicesEnabled: d?.jtProfileDTO?.servicesEnabled
-      ? d?.jtProfileDTO?.servicesEnabled
-      : false,
-    templeClass: d?.jtProfileDTO?.templeClass
-      ? d?.jtProfileDTO?.templeClass
-      : '',
+    eventsEnabled: d?.eventsEnabled ? d?.eventsEnabled : false,
+    ecommerceEnabled: d?.ecommerceEnabled ? d?.ecommerceEnabled : false,
+    popular: d?.popular ? d?.popular : false,
+    seasonal: d?.seasonal ? d?.seasonal : false,
+    servicesEnabled: d?.servicesEnabled ? d?.servicesEnabled : false,
+    templeClass: d?.templeClass ? d?.templeClass : '',
     jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
-    logo: d?.jtProfileDTO?.logo ? d?.jtProfileDTO?.logo : d?.url,
+    logo: d?.logo ? d?.logo : d?.url,
   };
   return myDataDetails;
 };
