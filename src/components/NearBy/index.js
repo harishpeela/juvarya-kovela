@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
@@ -8,11 +7,7 @@ import {Loader} from '../loader';
 import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
-import {
-  PopularTemples,
-  NewGetFollowUmFollowById,
-  SearchPopularTemples,
-} from '../../utils/api';
+import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
   let isFocused = useIsFocused();
@@ -33,10 +28,8 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
-        dty?.map(d => {
-          profilePicture(d);
-          setLoader(false);
-        });
+        setfilteredArray(dty);
+        setFilteredList(dty);
       }
     } catch (error) {
       console.log('error in popular temples', error);
@@ -55,29 +48,11 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
-  const profilePicture = async d => {
-    try {
-      let responce = await NewGetFollowUmFollowById(d?.id);
-      if (responce) {
-        setIsFollow(responce?.data);
-      } else {
-      }
-      let Following = responce?.data;
-      const obj = {...d, ...Following};
-      setfilteredArray(hg => [...hg, obj]);
-      setFilteredList(hg => [...hg, obj]);
-    } catch (error) {
-      console.log('error in profile pic', error);
+  useEffect(() => {}, [isFocused]);
+  useEffect(() => {
+    if (pageNo >= 0) {
+      PopularTemplesss();
     }
-  };
-  useEffect(() => {
-    console.log('isFollow', isFollow);
-  }, [isFocused]);
-  useEffect(() => {
-    // if (pageNo >= 0) {
-    PopularTemplesss();
-    //   console.log('pg', pageNo);
-    // }
   }, [pageNo]);
   const SearchPopTemp = async txt => {
     try {
@@ -149,7 +124,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       name={item.name}
                       templeId={item.id}
                       date={item.creationTime}
-                      isFollowingTrue={isFollow}
+                      isFollowingTrue={item?.follow}
                       pageNav={pageNav}
                     />
                   )}

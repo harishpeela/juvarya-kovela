@@ -237,7 +237,7 @@ export const UserFeedCompList = ({
         {''}
         {''}{' '}
         <Text style={{color: !isDarkMode ? 'gray' : 'white'}}>
-          {post?.jtProfileDTO?.desciption}
+          {post?.description}
         </Text>
       </Text>
     </View>

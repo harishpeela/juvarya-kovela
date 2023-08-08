@@ -2,6 +2,7 @@
 import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 export const ProfileImage = ({profileImg}) => {
+  console.log(profileImg);
   const renderImage = () => {
     if (!profileImg?.logo) {
       return (

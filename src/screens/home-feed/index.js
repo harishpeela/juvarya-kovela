@@ -52,6 +52,7 @@ const UserFeedScreen = ({navigation}) => {
     setIsLoading(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
+      console.log('result of homefeedlist', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;

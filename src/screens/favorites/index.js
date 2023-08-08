@@ -32,6 +32,7 @@ const Favorite = ({navigation}) => {
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
+      console.log('dats', data);
       setFollowingCount(data);
       setLoading(false);
       data?.map(a => {
@@ -89,6 +90,7 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
+  console.log('filteredarray', filteredArray);
   return (
     <SafeAreaView
       style={{
