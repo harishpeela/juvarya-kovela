@@ -32,6 +32,7 @@ import Feed from './feed';
 import Posts from './posts';
 import FollowersMembership from './profileFollowers';
 import ProfileMembership from './profile_memberShip';
+import AddMemebershipDetails from './add-mermbership';
 import SeeAll from './popularTemplesSeeAll';
 import Feeds from './feed-details';
 export {
@@ -69,6 +70,7 @@ export {
   Posts,
   FollowersMembership,
   ProfileMembership,
+  AddMemebershipDetails,
   SeeAll,
   Feeds,
 };

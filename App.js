@@ -35,6 +35,7 @@ import {
   Posts,
   FollowersMembership,
   ProfileMembership,
+  AddMemebershipDetails,
   SeeAll,
   Feeds,
 } from './src/screens';
@@ -88,6 +89,7 @@ const App = () => {
       posts,
       followersmembership,
       profilemembership,
+      addMembershipDetails,
       seeall,
       feeds,
     },
@@ -339,6 +341,13 @@ const App = () => {
         <Stack.Screen
           name={profilemembership}
           component={ProfileMembership}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addMembershipDetails}
+          component={AddMemebershipDetails}
           options={{
             headerShown: false,
           }}

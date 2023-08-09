@@ -137,6 +137,7 @@ export const allTexts = {
     posts: 'Posts',
     followersmembership: 'FollowersMembership',
     profilemembership: 'ProfileMembership',
+    addMembershipDetails: 'AddMemebershipDetails',
     seeall: 'SeeAll',
     feeds: 'Feeds',
   },

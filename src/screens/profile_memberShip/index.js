@@ -6,7 +6,7 @@ import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
-import {colors} from '../../common';
+import {colors, allTexts} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const ProfileMembership = ({route, navigation}) => {
@@ -39,7 +39,9 @@ const ProfileMembership = ({route, navigation}) => {
           txt={'Membership'}
           onPress={() => navigation.goBack()}
           isPlus
-          onPlusPress={() => alert('under development')}
+          onPlusPress={() =>
+            navigation.navigate(allTexts.screenNames.addMembershipDetails)
+          }
         />
         <View>
           {loader ? (
