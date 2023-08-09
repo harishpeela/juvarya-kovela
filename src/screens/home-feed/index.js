@@ -88,7 +88,7 @@ const UserFeedScreen = ({navigation}) => {
   useEffect(() => {
     if (apiPageNo >= 0) {
       listFeed(apiPageNo, apiPageSize);
-      console.log('apiPageNo', apiPageNo, apiPageSize);
+      // console.log('apiPageNo', apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
   return (
@@ -141,12 +141,11 @@ const UserFeedScreen = ({navigation}) => {
                 onSharePress={() => MyCustShare(item)}
                 saveid={item?.id}
                 likes={item?.likesCount}
-                // isLikeTrue={item?.likeStatus[0]?.like}
+                isLikeTrue={item?.like}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,
                     onSelect: onSelect,
-
                   });
                 }}
               />
@@ -155,13 +154,14 @@ const UserFeedScreen = ({navigation}) => {
             onEndReached={() => loadMoreItems()}
             onEndReachedThreshold={0.5}
           />
-        ) : !homeFeedList?.length > 0 ? (
+        ) : (
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>
-        ) : (
-          <View style={{flex: 1}}>
-            <Loader color={colors.orangeColor} size={30} />
+        )}
+        {!homeFeedList?.length > 0 && (
+          <View>
+            <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
       </>

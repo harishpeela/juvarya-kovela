@@ -150,6 +150,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textTransform: 'capitalize',
     fontWeight: 'bold',
+    color: colors.orangeColor,
   }
 });
 

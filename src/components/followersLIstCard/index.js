@@ -45,12 +45,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 0.7,
     marginLeft: '10%',
+    alignItems: 'center',
   },
   bulletConatianer: {
     marginRight: 10,
   },
   bullet: {
-    marginTop: 10,
     width: 5,
     height: 5,
     borderRadius: 2.5,
