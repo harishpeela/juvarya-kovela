@@ -64,6 +64,7 @@ export const UserFeedCompList = ({
     try {
       console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
+      console.log('res of likes', result?.data);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;
       }
@@ -80,11 +81,7 @@ export const UserFeedCompList = ({
         'మీరు ఫీడ్‌ని విజయవంతంగా సేవ్ చేసారు',
         ToastAndroid.SHORT,
       );
-      // Snackbar.show({
-      //   text: `${tel('dummyNamespace.saved')}`,
-      // });
     } else {
-      // console.log('feed not saved');
       ToastAndroid.show('మీరు ఫీడ్‌ని సేవ్ చేయలేదు', ToastAndroid.SHORT);
     }
   };
@@ -100,7 +97,6 @@ export const UserFeedCompList = ({
     try {
       let result = await NewLikesCount(id);
       if (result) {
-        console.log('new likes count', result?.data?.count);
         setLikeCount(result?.data?.count);
       } else {
         setLikeCount(0);
