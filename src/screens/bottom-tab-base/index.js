@@ -20,14 +20,14 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
-  const GetFavList = () => {
-    const {homeFeedListData} = useContext(ApplicationContext);
-    useEffect(() => {}, [ApplicationContext]);
-    // console.log('listkjsx', homeFeedListData?.length);
-    return homeFeedListData?.length > 0 ? true : false;
-  };
+  // const GetFavList = () => {
+  //   const {homeFeedListData} = useContext(ApplicationContext);
+  //   useEffect(() => {}, [ApplicationContext]);
+  //   // console.log('listkjsx', homeFeedListData?.length);
+  //   return homeFeedListData?.length > 0 ? true : false;
+  // };
   const {homeFeedListData} = useContext(ApplicationContext);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
     if (homeFeedListData?.length > 0) {
@@ -47,9 +47,9 @@ export default BottomTabBase = ({navigation}) => {
           initialRouteName={
             // allTexts.screenNames.userFeedScreen
             // !GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
-            homeFeedListData?.length > 0
-              ? allTexts.screenNames.home
-              : allTexts.tabNames.search
+            !homeFeedListData?.length
+              ? allTexts.tabNames.search
+              : allTexts.tabNames.home
           }
           tabBarOptions={{
             activeTintColor: colors.orangeColor,

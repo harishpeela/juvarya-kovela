@@ -20,9 +20,9 @@ import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
-  const [loader, setloader] = useState(true);
+  const [loader, setloader] = useState();
   const [homeFeedList, setHomeFeedList] = useState([]);
-  const [refrsh, setRefrsh] = useState(false);
+  const [refrsh, setRefrsh] = useState(true);
   const [apiPageNo, setApiPageNo] = useState(0);
   const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
@@ -50,15 +50,20 @@ const UserFeedScreen = ({navigation}) => {
   };
   const listFeed = async (pgNo, pgSize) => {
     setIsLoading(true);
+    setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('result of homefeedlist', result?.data);
+      // console.log('result of homefeedlist', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
         responce === null ? setNoData(true) : setNoData(false);
         responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
+        setRefrsh(false);
+      } else {
+        setloader(false);
+        setRefrsh(false);
       }
     } catch (error) {
       console.log('errorrrd', error);
@@ -88,7 +93,6 @@ const UserFeedScreen = ({navigation}) => {
   useEffect(() => {
     if (apiPageNo >= 0) {
       listFeed(apiPageNo, apiPageSize);
-      console.log('apiPageNo', apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
   return (
@@ -126,7 +130,8 @@ const UserFeedScreen = ({navigation}) => {
               <RefreshControl
                 refreshing={refrsh}
                 onRefresh={() => {
-                  setRefrsh(true);
+                  // setRefrsh(true);
+                  listFeed(apiPageNo, apiPageSize);
                 }}
               />
             }
@@ -141,12 +146,12 @@ const UserFeedScreen = ({navigation}) => {
                 onSharePress={() => MyCustShare(item)}
                 saveid={item?.id}
                 likes={item?.likesCount}
-                // isLikeTrue={item?.likeStatus[0]?.like}
+                isLikeTrue={item?.like}
+                savedFeed={item?.savedFeed}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewProfile, {
                     data: item,
                     onSelect: onSelect,
-
                   });
                 }}
               />
@@ -155,7 +160,7 @@ const UserFeedScreen = ({navigation}) => {
             onEndReached={() => loadMoreItems()}
             onEndReachedThreshold={0.5}
           />
-        ) : !homeFeedList?.length > 0 ? (
+        ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>

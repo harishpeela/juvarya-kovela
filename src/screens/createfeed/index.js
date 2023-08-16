@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Platform,
   Image,
+  Alert,
 } from 'react-native';
 import {allTexts, colors} from '../../common';
 import {styles} from './styles';
@@ -68,7 +69,13 @@ const CreateFeed = ({route, navigation}) => {
       .then(response => response.json())
       .then(result => {
         if (result?.message === 'Feed created') {
-          navigation.navigate(allTexts.screenNames.home);
+          // navigation.navigate(allTexts.screenNames.home);
+          Alert.alert('Success', `${result?.message}`, [
+            {
+              text: 'Ok',
+              onPress: () => navigation.navigate(allTexts.screenNames.home),
+            },
+          ]);
         } else {
           alert('somet thing went wrong');
         }

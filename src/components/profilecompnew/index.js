@@ -44,8 +44,8 @@ export const FolloUnfollowComp = ({
           bgColor={'#FFA001'}
           disabled={followBtnDisable}
           radius={10}
-          padding={7}
-          width={115}
+          padding={11}
+          width={95}
           onPress={followTemples}
           text={
             isFollow

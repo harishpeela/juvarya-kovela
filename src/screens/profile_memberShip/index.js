@@ -13,7 +13,6 @@ const ProfileMembership = ({route, navigation}) => {
   const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
-  console.log('id ===>', id);
   const MembershipData = async () => {
     setaLoader(true);
     try {
@@ -34,7 +33,7 @@ const ProfileMembership = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{marginHorizontal: '5%', marginVertical: 10}}>
+      <View style={{marginHorizontal: '5%', marginVertical: -10}}>
         <BackHeaderNew
           txt={'Membership'}
           onPress={() => navigation.goBack()}

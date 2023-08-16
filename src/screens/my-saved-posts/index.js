@@ -8,7 +8,6 @@ import {getSavedPostsList} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
 import {colors} from '../../common';
 const MySavedPosts = ({navigation}) => {
-  const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
 

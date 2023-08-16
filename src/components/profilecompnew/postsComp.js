@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 export const PostsComp = ({itemDetails, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.postsView}>
-      <Text>{itemDetails?.length}</Text>
+      <Text>{itemDetails?.length || '0'}</Text>
       <Text style={styles.postText}>Posts </Text>
     </TouchableOpacity>
   );

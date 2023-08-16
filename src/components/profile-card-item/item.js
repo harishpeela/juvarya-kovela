@@ -1,14 +1,33 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable no-undef */
 import React from 'react';
 import {fontFamily, colors} from '../../common';
-import {View, TouchableOpacity, StyleSheet, Text, Image} from 'react-native';
-export const Item = ({text, svg, onPress}) => (
-  <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
-    <View style={styles.iconContainer}>{svg}</View>
-    <View style={styles.textContainer}>
-      <Text style={styles.itemText}>{text}</Text>
-    </View>
-  </TouchableOpacity>
-);
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  Image,
+  useColorScheme,
+} from 'react-native';
+
+export const Item = ({text, svg, onPress}) => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.itemContainer}>
+      <View style={styles.iconContainer}>{svg}</View>
+      <View style={styles.textContainer}>
+        <Text
+          style={{...styles.itemText, color: isDarkMode ? 'black' : 'black'}}>
+          {text}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
 const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
@@ -20,7 +39,6 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 18,
     fontFamily: fontFamily.popinMedium,
-    color: colors.black,
     textTransform: 'capitalize',
   },
   item1Contaimer: {

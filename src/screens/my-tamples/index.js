@@ -17,11 +17,12 @@ import {FavTempleListCard} from '../../components';
 const MyTamples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
 
   let isFocused = useIsFocused();
   const TempleDetails = async d => {
+    setLoading(true);
     try {
       let result = await getTempledetailsWithId(d?.id);
       let responce = await GetProfilePicture(d?.id);
@@ -80,7 +81,7 @@ const MyTamples = ({navigation}) => {
             value={seracherdText}
             onCrossPress={() => {
               setSeracherdText('');
-              getTemples();
+              filteredArray.length ? getTemples() : '';
             }}
             onTextChange={e => {
               setSeracherdText(e);

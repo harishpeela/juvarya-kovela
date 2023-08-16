@@ -42,7 +42,7 @@ const ViewProfile = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
   console.log(
-    '=============================>',
+    '<=============================>',
     data,
     // '<==============',
     // userDetails,
@@ -82,7 +82,7 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      console.log('----------------------------------------------->', result);
+      // console.log('----------------------------------------------->', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);

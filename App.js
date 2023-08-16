@@ -148,7 +148,7 @@ const App = () => {
 
   const HomeStack = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="BottomTab">
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
