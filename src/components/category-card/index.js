@@ -65,7 +65,6 @@ export const UserFeedCompList = ({
     try {
       console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      console.log('result of like', result?.data);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;
       }

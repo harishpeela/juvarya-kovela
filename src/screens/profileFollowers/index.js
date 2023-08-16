@@ -50,8 +50,8 @@ const FollowersMembership = ({route, navigation}) => {
               keyExtractor={({item, index}) => index}
               renderItem={({item, index}) => (
                 <FollowersListCard
-                  name={item?.loggedInUser?.firstName}
-                  img={item?.jtProfileDTO?.logo}
+                  name={item?.user?.firstName}
+                  img={item?.user?.url}
                 />
               )}
             />

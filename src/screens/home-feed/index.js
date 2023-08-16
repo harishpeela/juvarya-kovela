@@ -164,11 +164,13 @@ const UserFeedScreen = ({navigation}) => {
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>
-        ) : (
-          <View style={{flex: 1}}>
-            <Loader color={colors.orangeColor} size={30} />
+        ) : (        
+          <View>
+            <Loader size={30} color={colors.orangeColor} />
           </View>
         )}
+       
+      
       </>
     </View>
   );
