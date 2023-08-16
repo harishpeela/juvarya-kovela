@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
 export const style = (bgColor, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
-      width: width || '30%',
+      width: width || '25%',
       padding: paddidng || 15,
       borderRadius: radius || 10,
       backgroundColor: bgColor || colors.blue,
@@ -114,7 +114,7 @@ export const style = (bgColor, radius, paddidng, width) =>
 export const textStyles = (textColor, fontSize) =>
   StyleSheet.create({
     textTitle: {
-      fontSize: fontSize || 14,
+      fontSize: fontSize || 12,
       color: textColor || colors.white,
       fontFamily: fontFamily.popinBold,
       textTransform: 'uppercase',

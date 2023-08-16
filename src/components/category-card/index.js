@@ -37,12 +37,13 @@ export const UserFeedCompList = ({
   onSharePress,
   mediaData,
   loader,
+  savedFeed,
 }) => {
   // console.log('likes count=========>', likes);
   const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
-  const [saveFeed, setSaveFeed] = useState(false);
+  const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
   const [items, setItems] = useState([
     {label: 'English', value: 'en'},
@@ -64,7 +65,6 @@ export const UserFeedCompList = ({
     try {
       console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      console.log('res of likes', result?.data);
       if (result && result.status === 200 && result.data.statusCode === 200) {
         return;
       }
@@ -89,9 +89,7 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
-    console.log('pay', payload);
     let result = await NewSaveFeed(payload);
-    console.log('result =====>', result?.data);
   };
   const likesCount = async () => {
     try {
@@ -153,6 +151,7 @@ export const UserFeedCompList = ({
               fontWeight: 'bold',
               marginBottom: 10,
               textTransform: 'capitalize',
+              color: isDarkMode ? 'black' : 'black',
             }}>
             {post?.jtProfileDTO?.name}
           </Text>
@@ -173,7 +172,6 @@ export const UserFeedCompList = ({
           renderItem={({item, index}) => {
             return (
               <View>
-                {/* <TouchableOpacity> */}
                 {!item?.uri ? (
                   <Image
                     source={{uri: item?.url}}
@@ -186,7 +184,6 @@ export const UserFeedCompList = ({
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
                 )}
-                {/* </TouchableOpacity> */}
               </View>
             );
           }}
@@ -226,13 +223,13 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text>
+        <Text style={styles.likes}>{likeCount || 0} Likes</Text>
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}
         {''}
         {''}{' '}
-        <Text style={{color: !isDarkMode ? 'gray' : 'white'}}>
+        <Text style={{color: isDarkMode ? 'gray' : 'black'}}>
           {post?.description}
         </Text>
       </Text>

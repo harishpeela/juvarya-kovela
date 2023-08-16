@@ -70,7 +70,7 @@ const Signin = ({navigation}) => {
         Alert.alert('Error', 'Invalid credentials....!');
       }
     } catch (error) {
-      console.log(error);
+      console.log('error in signin', error);
       actions.setSubmitting(false);
     }
   };

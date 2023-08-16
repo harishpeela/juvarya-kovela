@@ -92,7 +92,7 @@ export const allTexts = {
     noInternet: 'Network Error!',
   },
   tabNames: {
-    home: 'Home',
+    home: 'UserFeedScreen',
     search: 'search',
     ticket: 'ticket',
     favorites: 'favorites',

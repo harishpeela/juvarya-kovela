@@ -24,7 +24,6 @@ const Favorite = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
-  const [followingCount, setFollowingCount] = useState();
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
   const getTemples = async (userid, pgno, pgsz) => {
@@ -32,8 +31,7 @@ const Favorite = ({navigation}) => {
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
-      console.log('dats', data);
-      setFollowingCount(data);
+      // console.log('dats', data);
       setLoading(false);
       data?.map(a => {
         TempleDetails(a);
@@ -90,7 +88,7 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
-  console.log('filteredarray', filteredArray);
+  // console.log('filteredarray', filteredArray);
   return (
     <SafeAreaView
       style={{
@@ -107,7 +105,7 @@ const Favorite = ({navigation}) => {
         />
       </View>
       <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
-        {followingCount?.length} Following{' '}
+        {filteredArray?.length} Following{' '}
       </Text>
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>

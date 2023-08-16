@@ -101,7 +101,7 @@ const Menu = ({navigation}) => {
                 Feed{' '}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => Reels()}>
+            {/* <TouchableOpacity onPress={() => Reels()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -111,8 +111,8 @@ const Menu = ({navigation}) => {
                 }}>
                 Reels
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => NearBy()}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity onPress={() => NearBy()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -122,7 +122,7 @@ const Menu = ({navigation}) => {
                 }}>
                 NearBy{' '}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={() => UpcomingEvents()}>
               <Text
                 style={{
@@ -134,7 +134,7 @@ const Menu = ({navigation}) => {
                 Upcoming Events{' '}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => PastBookings()}>
+            {/* <TouchableOpacity onPress={() => PastBookings()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -144,8 +144,8 @@ const Menu = ({navigation}) => {
                 }}>
                 Past Bookings{' '}
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => Music()}>
+            </TouchableOpacity> */}
+            {/* <TouchableOpacity onPress={() => Music()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -155,7 +155,7 @@ const Menu = ({navigation}) => {
                 }}>
                 Music{' '}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={() => Festivals()}>
               <Text
                 style={{

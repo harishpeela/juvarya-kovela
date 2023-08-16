@@ -5,12 +5,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   voidButton: {
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 12,
     borderRadius: 10,
     borderColor: '#585858',
     borderWidth: 1,
     marginRight: 7,
+    width: 90,
+    alignItems: 'center',
     text: {
       fontSize: 13,
       fontWeight: '600',

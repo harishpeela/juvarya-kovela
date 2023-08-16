@@ -12,7 +12,7 @@ export const Data = d => {
     servicesEnabled: d?.servicesEnabled ? d?.servicesEnabled : false,
     templeClass: d?.templeClass ? d?.templeClass : '',
     jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
-    logo: d?.logo ? d?.logo : d?.url,
+    logo: d?.logo ? d?.logo : d?.jtProfileDTO?.logo,
   };
   return myDataDetails;
 };

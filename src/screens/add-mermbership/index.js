@@ -41,12 +41,10 @@ const AddMemebershipDetails = ({route, navigation}) => {
     alert('huuuu');
   };
 
-  // useEffect(() => {
-  //   MembershipData();
-  // }, [id]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{marginHorizontal: '5%', marginVertical: 10}}>
+      <BackgroundImage />
+      <View style={{marginHorizontal: '5%', marginVertical: '10%'}}>
         <BackHeaderNew
           txt={'Add Membership'}
           onPress={() => navigation.goBack()}
@@ -82,8 +80,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
           />
           <TouchableOpacity
             onPress={() => {
-              alert('hhhhhhh');
-              // navigation.navigate(allTexts.screenNames.signup);
+              onTextBoxChange();
             }}>
             <Text style={styles.login}>{'CREATE'}</Text>
           </TouchableOpacity>
