@@ -58,6 +58,9 @@ const Favorite = ({navigation}) => {
   };
   const onSelect = data => {
     // setIsLiked(data?.selected);
+    data?.selected !== ''
+      ? setfilteredArray(templeList.filter(obj => obj.id !== data?.selected))
+      : '';
   };
   useEffect(() => {}, [isFocused]);
   const performFilter = value => {

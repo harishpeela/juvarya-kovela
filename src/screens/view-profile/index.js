@@ -210,7 +210,7 @@ const ViewProfile = ({route, navigation}) => {
                 navigation.goBack();
                 route?.params?.onSelect({
                   // selectedId: trfData?.jtProfile,
-                  selected: isFollow,
+                  selected: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
