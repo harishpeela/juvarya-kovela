@@ -15,7 +15,6 @@ const Feeds = ({route, navigation}) => {
   const [feedData, setFeedData] = useState();
   const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
-  const [liked, setLiked] = useState(false);
   // console.log('item =========>', itemDetails);
   const feedDetails = async () => {
     try {
@@ -53,6 +52,7 @@ const Feeds = ({route, navigation}) => {
     tempProfilefeeddetails();
   }, [itemDetails]);
   console.log(feedData, '=============>');
+  console.log('posts', postsData);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -67,7 +67,8 @@ const Feeds = ({route, navigation}) => {
             id={feedData?.id}
             post={feedData}
             likes={feedData?.likesCount}
-            isLikeTrue={() => setLiked(!liked)}
+            isLikeTrue={feedData?.like}
+            savedFeed={feedData?.savedFeed}
           />
           <ScrollView>
             <FlatList
@@ -79,7 +80,8 @@ const Feeds = ({route, navigation}) => {
                     id={item?.id}
                     post={item}
                     likes={item?.likesCount}
-                    isLikeTrue={() => setLiked(!liked)}
+                    isLikeTrue={item?.like}
+                    savedFeed={item?.savedFeed}
                   />
                 )
               }

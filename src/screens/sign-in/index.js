@@ -12,7 +12,6 @@ import {LoginValidationSchema} from '../../common/schemas';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
-  getAuthTokenDetails,
 } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';

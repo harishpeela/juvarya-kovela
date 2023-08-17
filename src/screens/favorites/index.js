@@ -58,6 +58,9 @@ const Favorite = ({navigation}) => {
   };
   const onSelect = data => {
     // setIsLiked(data?.selected);
+    data?.selected !== ''
+      ? setfilteredArray(templeList.filter(obj => obj.id !== data?.selected))
+      : '';
   };
   useEffect(() => {}, [isFocused]);
   const performFilter = value => {
@@ -69,7 +72,12 @@ const Favorite = ({navigation}) => {
   };
   const renderLoder = () => {
     return isLoading ? (
-      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
+      <Text
+        style={{
+          alignSelf: 'center',
+          marginBottom: '5%',
+          color: colors.orangeColor,
+        }}>
         {' '}
         No Items to display
       </Text>
@@ -160,7 +168,6 @@ const Favorite = ({navigation}) => {
                               data: item,
                               onSelect: onSelect,
                             },
-                            console.log('onselect', onSelect),
                           );
                         }}
                       />

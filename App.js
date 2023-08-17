@@ -53,7 +53,6 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
 const App = () => {
-  console.log('app');
   const {
     screenNames: {
       signin,
@@ -95,7 +94,6 @@ const App = () => {
   } = allTexts;
 
   useEffect(() => {
-    console.log('appeffect');
     getLoginDetails();
   }, []);
   useEffect(() => {
