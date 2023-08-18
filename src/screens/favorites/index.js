@@ -31,7 +31,8 @@ const Favorite = ({navigation}) => {
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
-      // console.log('dats', data);
+      // data === undefined ? setfilteredArray([]) : '';
+      console.log('dats',data, templeList);
       setLoading(false);
       data?.map(a => {
         TempleDetails(a);
@@ -42,6 +43,9 @@ const Favorite = ({navigation}) => {
   };
   const TempleDetails = async d => {
     try {
+      console.log('uuuuu',d);
+      setfilteredArray([]);
+      setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
       if (result) {
         let templesArray = {...d, ...result?.data};
@@ -57,9 +61,9 @@ const Favorite = ({navigation}) => {
     }
   };
   const onSelect = data => {
-    // setIsLiked(data?.selected);
-    data?.selected !== ''
-      ? setfilteredArray(templeList.filter(obj => obj.id !== data?.selected))
+    getTemples(userDetails?.id, 0, 20);
+    data?.selected !== '' && templeList.length === 1
+      ? setfilteredArray([])
       : '';
   };
   useEffect(() => {}, [isFocused]);
