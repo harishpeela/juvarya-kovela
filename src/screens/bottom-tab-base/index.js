@@ -20,6 +20,11 @@ import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
+  const GetSearchScreen = () => <Search navigation={navigation} />;
+  const GetFavScreen = () => <Favorite navigation={navigation} />;
+  const GetTicketConfirmScreen = () => (
+    <TicketConfirmation navigation={navigation} />
+  );
   // const GetFavList = () => {
   //   const {homeFeedListData} = useContext(ApplicationContext);
   //   useEffect(() => {}, [ApplicationContext]);
@@ -69,7 +74,7 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.search}
-            component={Search}
+            component={GetSearchScreen}
             options={{
               tabBarIcon: ({color, size}) => (
                 <>
@@ -95,7 +100,7 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.favorites}
-            component={Favorite}
+            component={GetFavScreen}
             options={{
               tabBarIcon: ({color, size}) => (
                 <>

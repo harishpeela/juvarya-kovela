@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  View,
-  SafeAreaView,
-  FlatList,
-  Text,
-  ActivityIndicator,
-  useColorScheme,
-} from 'react-native';
+import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -31,8 +24,6 @@ const Favorite = ({navigation}) => {
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
-      // data === undefined ? setfilteredArray([]) : '';
-      console.log('dats',data, templeList);
       setLoading(false);
       data?.map(a => {
         TempleDetails(a);
@@ -42,8 +33,8 @@ const Favorite = ({navigation}) => {
     }
   };
   const TempleDetails = async d => {
+    setLoading(true);
     try {
-      console.log('uuuuu',d);
       setfilteredArray([]);
       setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
@@ -76,13 +67,17 @@ const Favorite = ({navigation}) => {
   };
   const renderLoder = () => {
     return isLoading ? (
-      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
-        {' '}
+      <Text
+        style={{
+          alignSelf: 'center',
+          marginBottom: '5%',
+          color: colors.orangeColor,
+        }}>
         No Items to display
       </Text>
     ) : (
       <View>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+        <Loader size={'large'} color={colors.orangeColor} />
       </View>
     );
   };
@@ -95,7 +90,6 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
-  // console.log('filteredarray', filteredArray);
   return (
     <SafeAreaView
       style={{
@@ -151,8 +145,8 @@ const Favorite = ({navigation}) => {
                 onEndReached={() => loadMoreItems()}
                 onEndReachedThreshold={0.5}
                 decelerationRate={0.5}
-                keyExtractor={(item, index) => item?.id}
-                renderItem={({item, index}) => {
+                keyExtractor={item => item?.id}
+                renderItem={({item}) => {
                   if (item?.name) {
                     return (
                       <FavTempleListCard

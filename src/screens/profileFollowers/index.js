@@ -16,7 +16,7 @@ const FollowersMembership = ({route, navigation}) => {
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
-      console.log('res of followes', result?.data);
+      // console.log('res of followes', result?.data);
       if (result.status === 200) {
         setLoader(false);
         setFollowersList(result?.data?.data);

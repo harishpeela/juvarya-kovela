@@ -64,7 +64,7 @@ const Signup = ({navigation}) => {
         data: {emailAddress, otp},
       } = response || {};
       let result = await loginUser1(signupPayload);
-      console.log('result of login in signuo', result);
+      // console.log('result of login in signuo', result);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);

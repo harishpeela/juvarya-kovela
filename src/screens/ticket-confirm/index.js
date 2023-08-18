@@ -2,6 +2,7 @@
 import {View, Text, useColorScheme} from 'react-native';
 import React from 'react';
 import {BackgroundImage} from '../../components';
+import { colors } from '../../common';
 const TicketConfirmation = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -14,7 +15,7 @@ const TicketConfirmation = () => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <BackgroundImage />
-      <Text style={{color: 'black'}}>
+      <Text style={{color: colors.orangeColor}}>
         Ticket Confirmation is Coming soon ...!
       </Text>
     </View>
