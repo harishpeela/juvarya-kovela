@@ -57,7 +57,11 @@ const MySavedPosts = ({navigation}) => {
               keyboardShouldPersistTaps="handled"
               keyExtractor={(item, index) => item?.id}
               renderItem={({item, index}) => (
-                <SaveFeedComp post={item} likes={item?.feedDTO?.likesCount} />
+                <SaveFeedComp
+                  post={item}
+                  likes={item?.feedDTO?.likesCount}
+                  isLikeTrue={item?.feedDTO?.like}
+                />
               )}
             />
           ) : (

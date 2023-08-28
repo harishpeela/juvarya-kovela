@@ -77,7 +77,6 @@ const UserFeedScreen = ({navigation}) => {
       </View>
     ) : noData ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
-        {' '}
         No Items to display
       </Text>
     ) : null;
@@ -95,6 +94,7 @@ const UserFeedScreen = ({navigation}) => {
       listFeed(apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
+  // console.log('homefeed', homeFeedList);
   return (
     <View
       style={{
@@ -164,13 +164,11 @@ const UserFeedScreen = ({navigation}) => {
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>
-        ) : (        
+        ) : (
           <View>
             <Loader size={30} color={colors.orangeColor} />
           </View>
         )}
-       
-      
       </>
     </View>
   );

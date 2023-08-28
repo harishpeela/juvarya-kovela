@@ -90,6 +90,7 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
+  console.log('filtered', filteredArray);
   return (
     <SafeAreaView
       style={{

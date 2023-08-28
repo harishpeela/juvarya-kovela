@@ -12,7 +12,7 @@ import {
   useColorScheme,
 } from 'react-native';
 import {styles} from './styles';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
 import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
 
@@ -57,7 +57,7 @@ const SeeAll = ({route, navigation}) => {
       PopularSeeAllTemples(apiPageNo, 20);
     }
   }, []);
-
+  const onSelect = data => {};
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <BackgroundImage />
@@ -80,7 +80,14 @@ const SeeAll = ({route, navigation}) => {
               data={popTemples}
               keyExtractor={({item, index}) => index}
               renderItem={({item, index}) => (
-                <TouchableOpacity style={styles.card}>
+                <TouchableOpacity
+                  style={styles.card}
+                  onPress={() =>
+                    navigation.navigate(allTexts.screenNames.viewProfile, {
+                      data: item,
+                      onSelect: onSelect,
+                    })
+                  }>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image
                       source={{uri: item.logo}}

@@ -6,7 +6,7 @@ import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import {likeOrUnlikeFeed} from '../../utils/api';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
@@ -57,10 +57,10 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
       />
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
-          <Icon
-            name={isLiked ? 'heart' : 'heart-o'}
-            size={20}
-            color={isLiked ? colors.orangeColor : 'black'}
+        <HandsIcon
+            name={isLiked ? 'hands-pray' : 'hands-pray'}
+            size={24}
+            color={isLiked ? colors.orangeColor : 'gray'}
           />
         </TouchableOpacity>
       </View>

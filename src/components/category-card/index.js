@@ -9,7 +9,6 @@ import {
   Animated,
   useColorScheme,
 } from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {colors} from '../../common';
 import React, {useState, useEffect, useRef} from 'react';
 import {styles} from './styles';
@@ -20,41 +19,32 @@ import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
 const {width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
-import {Posts} from '../../screens';
 import {Loader} from '../loader';
-import {useTranslation} from 'react-i18next';
-import Snackbar from 'react-native-snackbar';
+import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import '../../../languages/language';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
   likes,
   id,
-  saveOnPress,
   onPressTitle,
-  onDotsPress,
   saveid,
   onSharePress,
-  mediaData,
-  loader,
   savedFeed,
 }) => {
-  // console.log('likes count=========>', likes);
-  const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
-  const [items, setItems] = useState([
-    {label: 'English', value: 'en'},
-    {label: 'Telugu', value: 'tel'},
-  ]);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
+    console.log('count of likes', likeCount);
     if (isLiked) {
       setLikeCount(likeCount - 1);
+      console.log('like count change to -', likeCount);
     } else {
       setLikeCount(likeCount + 1);
+      console.log('like count changed to +', likeCount);
     }
     setIsLiked(!isLiked);
 
@@ -65,7 +55,8 @@ export const UserFeedCompList = ({
     try {
       console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      if (result && result.status === 200 && result.data.statusCode === 200) {
+      console.log('likes count', result.data);
+      if (result && result.status === 200) {
         return;
       }
       // console.log(result);
@@ -94,10 +85,11 @@ export const UserFeedCompList = ({
   const likesCount = async () => {
     try {
       let result = await NewLikesCount(id);
+      // console.log('counting', result.data);
       if (result) {
         setLikeCount(result?.data?.count);
       } else {
-        setLikeCount(0);
+        setLikeCount(likes);
       }
     } catch (error) {
       console.log('error in likes count', error);
@@ -191,10 +183,10 @@ export const UserFeedCompList = ({
       </View>
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
-          <Icon
-            name={isLiked ? 'heart' : 'heart-o'}
-            size={20}
-            color={isLiked ? colors.orangeColor : 'black'}
+          <HandsIcon
+            name={isLiked ? 'hands-pray' : 'hands-pray'}
+            size={24}
+            color={isLiked ? colors.orangeColor : 'gray'}
           />
         </TouchableOpacity>
         {post?.mediaList?.length > 1 && (
@@ -223,7 +215,7 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount || 0} Likes</Text>
+        <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text>
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}
