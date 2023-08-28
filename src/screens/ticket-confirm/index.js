@@ -2,7 +2,7 @@
 import {View, Text, useColorScheme} from 'react-native';
 import React from 'react';
 import {BackgroundImage} from '../../components';
-import { colors } from '../../common';
+import {colors} from '../../common';
 const TicketConfirmation = () => {
   const isDarkMode = useColorScheme() === 'dark';
 

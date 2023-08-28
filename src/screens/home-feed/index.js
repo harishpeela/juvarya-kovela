@@ -76,7 +76,12 @@ const UserFeedScreen = ({navigation}) => {
         <Loader size={'large'} color={colors.orangeColor} />
       </View>
     ) : noData ? (
-      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
+      <Text
+        style={{
+          alignSelf: 'center',
+          marginBottom: '5%',
+          color: colors.orangeColor,
+        }}>
         {' '}
         No Items to display
       </Text>
@@ -164,13 +169,11 @@ const UserFeedScreen = ({navigation}) => {
           <View style={styles.nodataView}>
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>
-        ) : (        
+        ) : (
           <View>
             <Loader size={30} color={colors.orangeColor} />
           </View>
         )}
-       
-      
       </>
     </View>
   );

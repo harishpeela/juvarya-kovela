@@ -21,7 +21,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   const GetSearchScreen = () => <Search navigation={navigation} />;
-  const GetFavScreen = () => <Favorite navigation={navigation} />;
+  const GetFavoriteScreen = () => <Favorite navigation={navigation} />;
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
   );
@@ -100,7 +100,8 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.favorites}
-            component={GetFavScreen}
+            component={GetFavoriteScreen}
+
             options={{
               tabBarIcon: ({color, size}) => (
                 <>

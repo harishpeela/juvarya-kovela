@@ -1,7 +1,12 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  useColorScheme,
+} from 'react-native';
 import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
@@ -33,6 +38,7 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
       console.log(error);
     }
   };
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -65,7 +71,9 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
         </TouchableOpacity>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount} Likes</Text>
+        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+          {likeCount} Likes
+        </Text>
       </View>
     </View>
   );

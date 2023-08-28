@@ -39,16 +39,12 @@ export const UserFeedCompList = ({
   loader,
   savedFeed,
 }) => {
-  // console.log('likes count=========>', likes);
+  console.log('likes count=========>', likes);
   const {t} = useTranslation();
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
-  const [items, setItems] = useState([
-    {label: 'English', value: 'en'},
-    {label: 'Telugu', value: 'tel'},
-  ]);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
     if (isLiked) {
@@ -223,13 +219,15 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount || 0} Likes</Text>
+        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+          {likeCount ? likeCount : 0} Likes
+        </Text>
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}
         {''}
         {''}{' '}
-        <Text style={{color: isDarkMode ? 'gray' : 'black'}}>
+        <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
           {post?.description}
         </Text>
       </Text>
