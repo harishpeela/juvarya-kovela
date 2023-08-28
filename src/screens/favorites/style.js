@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily, fontSize} from '../../common';
+import {colors, fontFamily} from '../../common';
 
 export const styles = StyleSheet.create({
   wrapper: {
@@ -9,11 +9,10 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   noAvailable: {
-    color: colors.black,
+    color: colors.orangeColor,
     fontFamily: fontFamily.popinBold,
   },
   searchbarContainer: {
-    // borderWidth: 1,
     margin: 5,
     flexDirection: 'row',
     alignItems: 'center',

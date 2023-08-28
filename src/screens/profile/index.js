@@ -138,6 +138,7 @@ const Profile = ({navigation}) => {
             fontWeight: '500',
             textTransform: 'capitalize',
             marginRight: '50%',
+            color: colors.orangeColor,
           }}>
           {t('account')}
         </Text>

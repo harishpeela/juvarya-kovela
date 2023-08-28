@@ -101,6 +101,7 @@ export default BottomTabBase = ({navigation}) => {
           <Tab.Screen
             name={allTexts.tabNames.favorites}
             component={GetFavoriteScreen}
+
             options={{
               tabBarIcon: ({color, size}) => (
                 <>

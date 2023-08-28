@@ -17,7 +17,7 @@ const ProfileMembership = ({route, navigation}) => {
     setaLoader(true);
     try {
       let result = await MemberShipDetails(id);
-      console.log('res', result?.data?.memberships);
+      // console.log('res', result?.data?.memberships);
       if (result) {
         setaLoader(false);
         setData(result?.data?.memberships);

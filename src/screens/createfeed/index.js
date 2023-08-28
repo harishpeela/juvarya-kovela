@@ -69,7 +69,6 @@ const CreateFeed = ({route, navigation}) => {
       .then(response => response.json())
       .then(result => {
         if (result?.message === 'Feed created') {
-          // navigation.navigate(allTexts.screenNames.home);
           Alert.alert('Success', `${result?.message}`, [
             {
               text: 'Ok',

@@ -30,7 +30,7 @@ export const styles = StyleSheet.create({
   emailText: {
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
-    color: colors.black,
+    color: colors.orangeColor,
     marginLeft: 9,
   },
 });

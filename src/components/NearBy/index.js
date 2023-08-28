@@ -24,7 +24,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples();
-      console.log('res', result?.data);
+      // console.log('res', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -57,7 +57,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const SearchPopTemp = async txt => {
     try {
       let result = await SearchPopularTemples(txt);
-      console.log('res', result);
+      // console.log('res', result);
       if (result?.status === 200) {
         setFilteredData(result?.data?.data);
       }

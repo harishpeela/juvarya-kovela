@@ -1,13 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  View,
-  SafeAreaView,
-  FlatList,
-  Text,
-  ActivityIndicator,
-  useColorScheme,
-} from 'react-native';
+import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -31,7 +24,6 @@ const Favorite = ({navigation}) => {
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
       let data = response?.data?.data;
-      // console.log('dats', data);
       setLoading(false);
       data?.map(a => {
         TempleDetails(a);
@@ -41,7 +33,10 @@ const Favorite = ({navigation}) => {
     }
   };
   const TempleDetails = async d => {
+    setLoading(true);
     try {
+      setfilteredArray([]);
+      setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
       if (result) {
         let templesArray = {...d, ...result?.data};
@@ -57,9 +52,9 @@ const Favorite = ({navigation}) => {
     }
   };
   const onSelect = data => {
-    // setIsLiked(data?.selected);
-    data?.selected !== ''
-      ? setfilteredArray(templeList.filter(obj => obj.id !== data?.selected))
+    getTemples(userDetails?.id, 0, 20);
+    data?.selected !== '' && templeList.length === 1
+      ? setfilteredArray([])
       : '';
   };
   useEffect(() => {}, [isFocused]);
@@ -78,12 +73,11 @@ const Favorite = ({navigation}) => {
           marginBottom: '5%',
           color: colors.orangeColor,
         }}>
-        {' '}
         No Items to display
       </Text>
     ) : (
       <View>
-        <ActivityIndicator size={'large'} color={colors.orangeColor} />
+        <Loader size={'large'} color={colors.orangeColor} />
       </View>
     );
   };
@@ -96,7 +90,6 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
-  // console.log('filteredarray', filteredArray);
   return (
     <SafeAreaView
       style={{
@@ -152,8 +145,8 @@ const Favorite = ({navigation}) => {
                 onEndReached={() => loadMoreItems()}
                 onEndReachedThreshold={0.5}
                 decelerationRate={0.5}
-                keyExtractor={(item, index) => item?.id}
-                renderItem={({item, index}) => {
+                keyExtractor={item => item?.id}
+                renderItem={({item}) => {
                   if (item?.name) {
                     return (
                       <FavTempleListCard
