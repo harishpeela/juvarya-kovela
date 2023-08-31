@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     justifyContent: 'space-between',
+    marginTop: '10%',
   },
   nomemship: {
     alignSelf: 'center',

@@ -38,16 +38,15 @@ export const UserFeedCompList = ({
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
-    console.log('count of likes', likeCount);
+    // console.log('count of likes', likeCount);
     if (isLiked) {
       setLikeCount(likeCount - 1);
-      console.log('like count change to -', likeCount);
+      // console.log('like count change to -', likeCount);
     } else {
       setLikeCount(likeCount + 1);
-      console.log('like count changed to +', likeCount);
+      // console.log('like count changed to +', likeCount);
     }
     setIsLiked(!isLiked);
-
     const payloadLike = {
       jtFeedId: id,
       like: !isLiked,
@@ -55,7 +54,7 @@ export const UserFeedCompList = ({
     try {
       console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      console.log('likes count', result.data);
+      // console.log('likes count', result.data);
       if (result && result.status === 200) {
         return;
       }

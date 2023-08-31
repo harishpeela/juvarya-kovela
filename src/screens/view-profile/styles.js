@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   footerContainer: {
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     paddingTop: 20,
     marginTop: '5%',
   },
@@ -89,4 +89,17 @@ export const styles = StyleSheet.create({
       },
     },
   },
+  titleHeader: {
+    fontSize: 16,
+    fontWeight: '500',
+    marginHorizontal: '25%',
+    alignSelf: 'center',
+    textTransform: 'capitalize',
+  },
+  eventsCard: {
+    borderWidth: 1,
+    padding: 20,
+    marginHorizontal: 10,
+    margin: 2,
+  }
 });

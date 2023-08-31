@@ -15,7 +15,7 @@ const Favorite = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState();
   const [seracherdText, setSeracherdText] = useState('');
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
@@ -43,7 +43,7 @@ const Favorite = ({navigation}) => {
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
-        setIsLoading(false);
+        setIsLoading(true);
       } else {
         setLoading(false);
       }
@@ -66,12 +66,13 @@ const Favorite = ({navigation}) => {
     );
   };
   const renderLoder = () => {
+    console.log('isload', isLoading);
     return isLoading ? (
       <Text
         style={{
           alignSelf: 'center',
           marginBottom: '5%',
-          color: colors.orangeColor,
+          color: colors.gray2,
         }}>
         No Items to display
       </Text>
@@ -90,7 +91,7 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
-  console.log('filtered', filteredArray);
+  // console.log('filtered', filteredArray);
   return (
     <SafeAreaView
       style={{

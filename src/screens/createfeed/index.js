@@ -72,7 +72,7 @@ const CreateFeed = ({route, navigation}) => {
           Alert.alert('Success', `${result?.message}`, [
             {
               text: 'Ok',
-              onPress: () => navigation.navigate(allTexts.screenNames.home),
+              onPress: () => navigation.navigate(allTexts.screenNames.userFeedScreen),
             },
           ]);
         } else {

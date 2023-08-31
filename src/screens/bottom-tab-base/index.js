@@ -1,11 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
-import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
-import {Loader} from '../../components';
 import {
   Favorite,
   Profile,
@@ -29,13 +27,14 @@ export default BottomTabBase = ({navigation}) => {
   );
   const GetFavList = () => {
     const {favoriteList} = useContext(ApplicationContext);
-    return favoriteList.length > 0 ? true : false;
+    // console.log('length', favoriteList?.length);
+    return favoriteList?.length > 0 ? true : false;
   };
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
-          GetFavList() ? allTexts.tabNames.search : allTexts.tabNames.home
+          GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
           // !homeFeedListData?.length
           //   ? allTexts.tabNames.search
           //   : allTexts.tabNames.home

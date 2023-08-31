@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   noAvailable: {
-    color: colors.orangeColor,
+    color: colors.black,
     fontFamily: fontFamily.popinBold,
   },
   searchbarContainer: {

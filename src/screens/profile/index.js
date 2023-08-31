@@ -33,8 +33,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
-  const {userDetails, setLoginDetails, loginDetails} =
-    useContext(ApplicationContext);
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   console.log('user', userDetails);
   const {t} = useTranslation();
   const {

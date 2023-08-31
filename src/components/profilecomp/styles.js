@@ -75,7 +75,6 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     paddingTop: 20,
-    marginLeft: 10,
     marginBottom: 10,
     borderBottomWidth: 0.2,
     item: {

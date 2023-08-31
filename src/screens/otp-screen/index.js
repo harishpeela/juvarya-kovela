@@ -133,6 +133,7 @@ const OTPScreen = ({navigation, route}) => {
         signinHandler();
       } else {
         console.log(result?.data?.message);
+        alert(result?.data?.message);
       }
     } catch (error) {
       console.log('5');

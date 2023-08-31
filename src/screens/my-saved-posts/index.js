@@ -65,8 +65,15 @@ const MySavedPosts = ({navigation}) => {
               )}
             />
           ) : (
-            <View style={{alignItems: 'center', marginTop: '65%'}}>
-              <Text> Yet Not saved any post ...!</Text>
+            <View
+              style={{
+                alignItems: 'center',
+                marginTop: '65%',
+              }}>
+              <Text style={{color: colors.orangeColor}}>
+                {' '}
+                Yet Not saved any post ...!
+              </Text>
             </View>
           )}
         </View>

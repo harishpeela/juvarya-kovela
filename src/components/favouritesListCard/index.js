@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
   },
   itemAdmin: {
-    color: colors.green2,
+    color: colors.orangeColor,
     fontSize: fontSize.tiny,
     fontFamily: fontFamily.popinMedium,
   },
   itemLocation: {
-    color: colors.green2,
+    color: colors.orangeColor,
     fontSize: fontSize.tiny,
     fontFamily: fontFamily.popinMedium,
   },
