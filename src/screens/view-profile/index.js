@@ -86,7 +86,6 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      // console.log('----------------------------------------------->', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -207,7 +206,6 @@ const ViewProfile = ({route, navigation}) => {
       setEventsData(result?.data?.events);
     }
   };
-  // console.log('resuky od evbhsg', eventsData);
   return (
     <View
       style={{
@@ -236,26 +234,31 @@ const ViewProfile = ({route, navigation}) => {
           </View>
           <View style={styles.firstTabView}>
             <ProfileImage profileImg={trfData} />
-            <PostsComp
-              itemDetails={postsCount}
-              onPress={() => setPosts(!posts)}
-            />
-            <FollowersComp
-              followCount={followCount}
-              onPressFollowers={() =>
-                navigation.navigate(allTexts.screenNames.followersmembership, {
-                  id: trfData?.jtProfile,
-                })
-              }
-            />
-            <CommunityComp
+            <View style={{flexDirection: 'row', marginLeft: '15%', flex: 1}}>
+              <PostsComp
+                itemDetails={postsCount}
+                onPress={() => setPosts(!posts)}
+              />
+              <FollowersComp
+                followCount={followCount}
+                onPressFollowers={() =>
+                  navigation.navigate(
+                    allTexts.screenNames.followersmembership,
+                    {
+                      id: trfData?.jtProfile,
+                    },
+                  )
+                }
+              />
+            </View>
+            {/* <CommunityComp
               itemCommunity={memberShip?.membershipCount}
               onPressmembership={() =>
                 navigation.navigate(allTexts.screenNames.profilemembership, {
                   id: trfData?.jtProfile,
                 })
               }
-            />
+            /> */}
           </View>
           <ProfileSeconTab nameData={trfData} title={trfData?.name} />
           <View style={styles.followtab}>

@@ -69,6 +69,7 @@ const Feeds = ({route, navigation}) => {
             likes={feedData?.likesCount}
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
+            saveid={feedData?.id}
           />
           <ScrollView>
             <FlatList
@@ -82,6 +83,8 @@ const Feeds = ({route, navigation}) => {
                     likes={item?.likesCount}
                     isLikeTrue={item?.like}
                     savedFeed={item?.savedFeed}
+                    saveid={item?.id}
+
                   />
                 )
               }

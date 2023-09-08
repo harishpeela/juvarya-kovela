@@ -91,6 +91,7 @@ const App = () => {
       addMembershipDetails,
       seeall,
       feeds,
+      home,
     },
   } = allTexts;
 
@@ -219,6 +220,13 @@ const App = () => {
         />
         <Stack.Screen
           name={userFeedScreen}
+          component={UserFeedScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={home}
           component={UserFeedScreen}
           options={{
             headerShown: false,

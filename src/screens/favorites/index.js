@@ -15,7 +15,7 @@ const Favorite = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
@@ -43,7 +43,6 @@ const Favorite = ({navigation}) => {
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
-        setIsLoading(true);
       } else {
         setLoading(false);
       }
@@ -107,9 +106,9 @@ const Favorite = ({navigation}) => {
           txt={'Following'}
         />
       </View>
-      <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
+      {/* <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
         {filteredArray?.length} Following{' '}
-      </Text>
+      </Text> */}
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
           <SearchBar
@@ -143,8 +142,8 @@ const Favorite = ({navigation}) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
-                ListFooterComponent={renderLoder}
-                onEndReached={() => loadMoreItems()}
+                // ListFooterComponent={renderLoder}
+                // onEndReached={() => loadMoreItems()}
                 onEndReachedThreshold={0.5}
                 decelerationRate={0.5}
                 keyExtractor={item => item?.id}

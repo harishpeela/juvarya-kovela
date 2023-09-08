@@ -27,7 +27,6 @@ export default BottomTabBase = ({navigation}) => {
   );
   const GetFavList = () => {
     const {favoriteList} = useContext(ApplicationContext);
-    // console.log('length', favoriteList?.length);
     return favoriteList?.length > 0 ? true : false;
   };
   return (

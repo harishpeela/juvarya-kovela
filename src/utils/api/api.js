@@ -168,7 +168,6 @@ export const axiosMultiPartFormData = axios.create({
 axiosMultiPartFormData.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
-  console.log('Sending req with this token', token || clientToken.clientToken);
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
 });
@@ -181,7 +180,6 @@ axiousInstance.interceptors.response.use(
       config.sent = true;
       let token = await getAuthTokenDetails();
       if (token) {
-        console.log('Unauthorized eror');
         await removeLoginSessionDetails();
         saveUserDetails('');
         RNRestart.Restart();

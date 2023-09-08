@@ -10,12 +10,16 @@ import {
   useColorScheme,
 } from 'react-native';
 import {colors} from '../../common';
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useMemo} from 'react';
 import {styles} from './styles';
 import {NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {NewLikeOrUnlikeFeed, NewLikesCount} from '../../utils/api';
+import {
+  NewLikeOrUnlikeFeed,
+  NewLikesCount,
+  DeleteSavedFeed,
+} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
 const {width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
@@ -38,13 +42,10 @@ export const UserFeedCompList = ({
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
-    // console.log('count of likes', likeCount);
     if (isLiked) {
-      setLikeCount(likeCount - 1);
-      // console.log('like count change to -', likeCount);
+      setLikeCount(likeCount === null ? 0 : likeCount - 1);
     } else {
-      setLikeCount(likeCount + 1);
-      // console.log('like count changed to +', likeCount);
+      setLikeCount(likeCount === null ? 0 : likeCount + 1);
     }
     setIsLiked(!isLiked);
     const payloadLike = {
@@ -52,18 +53,22 @@ export const UserFeedCompList = ({
       like: !isLiked,
     };
     try {
-      console.log('payloadLike', payloadLike);
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      // console.log('likes count', result.data);
       if (result && result.status === 200) {
+        setLikeCount(result?.data?.totalCount);
         return;
       }
-      // console.log(result);
     } catch (error) {
       console.log(error);
     }
   };
+  useMemo(() => {
+    if (likes !== null) {
+      setLikeCount(likes);
+    }
+  }, [likes]);
   const FeedStatus = () => {
+    console.log('saved');
     let status = !saveFeed;
     if (status) {
       SaveFeedApi();
@@ -72,6 +77,7 @@ export const UserFeedCompList = ({
         ToastAndroid.SHORT,
       );
     } else {
+      DeleteFeed();
       ToastAndroid.show('మీరు ఫీడ్‌ని సేవ్ చేయలేదు', ToastAndroid.SHORT);
     }
   };
@@ -79,7 +85,14 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
+    console.log('feedid', saveid);
     let result = await NewSaveFeed(payload);
+    console.log('res', result?.data);
+  };
+  const DeleteFeed = async () => {
+    console.log('feedid', id);
+    let result = await DeleteSavedFeed(id);
+    console.log('result of delete feed', result?.data);
   };
   const likesCount = async () => {
     try {
@@ -183,7 +196,7 @@ export const UserFeedCompList = ({
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
           <HandsIcon
-            name={isLiked ? 'hands-pray' : 'hands-pray'}
+            name={'hands-pray'}
             size={24}
             color={isLiked ? colors.orangeColor : 'gray'}
           />
@@ -220,7 +233,7 @@ export const UserFeedCompList = ({
         {post?.jtProfileDTO?.name}
         {''}
         {''}{' '}
-        <Text style={{color: isDarkMode ? 'gray' : 'black'}}>
+        <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
           {post?.description}
         </Text>
       </Text>

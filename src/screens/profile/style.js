@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: '5%',
+    marginTop: '10%',
+    marginLeft: '5%',
   },
   profileContainer: {
     marginTop: 20,

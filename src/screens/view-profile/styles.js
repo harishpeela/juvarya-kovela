@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
   firstTabView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
   },
   noposttext: {
     fontSize: 16,
