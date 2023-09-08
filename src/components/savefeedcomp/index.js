@@ -134,19 +134,6 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
           }}
         />
       </View>
-      <View style={styles.postHeader}>
-        <Text style={styles.username}>
-          {post?.jtProfileDTO?.name}
-          {''}
-          {''}{' '}
-          <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
-            {post?.description}
-          </Text>
-        </Text>
-        {/* <TouchableOpacity onPress={onPressTitle}>
-          <Text style={styles.username}>{post?.feedDTO?.description}</Text>
-        </TouchableOpacity> */}
-      </View>
       <View style={styles.postFooter}>
         <TouchableOpacity onPress={() => likeUnLikeHandler()}>
           <HandsIcon
@@ -167,6 +154,19 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
       </View>
       <View style={{paddingHorizontal: 15}}>
         <Text style={styles.likes}>{likeCount} Likes</Text>
+      </View>
+      <View style={styles.postHeader}>
+        <Text style={styles.username}>
+          {post?.jtProfileDTO?.name}
+          {''}
+          {''}{' '}
+          <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
+            {post?.description}
+          </Text>
+        </Text>
+        {/* <TouchableOpacity onPress={onPressTitle}>
+          <Text style={styles.username}>{post?.feedDTO?.description}</Text>
+        </TouchableOpacity> */}
       </View>
     </View>
   );
