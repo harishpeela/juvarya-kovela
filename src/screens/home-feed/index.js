@@ -49,8 +49,8 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async (pgNo, pgSize) => {
-    setIsLoading(true);
     setloader(true);
+    // setIsLoading(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
       // console.log('result of homefeedlist', result?.data);
@@ -85,15 +85,20 @@ const UserFeedScreen = ({navigation}) => {
     // setIsLiked(data?.selected);
   };
   const loadMoreItems = () => {
+    // setIsLoading(true);
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
   };
-  useEffect(() => {}, [userDetails]);
   useEffect(() => {
+    console.log('feed 2');
+  }, [userDetails]);
+  useEffect(() => {
+    console.log('feed 3');
     if (apiPageNo >= 0) {
       listFeed(apiPageNo, apiPageSize);
     }
   }, [apiPageNo]);
+  console.log('feed 1');
   // console.log('homefeed', homeFeedList);
   return (
     <View
@@ -130,7 +135,7 @@ const UserFeedScreen = ({navigation}) => {
               <RefreshControl
                 refreshing={refrsh}
                 onRefresh={() => {
-                  // setRefrsh(true);
+                  setRefrsh(true);
                   listFeed(apiPageNo, apiPageSize);
                 }}
               />

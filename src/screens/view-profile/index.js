@@ -43,12 +43,12 @@ const ViewProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -155,9 +155,12 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
+    // console.log('id===========<>', id);
     try {
       let result = await GetPosts(id, 0, 40);
+      // console.log('posytss ==>==============>', result?.data);
       let postsData = result?.data?.data;
+      console.log('posytss ==>', postsData);
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));

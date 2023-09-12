@@ -426,7 +426,6 @@ const App = () => {
   console.log('fav list length', favoriteList?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
-      // getAndSaveUserInfo();
       ApiData();
       getFollowedTempleList();
     }

@@ -29,14 +29,15 @@ export default BottomTabBase = ({navigation}) => {
     const {favoriteList} = useContext(ApplicationContext);
     return favoriteList?.length > 0 ? true : false;
   };
+  const {favoriteList} = useContext(ApplicationContext);
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
-          GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
-          // !homeFeedListData?.length
-          //   ? allTexts.tabNames.search
-          //   : allTexts.tabNames.home
+          // GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
+          !favoriteList?.length
+            ? allTexts.tabNames.search
+            : allTexts.tabNames.home
         }
         tabBarOptions={{
           activeTintColor: colors.orangeColor,

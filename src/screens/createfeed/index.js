@@ -69,7 +69,7 @@ const CreateFeed = ({route, navigation}) => {
       .then(response => response.json())
       .then(result => {
         if (result?.message === 'Feed created') {
-          Alert.alert('Success', `${result?.message}`, [
+          Alert.alert('Success', `${result?.message} successfully`, [
             {
               text: 'Ok',
               onPress: () =>

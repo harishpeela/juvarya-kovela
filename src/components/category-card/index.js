@@ -42,21 +42,25 @@ export const UserFeedCompList = ({
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
   const likeUnLikeHandler = async () => {
-    if (isLiked) {
-      setLikeCount(likeCount === null ? 0 : likeCount - 1);
-    } else {
-      setLikeCount(likeCount === null ? 0 : likeCount + 1);
-    }
+    // console.log('likes', likes);
+    // console.log('likes count', likeCount);
+    // if (isLiked) {
+    //   setLikeCount(likeCount - 1);
+    // } else {
+    //   setLikeCount(likeCount + 1);
+    // }
     setIsLiked(!isLiked);
     const payloadLike = {
       jtFeedId: id,
       like: !isLiked,
     };
+    // console.log('payload of likes', payloadLike);
     try {
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      if (result && result.status === 200) {
+      // console.log('result of likes count', result?.data);
+      if (result) {
         setLikeCount(result?.data?.totalCount);
-        return;
+        // return;
       }
     } catch (error) {
       console.log(error);
@@ -68,7 +72,6 @@ export const UserFeedCompList = ({
     }
   }, [likes]);
   const FeedStatus = () => {
-    console.log('saved');
     let status = !saveFeed;
     if (status) {
       SaveFeedApi();
@@ -97,11 +100,9 @@ export const UserFeedCompList = ({
   const likesCount = async () => {
     try {
       let result = await NewLikesCount(id);
-      // console.log('counting', result.data);
+      console.log('counting', result.data);
       if (result) {
         setLikeCount(result?.data?.count);
-      } else {
-        setLikeCount(likes);
       }
     } catch (error) {
       console.log('error in likes count', error);
@@ -132,9 +133,9 @@ export const UserFeedCompList = ({
     itemVisiblePercentThreshold: 50,
   }).current;
 
-  useEffect(() => {
-    likesCount();
-  }, []);
+  // useEffect(() => {
+  //   // likesCount();
+  // }, []);
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -227,7 +228,8 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text>
+        {/* <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text> */}
+        <Text style={styles.likes}>{likeCount} Likes</Text>
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}
