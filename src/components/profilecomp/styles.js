@@ -94,7 +94,7 @@ export const styles = StyleSheet.create({
 export const style = (bgColor, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
-      width: width || '25%',
+      width: width || '27%',
       padding: paddidng || 15,
       borderRadius: radius || 10,
       backgroundColor: bgColor || colors.blue,

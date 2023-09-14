@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {
   View,
   TouchableOpacity,
@@ -85,20 +86,25 @@ const UserFeedScreen = ({navigation}) => {
     // setIsLiked(data?.selected);
   };
   const loadMoreItems = () => {
-    // setIsLoading(true);
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
   };
-  useEffect(() => {
-    console.log('feed 2');
-  }, [userDetails]);
-  useEffect(() => {
-    console.log('feed 3');
-    if (apiPageNo >= 0) {
-      listFeed(apiPageNo, apiPageSize);
-    }
-  }, [apiPageNo]);
-  console.log('feed 1');
+  useFocusEffect(
+    React.useCallback(() => {
+      if (apiPageNo >= 0) {
+        listFeed(apiPageNo, apiPageSize);
+      }
+      return () => {
+        // alert('Screen was unfocused');
+      };
+    }, []),
+  );
+  // useEffect(() => {}, [userDetails]);
+  // useEffect(() => {
+  //   if (apiPageNo >= 0) {
+  //     listFeed(apiPageNo, apiPageSize);
+  //   }
+  // }, [apiPageNo]);
   // console.log('homefeed', homeFeedList);
   return (
     <View
