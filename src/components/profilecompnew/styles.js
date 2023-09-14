@@ -3,6 +3,7 @@ export const styles = StyleSheet.create({
   followersView: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: '30%',
   },
   voidButton: {
     paddingVertical: 10,
@@ -11,7 +12,7 @@ export const styles = StyleSheet.create({
     borderColor: '#585858',
     borderWidth: 1,
     marginRight: 7,
-    width: 90,
+    width: 100,
     alignItems: 'center',
     text: {
       fontSize: 13,

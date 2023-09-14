@@ -11,6 +11,7 @@ import {
   BottomTabBase,
   OTPScreen,
   HomeCardDetails,
+  UserFeedScreen,
   UpdatePassword,
   MyTamples,
   Service,
@@ -24,7 +25,6 @@ import {
   AddEvents,
   NearByProducts,
   NearByServices,
-  UserFeedScreen,
   TempleProfile,
   ViewProfile,
   Menu,
@@ -90,6 +90,7 @@ const App = () => {
       addMembershipDetails,
       seeall,
       feeds,
+      home,
     },
   } = allTexts;
 
@@ -218,6 +219,13 @@ const App = () => {
         />
         <Stack.Screen
           name={userFeedScreen}
+          component={UserFeedScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={home}
           component={UserFeedScreen}
           options={{
             headerShown: false,
@@ -375,7 +383,6 @@ const App = () => {
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
-    console.log('auth token', authDetails);
     setLoginDetails(authDetails);
   };
 
@@ -409,23 +416,18 @@ const App = () => {
         } = response;
         // console.log('feedlist', jtFeeds);
         getHomeFeedListData(jtFeeds);
+        setFavoriteList(jtFeeds);
       }
     } catch (error) {
       console.log(error);
     }
   };
+  console.log('fav list length', favoriteList?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
-      // getAndSaveUserInfo();
       ApiData();
       getFollowedTempleList();
     }
-    // console.log(
-    //   'userdetails',
-    //   userDetails,
-    //   'logindetails ======>',
-    //   loginDetails,
-    // );
   }, [loginDetails]);
 
   return (

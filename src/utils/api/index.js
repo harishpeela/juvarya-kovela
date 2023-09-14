@@ -12,6 +12,7 @@ import {
   axiosNewDataSave,
   axiosMultiPartFormDataMem,
   axiousInstanceNew1,
+  axiosEventsData1,
 } from './api';
 
 const endpoints = {
@@ -36,6 +37,8 @@ const endpoints = {
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
+  EVENTS_LIST: 'jtevent/list',
+  DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
@@ -185,6 +188,17 @@ export const getTempledetailsWithId = async id => {
     console.log(error);
   }
 };
+export const DeleteSavedFeed = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.delete(
+      `${endpoints.DELETE_SAVE_FEED}=${id}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const GetsearchPopularTemples = async name => {
   try {
     let result = await axiosNewData.get(
@@ -199,6 +213,16 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}&page=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const EventList = async (pgno, pgSize) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {

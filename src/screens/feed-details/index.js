@@ -19,7 +19,7 @@ const Feeds = ({route, navigation}) => {
   const feedDetails = async () => {
     try {
       let result = await Feed(itemDetails.id);
-      //   console.log('feed', result);
+      // console.log('feed', result?.data?.like);
       if (result) {
         setFeedData(result?.data);
       }
@@ -31,6 +31,7 @@ const Feeds = ({route, navigation}) => {
     try {
       let result = await GetPosts(itemDetails?.jtProfile, 0, 60);
       let Data = result.data.data;
+      // console.log('data', Data);
       if (Data) {
         let fil = Data.filter(item => item.mediaList);
         let arey = await removeObjectWithId(fil, itemDetails.id);
@@ -51,8 +52,6 @@ const Feeds = ({route, navigation}) => {
     feedDetails();
     tempProfilefeeddetails();
   }, [itemDetails]);
-  console.log(feedData, '=============>');
-  console.log('posts', postsData);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -69,6 +68,7 @@ const Feeds = ({route, navigation}) => {
             likes={feedData?.likesCount}
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
+            saveid={feedData?.id}
           />
           <ScrollView>
             <FlatList
@@ -82,6 +82,7 @@ const Feeds = ({route, navigation}) => {
                     likes={item?.likesCount}
                     isLikeTrue={item?.like}
                     savedFeed={item?.savedFeed}
+                    saveid={item?.id}
                   />
                 )
               }

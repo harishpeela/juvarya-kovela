@@ -15,6 +15,7 @@ import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
+import services from 'react-native-vector-icons/AntDesign';
 import {allTexts} from '../../common';
 import {Data} from '../home-feed/formateDetails';
 import {
@@ -23,6 +24,7 @@ import {
   NewFollowCount,
   GetPosts,
   MemberShipCount,
+  EventList,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -42,12 +44,12 @@ const ViewProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -60,6 +62,8 @@ const ViewProfile = ({route, navigation}) => {
   const [posts, setPosts] = useState(false);
   const [memberShip, setMemberShip] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
+  const [eventsLoader, setEventsLoader] = useState(false);
+  const [eventsData, setEventsData] = useState();
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -83,7 +87,6 @@ const ViewProfile = ({route, navigation}) => {
   useEffect(() => {
     let result = Data(data);
     if (result) {
-      // console.log('----------------------------------------------->', result);
       setTrfData(result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
@@ -92,7 +95,6 @@ const ViewProfile = ({route, navigation}) => {
         followingCount(result?.jtProfile);
         MemberShip(result?.jtProfile);
       } else {
-        console.log('nope');
       }
     } else {
       setTrfData();
@@ -154,8 +156,9 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
+    setloader(true);
     try {
-      let result = await GetPosts(id, 0, 40);
+      let result = await GetPosts(id, 0, 100);
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
@@ -177,7 +180,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
-  console.log('trfdata,', trfData);
+  // console.log('trfdata,', trfData);
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
@@ -194,7 +197,17 @@ const ViewProfile = ({route, navigation}) => {
       console.log('error in temple role api', error);
     }
   };
-  useEffect(() => {}, [route]);
+  useEffect(() => {
+    EventsList();
+  }, [route]);
+  const EventsList = async () => {
+    setEventsLoader(true);
+    let result = await EventList(0, 100);
+    if (result.status === 200) {
+      setEventsLoader(false);
+      setEventsData(result?.data?.events);
+    }
+  };
   return (
     <View
       style={{
@@ -207,7 +220,6 @@ const ViewProfile = ({route, navigation}) => {
           <View style={styles.header}>
             <TouchableOpacity
               onPress={() => {
-                console.log('route', route);
                 navigation.goBack();
                 route?.params?.onSelect({
                   selected: isFollow,
@@ -217,14 +229,7 @@ const ViewProfile = ({route, navigation}) => {
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
             </TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: '500',
-                marginHorizontal: '25%',
-                alignSelf: 'center',
-                textTransform: 'capitalize',
-              }}>
+            <Text style={styles.titleHeader}>
               {trfData?.name?.length < 15
                 ? `${trfData?.name}`
                 : `${trfData?.name?.substring(0, 15)}...`}
@@ -232,26 +237,31 @@ const ViewProfile = ({route, navigation}) => {
           </View>
           <View style={styles.firstTabView}>
             <ProfileImage profileImg={trfData} />
-            <PostsComp
-              itemDetails={postsCount}
-              onPress={() => setPosts(!posts)}
-            />
-            <FollowersComp
-              followCount={followCount}
-              onPressFollowers={() =>
-                navigation.navigate(allTexts.screenNames.followersmembership, {
-                  id: trfData?.jtProfile,
-                })
-              }
-            />
-            <CommunityComp
+            <View style={{flexDirection: 'row', marginLeft: '15%', flex: 1}}>
+              <PostsComp
+                itemDetails={postsCount}
+                onPress={() => setPosts(!posts)}
+              />
+              <FollowersComp
+                followCount={followCount}
+                onPressFollowers={() =>
+                  navigation.navigate(
+                    allTexts.screenNames.followersmembership,
+                    {
+                      id: trfData?.jtProfile,
+                    },
+                  )
+                }
+              />
+            </View>
+            {/* <CommunityComp
               itemCommunity={memberShip?.membershipCount}
               onPressmembership={() =>
                 navigation.navigate(allTexts.screenNames.profilemembership, {
                   id: trfData?.jtProfile,
                 })
               }
-            />
+            /> */}
           </View>
           <ProfileSeconTab nameData={trfData} title={trfData?.name} />
           <View style={styles.followtab}>
@@ -315,6 +325,46 @@ const ViewProfile = ({route, navigation}) => {
                         }}
                       />
                     ) : null}
+                  </TouchableOpacity>
+                )}
+              />
+            )}
+          </ScrollView>
+        )}
+        {currentIndex === 2 && (
+          <View>
+            <Feather name="camera-off" size={40} style={styles.noPosts} />
+            <Text style={styles.noPosts.text}>No Reels Yet</Text>
+          </View>
+        )}
+        {currentIndex === 3 && (
+          <View>
+            <Feather name="camera-off" size={40} style={styles.noPosts} />
+            <Text style={styles.noPosts.text}>No Services Yet</Text>
+          </View>
+        )}
+        {currentIndex === 4 && (
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.contentDisplay}>
+            {eventsLoader && (
+              <View style={{flex: 1}}>
+                <Loader color={colors.orangeColor} size={30} />
+              </View>
+            )}
+            {!eventsData?.length > 0 ? (
+              <View>
+                <Feather name="camera-off" size={40} style={styles.noPosts} />
+                <Text style={styles.noPosts.text}>No Events Yet</Text>
+              </View>
+            ) : (
+              <FlatList
+                data={eventsData}
+                keyExtractor={({item, index}) => index}
+                renderItem={({item, index}) => (
+                  <TouchableOpacity style={styles.eventsCard}>
+                    <Text> Name: {item?.name}</Text>
+                    {/* <Text> Data: {item?.date}</Text> */}
                   </TouchableOpacity>
                 )}
               />

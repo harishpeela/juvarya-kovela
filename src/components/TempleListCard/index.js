@@ -8,7 +8,7 @@ import {
   View,
   Text,
 } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {allTexts} from '../../common';
 import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -61,11 +61,19 @@ export const TempleListCard = ({
       let results = await FollowUnFollow(payload);
       console.log('77777777777', results?.data);
       if (results && results.status === 200) {
-        // setIsLiked(!isLiked);
+        setIsLiked(!isLiked);
+        console.log('isfollow', isLiked);
+        // ToastAndroid.show(
+        //   `Successfully you are${results?.data?.message.replace(
+        //     'Success:',
+        //     '',
+        //   )} temple!`,
         ToastAndroid.show(
-          `Successfully you are${
-            !isFollow ? ' following' : ' unFollowing'
-          } temple!`,
+          `మీరు విజయవంతంగా ఆలయాన్ని ${
+            results?.data?.message === 'Success: following'
+              ? 'అనుసరిస్తున్నారు'
+              : 'అనుసరించడం లేదు'
+          }`,
           ToastAndroid.SHORT,
         );
       } else {

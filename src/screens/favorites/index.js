@@ -11,7 +11,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
+  const {userDetails, favoriteList} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,6 @@ const Favorite = ({navigation}) => {
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
-        setIsLoading(false);
       } else {
         setLoading(false);
       }
@@ -66,12 +65,13 @@ const Favorite = ({navigation}) => {
     );
   };
   const renderLoder = () => {
+    console.log('isload', isLoading);
     return isLoading ? (
       <Text
         style={{
           alignSelf: 'center',
           marginBottom: '5%',
-          color: colors.orangeColor,
+          color: colors.gray2,
         }}>
         No Items to display
       </Text>
@@ -90,6 +90,7 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
+  // console.log('filtered', filteredArray);
   return (
     <SafeAreaView
       style={{
@@ -105,9 +106,9 @@ const Favorite = ({navigation}) => {
           txt={'Following'}
         />
       </View>
-      <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
+      {/* <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
         {filteredArray?.length} Following{' '}
-      </Text>
+      </Text> */}
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
           <SearchBar
@@ -141,8 +142,8 @@ const Favorite = ({navigation}) => {
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
-                ListFooterComponent={renderLoder}
-                onEndReached={() => loadMoreItems()}
+                // ListFooterComponent={renderLoder}
+                // onEndReached={() => loadMoreItems()}
                 onEndReachedThreshold={0.5}
                 decelerationRate={0.5}
                 keyExtractor={item => item?.id}

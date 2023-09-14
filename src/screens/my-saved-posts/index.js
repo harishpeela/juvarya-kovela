@@ -4,7 +4,7 @@ import {View, Text, TouchableOpacity, FlatList} from 'react-native';
 import {BackgroundImage, Loader} from '../../components';
 import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
-import {getSavedPostsList} from '../../utils/api';
+import {getSavedPostsList, Feed} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
 import {colors} from '../../common';
 const MySavedPosts = ({navigation}) => {
@@ -14,10 +14,12 @@ const MySavedPosts = ({navigation}) => {
   const getPostsList = async () => {
     try {
       let result = await getSavedPostsList();
-      // console.log('res of saved posts', result?.data);
-      if (result.status === 200) {
+      if (result?.status === 200) {
         setLoading(false);
-        setfilteredArray(result?.data?.feeds);
+        // setfilteredArray(result?.data?.feeds);
+        result?.data?.feeds?.map(id => {
+          FeedDetails(id);
+        });
       } else {
         setLoading(false);
       }
@@ -25,8 +27,16 @@ const MySavedPosts = ({navigation}) => {
       console.log('error in api', error);
     }
   };
-
-  console.log('filter', filteredArray);
+  const FeedDetails = async id => {
+    let result = await Feed(id?.feedId);
+    let data = result?.data || {};
+    let savefFeeds = {...id, ...data};
+    if (result) {
+      setfilteredArray(array => [...array, savefFeeds]);
+    } else {
+    }
+  };
+  // console.log('filter', filteredArray);
 
   useEffect(() => {
     getPostsList();
@@ -61,6 +71,7 @@ const MySavedPosts = ({navigation}) => {
                   post={item}
                   likes={item?.feedDTO?.likesCount}
                   isLikeTrue={item?.feedDTO?.like}
+                  id={item?.id}
                 />
               )}
             />

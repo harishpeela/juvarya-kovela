@@ -14,8 +14,8 @@ export const resources = {
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: 'tel',
-  fallbackLng: 'tel',
+  lng: 'en',
+  fallbackLng: 'en',
   compatibilityJSON: 'v3',
   interpolation: {
     escapeValue: false,

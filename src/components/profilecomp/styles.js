@@ -75,7 +75,6 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     paddingTop: 20,
-    marginLeft: 10,
     marginBottom: 10,
     borderBottomWidth: 0.2,
     item: {
@@ -95,7 +94,7 @@ export const styles = StyleSheet.create({
 export const style = (bgColor, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
-      width: width || '25%',
+      width: width || '27%',
       padding: paddidng || 15,
       borderRadius: radius || 10,
       backgroundColor: bgColor || colors.blue,

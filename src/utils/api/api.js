@@ -15,6 +15,7 @@ export const BASEURL = 'http://20.235.89.214:9092/api/';
 export const BASE = 'http://20.235.89.214:9094/';
 export const POPULARURL = 'http://20.235.89.214:9096/';
 export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
+export const EVENTS_URL = 'http://20.235.89.214:9060/';
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
@@ -64,6 +65,18 @@ axiosMultiPartFormData1.interceptors.request.use(async function (config) {
   return config;
 });
 
+export const axiosEventsData1 = axios.create({
+  baseURL: EVENTS_URL,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosEventsData1.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
 export const axiosMultiPartFormDataMem = axios.create({
   baseURL: MEMBER_SHIP_URL,
   headers: {
@@ -155,7 +168,6 @@ export const axiosMultiPartFormData = axios.create({
 axiosMultiPartFormData.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
-  console.log('Sending req with this token', token || clientToken.clientToken);
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
 });
@@ -168,7 +180,6 @@ axiousInstance.interceptors.response.use(
       config.sent = true;
       let token = await getAuthTokenDetails();
       if (token) {
-        console.log('Unauthorized eror');
         await removeLoginSessionDetails();
         saveUserDetails('');
         RNRestart.Restart();

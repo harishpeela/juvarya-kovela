@@ -25,9 +25,11 @@ const MyTamples = ({navigation}) => {
     setLoading(true);
     try {
       let result = await getTempledetailsWithId(d?.id);
+      console.log('result of temples details', result?.data);
       let responce = await GetProfilePicture(d?.id);
       if (result) {
-        let templesArray = {...d, ...result?.data, ...responce?.data};
+        let templesArray = {...d, ...result?.data};
+        console?.log('res', templesArray);
         setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
@@ -41,7 +43,7 @@ const MyTamples = ({navigation}) => {
   const AdminTempleDetails = async () => {
     try {
       let result = await AdminTemples();
-      console.log('res of admin', result?.data);
+      // console.log('res of admin', result?.data);
       let adminData = result?.data;
       adminData.map(e => {
         TempleDetails(e);
@@ -55,7 +57,7 @@ const MyTamples = ({navigation}) => {
   };
   useEffect(() => {
     AdminTempleDetails();
-  }, [isFocused]);
+  }, []);
   const performFilter = value => {
     setfilteredArray(
       templeList.filter(item =>
@@ -63,7 +65,7 @@ const MyTamples = ({navigation}) => {
       ),
     );
   };
-
+  // console.log('mjhbmjhbmjhbmbmjhbmjbmn mn ', filteredArray);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
@@ -116,7 +118,7 @@ const MyTamples = ({navigation}) => {
                         name={item.name}
                         location={item.line1}
                         date={item.creationTime}
-                        img={item?.url}
+                        img={item?.logo}
                         onPress={() => {
                           navigation.navigate(
                             allTexts.screenNames.viewProfile,

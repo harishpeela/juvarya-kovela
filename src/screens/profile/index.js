@@ -33,8 +33,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
-  const {userDetails, setLoginDetails, loginDetails} =
-    useContext(ApplicationContext);
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   console.log('user', userDetails);
   const {t} = useTranslation();
   const {
@@ -129,7 +128,7 @@ const Profile = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+          <Feather name="arrow-left-circle" color={'#FFA001'} size={34} />
         </TouchableOpacity>
         <Text
           // numberOfLines={1}
@@ -137,19 +136,19 @@ const Profile = ({navigation}) => {
             fontSize: 16,
             fontWeight: '500',
             textTransform: 'capitalize',
-            marginRight: '50%',
+            marginLeft: '5%',
             color: colors.orangeColor,
           }}>
           {t('account')}
         </Text>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => setIsVisible(!isVisible)}
           style={{alignSelf: 'flex-end'}}>
           <Image
             source={require('../../../assets/images/lan.webp')}
             style={{height: 40, width: 40}}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
       <View style={styles.profileContainer}>
         <View style={styles.uploadContainer}>

@@ -236,8 +236,6 @@ export const styles = StyleSheet.create({
   },
   postFooter: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginTop: 10,
     paddingHorizontal: 20,
   },

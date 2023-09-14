@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
 import {
   View,
   TouchableOpacity,
@@ -49,11 +50,10 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async (pgNo, pgSize) => {
-    setIsLoading(true);
     setloader(true);
+    // setIsLoading(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('result of homefeedlist', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
@@ -94,12 +94,23 @@ const UserFeedScreen = ({navigation}) => {
     setApiPageNo(apiPageNo + apiPageSize);
     setIsLoading(false);
   };
-  useEffect(() => {}, [userDetails]);
-  useEffect(() => {
-    if (apiPageNo >= 0) {
-      listFeed(apiPageNo, apiPageSize);
-    }
-  }, [apiPageNo]);
+  useFocusEffect(
+    React.useCallback(() => {
+      if (apiPageNo >= 0) {
+        listFeed(apiPageNo, apiPageSize);
+      }
+      return () => {
+        // alert('Screen was unfocused');
+      };
+    }, []),
+  );
+  // useEffect(() => {}, [userDetails]);
+  // useEffect(() => {
+  //   if (apiPageNo >= 0) {
+  //     listFeed(apiPageNo, apiPageSize);
+  //   }
+  // }, [apiPageNo]);
+  // console.log('homefeed', homeFeedList);
   return (
     <View
       style={{
@@ -135,7 +146,7 @@ const UserFeedScreen = ({navigation}) => {
               <RefreshControl
                 refreshing={refrsh}
                 onRefresh={() => {
-                  // setRefrsh(true);
+                  setRefrsh(true);
                   listFeed(apiPageNo, apiPageSize);
                 }}
               />

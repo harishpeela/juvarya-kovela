@@ -35,6 +35,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       console.log('error in popular temples', error);
     }
   };
+  
   const renderLoder = () => {
     return loader ? (
       <Text>no temples to Display</Text>
@@ -128,8 +129,8 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       pageNav={pageNav}
                     />
                   )}
-                  ListFooterComponent={renderLoder}
-                  onEndReached={() => loadMoreItems()}
+                  // ListFooterComponent={renderLoder}
+                  // onEndReached={() => loadMoreItems()}
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />
