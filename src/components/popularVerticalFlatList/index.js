@@ -69,6 +69,9 @@ export const PopularTemplesVerticalList = ({
       console.log(error);
     }
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
   return (
     <TouchableOpacity
       style={{
@@ -80,6 +83,7 @@ export const PopularTemplesVerticalList = ({
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewProfile, {
           data: post,
+          onSelect: onSelect,
         });
       }}>
       <ImageBackground

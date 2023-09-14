@@ -35,10 +35,10 @@ export default BottomTabBase = ({navigation}) => {
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
-          // GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
-          !favoriteList?.length
-            ? allTexts.tabNames.search
-            : allTexts.tabNames.home
+          GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
+          //   !favoriteList?.length
+          //     ? allTexts.tabNames.search
+          //     : allTexts.tabNames.home
         }
         tabBarOptions={{
           activeTintColor: colors.orangeColor,
@@ -47,7 +47,7 @@ export default BottomTabBase = ({navigation}) => {
         }}>
         <Tab.Screen
           name={allTexts.tabNames.home}
-          component={GetHomeScreen}
+          component={UserFeedScreen}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
@@ -58,7 +58,7 @@ export default BottomTabBase = ({navigation}) => {
         />
         <Tab.Screen
           name={allTexts.tabNames.search}
-          component={GetSearchScreen}
+          component={Search}
           options={{
             tabBarIcon: ({color, size}) => (
               <>

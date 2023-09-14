@@ -54,7 +54,6 @@ const UserFeedScreen = ({navigation}) => {
     // setIsLoading(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('result of homefeedlist', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
@@ -77,7 +76,6 @@ const UserFeedScreen = ({navigation}) => {
         <Loader size={'large'} color={colors.orangeColor} />
       </View>
     ) : noData ? (
-      // <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
       <Text
         style={{
           alignSelf: 'center',

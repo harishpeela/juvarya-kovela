@@ -11,7 +11,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
+  const {userDetails, favoriteList} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);

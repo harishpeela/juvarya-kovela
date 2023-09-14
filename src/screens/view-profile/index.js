@@ -156,12 +156,10 @@ const ViewProfile = ({route, navigation}) => {
   };
 
   const Posts = async id => {
-    // console.log('id===========<>', id);
+    setloader(true);
     try {
-      let result = await GetPosts(id, 0, 40);
-      // console.log('posytss ==>==============>', result?.data);
+      let result = await GetPosts(id, 0, 100);
       let postsData = result?.data?.data;
-      console.log('posytss ==>', postsData);
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
