@@ -1,5 +1,3 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -153,7 +151,9 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        <Text style={styles.likes}>{likeCount} Likes</Text>
+        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+          {likeCount} Likes
+        </Text>
       </View>
       <View style={styles.postHeader}>
         <Text style={styles.username}>

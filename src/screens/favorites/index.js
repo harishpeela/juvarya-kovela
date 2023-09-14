@@ -162,7 +162,6 @@ const Favorite = ({navigation}) => {
                               data: item,
                               onSelect: onSelect,
                             },
-                            console.log('onselect', onSelect),
                           );
                         }}
                       />

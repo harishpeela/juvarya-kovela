@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
 import {
@@ -223,8 +224,9 @@ const ViewProfile = ({route, navigation}) => {
               onPress={() => {
                 navigation.goBack();
                 route?.params?.onSelect({
-                  selectedId: trfData?.jtProfile,
                   selected: isFollow,
+                  selected: !isFollow ? trfData?.jtProfile : '',
+
                 });
               }}>
               <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />

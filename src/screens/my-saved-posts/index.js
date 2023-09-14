@@ -76,11 +76,7 @@ const MySavedPosts = ({navigation}) => {
               )}
             />
           ) : (
-            <View
-              style={{
-                alignItems: 'center',
-                marginTop: '65%',
-              }}>
+            <View style={{alignItems: 'center', marginTop: '65%'}}>
               <Text style={{color: colors.orangeColor}}>
                 {' '}
                 Yet Not saved any post ...!

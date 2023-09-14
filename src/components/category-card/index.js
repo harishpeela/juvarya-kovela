@@ -36,6 +36,7 @@ export const UserFeedCompList = ({
   onSharePress,
   savedFeed,
 }) => {
+  console.log('likes count=========>', likes);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
@@ -230,6 +231,9 @@ export const UserFeedCompList = ({
       <View style={{paddingHorizontal: 15}}>
         {/* <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text> */}
         <Text style={styles.likes}>{likeCount} Likes</Text>
+        {/* <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+          {likeCount ? likeCount : 0} Likes
+        </Text> */}
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}

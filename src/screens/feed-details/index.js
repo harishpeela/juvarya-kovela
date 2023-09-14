@@ -15,7 +15,7 @@ const Feeds = ({route, navigation}) => {
   const [feedData, setFeedData] = useState();
   const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
-  console.log('item =========>', itemDetails);
+  // console.log('item =========>', itemDetails);
   const feedDetails = async () => {
     try {
       let result = await Feed(itemDetails.id);
@@ -52,7 +52,6 @@ const Feeds = ({route, navigation}) => {
     feedDetails();
     tempProfilefeeddetails();
   }, [itemDetails]);
-  // console.log(postsData, '<=============>');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -84,7 +83,6 @@ const Feeds = ({route, navigation}) => {
                     isLikeTrue={item?.like}
                     savedFeed={item?.savedFeed}
                     saveid={item?.id}
-
                   />
                 )
               }

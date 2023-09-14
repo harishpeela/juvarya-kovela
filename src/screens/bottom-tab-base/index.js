@@ -22,6 +22,7 @@ export default BottomTabBase = ({navigation}) => {
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetFavScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
+  const GetFavoriteScreen = () => <Favorite navigation={navigation} />;
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
   );
