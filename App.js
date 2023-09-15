@@ -394,14 +394,14 @@ const App = () => {
         let responce = await GetMyTemples(result?.data?.id, 0, 20);
         setFavoriteList(responce?.data?.data);
         saveUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
           primaryContact: result?.data?.primaryContact,
         });
         setUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
