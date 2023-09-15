@@ -48,34 +48,32 @@ const Signup = ({navigation}) => {
 
   const UserRegisterHandler = async (data, action) => {
     let signupPayload = {
-      username: data.userName,
+      username: data.phone,
       password: data.password,
     };
     console.log('---> ======>', signupPayload);
     const otpPayload = {
       otpType: 'SIGNUP',
-      channel: 'MOBILE',
-      emailAddress: data.email.toLowerCase(),
+      primaryContact: data.phone,
     };
     console.log(otpPayload, 'otp');
     try {
       let response = await NewVerifyOTP(otpPayload);
       const {
-        data: {emailAddress, otp},
+        data: {primaryContact, otp},
       } = response || {};
       let result = await loginUser1(signupPayload);
-      // console.log('result of login in signuo', result);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
       } else {
-        if (response && emailAddress) {
+        if (response && primaryContact) {
           let otpPayload = {
             otp,
             data,
-            email: emailAddress,
+            primaryContact: data?.phone,
             password: data?.confirmPassword,
-            username: data?.userName,
+            username: data?.phone,
           };
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {

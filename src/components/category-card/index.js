@@ -36,7 +36,6 @@ export const UserFeedCompList = ({
   onSharePress,
   savedFeed,
 }) => {
-  console.log('likes count=========>', likes);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
@@ -182,8 +181,8 @@ export const UserFeedCompList = ({
                   <Image
                     source={{uri: item?.url}}
                     style={{
-                      height: 400,
-                      width,
+                      height: 300,
+                      width: 420,
                       resizeMode: 'stretch',
                     }}
                   />

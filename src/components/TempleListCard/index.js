@@ -69,11 +69,11 @@ export const TempleListCard = ({
         //     '',
         //   )} temple!`,
         ToastAndroid.show(
-          `మీరు విజయవంతంగా ఆలయాన్ని ${
+          `Successfully you are  ${
             results?.data?.message === 'Success: following'
-              ? 'అనుసరిస్తున్నారు'
-              : 'అనుసరించడం లేదు'
-          }`,
+              ? 'Following'
+              : 'unFollowing'
+          } the temple`,
           ToastAndroid.SHORT,
         );
       } else {

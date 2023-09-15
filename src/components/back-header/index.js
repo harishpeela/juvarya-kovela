@@ -14,15 +14,15 @@ export const BackHeader = ({
   onDotsPress,
 }) => {
   return (
-    <View style={[styles.continer, {margin: !isOption ? 0 : 10}]}>
+    <View style={[styles.continer, {marginLeft: !isOption ? 10 : 10}]}>
       <View style={styles.iconContainer}>
         <Icon
           onPress={onBackPress}
           name="arrow-left-circle"
-          color={colors.orangeColor}
-          size={35}
+          color={'#686869'}
+          size={30}
         />
-        <Text style={[styles.title, {marginLeft: !isOption ? 30 : 15}]}>
+        <Text style={[styles.title, {marginLeft: !isOption ? 10 : 15}]}>
           {txt}
         </Text>
       </View>
@@ -30,7 +30,7 @@ export const BackHeader = ({
         <View style={styles.icon}>
           <EntypoIcon
             name="dots-three-vertical"
-            color={colors.orangeColor}
+            color={colors.black}
             size={20}
             onPress={onDotsPress}
           />

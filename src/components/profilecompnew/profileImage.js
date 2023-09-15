@@ -1,8 +1,9 @@
 /* eslint-disable no-undef */
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+import { colors } from '../../common';
 export const ProfileImage = ({profileImg}) => {
-  console.log(profileImg);
+  // console.log(profileImg);
   const renderImage = () => {
     if (!profileImg?.logo) {
       return (
@@ -15,12 +16,14 @@ export const ProfileImage = ({profileImg}) => {
       );
     } else if (profileImg?.logo) {
       return (
-        <Image
-          source={{
-            uri: profileImg?.logo,
-          }}
-          style={styles.profileView}
-        />
+        <View style={styles.imgView}>
+          <Image
+            source={{
+              uri: profileImg?.logo,
+            }}
+            style={styles.profileView}
+          />
+        </View>
       );
     }
   };
@@ -30,8 +33,15 @@ const styles = StyleSheet.create({
   profileView: {
     width: 80,
     height: 80,
-    borderColor: '#FFA001',
-    borderWidth: 1,
     borderRadius: 40,
   },
+  imgView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 90 / 2,
+    height: 90,
+    width: 90,
+    borderColor: colors.orangeColor,
+  }
 });

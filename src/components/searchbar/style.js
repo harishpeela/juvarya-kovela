@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 10,
     height: 50,
     marginHorizontal: 10,
   },
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     color: colors.black,
     fontFamily: fontFamily.popinRegular,
-    fontSize: 16,
+    fontSize: 14,
     padding: 8,
     height: 50,
   },

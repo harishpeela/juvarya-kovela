@@ -57,8 +57,9 @@ const OTPScreen = ({navigation, route}) => {
 
   let otpInput = useRef(null);
   const {
-    params: {otp, email, password, data},
+    params: {otp, email, password, data, userName},
   } = route || {};
+  // console.log('data', data);
   const setText = () => {
     otpInput?.current?.setValue(otp);
   };
@@ -68,17 +69,20 @@ const OTPScreen = ({navigation, route}) => {
     let result = await getUserInfoNew();
     try {
       if (result) {
+        console.log('result', result?.data);
         saveUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.userName,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
         });
         setUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.userName,
           email: result?.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
         });
       }
     } catch (error) {
@@ -87,12 +91,12 @@ const OTPScreen = ({navigation, route}) => {
   };
   const signinHandler = async () => {
     let payload = {
-      username: data?.userName,
+      primaryContact: data?.phone,
       password: password,
     };
     try {
       let result = await loginUser1(payload);
-      console.log('payload', payload);
+      console.log('result of login user1', result?.data);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType},
@@ -119,24 +123,23 @@ const OTPScreen = ({navigation, route}) => {
       lastName: data.lastName,
       primaryContact: data.phone,
       username: data?.userName,
-      email: email.toLowerCase(),
+      email: data?.email?.toLowerCase(),
       password: data?.password,
       otp: otp,
     };
-    console.log('regi pay', registerPayload);
+    // console.log('regi pay', registerPayload);
     try {
       let result = await NewRegistesrUser(registerPayload);
-      console.log('register user result', result);
+      console.log('register user result', result?.data);
       // console.log('register user data', result?.status);
       if (result.status === 200) {
         // console.log('mesage', result?.data?.message);
         signinHandler();
       } else {
-        console.log(result?.data?.message);
+        console.log(result?.data?.message, 'error');
         alert(result?.data?.message);
       }
     } catch (error) {
-      console.log('5');
       console.log('errerer', error);
       alert(error);
     }

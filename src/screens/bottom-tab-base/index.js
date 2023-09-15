@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {SafeAreaView} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
@@ -16,6 +16,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
+import {Loader} from '../../components';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
@@ -31,14 +32,15 @@ export default BottomTabBase = ({navigation}) => {
     return favoriteList?.length > 0 ? true : false;
   };
   const {favoriteList} = useContext(ApplicationContext);
+  useEffect(() => {}, [favoriteList]);
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
       <Tab.Navigator
         initialRouteName={
           GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
-          //   !favoriteList?.length
-          //     ? allTexts.tabNames.search
-          //     : allTexts.tabNames.home
+          // !favoriteList?.length
+          //   ? allTexts.tabNames.search
+          //   : allTexts.tabNames.home
         }
         tabBarOptions={{
           activeTintColor: colors.orangeColor,
@@ -47,7 +49,7 @@ export default BottomTabBase = ({navigation}) => {
         }}>
         <Tab.Screen
           name={allTexts.tabNames.home}
-          component={UserFeedScreen}
+          component={GetHomeScreen}
           options={{
             tabBarIcon: ({color, size}) => (
               <>

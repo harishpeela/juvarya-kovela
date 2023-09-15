@@ -31,6 +31,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     margin: 8,
+    marginTop: 40,
   },
   bell: {marginLeft: 10, marginTop: 10},
   flatListStyle: {

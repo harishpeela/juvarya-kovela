@@ -10,8 +10,8 @@ export const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: '10%',
-    marginLeft: '5%',
+    marginTop: '20%',
+    marginLeft: '3%',
   },
   profileContainer: {
     marginTop: 20,
@@ -31,9 +31,9 @@ export const styles = StyleSheet.create({
   },
   preViewImageContainer: {
     borderWidth: 0.5,
-    height: 100,
-    width: 100,
-    borderRadius: 50,
+    height: 80,
+    width: 80,
+    borderRadius: 40,
   },
   crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
   preViewImage: {

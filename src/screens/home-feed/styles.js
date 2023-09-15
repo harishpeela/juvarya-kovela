@@ -1,5 +1,5 @@
-import {StyleSheet, Platform} from 'react-native';
-import { colors } from '../../common';
+import {StyleSheet} from 'react-native';
+import {colors} from '../../common';
 
 const styles = StyleSheet.create({
   postContainer: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 40,
+    marginTop: 60,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   button: {
     paddingVertical: 11,
     paddingHorizontal: 4,
-    marginLeft: 5
+    marginLeft: 5,
   },
   buttonText2: {
     fontSize: 16,
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     height: 2,
-    backgroundColor: colors.orangeColor,
+    backgroundColor: colors.black2,
   },
   shortestBar: {
     width: 12,
@@ -73,12 +73,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     marginRight: 25,
-    borderColor: colors.orangeColor,
+    borderColor: colors.black2,
   },
   bellIcon: {
     alignSelf: 'center',
   },
-  // post styling
   postHeader: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 300,
     marginTop: 10,
-    // marginBottom: 10,
   },
   image: {
     width: '100%',
@@ -151,7 +149,7 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: 'bold',
     color: colors.orangeColor,
-  }
+  },
 });
 
 export default styles;

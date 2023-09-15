@@ -24,8 +24,7 @@ export const SearchBar = ({
           {backgroundColor: bgColor ? bgColor : colors.gray4},
         ]}>
         <View style={styles.iconContainer}>
-          <Icon name="search1" size={25} color={colors.gray} />
-
+          <Icon name="search1" size={20} color={colors.gray} />
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
@@ -45,7 +44,7 @@ export const SearchBar = ({
               size={25}
             />
           )}
-          <IconVoice name="keyboard-voice" size={25} />
+          {/* <IconVoice name="keyboard-voice" size={25} /> */}
         </View>
       </View>
     </View>
