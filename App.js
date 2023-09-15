@@ -47,7 +47,7 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew, GetMyTemples} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -390,17 +390,22 @@ const App = () => {
     let result = await getUserInfoNew();
     try {
       if (result) {
+        console.log('result in app js of userinfo', result?.data);
+        let responce = await GetMyTemples(result?.data?.id, 0, 20);
+        setFavoriteList(responce?.data?.data);
         saveUserDetails({
           username: result?.data?.username,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
         });
         setUserDetails({
           username: result?.data?.username,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
         });
       }
     } catch (error) {
@@ -414,9 +419,7 @@ const App = () => {
         const {
           data: {jtFeeds},
         } = response;
-        // console.log('feedlist', jtFeeds);
         getHomeFeedListData(jtFeeds);
-        setFavoriteList(jtFeeds);
       }
     } catch (error) {
       console.log(error);
@@ -429,6 +432,7 @@ const App = () => {
       getFollowedTempleList();
     }
   }, [loginDetails]);
+  console.log('fav list length after', favoriteList?.length);
 
   return (
     <ApplicationContext.Provider

@@ -37,12 +37,15 @@ const Signin = ({navigation}) => {
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
+
         });
         setUserDetails({
           username: result?.data?.username,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
+          primaryContact: result?.data?.primaryContact,
         });
       }
     } catch (error) {
@@ -51,7 +54,7 @@ const Signin = ({navigation}) => {
   };
   const signinHandler = async (data, actions) => {
     let payload = {
-      username: data.email,
+      primaryContact: data?.email,
       password: data.password,
     };
     try {
@@ -77,14 +80,14 @@ const Signin = ({navigation}) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>
-        <Icon
+        {/* <Icon
           onPress={() => {
             navigation.goBack();
           }}
           name="arrow-left-circle"
           color={colors.orangeColor}
           size={30}
-        />
+        /> */}
         <Text style={styles.signinText}>{login}</Text>
       </View>
       <KeyboardAwareScrollView
@@ -114,12 +117,14 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={email}
+                  title={'Mobile number'}
+                  isFlag
+                  keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  autoCapitalize="none"
+                  maxLength={10}
                 />
                 <View style={{height: 20}} />
                 <View>

@@ -128,7 +128,7 @@ const Profile = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Feather name="arrow-left-circle" color={'#FFA001'} size={34} />
+          <Feather name="arrow-left-circle" color={colors.black2} size={34} />
         </TouchableOpacity>
         <Text
           // numberOfLines={1}
@@ -137,7 +137,7 @@ const Profile = ({navigation}) => {
             fontWeight: '500',
             textTransform: 'capitalize',
             marginLeft: '5%',
-            color: colors.orangeColor,
+            color: colors.black,
           }}>
           {t('account')}
         </Text>
@@ -150,98 +150,103 @@ const Profile = ({navigation}) => {
           />
         </TouchableOpacity> */}
       </View>
-      <View style={styles.profileContainer}>
-        <View style={styles.uploadContainer}>
-          {image !== null ? (
-            <View style={styles.preViewImageContainer}>
-              {isCross && (
-                <View style={styles.crossIconContainer}>
-                  <Icon
-                    onPress={() => {
-                      setImage(null);
-                    }}
-                    name="closecircle"
-                    color={colors.orangeColor}
-                    size={25}
-                  />
-                </View>
-              )}
-              <Image
-                resizeMode="cover"
-                style={styles.preViewImage}
-                source={{uri: image?.uri}}
-              />
-            </View>
-          ) : isLoading ? (
-            <View style={styles.loader}>
-              <Loader size={'small'} color={colors.orangeColor} />
-            </View>
-          ) : (
-            <TouchableOpacity
-              style={styles.uploadPic}
-              onPress={() => {
-                uploadPhoto();
-              }}>
-              {profPic ? (
+      <View style={{marginLeft: '12%'}}>
+        <View style={styles.profileContainer}>
+          <View style={styles.uploadContainer}>
+            {image !== null ? (
+              <View style={styles.preViewImageContainer}>
+                {isCross && (
+                  <View style={styles.crossIconContainer}>
+                    <Icon
+                      onPress={() => {
+                        setImage(null);
+                      }}
+                      name="closecircle"
+                      color={colors.orangeColor}
+                      size={25}
+                    />
+                  </View>
+                )}
                 <Image
-                  source={{uri: profPic}}
-                  style={{height: 100, width: 100, borderRadius: 100 / 2}}
+                  resizeMode="cover"
+                  style={styles.preViewImage}
+                  source={{uri: image?.uri}}
                 />
-              ) : (
-                <UploadPhoto />
-              )}
-            </TouchableOpacity>
+              </View>
+            ) : isLoading ? (
+              <View style={styles.loader}>
+                <Loader size={'small'} color={colors.orangeColor} />
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.uploadPic}
+                onPress={() => {
+                  uploadPhoto();
+                }}>
+                {profPic ? (
+                  <Image
+                    source={{uri: profPic}}
+                    style={{height: 100, width: 100, borderRadius: 100 / 2}}
+                  />
+                ) : (
+                  <UploadPhoto />
+                )}
+              </TouchableOpacity>
+            )}
+          </View>
+          <ProfileInfo
+            name={userDetails?.username}
+            email={userDetails?.email}
+          />
+        </View>
+        <View style={styles.profileItemsContainer}>
+          {/* <Item svg={<Demo />} text={bookings} />
+        <Item svg={<AccountIcon2 />} text={donations} /> */}
+          {(roleType === role.admin || roleType === role.agent) && (
+            <Item
+              svg={<AccountIcon4 />}
+              text={t('myTemple')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.myTamples);
+              }}
+            />
+          )}
+
+          <Item
+            svg={<AccountIcon1 />}
+            text={t('updatepassword')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.updatePassword);
+            }}
+          />
+          <Item
+            svg={<AccountIcon1 />}
+            text={t('posts')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.mySavedPosts);
+            }}
+          />
+          {(roleType === role.admin || roleType === role.agent) && (
+            <Item1
+              svg={require('../../../assets/images/priest.webp')}
+              text={t('poojari')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.poojari);
+              }}
+            />
           )}
         </View>
-        <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
-      </View>
-      <View style={styles.profileItemsContainer}>
-        {/* <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} /> */}
-        {(roleType === role.admin || roleType === role.agent) && (
-          <Item
-            svg={<AccountIcon4 />}
-            text={t('myTemple')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.myTamples);
+        <View style={styles.logoutbtnContainer}>
+          <PrimaryButton
+            onPress={async () => {
+              await removeLoginSessionDetails();
+              setLoginDetails(null);
             }}
+            bgColor={colors.orangeColor}
+            radius={25}
+            text={'Log Out'}
           />
-        )}
-
-        <Item
-          svg={<AccountIcon1 />}
-          text={t('updatepassword')}
-          onPress={() => {
-            navigation.navigate(allTexts.screenNames.updatePassword);
-          }}
-        />
-        <Item
-          svg={<AccountIcon1 />}
-          text={t('posts')}
-          onPress={() => {
-            navigation.navigate(allTexts.screenNames.mySavedPosts);
-          }}
-        />
-        {(roleType === role.admin || roleType === role.agent) && (
-          <Item1
-            svg={require('../../../assets/images/priest.webp')}
-            text={t('poojari')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.poojari);
-            }}
-          />
-        )}
-      </View>
-      <View style={styles.logoutbtnContainer}>
-        <PrimaryButton
-          onPress={async () => {
-            await removeLoginSessionDetails();
-            setLoginDetails(null);
-          }}
-          bgColor={colors.orangeColor}
-          radius={25}
-          text={'Log Out'}
-        />
+        </View>
       </View>
       <Modal
         visible={isVisible}

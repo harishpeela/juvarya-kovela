@@ -34,7 +34,8 @@ const FollowersMembership = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{marginHorizontal: '5%', marginVertical: -10}}>
+      <View
+        style={{marginHorizontal: '5%', marginVertical: -10, marginTop: 35}}>
         <BackHeaderNew txt={'Followers'} onPress={() => navigation.goBack()} />
       </View>
       <View style={{flex: 1}}>

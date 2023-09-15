@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   footerContainer: {
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 60,
     marginTop: '5%',
   },
   header: {
@@ -91,15 +92,17 @@ export const styles = StyleSheet.create({
   },
   titleHeader: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 'bold',
     marginHorizontal: '25%',
     alignSelf: 'center',
-    textTransform: 'capitalize',
+    // textTransform: 'capitalize',
+    fontFamily: 'sans-serif',
+    color: colors.black,
   },
   eventsCard: {
     borderWidth: 1,
     padding: 20,
     marginHorizontal: 10,
     margin: 2,
-  }
+  },
 });

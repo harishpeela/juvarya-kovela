@@ -133,7 +133,7 @@ const UserFeedScreen = ({navigation}) => {
           <FeatherIcon
             name="bell"
             size={14}
-            color={colors.orangeColor}
+            color={colors.black2}
             style={styles.bellIcon}
           />
         </View>

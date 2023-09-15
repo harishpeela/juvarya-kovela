@@ -128,9 +128,9 @@ const ViewProfile = ({route, navigation}) => {
         setFollowBtnDisable(false);
         FollowingCount();
         ToastAndroid.show(
-          `మీరు విజయవంతంగా ఆలయాన్ని ${
-            !isFollow ? ' అనుసరిస్తున్నారు' : ' అనుసరించడం లేదు'
-          } !`,
+          `Successfully you are ${
+            !isFollow ? ' Following' : 'unFollwing'
+          } the temple !`,
           ToastAndroid.SHORT,
         );
       } else {
@@ -224,10 +224,9 @@ const ViewProfile = ({route, navigation}) => {
                 route?.params?.onSelect({
                   selected: isFollow,
                   selected: !isFollow ? trfData?.jtProfile : '',
-
                 });
               }}>
-              <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+              <Feather name="arrow-left-circle" color={'#686869'} size={28} />
             </TouchableOpacity>
             <Text style={styles.titleHeader}>
               {trfData?.name?.length < 15
@@ -235,26 +234,27 @@ const ViewProfile = ({route, navigation}) => {
                 : `${trfData?.name?.substring(0, 15)}...`}
             </Text>
           </View>
-          <View style={styles.firstTabView}>
-            <ProfileImage profileImg={trfData} />
-            <View style={{flexDirection: 'row', marginLeft: '15%', flex: 1}}>
-              <PostsComp
-                itemDetails={postsCount}
-                onPress={() => setPosts(!posts)}
-              />
-              <FollowersComp
-                followCount={followCount}
-                onPressFollowers={() =>
-                  navigation.navigate(
-                    allTexts.screenNames.followersmembership,
-                    {
-                      id: trfData?.jtProfile,
-                    },
-                  )
-                }
-              />
-            </View>
-            {/* <CommunityComp
+          <View style={{marginLeft: 15}}>
+            <View style={styles.firstTabView}>
+              <ProfileImage profileImg={trfData} />
+              <View style={{flexDirection: 'row', marginLeft: '15%', flex: 1}}>
+                <PostsComp
+                  itemDetails={postsCount}
+                  onPress={() => setPosts(!posts)}
+                />
+                <FollowersComp
+                  followCount={followCount}
+                  onPressFollowers={() =>
+                    navigation.navigate(
+                      allTexts.screenNames.followersmembership,
+                      {
+                        id: trfData?.jtProfile,
+                      },
+                    )
+                  }
+                />
+              </View>
+              {/* <CommunityComp
               itemCommunity={memberShip?.membershipCount}
               onPressmembership={() =>
                 navigation.navigate(allTexts.screenNames.profilemembership, {
@@ -262,31 +262,32 @@ const ViewProfile = ({route, navigation}) => {
                 })
               }
             /> */}
-          </View>
-          <ProfileSeconTab nameData={trfData} title={trfData?.name} />
-          <View style={styles.followtab}>
-            <FolloUnfollowComp
-              followBtnDisable={followBtnDisable}
-              followTemples={() => FOLLOW(trfData?.jtProfile)}
-              followVisible={followVisible}
-              isFollow={isFollow}
+            </View>
+            <ProfileSeconTab nameData={trfData} title={trfData?.name} />
+            <View style={styles.followtab}>
+              <FolloUnfollowComp
+                followBtnDisable={followBtnDisable}
+                followTemples={() => FOLLOW(trfData?.jtProfile)}
+                followVisible={followVisible}
+                isFollow={isFollow}
+              />
+              <ContactTabcomp />
+              <DirectionsTabComp />
+              <CreateFeedTabComp
+                roleId={roleId}
+                onPlusPress={() =>
+                  navigation.navigate(allTexts?.screenNames.createfeed, {
+                    data: data,
+                  })
+                }
+              />
+            </View>
+            <ProfileFourthTab
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+              templeDetails={trfData}
             />
-            <ContactTabcomp />
-            <DirectionsTabComp />
-            <CreateFeedTabComp
-              roleId={roleId}
-              onPlusPress={() =>
-                navigation.navigate(allTexts?.screenNames.createfeed, {
-                  data: data,
-                })
-              }
-            />
           </View>
-          <ProfileFourthTab
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-            templeDetails={trfData}
-          />
         </View>
         {currentIndex === 1 && (
           <ScrollView

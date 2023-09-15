@@ -61,10 +61,12 @@ export const ProfileSeconTab = ({title, nameData}) => {
       <View style={styles.footerHead}>
         <Text>
           <Text style={styles.boldText} numberOfLines={1}>
-            {title?.length < 17 ? `${title}` : `${title?.substring(0, 17)}...`}
+            {title?.length < 17
+              ? `${title}  `
+              : `${title?.substring(0, 17)}...  `}
           </Text>
           <Text style={styles.ratingText}>
-            <AntDesign name={'star'} color={'#FFA001'} size={20} /> {'4.8'}
+            <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}
           </Text>
         </Text>
       </View>
@@ -137,12 +139,13 @@ export const PrimaryButton1 = ({
   padding,
   fontsize,
   width,
+  borderWidth,
   ...props
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={style(bgColor, radius, padding, width).wrapper}
+      style={style(bgColor, radius, padding, width, borderWidth).wrapper}
       {...props}>
       <Text style={textStyles(textColor, fontsize).textTitle}>
         {loading == true ? (

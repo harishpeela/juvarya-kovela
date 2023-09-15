@@ -24,7 +24,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const PopularTemplesss = async () => {
     try {
       let result = await PopularTemples();
-      // console.log('res', result?.data);
+      console.log('res', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -35,7 +35,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       console.log('error in popular temples', error);
     }
   };
-  
+
   const renderLoder = () => {
     return loader ? (
       <Text>no temples to Display</Text>
@@ -82,7 +82,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
             await PopularTemplesss(pageNo, 20);
           }}
           // onSubmit={FilteredList}
-          bgColor={'lightgray'}
+          bgColor={colors.gray4}
           placeHolder={'Search here'}
         />
       </View>
@@ -106,9 +106,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                     data: filteredList,
                   });
                 }}>
-                <Text style={{color: colors.orangeColor, fontSize: 18}}>
-                  See all
-                </Text>
+                <Text style={{color: colors.black, fontSize: 18}}>See all</Text>
               </TouchableOpacity>
             </View>
             <ScrollView>
@@ -129,8 +127,8 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       pageNav={pageNav}
                     />
                   )}
-                  // ListFooterComponent={renderLoder}
-                  // onEndReached={() => loadMoreItems()}
+                  ListFooterComponent={renderLoder}
+                  onEndReached={() => loadMoreItems()}
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />

@@ -49,6 +49,8 @@ const fontFamily = {
   PoetsenOneRegular: 'PoetsenOne-Regular',
   pacificoRegular: 'Pacifico-Regular',
   yellowtailRegular: 'Yellowtail-Regular',
+  HelveticaNeue: 'Helvetica Neue',
+  
 };
 
 const window = {
@@ -65,6 +67,7 @@ const colors = {
   yellowColor: '#FFE600',
   gold: '#FC9605',
   black: '#000',
+  black2: '#686869',
   green: '#31932A',
   green2: '#0A673B',
   green3: '#E6F7F1',

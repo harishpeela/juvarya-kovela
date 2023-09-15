@@ -22,12 +22,15 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   boldText: {
-    fontSize: 24,
-    fontWeight: '600',
-    textTransform: 'capitalize',
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: colors.black,
+    // textTransform: 'capitalize',
   },
   ratingText: {
-    fontSize: 20,
+    fontSize: 16,
+    color: colors.black,
+    fontWeight: 'bold',
   },
   subFooterHead: {
     flexDirection: 'row',
@@ -39,9 +42,9 @@ export const styles = StyleSheet.create({
     // paddingTop: 20,
   },
   desciption: {
-    fontSize: 14,
+    fontSize: 16,
     lineHeight: 18,
-    textTransform: 'capitalize',
+    // textTransform: 'capitalize',
   },
   footerAction: {
     flexDirection: 'row',
@@ -75,7 +78,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     paddingTop: 20,
-    marginBottom: 10,
+    // marginBottom: 10,
     borderBottomWidth: 0.2,
     item: {
       alignItems: 'center',
@@ -91,7 +94,7 @@ export const styles = StyleSheet.create({
   },
 });
 
-export const style = (bgColor, radius, paddidng, width) =>
+export const style = (bgColor, radius, paddidng, width, borderWidth) =>
   StyleSheet.create({
     wrapper: {
       width: width || '27%',
@@ -101,6 +104,7 @@ export const style = (bgColor, radius, paddidng, width) =>
       alignItems: 'center',
       justifyContent: 'center',
       marginRight: 6,
+      borderWidth: borderWidth || 0,
     },
     profileView: {
       width: 80,
@@ -113,7 +117,7 @@ export const style = (bgColor, radius, paddidng, width) =>
 export const textStyles = (textColor, fontSize) =>
   StyleSheet.create({
     textTitle: {
-      fontSize: fontSize || 12,
+      fontSize: fontSize || 11,
       color: textColor || colors.white,
       fontFamily: fontFamily.popinBold,
       textTransform: 'uppercase',

@@ -11,7 +11,7 @@ export const BackHeaderNew = ({onPress, txt, isPlus, onPlusPress}) => {
     <View style={{}}>
       <View style={styles.header}>
         <TouchableOpacity onPress={onPress}>
-          <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+          <Feather name="arrow-left-circle" color={colors.black2} size={28} />
         </TouchableOpacity>
         <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10}}>
           {txt}

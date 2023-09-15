@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
+    marginTop: 45
   },
   keyBoardStyle: {
     margin: 10,

@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
     marginLeft: 20,
     width: 120,
     marginBottom: 20,
-    marginTop: 25,
+    marginTop: 40,
   },
   signinText: {
     color: colors.black,

@@ -61,16 +61,16 @@ const styles = StyleSheet.create({
   },
   itemHeading: {
     color: colors.black,
-    fontSize: fontSize.large,
+    fontSize: fontSize.normal,
     fontFamily: fontFamily.popinMedium,
   },
   itemAdmin: {
-    color: colors.orangeColor,
+    color: colors.black,
     fontSize: fontSize.tiny,
     fontFamily: fontFamily.popinMedium,
   },
   itemLocation: {
-    color: colors.orangeColor,
+    color: colors.black,
     fontSize: fontSize.tiny,
     fontFamily: fontFamily.popinMedium,
   },

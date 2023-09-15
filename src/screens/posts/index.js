@@ -4,15 +4,16 @@ import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
 import {BackgroundImage} from '../../components';
 import Feather from 'react-native-vector-icons/Feather';
 import {styles} from './styles';
+import {colors} from '../../common';
 const Posts = ({navigation, route}) => {
   const {posts} = route.params || {};
-  console.log('data', posts[0]?.mediaList);
+  // console.log('data', posts[0]?.mediaList);
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
       <BackgroundImage />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
+          <Feather name="arrow-left-circle" color={colors.black2} size={28} />
         </TouchableOpacity>
         <Text style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
           Posts

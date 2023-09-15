@@ -9,7 +9,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
     <TouchableOpacity onPress={onPressFollowers} style={styles.followersView}>
-      <Text>{followCount}</Text>
+      <Text style={styles.postText}>{followCount}</Text>
       <Text style={styles.postText}>followers</Text>
     </TouchableOpacity>
   );
@@ -41,12 +41,14 @@ export const FolloUnfollowComp = ({
         </View>
       ) : (
         <PrimaryButton1
-          bgColor={'#FFA001'}
+          bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
           padding={11}
           width={100}
           onPress={followTemples}
+          textColor={isFollow ? colors.white : colors.black}
+          // borderWidth={isFollow ? 0 : 1}
           text={
             isFollow
               ? allTexts.buttonTexts.unFollow
