@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text, TouchableOpacity} from 'react-native';
 import React, {useRef, useEffect, useState, useContext} from 'react';
@@ -140,7 +141,7 @@ const OTPScreen = ({navigation, route}) => {
         alert(result?.data?.message);
       }
     } catch (error) {
-      console.log('errerer', error);
+      console.log('error', error);
       alert(error);
     }
   };

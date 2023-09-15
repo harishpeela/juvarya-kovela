@@ -182,8 +182,10 @@ export const UserFeedCompList = ({
                     source={{uri: item?.url}}
                     style={{
                       height: 300,
-                      width: 420,
+                      width,
                       resizeMode: 'stretch',
+                      strategy: 'exact',
+
                     }}
                   />
                 ) : (
