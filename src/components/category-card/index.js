@@ -21,11 +21,12 @@ import {
   DeleteSavedFeed,
 } from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
 import {Loader} from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import '../../../languages/language';
+import {windowHeight, windowWidth} from '../../utils/config/config';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -76,12 +77,15 @@ export const UserFeedCompList = ({
     if (status) {
       SaveFeedApi();
       ToastAndroid.show(
-        'మీరు ఫీడ్‌ని విజయవంతంగా సేవ్ చేసారు',
+        'You are successfully saved the feed',
         ToastAndroid.SHORT,
       );
     } else {
       DeleteFeed();
-      ToastAndroid.show('మీరు ఫీడ్‌ని సేవ్ చేయలేదు', ToastAndroid.SHORT);
+      ToastAndroid.show(
+        'You are successfully unsaved the feed',
+        ToastAndroid.SHORT,
+      );
     }
   };
   const SaveFeedApi = async () => {
@@ -184,8 +188,6 @@ export const UserFeedCompList = ({
                       height: 300,
                       width,
                       resizeMode: 'stretch',
-                      strategy: 'exact',
-
                     }}
                   />
                 ) : (
@@ -231,7 +233,9 @@ export const UserFeedCompList = ({
       </View>
       <View style={{paddingHorizontal: 15}}>
         {/* <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text> */}
-        <Text style={styles.likes}>{likeCount} Likes</Text>
+        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+          {likeCount} Likes
+        </Text>
         {/* <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
           {likeCount ? likeCount : 0} Likes
         </Text> */}

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import { colors, fontFamily } from '../../common';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   followersView: {
     alignItems: 'center',
@@ -13,13 +13,12 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.gray4,
     // borderWidth: 1,
     marginRight: 7,
-    width: 100,
+    width: 90,
     alignItems: 'center',
     text: {
       fontSize: 13,
       fontWeight: fontFamily.popinBold,
       color: 'black',
-      
     },
   },
   followLoader: {

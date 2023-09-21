@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';
-import {allTexts, colors} from '../../common';
+import {allTexts, colors, fontSize} from '../../common';
 import {PrimaryButton1} from '../profilecomp';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
@@ -44,11 +44,12 @@ export const FolloUnfollowComp = ({
           bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
-          padding={11}
-          width={100}
+          padding={9}
+          width={90}
           onPress={followTemples}
           textColor={isFollow ? colors.white : colors.black}
           // borderWidth={isFollow ? 0 : 1}
+          fontSize={12}
           text={
             isFollow
               ? allTexts.buttonTexts.unFollow
@@ -59,11 +60,9 @@ export const FolloUnfollowComp = ({
     </>
   );
 };
-export const ContactTabcomp = ({}) => {
+export const ContactTabcomp = ({onPressContact}) => {
   return (
-    <Pressable
-      onPress={() => console.log('pressed contact')}
-      style={styles.voidButton}>
+    <Pressable onPress={onPressContact} style={styles.voidButton}>
       <Text style={styles.voidButton.text}>Contact</Text>
     </Pressable>
   );

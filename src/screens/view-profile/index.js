@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-dupe-keys */
 /* eslint-disable no-shadow */
 /* eslint-disable react-native/no-inline-styles */
@@ -10,8 +11,9 @@ import {
   FlatList,
   Image,
   useColorScheme,
+  Modal,
 } from 'react-native';
-import {BackgroundImage, Loader} from '../../components';
+import {BackgroundImage, Loader, ContactModal} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -64,6 +66,7 @@ const ViewProfile = ({route, navigation}) => {
   const [postsCount, setPostsCount] = useState(0);
   const [eventsLoader, setEventsLoader] = useState(false);
   const [eventsData, setEventsData] = useState();
+  const [isModal, setIsModal] = useState(false);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -99,7 +102,7 @@ const ViewProfile = ({route, navigation}) => {
     } else {
       setTrfData();
     }
-  }, [data]);
+  }, []);
 
   const followingCount = async id => {
     try {
@@ -203,9 +206,14 @@ const ViewProfile = ({route, navigation}) => {
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
+    console.log('list of evengts', result?.data);
     if (result.status === 200) {
       setEventsLoader(false);
+      console.log('true', eventsLoader);
       setEventsData(result?.data?.events);
+    } else {
+      setEventsLoader(false);
+      console.log('false', eventsLoader);
     }
   };
   return (
@@ -271,7 +279,7 @@ const ViewProfile = ({route, navigation}) => {
                 followVisible={followVisible}
                 isFollow={isFollow}
               />
-              <ContactTabcomp />
+              <ContactTabcomp onPressContact={() => setIsModal(true)} />
               <DirectionsTabComp />
               <CreateFeedTabComp
                 roleId={roleId}
@@ -310,7 +318,7 @@ const ViewProfile = ({route, navigation}) => {
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
                   <TouchableOpacity
-                    style={{height: '100%', width: '34%'}}
+                    style={{height: '100%', width: '34%', margin: 2}}
                     onPress={() =>
                       navigation.navigate(allTexts.screenNames.feeds, {
                         itemDetails: item,
@@ -322,7 +330,7 @@ const ViewProfile = ({route, navigation}) => {
                         style={{
                           height: 140,
                           width: 140,
-                          resizeMode: 'stretch',
+                          // resizeMode: 'stretch',
                         }}
                       />
                     ) : null}
@@ -372,6 +380,7 @@ const ViewProfile = ({route, navigation}) => {
             )}
           </ScrollView>
         )}
+        {isModal && <ContactModal isModal={isModal} setIsModal={setIsModal} />}
       </View>
     </View>
   );

@@ -68,7 +68,7 @@ export default BottomTabBase = ({navigation}) => {
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name={allTexts.tabNames.ticket}
           component={TicketConfirmation}
           options={{
@@ -82,7 +82,7 @@ export default BottomTabBase = ({navigation}) => {
               </>
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name={allTexts.tabNames.favorites}
           component={GetFavScreen}

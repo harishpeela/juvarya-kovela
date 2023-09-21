@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {
   View,
@@ -95,7 +95,7 @@ const UserFeedScreen = ({navigation}) => {
     setIsLoading(false);
   };
   useFocusEffect(
-    React.useCallback(() => {
+    useCallback(() => {
       if (apiPageNo >= 0) {
         listFeed(apiPageNo, apiPageSize);
       }

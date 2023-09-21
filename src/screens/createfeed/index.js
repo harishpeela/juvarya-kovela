@@ -91,6 +91,10 @@ const CreateFeed = ({route, navigation}) => {
           saveToPhotos: true,
           includeBase64: true,
           selectionLimit: 10,
+          quality: 1,
+          maxHeight: 2080,
+          maxWidth: 2080,
+          allowsEditing: false,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
