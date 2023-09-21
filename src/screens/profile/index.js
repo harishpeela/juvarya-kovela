@@ -226,7 +226,7 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
-          {(roleType === role.admin || roleType === role.agent) && (
+          {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
               svg={require('../../../assets/images/priest.webp')}
               text={t('poojari')}
@@ -234,7 +234,7 @@ const Profile = ({navigation}) => {
                 navigation.navigate(allTexts.screenNames.poojari);
               }}
             />
-          )}
+          )} */}
         </View>
         <View style={styles.logoutbtnContainer}>
           <PrimaryButton

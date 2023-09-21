@@ -6,7 +6,7 @@ import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList, Feed} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -26,6 +26,9 @@ const MySavedPosts = ({navigation}) => {
     } catch (error) {
       console.log('error in api', error);
     }
+  };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
   };
   const FeedDetails = async id => {
     let result = await Feed(id?.feedId);
@@ -72,6 +75,12 @@ const MySavedPosts = ({navigation}) => {
                   likes={item?.feedDTO?.likesCount}
                   isLikeTrue={item?.feedDTO?.like}
                   id={item?.id}
+                  onPressTitle={() =>
+                    navigation.navigate(allTexts.screenNames.viewProfile, {
+                      data: item,
+                      onSelect: onSelect,
+                    })
+                  }
                 />
               )}
             />

@@ -58,9 +58,10 @@ import {DotsNation} from './dotsNation';
 import {BackHeaderNew} from './backHeaders';
 import {PopularTemplesList} from './NearBy';
 import {PostsComp} from './profilecompnew';
-import { FavTempleListCard } from './favouritesListCard';
-import { FollowersListCard } from './followersLIstCard';
-import { Item, Item1 } from './profile-card-item/item';
+import {FavTempleListCard} from './favouritesListCard';
+import {FollowersListCard} from './followersLIstCard';
+import {Item, Item1} from './profile-card-item/item';
+import ContactModal from './contact-model';
 export {
   Loader,
   SearchBar,
@@ -119,4 +120,5 @@ export {
   FollowersListCard,
   Item,
   Item1,
+  ContactModal,
 };

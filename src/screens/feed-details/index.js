@@ -9,7 +9,7 @@ import {
   UserFeedCompList,
 } from '../../components';
 import {Feed, GetPosts} from '../../utils/api';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
   const [feedData, setFeedData] = useState();
@@ -26,6 +26,9 @@ const Feeds = ({route, navigation}) => {
     } catch (error) {
       console.log('error in feed details ==>', error);
     }
+  };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
   };
   const tempProfilefeeddetails = async () => {
     try {
@@ -69,6 +72,12 @@ const Feeds = ({route, navigation}) => {
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
             saveid={feedData?.id}
+            onPressTitle={() =>
+              navigation.navigate(allTexts.screenNames.viewProfile, {
+                data: feedData,
+                onSelect: onSelect,
+              })
+            }
           />
           <ScrollView>
             <FlatList
@@ -83,6 +92,12 @@ const Feeds = ({route, navigation}) => {
                     isLikeTrue={item?.like}
                     savedFeed={item?.savedFeed}
                     saveid={item?.id}
+                    onPressTitle={() =>
+                      navigation.navigate(allTexts.screenNames.viewProfile, {
+                        data: postsData,
+                        onSelect: onSelect,
+                      })
+                    }
                   />
                 )
               }
