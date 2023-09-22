@@ -71,7 +71,7 @@ export const styles = StyleSheet.create({
   followtab: {
     flexDirection: 'row',
     marginTop: '3%',
-    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   disPlayContent: {
     marginTop: '-60%',

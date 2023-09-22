@@ -14,39 +14,43 @@ const Favorite = ({navigation}) => {
   const {userDetails, favoriteList} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
   const getTemples = async (userid, pgno, pgsz) => {
     setIsLoading(true);
+    setLoading(true);
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
-      let data = response?.data?.data;
-      setLoading(false);
-      data?.map(a => {
-        TempleDetails(a);
-      });
+      if (response?.data?.totalItems === 0) {
+        setLoading(false);
+      } else if (response.data) {
+        let data = response?.data?.data;
+        data?.map(a => {
+          TempleDetails(a);
+        });
+      }
     } catch (error) {
       console.log('error in mytemplesapi', error);
     }
   };
   const TempleDetails = async d => {
-    setLoading(true);
     try {
       setfilteredArray([]);
       setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
       if (result) {
         let templesArray = {...d, ...result?.data};
-        setLoading(false);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
+        setLoading(false);
       } else {
         setLoading(false);
       }
     } catch (error) {
+      setLoading(false);
       console.log('error in templedetails api is ==>', error);
     }
   };
@@ -65,7 +69,6 @@ const Favorite = ({navigation}) => {
     );
   };
   const renderLoder = () => {
-    console.log('isload', isLoading);
     return isLoading ? (
       <Text
         style={{
@@ -90,7 +93,6 @@ const Favorite = ({navigation}) => {
       getTemples(userDetails?.id, pageNo, 20);
     }
   }, [pageNo]);
-  // console.log('filtered', filteredArray);
   return (
     <SafeAreaView
       style={{
@@ -126,13 +128,13 @@ const Favorite = ({navigation}) => {
       </View>
 
       <View style={styles.cardContainer}>
-        {loading === true ? (
+        {loading ? (
           <View style={styles.loaderContainer}>
-            <Loader color={colors.orangeColor} />
+            <Loader color={colors.black} />
           </View>
         ) : (
           [
-            filteredArray?.length === 0 ? (
+            filteredArray?.length == 0 ? (
               <View style={styles.loaderContainer}>
                 <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
               </View>

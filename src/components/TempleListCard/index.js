@@ -27,7 +27,6 @@ export const TempleListCard = ({
   const [isFollow, setisFollow] = useState();
   let isFocused = useIsFocused();
   const FollowandUnFollow = d => {
-    console.log('ksj', d, isLiked);
     setIsLiked(!isLiked);
     if (!isLiked) {
       console.log('if');
@@ -45,6 +44,7 @@ export const TempleListCard = ({
       // );
     }
   };
+  const logo = require('../../utils/assets/images/temple-icon.png');
   const onSelect = data => {
     setIsLiked(data?.selected);
     // FollowandUnFollow(data?.selectedId);
@@ -95,7 +95,11 @@ export const TempleListCard = ({
         });
       }}>
       <ImageBackground
-        source={{uri: post?.logo}}
+        source={{
+          uri: post?.logo
+            ? post?.logo
+            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+        }}
         style={{height: 200, width: 200, borderRadius: 60}}
         imageStyle={{borderRadius: 20}}>
         <View

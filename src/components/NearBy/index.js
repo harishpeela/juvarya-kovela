@@ -35,7 +35,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
       console.log('error in popular temples', error);
     }
   };
-
   const renderLoder = () => {
     return loader ? (
       <Text>no temples to Display</Text>

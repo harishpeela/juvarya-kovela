@@ -12,16 +12,19 @@ const MySavedPosts = ({navigation}) => {
   const [filteredArray, setfilteredArray] = useState([]);
 
   const getPostsList = async () => {
+    setLoading(true);
     try {
       let result = await getSavedPostsList();
-      if (result?.status === 200) {
+      if (!result?.data?.feeds) {
         setLoading(false);
-        // setfilteredArray(result?.data?.feeds);
-        result?.data?.feeds?.map(id => {
-          FeedDetails(id);
-        });
-      } else {
-        setLoading(false);
+      } else if (result?.data?.feeds) {
+        if (result?.status === 200) {
+          result?.data?.feeds?.map(id => {
+            FeedDetails(id);
+          });
+        } else {
+          setLoading(false);
+        }
       }
     } catch (error) {
       console.log('error in api', error);
@@ -36,7 +39,9 @@ const MySavedPosts = ({navigation}) => {
     let savefFeeds = {...id, ...data};
     if (result) {
       setfilteredArray(array => [...array, savefFeeds]);
+      setLoading(false);
     } else {
+      setLoading(false);
     }
   };
   // console.log('filter', filteredArray);
@@ -60,7 +65,7 @@ const MySavedPosts = ({navigation}) => {
         <View style={{height: '85%'}}>
           {loading ? (
             <View>
-              <Loader color={colors.orangeColor} />
+              <Loader color={colors.orangeColor} size={'small'} />
             </View>
           ) : filteredArray?.length > 0 ? (
             <FlatList
@@ -86,10 +91,14 @@ const MySavedPosts = ({navigation}) => {
             />
           ) : (
             <View style={{alignItems: 'center', marginTop: '65%'}}>
-              <Text style={{color: colors.orangeColor}}>
-                {' '}
-                Yet Not saved any post ...!
-              </Text>
+              {loading ? (
+                <Loader size={'small'} color={colors.orangeColor} />
+              ) : (
+                <Text style={{color: colors.orangeColor}}>
+                  {' '}
+                  Yet Not saved any post ...!
+                </Text>
+              )}
             </View>
           )}
         </View>
