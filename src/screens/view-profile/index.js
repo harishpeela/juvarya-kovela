@@ -162,16 +162,19 @@ const ViewProfile = ({route, navigation}) => {
     setloader(true);
     try {
       let result = await GetPosts(id, 0, 100);
+      console.log('================>', result?.data);
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
+        console.log('media', media);
         setPostImages(media);
         setloader(false);
       } else {
-        setPostImages(null);
+        setPostImages(0);
+        setloader(false);
       }
       let count = postsData?.filter(item => item.mediaList);
       if (count) {
@@ -206,7 +209,7 @@ const ViewProfile = ({route, navigation}) => {
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
-    console.log('list of evengts', result?.data);
+    // console.log('list of evengts', result?.data);
     if (result.status === 200) {
       setEventsLoader(false);
       console.log('true', eventsLoader);
@@ -216,6 +219,7 @@ const ViewProfile = ({route, navigation}) => {
       console.log('false', eventsLoader);
     }
   };
+  console.log('postimages', postImages?.length);
   return (
     <View
       style={{
@@ -301,15 +305,28 @@ const ViewProfile = ({route, navigation}) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.contentDisplay}>
-            {loader && (
-              <View style={{flex: 1}}>
+            {/* {loader && (
+              <View
+                style={{
+                  flex: 1,
+                }}>
                 <Loader color={colors.orangeColor} size={30} />
               </View>
-            )}
+            )} */}
             {!postImages?.length > 0 ? (
               <View>
-                <Feather name="camera-off" size={40} style={styles.noPosts} />
-                <Text style={styles.noPosts.text}>No Posts Yet</Text>
+                {loader ? (
+                  <Loader size={'small'} color={colors.orangeColor} />
+                ) : (
+                  <View>
+                    <Feather
+                      name="camera-off"
+                      size={40}
+                      style={styles.noPosts}
+                    />
+                    <Text style={styles.noPosts.text}>No Posts Yet</Text>
+                  </View>
+                )}
               </View>
             ) : (
               <FlatList
@@ -318,7 +335,12 @@ const ViewProfile = ({route, navigation}) => {
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
                   <TouchableOpacity
-                    style={{height: '100%', width: '34%', margin: 2}}
+                    style={{
+                      height: '100%',
+                      width: '34%',
+                      marginBottom: 2,
+                      marginRight: 2,
+                    }}
                     onPress={() =>
                       navigation.navigate(allTexts.screenNames.feeds, {
                         itemDetails: item,
@@ -330,7 +352,6 @@ const ViewProfile = ({route, navigation}) => {
                         style={{
                           height: 140,
                           width: 140,
-                          // resizeMode: 'stretch',
                         }}
                       />
                     ) : null}

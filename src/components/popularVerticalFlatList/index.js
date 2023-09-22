@@ -87,7 +87,11 @@ export const PopularTemplesVerticalList = ({
         });
       }}>
       <ImageBackground
-        source={{uri: post?.logo}}
+        source={{
+          uri: post?.logo
+            ? post?.logo
+            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+        }}
         style={{height: '100%', width: '100%', borderRadius: 60}}
         imageStyle={{
           borderRadius: 20,

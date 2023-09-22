@@ -90,7 +90,7 @@ const Menu = ({navigation}) => {
             <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
           </TouchableOpacity>
           <View style={{marginVertical: '10%'}}>
-            <TouchableOpacity onPress={() => Feed()}>
+            {/* <TouchableOpacity onPress={() => Feed()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -100,7 +100,7 @@ const Menu = ({navigation}) => {
                 }}>
                 Feed{' '}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             {/* <TouchableOpacity onPress={() => Reels()}>
               <Text
                 style={{

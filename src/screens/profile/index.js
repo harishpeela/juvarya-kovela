@@ -34,7 +34,7 @@ import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('user', userDetails);
+  // console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},
@@ -75,7 +75,6 @@ const Profile = ({navigation}) => {
     setIsLoading(true);
     try {
       let result = await GetProfilePic();
-      console.log('data pic', result?.data);
       if (result) {
         setProfPic(result?.data?.url);
         setIsLoading(false);
@@ -91,6 +90,8 @@ const Profile = ({navigation}) => {
           mediaType: 'photo',
           saveToPhotos: true,
           includeBase64: true,
+          maxHeight: 1080,
+          maxWidth: 1080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {

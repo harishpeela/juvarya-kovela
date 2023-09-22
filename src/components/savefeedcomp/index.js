@@ -74,6 +74,30 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
   }).current;
   return (
     <View style={styles.postContainer} key={post?.id}>
+      <View style={styles.postHeader}>
+        <TouchableOpacity style={{marginBottom: 5}} onPress={onPressTitle}>
+          <Image
+            source={{
+              uri:
+                post?.jtProfileDTO?.logo ||
+                'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
+            }}
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={onPressTitle}>
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: 'bold',
+              marginBottom: 10,
+              textTransform: 'capitalize',
+              color: isDarkMode ? 'black' : 'black',
+            }}>
+            {post?.jtProfileDTO?.name}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <View>
         <FlatList
           data={post?.feedDTO?.mediaList}
@@ -89,32 +113,6 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
           renderItem={({item, index}) => {
             return (
               <View>
-                <View style={styles.postHeader}>
-                  <TouchableOpacity
-                    style={{marginBottom: 5}}
-                    onPress={onPressTitle}>
-                    <Image
-                      source={{
-                        uri:
-                          post?.jtProfileDTO?.logo ||
-                          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
-                      }}
-                      style={styles.profileImage}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={onPressTitle}>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: 'bold',
-                        marginBottom: 10,
-                        textTransform: 'capitalize',
-                        color: isDarkMode ? 'black' : 'black',
-                      }}>
-                      {post?.jtProfileDTO?.name}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
                 {!item?.uri ? (
                   <Image
                     source={{uri: item?.url}}
