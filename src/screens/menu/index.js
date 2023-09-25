@@ -5,10 +5,11 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
-import {BackgroundImage} from '../../components';
+import {BackgroundImage, Terms_And_Conditions} from '../../components';
 import React, {useState} from 'react';
 const Menu = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isModal, setIsModal] = useState();
   const NearBy = () => {
     setCurrentIndex(3);
     if (currentIndex == 3) {
@@ -76,9 +77,11 @@ const Menu = ({navigation}) => {
   const TC = () => {
     setCurrentIndex(9);
     if (currentIndex === 9) {
-      alert('T & C under development');
+      // alert('T & C under development');
+      setIsModal(true);
     } else {
-      alert('T & C under development');
+      // alert('T & C under development');
+      setIsModal(true);
     }
   };
   return (
@@ -189,6 +192,12 @@ const Menu = ({navigation}) => {
                 Terms & Conditions{' '}
               </Text>
             </TouchableOpacity>
+            {isModal && (
+              <Terms_And_Conditions
+                isModal={isModal}
+                onPress={() => setIsModal(false)}
+              />
+            )}
           </View>
         </View>
       </View>

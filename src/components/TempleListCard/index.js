@@ -29,22 +29,13 @@ export const TempleListCard = ({
   const FollowandUnFollow = d => {
     setIsLiked(!isLiked);
     if (!isLiked) {
-      console.log('if');
+      console.log('if', isLiked);
       followTemples(d);
-      // ToastAndroid.show(
-      //   'successfully you are following the temple',
-      //   ToastAndroid.SHORT,
-      // );
     } else if (isLiked) {
-      console.log('else');
+      console.log('else', isLiked);
       followTemples(d);
-      // ToastAndroid.show(
-      //   'successfully you are unfollowing the temple',
-      //   ToastAndroid.SHORT,
-      // );
     }
   };
-  const logo = require('../../utils/assets/images/temple-icon.png');
   const onSelect = data => {
     setIsLiked(data?.selected);
     // FollowandUnFollow(data?.selectedId);
@@ -61,7 +52,7 @@ export const TempleListCard = ({
       let results = await FollowUnFollow(payload);
       console.log('77777777777', results?.data);
       if (results && results.status === 200) {
-        setIsLiked(!isLiked);
+        // setIsLiked(!isLiked);
         console.log('isfollow', isLiked);
         // ToastAndroid.show(
         //   `Successfully you are${results?.data?.message.replace(

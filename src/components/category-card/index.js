@@ -92,9 +92,8 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
-    console.log('feedid', saveid);
+    // console.log('feedid', saveid);
     let result = await NewSaveFeed(payload);
-    console.log('res', result?.data);
   };
   const DeleteFeed = async () => {
     console.log('feedid', id);
@@ -185,7 +184,7 @@ export const UserFeedCompList = ({
                   <Image
                     source={{uri: item?.url}}
                     style={{
-                      height: 300,
+                      height: 350,
                       width,
                       resizeMode: 'stretch',
                     }}

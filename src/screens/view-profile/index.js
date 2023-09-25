@@ -162,14 +162,13 @@ const ViewProfile = ({route, navigation}) => {
     setloader(true);
     try {
       let result = await GetPosts(id, 0, 100);
-      console.log('================>', result?.data);
+      // console.log('================>', result?.data);
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
         ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
-        console.log('media', media);
         setPostImages(media);
         setloader(false);
       } else {
@@ -219,7 +218,6 @@ const ViewProfile = ({route, navigation}) => {
       console.log('false', eventsLoader);
     }
   };
-  console.log('postimages', postImages?.length);
   return (
     <View
       style={{
