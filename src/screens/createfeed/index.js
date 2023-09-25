@@ -92,9 +92,8 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          maxHeight: 1080,
-          maxWidth: 1080,
-          allowsEditing: false,
+          // maxHeight: 2080,
+          // maxWidth: 2080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {

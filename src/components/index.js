@@ -62,6 +62,7 @@ import {FavTempleListCard} from './favouritesListCard';
 import {FollowersListCard} from './followersLIstCard';
 import {Item, Item1} from './profile-card-item/item';
 import ContactModal from './contact-model';
+import { Terms_And_Conditions } from './terms-and-conditions';
 export {
   Loader,
   SearchBar,
@@ -121,4 +122,5 @@ export {
   Item,
   Item1,
   ContactModal,
+  Terms_And_Conditions,
 };

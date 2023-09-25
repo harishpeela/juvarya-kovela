@@ -24,7 +24,7 @@ const endpoints = {
   NEW_ADMIN_VERIFY: 'jtprofile/admin/verify',
   NEW_POPULAR_TEMPLES: 'jtprofile/popular',
   NEW_PROFIL_PICTURE: '/picture/profile?profileId',
-  NEW_FOLLOW_UMFOLLOW: '/jtfollwer/create',
+  NEW_FOLLOW_UMFOLLOW: 'jtfollwer/create',
   NEW_SAVE_FEED: '/jtfeedtocustomer/save',
   NEW_FOLLOW_UNFOLLOW_BY_ID: '/jtfollwer/profile',
   NEW_LIKE_UNLIKE_HOME_FEED: '/jtfeedreview/like',

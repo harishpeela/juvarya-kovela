@@ -121,13 +121,13 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       post={item}
                       name={item.name}
                       templeId={item.id}
-                      date={item.creationTime}
+                      // date={item.creationTime}
                       isFollowingTrue={item?.follow}
                       pageNav={pageNav}
                     />
                   )}
-                  ListFooterComponent={renderLoder}
-                  onEndReached={() => loadMoreItems()}
+                  // ListFooterComponent={renderLoder}
+                  // onEndReached={() => loadMoreItems()}
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />
