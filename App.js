@@ -37,6 +37,7 @@ import {
   AddMemebershipDetails,
   SeeAll,
   Feeds,
+  Notifications,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -91,6 +92,7 @@ const App = () => {
       seeall,
       feeds,
       home,
+      notification,
     },
   } = allTexts;
 
@@ -171,6 +173,13 @@ const App = () => {
         <Stack.Screen
           name={homeDetails}
           component={HomeCardDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={notification}
+          component={Notifications}
           options={{
             headerShown: false,
           }}
@@ -390,7 +399,7 @@ const App = () => {
     let result = await getUserInfoNew();
     try {
       if (result) {
-        console.log('result in app js of userinfo', result?.data);
+        // console.log('result in app js of userinfo', result?.data);
         let responce = await GetMyTemples(result?.data?.id, 0, 20);
         setFavoriteList(responce?.data?.data);
         saveUserDetails({

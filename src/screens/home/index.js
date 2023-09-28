@@ -119,7 +119,7 @@ const Home = ({navigation}) => {
       <View style={styles.cardContainer}>
         {loader ? (
           <View style={styles.loaderContainer}>
-            <Loader color={colors.green2} />
+            <Loader color={colors.orangeColor} />
           </View>
         ) : (
           <ScrollView>

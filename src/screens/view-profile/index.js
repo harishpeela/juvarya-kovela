@@ -13,7 +13,7 @@ import {
   useColorScheme,
   Modal,
 } from 'react-native';
-import {BackgroundImage, Loader, ContactModal} from '../../components';
+import {BackgroundImage, Loader, ContactModal, TempleProfile_PostsCard} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
@@ -233,7 +233,7 @@ const ViewProfile = ({route, navigation}) => {
                 navigation.goBack();
                 route?.params?.onSelect({
                   selected: isFollow,
-                  selected: !isFollow ? trfData?.jtProfile : '',
+                  selectedId: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
               <Feather name="arrow-left-circle" color={'#686869'} size={28} />
@@ -332,28 +332,7 @@ const ViewProfile = ({route, navigation}) => {
                 data={postImages}
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
-                  <TouchableOpacity
-                    style={{
-                      height: '100%',
-                      width: '34%',
-                      marginBottom: 2,
-                      marginRight: 2,
-                    }}
-                    onPress={() =>
-                      navigation.navigate(allTexts.screenNames.feeds, {
-                        itemDetails: item,
-                      })
-                    }>
-                    {item?.mediaList ? (
-                      <Image
-                        source={{uri: item?.mediaList[0]?.url}}
-                        style={{
-                          height: 140,
-                          width: 140,
-                        }}
-                      />
-                    ) : null}
-                  </TouchableOpacity>
+                  <TempleProfile_PostsCard nav={navigation} item={item} />
                 )}
               />
             )}

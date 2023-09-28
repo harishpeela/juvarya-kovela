@@ -63,6 +63,8 @@ import {FollowersListCard} from './followersLIstCard';
 import {Item, Item1} from './profile-card-item/item';
 import ContactModal from './contact-model';
 import { Terms_And_Conditions } from './terms-and-conditions';
+import { NotificationCard } from './notificationCard';
+import { TempleProfile_PostsCard } from './temp-profile-posts-card';
 export {
   Loader,
   SearchBar,
@@ -123,4 +125,6 @@ export {
   Item1,
   ContactModal,
   Terms_And_Conditions,
+  NotificationCard,
+  TempleProfile_PostsCard,
 };

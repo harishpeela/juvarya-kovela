@@ -34,7 +34,7 @@ import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  // console.log('user', userDetails);
+  console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},
@@ -74,15 +74,18 @@ const Profile = ({navigation}) => {
   const GetCustProfilePic = async () => {
     setIsLoading(true);
     try {
-      let result = await GetProfilePic();
+      let result = await GetProfilePic(userDetails?.email);
       if (result) {
         setProfPic(result?.data?.url);
+        setIsLoading(false);
+      } else {
         setIsLoading(false);
       }
     } catch (error) {
       console.log('error in get profile picture', error);
     }
   };
+
   const uploadPhoto = () => {
     try {
       launchImageLibrary(

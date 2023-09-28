@@ -196,7 +196,7 @@ const Seemore = ({navigation, route}) => {
               />
               {paginationLoader && (
                 <View>
-                  <Loader color={colors.green2} />
+                  <Loader color={colors.orangeColor} />
                 </View>
               )}
             </View>

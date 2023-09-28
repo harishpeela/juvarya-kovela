@@ -213,7 +213,7 @@ const HomeDetail = ({navigation, route}) => {
 
       {loader ? (
         <View style={styles.loaderContainer}>
-          <Loader />
+          <Loader size={'small'} color={colors.orangeColor} />
         </View>
       ) : (
         <ScrollView decelerationRate={0.8} showsVerticalScrollIndicator={false}>

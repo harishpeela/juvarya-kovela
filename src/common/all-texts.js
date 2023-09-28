@@ -140,6 +140,7 @@ export const allTexts = {
     addMembershipDetails: 'AddMemebershipDetails',
     seeall: 'SeeAll',
     feeds: 'Feeds',
+    notification: 'Notifications',
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -22,14 +22,16 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
+    setLoader(true);
     try {
       let result = await PopularTemples();
-      console.log('res', result?.data);
+      // console.log('res', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
         setfilteredArray(dty);
         setFilteredList(dty);
+        setLoader(false);
       }
     } catch (error) {
       console.log('error in popular temples', error);

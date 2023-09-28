@@ -13,6 +13,7 @@ import {
   axiosMultiPartFormDataMem,
   axiousInstanceNew1,
   axiosEventsData1,
+  axiosNotifications,
 } from './api';
 
 const endpoints = {
@@ -39,7 +40,8 @@ const endpoints = {
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
-  CUSTOMER_PROFILE_PICTURE: '/picture/customer',
+  NOTIFICATIONS: 'jtprofile/follower/notification',
+  CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
@@ -138,10 +140,10 @@ export const AdminTemples = async () => {
     console.log('error in popular temples', error);
   }
 };
-export const GetProfilePic = async () => {
+export const GetProfilePic = async mailId => {
   try {
     let result = await axiosMultiPartFormData1.get(
-      `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+      `${endpoints.CUSTOMER_PROFILE_PICTURE}=${mailId}`,
     );
     return result;
   } catch (error) {
@@ -625,6 +627,15 @@ export const getSavedPostsList = async () => {
         // retryDelay: 3000,
       },
     );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getNotifications = async () => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.NOTIFICATIONS}`);
     return result;
   } catch (error) {
     return error;

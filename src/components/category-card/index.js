@@ -96,14 +96,11 @@ export const UserFeedCompList = ({
     let result = await NewSaveFeed(payload);
   };
   const DeleteFeed = async () => {
-    console.log('feedid', id);
     let result = await DeleteSavedFeed(id);
-    console.log('result of delete feed', result?.data);
   };
   const likesCount = async () => {
     try {
       let result = await NewLikesCount(id);
-      console.log('counting', result.data);
       if (result) {
         setLikeCount(result?.data?.count);
       }
@@ -184,9 +181,11 @@ export const UserFeedCompList = ({
                   <Image
                     source={{uri: item?.url}}
                     style={{
+                      flex: 1,
                       height: 350,
                       width,
-                      resizeMode: 'stretch',
+                      resizeMode: 'contain',
+                      backgroundColor: 'black',
                     }}
                   />
                 ) : (

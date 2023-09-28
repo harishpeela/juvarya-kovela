@@ -130,7 +130,7 @@ const Favorite = ({navigation}) => {
       <View style={styles.cardContainer}>
         {loading ? (
           <View style={styles.loaderContainer}>
-            <Loader color={colors.black} />
+            <Loader color={colors.orangeColor} />
           </View>
         ) : (
           [

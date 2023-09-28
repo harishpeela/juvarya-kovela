@@ -12,7 +12,7 @@ import {
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
-import {getHomeFeedList} from '../../utils/api';
+import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
@@ -28,9 +28,20 @@ const UserFeedScreen = ({navigation}) => {
   const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
   const [noData, setNoData] = useState(false);
+  const [adminRole, setRoleAdmin] = useState();
 
   const isDarkMode = useColorScheme() === 'dark';
 
+  const Role = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    console.log('role', roleAdmin);
+    if (roleAdmin) {
+      setRoleAdmin('ROLE_ADMIN');
+    } else {
+      setRoleAdmin('');
+    }
+  };
   const MyCustShare = async item => {
     const ShareOptions = {
       message: item?.jtProfileDTO?.name,
@@ -51,9 +62,11 @@ const UserFeedScreen = ({navigation}) => {
   };
   const listFeed = async (pgNo, pgSize) => {
     setloader(true);
-    // setIsLoading(true);
+    // setHomeFeedList([]);
+    console.log('list feed', pgNo, pgSize);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
+      console.log('result of list feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;
@@ -91,9 +104,24 @@ const UserFeedScreen = ({navigation}) => {
     // setIsLiked(data?.selected);
   };
   const loadMoreItems = () => {
-    setApiPageNo(apiPageNo + apiPageSize);
+    setApiPageNo(apiPageNo + 1);
+    setApiPageSize(apiPageSize + 1);
+    console.log('loadmoreitems', apiPageNo, apiPageSize);
+    listFeed(21, 40);
     setIsLoading(false);
   };
+  const GetNotifications = async () => {
+    try {
+      let result = await getNotifications();
+      // console.log('res of notifications', result);
+    } catch (error) {
+      console.log('error in notifications', error);
+    }
+  };
+  useEffect(() => {
+    Role();
+    GetNotifications();
+  }, []);
   useFocusEffect(
     useCallback(() => {
       if (apiPageNo >= 0) {
@@ -129,14 +157,20 @@ const UserFeedScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.circle}>
+        {/* {adminRole ? ( */}
+        <TouchableOpacity
+          style={styles.circle}
+          onPress={() =>
+            navigation.navigate(allTexts.screenNames.notification)
+          }>
           <FeatherIcon
             name="bell"
             size={14}
             color={colors.black2}
             style={styles.bellIcon}
           />
-        </View>
+          <View style={styles.notificationDot} />
+        </TouchableOpacity>
       </View>
       <>
         {homeFeedList?.length > 0 ? (
