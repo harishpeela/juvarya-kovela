@@ -95,6 +95,7 @@ const OTPScreen = ({navigation, route}) => {
       primaryContact: data?.phone,
       password: password,
     };
+    console.log('payload of signin handler', payload);
     try {
       let result = await loginUser1(payload);
       console.log('result of login user1', result?.data);
@@ -128,7 +129,7 @@ const OTPScreen = ({navigation, route}) => {
       password: data?.password,
       otp: otp,
     };
-    // console.log('regi pay', registerPayload);
+    console.log('regi pay', registerPayload);
     try {
       let result = await NewRegistesrUser(registerPayload);
       console.log('register user result', result?.data);

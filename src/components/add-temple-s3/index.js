@@ -39,7 +39,6 @@ export const AddTampleStep3 = ({
 
     let token = await getAuthTokenDetails();
     let access_token = token.replace('bearer ', '');
-    console.log('tocj------', access_token);
     fetch(
       `http://20.255.59.150:8082/api/v1/jtcustomer/search/${emp?.employeId}?access_token=${access_token}`,
       requestOptions,

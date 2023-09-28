@@ -37,7 +37,7 @@ export const PopularCard = ({
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log('error in toggleHeart', error);
     }
   };
 

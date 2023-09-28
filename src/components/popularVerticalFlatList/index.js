@@ -24,7 +24,6 @@ export const PopularTemplesVerticalList = ({
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
   const [isFollow, setisFollow] = useState();
   const FollowandUnFollow = d => {
-    console.log('ksj', d, isLiked);
     setIsLiked(!isLiked);
     if (!isLiked) {
       followTemples(d);
@@ -47,7 +46,7 @@ export const PopularTemplesVerticalList = ({
     console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
-      console.log('result of follow un follow =========>', results?.data);
+      // console.log('result of follow un follow =========>', results?.data);
       if (results && results.status === 200) {
         setIsLiked(!isLiked);
         ToastAndroid.show(
@@ -66,7 +65,7 @@ export const PopularTemplesVerticalList = ({
         }
       }
     } catch (error) {
-      console.log(error);
+      console.log('error followTemples', error);
     }
   };
   const onSelect = data => {

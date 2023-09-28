@@ -6,7 +6,10 @@ export const ProfileInfo = ({img, name, email}) => {
   return (
     <View style={styles.wrapper}>
       <View style={styles.textContainer}>
-        <Text style={styles.nameText}> {name} </Text>
+        <Text style={styles.nameText}>
+          {' '}
+          {name?.length < 14 ? `${name}` : `${name?.substring(0, 14)}...`}{' '}
+        </Text>
         <Text style={styles.emailText}>{email}</Text>
       </View>
       <View style={styles.imageContainer}>

@@ -29,10 +29,8 @@ export const TempleListCard = ({
   const FollowandUnFollow = d => {
     setIsLiked(!isLiked);
     if (!isLiked) {
-      console.log('if', isLiked);
       followTemples(d);
     } else if (isLiked) {
-      console.log('else', isLiked);
       followTemples(d);
     }
   };
@@ -50,15 +48,8 @@ export const TempleListCard = ({
     console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
-      console.log('77777777777', results?.data);
+      // console.log('77777777777', results?.data);
       if (results && results.status === 200) {
-        // setIsLiked(!isLiked);
-        console.log('isfollow', isLiked);
-        // ToastAndroid.show(
-        //   `Successfully you are${results?.data?.message.replace(
-        //     'Success:',
-        //     '',
-        //   )} temple!`,
         ToastAndroid.show(
           `Successfully you are  ${
             results?.data?.message === 'Success: following'

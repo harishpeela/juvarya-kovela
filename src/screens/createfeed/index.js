@@ -92,11 +92,23 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          // maxHeight: 2080,
-          // maxWidth: 2080,
+          maxHeight: 2080,
+          maxWidth: 2080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
+            // // console.log('usha', res);
+            // const fileSize = res.assets[0].base64.length * (3 / 4) - 2;
+            // console.log('usha', res?.assets[0].height);
+            // if (fileSize < 3000000) {
+            //   // alert('ushshs');
+            //   // setFileSizeError(true);
+            //   setImage(res.assets);
+            //   setimageUploaded(false);
+            // } else {
+            //   setImage(res.assets);
+            //   setimageUploaded(false);
+            // }
             setImage(res.assets);
             setimageUploaded(false);
           } else {

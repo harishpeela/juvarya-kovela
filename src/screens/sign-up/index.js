@@ -77,7 +77,6 @@ const Signup = ({navigation}) => {
           };
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
-          console.log('2');
           alert(response?.data?.message);
         }
         action.setSubmitting(false);

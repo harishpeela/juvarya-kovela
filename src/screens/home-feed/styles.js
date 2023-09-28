@@ -150,6 +150,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.orangeColor,
   },
+  notificationDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 20,
+    backgroundColor: colors.orangeColor,
+    position: 'absolute',
+    top: -5,
+    left: 15,
+  },
 });
 
 export default styles;

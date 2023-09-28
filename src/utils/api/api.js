@@ -65,6 +65,19 @@ axiosMultiPartFormData1.interceptors.request.use(async function (config) {
   return config;
 });
 
+export const axiosNotifications = axios.create({
+  baseURL: POPULARURL,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosNotifications.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
+
 export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {

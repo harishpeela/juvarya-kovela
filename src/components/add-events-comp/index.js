@@ -62,7 +62,7 @@ export const AddEvent = ({data, navigation}) => {
     myHeaders.append('Authorization', token);
     let token = await getAuthTokenDetails();
     let Access_Token = token.replace('bearer ', '');
-    console.log('acess_Tocken------', Access_Token);
+    // console.log('acess_Tocken------', Access_Token);
 
     var formdata = new FormData();
     formdata.append('name', occasionData?.eventName);
@@ -172,7 +172,7 @@ export const AddEvent = ({data, navigation}) => {
                     labelStyle={styles.radioLabelStyle}
                     onPress={value => {
                       setIsRegular(value);
-                      console.log('condition', value);
+                      // console.log('condition', value);
                     }}
                   />
                 </View>
