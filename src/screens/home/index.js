@@ -15,16 +15,6 @@ import {HomeCard, HomeHeader, HomeTabs, Loader} from '../../components';
 import {styles} from './style';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList, getFavoritesList} from '../../utils/api';
-import Icon from 'react-native-vector-icons/Entypo';
-import BellIcon from 'react-native-vector-icons/FontAwesome5';
-import {
-  NearBy,
-  UpComingEvents,
-  NearByMainTab,
-  NearByProducts,
-  NearByServices,
-} from '../../components/NearBy';
-import {data, Data1} from '../../components/NearBy';
 import {ScrollView} from 'react-native-gesture-handler';
 const Home = ({navigation}) => {
   const {userDetails, favoriteList} = useContext(ApplicationContext);
@@ -34,7 +24,6 @@ const Home = ({navigation}) => {
   const [loader, setloader] = useState(false);
   const [refrsh, setRefrsh] = useState(false);
   const [homeFeedList, setHomeFeedList] = useState([]);
-  const [tabIndex, setTabIndex] = useState(1);
 
   const getFollowedTempleList = async () => {
     try {
@@ -77,29 +66,9 @@ const Home = ({navigation}) => {
   useEffect(() => {
     getFollowedTempleList();
     favoriteTemplesList.length;
-    // console.log('num of favourates', favoriteTemplesList.length);
   }, []);
   return (
     <SafeAreaView style={styles.wrapper}>
-      {/* <ImageBackground
-        source={require('../../utils/assets/images/homeBackGround.png')}
-        style={{flex: 1, height: 400}}> */}
-      {/* <View style={styles.topContainer}> */}
-      {/* <View style={{position: 'absolute', top: 20}}>
-          <Text style={{fontSize: 32}}>Kovela </Text>
-        </View> */}
-      {/* <HomeHeader
-          text={`${favoriteTemplesList.length}`}
-          onPress={() => navigation.navigate(allTexts.tabNames.favorites)}
-          img={require('../../utils/assets/images/avatar.png')}
-
-           name={userDetails?.username}
-          plusVisible={userDetails?.role === allTexts.constants.role.admin}
-          // onBellPress={() => navigation.navigate(allTexts.screenNames.events)}
-          onBellPress={() => alert('page under development')}
-        /> */}
-      {/* <HomeTabs /> */}
-      {/* </View> */}
       <View
         style={{
           borderRadius: 20,
