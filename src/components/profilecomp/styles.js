@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   desciption: {
     fontSize: 16,
     lineHeight: 18,
-    // textTransform: 'capitalize',
+    textTransform: 'capitalize',
   },
   footerAction: {
     flexDirection: 'row',
@@ -100,7 +100,7 @@ export const style = (bgColor, radius, paddidng, width, borderWidth) =>
       width: width || '27%',
       padding: paddidng || 15,
       borderRadius: radius || 10,
-      backgroundColor: bgColor || colors.blue,
+      backgroundColor: bgColor || '',
       alignItems: 'center',
       justifyContent: 'center',
       marginRight: 6,

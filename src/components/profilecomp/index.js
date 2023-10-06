@@ -7,6 +7,7 @@ import {
   Pressable,
   TouchableOpacity,
   ActivityIndicator,
+  ImageBackground,
 } from 'react-native';
 import {Loader} from '../loader';
 import {styles, style, textStyles} from './styles';
@@ -58,7 +59,7 @@ export const ProfileFirstTab = ({
 export const ProfileSeconTab = ({title, nameData}) => {
   return (
     <>
-      <View style={styles.footerHead}>
+      {/* <View style={styles.footerHead}>
         <Text>
           <Text style={styles.boldText} numberOfLines={1}>
             {title?.length < 17
@@ -69,7 +70,7 @@ export const ProfileSeconTab = ({title, nameData}) => {
             <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}
           </Text>
         </Text>
-      </View>
+      </View> */}
 
       <View style={styles.subFooterHead}>
         <Text style={{color: '#FFA001', fontSize: 18}}>
@@ -78,7 +79,8 @@ export const ProfileSeconTab = ({title, nameData}) => {
       </View>
 
       <View style={styles.footerBody}>
-        <Text style={styles.desciption}>• {nameData?.description}</Text>
+        <Text style={styles.desciption}>{nameData?.description}</Text>
+        {/* •  */}
       </View>
     </>
   );
@@ -140,21 +142,35 @@ export const PrimaryButton1 = ({
   fontsize,
   width,
   borderWidth,
+  isFollow,
   ...props
 }) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={style(bgColor, radius, padding, width, borderWidth).wrapper}
-      {...props}>
-      <Text style={textStyles(textColor, fontsize).textTitle}>
-        {loading == true ? (
-          <ActivityIndicator size={'small'} color={colors.white} />
-        ) : (
-          text
-        )}
-      </Text>
-    </TouchableOpacity>
+    <ImageBackground
+      source={require('../../../assets/images/followcard.png')}
+      style={{
+        height: 40,
+        width: 110,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <TouchableOpacity
+        onPress={onPress}
+        // style={style(bgColor, radius, padding, width, borderWidth).wrapper}
+        {...props}>
+        <Text style={textStyles(textColor, fontsize).textTitle}>
+          {loading == true ? (
+            <ActivityIndicator size={'small'} color={colors.white} />
+          ) : isFollow ? (
+            <Text style={{alignItems: 'center', justifyContent: 'center'}}>
+              <AntDesign name="plus" size={16} color={'black'} /> {text}
+            </Text>
+          ) : (
+            text
+          )}
+        </Text>
+      </TouchableOpacity>
+    </ImageBackground>
   );
 };
 export const ProfileFourthTab = ({

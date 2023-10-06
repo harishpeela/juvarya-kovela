@@ -199,7 +199,7 @@ const UserFeedScreen = ({navigation}) => {
                 isLikeTrue={item?.like}
                 savedFeed={item?.savedFeed}
                 onPressTitle={() => {
-                  navigation.navigate(allTexts.screenNames.viewProfile, {
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                     data: item,
                     onSelect: onSelect,
                   });

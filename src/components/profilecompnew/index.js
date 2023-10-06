@@ -10,14 +10,14 @@ export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
     <TouchableOpacity onPress={onPressFollowers} style={styles.followersView}>
       <Text style={styles.postText}>{followCount}</Text>
-      <Text style={styles.postText}>followers</Text>
+      <Text style={styles.postText}>Followers</Text>
     </TouchableOpacity>
   );
 };
 export const CommunityComp = ({itemCommunity, onPressmembership}) => {
   return (
     <TouchableOpacity onPress={onPressmembership} style={styles.followersView}>
-      <Text>{itemCommunity}</Text>
+      <Text>{itemCommunity} 0</Text>
       <Text style={styles.postText}> Membership </Text>
     </TouchableOpacity>
   );
@@ -41,7 +41,7 @@ export const FolloUnfollowComp = ({
         </View>
       ) : (
         <PrimaryButton1
-          bgColor={isFollow ? colors.orangeColor : colors.gray4}
+          // bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
           padding={9}
@@ -50,6 +50,7 @@ export const FolloUnfollowComp = ({
           textColor={isFollow ? colors.white : colors.black}
           // borderWidth={isFollow ? 0 : 1}
           fontSize={12}
+          isFollow={!isFollow}
           text={
             isFollow
               ? allTexts.buttonTexts.unFollow

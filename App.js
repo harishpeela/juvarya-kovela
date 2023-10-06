@@ -38,6 +38,7 @@ import {
   SeeAll,
   Feeds,
   Notifications,
+  ViewTempleProfile,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -93,6 +94,7 @@ const App = () => {
       feeds,
       home,
       notification,
+      viewtempleprofile,
     },
   } = allTexts;
 
@@ -159,6 +161,13 @@ const App = () => {
         <Stack.Screen
           name={profile}
           component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={viewtempleprofile}
+          component={ViewTempleProfile}
           options={{
             headerShown: false,
           }}

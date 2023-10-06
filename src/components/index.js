@@ -35,7 +35,11 @@ import {
   NearByProducts,
   UpComingEvents,
 } from './NearBy';
-import {BackgroundImage} from './backgroundImage';
+import {
+  BackgroundImage,
+  BackgroundImageAClass,
+  BackgroundImageFlower,
+} from './backgroundImage';
 import {UserFeedCompList} from './category-card';
 import {
   ProfileFirstTab,
@@ -62,9 +66,10 @@ import {FavTempleListCard} from './favouritesListCard';
 import {FollowersListCard} from './followersLIstCard';
 import {Item, Item1} from './profile-card-item/item';
 import ContactModal from './contact-model';
-import { Terms_And_Conditions } from './terms-and-conditions';
-import { NotificationCard } from './notificationCard';
-import { TempleProfile_PostsCard } from './temp-profile-posts-card';
+import {Terms_And_Conditions} from './terms-and-conditions';
+import {NotificationCard} from './notificationCard';
+import {TempleProfile_PostsCard} from './temp-profile-posts-card';
+import {ProfileTimingTabs} from './profilecompnew/profileTimingsTab';
 export {
   Loader,
   SearchBar,
@@ -127,4 +132,7 @@ export {
   Terms_And_Conditions,
   NotificationCard,
   TempleProfile_PostsCard,
+  BackgroundImageAClass,
+  BackgroundImageFlower,
+  ProfileTimingTabs,
 };
