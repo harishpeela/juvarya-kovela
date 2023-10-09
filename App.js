@@ -39,6 +39,7 @@ import {
   Feeds,
   Notifications,
   ViewTempleProfile,
+  Donations,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -95,6 +96,7 @@ const App = () => {
       home,
       notification,
       viewtempleprofile,
+      donations
     },
   } = allTexts;
 
@@ -161,6 +163,13 @@ const App = () => {
         <Stack.Screen
           name={profile}
           component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={donations}
+          component={Donations}
           options={{
             headerShown: false,
           }}

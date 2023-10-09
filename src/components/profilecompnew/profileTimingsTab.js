@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {colors} from '../../common';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProfileTimingTabs = () => {
   return (
     <View style={styles.container}>
@@ -12,10 +13,7 @@ export const ProfileTimingTabs = () => {
         <Text style={{color: colors.black}}> Top Temple</Text>
       </View>
       <View style={styles.time}>
-        <Image
-          source={require('../../../assets/images/schedule.png')}
-          style={{height: 25, width: 25}}
-        />
+        <AntDesign name="clockcircleo" size={20} />
         <Text style={{color: '#228C08'}}> Open Now</Text>
         <Text style={{color: colors.black, fontWeight: 'bold'}}>
           {' '}
@@ -45,7 +43,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '55%',
     borderWidth: 0.5,
-    padding: 2,
+    padding: 4,
     borderRadius: 5,
     justifyContent: 'center',
   },

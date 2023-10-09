@@ -70,6 +70,13 @@ import {Terms_And_Conditions} from './terms-and-conditions';
 import {NotificationCard} from './notificationCard';
 import {TempleProfile_PostsCard} from './temp-profile-posts-card';
 import {ProfileTimingTabs} from './profilecompnew/profileTimingsTab';
+import {
+  BackgroundSmallFlower,
+  BackgroundSmallFlowerCall,
+  BackgroundSmallFlowerUser,
+} from './backgroundFlower';
+import {Danation_Add_Card} from './donationCard';
+import { Donation_first_Tab } from './donation-comp/comp-firstTab';
 export {
   Loader,
   SearchBar,
@@ -135,4 +142,9 @@ export {
   BackgroundImageAClass,
   BackgroundImageFlower,
   ProfileTimingTabs,
+  BackgroundSmallFlower,
+  BackgroundSmallFlowerCall,
+  BackgroundSmallFlowerUser,
+  Danation_Add_Card,
+  Donation_first_Tab,
 };
