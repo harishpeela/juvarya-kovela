@@ -7,19 +7,22 @@ export const styles = StyleSheet.create({
     marginLeft: '30%',
   },
   voidButton: {
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-    backgroundColor: colors.gray4,
-    // borderWidth: 1,
-    marginRight: 7,
-    width: 90,
+    flexDirection: 'row',
+    height: 40,
+    width: 100,
+    borderRadius: 20,
+    marginRight: 10,
+    borderWidth: 0.5,
+    alignItems: 'center'
+  },
+  voidButton1: {
+    flexDirection: 'row',
+    height: 40,
+    width: 170,
+    borderRadius: 20,
+    marginRight: 10,
+    borderWidth: 0.5,
     alignItems: 'center',
-    text: {
-      fontSize: 13,
-      fontWeight: fontFamily.popinBold,
-      color: 'black',
-    },
   },
   followLoader: {
     width: 105,
@@ -33,5 +36,11 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: colors.black,
     lineHeight: 18,
+  },
+  postText1: {
+    fontSize: 18,
+    color: colors.black,
+    lineHeight: 18,
+    fontWeight: 'bold',
   },
 });

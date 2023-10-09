@@ -26,6 +26,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import services from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {allTexts} from '../../common';
 import {Data} from '../home-feed/formateDetails';
 import {
@@ -46,6 +47,7 @@ import {
   FolloUnfollowComp,
   DirectionsTabComp,
   ProfileTimingTabs,
+  Danation_Add_Card,
 } from '../../components';
 import {ProfileImage} from '../../components';
 import {colors} from '../../common';
@@ -55,12 +57,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -249,6 +251,14 @@ const ViewTempleProfile = ({route, navigation}) => {
               }}>
               <Feather name="arrow-left-circle" color={'#686869'} size={28} />
             </TouchableOpacity>
+            <View>
+              <TouchableOpacity style={styles.bell}>
+                <FontAwesome name="bell-o" size={24} />
+                <View style={styles.notificationNum}>
+                  <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
           <View style={{alignSelf: 'center', marginTop: -15}}>
             <ProfileImage profileImg={trfData} />
@@ -262,7 +272,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
             {'(15.3k Ratings)'}
           </Text>
-          <View>
+          <View style={{marginTop: 10}}>
             <ProfileTimingTabs />
           </View>
           <View style={{marginLeft: 15}}>
@@ -304,23 +314,32 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             <View style={styles.followtab}>
-              <FolloUnfollowComp
-                followBtnDisable={followBtnDisable}
-                followTemples={() => FOLLOW(trfData?.jtProfile)}
-                followVisible={followVisible}
-                isFollow={isFollow}
-              />
-              <ContactTabcomp onPressContact={() => setIsModal(true)} />
-              <DirectionsTabComp />
-              <CreateFeedTabComp
-                roleId={roleId}
-                onPlusPress={() =>
-                  navigation.navigate(allTexts?.screenNames.createfeed, {
-                    data: data,
-                  })
-                }
-              />
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+                <FolloUnfollowComp
+                  followBtnDisable={followBtnDisable}
+                  followTemples={() => FOLLOW(trfData?.jtProfile)}
+                  followVisible={followVisible}
+                  isFollow={isFollow}
+                />
+                <ContactTabcomp onPressContact={() => setIsModal(true)} />
+                <DirectionsTabComp />
+                <CreateFeedTabComp
+                  roleId={roleId}
+                  onPlusPress={() =>
+                    navigation.navigate(allTexts?.screenNames.createfeed, {
+                      data: data,
+                    })
+                  }
+                />
+              </ScrollView>
             </View>
+            <Danation_Add_Card
+              onPress={() =>
+                navigation.navigate(allTexts?.screenNames?.donations)
+              }
+            />
             <ProfileFourthTab
               currentIndex={currentIndex}
               setCurrentIndex={setCurrentIndex}

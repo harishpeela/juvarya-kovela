@@ -142,6 +142,7 @@ export const allTexts = {
     feeds: 'Feeds',
     notification: 'Notifications',
     viewtempleprofile: 'ViewTempleProfile',
+    donations: 'Donations',
   },
   homeHeader: {
     welcome: 'Welcome ',

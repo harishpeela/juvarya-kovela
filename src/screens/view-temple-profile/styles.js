@@ -49,6 +49,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
   contentDisplay: {
     height: '56%',
@@ -67,8 +68,8 @@ export const styles = StyleSheet.create({
   },
   followtab: {
     flexDirection: 'row',
-    marginTop: '3%',
-    justifyContent: 'space-between',
+    // marginTop: '3%',
+    justifyContent: 'space-around',
   },
   disPlayContent: {
     marginTop: '-60%',
@@ -88,12 +89,13 @@ export const styles = StyleSheet.create({
     },
   },
   titleHeader: {
-    fontSize: 16,
+    fontSize: 28,
     fontWeight: 'bold',
     alignSelf: 'center',
     fontFamily: 'sans-serif',
     color: '#CC4501',
     marginTop: 20,
+    textTransform: 'capitalize',
   },
   eventsCard: {
     borderWidth: 1,
@@ -106,5 +108,25 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
     alignSelf: 'center',
+    marginTop: 10,
+  },
+  bell: {
+    backgroundColor: 'white',
+    borderRadius: 28 / 2,
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  notificationNum: {
+    height: 20,
+    width: 20,
+    borderRadius: 20 / 2,
+    backgroundColor: colors.orangeColor,
+    position: 'absolute',
+    top: -5,
+    left: 15,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

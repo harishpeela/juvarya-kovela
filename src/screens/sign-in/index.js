@@ -53,6 +53,7 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
+    console.log('1');
     let payload = {
       primaryContact: data?.email,
       password: data.password,
@@ -69,7 +70,8 @@ const Signin = ({navigation}) => {
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
-        Alert.alert('Error', 'Invalid credentials....!');
+        console.log('1');
+        Alert.alert('Error', result?.message);
       }
     } catch (error) {
       console.log('error in signin', error);
