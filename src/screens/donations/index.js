@@ -1,7 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {BackHeaderNew, Donation_first_Tab} from '../../components';
+import {
+  BackHeaderNew,
+  Donation_first_Tab,
+  Donation_Second_Tab,
+} from '../../components';
 const Donations = ({navigation}) => {
   return (
     <View>
@@ -9,6 +13,15 @@ const Donations = ({navigation}) => {
         <BackHeaderNew onPress={() => navigation.goBack()} />
       </View>
       <Donation_first_Tab title={'Durga Matha'} rating={'3.5 (18 rating)'} />
+      <View
+        style={{
+          height: '50%',
+          backgroundColor: '#FFF3E5',
+          margin: 10,
+          borderRadius: 10,
+        }}>
+        <Donation_Second_Tab />
+      </View>
     </View>
   );
 };

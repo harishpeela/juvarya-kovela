@@ -9,12 +9,9 @@ import {
   ToastAndroid,
   ScrollView,
   FlatList,
-  Image,
   useColorScheme,
-  Modal,
 } from 'react-native';
 import {
-  BackgroundImage,
   Loader,
   ContactModal,
   TempleProfile_PostsCard,
@@ -379,6 +376,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 numColumns={3}
                 data={postImages}
                 keyExtractor={({item, index}) => index}
+                style={{width: '100%', backgroundColor: 'white'}}
                 renderItem={({item, index}) => (
                   <TempleProfile_PostsCard nav={navigation} item={item} />
                 )}

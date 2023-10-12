@@ -44,8 +44,10 @@ const UserFeedScreen = ({navigation}) => {
   };
   const MyCustShare = async item => {
     const ShareOptions = {
-      message: item?.jtProfileDTO?.name,
-      URL: item?.jtProfileDTO?.logo,
+      // message: item?.jtProfileDTO?.name,
+      // URL: item?.jtProfileDTO?.logo,
+      message: 'https://play.google.com/apps/test/com.kovela/4004',
+      URL: 'https://play.google.com/apps/test/com.kovela/4004',
       title: item?.jtProfileDTO?.desciption,
     };
     const options = {

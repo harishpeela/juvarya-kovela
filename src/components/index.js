@@ -74,9 +74,11 @@ import {
   BackgroundSmallFlower,
   BackgroundSmallFlowerCall,
   BackgroundSmallFlowerUser,
+  BackgroundSmallFlowerRs,
 } from './backgroundFlower';
 import {Danation_Add_Card} from './donationCard';
-import { Donation_first_Tab } from './donation-comp/comp-firstTab';
+import {Donation_first_Tab} from './donation-comp/comp-firstTab';
+import {Donation_Second_Tab} from './donation-comp/comp-firstTab/donation-second_Tab';
 export {
   Loader,
   SearchBar,
@@ -147,4 +149,6 @@ export {
   BackgroundSmallFlowerUser,
   Danation_Add_Card,
   Donation_first_Tab,
+  Donation_Second_Tab,
+  BackgroundSmallFlowerRs,
 };
