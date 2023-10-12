@@ -11,11 +11,11 @@ export const Donation_first_Tab = ({title, rating}) => {
         style={{height: 70, width: 70, borderRadius: 70 / 2}}
       />
       <View style={{marginLeft: 30}}>
-        <Text style={{fontSize: 20, color: colors.black, fontWeight: 'bold'}}>
+        <Text style={{fontSize: 24, color: colors.black, fontWeight: 'bold'}}>
           {title}{' '}
         </Text>
         <Text style={{fontSize: 16, color: colors.black, fontWeight: '400'}}>
-          <AntDesign name="star" size={14} /> {rating}
+          <AntDesign name="star" size={14} color={'#CC4501'} /> {rating}
         </Text>
       </View>
     </View>

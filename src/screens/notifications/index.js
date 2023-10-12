@@ -13,14 +13,44 @@ import {colors} from '../../common';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState();
+  const [name, setname] = useState();
+  // const GetNotifications = async () => {
+  //   setLoader(true);
+  //   try {
+  //     let result = await getNotifications();
+  //     console.log('res of notifications', result?.data[0]?.notifications[0]);
+  //     let Data = result?.data[0]?.notifications;
+  //     if (Data) {
+  //       setNotificationData(Data);
+  //       setLoader(false);
+  //     } else {
+  //       setLoader(false);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in notifications', error);
+  //     setLoader(false);
+  //   }
+  // };
+
   const GetNotifications = async () => {
     setLoader(true);
     try {
       let result = await getNotifications();
       console.log('res of notifications', result?.data[0]?.notifications[0]);
       let Data = result?.data[0]?.notifications;
+      let mapping = result?.data[0]?.jtProfileDTO;
+      let tempName = mapping?.name;
+
+      // let MapData = mapping
+      //   .filter(array => array)
+      //   .map(({jtProfileDTO, notifications}) => ({
+      //     jtProfileDTO,
+      //     notifications,
+      //   }));
+      console.log('MapData', mapping);
       if (Data) {
         setNotificationData(Data);
+        setname(tempName);
         setLoader(false);
       } else {
         setLoader(false);
@@ -30,6 +60,7 @@ const Notifications = ({navigation}) => {
       setLoader(false);
     }
   };
+
   useEffect(() => {
     GetNotifications();
   }, []);
@@ -52,7 +83,9 @@ const Notifications = ({navigation}) => {
                 data={notificationdata}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({item, index}) => index}
-                renderItem={({item, index}) => <NotificationCard data={item} />}
+                renderItem={({item, index}) => (
+                  <NotificationCard data={item} name={name} />
+                )}
               />
             </ScrollView>
           ) : (
