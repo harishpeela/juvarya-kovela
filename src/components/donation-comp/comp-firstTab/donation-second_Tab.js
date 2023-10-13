@@ -9,8 +9,10 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  ImageBackground,
 } from 'react-native';
 import {colors} from '../../../common';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BackgroundSmallFlowerRs} from '../../backgroundFlower';
 export const Donation_Second_Tab = () => {
   const [activeIndex, setActiveIndex] = useState();
@@ -54,7 +56,35 @@ export const Donation_Second_Tab = () => {
         <BackgroundSmallFlowerRs />
         <TextInput placeholder="Other Amount" style={styles.input} />
       </View>
-      <View />
+      <View style={styles.border} />
+      <View style={styles.donationUser}>
+        <Text style={{color: colors.black}}>
+          Feature your profile on temple page just by donating an amount more
+          than ₹201.
+        </Text>
+        <View style={styles.userDonView}>
+          <ImageBackground
+            source={require('../../../../assets/images/smallflower.png')}
+            imageStyle={{height: 60, width: 60}}
+            style={{alignItems: 'center', width: 50}}>
+            <Image
+              source={require('../../../../assets/images/hanuman.png')}
+              style={styles.userimg}
+            />
+          </ImageBackground>
+          <View style={{marginLeft: '4%'}}>
+            <Text style={{color: colors.black, fontWeight: '500'}}>
+              Top Donation by Savitha Devi
+            </Text>
+            <TouchableOpacity style={styles.userTouch}>
+              <Text style={styles.usertext}>
+                <AntDesign name="star" size={14} color={'#CC4501'} /> Featured
+                Profile{' '}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -68,7 +98,7 @@ const styles = StyleSheet.create({
     width: 100,
     flexDirection: 'row',
     borderRadius: 25,
-    marginTop: 30,
+    marginTop: 10,
   },
   text: {
     position: 'absolute',
@@ -83,13 +113,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 2,
     marginHorizontal: 20,
-    marginTop: '5%',
+    marginTop: '2%',
     backgroundColor: colors.white,
     borderRadius: 30,
   },
   input: {
     marginLeft: 40,
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 20,
+    fontWeight: '400',
+  },
+  border: {
+    borderWidth: 0.3,
+    borderColor: 'lightgray',
+    marginTop: 30,
+    marginHorizontal: 20,
+  },
+  donationUser: {
+    margin: 20,
+  },
+  userimg: {
+    height: 45,
+    width: 45,
+    borderRadius: 45 / 2,
+    marginTop: 5,
+    marginLeft: 5,
+  },
+  userDonView: {
+    flexDirection: 'row',
+    marginTop: 10,
+    alignItems: 'center',
+  },
+  usertext: {
+    fontSize: 12,
+    color: '#CC4501',
+  },
+  userTouch: {
+    borderWidth: 0.5,
+    width: 120,
+    padding: 3,
+    borderRadius: 10,
+    borderColor: '#CC4501',
+    marginTop: 5,
   },
 });

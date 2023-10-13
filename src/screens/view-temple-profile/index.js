@@ -376,7 +376,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 numColumns={3}
                 data={postImages}
                 keyExtractor={({item, index}) => index}
-                style={{width: '100%', backgroundColor: 'white'}}
+                style={{width: '100%'}}
                 renderItem={({item, index}) => (
                   <TempleProfile_PostsCard nav={navigation} item={item} />
                 )}

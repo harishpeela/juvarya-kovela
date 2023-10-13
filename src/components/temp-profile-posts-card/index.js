@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {TouchableOpacity, Image} from 'react-native';
@@ -21,7 +20,7 @@ export const TempleProfile_PostsCard = ({item, nav}) => {
           source={{uri: item?.mediaList[0]?.url}}
           style={{
             height: 140,
-            width: '100%',
+            width: item?.mediaList[0]?.url?.length < 1 || 2 ? 130 : '100%',
           }}
         />
       ) : null}
