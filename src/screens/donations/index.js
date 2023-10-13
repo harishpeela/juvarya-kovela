@@ -8,14 +8,14 @@ import {
 } from '../../components';
 const Donations = ({navigation}) => {
   return (
-    <View>
+    <View style={{backgroundColor: 'white', flex: 1}}>
       <View style={{marginTop: 50, margin: 20}}>
         <BackHeaderNew onPress={() => navigation.goBack()} />
       </View>
       <Donation_first_Tab title={'Durga Matha'} rating={'3.5 (18 rating)'} />
       <View
         style={{
-          height: '50%',
+          height: '40%',
           backgroundColor: '#FFF3E5',
           margin: 10,
           borderRadius: 10,

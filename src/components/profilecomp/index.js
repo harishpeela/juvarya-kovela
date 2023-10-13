@@ -319,12 +319,12 @@ export const ProfileFourthTab = ({
           style={{
             ...styles.controlPanel.item.text,
             color: currentIndex === 1 ? '#CC4501' : '#585858',
-            textDecorationLine: 'red'
+            textDecorationLine: 'red',
           }}>
           POSTS
         </Text>
       </Pressable>
-      {templeDetails?.ecommerceEnabled && (
+      {templeDetails && (
         <Pressable
           style={{
             ...styles.controlPanel.item,
@@ -400,25 +400,29 @@ export const ProfileFourthTab = ({
         </Pressable>
       )}
 
-      {templeDetails?.donationsEnabled && (
+      {/* {templeDetails?.donationsEnabled && ( */}
+      {templeDetails && (
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 5 ? 1 : 0,
-            borderColor: currentIndex === 5 ? colors.orangeColor : null,
-          }}>
-          <FontAwesome5
-            name="hand-holding-heart"
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderBottomWidth: currentIndex === 5 ? 5 : 0,
+            borderColor: currentIndex === 5 ? '#CC4501' : null,
+          }}
+          onPress={() => setCurrentIndex(5)}>
+          <Feather
+            name="users"
             color={currentIndex === 5 ? '#CC4501' : '#585858'}
             size={24}
           />
-          <Text
+          {/* <Text
             style={{
               ...styles.controlPanel.item.text,
               color: currentIndex === 5 ? '#CC4501' : '#585858',
             }}>
             Donate
-          </Text>
+          </Text> */}
         </Pressable>
       )}
     </View>
