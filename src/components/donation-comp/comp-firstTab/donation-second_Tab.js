@@ -18,9 +18,9 @@ export const Donation_Second_Tab = () => {
   const [activeIndex, setActiveIndex] = useState();
   let Data = [
     {id: 1, rs: '101'},
-    {id: 2, rs: '201'},
+    // {id: 2, rs: '201'},
     {id: 3, rs: '301'},
-    {id: 4, rs: '401'},
+    // {id: 4, rs: '401'},
     {id: 5, rs: '501'},
   ];
   return (

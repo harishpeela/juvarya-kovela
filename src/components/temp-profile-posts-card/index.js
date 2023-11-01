@@ -20,7 +20,7 @@ export const TempleProfile_PostsCard = ({item, nav}) => {
           source={{uri: item?.mediaList[0]?.url}}
           style={{
             height: 140,
-            width: item?.mediaList[0]?.url?.length < 1 || 2 ? 130 : '100%',
+            width: item?.mediaList[0]?.url?.length < 1 ? 130 : '100%',
           }}
         />
       ) : null}

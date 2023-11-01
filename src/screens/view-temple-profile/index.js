@@ -250,7 +250,11 @@ const ViewTempleProfile = ({route, navigation}) => {
             </TouchableOpacity>
             <View>
               <TouchableOpacity style={styles.bell}>
-                <FontAwesome name="bell-o" size={24} />
+                <FontAwesome
+                  name="bell-o"
+                  size={24}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
                 <View style={styles.notificationNum}>
                   <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
                 </View>
