@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors} from '../../common';
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},
@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   footerContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 30,
     marginTop: '5%',
   },
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   contentDisplay: {
-    height: '56%',
+    // height: '56%',
   },
   noPosts: {
     borderWidth: 1,

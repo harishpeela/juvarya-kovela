@@ -5,17 +5,19 @@ import {allTexts, colors} from '../../common';
 export const Danation_Add_Card = ({onPress}) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={require('../../../assets/images/tempimg4.jpg')}
-        style={{height: 30, wight: 30, borderRadius: 40 / 2}}
-        height={40}
-        width={40}
-      />
       <View style={styles.second}>
-        <Text style={styles.secondText}>Top Donation by Juvarya..</Text>
-        <Text style={styles.rs}>
-          ₹201 {''} {'>'}{' '}
-        </Text>
+        <Image
+          source={require('../../../assets/images/tempimg4.jpg')}
+          style={{height: 30, wight: 30, borderRadius: 40 / 2}}
+          height={40}
+          width={40}
+        />
+        <View style={{marginLeft: 10}}>
+          <Text style={styles.secondText}>Top Donation by Juvarya..</Text>
+          <Text style={styles.rs}>
+            ₹201 {''} {'>'}{' '}
+          </Text>
+        </View>
       </View>
       <TouchableOpacity style={styles.third} onPress={onPress}>
         <Image
@@ -31,16 +33,18 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     marginTop: 30,
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: '#FFF3E5',
     padding: 10,
   },
   second: {
     maxWidth: '50%',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   secondText: {
-    fontSize: 16,
+    fontSize: 14,
     color: colors.black,
   },
   rs: {color: colors.black, fontWeight: 'bold', fontSize: 16},

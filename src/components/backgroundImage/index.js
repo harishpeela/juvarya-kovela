@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    width: 410, // adjust as needed
+    width: '100%', // adjust as needed
     height: 220, // adjust as needed
     zIndex: -1, // to position the image behind the feed screen content
   },

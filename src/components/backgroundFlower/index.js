@@ -34,7 +34,7 @@ export const BackgroundSmallFlowerCall = () => {
         marginLeft: 10,
         marginTop: -5,
       }}>
-      <Ionicons name="call" size={16} />
+      <Ionicons name="call" size={16} color={'#CC4501'} />
     </ImageBackground>
   );
 };
