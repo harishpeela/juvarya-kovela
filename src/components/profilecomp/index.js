@@ -319,7 +319,7 @@ export const ProfileFourthTab = ({
           style={{
             ...styles.controlPanel.item.text,
             color: currentIndex === 1 ? '#CC4501' : '#585858',
-            textDecorationLine: 'red',
+            // textDecorationLine: 'red',
           }}>
           POSTS
         </Text>
@@ -328,7 +328,7 @@ export const ProfileFourthTab = ({
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 4 ? 5 : 0,
+            borderBottomWidth: currentIndex === 4 ? 3 : 0,
             borderColor: currentIndex === 4 ? '#CC4501' : null,
           }}
           onPress={() => setCurrentIndex(4)}>

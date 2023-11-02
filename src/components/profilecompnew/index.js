@@ -73,12 +73,11 @@ export const FolloUnfollowComp = ({
 // };
 export const ContactTabcomp = ({onPressContact}) => {
   return (
-    // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton}>
     <TouchableOpacity style={styles.voidButton}>
       <BackgroundSmallFlowerCall />
       <Text
         style={{
-          marginLeft: '40%',
+          // marginLeft: '40%',
           color: '#CC4501',
           fontSize: 14,
           fontWeight: '600',
@@ -87,7 +86,6 @@ export const ContactTabcomp = ({onPressContact}) => {
         Call
       </Text>
     </TouchableOpacity>
-    // </LinearGradient>
   );
 };
 // export const DirectionsTabComp = () => {

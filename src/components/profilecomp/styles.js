@@ -83,7 +83,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-around',
     item: {
       alignItems: 'center',
-      // width: 80,
+      width: 80,
       flexDirection: 'row',
       justifyContent: 'space-around',
       text: {

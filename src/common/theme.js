@@ -50,7 +50,6 @@ const fontFamily = {
   pacificoRegular: 'Pacifico-Regular',
   yellowtailRegular: 'Yellowtail-Regular',
   HelveticaNeue: 'Helvetica Neue',
-  
 };
 
 const window = {
@@ -85,5 +84,4 @@ const colors = {
   blue3: '#06B3C4',
   red4: '#DD1E0C',
 };
-
 export {fontSize, fontFamily, window, colors};
