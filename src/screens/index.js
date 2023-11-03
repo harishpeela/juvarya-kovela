@@ -37,7 +37,10 @@ import SeeAll from './popularTemplesSeeAll';
 import Feeds from './feed-details';
 import Notifications from './notifications';
 import ViewTempleProfile from './view-temple-profile';
+<<<<<<< HEAD
+=======
 import Donations from './donations';
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
 export {
   CreatePost,
   Seemore,
@@ -78,5 +81,8 @@ export {
   Feeds,
   Notifications,
   ViewTempleProfile,
+<<<<<<< HEAD
+=======
   Donations,
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
 };

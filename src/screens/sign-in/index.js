@@ -21,9 +21,6 @@ const Signin = ({navigation}) => {
     buttonTexts: {login, sigup},
     paragraphs: {dontHaveAccount},
     placeHolders: {emailPlace, passwordPlace},
-    headings: {
-      inputTitles: {email},
-    },
   } = allTexts;
 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
@@ -52,12 +49,14 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
+    console.log('actions', actions);
     let payload = {
       primaryContact: data?.email,
       password: data.password,
     };
     try {
       let result = await loginUser1(payload);
+      console.log('error=====', result);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType},
@@ -68,7 +67,11 @@ const Signin = ({navigation}) => {
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
+<<<<<<< HEAD
+        Alert.alert('Error', `${result?.message}`);
+=======
         Alert.alert('Error', result?.message);
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
       }
     } catch (error) {
       console.log('error in signin', error);

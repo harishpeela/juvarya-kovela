@@ -13,7 +13,12 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 10,
     borderWidth: 0.5,
+<<<<<<< HEAD
+    alignItems: 'center',
+    justifyContent: 'center',
+=======
     alignItems: 'center'
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
   },
   voidButton1: {
     flexDirection: 'row',

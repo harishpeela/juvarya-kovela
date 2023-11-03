@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
+<<<<<<< HEAD
+import {colors, fontFamily} from '../../common';
+=======
 import {colors} from '../../common';
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},
@@ -92,7 +96,11 @@ export const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     alignSelf: 'center',
+<<<<<<< HEAD
+    fontFamily: 'icomoon',
+=======
     fontFamily: 'sans-serif',
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
     color: '#CC4501',
     marginTop: 20,
     textTransform: 'capitalize',

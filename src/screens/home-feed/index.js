@@ -50,13 +50,17 @@ const UserFeedScreen = ({navigation}) => {
       URL: 'https://play.google.com/apps/test/com.kovela/4004',
       title: item?.jtProfileDTO?.desciption,
     };
+    // console.log('my share', ShareOptions);
     const options = {
       message: item?.jtProfileDTO?.name,
       URL: item?.jtProfileDTO?.logo,
       title: item?.jtProfileDTO?.desciption,
     };
+    // console.log('my share', options);
+
     try {
       const shareResponce = await Share.open(ShareOptions, options);
+      console.log(shareResponce, '========>');
       return shareResponce;
     } catch (error) {
       console.log('error in share', error);
@@ -68,7 +72,7 @@ const UserFeedScreen = ({navigation}) => {
     console.log('list feed', pgNo, pgSize);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('result of list feed', result?.data);
+      // console.log('result of list feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result.data.jtFeeds;

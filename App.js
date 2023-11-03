@@ -39,7 +39,10 @@ import {
   Feeds,
   Notifications,
   ViewTempleProfile,
+<<<<<<< HEAD
+=======
   Donations,
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -96,7 +99,10 @@ const App = () => {
       home,
       notification,
       viewtempleprofile,
+<<<<<<< HEAD
+=======
       donations
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
     },
   } = allTexts;
 
@@ -184,6 +190,13 @@ const App = () => {
         <Stack.Screen
           name={mySavedPosts}
           component={MySavedPosts}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={viewtempleprofile}
+          component={ViewTempleProfile}
           options={{
             headerShown: false,
           }}
