@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textTransform: 'capitalize',
     fontWeight: 'bold',
-    color: colors.orangeColor,
+    color: colors.black2,
   },
   notificationDot: {
     width: 10,

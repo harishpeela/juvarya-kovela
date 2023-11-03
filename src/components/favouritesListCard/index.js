@@ -8,7 +8,11 @@ export const FavTempleListCard = ({name, location, date, onPress, img}) => {
       <View style={styles.secondaryContainer}>
         <View>
           <Image
-            source={{uri: img}}
+            source={{
+              uri: img
+                ? img
+                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/16913957822441691395781877.jpg',
+            }}
             style={{height: 70, width: 70, borderRadius: 70 / 2}}
           />
         </View>

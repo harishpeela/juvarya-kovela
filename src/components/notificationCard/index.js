@@ -2,7 +2,7 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {colors} from '../../common';
-export const NotificationCard = ({data}) => {
+export const NotificationCard = ({data, name}) => {
   return (
     <TouchableOpacity style={styles.contatainer}>
       <View style={styles.cardView}>
@@ -14,7 +14,7 @@ export const NotificationCard = ({data}) => {
           }}
           style={styles.img}
         />
-        <View>
+        <View style={{width: '90%'}}>
           <Text style={{marginLeft: 10}}>
             <Text>
               <Text
@@ -27,8 +27,13 @@ export const NotificationCard = ({data}) => {
               </Text>
             </Text>{' '}
             following your temple{' '}
-            <Text style={{color: colors.black}}>
-              {data?.jtProfileDTO?.name}
+            <Text
+              style={{
+                color: colors.black,
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+              }}>
+              {name}
             </Text>
           </Text>
         </View>
