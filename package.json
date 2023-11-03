@@ -28,11 +28,7 @@
     "react": "18.2.0",
     "react-facebook-login": "^4.1.1",
     "react-i18next": "^13.0.2",
-<<<<<<< HEAD
     "react-native": "^0.70.0",
-=======
-    "react-native": "0.72.6",
->>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
     "react-native-base64": "^0.2.1",
     "react-native-fast-image": "^8.6.1",
     "react-native-gesture-handler": "^2.6.0",
