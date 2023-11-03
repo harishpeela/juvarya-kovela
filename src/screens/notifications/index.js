@@ -14,6 +14,27 @@ const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState();
   const [name, setname] = useState();
+<<<<<<< HEAD
+=======
+  // const GetNotifications = async () => {
+  //   setLoader(true);
+  //   try {
+  //     let result = await getNotifications();
+  //     console.log('res of notifications', result?.data[0]?.notifications[0]);
+  //     let Data = result?.data[0]?.notifications;
+  //     if (Data) {
+  //       setNotificationData(Data);
+  //       setLoader(false);
+  //     } else {
+  //       setLoader(false);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in notifications', error);
+  //     setLoader(false);
+  //   }
+  // };
+
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
   const GetNotifications = async () => {
     setLoader(true);
     try {
@@ -42,6 +63,7 @@ const Notifications = ({navigation}) => {
       setLoader(false);
     }
   };
+
   useEffect(() => {
     GetNotifications();
   }, []);

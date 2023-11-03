@@ -28,6 +28,7 @@ export const BackgroundSmallFlowerCall = () => {
       style={{
         height: 30,
         width: 30,
+<<<<<<< HEAD
         alignItems: 'center',
         justifyContent: 'center',
       }}>
@@ -37,6 +38,15 @@ export const BackgroundSmallFlowerCall = () => {
         color={'#CC4501'}
         style={{alignSelf: 'center', justifyContent: 'center'}}
       />
+=======
+        position: 'absolute',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 10,
+        marginTop: -5,
+      }}>
+      <Ionicons name="call" size={16} color={'#CC4501'} />
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
     </ImageBackground>
   );
 };

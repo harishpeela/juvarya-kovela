@@ -35,7 +35,6 @@ const Signin = ({navigation}) => {
           role: result?.data?.roles,
           id: result?.data?.id,
           primaryContact: result?.data?.primaryContact,
-
         });
         setUserDetails({
           username: result?.data?.username,
@@ -68,7 +67,11 @@ const Signin = ({navigation}) => {
         actions.setSubmitting(false);
       } else {
         actions.setSubmitting(false);
+<<<<<<< HEAD
         Alert.alert('Error', `${result?.message}`);
+=======
+        Alert.alert('Error', result?.message);
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
       }
     } catch (error) {
       console.log('error in signin', error);

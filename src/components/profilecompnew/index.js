@@ -73,11 +73,19 @@ export const FolloUnfollowComp = ({
 // };
 export const ContactTabcomp = ({onPressContact}) => {
   return (
+<<<<<<< HEAD
+=======
+    // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton}>
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
     <TouchableOpacity style={styles.voidButton}>
       <BackgroundSmallFlowerCall />
       <Text
         style={{
+<<<<<<< HEAD
           // marginLeft: '40%',
+=======
+          marginLeft: '40%',
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
           color: '#CC4501',
           fontSize: 14,
           fontWeight: '600',
@@ -86,6 +94,10 @@ export const ContactTabcomp = ({onPressContact}) => {
         Call
       </Text>
     </TouchableOpacity>
+<<<<<<< HEAD
+=======
+    // </LinearGradient>
+>>>>>>> 5be67f0a4c428b30b7227da3c76c75c89e6fdd5c
   );
 };
 // export const DirectionsTabComp = () => {
