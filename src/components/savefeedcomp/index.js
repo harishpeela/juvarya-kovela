@@ -13,7 +13,7 @@ import {Loader} from '../loader';
 import {colors} from '../../common';
 import React, {useState, useRef} from 'react';
 import {styles} from './styles';
-import {likeOrUnlikeFeed} from '../../utils/api';
+import {NewLikeOrUnlikeFeed} from '../../utils/api';
 import {DotsNation} from '../dotsNation';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
@@ -34,12 +34,12 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
     setIsLiked(!isLiked);
 
     const payloadLike = {
-      feedId: id,
+      jtFeedId: id,
       like: !isLiked,
     };
     try {
       console.log('payloadLike  =====<>', payloadLike);
-      let result = await likeOrUnlikeFeed(payloadLike);
+      let result = await NewLikeOrUnlikeFeed(payloadLike);
       console.log('result', result);
       if (result && result.status === 200) {
         return;
@@ -150,7 +150,7 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
       </View>
       <View style={{paddingHorizontal: 15}}>
         <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
-          {likeCount} Likes
+          {likeCount ? likeCount : likes} Likes
         </Text>
       </View>
       <View style={styles.postHeader}>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, FlatList} from 'react-native';
@@ -94,7 +95,7 @@ const MySavedPosts = ({navigation}) => {
               {loading ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : (
-                <Text style={{color: colors.orangeColor}}>
+                <Text style={{color: colors.black2}}>
                   {' '}
                   Yet Not saved any post ...!
                 </Text>

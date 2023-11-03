@@ -34,7 +34,7 @@ import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('user', userDetails);
+  // console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},

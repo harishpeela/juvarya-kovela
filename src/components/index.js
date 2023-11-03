@@ -35,7 +35,11 @@ import {
   NearByProducts,
   UpComingEvents,
 } from './NearBy';
-import {BackgroundImage} from './backgroundImage';
+import {
+  BackgroundImage,
+  BackgroundImageAClass,
+  BackgroundImageFlower,
+} from './backgroundImage';
 import {UserFeedCompList} from './category-card';
 import {
   ProfileFirstTab,
@@ -62,9 +66,19 @@ import {FavTempleListCard} from './favouritesListCard';
 import {FollowersListCard} from './followersLIstCard';
 import {Item, Item1} from './profile-card-item/item';
 import ContactModal from './contact-model';
-import { Terms_And_Conditions } from './terms-and-conditions';
-import { NotificationCard } from './notificationCard';
-import { TempleProfile_PostsCard } from './temp-profile-posts-card';
+import {Terms_And_Conditions} from './terms-and-conditions';
+import {NotificationCard} from './notificationCard';
+import {TempleProfile_PostsCard} from './temp-profile-posts-card';
+import {ProfileTimingTabs} from './profilecompnew/profileTimingsTab';
+import {
+  BackgroundSmallFlower,
+  BackgroundSmallFlowerCall,
+  BackgroundSmallFlowerUser,
+  BackgroundSmallFlowerRs,
+} from './backgroundFlower';
+import {Danation_Add_Card} from './donationCard';
+import {Donation_first_Tab} from './donation-comp/comp-firstTab';
+import {Donation_Second_Tab} from './donation-comp/comp-firstTab/donation-second_Tab';
 export {
   Loader,
   SearchBar,
@@ -127,4 +141,14 @@ export {
   Terms_And_Conditions,
   NotificationCard,
   TempleProfile_PostsCard,
+  BackgroundImageAClass,
+  BackgroundImageFlower,
+  ProfileTimingTabs,
+  BackgroundSmallFlower,
+  BackgroundSmallFlowerCall,
+  BackgroundSmallFlowerUser,
+  Danation_Add_Card,
+  Donation_first_Tab,
+  Donation_Second_Tab,
+  BackgroundSmallFlowerRs,
 };

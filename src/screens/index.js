@@ -36,6 +36,7 @@ import AddMemebershipDetails from './add-mermbership';
 import SeeAll from './popularTemplesSeeAll';
 import Feeds from './feed-details';
 import Notifications from './notifications';
+import ViewTempleProfile from './view-temple-profile';
 export {
   CreatePost,
   Seemore,
@@ -75,4 +76,5 @@ export {
   SeeAll,
   Feeds,
   Notifications,
+  ViewTempleProfile,
 };

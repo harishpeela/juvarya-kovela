@@ -141,6 +141,7 @@ export const allTexts = {
     seeall: 'SeeAll',
     feeds: 'Feeds',
     notification: 'Notifications',
+    viewtempleprofile: 'ViewTempleProfile'
   },
   homeHeader: {
     welcome: 'Welcome ',
