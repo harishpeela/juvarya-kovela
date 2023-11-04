@@ -1,11 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, Image, StyleSheet, SafeAreaView} from 'react-native';
 import {colors, fontFamily, fontSize} from '../../common';
 
 export const FollowersListCard = ({name, location, date, onPress, img}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
+      <SafeAreaView >
+        
+      </SafeAreaView>
       <View style={styles.secondaryContainer}>
         <View>
           <Image

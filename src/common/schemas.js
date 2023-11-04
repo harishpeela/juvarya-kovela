@@ -41,13 +41,11 @@ export const AddTampleSchema = Yup.object({
   description: Yup.string().trim().required('Description  is required'),
   // community: Yup.string().trim().required('Community is requires'),
 });
-
 export const AddEventSchema = Yup.object({
   eventName: Yup.string().required('Event Name is required'),
   description: Yup.string().trim().required('Description  is required'),
   // community: Yup.string().trim().required('you are not a admin to Add'),
 });
-
 export const AddTampleSchemaS2 = Yup.object({
   pinCode: Yup.string().trim().required('Pincode is required'),
   line1: Yup.string().trim().required('line1  is required'),

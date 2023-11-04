@@ -4,7 +4,7 @@ import {colors, fontFamily} from '../../common';
 export const styles = (bgColor, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
-      width: width || '100%',
+      width: width?width:"100%",
       padding: paddidng || 15,
       borderRadius: radius || 10,
       backgroundColor: bgColor || colors.blue,
