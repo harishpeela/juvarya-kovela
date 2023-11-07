@@ -159,7 +159,7 @@ const Favorite = ({navigation}) => {
                         img={item?.jtProfileDTO?.logo}
                         onPress={() => {
                           navigation.navigate(
-                            allTexts.screenNames.viewProfile,
+                            allTexts.screenNames.viewtempleprofile,
                             {
                               data: item,
                               onSelect: onSelect,

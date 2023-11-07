@@ -73,7 +73,7 @@ const Feeds = ({route, navigation}) => {
             savedFeed={feedData?.savedFeed}
             saveid={feedData?.id}
             onPressTitle={() =>
-              navigation.navigate(allTexts.screenNames.viewProfile, {
+              navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                 data: feedData,
                 onSelect: onSelect,
               })
@@ -93,10 +93,13 @@ const Feeds = ({route, navigation}) => {
                     savedFeed={item?.savedFeed}
                     saveid={item?.id}
                     onPressTitle={() =>
-                      navigation.navigate(allTexts.screenNames.viewProfile, {
-                        data: postsData,
-                        onSelect: onSelect,
-                      })
+                      navigation.navigate(
+                        allTexts.screenNames.viewtempleprofile,
+                        {
+                          data: postsData,
+                          onSelect: onSelect,
+                        },
+                      )
                     }
                   />
                 )
