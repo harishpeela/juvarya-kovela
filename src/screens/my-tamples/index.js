@@ -121,7 +121,7 @@ const MyTamples = ({navigation}) => {
                         img={item?.logo}
                         onPress={() => {
                           navigation.navigate(
-                            allTexts.screenNames.viewProfile,
+                            allTexts.screenNames.viewtempleprofile,
                             {
                               data: item,
                               onSelect: onSelect,

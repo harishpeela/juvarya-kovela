@@ -227,7 +227,7 @@ const ViewTempleProfile = ({route, navigation}) => {
     }
   };
   return (
-    <View
+    <ScrollView
       style={{
         ...styles.maincontainer,
         backgroundColor: isDarkMode ? 'white' : 'white',
@@ -421,7 +421,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                 renderItem={({item, index}) => (
                   <TouchableOpacity style={styles.eventsCard}>
                     <Text> Name: {item?.name}</Text>
-                    {/* <Text> Data: {item?.date}</Text> */}
                   </TouchableOpacity>
                 )}
               />
@@ -430,7 +429,7 @@ const ViewTempleProfile = ({route, navigation}) => {
         )}
         {isModal && <ContactModal isModal={isModal} setIsModal={setIsModal} />}
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default ViewTempleProfile;
