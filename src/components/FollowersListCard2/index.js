@@ -74,7 +74,7 @@ const FollowersListCard2 = ({
           <View>
             <PrimaryButton
               text={'Block'}
-              textColor={'red'}
+              textColor={colors.red6}
               width={70}
               bgColor={colors.red5}
               loading={false}

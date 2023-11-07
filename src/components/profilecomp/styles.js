@@ -79,7 +79,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
     // marginBottom: 10,
-    borderBottomWidth: 0.2,
+    paddingBottom:'1%',
+    borderBottomWidth: 1,
+    borderColor:colors.gray,
     justifyContent: 'space-between',
     item: {
       alignItems: 'center',

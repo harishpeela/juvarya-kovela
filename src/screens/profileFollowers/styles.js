@@ -60,6 +60,13 @@ export const styles = StyleSheet.create({
   list:{
     // borderWidth:1,
     marginBottom:250,
+  },
+  noData:{
+    alignItems: 'center'
+  },
+  noDataText:{
+    fontSize: 18,
+     color: 'black'
   }
 
 });

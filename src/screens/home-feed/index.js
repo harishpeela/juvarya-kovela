@@ -124,6 +124,13 @@ const UserFeedScreen = ({navigation}) => {
     Role();
     GetNotifications();
   }, []);
+  const onPressTitle = (item) =>{
+    navigation.navigate("ViewTempleProfile",{
+      previousScreen:allTexts.screenNames.viewtempleprofile,
+      data: item,
+      onSelect: onSelect,
+    })
+  }
   useFocusEffect(
     useCallback(() => {
       if (apiPageNo >= 0) {
@@ -201,10 +208,7 @@ const UserFeedScreen = ({navigation}) => {
                 isLikeTrue={item?.like}
                 savedFeed={item?.savedFeed}
                 onPressTitle={() => {
-                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                    data: item,
-                    onSelect: onSelect,
-                  });
+                  onPressTitle(item)
                 }}
               />
             )}

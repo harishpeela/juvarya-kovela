@@ -6,14 +6,23 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: '30%',
   },
+  
   voidButton: {
     flexDirection: 'row',
     height: 40,
     width: 100,
     borderRadius: 20,
     marginRight: 10,
-    borderWidth: 0.5,
-    alignItems: 'center'
+    alignItems: 'center',
+    elevation: 2, // Add the desired elevation value to create a shadow
+    backgroundColor: 'white', // You may want to set a background color for the shadow to appear
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
+    shadowColor: colors.black,
+    shadowRadius: 20,
+    marginBottom: '1%',
   },
   voidButton1: {
     flexDirection: 'row',
@@ -21,8 +30,15 @@ export const styles = StyleSheet.create({
     width: 170,
     borderRadius: 20,
     marginRight: 10,
-    borderWidth: 0.5,
     alignItems: 'center',
+    elevation: 2,
+    shadowColor: colors.black,
+    shadowRadius: 20,
+    backgroundColor: 'white', // You may want to set a background color for the shadow to appear
+    shadowOffset: {
+      width: 5,
+      height: 5,
+    },
   },
   followLoader: {
     width: 105,

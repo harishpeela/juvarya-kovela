@@ -123,7 +123,7 @@ export const CreateFeedTabComp = ({roleId, onPlusPress}) => {
     <>
       {roleId === 'ROLE_ITEM_ADMIN' && (
         <TouchableOpacity onPress={onPlusPress}>
-          <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
+          <AntDesign style={{margin:'1%', textAlign:'center', alignSelf:'center',  justifyContent:'center',alignItems:"center"}} name="pluscircleo" size={30} color={'#FFA001'} />
         </TouchableOpacity>
       )}
     </>

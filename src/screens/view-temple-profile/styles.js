@@ -30,6 +30,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    // borderWidth:10
   },
   boldText: {
     fontSize: 24,
@@ -53,6 +54,7 @@ export const styles = StyleSheet.create({
   },
   contentDisplay: {
     height: '56%',
+    // borderWidth:2,
   },
   noPosts: {
     borderWidth: 1,
@@ -100,7 +102,6 @@ export const styles = StyleSheet.create({
   eventsCard: {
     borderWidth: 1,
     padding: 20,
-    marginHorizontal: 10,
     margin: 2,
   },
   ratingText: {
@@ -129,4 +130,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  centeredContent: {
+    display: 'flex',
+    // alignContent: 'center',
+  },
+  horizontalContainer:{
+    padding:'2%',
+    margin:'1%',
+    
+  }
 });

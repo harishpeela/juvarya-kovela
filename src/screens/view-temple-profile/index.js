@@ -9,7 +9,7 @@ import {
   ToastAndroid,
   ScrollView,
   FlatList,
-  useColorScheme,
+  useColorScheme,LogBox
 } from 'react-native';
 import {
   Loader,
@@ -18,6 +18,8 @@ import {
   BackgroundImageAClass,
   BackgroundImageFlower,
 } from '../../components';
+
+
 import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import React, {useState, useEffect, useContext} from 'react';
@@ -54,12 +56,10 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log('data -_------------------------>>>>>>> ' + data);
+  // LogBox.ignoreLogs([
+  //   'Non-serializable values were found in the navigation state',
+  // ]);
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -194,6 +194,14 @@ const ViewTempleProfile = ({route, navigation}) => {
     }
   };
   // console.log('trfdata,', trfData);
+const onPressBack = ()=>{
+  navigation.navigate(route.params.previousScreen)
+  route?.params?.onSelect({
+    selected: isFollow,
+    selectedId: !isFollow ? trfData?.jtProfile : '',
+  });
+}
+
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
@@ -240,11 +248,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             <TouchableOpacity
               style={{backgroundColor: 'white', borderRadius: 28 / 2}}
               onPress={() => {
-                navigation.goBack();
-                route?.params?.onSelect({
-                  selected: isFollow,
-                  selectedId: !isFollow ? trfData?.jtProfile : '',
-                });
+                onPressBack()
               }}>
               <Feather name="arrow-left-circle" color={'#686869'} size={28} />
             </TouchableOpacity>
@@ -312,6 +316,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View>
             <View style={styles.followtab}>
               <ScrollView
+                style={styles.horizontalContainer}
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
                 <FolloUnfollowComp
@@ -376,7 +381,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 numColumns={3}
                 data={postImages}
                 keyExtractor={({item, index}) => index}
-                style={{width: '100%'}}
+                style={styles.centeredContent}
                 renderItem={({item, index}) => (
                   <TempleProfile_PostsCard nav={navigation} item={item} />
                 )}
