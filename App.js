@@ -96,7 +96,7 @@ const App = () => {
       home,
       notification,
       viewtempleprofile,
-      donations
+      donations,
     },
   } = allTexts;
 
@@ -163,20 +163,6 @@ const App = () => {
         <Stack.Screen
           name={profile}
           component={Profile}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={donations}
-          component={Donations}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={viewtempleprofile}
-          component={ViewTempleProfile}
           options={{
             headerShown: false,
           }}
@@ -394,6 +380,20 @@ const App = () => {
         <Stack.Screen
           name={feed}
           component={Feeds}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={viewtempleprofile}
+          component={ViewTempleProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={donations}
+          component={Donations}
           options={{
             headerShown: false,
           }}
