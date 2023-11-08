@@ -77,7 +77,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
             // FilteredList(e);
             SearchPopTemp(e);
           }}
-          loading={searchLoading}
+          loading={setSearchLoading}
           onCrossPress={async () => {
             setSearchedText('');
             await PopularTemplesss(pageNo, 20);

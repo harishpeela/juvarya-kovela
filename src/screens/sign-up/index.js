@@ -19,7 +19,6 @@ export const KovelaIcon = () => (
     />
   </View>
 );
-
 const Signup = ({navigation}) => {
   const {
     buttonTexts: {login, sigup},

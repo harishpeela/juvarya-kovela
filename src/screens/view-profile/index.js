@@ -13,7 +13,12 @@ import {
   useColorScheme,
   Modal,
 } from 'react-native';
-import {BackgroundImage, Loader, ContactModal, TempleProfile_PostsCard} from '../../components';
+import {
+  BackgroundImage,
+  Loader,
+  ContactModal,
+  TempleProfile_PostsCard,
+} from '../../components';
 import {styles} from './styles';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
