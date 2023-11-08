@@ -184,7 +184,7 @@ export const UserFeedCompList = ({
                       height: 350,
                       width,
                       resizeMode: 'contain',
-                      backgroundColor: 'black',
+                      backgroundColor: 'black', //#faf8c8//,
                     }}
                   />
                 ) : (
