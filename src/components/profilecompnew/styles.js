@@ -13,7 +13,8 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 10,
     borderWidth: 0.5,
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   voidButton1: {
     flexDirection: 'row',

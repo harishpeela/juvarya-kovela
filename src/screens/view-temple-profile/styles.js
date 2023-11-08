@@ -40,7 +40,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   footerContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     paddingTop: 30,
     marginTop: '5%',
   },
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   contentDisplay: {
-    height: '56%',
+    // height: '56%',
   },
   noPosts: {
     borderWidth: 1,
@@ -92,7 +92,7 @@ export const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: 'bold',
     alignSelf: 'center',
-    fontFamily: 'sans-serif',
+    fontFamily: 'icomoon',
     color: '#CC4501',
     marginTop: 20,
     textTransform: 'capitalize',

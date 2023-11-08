@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
     // marginBottom: 10,
     borderBottomWidth: 0.2,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     item: {
       alignItems: 'center',
       width: 80,
@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
       text: {
         paddingVertical: 5,
         fontSize: 18,
-        marginLeft: 15,
+        marginLeft: 5,
       },
       selectedText: {
         paddingVertical: 5,

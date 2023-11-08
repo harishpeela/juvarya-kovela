@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   postTextNum: {
     fontSize: 18,
     color: colors.black,
-    lineHeight: 18,
     fontWeight: 'bold',
   },
 });

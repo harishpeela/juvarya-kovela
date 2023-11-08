@@ -92,22 +92,21 @@ export const UserFeedCompList = ({
     let payload = {
       feedId: saveid,
     };
-    // console.log('feedid', saveid);
     let result = await NewSaveFeed(payload);
   };
   const DeleteFeed = async () => {
     let result = await DeleteSavedFeed(id);
   };
-  const likesCount = async () => {
-    try {
-      let result = await NewLikesCount(id);
-      if (result) {
-        setLikeCount(result?.data?.count);
-      }
-    } catch (error) {
-      console.log('error in likes count', error);
-    }
-  };
+  // const likesCount = async () => {
+  //   try {
+  //     let result = await NewLikesCount(id);
+  //     if (result) {
+  //       setLikeCount(result?.data?.count);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in likes count', error);
+  //   }
+  // };
   const scrollX = useRef(new Animated.Value(0)).current;
   const handleOnScroll = event => {
     Animated.event(
