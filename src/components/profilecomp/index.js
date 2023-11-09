@@ -306,7 +306,7 @@ export const ProfileFourthTab = ({
       <Pressable
         style={{
           ...styles.controlPanel.item,
-          borderBottomWidth: currentIndex === 1 ? 5 : 0,
+          borderBottomWidth: currentIndex === 1 ? 2 : 0,
           borderColor: currentIndex === 1 ? '#CC4501' : null,
         }}
         onPress={() => setCurrentIndex(1)}>
@@ -314,10 +314,11 @@ export const ProfileFourthTab = ({
           name="grid"
           color={currentIndex === 1 ? '#CC4501' : '#585858'}
           size={24}
+          styles={styles.Icon}
         />
         <Text
           style={{
-            ...styles.controlPanel.item.text,
+            ...styles.controlPanel.item.postText,
             color: currentIndex === 1 ? '#CC4501' : '#585858',
             // textDecorationLine: 'red',
           }}>
@@ -328,7 +329,7 @@ export const ProfileFourthTab = ({
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 4 ? 3 : 0,
+            borderBottomWidth: currentIndex === 4 ? 2 : 0,
             borderColor: currentIndex === 4 ? '#CC4501' : null,
           }}
           onPress={() => setCurrentIndex(4)}>
@@ -336,6 +337,7 @@ export const ProfileFourthTab = ({
             name="location-outline"
             color={currentIndex === 4 ? '#CC4501' : '#585858'}
             size={24}
+            style={styles.Icon}
           />
           {/* <Image
             source={require('../../../assets/images/location.png')}
@@ -365,6 +367,7 @@ export const ProfileFourthTab = ({
             name="movie-open-outline"
             color={currentIndex === 2 ? '#CC4501' : '#585858'}
             size={24}
+            style={styles.Icon}
           />
           <Text
             style={{
@@ -379,16 +382,16 @@ export const ProfileFourthTab = ({
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 3 ? 5 : 0,
+            borderBottomWidth: currentIndex === 3 ? 2 : 0,
             borderColor: currentIndex === 3 ? '#CC4501' : null,
-            justifyContent: 'center',
-            alignItems: 'center',
+           
           }}
           onPress={() => setCurrentIndex(3)}>
           <AntDesign
             name="clockcircleo"
             color={currentIndex === 3 ? '#CC4501' : '#585858'}
             size={24}
+            style={styles.Icon}
           />
           {/* <Text
             style={{
@@ -405,9 +408,7 @@ export const ProfileFourthTab = ({
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderBottomWidth: currentIndex === 5 ? 5 : 0,
+            borderBottomWidth: currentIndex === 5 ? 2 : 0,
             borderColor: currentIndex === 5 ? '#CC4501' : null,
           }}
           onPress={() => setCurrentIndex(5)}>
@@ -415,6 +416,7 @@ export const ProfileFourthTab = ({
             name="users"
             color={currentIndex === 5 ? '#CC4501' : '#585858'}
             size={24}
+            style={styles.Icon}
           />
           {/* <Text
             style={{

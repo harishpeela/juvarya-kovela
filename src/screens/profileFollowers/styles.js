@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({
   CardContainer:{},
   followersContainer:{
@@ -59,7 +60,17 @@ export const styles = StyleSheet.create({
   },
   list:{
     // borderWidth:1,
-    marginBottom:250,
+    marginBottom:300,
+  },
+  noDataContainer:{
+    alignItems:'center',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  noDataText:{
+    fontSize:fontSize.xlarge,
+    color:colors.black,
   }
+  
 
 });

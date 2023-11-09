@@ -85,5 +85,6 @@ const colors = {
   blue2: '#0098FD',
   blue3: '#06B3C4',
   red4: '#DD1E0C',
+  shadowColor:'rgba(0, 0, 0, 0.24)'
 };
 export {fontSize, fontFamily, window, colors};

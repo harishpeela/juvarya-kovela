@@ -33,7 +33,7 @@ export const FolloUnfollowComp = ({
   isFollow,
 }) => {
   return (
-    <>
+    <View style={styles.followingContainer}>
       {followVisible ? (
         <View style={styles.followLoader}>
           <Loader
@@ -61,7 +61,7 @@ export const FolloUnfollowComp = ({
           }
         />
       )}
-    </>
+    </View>
   );
 };
 // export const ContactTabcomp = ({onPressContact}) => {
@@ -73,18 +73,9 @@ export const FolloUnfollowComp = ({
 // };
 export const ContactTabcomp = ({onPressContact}) => {
   return (
-    <TouchableOpacity style={styles.voidButton}>
+    <TouchableOpacity style={[styles.voidButton, styles.button]}>
       <BackgroundSmallFlowerCall />
-      <Text
-        style={{
-          // marginLeft: '40%',
-          color: '#CC4501',
-          fontSize: 14,
-          fontWeight: '600',
-        }}>
-        {' '}
-        Call
-      </Text>
+      <Text style={styles.voidButtonText}>Call</Text>
     </TouchableOpacity>
   );
 };
@@ -100,30 +91,21 @@ export const ContactTabcomp = ({onPressContact}) => {
 export const DirectionsTabComp = () => {
   return (
     // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton1}>
-    <TouchableOpacity style={styles.voidButton1}>
+    <TouchableOpacity style={[styles.voidButton1, styles.button]}>
       <BackgroundSmallFlowerUser />
-      <Text
-        style={{
-          color: '#CC4501',
-          marginLeft: '24%',
-          fontSize: 14,
-          fontWeight: '600',
-        }}>
-        {' '}
-        Become a Mentor
-      </Text>
+      <Text style={styles.voidButton1Text}>Become a Mentor</Text>
     </TouchableOpacity>
     // </LinearGradient>
   );
 };
 export const CreateFeedTabComp = ({roleId, onPlusPress}) => {
   return (
-    <>
+    <View style={styles.feedContainer}>
       {roleId === 'ROLE_ITEM_ADMIN' && (
         <TouchableOpacity onPress={onPlusPress}>
           <AntDesign name="pluscircleo" size={30} color={'#FFA001'} />
         </TouchableOpacity>
       )}
-    </>
+    </View>
   );
 };

@@ -12,18 +12,28 @@ export const styles = StyleSheet.create({
     width: 100,
     borderRadius: 20,
     marginRight: 10,
-    borderWidth: 0.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
+  voidButtonText: {
+    color: '#CC4501',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+
   voidButton1: {
     flexDirection: 'row',
     height: 40,
     width: 170,
     borderRadius: 20,
     marginRight: 10,
-    borderWidth: 0.5,
     alignItems: 'center',
+  },
+  voidButton1Text: {
+    color: '#CC4501',
+    marginLeft: '24%',
+    fontSize: 14,
+    fontWeight: '600',
   },
   followLoader: {
     width: 105,
@@ -44,4 +54,24 @@ export const styles = StyleSheet.create({
     lineHeight: 18,
     fontWeight: 'bold',
   },
+  button:{
+    borderWidth:1,
+    borderTopColor:'rgba(204, 69, 1, 0.4)',
+    borderBottomColor:colors.white,
+    borderLeftColor:'rgba(204,69,1,0.4)',
+    borderRightColor:colors.white,
+    elevation:3,
+    backgroundColor:'white',
+    shadowColor: 'black', // Shadow color
+    shadowOffset: { width: 2, height: 2 }, // Shadow offset
+    marginBottom:'1%',
+    marginTop:'1%',
+  },
+  feedContainer:{
+    alignItems:'center',
+    alignSelf:'center', 
+  },
+  followingContainer:{
+    alignSelf:'center',
+  }
 });

@@ -20,10 +20,12 @@ import {Ellipsis} from '../../components';
 const FollowersMembership = ({route, navigation}) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [searchedText, setSearchedText] = useState();
+  const [searchedText, setSearchedText] = useState("");
   const [filteredData, setFilteredData] = useState(followersList);
   const {id} = route.params || {};
   const [followersFirstName, setFollowersFirstName] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
 
   console.log('id', id);
   let TempleFolowers = async () => {
@@ -49,13 +51,14 @@ const FollowersMembership = ({route, navigation}) => {
   }, [route]);
 
   const handleSearch = query => {
-    console.log(query);
-    console.log('followersFirstName => ' + followerFirstName);
-    // const filtered = followersList.filter(item =>
-    //   item.firstName.toLowerCase().includes(query.toLowerCase),
-    // );
-    // setFilteredData(filtered);
-    console.log('filtered data => ' + filteredData);
+    setLoading(true);
+    const filteredUserData = followersList.filter(item =>
+      item.user.firstName.toLowerCase().includes(query.toLowerCase()),
+    );
+    setFilteredData(filteredUserData);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
   };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -73,25 +76,21 @@ const FollowersMembership = ({route, navigation}) => {
           <View style={styles.searchContainer}>
             <SearchBar
               value={searchedText}
-              onTextChange={e => {
-                // setSearchedText(e);
-                // // FilteredList(e);
-                // SearchPopTemp(e);
-                handleSearch(e);
+              onTextChange={text => {
+                setSearchedText(text);
+                handleSearch(text);
               }}
-              // loading={searchLoading}
-              // onCrossPress={async () => {
-              //   setSearchedText('');
-              //   await PopularTemplesss(pageNo, 20);
-              // }}
-              // // onSubmit={FilteredList}
+              loading={loading}
+              onCrossPress={() => {
+                setSearchedText('');
+                setFilteredData([]);
+              }}
               placeHolder={'Search here'}
               style={styles.customSearch}
-              showCrossPress={false}
+              showCrossPress={true}
               bgColor={colors.white}
               brColor={colors.gray2}
               brWidth={1}
-              // srHeight={"100%"}
             />
           </View>
           <View style={styles.sortContainer}>
@@ -105,31 +104,55 @@ const FollowersMembership = ({route, navigation}) => {
           </View>
         </View>
         <View style={styles.followersContainer}>
-          {!followersList?.length > 0 ? (
+          {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
-            <ScrollView showsVerticalScrollIndicator={false}>
-              <FlatList
-                style={styles.list}
-                data={followersList}
-                contentContainerStyle={styles.flatListStyle}
-                keyExtractor={({item, index}) => index}
-                renderItem={({item, index}) => (
-                  <FollowersListCard2
-                    name={item?.user?.firstName}
-                    img={item?.user?.url}
-                    data={item?.user}
-                    donation={item?.user?.donation}
+            <>
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {searchedText === '' && (
+                  <FlatList
+                    style={styles.list}
+                    data={followersList}
+                    contentContainerStyle={styles.flatListStyle}
+                    keyExtractor={(item, index) => item.user.id.toString()}
+                    renderItem={({item}) => (
+                      <FollowersListCard2
+                        name={item.user.firstName}
+                        img={item.user.url}
+                        data={item.user}
+                        donation={item.user.donation}
+                      />
+                    )}
                   />
                 )}
-              />
-            </ScrollView>
+              </ScrollView>
+
+              <ScrollView style={{height: searchedText ? '85%' : 0}}>
+                {searchedText && filteredData.length > 0 ? (
+                  <FlatList
+                    style={styles.list}
+                    data={filteredData}
+                    contentContainerStyle={styles.flatListStyle}
+                    keyExtractor={item => item.user.id.toString()}
+                    renderItem={({item}) => (
+                      <FollowersListCard2
+                        name={item.user.firstName}
+                        img={item.user.url}
+                        data={item.user}
+                        donation={item.user.donation}
+                      />
+                    )}
+                  />
+                ) : (
+                  <View style={styles.noDataContainer}>
+                    <Text style={styles.noDataText}>
+                      No Followers to Display
+                    </Text>
+                  </View>
+                )}
+              </ScrollView>
+            </>
           )}
-        </View>
-        <View>
-          {filteredData.map((e, idx) => {
-            <Text>{e.firstName}</Text>;
-          })}
         </View>
       </View>
     </SafeAreaView>

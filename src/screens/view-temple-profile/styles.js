@@ -129,4 +129,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  horizontalContainer:{
+    // padding:"2%",
+    display:'flex',
+  },
+  followingContainer:{
+    borderWidth:20,
+  }
 });
