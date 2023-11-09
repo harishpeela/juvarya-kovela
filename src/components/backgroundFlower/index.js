@@ -77,7 +77,7 @@ export const BackgroundSmallFlowerRs = () => {
         marginLeft: 10,
         marginTop: -5,
       }}>
-      <Text>₹</Text>
+      <Text style={{color: '#CC4501'}}>₹</Text>
     </ImageBackground>
   );
 };
