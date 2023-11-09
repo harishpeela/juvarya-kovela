@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ImageBackground,
+  useColorScheme,
 } from 'react-native';
 import {BackgroundSmallFlower} from '../backgroundFlower';
 import LinearGradient from 'react-native-linear-gradient';
@@ -28,6 +29,7 @@ export const ProfileFirstTab = ({
   itemCommunity,
   followCount,
 }) => {
+
   return (
     <View style={styles.infoContainer}>
       <Image source={{uri: profileImg}} style={styles.profileView} />
@@ -60,6 +62,7 @@ export const ProfileFirstTab = ({
   );
 };
 export const ProfileSeconTab = ({title, nameData}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <>
       <View style={styles.subFooterHead}>
@@ -69,7 +72,10 @@ export const ProfileSeconTab = ({title, nameData}) => {
       </View>
 
       <View style={styles.footerBody}>
-        <Text style={styles.desciption}>{nameData?.description}</Text>
+        <Text
+          style={{...styles.desciption, color: isDarkMode ? 'gray' : 'gray'}}>
+          {nameData?.description}
+        </Text>
         {/* •  */}
       </View>
     </>

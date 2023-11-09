@@ -48,7 +48,7 @@ export default BottomTabBase = ({navigation}) => {
         }}>
         <Tab.Screen
           name={allTexts.tabNames.home}
-          component={GetHomeScreen}
+          component={UserFeedScreen}
           options={{
             tabBarIcon: ({color, size}) => (
               <>
