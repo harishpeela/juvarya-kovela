@@ -316,9 +316,15 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View>
             <View style={styles.followtab}>
               <ScrollView
+              alignSelf="center"
+              // justifyContent="center"
+              align
                 horizontal={true}
-                showsHorizontalScrollIndicator={false}>
+                showsHorizontalScrollIndicator={false}
+                style={styles.horizontalContainer}
+                >
                 <FolloUnfollowComp
+                style={styles.followingContainer}
                   followBtnDisable={followBtnDisable}
                   followTemples={() => FOLLOW(trfData?.jtProfile)}
                   followVisible={followVisible}

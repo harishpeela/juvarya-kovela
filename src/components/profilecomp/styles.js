@@ -52,6 +52,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
   },
+  Icon:{
+    // borderWidth:2,
+    borderColor:'red',
+    alignContent:'center',
+    alignSelf:'center',
+    color:colors.gray2
+  },
   followLoader: {
     width: 105,
     padding: 10,
@@ -65,7 +72,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: 10,
     borderColor: '#585858',
-    borderWidth: 1,
     marginRight: 7,
     text: {
       fontSize: 13,
@@ -77,23 +83,28 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    paddingTop: 20,
-    // marginBottom: 10,
-    borderBottomWidth: 0.2,
-    justifyContent: 'space-around',
+    marginTop:'2%',
+    width:'100%',
+    // borderBottomWidth: 0.5,
+    marginBottom:'0.5%',
+    justifyContent: 'space-between',
+    padding:'1%',
+    alignItems:'center',
     item: {
-      alignItems: 'center',
-      width: 80,
+      width: "22%",
       flexDirection: 'row',
-      justifyContent: 'space-around',
+      justifyContent: 'center',
+      alignItems:'center',
+      // borderWidth:1,
+      paddingVertical:4,
       text: {
-        paddingVertical: 5,
         fontSize: 18,
-        marginLeft: 5,
       },
-      selectedText: {
-        paddingVertical: 5,
-      },
+      postText:{
+        fontSize: 16,
+        marginLeft:"10%",
+      }
+      
     },
   },
 });

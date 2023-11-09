@@ -79,6 +79,10 @@ import {
 import {Danation_Add_Card} from './donationCard';
 import {Donation_first_Tab} from './donation-comp/comp-firstTab';
 import {Donation_Second_Tab} from './donation-comp/comp-firstTab/donation-second_Tab';
+import Ellipsis from './ellipsis';
+import Sort from './sort';
+import FollowersListCard2 from './FollowersListCard2';
+
 export {
   Loader,
   SearchBar,
@@ -133,7 +137,7 @@ export {
   PopularTemplesList,
   ProfileImage,
   PostsComp,
-  FavTempleListCard,
+  FavTempleListCard, 
   FollowersListCard,
   Item,
   Item1,
@@ -151,4 +155,7 @@ export {
   Donation_first_Tab,
   Donation_Second_Tab,
   BackgroundSmallFlowerRs,
+  Ellipsis,
+  Sort,
+  FollowersListCard2,
 };

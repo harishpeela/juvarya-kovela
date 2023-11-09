@@ -29,7 +29,6 @@ const Splash = ({navigation}) => {
       console.log(error);
     }
   };
-
   return (
     <ImageBackground
       resizeMode="cover"

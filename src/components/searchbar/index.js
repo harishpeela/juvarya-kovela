@@ -15,6 +15,10 @@ export const SearchBar = ({
   placeHolder,
   loading,
   onCrossPress,
+  showCrossPress,
+  brColor,
+  brWidth,
+  srHeight,
 }) => {
   return (
     <View>
@@ -22,6 +26,9 @@ export const SearchBar = ({
         style={[
           styles.searchContainer,
           {backgroundColor: bgColor ? bgColor : colors.gray4},
+          {borderWidth : brWidth ? brWidth : 0},
+          {borderColor : brColor ? brColor : colors.white},
+          {height: srHeight ? srHeight : 50}
         ]}>
         <View style={styles.iconContainer}>
           <Icon name="search1" size={20} color={colors.gray} />
@@ -33,17 +40,24 @@ export const SearchBar = ({
             value={value}
             // maxLength={25}
             onSubmitEditing={onSubmit}
+            autoCapitalize={false}
           />
-
           {loading && <Loader size={25} color={colors.green2} />}
-          {value !== '' && !loading && (
-            <Feather
-              onPress={onCrossPress}
-              name="x-circle"
-              color={colors.orangeColor}
-              size={25}
-            />
+          {showCrossPress === true ? (
+            <>
+              {value !== '' && !loading && (
+                <Feather
+                  onPress={onCrossPress}
+                  name="x-circle"
+                  color={colors.orangeColor}
+                  size={25}
+                />
+              )}
+            </>
+          ) : (
+            <></>
           )}
+
           {/* <IconVoice name="keyboard-voice" size={25} /> */}
         </View>
       </View>
