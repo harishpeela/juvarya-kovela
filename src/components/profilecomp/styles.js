@@ -53,11 +53,9 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
   },
   Icon:{
-    // borderWidth:2,
     borderColor:'red',
     alignContent:'center',
     alignSelf:'center',
-    color:colors.gray2
   },
   followLoader: {
     width: 105,
@@ -78,6 +76,9 @@ export const styles = StyleSheet.create({
       fontWeight: '600',
       color: '#000',
     },
+  },
+  controlPanelContainer:{
+    // borderWidth:1,
   },
   controlPanel: {
     flexDirection: 'row',

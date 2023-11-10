@@ -6,6 +6,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {colors} from '../../common';
 
+
 export const BackHeaderNew = ({txtColor,onPress, txt, isPlus, onPlusPress}) => {
   return (
     <View style={{}}>
@@ -13,7 +14,7 @@ export const BackHeaderNew = ({txtColor,onPress, txt, isPlus, onPlusPress}) => {
         <TouchableOpacity onPress={onPress}>
           <Feather name="arrow-left-circle" color={txtColor === undefined ? (<></>):txtColor} size={28} />
         </TouchableOpacity>
-        <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10, color:txtColor === undefined ? (<></>):txtColor }}>
+        <Text style={{fontSize: 18, fontWeight: '500', marginHorizontal: 10, color:txtColor === undefined ? (<></>):txtColor }}>
           {txt}
         </Text>
         {isPlus && (

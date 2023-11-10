@@ -87,4 +87,7 @@ const colors = {
   red4: '#DD1E0C',
   shadowColor:'rgba(0, 0, 0, 0.24)'
 };
-export {fontSize, fontFamily, window, colors};
+const timer = {
+  loaderTime:3000,
+}
+export {fontSize,timer, fontFamily, window, colors};

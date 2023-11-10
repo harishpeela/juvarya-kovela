@@ -62,7 +62,6 @@ const FollowersMembership = ({route, navigation}) => {
   };
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View></View>
       <View style={styles.followersHeader}>
         <BackHeaderNew
           txt={`${followersList?.length} Followers`}
