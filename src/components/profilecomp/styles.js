@@ -79,6 +79,9 @@ export const styles = StyleSheet.create({
       color: '#000',
     },
   },
+  controlPanelContainer:{
+    // borderWidth:1,
+  },
   controlPanel: {
     flexDirection: 'row',
     flexWrap: 'wrap',

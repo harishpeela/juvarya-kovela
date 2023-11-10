@@ -42,7 +42,7 @@ import {
   Donations,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, useNavigation} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
@@ -54,6 +54,7 @@ import {getHomeFeedList, getUserInfoNew, GetMyTemples} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
+
 
 const App = () => {
   const {
@@ -99,7 +100,6 @@ const App = () => {
       donations,
     },
   } = allTexts;
-
   useEffect(() => {
     getLoginDetails();
   }, []);
@@ -149,10 +149,16 @@ const App = () => {
       </Stack.Navigator>
     );
   };
-
   const HomeStack = () => {
     return (
       <Stack.Navigator initialRouteName="BottomTab">
+         <Stack.Screen
+          name={splash}
+          component={Splash}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
@@ -411,6 +417,7 @@ const App = () => {
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
     setLoginDetails(authDetails);
+    console.log('saiii ------------>>>>>>>>>>>>>>>>>');
   };
 
   const ApiData = async () => {

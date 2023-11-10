@@ -385,7 +385,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 numColumns={3}
                 data={postImages}
                 keyExtractor={({item, index}) => index}
-                style={{width: '100%'}}
+                style={styles.ImagesContainer}
                 renderItem={({item, index}) => (
                   <TempleProfile_PostsCard nav={navigation} item={item} />
                 )}
@@ -415,13 +415,14 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             )}
             {!eventsData?.length > 0 ? (
-              <View>
+              <View >
                 <Feather name="camera-off" size={40} style={styles.noPosts} />
                 <Text style={styles.noPosts.text}>No Events Yet</Text>
               </View>
             ) : (
               <FlatList
                 data={eventsData}
+                style={styles.ImagesContainer}
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
                   <TouchableOpacity style={styles.eventsCard}>

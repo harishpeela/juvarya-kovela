@@ -7,7 +7,7 @@ import {Formik} from 'formik';
 import {styles} from './styles.js';
 import Signup, {KovelaIcon} from '../sign-up';
 import Icon from 'react-native-vector-icons/Feather';
-import {loginUser1, getUserInfoNew} from '../../utils/api';
+import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
   saveLoginSessionDetails,
@@ -16,7 +16,11 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 
+
+
 const Signin = ({navigation}) => {
+  const [homeFeedListData, getHomeFeedListData] = useState([]);
+
   const {
     buttonTexts: {login, sigup},
     paragraphs: {dontHaveAccount},
@@ -75,6 +79,30 @@ const Signin = ({navigation}) => {
       actions.setSubmitting(false);
     }
   };
+
+  const getFollowedTempleList = async () => {
+    try {
+      let response = await getHomeFeedList(0, 100);
+      if (response && response.status === 200) {
+        const {
+          data: {jtFeeds},
+        } = response;
+        getHomeFeedListData(jtFeeds);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const onChangeNavigation = () =>{
+    getFollowedTempleList();
+    console.log("Login is Trigerring ");
+    if(getHomeFeedListData.length > 0){
+      navigation.navigate(allTexts.screenNames.homeDetails);
+    }else{
+      navigation.navigate(allTexts.tabNames.search);
+    }
+
+  }
 
   return (
     <SafeAreaView style={styles.wrapper}>
