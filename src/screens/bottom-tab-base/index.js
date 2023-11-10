@@ -182,7 +182,7 @@ export default BottomTabBase = ({navigation}) => {
         // For now, let's simulate a delay of 5 seconds
         await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
         // After 5 seconds, hide SplashScreen and show tabs
-        setShowTabs(true);
+        setShowTabs(true);+89 
         // SplashScreen.hide();
       } catch (error) {
         console.error('Error loading tabs:', error);
