@@ -14,7 +14,6 @@ import {
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getHomeFeedList} from '../../utils/api';
 import {Loader} from '../../components';
@@ -22,8 +21,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {useNavigation} from '@react-navigation/native';
 import LoadingDots from 'react-native-loading-dots';
 import {styles} from './style';
-import { timer } from '../../common/theme';
-
+import {timer} from '../../common/theme';
 
 // import {ActivityIndicator} from '@react-native-material/core';
 const Tab = createBottomTabNavigator();
@@ -196,39 +194,41 @@ export default BottomTabBase = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-      {showTabs ? (
-        <Tab.Navigator
-          initialRouteName={
-            feedLength ? allTexts.tabNames.home : allTexts.tabNames.search
-          }
-          tabBarOptions={{
-            activeTintColor: colors.orangeColor,
-            keyboardHidesTabBar: true,
-            showLabel: false,
-          }}>
-          <Tab.Screen
-            name={allTexts.tabNames.home}
-            component={GetHomeScreen}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <FoundationIcon name="home" color={color} size={30} />
-                </>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name={allTexts.tabNames.search}
-            component={Search}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <FeatherIcon name="search" color={color} size={30} />
-                </>
-              ),
-            }}
-          />
-          {/* <Tab.Screen
+      <Tab.Navigator
+        initialRouteName={
+          GetFavList() ? allTexts.tabNames.home : allTexts.tabNames.search
+          // !favoriteList?.length
+          //   ? allTexts.tabNames.search
+          //   : allTexts.tabNames.home
+        }
+        tabBarOptions={{
+          activeTintColor: colors.orangeColor,
+          keyboardHidesTabBar: true,
+          showLabel: false,
+        }}>
+        <Tab.Screen
+          name={allTexts.tabNames.home}
+          component={UserFeedScreen}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <>
+                <FoundationIcon name="home" color={color} size={30} />
+              </>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={allTexts.tabNames.search}
+          component={Search}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <>
+                <FeatherIcon name="search" color={color} size={30} />
+              </>
+            ),
+          }}
+        />
+        {/* <Tab.Screen
           name={allTexts.tabNames.ticket}
           component={TicketConfirmation}
           options={{
@@ -243,41 +243,46 @@ export default BottomTabBase = ({navigation}) => {
             ),
           }}
         /> */}
-          <Tab.Screen
-            name={allTexts.tabNames.favorites}
-            component={GetFavScreen}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <FontistoIcon name="heart-alt" color={color} size={25} />
-                </>
-              ),
-            }}
-          />
-          <Tab.Screen
-            name={allTexts.tabNames.profile}
-            component={GetProfileScreen}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <FeatherIcon name="user" color={color} size={30} />
-                </>
-              ),
-            }}
-          />
-        </Tab.Navigator>
+        <Tab.Screen
+          name={allTexts.tabNames.favorites}
+          component={GetFavScreen}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <>
+                <FontistoIcon name="heart-alt" color={color} size={25} />
+              </>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name={allTexts.tabNames.profile}
+          component={GetProfileScreen}
+          options={{
+            tabBarIcon: ({color, size}) => (
+              <>
+                <FeatherIcon name="user" color={color} size={30} />
+              </>
+            ),
+          }}
+        />
+      </Tab.Navigator>
       ) : (
-        <View style={styles.loadingScreen}>
-          <View style={styles.dotsWrapper}>
-            {/* <Text>Loading</Text> */}
-            <LoadingDots
-              size={15}
-              bounceHeight={17}
-              dots={4}
-              colors={[colors.orangeColor, colors.orangeColor, colors.orangeColor, colors.orangeColor]}
-            />
-          </View>
+      <View style={styles.loadingScreen}>
+        <View style={styles.dotsWrapper}>
+          {/* <Text>Loading</Text> */}
+          <LoadingDots
+            size={15}
+            bounceHeight={17}
+            dots={4}
+            colors={[
+              colors.orangeColor,
+              colors.orangeColor,
+              colors.orangeColor,
+              colors.orangeColor,
+            ]}
+          />
         </View>
+      </View>
       )}
     </SafeAreaView>
   );

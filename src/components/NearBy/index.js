@@ -77,7 +77,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
             // FilteredList(e);
             SearchPopTemp(e);
           }}
-          loading={setSearchLoading}
+          loading={false}
           onCrossPress={async () => {
             setSearchedText('');
             await PopularTemplesss(pageNo, 20);
@@ -157,7 +157,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
               ) : (
                 <View style={{alignItems: 'center'}}>
                   <Text style={{fontSize: 18, color: 'black'}}>
-                    no Temples to Display
+                    No Temples to Display
                   </Text>
                 </View>
               )}

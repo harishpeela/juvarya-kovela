@@ -321,8 +321,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 align
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
-                // style={styles.horizontalContainer}
-                >
+                style={styles.horizontalContainer}>
                 <FolloUnfollowComp
                   style={styles.followingContainer}
                   followBtnDisable={followBtnDisable}
