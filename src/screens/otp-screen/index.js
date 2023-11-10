@@ -146,7 +146,6 @@ const OTPScreen = ({navigation, route}) => {
       alert(error);
     }
   };
-
   return (
     <View style={styles.wrapper}>
       <View style={styles.topContainer}>
@@ -181,7 +180,6 @@ const OTPScreen = ({navigation, route}) => {
             <Text style={styles.black}>{` ${timer} seconds`}</Text>
           </Text>
         )}
-
         <PrimaryButton
           text={'Continue'}
           loading={loading}

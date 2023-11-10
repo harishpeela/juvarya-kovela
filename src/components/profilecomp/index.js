@@ -308,44 +308,45 @@ export const ProfileFourthTab = ({
   templeDetails,
 }) => {
   return (
-    <View style={styles.controlPanel}>
-      <Pressable
-        style={{
-          ...styles.controlPanel.item,
-          borderBottomWidth: currentIndex === 1 ? 2 : 0,
-          borderColor: currentIndex === 1 ? '#CC4501' : null,
-        }}
-        onPress={() => setCurrentIndex(1)}>
-        <Feather
-          name="grid"
-          color={currentIndex === 1 ? '#CC4501' : '#585858'}
-          size={24}
-          styles={styles.Icon}
-        />
-        <Text
-          style={{
-            ...styles.controlPanel.item.postText,
-            color: currentIndex === 1 ? '#CC4501' : '#585858',
-            // textDecorationLine: 'red',
-          }}>
-          POSTS
-        </Text>
-      </Pressable>
-      {templeDetails && (
+    <View style={styles.controlPanelContainer}>
+      <View style={styles.controlPanel}>
         <Pressable
           style={{
             ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 4 ? 2 : 0,
-            borderColor: currentIndex === 4 ? '#CC4501' : null,
+            borderBottomWidth: currentIndex === 1 ? 2 : 0,
+            borderColor: currentIndex === 1 ? '#CC4501' : null,
           }}
-          onPress={() => setCurrentIndex(4)}>
-          <Ionicons
-            name="location-outline"
-            color={currentIndex === 4 ? '#CC4501' : '#585858'}
+          onPress={() => setCurrentIndex(1)}>
+          <Feather
+            name="grid"
+            color={currentIndex === 1 ? '#CC4501' : colors.gray2}
             size={24}
-            style={styles.Icon}
+            styles={styles.Icon}
           />
-          {/* <Image
+          <Text
+            style={{
+              ...styles.controlPanel.item.postText,
+              color: currentIndex === 1 ? '#CC4501' : colors.gray2,
+              // textDecorationLine: 'red',
+            }}>
+            POSTS
+          </Text>
+        </Pressable>
+        {templeDetails && (
+          <Pressable
+            style={{
+              ...styles.controlPanel.item,
+              borderBottomWidth: currentIndex === 4 ? 2 : 0,
+              borderColor: currentIndex === 4 ? '#CC4501' : null,
+            }}
+            onPress={() => setCurrentIndex(4)}>
+            <Ionicons
+              name="location-outline"
+              color={currentIndex === 4 ? '#CC4501' : colors.gray2}
+              size={24}
+              style={styles.Icon}
+            />
+            {/* <Image
             source={require('../../../assets/images/location.png')}
             style={{
               height: 20,
@@ -353,86 +354,86 @@ export const ProfileFourthTab = ({
               tintColor: currentIndex === 4 ? '#CC4501' : '#585858',
             }}
           /> */}
-          {/* <Text
+            {/* <Text
             style={{
               ...styles.controlPanel.item.text,
               color: currentIndex === 4 ? '#CC4501' : '#585858',
             }}>
             Events
           </Text> */}
-        </Pressable>
-      )}
-      {templeDetails?.reelsEnabled && (
-        <Pressable
-          style={{
-            ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 2 ? 1 : 0,
-            borderColor: currentIndex === 2 ? '#CC4501' : null,
-          }}>
-          <MaterialCommunityIcons
-            name="movie-open-outline"
-            color={currentIndex === 2 ? '#CC4501' : '#585858'}
-            size={24}
-            style={styles.Icon}
-          />
-          <Text
+          </Pressable>
+        )}
+        {templeDetails?.reelsEnabled && (
+          <Pressable
             style={{
-              ...styles.controlPanel.item.text,
-              color: currentIndex === 2 ? '#CC4501' : '#585858',
+              ...styles.controlPanel.item,
+              borderBottomWidth: currentIndex === 2 ? 1 : 0,
+              borderColor: currentIndex === 2 ? '#CC4501' : null,
             }}>
-            Reels
-          </Text>
-        </Pressable>
-      )}
-      {templeDetails?.servicesEnabled && (
-        <Pressable
-          style={{
-            ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 3 ? 2 : 0,
-            borderColor: currentIndex === 3 ? '#CC4501' : null,
-           
-          }}
-          onPress={() => setCurrentIndex(3)}>
-          <AntDesign
-            name="clockcircleo"
-            color={currentIndex === 3 ? '#CC4501' : '#585858'}
-            size={24}
-            style={styles.Icon}
-          />
-          {/* <Text
+            <MaterialCommunityIcons
+              name="movie-open-outline"
+              color={currentIndex === 2 ? '#CC4501' : colors.gray2}
+              size={24}
+              style={styles.Icon}
+            />
+            <Text
+              style={{
+                ...styles.controlPanel.item.text,
+                color: currentIndex === 2 ? '#CC4501' : '#585858',
+              }}>
+              Reels
+            </Text>
+          </Pressable>
+        )}
+        {templeDetails?.servicesEnabled && (
+          <Pressable
+            style={{
+              ...styles.controlPanel.item,
+              borderBottomWidth: currentIndex === 3 ? 2 : 0,
+              borderColor: currentIndex === 3 ? '#CC4501' : null,
+            }}
+            onPress={() => setCurrentIndex(3)}>
+            <AntDesign
+              name="clockcircleo"
+              color={currentIndex === 3 ? '#CC4501' : colors.gray2}
+              size={24}
+              style={styles.Icon}
+            />
+            {/* <Text
             style={{
               ...styles.controlPanel.item.text,
               color: currentIndex === 2 ? '#CC4501' : '#585858',
             }}>
             Reels
           </Text> */}
-        </Pressable>
-      )}
+          </Pressable>
+        )}
 
-      {/* {templeDetails?.donationsEnabled && ( */}
-      {templeDetails && (
-        <Pressable
-          style={{
-            ...styles.controlPanel.item,
-            borderBottomWidth: currentIndex === 5 ? 2 : 0,
-            borderColor: currentIndex === 5 ? '#CC4501' : null,
-          }}
-          onPress={() => setCurrentIndex(5)}>
-          <Feather
-            name="users"
-            color={currentIndex === 5 ? '#CC4501' : '#585858'}
-            size={24}
-            style={styles.Icon}
-          />
-          {/* <Text
+        {/* {templeDetails?.donationsEnabled && ( */}
+        {templeDetails && (
+          <Pressable
+            style={{
+              ...styles.controlPanel.item,
+              borderBottomWidth: currentIndex === 5 ? 2 : 0,
+              borderColor: currentIndex === 5 ? '#CC4501' : null,
+            }}
+            onPress={() => setCurrentIndex(5)}>
+            <Feather
+              name="users"
+              color={currentIndex === 5 ? '#CC4501' : colors.gray2}
+              size={24}
+              style={styles.Icon}
+            />
+            {/* <Text
             style={{
               ...styles.controlPanel.item.text,
               color: currentIndex === 5 ? '#CC4501' : '#585858',
             }}>
             Donate
           </Text> */}
-        </Pressable>
-      )}
+          </Pressable>
+        )}
+      </View>
     </View>
   );
 };

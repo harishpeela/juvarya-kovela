@@ -55,16 +55,12 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button:{
-    borderWidth:1,
-    borderTopColor:'rgba(204, 69, 1, 0.4)',
-    borderBottomColor:colors.white,
-    borderLeftColor:'rgba(204,69,1,0.4)',
-    borderRightColor:colors.white,
-    elevation:3,
+    elevation:2,
     backgroundColor:'white',
     shadowColor: 'black', // Shadow color
     shadowOffset: { width: 2, height: 2 }, // Shadow offset
     marginBottom:'1%',
+    // padding:10,
     marginTop:'1%',
   },
   feedContainer:{
