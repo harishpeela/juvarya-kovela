@@ -7306,6 +7306,7 @@
     "prop-types" "^15.6.2"
     "react-native-iphone-x-helper" "^1.0.3"
 
+<<<<<<< HEAD
 react-native-linear-gradient@^2.8.3:
   version "2.8.3"
   resolved "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
@@ -7315,6 +7316,22 @@ react-native-modal-datetime-picker@^14.0.1:
   version "14.0.1"
   resolved "https://registry.npmjs.org/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-14.0.1.tgz"
   integrity sha512-wQt4Pjxt2jiTsVhLMG0E7WrRTYBEQx2d/nUrFVCbRqJ7lrXocXaT5UZsyMpV93TnKcyut62OprbO88wYq/vh0g==
+=======
+"react-native-linear-gradient@^2.8.3":
+  "integrity" "sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA=="
+  "resolved" "https://registry.npmjs.org/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz"
+  "version" "2.8.3"
+
+"react-native-loading-dots@^1.4.0":
+  "integrity" "sha512-tBwohgwK7+oM+QX2JJzwIrKeC9vP8jgetxHVUxgNUDLR+38mAX2jQZwbunwkBSjQy12xuNfBqDW6wucLBvAfYA=="
+  "resolved" "https://registry.npmjs.org/react-native-loading-dots/-/react-native-loading-dots-1.4.0.tgz"
+  "version" "1.4.0"
+
+"react-native-modal-datetime-picker@^14.0.1":
+  "integrity" "sha512-wQt4Pjxt2jiTsVhLMG0E7WrRTYBEQx2d/nUrFVCbRqJ7lrXocXaT5UZsyMpV93TnKcyut62OprbO88wYq/vh0g=="
+  "resolved" "https://registry.npmjs.org/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-14.0.1.tgz"
+  "version" "14.0.1"
+>>>>>>> 6eb4c2558c00b687c3161dbe9dd85e6f4cb1e36a
   dependencies:
     "prop-types" "^15.7.2"
 
@@ -7342,10 +7359,12 @@ react-native-modal-datetime-picker@^14.0.1:
   "integrity" "sha512-/QnujrXSNyXasv7v8K3eu5Z4XGRYMPRa0+x0RjNr6Z5/KEuPHwrg1Xm7UZ2YSm6jCF2b1BW6ceqP/1d626gvhQ=="
   "resolved" "https://registry.npmjs.org/react-native-reanimated/-/react-native-reanimated-2.11.0.tgz"
   "version" "2.11.0"
+
   dependencies:
     "@babel/plugin-transform-object-assign" "^7.16.7"
     "@babel/preset-typescript" "^7.16.7"
     "@types/invariant" "^2.2.35"
+
     "invariant" "^2.2.4"
     "lodash.isequal" "^4.5.0"
     "setimmediate" "^1.0.5"
@@ -7420,10 +7439,18 @@ react-native-modal-datetime-picker@^14.0.1:
     "prop-types" "^15.7.2"
     "shaka-player" "^2.5.9"
 
+<<<<<<< HEAD
 react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", react-native@>=0.20.0, react-native@>=0.42.0, react-native@>=0.47.1, react-native@>=0.48.4, react-native@>=0.50.0, react-native@>=0.57, react-native@>=0.57.0, react-native@>=0.60, react-native@>=0.60.0, react-native@>=0.65.0, react-native@0.70.0:
   version "0.70.0"
   resolved "https://registry.npmjs.org/react-native/-/react-native-0.70.0.tgz"
   integrity sha512-QjXLbrK9f+/B2eCzn6kAvglLV/8nwPuFGaFv7ggPpAzFRyx5bVN1dwQLHL3MrP7iXR/M7Jc6Nnid7tmRSic6vA==
+=======
+"react-native@*", "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", "react-native@^0.72.5", "react-native@>=0.20.0", "react-native@>=0.42.0", "react-native@>=0.47.1", "react-native@>=0.48.4", "react-native@>=0.50.0", "react-native@>=0.57", "react-native@>=0.57.0", "react-native@>=0.60", "react-native@>=0.60.0", "react-native@>=0.65.0", "react-native@0.70.0":
+  "integrity" "sha512-QjXLbrK9f+/B2eCzn6kAvglLV/8nwPuFGaFv7ggPpAzFRyx5bVN1dwQLHL3MrP7iXR/M7Jc6Nnid7tmRSic6vA=="
+  "resolved" "https://registry.npmjs.org/react-native/-/react-native-0.70.0.tgz"
+  "version" "0.70.0"
+
+>>>>>>> 6eb4c2558c00b687c3161dbe9dd85e6f4cb1e36a
   dependencies:
     "@jest/create-cache-key-function" "^27.0.1"
     "@react-native-community/cli" "^9.0.0"
@@ -7432,6 +7459,7 @@ react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", react-native
     "@react-native/assets" "1.0.0"
     "@react-native/normalize-color" "2.0.0"
     "@react-native/polyfills" "2.0.0"
+
     "abort-controller" "^3.0.0"
     "anser" "^1.4.9"
     "base64-js" "^1.1.2"
@@ -7480,10 +7508,17 @@ react-native@*, "react-native@^0.0.0-0 || 0.60 - 0.70 || 1000.0.0", react-native
     "react-shallow-renderer" "^16.15.0"
     "scheduler" "^0.22.0"
 
+<<<<<<< HEAD
 react@*, react@^16.0.0, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", react@^18.1.0, "react@>= 16.8.0", react@>=16, react@>=16.0, react@>=16.8.0, react@>=17.0.0, react@18.1.0:
   version "18.1.0"
   resolved "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
   integrity sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ==
+=======
+"react@*", "react@^16.0.0", "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17 || ^18", "react@^18.1.0", "react@^18.2.0", "react@>= 16.8.0", "react@>=16", "react@>=16.0", "react@>=16.8.0", "react@>=17.0.0", "react@18.1.0":
+  "integrity" "sha512-4oL8ivCz5ZEPyclFQXaNksK3adutVS8l2xzZU0cqEFrE9Sb7fC0EFK5uEk74wIreL1DERyjvsU915j1pcT2uEQ=="
+  "resolved" "https://registry.npmjs.org/react/-/react-18.1.0.tgz"
+  "version" "18.1.0"
+>>>>>>> 6eb4c2558c00b687c3161dbe9dd85e6f4cb1e36a
   dependencies:
     "loose-envify" "^1.1.0"
 
@@ -7517,6 +7552,7 @@ react@*, react@^16.0.0, "react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 ||
   "integrity" "sha512-Ug69mNOpfvKDAc2Q8DRpMjjzdtrnv9HcSMX+4VsZxD1aZ6ZzrIE7rlzXBtWTyhULSMKg076AW6WR5iZpD0JiOg=="
   "resolved" "https://registry.npmjs.org/read-pkg/-/read-pkg-5.2.0.tgz"
   "version" "5.2.0"
+
   dependencies:
     "@types/normalize-package-data" "^2.4.0"
     "normalize-package-data" "^2.5.0"
