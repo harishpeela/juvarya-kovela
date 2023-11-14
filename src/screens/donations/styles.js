@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#CC4501',
     alignItems: 'center',
+    marginBottom: 30,
   },
   butText: {
     color: 'white',

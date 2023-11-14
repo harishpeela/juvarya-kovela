@@ -12,9 +12,7 @@ export const Donation_Third_Tab = () => {
         width={100}
         style={styles.img}
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{height: 40, margin: 10}}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{margin: 10}}>
         <Text style={{fontSize: 12}}>
           Lorem ipsum dolor sit amet consectetur. Sollicitudin ipsum bibendum
           nunc integer tellus. In lorem feugiat facilisi ante vitae blandit

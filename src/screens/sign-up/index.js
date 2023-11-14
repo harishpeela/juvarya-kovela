@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-import React, {useEffect, useContext, useState} from 'react';
+import React from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -46,11 +46,11 @@ const Signup = ({navigation}) => {
   } = allTexts;
 
   const UserRegisterHandler = async (data, action) => {
-    let signupPayload = {
+    let LogInPayload = {
       username: data.phone,
       password: data.password,
     };
-    console.log('---> ======>', signupPayload);
+    console.log('---> ======>', LogInPayload);
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data.phone,
@@ -61,7 +61,7 @@ const Signup = ({navigation}) => {
       const {
         data: {primaryContact, otp},
       } = response || {};
-      let result = await loginUser1(signupPayload);
+      let result = await loginUser1(LogInPayload);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
