@@ -11,10 +11,12 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
-import {colors} from '../../../common';
+import SelectDropdown from 'react-native-select-dropdown';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {colors, fontFamily} from '../../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BackgroundSmallFlowerRs} from '../../backgroundFlower';
-export const Donation_Second_Tab = ({VALUE, Data, onChange}) => {
+export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
   const [activeIndex, setActiveIndex] = useState();
 
   return (
@@ -50,6 +52,24 @@ export const Donation_Second_Tab = ({VALUE, Data, onChange}) => {
           </TouchableOpacity>
         )}
       />
+      <View>
+        <SelectDropdown
+          data={dropData}
+          buttonTextStyle={styles.DTextStyle}
+          // defaultValue={isRoleSelected}
+          onSelect={e => {
+            // setIsRoleSelected(e);
+            // setDropDownError(false);
+          }}
+          buttonStyle={styles.DbuttonStyle}
+          defaultButtonText="Donation Type"
+          renderDropdownIcon={() => (
+            <View>
+              <Icon color={colors.white} size={20} name="down" />
+            </View>
+          )}
+        />
+      </View>
       <View style={styles.inputView}>
         <BackgroundSmallFlowerRs />
         <TextInput
@@ -93,7 +113,6 @@ export const Donation_Second_Tab = ({VALUE, Data, onChange}) => {
   );
 };
 const styles = StyleSheet.create({
-  container: {},
   choose: {margin: 10, fontSize: 18, fontWeight: 'bold', color: colors.black},
   flatlist: {
     // borderWidth: 0.5,
@@ -162,5 +181,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#CC4501',
     marginTop: 5,
+  },
+  DTextStyle: {
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 18,
+    color: colors.white,
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+  },
+  DbuttonStyle: {
+    height: 45,
+    width: '90%',
+    borderRadius: 5,
+    backgroundColor: colors.orangeColor,
+    margin: 10,
   },
 });

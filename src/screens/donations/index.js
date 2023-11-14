@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {View, TouchableOpacity, Text} from 'react-native';
+import {View, TouchableOpacity, Text, ScrollView} from 'react-native';
 import {styles} from './styles';
 import {
   BackHeaderNew,
@@ -17,8 +17,16 @@ const Donations = ({navigation}) => {
     // {id: 4, rs: '401'},
     {id: 5, rs: '501'},
   ];
+  let donationType = [
+    'Food',
+    'Prasadam',
+    'Temple',
+    'Roads',
+    'Education',
+    'Others',
+  ];
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <BackHeaderNew txtColor={'black'} onPress={() => navigation.goBack()} />
       </View>
@@ -29,6 +37,7 @@ const Donations = ({navigation}) => {
             VALUE={a => setValue(a)}
             Data={Data}
             onChange={e => setValue(e)}
+            dropData={donationType}
           />
         </View>
         <View style={{marginHorizontal: 10}}>
@@ -38,7 +47,7 @@ const Donations = ({navigation}) => {
           <Text style={styles.butText}> Donate ₹ {value} </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 export default Donations;
