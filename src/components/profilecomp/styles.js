@@ -52,10 +52,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
   },
-  Icon:{
-    borderColor:'red',
-    alignContent:'center',
-    alignSelf:'center',
+  Icon: {
+    borderColor: 'red',
+    alignContent: 'center',
+    alignSelf: 'center',
   },
   followLoader: {
     width: 105,
@@ -77,38 +77,43 @@ export const styles = StyleSheet.create({
       color: '#000',
     },
   },
-  controlPanelContainer:{
-    // borderWidth:1,
+  buttonContainer: {
+    // borderWidth: 5,
+    height: 40,
+    width: 110,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
+    marginRight: 10,
   },
   controlPanel: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    marginTop:'2%',
-    width:'100%',
+    marginTop: '2%',
+    width: '100%',
     // borderBottomWidth: 0.5,
-    marginBottom:'0.5%',
+    marginBottom: '0.5%',
     justifyContent: 'space-between',
-    padding:'1%',
-    alignItems:'center',
+    padding: '1%',
+    alignItems: 'center',
     item: {
-      width: "22%",
+      width: '22%',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems:'center',
+      alignItems: 'center',
       // borderWidth:1,
-      paddingVertical:4,
+      paddingVertical: 4,
       text: {
         fontSize: 18,
       },
-      postText:{
+      postText: {
         fontSize: 16,
-        marginLeft:"10%",
-      }
-      
+        marginLeft: '10%',
+      },
     },
   },
-});
+})
 
 export const style = (bgColor, radius, paddidng, width, borderWidth) =>
   StyleSheet.create({
@@ -130,6 +135,8 @@ export const style = (bgColor, radius, paddidng, width, borderWidth) =>
       borderRadius: 40,
     },
   });
+
+
 export const textStyles = (textColor, fontSize) =>
   StyleSheet.create({
     textTitle: {

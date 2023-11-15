@@ -329,6 +329,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   followTemples={() => FOLLOW(trfData?.jtProfile)}
                   followVisible={followVisible}
                   isFollow={isFollow}
+                  shadow={true}
                 />
                 <ContactTabcomp onPressContact={() => setIsModal(true)} />
                 <DirectionsTabComp />
@@ -343,6 +344,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </ScrollView>
             </View>
             <Danation_Add_Card
+            roleId={roleId}
               onPress={() =>
                 navigation.navigate(allTexts?.screenNames?.donations)
               }

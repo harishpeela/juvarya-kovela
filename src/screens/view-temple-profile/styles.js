@@ -130,13 +130,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   followingContainer:{
-    borderWidth:20,
+    borderWidth:20,    
   },
   ImagesContainer:{
     width:'100%',
     borderTopWidth:1,
     borderTopColor:colors.gray2,
-    paddingTop:'1%',
+    // paddingTop:'1%',
   },
   horizontalContainer:{
     borderWidth:2,

@@ -133,19 +133,17 @@ export const PrimaryButton1 = ({
   width,
   borderWidth,
   isFollow,
+  shadow,
   ...props
 }) => {
   return (
     <LinearGradient
-      colors={['#CC4501', '#CC4501']}
-      style={{
-        height: 40,
-        width: 110,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 18,
-        marginRight: 10,
-      }}>
+    style={[styles.buttonContainer, shadow ? {
+      elevation:3,
+      shadowColor: 'black', // Shadow color
+      shadowOffset: { width:6 , height: 6 }, // Shadow offset
+    }:(0)]}
+      colors={['#CC4501', '#CC4501']} >
       <TouchableOpacity
         onPress={onPress}
         // style={style(bgColor, radius, padding, width, borderWidth).wrapper}

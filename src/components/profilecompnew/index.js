@@ -31,6 +31,7 @@ export const FolloUnfollowComp = ({
   followBtnDisable,
   followTemples,
   isFollow,
+  shadow
 }) => {
   return (
     <View style={styles.followingContainer}>
@@ -44,6 +45,7 @@ export const FolloUnfollowComp = ({
         </View>
       ) : (
         <PrimaryButton1
+
           bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
@@ -59,6 +61,7 @@ export const FolloUnfollowComp = ({
               ? allTexts.buttonTexts.unFollow
               : allTexts.buttonTexts.follow
           }
+          shadow={shadow}
         />
       )}
     </View>

@@ -161,7 +161,9 @@ export const allTexts = {
   },
   other: {
     follow: 'Follow',
-    unfollow:'Unfollow',
+    unfollow: 'Unfollow',
     role: 'role is Required',
+    AdminAccess: 'true',
+    Donation: 'Donation',
   },
 };
