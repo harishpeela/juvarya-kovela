@@ -27,6 +27,7 @@ export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
         showsHorizontalScrollIndicator={false}
         data={Data}
         keyExtractor={({item, index}) => index}
+        style={{alignSelf: 'center'}}
         renderItem={({item, index}) => (
           <TouchableOpacity
             onPress={() => {
@@ -192,8 +193,9 @@ const styles = StyleSheet.create({
   DbuttonStyle: {
     height: 45,
     width: '90%',
-    borderRadius: 5,
+    borderRadius: 30,
     backgroundColor: colors.orangeColor,
     margin: 10,
+    marginHorizontal: 20,
   },
 });

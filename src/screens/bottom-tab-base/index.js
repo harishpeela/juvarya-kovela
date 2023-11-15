@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {colors, allTexts, screenNames, fontSize} from './../../common/index';
+import {colors, allTexts} from './../../common/index';
 import {
   Favorite,
   Profile,
@@ -16,15 +16,10 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
-import {getHomeFeedList} from '../../utils/api';
-import {Loader} from '../../components';
-import SplashScreen from 'react-native-splash-screen';
-import {useNavigation} from '@react-navigation/native';
 import LoadingDots from 'react-native-loading-dots';
 import {styles} from './style';
 import {timer} from '../../common/theme';
 
-// import {ActivityIndicator} from '@react-native-material/core';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
@@ -36,12 +31,11 @@ export default BottomTabBase = ({navigation}) => {
     <TicketConfirmation navigation={navigation} />
   );
   const {favoriteList} = useContext(ApplicationContext);
-  const navigation2 = useNavigation();
   const [showTabs, setShowTabs] = useState(false);
   const [feedLength, setFeedLength] = useState(0);
 
   useEffect(() => {
-    setFeedLength(favoriteList.length);
+    setFeedLength(favoriteList?.length);
   }, [favoriteList, navigation]);
   const [checking, setChecking] = useState(false);
 
@@ -49,16 +43,10 @@ export default BottomTabBase = ({navigation}) => {
     const loadTabs = async () => {
       setChecking(true);
       try {
-        // Your async tasks or conditions to determine when to show/hide tabs
-        // Example: Wait for some data to load
-
-        // For now, let's simulate a delay of 5 seconds
         await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
-        // After 5 seconds, hide SplashScreen and show tabs
         setShowTabs(true);
       } catch (error) {
         console.error('Error loading tabs:', error);
-        // Handle errors here, if necessary
       } finally {
         setChecking(false); // Stop checking
       }
