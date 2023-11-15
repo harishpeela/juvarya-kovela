@@ -22,8 +22,7 @@ import SplashScreen from 'react-native-splash-screen';
 import {useNavigation} from '@react-navigation/native';
 import LoadingDots from 'react-native-loading-dots';
 import {styles} from './style';
-import { timer } from '../../common/theme';
-
+import {timer} from '../../common/theme';
 
 // import {ActivityIndicator} from '@react-native-material/core';
 const Tab = createBottomTabNavigator();
@@ -52,7 +51,6 @@ export default BottomTabBase = ({navigation}) => {
       try {
         // Your async tasks or conditions to determine when to show/hide tabs
         // Example: Wait for some data to load
-    
         // For now, let's simulate a delay of 5 seconds
         await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
         // After 5 seconds, hide SplashScreen and show tabs
@@ -142,12 +140,16 @@ export default BottomTabBase = ({navigation}) => {
       ) : (
         <View style={styles.loadingScreen}>
           <View style={styles.dotsWrapper}>
-            {/* <Text>Loading</Text> */}
             <LoadingDots
               size={15}
               bounceHeight={17}
               dots={4}
-              colors={[colors.orangeColor, colors.orangeColor, colors.orangeColor, colors.orangeColor]}
+              colors={[
+                colors.orangeColor,
+                colors.orangeColor,
+                colors.orangeColor,
+                colors.orangeColor,
+              ]}
             />
           </View>
         </View>

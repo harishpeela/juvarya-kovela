@@ -1,5 +1,4 @@
-
-import { View, StyleSheet } from "react-native";
+import {View, StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
     loadingScreen: {
@@ -14,4 +13,3 @@ export const styles = StyleSheet.create({
       
     },
   });
-  

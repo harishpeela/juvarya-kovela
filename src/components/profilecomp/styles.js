@@ -56,6 +56,7 @@ export const styles = StyleSheet.create({
     borderColor: 'red',
     alignContent: 'center',
     alignSelf: 'center',
+
   },
   followLoader: {
     width: 105,

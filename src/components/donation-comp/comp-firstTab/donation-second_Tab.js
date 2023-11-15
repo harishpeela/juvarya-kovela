@@ -11,20 +11,16 @@ import {
   TextInput,
   ImageBackground,
 } from 'react-native';
-import {colors} from '../../../common';
+import SelectDropdown from 'react-native-select-dropdown';
+import Icon from 'react-native-vector-icons/AntDesign';
+import {colors, fontFamily} from '../../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BackgroundSmallFlowerRs} from '../../backgroundFlower';
-export const Donation_Second_Tab = () => {
+export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
   const [activeIndex, setActiveIndex] = useState();
-  let Data = [
-    {id: 1, rs: '101'},
-    // {id: 2, rs: '201'},
-    {id: 3, rs: '301'},
-    // {id: 4, rs: '401'},
-    {id: 5, rs: '501'},
-  ];
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Text style={styles.choose}>Choose amount</Text>
       <FlatList
         horizontal
@@ -33,13 +29,17 @@ export const Donation_Second_Tab = () => {
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
           <TouchableOpacity
-            onPress={() => setActiveIndex(index)}
+            onPress={() => {
+              setActiveIndex(index);
+              VALUE(item?.rs);
+            }}
             style={{
               ...styles.flatlist,
               backgroundColor: activeIndex === index ? '#CC4501' : colors.white,
             }}>
             <Image
               source={require('../../../../assets/images/smallflower.png')}
+              style={{marginLeft: 5}}
             />
             <Text
               style={{
@@ -52,13 +52,36 @@ export const Donation_Second_Tab = () => {
           </TouchableOpacity>
         )}
       />
+      <View>
+        <SelectDropdown
+          data={dropData}
+          buttonTextStyle={styles.DTextStyle}
+          // defaultValue={isRoleSelected}
+          onSelect={e => {
+            // setIsRoleSelected(e);
+            // setDropDownError(false);
+          }}
+          buttonStyle={styles.DbuttonStyle}
+          defaultButtonText="Donation Type"
+          renderDropdownIcon={() => (
+            <View>
+              <Icon color={colors.white} size={20} name="down" />
+            </View>
+          )}
+        />
+      </View>
       <View style={styles.inputView}>
         <BackgroundSmallFlowerRs />
-        <TextInput placeholder="Other Amount" style={styles.input} />
+        <TextInput
+          placeholder="Other Amount"
+          style={styles.input}
+          keyboardType="number-pad"
+          onChangeText={onChange}
+        />
       </View>
       <View style={styles.border} />
       <View style={styles.donationUser}>
-        <Text style={{color: colors.black}}>
+        <Text style={{color: colors.black, fontSize: 12}}>
           Feature your profile on temple page just by donating an amount more
           than ₹201.
         </Text>
@@ -73,45 +96,49 @@ export const Donation_Second_Tab = () => {
             />
           </ImageBackground>
           <View style={{marginLeft: '4%'}}>
-            <Text style={{color: colors.black, fontWeight: '500'}}>
+            <Text
+              style={{color: colors.black, fontWeight: '500', fontSize: 12}}>
               Top Donation by Savitha Devi
             </Text>
             <TouchableOpacity style={styles.userTouch}>
               <Text style={styles.usertext}>
-                <AntDesign name="star" size={14} color={'#CC4501'} /> Featured
+                <AntDesign name="star" size={12} color={'#CC4501'} /> Featured
                 Profile{' '}
               </Text>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
-  container: {},
   choose: {margin: 10, fontSize: 18, fontWeight: 'bold', color: colors.black},
   flatlist: {
-    borderWidth: 0.5,
-    padding: 10,
+    // borderWidth: 0.5,
+    padding: 5,
     margin: 5,
     width: 100,
     flexDirection: 'row',
     borderRadius: 25,
     marginTop: 10,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 0.8,
+    shadowRadius: 1,
   },
   text: {
     position: 'absolute',
-    top: 13,
-    left: 25,
+    top: 10,
+    left: 20,
     fontSize: 18,
     fontWeight: 'bold',
   },
   inputView: {
-    borderWidth: 0.5,
+    // borderWidth: 0.5,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 2,
+    // padding: 2,
     marginHorizontal: 20,
     marginTop: '2%',
     backgroundColor: colors.white,
@@ -125,11 +152,11 @@ const styles = StyleSheet.create({
   border: {
     borderWidth: 0.3,
     borderColor: 'lightgray',
-    marginTop: 30,
-    marginHorizontal: 20,
+    marginTop: 20,
+    marginHorizontal: 10,
   },
   donationUser: {
-    margin: 20,
+    margin: 10,
   },
   userimg: {
     height: 45,
@@ -140,7 +167,7 @@ const styles = StyleSheet.create({
   },
   userDonView: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 5,
     alignItems: 'center',
   },
   usertext: {
@@ -154,5 +181,19 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: '#CC4501',
     marginTop: 5,
+  },
+  DTextStyle: {
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 18,
+    color: colors.white,
+    textTransform: 'capitalize',
+    fontWeight: 'bold',
+  },
+  DbuttonStyle: {
+    height: 45,
+    width: '90%',
+    borderRadius: 5,
+    backgroundColor: colors.orangeColor,
+    margin: 10,
   },
 });
