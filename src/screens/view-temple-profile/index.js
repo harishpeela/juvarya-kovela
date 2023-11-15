@@ -246,7 +246,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   selectedId: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
-              <Feather name="arrow-left-circle" color={'#686869'} size={28} />
+              <Feather name="arrow-left-circle" color={'black'} size={28} />
             </TouchableOpacity>
             <View>
               <TouchableOpacity style={styles.bell}>
