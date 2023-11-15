@@ -55,12 +55,11 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   button:{
-    elevation:2,
+    elevation:6,
     backgroundColor:'white',
     shadowColor: 'black', // Shadow color
     shadowOffset: { width: 2, height: 2 }, // Shadow offset
     marginBottom:'1%',
-    // padding:10,
     marginTop:'1%',
   },
   feedContainer:{

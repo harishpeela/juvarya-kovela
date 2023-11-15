@@ -47,11 +47,10 @@ export default BottomTabBase = ({navigation}) => {
 
   useEffect(() => {
     const loadTabs = async () => {
-      setChecking(true);
+      setChecking(true)
       try {
         // Your async tasks or conditions to determine when to show/hide tabs
         // Example: Wait for some data to load
-
         // For now, let's simulate a delay of 5 seconds
         await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
         // After 5 seconds, hide SplashScreen and show tabs
