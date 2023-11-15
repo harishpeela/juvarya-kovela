@@ -53,11 +53,10 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
   },
   Icon: {
-    // borderWidth:2,
     borderColor: 'red',
     alignContent: 'center',
     alignSelf: 'center',
-    color: colors.gray2,
+
   },
   followLoader: {
     width: 105,
@@ -79,8 +78,14 @@ export const styles = StyleSheet.create({
       color: '#000',
     },
   },
-  controlPanelContainer:{
-    // borderWidth:1,
+  buttonContainer: {
+    // borderWidth: 5,
+    height: 40,
+    width: 110,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 25,
+    marginRight: 10,
   },
   controlPanel: {
     flexDirection: 'row',
@@ -92,7 +97,7 @@ export const styles = StyleSheet.create({
     marginBottom: '0.5%',
     justifyContent: 'space-between',
     padding: '1%',
-    // alignItems: 'center',
+    alignItems: 'center',
     item: {
       width: '22%',
       flexDirection: 'row',
@@ -109,7 +114,7 @@ export const styles = StyleSheet.create({
       },
     },
   },
-});
+})
 
 export const style = (bgColor, radius, paddidng, width, borderWidth) =>
   StyleSheet.create({
@@ -131,6 +136,8 @@ export const style = (bgColor, radius, paddidng, width, borderWidth) =>
       borderRadius: 40,
     },
   });
+
+
 export const textStyles = (textColor, fontSize) =>
   StyleSheet.create({
     textTitle: {

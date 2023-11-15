@@ -41,7 +41,7 @@ export default BottomTabBase = ({navigation}) => {
 
   useEffect(() => {
     const loadTabs = async () => {
-      setChecking(true);
+      setChecking(true)
       try {
         await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
         setShowTabs(true);
