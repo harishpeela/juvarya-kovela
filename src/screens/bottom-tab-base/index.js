@@ -11,14 +11,12 @@ import {
   TicketConfirmation,
   UserFeedScreen,
 } from '..';
+import {BackgroundImage, Loader} from '../../components';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
-import LoadingDots from 'react-native-loading-dots';
-import {styles} from './style';
-import {timer} from '../../common/theme';
 
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
@@ -30,36 +28,43 @@ export default BottomTabBase = ({navigation}) => {
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
   );
-  const {favoriteList} = useContext(ApplicationContext);
+  const {homeFeedListData} = useContext(ApplicationContext);
   const [showTabs, setShowTabs] = useState(false);
   const [feedLength, setFeedLength] = useState(0);
-
   useEffect(() => {
-    setFeedLength(favoriteList?.length);
-  }, [favoriteList, navigation]);
+    setFeedLength(homeFeedListData?.length);
+  }, [homeFeedListData, navigation]);
   const [checking, setChecking] = useState(false);
 
-  useEffect(() => {
-    const loadTabs = async () => {
-      setChecking(true)
-      try {
-        await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
-        setShowTabs(true);
-      } catch (error) {
-        console.error('Error loading tabs:', error);
-      } finally {
-        setChecking(false); // Stop checking
-      }
-    };
-    loadTabs();
-  }, []);
+  // useEffect(() => {
+  //   const loadTabs = async () => {
+  //     setChecking(true);
+  //     try {
+  //       await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
+  //       setShowTabs(true);
+  //     } catch (error) {
+  //       console.error('Error loading tabs:', error);
+  //     } finally {
+  //       setChecking(false); // Stop checking
+  //     }
+  //   };
+  //   loadTabs();
+  // }, []);
 
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-      {showTabs ? (
+      {/* {showTabs ? ( */}
+      {homeFeedListData === undefined ? (
+        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <BackgroundImage />
+          <Loader size={'large'} color={colors.orangeColor} />
+        </View>
+      ) : (
         <Tab.Navigator
           initialRouteName={
-            feedLength ? allTexts.tabNames.home : allTexts.tabNames.search
+            homeFeedListData?.length
+              ? allTexts.tabNames.home
+              : allTexts.tabNames.search
           }
           tabBarOptions={{
             activeTintColor: colors.orangeColor,
@@ -68,7 +73,7 @@ export default BottomTabBase = ({navigation}) => {
           }}>
           <Tab.Screen
             name={allTexts.tabNames.home}
-            component={GetHomeScreen}
+            component={UserFeedScreen}
             options={{
               tabBarIcon: ({color, size}) => (
                 <>
@@ -126,7 +131,8 @@ export default BottomTabBase = ({navigation}) => {
             }}
           />
         </Tab.Navigator>
-      ) : (
+      )}
+      {/* ) : (
         <View style={styles.loadingScreen}>
           <View style={styles.dotsWrapper}>
             <LoadingDots
@@ -142,7 +148,7 @@ export default BottomTabBase = ({navigation}) => {
             />
           </View>
         </View>
-      )}
+      )} */}
     </SafeAreaView>
   );
 };

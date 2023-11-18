@@ -54,12 +54,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -193,7 +193,6 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
-  // console.log('trfdata,', trfData);
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
@@ -212,7 +211,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     EventsList();
-  }, [route]);
+  }, []);
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
@@ -343,7 +342,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </ScrollView>
             </View>
             <Danation_Add_Card
-            roleId={roleId}
+              roleId={roleId}
               onPress={() =>
                 navigation.navigate(allTexts?.screenNames?.donations)
               }
@@ -417,7 +416,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             )}
             {!eventsData?.length > 0 ? (
-              <View >
+              <View>
                 <Feather name="camera-off" size={40} style={styles.noPosts} />
                 <Text style={styles.noPosts.text}>No Events Yet</Text>
               </View>

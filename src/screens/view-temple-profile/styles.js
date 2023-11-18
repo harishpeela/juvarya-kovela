@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors} from '../../common';
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},
@@ -129,16 +129,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  followingContainer:{
-    borderWidth:20,    
+  followingContainer: {
+    borderWidth: 20,
   },
-  ImagesContainer:{
-    width:'100%',
-    borderTopWidth:1,
-    borderTopColor:colors.gray2,
-    // paddingTop:'1%',
+  ImagesContainer: {
+    width: '100%',
+    borderTopWidth: 1,
+    borderTopColor: colors.gray2,
   },
-  horizontalContainer:{
-    borderWidth:2,
-  }
+  horizontalContainer: {},
 });

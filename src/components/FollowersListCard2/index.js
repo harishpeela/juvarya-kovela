@@ -21,8 +21,6 @@ const FollowersListCard2 = ({
   onPress,
   img,
 }) => {
-  // console.log("Data => "+data)
-  console.log('Donation => ' + donation);
 
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
@@ -34,7 +32,6 @@ const FollowersListCard2 = ({
                 ? img
                 : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
             }}
-            //   style={{height: 70, width: 70, borderRadius: 70 / 2}}
             style={styles.image}
           />
           <Image
@@ -43,7 +40,6 @@ const FollowersListCard2 = ({
                 ? img
                 : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
             }}
-            //   style={{height: 70, width: 70, borderRadius: 70 / 2}}
             style={styles.backgroundImage}
           />
         </View>

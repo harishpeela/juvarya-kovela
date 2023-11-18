@@ -1,7 +1,6 @@
 import Splash from './splash';
 import SignUp from './sign-up';
 import Signin from './sign-in';
-import Home from './home';
 import BottomTabBase from './bottom-tab-base';
 import Search from './search';
 import Favorite from './favorites';
@@ -44,7 +43,6 @@ export {
   Signin,
   Splash,
   SignUp,
-  Home,
   BottomTabBase,
   Search,
   Favorite,
