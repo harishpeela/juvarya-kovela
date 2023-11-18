@@ -34,7 +34,7 @@ import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('user', userDetails);
+  // console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},
@@ -132,7 +132,7 @@ const Profile = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Feather name="arrow-left-circle" color={colors.black2} size={34} />
+          <Feather name="arrow-left-circle" color={colors.black} size={34} />
         </TouchableOpacity>
         <Text
           // numberOfLines={1}
