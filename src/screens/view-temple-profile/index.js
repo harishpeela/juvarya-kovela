@@ -245,7 +245,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   selectedId: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
-              <Feather name="arrow-left-circle" color={'black'} size={28} />
+              <Feather name="arrow-left" color={'black'} size={28} />
             </TouchableOpacity>
             <View>
               <TouchableOpacity style={styles.bell}>
@@ -255,7 +255,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   color={isDarkMode ? 'black' : 'black'}
                 />
                 <View style={styles.notificationNum}>
-                  <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
+                  <Text style={styles.bellText}>2</Text>
                 </View>
               </TouchableOpacity>
             </View>

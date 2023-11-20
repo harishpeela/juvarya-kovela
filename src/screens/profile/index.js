@@ -132,7 +132,7 @@ const Profile = ({navigation}) => {
           onPress={() => {
             navigation.goBack();
           }}>
-          <Feather name="arrow-left-circle" color={colors.black} size={34} />
+          <Feather name="arrow-left" color={colors.black} size={30} />
         </TouchableOpacity>
         <Text
           // numberOfLines={1}

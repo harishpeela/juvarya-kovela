@@ -9,7 +9,7 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
@@ -129,18 +129,9 @@ const UserFeedScreen = ({navigation}) => {
       if (apiPageNo >= 0) {
         listFeed(apiPageNo, apiPageSize);
       }
-      return () => {
-        // alert('Screen was unfocused');
-      };
+      return () => {};
     }, []),
   );
-  // useEffect(() => {}, [userDetails]);
-  // useEffect(() => {
-  //   if (apiPageNo >= 0) {
-  //     listFeed(apiPageNo, apiPageSize);
-  //   }
-  // }, [apiPageNo]);
-  // console.log('homefeed', homeFeedList);
   return (
     <View
       style={{
@@ -165,10 +156,10 @@ const UserFeedScreen = ({navigation}) => {
           onPress={() =>
             navigation.navigate(allTexts.screenNames.notification)
           }>
-          <FeatherIcon
-            name="bell"
-            size={14}
-            color={colors.black2}
+          <FontAwesome
+            name="bell-o"
+            size={24}
+            color={isDarkMode ? 'black' : 'black'}
             style={styles.bellIcon}
           />
           <View style={styles.notificationDot} />
