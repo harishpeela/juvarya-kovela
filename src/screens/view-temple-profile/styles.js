@@ -118,11 +118,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  bellText: {color: 'white', fontWeight: 'bold', alignSelf: 'center'},
   notificationNum: {
     height: 20,
     width: 20,
     borderRadius: 20 / 2,
-    backgroundColor: colors.orangeColor,
+    backgroundColor: '#CC4501',
     position: 'absolute',
     top: -5,
     left: 15,

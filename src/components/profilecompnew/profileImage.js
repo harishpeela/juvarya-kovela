@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
     borderRadius: 90 / 2,
     height: 90,
     width: 90,
-    borderColor: colors.orangeColor,
+    borderColor: '#CC4501',
   }
 });

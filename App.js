@@ -242,13 +242,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={home}
           component={UserFeedScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={events}
           component={Events}
@@ -277,13 +277,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={calender}
           component={Calender}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={addevents}
           component={AddEvents}
