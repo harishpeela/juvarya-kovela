@@ -269,14 +269,14 @@ const ViewProfile = ({route, navigation}) => {
                   }
                 />
               </View>
-              {/* <CommunityComp
+              <CommunityComp
               itemCommunity={memberShip?.membershipCount}
               onPressmembership={() =>
                 navigation.navigate(allTexts.screenNames.profilemembership, {
                   id: trfData?.jtProfile,
                 })
               }
-            /> */}
+            />
             </View>
             <ProfileSeconTab nameData={trfData} title={trfData?.name} />
             <View style={styles.followtab}>

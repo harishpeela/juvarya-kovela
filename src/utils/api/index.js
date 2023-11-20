@@ -77,6 +77,8 @@ export const getInitialToken = async () => {
     return error.response.data;
   }
 };
+
+
 export const loginUser1 = async data => {
   try {
     let result = await authAxiousInstance1.post(
@@ -89,6 +91,8 @@ export const loginUser1 = async data => {
     return error;
   }
 };
+
+
 export const PopularTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
@@ -100,6 +104,9 @@ export const PopularTemples = async () => {
     console.log('error in popular temples', error);
   }
 };
+
+
+
 export const SearchPopularTemples = async txt => {
   try {
     let result = await axiosNewData.get(
@@ -366,6 +373,9 @@ export const getTempleDetails = async id => {
     return error;
   }
 };
+
+
+
 export const RegistesrUser = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SIGN_UP}`, data);
@@ -385,6 +395,8 @@ export const NewRegistesrUser = async data => {
     return error;
   }
 };
+
+
 export const SaveFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SAVE_FEED}`, data);
@@ -393,6 +405,8 @@ export const SaveFeed = async data => {
     return error;
   }
 };
+
+
 export const createFeedPost = async data => {
   try {
     let result = await axiousInstance.post(
@@ -464,6 +478,9 @@ export const NewUpdateUserPassword = async data => {
     return error;
   }
 };
+
+
+
 export const createTemple = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_TEMPLE}`, data);
@@ -472,6 +489,9 @@ export const createTemple = async data => {
     return error;
   }
 };
+
+
+
 export const createFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_FEED}`, data);
@@ -480,6 +500,8 @@ export const createFeed = async data => {
     return error;
   }
 };
+
+
 export const getTempleList = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
@@ -497,22 +519,34 @@ export const getFeedList = async (pageNo, pageSize, id) => {
       `${endpoints.GET_FEED_LIST_IN_DETAILS}?page=${pageNo}&pageSize=${pageSize}&itemId=${id}&popular=true`,
       {retry: 5, retryDelay: 3000},
     );
+    console.log(result.headers['x-response-time']);
     return result;
   } catch (error) {
     return error;
   }
 };
+
+
+
 export const getHomeFeedList = async (pageNo, pageSize) => {
   try {
+    var d = new Date();
+    var n = d.getTime();
+    console.log("khufhu", n)
     let result = await axiosNewData1.get(
       `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
+    var a = new Date();
+    var ns = a.getTime();
+    console.log("hjvvvhj", ns)
     return result;
   } catch (error) {
     return error;
   }
 };
+
+
 export const getMoreExploreAPI = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
@@ -523,6 +557,8 @@ export const getMoreExploreAPI = async (pageNo, pageSize) => {
     return error;
   }
 };
+
+
 export const getFavoritesList = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
@@ -533,6 +569,8 @@ export const getFavoritesList = async (pageNo, pageSize) => {
     return error;
   }
 };
+
+
 export const getFollowSearchList = async query => {
   try {
     let result = await axiousInstance.get(
@@ -543,6 +581,8 @@ export const getFollowSearchList = async query => {
     return error;
   }
 };
+
+
 export const getSearchedTemple = async query => {
   try {
     let result = await axiousInstance.get(
@@ -554,6 +594,8 @@ export const getSearchedTemple = async query => {
     return error;
   }
 };
+
+
 export const followUnfollowTemple = async data => {
   try {
     let result = await axiousInstance.post(

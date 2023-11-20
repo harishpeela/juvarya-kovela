@@ -17,6 +17,7 @@ import {
   TempleProfile_PostsCard,
   BackgroundImageAClass,
   BackgroundImageFlower,
+  BackHeaderNew,
 } from '../../components';
 import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -245,7 +246,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                   selectedId: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
-              <Feather name="arrow-left" color={'black'} size={28} />
+              <BackHeaderNew
+                // txt={`${followersList?.length} Followers`}
+                onPress={() => navigation.goBack()}
+                txtColor={colors.black}
+                isPlus={false}
+              />
+              {/* <Feather name="arrow-left-circle" color={'#686869'} size={28} /> */}
             </TouchableOpacity>
             <View>
               <TouchableOpacity style={styles.bell}>
@@ -344,7 +351,9 @@ const ViewTempleProfile = ({route, navigation}) => {
             <Danation_Add_Card
               roleId={roleId}
               onPress={() =>
-                navigation.navigate(allTexts?.screenNames?.donations)
+                navigation.navigate(allTexts?.screenNames?.donations, {
+                  data: trfData,
+                })
               }
             />
             <ProfileFourthTab

@@ -31,11 +31,19 @@ export const Item = ({text, svg, onPress}) => {
 const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
     paddingVertical: 15,
+    borderColor:'yellow',
+    alignItems:'center',
+    justifyContent:"space-between",
   },
-  iconContainer: {flex: 0.15},
-  textContainer: {flex: 0.85},
+  iconContainer: {
+  minWidth:'auto',
+  // borderWidth:2
+  },
+  textContainer: {
+  width:'80%',
+  // borderWidth:2
+  },
   itemText: {
     fontSize: 18,
     fontFamily: fontFamily.popinMedium,

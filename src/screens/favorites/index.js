@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
-import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
+import {BackHeader, Loader, SearchBar, BackgroundImage, BackHeaderNew} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
@@ -99,13 +99,19 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <View style={styles.headerContainer}>
-        <BackHeader
+        {/* <BackHeader
           onBackPress={() => {
             navigation.goBack();
           }}
           txt={'Following'}
+        /> */}
+        <BackHeaderNew
+          // txt={`${followersList?.length} Followers`}
+          onPress={() => navigation.goBack()}
+          txtColor={colors.black}
+          isPlus={false}
         />
       </View>
       {/* <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>

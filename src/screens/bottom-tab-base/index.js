@@ -35,7 +35,6 @@ export default BottomTabBase = ({navigation}) => {
     setFeedLength(homeFeedListData?.length);
   }, [homeFeedListData, navigation]);
   const [checking, setChecking] = useState(false);
-
   // useEffect(() => {
   //   const loadTabs = async () => {
   //     setChecking(true);

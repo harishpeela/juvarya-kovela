@@ -5,7 +5,11 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import Feather from 'react-native-vector-icons/Feather';
-import {BackgroundImage, Terms_And_Conditions} from '../../components';
+import {
+  BackHeaderNew,
+  BackgroundImage,
+  Terms_And_Conditions,
+} from '../../components';
 import React, {useState} from 'react';
 const Menu = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -89,9 +93,15 @@ const Menu = ({navigation}) => {
       <View style={styles.footerBackground}>
         <BackgroundImage />
         <View style={{margin: '5%', marginTop: '10%'}}>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
+          {/* <TouchableOpacity onPress={() => navigation.goBack()}>
             <Feather name="arrow-left-circle" color={'#FFA001'} size={28} />
-          </TouchableOpacity>
+            <BackHeaderNew /> $$$Previous BackHeader
+          </TouchableOpacity> */}
+          <BackHeaderNew
+            onPress={() => navigation.goBack()}
+            txtColor={colors.black}
+            isPlus={false}
+          />
           <View style={{marginVertical: '10%'}}>
             {/* <TouchableOpacity onPress={() => Feed()}>
               <Text

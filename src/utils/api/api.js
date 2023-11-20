@@ -16,6 +16,9 @@ export const BASE = 'http://20.235.89.214:9094/';
 export const POPULARURL = 'http://20.235.89.214:9096/';
 export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
 export const EVENTS_URL = 'http://20.235.89.214:9060/';
+
+
+
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
@@ -135,6 +138,7 @@ export const axiosNewData1 = axios.create({
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
+  console.log("bhjbhjbhjf", config.headers['x-response-time']);
   return config;
 });
 export const axiousInstanceNew = axios.create({

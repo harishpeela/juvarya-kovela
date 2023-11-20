@@ -4,6 +4,7 @@ import {colors} from '../../common';
 import {styles, textStyles} from './styles';
 
 export const PrimaryButton = ({
+  shadow,
   bgColor,
   textColor,
   radius,
@@ -18,7 +19,7 @@ export const PrimaryButton = ({
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={styles(bgColor, radius, padding, width).wrapper}
+      style={[styles(bgColor, radius, padding, width).wrapper,]}
       {...props}>
       <Text style={textStyles(textColor, fontsize).textTitle}>
         {loading == true ? (

@@ -2,52 +2,45 @@ import {StyleSheet} from 'react-native';
 import {colors, fontFamily, fontSize} from '../../common';
 
 export const styles = StyleSheet.create({
+  overlay: {
+    // borderWidth:2,
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)', // semi-transparent background
+  },
   centeredView: {
-    flex: 1,
-    justifyContent: 'center',
+    // padding:'10%',
     alignItems: 'center',
-    marginTop: 22,
+    marginTop:'16%',
+    marginHorizontal: '7%', 
   },
   modalView: {
-    margin: 20,
+    // borderWidth:1,
+    // borderColor:colors.gray,
+    borderRadius:1,
+    padding:'5%',
     backgroundColor: 'white',
-    borderRadius: 5,
-    padding: "10%",
-    alignItems: 'center',
-    shadowColor: '#000',
+    // width: '100%',
+    // height: '20%', // alignItems: 'center',
+    shadowColor: 'black',
     shadowOffset: {
-      width: 0,
-      height: 2,
+      width: 1,
+      height: 1,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 5,
-    padding: 10,
     elevation: 2,
-    // paddingHorizontal:"5%",
-      width:'30%'
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
+    justifyContent:'flex-end',
+    alignContent:'flex-end',
+    alignSelf:'flex-end',
   },
   textStyle: {
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
-    fontSize:fontSize.small
   },
   modalText: {
-    marginBottom: 15,
     textAlign: 'center',
-    fontSize:colors.h1
+    color:colors.gray,
+    fontSize:fontSize.small
   },
-  buttonContainer:{
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-around',
-    buttonContainer:'100%',
-  }
 });

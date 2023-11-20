@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
+    // borderWidth:2,
   },
   contentDisplay: {
     // height: '56%',

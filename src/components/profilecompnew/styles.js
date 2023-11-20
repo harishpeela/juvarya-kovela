@@ -51,11 +51,10 @@ export const styles = StyleSheet.create({
   postText1: {
     fontSize: 18,
     color: colors.black,
-    // lineHeight: 22,
     fontWeight: 'bold',
   },
-  button: {
-    elevation: 6,
+  button:{
+    elevation:2,
     backgroundColor: 'white',
     shadowColor: 'black', // Shadow color
     shadowOffset: {width: 2, height: 2}, // Shadow offset
