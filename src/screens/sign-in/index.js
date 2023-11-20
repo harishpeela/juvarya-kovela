@@ -5,6 +5,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
+import {KovelaIcon} from '../sign-up/index.js';
 import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {

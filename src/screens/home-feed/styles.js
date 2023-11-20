@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: colors.orangeColor,
     position: 'absolute',
-    top: 7,
+    top: 4,
     left: 20,
   },
 });
