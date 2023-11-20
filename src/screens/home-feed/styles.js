@@ -9,8 +9,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 10,
   },
-
-  //  button Container of navbar
+  flatListStyle: {backgroundColor: 'white'},
   navBarContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -19,7 +18,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: 'row',
-    // justifyContent: 'space-around',
     alignItems: 'center',
     backgroundColor: 'transparent',
     height: 50,
@@ -36,8 +34,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
   },
-
-  // side bar icon styling
   sidebarIcon: {
     width: 24,
     height: 13,
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     height: 2,
-    backgroundColor: colors.black2,
+    backgroundColor: colors.black,
   },
   shortestBar: {
     width: 12,
@@ -66,14 +62,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   circle: {
-    width: 25,
-    height: 25,
-    borderRadius: 15,
+    width: 35,
+    height: 35,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
     marginRight: 25,
     borderColor: colors.black2,
+    backgroundColor: '#ffffff',
+    borderRadius: 35 / 2,
   },
   bellIcon: {
     alignSelf: 'center',
@@ -156,8 +152,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: colors.orangeColor,
     position: 'absolute',
-    top: -5,
-    left: 15,
+    top: 4,
+    left: 20,
   },
 });
 

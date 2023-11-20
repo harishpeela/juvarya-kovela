@@ -13,9 +13,7 @@ const Donations = ({route,navigation}) => {
   const [value, setValue] = useState('0' || value);
   let Data = [
     {id: 1, rs: '101'},
-    // {id: 2, rs: '201'},
     {id: 3, rs: '301'},
-    // {id: 4, rs: '401'},
     {id: 5, rs: '501'},
   ];
   let donationType = [

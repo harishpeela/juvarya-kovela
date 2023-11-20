@@ -55,12 +55,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -194,7 +194,6 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in posts', error);
     }
   };
-  // console.log('trfdata,', trfData);
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
@@ -213,7 +212,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   };
   useEffect(() => {
     EventsList();
-  }, [route]);
+  }, []);
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
@@ -247,12 +246,12 @@ const ViewTempleProfile = ({route, navigation}) => {
                   selectedId: !isFollow ? trfData?.jtProfile : '',
                 });
               }}>
-                <BackHeaderNew
-          // txt={`${followersList?.length} Followers`}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-          isPlus={false}
-        />
+              <BackHeaderNew
+                // txt={`${followersList?.length} Followers`}
+                onPress={() => navigation.goBack()}
+                txtColor={colors.black}
+                isPlus={false}
+              />
               {/* <Feather name="arrow-left-circle" color={'#686869'} size={28} /> */}
             </TouchableOpacity>
             <View>
@@ -263,7 +262,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   color={isDarkMode ? 'black' : 'black'}
                 />
                 <View style={styles.notificationNum}>
-                  <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
+                  <Text style={styles.bellText}>2</Text>
                 </View>
               </TouchableOpacity>
             </View>

@@ -67,17 +67,7 @@ const endpoints = {
   GET_SAVED_POSTS_LIST: '/jtfeedtocustomer/list',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
-  LOGIN:
-    'v1/oauth/token?grant_type=password&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
-};
-export const getHomeResponse = async () => {
-  try {
-    let result = await axiousInstance.get(`${endpoints.HOME_RESPONSE}`);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
 };
 export const getInitialToken = async () => {
   try {
@@ -621,38 +611,6 @@ export const getUserInfoNew = async () => {
   try {
     let result = await axiousInstanceNew1.get(
       `${endpoints.NEW_GET_CURRENT_USER}`,
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-export const createNewInvoice = async data => {
-  try {
-    let result = await axiousInstance.post(endpoints.Create_Invoice, data);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
-};
-
-export const upcomingOccasions = async (pageNo, pageSize) => {
-  try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_UPCOMING_OCCASIONS}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
-      {retry: 5, retryDelay: 3000},
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const getItemCommunities = async (id, pageNo, pageSize) => {
-  try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_ITEM_COMMUNITIES}?itemId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`,
-      {retry: 5, retryDelay: 3000},
     );
     return result;
   } catch (error) {

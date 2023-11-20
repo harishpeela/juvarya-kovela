@@ -34,7 +34,7 @@ import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('user', userDetails);
+  // console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},
@@ -227,7 +227,7 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
-            <Item
+          <Item
             svg={<AccountIcon1 />}
             text={t('Update Profile')}
             onPress={() => {
@@ -256,7 +256,9 @@ const Profile = ({navigation}) => {
             shadow={true}
             textColor={colors.black}
           />
-          <Text style={styles.versionText}>Version&ensp;{allTexts.appVersion.version}</Text>
+          <Text style={styles.versionText}>
+            Version&ensp;{allTexts.appVersion.version}
+          </Text>
         </View>
       </View>
 

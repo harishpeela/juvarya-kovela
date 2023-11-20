@@ -42,7 +42,7 @@ import {
   Donations,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer, useNavigation} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
@@ -54,7 +54,6 @@ import {getHomeFeedList, getUserInfoNew, GetMyTemples} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
-
 
 const App = () => {
   const {
@@ -106,7 +105,7 @@ const App = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        new Promise(resolve => setTimeout(resolve, 5000));
+        new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -243,13 +242,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={home}
           component={UserFeedScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={events}
           component={Events}
@@ -278,13 +277,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={calender}
           component={Calender}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={addevents}
           component={AddEvents}
@@ -412,21 +411,18 @@ const App = () => {
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
   const [favoriteList, setFavoriteList] = useState([]);
-  const [homeFeedListData, getHomeFeedListData] = useState([]);
+  const [homeFeedListData, getHomeFeedListData] = useState();
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
+    // console.log(authDetails, '==================>>>>>>');
     setLoginDetails(authDetails);
-    console.log('saiii ------------>>>>>>>>>>>>>>>>>');
   };
 
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
       if (result) {
-        // console.log('result in app js of userinfo', result?.data);
-        let responce = await GetMyTemples(result?.data?.id, 0, 20);
-        setFavoriteList(responce?.data?.data);
         saveUserDetails({
           username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
@@ -448,25 +444,27 @@ const App = () => {
   };
   const getFollowedTempleList = async () => {
     try {
-      let response = await getHomeFeedList(0, 100);
-      if (response && response.status === 200) {
+      let response = await getHomeFeedList(0, 20);
+      console.log('feed list in app.js', response?.data);
+      if (response && response?.status === 200) {
         const {
           data: {jtFeeds},
         } = response;
+        console.log('....', jtFeeds?.length);
         getHomeFeedListData(jtFeeds);
       }
     } catch (error) {
       console.log(error);
     }
   };
-  console.log('fav list length', favoriteList?.length);
+  // console.log('fav list length', favoriteList?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       ApiData();
       getFollowedTempleList();
     }
   }, [loginDetails]);
-  console.log('fav list length after', favoriteList?.length);
+  // console.log('fav list length after', favoriteList?.length);
 
   return (
     <ApplicationContext.Provider
