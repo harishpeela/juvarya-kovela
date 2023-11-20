@@ -137,6 +137,7 @@ const Profile = ({navigation}) => {
           <Feather name="arrow-left-circle" color={colors.black2} size={34} />
         </TouchableOpacity> */}
         {/* <Text
+
           // numberOfLines={1}
           style={{
             fontSize: 16,
