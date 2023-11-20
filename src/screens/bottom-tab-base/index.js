@@ -45,23 +45,24 @@ export default BottomTabBase = ({navigation}) => {
   }, [favoriteList, navigation]);
   const [checking, setChecking] = useState(false);
 
+  const loadTabs = async () => {
+    setChecking(true)
+    try {
+      // Your async tasks or conditions to determine when to show/hide tabs
+      // Example: Wait for some data to load
+      // For now, let's simulate a delay of 5 seconds
+      await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
+      // After 5 seconds, hide SplashScreen and show tabs
+      setShowTabs(true);
+    } catch (error) {
+      console.error('Error loading tabs:', error);
+      // Handle errors here, if necessary
+    } finally {
+      setChecking(false); // Stop checking
+    }
+  };
+
   useEffect(() => {
-    const loadTabs = async () => {
-      setChecking(true)
-      try {
-        // Your async tasks or conditions to determine when to show/hide tabs
-        // Example: Wait for some data to load
-        // For now, let's simulate a delay of 5 seconds
-        await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
-        // After 5 seconds, hide SplashScreen and show tabs
-        setShowTabs(true);
-      } catch (error) {
-        console.error('Error loading tabs:', error);
-        // Handle errors here, if necessary
-      } finally {
-        setChecking(false); // Stop checking
-      }
-    };
     loadTabs();
   }, []);
 

@@ -10,6 +10,7 @@ export const styles = (bgColor, radius, paddidng, width) =>
       backgroundColor: bgColor || colors.blue,
       alignItems: 'center',
       justifyContent: 'center',
+      
     },
   });
 export const textStyles = (textColor, fontSize) =>

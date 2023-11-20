@@ -101,9 +101,7 @@ const Signin = ({navigation}) => {
     }else{
       navigation.navigate(allTexts.tabNames.search);
     }
-
   }
-
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>

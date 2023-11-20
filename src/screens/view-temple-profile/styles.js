@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
+    // borderWidth:2,
   },
   contentDisplay: {
     // height: '56%',
@@ -139,6 +140,6 @@ export const styles = StyleSheet.create({
     // paddingTop:'1%',
   },
   horizontalContainer:{
-    borderWidth:2,
+    // borderWidth:2,
   }
 });

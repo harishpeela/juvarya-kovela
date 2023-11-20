@@ -1,7 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
-  maincontainer: {flex: 1},
+  maincontainer: {
+    flex: 1,
+    borderWidth:5,
+    
+  },
   scrolledcontainer: {flex: 1},
   infoContainer: {
     flexDirection: 'row',

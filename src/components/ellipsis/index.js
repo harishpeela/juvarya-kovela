@@ -1,61 +1,65 @@
 import {View, Text, SafeAreaView, Modal, Pressable} from 'react-native';
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 // import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../common';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './style';
+useRef;
 const Ellipsis = ({txtColor}) => {
   // const [isModalVisible, setModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
-  // const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
+  const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
+  const ellipsisRef = useRef(null);
 
   const toggleModal = () => {
+    if (ellipsisRef.current) {
+      ellipsisRef.current.measure((fx, fy, width, height, px, py) => {
+        setModalPosition({top: py + height, left: px});
+        console.log('modalPosition is updating ' + height, px, py);
+        setModalVisible(!modalVisible);
+      });
+    }
     console.log('it is calling in the console');
     setModalVisible(!modalVisible);
   };
+
+  const closeToggleModal = () => {
+    console.log('Close button is trigeering');
+    setModalVisible(false);
+  };
   return (
     <SafeAreaView>
-      <View>
-        <TouchableOpacity onPress={toggleModal}>
-          {/* <Icon name="ellipsis-v" size={24} color={txtColor === undefined ? (colors.black2):txtColor} /> */}
-          <Icon
-            name="ellipsis-vertical"
-            size={24}
-            color={txtColor === undefined ? colors.black2 : txtColor}
-          />
-        </TouchableOpacity>
-      </View>
+      <Pressable onPress={closeToggleModal} ref={ellipsisRef}>
+        <View>
+          <TouchableOpacity onPress={toggleModal}>
+            {/* <Icon name="ellipsis-v" size={24} color={txtColor === undefined ? (colors.black2):txtColor} /> */}
+            <Icon
+              name="ellipsis-vertical"
+              size={24}
+              color={txtColor === undefined ? colors.black2 : txtColor}
+            />
+          </TouchableOpacity>
+        </View>
+      </Pressable>
       {modalVisible ? (
-        <View style={styles.centeredView}>
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert('Modal has been closed.');
-              setModalVisible(!modalVisible);
-            }}>
-            <View style={styles.centeredView}>
-              <View style={styles.modalView}>
-                <Text style={styles.modalText}>Show Blocked Contacts</Text>
-                <View style={styles.buttonContainer}>
-                  <Pressable
-                    style={[styles.button, styles.openButton]}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.textStyle}>View List</Text>
-                  </Pressable>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.textStyle}>Close</Text>
-                  </Pressable>
-                </View>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={toggleModal}>
+          <Pressable style={[styles.overlay]} onPress={closeToggleModal}>
+            <View
+              style={[
+                styles.centeredView,
+               
+              ]}>
+              <View style={[styles.modalView]}>
+                <Text style={styles.modalText}>Blocked Users</Text>
               </View>
             </View>
-          </Modal>
-        </View>
+          </Pressable>
+        </Modal>
       ) : (
         <></>
       )}

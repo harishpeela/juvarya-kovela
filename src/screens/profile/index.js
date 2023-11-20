@@ -9,7 +9,7 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {BackgroundImage} from '../../components';
+import {BackgroundImage, BackgroundImageAClass} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
@@ -126,15 +126,17 @@ const Profile = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
+      <BackgroundImageAClass />
+
       <View style={styles.header}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => {
             navigation.goBack();
           }}>
           <Feather name="arrow-left-circle" color={colors.black2} size={34} />
-        </TouchableOpacity>
-        <Text
+        </TouchableOpacity> */}
+        {/* <Text
           // numberOfLines={1}
           style={{
             fontSize: 16,
@@ -144,7 +146,7 @@ const Profile = ({navigation}) => {
             color: colors.black,
           }}>
           {t('account')}
-        </Text>
+        </Text> */}
         {/* <TouchableOpacity
           onPress={() => setIsVisible(!isVisible)}
           style={{alignSelf: 'flex-end'}}>
@@ -154,55 +156,50 @@ const Profile = ({navigation}) => {
           />
         </TouchableOpacity> */}
       </View>
-      <View style={{marginLeft: '12%'}}>
-        <View style={styles.profileContainer}>
-          <View style={styles.uploadContainer}>
-            {image !== null ? (
-              <View style={styles.preViewImageContainer}>
-                {isCross && (
-                  <View style={styles.crossIconContainer}>
-                    <Icon
-                      onPress={() => {
-                        setImage(null);
-                      }}
-                      name="closecircle"
-                      color={colors.orangeColor}
-                      size={25}
-                    />
-                  </View>
-                )}
-                <Image
-                  resizeMode="cover"
-                  style={styles.preViewImage}
-                  source={{uri: image?.uri}}
-                />
-              </View>
-            ) : isLoading ? (
-              <View style={styles.loader}>
-                <Loader size={'small'} color={colors.orangeColor} />
-              </View>
-            ) : (
-              <TouchableOpacity
-                style={styles.uploadPic}
-                onPress={() => {
-                  uploadPhoto();
-                }}>
-                {profPic ? (
-                  <Image
-                    source={{uri: profPic}}
-                    style={{height: 100, width: 100, borderRadius: 100 / 2}}
+
+      <View style={styles.profileContainer}>
+        <View style={styles.uploadContainer}>
+          {image !== null ? (
+            <View style={styles.preViewImageContainer}>
+              {isCross && (
+                <View style={styles.crossIconContainer}>
+                  <Icon
+                    onPress={() => {
+                      setImage(null);
+                    }}
+                    name="closecircle"
+                    color={colors.orangeColor}
+                    size={25}
                   />
-                ) : (
-                  <UploadPhoto />
-                )}
-              </TouchableOpacity>
-            )}
-          </View>
-          <ProfileInfo
-            name={userDetails?.username}
-            email={userDetails?.email}
-          />
+                </View>
+              )}
+              <Image
+                resizeMode="cover"
+                style={styles.preViewImage}
+                source={{uri: image?.uri}}
+              />
+            </View>
+          ) : isLoading ? (
+            <View style={styles.loader}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={styles.uploadPic}
+              onPress={() => {
+                uploadPhoto();
+              }}>
+              {profPic ? (
+                <Image source={{uri: profPic}} style={styles.profileImage} />
+              ) : (
+                <UploadPhoto />
+              )}
+            </TouchableOpacity>
+          )}
         </View>
+        <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
+      </View>
+      <View style={styles.profileItemsHeader}>
         <View style={styles.profileItemsContainer}>
           {/* <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} /> */}
@@ -230,6 +227,13 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
+            <Item
+            svg={<AccountIcon1 />}
+            text={t('Update Profile')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.mySavedPosts);
+            }}
+          />
           {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
               svg={require('../../../assets/images/priest.webp')}
@@ -246,12 +250,16 @@ const Profile = ({navigation}) => {
               await removeLoginSessionDetails();
               setLoginDetails(null);
             }}
-            bgColor={colors.orangeColor}
+            bgColor={colors.white}
             radius={25}
             text={'Log Out'}
+            shadow={true}
+            textColor={colors.black}
           />
+          <Text style={styles.versionText}>Version&ensp;{allTexts.appVersion.version}</Text>
         </View>
       </View>
+
       <Modal
         visible={isVisible}
         transparent={true}
@@ -263,7 +271,6 @@ const Profile = ({navigation}) => {
             right: 50,
             top: 20,
             backgroundColor: colors.orangeColor,
-            padding: 10,
             borderTopLeftRadius: 20,
           }}>
           <FlatList
