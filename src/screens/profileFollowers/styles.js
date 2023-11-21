@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
-import { colors, fontSize } from '../../common';
+import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
-  CardContainer:{},
-  followersContainer:{
-    borderWidth:1,
+  CardContainer: {},
+  followersContainer: {
+    borderWidth: 1,
   },
   footerContainer: {
     paddingHorizontal: 30,
@@ -16,61 +16,57 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
   },
-  followersHeader:{
-    marginHorizontal: '5%', 
-    marginVertical: -10, 
-    marginTop: 35, 
-    display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-between'
+  followersHeader: {
+    marginHorizontal: '5%',
+    marginVertical: -10,
+    marginTop: 35,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
-  bodyContainer:{
+  bodyContainer: {
     marginHorizontal: '4%',
-    display:'flex',
-    flexDirection:'column',
+    display: 'flex',
+    flexDirection: 'column',
     // borderWidth:5,
     // marginBottom:200,
   },
-  searchAndFilter:{
-    display:'flex',
-    flexDirection:'row',
-    alignItems:'center',
-    marginBottom:'5%',
-    marginTop:'5%',
-    paddingHorizontal:'1%',
-    justifyContent:'space-between',
-    height:"7%",
-    width:"100%",
-    padding:"1%",
-    alignContent:'center',
-    alignItems:'center',
+  searchAndFilter: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: '5%',
+    marginTop: '5%',
+    paddingHorizontal: '1%',
+    justifyContent: 'space-between',
+    height:'7%',
+    width:'100%',
+    padding:'1%',
+    alignContent: 'center',
+    alignItems: 'center',
   },
-  searchContainer:{
-    width:'82%',
-    height:'100%',
+  searchContainer: {
+    width: '82%',
+    height: '100%',
   },
-  followersContainer:{
-    height:'100%',
+  followersContainer: {
+    height: '100%',
   },
-  sortContainer:{
-    display:'flex',
-    width:'15%',
-    height:'100%',
+  sortContainer: {
+    display: 'flex',
+    width: '15%',
+    height: '100%',
     // borderWidth:2,
   },
-  list:{
-    // borderWidth:1,
-    marginBottom:300,
+  list: {
+    marginBottom: 240,
   },
-  noDataContainer:{
-    alignItems:'center',
-    alignItems:'center',
-    justifyContent:'center',
+  noDataContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  noDataText:{
-    fontSize:fontSize.xlarge,
-    color:colors.black,
-  }
-  
-
+  noDataText: {
+    fontSize: fontSize.xlarge,
+    color: colors.black,
+  },
 });

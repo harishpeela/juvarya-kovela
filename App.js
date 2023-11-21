@@ -445,7 +445,7 @@ const App = () => {
   const getFollowedTempleList = async () => {
     try {
       let response = await getHomeFeedList(0, 20);
-      console.log('feed list in app.js', response?.data);
+      // console.log('feed list in app.js', response?.data);
       if (response && response?.status === 200) {
         const {
           data: {jtFeeds},

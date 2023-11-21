@@ -138,7 +138,6 @@ export const axiosNewData1 = axios.create({
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
-  console.log("bhjbhjbhjf", config.headers['x-response-time']);
   return config;
 });
 export const axiousInstanceNew = axios.create({

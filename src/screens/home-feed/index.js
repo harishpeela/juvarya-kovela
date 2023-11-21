@@ -63,6 +63,7 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async (pgNo, pgSize) => {
+    console.log('1 time');
     setloader(true);
     // setHomeFeedList([]);
     // console.log('list feed', pgNo, pgSize);
@@ -175,6 +176,7 @@ const UserFeedScreen = ({navigation}) => {
                 onRefresh={() => {
                   setRefrsh(true);
                   listFeed(apiPageNo, apiPageSize);
+                  console.log('2 time');
                 }}
               />
             }

@@ -490,8 +490,6 @@ export const createTemple = async data => {
   }
 };
 
-
-
 export const createFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_FEED}`, data);
@@ -532,14 +530,12 @@ export const getHomeFeedList = async (pageNo, pageSize) => {
   try {
     var d = new Date();
     var n = d.getTime();
-    console.log("khufhu", n)
     let result = await axiosNewData1.get(
       `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
     var a = new Date();
     var ns = a.getTime();
-    console.log("hjvvvhj", ns)
     return result;
   } catch (error) {
     return error;
