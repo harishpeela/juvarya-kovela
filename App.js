@@ -50,7 +50,7 @@ import {
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getHomeFeedList, getUserInfoNew, GetMyTemples} from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -415,7 +415,6 @@ const App = () => {
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
-    // console.log(authDetails, '==================>>>>>>');
     setLoginDetails(authDetails);
   };
 
@@ -445,7 +444,6 @@ const App = () => {
   const getFollowedTempleList = async () => {
     try {
       let response = await getHomeFeedList(0, 20);
-      // console.log('feed list in app.js', response?.data);
       if (response && response?.status === 200) {
         const {
           data: {jtFeeds},
@@ -457,14 +455,12 @@ const App = () => {
       console.log(error);
     }
   };
-  // console.log('fav list length', favoriteList?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       ApiData();
       getFollowedTempleList();
     }
   }, [loginDetails]);
-  // console.log('fav list length after', favoriteList?.length);
 
   return (
     <ApplicationContext.Provider
