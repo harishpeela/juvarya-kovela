@@ -1,7 +1,6 @@
 export const allTexts = {
-
-  appVersion:{
-    version:"0.70.0"
+  appVersion: {
+    version: '0.70.0',
   },
   buttonTexts: {
     // place all your button texts here

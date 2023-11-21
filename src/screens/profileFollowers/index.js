@@ -12,7 +12,7 @@ import {
 } from '../../components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {TempleFollowersList} from '../../utils/api';
-import {Loader, FollowersListCard} from '../../components';
+import {Loader} from '../../components';
 import {colors} from '../../common';
 import {styles} from './styles';
 import {Ellipsis} from '../../components';
@@ -20,23 +20,19 @@ import {Ellipsis} from '../../components';
 const FollowersMembership = ({route, navigation}) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [searchedText, setSearchedText] = useState("");
+  const [searchedText, setSearchedText] = useState('');
   const [filteredData, setFilteredData] = useState(followersList);
   const {id} = route.params || {};
-  const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchLoading, setSearchLoading] = useState(false);
 
-  console.log('id', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
       // console.log('res of followes', result?.data);
       if (result.status === 200) {
+        console.log('data of temple followers', result?.data);
         setLoader(false);
         setFollowersList(result?.data?.data);
-        setFollowersFirstName(result?.data?.data?.user?.firstName);
-        console.log('FollowerList => ' + followersFirstName);
       } else {
         setLoader(false);
       }
@@ -45,7 +41,6 @@ const FollowersMembership = ({route, navigation}) => {
     }
   };
 
-  console.log('rs', followersList);
   useEffect(() => {
     TempleFolowers();
   }, [route]);
@@ -107,49 +102,47 @@ const FollowersMembership = ({route, navigation}) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                {searchedText === '' && (
-                  <FlatList
-                    style={styles.list}
-                    data={followersList}
-                    contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={(item, index) => item.user.id.toString()}
-                    renderItem={({item}) => (
-                      <FollowersListCard2
-                        name={item.user.firstName}
-                        img={item.user.url}
-                        data={item.user}
-                        donation={item.user.donation}
-                      />
-                    )}
-                  />
-                )}
-              </ScrollView>
+              {/* <ScrollView showsVerticalScrollIndicator={false}> */}
+              {searchedText === '' && (
+                <FlatList
+                  style={styles.list}
+                  data={followersList}
+                  contentContainerStyle={styles.flatListStyle}
+                  keyExtractor={(item, index) => item.user.id.toString()}
+                  renderItem={({item}) => (
+                    <FollowersListCard2
+                      name={item.user.firstName}
+                      img={item.user.url}
+                      data={item.user}
+                      donation={item.user.donation}
+                    />
+                  )}
+                />
+              )}
+              {/* </ScrollView> */}
 
-              <ScrollView style={{height: searchedText ? '85%' : 0}}>
-                {searchedText && filteredData.length > 0 ? (
-                  <FlatList
-                    style={styles.list}
-                    data={filteredData}
-                    contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={item => item.user.id.toString()}
-                    renderItem={({item}) => (
-                      <FollowersListCard2
-                        name={item.user.firstName}
-                        img={item.user.url}
-                        data={item.user}
-                        donation={item.user.donation}
-                      />
-                    )}
-                  />
-                ) : (
-                  <View style={styles.noDataContainer}>
-                    <Text style={styles.noDataText}>
-                      No Followers to Display
-                    </Text>
-                  </View>
-                )}
-              </ScrollView>
+              {/* <ScrollView style={{height: searchedText ? '85%' : 0}}> */}
+              {searchedText && filteredData.length > 0 ? (
+                <FlatList
+                  style={styles.list}
+                  data={filteredData}
+                  contentContainerStyle={styles.flatListStyle}
+                  keyExtractor={item => item.user.id.toString()}
+                  renderItem={({item}) => (
+                    <FollowersListCard2
+                      name={item.user.firstName}
+                      img={item.user.url}
+                      data={item.user}
+                      donation={item.user.donation}
+                    />
+                  )}
+                />
+              ) : (
+                <View style={styles.noDataContainer}>
+                  <Text style={styles.noDataText}>No Followers to Display</Text>
+                </View>
+              )}
+              {/* </ScrollView> */}
             </>
           )}
         </View>

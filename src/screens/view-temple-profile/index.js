@@ -55,12 +55,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -96,8 +96,8 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in membership count', error);
     }
   };
+  let result = Data(data);
   useEffect(() => {
-    let result = Data(data);
     if (result) {
       setTrfData(result);
       if (result?.jtProfile) {
@@ -217,7 +217,7 @@ const ViewTempleProfile = ({route, navigation}) => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
     // console.log('list of evengts', result?.data);
-    if (result.status === 200) {
+    if (result?.status === 200) {
       setEventsLoader(false);
       console.log('true', eventsLoader);
       setEventsData(result?.data?.events);
@@ -252,7 +252,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                 txtColor={colors.black}
                 isPlus={false}
               />
-              {/* <Feather name="arrow-left-circle" color={'#686869'} size={28} /> */}
             </TouchableOpacity>
             <View>
               <TouchableOpacity style={styles.bell}>
