@@ -72,7 +72,6 @@ const Signin = ({navigation}) => {
         Alert.alert('Error', result?.message);
       }
     } catch (error) {
-      console.log('error in signin', error);
       actions.setSubmitting(false);
     }
   };

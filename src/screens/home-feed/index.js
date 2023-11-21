@@ -17,10 +17,8 @@ import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
-import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 const UserFeedScreen = ({navigation}) => {
-  const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState();
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(true);
@@ -28,7 +26,6 @@ const UserFeedScreen = ({navigation}) => {
   const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
   const [noData, setNoData] = useState(false);
-  const [adminRole, setRoleAdmin] = useState();
 
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -63,16 +60,13 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
   const listFeed = async (pgNo, pgSize) => {
-    console.log('1 time');
     setloader(true);
-    // setHomeFeedList([]);
-    // console.log('list feed', pgNo, pgSize);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
       console.log('result of list feed in home feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
-        let responce = result.data.jtFeeds;
+        let responce = result?.data?.jtFeeds;
         responce === null ? setNoData(true) : setNoData(false);
         responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
@@ -82,7 +76,7 @@ const UserFeedScreen = ({navigation}) => {
         setRefrsh(false);
       }
     } catch (error) {
-      console.log('errorrrd', error);
+      console.log('error in listFeed', error);
     }
   };
 
@@ -110,19 +104,17 @@ const UserFeedScreen = ({navigation}) => {
     setApiPageNo(apiPageNo + 20);
     setApiPageSize(apiPageSize + 20);
     listFeed(apiPageNo, apiPageSize);
-    // console.log('loadmoreitems', apiPageNo, apiPageSize);
     setIsLoading(false);
   };
   const GetNotifications = async () => {
     try {
       let result = await getNotifications();
-      // console.log('res of notifications', result);
+      console.log('res of notifications', result);
     } catch (error) {
       console.log('error in notifications', error);
     }
   };
   useEffect(() => {
-    // Role();
     GetNotifications();
   }, []);
   useFocusEffect(
@@ -176,7 +168,6 @@ const UserFeedScreen = ({navigation}) => {
                 onRefresh={() => {
                   setRefrsh(true);
                   listFeed(apiPageNo, apiPageSize);
-                  console.log('2 time');
                 }}
               />
             }

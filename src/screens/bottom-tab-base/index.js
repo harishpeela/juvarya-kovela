@@ -17,7 +17,6 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
-
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
