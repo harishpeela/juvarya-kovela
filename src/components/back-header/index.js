@@ -18,8 +18,8 @@ export const BackHeader = ({
       <View style={styles.iconContainer}>
         <Icon
           onPress={onBackPress}
-          name="arrow-left-circle"
-          color={'#686869'}
+          name="arrow-left"
+          color={'black'}
           size={30}
         />
         <Text style={[styles.title, {marginLeft: !isOption ? 10 : 15}]}>

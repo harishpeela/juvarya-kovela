@@ -61,7 +61,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   //   // '<==============',
   //   // userDetails,
   // );
-  console.log('1');
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -70,7 +69,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [followVisible, setFollowVisible] = useState(false);
   const [followCount, setFollowCount] = useState(0);
   const [postImages, setPostImages] = useState([]);
-  const [roleId, setRoleId] = useState(false);
+  const [roleId, setRoleId] = useState();
   const [posts, setPosts] = useState(false);
   const [memberShip, setMemberShip] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
@@ -172,7 +171,6 @@ const ViewTempleProfile = ({route, navigation}) => {
     setloader(true);
     try {
       let result = await GetPosts(id, 0, 100);
-      // console.log('================>', result?.data);
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
@@ -217,14 +215,11 @@ const ViewTempleProfile = ({route, navigation}) => {
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
-    // console.log('list of evengts', result?.data);
     if (result?.status === 200) {
       setEventsLoader(false);
-      console.log('true', eventsLoader);
       setEventsData(result?.data?.events);
     } else {
       setEventsLoader(false);
-      console.log('false', eventsLoader);
     }
   };
   return (
@@ -337,7 +332,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   shadow={true}
                 />
                 <ContactTabcomp onPressContact={() => setIsModal(true)} />
-                <DirectionsTabComp />
+                <DirectionsTabComp role={roleId} />
                 <CreateFeedTabComp
                   roleId={roleId}
                   onPlusPress={() =>

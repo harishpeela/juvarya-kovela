@@ -448,7 +448,6 @@ const App = () => {
         const {
           data: {jtFeeds},
         } = response;
-        console.log('....', jtFeeds?.length);
         getHomeFeedListData(jtFeeds);
       }
     } catch (error) {

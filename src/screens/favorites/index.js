@@ -2,13 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
-import {
-  BackHeader,
-  Loader,
-  SearchBar,
-  BackgroundImage,
-  BackHeaderNew,
-} from '../../components';
+import {Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
@@ -17,7 +11,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails, favoriteList} = useContext(ApplicationContext);
+  const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState();
@@ -57,7 +51,7 @@ const Favorite = ({navigation}) => {
       }
     } catch (error) {
       setLoading(false);
-      console.log('error in templedetails api is ==>', error);
+      console.log('error in templedetails api in favourites ==>', error);
     }
   };
   const onSelect = data => {
