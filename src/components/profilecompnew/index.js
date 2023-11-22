@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, TouchableOpacity, Text} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';
-import {allTexts, colors, fontSize} from '../../common';
+import {allTexts, colors} from '../../common';
 import {PrimaryButton1} from '../profilecomp';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
@@ -31,7 +31,7 @@ export const FolloUnfollowComp = ({
   followBtnDisable,
   followTemples,
   isFollow,
-  shadow
+  shadow,
 }) => {
   return (
     <View style={styles.followingContainer}>
@@ -45,7 +45,6 @@ export const FolloUnfollowComp = ({
         </View>
       ) : (
         <PrimaryButton1
-
           bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
@@ -53,7 +52,6 @@ export const FolloUnfollowComp = ({
           width={90}
           onPress={followTemples}
           textColor={colors.white}
-          // borderWidth={isFollow ? 0 : 1}
           fontSize={12}
           isFollow={!isFollow}
           text={
@@ -91,12 +89,31 @@ export const ContactTabcomp = ({onPressContact}) => {
 //     </Pressable>
 //   );
 // };
-export const DirectionsTabComp = () => {
+export const DirectionsTabComp = ({role}) => {
+  const [roleId, setRoleId] = useState(true);
+  const roleStatus = () => {
+    if (role) {
+      setRoleId(false);
+    } else {
+      setRoleId(false);
+    }
+  };
+  useEffect(() => {
+    roleStatus();
+  }, []);
   return (
     // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton1}>
     <TouchableOpacity style={[styles.voidButton1, styles.button]}>
       <BackgroundSmallFlowerUser />
-      <Text style={styles.voidButton1Text}>Become a Mentor</Text>
+      {roleId ? (
+        <View style={{flex: 1}}>
+          <Loader size={'small'} />
+        </View>
+      ) : (
+        <Text style={styles.voidButton1Text}>
+          {role ? 'Add a Member' : 'Become a member'}
+        </Text>
+      )}
     </TouchableOpacity>
     // </LinearGradient>
   );

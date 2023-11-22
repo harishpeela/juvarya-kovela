@@ -63,7 +63,7 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('result of list feed in home feed', result?.data);
+      // console.log('result of list feed in home feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result?.data?.jtFeeds;
@@ -109,7 +109,6 @@ const UserFeedScreen = ({navigation}) => {
   const GetNotifications = async () => {
     try {
       let result = await getNotifications();
-      console.log('res of notifications', result);
     } catch (error) {
       console.log('error in notifications', error);
     }
