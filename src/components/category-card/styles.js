@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 import {colors} from '../../common';
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
     borderRadius: 24,
     padding: 20,
     marginVertical: 2,
@@ -18,7 +17,7 @@ export const styles = StyleSheet.create({
   },
   postContainer: {
     marginBottom: 10,
-    backgroundColor: 'transparent',
+    backgroundColor: 'white',
     borderRadius: 10,
     paddingVertical: 10,
     marginTop: 10,

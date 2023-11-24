@@ -147,6 +147,7 @@ export const allTexts = {
     viewtempleprofile: 'ViewTempleProfile',
     donations: 'Donations',
     memberShip: 'MemberShip',
+    donationslist: 'DonationsList',
   },
   homeHeader: {
     welcome: 'Welcome ',

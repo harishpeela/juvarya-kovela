@@ -14,7 +14,7 @@ const ProfileMembership = ({route, navigation}) => {
   // const {id} = route.params || {};
   const [data, setData] = useState([{name: 'sai'}, {name: 'something'}]);
   const [loader, setaLoader] = useState(false);
-
+  
   // const MembershipData = async () => {
   //   setaLoader(true);
   //   try {
@@ -80,10 +80,9 @@ const ProfileMembership = ({route, navigation}) => {
               </View>
             ))
           ) : (
-            <Text style={styles.nomemship}>
-              {' '}
-              No Membership available for this Temple
-            </Text>
+            <View style={styles.nomemship}>
+              <Text> No Membership available for this Temple</Text>
+            </View>
           )}
         </View>
       </View>

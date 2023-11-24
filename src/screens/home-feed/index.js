@@ -9,7 +9,7 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import {BackgroundImage} from '../../components';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
@@ -17,12 +17,10 @@ import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
-import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const UserFeedScreen = ({navigation}) => {
-  const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState();
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(true);
@@ -30,20 +28,19 @@ const UserFeedScreen = ({navigation}) => {
   const [apiPageSize, setApiPageSize] = useState(20);
   const [isLoading, setIsLoading] = useState(false);
   const [noData, setNoData] = useState(false);
-  const [adminRole, setRoleAdmin] = useState();
 
   const isDarkMode = useColorScheme() === 'dark';
 
-  const Role = () => {
-    let ROLES = userDetails?.role;
-    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
-    console.log('role', roleAdmin);
-    if (roleAdmin) {
-      setRoleAdmin('ROLE_ADMIN');
-    } else {
-      setRoleAdmin('');
-    }
-  };
+  // const Role = () => {
+  //   let ROLES = userDetails?.role;
+  //   var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+  //   console.log('role', roleAdmin);
+  //   if (roleAdmin) {
+  //     setRoleAdmin('ROLE_ADMIN');
+  //   } else {
+  //     setRoleAdmin('');
+  //   }
+  // };
   const MyCustShare = async item => {
     const ShareOptions = {
       // message: item?.jtProfileDTO?.name,
@@ -66,14 +63,12 @@ const UserFeedScreen = ({navigation}) => {
   };
   const listFeed = async (pgNo, pgSize) => {
     setloader(true);
-    // setHomeFeedList([]);
-    console.log('list feed', pgNo, pgSize);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('result of list feed', result?.data);
+      // console.log('result of list feed in home feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
-        let responce = result.data.jtFeeds;
+        let responce = result?.data?.jtFeeds;
         responce === null ? setNoData(true) : setNoData(false);
         responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
@@ -83,7 +78,7 @@ const UserFeedScreen = ({navigation}) => {
         setRefrsh(false);
       }
     } catch (error) {
-      console.log('errorrrd', error);
+      console.log('error in listFeed', error);
     }
   };
 
@@ -108,22 +103,19 @@ const UserFeedScreen = ({navigation}) => {
     // setIsLiked(data?.selected);
   };
   const loadMoreItems = () => {
-    setApiPageNo(apiPageNo + 1);
-    setApiPageSize(apiPageSize + 1);
-    console.log('loadmoreitems', apiPageNo, apiPageSize);
-    listFeed(21, 40);
+    setApiPageNo(apiPageNo + 20);
+    setApiPageSize(apiPageSize + 20);
+    listFeed(apiPageNo, apiPageSize);
     setIsLoading(false);
   };
   const GetNotifications = async () => {
     try {
       let result = await getNotifications();
-      // console.log('res of notifications', result);
     } catch (error) {
       console.log('error in notifications', error);
     }
   };
   useEffect(() => {
-    Role();
     GetNotifications();
   }, []);
   useFocusEffect(
@@ -131,18 +123,9 @@ const UserFeedScreen = ({navigation}) => {
       if (apiPageNo >= 0) {
         listFeed(apiPageNo, apiPageSize);
       }
-      return () => {
-        // alert('Screen was unfocused');
-      };
+      return () => {};
     }, []),
   );
-  // useEffect(() => {}, [userDetails]);
-  // useEffect(() => {
-  //   if (apiPageNo >= 0) {
-  //     listFeed(apiPageNo, apiPageSize);
-  //   }
-  // }, [apiPageNo]);
-  // console.log('homefeed', homeFeedList);
   return (
     <View
       style={{
@@ -171,6 +154,7 @@ const UserFeedScreen = ({navigation}) => {
             name="bell-o"
             size={24}
             color={isDarkMode ? 'black' : 'black'}
+            style={styles.bellIcon}
           />
           <View style={styles.notificationDot} />
         </TouchableOpacity>
@@ -218,8 +202,9 @@ const UserFeedScreen = ({navigation}) => {
             <Text style={styles.nodatatext}>no items to display</Text>
           </View>
         ) : (
-          <View>
-            <Loader size={30} color={colors.orangeColor} />
+          <View
+            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
       </>

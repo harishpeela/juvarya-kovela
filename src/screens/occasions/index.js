@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
 import {OccasionBackHeader} from '../../components';
-import {
-  View,
-  SafeAreaView,
-  Text,
-  TouchableOpacity,
-  CheckBox
-} from 'react-native';
+import {View, SafeAreaView, Text} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import {allTexts, colors} from '../../common';
 import {styles} from './styles';
@@ -19,7 +13,6 @@ const Occasions = ({navigation}) => {
         txt={allTexts.headings.accountItems.occasion}
         plusButton
         onPlusPress={() => {
-          alert('hello');
         }}
       />
       <View style={styles.occView}>

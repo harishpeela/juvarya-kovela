@@ -14,6 +14,7 @@ import {
   axiousInstanceNew1,
   axiosEventsData1,
   axiosNotifications,
+  axiosDonation,
 } from './api';
 
 const endpoints = {
@@ -35,6 +36,8 @@ const endpoints = {
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
+  DONATIONS: '/jtDonation/save',
+  DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
@@ -67,17 +70,7 @@ const endpoints = {
   GET_SAVED_POSTS_LIST: '/jtfeedtocustomer/list',
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
-  LOGIN:
-    'v1/oauth/token?grant_type=password&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
-};
-export const getHomeResponse = async () => {
-  try {
-    let result = await axiousInstance.get(`${endpoints.HOME_RESPONSE}`);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
 };
 export const getInitialToken = async () => {
   try {
@@ -87,7 +80,6 @@ export const getInitialToken = async () => {
     return error.response.data;
   }
 };
-
 
 export const loginUser1 = async data => {
   try {
@@ -102,7 +94,15 @@ export const loginUser1 = async data => {
   }
 };
 
-
+export const DonationsPost = async data => {
+  try {
+    let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
 export const PopularTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
@@ -114,8 +114,6 @@ export const PopularTemples = async () => {
     console.log('error in popular temples', error);
   }
 };
-
-
 
 export const SearchPopularTemples = async txt => {
   try {
@@ -222,6 +220,16 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}&page=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const getDonationsList = async (custId, pgno, pgSize) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.DONATIONS_LIST}${custId}?pageNo=${pgno}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {
@@ -383,17 +391,6 @@ export const getTempleDetails = async id => {
     return error;
   }
 };
-
-
-
-export const RegistesrUser = async data => {
-  try {
-    let result = await axiousInstance.post(`${endpoints.SIGN_UP}`, data);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
 export const NewRegistesrUser = async data => {
   try {
     let result = await axiousInstanceNewSignIn.post(
@@ -406,7 +403,6 @@ export const NewRegistesrUser = async data => {
   }
 };
 
-
 export const SaveFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SAVE_FEED}`, data);
@@ -415,7 +411,6 @@ export const SaveFeed = async data => {
     return error;
   }
 };
-
 
 export const createFeedPost = async data => {
   try {
@@ -489,8 +484,6 @@ export const NewUpdateUserPassword = async data => {
   }
 };
 
-
-
 export const createTemple = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_TEMPLE}`, data);
@@ -500,8 +493,6 @@ export const createTemple = async data => {
   }
 };
 
-
-
 export const createFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_FEED}`, data);
@@ -510,7 +501,6 @@ export const createFeed = async data => {
     return error;
   }
 };
-
 
 export const getTempleList = async (pageNo, pageSize) => {
   try {
@@ -536,26 +526,21 @@ export const getFeedList = async (pageNo, pageSize, id) => {
   }
 };
 
-
-
 export const getHomeFeedList = async (pageNo, pageSize) => {
   try {
     var d = new Date();
     var n = d.getTime();
-    console.log("khufhu", n)
     let result = await axiosNewData1.get(
       `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
       {retry: 5, retryDelay: 3000},
     );
     var a = new Date();
     var ns = a.getTime();
-    console.log("hjvvvhj", ns)
     return result;
   } catch (error) {
     return error;
   }
 };
-
 
 export const getMoreExploreAPI = async (pageNo, pageSize) => {
   try {
@@ -568,7 +553,6 @@ export const getMoreExploreAPI = async (pageNo, pageSize) => {
   }
 };
 
-
 export const getFavoritesList = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
@@ -579,7 +563,6 @@ export const getFavoritesList = async (pageNo, pageSize) => {
     return error;
   }
 };
-
 
 export const getFollowSearchList = async query => {
   try {
@@ -592,7 +575,6 @@ export const getFollowSearchList = async query => {
   }
 };
 
-
 export const getSearchedTemple = async query => {
   try {
     let result = await axiousInstance.get(
@@ -604,7 +586,6 @@ export const getSearchedTemple = async query => {
     return error;
   }
 };
-
 
 export const followUnfollowTemple = async data => {
   try {
@@ -621,38 +602,6 @@ export const getUserInfoNew = async () => {
   try {
     let result = await axiousInstanceNew1.get(
       `${endpoints.NEW_GET_CURRENT_USER}`,
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-export const createNewInvoice = async data => {
-  try {
-    let result = await axiousInstance.post(endpoints.Create_Invoice, data);
-    return result;
-  } catch (error) {
-    return error.response.data;
-  }
-};
-
-export const upcomingOccasions = async (pageNo, pageSize) => {
-  try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_UPCOMING_OCCASIONS}?pageNo=${pageNo}&pageSize=${pageSize}&date=2023-02-01`,
-      {retry: 5, retryDelay: 3000},
-    );
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
-
-export const getItemCommunities = async (id, pageNo, pageSize) => {
-  try {
-    let result = await axiousInstance.get(
-      `${endpoints.GET_ITEM_COMMUNITIES}?itemId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`,
-      {retry: 5, retryDelay: 3000},
     );
     return result;
   } catch (error) {

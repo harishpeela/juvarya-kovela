@@ -65,6 +65,7 @@ const colors = {
   red2: '#CB0000',
   red3: '#EE6C4D',
   red4: '#D30000',
+  red6: '#D30000',
   red5: 'rgba(211, 0, 0, 0.08)',
   yellowColor: '#FFE600',
   gold: '#FC9605',
@@ -89,6 +90,6 @@ const colors = {
   shadowColor: 'rgba(0, 0, 0, 0.24)',
 };
 const timer = {
-  loaderTime: 3000,
+  loaderTime: 1000,
 };
 export {fontSize, timer, fontFamily, window, colors};

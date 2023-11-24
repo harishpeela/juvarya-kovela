@@ -37,10 +37,9 @@ export const styles = StyleSheet.create({
     paddingBottom: 100,
   },
   buttonContainer: {
-    marginTop: 15,
+    marginTop: 5,
     width: '70%',
     alignSelf: 'center',
-    // borderWidth: 1,
   },
   alreadyTextContainer: {
     marginVertical: 4,
@@ -64,5 +63,20 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     marginLeft: 20,
+  },
+  tc: {
+    fontSize: 14,
+    alignSelf: 'center',
+    fontWeight: '500',
+  },
+  checkView: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    marginTop: 10,
+    alignItems: 'center'
+  },
+  checkIcon: {
+    fontSize: 12,
+    marginRight: 5,
   },
 });

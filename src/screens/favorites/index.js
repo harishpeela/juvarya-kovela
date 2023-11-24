@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
-import {BackHeader, Loader, SearchBar, BackgroundImage, BackHeaderNew} from '../../components';
+import {Loader, SearchBar, BackgroundImage} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
@@ -11,7 +11,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails, favoriteList} = useContext(ApplicationContext);
+  const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState();
@@ -51,7 +51,7 @@ const Favorite = ({navigation}) => {
       }
     } catch (error) {
       setLoading(false);
-      console.log('error in templedetails api is ==>', error);
+      console.log('error in templedetails api in favourites ==>', error);
     }
   };
   const onSelect = data => {
@@ -99,24 +99,8 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      {/* <BackgroundImage /> */}
-      <View style={styles.headerContainer}>
-        {/* <BackHeader
-          onBackPress={() => {
-            navigation.goBack();
-          }}
-          txt={'Following'}
-        /> */}
-        <BackHeaderNew
-          // txt={`${followersList?.length} Followers`}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-          isPlus={false}
-        />
-      </View>
-      {/* <Text style={{marginLeft: '5%', color: 'black', fontWeight: 'bold'}}>
-        {filteredArray?.length} Following{' '}
-      </Text> */}
+      <BackgroundImage />
+      <View style={styles.headerContainer} />
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
           <SearchBar
@@ -140,7 +124,7 @@ const Favorite = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray?.length == 0 ? (
+            filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
                 <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
               </View>
