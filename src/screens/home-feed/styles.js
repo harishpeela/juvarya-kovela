@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 60,
+    paddingHorizontal:"2.5%",
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -43,7 +44,6 @@ const styles = StyleSheet.create({
     height: 13,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    marginLeft: 10,
   },
   bar: {
     height: 2,
@@ -66,14 +66,12 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   circle: {
-    width: 25,
-    height: 25,
-    borderRadius: 15,
+    backgroundColor: 'white',
+    borderRadius: 28 / 2,
+    width: 30,
+    height: 30,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    marginRight: 25,
-    borderColor: colors.black2,
   },
   bellIcon: {
     alignSelf: 'center',
@@ -159,6 +157,12 @@ const styles = StyleSheet.create({
     top: -5,
     left: 15,
   },
+  flatListStyle:{
+  },
+  homeCard:{
+    // borderWidth:10,
+    // borderColor:'red'
+  }
 });
 
 export default styles;

@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
   cardContainer: {
     width: '100%',
     // marginTop: '15%',
+    
   },
   loaderContainer: {
     alignItems: 'center',

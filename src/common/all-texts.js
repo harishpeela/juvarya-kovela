@@ -1,7 +1,6 @@
 export const allTexts = {
-
-  appVersion:{
-    version:"0.70.0"
+  appVersion: {
+    version: '0.70.0',
   },
   buttonTexts: {
     // place all your button texts here
@@ -147,6 +146,7 @@ export const allTexts = {
     notification: 'Notifications',
     viewtempleprofile: 'ViewTempleProfile',
     donations: 'Donations',
+    memberShip: 'MemberShip',
   },
   homeHeader: {
     welcome: 'Welcome ',

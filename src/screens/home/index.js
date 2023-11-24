@@ -110,6 +110,7 @@ const Home = ({navigation}) => {
               keyExtractor={(item, index) => index}
               renderItem={({item, index}) => (
                 <HomeCard
+                style={styles.homeCard}
                   heading={item?.itemDetails?.name}
                   text={item.description}
                   icon={item?.itemDetails?.profilePicture}

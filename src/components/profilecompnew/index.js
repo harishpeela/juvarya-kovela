@@ -96,7 +96,7 @@ export const DirectionsTabComp = () => {
     // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton1}>
     <TouchableOpacity style={[styles.voidButton1, styles.button]}>
       <BackgroundSmallFlowerUser />
-      <Text style={styles.voidButton1Text}>Become a Mentor</Text>
+      <Text style={styles.voidButton1Text}>Become a Member</Text>
     </TouchableOpacity>
     // </LinearGradient>
   );

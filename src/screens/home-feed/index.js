@@ -19,6 +19,8 @@ import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import ApplicationContext from '../../utils/context-api/Context';
 import Share from 'react-native-share';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 const UserFeedScreen = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setloader] = useState();
@@ -165,11 +167,10 @@ const UserFeedScreen = ({navigation}) => {
           onPress={() =>
             navigation.navigate(allTexts.screenNames.notification)
           }>
-          <FeatherIcon
-            name="bell"
-            size={14}
-            color={colors.black2}
-            style={styles.bellIcon}
+          <FontAwesome
+            name="bell-o"
+            size={24}
+            color={isDarkMode ? 'black' : 'black'}
           />
           <View style={styles.notificationDot} />
         </TouchableOpacity>

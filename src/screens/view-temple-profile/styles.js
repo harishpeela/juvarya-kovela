@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors, fontFamily, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},
@@ -51,6 +51,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     // borderWidth:2,
+    paddingHorizontal: '1%',
+  },
+  menuAndAlert: {
+    flexDirection: 'row',
+    width: 'auto',
+    justifyContent: 'space-between',
+  },
+  menu: {
+    borderWidth: 0.1,
+    borderColor: colors.gray,
+    padding: 1,
+    backgroundColor: 'white',
+    marginLeft:'5%',
   },
   contentDisplay: {
     // height: '56%',
@@ -130,16 +143,68 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  followingContainer:{
-    borderWidth:20,    
+  followingContainer: {
+    borderWidth: 20,
   },
-  ImagesContainer:{
-    width:'100%',
-    borderTopWidth:1,
-    borderTopColor:colors.gray2,
+  ImagesContainer: {
+    width: '100%',
+    borderTopWidth: 1,
+    borderTopColor: colors.gray2,
     // paddingTop:'1%',
   },
-  horizontalContainer:{
+  horizontalContainer: {
     // borderWidth:2,
+  },
+  plusContainer: {
+    backgroundColor: colors.white,
+    padding: 10,
+    borderRadius: 10,
+  },
+  modal: {
+    height: 250,
+    width: '90%',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    borderRadius: 20,
+  },
+  model: {
+    backgroundColor:'rgba(0,0,0,0.1)',
+    height: '100%',
+    width: '100%',
+    justifyContent: 'flex-end',
+  },
+  modalView:{
+    backgroundColor:'white',
+    padding:5,
+    borderTopLeftRadius:10,
+    borderTopRightRadius:10,
+  },
+  modalContent:{
+    flexDirection:'row',
+    // borderWidth:1,
+    alignItems:'center',
+    marginBottom:5,
+    alignSelf:'flex-start',
+    marginHorizontal:'3%',
+    paddingVertical:5,
+  },
+  modalContentText:{
+    fontSize:fontSize.large,
+    paddingHorizontal:15,
+    color:colors.black2,
+  },
+  line:{
+    height:5,
+    alignContent:'center',
+    alignSelf:'center',
+    width:"13%",
+    backgroundColor:colors.gray,
+    marginVertical:"3%",
+    // borderTopLeftRadius:3,
+    // borderTopRightRadius:3,
+    // borderBottomLeftRadius:3,
+    // borderBottomRightRadius:3,
+    borderRadius:3,
+
   }
 });

@@ -40,6 +40,7 @@ import {
   Notifications,
   ViewTempleProfile,
   Donations,
+  MemberShip,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
@@ -55,8 +56,10 @@ import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
-
 const App = () => {
+  const checking = () => {
+    console.log('it checking the value');
+  };
   const {
     screenNames: {
       signin,
@@ -98,6 +101,7 @@ const App = () => {
       notification,
       viewtempleprofile,
       donations,
+      memberShip,
     },
   } = allTexts;
   useEffect(() => {
@@ -152,7 +156,7 @@ const App = () => {
   const HomeStack = () => {
     return (
       <Stack.Navigator initialRouteName="BottomTab">
-         <Stack.Screen
+        <Stack.Screen
           name={splash}
           component={Splash}
           options={{
@@ -400,6 +404,13 @@ const App = () => {
         <Stack.Screen
           name={donations}
           component={Donations}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={memberShip}
+          component={MemberShip}
           options={{
             headerShown: false,
           }}
