@@ -40,6 +40,7 @@ import {
   Notifications,
   ViewTempleProfile,
   Donations,
+  DonationsList,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -97,6 +98,7 @@ const App = () => {
       notification,
       viewtempleprofile,
       donations,
+      donationslist,
     },
   } = allTexts;
   useEffect(() => {
@@ -182,6 +184,13 @@ const App = () => {
         <Stack.Screen
           name={homeDetails}
           component={HomeCardDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={donationslist}
+          component={DonationsList}
           options={{
             headerShown: false,
           }}
