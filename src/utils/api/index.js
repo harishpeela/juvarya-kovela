@@ -14,6 +14,7 @@ import {
   axiousInstanceNew1,
   axiosEventsData1,
   axiosNotifications,
+  axiosDonation,
 } from './api';
 
 const endpoints = {
@@ -35,6 +36,7 @@ const endpoints = {
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
+  DONATIONS: '/jtDonation/save',
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
@@ -78,7 +80,6 @@ export const getInitialToken = async () => {
   }
 };
 
-
 export const loginUser1 = async data => {
   try {
     let result = await authAxiousInstance1.post(
@@ -92,7 +93,15 @@ export const loginUser1 = async data => {
   }
 };
 
-
+export const DonationsPost = async data => {
+  try {
+    let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
 export const PopularTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
@@ -104,8 +113,6 @@ export const PopularTemples = async () => {
     console.log('error in popular temples', error);
   }
 };
-
-
 
 export const SearchPopularTemples = async txt => {
   try {
@@ -373,17 +380,6 @@ export const getTempleDetails = async id => {
     return error;
   }
 };
-
-
-
-export const RegistesrUser = async data => {
-  try {
-    let result = await axiousInstance.post(`${endpoints.SIGN_UP}`, data);
-    return result;
-  } catch (error) {
-    return error;
-  }
-};
 export const NewRegistesrUser = async data => {
   try {
     let result = await axiousInstanceNewSignIn.post(
@@ -396,7 +392,6 @@ export const NewRegistesrUser = async data => {
   }
 };
 
-
 export const SaveFeed = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.SAVE_FEED}`, data);
@@ -405,7 +400,6 @@ export const SaveFeed = async data => {
     return error;
   }
 };
-
 
 export const createFeedPost = async data => {
   try {
@@ -479,8 +473,6 @@ export const NewUpdateUserPassword = async data => {
   }
 };
 
-
-
 export const createTemple = async data => {
   try {
     let result = await axiousInstance.post(`${endpoints.CREATE_TEMPLE}`, data);
@@ -498,7 +490,6 @@ export const createFeed = async data => {
     return error;
   }
 };
-
 
 export const getTempleList = async (pageNo, pageSize) => {
   try {
@@ -524,8 +515,6 @@ export const getFeedList = async (pageNo, pageSize, id) => {
   }
 };
 
-
-
 export const getHomeFeedList = async (pageNo, pageSize) => {
   try {
     var d = new Date();
@@ -542,7 +531,6 @@ export const getHomeFeedList = async (pageNo, pageSize) => {
   }
 };
 
-
 export const getMoreExploreAPI = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
@@ -553,7 +541,6 @@ export const getMoreExploreAPI = async (pageNo, pageSize) => {
     return error;
   }
 };
-
 
 export const getFavoritesList = async (pageNo, pageSize) => {
   try {
@@ -566,7 +553,6 @@ export const getFavoritesList = async (pageNo, pageSize) => {
   }
 };
 
-
 export const getFollowSearchList = async query => {
   try {
     let result = await axiousInstance.get(
@@ -577,7 +563,6 @@ export const getFollowSearchList = async query => {
     return error;
   }
 };
-
 
 export const getSearchedTemple = async query => {
   try {
@@ -590,7 +575,6 @@ export const getSearchedTemple = async query => {
     return error;
   }
 };
-
 
 export const followUnfollowTemple = async data => {
   try {

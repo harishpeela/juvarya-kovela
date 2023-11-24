@@ -90,32 +90,13 @@ export const ContactTabcomp = ({onPressContact}) => {
 //   );
 // };
 export const DirectionsTabComp = ({role}) => {
-  const [roleId, setRoleId] = useState(true);
-  const roleStatus = () => {
-    if (role) {
-      setRoleId(false);
-    } else {
-      setRoleId(false);
-    }
-  };
-  useEffect(() => {
-    roleStatus();
-  }, []);
   return (
-    // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton1}>
     <TouchableOpacity style={[styles.voidButton1, styles.button]}>
       <BackgroundSmallFlowerUser />
-      {roleId ? (
-        <View style={{flex: 1}}>
-          <Loader size={'small'} />
-        </View>
-      ) : (
-        <Text style={styles.voidButton1Text}>
-          {role ? 'Add a Member' : 'Become a member'}
-        </Text>
-      )}
+      <Text style={styles.voidButton1Text}>
+        {role ? 'Add a Member' : 'Become a member'}
+      </Text>
     </TouchableOpacity>
-    // </LinearGradient>
   );
 };
 export const CreateFeedTabComp = ({roleId, onPlusPress}) => {

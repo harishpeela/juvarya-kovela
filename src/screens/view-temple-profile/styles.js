@@ -140,4 +140,10 @@ export const styles = StyleSheet.create({
     borderTopColor: colors.gray2,
   },
   horizontalContainer: {},
+  loader: {
+    flex: 1,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    marginLeft: 70,
+  },
 });

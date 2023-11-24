@@ -16,7 +16,14 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {colors, fontFamily} from '../../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BackgroundSmallFlowerRs} from '../../backgroundFlower';
-export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
+export const Donation_Second_Tab = ({
+  VALUE,
+  Data,
+  onChange,
+  dropData,
+  onSelect,
+  valueRs,
+}) => {
   const [activeIndex, setActiveIndex] = useState();
 
   return (
@@ -58,10 +65,7 @@ export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
           data={dropData}
           buttonTextStyle={styles.DTextStyle}
           // defaultValue={isRoleSelected}
-          onSelect={e => {
-            // setIsRoleSelected(e);
-            // setDropDownError(false);
-          }}
+          onSelect={onSelect}
           buttonStyle={styles.DbuttonStyle}
           defaultButtonText="Donation Type"
           renderDropdownIcon={() => (
@@ -78,6 +82,7 @@ export const Donation_Second_Tab = ({VALUE, Data, onChange, dropData}) => {
           style={styles.input}
           keyboardType="number-pad"
           onChangeText={onChange}
+          value={valueRs}
         />
       </View>
       <View style={styles.border} />

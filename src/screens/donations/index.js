@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {View, TouchableOpacity, Text, ScrollView} from 'react-native';
 import {styles} from './styles';
 import {
@@ -8,9 +8,11 @@ import {
   Donation_Second_Tab,
   Donation_Third_Tab,
 } from '../../components';
-const Donations = ({route,navigation}) => {
-  
-  const [value, setValue] = useState('0' || value);
+import ApplicationContext from '../../utils/context-api/Context';
+import {DonationsPost} from '../../utils/api';
+const Donations = ({route, navigation}) => {
+  const [value, setValue] = useState(value);
+  const [dropValue, setDropValue] = useState();
   let Data = [
     {id: 1, rs: '101'},
     {id: 3, rs: '301'},
@@ -24,30 +26,29 @@ const Donations = ({route,navigation}) => {
     'Education',
     'Others',
   ];
-
+  const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log("data ===>>>>>  "+ data.name);
-
-
-  const [trfData, setTrfData] = useState();
-
-
-  // useEffect(() => {
-  //   let result = Data(data);
-  //   if (result) {
-  //     setTrfData(result);
-  //     if (result?.jtProfile) {
-  //       getFollowValue(result?.jtProfile);
-  //       Posts(result?.jtProfile);
-  //       TempleRoleSearchWithId(result?.jtProfile);
-  //       followingCount(result?.jtProfile);
-  //       MemberShip(result?.jtProfile);
-  //     } else {
-  //     }
-  //   } else {
-  //     setTrfData();
-  //   }
-  // }, []);
+  const PostDonations = async () => {
+    let payload = {
+      donation: value,
+      description: dropValue,
+      email: userDetails?.email,
+      jtProfile: data?.jtProfile,
+    };
+    console.log('payload', payload);
+    try {
+      if (value === '0' || value === undefined) {
+        alert('please enter amount');
+      } else if (!dropValue) {
+        alert('please select donation type');
+      } else {
+        let result = await DonationsPost(payload);
+        console.log('result of post donations', result?.data);
+      }
+    } catch (error) {
+      console.log('error in donations api', error);
+    }
+  };
 
   return (
     <>
@@ -66,6 +67,8 @@ const Donations = ({route,navigation}) => {
               Data={Data}
               onChange={e => setValue(e)}
               dropData={donationType}
+              onSelect={e => setDropValue(e)}
+              valueRs={value}
             />
           </View>
           <View style={{marginHorizontal: 10}}>
@@ -73,7 +76,7 @@ const Donations = ({route,navigation}) => {
           </View>
         </View>
       </ScrollView>
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => PostDonations()}>
         <Text style={styles.butText}> Donate ₹ {value} </Text>
       </TouchableOpacity>
     </>
