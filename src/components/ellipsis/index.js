@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../common';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './style';
-useRef;
 const Ellipsis = ({txtColor}) => {
   // const [isModalVisible, setModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,7 +29,7 @@ const Ellipsis = ({txtColor}) => {
   };
   return (
     <SafeAreaView>
-      <Pressable onPress={closeToggleModal} ref={ellipsisRef}>
+      <Pressable onPress={closeToggleModal}>
         <View>
           <TouchableOpacity onPress={toggleModal}>
             {/* <Icon name="ellipsis-v" size={24} color={txtColor === undefined ? (colors.black2):txtColor} /> */}
@@ -49,11 +48,7 @@ const Ellipsis = ({txtColor}) => {
           visible={modalVisible}
           onRequestClose={toggleModal}>
           <Pressable style={[styles.overlay]} onPress={closeToggleModal}>
-            <View
-              style={[
-                styles.centeredView,
-               
-              ]}>
+            <View style={[styles.centeredView]}>
               <View style={[styles.modalView]}>
                 <Text style={styles.modalText}>Blocked Users</Text>
               </View>

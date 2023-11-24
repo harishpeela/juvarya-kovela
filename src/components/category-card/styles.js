@@ -22,6 +22,18 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     marginTop: 10,
   },
+  imageContainer: {
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  // imageContainer2: {
+  //   borderWidth: 10,
+  //   borderColor: 'yellow',
+  //   width: '100%',
+  //   height: 350,
+  //   borderWidth:5,
+
+  // },
   button: {
     paddingVertical: 11,
     paddingHorizontal: 4,

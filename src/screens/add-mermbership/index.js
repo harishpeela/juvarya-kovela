@@ -25,7 +25,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
   const [memDur, setMemDur] = React.useState('');
   console.log('id ===>', id);
   const MembershipData = async () => {
-    setaLoader(true);
+    // setaLoader(true)
     try {
       let result = await MemberShipDetails(id);
       // console.log('res', result?.data?.memberships);
@@ -52,28 +52,28 @@ const AddMemebershipDetails = ({route, navigation}) => {
         <View>
           <TextInput
             style={styles.inputTextStyle}
-            onChangeText={v => setMemType(v)}
+            onChangeText={v => setMemType()}
             value={memType}
             placeholder="Type"
             keyboardType="numeric"
           />
           <TextInput
             style={styles.inputTextStyle}
-            onChangeText={v => setMemName(v)}
+            onChangeText={() => setMemName()}
             value={memName}
             placeholder="Membership name"
             keyboardType="numeric"
           />
           <TextInput
             style={styles.inputTextStyle}
-            onChangeText={v => setMemFee(v)}
+            onChangeText={() => setMemFee()}
             value={memFee}
             placeholder="Membership fee"
             keyboardType="numeric"
           />
           <TextInput
             style={styles.inputTextStyle}
-            onChangeText={v => setMemDur(v)}
+            onChangeText={() => setMemDur()}
             value={memDur}
             placeholder="Duration"
             keyboardType="numeric"

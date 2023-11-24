@@ -1,8 +1,12 @@
+/* eslint-disable no-alert */
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView} from 'react-native';
 import {AddEvent, EventHeader} from '../../components';
 import {styles} from './styles';
 import ApplicationContext from '../../utils/context-api/Context';
+
+
 const AddEvents = ({navigation, route}) => {
   const [data, setdata] = useState('');
   const {

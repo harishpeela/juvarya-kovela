@@ -37,6 +37,7 @@ import Feeds from './feed-details';
 import Notifications from './notifications';
 import ViewTempleProfile from './view-temple-profile';
 import Donations from './donations';
+import MemberShip from './Membership/Index';
 import DonationsList from './DonationsList';
 export {
   CreatePost,
@@ -78,5 +79,6 @@ export {
   Notifications,
   ViewTempleProfile,
   Donations,
+  MemberShip,
   DonationsList,
 };

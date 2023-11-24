@@ -18,6 +18,8 @@ import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import Share from 'react-native-share';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState();
   const [homeFeedList, setHomeFeedList] = useState([]);

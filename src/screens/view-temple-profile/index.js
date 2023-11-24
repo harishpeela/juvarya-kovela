@@ -10,6 +10,9 @@ import {
   ScrollView,
   FlatList,
   useColorScheme,
+  Modal,
+  Pressable,
+  Alert,
 } from 'react-native';
 import {
   Loader,
@@ -51,6 +54,11 @@ import {ProfileImage} from '../../components';
 import {colors} from '../../common';
 import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {SearchTempleRoleWithId} from '../../utils/api';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {ISO_8601} from 'moment';
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
@@ -77,6 +85,10 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [eventsLoader, setEventsLoader] = useState(false);
   const [eventsData, setEventsData] = useState();
   const [isModal, setIsModal] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [open, setOpen] = useState(true);
+  console.log('=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + roleId);
+
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -229,222 +241,297 @@ const ViewTempleProfile = ({route, navigation}) => {
       setEventsLoader(false);
     }
   };
+
+  const closeModal = () => {
+    setIsVisible(!isVisible);
+    console.log('it is calling ');
+  };
   return (
     <ScrollView
       style={{
         ...styles.maincontainer,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={styles.footerBackground}>
-        <BackgroundImageAClass />
-        {data?.jtProfileDTO?.templeClass === 'c' && <BackgroundImageFlower />}
-        <View style={styles.footerContainer}>
-          <View style={styles.header}>
-            <TouchableOpacity
-              style={{backgroundColor: 'white', borderRadius: 28 / 2}}
-              onPress={() => {
-                navigation.goBack();
-                route?.params?.onSelect({
-                  selected: isFollow,
-                  selectedId: !isFollow ? trfData?.jtProfile : '',
-                });
-              }}>
-              <BackHeaderNew
-                // txt={`${followersList?.length} Followers`}
-                onPress={() => navigation.goBack()}
-                txtColor={colors.black}
-                isPlus={false}
-              />
-            </TouchableOpacity>
-            <View>
-              <TouchableOpacity style={styles.bell}>
-                <FontAwesome
-                  name="bell-o"
-                  size={24}
-                  color={isDarkMode ? 'black' : 'black'}
-                />
-                <View style={styles.notificationNum}>
-                  <Text style={styles.bellText}>2</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View style={{alignSelf: 'center', marginTop: -15}}>
-            <ProfileImage profileImg={trfData} />
-          </View>
-          <Text style={styles.titleHeader}>
-            {trfData?.name?.length < 25
-              ? `${trfData?.name}`
-              : `${trfData?.name?.substring(0, 25)}...`}
-          </Text>
-          <Text style={styles.ratingText}>
-            <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
-            {'(15.3k Ratings)'}
-          </Text>
-          <View style={{marginTop: 10}}>
-            <ProfileTimingTabs />
-          </View>
-          <View style={{marginLeft: 15}}>
-            <ProfileSeconTab nameData={trfData} title={trfData?.name} />
-            <View style={styles.firstTabView}>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  flex: 1,
-                  justifyContent: 'space-around',
-                  margin: 30,
+      <Pressable>
+        <View style={styles.footerBackground}>
+          <BackgroundImageAClass />
+          {data?.jtProfileDTO?.templeClass === 'c' && <BackgroundImageFlower />}
+          <View style={styles.footerContainer}>
+            <View style={styles.header}>
+              <TouchableOpacity
+                style={{backgroundColor: 'white', borderRadius: 28 / 2}}
+                onPress={() => {
+                  navigation.goBack();
+                  route?.params?.onSelect({
+                    selected: isFollow,
+                    selectedId: !isFollow ? trfData?.jtProfile : '',
+                  });
                 }}>
-                <PostsComp
-                  itemDetails={postsCount}
-                  onPress={() => setPosts(!posts)}
+                <BackHeaderNew
+                  // txt={`${followersList?.length} Followers`}
+                  onPress={() => navigation.goBack()}
+                  txtColor={colors.black}
+                  isPlus={false}
                 />
-                <FollowersComp
-                  followCount={followCount}
-                  onPressFollowers={() =>
-                    navigation.navigate(
-                      allTexts.screenNames.followersmembership,
-                      {
-                        id: trfData?.jtProfile,
-                      },
-                    )
-                  }
-                />
-                <CommunityComp
-                  itemCommunity={memberShip?.membershipCount}
-                  onPressmembership={() =>
-                    navigation.navigate(
-                      allTexts.screenNames.profilemembership,
-                      {
-                        id: trfData?.jtProfile,
-                      },
-                    )
-                  }
-                />
-              </View>
-            </View>
-            <View style={styles.followtab}>
-              <ScrollView
-                alignSelf="center"
-                // justifyContent="center"
-                align
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}
-                style={styles.horizontalContainer}>
-                <FolloUnfollowComp
-                  style={styles.followingContainer}
-                  followBtnDisable={followBtnDisable}
-                  followTemples={() => FOLLOW(trfData?.jtProfile)}
-                  followVisible={followVisible}
-                  isFollow={isFollow}
-                  shadow={true}
-                />
-                <ContactTabcomp onPressContact={() => setIsModal(true)} />
-                {roleLoader ? (
-                  <View style={styles.loader}>
-                    <Loader size={'small'} color={colors.orangeColor} />
+                {/* <Feather name="arrow-left-circle" color={'#686869'} size={28} /> */}
+              </TouchableOpacity>
+              <View style={styles.menuAndAlert}>
+                <TouchableOpacity style={styles.bell}>
+                  <FontAwesome
+                    name="bell-o"
+                    size={24}
+                    color={isDarkMode ? 'black' : 'black'}
+                  />
+                  <View style={styles.notificationNum}>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
                   </View>
-                ) : (
-                  <DirectionsTabComp role={roleId} />
-                )}
-                <CreateFeedTabComp
-                  roleId={roleId}
-                  onPlusPress={() =>
-                    navigation.navigate(allTexts?.screenNames.createfeed, {
-                      data: data,
-                    })
-                  }
-                />
-              </ScrollView>
-            </View>
-            <Danation_Add_Card
-              roleId={roleId}
-              onPress={() =>
-                navigation.navigate(allTexts?.screenNames?.donations, {
-                  data: trfData,
-                })
-              }
-            />
-            <ProfileFourthTab
-              currentIndex={currentIndex}
-              setCurrentIndex={setCurrentIndex}
-              templeDetails={trfData}
-            />
-          </View>
-        </View>
-        {currentIndex === 1 && (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.contentDisplay}>
-            {!postImages?.length > 0 ? (
-              <View>
-                {loader ? (
-                  <Loader size={'small'} color={colors.orangeColor} />
-                ) : (
-                  <View>
-                    <Feather
-                      name="camera-off"
-                      size={40}
-                      style={styles.noPosts}
-                    />
-                    <Text style={styles.noPosts.text}>No Posts Yet</Text>
-                  </View>
-                )}
-              </View>
-            ) : (
-              <FlatList
-                numColumns={3}
-                data={postImages}
-                keyExtractor={({item, index}) => index}
-                style={styles.ImagesContainer}
-                renderItem={({item, index}) => (
-                  <TempleProfile_PostsCard nav={navigation} item={item} />
-                )}
-              />
-            )}
-          </ScrollView>
-        )}
-        {currentIndex === 2 && (
-          <View>
-            <Feather name="camera-off" size={40} style={styles.noPosts} />
-            <Text style={styles.noPosts.text}>No Reels Yet</Text>
-          </View>
-        )}
-        {currentIndex === 3 && (
-          <View>
-            <Feather name="camera-off" size={40} style={styles.noPosts} />
-            <Text style={styles.noPosts.text}>No Services Yet</Text>
-          </View>
-        )}
-        {currentIndex === 4 && (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={styles.contentDisplay}>
-            {eventsLoader && (
-              <View style={{flex: 1}}>
-                <Loader color={colors.orangeColor} size={30} />
-              </View>
-            )}
-            {!eventsData?.length > 0 ? (
-              <View>
-                <Feather name="camera-off" size={40} style={styles.noPosts} />
-                <Text style={styles.noPosts.text}>No Events Yet</Text>
-              </View>
-            ) : (
-              <FlatList
-                data={eventsData}
-                style={styles.ImagesContainer}
-                keyExtractor={({item, index}) => index}
-                renderItem={({item, index}) => (
-                  <TouchableOpacity style={styles.eventsCard}>
-                    <Text> Name: {item?.name}</Text>
+                </TouchableOpacity>
+                {roleId === 'ROLE_ITEM_ADMIN' ? (
+                  <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                    <View style={styles.menu}>
+                      <Feather name="menu" size={28} color={colors.black} />
+                    </View>
                   </TouchableOpacity>
+                ) : (
+                  <></>
                 )}
+              </View>
+            </View>
+            <View style={{alignSelf: 'center', marginTop: -15}}>
+              <ProfileImage profileImg={trfData} />
+            </View>
+            <Text style={styles.titleHeader}>
+              {trfData?.name?.length < 25
+                ? `${trfData?.name}`
+                : `${trfData?.name?.substring(0, 25)}...`}
+            </Text>
+            <Text style={styles.ratingText}>
+              <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
+              {'(15.3k Ratings)'}
+            </Text>
+            <View style={{marginTop: 10}}>
+              <ProfileTimingTabs />
+            </View>
+            <View style={{marginLeft: 15}}>
+              <ProfileSeconTab nameData={trfData} title={trfData?.name} />
+              <View style={styles.firstTabView}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    flex: 1,
+                    justifyContent: 'space-around',
+                    margin: 30,
+                  }}>
+                  <PostsComp
+                    itemDetails={postsCount}
+                    onPress={() => setPosts(!posts)}
+                  />
+                  <FollowersComp
+                    followCount={followCount}
+                    onPressFollowers={() =>
+                      navigation.navigate(
+                        allTexts.screenNames.followersmembership,
+                        {
+                          id: trfData?.jtProfile,
+                        },
+                      )
+                    }
+                  />
+                  <CommunityComp
+                    itemCommunity={memberShip?.membershipCount}
+                    onPressmembership={() =>
+                      navigation.navigate(
+                        allTexts.screenNames.profilemembership,
+                        {
+                          id: trfData?.jtProfile,
+                        },
+                      )
+                    }
+                  />
+                </View>
+              </View>
+              <View style={styles.followtab}>
+                <ScrollView
+                  alignSelf="center"
+                  // justifyContent="center"
+                  align
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  style={styles.horizontalContainer}>
+                  <FolloUnfollowComp
+                    style={styles.followingContainer}
+                    followBtnDisable={followBtnDisable}
+                    followTemples={() => FOLLOW(trfData?.jtProfile)}
+                    followVisible={followVisible}
+                    isFollow={isFollow}
+                    shadow={true}
+                  />
+                  <ContactTabcomp onPressContact={() => setIsModal(true)} />
+                  <DirectionsTabComp />
+                  <CreateFeedTabComp
+                    roleId={roleId}
+                    onPlusPress={() =>
+                      navigation.navigate(allTexts?.screenNames.createfeed, {
+                        data: data,
+                      })
+                    }
+                  />
+                </ScrollView>
+              </View>
+              <Danation_Add_Card
+                roleId={roleId}
+                onPress={() =>
+                  navigation.navigate(allTexts?.screenNames?.donations, {
+                    data: trfData,
+                  })
+                }
               />
-            )}
-          </ScrollView>
-        )}
-        {isModal && <ContactModal isModal={isModal} setIsModal={setIsModal} />}
-      </View>
+              <ProfileFourthTab
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+                templeDetails={trfData}
+              />
+            </View>
+          </View>
+          {currentIndex === 1 && (
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={styles.contentDisplay}>
+              {/* {loader && (
+                <View
+                  style={{
+                    flex: 1,
+                  }}>
+                  <Loader color={colors.orangeColor} size={30} />
+                </View>
+              )} */}
+              {!postImages?.length > 0 ? (
+                <View>
+                  {loader ? (
+                    <Loader size={'small'} color={colors.orangeColor} />
+                  ) : (
+                    <View>
+                      <Feather
+                        name="camera-off"
+                        size={40}
+                        style={styles.noPosts}
+                      />
+                      <Text style={styles.noPosts.text}>No Posts Yet</Text>
+                    </View>
+                  )}
+                </View>
+              ) : (
+                <FlatList
+                  numColumns={3}
+                  data={postImages}
+                  keyExtractor={({item, index}) => index}
+                  style={styles.ImagesContainer}
+                  renderItem={({item, index}) => (
+                    <TempleProfile_PostsCard nav={navigation} item={item} />
+                  )}
+                />
+              )}
+            </ScrollView>
+          )}
+          {currentIndex === 2 && (
+            <View>
+              <Feather name="camera-off" size={40} style={styles.noPosts} />
+              <Text style={styles.noPosts.text}>No Reels Yet</Text>
+            </View>
+          )}
+          {currentIndex === 3 && (
+            <View>
+              <Feather name="camera-off" size={40} style={styles.noPosts} />
+              <Text style={styles.noPosts.text}>No Services Yet</Text>
+            </View>
+          )}
+          {currentIndex === 4 && (
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={styles.contentDisplay}>
+              {eventsLoader && (
+                <View style={{flex: 1}}>
+                  <Loader color={colors.orangeColor} size={30} />
+                </View>
+              )}
+              {!eventsData?.length > 0 ? (
+                <View>
+                  <Feather name="camera-off" size={40} style={styles.noPosts} />
+                  <Text style={styles.noPosts.text}>No Events Yet</Text>
+                </View>
+              ) : (
+                <FlatList
+                  data={eventsData}
+                  style={styles.ImagesContainer}
+                  keyExtractor={({item, index}) => index}
+                  renderItem={({item, index}) => (
+                    <TouchableOpacity style={styles.eventsCard}>
+                      <Text> Name: {item?.name}</Text>
+                    </TouchableOpacity>
+                  )}
+                />
+              )}
+            </ScrollView>
+          )}
+          {isModal && (
+            <ContactModal isModal={isModal} setIsModal={setIsModal} />
+          )}
+        </View>
+      </Pressable>
+      <Modal
+        animationType={'slide'}
+        transparent={true}
+        visible={isVisible}
+        onRequestClose={() => {
+          setIsVisible(!isVisible);
+        }}>
+        <Pressable
+          onPress={() => setIsVisible(!isVisible)}
+          style={styles.model}>
+          <View style={styles.modalView}>
+            <View style={styles.line} />
+
+            <View style={styles.modalContent}>
+              <Icon color={colors.black} name="create-outline" size={22} />
+
+              <Text style={styles.modalContentText}>Create a Post</Text>
+            </View>
+            <View style={styles.modalContent}>
+              <Icon color={colors.black} name="people-outline" size={22} />
+
+              <Text style={styles.modalContentText}>User groups</Text>
+            </View>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.profilemembership
+                //    {
+                //   id: trfData?.jtProfile,
+                // }
+                )
+              }>
+              <View style={styles.modalContent}>
+                <MaterialIcons
+                  color={colors.black}
+                  name="account-box-outline"
+                  size={22}
+                />
+
+                <Text style={styles.modalContentText}>Manage Memberships</Text>
+              </View>
+            </TouchableOpacity>
+            {/* <View style={styles.modalContent}>
+              <Feather color={colors.black} name="camera-off" size={20}  />
+
+              <Text style={styles.modalContentText}>sdasdd</Text>
+            </View>
+            <View style={styles.modalContent}>
+              <Feather  color={colors.black} name="camera-off" size={20}  />
+
+              <Text style={styles.modalContentText}>sdasdd</Text>
+            </View> */}
+          </View>
+        </Pressable>
+      </Modal>
     </ScrollView>
   );
 };

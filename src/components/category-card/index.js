@@ -27,6 +27,8 @@ import {Loader} from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import '../../../languages/language';
 import {windowHeight, windowWidth} from '../../utils/config/config';
+import imageSize from 'react-image-size';
+
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -42,6 +44,24 @@ export const UserFeedCompList = ({
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
+  // const [image, setImage] = useState('');
+  // const [dimensions, setDimensions] = useState({width: 0, height: 0});
+
+  // useEffect(() => {
+  //   // Fetch image dimensions
+  //   console.log('ImageData in categorey-card =>>>' + image);
+  //   if (image !== undefined && image !== null) {
+  //     imageSize(image)
+  //       .then(size => {
+  //         setDimensions({width: size.width, height: size.height});
+  //         console.log(dimensions);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error getting image dimensions:', error);
+  //       });
+  //   }
+  // }, []);
+
   const likeUnLikeHandler = async () => {
     // console.log('likes', likes);
     // console.log('likes count', likeCount);
@@ -72,6 +92,7 @@ export const UserFeedCompList = ({
       setLikeCount(likes);
     }
   }, [likes]);
+
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
@@ -174,9 +195,20 @@ export const UserFeedCompList = ({
           viewabilityConfig={viewabilityConfig}
           keyExtractor={({item, index}) => index}
           renderItem={({item, index}) => {
+            // setImage(item?.url)
             return (
               <View>
                 {!item?.uri ? (
+                  // <Image
+                  //   source={{uri: item?.url}}
+                  //   style={{
+                  //     flex: 1,
+                  //     height: 350,
+                  //     width,
+                  //     resizeMode: 'contain',
+                  //     backgroundColor: 'black', //#faf8c8//,
+                  //   }}
+                  // />
                   <Image
                     source={{uri: item?.url}}
                     style={{
