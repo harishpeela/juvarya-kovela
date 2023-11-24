@@ -37,6 +37,7 @@ const endpoints = {
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
+  DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
@@ -219,6 +220,16 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_GET_MY_TEMPELS_LIST}=${custId}&page=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const getDonationsList = async (custId, pgno, pgSize) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.DONATIONS_LIST}${custId}?pageNo=${pgno}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {

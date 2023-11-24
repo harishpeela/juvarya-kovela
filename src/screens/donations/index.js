@@ -1,6 +1,7 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useContext} from 'react';
-import {View, TouchableOpacity, Text, ScrollView} from 'react-native';
+import {View, TouchableOpacity, Text, ScrollView, Alert} from 'react-native';
 import {styles} from './styles';
 import {
   BackHeaderNew,
@@ -10,6 +11,7 @@ import {
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import {DonationsPost} from '../../utils/api';
+import {allTexts} from '../../common';
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
   const [dropValue, setDropValue] = useState();
@@ -43,6 +45,18 @@ const Donations = ({route, navigation}) => {
         alert('please select donation type');
       } else {
         let result = await DonationsPost(payload);
+        if (result) {
+          console.log('message', result?.data);
+          Alert.alert('Success', result?.data?.message, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.screenNames.donationslist, {
+                  data: data,
+                }),
+            },
+          ]);
+        }
         console.log('result of post donations', result?.data);
       }
     } catch (error) {

@@ -146,6 +146,7 @@ export const allTexts = {
     notification: 'Notifications',
     viewtempleprofile: 'ViewTempleProfile',
     donations: 'Donations',
+    donationslist: 'DonationsList',
   },
   homeHeader: {
     welcome: 'Welcome ',
