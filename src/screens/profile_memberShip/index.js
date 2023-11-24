@@ -10,7 +10,6 @@ import {colors, allTexts} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Button} from 'react-native-share';
-
 const ProfileMembership = ({route, navigation}) => {
   // const {id} = route.params || {};
   const [data, setData] = useState([{name: 'sai'}, {name: 'something'}]);
@@ -59,11 +58,14 @@ const ProfileMembership = ({route, navigation}) => {
                     }}
                     style={styles.image}
                   />
-                  <Text style={styles.firstDetailsText}>
-                    Premium MemberShip
-                  </Text>
+                  <View style={styles.firstDetailsTextContainer}>
+                    <Text style={styles.firstDetailsText}>Premium</Text>
+                    <TouchableOpacity style={styles.button}>
+                      <Text style={styles.buttonText}>Click</Text>
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <Text style={styles.description}>Description Description</Text>
+                <Text style={styles.description}>Description</Text>
                 <Text style={styles.moreDetails}>more Details</Text>
                 <View style={styles.border} />
                 <View style={styles.lastContainer}>
@@ -71,7 +73,7 @@ const ProfileMembership = ({route, navigation}) => {
                     <Text style={styles.priceText}>$49.99</Text>
                     <Text style={styles.priceText2}>$49.99</Text>
                   </View>
-                  <TouchableOpacity style={styles.button}>
+                  <TouchableOpacity style={styles.button2}>
                     <Text style={styles.buttonText}>Click Here</Text>
                   </TouchableOpacity>
                 </View>
@@ -88,4 +90,4 @@ const ProfileMembership = ({route, navigation}) => {
     </SafeAreaView>
   );
 };
-export default ProfileMembership;
+export default ProfileMembership
