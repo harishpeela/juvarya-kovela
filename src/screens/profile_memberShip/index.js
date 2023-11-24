@@ -13,6 +13,7 @@ const ProfileMembership = ({route, navigation}) => {
   const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
+  console.log('id==>', id);
   const MembershipData = async () => {
     setaLoader(true);
     try {
@@ -27,13 +28,13 @@ const ProfileMembership = ({route, navigation}) => {
     }
   };
 
-  useEffect(() => {
-    MembershipData();
-  }, [id]);
+  // useEffect(() => {
+  //   MembershipData();
+  // }, [id]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{marginHorizontal: '5%', marginVertical: -10}}>
+      <View style={{marginHorizontal: '5%', marginVertical: 20}}>
         <BackHeaderNew
           txt={'Membership'}
           onPress={() => navigation.goBack()}
@@ -67,10 +68,9 @@ const ProfileMembership = ({route, navigation}) => {
               )}
             />
           ) : (
-            <Text style={styles.nomemship}>
-              {' '}
-              No Membership available for this Temple
-            </Text>
+            <View style={styles.nomemship}>
+              <Text> No Membership available for this Temple</Text>
+            </View>
           )}
         </View>
       </View>

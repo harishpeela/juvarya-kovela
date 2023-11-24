@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     marginTop: '10%',
   },
   nomemship: {
-    alignSelf: 'center',
-    marginTop: '40%',
+    alignItems: 'center',
+    marginTop: '100%',
   },
   type: {fontSize: 18},
 });

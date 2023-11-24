@@ -15,7 +15,6 @@ import {BackgroundImage, Loader} from '../../components';
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
-import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ApplicationContext from '../../utils/context-api/Context';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
@@ -28,30 +27,13 @@ export default BottomTabBase = ({navigation}) => {
     <TicketConfirmation navigation={navigation} />
   );
   const {homeFeedListData} = useContext(ApplicationContext);
-  const [showTabs, setShowTabs] = useState(false);
   const [feedLength, setFeedLength] = useState(0);
   useEffect(() => {
     setFeedLength(homeFeedListData?.length);
   }, [homeFeedListData, navigation]);
-  const [checking, setChecking] = useState(false);
-  // useEffect(() => {
-  //   const loadTabs = async () => {
-  //     setChecking(true);
-  //     try {
-  //       await new Promise(resolve => setTimeout(resolve, timer.loaderTime));
-  //       setShowTabs(true);
-  //     } catch (error) {
-  //       console.error('Error loading tabs:', error);
-  //     } finally {
-  //       setChecking(false); // Stop checking
-  //     }
-  //   };
-  //   loadTabs();
-  // }, []);
 
   return (
     <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
-      {/* {showTabs ? ( */}
       {homeFeedListData === undefined ? (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <BackgroundImage />
@@ -130,23 +112,6 @@ export default BottomTabBase = ({navigation}) => {
           />
         </Tab.Navigator>
       )}
-      {/* ) : (
-        <View style={styles.loadingScreen}>
-          <View style={styles.dotsWrapper}>
-            <LoadingDots
-              size={15}
-              bounceHeight={17}
-              dots={4}
-              colors={[
-                colors.orangeColor,
-                colors.orangeColor,
-                colors.orangeColor,
-                colors.orangeColor,
-              ]}
-            />
-          </View>
-        </View>
-      )} */}
     </SafeAreaView>
   );
 };

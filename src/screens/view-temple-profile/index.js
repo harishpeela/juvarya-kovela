@@ -70,6 +70,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [followCount, setFollowCount] = useState(0);
   const [postImages, setPostImages] = useState([]);
   const [roleId, setRoleId] = useState();
+  const [roleLoader, setRoleLoader] = useState(true);
   const [posts, setPosts] = useState(false);
   const [memberShip, setMemberShip] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
@@ -197,15 +198,21 @@ const ViewTempleProfile = ({route, navigation}) => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
       if (result) {
+        setRoleLoader(true);
         let val = result?.data?.roles;
         var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
         if (roleAdmin) {
           setRoleId('ROLE_ITEM_ADMIN');
+          setRoleLoader(false);
+        } else {
+          setRoleLoader(false);
         }
       } else {
         setRoleId(null);
+        setRoleLoader(false);
       }
     } catch (error) {
+      setRoleLoader(false);
       console.log('error in temple role api', error);
     }
   };
@@ -332,7 +339,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                   shadow={true}
                 />
                 <ContactTabcomp onPressContact={() => setIsModal(true)} />
-                <DirectionsTabComp role={roleId} />
+                {roleLoader ? (
+                  <View style={styles.loader}>
+                    <Loader size={'small'} color={colors.orangeColor} />
+                  </View>
+                ) : (
+                  <DirectionsTabComp role={roleId} />
+                )}
                 <CreateFeedTabComp
                   roleId={roleId}
                   onPlusPress={() =>
@@ -362,14 +375,6 @@ const ViewTempleProfile = ({route, navigation}) => {
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={styles.contentDisplay}>
-            {/* {loader && (
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Loader color={colors.orangeColor} size={30} />
-                </View>
-              )} */}
             {!postImages?.length > 0 ? (
               <View>
                 {loader ? (
