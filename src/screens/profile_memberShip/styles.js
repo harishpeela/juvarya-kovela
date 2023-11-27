@@ -3,6 +3,8 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
+    marginTop: 40,
+    margin: '5%'
   },
   container1: {
     borderWidth: 2,

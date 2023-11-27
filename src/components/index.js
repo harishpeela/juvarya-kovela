@@ -84,6 +84,7 @@ import Ellipsis from './ellipsis';
 import Sort from './sort';
 import FollowersListCard2 from './FollowersListCard2';
 import { Donations_list_Card } from './donation_list';
+import { MemberShipCard } from './membershipCard';
 export {
   Loader,
   SearchBar,
@@ -161,4 +162,5 @@ export {
   FollowersListCard2,
   Donation_Third_Tab,
   Donations_list_Card,
+  MemberShipCard,
 };

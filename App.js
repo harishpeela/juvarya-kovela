@@ -41,6 +41,7 @@ import {
   ViewTempleProfile,
   Donations,
   MemberShip,
+  DonationsList
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -97,13 +98,11 @@ const App = () => {
       addMembershipDetails,
       seeall,
       feeds,
-      home,
       notification,
       viewtempleprofile,
       donations,
       memberShip,
       donationslist,
-
     },
   } = allTexts;
   useEffect(() => {

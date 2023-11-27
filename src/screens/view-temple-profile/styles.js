@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../common';
+import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   maincontainer: {flex: 1},
   scrolledcontainer: {flex: 1},

@@ -55,7 +55,6 @@ import {colors} from '../../common';
 import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {ISO_8601} from 'moment';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -86,8 +85,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [eventsData, setEventsData] = useState();
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [open, setOpen] = useState(true);
-  console.log('=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + roleId);
 
   const FOLLOW = id => {
     if (isFollow) {
