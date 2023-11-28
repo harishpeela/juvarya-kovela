@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import {View, Text} from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useContext} from 'react';
 import {InputField, PrimaryEventButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -12,15 +12,12 @@ import {TextInput, TouchableOpacity} from 'react-native';
 import CalenderIcon from 'react-native-vector-icons/AntDesign';
 import RadioForm from 'react-native-simple-radio-button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import moment from 'moment/moment';
 import ApplicationContext from '../../utils/context-api/Context';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const AddEvent = ({data, navigation}) => {
   const {id} = useContext(ApplicationContext);
-  // console.log('-=========-=-=-=-=-=-', id);
-  // console.log('iiiiiidddddddddddd', navigation);
   const {
     buttonTexts: {addevents},
     placeHolders: {tampleNameP, descriptionP},
@@ -50,9 +47,6 @@ export const AddEvent = ({data, navigation}) => {
       ? ` ${TempDate[3]} ${TempDate[4]} ${TempDate[5]} ${TempDate[6]} ${TempDate[7]} ${TempDate[8]} ${TempDate[9]} ${TempDate[10]} ${TempDate[11]} ${TempDate[12]} ${TempDate[13]} ${TempDate[14]}`
       : '';
   };
-  // const FromDate = GetFromDate();
-  // const [selectedDate, setSelectedDate] = useState(new Date());
-  // console.log('selecteddate', selectedDate, isRegular);
   var radio_prop = [
     {label: 'Single day', value: 0},
     {label: 'more days', value: 1},
@@ -62,8 +56,6 @@ export const AddEvent = ({data, navigation}) => {
     myHeaders.append('Authorization', token);
     let token = await getAuthTokenDetails();
     let Access_Token = token.replace('bearer ', '');
-    // console.log('acess_Tocken------', Access_Token);
-
     var formdata = new FormData();
     formdata.append('name', occasionData?.eventName);
     formdata.append('fromDate', occasionData?.fromDate);
@@ -72,11 +64,6 @@ export const AddEvent = ({data, navigation}) => {
     formdata.append('country', 'IN');
     formdata.append('description', occasionData?.description);
     formdata.append('itemId', id);
-    // formdata.append(
-    //   'files',
-    //   fileInput.files[0],
-    //   '/C:/Users/Juvi/Desktop/hero-800px-9fbe463f.jpg',
-    // );
     formdata.append('city', 'IN-AP-AKP');
     formdata.append('createFeed', 'true');
     formdata.append('toDate', occasionData?.toDate);
@@ -94,16 +81,12 @@ export const AddEvent = ({data, navigation}) => {
     )
       .then(response => response.json())
       .then(result => {
-        // console.log('injnhjnh', result);
         if (result?.id) {
           navigation.navigate(allTexts.screenNames.events, {idparam: id});
         }
       })
       .catch(error => console.log('error', error));
   };
-  // var dates = moment('2016-05-12').format('YYYY/MMM/DD');
-  // console.log('dates', dates);
-
   return (
     <View style={styles.wrapper}>
       <KeyboardAwareScrollView
@@ -172,7 +155,6 @@ export const AddEvent = ({data, navigation}) => {
                     labelStyle={styles.radioLabelStyle}
                     onPress={value => {
                       setIsRegular(value);
-                      // console.log('condition', value);
                     }}
                   />
                 </View>

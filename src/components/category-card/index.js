@@ -10,24 +10,18 @@ import {
   useColorScheme,
 } from 'react-native';
 import {colors} from '../../common';
-import React, {useState, useEffect, useRef, useMemo} from 'react';
+import React, {useState, useRef, useMemo} from 'react';
 import {styles} from './styles';
 import {NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {
-  NewLikeOrUnlikeFeed,
-  NewLikesCount,
-  DeleteSavedFeed,
-} from '../../utils/api';
+import {NewLikeOrUnlikeFeed, DeleteSavedFeed} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 import {DotsNation} from '../dotsNation';
 import {Loader} from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import '../../../languages/language';
-import {windowHeight, windowWidth} from '../../utils/config/config';
-import imageSize from 'react-image-size';
 
 export const UserFeedCompList = ({
   post,
@@ -44,44 +38,17 @@ export const UserFeedCompList = ({
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
-  // const [image, setImage] = useState('');
-  // const [dimensions, setDimensions] = useState({width: 0, height: 0});
-
-  // useEffect(() => {
-  //   // Fetch image dimensions
-  //   console.log('ImageData in categorey-card =>>>' + image);
-  //   if (image !== undefined && image !== null) {
-  //     imageSize(image)
-  //       .then(size => {
-  //         setDimensions({width: size.width, height: size.height});
-  //         console.log(dimensions);
-  //       })
-  //       .catch(error => {
-  //         console.error('Error getting image dimensions:', error);
-  //       });
-  //   }
-  // }, []);
 
   const likeUnLikeHandler = async () => {
-    // console.log('likes', likes);
-    // console.log('likes count', likeCount);
-    // if (isLiked) {
-    //   setLikeCount(likeCount - 1);
-    // } else {
-    //   setLikeCount(likeCount + 1);
-    // }
     setIsLiked(!isLiked);
     const payloadLike = {
       jtFeedId: id,
       like: !isLiked,
     };
-    // console.log('payload of likes', payloadLike);
     try {
       let result = await NewLikeOrUnlikeFeed(payloadLike);
-      // console.log('result of likes count', result?.data);
       if (result) {
         setLikeCount(result?.data?.totalCount);
-        // return;
       }
     } catch (error) {
       console.log(error);
@@ -118,16 +85,6 @@ export const UserFeedCompList = ({
   const DeleteFeed = async () => {
     let result = await DeleteSavedFeed(id);
   };
-  // const likesCount = async () => {
-  //   try {
-  //     let result = await NewLikesCount(id);
-  //     if (result) {
-  //       setLikeCount(result?.data?.count);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in likes count', error);
-  //   }
-  // };
   const scrollX = useRef(new Animated.Value(0)).current;
   const handleOnScroll = event => {
     Animated.event(
@@ -153,9 +110,6 @@ export const UserFeedCompList = ({
     itemVisiblePercentThreshold: 50,
   }).current;
 
-  // useEffect(() => {
-  //   // likesCount();
-  // }, []);
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -195,20 +149,9 @@ export const UserFeedCompList = ({
           viewabilityConfig={viewabilityConfig}
           keyExtractor={({item, index}) => index}
           renderItem={({item, index}) => {
-            // setImage(item?.url)
             return (
               <View>
                 {!item?.uri ? (
-                  // <Image
-                  //   source={{uri: item?.url}}
-                  //   style={{
-                  //     flex: 1,
-                  //     height: 350,
-                  //     width,
-                  //     resizeMode: 'contain',
-                  //     backgroundColor: 'black', //#faf8c8//,
-                  //   }}
-                  // />
                   <Image
                     source={{uri: item?.url}}
                     style={{
@@ -216,7 +159,7 @@ export const UserFeedCompList = ({
                       height: 350,
                       width,
                       resizeMode: 'contain',
-                      backgroundColor: 'black', //#faf8c8//,
+                      backgroundColor: 'black',
                     }}
                   />
                 ) : (
@@ -261,13 +204,9 @@ export const UserFeedCompList = ({
         </View>
       </View>
       <View style={{paddingHorizontal: 15}}>
-        {/* <Text style={styles.likes}>{likeCount ? likeCount : likes} Likes</Text> */}
         <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
           {likeCount} Likes
         </Text>
-        {/* <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
-          {likeCount ? likeCount : 0} Likes
-        </Text> */}
       </View>
       <Text style={styles.username}>
         {post?.jtProfileDTO?.name}

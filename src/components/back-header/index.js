@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {colors} from '../../common';
-import React, {useState} from 'react';
+import React from 'react';
 import {styles} from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';

@@ -1,4 +1,10 @@
-import {View, Text, TouchableOpacity, ToastAndroid, Pressable} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ToastAndroid,
+  Pressable,
+} from 'react-native';
 import {colors} from '../../common';
 import React, {useState} from 'react';
 import {styles} from './styles';
@@ -6,7 +12,15 @@ import EntypoIcon from 'react-native-vector-icons/Entypo';
 import {ImageLoader} from '..';
 import {followUnfollowTemple} from '../../utils/api';
 
-export const SearchCard = ({name, img, location, item, isFollowTemple, id,onPress}) => {
+export const SearchCard = ({
+  name,
+  img,
+  location,
+  item,
+  isFollowTemple,
+  id,
+  onPress,
+}) => {
   const [isFollow, setisFollow] = useState(isFollowTemple);
 
   const toggleFollow = async () => {

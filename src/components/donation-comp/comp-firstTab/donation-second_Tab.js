@@ -64,7 +64,6 @@ export const Donation_Second_Tab = ({
         <SelectDropdown
           data={dropData}
           buttonTextStyle={styles.DTextStyle}
-          // defaultValue={isRoleSelected}
           onSelect={onSelect}
           buttonStyle={styles.DbuttonStyle}
           defaultButtonText="Donation Type"
@@ -121,7 +120,6 @@ export const Donation_Second_Tab = ({
 const styles = StyleSheet.create({
   choose: {margin: 10, fontSize: 18, fontWeight: 'bold', color: colors.black},
   flatlist: {
-    // borderWidth: 0.5,
     padding: 5,
     margin: 5,
     width: 100,
@@ -141,10 +139,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   inputView: {
-    // borderWidth: 0.5,
     flexDirection: 'row',
     alignItems: 'center',
-    // padding: 2,
     marginHorizontal: 20,
     marginTop: '2%',
     backgroundColor: colors.white,

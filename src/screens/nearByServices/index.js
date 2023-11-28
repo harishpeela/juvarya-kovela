@@ -7,9 +7,8 @@ import {
   Text,
   TextInput,
   Image,
-  Modal,
 } from 'react-native';
-import { BackgroundImage } from '../../components';
+import {BackgroundImage} from '../../components';
 import {styles} from './styles';
 import IconSearch from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -28,7 +27,6 @@ const NearByServices = ({navigation}) => {
         </TouchableOpacity>
         <Text style={styles.headText}>NearBy Services</Text>
       </View>
-      {/* <TouchableOpacity /> */}
       <View style={styles.searchTabMain}>
         <View style={styles.searchTab}>
           <IconSearch name="search1" size={25} style={{marginHorizontal: 10}} />

@@ -12,8 +12,7 @@ const Occasions = ({navigation}) => {
         onBackPress={() => navigation.goBack()}
         txt={allTexts.headings.accountItems.occasion}
         plusButton
-        onPlusPress={() => {
-        }}
+        onPlusPress={() => {}}
       />
       <View style={styles.occView}>
         <InputTitle
@@ -31,8 +30,6 @@ const InputTitle = ({occationNmame, descripton, pickDate, data}) => {
     {label: 'Selected Period', value: 1},
   ];
   const [isRegular, setIsRegular] = useState(data);
-  const [imageUploaded, setimageUploaded] = useState(false);
-  const [isSelected, setSelection] = useState(false);
   return (
     <View>
       <Text style={styles.occatsionText}>{occationNmame} </Text>

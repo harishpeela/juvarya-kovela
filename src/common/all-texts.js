@@ -128,7 +128,6 @@ export const allTexts = {
     nearByProducts: 'NearByProducts',
     nearByServices: 'NearByServices',
     userFeedScreen: 'UserFeedScreen',
-    templeProfile: 'TempleProfile',
     viewProfile: 'ViewProfile',
     menu: 'Menu',
     addtemplenew: 'AddTempleNew',

@@ -7,7 +7,6 @@ import {styles} from './styles';
 import {colors} from '../../common';
 const Posts = ({navigation, route}) => {
   const {posts} = route.params || {};
-  // console.log('data', posts[0]?.mediaList);
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
       <BackgroundImage />

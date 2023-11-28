@@ -17,7 +17,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const [isFollow, setIsFollow] = useState();
   const [searchedText, setSearchedText] = useState('');
   const [loader, setLoader] = useState(false);
-  const [searchLoading, setSearchLoading] = useState(false);
   const [filteredList, setFilteredList] = useState([]);
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
@@ -25,7 +24,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     setLoader(true);
     try {
       let result = await PopularTemples();
-      // console.log('res', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -59,7 +57,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   const SearchPopTemp = async txt => {
     try {
       let result = await SearchPopularTemples(txt);
-      // console.log('res', result);
       if (result?.status === 200) {
         setFilteredData(result?.data?.data);
       }
@@ -74,7 +71,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
           value={searchedText}
           onTextChange={e => {
             setSearchedText(e);
-            // FilteredList(e);
             SearchPopTemp(e);
           }}
           loading={false}
@@ -82,7 +78,6 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
             setSearchedText('');
             await PopularTemplesss(pageNo, 20);
           }}
-          // onSubmit={FilteredList}
           bgColor={colors.gray4}
           placeHolder={'Search here'}
         />
@@ -123,13 +118,10 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
                       post={item}
                       name={item.name}
                       templeId={item.id}
-                      // date={item.creationTime}
                       isFollowingTrue={item?.follow}
                       pageNav={pageNav}
                     />
                   )}
-                  // ListFooterComponent={renderLoder}
-                  // onEndReached={() => loadMoreItems()}
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />

@@ -66,7 +66,6 @@ export const AddTampleStep3 = ({
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            // console.log('statevalue', values);
             formikActions.setSubmitting(true);
             if (isRoleSelected == '') {
               setDropDownError(true);
@@ -135,7 +134,6 @@ export const AddTampleStep3 = ({
                     <PrimaryButton
                       bgColor={colors.blue3}
                       onPress={handleSubmit}
-                      // onPress={setIsAllDataAvailable}
                       text={'add'}
                       radius={8}
                       fontsize={10}

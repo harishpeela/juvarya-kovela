@@ -29,7 +29,7 @@ import Snackbar from 'react-native-snackbar';
 import ApplicationContext from '../../utils/context-api/Context';
 const HomeDetail = ({navigation, route}) => {
   const [loader, setloader] = useState(true);
-  const {userDetails, setId} = useContext(ApplicationContext);
+  const {userDetails} = useContext(ApplicationContext);
   const [isFollow, setisFollow] = useState(false);
   const [alertVible, setAlertVible] = useState(false);
   const [feedListData, setFeedListData] = useState([]);
@@ -45,7 +45,6 @@ const HomeDetail = ({navigation, route}) => {
   const {
     params: {id, title},
   } = route || {};
-  // console.log('details', id, title);
   const getData = async () => {
     try {
       let result = await getTempleDetails(id);

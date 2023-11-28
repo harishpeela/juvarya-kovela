@@ -1,20 +1,17 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useEffect, useContext} from 'react';
-import {AddTampleStep1, InputField, PrimaryButton} from '../../components';
+import {View} from 'react-native';
+import React from 'react';
+import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
-import {AddTampleSchema, AddTampleSchemaS2} from '../../common/schemas';
-// import {styles} from './style';
+import {AddTampleSchemaS2} from '../../common/schemas';
 import {styles} from './styles';
-import {getInitialToken, getRefreshToken, RegistesrUser} from '../../utils/api';
 
 export const AddTampleStep2 = ({onNextBtnPress, data}) => {
   const {
     buttonTexts: {next},
     placeHolders: {pincodeP, line1P, line2P, line3P},
     headings: {
-      kovela,
       inputTitles: {pinCode, line2, line1, line3},
     },
   } = allTexts;

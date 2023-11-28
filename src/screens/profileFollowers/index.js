@@ -1,13 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ScrollView} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import {
-  BackgroundImage,
   BackHeaderNew,
   FollowersListCard2,
   SearchBar,
-  SearchCard,
   Sort,
 } from '../../components';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -28,7 +26,6 @@ const FollowersMembership = ({route, navigation}) => {
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
-      // console.log('res of followes', result?.data);
       if (result.status === 200) {
         console.log('data of temple followers', result?.data);
         setLoader(false);

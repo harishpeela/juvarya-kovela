@@ -35,7 +35,6 @@ const Signup = ({navigation}) => {
       passwordPlace,
     },
     headings: {
-      kovela,
       inputTitles: {
         fName,
         phoneNo,
@@ -53,12 +52,10 @@ const Signup = ({navigation}) => {
       username: data.phone,
       password: data.password,
     };
-    console.log('---> ======>', LogInPayload);
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data.phone,
     };
-    console.log(otpPayload, 'otp');
     try {
       let response = await NewVerifyOTP(otpPayload);
       const {

@@ -6,11 +6,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../../common';
 export const MemberShipCard = ({data, onPress}) => {
-  const DATA = [
-    {name: 'NookalThalli', type: 'BASIC'},
-    {name: 'Venkateswaraswamy', type: 'PRIMIUM'},
-    {name: 'NookalThalli', type: 'AVERAGE'},
-  ];
   return (
     <View>
       <FlatList
@@ -27,7 +22,7 @@ export const MemberShipCard = ({data, onPress}) => {
               borderRadius: 20,
             }}>
             <View style={styles.logo}>
-              {item?.type === 'PRIMIUM' && (
+              {item?.type === 'PREMIUM' && (
                 <View style={{alignItems: 'center'}}>
                   <FontAwesome5 name="crown" color={'green'} size={40} />
                   <Text style={styles.typetext}>PRIMIUM</Text>

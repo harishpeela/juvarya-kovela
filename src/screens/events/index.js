@@ -20,7 +20,6 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 
 function Events({navigation, route}) {
   const [events, setEvents] = useState();
-  // const [idData, setIdData] = useState();
   const {id} = useContext(ApplicationContext);
   const {idparam} = route?.params || {};
   const EventsList = async () => {
@@ -32,7 +31,6 @@ function Events({navigation, route}) {
     };
     let token = await getAuthTokenDetails();
     let Access_Token = token.replace('bearer ', '');
-    console.log('acess_Tocken------', Access_Token);
     setEvents([]);
     fetch(
       `http://20.255.59.150:8082/api/v1/occasion/upcoming/item?itemId=${

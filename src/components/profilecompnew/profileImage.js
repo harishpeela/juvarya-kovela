@@ -1,9 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import {Image, StyleSheet, View} from 'react-native';
-import { colors } from '../../common';
 export const ProfileImage = ({profileImg}) => {
-  // console.log(profileImg);
   const renderImage = () => {
     if (!profileImg?.logo) {
       return (

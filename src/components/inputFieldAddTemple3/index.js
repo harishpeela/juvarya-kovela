@@ -1,8 +1,7 @@
-import {View, Text, TextInput, Image} from 'react-native';
+import {View, Text, TextInput} from 'react-native';
 import React from 'react';
-import {colors, fontFamily} from '../../common';
+import {colors} from '../../common';
 import {styles} from './styles';
-import PhoneIcon from 'react-native-vector-icons/Feather';
 
 export const InputTypeAddTemp3 = ({
   title,
@@ -22,7 +21,6 @@ export const InputTypeAddTemp3 = ({
         <Text style={{color: colors.green, fontSize: 16}}>{title}</Text>
         <View style={styles.fieldContainer}>
           <TextInput
-            // placeholder={placeholder}
             value={value}
             placeholderTextColor={colors.gray2}
             onChangeText={onChange}

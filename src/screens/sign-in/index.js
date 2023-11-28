@@ -22,9 +22,6 @@ const Signin = ({navigation}) => {
     buttonTexts: {login, sigup},
     paragraphs: {dontHaveAccount},
     placeHolders: {emailPlace, passwordPlace},
-    headings: {
-      inputTitles: {email},
-    },
   } = allTexts;
 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
@@ -89,27 +86,10 @@ const Signin = ({navigation}) => {
       console.log(error);
     }
   };
-  const onChangeNavigation = () => {
-    getFollowedTempleList();
-    console.log('Login is Trigerring ');
-    if (getHomeFeedListData.length > 0) {
-      navigation.navigate(allTexts.screenNames.homeDetails);
-    } else {
-      navigation.navigate(allTexts.tabNames.search);
-    }
-  };
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>
-        {/* <Icon
-          onPress={() => {
-            navigation.goBack();
-          }}
-          name="arrow-left-circle"
-          color={colors.orangeColor}
-          size={30}
-        /> */}
         <Text style={styles.signinText}>{login}</Text>
       </View>
       <KeyboardAwareScrollView

@@ -5,17 +5,8 @@ import {getDonationsList, GetProfilePic} from '../../utils/api';
 import {BackHeaderNew, SearchBar} from '../../components';
 import {styles} from './styles';
 import {colors} from '../../common';
-import {Ellipsis} from '../../components';
-import {
-  BackgroundImage,
-  BackHeader,
-  Donations_list_Card,
-  Sort,
-  FollowersListCard3,
-  Loader,
-} from '../../components';
+import {BackgroundImage, FollowersListCard3, Loader} from '../../components';
 const DonationsList = ({navigation, route}) => {
-  const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
   const [filteredData, setFilteredData] = useState(apiData);
@@ -23,10 +14,8 @@ const DonationsList = ({navigation, route}) => {
   const [loading, setLoading] = useState(false);
   const {data} = route.params || {};
   const customerProfilePic = async e => {
-    // console.log(e?.email, '=================>');
     try {
       let result = await GetProfilePic(e?.email);
-      // console.log('result of profile api', result?.data);
       if (result?.data) {
         let responce = {...e, url: result?.data?.url};
         setApiData(array => [...array, responce]);
@@ -42,12 +31,10 @@ const DonationsList = ({navigation, route}) => {
     try {
       let id = data?.jtProfile;
       let result = await getDonationsList(id, 0, 60);
-      // console.log('result', result?.data?.donationDTO);
       let donationDTO = result?.data?.donationDTO;
       donationDTO.map(e => {
         customerProfilePic(e);
       });
-      // setApiData(result?.data?.donationDTO);
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
@@ -58,7 +45,6 @@ const DonationsList = ({navigation, route}) => {
     const filteredUserData = apiData?.filter(item =>
       item?.email?.toLowerCase().includes(query.toLowerCase()),
     );
-    // console.log(filteredUserData, '==================================>');
     setFilteredData(filteredUserData);
     setTimeout(() => {
       setLoading(false);
@@ -76,7 +62,6 @@ const DonationsList = ({navigation, route}) => {
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
-        {/* <Ellipsis txtColor={colors.black} /> */}
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>
@@ -100,15 +85,6 @@ const DonationsList = ({navigation, route}) => {
               brWidth={1}
             />
           </View>
-          {/* <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.orangeColor}
-              srWidth={'100%'}
-              // srHeight={"100%"}
-            />
-          </View> */}
         </View>
         <View style={styles.followersContainer}>
           {loader ? (
@@ -128,9 +104,6 @@ const DonationsList = ({navigation, route}) => {
                       rs={item?.donation}
                       description={item?.description}
                       img={item?.url}
-                      // img={item.user.url}
-                      // data={item.user}
-                      // donation={item.user.donation}
                     />
                   )}
                 />
@@ -149,8 +122,6 @@ const DonationsList = ({navigation, route}) => {
                       rs={item?.donation}
                       description={item?.description}
                       img={item?.url}
-                      // data={item.user}
-                      // donation={item.user.donation}
                     />
                   )}
                 />
