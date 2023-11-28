@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
+import useFocusEffect from '@react-navigation/native';
 import {View, Text, SafeAreaView} from 'react-native';
 import {
   BackgroundImage,
@@ -36,6 +38,12 @@ const ProfileMembership = ({route, navigation}) => {
   useEffect(() => {
     MembershipData();
   }, []);
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     MembershipData();
+  //     return () => {};
+  //   }, []),
+  // );
   return (
     <SafeAreaView>
       <BackgroundImage />
@@ -44,7 +52,6 @@ const ProfileMembership = ({route, navigation}) => {
           txt={'Membership'}
           onPress={() => navigation.goBack()}
           isPlus
-          // txtColor={'white'}
           onPlusPress={() =>
             navigation.navigate(allTexts.screenNames.addMembershipDetails)
           }
@@ -55,7 +62,12 @@ const ProfileMembership = ({route, navigation}) => {
           </View>
         ) : (
           <View style={{marginTop: '10%'}}>
-            {!data?.length ? (
+            {data?.length ? (
+              <MemberShipCard
+                onPress={() => alert('under development')}
+                data={data}
+              />
+            ) : (
               <View
                 style={{
                   justifyContent: 'center',
@@ -64,11 +76,6 @@ const ProfileMembership = ({route, navigation}) => {
                 }}>
                 <Text> no memberships for this temple</Text>
               </View>
-            ) : (
-              <MemberShipCard
-                onPress={() => alert('under development')}
-                data={data}
-              />
             )}
           </View>
         )}

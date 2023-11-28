@@ -162,9 +162,6 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
             {post?.description}
           </Text>
         </Text>
-        {/* <TouchableOpacity onPress={onPressTitle}>
-          <Text style={styles.username}>{post?.feedDTO?.description}</Text>
-        </TouchableOpacity> */}
       </View>
     </View>
   );

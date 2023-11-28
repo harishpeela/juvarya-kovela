@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import {Text, View, ScrollView} from 'react-native';
 import {styles} from './style';
-// import RadioButton from '../../components/RadioButton';
 import {Switch} from '@react-native-material/core';
 import {RadioButton, PageHeader, TempleInput} from '../../components';
 const AddTempleNew = ({navigation}) => {

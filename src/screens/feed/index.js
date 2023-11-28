@@ -20,7 +20,6 @@ const Feed = ({navigation}) => {
     try {
       setloader(true);
       let response = await getHomeFeedList(0, 100);
-      // console.log('log', response?.data);
       if (response && response.status === 200) {
         const {
           data: {feeds},
@@ -63,21 +62,10 @@ const Feed = ({navigation}) => {
           keyExtractor={(item, index) => index}
           renderItem={({item, index}) => (
             <UserFeedCompList
-              // id={item?.itemDetails?.id}
               id={item?.id}
               post={item}
-              // onDotsPress={() => setModelVisible(true)}
               likes={item?.likesCount}
               isLikeTrue={item?.like}
-              // onDotsPress={() => setModelVisible(true)}
-              // onPressTitle={() =>
-              //   navigation.navigate(allTexts.screenNames.viewProfile, {
-              //     id: item?.itemDetails?.id,
-              //     title: item?.itemDetails?.name,
-              //     profileImg: item?.itemDetails?.profilePicture,
-              //     data: item,
-              //   })
-              // }
             />
           )}
         />

@@ -1,19 +1,17 @@
 import {View, Text, SafeAreaView, Modal, Pressable} from 'react-native';
 import React, {useRef, useState} from 'react';
-// import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../../common';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {styles} from './style';
 const Ellipsis = ({txtColor}) => {
-  // const [isModalVisible, setModalVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalPosition, setModalPosition] = useState({top: 0, left: 0});
   const ellipsisRef = useRef(null);
 
   const toggleModal = () => {
     if (ellipsisRef.current) {
-      ellipsisRef.current.measure((fx, fy, width, height, px, py) => {
+      ellipsisRef.current.measure((height, px, py) => {
         setModalPosition({top: py + height, left: px});
         console.log('modalPosition is updating ' + height, px, py);
         setModalVisible(!modalVisible);
@@ -32,7 +30,6 @@ const Ellipsis = ({txtColor}) => {
       <Pressable onPress={closeToggleModal}>
         <View>
           <TouchableOpacity onPress={toggleModal}>
-            {/* <Icon name="ellipsis-v" size={24} color={txtColor === undefined ? (colors.black2):txtColor} /> */}
             <Icon
               name="ellipsis-vertical"
               size={24}

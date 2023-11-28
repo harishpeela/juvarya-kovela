@@ -3,7 +3,6 @@ import {allTexts, colors} from '../../common';
 import React from 'react';
 import {styles} from './styles';
 import {CustomIcon} from '..';
-import {BellSVG} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/Feather';
 import SpeckerIcon from 'react-native-vector-icons/AntDesign';
 
@@ -50,11 +49,6 @@ export const HomeHeader = ({
           </TouchableOpacity>
         )}
         <TouchableOpacity onPress={onBellPress} style={styles.bellContainer}>
-          {/* <BellSVG style={styles.bell} /> */}
-          {/* <Image
-            source={require('../../../assets/images/specker.png')}
-            style={{height: 30, width: 30, borderRadius:30}}
-          /> */}
           <SpeckerIcon name="notification" size={30} />
         </TouchableOpacity>
       </View>

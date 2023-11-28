@@ -1,19 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-} from 'react-native';
-import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
 import {styles} from './style';
 import {PrimaryButton} from '../primary-button';
 import {colors, fontSize} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {Item} from '../profile-card-item/item';
-import {color} from 'react-native-reanimated';
 
 const FollowersListCard2 = ({
   donation,
@@ -89,17 +80,7 @@ const FollowersListCard2 = ({
 
 export default FollowersListCard2;
 
-export const FollowersListCard3 = ({
-  donation,
-  data,
-  name,
-  location,
-  date,
-  onPress,
-  img,
-  rs,
-  description,
-}) => {
+export const FollowersListCard3 = ({name, onPress, img, rs, description}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
       <View style={styles.cardContainer}>

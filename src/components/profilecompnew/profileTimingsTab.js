@@ -1,9 +1,8 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
-import {colors, window} from '../../common';
+import {colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProfileTimingTabs = () => {
-  const {width, height} = Dimensions.get('window');
   return (
     <View style={styles.container}>
       <View style={styles.toptemp}>

@@ -6,12 +6,7 @@ import React, {useEffect, useState} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
-import {
-  getTempledetailsWithId,
-  GetProfilePicture,
-  AdminTemples,
-} from '../../utils/api';
-import {useIsFocused} from '@react-navigation/native';
+import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
 
 const MyTamples = ({navigation}) => {
@@ -20,13 +15,10 @@ const MyTamples = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
 
-  let isFocused = useIsFocused();
   const TempleDetails = async d => {
     setLoading(true);
     try {
       let result = await getTempledetailsWithId(d?.id);
-      console.log('result of temples details', result?.data);
-      let responce = await GetProfilePicture(d?.id);
       if (result) {
         let templesArray = {...d, ...result?.data};
         console?.log('res', templesArray);
@@ -43,7 +35,6 @@ const MyTamples = ({navigation}) => {
   const AdminTempleDetails = async () => {
     try {
       let result = await AdminTemples();
-      // console.log('res of admin', result?.data);
       let adminData = result?.data;
       adminData.map(e => {
         TempleDetails(e);
@@ -65,7 +56,6 @@ const MyTamples = ({navigation}) => {
       ),
     );
   };
-  // console.log('mjhbmjhbmjhbmbmjhbmjbmn mn ', filteredArray);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />

@@ -25,7 +25,6 @@ import {
   AddEvents,
   NearByProducts,
   NearByServices,
-  TempleProfile,
   ViewProfile,
   Menu,
   AddTempleNew,
@@ -58,9 +57,6 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
 const App = () => {
-  const checking = () => {
-    console.log('it checking the value');
-  };
   const {
     screenNames: {
       signin,
@@ -83,7 +79,6 @@ const App = () => {
       addevents,
       nearByProducts,
       nearByServices,
-      templeProfile,
       viewProfile,
       menu,
       addtemplenew,
@@ -314,13 +309,6 @@ const App = () => {
         <Stack.Screen
           name={nearByServices}
           component={NearByServices}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={templeProfile}
-          component={TempleProfile}
           options={{
             headerShown: false,
           }}

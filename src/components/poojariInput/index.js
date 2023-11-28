@@ -1,8 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, TextInput} from 'react-native';
-import Feather from 'react-native-vector-icons/Feather';
-
 export const Input = ({placeholder, props, phtc, oct, value}) => {
   return (
     <View>

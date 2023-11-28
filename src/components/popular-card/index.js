@@ -1,5 +1,5 @@
 import {View, Text, Image, TouchableOpacity, ToastAndroid} from 'react-native';
-import {allTexts, colors} from '../../common';
+import {colors} from '../../common';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import React, {useState} from 'react';
@@ -25,9 +25,7 @@ export const PopularCard = ({
       follow: !isFollow,
     };
     try {
-      // console.log(payload);
       let results = await followUnfollowTemple(payload);
-      // console.log('Follow unfollow API response ', results);
       if (results && results.status === 200) {
         ToastAndroid.show(
           `Successfully${

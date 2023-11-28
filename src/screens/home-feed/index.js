@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {
   View,
@@ -29,17 +29,6 @@ const UserFeedScreen = ({navigation}) => {
   const [noData, setNoData] = useState(false);
 
   const isDarkMode = useColorScheme() === 'dark';
-
-  // const Role = () => {
-  //   let ROLES = userDetails?.role;
-  //   var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
-  //   console.log('role', roleAdmin);
-  //   if (roleAdmin) {
-  //     setRoleAdmin('ROLE_ADMIN');
-  //   } else {
-  //     setRoleAdmin('');
-  //   }
-  // };
   const MyCustShare = async item => {
     const ShareOptions = {
       // message: item?.jtProfileDTO?.name,
@@ -64,7 +53,6 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('result of list feed in home feed', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         let responce = result?.data?.jtFeeds;

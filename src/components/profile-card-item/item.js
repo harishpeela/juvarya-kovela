@@ -32,17 +32,15 @@ const styles = StyleSheet.create({
   itemContainer: {
     flexDirection: 'row',
     paddingVertical: 15,
-    borderColor:'yellow',
-    alignItems:'center',
-    justifyContent:"space-between",
+    borderColor: 'yellow',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   iconContainer: {
-  minWidth:'auto',
-  // borderWidth:2
+    minWidth: 'auto',
   },
   textContainer: {
-  width:'80%',
-  // borderWidth:2
+    width: '80%',
   },
   itemText: {
     fontSize: 18,
