@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   SafeAreaView,
   StyleSheet,
@@ -11,6 +12,8 @@ import {styles} from './style';
 import {PrimaryButton} from '../primary-button';
 import {colors, fontSize} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Item} from '../profile-card-item/item';
+import {color} from 'react-native-reanimated';
 
 const FollowersListCard2 = ({
   donation,
@@ -20,8 +23,8 @@ const FollowersListCard2 = ({
   date,
   onPress,
   img,
+  rs,
 }) => {
-
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
       <View style={styles.cardContainer}>
@@ -85,3 +88,74 @@ const FollowersListCard2 = ({
 };
 
 export default FollowersListCard2;
+
+export const FollowersListCard3 = ({
+  donation,
+  data,
+  name,
+  location,
+  date,
+  onPress,
+  img,
+  rs,
+  description,
+}) => {
+  return (
+    <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
+      <View style={styles.cardContainer}>
+        <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: img
+                ? img
+                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+            }}
+            style={styles.image}
+          />
+          <Image
+            source={{
+              uri: img
+                ? img
+                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+            }}
+            style={styles.backgroundImage}
+          />
+        </View>
+        <View
+          style={{
+            borderBottomColor: 'black',
+            borderBottomWidth: StyleSheet.hairlineWidth,
+          }}
+        />
+        <View style={styles.listFirstItem}>
+          <View style={styles.textContainer}>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={styles.firstName}>
+              {name}
+            </Text>
+            <Text style={styles.donationText}>
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: 'bold',
+                  color: colors.orangeColor,
+                }}>
+                {`Donation Purpose:  ${description}`}
+              </Text>
+            </Text>
+          </View>
+          <Text
+            style={{
+              fontSize: 16,
+              color: colors.orangeColor,
+              fontWeight: 'bold',
+            }}>
+            {rs}{' '}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+};
