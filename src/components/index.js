@@ -83,6 +83,10 @@ import { Donation_Third_Tab } from './donation-comp/donation-third-tab/donation_
 import Ellipsis from './ellipsis';
 import Sort from './sort';
 import FollowersListCard2 from './FollowersListCard2';
+import EventCard from './EventCard';
+import EventCard2 from './EventCard2';
+
+
 
 export {
   Loader,
@@ -160,4 +164,6 @@ export {
   Sort,
   FollowersListCard2,
   Donation_Third_Tab,
+  EventCard,
+  EventCard2,
 };

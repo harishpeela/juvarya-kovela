@@ -134,13 +134,15 @@ export const axiosNewData1 = axios.create({
   headers: {
     Authorization: bearer_token,
   },
-});
+})
+
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
   console.log("bhjbhjbhjf", config.headers['x-response-time']);
   return config;
-});
+})
+
 export const axiousInstanceNew = axios.create({
   baseURL: BASEURL,
   headers: {
@@ -171,7 +173,8 @@ axiousInstance.interceptors.request.use(async function (config) {
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-});
+})
+
 
 export const axiosMultiPartFormData = axios.create({
   baseURL: BASE_URL,
@@ -181,13 +184,17 @@ export const axiosMultiPartFormData = axios.create({
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
   },
-});
+})
+
+
 axiosMultiPartFormData.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-});
+})
+
+
 
 axiousInstance.interceptors.response.use(
   response => response,
@@ -205,7 +212,8 @@ axiousInstance.interceptors.response.use(
     }
     return Promise.reject(error);
   },
-);
+)
+
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
@@ -235,4 +243,4 @@ axiousInstance.interceptors.response.use(
     });
     return delayRetryRequest.then(() => axios(config));
   },
-);
+)

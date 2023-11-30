@@ -37,14 +37,12 @@ export default BottomTabBase = ({navigation}) => {
   );
   const {favoriteList} = useContext(ApplicationContext);
   const navigation2 = useNavigation();
-  const [showTabs, setShowTabs] = useState(false);
+  const [showTabs, setShowTabs] = useState(true);
   const [feedLength, setFeedLength] = useState(0);
-
   useEffect(() => {
     setFeedLength(favoriteList.length);
   }, [favoriteList, navigation]);
   const [checking, setChecking] = useState(false);
-
   const loadTabs = async () => {
     setChecking(true)
     try {

@@ -39,6 +39,10 @@ import Notifications from './notifications';
 import ViewTempleProfile from './view-temple-profile';
 import Donations from './donations';
 import MemberShip from './Membership/Index';
+import EventsScreen from './EventsScreen';
+
+
+
 
 export {
   CreatePost,
@@ -82,4 +86,5 @@ export {
   ViewTempleProfile,
   Donations,
   MemberShip,
+  EventsScreen
 };

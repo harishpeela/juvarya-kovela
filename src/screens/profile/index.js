@@ -9,7 +9,7 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {BackgroundImage, BackgroundImageAClass} from '../../components';
+import {BackgroundImage, BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
@@ -32,6 +32,8 @@ import Feather from 'react-native-vector-icons/Feather';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
+
+
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   console.log('user', userDetails);
@@ -47,6 +49,9 @@ const Profile = ({navigation}) => {
   const [isModal, setIsModal] = useState(false);
   const [isCross, setIsCross] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const[clicked,setClicked] = useState(false);
+  const[tcModal, setTcModal] = useState(false)
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -123,6 +128,16 @@ const Profile = ({navigation}) => {
   const changelan = lang => {
     i18next.changeLanguage(lang);
     setIsVisible(false);
+  };
+  const TC = () => {
+    setClicked(true);
+    if (clicked === true) {
+      // alert('T & C under development');
+      setTcModal(true);
+    } else {
+      // alert('T & C under development');
+      setTcModal(true);
+    }
   };
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -244,6 +259,26 @@ const Profile = ({navigation}) => {
             />
           )} */}
         </View>
+        <View>
+        <TouchableOpacity onPress={() => TC()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: clicked === true ? colors.orangeColor : 'gray',
+                  textDecorationLine: clicked ===true ? 'underline' : 'none',
+                  fontWeight: clicked === true ? 'bold' : '400',
+                }}>
+                Terms & Conditions{' '}
+              </Text>
+            </TouchableOpacity>
+            {tcModal && (
+              <Terms_And_Conditions
+                isModal={tcModal}
+                onPress={() => setTcModal(false)
+                }
+              />
+            )} 
+            </View>
         <View style={styles.logoutbtnContainer}>
           <PrimaryButton
             onPress={async () => {
