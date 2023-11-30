@@ -79,15 +79,14 @@ import {
 import {Danation_Add_Card} from './donationCard';
 import {Donation_first_Tab} from './donation-comp/comp-firstTab';
 import {Donation_Second_Tab} from './donation-comp/comp-firstTab/donation-second_Tab';
-import { Donation_Third_Tab } from './donation-comp/donation-third-tab/donation_third_tab';
+import {Donation_Third_Tab} from './donation-comp/donation-third-tab/donation_third_tab';
 import Ellipsis from './ellipsis';
 import Sort from './sort';
 import FollowersListCard2 from './FollowersListCard2';
 import EventCard from './EventCard';
 import EventCard2 from './EventCard2';
-
-
-
+import {Donations_list_Card} from './donation_list';
+import {MemberShipCard} from './membershipCard';
 export {
   Loader,
   SearchBar,
@@ -142,7 +141,7 @@ export {
   PopularTemplesList,
   ProfileImage,
   PostsComp,
-  FavTempleListCard, 
+  FavTempleListCard,
   FollowersListCard,
   Item,
   Item1,
@@ -166,4 +165,6 @@ export {
   Donation_Third_Tab,
   EventCard,
   EventCard2,
+  Donations_list_Card,
+  MemberShipCard,
 };

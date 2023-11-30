@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import {
   View,
@@ -9,34 +10,28 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {BackgroundImage, BackgroundImageAClass, Terms_And_Conditions} from '../../components';
+import {
+  BackgroundImage,
+  BackgroundImageAClass,
+  Terms_And_Conditions,
+} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
-import {
-  PrimaryButton,
-  ProfileInfo,
-  Loader,
-  Item,
-  Item1,
-} from '../../components';
+import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
 import {UploadPhoto} from '../../utils/svgs';
 import {AccountIcon1, AccountIcon4} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
 import lan from '../../../languages/lan.json';
-import Feather from 'react-native-vector-icons/Feather';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
-
-
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('user', userDetails);
   const {t} = useTranslation();
   const {
     constants: {role},
@@ -49,8 +44,8 @@ const Profile = ({navigation}) => {
   const [isModal, setIsModal] = useState(false);
   const [isCross, setIsCross] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const[clicked,setClicked] = useState(false);
-  const[tcModal, setTcModal] = useState(false)
+  const [clicked, setClicked] = useState(false);
+  const [tcModal, setTcModal] = useState(false);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -144,33 +139,7 @@ const Profile = ({navigation}) => {
       {/* <BackgroundImage /> */}
       <BackgroundImageAClass />
 
-      <View style={styles.header}>
-        {/* <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Feather name="arrow-left-circle" color={colors.black2} size={34} />
-        </TouchableOpacity> */}
-        {/* <Text
-          // numberOfLines={1}
-          style={{
-            fontSize: 16,
-            fontWeight: '500',
-            textTransform: 'capitalize',
-            marginLeft: '5%',
-            color: colors.black,
-          }}>
-          {t('account')}
-        </Text> */}
-        {/* <TouchableOpacity
-          onPress={() => setIsVisible(!isVisible)}
-          style={{alignSelf: 'flex-end'}}>
-          <Image
-            source={require('../../../assets/images/lan.webp')}
-            style={{height: 40, width: 40}}
-          />
-        </TouchableOpacity> */}
-      </View>
+      <View style={styles.header} />
 
       <View style={styles.profileContainer}>
         <View style={styles.uploadContainer}>
@@ -242,12 +211,10 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
-            <Item
+          <Item
             svg={<AccountIcon1 />}
             text={t('Update Profile')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.mySavedPosts);
-            }}
+            onPress={() => alert('page under development')}
           />
           {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
@@ -260,25 +227,24 @@ const Profile = ({navigation}) => {
           )} */}
         </View>
         <View>
-        <TouchableOpacity onPress={() => TC()}>
-              <Text
-                style={{
-                  ...styles.tabs,
-                  color: clicked === true ? colors.orangeColor : 'gray',
-                  textDecorationLine: clicked ===true ? 'underline' : 'none',
-                  fontWeight: clicked === true ? 'bold' : '400',
-                }}>
-                Terms & Conditions{' '}
-              </Text>
-            </TouchableOpacity>
-            {tcModal && (
-              <Terms_And_Conditions
-                isModal={tcModal}
-                onPress={() => setTcModal(false)
-                }
-              />
-            )} 
-            </View>
+          <TouchableOpacity onPress={() => TC()}>
+            <Text
+              style={{
+                ...styles.tabs,
+                color: clicked === true ? colors.orangeColor : 'gray',
+                textDecorationLine: clicked === true ? 'underline' : 'none',
+                fontWeight: clicked === true ? 'bold' : '400',
+              }}>
+              Terms & Conditions{' '}
+            </Text>
+          </TouchableOpacity>
+          {tcModal && (
+            <Terms_And_Conditions
+              isModal={tcModal}
+              onPress={() => setTcModal(false)}
+            />
+          )}
+        </View>
         <View style={styles.logoutbtnContainer}>
           <PrimaryButton
             onPress={async () => {
@@ -291,7 +257,9 @@ const Profile = ({navigation}) => {
             shadow={true}
             textColor={colors.black}
           />
-          <Text style={styles.versionText}>Version&ensp;{allTexts.appVersion.version}</Text>
+          <Text style={styles.versionText}>
+            Version&ensp;{allTexts.appVersion.version}
+          </Text>
         </View>
       </View>
 

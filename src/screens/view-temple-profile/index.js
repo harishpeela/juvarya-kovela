@@ -56,20 +56,19 @@ import { colors } from '../../common';
 import { PostsComp } from '../../components/profilecompnew/postsComp';
 import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { ISO_8601 } from 'moment';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
-  const { data } = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -78,7 +77,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [followVisible, setFollowVisible] = useState(false);
   const [followCount, setFollowCount] = useState(0);
   const [postImages, setPostImages] = useState([]);
-  const [roleId, setRoleId] = useState(false);
+  const [roleId, setRoleId] = useState();
+  const [roleLoader, setRoleLoader] = useState(true);
   const [posts, setPosts] = useState(false);
   const [memberShip, setMemberShip] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
@@ -86,8 +86,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [eventsData, setEventsData] = useState();
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [open, setOpen] = useState(true);
-  console.log('=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' + roleId);
 
   const FOLLOW = id => {
     if (isFollow) {
@@ -109,8 +107,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
       console.log('error in membership count', error);
     }
   };
+  let result = Data(data);
   useEffect(() => {
-    let result = Data(data);
     if (result) {
       setTrfData(result);
       if (result?.jtProfile) {
@@ -183,7 +181,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
     setloader(true);
     try {
       let result = await GetPosts(id, 0, 100);
-      // console.log('================>', result?.data);
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
@@ -206,37 +203,39 @@ const ViewTempleProfile = ({ route, navigation }) => {
       console.log('error in posts', error);
     }
   };
-  // console.log('trfdata,', trfData);
   const TempleRoleSearchWithId = async profileId => {
     let result = await SearchTempleRoleWithId(profileId);
     try {
       if (result) {
+        setRoleLoader(true);
         let val = result?.data?.roles;
         var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
         if (roleAdmin) {
           setRoleId('ROLE_ITEM_ADMIN');
+          setRoleLoader(false);
+        } else {
+          setRoleLoader(false);
         }
       } else {
         setRoleId(null);
+        setRoleLoader(false);
       }
     } catch (error) {
+      setRoleLoader(false);
       console.log('error in temple role api', error);
     }
   };
   useEffect(() => {
     EventsList();
-  }, [route]);
+  }, []);
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
-    // console.log('list of evengts', result?.data);
-    if (result.status === 200) {
+    if (result?.status === 200) {
       setEventsLoader(false);
-      console.log('true', eventsLoader);
       setEventsData(result?.data?.events);
     } else {
       setEventsLoader(false);
-      console.log('false', eventsLoader);
     }
   };
 

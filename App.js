@@ -43,21 +43,21 @@ import {
   MemberShip,
   EventsScreen,
   Home,
+  DonationsList
 } from './src/screens';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
   saveUserDetails,
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import { getHomeFeedList, getUserInfoNew, GetMyTemples } from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
-
 
 Events
 const App = () => {
@@ -101,12 +101,12 @@ const App = () => {
       addMembershipDetails,
       seeall,
       feeds,
-      home,
       notification,
       viewtempleprofile,
       donations,
       memberShip,
-      eventsScreen
+      eventsScreen,
+      donationslist,
     },
   } = allTexts;
   useEffect(() => {
@@ -115,7 +115,7 @@ const App = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        new Promise(resolve => setTimeout(resolve, 5000));
+        new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
         console.warn(e);
       } finally {
@@ -196,6 +196,13 @@ const App = () => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name={donationslist}
+          component={DonationsList}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={notification}
           component={Notifications}
@@ -252,13 +259,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={home}
           component={UserFeedScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={events}
           component={Events}
@@ -287,13 +294,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={calender}
           component={Calender}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={addevents}
           component={AddEvents}
@@ -435,21 +442,17 @@ const App = () => {
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
   const [favoriteList, setFavoriteList] = useState([]);
-  const [homeFeedListData, getHomeFeedListData] = useState([]);
+  const [homeFeedListData, getHomeFeedListData] = useState();
   const [id, setId] = useState();
   const getLoginDetails = async () => {
     let authDetails = await getAuthTokenDetails();
     setLoginDetails(authDetails);
-    console.log('saiii ------------>>>>>>>>>>>>>>>>>');
   };
 
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
       if (result) {
-        // console.log('result in app js of userinfo', result?.data);
-        let responce = await GetMyTemples(result?.data?.id, 0, 20);
-        setFavoriteList(responce?.data?.data);
         saveUserDetails({
           username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
@@ -471,8 +474,8 @@ const App = () => {
   };
   const getFollowedTempleList = async () => {
     try {
-      let response = await getHomeFeedList(0, 100);
-      if (response && response.status === 200) {
+      let response = await getHomeFeedList(0, 20);
+      if (response && response?.status === 200) {
         const {
           data: { jtFeeds },
         } = response;
@@ -482,14 +485,12 @@ const App = () => {
       console.log(error);
     }
   };
-  console.log('fav list length', favoriteList?.length);
   useEffect(() => {
     if (loginDetails != null && loginDetails != '') {
       ApiData();
       getFollowedTempleList();
     }
   }, [loginDetails]);
-  console.log('fav list length after', favoriteList?.length);
 
   return (
     <ApplicationContext.Provider

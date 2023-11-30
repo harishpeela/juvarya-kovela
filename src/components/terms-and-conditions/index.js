@@ -7,7 +7,6 @@ import {
   StyleSheet,
 } from 'react-native';
 import {colors} from '../../common';
-import {color} from 'react-native-reanimated';
 export const Terms_And_Conditions = ({isModal, onPress}) => {
   return (
     <Modal
@@ -119,12 +118,13 @@ const styles = StyleSheet.create({
     padding: 15,
   },
   mainContainer: {
+    marginTop: 10,
     // borderRadius: 80,
   },
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.black,
+    color: colors.orangeColor,
   },
   peragraph: {
     fontSize: 14,

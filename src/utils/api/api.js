@@ -16,8 +16,7 @@ export const BASE = 'http://20.235.89.214:9094/';
 export const POPULARURL = 'http://20.235.89.214:9096/';
 export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
 export const EVENTS_URL = 'http://20.235.89.214:9060/';
-
-
+export const DONATION_URL = 'http://20.235.89.214:9093/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -80,7 +79,18 @@ axiosNotifications.interceptors.request.use(async function (config) {
   config.headers.Authorization = token;
   return config;
 });
-
+export const axiosDonation = axios.create({
+  baseURL: DONATION_URL,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosDonation.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
 export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
@@ -139,7 +149,6 @@ export const axiosNewData1 = axios.create({
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
-  console.log("bhjbhjbhjf", config.headers['x-response-time']);
   return config;
 })
 

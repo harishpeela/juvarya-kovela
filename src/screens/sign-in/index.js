@@ -5,8 +5,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
-import Signup, {KovelaIcon} from '../sign-up';
-import Icon from 'react-native-vector-icons/Feather';
+import {KovelaIcon} from '../sign-up/index.js';
 import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
@@ -16,10 +15,8 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 
-
-
 const Signin = ({navigation}) => {
-  const [homeFeedListData, getHomeFeedListData] = useState([]);
+  const [getHomeFeedListData] = useState([]);
 
   const {
     buttonTexts: {login, sigup},
@@ -75,7 +72,6 @@ const Signin = ({navigation}) => {
         Alert.alert('Error', result?.message);
       }
     } catch (error) {
-      console.log('error in signin', error);
       actions.setSubmitting(false);
     }
   };
@@ -93,15 +89,16 @@ const Signin = ({navigation}) => {
       console.log(error);
     }
   };
-  const onChangeNavigation = () =>{
+  const onChangeNavigation = () => {
     getFollowedTempleList();
-    console.log("Login is Trigerring ");
-    if(getHomeFeedListData.length > 0){
+    console.log('Login is Trigerring ');
+    if (getHomeFeedListData.length > 0) {
       navigation.navigate(allTexts.screenNames.homeDetails);
-    }else{
+    } else {
       navigation.navigate(allTexts.tabNames.search);
     }
-  }
+  };
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>

@@ -1,9 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
-import {View, TouchableOpacity, Text, Image, Pressable} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, TouchableOpacity, Text} from 'react-native';
 import {styles} from './styles';
 import {Loader} from '../loader';
-import {allTexts, colors, fontSize} from '../../common';
+import {allTexts, colors} from '../../common';
 import {PrimaryButton1} from '../profilecomp';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
@@ -21,7 +21,7 @@ export const FollowersComp = ({followCount, onPressFollowers}) => {
 export const CommunityComp = ({itemCommunity, onPressmembership}) => {
   return (
     <TouchableOpacity onPress={onPressmembership} style={styles.followersView}>
-      <Text style={styles.postText1}>{itemCommunity} 0</Text>
+      <Text style={styles.postText1}>{itemCommunity}</Text>
       <Text style={styles.postText}> Members </Text>
     </TouchableOpacity>
   );
@@ -31,7 +31,7 @@ export const FolloUnfollowComp = ({
   followBtnDisable,
   followTemples,
   isFollow,
-  shadow
+  shadow,
 }) => {
   return (
     <View style={styles.followingContainer}>
@@ -45,7 +45,6 @@ export const FolloUnfollowComp = ({
         </View>
       ) : (
         <PrimaryButton1
-
           bgColor={isFollow ? colors.orangeColor : colors.gray4}
           disabled={followBtnDisable}
           radius={10}
@@ -53,7 +52,6 @@ export const FolloUnfollowComp = ({
           width={90}
           onPress={followTemples}
           textColor={colors.white}
-          // borderWidth={isFollow ? 0 : 1}
           fontSize={12}
           isFollow={!isFollow}
           text={
@@ -91,14 +89,14 @@ export const ContactTabcomp = ({onPressContact}) => {
 //     </Pressable>
 //   );
 // };
-export const DirectionsTabComp = () => {
+export const DirectionsTabComp = ({role}) => {
   return (
-    // <LinearGradient colors={['#CC4501', '#CC4501']} style={styles.voidButton1}>
     <TouchableOpacity style={[styles.voidButton1, styles.button]}>
       <BackgroundSmallFlowerUser />
-      <Text style={styles.voidButton1Text}>Become a Member</Text>
+      <Text style={styles.voidButton1Text}>
+        {role ? 'Add a Member' : 'Become a member'}
+      </Text>
     </TouchableOpacity>
-    // </LinearGradient>
   );
 };
 export const CreateFeedTabComp = ({roleId, onPlusPress}) => {

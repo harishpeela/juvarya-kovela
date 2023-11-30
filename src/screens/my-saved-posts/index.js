@@ -56,7 +56,7 @@ const MySavedPosts = ({navigation}) => {
       <View style={styles.footerBackground}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Feather name="arrow-left-circle" color={colors.black2} size={28} />
+            <Feather name="arrow-left" color={colors.black} size={28} />
           </TouchableOpacity>
           <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10}}>
             Saved Posts
@@ -73,8 +73,8 @@ const MySavedPosts = ({navigation}) => {
               showsVerticalScrollIndicator={false}
               contentContainerStyle={styles.flatListStyle}
               keyboardShouldPersistTaps="handled"
-              keyExtractor={(item, index) => item?.id}
-              renderItem={({item, index}) => (
+              keyExtractor={item => item?.id}
+              renderItem={({item}) => (
                 <SaveFeedComp
                   post={item}
                   likes={item?.feedDTO?.likesCount}

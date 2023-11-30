@@ -2,10 +2,8 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
-import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {colors} from '../../common';
-import Fontisto from 'react-native-vector-icons/Fontisto'
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
 export const BackHeaderNew = ({
   txtColor,
@@ -16,29 +14,36 @@ export const BackHeaderNew = ({
 }) => {
   return (
     <View style={styles.header}>
-      <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-        <Fontisto
-          name="arrow-left"
-          color={txtColor === undefined ? <></> : txtColor}
-          size={17}
-        />
-      </TouchableOpacity>
-      {txt ? (
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '500',
-            marginHorizontal: 10,
-            color: txtColor === undefined ? <></> : txtColor,
-          }}>
-          {txt}
-        </Text>
-      ) : (
-        <></>
-      )}
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+          <Fontisto
+            name="arrow-left"
+            color={txtColor === undefined ? <></> : txtColor}
+            size={17}
+          />
+        </TouchableOpacity>
+        {txt ? (
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: '500',
+              marginHorizontal: 10,
+              color: txtColor === undefined ? <></> : txtColor,
+            }}>
+            {txt}
+          </Text>
+        ) : (
+          <></>
+        )}
+      </View>
 
       {isPlus && (
-        <TouchableOpacity style={{marginLeft: '45%'}} onPress={onPlusPress}>
+        <TouchableOpacity onPress={onPlusPress}>
           <AntDesign
             name="plus"
             size={24}

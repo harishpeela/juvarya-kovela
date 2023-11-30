@@ -1,7 +1,6 @@
 import Splash from './splash';
 import SignUp from './sign-up';
 import Signin from './sign-in';
-import Home from './home';
 import BottomTabBase from './bottom-tab-base';
 import Search from './search';
 import Favorite from './favorites';
@@ -40,17 +39,13 @@ import ViewTempleProfile from './view-temple-profile';
 import Donations from './donations';
 import MemberShip from './Membership/Index';
 import EventsScreen from './EventsScreen';
-
-
-
-
+import DonationsList from './DonationsList';
 export {
   CreatePost,
   Seemore,
   Signin,
   Splash,
   SignUp,
-  Home,
   BottomTabBase,
   Search,
   Favorite,
@@ -86,5 +81,6 @@ export {
   ViewTempleProfile,
   Donations,
   MemberShip,
-  EventsScreen
+  EventsScreen,
+  DonationsList,
 };

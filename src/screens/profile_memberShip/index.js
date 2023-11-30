@@ -1,36 +1,41 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
-import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {View, Text, SafeAreaView} from 'react-native';
+import {
+  BackgroundImage,
+  BackHeaderNew,
+  Loader,
+  MemberShipCard,
+} from '../../components';
 import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
 import {colors, allTexts} from '../../common';
-import {FlatList} from 'react-native-gesture-handler';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button} from 'react-native-share';
 const ProfileMembership = ({route, navigation}) => {
-  // const {id} = route.params || {};
-  const [data, setData] = useState([{name: 'sai'}, {name: 'something'}]);
+  const {id} = route.params || {};
+  const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
 
-  // const MembershipData = async () => {
-  //   setaLoader(true);
-  //   try {
-  //     let result = await MemberShipDetails(id);
-  //     // console.log('res', result?.data?.memberships);
-  //     if (result) {
-  //       setaLoader(false);
-  //       setData(result?.data?.memberships);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in membership details api', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   MembershipData();
-  // }, [id]);
+  const MembershipData = async () => {
+    setaLoader(true);
+    try {
+      let result = await MemberShipDetails(id);
+      console.log('res', result?.data);
+      if (result) {
+        setaLoader(false);
+        setData(result?.data?.memberships);
+      } else {
+        setaLoader(false);
+      }
+    } catch (error) {
+      console.log('error in membership details api', error);
+      setaLoader(false);
+      alert(error);
+    }
+  };
+  useEffect(() => {
+    MembershipData();
+  }, []);
   return (
     <SafeAreaView>
       <BackgroundImage />
@@ -39,55 +44,36 @@ const ProfileMembership = ({route, navigation}) => {
           txt={'Membership'}
           onPress={() => navigation.goBack()}
           isPlus
+          // txtColor={'white'}
           onPlusPress={() =>
             navigation.navigate(allTexts.screenNames.addMembershipDetails)
           }
         />
-        <View>
-          {loader ? (
-            <View>
-              <Loader size={'small'} color={colors.orangeColor} />
-            </View>
-          ) : data?.length > 0 ? (
-            data?.map((e, idx) => (
-              <View style={styles.card}>
-                <View style={styles.firstDetails}>
-                  <Image
-                    source={{
-                      uri: 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
-                    }}
-                    style={styles.image}
-                  />
-                  <View style={styles.firstDetailsTextContainer}>
-                    <Text style={styles.firstDetailsText}>Premium</Text>
-                    <TouchableOpacity style={styles.button}>
-                      <Text style={styles.buttonText}>Click</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                <Text style={styles.description}>Description</Text>
-                <Text style={styles.moreDetails}>more Details</Text>
-                <View style={styles.border} />
-                <View style={styles.lastContainer}>
-                  <View style={styles.lastContainerText}>
-                    <Text style={styles.priceText}>$49.99</Text>
-                    <Text style={styles.priceText2}>$49.99</Text>
-                  </View>
-                  <TouchableOpacity style={styles.button2}>
-                    <Text style={styles.buttonText}>Click Here</Text>
-                  </TouchableOpacity>
-                </View>
+        {loader ? (
+          <View>
+            <Loader size={'small'} color={colors.orangeColor} />
+          </View>
+        ) : (
+          <View style={{marginTop: '10%'}}>
+            {!data?.length ? (
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '50%',
+                }}>
+                <Text> no memberships for this temple</Text>
               </View>
-            ))
-          ) : (
-            <Text style={styles.nomemship}>
-              {' '}
-              No Membership available for this Temple
-            </Text>
-          )}
-        </View>
+            ) : (
+              <MemberShipCard
+                onPress={() => alert('under development')}
+                data={data}
+              />
+            )}
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );
 };
-export default ProfileMembership
+export default ProfileMembership;

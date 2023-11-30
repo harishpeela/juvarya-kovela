@@ -1,6 +1,7 @@
+/* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-alert */
 import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -9,6 +10,7 @@ import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
 import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
@@ -20,6 +22,7 @@ export const KovelaIcon = () => (
   </View>
 );
 const Signup = ({navigation}) => {
+  const [isChecked, setIsChecked] = useState(false);
   const {
     buttonTexts: {login, sigup},
     screenNames: {signin, otpScreen},
@@ -173,14 +176,44 @@ const Signup = ({navigation}) => {
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
                 />
-                <View style={styles.buttonContainer}>
-                  <PrimaryButton
-                    bgColor={colors.orangeColor}
-                    loading={isSubmitting}
-                    onPress={handleSubmit}
-                    text={sigup}
-                    radius={25}
+                <TouchableOpacity
+                  onPress={() => setIsChecked(!isChecked)}
+                  style={styles.checkView}>
+                  <Ionicons
+                    name={isChecked ? 'checkbox' : 'square-outline'}
+                    style={{
+                      ...styles.checkIcon,
+                      color: isChecked ? colors.orangeColor : '#7a98fa',
+                    }}
                   />
+                  <Text
+                    style={{
+                      ...styles.tc,
+                      color: isChecked ? colors.orangeColor : '#7a98fa',
+                    }}>
+                    Terms & Conditions{' '}
+                  </Text>
+                </TouchableOpacity>
+                <View style={styles.buttonContainer}>
+                  {isChecked ? (
+                    <PrimaryButton
+                      bgColor={colors.orangeColor}
+                      loading={isSubmitting}
+                      onPress={handleSubmit}
+                      text={sigup}
+                      radius={25}
+                    />
+                  ) : (
+                    <PrimaryButton
+                      bgColor={'gray'}
+                      loading={isSubmitting}
+                      onPress={() =>
+                        alert('Accept terms and conditions to continue..')
+                      }
+                      text={sigup}
+                      radius={25}
+                    />
+                  )}
                 </View>
                 <TouchableOpacity
                   style={styles.alreadyAcc}
