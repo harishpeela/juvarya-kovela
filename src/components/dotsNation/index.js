@@ -1,8 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Animated, Dimensions} from 'react-native';
 const {width} = Dimensions.get('screen');
-export const DotsNation = ({data, scrollX, index}) => {
-  // console.log('njdj', data);
+export const DotsNation = ({data, scrollX}) => {
 
   return (
     <View style={styles.container}>
@@ -38,10 +37,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   container: {
-    // position: 'absolute',
-    // bottom: 5,
     flexDirection: 'row',
-    // width: '100%',
     margin: 5,
     justifyContent: 'center',
   },

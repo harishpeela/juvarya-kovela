@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text} from 'react-native';
 import {getNotifications} from '../../utils/api';
 import {Loader} from '../../components';
 import {
@@ -14,40 +14,14 @@ const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState();
   const [name, setname] = useState();
-  // const GetNotifications = async () => {
-  //   setLoader(true);
-  //   try {
-  //     let result = await getNotifications();
-  //     console.log('res of notifications', result?.data[0]?.notifications[0]);
-  //     let Data = result?.data[0]?.notifications;
-  //     if (Data) {
-  //       setNotificationData(Data);
-  //       setLoader(false);
-  //     } else {
-  //       setLoader(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in notifications', error);
-  //     setLoader(false);
-  //   }
-  // };
 
   const GetNotifications = async () => {
     setLoader(true);
     try {
       let result = await getNotifications();
-      console.log('res of notifications', result?.data[0]?.notifications[0]);
       let Data = result?.data[0]?.notifications;
       let mapping = result?.data[0]?.jtProfileDTO;
       let tempName = mapping?.name;
-
-      // let MapData = mapping
-      //   .filter(array => array)
-      //   .map(({jtProfileDTO, notifications}) => ({
-      //     jtProfileDTO,
-      //     notifications,
-      //   }));
-      console.log('MapData', mapping);
       if (Data) {
         setNotificationData(Data);
         setname(tempName);
@@ -64,7 +38,6 @@ const Notifications = ({navigation}) => {
   useEffect(() => {
     GetNotifications();
   }, []);
-  console.log('motifications', notificationdata);
   return (
     <View style={{backgroundColor: colors.white, flex: 1}}>
       <BackgroundImage />

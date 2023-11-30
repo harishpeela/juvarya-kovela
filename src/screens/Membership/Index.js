@@ -2,17 +2,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
 import {View, Text, FlatList, ScrollView} from 'react-native';
-import {
-  BackgroundImage,
-  BackHeaderNew,
-  FollowersListCard2,
-  SearchBar,
-  SearchCard,
-  Sort,
-} from '../../components';
+import {BackHeaderNew, FollowersListCard2} from '../../components';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {TempleFollowersList} from '../../utils/api';
-import {Loader, FollowersListCard} from '../../components';
+import {Loader} from '../../components';
 import {colors} from '../../common';
 import {styles} from './styles';
 import {Ellipsis} from '../../components';
@@ -24,17 +17,14 @@ const MemberShip = ({route, navigation}) => {
   const {id} = route.params || {};
   const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchLoading, setSearchLoading] = useState(false);
   console.log('id', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
-      // console.log('res of followes', result?.data);
       if (result.status === 200) {
         setLoader(false);
         setFollowersList(result?.data?.data);
         setFollowersFirstName(result?.data?.data?.user?.firstName);
-        console.log('FollowerList => ' + followersFirstName);
       } else {
         setLoader(false);
       }

@@ -18,7 +18,6 @@ const Splash = ({navigation}) => {
   const GenerateAuthToken = async () => {
     try {
       let result = await getInitialToken();
-      // console.log(result);
       if (result.status === 200) {
         const {
           data: {access_token, token_type},

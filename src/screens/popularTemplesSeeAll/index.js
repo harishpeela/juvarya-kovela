@@ -8,7 +8,6 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator,
   useColorScheme,
 } from 'react-native';
 import {styles} from './styles';
@@ -16,7 +15,7 @@ import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
 import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
 
-const SeeAll = ({route, navigation}) => {
+const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +24,6 @@ const SeeAll = ({route, navigation}) => {
     setIsLoading(true);
     try {
       let result = await PopularTemples(pgNo, pgToNo);
-      console.log('res of see all temp', result?.data);
       if (result.status === 200) {
         let PopData = result?.data?.data;
         setPopTemples([...popTemples, ...PopData]);
@@ -83,10 +81,13 @@ const SeeAll = ({route, navigation}) => {
                 <TouchableOpacity
                   style={styles.card}
                   onPress={() =>
-                    navigation.navigate(allTexts.screenNames.viewProfile, {
-                      data: item,
-                      onSelect: onSelect,
-                    })
+                    navigation.navigate(
+                      allTexts.screenNames.viewtempleprofile,
+                      {
+                        data: item,
+                        onSelect: onSelect,
+                      },
+                    )
                   }>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image

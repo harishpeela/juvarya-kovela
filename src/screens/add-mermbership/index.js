@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -8,39 +8,13 @@ import {
   SafeAreaView,
   TextInput,
 } from 'react-native';
-import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
-import {MemberShipDetails} from '../../utils/api';
+import {BackgroundImage, BackHeaderNew} from '../../components';
 import {styles} from './styles';
-import {colors} from '../../common';
-import {FlatList} from 'react-native-gesture-handler';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 const AddMemebershipDetails = ({route, navigation}) => {
-  const {id} = route.params || {};
-  const [data, setData] = useState([]);
-  const [loader, setaLoader] = useState(false);
-  const [text, onChangeText] = React.useState('Useless Text');
-  const [memType, setMemType] = React.useState('');
-  const [memName, setMemName] = React.useState('');
-  const [memFee, setMemFee] = React.useState('');
-  const [memDur, setMemDur] = React.useState('');
-  console.log('id ===>', id);
-  const MembershipData = async () => {
-    // setaLoader(true)
-    try {
-      let result = await MemberShipDetails(id);
-      // console.log('res', result?.data?.memberships);
-      if (result) {
-        setaLoader(false);
-        setData(result?.data?.memberships);
-      }
-    } catch (error) {
-      console.log('error in membership details api', error);
-    }
-  };
-  const onTextBoxChange = () => {
-    alert('huuuu');
-  };
-
+  const [memType, setMemType] = useState('');
+  const [memName, setMemName] = useState('');
+  const [memFee, setMemFee] = useState('');
+  const [memDur, setMemDur] = useState('');
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
@@ -78,10 +52,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
             placeholder="Duration"
             keyboardType="numeric"
           />
-          <TouchableOpacity
-            onPress={() => {
-              onTextBoxChange();
-            }}>
+          <TouchableOpacity>
             <Text style={styles.login}>{'CREATE'}</Text>
           </TouchableOpacity>
         </View>

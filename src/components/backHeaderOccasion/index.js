@@ -1,6 +1,6 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {colors} from '../../common';
-import React, {useState} from 'react';
+import React from 'react';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import Icon from 'react-native-vector-icons/Feather';
 import {styles} from './styles';
@@ -13,18 +13,6 @@ export const OccasionBackHeader = ({
   onPlusPress,
   onDotsPress,
 }) => {
-  const [selectedStartDate, setSelectedStartDate] = useState(null);
-  const [selectedEndDate, setSelectedEndDate] = useState(null);
-
-  const onDateChange = (date, type) => {
-    //function to handle the date change
-    if (type === 'END_DATE') {
-      setSelectedEndDate(date);
-    } else {
-      setSelectedEndDate(null);
-      setSelectedStartDate(date);
-    }
-  };
   return (
     <View style={[styles.continer, {margin: !isOption ? 0 : 10}]}>
       <View style={styles.iconContainer}>

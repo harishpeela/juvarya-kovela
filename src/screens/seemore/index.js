@@ -1,13 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {View, Text, SafeAreaView, FlatList} from 'react-native';
-import React, {useContext, useState, useEffect} from 'react';
-import {
-  BackHeader,
-  HomeHeader,
-  Loader,
-  SearchBar,
-  SearchCard,
-} from '../../components';
-import ApplicationContext from '../../utils/context-api/Context';
+import React, {useState, useEffect} from 'react';
+import {BackHeader, Loader, SearchBar, SearchCard} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {getMoreExploreAPI, getPopularTemples} from '../../utils/api';
@@ -15,7 +9,6 @@ import Snackbar from 'react-native-snackbar';
 import {useIsFocused} from '@react-navigation/native';
 
 const Seemore = ({navigation, route}) => {
-  const {userDetails} = useContext(ApplicationContext);
   const [popTempleLoader, setPopTempleLoader] = useState(false);
   const [popTemples, setPopTemples] = useState([]);
   const [filterList, setFilterList] = useState([]);
@@ -24,7 +17,6 @@ const Seemore = ({navigation, route}) => {
   const [totalPages, setTotalPages] = useState(1);
   const [paginationLoader, setPaginationLoader] = useState(false);
 
-  //   const [moreExploreTemples, setMoreExploreTemples] = useState([]);
   let isFocused = useIsFocused();
   const performFilter = value => {
     setFilterList(
@@ -66,7 +58,6 @@ const Seemore = ({navigation, route}) => {
     try {
       let response = await getPopularTemples(pageNumber);
       if (response && response.status === 200) {
-        // console.log(response);
         setPopTempleLoader(false);
         const {
           data: {items, count, pageSize},
@@ -122,7 +113,6 @@ const Seemore = ({navigation, route}) => {
 
   const onListEndReached = () => {
     if (pageNumber + 1 <= totalPages) {
-      // console.log('End Of list');
       setPageNumber(pageNumber + 1);
       setPaginationLoader(true);
     }
@@ -136,10 +126,6 @@ const Seemore = ({navigation, route}) => {
           }}
           txt={route?.params?.screenTitle}
         />
-        {/* <HomeHeader
-          img={require('../../utils/assets/images/avatar.png')}
-          name={userDetails?.username}
-        /> */}
         <View style={styles.searchContainer}>
           <SearchBar
             value={searchText}

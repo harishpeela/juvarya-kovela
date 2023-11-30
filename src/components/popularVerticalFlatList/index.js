@@ -43,10 +43,8 @@ export const PopularTemplesVerticalList = ({
       jtProfile: d,
       following: !isLiked,
     };
-    console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
-      // console.log('result of follow un follow =========>', results?.data);
       if (results && results.status === 200) {
         setIsLiked(!isLiked);
         ToastAndroid.show(

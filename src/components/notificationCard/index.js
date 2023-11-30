@@ -2,7 +2,6 @@
 import React from 'react';
 import {View, TouchableOpacity, Text, StyleSheet, Image} from 'react-native';
 import {colors} from '../../common';
-import {color} from 'react-native-reanimated';
 export const NotificationCard = ({data, name}) => {
   return (
     <TouchableOpacity style={styles.contatainer}>

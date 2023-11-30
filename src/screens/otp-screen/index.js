@@ -18,7 +18,6 @@ const OTPScreen = ({navigation, route}) => {
   const [timer, setTimer] = useState('00');
   const [loading, setLoading] = useState(false);
   const Ref = useRef(null);
-  //timer Feature
   var secLeft = 30;
   const getTimeRemaining = e => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -58,9 +57,8 @@ const OTPScreen = ({navigation, route}) => {
 
   let otpInput = useRef(null);
   const {
-    params: {otp, email, password, data, userName},
+    params: {otp, email, password, data},
   } = route || {};
-  // console.log('data', data);
   const setText = () => {
     otpInput?.current?.setValue(otp);
   };
@@ -70,7 +68,6 @@ const OTPScreen = ({navigation, route}) => {
     let result = await getUserInfoNew();
     try {
       if (result) {
-        console.log('result', result?.data);
         saveUserDetails({
           username: result?.data?.userName,
           email: result.data?.email,
@@ -95,10 +92,8 @@ const OTPScreen = ({navigation, route}) => {
       primaryContact: data?.phone,
       password: password,
     };
-    console.log('payload of signin handler', payload);
     try {
       let result = await loginUser1(payload);
-      console.log('result of login user1', result?.data);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType},
@@ -116,7 +111,6 @@ const OTPScreen = ({navigation, route}) => {
   useEffect(() => {
     startTime(getDeadTime());
     setText();
-    // getAndSaveUserInfo();
   }, []);
 
   const UserRegisterHandler = async () => {
@@ -129,13 +123,9 @@ const OTPScreen = ({navigation, route}) => {
       password: data?.password,
       otp: otp,
     };
-    console.log('regi pay', registerPayload);
     try {
       let result = await NewRegistesrUser(registerPayload);
-      console.log('register user result', result?.data);
-      // console.log('register user data', result?.status);
       if (result.status === 200) {
-        // console.log('mesage', result?.data?.message);
         signinHandler();
       } else {
         console.log(result?.data?.message, 'error');

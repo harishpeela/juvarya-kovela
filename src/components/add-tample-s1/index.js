@@ -23,7 +23,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
   } = allTexts;
 
   const uploadPhoto = () => {
-    // setImageLoading(true);
     try {
       launchImageLibrary(
         {mediaType: 'photo', saveToPhotos: true, includeBase64: true},
@@ -34,7 +33,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
           } else {
             console.log(res.errorMessage);
           }
-          // setImageLoading(false);
         },
       );
     } catch (error) {
@@ -68,14 +66,11 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
     )
       .then(response => response.json())
       .then(result => {
-        // console.log('api filter', result);
-
         setFilterdData(result.communities);
         setApiSearch(result.communities);
         let filteredCommunityData = filterdData
           .filter(item => item.name)
           .map(({id, name}) => ({id, name}));
-        // console.log('filteredCommunityData', filteredCommunityData);
         if (filteredCommunityData) {
           setMappingData(filteredCommunityData);
         } else {
@@ -156,8 +151,6 @@ export const AddTampleStep1 = ({onNextBtnPress, data, image, setImage}) => {
             }
             onNextBtnPress(values, isRegular);
             CommunityGetApi();
-            // CommunityPostApi();
-            // console.log('commite', values);
           }}
           validationSchema={AddTampleSchema}
           initialValues={{

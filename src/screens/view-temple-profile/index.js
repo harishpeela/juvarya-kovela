@@ -12,7 +12,6 @@ import {
   useColorScheme,
   Modal,
   Pressable,
-  Alert,
 } from 'react-native';
 import {
   Loader,
@@ -27,7 +26,6 @@ import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import React, { useState, useEffect, useContext } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
-import services from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { allTexts } from '../../common';
 import { Data } from '../home-feed/formateDetails';
@@ -56,19 +54,18 @@ import { colors } from '../../common';
 import { PostsComp } from '../../components/profilecompnew/postsComp';
 import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -239,10 +236,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
-  const closeModal = () => {
-    setIsVisible(!isVisible);
-    console.log('it is calling ');
-  };
   return (
     <ScrollView
       style={{
@@ -270,7 +263,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   txtColor={colors.black}
                   isPlus={false}
                 />
-                {/* <Feather name="arrow-left-circle" color={'#686869'} size={28} /> */}
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>
                 <TouchableOpacity style={styles.bell}>
@@ -350,7 +342,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <View style={styles.followtab}>
                 <ScrollView
                   alignSelf="center"
-                  // justifyContent="center"
                   align
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
@@ -394,14 +385,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
             <ScrollView
               showsVerticalScrollIndicator={false}
               style={styles.contentDisplay}>
-              {/* {loader && (
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
-                  <Loader color={colors.orangeColor} size={30} />
-                </View>
-              )} */}
               {!postImages?.length > 0 ? (
                 <View>
                   {loader ? (

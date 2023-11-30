@@ -69,16 +69,12 @@ const TempleProfile = ({route, navigation}) => {
     discription: '',
   });
   const {id, title, profileImg, data} = route.params || {};
-  // console.log('data', id, title, data, profileImg);
   const getData = async () => {
-    // console.log('idid', id);
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
       console.log('res', result?.data);
       let feedList = await getFeedList(0, 20, id);
-      // console.log('id', id);
-      // console.log('feedlistssss', feedList?.data[1]?.mediaList);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);
         setFollowVisible(false);
@@ -95,17 +91,6 @@ const TempleProfile = ({route, navigation}) => {
         });
       } else {
         setFollowVisible(false);
-        // Snackbar.show({
-        // text: allTexts.constants.noInternet,
-        // duration: Snackbar.LENGTH_INDEFINITE,
-        // action: {
-        //   text: 'Try again',
-        //   textColor: 'red',
-        //   onPress: () => {
-        //     getData();
-        //   },
-        // },
-        // });
       }
     } catch (error) {
       setFollowVisible(false);
@@ -118,14 +103,11 @@ const TempleProfile = ({route, navigation}) => {
       itemType: 'ITEM',
       follow: !isFollow,
     };
-    // console.log('pay', payload);
     try {
       setFollowBtnDisable(true);
       let results = await followUnfollowTemple(payload);
-      // console.log('results', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
-        // console.log('results', results.json());
         setFollowBtnDisable(false);
 
         ToastAndroid.show(
@@ -135,17 +117,6 @@ const TempleProfile = ({route, navigation}) => {
           ToastAndroid.SHORT,
         );
       } else {
-        // Snackbar.show({
-        //   text: allTexts.constants.noInternet,
-        //   duration: Snackbar.LENGTH_INDEFINITE,
-        //   action: {
-        //     text: 'Try again',
-        //     textColor: 'red',
-        //     onPress: () => {
-        //       followTemples();
-        //     },
-        //   },
-        // });
       }
     } catch (error) {
       console.log(error);

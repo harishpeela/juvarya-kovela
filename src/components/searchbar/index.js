@@ -1,11 +1,11 @@
-import {View, Text, TextInput} from 'react-native';
+/* eslint-disable react-native/no-inline-styles */
+import {View, TextInput} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {colors} from '../../common';
 import {styles} from './style';
 import {Loader} from '..';
-import IconVoice from 'react-native-vector-icons/MaterialIcons';
 
 export const SearchBar = ({
   value,
@@ -23,12 +23,14 @@ export const SearchBar = ({
   return (
     <View>
       <View
+        // eslint-disable-next-line no-sparse-arrays
         style={[
           styles.searchContainer,
           {backgroundColor: bgColor ? bgColor : colors.gray4},
-          {borderWidth : brWidth ? brWidth : 0},
-          {borderColor : brColor ? brColor : colors.white},
-          {height: srHeight ? srHeight : 50}
+          {borderWidth: brWidth ? brWidth : 0},
+          {borderColor: brColor ? brColor : colors.white},
+          {height: srHeight ? srHeight : 50},
+          ,
         ]}>
         <View style={styles.iconContainer}>
           <Icon name="search1" size={20} color={colors.gray} />
@@ -38,7 +40,6 @@ export const SearchBar = ({
             placeholder={placeHolder || 'Search temples'}
             style={styles.field}
             value={value}
-            // maxLength={25}
             onSubmitEditing={onSubmit}
             autoCapitalize={false}
           />
@@ -57,8 +58,6 @@ export const SearchBar = ({
           ) : (
             <></>
           )}
-
-          {/* <IconVoice name="keyboard-voice" size={25} /> */}
         </View>
       </View>
     </View>

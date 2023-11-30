@@ -44,8 +44,6 @@ const MySavedPosts = ({navigation}) => {
       setLoading(false);
     }
   };
-  // console.log('filter', filteredArray);
-
   useEffect(() => {
     getPostsList();
   }, []);

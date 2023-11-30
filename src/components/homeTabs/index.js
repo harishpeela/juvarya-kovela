@@ -1,13 +1,11 @@
-import {View, Text, Image, TouchableOpacity, FlatList} from 'react-native';
-import {allTexts, colors, fontFamily, fontSize} from '../../common';
+import {View, Text, TouchableOpacity, FlatList} from 'react-native';
+import {allTexts} from '../../common';
 import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
 
 export const HomeTabs = ({}) => {
   const [id, setId] = useState(1);
-  useEffect(() => {
-    // console.log(id);
-  }, [id]);
+  useEffect(() => {}, [id]);
   let tabList = [
     {
       id: 1,

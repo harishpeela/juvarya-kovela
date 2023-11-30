@@ -1,13 +1,11 @@
-import {View, Text, Image, TouchableOpacity} from 'react-native';
-import {allTexts, colors, fontFamily, fontSize} from '../../common';
-import React, {useState} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {colors} from '../../common';
+import React from 'react';
 import {styles} from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import {ImageLoader} from '..';
 
 export const ExploreCard = ({name, img, location, onPress}) => {
-  const [id, setId] = useState(1);
-
   return (
     <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.imgContainer}>

@@ -17,7 +17,6 @@ const Services = ({navigation, route}) => {
     params: {id, title, name},
   } = route || {};
   const [servicesData, setServicesData] = useState(name);
-  // console.log('servicedata', name.id);
 
   const ActiveData = () => {
     let data = servicesData?.serviceCategories;

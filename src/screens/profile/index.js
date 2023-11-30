@@ -136,11 +136,8 @@ const Profile = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      {/* <BackgroundImage /> */}
       <BackgroundImageAClass />
-
       <View style={styles.header} />
-
       <View style={styles.profileContainer}>
         <View style={styles.uploadContainer}>
           {image !== null ? (

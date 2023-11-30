@@ -42,13 +42,14 @@ const UpdatePassword = ({navigation}) => {
       redirect: 'follow',
     };
 
-    fetch('http://20.235.89.214:9092/api/customer/password', requestOptions)
+    fetch('https://kovela.app/customer/api/customer/password', requestOptions)
       .then(response => response.json())
       .then(result => {
         formikActions.setSubmitting(false);
         if (result) {
           ToastAndroid.show(
-            'మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది ..!',
+            // 'మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది ..!',
+            'Your Password saved sucessfully',
             ToastAndroid.SHORT,
           );
           navigation.goBack();

@@ -12,7 +12,6 @@ const AddEvents = ({navigation, route}) => {
   const {
     params: {id},
   } = route || {};
-  // console.log('add eventid', id);
   const {setId} = useContext(ApplicationContext);
   useEffect(() => {
     if (id) {

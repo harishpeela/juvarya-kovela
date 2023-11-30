@@ -3,7 +3,6 @@ import IcomoonConfig from '../../common/selection.json';
 const Icomoon = createIconSetFromIcoMoon(IcomoonConfig);
 import React from 'react';
 import {View, Text} from 'react-native';
-import {colors, fontFamily} from '../../common';
 import {styles} from './style';
 import IconBadge from 'react-native-icon-badge';
 

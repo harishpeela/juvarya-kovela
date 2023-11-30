@@ -38,7 +38,7 @@ const endpoints = {
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
-  MEMBER_SHIP_COUNT: '/jtProfileMembership/count?profileId',
+  MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',

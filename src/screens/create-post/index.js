@@ -6,7 +6,7 @@ import {
   Platform,
   ToastAndroid,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   BackHeader,
   ImageLoader,
@@ -17,10 +17,9 @@ import {styles} from './style';
 import {Formik} from 'formik';
 import {createPostScheme} from '../../common/schemas';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {allTexts, colors, fontFamily} from '../../common';
+import {colors} from '../../common';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
-import ToggleSwitch from 'toggle-switch-react-native';
 import {createFeedPost} from '../../utils/api';
 
 const CreatePost = ({navigation, route}) => {
@@ -28,7 +27,6 @@ const CreatePost = ({navigation, route}) => {
     params: {id},
   } = route || {};
   const [imageUploaded, setimageUploaded] = useState(false);
-  const [toggleOn, setToggleOn] = useState(false);
   const [image, setImage] = useState(null);
   const [isImageAvailable, setisImageAvailable] = useState(false);
 
@@ -42,13 +40,9 @@ const CreatePost = ({navigation, route}) => {
             setImage(res.assets[0]);
             setimageUploaded(false);
             setisImageAvailable(true);
-            // console.log(res.assets[0]);
-            // setIsImageAvailable(true);
-            // setImageLoading(false);
           } else {
             console.log(res.errorMessage);
           }
-          // setImageLoading(false);
         },
       );
     } catch (error) {
@@ -79,7 +73,6 @@ const CreatePost = ({navigation, route}) => {
         navigation.goBack();
         ToastAndroid.show('Post Created Successfully!', 1000);
       }
-      // console.log(response);
     } catch (error) {
       console.log('Error', error);
     }
@@ -178,49 +171,6 @@ const CreatePost = ({navigation, route}) => {
             );
           }}
         </Formik>
-        {/* <View style={styles.radioContainer}>
-          <Text style={styles.title}>{'Post to Other Account'}</Text>
-          <View style={styles.switchContainer}>
-            <Text
-              style={[
-                styles.title,
-                {fontFamily: fontFamily.popinRegular, fontSize: 15},
-              ]}>
-              {'John Doe'}
-            </Text>
-            <ToggleSwitch
-              isOn={toggleOn}
-              onColor={colors.blue3}
-              offColor={colors.gray2}
-              size="medium"
-              onToggle={isOn => {
-                setToggleOn(isOn);
-              }}
-            />
-          </View>
-        </View> */}
-        {/* <View>
-          <View style={styles.orgainsedContainer}>
-            <Text style={styles.title}>{'Organized By'}</Text>
-            <View style={styles.organiserContainer}>
-              <View style={styles.orgainserimgContainer}>
-                <ImageLoader
-                  resizeMode={'contain'}
-                  imageStyle={styles.orgainserimg}
-                  url={
-                    'https://image.shutterstock.com/image-photo/kuala-lumpur-malaysia-sri-maha-260nw-614123705.jpg'
-                  }
-                />
-              </View>
-              <View style={styles.orgainserTxtContainer}>
-                <Text style={styles.organiserTitle}>
-                  {'Sri Nookambika Devastham'}
-                </Text>
-                <Text style={styles.verifiedText}>{'Verified Organizer'}</Text>
-              </View>
-            </View>
-          </View>
-        </View> */}
       </View>
     </SafeAreaView>
   );

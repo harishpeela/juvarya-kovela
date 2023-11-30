@@ -14,7 +14,6 @@ const Manage = ({navigation, route}) => {
   const {
     params: {id, title, name},
   } = route || {};
-  // console.log('id', id);
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.headerContainer}>

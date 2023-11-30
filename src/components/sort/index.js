@@ -1,24 +1,23 @@
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../../common';
 import {styles} from './style';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-const Sort = ({srWidth,srHeight, txtColor, brColor}) => {
-  console.log(srWidth)
+const Sort = ({srWidth, srHeight, txtColor, brColor}) => {
   return (
     <TouchableOpacity>
       <Pressable>
         <View
           style={[
-            styles.sortContainer, 
-            {width: srWidth ? srWidth : "100%"},
+            styles.sortContainer,
+            {width: srWidth ? srWidth : '100%'},
             {height: srHeight ? srHeight : 50},
-    {borderColor: brColor ? brColor : colors.black}
+            {borderColor: brColor ? brColor : colors.black},
           ]}>
           <Icon
-          style={styles.sortIcon}
+            style={styles.sortIcon}
             name="sort"
             size={32}
             color={txtColor === undefined ? colors.black : txtColor}
