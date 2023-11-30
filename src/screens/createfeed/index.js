@@ -65,7 +65,7 @@ const CreateFeed = ({route, navigation}) => {
       body: formdata,
       redirect: 'follow',
     };
-    fetch('http://20.235.89.214:9094/jtfeed/create', requestOptions)
+    fetch('https://kovela.app/media/jtfeed/create', requestOptions)
       .then(response => response.json())
       .then(result => {
         if (result?.message === 'Feed created') {

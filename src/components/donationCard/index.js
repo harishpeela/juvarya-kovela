@@ -4,7 +4,6 @@ import {View, Image, Text} from 'react-native';
 import Donation_Button from '../Donate_Button';
 import {styles} from './style';
 export const Danation_Add_Card = ({onPress, roleId}) => {
-  console.log('It is printing the roleId ->>>> ' + roleId);
   return (
     <View style={styles.container}>
       <View style={styles.second}>
