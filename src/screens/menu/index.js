@@ -4,6 +4,7 @@
 import {TouchableOpacity, Text, View} from 'react-native';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
+import Feather from 'react-native-vector-icons/Feather';
 import {
   BackHeaderNew,
   BackgroundImage,
@@ -23,11 +24,13 @@ const Menu = ({navigation}) => {
   };
   const Festivals = () => {
     setCurrentIndex(7);
-    if (currentIndex === 7) {
-      alert('Festivals under development');
-    } else {
-      alert('Festivals under development');
-    }
+    navigation.navigate(allTexts.screenNames.eventsScreen);
+
+    // if (currentIndex === 7) {
+    //   navigation.navigate(allTexts.screenNames.eventsScreen)
+    // } else {
+    //   alert('Festivals under development');
+    // }
   };
   const Accounts = () => {
     setCurrentIndex(8);
@@ -89,7 +92,7 @@ const Menu = ({navigation}) => {
                 Accounts{' '}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => TC()}>
+            {/* <TouchableOpacity onPress={() => TC()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -105,7 +108,7 @@ const Menu = ({navigation}) => {
                 isModal={isModal}
                 onPress={() => setIsModal(false)}
               />
-            )}
+            )} */}
           </View>
         </View>
       </View>

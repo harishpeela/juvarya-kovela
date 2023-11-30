@@ -1,9 +1,9 @@
 /* eslint-disable no-new */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {StatusBar} from 'react-native';
-import {LogBox} from 'react-native';
-import {allTexts} from './src/common';
+import { StatusBar } from 'react-native';
+import { LogBox } from 'react-native';
+import { allTexts } from './src/common';
 import {
   Splash,
   SignUp,
@@ -40,6 +40,8 @@ import {
   ViewTempleProfile,
   Donations,
   MemberShip,
+  EventsScreen,
+  Home,
   DonationsList
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -56,6 +58,7 @@ import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
+Events
 const App = () => {
   const {
     screenNames: {
@@ -97,6 +100,7 @@ const App = () => {
       viewtempleprofile,
       donations,
       memberShip,
+      eventsScreen,
       donationslist,
     },
   } = allTexts;
@@ -404,7 +408,14 @@ const App = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
+          name={eventsScreen}
+          component={EventsScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name={memberShip}
           component={MemberShip}
           options={{
@@ -454,7 +465,7 @@ const App = () => {
       let response = await getHomeFeedList(0, 20);
       if (response && response?.status === 200) {
         const {
-          data: {jtFeeds},
+          data: { jtFeeds },
         } = response;
         getHomeFeedListData(jtFeeds);
       }

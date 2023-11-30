@@ -215,8 +215,8 @@ export const ProfileFourthTab = ({
               borderColor: currentIndex === 4 ? '#CC4501' : null,
             }}
             onPress={() => setCurrentIndex(4)}>
-            <Ionicons
-              name="location-outline"
+            <MaterialCommunityIcons
+              name="party-popper"
               color={currentIndex === 4 ? '#CC4501' : colors.gray2}
               size={24}
               style={styles.Icon}
@@ -231,8 +231,8 @@ export const ProfileFourthTab = ({
               borderColor: currentIndex === 2 ? '#CC4501' : null,
             }}>
             <MaterialCommunityIcons
-              name="movie-open-outline"
-              color={currentIndex === 2 ? '#CC4501' : colors.gray2}
+              name="party-popper"
+              color={currentIndex === 3 ? '#CC4501' : colors.gray2}
               size={24}
               style={styles.Icon}
             />
@@ -253,8 +253,8 @@ export const ProfileFourthTab = ({
               borderColor: currentIndex === 3 ? '#CC4501' : null,
             }}
             onPress={() => setCurrentIndex(3)}>
-            <AntDesign
-              name="clockcircleo"
+            <MaterialCommunityIcons
+              name="party-popper"
               color={currentIndex === 3 ? '#CC4501' : colors.gray2}
               size={24}
               style={styles.Icon}

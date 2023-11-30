@@ -199,4 +199,4 @@ const UserFeedScreen = ({navigation}) => {
   );
 };
 
-export default UserFeedScreen;
+export default UserFeedScreen

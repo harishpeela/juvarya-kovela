@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingTop:"10%"
   },
   logoutbtnContainer: {
-    marginTop:"45%",
+    marginTop:"30%",
     width: '50%',
     alignSelf: 'center',
     alignItems:'center',
@@ -92,5 +92,11 @@ export const styles = StyleSheet.create({
     height: 100,
     width: 100,
     justifyContent: 'center',
+  },
+  tabs: {
+    marginTop:'10%',
+    fontSize: 18,
+    marginVertical: 10,
+    color: colors.gray4
   },
 });
