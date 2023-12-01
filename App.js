@@ -1,9 +1,9 @@
 /* eslint-disable no-new */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { StatusBar } from 'react-native';
-import { LogBox } from 'react-native';
-import { allTexts } from './src/common';
+import {StatusBar} from 'react-native';
+import {LogBox} from 'react-native';
+import {allTexts} from './src/common';
 import {
   Splash,
   SignUp,
@@ -42,7 +42,7 @@ import {
   MemberShip,
   EventsScreen,
   Home,
-  DonationsList
+  DonationsList,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -58,7 +58,7 @@ import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
-Events
+Events;;
 const App = () => {
   const {
     screenNames: {
@@ -191,7 +191,7 @@ const App = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={donationslist}
           component={DonationsList}
           options={{
@@ -465,7 +465,7 @@ const App = () => {
       let response = await getHomeFeedList(0, 20);
       if (response && response?.status === 200) {
         const {
-          data: { jtFeeds },
+          data: {jtFeeds},
         } = response;
         getHomeFeedListData(jtFeeds);
       }

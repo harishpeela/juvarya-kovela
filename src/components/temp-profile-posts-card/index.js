@@ -1,14 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {TouchableOpacity, Image} from 'react-native';
+import {TouchableOpacity, Image, Dimensions} from 'react-native';
 import {allTexts} from '../../common';
 export const TempleProfile_PostsCard = ({item, nav}) => {
   return (
     <TouchableOpacity
       style={{
-        flex: 1,
-        height: 140,
-        margin: 3,
+        // flex: 1,
+        // height: 120,
       }}
       onPress={() =>
         nav.navigate(allTexts.screenNames.feeds, {
@@ -18,9 +17,13 @@ export const TempleProfile_PostsCard = ({item, nav}) => {
       {item?.mediaList ? (
         <Image
           source={{uri: item?.mediaList[0]?.url}}
+          height={Dimensions.get('window').width / 3}
+          width={Dimensions.get('window').width / 3}
           style={{
-            height: 140,
-            width: item?.mediaList[0]?.url?.length < 1 ? 130 : '100%',
+            margin: 1,
+            height: Dimensions.get('window').width / 3,
+            width: Dimensions.get('window').width / 3,
+            resizeMode: 'cover',
           }}
         />
       ) : null}

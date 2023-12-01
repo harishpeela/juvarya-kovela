@@ -66,7 +66,8 @@ export const styles = StyleSheet.create({
     marginLeft: '5%',
   },
   contentDisplay: {
-    // height: '56%',
+    // borderWidth: 1,
+    // margin: 10,
   },
   noPosts: {
     borderWidth: 1,

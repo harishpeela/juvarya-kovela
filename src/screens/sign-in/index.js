@@ -28,17 +28,18 @@ const Signin = ({navigation}) => {
 
   const ApiData = async () => {
     let result = await getUserInfoNew();
+    console.log('userifo', result?.data?.firstName + result?.data?.lastName);
     try {
       if (result) {
         saveUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
           primaryContact: result?.data?.primaryContact,
         });
         setUserDetails({
-          username: result?.data?.username,
+          username: result?.data?.firstName + result?.data?.lastName,
           email: result.data?.email,
           role: result?.data?.roles,
           id: result?.data?.id,
@@ -70,20 +71,6 @@ const Signin = ({navigation}) => {
       }
     } catch (error) {
       actions.setSubmitting(false);
-    }
-  };
-
-  const getFollowedTempleList = async () => {
-    try {
-      let response = await getHomeFeedList(0, 100);
-      if (response && response.status === 200) {
-        const {
-          data: {jtFeeds},
-        } = response;
-        getHomeFeedListData(jtFeeds);
-      }
-    } catch (error) {
-      console.log(error);
     }
   };
 

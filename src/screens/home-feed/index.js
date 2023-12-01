@@ -55,9 +55,11 @@ const UserFeedScreen = ({navigation}) => {
       let result = await getHomeFeedList(pgNo, pgSize);
       if (result && result?.status === 200) {
         setloader(false);
-        let responce = result?.data?.jtFeeds;
-        responce === null ? setNoData(true) : setNoData(false);
-        responce && setHomeFeedList([...homeFeedList, ...responce]);
+        setHomeFeedList(result?.data?.jtFeeds);
+        console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
+        // let responce = result?.data?.jtFeeds;
+        // responce === null ? setNoData(true) : setNoData(false);
+        // responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
         setRefrsh(false);
       } else {
@@ -180,9 +182,9 @@ const UserFeedScreen = ({navigation}) => {
                 }}
               />
             )}
-            ListFooterComponent={renderLoder}
-            onEndReached={() => loadMoreItems()}
-            onEndReachedThreshold={0.5}
+            // ListFooterComponent={renderLoder}
+            // onEndReached={() => loadMoreItems()}
+            // onEndReachedThreshold={0.5}
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>

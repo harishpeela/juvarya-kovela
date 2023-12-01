@@ -3,13 +3,12 @@ import {colors, fontFamily} from '../../common';
 
 export const styles = StyleSheet.create({
   textContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    flex: 0.8,
+    alignItems: 'center',
   },
   wrapper: {
-    padding: 15,
-    borderRadius: 10,
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   imageContainer: {
     width: 70,
@@ -31,6 +30,6 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
     color: colors.orangeColor,
-    marginLeft: 9,
   },
+  noDobText: {fontSize: 12, color: colors.orangeColor, fontWeight: 'bold'}
 });
