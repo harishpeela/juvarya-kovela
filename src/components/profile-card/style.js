@@ -3,7 +3,9 @@ import {colors, fontFamily} from '../../common';
 
 export const styles = StyleSheet.create({
   textContainer: {
-    alignItems: 'center',
+    flexDirection: 'column',
+    alignContent:'center',
+    textAlign:'center'
   },
   wrapper: {
     flex: 1,
@@ -14,7 +16,6 @@ export const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 50,
-    flex: 0.2,
   },
   image: {
     width: undefined,
@@ -25,6 +26,8 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     color: colors.black,
+    alignContent:'center',
+    textAlign:'center'
   },
   emailText: {
     fontFamily: fontFamily.popinLight,

@@ -61,7 +61,7 @@ const FollowersListCard2 = ({
               )}
             </Text>
           </View>
-          <View>
+          {/* <View>
             <PrimaryButton
               text={'Block'}
               textColor={'red'}
@@ -71,7 +71,7 @@ const FollowersListCard2 = ({
               padding={8}
               fontsize={fontSize.xxsmall}
             />
-          </View>
+          </View> */}
         </View>
       </View>
     </TouchableOpacity>
