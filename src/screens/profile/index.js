@@ -10,11 +10,7 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {
-  BackgroundImage,
-  BackgroundImageAClass,
-  Terms_And_Conditions,
-} from '../../components';
+import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
@@ -36,6 +32,7 @@ const Profile = ({navigation}) => {
   const {
     constants: {role},
   } = allTexts;
+  // console.log('user details', userDetails);
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState(null);
@@ -46,6 +43,7 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
+  const [dob, setDob] = useState(true);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -178,7 +176,11 @@ const Profile = ({navigation}) => {
             </TouchableOpacity>
           )}
         </View>
-        <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
+        <ProfileInfo
+          name={userDetails?.username}
+          email={userDetails?.email}
+          dob={dob}
+        />
       </View>
       <View style={styles.profileItemsHeader}>
         <View style={styles.profileItemsContainer}>
