@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignContent: 'center',
     alignItems: 'center',
+    // borderWidth:2,
   },
   followersListCard: {
     // borderWidth: 2,
@@ -48,8 +49,9 @@ export const styles = StyleSheet.create({
     marginBottom: '3%',
   },
   textContainer: {
-    width:'80%',
+    width:'auto',
     height: 'auto',
     display: 'flex',
+    // borderWidth:2
   },
 });
