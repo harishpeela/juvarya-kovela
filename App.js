@@ -21,7 +21,6 @@ import {
   Favorite,
   Occasions,
   Manage,
-  Calender,
   AddEvents,
   NearByProducts,
   NearByServices,
@@ -41,7 +40,6 @@ import {
   Donations,
   MemberShip,
   EventsScreen,
-  Home,
   DonationsList,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -58,7 +56,6 @@ import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
-Events;;
 const App = () => {
   const {
     screenNames: {
@@ -78,7 +75,6 @@ const App = () => {
       favlist,
       occasions,
       manage,
-      calender,
       addevents,
       nearByProducts,
       nearByServices,

@@ -73,7 +73,7 @@ const CreateFeed = ({route, navigation}) => {
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.bottomTab),
+                navigation.navigate(allTexts.screenNames.userFeedScreen),
             },
           ]);
         } else {

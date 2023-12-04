@@ -5,21 +5,22 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    margin: '10%'
+    margin: '10%',
+    backgroundColor: 'green',
   },
-  postView:{
+  postView: {
     marginHorizontal: '5%',
-    flexDirection: 'row', 
+    flexDirection: 'row',
     alignItems: 'center',
     padding: '2%',
     borderRadius: 20,
     backgroundColor: 'lightgray',
-    marginVertical: '2%'
+    marginVertical: '2%',
   },
   image: {
     height: 100,
     width: 100,
-    borderRadius: 40
+    borderRadius: 40,
   },
   description: {
     marginLeft: '5%',
@@ -36,6 +37,5 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '800',
     textTransform: 'capitalize',
-  }
-
+  },
 });
