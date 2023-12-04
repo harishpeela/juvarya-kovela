@@ -1,22 +1,38 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, FlatList, Text, TouchableOpacity, Image} from 'react-native';
-import {BackgroundImage} from '../../components';
-import Feather from 'react-native-vector-icons/Feather';
+import {View, FlatList, Text, Image, useColorScheme} from 'react-native';
+import {BackgroundImage, BackHeader} from '../../components';
 import {styles} from './styles';
-import {colors} from '../../common';
 const Posts = ({navigation, route}) => {
   const {posts} = route.params || {};
+  const isDarkMode = useColorScheme() === 'dark';
+
   return (
-    <View style={{backgroundColor: 'white', flex: 1}}>
+    <View style={{backgroundColor: isDarkMode ? 'white' : 'white', flex: 1}}>
       <BackgroundImage />
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Feather name="arrow-left-circle" color={colors.black2} size={28} />
+        {/* <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Feather
+            name="arrow-left-circle"
+            color={isDarkMode ? colors.black2 : colors.black2}
+            size={28}
+          />
         </TouchableOpacity>
-        <Text style={{fontSize: 24, fontWeight: '500', marginHorizontal: 10}}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: '500',
+            marginHorizontal: 10,
+            color: isDarkMode ? 'black' : 'black',
+          }}>
           Posts
-        </Text>
+        </Text> */}
+        <BackHeader
+          onBackPress={() => {
+            navigation.goBack();
+          }}
+          txt={'Posts'}
+        />
       </View>
       {!posts?.length ? (
         <View style={styles.noposts}>

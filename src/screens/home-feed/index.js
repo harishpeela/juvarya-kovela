@@ -31,11 +31,12 @@ const UserFeedScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const MyCustShare = async item => {
     const ShareOptions = {
-      // message: item?.jtProfileDTO?.name,
-      // URL: item?.jtProfileDTO?.logo,
-      message: 'https://play.google.com/apps/test/com.kovela/4004',
-      URL: 'https://play.google.com/apps/test/com.kovela/4004',
-      title: item?.jtProfileDTO?.desciption,
+      message: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      URL: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      title: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      // message: 'https://play.google.com/apps/test/com.kovela/4004',
+      // URL: 'https://play.google.com/apps/test/com.kovela/4004',
+      // title: item?.jtProfileDTO?.desciption,
     };
     const options = {
       message: item?.jtProfileDTO?.name,

@@ -370,7 +370,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               <Danation_Add_Card
                 roleId={roleId}
                 onPress={() =>
-                  navigation.navigate(allTexts?.screenNames?.donations, {
+                  navigation.navigate(allTexts?.screenNames?.donationslist, {
                     data: trfData,
                   })
                 }

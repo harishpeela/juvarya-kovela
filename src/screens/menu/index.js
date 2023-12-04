@@ -89,7 +89,7 @@ const Menu = ({navigation}) => {
                   textDecorationLine: currentIndex === 8 ? 'underline' : 'none',
                   fontWeight: currentIndex == 8 ? 'bold' : '400',
                 }}>
-                Accounts{' '}
+                Account{' '}
               </Text>
             </TouchableOpacity>
             {/* <TouchableOpacity onPress={() => TC()}>

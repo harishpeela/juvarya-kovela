@@ -51,7 +51,7 @@ const Donations = ({route, navigation}) => {
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.donationslist, {
+                navigation.navigate(allTexts.screenNames.bottomTab, {
                   data: data,
                 }),
             },

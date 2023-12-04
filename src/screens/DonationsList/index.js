@@ -1,10 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, SafeAreaView, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
 import {BackHeaderNew, SearchBar} from '../../components';
 import {styles} from './styles';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {BackgroundImage, FollowersListCard3, Loader} from '../../components';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
@@ -91,23 +97,26 @@ const DonationsList = ({navigation, route}) => {
             <Loader size={'large'} color={colors.black} />
           ) : (
             <>
-              {searchedText === '' && (
-                <FlatList
-                  style={styles.list}
-                  showsVerticalScrollIndicator={false}
-                  data={apiData}
-                  contentContainerStyle={styles.flatListStyle}
-                  keyExtractor={(item, index) => item?.id?.toString()}
-                  renderItem={({item}) => (
-                    <FollowersListCard3
-                      name={item?.email}
-                      rs={item?.donation}
-                      description={item?.description}
-                      img={item?.url}
-                    />
-                  )}
-                />
-              )}
+              {searchedText === '' &&
+                (apiData?.length ? (
+                  <FlatList
+                    style={styles.list}
+                    showsVerticalScrollIndicator={false}
+                    data={apiData}
+                    contentContainerStyle={styles.flatListStyle}
+                    keyExtractor={(item, index) => item?.id?.toString()}
+                    renderItem={({item}) => (
+                      <FollowersListCard3
+                        name={item?.email}
+                        rs={item?.donation}
+                        description={item?.description}
+                        img={item?.url}
+                      />
+                    )}
+                  />
+                ) : (
+                  ''
+                ))}
 
               {searchedText && filteredData?.length > 0 ? (
                 <FlatList
@@ -128,7 +137,7 @@ const DonationsList = ({navigation, route}) => {
               ) : (
                 <View style={styles.noDataContainer}>
                   <Text style={styles.noDataText}>
-                    No such name in donation list
+                    No items in donation list
                   </Text>
                 </View>
               )}
@@ -136,6 +145,22 @@ const DonationsList = ({navigation, route}) => {
           )}
         </View>
       </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate(allTexts.screenNames.donations)}
+        style={{
+          position: 'absolute',
+          bottom: '15%',
+          left: '30%',
+          width: '40%',
+          alignItems: 'center',
+          padding: 10,
+          backgroundColor: colors.red6,
+          borderRadius: 20,
+        }}>
+        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
+          Add Donation
+        </Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
