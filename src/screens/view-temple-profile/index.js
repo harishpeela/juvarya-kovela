@@ -305,13 +305,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    flex: 1,
-                    justifyContent: 'space-around',
-                    margin: 30,
-                  }}>
+                <View style={styles.postsTab}>
                   <PostsComp
                     itemDetails={postsCount}
                     onPress={() => setPosts(!posts)}

@@ -61,7 +61,7 @@ const SeeAll = ({navigation}) => {
       <BackgroundImage />
       <View style={{margin: '5%', marginTop: '10%', marginLeft: '10%'}}>
         <BackHeaderNew
-          txt={'Popular Tempels'}
+          txt={'Popular Temples'}
           onPress={() => navigation.goBack()}
         />
       </View>

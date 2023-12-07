@@ -37,7 +37,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   iconContainer: {
-    minWidth: 'auto',
+    // minWidth: 'auto',
+    borderWidth: 2,
+    borderRadius: 40 / 2,
+    height: 35,
+    width: 35,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 2,
+    borderColor: colors.orangeColor,
   },
   textContainer: {
     width: '80%',
