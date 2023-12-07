@@ -148,6 +148,7 @@ export const allTexts = {
     memberShip: 'MemberShip',
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
+    eventsDetails: 'EventDetails',
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -10,27 +10,27 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
+import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
-import React, {useContext, useState, useEffect} from 'react';
-import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
+import React, { useContext, useState, useEffect } from 'react';
+import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
-import {styles} from './style';
-import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
-import {UploadPhoto} from '../../utils/svgs';
-import {AccountIcon1, AccountIcon4} from '../../utils/svgs';
-import {allTexts, colors} from '../../common';
-import {useTranslation} from 'react-i18next';
-import i18next, {resources} from '../../../languages/language';
+import { styles } from './style';
+import { PrimaryButton, ProfileInfo, Loader, Item } from '../../components';
+import { UploadPhoto } from '../../utils/svgs';
+import { AccountIcon1, AccountIcon4 } from '../../utils/svgs';
+import { allTexts, colors } from '../../common';
+import { useTranslation } from 'react-i18next';
+import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {GetProfilePic, PostProfilePic} from '../../utils/api';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { GetProfilePic, PostProfilePic } from '../../utils/api';
 
-const Profile = ({navigation}) => {
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  const {t} = useTranslation();
+const Profile = ({ navigation }) => {
+  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  const { t } = useTranslation();
   const {
-    constants: {role},
+    constants: { role },
   } = allTexts;
   // console.log('user details', userDetails);
   const [roleType, setRoleType] = useState();
@@ -133,179 +133,182 @@ const Profile = ({navigation}) => {
     }
   };
   return (
-    <SafeAreaView style={styles.wrapper}>
-      <BackgroundImageAClass />
-      <View style={styles.header} />
-      <View style={styles.profileContainer}>
-        <View style={styles.uploadContainer}>
-          {image !== null ? (
-            <View style={styles.preViewImageContainer}>
-              {isCross && (
-                <View style={styles.crossIconContainer}>
-                  <Icon
-                    onPress={() => {
-                      setImage(null);
-                    }}
-                    name="closecircle"
-                    color={colors.orangeColor}
-                    size={25}
-                  />
-                </View>
-              )}
-              <Image
-                resizeMode="cover"
-                style={styles.preViewImage}
-                source={{uri: image?.uri}}
-              />
-            </View>
-          ) : isLoading ? (
-            <View style={styles.loader}>
-              <Loader size={'small'} color={colors.orangeColor} />
-            </View>
-          ) : (
-            <TouchableOpacity
-              style={styles.uploadPic}
-              onPress={() => {
-                uploadPhoto();
-              }}>
-              {profPic ? (
-                <Image source={{uri: profPic}} style={styles.profileImage} />
-              ) : (
-                <UploadPhoto />
-              )}
-            </TouchableOpacity>
-          )}
-        </View>
-        <ProfileInfo
-          name={userDetails?.username}
-          email={userDetails?.email}
-          dob={dob}
-        />
-      </View>
-      <View style={styles.profileItemsHeader}>
-        <View style={styles.profileItemsContainer}>
-          {/* <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} /> */}
-          {(roleType === role.admin || roleType === role.agent) && (
-            <Item
-              svg={<AccountIcon4 />}
-              text={t('myTemple')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.myTamples);
-              }}
-            />
-          )}
+    // <SafeAreaView style={styles.wrapper}>
+    //   <BackgroundImageAClass />
+    //   <View style={styles.header} />
+    //   <View style={styles.profileContainer}>
+    //     <View style={styles.uploadContainer}>
+    //       {image !== null ? (
+    //         <View style={styles.preViewImageContainer}>
+    //           {isCross && (
+    //             <View style={styles.crossIconContainer}>
+    //               <Icon
+    //                 onPress={() => {
+    //                   setImage(null);
+    //                 }}
+    //                 name="closecircle"
+    //                 color={colors.orangeColor}
+    //                 size={25}
+    //               />
+    //             </View>
+    //           )}
+    //           <Image
+    //             resizeMode="cover"
+    //             style={styles.preViewImage}
+    //             source={{uri: image?.uri}}
+    //           />
+    //         </View>
+    //       ) : isLoading ? (
+    //         <View style={styles.loader}>
+    //           <Loader size={'small'} color={colors.orangeColor} />
+    //         </View>
+    //       ) : (
+    //         <TouchableOpacity
+    //           style={styles.uploadPic}
+    //           onPress={() => {
+    //             uploadPhoto();
+    //           }}>
+    //           {profPic ? (
+    //             <Image source={{uri: profPic}} style={styles.profileImage} />
+    //           ) : (
+    //             <UploadPhoto />
+    //           )}
+    //         </TouchableOpacity>
+    //       )}
+    //     </View>
+    //     <ProfileInfo
+    //       name={userDetails?.username}
+    //       email={userDetails?.email}
+    //       dob={dob}
+    //     />
+    //   </View>
+    //   <View style={styles.profileItemsHeader}>
+    //     <View style={styles.profileItemsContainer}>
+    //       {/* <Item svg={<Demo />} text={bookings} />
+    //     <Item svg={<AccountIcon2 />} text={donations} /> */}
+    //       {(roleType === role.admin || roleType === role.agent) && (
+    //         <Item
+    //           svg={<AccountIcon4 />}
+    //           text={t('myTemple')}
+    //           onPress={() => {
+    //             navigation.navigate(allTexts.screenNames.myTamples);
+    //           }}
+    //         />
+    //       )}
 
-          <Item
-            svg={<AccountIcon1 />}
-            text={t('updatepassword')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.updatePassword);
-            }}
-          />
-          <Item
-            svg={<AccountIcon1 />}
-            text={t('posts')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.mySavedPosts);
-            }}
-          />
-          <Item
-            svg={<AccountIcon1 />}
-            text={t('Update Profile')}
-            onPress={() => alert('page under development')}
-          />
-          {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item1
-              svg={require('../../../assets/images/priest.webp')}
-              text={t('poojari')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.poojari);
-              }}
-            />
-          )} */}
-        </View>
-        <View>
-          <TouchableOpacity onPress={() => TC()}>
-            <Text
-              style={{
-                ...styles.tabs,
-                color: clicked === true ? colors.orangeColor : 'gray',
-                textDecorationLine: clicked === true ? 'underline' : 'none',
-                fontWeight: clicked === true ? 'bold' : '400',
-              }}>
-              Terms & Conditions{' '}
-            </Text>
-          </TouchableOpacity>
-          {tcModal && (
-            <Terms_And_Conditions
-              isModal={tcModal}
-              onPress={() => setTcModal(false)}
-            />
-          )}
-        </View>
-        <View style={styles.logoutbtnContainer}>
-          <PrimaryButton
-            onPress={async () => {
-              await removeLoginSessionDetails();
-              setLoginDetails(null);
-            }}
-            bgColor={colors.white}
-            radius={25}
-            text={'Log Out'}
-            shadow={true}
-            textColor={colors.black}
-          />
-          <Text style={styles.versionText}>
-            Version&ensp;{allTexts.appVersion.version}
-          </Text>
-        </View>
-      </View>
+    //       <Item
+    //         svg={<AccountIcon1 />}
+    //         text={t('updatepassword')}
+    //         onPress={() => {
+    //           navigation.navigate(allTexts.screenNames.updatePassword);
+    //         }}
+    //       />
+    //       <Item
+    //         svg={<AccountIcon1 />}
+    //         text={t('posts')}
+    //         onPress={() => {
+    //           navigation.navigate(allTexts.screenNames.mySavedPosts);
+    //         }}
+    //       />
+    //       <Item
+    //         svg={<AccountIcon1 />}
+    //         text={t('Update Profile')}
+    //         onPress={() => alert('page under development')}
+    //       />
+    //       {/* {(roleType === role.admin || roleType === role.agent) && (
+    //         <Item1
+    //           svg={require('../../../assets/images/priest.webp')}
+    //           text={t('poojari')}
+    //           onPress={() => {
+    //             navigation.navigate(allTexts.screenNames.poojari);
+    //           }}
+    //         />
+    //       )} */}
+    //     </View>
+    //     <View>
+    //       <TouchableOpacity onPress={() => TC()}>
+    //         <Text
+    //           style={{
+    //             ...styles.tabs,
+    //             color: clicked === true ? colors.orangeColor : 'gray',
+    //             textDecorationLine: clicked === true ? 'underline' : 'none',
+    //             fontWeight: clicked === true ? 'bold' : '400',
+    //           }}>
+    //           Terms & Conditions{' '}
+    //         </Text>
+    //       </TouchableOpacity>
+    //       {tcModal && (
+    //         <Terms_And_Conditions
+    //           isModal={tcModal}
+    //           onPress={() => setTcModal(false)}
+    //         />
+    //       )}
+    //     </View>
+    //     <View style={styles.logoutbtnContainer}>
+    //       <PrimaryButton
+    //         onPress={async () => {
+    //           await removeLoginSessionDetails();
+    //           setLoginDetails(null);
+    //         }}
+    //         bgColor={colors.white}
+    //         radius={25}
+    //         text={'Log Out'}
+    //         shadow={true}
+    //         textColor={colors.black}
+    //       />
+    //       <Text style={styles.versionText}>
+    //         Version&ensp;{allTexts.appVersion.version}
+    //       </Text>
+    //     </View>
+    //   </View>
 
-      <Modal
-        visible={isVisible}
-        transparent={true}
-        style={{position: 'absolute', left: 20}}
-        onRequestClose={() => setIsVisible(false)}>
-        <View
-          style={{
-            position: 'absolute',
-            right: 50,
-            top: 20,
-            backgroundColor: colors.orangeColor,
-            borderTopLeftRadius: 20,
-          }}>
-          <FlatList
-            data={Object.keys(resources)}
-            renderItem={({item}) => (
-              <TouchableOpacity onPress={() => changelan(item)}>
-                <Text style={{fontSize: 12, margin: 5}}>{lan[item]?.lan} </Text>
-              </TouchableOpacity>
-            )}
-          />
-        </View>
-      </Modal>
-      <Modal
-        visible={isModal}
-        transparent={true}
-        onRequestClose={() => setIsModal(false)}>
-        <View style={styles.editPic}>
-          <TouchableOpacity
-            onPress={() => {
-              updateProfilePicture(), setIsModal(false);
-            }}>
-            <Text style={{color: 'white'}}> update profile Pictue</Text>
-          </TouchableOpacity>
-          <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
-          <TouchableOpacity
-            onPress={() => {
-              setImage(null), setIsModal(false), setIsCross(false);
-            }}>
-            <Text style={{color: 'white'}}>Cancel</Text>
-          </TouchableOpacity>
-        </View>
-      </Modal>
-    </SafeAreaView>
+    //   <Modal
+    //     visible={isVisible}
+    //     transparent={true}
+    //     style={{position: 'absolute', left: 20}}
+    //     onRequestClose={() => setIsVisible(false)}>
+    //     <View
+    //       style={{
+    //         position: 'absolute',
+    //         right: 50,
+    //         top: 20,
+    //         backgroundColor: colors.orangeColor,
+    //         borderTopLeftRadius: 20,
+    //       }}>
+    //       <FlatList
+    //         data={Object.keys(resources)}
+    //         renderItem={({item}) => (
+    //           <TouchableOpacity onPress={() => changelan(item)}>
+    //             <Text style={{fontSize: 12, margin: 5}}>{lan[item]?.lan} </Text>
+    //           </TouchableOpacity>
+    //         )}
+    //       />
+    //     </View>
+    //   </Modal>
+    //   <Modal
+    //     visible={isModal}
+    //     transparent={true}
+    //     onRequestClose={() => setIsModal(false)}>
+    //     <View style={styles.editPic}>
+    //       <TouchableOpacity
+    //         onPress={() => {
+    //           updateProfilePicture(), setIsModal(false);
+    //         }}>
+    //         <Text style={{color: 'white'}}> update profile Pictue</Text>
+    //       </TouchableOpacity>
+    //       <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
+    //       <TouchableOpacity
+    //         onPress={() => {
+    //           setImage(null), setIsModal(false), setIsCross(false);
+    //         }}>
+    //         <Text style={{color: 'white'}}>Cancel</Text>
+    //       </TouchableOpacity>
+    //     </View>
+    //   </Modal>
+    // </SafeAreaView>
+    <View>
+      <Text>It is displaying the data in the profile component</Text>
+    </View>
   );
 };
 export default Profile;

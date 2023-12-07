@@ -40,6 +40,9 @@ import Donations from './donations';
 import MemberShip from './Membership/Index';
 import EventsScreen from './EventsScreen';
 import DonationsList from './DonationsList';
+import EventDetails from './eventDetails';
+
+
 export {
   CreatePost,
   Seemore,
@@ -83,4 +86,5 @@ export {
   MemberShip,
   EventsScreen,
   DonationsList,
+  EventDetails
 };
