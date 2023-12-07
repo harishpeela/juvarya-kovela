@@ -1,52 +1,77 @@
 import { StyleSheet } from 'react-native'
-import { colors } from '../../common'
+import { colors, fontSize } from '../../common'
 
 export const styles = StyleSheet.create({
     container: {
-        // borderWidth: 1,
         // borderColor:colors.orangeColor,
-        height: '13%',
-        width: '100%',
-        borderRadius: 5,
-        elevation: 9,
-        backgroundColor: 'white',
+        height: 250,
+        marginHorizontal:"1%",
+        marginVertical:"1%",
+        width: '48%',      
+        // borderRadius: 5,
+        // borderWidth:2,
+        // elevation: 9,
+        // backgroundColor: 'white',
+        // shadowColor:colors.black,
+        elevation:3,
         shadowColor:colors.black,
-        flexDirection: 'row',
-        justifyContent: 'space-around'
-    },
-    leftContainer: {
-        width: '30%',
-        alignContent: 'center',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 5,
-        // borderWidth: 3,
-        // borderColor: colors.orangeColor
-
-    },
-    rightContainer: {
-        // borderWidth: 1,
-        width: '65%',
+        backgroundColor:colors.white,
         justifyContent:'space-around',
+        borderRadius:5,
     },
+    secondContainer:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center',
+        justifyContent:'center'
+    },
+  
     Image: {
-        height: '95%',
-        width: "95%",
-        borderWidth:2,
-        borderColor:colors.orangeColor
+        height: "65%",
+        width: "100%",
     },
     dateContainer:{
+        backgroundColor:colors.orangeColor,
+    textAlign:'center',
+    alignContent:'center',
+    justifyContent:'center',
+    width:'95%',
+    borderRadius:2
+    },
+    dateText:{
+        alignSelf:'center'
+    },
+    festivalText:{
+        color:colors.black,
+        fontSize:fontSize.small,
+        fontWeight:'500'
+    },
+    locationIcon:{
         flexDirection:'row',
-        // borderWidth:1,
-        justifyContent:'space-between',
-        width:"95%"
+        alignItems:'center',
+        justifyContent:'center',
+        // borderWidth:2,
+        alignContent:'center',
+        alignSelf:'center'
     },
-    hrLine:{
-        borderWidth:0.2,
-        borderColor:colors.gray
-    },
-    text:{
-        color:colors.black
+    container2:{
+        width:'97%',
+        alignSelf:'center',
+        alignItems:'center',
+        height:'30%',
     }
+    // dateContainer:{
+    //     flexDirection:'row',
+    //     // borderWidth:1,
+    //     justifyContent:'space-between',
+    //     width:"95%"
+    // },
+    // hrLine:{
+    //     borderWidth:0.2,
+    //     borderColor:colors.gray
+    // },
+    // text:{
+    //     color:colors.black
+    // }
 
 })

@@ -1,10 +1,11 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View, Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
 import {
+  EventsScreen,
   Favorite,
   Profile,
   Search,
@@ -16,6 +17,7 @@ import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import ApplicationContext from '../../utils/context-api/Context';
+import {styles} from './style';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
@@ -41,7 +43,9 @@ export default BottomTabBase = ({navigation}) => {
   }, [homeFeedListData, navigation]);
 
   return (
-    <SafeAreaView style={{flex: 1}} showsVerticalScrollIndicator={false}>
+    <SafeAreaView
+      style={{flex: 1, borderWidth: 4}}
+      showsVerticalScrollIndicator={false}>
       {homeFeedListData === undefined ? (
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
           <BackgroundImage />
@@ -66,10 +70,14 @@ export default BottomTabBase = ({navigation}) => {
             name={allTexts.tabNames.home}
             component={UserFeedScreen}
             options={{
+              tabBarStyle: {
+                height: 200,
+              },
               tabBarIcon: ({color, size}) => (
-                <>
+                <View style={styles.container}>
                   <FoundationIcon name="home" color={color} size={30} />
-                </>
+                  <Text style={{color: color}}>Home</Text>
+                </View>
               ),
             }}
           />
@@ -78,9 +86,10 @@ export default BottomTabBase = ({navigation}) => {
             component={Search}
             options={{
               tabBarIcon: ({color, size}) => (
-                <>
+                <View style={styles.container}>
                   <FeatherIcon name="search" color={color} size={30} />
-                </>
+                  <Text style={{color: color}}>search</Text>
+                </View>
               ),
             }}
           />
@@ -100,24 +109,45 @@ export default BottomTabBase = ({navigation}) => {
           }}
         /> */}
           <Tab.Screen
+            name={allTexts.screenNames.eventsScreen}
+            component={EventsScreen}
+            // name={"sas"}
+            options={{
+              tabBarIcon: ({color, size}) => (
+                <View style={styles.imageContainer}>
+                  <Image
+                    source={require('../../utils/assets/images/Kovela-logo.png')}
+                    style={{
+                      height: 50,
+                      width: 50,
+                    }}
+                  />
+                </View>
+              ),
+            }}
+          />
+          <Tab.Screen
             name={allTexts.tabNames.favorites}
             component={GetFavScreen}
             options={{
               tabBarIcon: ({color, size}) => (
-                <>
+                <View style={styles.container}>
                   <FontistoIcon name="heart-alt" color={color} size={25} />
-                </>
+                  <Text style={{color: color}}>saved</Text>
+                </View>
               ),
             }}
           />
           <Tab.Screen
             name={allTexts.tabNames.profile}
             component={GetProfileScreen}
+            // name={"sas"}
             options={{
               tabBarIcon: ({color, size}) => (
-                <>
+                <View style={styles.container}>
                   <FeatherIcon name="user" color={color} size={30} />
-                </>
+                  <Text style={{color: color}}>profile</Text>
+                </View>
               ),
             }}
           />

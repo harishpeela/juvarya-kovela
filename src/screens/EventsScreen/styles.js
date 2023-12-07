@@ -59,6 +59,10 @@ export const styles = StyleSheet.create({
     noDataText: {
         fontSize: fontSize.xlarge,
         color: colors.black,
+    },
+    flatListStyle:{
+        justifyContent:'space-between',
+        alignItems:'center'
     }
 
 

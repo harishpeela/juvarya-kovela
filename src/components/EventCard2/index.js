@@ -1,30 +1,49 @@
-import { Text, View, Image } from 'react-native'
+import { Text, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from './styles'
+import Icon from 'react-native-vector-icons/EvilIcons'
+import { allTexts, colors } from '../../common'
 
-const EventCard2 = () => {
+const EventCard2 = ({ navigation }) => {
     return (
-        <View style={styles.container}>
-            <View style={styles.leftContainer}>
+
+        <TouchableOpacity
+        style={styles.container}
+        onPress={() => {
+            navigation.navigate(allTexts.screenNames.eventsDetails,{
+                navigation:navigation,
+            })
+        }}
+        >
+          
+
                 <Image
                     source={{
                         uri: "https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg",
                     }}
                     style={styles.Image}
                 />
-            </View>
-            <View style={styles.hrLine} />
-            <View style={styles.rightContainer}>
-                <Text style={[styles.text]} >Name: (Ganesh chaturthi)</Text>
-                <Text style={[styles.text]} >Name: (EventName)</Text>
-                <Text style={[styles.text]} >Name: (EventName)</Text>
-                <Text style={[styles.text]} >Community: (CommunityName)</Text>
-                <View style={styles.dateContainer}>
-                    <Text style={[styles.text]} >Start:(start Date)</Text>
-                    <Text style={[styles.text]} >End:(End Date)</Text>
+                <View style={styles.container2}>
+
+
+                    <View style={styles.dateContainer}>
+                        <Text style={styles.dateText} >Thu, 30 Nov</Text>
+                    </View>
+                    <View style={styles.secondContainer}>
+                        <Text style={[styles.festivalText]} >Ganesh festival</Text>
+                        <View style={styles.locationIcon}>
+                            <Icon name='location' color={colors.red1} size={20} />
+                            <Text style={{ color: colors.gray }}>Vizag</Text>
+                        </View>
+
+
+                    </View>
+                    <View style={styles.rightContainer}>
+                        <Text style={[styles.text]} >description adsasd asd asdasdas</Text>
+                    </View>
                 </View>
-            </View>
-        </View>
+
+        </TouchableOpacity>
     )
 }
 

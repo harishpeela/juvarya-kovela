@@ -70,7 +70,7 @@ const Menu = ({navigation}) => {
                 Upcoming Events{' '}
               </Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => Festivals()}>
+            {/* <TouchableOpacity onPress={() => Festivals()}>
               <Text
                 style={{
                   ...styles.tabs,
@@ -80,7 +80,7 @@ const Menu = ({navigation}) => {
                 }}>
                 Festivals{' '}
               </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity onPress={() => Accounts()}>
               <Text
                 style={{

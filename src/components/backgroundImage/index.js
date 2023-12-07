@@ -16,6 +16,12 @@ export const BackgroundImageAClass = () => (
     style={styles.backgroundA}
   />
 );
+export const BackgroundImage2 = () => (
+  <Image
+    source={require('../../../assets/images/background_image.png')}
+    style={styles.backgroundImage2}
+  />
+);
 export const BackgroundImageFlower = () => (
   <Image
     source={require('../../../assets/images/bgflower.png')}

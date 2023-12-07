@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity,ScrollView,FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { styles } from './styles'
 import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context'
@@ -49,14 +49,14 @@ const EventsScreen = ({ navigation }) => {
   useEffect(() => {
     EventsList();
   }, [])
-  
+
   console.log("EventsScreen =>>>>>>>>>" + eventsData)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.Header}>
         <BackHeaderNew
-          txt={`EventsScren`}
+          txt={`EventsScreen`}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
@@ -99,30 +99,39 @@ const EventsScreen = ({ navigation }) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              <EventCard2 />
+              <ScrollView showsVerticalScrollIndicator={false}>
+                {searchedText === '' && (
+                  <FlatList
+                  numColumns={2}
+                    data={eventsData}
+                    contentContainerStyle={styles.flatListStyle}
+                    keyExtractor={(item, index) => item.toString()}
+                    renderItem={({ item }) => (
+                      <EventCard2
+                      navigation={navigation}
+                        // name={item.user.firstName}
+                        // img={item.user.url}
+                        // data={item.user}
+                        // donation={item.user.donation}
+                      />
+                    )}
+                  />
+                )}
+              </ScrollView>
             </>
-            // <>
-            //   <ScrollView showsVerticalScrollIndicator={false}>
-            //     {searchedText === '' && (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={followersList}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={(item, index) => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     )}
-            //   </ScrollView>
 
-            //   <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            //     {searchedText && filteredData.length > 0 ? (
+          )}
+        </View>
+      </View>
+    </SafeAreaView>
+  )
+}
+export default EventsScreen
+
+
+
+{/* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
+            {searchedText && filteredData.length > 0 ? (
             //       <FlatList
             //         style={styles.list}
             //         data={filteredData}
@@ -145,12 +154,4 @@ const EventsScreen = ({ navigation }) => {
             //       </View>
             //     )}
             //   </ScrollView>
-            // </>
-          )}
-        </View>
-      </View>
-    </SafeAreaView>
-  )
-}
-export default EventsScreen
-
+            // </> */}
