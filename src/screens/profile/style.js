@@ -5,56 +5,54 @@ export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: 'white',
-    alignContent:'center',
-    alignSelf:'center',
-    width:'100%',
+    alignContent: 'center',
+    alignSelf: 'center',
+    width: '100%',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: '10%',
-    paddingHorizontal:'3%'
+    paddingHorizontal: '3%',
   },
   profileContainer: {
     // borderWidth:2,
     flexDirection: 'column',
     alignItems: 'center',
-    minHeight:'auto',
-    height:'30%',
-    alignContent:'center',
-    paddingTop:"10%"
+    minHeight: 'auto',
+    height: '30%',
+    alignContent: 'center',
+    paddingTop: '10%',
   },
   logoutbtnContainer: {
-    marginTop:"30%",
+    marginTop: '20%',
     width: '50%',
     alignSelf: 'center',
-    alignItems:'center',
-    justifyContent:"center",
+    alignItems: 'center',
+    justifyContent: 'center',
     // borderWidth:2,
   },
-  versionText:{
-    color:colors.gray2,
+  versionText: {
+    color: colors.gray2,
     // borderWidth:2,
-    fontSize:fontSize.small
-
+    fontSize: fontSize.small,
   },
-  profileItemsHeader:{
-    alignItems:'center',
-    justifyContent:'center',
+  profileItemsHeader: {
+    alignItems: 'center',
+    justifyContent: 'center',
     // borderWidth:2,
-
   },
   iconContainer: {flex: 0.15},
   profileItemsContainer: {
-    width:'60%',
-    borderColor:'red',
+    width: '60%',
+    borderColor: 'red',
   },
   preViewImageContainer: {
     height: 80,
     width: 80,
-    borderRadius: "50%",
+    borderRadius: '50%',
   },
-  profileImage:{
+  profileImage: {
     alignContent: 'center',
     alignSelf: 'center',
     height: 100,
@@ -63,19 +61,22 @@ export const styles = StyleSheet.create({
   },
   crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
   preViewImage: {
-    height: undefined,
-    width: undefined,
-    flex: 1,
-    borderRadius: 75,
+    height: 100,
+    width: 100,
+    // flex: 1,
+    borderRadius: 100 / 2,
+    alignContent: 'center',
+    alignSelf: 'center',
+    borderWidth: 5,
+    borderColor: colors.orangeColor,
   },
   uploadPic: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth:3,
-    borderColor:colors.orangeColor,
-    borderRadius:(100+20)/2,
-    padding:1
-
+    borderWidth: 3,
+    borderColor: colors.orangeColor,
+    borderRadius: 120 / 2,
+    padding: 1,
   },
   editPic: {
     backgroundColor: colors.orangeColor,
@@ -94,9 +95,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabs: {
-    marginTop:'10%',
+    marginTop: '10%',
     fontSize: 18,
     marginVertical: 10,
-    color: colors.gray4
+    color: colors.gray4,
   },
 });

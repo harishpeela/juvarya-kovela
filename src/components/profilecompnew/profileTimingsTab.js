@@ -1,5 +1,6 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import {colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProfileTimingTabs = () => {
