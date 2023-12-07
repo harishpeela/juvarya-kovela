@@ -12,13 +12,13 @@ import {
 } from 'react-native';
 import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, {useContext, useState, useEffect} from 'react';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
 import {UploadPhoto} from '../../utils/svgs';
-import {AccountIcon1, AccountIcon4} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
@@ -91,16 +91,16 @@ const Profile = ({navigation}) => {
           mediaType: 'photo',
           saveToPhotos: true,
           includeBase64: true,
-          maxHeight: 1080,
-          maxWidth: 1080,
+          // maxHeight: 1080,
+          // maxWidth: 1080,
         },
         res => {
-          if (!res.didCancel && !res.errorCode) {
-            setImage(res.assets[0]);
+          if (!res?.didCancel && !res?.errorCode) {
+            setImage(res?.assets[0]);
             setimageUploaded(false);
             setIsModal(true);
           } else {
-            console.log(res.errorMessage);
+            console.log(res?.errorMessage);
           }
         },
       );
@@ -110,7 +110,7 @@ const Profile = ({navigation}) => {
   };
   const getImageObj = img => {
     let newUri =
-      Platform.OS === 'ios' ? img.uri : img.uri.replace('file://', 'file:');
+      Platform.OS === 'ios' ? img?.uri : img?.uri?.replace('file://', 'file:');
     let imageObj = {
       uri: newUri,
       name: `${Date.now()}.jpg`,
@@ -172,6 +172,9 @@ const Profile = ({navigation}) => {
                 <Image source={{uri: profPic}} style={styles.profileImage} />
               ) : (
                 <UploadPhoto />
+                // <View style={styles.profileImage}>
+                //   <Icon name="camera" size={90} color={colors.orangeColor} />
+                // </View>
               )}
             </TouchableOpacity>
           )}
@@ -188,7 +191,12 @@ const Profile = ({navigation}) => {
         <Item svg={<AccountIcon2 />} text={donations} /> */}
           {(roleType === role.admin || roleType === role.agent) && (
             <Item
-              svg={<AccountIcon4 />}
+              svg={
+                <Image
+                  source={require('../../../assets/images/templeIcon.png')}
+                  style={{height: 20, width: 20}}
+                />
+              }
               text={t('myTemple')}
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.myTamples);
@@ -197,21 +205,21 @@ const Profile = ({navigation}) => {
           )}
 
           <Item
-            svg={<AccountIcon1 />}
+            svg={<Icon name="unlock" size={20} />}
             text={t('updatepassword')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.updatePassword);
             }}
           />
           <Item
-            svg={<AccountIcon1 />}
+            svg={<FontAwesome5 name="save" size={20} />}
             text={t('posts')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
           <Item
-            svg={<AccountIcon1 />}
+            svg={<Icon name="profile" size={20} />}
             text={t('Update Profile')}
             onPress={() => alert('page under development')}
           />
