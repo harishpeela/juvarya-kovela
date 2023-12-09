@@ -408,12 +408,12 @@ const ViewTempleProfile = ({route, navigation}) => {
               )}
             </View>
           )}
-          {currentIndex === 2 && (
+          {/* {currentIndex === 2 && (
             <View>
               <Feather name="camera-off" size={40} style={styles.noPosts} />
               <Text style={styles.noPosts.text}>No Reels Yet</Text>
             </View>
-          )}
+          )} */}
           {currentIndex === 3 && (
             // <EventCard />
             <View>
@@ -436,16 +436,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <Text style={styles.noPosts.text}>No Events Yet</Text>
                 </View>
               ) : (
-                // <FlatList
-                //   data={eventsData}
-                //   style={styles.ImagesContainer}
-                //   keyExtractor={({item, index}) => index}
-                //   renderItem={({item, index}) => (
-                //     <TouchableOpacity style={styles.eventsCard}>
-                //       <Text> Name: {item?.name}</Text>
-                //     </TouchableOpacity>
-                //   )}
-                // />
                 <EventCard navigation={navigation} data={eventsData} />
               )}
             </ScrollView>

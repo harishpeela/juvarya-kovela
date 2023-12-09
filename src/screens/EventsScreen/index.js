@@ -1,7 +1,17 @@
-import { StyleSheet, Text, View, TouchableOpacity,ScrollView,FlatList } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { styles } from './styles'
-import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {styles} from './styles';
+import {
+  SafeAreaFrameContext,
+  SafeAreaView,
+} from 'react-native-safe-area-context';
 import {
   Loader,
   ContactModal,
@@ -15,15 +25,12 @@ import {
   Sort,
   EventCard2,
 } from '../../components';
-import { colors } from '../../common';
-import { EventList } from '../../utils/api';
+import {colors} from '../../common';
+import {EventList} from '../../utils/api';
 
-
-
-const EventsScreen = ({ navigation }) => {
-
+const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
-  const [searchedText, setSearchedText] = useState("");
+  const [searchedText, setSearchedText] = useState('');
   // const [filteredData, setFilteredData] = useState(followersList);
   // const {id} = route.params || {};
   const [followersFirstName, setFollowersFirstName] = useState([]);
@@ -31,7 +38,6 @@ const EventsScreen = ({ navigation }) => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [eventsData, setEventsData] = useState();
   const [eventsLoader, setEventsLoader] = useState(false);
-
 
   const EventsList = async () => {
     setEventsLoader(true);
@@ -45,18 +51,18 @@ const EventsScreen = ({ navigation }) => {
       setEventsLoader(false);
       console.log('false', eventsLoader);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
-  }, [])
+  }, []);
 
-  console.log("EventsScreen =>>>>>>>>>" + eventsData)
+  console.log('EventsScreen =>>>>>>>>>' + eventsData);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.Header}>
         <BackHeaderNew
-          txt={`EventsScreen`}
+          txt={'Events'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
@@ -90,7 +96,7 @@ const EventsScreen = ({ navigation }) => {
               brColor={colors.gray2}
               txtColor={colors.orangeColor}
               srWidth={'100%'}
-            // srHeight={"100%"}
+              // srHeight={"100%"}
             />
           </View>
         </View>
@@ -102,13 +108,13 @@ const EventsScreen = ({ navigation }) => {
               <ScrollView showsVerticalScrollIndicator={false}>
                 {searchedText === '' && (
                   <FlatList
-                  numColumns={2}
+                    numColumns={2}
                     data={eventsData}
                     contentContainerStyle={styles.flatListStyle}
                     keyExtractor={(item, index) => item.toString()}
-                    renderItem={({ item }) => (
+                    renderItem={({item}) => (
                       <EventCard2
-                      navigation={navigation}
+                        navigation={navigation}
                         // name={item.user.firstName}
                         // img={item.user.url}
                         // data={item.user}
@@ -119,18 +125,16 @@ const EventsScreen = ({ navigation }) => {
                 )}
               </ScrollView>
             </>
-
           )}
         </View>
       </View>
     </SafeAreaView>
-  )
-}
-export default EventsScreen
+  );
+};
+export default EventsScreen;
 
-
-
-{/* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
+{
+  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
             {searchedText && filteredData.length > 0 ? (
             //       <FlatList
             //         style={styles.list}
@@ -154,4 +158,5 @@ export default EventsScreen
             //       </View>
             //     )}
             //   </ScrollView>
-            // </> */}
+            // </> */
+}

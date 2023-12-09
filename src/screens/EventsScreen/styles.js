@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         height: '100%',
     },
     followersContainer: {
-        height: '100%',
+        height: '85%',
     },
     sortContainer: {
         display: 'flex',
