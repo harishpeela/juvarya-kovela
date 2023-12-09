@@ -79,4 +79,5 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     marginRight: 5,
   },
+ 
 });
