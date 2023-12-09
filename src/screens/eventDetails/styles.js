@@ -1,17 +1,11 @@
-
-
-
 import { StyleSheet } from 'react-native'
-import { colors, fontSize } from '../../common'
+import { colors, fontFamily, fontSize } from '../../common'
 
 export const styles = StyleSheet.create({
 
-    footerBackground: {
-        borderRadius: 25,
-        flex: 1,
-    },
-    footerContainer: {
-        // marginTop: '5%',
+    container: {
+        height: '100%',
+        backgroundColor: colors.white
     },
     header: {
         marginTop: '10%',
@@ -23,21 +17,21 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '5%',
     },
     secondContainer: {
-        marginTop: 200,
+        marginTop: 170,
         flexDirection: 'column',
         width: '100%',
+        paddingTop: '5%',
+        shadowColor: colors.black,
+        height: '50%',
+        // borderWidth:5,
+        // borderColor:'red',
         backgroundColor: colors.white,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-        height: '70%',
-        paddingTop: '5%',
-        elevation: 5,
-        shadowColor: colors.black
     },
     locationIcon: {
         flexDirection: 'row',
         alignContent: 'flex-start'
-
     },
     festivalText: {
         color: colors.black,
@@ -48,14 +42,20 @@ export const styles = StyleSheet.create({
         color: colors.orangeColor,
         fontSize: fontSize.large
     },
+    buttonContainer: {
+        height: '6%',
+        alignItems: 'center',
+        backgroundColor: 'transparent',
+        alignContent: 'center'
+    },
     button: {
         width: '85%',
         backgroundColor: colors.orangeColor,
         alignSelf: 'center',
-        height: 50,
-        borderRadius: 10,
+        borderRadius: 5,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        elevation: 2,
     },
     btnText: {
         color: colors.white,
@@ -69,6 +69,8 @@ export const styles = StyleSheet.create({
     },
     secondContainer2: {
         marginHorizontal: '3%',
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15,
     },
     locText: {
         color: colors.gray,
@@ -80,45 +82,106 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    round2:{
+    round2: {
         backgroundColor: colors.white,
         borderRadius: 50,
         alignItems: 'center',
         justifyContent: 'center',
-        alignContent:'center',
-        alignSelf:'center',
-        padding:3
-        
+        alignContent: 'center',
+        alignSelf: 'center',
+        padding: 3
+
     },
     toggleContainer: {
-        borderWidth: 1,
         width: '100%',
         flexDirection: 'column',
         marginTop: '5%',
-        height: '60%',
+        height: '100%',
     },
     separateContainer: {
         alignSelf: 'center',
         alignContent: 'center',
-        justifyContent:'space-around'
+        justifyContent: 'space-around',
+        marginBottom: 4,
+
     },
     separateContainerText: {
         textAlign: 'center',
         color: colors.gray2,
         fontSize: fontSize.large,
         fontWeight: '600',
-        paddingVertical:2,
+        paddingVertical: 2,
     },
     toggleHead: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent:'space-around'
-
+        justifyContent: 'space-around',
     },
     orangeColor: {
         borderBottomWidth: 1,
         borderColor: colors.orangeColor,
-        color:colors.black,
-        
+        color: colors.black,
+    },
+    btnContainer: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        paddingHorizontal: "2%",
+        paddingVertical: '2%',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+    },
+    desContainer: {
+        marginHorizontal: '5%',
+    },
+    des: {
+        color: colors.black,
+        fontSize: fontSize.h5,
+        fontWeight: '700',
+        paddingVertical: 5
+    },
+    desData: {
+        color: colors.black,
+        fontStyle: fontFamily.PoetsenOneRegular
+    },
+    formContainer: {
+        // borderWidth:1,
+
+    },
+    registrationText: {
+        color: colors.black,
+        textAlign: 'center',
+        fontSize: fontSize.h4,
+        fontWeight: '600'
+    },
+    formik: {
+        paddingHorizontal: '10%'
+    },
+    inputAndBtnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        marginVertical: 5
+    },
+    toggleData: {
+        marginBottom: 300,
+    },
+    subBtn: {
+        justifyContent: 'center', // Center vertically
+        alignItems: 'center', // Center horizontally
+        backgroundColor: colors.orangeColor,
+        borderRadius: 5,
+        alignSelf: 'flex-end',
+        alignContent: 'center',
+        paddingVertical:'2%',
+        paddingHorizontal:'5%',
+        elevation:2
+    },
+    subBtnText: {
+        color: colors.white,
+        fontWeight: '600',
+        fontSize: fontSize.h6,
+        alignContent: 'center',
+        alignSelf: 'center',
+        textAlign: 'center'
     }
 })

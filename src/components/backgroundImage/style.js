@@ -18,6 +18,7 @@ export const styles = StyleSheet.create({
       zIndex: -1, // to position the image behind the feed screen content
     alignSelf:'center',
     alignContent:"center",
+
     },
     backgroundImage2:{
       position: 'absolute',
@@ -28,6 +29,7 @@ export const styles = StyleSheet.create({
       zIndex: -1, // to position the image behind the feed screen content
     alignSelf:'center',
     alignContent:"center",
+    resizeMode:'contain',
     },
     backgroundFlower: {
       position: 'absolute',

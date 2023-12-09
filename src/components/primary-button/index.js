@@ -14,12 +14,13 @@ export const PrimaryButton = ({
   padding,
   fontsize,
   width,
+  height,
   ...props
 }) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      style={[styles(bgColor, radius, padding, width).wrapper,]}
+      style={[styles(bgColor, radius, padding, width,height).wrapper,]}
       {...props}>
       <Text style={textStyles(textColor, fontsize).textTitle}>
         {loading == true ? (

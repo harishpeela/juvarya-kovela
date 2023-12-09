@@ -14,9 +14,11 @@ import {
   SearchBar,
   Sort,
   EventCard2,
+  EventCard3,
 } from '../../components';
 import { colors } from '../../common';
 import { EventList } from '../../utils/api';
+
 
 
 
