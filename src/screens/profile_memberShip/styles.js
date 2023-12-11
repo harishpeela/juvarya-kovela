@@ -3,17 +3,18 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
-    marginTop: 40,
-    margin: '5%'
+    backgroundColor:colors.white,
+    paddingTop:40,
+    paddingHorizontal:30
+
   },
   header:{
     flexDirection:'row',
     justifyContent:'space-between',
-    alignItems:'center'
-
+    alignItems:'center',
   },
   container1: {
-    borderWidth: 2,
+    // borderWidth: 2,
     height: '100%',
   },
   card: {
@@ -105,13 +106,11 @@ export const styles = StyleSheet.create({
   },
   followersContainer: {
     height: '100%',
-    borderWidth:2
   },
   sortContainer: {
     display: 'flex',
     width: '15%',
     height: '100%',
-    // borderWidth:2,
   },
   list: {
     marginBottom: 240,
@@ -124,4 +123,10 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
+  joinText:{
+    color:colors.orangeColor,
+    fontWeight:'900',
+    fontSize:fontSize.xxlarge
+  },
+
 });

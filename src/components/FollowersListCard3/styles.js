@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignContent: 'center',
     alignItems: 'center',
-    borderWidth:2,
   },
   followersListCard: {
     // borderWidth: 2,
@@ -29,12 +28,11 @@ export const styles = StyleSheet.create({
   listFirstItem: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     height: '100%',
-    width: '75%',
+    width: '76%',
     borderBottomWidth: 0.8,
     borderBottomColor: colors.gray2,
+    // borderWidth:1,
   },
   image: {
     height: 60,
@@ -44,9 +42,10 @@ export const styles = StyleSheet.create({
     borderColor: colors.orangeColor,
   },
   firstName: {
-    fontSize: fontSize.small,
+    fontSize: fontSize.large,
     color: colors.black,
-    marginBottom: '3%',
+    marginBottom:5
+    
   },
   textContainer: {
     width:'auto',
@@ -54,4 +53,17 @@ export const styles = StyleSheet.create({
     display: 'flex',
     // borderWidth:2
   },
+  donationText:{
+    color:colors.black,
+    fontSize:fontSize.small
+  },
+  premiumText:{
+    fontSize:fontSize.small,
+    color:colors.green,
+    fontWeight:'900'
+  },
+  textContainer2:{
+    flexDirection:'row',
+    alignItems:'center'
+  }
 });

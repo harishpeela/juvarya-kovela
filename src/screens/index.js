@@ -42,6 +42,7 @@ import EventsScreen from './EventsScreen';
 import DonationsList from './DonationsList';
 import EventDetails from './eventDetails';
 import CreateEvent from './CreateEvent';
+import ProfileMemberShips from './ProfileMemberShips';
 
 
 export {
@@ -88,5 +89,6 @@ export {
   EventsScreen,
   DonationsList,
   EventDetails,
-  CreateEvent
+  CreateEvent,
+  ProfileMemberShips
 };
