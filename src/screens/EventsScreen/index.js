@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   StyleSheet,
   Text,
@@ -28,6 +29,7 @@ import {
 } from '../../components';
 import {colors} from '../../common';
 import {EventList} from '../../utils/api';
+import { InteractionManager } from 'react-native';
 
 const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
@@ -42,22 +44,21 @@ const EventsScreen = ({navigation}) => {
 
   const EventsList = async () => {
     setEventsLoader(true);
-    let result = await EventList(0, 100);
-    // console.log('list of evengts', result?.data);
+    let result = await EventList(0, 100, 85);
+    console.log('result', result?.data?.data[0]?.description);
     if (result.status === 200) {
       setEventsLoader(false);
-      console.log('true', eventsLoader);
-      setEventsData(result?.data?.events);
+      setEventsData(result?.data?.data);
     } else {
       setEventsLoader(false);
-      console.log('false', eventsLoader);
     }
   };
   useEffect(() => {
     EventsList();
   }, []);
 
-  console.log('EventsScreen =>>>>>>>>>' + eventsData);
+  console.log('EventsScreen =>>>>>>>>>', eventsData);
+  console.log('itegebehbe', eventsData?.description);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -107,23 +108,37 @@ const EventsScreen = ({navigation}) => {
           ) : (
             <>
               <ScrollView showsVerticalScrollIndicator={false}>
-                {searchedText === '' && (
-                  <FlatList
-                    numColumns={2}
-                    data={eventsData}
-                    contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={(item, index) => item.toString()}
-                    renderItem={({item}) => (
-                      <EventCard2
-                        navigation={navigation}
-                        // name={item.user.firstName}
-                        // img={item.user.url}
-                        // data={item.user}
-                        // donation={item.user.donation}
-                      />
-                    )}
-                  />
-                )}
+                {searchedText === '' &&
+                  (eventsData?.length ? (
+                    <FlatList
+                      numColumns={2}
+                      data={eventsData}
+                      contentContainerStyle={styles.flatListStyle}
+                      keyExtractor={(item, index) => item.toString()}
+                      renderItem={({item}) => (
+                        <EventCard2
+                          navigation={navigation}
+                          item={item}
+                          // name={item.user.firstName}
+                          // img={item.user.url}
+                          // data={item.user}
+                          // donation={item.user.donation}
+                        />
+                      )}
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        marginTop: '60%',
+                      }}>
+                      <Text style={{fontSize: 18, fontWeight: 'bold'}}>
+                        {' '}
+                        No events to display
+                      </Text>
+                    </View>
+                  ))}
               </ScrollView>
             </>
           )}
@@ -134,30 +149,3 @@ const EventsScreen = ({navigation}) => {
 };
 export default EventsScreen;
 
-{
-  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            {searchedText && filteredData.length > 0 ? (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={filteredData}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={item => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     ) : (
-            //       <View style={styles.noDataContainer}>
-            //         <Text style={styles.noDataText}>
-            //           No Followers to Display
-            //         </Text>
-            //       </View>
-            //     )}
-            //   </ScrollView>
-            // </> */
-}

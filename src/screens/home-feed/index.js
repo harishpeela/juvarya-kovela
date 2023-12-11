@@ -57,7 +57,7 @@ const UserFeedScreen = ({navigation}) => {
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
+        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
         // let responce = result?.data?.jtFeeds;
         // responce === null ? setNoData(true) : setNoData(false);
         // responce && setHomeFeedList([...homeFeedList, ...responce]);

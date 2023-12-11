@@ -41,7 +41,7 @@ const endpoints = {
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   FEED: '/jtfeed/',
-  EVENTS_LIST: 'jtevent/list',
+  EVENTS_LIST: 'jtevent/search/item',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -236,10 +236,10 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const EventList = async (pgno, pgSize) => {
+export const EventList = async (pgno, pgSize, id) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
+      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}&profileId=${id}`,
     );
     return result;
   } catch (error) {
