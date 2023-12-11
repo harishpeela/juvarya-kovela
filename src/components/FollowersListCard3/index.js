@@ -48,11 +48,12 @@ const FollowersListCard3 = ({
                             numberOfLines={1}
                             ellipsizeMode="tail"
                             style={styles.firstName}>
-                            {name}
+                            Harsha
                         </Text>
-                        <Text style={styles.donationText}>
-                            MemberShip: <Text>Premium</Text>
-                        </Text>
+                        <View style={styles.textContainer2}>
+                            <Text style={styles.premiumText}>Premium Member</Text>
+                        </View>
+
                     </View>
 
                 </View>
@@ -60,5 +61,4 @@ const FollowersListCard3 = ({
         </TouchableOpacity>
     );
 };
-
-export default FollowersListCard3;
+export default FollowersListCard3

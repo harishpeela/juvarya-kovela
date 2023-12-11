@@ -51,7 +51,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     // borderWidth:2,
-    paddingHorizontal: '1%',
   },
   menuAndAlert: {
     flexDirection: 'row',

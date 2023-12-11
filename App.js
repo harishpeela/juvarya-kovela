@@ -45,6 +45,7 @@ import {
   DonationsList,
   EventDetails,
   CreateEvent,
+  ProfileMemberShips,
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -104,7 +105,8 @@ const App = () => {
       eventsScreen,
       donationslist,
       eventsDetails,
-      createEvent
+      createEvent,
+      profilememberships
     },
   } = allTexts;
   useEffect(() => {
@@ -435,6 +437,13 @@ const App = () => {
         <Stack.Screen
           name={createEvent}
           component={CreateEvent}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profilememberships}
+          component={ProfileMemberShips}
           options={{
             headerShown: false,
           }}
