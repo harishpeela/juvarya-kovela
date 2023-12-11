@@ -25,6 +25,7 @@ import {
   SearchBar,
   Sort,
   EventCard2,
+  EventCard3,
 } from '../../components';
 import {colors} from '../../common';
 import {EventList} from '../../utils/api';
@@ -148,30 +149,3 @@ const EventsScreen = ({navigation}) => {
 };
 export default EventsScreen;
 
-{
-  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            {searchedText && filteredData.length > 0 ? (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={filteredData}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={item => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     ) : (
-            //       <View style={styles.noDataContainer}>
-            //         <Text style={styles.noDataText}>
-            //           No Followers to Display
-            //         </Text>
-            //       </View>
-            //     )}
-            //   </ScrollView>
-            // </> */
-}

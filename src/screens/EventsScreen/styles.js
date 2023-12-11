@@ -39,7 +39,6 @@ export const styles = StyleSheet.create({
   },
   followersContainer: {
     height: '85%',
-
   },
   sortContainer: {
     display: 'flex',
@@ -60,10 +59,7 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   flatListStyle: {
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
-    // height: Dimensions.get('window').width / 2,
-    // width: Dimensions.get('window').width / 2,
-    width: '95%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });

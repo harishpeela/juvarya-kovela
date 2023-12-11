@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors, fontFamily} from '../../common';
 
-export const styles = (bgColor, radius, paddidng, width) =>
+export const styles = (bgColor,height, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
       width: width?width:"100%",
@@ -10,6 +10,7 @@ export const styles = (bgColor, radius, paddidng, width) =>
       backgroundColor: bgColor || colors.blue,
       alignItems: 'center',
       justifyContent: 'center',
+      height:height?height:'100%'
       
     },
   });

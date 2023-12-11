@@ -14,11 +14,13 @@ export const InputField = ({
   titleColor,
   value,
   onCardPress,
+  width,
+  border,
   ...props
 }) => {
   return (
     <>
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper]}>
         <Text
           style={[
             styles.title,

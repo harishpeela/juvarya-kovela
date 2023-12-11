@@ -9,6 +9,26 @@ import Icon2 from 'react-native-vector-icons/EvilIcons';
 import {BackgroundImage2} from '../../components/backgroundImage';
 const EventDetails = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [isChecked, setIsChecked] = useState(false);
+  const {
+    screenNames: { signin, otpScreen },
+    paragraphs: { alreadyAccount },
+    placeHolders: {
+      fistNamePlace,
+      lastNamePlace,
+      emailPlace,
+      confirmPasswordPlace,
+      passwordPlace,
+    },
+    headings: {
+      inputTitles: {
+        phoneNo,
+        email,
+        username,
+        Gender
+      },
+    },
+  } = allTexts;
 
   return (
     <View style={styles.footerContainer}>
@@ -111,56 +131,160 @@ const EventDetails = ({navigation}) => {
                   ]}
                 />
               </View>
-            </Pressable>
+            </View>
           </View>
-
-          <View style={styles.toggleData}>
-            {currentIndex === 1 && (
-              <Text>List displaying </Text>
-              // <View
-              //   showsVerticalScrollIndicator={false}
-              //   style={styles.contentDisplay}>
-              //   {!postImages?.length > 0 ? (
-              //     <View>
-              //       {loader ? (
-              //         <Loader size={'small'} color={colors.orangeColor} />
-              //       ) : (
-              //         <View>
-              //           <Feather
-              //             name="camera-off"
-              //             size={40}
-              //             style={styles.noPosts}
-              //           />
-              //           <Text style={styles.noPosts.text}>No Posts Yet</Text>
-              //         </View>
-              //       )}
-              //     </View>
-              //   ) : (
-              //     <FlatList
-              //       numColumns={3}
-              //       data={postImages}
-              //       keyExtractor={({item, index}) => index}
-              //       style={styles.ImagesContainer}
-              //       renderItem={({item, index}) => (
-              //         <TempleProfile_PostsCard nav={navigation} item={item} />
-              //       )}
-              //     />
-              //   )}
-              // </View>
-            )}
-            {currentIndex === 2 && (
-              <View>
-                <Text>It is displaying 2</Text>
-              </View>
-            )}
-            {currentIndex === 3 && (
-              <View>
-                <Text>It is displaying 3</Text>
+          <View style={styles.toggleContainer}>
+            <View style={styles.toggleHead}>
+              <Pressable onPress={() => setCurrentIndex(1)}>
+                <View style={styles.separateContainer}>
+                  <Text style={[styles.separateContainerText, currentIndex === 1 && styles.orangeColor]}>HighLights</Text>
+                  <View style={[styles.border, currentIndex === 1 && styles.orangeColor]} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setCurrentIndex(2)}>
+                <View style={styles.separateContainer}>
+                  <Text style={[styles.separateContainerText, currentIndex === 2 && styles.orangeColor]}>Info</Text>
+                  <View style={[styles.border, currentIndex === 2 && styles.orangeColor]} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setCurrentIndex(3)}>
+                <View style={styles.separateContainer}>
+                  <Text style={[styles.separateContainerText, currentIndex === 3 && styles.orangeColor]}>Contribute</Text>
+                  <View style={[styles.border, currentIndex === 3 && styles.orangeColor]} />
+                </View>
+              </Pressable>
+              <Pressable onPress={() => setCurrentIndex(4)}>
+                <View style={styles.separateContainer}>
+                  <Text style={[styles.separateContainerText, currentIndex === 4 && styles.orangeColor]}>Events</Text>
+                  <View style={[styles.border, currentIndex === 4 && styles.orangeColor]} />
+                </View>
+              </Pressable>
+            </View>
+            <KeyboardAwareScrollView >
+              <View style={styles.toggleData}>
+                {currentIndex === 1 && (
+                  <ScrollView>
+                    <View style={styles.container1}>
+                      <EventCard3 />
+                      <EventCard3 />
+                      <EventCard3 />
+                      <EventCard3 />
+                      <EventCard3 />
+                      <EventCard3 />
+                    </View>
+                  </ScrollView>
+                )}
+                {currentIndex === 2 && (
+                  <View style={styles.infoContainer}>
+                    <View style={styles.btnContainer}>
+                      <Btn />
+                      <Btn />
+                      <Btn />
+                      <Btn />
+                      <Btn />
+                    </View>
+                    <View style={styles.desContainer}>
+                      <Text style={styles.des}>Description: </Text>
+                      <Text style={styles.desData}>The build will continue, but you are strongly encouraged to update your project to
+                        Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem. Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+                      </Text>
+                    </View>
+                  </View>
+                )}
+                {currentIndex === 3 && (
+                  <KeyboardAwareScrollView>
+                    <View style={styles.formContainer}>
+                      <View style={styles.registrationContainer}>
+                        <Text style={styles.registrationText}>Registration Form</Text>
+                      </View>
+                      <View style={styles.formik}>
+                        <Formik
+                          onSubmit={(values, formikActions) => {
+                            UserRegisterHandler(values, formikActions);
+                            console.log('values', values);
+                          }}
+                          initialValues={{
+                            phone: '',
+                            email: '',
+                            userName: '',
+                            Gender: '',
+                          }}>
+                          {({
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting,
+                            values,
+                          }) => {
+                            return (
+                              <View style={styles.fieldContainer}>
+                                <TextInput2
+                                  title={'UserName'}
+                                  placeholder={'Enter Your Name'}
+                                  error={touched.userName && errors.userName}
+                                  onBlur={handleBlur('userName')}
+                                  setState={handleChange('userName')}
+                                />
+                                <TextInput2
+                                  title={phoneNo}
+                                  isFlag
+                                  keyboardType={'numeric'}
+                                  placeholder={'Enter Your Phone Number'}
+                                  error={touched.phone && errors.phone}
+                                  onBlur={handleBlur('phone')}
+                                  setState={handleChange('phone')}
+                                  maxLength={10}
+                                />
+                                <TextInput2
+                                  title={email}
+                                  placeholder={emailPlace}
+                                  error={touched.email && errors.email}
+                                  onBlur={handleBlur('email')}
+                                  setState={handleChange('email')}
+                                  autoCapitalize="none"
+                                />
+                                <View style={styles.inputAndBtnContainer}>
+                                  <TextInput2
+                                    title={'Gender'}
+                                    placeholder={'Gender'}
+                                    error={touched.email && errors.email}
+                                    onBlur={handleBlur('email')}
+                                    setState={handleChange('email')}
+                                    autoCapitalize="none"
+                                    width={'25%'}
+                                  />
+                                  <TouchableOpacity style={styles.subBtn}>
+                                    <Text style={styles.subBtnText}>Submit</Text>
+                                  </TouchableOpacity>
+                                </View>
+                                <View style={styles.buttonContainer}></View>
+                                <TouchableOpacity
+                                  style={styles.alreadyAcc}
+                                  onPress={() => {
+                                    navigation.navigate(signin);
+                                  }}>
+                                </TouchableOpacity>
+                              </View>
+                            );
+                          }}
+                        </Formik>
+                      </View>
+                    </View>
+                  </KeyboardAwareScrollView>
+                )}
+                {currentIndex === 4 && (
+                  <Text>Maps displaying 4</Text>
+                )}
               </View>
             )}
             {currentIndex === 4 && <Text>Maps displaying 4</Text>}
+
           </View>
         </View>
+      </ScrollView>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.btnText}>Interested</Text>
         </TouchableOpacity>

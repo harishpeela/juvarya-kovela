@@ -61,6 +61,7 @@ const window = {
 const colors = {
   orangeColor: '#FFA001',
   orangeColor2: 'rgba(255,160,1,0.5)',
+  orangeColor3:"rgba(255, 160, 1, 0.4)",
   red1: '#FF2E01',
   red2: '#CB0000',
   red3: '#EE6C4D',

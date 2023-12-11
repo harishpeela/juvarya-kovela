@@ -58,6 +58,9 @@ export default BottomTabBase = ({navigation}) => {
         </View>
       ) : (
         <Tab.Navigator
+          screenOptions={{
+            tabBarStyle: {innerHeight: 200},
+          }}
           initialRouteName={
             homeFeedListData?.length
               ? allTexts.tabNames.home
