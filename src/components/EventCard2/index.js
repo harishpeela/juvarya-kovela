@@ -4,7 +4,7 @@ import {styles} from './styles';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 
-const EventCard2 = ({navigation}) => {
+const EventCard2 = ({navigation, item}) => {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -15,16 +15,18 @@ const EventCard2 = ({navigation}) => {
       }}>
       <Image
         source={{
-          uri: 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+          uri: item?.mediaList[0]?.url
+            ? item?.mediaList[0]?.url
+            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
         }}
         style={styles.Image}
       />
       <View style={styles.container2}>
         <View style={styles.dateContainer}>
-          <Text style={styles.dateText}>Thu, 30 Nov</Text>
+          <Text style={styles.dateText}>{item?.description}</Text>
         </View>
         <View style={styles.secondContainer}>
-          <Text style={[styles.festivalText]}>Ganesh festival</Text>
+          <Text style={[styles.festivalText]}>{item?.name} </Text>
           <View style={styles.locationIcon}>
             <Icon name="location" color={colors.red1} size={20} />
             <Text style={{color: colors.gray}}>Vizag</Text>

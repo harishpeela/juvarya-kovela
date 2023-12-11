@@ -14,14 +14,15 @@ import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
 import {colors, allTexts} from '../../common';
 const ProfileMembership = ({route, navigation}) => {
-  const {id} = route.params || {};
+  const {trfdata} = route.params || {};
+  console.log('route', trfdata);
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
 
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MemberShipDetails(id);
+      let result = await MemberShipDetails(trfdata?.id);
       console.log('res', result?.data);
       if (result) {
         setaLoader(false);
@@ -35,9 +36,9 @@ const ProfileMembership = ({route, navigation}) => {
       alert(error);
     }
   };
-  useEffect(() => {
-    MembershipData();
-  }, []);
+  // useEffect(() => {
+  //   MembershipData();
+  // }, []);
   // useFocusEffect(
   //   useCallback(() => {
   //     MembershipData();
