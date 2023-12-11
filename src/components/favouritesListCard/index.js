@@ -14,12 +14,12 @@ export const FavTempleListCard = ({name, location, date, onPress, img}) => {
         </View>
         <View style={styles.listFirstItem}>
           <View style={styles.bulletConatianer}>
-            <View style={styles.bullet} />
+            {/* <View style={styles.bullet} /> */}
           </View>
           <View>
             <Text style={styles.itemHeading}>{name}</Text>
             <Text numberOfLines={1} style={styles.itemAdmin}>
-              Admin
+              Temple
             </Text>
             <Text style={styles.itemLocation}>{`location-${location}`}</Text>
           </View>
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.black,
   },
   itemHeading: {
-    color: colors.black,
+    color: colors.orangeColor,
     fontSize: fontSize.normal,
     fontFamily: fontFamily.popinMedium,
   },
