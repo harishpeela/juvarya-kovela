@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity,ScrollView,FlatList } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, FlatList } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { styles } from './styles'
 import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context'
@@ -16,10 +16,10 @@ import {
   EventCard2,
   EventCard3,
 } from '../../components';
-import { colors } from '../../common';
+import { allTexts, colors } from '../../common';
 import { EventList } from '../../utils/api';
-
-
+import Icon from "react-native-vector-icons/AntDesign"
+allTexts
 
 
 const EventsScreen = ({ navigation }) => {
@@ -42,6 +42,7 @@ const EventsScreen = ({ navigation }) => {
     if (result.status === 200) {
       setEventsLoader(false);
       console.log('true', eventsLoader);
+      console.log("evenlength = >>>>>>>>>" + result?.data?.events.length);
       setEventsData(result?.data?.events);
     } else {
       setEventsLoader(false);
@@ -58,11 +59,17 @@ const EventsScreen = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.Header}>
         <BackHeaderNew
-          txt={`EventsScreen`}
+          txt={`Events`}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
-        {/* <Ellipsis txtColor={colors.black} /> */}
+        <TouchableOpacity  onPress={() => {
+            navigation.navigate(allTexts.screenNames.createEvent,{
+                navigation:navigation,
+            })
+        }}>
+          <Icon name="pluscircleo" size={24} color={colors.black} />
+        </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>
@@ -104,17 +111,17 @@ const EventsScreen = ({ navigation }) => {
               <ScrollView showsVerticalScrollIndicator={false}>
                 {searchedText === '' && (
                   <FlatList
-                  numColumns={2}
+                    numColumns={2}
                     data={eventsData}
                     contentContainerStyle={styles.flatListStyle}
                     keyExtractor={(item, index) => item.toString()}
                     renderItem={({ item }) => (
                       <EventCard2
-                      navigation={navigation}
-                        // name={item.user.firstName}
-                        // img={item.user.url}
-                        // data={item.user}
-                        // donation={item.user.donation}
+                        navigation={navigation}
+                      // name={item.user.firstName}
+                      // img={item.user.url}
+                      // data={item.user}
+                      // donation={item.user.donation}
                       />
                     )}
                   />

@@ -149,6 +149,7 @@ export const allTexts = {
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
     eventsDetails: 'EventDetails',
+    createEvent: 'CreateEvent'
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
-        backgroundColor: colors.orangeColor3,
+        backgroundColor: colors.orangeColor,
         shadowColor: colors.black,
         shadowRadius: 5, 
         // elevation:4,
@@ -25,9 +25,9 @@ export const styles = StyleSheet.create({
         marginVertical:'1%'
     },
     btnText:{
-        color:colors.orangeColor,
+        color:colors.white,
         textAlign:'center',
-        fontWeight:'400',
+        fontWeight:'900',
         fontSize:fontSize.small
     }
 
