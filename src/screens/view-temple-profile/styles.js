@@ -84,7 +84,8 @@ export const styles = StyleSheet.create({
   followtab: {
     flexDirection: 'row',
     // marginTop: '3%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   disPlayContent: {
     marginTop: '-60%',
@@ -155,7 +156,8 @@ export const styles = StyleSheet.create({
     // paddingTop:'1%',
   },
   horizontalContainer: {
-    // borderWidth:2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   plusContainer: {
     backgroundColor: colors.white,
