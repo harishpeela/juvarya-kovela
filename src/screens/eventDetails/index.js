@@ -1,30 +1,40 @@
-/* eslint-disable no-undef */
-import {Text, View, TouchableOpacity, Pressable} from 'react-native';
-import React, {useState} from 'react';
-import {styles} from './styles';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { BackgroundImage, BackgroundImageAClass, EventCard3, InputField, PrimaryButton, TextInput2 } from '../../components';
 import {
-  BackHeaderNew,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Pressable,
+  Button,
+} from 'react-native';
+import React, {useState} from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  BackgroundImage,
+  BackgroundImageAClass,
+  EventCard3,
+  InputField,
+  PrimaryButton,
+  TextInput2,
 } from '../../components';
-import { allTexts, colors } from '../../common';
-import Icon2 from 'react-native-vector-icons/EvilIcons'
-import { BackgroundImage2 } from '../../components/backgroundImage';
+import {BackHeaderNew} from '../../components';
+import {allTexts, colors} from '../../common';
+import Icon2 from 'react-native-vector-icons/EvilIcons';
+import {BackgroundImage2} from '../../components/backgroundImage';
 import Btn from '../../components/btn';
-import { Formik, Field } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { PasswordField } from '../../components/inputfield';
-import { Picker } from '@react-native-picker/picker';
-import { styles } from './styles';
-import Icon3 from 'react-native-vector-icons/Entypo'
+import {Formik, Field} from 'formik';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {PasswordField} from '../../components/inputfield';
+import {Picker} from '@react-native-picker/picker';
+import {styles} from './styles';
 
-const EventDetails = ({ navigation }) => {
+const EventDetails = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
   const {
-    screenNames: { signin, otpScreen },
-    paragraphs: { alreadyAccount },
+    screenNames: {signin, otpScreen},
+    paragraphs: {alreadyAccount},
     placeHolders: {
       fistNamePlace,
       lastNamePlace,
@@ -33,12 +43,7 @@ const EventDetails = ({ navigation }) => {
       passwordPlace,
     },
     headings: {
-      inputTitles: {
-        phoneNo,
-        email,
-        username,
-        Gender
-      },
+      inputTitles: {phoneNo, email, username, Gender},
     },
   } = allTexts;
 
@@ -123,8 +128,19 @@ const EventDetails = ({ navigation }) => {
               </Pressable>
               <Pressable onPress={() => setCurrentIndex(3)}>
                 <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 3 && styles.orangeColor]}>Contribute</Text>
-                  <View style={[styles.border, currentIndex === 3 && styles.orangeColor]} />
+                  <Text
+                    style={[
+                      styles.separateContainerText,
+                      currentIndex === 3 && styles.orangeColor,
+                    ]}>
+                    Contribute
+                  </Text>
+                  <View
+                    style={[
+                      styles.border,
+                      currentIndex === 3 && styles.orangeColor,
+                    ]}
+                  />
                 </View>
               </Pressable>
               <Pressable onPress={() => setCurrentIndex(4)}>
@@ -134,7 +150,7 @@ const EventDetails = ({ navigation }) => {
                 </View>
               </Pressable>
             </View>
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView>
               <View style={styles.toggleData}>
                 {currentIndex === 1 && (
                   <ScrollView>
@@ -161,8 +177,18 @@ const EventDetails = ({ navigation }) => {
                     </View>
                     <View style={styles.desContainer}>
                       <Text style={styles.des}>Description: </Text>
-                      <Text style={styles.desData}>The build will continue, but you are strongly encouraged to update your project to
-                        Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem. Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+                      <Text style={styles.desData}>
+                        The build will continue, but you are strongly encouraged
+                        to update your project to Lorem ipsum dolor sit amet
+                        consectetur. Enim sed commodo maecenas sed nisl
+                        ultrices. Mauris amet quisque placerat sit mi risus
+                        lorem. Tincidunt nam sit sit pharetra. Varius tincidunt
+                        mi elementum libero nisl condimentum nisi mauris. Erat
+                        sed vel lectus cras ut pellentesque sem. Nunc ut et sed
+                        ac et tristique nunc aenean varius. Phasellus sit
+                        parturient sed sed ut vitae. Porttitor facilisi dui
+                        mauris sit donec eget augue pretium. Id magna arcu sit
+                        tortor.
                       </Text>
                     </View>
                   </View>
@@ -171,7 +197,9 @@ const EventDetails = ({ navigation }) => {
                   <KeyboardAwareScrollView>
                     <View style={styles.formContainer}>
                       <View style={styles.registrationContainer}>
-                        <Text style={styles.registrationText}>Registration Form</Text>
+                        <Text style={styles.registrationText}>
+                          Registration Form
+                        </Text>
                       </View>
                       <View style={styles.formik}>
                         <Formik
@@ -232,13 +260,14 @@ const EventDetails = ({ navigation }) => {
                                     width={'25%'}
                                   />
                                   <TouchableOpacity style={styles.subBtn}>
-                                    <Text style={styles.subBtnText}>Submit</Text>
+                                    <Text style={styles.subBtnText}>
+                                      Submit
+                                    </Text>
                                   </TouchableOpacity>
                                 </View> */}
                                 <TouchableOpacity style={styles.subBtn}>
                                   <Text style={styles.subBtnText}>Submit</Text>
                                 </TouchableOpacity>
-
                               </View>
                             );
                           }}
@@ -253,9 +282,7 @@ const EventDetails = ({ navigation }) => {
                   </View>
                 )}
               </View>
-            )}
-            {currentIndex === 4 && <Text>Maps displaying 4</Text>}
-
+            </KeyboardAwareScrollView>
           </View>
         </View>
       </ScrollView>
