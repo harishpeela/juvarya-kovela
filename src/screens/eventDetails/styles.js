@@ -28,31 +28,40 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.white,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
+        paddingLeft:5
     },
     locationIcon: {
         flexDirection: 'row',
-        alignContent: 'flex-start'
+        alignContent: 'flex-start',
+        alignItems:'center',
+        alignContent:'center',
+        marginHorizontal:'5%'
     },
     festivalText: {
         color: colors.black,
         fontSize: fontSize.h1,
-        fontWeight: '700'
+        fontWeight: '700',
+        marginVertical:'1%',
     },
     dateText: {
         color: colors.orangeColor,
-        fontSize: fontSize.large
+        fontSize: fontSize.medium,
+        fontWeight: '700'
+
     },
     buttonContainer: {
         height: '6%',
         alignItems: 'center',
         backgroundColor: 'transparent',
-        alignContent: 'center'
+        alignContent: 'center',
+        marginBottom:5
     },
     button: {
-        width: '85%',
+        width: '95%',
+        height:'90%',
         backgroundColor: colors.orangeColor,
         alignSelf: 'center',
-        borderRadius: 5,
+        borderRadius: 25,
         justifyContent: 'center',
         alignItems: 'center',
         elevation: 2,
@@ -60,21 +69,22 @@ export const styles = StyleSheet.create({
     btnText: {
         color: colors.white,
         fontWeight: '600',
-        fontSize: fontSize.h1
+        fontSize: fontSize.h6
     },
     dateAndLocation: {
         flexDirection: 'row',
-        width: '35%',
-        justifyContent: 'space-between'
+        // borderWidth:2,
+        // borderColor:'red',
+        marginHorizontal:'1%'
     },
     secondContainer2: {
         marginHorizontal: '3%',
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
+        // borderWidth:2,
     },
     locText: {
         color: colors.gray,
-        fontSize: fontSize.large
+        fontSize: fontSize.small,
+        fontWeight:'500'
     },
     round: {
         backgroundColor: colors.white,
@@ -95,7 +105,7 @@ export const styles = StyleSheet.create({
     toggleContainer: {
         width: '100%',
         flexDirection: 'column',
-        marginTop: '5%',
+        marginTop: '6%',
         height: '100%',
     },
     separateContainer: {
@@ -113,12 +123,14 @@ export const styles = StyleSheet.create({
         paddingVertical: 2,
     },
     toggleHead: {
-        width: '100%',
+        width: '90%',
         flexDirection: 'row',
         justifyContent: 'space-around',
+        // borderWidth:2,
+        // marginHorizontal:'4%'
     },
     orangeColor: {
-        borderBottomWidth: 1,
+        borderBottomWidth:1.5,
         borderColor: colors.orangeColor,
         color: colors.black,
     },
@@ -151,7 +163,8 @@ export const styles = StyleSheet.create({
         color: colors.black,
         textAlign: 'center',
         fontSize: fontSize.h4,
-        fontWeight: '600'
+        fontWeight: '600',
+        marginVertical:'5%'
     },
     formik: {
         paddingHorizontal: '10%'
@@ -163,25 +176,35 @@ export const styles = StyleSheet.create({
         marginVertical: 5
     },
     toggleData: {
-        marginBottom: 300,
+        marginBottom: 500,
+        // borderWidth:5
     },
     subBtn: {
-        justifyContent: 'center', // Center vertically
-        alignItems: 'center', // Center horizontally
         backgroundColor: colors.orangeColor,
-        borderRadius: 5,
-        alignSelf: 'flex-end',
-        alignContent: 'center',
-        paddingVertical:'2%',
-        paddingHorizontal:'5%',
-        elevation:2
+        elevation:2,
+        marginTop:'8%',
+        paddingVertical:10,
+        borderRadius:25,
+        width:'90%',
+        alignSelf:'center'
+
     },
     subBtnText: {
         color: colors.white,
-        fontWeight: '600',
-        fontSize: fontSize.h6,
+        fontWeight: '900',
         alignContent: 'center',
         alignSelf: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize:fontSize.h6
+    },
+    locationContainer:{
+        // borderWidth:1,
+        alignItems:'center',
+        justifyContent:'center',
+        height:300
+    },
+    locationText:{
+        color:colors.black,
+        fontSize:fontSize.h4
     }
 })

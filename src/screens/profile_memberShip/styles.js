@@ -6,6 +6,12 @@ export const styles = StyleSheet.create({
     marginTop: 40,
     margin: '5%'
   },
+  header:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center'
+
+  },
   container1: {
     borderWidth: 2,
     height: '100%',
@@ -96,5 +102,26 @@ export const styles = StyleSheet.create({
   firstDetailsTextContainer: {
     flexDirection: 'column',
     alignItems: 'flex-start',
+  },
+  followersContainer: {
+    height: '100%',
+    borderWidth:2
+  },
+  sortContainer: {
+    display: 'flex',
+    width: '15%',
+    height: '100%',
+    // borderWidth:2,
+  },
+  list: {
+    marginBottom: 240,
+  },
+  noDataContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noDataText: {
+    fontSize: fontSize.xlarge,
+    color: colors.black,
   },
 });

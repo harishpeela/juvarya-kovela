@@ -5,6 +5,7 @@ import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
 
+
 import {
   Splash,
   SignUp,
@@ -43,6 +44,7 @@ import {
   EventsScreen,
   DonationsList,
   EventDetails,
+  CreateEvent,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -101,6 +103,7 @@ const App = () => {
       eventsScreen,
       donationslist,
       eventsDetails,
+      createEvent
     },
   } = allTexts;
   useEffect(() => {
@@ -424,6 +427,13 @@ const App = () => {
         <Stack.Screen
           name={eventsDetails}
           component={EventDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={createEvent}
+          component={CreateEvent}
           options={{
             headerShown: false,
           }}
