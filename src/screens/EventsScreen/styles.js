@@ -1,10 +1,7 @@
 import { StyleSheet } from 'react-native';
 import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({
-    CardContainer: {},
-    followersContainer: {
-        borderWidth: 1,
-    },
+ 
     Header: {
         marginHorizontal: '5%',
         marginVertical: 10,
@@ -17,8 +14,6 @@ export const styles = StyleSheet.create({
         marginHorizontal: '4%',
         display: 'flex',
         flexDirection: 'column',
-        // borderWidth:5,
-        // marginBottom:200,
     },
     searchAndFilter: {
         display: 'flex',

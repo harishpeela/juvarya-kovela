@@ -18,7 +18,7 @@ export const BackgroundImageAClass = () => (
 );
 export const BackgroundImage2 = () => (
   <Image
-    source={require('../../../assets/images/background_image.png')}
+    source={require('../../utils/assets/images/temple.png')}
     style={styles.backgroundImage2}
   />
 );
