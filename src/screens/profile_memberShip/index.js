@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import useFocusEffect from '@react-navigation/native';
-import { View, Text, SafeAreaView, FlatList } from 'react-native';
+import {View, Text, SafeAreaView, FlatList} from 'react-native';
 import {
   BackgroundImage,
   BackHeaderNew,
@@ -12,11 +12,11 @@ import {
   MemberShipCard,
 } from '../../components';
 
-import { MemberShipDetails } from '../../utils/api';
-import { styles } from './styles';
-import { colors, allTexts } from '../../common';
-const ProfileMembership = ({ route, navigation }) => {
-  const { id } = route.params || {};
+import {MemberShipDetails} from '../../utils/api';
+import {styles} from './styles';
+import {colors, allTexts} from '../../common';
+const ProfileMembership = ({route, navigation}) => {
+  const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   // const [loader, setLoader] = useState(true);
@@ -58,19 +58,18 @@ const ProfileMembership = ({ route, navigation }) => {
           <BackHeaderNew
             txt={'Members'}
             onPress={() => navigation.goBack()}
-          // onPlusPress={() =>
-          //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
-          // }
+            // onPlusPress={() =>
+            //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
+            // }
           />
           <Text>Join</Text>
-
         </View>
         {loader ? (
           <View>
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <View style={{ marginTop: '10%' }}>
+          <View style={{marginTop: '10%'}}>
             {data?.length ? (
               <MemberShipCard
                 onPress={() => alert('under development')}
