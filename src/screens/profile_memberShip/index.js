@@ -24,8 +24,6 @@ const ProfileMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState(followersList);
 
-
-
   // const MembershipData = async () => {
   //   setaLoader(true);
   //   try {

@@ -1,5 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Pressable, Button } from 'react-native'
-import React, { useState } from 'react'
+/* eslint-disable no-undef */
+import {Text, View, TouchableOpacity, Pressable} from 'react-native';
+import React, {useState} from 'react';
+import {styles} from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BackgroundImage, BackgroundImageAClass, EventCard3, InputField, PrimaryButton, TextInput2 } from '../../components';
 import {
@@ -251,7 +253,8 @@ const EventDetails = ({ navigation }) => {
                   </View>
                 )}
               </View>
-            </KeyboardAwareScrollView>
+            )}
+            {currentIndex === 4 && <Text>Maps displaying 4</Text>}
 
           </View>
         </View>
