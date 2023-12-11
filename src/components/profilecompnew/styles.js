@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     height: 40,
     width: 170,
     borderRadius: 20,
-    marginRight: 10,
+    // marginRight: 10,
     alignItems: 'center',
   },
   voidButton1Text: {
@@ -66,6 +66,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   followingContainer: {
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
 });

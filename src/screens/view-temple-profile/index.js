@@ -60,12 +60,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -336,32 +336,30 @@ const ViewTempleProfile = ({route, navigation}) => {
                 </View>
               </View>
               <View style={styles.followtab}>
-                <ScrollView
-                  alignSelf="center"
-                  align
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  style={styles.horizontalContainer}>
-                  <FolloUnfollowComp
-                    style={styles.followingContainer}
-                    followBtnDisable={followBtnDisable}
-                    followTemples={() => FOLLOW(trfData?.jtProfile)}
-                    followVisible={followVisible}
-                    isFollow={isFollow}
-                    shadow={true}
-                  />
-                  <ContactTabcomp onPressContact={() => setIsModal(true)} />
-                  <DirectionsTabComp />
-                  <CreateFeedTabComp
+                {/* <View
+                  // alignSelf="center"
+                  // align
+                  style={styles.horizontalContainer}> */}
+                <FolloUnfollowComp
+                  style={styles.followingContainer}
+                  followBtnDisable={followBtnDisable}
+                  followTemples={() => FOLLOW(trfData?.jtProfile)}
+                  followVisible={followVisible}
+                  isFollow={isFollow}
+                  shadow={true}
+                />
+                {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
+                <DirectionsTabComp />
+                {/* <CreateFeedTabComp
                     roleId={roleId}
                     onPlusPress={() =>
                       navigation.navigate(allTexts?.screenNames.createfeed, {
                         data: data,
                       })
                     }
-                  />
-                </ScrollView>
+                  /> */}
               </View>
+              {/* </View> */}
               <Danation_Add_Card
                 roleId={roleId}
                 onPress={() =>
