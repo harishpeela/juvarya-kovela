@@ -11,7 +11,6 @@ export const styles = (bgColor,height, radius, paddidng, width) =>
       alignItems: 'center',
       justifyContent: 'center',
       height:height?height:'100%'
-      
     },
   });
 export const textStyles = (textColor, fontSize) =>
