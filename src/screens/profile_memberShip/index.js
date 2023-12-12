@@ -3,7 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useCallback } from 'react';
 import useFocusEffect from '@react-navigation/native';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import {
   BackgroundImage,
   BackHeaderNew,
@@ -15,9 +15,9 @@ import {
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
+import Icon from "react-native-vector-icons/AntDesign"
 
-
-const ProfileMembership = ({ route, navigation }) => {
+const ProfileMembership = ({ route, navigation,roleId }) => {
   // const { id } = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
@@ -25,13 +25,21 @@ const ProfileMembership = ({ route, navigation }) => {
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState(followersList);
-
-
-  const data ={
-    item:{
-      name:"hasrsh"
+console.log("profilememberShips roleId displaying =>>>>>>>" + roleId)
+  const data2 = [
+    {
+      name: "Harsha",
+      type: "Premium"
+    },
+    {
+      name: 'Harish',
+      type: 'Gold'
+    },
+    {
+      name: 'Ajay',
+      type: "basic"
     }
-  }
+  ]
 
   // const MembershipData = async () => {
   //   setaLoader(true);
@@ -71,10 +79,20 @@ const ProfileMembership = ({ route, navigation }) => {
           //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
           // }
           />
-          <TouchableOpacity onPress={()=>{
+          <TouchableOpacity onPress={() => {
             navigation.navigate(allTexts.screenNames.profilememberships)
           }}>
-          <Text style={styles.joinText}>Join</Text>
+            {roleId ? (
+            <Text style={styles.joinText}>Join</Text>
+            ):(
+              <TouchableOpacity  onPress={() => {
+                navigation.navigate(allTexts.screenNames.memberShip,{
+                    navigation:navigation,
+                })
+            }}>
+              <Icon name="pluscircleo" size={24} color={colors.black} />
+            </TouchableOpacity>
+            )}
           </TouchableOpacity>
         </View>
         {loader ? (
@@ -82,66 +100,28 @@ const ProfileMembership = ({ route, navigation }) => {
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <View style={{ marginTop: '10%' }}>
-            {data?.length ? (
-              <MemberShipCard
-                onPress={() => alert('under development')}
-                data={data}
-              />
+          <View style={styles.followersContainer}>
+            {loader ? (
+              <Loader size={'large'} color={colors.orangeColor} />
             ) : (
-              <View style={styles.followersContainer}>
-                {loader ? (
-                  <Loader size={'large'} color={colors.orangeColor} />
-                ) : (
-                  <>
-                    <FollowersListCard3 />
-                  </>
-
-                  // <>
-                  //   {/* <ScrollView showsVerticalScrollIndicator={false}> */}
-                  //   {searchedText === '' && (
-                  //     <FlatList
-                  //       style={styles.list}
-                  //       data={followersList}
-                  //       contentContainerStyle={styles.flatListStyle}
-                  //       keyExtractor={(item, index) => item.user.id.toString()}
-                  //       renderItem={({ item }) => (
-                  //         <FollowersListCard2
-                  //           name={item.user.firstName}
-                  //           img={item.user.url}
-                  //           data={item.user}
-                  //           donation={item.user.donation}
-                  //         />
-                  //       )}
-                  //     />
-                  //   )}
-                  //   {/* </ScrollView> */}
-
-                  //   {/* <ScrollView style={{height: searchedText ? '85%' : 0}}> */}
-                  //   {searchedText && filteredData.length > 0 ? (
-                  //     <FlatList
-                  //       style={styles.list}
-                  //       data={filteredData}
-                  //       contentContainerStyle={styles.flatListStyle}
-                  //       keyExtractor={item => item.user.id.toString()}
-                  //       renderItem={({ item }) => (
-                  //         <FollowersListCard2
-                  //           name={item.user.firstName}
-                  //           img={item.user.url}
-                  //           data={item.user}
-                  //           donation={item.user.donation}
-                  //         />
-                  //       )}
-                  //     />
-                  //   ) : (
-                  //     <View style={styles.noDataContainer}>
-                  //       <Text style={styles.noDataText}>No Followers to Display</Text>
-                  //     </View>
-                  //   )}
-                  //   {/* </ScrollView> */}
-                  // </>
-                )}
-              </View>
+              <>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {data2 !== '' && (
+                    <FlatList
+                      style={styles.list}
+                      data={data2}
+                      contentContainerStyle={styles.flatListStyle}
+                      keyExtractor={(item, index) => item.toString()}
+                      renderItem={({ item }) => (
+                        <FollowersListCard3
+                          item={item}
+                          img={null}
+                        />
+                      )}
+                    />
+                  )}
+                </ScrollView>
+              </>
             )}
           </View>
         )}

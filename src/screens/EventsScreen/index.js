@@ -19,7 +19,6 @@ import {
 import { allTexts, colors } from '../../common';
 import { EventList } from '../../utils/api';
 import Icon from "react-native-vector-icons/AntDesign"
-allTexts
 
 
 const EventsScreen = ({ navigation }) => {

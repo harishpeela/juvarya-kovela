@@ -334,6 +334,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                         allTexts.screenNames.profilemembership,
                         {
                           id: trfData?.jtProfile,
+                          roleId:roleId
                         },
                       )
                     }

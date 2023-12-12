@@ -8,7 +8,6 @@ const ProfileMemberShips = () => {
             type:"Average"
         }
     }
-
   return (
     <View>
          <MemberShipCard />

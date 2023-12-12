@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
+    marginTop:20,
   },
   container1: {
     // borderWidth: 2,
@@ -114,6 +115,7 @@ export const styles = StyleSheet.create({
   },
   list: {
     marginBottom: 240,
+    marginTop:20,
   },
   noDataContainer: {
     alignItems: 'center',
