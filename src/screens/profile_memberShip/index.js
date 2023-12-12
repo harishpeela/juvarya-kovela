@@ -3,19 +3,25 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState, useCallback} from 'react';
 import useFocusEffect from '@react-navigation/native';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {
   BackgroundImage,
   BackHeaderNew,
   Loader,
   MemberShipCard,
 } from '../../components';
-import { MemberShipDetails } from '../../utils/api';
-import { styles } from './styles';
-import { colors, allTexts } from '../../common';
+import {MemberShipDetails} from '../../utils/api';
+import {styles} from './styles';
+import {colors, allTexts} from '../../common';
 
-const ProfileMembership = ({ route, navigation }) => {
-  // const { id } = route.params || {};
+const ProfileMembership = ({route, navigation}) => {
+  const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   // const [loader, setLoader] = useState(true);
@@ -23,12 +29,24 @@ const ProfileMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState(followersList);
 
-
-  const data ={
-    item:{
-      name:"hasrsh"
-    }
-  }
+  const flatData = [
+    {
+      id: 1,
+      name: 'hasrsh',
+      type: 'BASIC',
+    },
+    {
+      id: 2,
+      name: 'mahesh',
+      type: 'AVERAGE',
+    },
+    {
+      id: 3,
+      name: 'mahesh',
+      type: 'PREMIUM',
+    },
+    ,
+  ];
 
   const MembershipData = async () => {
     setaLoader(true);
@@ -47,9 +65,9 @@ const ProfileMembership = ({ route, navigation }) => {
       alert(error);
     }
   };
-  useEffect(() => {
-    MembershipData();
-  }, []);
+  // useEffect(() => {
+  //   MembershipData();
+  // }, []);
   // useFocusEffect(
   //   useCallback(() => {
   //     MembershipData();
@@ -60,19 +78,19 @@ const ProfileMembership = ({ route, navigation }) => {
     <SafeAreaView>
       {/* <BackgroundImage /> */}
       <View style={styles.mainContainer}>
-
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
             onPress={() => navigation.goBack()}
-          // onPlusPress={() =>
-          //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
-          // }
+            // onPlusPress={() =>
+            //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
+            // }
           />
-          <TouchableOpacity onPress={()=>{
-            navigation.navigate(allTexts.screenNames.profilememberships)
-          }}>
-          <Text style={styles.joinText}>Join</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.profilememberships);
+            }}>
+            <Text style={styles.joinText}>Join</Text>
           </TouchableOpacity>
         </View>
         {loader ? (
@@ -81,10 +99,10 @@ const ProfileMembership = ({ route, navigation }) => {
           </View>
         ) : (
           <View style={{marginTop: '10%'}}>
-            {data?.length ? (
+            {flatData?.length ? (
               <MemberShipCard
                 onPress={() => alert('under development')}
-                data={data}
+                data={flatData}
               />
             ) : (
               <View
