@@ -19,12 +19,12 @@ import {
 import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
 import {colors, allTexts} from '../../common';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const ProfileMembership = ({route, navigation}) => {
+const ProfileMembership = ({route, navigation, roleId}) => {
   const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
-  // const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState(followersList);
@@ -90,7 +90,18 @@ const ProfileMembership = ({route, navigation}) => {
             onPress={() => {
               navigation.navigate(allTexts.screenNames.profilememberships);
             }}>
-            <Text style={styles.joinText}>Join</Text>
+            {roleId ? (
+              <Text style={styles.joinText}>Join</Text>
+            ) : (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.memberShip, {
+                    navigation: navigation,
+                  });
+                }}>
+                <Icon name="pluscircleo" size={24} color={colors.black} />
+              </TouchableOpacity>
+            )}
           </TouchableOpacity>
         </View>
         {loader ? (
