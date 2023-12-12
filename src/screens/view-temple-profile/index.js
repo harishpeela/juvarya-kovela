@@ -228,10 +228,11 @@ const ViewTempleProfile = ({route, navigation}) => {
   }, []);
   const EventsList = async () => {
     setEventsLoader(true);
-    let result = await EventList(0, 100);
+    let result = await EventList(0, 100, 85);
+    console.log('eventsdata', result?.data);
     if (result?.status === 200) {
       setEventsLoader(false);
-      setEventsData(result?.data?.events);
+      setEventsData(result?.data?.data);
     } else {
       setEventsLoader(false);
     }
@@ -305,13 +306,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    flex: 1,
-                    justifyContent: 'space-around',
-                    margin: 30,
-                  }}>
+                <View style={styles.postsTab}>
                   <PostsComp
                     itemDetails={postsCount}
                     onPress={() => setPosts(!posts)}
@@ -333,8 +328,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                       navigation.navigate(
                         allTexts.screenNames.profilemembership,
                         {
-                          id: trfData?.jtProfile,
-                          roleId:roleId
+                          trfdata: trfData,
                         },
                       )
                     }
@@ -342,32 +336,30 @@ const ViewTempleProfile = ({route, navigation}) => {
                 </View>
               </View>
               <View style={styles.followtab}>
-                <ScrollView
-                  alignSelf="center"
-                  align
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  style={styles.horizontalContainer}>
-                  <FolloUnfollowComp
-                    style={styles.followingContainer}
-                    followBtnDisable={followBtnDisable}
-                    followTemples={() => FOLLOW(trfData?.jtProfile)}
-                    followVisible={followVisible}
-                    isFollow={isFollow}
-                    shadow={true}
-                  />
-                  <ContactTabcomp onPressContact={() => setIsModal(true)} />
-                  <DirectionsTabComp />
-                  <CreateFeedTabComp
+                {/* <View
+                  // alignSelf="center"
+                  // align
+                  style={styles.horizontalContainer}> */}
+                <FolloUnfollowComp
+                  style={styles.followingContainer}
+                  followBtnDisable={followBtnDisable}
+                  followTemples={() => FOLLOW(trfData?.jtProfile)}
+                  followVisible={followVisible}
+                  isFollow={isFollow}
+                  shadow={true}
+                />
+                {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
+                <DirectionsTabComp />
+                {/* <CreateFeedTabComp
                     roleId={roleId}
                     onPlusPress={() =>
                       navigation.navigate(allTexts?.screenNames.createfeed, {
                         data: data,
                       })
                     }
-                  />
-                </ScrollView>
+                  /> */}
               </View>
+              {/* </View> */}
               <Danation_Add_Card
                 roleId={roleId}
                 onPress={() =>
@@ -415,12 +407,12 @@ const ViewTempleProfile = ({route, navigation}) => {
               )}
             </View>
           )}
-          {currentIndex === 2 && (
+          {/* {currentIndex === 2 && (
             <View>
               <Feather name="camera-off" size={40} style={styles.noPosts} />
               <Text style={styles.noPosts.text}>No Reels Yet</Text>
             </View>
-          )}
+          )} */}
           {currentIndex === 3 && (
             // <EventCard />
             <View>
@@ -443,16 +435,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <Text style={styles.noPosts.text}>No Events Yet</Text>
                 </View>
               ) : (
-                // <FlatList
-                //   data={eventsData}
-                //   style={styles.ImagesContainer}
-                //   keyExtractor={({item, index}) => index}
-                //   renderItem={({item, index}) => (
-                //     <TouchableOpacity style={styles.eventsCard}>
-                //       <Text> Name: {item?.name}</Text>
-                //     </TouchableOpacity>
-                //   )}
-                // />
                 <EventCard navigation={navigation} data={eventsData} />
               )}
             </ScrollView>
@@ -487,12 +469,9 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate(
-                  allTexts.screenNames.profilemembership,
-                  //    {
-                  //   id: trfData?.jtProfile,
-                  // }
-                )
+                navigation.navigate(allTexts.screenNames.profilemembership, {
+                  id: trfData?.jtProfile,
+                })
               }>
               <View style={styles.modalContent}>
                 <MaterialIcons

@@ -6,10 +6,11 @@ export const styles = (bgColor,height, radius, paddidng, width) =>
     wrapper: {
       width: width?width:"100%",
       padding: paddidng || 15,
-      borderRadius: 30,
+      borderRadius: radius || 25,
       backgroundColor: bgColor || colors.blue,
       alignItems: 'center',
-      justifyContent: 'center',      
+      justifyContent: 'center',
+      // height:height?height:'100%'
     },
   });
 export const textStyles = (textColor, fontSize) =>

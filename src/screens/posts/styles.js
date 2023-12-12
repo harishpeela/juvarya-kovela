@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'center',
     margin: '10%',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   postView: {
     marginHorizontal: '5%',

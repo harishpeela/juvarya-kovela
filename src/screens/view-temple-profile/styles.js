@@ -83,7 +83,8 @@ export const styles = StyleSheet.create({
   followtab: {
     flexDirection: 'row',
     // marginTop: '3%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   disPlayContent: {
     marginTop: '-60%',
@@ -154,7 +155,8 @@ export const styles = StyleSheet.create({
     // paddingTop:'1%',
   },
   horizontalContainer: {
-    // borderWidth:2,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   plusContainer: {
     backgroundColor: colors.white,
@@ -201,10 +203,12 @@ export const styles = StyleSheet.create({
     width: '13%',
     backgroundColor: colors.gray,
     marginVertical: '3%',
-    // borderTopLeftRadius:3,
-    // borderTopRightRadius:3,
-    // borderBottomLeftRadius:3,
-    // borderBottomRightRadius:3,
     borderRadius: 3,
   },
+  postsTab: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'space-around',
+    margin: 30,
+  }
 });

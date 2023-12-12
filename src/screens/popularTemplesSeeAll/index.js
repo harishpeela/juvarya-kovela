@@ -61,7 +61,7 @@ const SeeAll = ({navigation}) => {
       <BackgroundImage />
       <View style={{margin: '5%', marginTop: '10%', marginLeft: '10%'}}>
         <BackHeaderNew
-          txt={'Popular Tempels'}
+          txt={'Popular Temples'}
           onPress={() => navigation.goBack()}
         />
       </View>
@@ -91,12 +91,16 @@ const SeeAll = ({navigation}) => {
                   }>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image
-                      source={{uri: item.logo}}
+                      source={{
+                        uri: item.logo
+                          ? item?.logo
+                          : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+                      }}
                       style={{height: 70, width: 70, borderRadius: 70 / 2}}
                     />
                     <View style={{marginLeft: 10}}>
                       <Text>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '95%'}}>
+                      <Text numberOfLines={2} style={{maxWidth: '85%'}}>
                         {item.desciption}{' '}
                       </Text>
                     </View>
