@@ -42,8 +42,8 @@ const InvitationScreen = ({ navigation, id,route }) => {
             submit(id, email);
             console.log('Email is valid:', email);
             Alert.alert(
-                'Invalid Email',
-                'Please enter a valid email address.',
+                'Notification Send',
+                'Navigate to Home Page',
                 [{
                     text: 'OK', onPress: () => {
                         // navigation.goBack(null)
@@ -51,7 +51,6 @@ const InvitationScreen = ({ navigation, id,route }) => {
                         navigation.pop()
                         navigation.pop()
                     }
-                    
                 }]
             );
         } else {
