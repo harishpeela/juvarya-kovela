@@ -318,19 +318,21 @@ const ViewTempleProfile = ({route, navigation}) => {
                         allTexts.screenNames.followersmembership,
                         {
                           id: trfData?.jtProfile,
+                          roleId: roleId,
                         },
                       )
                     }
                   />
                   <CommunityComp
                     itemCommunity={memberShip?.membershipCount}
-                    onPressmembership={() =>
-                      navigation.navigate(
-                        allTexts.screenNames.profilemembership,
-                        {
-                          trfdata: trfData,
-                        },
-                      )
+                    onPressmembership={
+                      () => alert('page under development')
+                      // navigation.navigate(
+                      //   allTexts.screenNames.profilemembership,
+                      //   {
+                      //     trfdata: trfData,
+                      //   },
+                      // )
                     }
                   />
                 </View>
@@ -349,7 +351,17 @@ const ViewTempleProfile = ({route, navigation}) => {
                   shadow={true}
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
-                <DirectionsTabComp />
+                <DirectionsTabComp
+                  onPress={() => {
+                    navigation.navigate(
+                      allTexts.screenNames.profilememberships,
+                      {
+                        trfdata: trfData,
+                        roleId: roleId,
+                      },
+                    );
+                  }}
+                />
                 {/* <CreateFeedTabComp
                     roleId={roleId}
                     onPlusPress={() =>

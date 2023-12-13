@@ -3,15 +3,17 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
-    backgroundColor:colors.white,
-    paddingTop:40,
-    paddingHorizontal:30
+    backgroundColor: colors.white,
+    paddingTop: 40,
+    paddingHorizontal: 30,
 
   },
   header:{
-    flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '10%',
+    margin: '5%',
   },
   container1: {
     // borderWidth: 2,
