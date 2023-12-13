@@ -46,6 +46,7 @@ import {
   EventDetails,
   CreateEvent,
   ProfileMemberShips,
+  InvitationScreen
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -106,7 +107,8 @@ const App = () => {
       donationslist,
       eventsDetails,
       createEvent,
-      profilememberships
+      profilememberships,
+      invitationScreen
     },
   } = allTexts;
   useEffect(() => {
@@ -126,6 +128,7 @@ const App = () => {
   }, []);
   const AuthStack = () => {
     return (
+      
       <Stack.Navigator>
         <Stack.Screen
           name={splash}
@@ -444,6 +447,13 @@ const App = () => {
         <Stack.Screen
           name={profilememberships}
           component={ProfileMemberShips}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={invitationScreen}
+          component={InvitationScreen}
           options={{
             headerShown: false,
           }}

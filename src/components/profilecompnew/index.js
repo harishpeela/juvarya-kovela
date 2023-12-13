@@ -12,15 +12,24 @@ import {
 } from '../backgroundFlower';
 export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
-    <TouchableOpacity onPress={onPressFollowers} style={styles.followersView}>
+    <TouchableOpacity  style={styles.followersView}>
       <Text style={styles.postText1}>{followCount}</Text>
       <Text style={styles.postText}>Followers</Text>
     </TouchableOpacity>
   );
 };
-export const CommunityComp = ({itemCommunity, onPressmembership}) => {
+
+export const CommunityComp = ({navigation,roleId,itemCommunity}) => {
   return (
-    <TouchableOpacity onPress={onPressmembership} style={styles.followersView}>
+    <TouchableOpacity 
+    onPress={() =>
+        navigation.navigate(
+          allTexts.screenNames.invitationScreen,{
+            roleId:roleId
+          }
+        )
+      }
+    style={styles.followersView}>
       <Text style={styles.postText1}>{itemCommunity}</Text>
       <Text style={styles.postText}> Members </Text>
     </TouchableOpacity>

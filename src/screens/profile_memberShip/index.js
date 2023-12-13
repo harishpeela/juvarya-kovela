@@ -2,7 +2,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useCallback } from 'react';
-import useFocusEffect from '@react-navigation/native';
 import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
 import {
   BackgroundImage,
@@ -11,21 +10,23 @@ import {
   Loader,
   MemberShipCard,
 } from '../../components';
-
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
 import Icon from "react-native-vector-icons/AntDesign"
+import { useFocusEffect } from '@react-navigation/native';
 
-const ProfileMembership = ({ route, navigation,roleId }) => {
-  // const { id } = route.params || {};
+
+const ProfileMembership = ({ route, navigation, roleId }) => {
+  const { id } = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
-  // const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
-  const [filteredData, setFilteredData] = useState(followersList);
-console.log("profilememberShips roleId displaying =>>>>>>>" + roleId)
+  const [filteredData, setFilteredData] = useState();
+
+  console.log("profilememberShips roleId displaying =>>>>>>>" + roleId)
+
   const data2 = [
     {
       name: "Harsha",
@@ -41,57 +42,51 @@ console.log("profilememberShips roleId displaying =>>>>>>>" + roleId)
     }
   ]
 
-  // const MembershipData = async () => {
-  //   setaLoader(true);
-  //   try {
-  //     let result = await MemberShipDetails(id);
-  //     console.log('res', result?.data);
-  //     if (result) {
-  //       setaLoader(false);
-  //       setData(result?.data?.memberships);
-  //     } else {
-  //       setaLoader(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in membership details api', error);
-  //     setaLoader(false);
-  //     alert(error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   MembershipData();
-  // }, []);
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     MembershipData();
-  //     return () => {};
-  //   }, []),
-  // );
+  // useFocusEffect is used here to run the effect only when the screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      const MembershipData = async () => {
+        setaLoader(true);
+        try {
+          let result = await MemberShipDetails(id);
+          console.log('res', result?.data);
+          if (result) {
+            setaLoader(false);
+            setData(result?.data?.memberships);
+          } else {
+            setaLoader(false);
+          }
+        } catch (error) {
+          console.log('error in membership details api', error);
+          setaLoader(false);
+          alert(error);
+        }
+      }
+      MembershipData();
+    }, [])
+  );
+
   return (
     <SafeAreaView>
-      {/* <BackgroundImage /> */}
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
             onPress={() => navigation.goBack()}
-          // onPlusPress={() =>
-          //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
-          // }
           />
           <TouchableOpacity onPress={() => {
             navigation.navigate(allTexts.screenNames.profilememberships)
           }}>
-            {roleId ? (
-            <Text style={styles.joinText}>Join</Text>
-            ):(
-              <TouchableOpacity  onPress={() => {
-                navigation.navigate(allTexts.screenNames.memberShip,{
-                    navigation:navigation,
+            {roleId !== 'ROLE_ITEM_ADMIN' ? (
+              <Text style={styles.joinText}>Join</Text>
+            ) : (
+              <TouchableOpacity onPress={() => {
+                navigation.navigate(allTexts.screenNames.memberShip, {
+                  navigation: navigation,
                 })
-            }}>
-              <Icon name="pluscircleo" size={24} color={colors.black} />
-            </TouchableOpacity>
+              }}>
+                <Icon name="pluscircleo" size={24} color={colors.black} />
+              </TouchableOpacity>
             )}
           </TouchableOpacity>
         </View>
