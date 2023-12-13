@@ -51,7 +51,11 @@ const ProfileMemberShips = ({navigation, route}) => {
         )}
       </View>
       <View style={{marginTop: '10%'}}>
-        <MemberShipCard data={data} length={membership.length ? membership.length : '0' } />
+        <MemberShipCard
+          data={data}
+          length={membership.length ? membership.length : '0'}
+          txt={roleId ? 'Invite' : 'Join Now'}
+        />
       </View>
     </View>
   );
