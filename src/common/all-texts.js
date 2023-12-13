@@ -150,7 +150,8 @@ export const allTexts = {
     donationslist: 'DonationsList',
     eventsDetails: 'EventDetails',
     createEvent: 'CreateEvent',
-    profilememberships: 'ProfileMemberShips'
+    profilememberships: 'ProfileMemberShips',
+    invitationScreen: 'InvitationScreen',
   },
   homeHeader: {
     welcome: 'Welcome ',

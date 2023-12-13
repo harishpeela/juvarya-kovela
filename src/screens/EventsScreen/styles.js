@@ -9,7 +9,6 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems:'center',
-        // borderWidth:2
     },
     bodyContainer: {
         marginHorizontal: '4%',
@@ -36,6 +35,8 @@ export const styles = StyleSheet.create({
     },
     followersContainer: {
         height: '100%',
+        // borderWidth:2,
+        // paddingBottom:300
     },
     sortContainer: {
         display: 'flex',
@@ -44,7 +45,6 @@ export const styles = StyleSheet.create({
         // borderWidth:2,
     },
     list: {
-        // borderWidth:1,
         marginBottom: 300,
     },
     noDataContainer: {
@@ -58,6 +58,8 @@ export const styles = StyleSheet.create({
     },
     flatListStyle:{
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        borderWidth:1,
+        paddingBottom:500,
     }
 });
