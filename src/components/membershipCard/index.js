@@ -5,13 +5,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../../common';
-export const MemberShipCard = ({data, onPress}) => {
+export const MemberShipCard = ({data, onPress, length, txt}) => {
   return (
     <View>
       <FlatList
         data={data}
         keyboardShouldPersistTaps="handled"
-        keyExtractor={({item, index}) => index}
+        keyExtractor={({item, index}) => item}
         renderItem={({item, index}) => (
           <LinearGradient
             colors={['#f7f307', '#aba944']}
@@ -48,7 +48,10 @@ export const MemberShipCard = ({data, onPress}) => {
                   <Text style={styles.typetext}>BASIC</Text>
                 </View>
               )}
-              <Text style={styles.name}> {item?.type}</Text>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.name}>{length} </Text>
+                <Text style={styles.name}> {item?.type}</Text>
+              </View>
             </View>
             <View style={styles.underLine} />
             <View>
@@ -58,7 +61,7 @@ export const MemberShipCard = ({data, onPress}) => {
                   <Text style={styles.offerPrice}> $ 299</Text>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={onPress}>
-                  <Text style={styles.buttext}>Upgrade </Text>
+                  <Text style={styles.buttext}>{txt}</Text>
                 </TouchableOpacity>
               </View>
             </View>

@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { colors, fontSize } from '../../common';
+import {StyleSheet, Dimensions} from 'react-native';
+import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
- 
     Header: {
         marginHorizontal: '5%',
         marginVertical: 10,
@@ -63,6 +62,4 @@ export const styles = StyleSheet.create({
         borderWidth:1,
         paddingBottom:500,
     }
-
-
 });

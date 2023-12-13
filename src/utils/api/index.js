@@ -41,8 +41,9 @@ const endpoints = {
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
+  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
   FEED: '/jtfeed/',
-  EVENTS_LIST: 'jtevent/list',
+  EVENTS_LIST: 'jtevent/search/item',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -237,10 +238,10 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const EventList = async (pgno, pgSize) => {
+export const EventList = async (pgno, pgSize, id) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
+      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}&profileId=${id}`,
     );
     return result;
   } catch (error) {
@@ -267,10 +268,10 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipDetails = async id => {
+export const MemberShipDetails = async (pageNo, pageSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+      `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pageNo}&pageSize=${pageSize}`,
     );
     return result;
   } catch (error) {

@@ -6,9 +6,8 @@ import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from
 import {
   BackgroundImage,
   BackHeaderNew,
-  FollowersListCard3,
   Loader,
-  MemberShipCard,
+  FollowersListCard3,
 } from '../../components';
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
@@ -29,19 +28,21 @@ const ProfileMembership = ({ route, navigation, roleId }) => {
 
   const data2 = [
     {
-      name: "Harsha",
-      type: "Premium"
+      id: 1,
+      name: 'hasrsh',
+      type: 'BASIC',
     },
     {
-      name: 'Harish',
-      type: 'Gold'
+      id: 2,
+      name: 'mahesh',
+      type: 'AVERAGE',
     },
     {
-      name: 'Ajay',
-      type: "basic"
-    }
-  ]
-
+      id: 3,
+      name: 'mahesh',
+      type: 'PREMIUM',
+    },
+  ];
   // useFocusEffect is used here to run the effect only when the screen comes into focus
   useFocusEffect(
     useCallback(() => {
@@ -65,7 +66,6 @@ const ProfileMembership = ({ route, navigation, roleId }) => {
       MembershipData();
     }, [])
   );
-
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
@@ -95,28 +95,23 @@ const ProfileMembership = ({ route, navigation, roleId }) => {
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <View style={styles.followersContainer}>
-            {loader ? (
-              <Loader size={'large'} color={colors.orangeColor} />
+          <View style={{marginTop: '10%'}}>
+            {flatData?.length ? (
+              // <FollowersListCard3
+              //   onPress={() => alert('under development')}
+              //   data={flatData}
+              // />
+              <FollowersListCard3 data={flatData} />
+
             ) : (
-              <>
-                <ScrollView showsVerticalScrollIndicator={false}>
-                  {data2 !== '' && (
-                    <FlatList
-                      style={styles.list}
-                      data={data2}
-                      contentContainerStyle={styles.flatListStyle}
-                      keyExtractor={(item, index) => item.toString()}
-                      renderItem={({ item }) => (
-                        <FollowersListCard3
-                          item={item}
-                          img={null}
-                        />
-                      )}
-                    />
-                  )}
-                </ScrollView>
-              </>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '50%',
+                }}>
+                <Text> no memberships for this temple</Text>
+              </View>
             )}
           </View>
         )}
