@@ -19,6 +19,8 @@ export const styles = StyleSheet.create({
     container:{
       // borderWidth:1,
       alignItems:'center',
+      justifyContent:'center',
+      
       // paddingVertical:5,
       // marginVertical:10,
     },
