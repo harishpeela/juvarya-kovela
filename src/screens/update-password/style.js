@@ -19,6 +19,7 @@ export const styles = StyleSheet.create({
   },
   fieldContainer: {
     marginTop: -30,
+    
   },
   buttonContainer: {
     marginTop: 15,

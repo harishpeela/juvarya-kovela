@@ -182,7 +182,7 @@ const Profile = ({navigation}) => {
         <ProfileInfo
           name={userDetails?.username}
           email={userDetails?.email}
-          dob={dob}
+          // dob={dob}
         />
       </View>
       <View style={styles.profileItemsHeader}>
@@ -211,13 +211,13 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.updatePassword);
             }}
           />
-          <Item
+          {/* <Item
             svg={<FontAwesome5 name="save" size={20} />}
             text={t('posts')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
-          />
+          /> */}
           <Item
             svg={<Icon name="profile" size={20} />}
             text={t('Update Profile')}
