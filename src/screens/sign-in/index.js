@@ -51,26 +51,54 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
-    let payload = {
-      primaryContact: data?.email,
-      password: data.password,
-    };
-    try {
-      let result = await loginUser1(payload);
-      if (result && result.status === 200) {
-        const {
-          data: {accessToken, tokenType},
-        } = result;
-        await saveLoginSessionDetails(tokenType, accessToken);
-        ApiData();
-        setLoginDetails(accessToken);
+    if (data.email.length > 10) {
+      let payload = {
+        // primaryContact: data?.email,
+        email: data?.email,
+        password: data.password,
+      };
+      console.log('playload with email', payload);
+      try {
+        let result = await loginUser1(payload);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else {
+          actions.setSubmitting(false);
+          Alert.alert('Error', result?.message);
+        }
+      } catch (error) {
         actions.setSubmitting(false);
-      } else {
-        actions.setSubmitting(false);
-        Alert.alert('Error', result?.message);
       }
-    } catch (error) {
-      actions.setSubmitting(false);
+    } else {
+      let payload = {
+        primaryContact: data?.email,
+        password: data.password,
+      };
+      console.log('playload with mobile', payload);
+
+      try {
+        let result = await loginUser1(payload);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else {
+          actions.setSubmitting(false);
+          Alert.alert('Error', result?.message);
+        }
+      } catch (error) {
+        actions.setSubmitting(false);
+      }
     }
   };
 
@@ -106,14 +134,14 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number'}
+                  title={'Mobile number / email'}
                   isFlag
-                  keyboardType={'numeric'}
+                  // keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  maxLength={10}
+                  maxLength={20}
                 />
                 <View style={{height: 20}} />
                 <View>
