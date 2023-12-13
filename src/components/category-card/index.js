@@ -65,13 +65,13 @@ export const UserFeedCompList = ({
     if (status) {
       SaveFeedApi();
       ToastAndroid.show(
-        'You are successfully saved the feed',
+        'Saved',
         ToastAndroid.SHORT,
       );
     } else {
       DeleteFeed();
       ToastAndroid.show(
-        'You are successfully unsaved the feed',
+        'Unsaved',
         ToastAndroid.SHORT,
       );
     }

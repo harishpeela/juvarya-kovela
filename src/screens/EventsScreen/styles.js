@@ -3,13 +3,14 @@ import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({
  
     Header: {
-        marginHorizontal: '5%',
+        marginHorizontal: '-2%',
         marginVertical: 10,
         marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
+
     bodyContainer: {
         marginHorizontal: '4%',
         display: 'flex',
@@ -32,6 +33,8 @@ export const styles = StyleSheet.create({
     searchContainer: {
         width: '82%',
         height: '100%',
+        margin:'2'
+       
     },
     followersContainer: {
         height: '100%',
@@ -40,6 +43,7 @@ export const styles = StyleSheet.create({
         display: 'flex',
         width: '15%',
         height: '100%',
+        
         // borderWidth:2,
     },
     list: {

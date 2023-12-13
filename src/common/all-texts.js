@@ -33,6 +33,7 @@ export const allTexts = {
       tDescription: 'Description',
       tCommunity: 'Community',
       confirmPassword: 'confirm password',
+      currentPassword:'Current Password',
       pinCode: 'Pincode',
       line2: 'Line 2',
       line1: 'Line 1',

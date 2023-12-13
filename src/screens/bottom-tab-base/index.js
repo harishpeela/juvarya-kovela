@@ -13,6 +13,8 @@ import {
   UserFeedScreen,
 } from '..';
 import {BackgroundImage, Loader} from '../../components';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
@@ -75,8 +77,8 @@ export default BottomTabBase = ({navigation}) => {
               },
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FoundationIcon name="home" color={color} size={23} />
-                  <Text style={{color: color}}>Home</Text>
+                  <MaterialIcons name="event" color={color} size={23} />
+                  <Text style={{color: color}}>Events</Text>
                 </View>
               ),
             }}
