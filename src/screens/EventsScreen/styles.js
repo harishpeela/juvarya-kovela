@@ -1,7 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { colors, fontSize } from '../../common';
+import {StyleSheet, Dimensions} from 'react-native';
+import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
- 
     Header: {
         marginHorizontal: '-2%',
         marginVertical: 10,
@@ -9,6 +8,7 @@ export const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems:'center',
     },
 
     bodyContainer: {
@@ -38,6 +38,8 @@ export const styles = StyleSheet.create({
     },
     followersContainer: {
         height: '100%',
+        // borderWidth:2,
+        // paddingBottom:300
     },
     sortContainer: {
         display: 'flex',
@@ -47,7 +49,6 @@ export const styles = StyleSheet.create({
         // borderWidth:2,
     },
     list: {
-        // borderWidth:1,
         marginBottom: 300,
     },
     noDataContainer: {
@@ -61,8 +62,8 @@ export const styles = StyleSheet.create({
     },
     flatListStyle:{
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        borderWidth:1,
+        paddingBottom:500,
     }
-
-
 });

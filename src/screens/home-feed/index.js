@@ -1,25 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useCallback} from 'react';
-import {useFocusEffect} from '@react-navigation/native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
   TouchableOpacity,
   RefreshControl,
   Text,
   useColorScheme,
+  StatusBar,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
-import {BackgroundImage} from '../../components';
-import {getHomeFeedList, getNotifications} from '../../utils/api';
-import {UserFeedCompList} from '../../components';
-import {Loader} from '../../components';
-import {allTexts, colors} from '../../common';
-import {FlatList} from 'react-native-gesture-handler';
+import { BackgroundImage } from '../../components';
+import { getHomeFeedList, getNotifications } from '../../utils/api';
+import { UserFeedCompList } from '../../components';
+import { Loader } from '../../components';
+import { allTexts, colors } from '../../common';
+import { FlatList } from 'react-native-gesture-handler';
 import Share from 'react-native-share';
 
-const UserFeedScreen = ({navigation}) => {
+
+const UserFeedScreen = ({ navigation }) => {
   const [loader, setloader] = useState();
   const [homeFeedList, setHomeFeedList] = useState([]);
   const [refrsh, setRefrsh] = useState(true);
@@ -57,7 +59,7 @@ const UserFeedScreen = ({navigation}) => {
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
+        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
         // let responce = result?.data?.jtFeeds;
         // responce === null ? setNoData(true) : setNoData(false);
         // responce && setHomeFeedList([...homeFeedList, ...responce]);
@@ -113,7 +115,7 @@ const UserFeedScreen = ({navigation}) => {
       if (apiPageNo >= 0) {
         listFeed(apiPageNo, apiPageSize);
       }
-      return () => {};
+      return () => { };
     }, []),
   );
   return (
@@ -122,6 +124,11 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
+      <StatusBar
+        backgroundColor="black"
+        barStyle="light-content"
+        translucent={true}
+      />
       <BackgroundImage />
       <View style={styles.navBarContainer}>
         <View style={styles.buttonContainer}>
@@ -166,7 +173,7 @@ const UserFeedScreen = ({navigation}) => {
             keyboardShouldPersistTaps="handled"
             // decelerationRate={0.3}
             keyExtractor={(item, index) => index}
-            renderItem={({item, index}) => (
+            renderItem={({ item, index }) => (
               <UserFeedCompList
                 id={item?.id}
                 post={item}
@@ -183,9 +190,9 @@ const UserFeedScreen = ({navigation}) => {
                 }}
               />
             )}
-            // ListFooterComponent={renderLoder}
-            // onEndReached={() => loadMoreItems()}
-            // onEndReachedThreshold={0.5}
+          // ListFooterComponent={renderLoder}
+          // onEndReached={() => loadMoreItems()}
+          // onEndReachedThreshold={0.5}
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
@@ -193,7 +200,7 @@ const UserFeedScreen = ({navigation}) => {
           </View>
         ) : (
           <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}

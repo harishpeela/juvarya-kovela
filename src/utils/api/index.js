@@ -40,8 +40,10 @@ const endpoints = {
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
+  MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
+  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
   FEED: '/jtfeed/',
-  EVENTS_LIST: 'jtevent/list',
+  EVENTS_LIST: 'jtevent/search/item',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -119,7 +121,7 @@ export const SearchPopularTemples = async txt => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.NEW_POPULAR_TEMPLES}?query=${txt}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -130,7 +132,7 @@ export const SearchTempleRoleWithId = async profId => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.NEW_TEMPLE_ROLE_WITH_ID}=${profId}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -188,7 +190,7 @@ export const getTempledetailsWithId = async id => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.NEW_GET_TEMPLESDETAILS_WITH_TEMPID}/${id}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -199,7 +201,7 @@ export const DeleteSavedFeed = async id => {
   try {
     let result = await axiosMultiPartFormData1.delete(
       `${endpoints.DELETE_SAVE_FEED}=${id}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -236,10 +238,10 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const EventList = async (pgno, pgSize) => {
+export const EventList = async (pgno, pgSize, id) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
+      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}&profileId=${id}`,
     );
     return result;
   } catch (error) {
@@ -266,16 +268,30 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipDetails = async id => {
+export const MemberShipDetails = async (pageNo, pageSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+      `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pageNo}&pageSize=${pageSize}`,
     );
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
+export const MemberShipInvite = async (id, email) => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_INVITE}/${id}`,
+      { email: email }
+    );
+
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 export const GetPosts = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosNewData1.get(
@@ -302,7 +318,7 @@ export const verifyAdminProfile = async (profileId, custId) => {
   try {
     let result = await axiousInstanceFeed.get(
       `${endpoints.NEW_ADMIN_VERIFY}?profileId=${profileId}&customerId=${custId}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -313,7 +329,7 @@ export const NewFavFollowersList = async (profileId, pgno, pgsze) => {
   try {
     let result = await axiosNewData1.get(
       `${endpoints.NEW_FAVORITES}?page=${pgno}&pageSize=${pgsze}&profileId=${profileId}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -384,7 +400,7 @@ export const getTempleDetails = async id => {
   try {
     let result = await axiousInstance.get(
       `${endpoints.GET_TEMPLE_DETAILS}${id}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -506,7 +522,7 @@ export const getTempleList = async (pageNo, pageSize) => {
   try {
     let result = await axiousInstance.get(
       `${endpoints.GET_TEMPLE_LIST}?pageNumber=${pageNo}&pageSize=${pageSize}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {
@@ -517,7 +533,7 @@ export const getFeedList = async (pageNo, pageSize, id) => {
   try {
     let result = await axiousInstance.get(
       `${endpoints.GET_FEED_LIST_IN_DETAILS}?page=${pageNo}&pageSize=${pageSize}&itemId=${id}&popular=true`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     console.log(result.headers['x-response-time']);
     return result;
@@ -532,7 +548,7 @@ export const getHomeFeedList = async (pageNo, pageSize) => {
     var n = d.getTime();
     let result = await axiosNewData1.get(
       `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     var a = new Date();
     var ns = a.getTime();
@@ -579,7 +595,7 @@ export const getSearchedTemple = async query => {
   try {
     let result = await axiousInstance.get(
       `${endpoints.MORE_TO_EXPLORE}?page=0&pageSize=20&query=${query}`,
-      {retry: 5, retryDelay: 3000},
+      { retry: 5, retryDelay: 3000 },
     );
     return result;
   } catch (error) {

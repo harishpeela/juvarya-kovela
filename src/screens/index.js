@@ -41,6 +41,9 @@ import MemberShip from './Membership/Index';
 import EventsScreen from './EventsScreen';
 import DonationsList from './DonationsList';
 import EventDetails from './eventDetails';
+import CreateEvent from './CreateEvent';
+import ProfileMemberShips from './ProfileMemberShips';
+import InvitationScreen from './Invitation';
 
 
 export {
@@ -86,5 +89,8 @@ export {
   MemberShip,
   EventsScreen,
   DonationsList,
-  EventDetails
+  EventDetails,
+  CreateEvent,
+  ProfileMemberShips,
+  InvitationScreen
 };

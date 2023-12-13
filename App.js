@@ -1,9 +1,10 @@
 /* eslint-disable no-new */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { StatusBar } from 'react-native';
-import { LogBox } from 'react-native';
-import { allTexts } from './src/common';
+import {StatusBar} from 'react-native';
+import {LogBox} from 'react-native';
+import {allTexts} from './src/common';
+
 
 import {
   Splash,
@@ -43,21 +44,23 @@ import {
   EventsScreen,
   DonationsList,
   EventDetails,
+  CreateEvent,
+  ProfileMemberShips,
+  InvitationScreen
 } from './src/screens';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
   saveUserDetails,
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import { getHomeFeedList, getUserInfoNew } from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
-
 
 const App = () => {
   const {
@@ -101,7 +104,10 @@ const App = () => {
       memberShip,
       eventsScreen,
       donationslist,
-      eventsDetails
+      eventsDetails,
+      createEvent,
+      profilememberships,
+      invitationScreen
     },
   } = allTexts;
   useEffect(() => {
@@ -121,6 +127,7 @@ const App = () => {
   }, []);
   const AuthStack = () => {
     return (
+      
       <Stack.Navigator>
         <Stack.Screen
           name={splash}
@@ -410,7 +417,7 @@ const App = () => {
         />
         <Stack.Screen
           name={eventsScreen}
-          component={eventsScreen}
+          component={EventsScreen}
           options={{
             headerShown: false,
           }}
@@ -425,6 +432,27 @@ const App = () => {
         <Stack.Screen
           name={eventsDetails}
           component={EventDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={createEvent}
+          component={CreateEvent}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profilememberships}
+          component={ProfileMemberShips}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={invitationScreen}
+          component={InvitationScreen}
           options={{
             headerShown: false,
           }}
@@ -472,7 +500,7 @@ const App = () => {
       let response = await getHomeFeedList(0, 20);
       if (response && response?.status === 200) {
         const {
-          data: { jtFeeds },
+          data: {jtFeeds},
         } = response;
         getHomeFeedListData(jtFeeds);
       }
