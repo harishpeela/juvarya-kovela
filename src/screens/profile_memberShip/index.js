@@ -14,21 +14,20 @@ import {
   BackgroundImage,
   BackHeaderNew,
   Loader,
-  MemberShipCard,
+  FollowersListCard3,
 } from '../../components';
 import {MemberShipDetails} from '../../utils/api';
 import {styles} from './styles';
 import {colors, allTexts} from '../../common';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-const ProfileMembership = ({route, navigation, roleId}) => {
-  const {id} = route.params || {};
+const ProfileMembership = ({route, navigation}) => {
+  const {trfdata, roleId} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState(followersList);
-
   const flatData = [
     {
       id: 1,
@@ -45,13 +44,12 @@ const ProfileMembership = ({route, navigation, roleId}) => {
       name: 'mahesh',
       type: 'PREMIUM',
     },
-    ,
   ];
 
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MemberShipDetails(id);
+      let result = await MemberShipDetails(0, 20);
       console.log('res', result?.data);
       if (result) {
         setaLoader(false);
@@ -65,9 +63,9 @@ const ProfileMembership = ({route, navigation, roleId}) => {
       alert(error);
     }
   };
-  // useEffect(() => {
-  //   MembershipData();
-  // }, []);
+  useEffect(() => {
+    MembershipData();
+  }, []);
   // useFocusEffect(
   //   useCallback(() => {
   //     MembershipData();
@@ -111,10 +109,12 @@ const ProfileMembership = ({route, navigation, roleId}) => {
         ) : (
           <View style={{marginTop: '10%'}}>
             {flatData?.length ? (
-              <MemberShipCard
-                onPress={() => alert('under development')}
-                data={flatData}
-              />
+              // <FollowersListCard3
+              //   onPress={() => alert('under development')}
+              //   data={flatData}
+              // />
+              <FollowersListCard3 data={flatData} />
+
             ) : (
               <View
                 style={{

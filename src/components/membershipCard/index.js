@@ -11,7 +11,7 @@ export const MemberShipCard = ({data, onPress, length, txt}) => {
       <FlatList
         data={data}
         keyboardShouldPersistTaps="handled"
-        // keyExtractor={({item, index}) => item}
+        keyExtractor={({item, index}) => item}
         renderItem={({item, index}) => (
           <LinearGradient
             colors={['#f7f307', '#aba944']}
