@@ -50,11 +50,14 @@ const ProfileMemberShips = ({navigation, route}) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{marginTop: '10%'}}>
+      <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
         <MemberShipCard
           data={data}
           length={membership.length ? membership.length : '0'}
           txt={roleId ? 'Invite' : 'Join Now'}
+          onPress={() =>
+            navigation.navigate(allTexts.screenNames.profilemembership)
+          }
         />
       </View>
     </View>
