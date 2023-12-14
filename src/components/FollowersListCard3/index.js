@@ -18,26 +18,18 @@ const FollowersListCard3 = ({data, img}) => {
       <FlatList
         data={data}
         keyboardShouldPersistTaps="handled"
-        keyExtractor={({item, index}) => index}
+        keyExtractor={({item, index}) => index?.toString()}
         renderItem={({item, index}) => (
           <TouchableOpacity style={styles.listItemContainer}>
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
                 <Image
                   source={{
-                    uri: img
-                      ? img
+                    uri: item?.loggedInUser?.customerProfileUrl
+                      ? item?.loggedInUser?.customerProfileUrl
                       : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
                   }}
                   style={styles.image}
-                />
-                <Image
-                  source={{
-                    uri: img
-                      ? img
-                      : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
-                  }}
-                  style={styles.backgroundImage}
                 />
               </View>
               <View
@@ -52,10 +44,13 @@ const FollowersListCard3 = ({data, img}) => {
                     numberOfLines={1}
                     ellipsizeMode="tail"
                     style={styles.firstName}>
-                    {item.name}
+                    {item.loggedInUser?.firstName}
                   </Text>
+                  <Text> MemberShip Id :{item?.membershipId} </Text>
                   <View style={styles.textContainer2}>
-                    <Text style={styles.premiumText}>{item.type}</Text>
+                    <Text style={styles.premiumText}>
+                      {item?.membershipDto?.type}
+                    </Text>
                   </View>
                 </View>
               </View>

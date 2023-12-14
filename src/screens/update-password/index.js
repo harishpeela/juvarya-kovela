@@ -16,10 +16,11 @@ const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
+
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-      inputTitles: {password, confirmPassword},
+      inputTitles: {currentPassword,password, confirmPassword},
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -102,6 +103,16 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
+
+                 <PasswordField
+                  title={currentPassword}
+                  value={values.password}
+                  titleColor={colors.orangeColor}
+                  placeholder={passwordPlace}
+                  error={touched.password && errors.password}
+                  onBlur={handleBlur('password')}
+                  setState={handleChange('password')}
+                />
                 <PasswordField
                   title={password}
                   value={values.password}

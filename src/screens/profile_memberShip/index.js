@@ -48,15 +48,17 @@ const ProfileMembership = ({ route, navigation }) => {
     },
   ];
 
-
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MemberShipDetails(0, 20);
-      console.log('res', result?.data);
-      if (result) {
+      let result = await MemberShipDetails(0, 100);
+      console.log('res', result?.data?.data);
+      let responce = result?.data?.data;
+      if (responce) {
+        let dataList = responce.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+        console.log('dayta of members list', dataList);
         setaLoader(false);
-        setData(result?.data?.memberships);
+        setData(dataList);
       } else {
         setaLoader(false);
       }
@@ -112,13 +114,13 @@ const ProfileMembership = ({ route, navigation }) => {
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <View style={{ marginTop: '10%' }}>
-            {flatData?.length ? (
+          <View style={{marginTop: '10%'}}>
+            {data?.length ? (
               // <FollowersListCard3
               //   onPress={() => alert('under development')}
               //   data={flatData}
               // />
-              <FollowersListCard3 data={flatData} />
+              <FollowersListCard3 data={data} />
             ) : (
               <View
                 style={{

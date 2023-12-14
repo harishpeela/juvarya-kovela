@@ -33,9 +33,9 @@ const ProfileMemberShips = ({navigation, route}) => {
       alert(error);
     }
   };
-  // useEffect(() => {
-  //   MembershipData();
-  // }, []);
+  useEffect(() => {
+    // MembershipData();
+  }, []);
   return (
     <View style={{flex: 1}}>
       <BackgroundImage />
@@ -54,7 +54,7 @@ const ProfileMemberShips = ({navigation, route}) => {
         <MemberShipCard
           data={data}
           length={membership.length ? membership.length : '0'}
-          txt={roleId ? 'Invite' : 'Join Now'}
+          txt={roleId === 'ROLE_ITEM_ADMIN' ? 'Invite' : 'Join Now'}
           onPress={() =>
             navigation.navigate(allTexts.screenNames.profilemembership)
           }
