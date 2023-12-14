@@ -1,3 +1,5 @@
+/* eslint-disable no-sparse-arrays */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
@@ -46,14 +48,86 @@ const ProfileMembership = ({route, navigation}) => {
     },
   ];
 
+  const DataApi = [
+    {
+      id: 1,
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
+    },
+    {
+      id: 2,
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
+    },
+    {
+      id: 3,
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
+    },
+    ,
+  ];
+const Split = () => {
+  let result = DataApi;
+  let dataList = result.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+  console.log('dayta of members list', dataList);
+};
+
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MemberShipDetails(0, 20);
-      console.log('res', result?.data);
-      if (result) {
+      let result = await MemberShipDetails(0, 100);
+      console.log('res', result?.data?.data);
+      let responce = result?.data?.data;
+      if (responce) {
+        let dataList = responce.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+        console.log('dayta of members list', dataList);
         setaLoader(false);
-        setData(result?.data?.memberships);
+        setData(dataList);
       } else {
         setaLoader(false);
       }
@@ -65,6 +139,7 @@ const ProfileMembership = ({route, navigation}) => {
   };
   useEffect(() => {
     MembershipData();
+    // Split();
   }, []);
   // useFocusEffect(
   //   useCallback(() => {
@@ -108,13 +183,12 @@ const ProfileMembership = ({route, navigation}) => {
           </View>
         ) : (
           <View style={{marginTop: '10%'}}>
-            {flatData?.length ? (
+            {data?.length ? (
               // <FollowersListCard3
               //   onPress={() => alert('under development')}
               //   data={flatData}
               // />
-              <FollowersListCard3 data={flatData} />
-
+              <FollowersListCard3 data={data} />
             ) : (
               <View
                 style={{
