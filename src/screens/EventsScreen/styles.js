@@ -2,15 +2,15 @@ import {StyleSheet, Dimensions} from 'react-native';
 import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
     Header: {
-        marginHorizontal: '5%',
+        marginHorizontal: '-2%',
         marginVertical: 10,
         marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems:'center',
-        // borderWidth:2
     },
+
     bodyContainer: {
         marginHorizontal: '4%',
         display: 'flex',
@@ -33,18 +33,22 @@ export const styles = StyleSheet.create({
     searchContainer: {
         width: '82%',
         height: '100%',
+        margin:'2'
+       
     },
     followersContainer: {
         height: '100%',
+        // borderWidth:2,
+        // paddingBottom:300
     },
     sortContainer: {
         display: 'flex',
         width: '15%',
         height: '100%',
+        
         // borderWidth:2,
     },
     list: {
-        // borderWidth:1,
         marginBottom: 300,
     },
     noDataContainer: {
@@ -58,6 +62,8 @@ export const styles = StyleSheet.create({
     },
     flatListStyle:{
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
+        borderWidth:1,
+        paddingBottom:500,
     }
 });

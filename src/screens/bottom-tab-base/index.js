@@ -13,6 +13,8 @@ import {
   UserFeedScreen,
 } from '..';
 import {BackgroundImage, Loader} from '../../components';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 import FoundationIcon from 'react-native-vector-icons/Foundation';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
@@ -72,16 +74,16 @@ export default BottomTabBase = ({navigation}) => {
             showLabel: false,
           }}>
           <Tab.Screen
-            name={allTexts.tabNames.home}
-            component={UserFeedScreen}
+            name={allTexts.screenNames.eventsScreen}
+            component={EventsScreen}
             options={{
               tabBarStyle: {
                 height: 200,
               },
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FoundationIcon name="home" color={color} size={30} />
-                  <Text style={{color: color}}>Home</Text>
+                  <MaterialIcons name="event" color={color} size={23} />
+                  <Text style={{color: color}}>Events</Text>
                 </View>
               ),
             }}
@@ -92,8 +94,8 @@ export default BottomTabBase = ({navigation}) => {
             options={{
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FeatherIcon name="search" color={color} size={30} />
-                  <Text style={{color: color}}>search</Text>
+                  <FeatherIcon name="search" color={color} size={23} />
+                  <Text style={{color: color}}>Search</Text>
                 </View>
               ),
             }}
@@ -113,9 +115,9 @@ export default BottomTabBase = ({navigation}) => {
             ),
           }}
         /> */}
-          <Tab.Screen
-            name={allTexts.screenNames.eventsScreen}
-            component={getEventsScreen}
+          <Tab.Screen          
+            name={allTexts.tabNames.home}
+            component={UserFeedScreen}
             // name={"sas"}
             options={{
               tabBarIcon: ({color, size}) => (
@@ -142,8 +144,8 @@ export default BottomTabBase = ({navigation}) => {
             options={{
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FontistoIcon name="heart-alt" color={color} size={25} />
-                  <Text style={{color: color}}>saved</Text>
+                  <FontistoIcon name="heart-alt" color={color} size={20} />
+                  <Text style={{color: color}}>Favorites</Text>
                 </View>
               ),
             }}
@@ -155,8 +157,8 @@ export default BottomTabBase = ({navigation}) => {
             options={{
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FeatherIcon name="user" color={color} size={30} />
-                  <Text style={{color: color}}>profile</Text>
+                  <FeatherIcon name="user" color={color} size={23} />
+                  <Text style={{color: color}}>Profile</Text>
                 </View>
               ),
             }}
