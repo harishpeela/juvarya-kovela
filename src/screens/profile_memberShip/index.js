@@ -24,29 +24,83 @@ import { colors, allTexts } from '../../common';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const ProfileMembership = ({ route, navigation }) => {
-  const { trfdata, roleId,id } = route.params || {};
+  const { id, roleId } = route.params || {};
+
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
-  const [filteredData, setFilteredData] = useState(followersList);
-  const flatData = [
+  const [filteredData, setFilteredData] = useState();
+
+  const DataApi = [
     {
       id: 1,
-      name: 'hasrsh',
-      type: 'BASIC',
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
     },
     {
       id: 2,
-      name: 'mahesh',
-      type: 'AVERAGE',
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
     },
     {
       id: 3,
-      name: 'mahesh',
-      type: 'PREMIUM',
+      customerID: 19,
+      membershipId: 8,
+      membershipDto: {
+        id: 8,
+        name: 'BASIC',
+        profileId: 88,
+        type: 'BASIC',
+      },
+      loggedInUser: {
+        id: 19,
+        email: 'syamala.pacharla@juvarya.com',
+        firstName: 'syamala pacharla',
+        roles: ['ROLE_USER', 'ROLE_ADMIN'],
+        customerProfileUrl:
+          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
+        primaryContact: '8888888888',
+      },
     },
+    ,
   ];
+const Split = () => {
+  let result = DataApi;
+  let dataList = result.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+  console.log('dayta of members list', dataList);
+  setData(dataList);
+};
 
   const MembershipData = async () => {
     setaLoader(true);
@@ -68,9 +122,10 @@ const ProfileMembership = ({ route, navigation }) => {
       alert(error);
     }
   };
-  // useEffect(() => {
-  //   MembershipData();
-  // }, []);
+  useEffect(() => {
+    // MembershipData();
+    // Split();
+  }, []);
   // useFocusEffect(
   //   useCallback(() => {
   //     MembershipData();
@@ -84,6 +139,7 @@ const ProfileMembership = ({ route, navigation }) => {
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
+            isArrrow={true}
             onPress={() => navigation.goBack()}
           // onPlusPress={() =>
           //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
@@ -97,14 +153,13 @@ const ProfileMembership = ({ route, navigation }) => {
               <>
               </>
             ) : (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate(allTexts.screenNames.invitationScreen, {
-                    navigation: navigation,
-                    id:id
-                  });
-                }}>
-                <Text style={styles.joinText}>Invite</Text>
+              <TouchableOpacity onPress={() => {
+                navigation.navigate(allTexts.screenNames.invitationScreen, {
+                  navigation: navigation,
+                })
+              }}>
+                {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
+                <Text style={{fontSize: 20, color: colors.orangeColor}}>Invite</Text>
               </TouchableOpacity>
             )}
           </TouchableOpacity>
@@ -116,10 +171,6 @@ const ProfileMembership = ({ route, navigation }) => {
         ) : (
           <View style={{marginTop: '10%'}}>
             {data?.length ? (
-              // <FollowersListCard3
-              //   onPress={() => alert('under development')}
-              //   data={flatData}
-              // />
               <FollowersListCard3 data={data} />
             ) : (
               <View

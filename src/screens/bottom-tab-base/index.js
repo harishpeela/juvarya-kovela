@@ -31,6 +31,7 @@ export default BottomTabBase = ({navigation}) => {
   //     component
   //   )
   // }
+  const GetEvents = () => <EventsScreen navigation={navigation} />;
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetFavScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
@@ -75,7 +76,7 @@ export default BottomTabBase = ({navigation}) => {
           }}>
           <Tab.Screen
             name={allTexts.screenNames.eventsScreen}
-            component={EventsScreen}
+            component={GetEvents}
             options={{
               tabBarStyle: {
                 height: 200,

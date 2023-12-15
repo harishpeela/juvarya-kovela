@@ -41,9 +41,9 @@ const FollowersMembership = ({route, navigation}) => {
     }
   };
 
-  // useEffect(() => {
-  //   TempleFolowers();
-  // }, [route]);
+  useEffect(() => {
+    TempleFolowers();
+  }, [route]);
 
   const handleSearch = query => {
     setLoading(true);
@@ -59,10 +59,12 @@ const FollowersMembership = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.followersHeader}>
         <BackHeaderNew
+          isArrrow={true}
           txt={
-            followersList.length > 0
-              ? `${followersList.length} Followers`
-              : null // or any fallback value you want when followersList is not greater than 0
+            // followersList.length > 0
+            //   ? `${followersList.length}
+            'Followers'
+            // : null // or any fallback value you want when followersList is not greater than 0
           }
           onPress={() => navigation.goBack()}
           txtColor={colors.black}

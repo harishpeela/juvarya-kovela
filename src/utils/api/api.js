@@ -23,7 +23,7 @@ export const DONATION_URL = 'https://kovela.app/donations/';
 // export const BASE = 'http://20.235.89.214:9094/';
 // export const POPULARURL = 'http://20.235.89.214:9096/';
 // export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
-export const EVENTS_URL = 'http://20.235.89.214:9060/';
+export const EVENTS_URL = 'https://kovela.app/events/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({

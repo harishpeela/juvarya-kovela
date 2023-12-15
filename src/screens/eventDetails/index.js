@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
-import {Text, View, TouchableOpacity, Pressable} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Pressable,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -18,8 +24,6 @@ import {BackgroundImage2} from '../../components/backgroundImage';
 import Btn from '../../components/btn';
 import {Formik, Field} from 'formik';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {PasswordField} from '../../components/inputfield';
-import {Picker} from '@react-native-picker/picker';
 import Icon3 from 'react-native-vector-icons/Entypo';
 
 const EventDetails = ({navigation}) => {
@@ -27,17 +31,9 @@ const EventDetails = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
   const {
-    screenNames: {signin, otpScreen},
-    paragraphs: {alreadyAccount},
-    placeHolders: {
-      fistNamePlace,
-      lastNamePlace,
-      emailPlace,
-      confirmPasswordPlace,
-      passwordPlace,
-    },
+    placeHolders: {emailPlace},
     headings: {
-      inputTitles: {phoneNo, email, username, Gender},
+      inputTitles: {phoneNo, email},
     },
   } = allTexts;
 
