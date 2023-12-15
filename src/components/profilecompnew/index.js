@@ -74,14 +74,24 @@ export const ContactTabcomp = ({onPressContact}) => {
     </TouchableOpacity>
   );
 };
-export const DirectionsTabComp = ({role, onPress}) => {
+export const DirectionsTabComp = ({roleId,trfData,navigation}) => {
   return (
     <TouchableOpacity
       style={[styles.voidButton1, styles.button]}
-      onPress={onPress}>
+
+      onPress={() => {
+        navigation.navigate(
+          allTexts.screenNames.profilememberships,
+          {
+            trfdata: trfData,
+            roleId: roleId,
+          },
+        );
+      }}
+      >
       <BackgroundSmallFlowerUser />
       <Text style={styles.voidButton1Text}>
-        {role ? 'Add a Member' : 'Become a member'}
+        {roleId ? 'Add a Member' : 'Become a member'}
       </Text>
     </TouchableOpacity>
   );
