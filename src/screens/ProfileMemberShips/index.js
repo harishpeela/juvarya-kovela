@@ -40,7 +40,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     <View style={{flex: 1}}>
       <BackgroundImage />
       <View style={styles.header}>
-        <BackHeaderNew txt={'Members'} onPress={() => navigation.goBack()} />
+        <BackHeaderNew txt={'Members'} onPress={() => navigation.pop()} />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
             onPress={() => {
