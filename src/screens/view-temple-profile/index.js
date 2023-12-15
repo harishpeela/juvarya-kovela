@@ -22,13 +22,13 @@ import {
   BackHeaderNew,
   EventCard,
 } from '../../components';
-import { styles } from './styles';
+import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import React, { useState, useEffect, useContext } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { allTexts } from '../../common';
-import { Data } from '../home-feed/formateDetails';
+import {allTexts} from '../../common';
+import {Data} from '../home-feed/formateDetails';
 import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
@@ -38,7 +38,7 @@ import {
   EventList,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import { ProfileSeconTab, ProfileFourthTab } from '../../components';
+import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
   CommunityComp,
   FollowersComp,
@@ -49,17 +49,17 @@ import {
   ProfileTimingTabs,
   Danation_Add_Card,
 } from '../../components';
-import { ProfileImage } from '../../components';
-import { colors } from '../../common';
-import { PostsComp } from '../../components/profilecompnew/postsComp';
-import { SearchTempleRoleWithId } from '../../utils/api';
+import {ProfileImage} from '../../components';
+import {colors} from '../../common';
+import {PostsComp} from '../../components/profilecompnew/postsComp';
+import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const ViewTempleProfile = ({ route, navigation }) => {
+const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
-  const { data } = route.params || {};
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,
@@ -84,7 +84,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  console.log("RoleId ====>>>>>>>>>>>" + roleId);
+  console.log('RoleId ====>>>>>>>>>>>' + roleId);
 
   const FOLLOW = id => {
     if (isFollow) {
@@ -150,7 +150,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
         setFollowBtnDisable(false);
         FollowingCount();
         ToastAndroid.show(
-          `Successfully you are ${!isFollow ? ' Following' : 'unFollwing'
+          `Successfully you are ${
+            !isFollow ? ' Following' : 'unFollwing'
           } the temple !`,
           ToastAndroid.SHORT,
         );
@@ -183,7 +184,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
-        ?.map(({ mediaList, id, jtProfile }) => ({ mediaList, id, jtProfile }));
+        ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
@@ -252,7 +253,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
-                style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
+                style={{backgroundColor: 'white', borderRadius: 28 / 2}}
                 onPress={() => {
                   navigation.goBack();
                   route?.params?.onSelect({
@@ -262,6 +263,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 }}>
                 <BackHeaderNew
                   // txt={`${followersList?.length} Followers`}
+                  // txt={'Followers'}
+                  isArrrow={true}
                   onPress={() => navigation.goBack()}
                   txtColor={colors.black}
                   isPlus={false}
@@ -275,7 +278,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     color={isDarkMode ? 'black' : 'black'}
                   />
                   <View style={styles.notificationNum}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>2</Text>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
                   </View>
                 </TouchableOpacity>
                 {roleId === 'ROLE_ITEM_ADMIN' ? (
@@ -285,13 +288,11 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     </View>
                   </TouchableOpacity>
                 ) : (
-                  <>
-
-                  </>
+                  <></>
                 )}
               </View>
             </View>
-            <View style={{ alignSelf: 'center', marginTop: -15 }}>
+            <View style={{alignSelf: 'center', marginTop: -15}}>
               <ProfileImage profileImg={trfData} />
             </View>
             <Text style={styles.titleHeader}>
@@ -303,10 +304,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
             </Text>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               <ProfileTimingTabs />
             </View>
-            <View style={{ marginLeft: 15 }}>
+            <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
@@ -421,9 +422,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <FlatList
                   numColumns={3}
                   data={postImages}
-                  keyExtractor={({ item, index }) => index}
+                  keyExtractor={({item, index}) => index}
                   style={styles.ImagesContainer}
-                  renderItem={({ item, index }) => (
+                  renderItem={({item, index}) => (
                     <TempleProfile_PostsCard nav={navigation} item={item} />
                   )}
                 />
@@ -448,7 +449,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               showsVerticalScrollIndicator={false}
               style={styles.contentDisplay}>
               {eventsLoader && (
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                   <Loader color={colors.orangeColor} size={30} />
                 </View>
               )}

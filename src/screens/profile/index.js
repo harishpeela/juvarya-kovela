@@ -171,10 +171,9 @@ const Profile = ({navigation}) => {
               {profPic ? (
                 <Image source={{uri: profPic}} style={styles.profileImage} />
               ) : (
-                <UploadPhoto />
-                // <View style={styles.profileImage}>
-                //   <Icon name="camera" size={90} color={colors.orangeColor} />
-                // </View>
+                <View style={styles.profileImage}>
+                  <Icon name="camera" size={80} color={colors.orangeColor} />
+                </View>
               )}
             </TouchableOpacity>
           )}

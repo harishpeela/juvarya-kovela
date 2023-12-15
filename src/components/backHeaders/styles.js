@@ -13,6 +13,8 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
+    backgroundColor: colors.orangeColor,
+    marginLeft: 10,
     // elevation:3,
     // shadowOffset:{
     //   width:1,
