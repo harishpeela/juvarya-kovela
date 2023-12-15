@@ -19,15 +19,9 @@ export const FollowersComp = ({followCount, onPressFollowers}) => {
   );
 };
 
-export const CommunityComp = ({navigation, roleId, itemCommunity}) => {
+export const CommunityComp = ({onPress, itemCommunity}) => {
   return (
-    <TouchableOpacity
-      onPress={() =>
-        navigation.navigate(allTexts.screenNames.invitationScreen, {
-          roleId: roleId,
-        })
-      }
-      style={styles.followersView}>
+    <TouchableOpacity onPress={onPress} style={styles.followersView}>
       <Text style={styles.postText1}>{itemCommunity}</Text>
       <Text style={styles.postText}> Events </Text>
     </TouchableOpacity>

@@ -55,19 +55,19 @@ const EventsScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
-        {/* <View style={styles.searchAndFilter}>
+        <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}>
             <SearchBar
-              // value={searchedText}
-              // onTextChange={text => {
-              //   setSearchedText(text);
-              //   handleSearch(text);
-              // }}
-              // loading={loading}
-              // onCrossPress={() => {
-              //   setSearchedText('');
-              //   setFilteredData([]);
-              // }}
+              value={searchedText}
+              onTextChange={text => {
+                setSearchedText(text);
+                // handleSearch(text);
+              }}
+              loading={eventsLoader}
+              onCrossPress={() => {
+                setSearchedText('');
+                // setFilteredData([]);
+              }}
               placeHolder={'Search here'}
               style={styles.customSearch}
               showCrossPress={false}
@@ -85,7 +85,7 @@ const EventsScreen = ({navigation}) => {
               // srHeight={"100%"}
             />
           </View>
-        </View> */}
+        </View>
         <View style={styles.followersContainer}>
           {eventsLoader ? (
             <View
