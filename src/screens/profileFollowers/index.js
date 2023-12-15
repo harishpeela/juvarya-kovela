@@ -41,9 +41,9 @@ const FollowersMembership = ({route, navigation}) => {
     }
   };
 
-  // useEffect(() => {
-  //   TempleFolowers();
-  // }, [route]);
+  useEffect(() => {
+    TempleFolowers();
+  }, [route]);
 
   const handleSearch = query => {
     setLoading(true);

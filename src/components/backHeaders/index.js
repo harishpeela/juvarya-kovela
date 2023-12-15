@@ -11,6 +11,7 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
+  isArrrow,
 }) => {
   return (
     <View style={styles.header}>
@@ -20,19 +21,21 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-          {/* <Fontisto
-            name="arrow-left"
-            color={txtColor === undefined ? <></> : txtColor}
-            size={17}
-          /> */}
-        </TouchableOpacity>
+        {isArrrow && (
+          <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+            <Fontisto
+              name="arrow-left"
+              // color={txtColor === undefined ? <></> : txtColor}
+              color={'white'}
+              size={17}
+            />
+          </TouchableOpacity>
+        )}
         {txt ? (
           <Text
             style={{
               fontSize: 20,
               fontWeight: '500',
-              marginHorizontal: 10,
               color: txtColor === undefined ? <></> : txtColor,
             }}>
             {txt}
