@@ -278,20 +278,18 @@ export const MemberShipDetails = async (pageNo, pageSize) => {
     console.log('error', error);
   }
 };
-export const MemberShipInvite = async (id, email) => {
+export const MemberShipInvite = async (payload) => {
   try {
     // Provide the data payload in the axios post call
     let result = await axiosMultiPartFormDataMem.post(
-      `${endpoints.MEMBER_SHIP_INVITE}/${id}`,
-      { email: email }
+      `${endpoints.MEMBER_SHIP_INVITE}`,
+      payload
     );
-
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
-
 export const GetPosts = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosNewData1.get(

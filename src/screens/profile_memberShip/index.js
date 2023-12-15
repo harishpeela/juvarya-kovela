@@ -4,7 +4,14 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import useFocusEffect from '@react-navigation/native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native';
 import {
   BackgroundImage,
   BackHeaderNew,
@@ -14,12 +21,11 @@ import {
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
-import Icon from "react-native-vector-icons/AntDesign"
-import { useFocusEffect } from '@react-navigation/native';
-
+import Icon from 'react-native-vector-icons/AntDesign';
 
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
+
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -128,18 +134,24 @@ const Split = () => {
   // );
   return (
     <SafeAreaView>
+      {/* <BackgroundImage /> */}
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
             isArrrow={true}
             onPress={() => navigation.goBack()}
+          // onPlusPress={() =>
+          //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
+          // }
           />
-          <TouchableOpacity onPress={() => {
-            navigation.navigate(allTexts.screenNames.profilememberships)
-          }}>
-            {roleId !== 'ROLE_ITEM_ADMIN' ? (
-              <Text style={styles.joinText}>Join</Text>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.profilememberships);
+            }}>
+            {roleId ? (
+              <>
+              </>
             ) : (
               <TouchableOpacity onPress={() => {
                 navigation.navigate(allTexts.screenNames.invitationScreen, {

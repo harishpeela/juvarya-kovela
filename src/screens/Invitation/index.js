@@ -124,6 +124,7 @@ const InvitationScreen = ({navigation, id, route}) => {
       </Modal>
     </View>
   );
+
 };
 
 export default InvitationScreen;
