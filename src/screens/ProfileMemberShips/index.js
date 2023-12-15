@@ -40,7 +40,11 @@ const ProfileMemberShips = ({navigation, route}) => {
     <View style={{flex: 1}}>
       <BackgroundImage />
       <View style={styles.header}>
-        <BackHeaderNew txt={'Members'} onPress={() => navigation.goBack()} />
+        <BackHeaderNew
+          txt={'Members'}
+          isArrrow={true}
+          onPress={() => navigation.goBack()}
+        />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
             onPress={() => {
@@ -56,7 +60,9 @@ const ProfileMemberShips = ({navigation, route}) => {
           length={membership.length ? membership.length : '0'}
           txt={roleId === 'ROLE_ITEM_ADMIN' ? 'Invite' : 'Join Now'}
           onPress={() =>
-            navigation.navigate(allTexts.screenNames.profilemembership)
+            navigation.navigate(allTexts.screenNames.profilemembership, {
+              roleId: roleId,
+            })
           }
         />
       </View>

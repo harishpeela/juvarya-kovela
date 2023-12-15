@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
     alignSelf: 'center',
     backgroundColor: colors.orangeColor,
-    marginLeft: 10,
+    marginLeft: 5,
     // elevation:3,
     // shadowOffset:{
     //   width:1,

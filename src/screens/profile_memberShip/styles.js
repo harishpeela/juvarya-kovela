@@ -3,9 +3,9 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
-    backgroundColor:colors.white,
-    paddingTop:40,
-    paddingHorizontal:30
+    backgroundColor: colors.white,
+    paddingTop: 40,
+    paddingHorizontal: 15,
 
   },
   header:{

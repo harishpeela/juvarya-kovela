@@ -33,13 +33,12 @@ export const styles = StyleSheet.create({
   searchContainer: {
     width: '82%',
     height: '100%',
-    margin: '2',
+    margin: '2%',
   },
   followersContainer: {
     height: '100%',
     // borderWidth:2,
-    paddingBottom:'35%',
-    marginTop: '10%',
+    paddingBottom: '35%',
   },
   sortContainer: {
     display: 'flex',

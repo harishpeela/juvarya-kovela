@@ -18,33 +18,13 @@ import Icon from "react-native-vector-icons/AntDesign"
 import { useFocusEffect } from '@react-navigation/native';
 
 
-const ProfileMembership = ({ route, navigation, roleId }) => {
-  const { id } = route.params || {};
+const ProfileMembership = ({ route, navigation }) => {
+  const { id, roleId } = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
-
-  console.log("profilememberShips roleId displaying =>>>>>>>" + roleId)
-
-  const data2 = [
-    {
-      id: 1,
-      name: 'hasrsh',
-      type: 'BASIC',
-    },
-    {
-      id: 2,
-      name: 'mahesh',
-      type: 'AVERAGE',
-    },
-    {
-      id: 3,
-      name: 'mahesh',
-      type: 'PREMIUM',
-    },
-  ];
 
   const DataApi = [
     {
@@ -113,6 +93,7 @@ const Split = () => {
   let result = DataApi;
   let dataList = result.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
   console.log('dayta of members list', dataList);
+  setData(dataList);
 };
 
   const MembershipData = async () => {
@@ -136,7 +117,7 @@ const Split = () => {
     }
   };
   useEffect(() => {
-    MembershipData();
+    // MembershipData();
     // Split();
   }, []);
   // useFocusEffect(
@@ -151,6 +132,7 @@ const Split = () => {
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
+            isArrrow={true}
             onPress={() => navigation.goBack()}
           />
           <TouchableOpacity onPress={() => {
@@ -160,11 +142,12 @@ const Split = () => {
               <Text style={styles.joinText}>Join</Text>
             ) : (
               <TouchableOpacity onPress={() => {
-                navigation.navigate(allTexts.screenNames.memberShip, {
+                navigation.navigate(allTexts.screenNames.invitationScreen, {
                   navigation: navigation,
                 })
               }}>
-                <Icon name="pluscircleo" size={24} color={colors.black} />
+                {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
+                <Text style={{fontSize: 20, color: colors.orangeColor}}>Invite</Text>
               </TouchableOpacity>
             )}
           </TouchableOpacity>
@@ -176,10 +159,6 @@ const Split = () => {
         ) : (
           <View style={{marginTop: '10%'}}>
             {data?.length ? (
-              // <FollowersListCard3
-              //   onPress={() => alert('under development')}
-              //   data={flatData}
-              // />
               <FollowersListCard3 data={data} />
             ) : (
               <View
