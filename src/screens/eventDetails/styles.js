@@ -1,6 +1,6 @@
-import {StyleSheet} from 'react-native';
-import {colors, fontFamily, fontSize} from '../../common';
- 
+
+import { StyleSheet } from 'react-native';
+import { colors, fontFamily, fontSize } from '../../common';
 export const styles = StyleSheet.create({
   container: {
     height: '100%',
@@ -9,25 +9,23 @@ export const styles = StyleSheet.create({
   header: {
     marginTop: '10%',
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    // borderWidth:2,
-    paddingHorizontal: '5%',
+    marginHorizontal: '2%',
+    justifyContent: 'space-between'
   },
   secondContainer: {
-    marginTop: 170,
+    marginTop: 150,
     flexDirection: 'column',
     width: '100%',
     paddingTop: '5%',
     shadowColor: colors.black,
-    height: '50%',
     // borderWidth:5,
     // borderColor:'red',
     backgroundColor: colors.white,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     paddingLeft: 5,
+    height: '67%'
   },
   locationIcon: {
     flexDirection: 'row',
@@ -88,6 +86,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100 / 2,
     alignItems: 'center',
     justifyContent: 'center',
+    borderWidth: 2
   },
   round2: {
     backgroundColor: colors.white,
@@ -170,7 +169,7 @@ export const styles = StyleSheet.create({
     marginVertical: 5,
   },
   toggleData: {
-    marginBottom: 500,
+    marginBottom: 200,
     // borderWidth:5
   },
   subBtn: {
@@ -200,4 +199,28 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontSize: fontSize.h4,
   },
+  intButton: {
+    backgroundColor: colors.orangeColor,
+    borderWidth: 1,
+    borderColor: colors.gray,
+    width: '95%',
+    alignContent: 'center',
+    alignSelf: 'center',
+    borderRadius: 50,
+    paddingHorizontal: '2%',
+    paddingVertical: '1.5%',
+    elevation: 2,
+    shadowColor: colors.black,
+    alignItems:'center',
+    justifyContent:'center'
+  },
+  locationText:{
+    textAlign:'center',
+    marginTop:100
+  },
+  intButtonText:{
+    color:colors.white,
+    fontWeight:'700',
+    fontSize:fontSize.h6
+  }
 });
