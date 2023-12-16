@@ -104,7 +104,7 @@ const App = () => {
       memberShip,
       eventsScreen,
       donationslist,
-      eventsDetails,
+      eventDetails,
       createEvent,
       profilememberships,
       invitationScreen
@@ -430,7 +430,7 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={eventsDetails}
+          name={eventDetails}
           component={EventDetails}
           options={{
             headerShown: false,

@@ -37,9 +37,7 @@ export const BackHeaderNew = ({
             style={{
               fontSize: 20,
               fontWeight: '500',
-              marginHorizontal: 10,
-              color: colors.black
-
+              color: 'black',
             }}>
             {txt}
           </Text>

@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BackHeaderNew} from '../../components';
+import {BackHeaderNew, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {MemberShipInvite} from '../../utils/api';
@@ -53,8 +53,6 @@ const InvitationScreen = ({navigation, id, route}) => {
         {
           text: 'OK',
           onPress: () => {
-            // navigation.goBack(null)
-            // navigation.goBack(null)
             navigation.pop();
             navigation.pop();
           },
@@ -71,6 +69,7 @@ const InvitationScreen = ({navigation, id, route}) => {
   };
   return (
     <View style={styles.container}>
+      <BackgroundImage />
       <View style={styles.Header}>
         <BackHeaderNew
           onPress={() => navigation.goBack()}
@@ -86,6 +85,7 @@ const InvitationScreen = ({navigation, id, route}) => {
           style={[styles.textInput, !isValidEmail && styles.invalidInput]}
           placeholder="Enter the Email"
           onChangeText={validateEmail}
+          maxLength={30}
         />
         {error ? (
           <View style={styles.errorContainer}>
@@ -124,7 +124,6 @@ const InvitationScreen = ({navigation, id, route}) => {
       </Modal>
     </View>
   );
-
 };
 
 export default InvitationScreen;

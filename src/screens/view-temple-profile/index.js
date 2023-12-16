@@ -335,7 +335,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                     )
                   }> */}
                   <CommunityComp
-                    itemCommunity={memberShip?.membershipCount}
+                    // itemCommunity={memberShip?.membershipCount}
                     onPress={
                       () => alert('page under development')
                       // navigation.navigate(

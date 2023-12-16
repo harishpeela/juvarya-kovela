@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginLeft: 20,
+    marginLeft: 30,
   },
 
   bodyContainer: {
@@ -28,7 +28,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     padding: '1%',
     alignContent: 'center',
-    alignItems: 'center',
   },
   searchContainer: {
     width: '82%',
@@ -36,9 +35,9 @@ export const styles = StyleSheet.create({
     margin: '2%',
   },
   followersContainer: {
-    height: '100%',
+    // height: '100%',
     // borderWidth:2,
-    paddingBottom: '35%',
+    marginBottom: '70%',
   },
   sortContainer: {
     display: 'flex',
