@@ -39,11 +39,11 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
+  // MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
-  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
+  MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
-  EVENTS_LIST: 'jtevent/search/item',
+  EVENTS_LIST: 'jtevent/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -238,10 +238,10 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const EventList = async (pgno, pgSize, id) => {
+export const EventList = async (pgno, pgSize) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}&profileId=${id}`,
+      `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {
@@ -278,20 +278,30 @@ export const MemberShipDetails = async (pageNo, pageSize) => {
     console.log('error', error);
   }
 };
-export const MemberShipInvite = async (id, email) => {
+export const MemberShipInvite = async (payload) => {
   try {
     // Provide the data payload in the axios post call
     let result = await axiosMultiPartFormDataMem.post(
-      `${endpoints.MEMBER_SHIP_INVITE}/${id}`,
-      { email: email }
+      `${endpoints.MEMBER_SHIP_INVITE}`,
+      payload
     );
-
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
 
+export const MemberShipCreate = async (payload) => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_CREATE}`,payload
+    )
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 export const GetPosts = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosNewData1.get(
