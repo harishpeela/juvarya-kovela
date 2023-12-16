@@ -57,12 +57,11 @@ export const MemberShipCard = ({data, onPress, length, txt}) => {
             <View>
               <View style={styles.secondContainer}>
                 <View style={{alignItems: 'center'}}>
-                  <Text style={styles.orgprice}> $ 499</Text>
                   <Text style={styles.offerPrice}> $ 299</Text>
                 </View>
-                {/* <TouchableOpacity style={styles.button} onPress={onPress}>
+                {/* <TouchableOpacity style={styles.button} onPress={onPress}> */}
                   <Text style={styles.buttext}>{txt}</Text>
-                </TouchableOpacity> */}
+                {/* </TouchableOpacity> */}
               </View>
             </View>
           </LinearGradient>

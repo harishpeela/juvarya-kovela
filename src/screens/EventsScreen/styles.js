@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal:'2%'
   },
-
   bodyContainer: {
     marginHorizontal: '4%',
     display: 'flex',
@@ -28,6 +27,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     padding: '1%',
     alignContent: 'center',
+    alignItems: 'center',
   },
   searchContainer: {
     width: '82%',
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
   },
   sortContainer: {
     display: 'flex',
-    width: '20%',
+    width: '15%',
     height: '100%',
 
     // borderWidth:2,
@@ -50,6 +50,7 @@ export const styles = StyleSheet.create({
     marginBottom: 300,
   },
   noDataContainer: {
+    alignItems: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },

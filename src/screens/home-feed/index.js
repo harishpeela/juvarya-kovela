@@ -11,6 +11,7 @@ import {
   StatusBar,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Octicons from 'react-native-vector-icons/Octicons'
 import styles from './styles';
 import { BackgroundImage } from '../../components';
 import { getHomeFeedList, getNotifications } from '../../utils/api';
@@ -125,8 +126,8 @@ const UserFeedScreen = ({ navigation }) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <StatusBar
-        backgroundColor="black"
-        barStyle="light-content"
+        backgroundColor="transparent"
+        barStyle="dark-content"
         translucent={true}
       />
       <BackgroundImage />
@@ -135,10 +136,15 @@ const UserFeedScreen = ({ navigation }) => {
           <TouchableOpacity
             onPress={() => navigation.navigate(allTexts.screenNames.menu)}>
             <View style={styles.sidebarIcon}>
-              <View style={[styles.bar, styles.shortestBar]} />
-              <View style={[styles.bar, styles.mediumBar]} />
-              <View style={[styles.bar, styles.longestBar]} />
+            
             </View>
+            <View style={styles.userIconBorder}>
+            <FontAwesome name='user-circle' size={30} color='#A9A9A9'/>
+            </View>
+            <View style={styles.barsBorder}>
+            <Octicons name='three-bars' size={15} color='black'/>
+            </View>
+            
           </TouchableOpacity>
         </View>
         {/* {adminRole ? ( */}

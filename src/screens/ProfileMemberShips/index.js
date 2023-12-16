@@ -58,7 +58,11 @@ const ProfileMemberShips = ({navigation, route}) => {
         <MemberShipCard
           data={data}
           length={membership.length ? membership.length : '0'}
-          txt={roleId === 'ROLE_ITEM_ADMIN' ? 'Invite' : 'Join Now'}
+          txt={
+            roleId === 'ROLE_ITEM_ADMIN'
+              ? `${membership?.length} Memberships`
+              : 'Join Now'
+          }
           onPress={() =>
             navigation.navigate(allTexts.screenNames.profilemembership, {
               roleId: roleId,

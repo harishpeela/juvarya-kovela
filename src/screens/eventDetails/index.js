@@ -27,6 +27,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon3 from 'react-native-vector-icons/Entypo';
 
 const EventDetails = ({ navigation, route }) => {
+
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
@@ -71,7 +72,7 @@ const EventDetails = ({ navigation, route }) => {
       </View>
       <View style={styles.secondContainer}>
         <View style={styles.secondContainer2}>
-          <Text style={[styles.festivalText]}>Basic</Text>
+          <Text style={[styles.festivalText]}>Ganesh festival</Text>
           <View style={styles.dateAndLocation}>
             <Text style={styles.dateText}>07 July</Text>
             <View style={styles.locationIcon}>
