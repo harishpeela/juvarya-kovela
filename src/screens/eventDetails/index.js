@@ -1,5 +1,11 @@
 /* eslint-disable no-undef */
-import {Text, View, TouchableOpacity, Pressable} from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Pressable,
+  ScrollView,
+} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';

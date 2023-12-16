@@ -56,7 +56,11 @@ const Feeds = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
       <View style={{margin: '5%', marginVertical: '5%', marginTop: 80}}>
-        <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} />
+        <BackHeaderNew
+          txt={'Posts'}
+          isArrrow={true}
+          onPress={() => navigation.goBack()}
+        />
       </View>
       {loader ? (
         <Loader size={'medium'} color={colors.orangeColor} />

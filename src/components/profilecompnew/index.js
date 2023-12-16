@@ -12,25 +12,19 @@ import {
 } from '../backgroundFlower';
 export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
-    <TouchableOpacity  style={styles.followersView}>
+    <TouchableOpacity style={styles.followersView} onPress={onPressFollowers}>
       <Text style={styles.postText1}>{followCount}</Text>
       <Text style={styles.postText}>Followers</Text>
     </TouchableOpacity>
   );
 };
 
-export const CommunityComp = ({navigation,roleId,itemCommunity}) => {
+export const CommunityComp = ({onPress, itemCommunity}) => {
   return (
-    <TouchableOpacity 
-    onPress={() =>
-        navigation.navigate(
-          allTexts.screenNames.invitationScreen,{
-            roleId:roleId
-          }
-        )
-      }
-    style={styles.followersView}>
-      <Text style={styles.postText1}>{itemCommunity}</Text>
+    <TouchableOpacity onPress={onPress} style={styles.followersView}>
+      <Text style={styles.postText1}>
+        {itemCommunity ? itemCommunity : '0'}
+      </Text>
       <Text style={styles.postText}> Events </Text>
     </TouchableOpacity>
   );
@@ -82,14 +76,24 @@ export const ContactTabcomp = ({onPressContact}) => {
     </TouchableOpacity>
   );
 };
-export const DirectionsTabComp = ({role, onPress}) => {
+export const DirectionsTabComp = ({roleId,trfData,navigation}) => {
   return (
     <TouchableOpacity
       style={[styles.voidButton1, styles.button]}
-      onPress={onPress}>
+
+      onPress={() => {
+        navigation.navigate(
+          allTexts.screenNames.profilememberships,
+          {
+            trfdata: trfData,
+            roleId: roleId,
+          },
+        );
+      }}
+      >
       <BackgroundSmallFlowerUser />
       <Text style={styles.voidButton1Text}>
-        {role ? 'Add a Member' : 'Become a member'}
+        {roleId ? 'Add a Member' : 'Become a member'}
       </Text>
     </TouchableOpacity>
   );

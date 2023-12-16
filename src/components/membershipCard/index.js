@@ -48,21 +48,20 @@ export const MemberShipCard = ({data, onPress, length, txt}) => {
                   <Text style={styles.typetext}>BASIC</Text>
                 </View>
               )}
-              <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              {/* <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={styles.name}>{length} </Text>
                 <Text style={styles.name}> {item?.type}</Text>
-              </View>
+              </View> */}
             </View>
             <View style={styles.underLine} />
             <View>
               <View style={styles.secondContainer}>
                 <View style={{alignItems: 'center'}}>
-                  <Text style={styles.orgprice}> $ 499</Text>
                   <Text style={styles.offerPrice}> $ 299</Text>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
+                {/* <TouchableOpacity style={styles.button} onPress={onPress}> */}
                   <Text style={styles.buttext}>{txt}</Text>
-                </TouchableOpacity>
+                {/* </TouchableOpacity> */}
               </View>
             </View>
           </LinearGradient>

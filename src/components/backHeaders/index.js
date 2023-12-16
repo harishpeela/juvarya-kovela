@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {styles} from './styles';
+import { View, Text, TouchableOpacity, Pressable } from 'react-native';
+import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { colors } from '../../common';
 
 export const BackHeaderNew = ({
   txtColor,
@@ -11,6 +12,7 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
+  isArrrow,
 }) => {
   return (
     <View style={styles.header}>
@@ -20,34 +22,33 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-          {/* <Fontisto
-            name="arrow-left"
-            color={txtColor === undefined ? <></> : txtColor}
-            size={17}
-          /> */}
-        </TouchableOpacity>
+        {isArrrow && (
+          <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+            <Fontisto
+              name="arrow-left"
+              // color={txtColor === undefined ? <></> : txtColor}
+              color={'white'}
+              size={17}
+            />
+          </TouchableOpacity>
+        )}
         {txt ? (
           <Text
             style={{
               fontSize: 20,
               fontWeight: '500',
-              marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color: 'black',
             }}>
             {txt}
           </Text>
-        ) : (
-          <></>
         )}
       </View>
-
       {isPlus && (
-        <TouchableOpacity onPress={onPlusPress}>
+        <TouchableOpacity >
           <AntDesign
             name="plus"
             size={24}
-            color={txtColor === undefined ? <></> : txtColor}
+            color={colors.black}
           />
         </TouchableOpacity>
       )}

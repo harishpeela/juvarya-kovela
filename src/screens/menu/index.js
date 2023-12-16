@@ -57,6 +57,7 @@ const Menu = ({navigation}) => {
             onPress={() => navigation.goBack()}
             txtColor={colors.black}
             isPlus={false}
+            isArrrow={true}
           />
           <View style={{marginVertical: '10%'}}>
             <TouchableOpacity onPress={() => UpcomingEvents()}>
