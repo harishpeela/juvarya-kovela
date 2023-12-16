@@ -8,12 +8,16 @@ export const styles = StyleSheet.create({
   },
   textInputContainer: {
     marginHorizontal: '7%',
-    marginTop: 30,
+    marginTop: '50%',
   },
   textInput: {
     borderWidth: 1,
     borderRadius: 15,
     borderColor: colors.black,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 18,
+    paddingLeft: 30,
   },
   subBtn: {
     backgroundColor: colors.orangeColor,
@@ -45,6 +49,7 @@ export const styles = StyleSheet.create({
   },
   errorContainer: {
     alignItems: 'center',
+    marginTop: '2%'
   },
   errorText: {
     color: 'red',

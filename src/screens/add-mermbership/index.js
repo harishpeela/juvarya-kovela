@@ -22,6 +22,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
         <BackHeaderNew
           txt={'Add Membership'}
           onPress={() => navigation.goBack()}
+          isArrrow={true}
         />
         <View>
           <TextInput

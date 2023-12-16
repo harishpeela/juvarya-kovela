@@ -26,7 +26,7 @@ import {Formik, Field} from 'formik';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon3 from 'react-native-vector-icons/Entypo';
 
-const EventDetails = ({navigation}) => {
+const EventDetails = ({navigation, route}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
@@ -36,12 +36,8 @@ const EventDetails = ({navigation}) => {
       inputTitles: {phoneNo, email},
     },
   } = allTexts;
-
-  const genders = [
-    {label: 'Male', value: 'male'},
-    {label: 'Female', value: 'female'},
-  ];
-
+  const {item} = route.params || {};
+  console.log('route', item);
   const handlePress = () => {
     if (eventPage) {
       setEventPage(false);
@@ -56,7 +52,7 @@ const EventDetails = ({navigation}) => {
     <View style={styles.container}>
       {/* <ScrollView> */}
       <BackgroundImage2 />
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity
           style={styles.round}
           onPress={() => {
@@ -77,10 +73,10 @@ const EventDetails = ({navigation}) => {
         <TouchableOpacity style={styles.round2}>
           <Icon name="share" size={22} color={colors.black} />
         </TouchableOpacity>
-      </View>
+      </View> */}
       <View style={styles.secondContainer}>
         <View style={styles.secondContainer2}>
-          <Text style={[styles.festivalText]}>Ganesh festival</Text>
+          <Text style={[styles.festivalText]}>Basic</Text>
           <View style={styles.dateAndLocation}>
             <Text style={styles.dateText}>07 July</Text>
             <View style={styles.locationIcon}>

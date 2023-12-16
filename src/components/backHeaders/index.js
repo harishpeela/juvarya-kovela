@@ -36,7 +36,7 @@ export const BackHeaderNew = ({
             style={{
               fontSize: 20,
               fontWeight: '500',
-              color: txtColor === undefined ? <></> : txtColor,
+              color: 'black',
             }}>
             {txt}
           </Text>

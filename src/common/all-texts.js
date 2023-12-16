@@ -149,7 +149,7 @@ export const allTexts = {
     memberShip: 'MemberShip',
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
-    eventsDetails: 'EventDetails',
+    eventDetails: 'EventDetails',
     createEvent: 'CreateEvent',
     profilememberships: 'ProfileMemberShips',
     invitationScreen: 'InvitationScreen',

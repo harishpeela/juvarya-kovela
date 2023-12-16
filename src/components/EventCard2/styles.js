@@ -3,15 +3,11 @@ import {colors, fontSize} from '../../common';
 
 export const styles = StyleSheet.create({
   container: {
-    // borderColor:colors.orangeColor,
-    height: 250,
+    height: 220,
     marginHorizontal: '1%',
     marginVertical: '1%',
     width: '48%',
     borderRadius: 7,
-    // elevation: 9,
-    // backgroundColor: 'white',
-    // shadowColor:colors.black,
     elevation: 3,
     shadowColor: colors.black,
     backgroundColor: colors.white,
@@ -21,10 +17,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   Image: {
     height: '65%',
     width: '100%',
+    display: 'flex',
   },
   dateContainer: {
     backgroundColor: colors.orangeColor,
@@ -39,8 +35,8 @@ export const styles = StyleSheet.create({
   },
   festivalText: {
     color: colors.black,
-    fontSize: fontSize.small,
-    fontWeight: '500',
+    fontSize: 11,
+    fontWeight: 'bold',
   },
   locationIcon: {
     flexDirection: 'row',
@@ -56,17 +52,4 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 3,
   },
-  // dateContainer:{
-  //     flexDirection:'row',
-  //     // borderWidth:1,
-  //     justifyContent:'space-between',
-  //     width:"95%"
-  // },
-  // hrLine:{
-  //     borderWidth:0.2,
-  //     borderColor:colors.gray
-  // },
-  // text:{
-  //     color:colors.black
-  // }
 });

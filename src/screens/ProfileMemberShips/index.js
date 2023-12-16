@@ -34,14 +34,14 @@ const ProfileMemberShips = ({navigation, route}) => {
     }
   };
   useEffect(() => {
-    // MembershipData();
+    MembershipData();
   }, []);
   return (
     <View style={{flex: 1}}>
       <BackgroundImage />
       <View style={styles.header}>
         <BackHeaderNew
-          txt={'Members'}
+          txt={'MemberShips'}
           isArrrow={true}
           onPress={() => navigation.goBack()}
         />

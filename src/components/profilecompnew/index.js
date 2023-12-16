@@ -22,7 +22,9 @@ export const FollowersComp = ({followCount, onPressFollowers}) => {
 export const CommunityComp = ({onPress, itemCommunity}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.followersView}>
-      <Text style={styles.postText1}>{itemCommunity}</Text>
+      <Text style={styles.postText1}>
+        {itemCommunity ? itemCommunity : '0'}
+      </Text>
       <Text style={styles.postText}> Events </Text>
     </TouchableOpacity>
   );

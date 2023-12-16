@@ -23,8 +23,8 @@ const EventsScreen = ({navigation}) => {
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100);
+    console.log('data ==>', result?.data);
     if (result.status === 200) {
-      console.log('eventsloader', eventsLoader);
       setEventsData(result?.data?.events);
       setEventsLoader(false);
     } else {
@@ -51,7 +51,7 @@ const EventsScreen = ({navigation}) => {
               navigation: navigation,
             });
           }}>
-          <Icon name="pluscircleo" size={24} color={colors.black} />
+          {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
         </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
@@ -93,7 +93,7 @@ const EventsScreen = ({navigation}) => {
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : (
-            <>{searchedText === '' && <EventCard2 data={eventsData} />}</>
+            <>{searchedText === '' && <EventCard2 data={eventsData} navigation={navigation} />}</>
           )}
         </View>
       </View>
