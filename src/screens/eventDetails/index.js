@@ -6,8 +6,8 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
-import {styles} from './styles';
+import React, { useState } from 'react';
+import { styles } from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   BackgroundImage,
@@ -17,26 +17,26 @@ import {
   PrimaryButton,
   TextInput2,
 } from '../../components';
-import {BackHeaderNew} from '../../components';
-import {allTexts, colors} from '../../common';
+import { BackHeaderNew } from '../../components';
+import { allTexts, colors } from '../../common';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
-import {BackgroundImage2} from '../../components/backgroundImage';
+import { BackgroundImage2 } from '../../components/backgroundImage';
 import Btn from '../../components/btn';
-import {Formik, Field} from 'formik';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import { Formik, Field } from 'formik';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon3 from 'react-native-vector-icons/Entypo';
 
-const EventDetails = ({navigation, route}) => {
+const EventDetails = ({ navigation, route }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
   const {
-    placeHolders: {emailPlace},
+    placeHolders: { emailPlace },
     headings: {
-      inputTitles: {phoneNo, email},
+      inputTitles: { phoneNo, email },
     },
   } = allTexts;
-  const {item} = route.params || {};
+  const { item } = route.params || {};
   console.log('route', item);
   const handlePress = () => {
     if (eventPage) {
@@ -52,28 +52,23 @@ const EventDetails = ({navigation, route}) => {
     <View style={styles.container}>
       {/* <ScrollView> */}
       <BackgroundImage2 />
-      {/* <View style={styles.header}>
-        <TouchableOpacity
-          style={styles.round}
+      <View style={styles.header}>
+        <BackHeaderNew
           onPress={() => {
-            navigation.goBack();
-          }}>
-          <BackHeaderNew
-            onPress={() => {
-              if (eventPage && currentIndex === 2) {
-                handlePress();
-              } else {
-                navigation.goBack();
-              }
-            }}
-            txtColor={colors.black}
-            isPlus={false}
-          />
-        </TouchableOpacity>
+            if (eventPage && currentIndex === 2) {
+              handlePress();
+            } else {
+              navigation.goBack();
+            }
+          }}
+          txtColor={colors.black}
+          isPlus={false}
+          isArrow={true}
+        />
         <TouchableOpacity style={styles.round2}>
           <Icon name="share" size={22} color={colors.black} />
         </TouchableOpacity>
-      </View> */}
+      </View>
       <View style={styles.secondContainer}>
         <View style={styles.secondContainer2}>
           <Text style={[styles.festivalText]}>Basic</Text>
@@ -156,12 +151,12 @@ const EventDetails = ({navigation, route}) => {
               </View>
             </Pressable>
           </View>
-          <View style={styles.toggleData}>
-            {currentIndex === 1 && (
-              <ScrollView>
+          <ScrollView>
+            <View style={styles.toggleData}>
+              {currentIndex === 1 && (
                 <TouchableOpacity
                   onPress={handlePress}
-                  style={styles.container1}>
+                >
                   <EventCard3 onPress={handlePress} />
                   <EventCard3 />
                   <EventCard3 />
@@ -169,91 +164,90 @@ const EventDetails = ({navigation, route}) => {
                   <EventCard3 />
                   <EventCard3 />
                 </TouchableOpacity>
-              </ScrollView>
-            )}
-            {currentIndex === 2 && (
-              <View style={styles.infoContainer}>
-                <View style={styles.btnContainer}>
-                  <Btn />
-                  <Btn />
-                  <Btn />
-                  <Btn />
-                  <Btn />
-                </View>
-                <View style={styles.desContainer}>
-                  <Text style={styles.des}>Description: </Text>
-                  <Text style={styles.desData}>
-                    The build will continue, but you are strongly encouraged to
-                    update your project to Lorem ipsum dolor sit amet
-                    consectetur. Enim sed commodo maecenas sed nisl ultrices.
-                    Mauris amet quisque placerat sit mi risus lorem. Tincidunt
-                    nam sit sit pharetra. Varius tincidunt mi elementum libero
-                    nisl condimentum nisi mauris. Erat sed vel lectus cras ut
-                    pellentesque sem. Nunc ut et sed ac et tristique nunc aenean
-                    varius. Phasellus sit parturient sed sed ut vitae. Porttitor
-                    facilisi dui mauris sit donec eget augue pretium. Id magna
-                    arcu sit tortor.
-                  </Text>
-                </View>
-              </View>
-            )}
-            {currentIndex === 3 && (
-              <KeyboardAwareScrollView>
-                <View style={styles.formContainer}>
-                  <View style={styles.registrationContainer}>
-                    <Text style={styles.registrationText}>
-                      Registration Form
+              )}
+              {currentIndex === 2 && (
+                <View style={styles.infoContainer} >
+                  <View style={styles.btnContainer}>
+                    <Btn />
+                    <Btn />
+                    <Btn />
+                    <Btn />
+                    <Btn />
+                  </View>
+                  <View style={styles.desContainer}>
+                    <Text style={styles.des}>Description: </Text>
+                    <Text style={styles.desData}>
+                      The build will continue, but you are strongly encouraged to
+                      update your project to Lorem ipsum dolor sit amet
+                      consectetur. Enim sed commodo maecenas sed nisl ultrices.
+                      Mauris amet quisque placerat sit mi risus lorem. Tincidunt
+                      nam sit sit pharetra. Varius tincidunt mi elementum libero
+                      nisl condimentum nisi mauris. Erat sed vel lectus cras ut
+                      pellentesque sem. Nunc ut et sed ac et tristique nunc aenean
+                      varius. Phasellus sit parturient sed sed ut vitae. Porttitor
+                      facilisi dui mauris sit donec eget augue pretium. Id magna
+                      arcu sit tortor.
                     </Text>
                   </View>
-                  <View style={styles.formik}>
-                    <Formik
-                      onSubmit={(values, formikActions) => {
-                        UserRegisterHandler(values, formikActions);
-                        console.log('values', values);
-                      }}
-                      initialValues={{
-                        phone: '',
-                        email: '',
-                        userName: '',
-                        Gender: '',
-                      }}>
-                      {({
-                        errors,
-                        touched,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        isSubmitting,
-                        values,
-                      }) => {
-                        return (
-                          <View style={styles.fieldContainer}>
-                            <TextInput2
-                              title={'UserName'}
-                              placeholder={'Enter Your Name'}
-                              error={touched.userName && errors.userName}
-                              onBlur={handleBlur('userName')}
-                              setState={handleChange('userName')}
-                            />
-                            <TextInput2
-                              title={phoneNo}
-                              isFlag
-                              keyboardType={'numeric'}
-                              placeholder={'Enter Your Phone Number'}
-                              error={touched.phone && errors.phone}
-                              onBlur={handleBlur('phone')}
-                              setState={handleChange('phone')}
-                              maxLength={10}
-                            />
-                            <TextInput2
-                              title={email}
-                              placeholder={emailPlace}
-                              error={touched.email && errors.email}
-                              onBlur={handleBlur('email')}
-                              setState={handleChange('email')}
-                              autoCapitalize="none"
-                            />
-                            {/* <View style={styles.inputAndBtnContainer}>
+                </View>
+              )}
+              {currentIndex === 3 && (
+                <KeyboardAwareScrollView>
+                  <View style={styles.formContainer}>
+                    <View style={styles.registrationContainer}>
+                      <Text style={styles.registrationText}>
+                        Registration Form
+                      </Text>
+                    </View>
+                    <View style={styles.formik}>
+                      <Formik
+                        onSubmit={(values, formikActions) => {
+                          UserRegisterHandler(values, formikActions);
+                          console.log('values', values);
+                        }}
+                        initialValues={{
+                          phone: '',
+                          email: '',
+                          userName: '',
+                          Gender: '',
+                        }}>
+                        {({
+                          errors,
+                          touched,
+                          handleChange,
+                          handleBlur,
+                          handleSubmit,
+                          isSubmitting,
+                          values,
+                        }) => {
+                          return (
+                            <View style={styles.fieldContainer}>
+                              <TextInput2
+                                title={'UserName'}
+                                placeholder={'Enter Your Name'}
+                                error={touched.userName && errors.userName}
+                                onBlur={handleBlur('userName')}
+                                setState={handleChange('userName')}
+                              />
+                              <TextInput2
+                                title={phoneNo}
+                                isFlag
+                                keyboardType={'numeric'}
+                                placeholder={'Enter Your Phone Number'}
+                                error={touched.phone && errors.phone}
+                                onBlur={handleBlur('phone')}
+                                setState={handleChange('phone')}
+                                maxLength={10}
+                              />
+                              <TextInput2
+                                title={email}
+                                placeholder={emailPlace}
+                                error={touched.email && errors.email}
+                                onBlur={handleBlur('email')}
+                                setState={handleChange('email')}
+                                autoCapitalize="none"
+                              />
+                              {/* <View style={styles.inputAndBtnContainer}>
                                   <TextInput2
                                     title={'Gender'}
                                     placeholder={'Gender'}
@@ -267,28 +261,37 @@ const EventDetails = ({navigation, route}) => {
                                     <Text style={styles.subBtnText}>Submit</Text>
                                   </TouchableOpacity>
                                 </View> */}
-                            <TouchableOpacity style={styles.subBtn}>
-                              <Text style={styles.subBtnText}>Submit</Text>
-                            </TouchableOpacity>
-                          </View>
-                        );
-                      }}
-                    </Formik>
+                              <TouchableOpacity style={styles.subBtn}>
+                                <Text style={styles.subBtnText}>Submit</Text>
+                              </TouchableOpacity>
+                            </View>
+                          );
+                        }}
+                      </Formik>
+                    </View>
                   </View>
-                </View>
-              </KeyboardAwareScrollView>
-            )}
-            {/* {currentIndex === 4 && (
+                </KeyboardAwareScrollView>
+              )}
+              {/* {currentIndex === 4 && (
                   <View style={styles.locationContainer}>
                     <Text style={styles.locationText}>Event Location </Text>
                   </View>
                 )} */}
-
-            {currentIndex === 4 && <Text>Maps displaying 4</Text>}
-          </View>
+              {currentIndex === 4 && <Text style={styles.locationText}>Maps displaying 4</Text>}
+            </View>
+          </ScrollView>
         </View>
       </View>
       {/* </ScrollView> */}
+      {currentIndex !== 3 ? (
+        <TouchableOpacity style={styles.intButton}>
+          <Text style={styles.intButtonText}>Interested</Text>
+        </TouchableOpacity>
+      ) : (
+        <>
+        </>
+      )}
+
     </View>
   );
 };
