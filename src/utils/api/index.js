@@ -41,7 +41,7 @@ const endpoints = {
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   // MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
-  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
+  MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
@@ -290,6 +290,18 @@ export const MemberShipInvite = async (payload) => {
     console.log('error', error);
   }
 };
+
+export const MemberShipCreate = async (payload) => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_CREATE}`,payload
+    )
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 export const GetPosts = async (id, pgfrm, pgto) => {
   try {
     let result = await axiosNewData1.get(

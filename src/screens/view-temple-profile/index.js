@@ -364,15 +364,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
-                  onPress={() => {
-                    navigation.navigate(
-                      allTexts.screenNames.profilememberships,
-                      {
-                        trfdata: trfData,
-                        roleId: roleId,
-                      },
-                    );
-                  }}
+                  navigation={navigation}
+                  roleId={roleId}
+                  trfData={trfData}
                 />
                 {/* <CreateFeedTabComp
                     roleId={roleId}
