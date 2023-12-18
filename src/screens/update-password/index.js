@@ -20,11 +20,7 @@ const UpdatePassword = ({navigation}) => {
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-<<<<<<< HEAD
-      inputTitles: {currentPassword, password, confirmPassword},
-=======
       inputTitles: {currentPassword,Newpassword, confirmPassword},
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -119,11 +115,7 @@ const UpdatePassword = ({navigation}) => {
                   setState={handleChange('password')}
                 />
                 <PasswordField
-<<<<<<< HEAD
                   title={'New Password'}
-=======
-                  title={Newpassword}
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
                   value={values.password}
                   titleColor={colors.orangeColor}
                   placeholder={passwordPlace}
@@ -144,12 +136,6 @@ const UpdatePassword = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
-<<<<<<< HEAD
-=======
-                    radius={25}
-                    width={100}
-                    textColor={'white'}
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={updatePassword}

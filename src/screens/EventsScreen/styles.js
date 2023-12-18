@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
     width: '100%',
     padding: '1%',
     alignContent: 'center',
-    alignItems: 'center',
   },
   searchContainer: {
     width: '82%',
@@ -36,7 +35,6 @@ export const styles = StyleSheet.create({
   },
   ListContainer: {
     height: '100%',
-    borderWidth:2,
     marginTop:20
   },
   sortContainer: {

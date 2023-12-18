@@ -15,7 +15,6 @@ import {EventList} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const EventsScreen = ({navigation}) => {
-  const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
@@ -56,37 +55,6 @@ const EventsScreen = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
-        {/* <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              value={searchedText}
-              onTextChange={text => {
-                setSearchedText(text);
-                // handleSearch(text);
-              }}
-              loading={eventsLoader}
-              onCrossPress={() => {
-                setSearchedText('');
-                // setFilteredData([]);
-              }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={false}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-          </View>
-          <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.orangeColor}
-              srWidth={'100%'}
-              // srHeight={"100%"}
-            />
-          </View>
-        </View> */}
         <View style={styles.ListContainer}>
           {eventsLoader ? (
             <View
@@ -94,7 +62,11 @@ const EventsScreen = ({navigation}) => {
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : (
-            <>{searchedText === '' && <EventCard2 data={eventsData} navigation={navigation} />}</>
+            <>
+              {searchedText === '' && (
+                <EventCard2 data={eventsData} navigation={navigation} />
+              )}
+            </>
           )}
         </View>
       </View>

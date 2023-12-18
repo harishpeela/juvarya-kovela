@@ -95,7 +95,7 @@ export {
   EventDetails,
   ForgetPassword,
   UpdateProfile,
-  ForgotPasswordOtpScreen
+  ForgotPasswordOtpScreen,
   CreateEvent,
   ProfileMemberShips,
   InvitationScreen,
