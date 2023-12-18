@@ -12,7 +12,7 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
-  isArrrow,
+  isArrow, // Corrected typo in the prop name
 }) => {
   return (
     <View style={styles.header}>
@@ -22,12 +22,13 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        {isArrrow && (
+        {isArrow && ( // Corrected condition for arrow rendering
           <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
             <Fontisto
               name="arrow-left"
               color={'white'}
               size={17}
+              color={colors.black}
             />
           </TouchableOpacity>
         )}
@@ -41,7 +42,7 @@ export const BackHeaderNew = ({
             }}>
             {txt}
           </Text>
-        )}
+        ) : null}
       </View>
       {isPlus && (
         <TouchableOpacity>

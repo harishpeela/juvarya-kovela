@@ -141,6 +141,13 @@ const UserFeedScreen = ({navigation}) => {
             <View style={styles.barsBorder}>
               <Octicons name="three-bars" size={15} color="black" />
             </View>
+            <View style={styles.userIconBorder}>
+            <FontAwesome name='user-circle' size={30} color='#A9A9A9'/>
+            </View>
+            <View style={styles.barsBorder}>
+            <Octicons name='three-bars' size={15} color='black'/>
+            </View>
+            
           </TouchableOpacity>
         </View>
         {/* {adminRole ? ( */}

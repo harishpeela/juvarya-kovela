@@ -4,8 +4,6 @@ import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
-
-
 import {
   Splash,
   SignUp,
@@ -44,6 +42,8 @@ import {
   EventsScreen,
   DonationsList,
   EventDetails,
+  ForgetPassword,
+  UpdateProfile,
   CreateEvent,
   ProfileMemberShips,
   InvitationScreen,
@@ -60,6 +60,7 @@ import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
+import ForgotPasswordOtpScreen from './src/screens/forgot-password-otp-screen';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -105,6 +106,8 @@ const App = () => {
       memberShip,
       eventsScreen,
       donationslist,
+      forgetPassword,
+      updateProfile,
       eventDetails,
       createEvent,
       profilememberships,
@@ -159,6 +162,15 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={forgetPassword}
+          component={ForgetPassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+       
+         
       </Stack.Navigator>
     );
   };
@@ -217,6 +229,21 @@ const App = () => {
         <Stack.Screen
           name={updatePassword}
           component={UpdatePassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={updateProfile}
+          component={UpdateProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+<Stack.Screen
+          name={forgotPasswordOtpScreen}
+          component={ForgotPasswordOtpScreen}
           options={{
             headerShown: false,
           }}

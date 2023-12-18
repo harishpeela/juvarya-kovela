@@ -43,6 +43,7 @@ const EventsScreen = ({navigation}) => {
           txt={'Events'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
+          isArrow={true}
         />
         <TouchableOpacity
           style={{marginRight: 20}}
@@ -51,11 +52,11 @@ const EventsScreen = ({navigation}) => {
               navigation: navigation,
             });
           }}>
-          {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
+          <Icon name="pluscircleo" size={24} color={colors.black} />
         </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
+        {/* <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}>
             <SearchBar
               value={searchedText}
@@ -85,8 +86,8 @@ const EventsScreen = ({navigation}) => {
               // srHeight={"100%"}
             />
           </View>
-        </View>
-        <View style={styles.followersContainer}>
+        </View> */}
+        <View style={styles.ListContainer}>
           {eventsLoader ? (
             <View
               style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>

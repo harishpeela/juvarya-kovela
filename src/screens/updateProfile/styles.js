@@ -1,3 +1,5 @@
+
+
 import {StyleSheet, useColorScheme} from 'react-native';
 import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
@@ -6,11 +8,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
-<<<<<<< HEAD
-    marginTop: '15%',
-=======
     
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
   },
   keyBoardStyle: {
     margin: 10,
@@ -19,21 +17,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     flex: 1,
-    justifyContent: 'center',
+    marginTop:'0%'
   },
   fieldContainer: {
-<<<<<<< HEAD
-    marginTop: -30,
-=======
-    marginTop: 30,
+    // marginTop: 30,
     
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
   },
   buttonContainer: {
-    marginTop: 25,
+    marginTop: 15,
     width: '70%',
     alignSelf: 'center',
   },
+
   isLogin: {
     fontFamily: fontFamily.popinBold,
     color: colors.red3,

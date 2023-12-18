@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert,StatusBar} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -105,8 +105,13 @@ const Signin = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <StatusBar
+        backgroundColor="transparent"
+        barStyle="dark-content"
+        translucent={true}
+      />
       <View style={styles.signinTextContainer}>
-        <Text style={styles.signinText}>{login}</Text>
+        {/* <Text style={styles.signinText}>h</Text> */}
       </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
@@ -136,7 +141,7 @@ const Signin = ({navigation}) => {
               <View style={styles.inputContainer}>
                 <InputField
                   title={'Mobile number / email'}
-                  isFlag
+                  // isFlag
                   // keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
@@ -156,12 +161,13 @@ const Signin = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.btnContainer}>
-                  <PrimaryButton
+                  <PrimaryButton 
                     bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
                     radius={25}
+                     
                   />
                 </View>
                 <TouchableOpacity
@@ -173,6 +179,19 @@ const Signin = ({navigation}) => {
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
                 </TouchableOpacity>
+                
+
+                <TouchableOpacity
+                 onPress={() => {
+                  navigation.navigate(allTexts.screenNames.forgetPassword);
+                }}>
+                <View>
+
+                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
+                </View>
+                </TouchableOpacity>
+
+                
               </View>
             );
           }}

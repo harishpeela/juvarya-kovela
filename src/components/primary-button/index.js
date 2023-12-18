@@ -22,10 +22,10 @@ export const PrimaryButton = ({
       style={[styles(bgColor, radius, padding, width).wrapper,]}
       {...props}>
       <Text style={textStyles(textColor, fontsize).textTitle}>
-        {loading == true ? (
+        {loading === true ? (
           <ActivityIndicator size={'small'} color={colors.white} />
         ) : (
-          text
+          <Text>{text}</Text>
         )}
       </Text>
     </TouchableOpacity>

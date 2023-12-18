@@ -17,7 +17,7 @@ export const textStyles = (textColor, fontSize) =>
   StyleSheet.create({
     textTitle: {
       fontSize: fontSize || 14,
-      color: textColor || colors.white,
+      color: textColor ? textColor:colors.black,
       fontFamily: fontFamily.popinBold,
       textTransform: 'uppercase',
     },

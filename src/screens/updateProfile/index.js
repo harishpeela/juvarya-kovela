@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, ToastAndroid, useColorScheme} from 'react-native';
 import React, {useContext} from 'react';
-import {BackHeaderNew, PrimaryButton} from '../../components';
-import {PasswordField} from '../../components/inputfield';
+import {PrimaryButton} from '../../components';
+import {InputField, PasswordField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
-import {styles} from './style';
+// import {styles} from './style';
+import {styles} from './styles';
 import {BackHeader, BackgroundImage} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -16,15 +17,18 @@ const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-<<<<<<< HEAD
-      inputTitles: {currentPassword, password, confirmPassword},
-=======
-      inputTitles: {currentPassword,Newpassword, confirmPassword},
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
+      inputTitles: {
+        currentPassword,
+        Newpassword,
+        confirmPassword,
+        dateOfBirth,
+        gender,
+        gotra,
+        userAddress,
+      },
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -76,9 +80,8 @@ const UpdatePassword = ({navigation}) => {
       }}>
       <BackgroundImage />
       <View style={styles.headerContainer}>
-        <BackHeaderNew
-          isArrrow={true}
-          onPress={() => {
+        <BackHeader
+          onBackPress={() => {
             navigation.goBack();
           }}
           txt={updatePassword}
@@ -96,6 +99,7 @@ const UpdatePassword = ({navigation}) => {
           initialValues={{
             password: '',
             confirmPassword: '',
+            gotra:'',
           }}>
           {({
             errors,
@@ -108,54 +112,52 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
-
-                 <PasswordField
-                  title={currentPassword}
-                  value={values.password}
-                  titleColor={colors.orangeColor}
-                  placeholder={passwordPlace}
-                  error={touched.password && errors.password}
+                
+                <InputField
+                  title={dateOfBirth}
+                  value={values.password}titleColor={colors.orangeColor}
+                  // error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
                 />
-                <PasswordField
-<<<<<<< HEAD
-                  title={'New Password'}
-=======
-                  title={Newpassword}
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
+                 <InputField
+                  title={gender}
                   value={values.password}
                   titleColor={colors.orangeColor}
-                  placeholder={passwordPlace}
-                  error={touched.password && errors.password}
+                  // error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
                 />
                 {/* <View style={{height: 30}} /> */}
-                <PasswordField
-                  title={'confirm new Password'}
+                <InputField
+                  title={gotra}
                   value={values.confirmPassword}
                   titleColor={colors.orangeColor}
-                  placeholder={confirmPasswordPlace}
-                  error={touched.confirmPassword && errors.confirmPassword}
+                  // error={touched.confirmPassword && errors.confirmPassword}
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
                 />
-                <View style={styles.buttonContainer}>
+
+                <InputField
+                  title={userAddress}
+                  value={values.confirmPassword}
+                  titleColor={colors.orangeColor}
+                  // error={touched.confirmPassword && errors.confirmPassword}
+                  onBlur={handleBlur('confirmPassword')}
+                  setState={handleChange('confirmPassword')}
+                />
+
+                {/* <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
-<<<<<<< HEAD
-=======
                     radius={25}
                     width={100}
                     textColor={'white'}
->>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={updatePassword}
-                    radius={25}
                   />
-                </View>
+                </View> */}
               </View>
             );
           }}

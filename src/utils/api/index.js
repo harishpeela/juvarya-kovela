@@ -20,6 +20,7 @@ import {
 const endpoints = {
   NEW_SIGN_IN: 'auth/signin',
   NEW_SIGN_UP: 'auth/signup',
+  FORGOT_PASSWORD: 'auth/forgot/password',
   NEW_OTP: 'auth/jtuserotp/trigger',
   NEW_GET_CURRENT_USER: 'auth/currentCustomer',
   NEW_UPDATE_PASSWORD: 'customer/password',
@@ -94,6 +95,23 @@ export const loginUser1 = async data => {
     console.log('error in login', error);
     return error;
   }
+  
+  
+};
+
+export const forgotPassword = async data => {
+  try {
+    let result = await authAxiousForgotPassword.post(
+      `${endpoints.FORGOT_PASSWORD}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+  
+  
 };
 
 export const DonationsPost = async data => {

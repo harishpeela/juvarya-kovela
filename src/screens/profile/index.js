@@ -179,6 +179,7 @@ const Profile = ({navigation}) => {
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={80} color={colors.orangeColor} />
                 </View>
+
               )}
             </TouchableOpacity>
           )}
@@ -222,8 +223,10 @@ const Profile = ({navigation}) => {
           /> */}
           <Item
             svg={<Icon name="profile" size={20} />}
-            text={t('Update Profile')}
-            onPress={() => alert('page under development')}
+            text={t('update Profile')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.updateProfile)
+            }}
           />
           {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
@@ -260,11 +263,12 @@ const Profile = ({navigation}) => {
               await removeLoginSessionDetails();
               setLoginDetails(null);
             }}
-            bgColor={colors.white}
+            bgColor={colors.black}
+            loading={false}
             radius={25}
-            text={'Log Out'}
+            text={'Log out'}
             shadow={true}
-            textColor={colors.black}
+            textColor={colors.white}
           />
           <Text style={styles.versionText}>
             Version&ensp;{allTexts.appVersion.version}
