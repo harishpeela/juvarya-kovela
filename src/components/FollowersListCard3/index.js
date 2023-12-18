@@ -9,10 +9,11 @@ import {
 import React from 'react';
 import {styles} from './styles';
 import {PrimaryButton} from '../primary-button';
-import {colors, fontSize} from '../../common';
+import {allTexts, colors, fontSize} from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-const FollowersListCard3 = ({data, img}) => {
+const FollowersListCard3 = ({data, navigation}) => {
+  console.log('item======>', data);
   return (
     <View>
       <FlatList
@@ -20,7 +21,14 @@ const FollowersListCard3 = ({data, img}) => {
         keyboardShouldPersistTaps="handled"
         keyExtractor={({item, index}) => index?.toString()}
         renderItem={({item, index}) => (
-          <TouchableOpacity style={styles.listItemContainer}>
+          <TouchableOpacity
+            style={styles.listItemContainer}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.membershipdetails, {
+                data: item,
+              }),
+                console.log('item', item);
+            }}>
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
                 <Image

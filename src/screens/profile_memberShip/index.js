@@ -19,7 +19,7 @@ import { useFocusEffect } from '@react-navigation/native';
 
 
 const ProfileMembership = ({ route, navigation }) => {
-  const { id, roleId } = route.params || {};
+  const {roleId } = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
 
@@ -27,10 +27,10 @@ const ProfileMembership = ({ route, navigation }) => {
     setaLoader(true);
     try {
       let result = await MemberShipDetails(0, 100);
-      console.log('res', result?.data?.data);
+      console.log('res', result?.data);
       let responce = result?.data?.data;
       if (responce) {
-        let dataList = responce.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+        let dataList = responce?.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
         console.log('dayta of members list', dataList);
         setaLoader(false);
         setData(dataList);
@@ -51,7 +51,7 @@ const ProfileMembership = ({ route, navigation }) => {
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <BackHeaderNew
-            txt={'Member'}
+            txt={'Members'}
             isArrrow={true}
             onPress={() => navigation.goBack()}
           />
@@ -65,6 +65,7 @@ const ProfileMembership = ({ route, navigation }) => {
               <TouchableOpacity onPress={() => {
                 navigation.navigate(allTexts.screenNames.invitationScreen, {
                   navigation: navigation,
+                  roleId: roleId,
                 })
               }}>
                 {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
@@ -80,7 +81,7 @@ const ProfileMembership = ({ route, navigation }) => {
         ) : (
           <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: '10%'}}>
             {data?.length ? (
-              <FollowersListCard3 data={data} />
+              <FollowersListCard3 data={data} navigation={navigation} />
             ) : (
               <View
                 style={{

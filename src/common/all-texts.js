@@ -162,6 +162,7 @@ export const allTexts = {
     createEvent: 'CreateEvent',
     profilememberships: 'ProfileMemberShips',
     invitationScreen: 'InvitationScreen',
+    membershipdetails: 'MemberShipDetails',
   },
   homeHeader: {
     welcome: 'Welcome ',

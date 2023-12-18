@@ -46,7 +46,8 @@ import {
   UpdateProfile,
   CreateEvent,
   ProfileMemberShips,
-  InvitationScreen
+  InvitationScreen,
+  MemberShipDetails,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -110,7 +111,8 @@ const App = () => {
       eventDetails,
       createEvent,
       profilememberships,
-      invitationScreen
+      invitationScreen,
+      membershipdetails,
     },
   } = allTexts;
   useEffect(() => {
@@ -249,6 +251,13 @@ const App = () => {
         <Stack.Screen
           name={myTamples}
           component={MyTamples}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={membershipdetails}
+          component={MemberShipDetails}
           options={{
             headerShown: false,
           }}

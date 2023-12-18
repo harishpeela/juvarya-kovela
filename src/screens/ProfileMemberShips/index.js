@@ -48,7 +48,9 @@ const ProfileMemberShips = ({navigation, route}) => {
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.addMembershipDetails);
+              navigation.navigate(allTexts.screenNames.addMembershipDetails, {
+                roleId: roleId,
+              });
             }}>
             <Text style={styles.joinText}>Create</Text>
           </TouchableOpacity>
@@ -57,7 +59,6 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
         <MemberShipCard
           data={data}
-          length={membership.length ? membership.length : '0'}
           txt={
             roleId === 'ROLE_ITEM_ADMIN'
               ? `${membership?.length} Memberships`

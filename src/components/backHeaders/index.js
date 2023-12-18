@@ -1,10 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import {View, Text, TouchableOpacity, Pressable} from 'react-native';
+import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { colors } from '../../common';
+import {colors} from '../../common';
 
 export const BackHeaderNew = ({
   txtColor,
@@ -32,24 +32,21 @@ export const BackHeaderNew = ({
             />
           </TouchableOpacity>
         )}
-        {txt ? (
+        {txt && (
           <Text
             style={{
               fontSize: 20,
               fontWeight: '500',
               color: 'black',
+              marginLeft: 10
             }}>
             {txt}
           </Text>
         ) : null}
       </View>
       {isPlus && (
-        <TouchableOpacity onPress={onPlusPress}> {/* Added onPress prop for the plus icon */}
-          <AntDesign
-            name="plus"
-            size={24}
-            color={colors.black}
-          />
+        <TouchableOpacity>
+          <AntDesign name="plus" size={24} color={colors.black} />
         </TouchableOpacity>
       )}
     </View>

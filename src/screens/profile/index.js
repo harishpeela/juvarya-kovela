@@ -18,13 +18,12 @@ import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
-import {UploadPhoto} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {GetProfilePic, PostProfilePic} from '../../utils/api';
+import {GetProfilePic, PostProfilePic, AdminTemples} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
@@ -44,6 +43,7 @@ const Profile = ({navigation}) => {
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
   const [dob, setDob] = useState(true);
+  const [templeAdmins, setTempleAdmins] = useState([]);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -56,9 +56,19 @@ const Profile = ({navigation}) => {
       setRoleType('ROLE_AGENT');
     }
   };
+  const RoleAdminTemples = async () => {
+    try {
+      let result = await AdminTemples();
+      setTempleAdmins(result?.data);
+      console.log('result od admin temples', result?.data);
+    } catch (error) {
+      console.log('error in temple admin', error);
+    }
+  };
   useEffect(() => {
     Type();
     GetCustProfilePic();
+    RoleAdminTemples();
   }, []);
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
@@ -132,6 +142,7 @@ const Profile = ({navigation}) => {
       setTcModal(true);
     }
   };
+  console.log('temple admins', templeAdmins?.length);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -189,7 +200,7 @@ const Profile = ({navigation}) => {
         <View style={styles.profileItemsContainer}>
           {/* <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} /> */}
-          {(roleType === role.admin || roleType === role.agent) && (
+          {templeAdmins && (
             <Item
               svg={
                 <Image

@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 50,
-    paddingHorizontal:"2.5%",
+    paddingHorizontal:'2.5%',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     height: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
-    bottom:20
+    bottom: 20,
   },
   bar: {
     height: 2,
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   bellIcon: {
     alignSelf: 'center',
-    bottom:5
+    bottom: 5,
   },
   postHeader: {
     flexDirection: 'row',
@@ -157,9 +157,8 @@ const styles = StyleSheet.create({
     top: 4,
     left: 20,
   },
-  flatListStyle:{
-  },
-  homeCard:{
+  flatListStyle: {},
+  homeCard: {
     // borderWidth:10,
     // borderColor:'red'
   },
