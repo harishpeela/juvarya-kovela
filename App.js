@@ -132,7 +132,6 @@ const App = () => {
   }, []);
   const AuthStack = () => {
     return (
-      
       <Stack.Navigator>
         <Stack.Screen
           name={splash}
@@ -169,8 +168,6 @@ const App = () => {
             headerShown: false,
           }}
         />
-       
-         
       </Stack.Navigator>
     );
   };
@@ -233,17 +230,9 @@ const App = () => {
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={updateProfile}
           component={UpdateProfile}
-          options={{
-            headerShown: false,
-          }}
-        />
-
-<Stack.Screen
-          name={forgotPasswordOtpScreen}
-          component={ForgotPasswordOtpScreen}
           options={{
             headerShown: false,
           }}

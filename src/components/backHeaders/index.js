@@ -24,12 +24,7 @@ export const BackHeaderNew = ({
         }}>
         {isArrow && ( // Corrected condition for arrow rendering
           <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-            <Fontisto
-              name="arrow-left"
-              color={'white'}
-              size={17}
-              color={colors.black}
-            />
+            <Fontisto name="arrow-left" size={17} color={colors.black} />
           </TouchableOpacity>
         )}
         {txt && (
@@ -38,11 +33,11 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               color: 'black',
-              marginLeft: 10
+              marginLeft: 10,
             }}>
             {txt}
           </Text>
-        ) : null}
+        )}
       </View>
       {isPlus && (
         <TouchableOpacity>
