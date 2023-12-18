@@ -50,5 +50,4 @@ const EventCard2 = ({onPress, data, navigation}) => {
     />
   );
 };
-
 export default EventCard2;

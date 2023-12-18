@@ -1,3 +1,5 @@
+
+
 import {StyleSheet, useColorScheme} from 'react-native';
 import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
@@ -15,10 +17,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     flex: 1,
-    justifyContent: 'center',
+    marginTop:'0%'
   },
   fieldContainer: {
-    marginTop: 30,
+    // marginTop: 30,
     
   },
   buttonContainer: {

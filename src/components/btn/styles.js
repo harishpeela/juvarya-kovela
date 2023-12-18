@@ -19,10 +19,11 @@ export const styles = StyleSheet.create({
           height: 2,
         },
         shadowOpacity: 0.3,
-        paddingHorizontal:'4%',
+        // paddingHorizontal:'1%',
         paddingVertical:'2%',
         marginHorizontal:'1%',
-        marginVertical:'1%'
+        marginVertical:'1%',
+        width:'23%'
     },
     btnText:{
         color:colors.white,

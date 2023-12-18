@@ -162,24 +162,26 @@ const styles = StyleSheet.create({
     // borderWidth:10,
     // borderColor:'red'
   },
-  userIconBorder: {
-    borderWidth: 2,
-    borderColor: 'orange',
-    padding: 4,
-    borderRadius: 50,
+  userIconBorder:{
+    borderWidth:2,
+    borderColor:'orange',
+    padding:4,
+    borderRadius:50
   },
-  barIcons: {},
-  barsBorder: {
-    borderWidth: 1,
-    borderColor: 'black',
-    borderRadius: 50,
-    alignItems: 'center',
-    width: 25,
-    padding: 2,
-    left: 25,
-    bottom: 20,
-    backgroundColor: '#D3D3D3',
+  barIcons:{
+    
   },
+  barsBorder:{
+    borderWidth:1,
+    borderColor:'black',
+    borderRadius:50,
+    alignItems:'center',
+    width:25,
+    padding:2,
+    left:25,
+    bottom:20,
+    backgroundColor:'#D3D3D3'
+  }
 });
 
 export default styles;

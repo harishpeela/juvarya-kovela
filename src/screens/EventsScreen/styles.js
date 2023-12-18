@@ -3,14 +3,13 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   Header: {
     // marginHorizontal: '3%',
-    marginTop: 30,
+    marginTop: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginLeft: 30,
+    marginHorizontal:'2%'
   },
-
   bodyContainer: {
     marginHorizontal: '4%',
     display: 'flex',
@@ -28,28 +27,29 @@ export const styles = StyleSheet.create({
     width: '100%',
     padding: '1%',
     alignContent: 'center',
+    alignItems: 'center',
   },
   searchContainer: {
     width: '82%',
     height: '100%',
     margin: '2%',
   },
-  followersContainer: {
-    // height: '100%',
-    // borderWidth:2,
-    marginBottom: '70%',
+  ListContainer: {
+    height: '100%',
+    borderWidth:2,
+    marginTop:20
   },
   sortContainer: {
     display: 'flex',
-    width: '20%',
+    width: '15%',
     height: '100%',
-
     // borderWidth:2,
   },
   list: {
     marginBottom: 300,
   },
   noDataContainer: {
+    alignItems: 'center',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
   flatListStyle: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 2,
     paddingBottom: 500,
   },
 });
