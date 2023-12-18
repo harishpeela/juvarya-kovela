@@ -6,7 +6,11 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
+<<<<<<< HEAD
+    marginTop: '15%',
+=======
     
+>>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
   },
   keyBoardStyle: {
     margin: 10,
@@ -18,15 +22,18 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fieldContainer: {
+<<<<<<< HEAD
+    marginTop: -30,
+=======
     marginTop: 30,
     
+>>>>>>> 7a776561aeadf78dead009037403fe1ad6a737f9
   },
   buttonContainer: {
-    marginTop: 15,
+    marginTop: 25,
     width: '70%',
     alignSelf: 'center',
   },
-
   isLogin: {
     fontFamily: fontFamily.popinBold,
     color: colors.red3,

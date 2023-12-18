@@ -335,7 +335,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                     )
                   }> */}
                   <CommunityComp
-                    // itemCommunity={memberShip?.membershipCount}
                     onPress={
                       () => alert('page under development')
                       // navigation.navigate(
@@ -477,8 +476,12 @@ const ViewTempleProfile = ({route, navigation}) => {
 
             <View style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
-
-              <Text style={styles.modalContentText}>Create a Post</Text>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.createfeed)
+                }>
+                <Text style={styles.modalContentText}>Create a Post</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.modalContent}>
               <Icon color={colors.black} name="people-outline" size={22} />

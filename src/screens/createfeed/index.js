@@ -140,7 +140,6 @@ const CreateFeed = ({route, navigation}) => {
       console.log('nope');
     }
   }, [data]);
-  console.log('trfData', trfData);
   return (
     <SafeAreaView>
       <BackgroundImage />
@@ -176,7 +175,10 @@ const CreateFeed = ({route, navigation}) => {
               onPress={() => {
                 uploadPhoto();
               }}>
-              <UploadPhoto />
+              {/* <UploadPhoto /> */}
+              <View style={styles.profileImage}>
+                  <Icon name="camera" size={70} color={colors.orangeColor} />
+                </View>
             </TouchableOpacity>
           )}
         </View>
