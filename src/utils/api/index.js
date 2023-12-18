@@ -39,7 +39,7 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  // MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
+  MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',

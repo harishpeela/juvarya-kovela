@@ -44,7 +44,7 @@ import EventDetails from './eventDetails';
 import CreateEvent from './CreateEvent';
 import ProfileMemberShips from './ProfileMemberShips';
 import InvitationScreen from './Invitation';
-
+import MemberShipDetails from './membershipDetails';
 
 export {
   CreatePost,
@@ -92,5 +92,6 @@ export {
   EventDetails,
   CreateEvent,
   ProfileMemberShips,
-  InvitationScreen
+  InvitationScreen,
+  MemberShipDetails,
 };

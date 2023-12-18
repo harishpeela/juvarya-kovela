@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 60,
-    paddingHorizontal:"2.5%",
+    marginTop: 50,
+    paddingHorizontal:'2.5%',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -37,9 +37,10 @@ const styles = StyleSheet.create({
   },
   sidebarIcon: {
     width: 24,
-    height: 13,
+    height: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    bottom: 20,
   },
   bar: {
     height: 2,
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
   },
   bellIcon: {
     alignSelf: 'center',
+    bottom: 5,
   },
   postHeader: {
     flexDirection: 'row',
@@ -155,12 +157,29 @@ const styles = StyleSheet.create({
     top: 4,
     left: 20,
   },
-  flatListStyle:{
-  },
-  homeCard:{
+  flatListStyle: {},
+  homeCard: {
     // borderWidth:10,
     // borderColor:'red'
-  }
+  },
+  userIconBorder: {
+    borderWidth: 2,
+    borderColor: 'orange',
+    padding: 4,
+    borderRadius: 50,
+  },
+  barIcons: {},
+  barsBorder: {
+    borderWidth: 1,
+    borderColor: 'black',
+    borderRadius: 50,
+    alignItems: 'center',
+    width: 25,
+    padding: 2,
+    left: 25,
+    bottom: 20,
+    backgroundColor: '#D3D3D3',
+  },
 });
 
 export default styles;
