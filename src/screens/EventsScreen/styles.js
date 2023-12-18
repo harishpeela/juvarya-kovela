@@ -43,7 +43,6 @@ export const styles = StyleSheet.create({
     display: 'flex',
     width: '15%',
     height: '100%',
-
     // borderWidth:2,
   },
   list: {

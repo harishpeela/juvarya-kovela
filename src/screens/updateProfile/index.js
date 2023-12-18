@@ -2,12 +2,13 @@
 import {View, ToastAndroid, useColorScheme} from 'react-native';
 import React, {useContext} from 'react';
 import {PrimaryButton} from '../../components';
-import {PasswordField} from '../../components/inputfield';
+import {InputField, PasswordField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
-import {styles} from './style';
+// import {styles} from './style';
+import {styles} from './styles';
 import {BackHeader, BackgroundImage} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -16,11 +17,18 @@ const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-      inputTitles: {currentPassword,Newpassword, confirmPassword},
+      inputTitles: {
+        currentPassword,
+        Newpassword,
+        confirmPassword,
+        dateOfBirth,
+        gender,
+        gotra,
+        userAddress,
+      },
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -91,6 +99,7 @@ const UpdatePassword = ({navigation}) => {
           initialValues={{
             password: '',
             confirmPassword: '',
+            gotra:'',
           }}>
           {({
             errors,
@@ -103,36 +112,42 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
-
-                 <PasswordField
-                  title={currentPassword}
-                  value={values.password}
-                  titleColor={colors.orangeColor}
-                  placeholder={passwordPlace}
-                  error={touched.password && errors.password}
+                
+                <InputField
+                  title={dateOfBirth}
+                  value={values.password}titleColor={colors.orangeColor}
+                  // error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
                 />
-                <PasswordField
-                  title={Newpassword}
+                 <InputField
+                  title={gender}
                   value={values.password}
                   titleColor={colors.orangeColor}
-                  placeholder={passwordPlace}
-                  error={touched.password && errors.password}
+                  // error={touched.password && errors.password}
                   onBlur={handleBlur('password')}
                   setState={handleChange('password')}
                 />
                 {/* <View style={{height: 30}} /> */}
-                <PasswordField
-                  title={confirmPassword}
+                <InputField
+                  title={gotra}
                   value={values.confirmPassword}
                   titleColor={colors.orangeColor}
-                  placeholder={confirmPasswordPlace}
-                  error={touched.confirmPassword && errors.confirmPassword}
+                  // error={touched.confirmPassword && errors.confirmPassword}
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
                 />
-                <View style={styles.buttonContainer}>
+
+                <InputField
+                  title={userAddress}
+                  value={values.confirmPassword}
+                  titleColor={colors.orangeColor}
+                  // error={touched.confirmPassword && errors.confirmPassword}
+                  onBlur={handleBlur('confirmPassword')}
+                  setState={handleChange('confirmPassword')}
+                />
+
+                {/* <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
                     radius={25}
@@ -142,7 +157,7 @@ const UpdatePassword = ({navigation}) => {
                     onPress={handleSubmit}
                     text={updatePassword}
                   />
-                </View>
+                </View> */}
               </View>
             );
           }}

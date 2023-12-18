@@ -43,6 +43,15 @@ export const authAxiousInstance1 = axios.create({
   },
 });
 
+export const authAxiousForgotPassword = axios.create({
+  baseURL: BASEURL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+
+
 export const authAxiosAddTempId = axios.create({
   baseURL: BASE_URL,
   Accept: 'application/json',
@@ -92,6 +101,7 @@ export const axiosDonation = axios.create({
     Authorization: bearer_token,
   },
 });
+
 axiosDonation.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   // console.log('Sending req with this token', token);
