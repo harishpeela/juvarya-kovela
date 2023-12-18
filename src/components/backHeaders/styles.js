@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {colors} from '../../common';
+import { StyleSheet } from 'react-native';
+import { colors } from '../../common';
 export const styles = StyleSheet.create({
   header: {
     // borderWidth:2,
@@ -13,12 +13,14 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
-    // elevation:3,
+    backgroundColor: colors.white,
+    marginLeft: 5,
+    elevation: 3,
     // shadowOffset:{
     //   width:1,
     //   height:1
     // },
-    // shadowColor:colors.black,
-    // backgroundColor:colors.white,
+    shadowColor: colors.black,
+    marginHorizontal:15
   },
 });

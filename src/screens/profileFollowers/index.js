@@ -1,26 +1,26 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, FlatList} from 'react-native';
 import {
   BackHeaderNew,
   FollowersListCard2,
   SearchBar,
   Sort,
 } from '../../components';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { TempleFollowersList } from '../../utils/api';
-import { Loader } from '../../components';
-import { colors } from '../../common';
-import { styles } from './styles';
-import { Ellipsis } from '../../components';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {TempleFollowersList} from '../../utils/api';
+import {Loader} from '../../components';
+import {colors} from '../../common';
+import {styles} from './styles';
+import {Ellipsis} from '../../components';
 
-const FollowersMembership = ({ route, navigation }) => {
+const FollowersMembership = ({route, navigation}) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
   const [filteredData, setFilteredData] = useState(followersList);
-  const { id } = route.params || {};
+  const {id} = route.params || {};
   const [loading, setLoading] = useState(false);
 
   let TempleFolowers = async () => {
@@ -32,7 +32,6 @@ const FollowersMembership = ({ route, navigation }) => {
         // if(result?.data?.data)
         if (result?.data?.data !== undefined) {
           setFollowersList(result?.data?.data);
-
         }
       } else {
         setLoader(false);
@@ -57,13 +56,15 @@ const FollowersMembership = ({ route, navigation }) => {
     }, 500);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.followersHeader}>
         <BackHeaderNew
+          isArrrow={true}
           txt={
-            followersList.length > 0
-              ? `${followersList.length} Followers`
-              : null // or any fallback value you want when followersList is not greater than 0
+            // followersList.length > 0
+            //   ? `${followersList.length}
+            'Followers'
+            // : null // or any fallback value you want when followersList is not greater than 0
           }
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
@@ -98,7 +99,7 @@ const FollowersMembership = ({ route, navigation }) => {
               brColor={colors.gray2}
               txtColor={colors.orangeColor}
               srWidth={'100%'}
-            // srHeight={"100%"}
+              // srHeight={"100%"}
             />
           </View>
         </View>
@@ -114,7 +115,7 @@ const FollowersMembership = ({ route, navigation }) => {
                   data={followersList}
                   contentContainerStyle={styles.flatListStyle}
                   keyExtractor={(item, index) => item.user.id.toString()}
-                  renderItem={({ item }) => (
+                  renderItem={({item}) => (
                     <FollowersListCard2
                       name={item.user.firstName}
                       img={item.user.url}
@@ -133,7 +134,7 @@ const FollowersMembership = ({ route, navigation }) => {
                   data={filteredData}
                   contentContainerStyle={styles.flatListStyle}
                   keyExtractor={item => item.user.id.toString()}
-                  renderItem={({ item }) => (
+                  renderItem={({item}) => (
                     <FollowersListCard2
                       name={item.user.firstName}
                       img={item.user.url}

@@ -31,6 +31,7 @@ export default BottomTabBase = ({navigation}) => {
   //     component
   //   )
   // }
+  const GetEvents = () => <EventsScreen navigation={navigation} />;
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetFavScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
@@ -38,8 +39,13 @@ export default BottomTabBase = ({navigation}) => {
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
   );
+  const getEventsScreen = () => {
+    setIndex(1);
+    return <EventsScreen navigation={navigation} />;
+  };
   const {homeFeedListData} = useContext(ApplicationContext);
   const [feedLength, setFeedLength] = useState(0);
+  const [index, setIndex] = useState(0);
   useEffect(() => {
     setFeedLength(homeFeedListData?.length);
   }, [homeFeedListData, navigation]);
@@ -70,7 +76,7 @@ export default BottomTabBase = ({navigation}) => {
           }}>
           <Tab.Screen
             name={allTexts.screenNames.eventsScreen}
-            component={EventsScreen}
+            component={GetEvents}
             options={{
               tabBarStyle: {
                 height: 200,
@@ -110,15 +116,18 @@ export default BottomTabBase = ({navigation}) => {
             ),
           }}
         /> */}
-          <Tab.Screen
-            
-
+          <Tab.Screen          
             name={allTexts.tabNames.home}
             component={UserFeedScreen}
             // name={"sas"}
             options={{
               tabBarIcon: ({color, size}) => (
-                <View style={styles.imageContainer}>
+                <View
+                  style={{
+                    ...styles.imageContainer,
+                    borderColor: index == 1 ? colors.orangeColor : 'gray',
+                    borderWidth: index == 1 ? 2 : 0.5,
+                  }}>
                   <Image
                     source={require('../../utils/assets/images/Kovela-logo.png')}
                     style={{

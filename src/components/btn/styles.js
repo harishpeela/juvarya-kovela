@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
-        backgroundColor: colors.orangeColor3,
+        backgroundColor: colors.orangeColor,
         shadowColor: colors.black,
         shadowRadius: 5, 
         // elevation:4,
@@ -19,15 +19,16 @@ export const styles = StyleSheet.create({
           height: 2,
         },
         shadowOpacity: 0.3,
-        paddingHorizontal:'4%',
+        // paddingHorizontal:'1%',
         paddingVertical:'2%',
         marginHorizontal:'1%',
-        marginVertical:'1%'
+        marginVertical:'1%',
+        width:'23%'
     },
     btnText:{
-        color:colors.orangeColor,
+        color:colors.white,
         textAlign:'center',
-        fontWeight:'400',
+        fontWeight:'900',
         fontSize:fontSize.small
     }
 

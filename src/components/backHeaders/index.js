@@ -1,9 +1,10 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
-import {styles} from './styles';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { colors } from '../../common';
 
 export const BackHeaderNew = ({
   txtColor,
@@ -11,6 +12,7 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
+  isArrow, // Corrected typo in the prop name
 }) => {
   return (
     <View style={styles.header}>
@@ -20,34 +22,33 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-          {/* <Fontisto
-            name="arrow-left"
-            color={txtColor === undefined ? <></> : txtColor}
-            size={17}
-          /> */}
-        </TouchableOpacity>
+        {isArrow && ( // Corrected condition for arrow rendering
+          <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+            <Fontisto
+              name="arrow-left"
+              color={'white'}
+              size={17}
+              color={colors.black}
+            />
+          </TouchableOpacity>
+        )}
         {txt ? (
           <Text
             style={{
               fontSize: 20,
               fontWeight: '500',
-              marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color: 'black',
             }}>
             {txt}
           </Text>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </View>
-
       {isPlus && (
-        <TouchableOpacity onPress={onPlusPress}>
+        <TouchableOpacity onPress={onPlusPress}> {/* Added onPress prop for the plus icon */}
           <AntDesign
             name="plus"
             size={24}
-            color={txtColor === undefined ? <></> : txtColor}
+            color={colors.black}
           />
         </TouchableOpacity>
       )}

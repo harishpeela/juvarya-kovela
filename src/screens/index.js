@@ -44,7 +44,9 @@ import EventDetails from './eventDetails';
 import ForgetPassword from './forgetPassword';
 import UpdateProfile from './updateProfile';
 import ForgotPasswordOtpScreen from './forgot-password-otp-screen';
-
+import CreateEvent from './CreateEvent';
+import ProfileMemberShips from './ProfileMemberShips';
+import InvitationScreen from './Invitation';
 
 
 export {
@@ -94,5 +96,7 @@ export {
   ForgetPassword,
   UpdateProfile,
   ForgotPasswordOtpScreen
-
+  CreateEvent,
+  ProfileMemberShips,
+  InvitationScreen
 };
