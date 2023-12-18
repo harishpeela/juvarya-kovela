@@ -1,13 +1,4 @@
-import {
-  Alert,
-  Modal,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {BackHeaderNew, BackgroundImage} from '../../components';
 import {styles} from './styles';
@@ -19,7 +10,6 @@ const InvitationScreen = ({navigation, id, route}) => {
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
   const {roleId} = route.params || {};
-    console.log('roleId', roleId);
   const MemberShipInviteApi = async () => {
     if (email === '') {
       setError(true);

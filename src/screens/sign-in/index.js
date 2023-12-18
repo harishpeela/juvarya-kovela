@@ -68,9 +68,10 @@ const Signin = ({navigation}) => {
           ApiData();
           setLoginDetails(accessToken);
           actions.setSubmitting(false);
-        } else {
+        } else if (!result && result.status === 200){
           actions.setSubmitting(false);
-          Alert.alert('Error', result?.message);
+          console.log('error login', result?.data);
+          Alert.alert('Errors', result?.data?.message);
         }
       } catch (error) {
         actions.setSubmitting(false);

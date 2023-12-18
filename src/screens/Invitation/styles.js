@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     marginTop: '2%'
   },
   errorText: {
-    color: 'red',
+    color: colors.orangeColor,
     fontWeight: '600',
   },
 });

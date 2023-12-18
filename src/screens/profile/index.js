@@ -28,9 +28,6 @@ import {GetProfilePic, PostProfilePic, AdminTemples} from '../../utils/api';
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
-  const {
-    constants: {role},
-  } = allTexts;
   // console.log('user details', userDetails);
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -42,7 +39,6 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [dob, setDob] = useState(true);
   const [templeAdmins, setTempleAdmins] = useState([]);
 
   const Type = () => {
@@ -135,10 +131,8 @@ const Profile = ({navigation}) => {
   const TC = () => {
     setClicked(true);
     if (clicked === true) {
-      // alert('T & C under development');
       setTcModal(true);
     } else {
-      // alert('T & C under development');
       setTcModal(true);
     }
   };
@@ -197,8 +191,6 @@ const Profile = ({navigation}) => {
       </View>
       <View style={styles.profileItemsHeader}>
         <View style={styles.profileItemsContainer}>
-          {/* <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} /> */}
           {templeAdmins && (
             <Item
               svg={
