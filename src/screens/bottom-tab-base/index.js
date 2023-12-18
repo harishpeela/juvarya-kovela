@@ -89,7 +89,7 @@ export default BottomTabBase = ({navigation}) => {
             options={{
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>
-                  <FeatherIcon name="search" color={color} size={23} />
+                  <FeatherIcon name="search"  color={color} size={23} />
                   <Text style={{color: color}}>Search</Text>
                 </View>
               ),
@@ -152,7 +152,7 @@ export default BottomTabBase = ({navigation}) => {
                   <FeatherIcon name="user" color={color} size={23} />
                   <Text style={{color: color}}>Profile</Text>
                 </View>
-              ),
+              )
             }}
           />
         </Tab.Navigator>

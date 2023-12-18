@@ -43,6 +43,7 @@ const Signup = ({navigation}) => {
         password,
         confirmPassword,
         username,
+        
       },
     },
   } = allTexts;
@@ -132,12 +133,14 @@ const Signup = ({navigation}) => {
                   onBlur={handleBlur('lastName')}
                   setState={handleChange('lastName')}
                 />
+
                 <InputField
-                  title={username}
-                  placeholder={'user Name'}
-                  error={touched.userName && errors.userName}
-                  onBlur={handleBlur('userName')}
-                  setState={handleChange('userName')}
+                  title={email}
+                  placeholder={emailPlace}
+                  error={touched.email && errors.email}
+                  onBlur={handleBlur('email')}
+                  setState={handleChange('email')}
+                  autoCapitalize="none"
                 />
                 <InputField
                   title={phoneNo}
@@ -150,12 +153,11 @@ const Signup = ({navigation}) => {
                   maxLength={10}
                 />
                 <InputField
-                  title={email}
-                  placeholder={emailPlace}
-                  error={touched.email && errors.email}
-                  onBlur={handleBlur('email')}
-                  setState={handleChange('email')}
-                  autoCapitalize="none"
+                  title={username}
+                  placeholder={'user Name'}
+                  error={touched.userName && errors.userName}
+                  onBlur={handleBlur('userName')}
+                  setState={handleChange('userName')}
                 />
                 <PasswordField
                   value={values.password}

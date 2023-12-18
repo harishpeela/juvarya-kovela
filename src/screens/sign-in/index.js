@@ -77,7 +77,7 @@ const Signin = ({navigation}) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>
-        <Text style={styles.signinText}>{login}</Text>
+        {/* <Text style={styles.signinText}>h</Text> */}
       </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
@@ -127,12 +127,13 @@ const Signin = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.btnContainer}>
-                  <PrimaryButton
+                  <PrimaryButton 
                     bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
                     radius={25}
+                     
                   />
                 </View>
                 <TouchableOpacity
@@ -144,6 +145,19 @@ const Signin = ({navigation}) => {
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
                 </TouchableOpacity>
+                
+
+                <TouchableOpacity
+                 onPress={() => {
+                  navigation.navigate(allTexts.screenNames.forgetPassword);
+                }}>
+                <View>
+
+                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
+                </View>
+                </TouchableOpacity>
+
+                
               </View>
             );
           }}

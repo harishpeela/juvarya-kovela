@@ -56,5 +56,13 @@ export const styles = StyleSheet.create({
     textTransform: 'uppercase',
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
+    borderWidth:1
   },
+  forgotPassword:{
+   textAlign:'center',
+   color:'orange',
+   marginTop:'15%'
+  
+  
+  }
 });

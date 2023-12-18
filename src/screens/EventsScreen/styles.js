@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     searchContainer: {
         width: '82%',
         height: '100%',
-        margin:'2'
+        
        
     },
     followersContainer: {
