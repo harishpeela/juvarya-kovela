@@ -5,7 +5,9 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {MemberShipInvite} from '../../utils/api';
 
-const InvitationScreen = ({navigation, id, route}) => {
+const InvitationScreen = ({navigation, route}) => {
+  const {onSelect} = route.params || {};
+  console.log('route', onSelect);
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
@@ -49,10 +51,16 @@ const InvitationScreen = ({navigation, id, route}) => {
       <BackgroundImage />
       <View style={styles.Header}>
         <BackHeaderNew
-          onPress={() => navigation.goBack()}
+          onPress={() => {
+            navigation.goBack();
+            route?.params?.onSelect({
+              // selected: isFollow,
+              // selectedId: !isFollow ? trfData?.jtProfile : '',
+            });
+          }}
           txtColor={colors.black}
           txt={'Inviation'}
-          isArrrow={true}
+          isArrow={true}
           isPlus={false}
         />
       </View>

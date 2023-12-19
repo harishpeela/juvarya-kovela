@@ -125,7 +125,7 @@ export const AddEvent = ({data, navigation}) => {
                 <InputField
                   value={values.eventName}
                   title={eventname}
-                  titleColor={colors.green2}
+                  titleColor={colors.orangeColor}
                   placeholder={tampleNameP}
                   error={touched.eventName && errors.eventName}
                   onBlur={handleBlur('eventName')}
@@ -135,7 +135,7 @@ export const AddEvent = ({data, navigation}) => {
                 <InputField
                   value={values.description}
                   title={tDescription}
-                  titleColor={colors.green2}
+                  titleColor={colors.orangeColor}
                   placeholder={descriptionP}
                   error={touched.description && errors.description}
                   onBlur={handleBlur('description')}
@@ -147,8 +147,8 @@ export const AddEvent = ({data, navigation}) => {
                     initial={isRegular}
                     formHorizontal={true}
                     labelHorizontal={true}
-                    buttonColor={colors.blue3}
-                    selectedButtonColor={colors.blue3}
+                    buttonColor={colors.orangeColor}
+                    selectedButtonColor={colors.orangeColor}
                     animation={false}
                     buttonSize={8}
                     buttonOuterSize={20}
@@ -165,7 +165,7 @@ export const AddEvent = ({data, navigation}) => {
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                       <InputField1
                         value={data.date || GetDate()}
-                        titleColor={colors.green2}
+                        titleColor={colors.orangeColor}
                         placeholder="yyyy/mm/dd"
                         error={touched.date && errors.date}
                         onBlur={handleBlur('date')}
@@ -220,7 +220,7 @@ export const AddEvent = ({data, navigation}) => {
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                       <InputField1
                         value={values.toDate}
-                        titleColor={colors.green2}
+                        titleColor={colors.orangeColor}
                         placeholder="to-Date - yyyy/mm/dd"
                         error={touched.toDate && errors.toDate}
                         onBlur={handleBlur('toDate')}
@@ -251,7 +251,7 @@ export const AddEvent = ({data, navigation}) => {
 
                 <View style={styles.buttonContainer}>
                   <PrimaryEventButton
-                    bgColor={colors.blue3}
+                    bgColor={colors.orangeColor}
                     onPress={handleSubmit}
                     text={addevents}
                     radius={8}
@@ -290,7 +290,7 @@ const InputField1 = ({
         <View style={styles.fieldContainer1}>
           <TextInput
             value={value}
-            placeholderTextColor={colors.gray2}
+            placeholderTextColor={colors.orangeColor}
             onChangeText={val => setState(val)}
             style={styles.inputText}
             placeholder={placeholder}

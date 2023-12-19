@@ -84,8 +84,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  console.log('RoleId ====>>>>>>>>>>>' + roleId);
-
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -262,9 +260,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   });
                 }}>
                 <BackHeaderNew
-                  // txt={`${followersList?.length} Followers`}
-                  // txt={'Followers'}
-                  isArrrow={true}
+                  isArrow={true}
                   onPress={() => navigation.goBack()}
                   txtColor={colors.black}
                   isPlus={false}

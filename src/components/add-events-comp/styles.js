@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     marginLeft: 50,
   },
   pickDateTxt: {
-    color: colors.green2,
+    color: colors.orangeColor,
     textTransform: 'capitalize',
     fontFamily: fontFamily.popinRegular,
   },
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   icon: {
     height: 40,
     width: 40,
-    backgroundColor: colors.blue3,
+    backgroundColor: colors.orangeColor,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
   },
   radioLabelStyle: {
     fontSize: 16,
-    color: colors.green2,
+    color: colors.orangeColor,
     letterSpacing: -0.33,
     fontFamily: fontFamily.bold,
     paddingBottom: 4,
@@ -81,12 +81,12 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   rememberMeText: {
-    color: '#444444',
+    color: 'black',
     fontSize: 18,
     // fontFamily: ,
   },
   checkIcon: {
-    color: 'blue',
+    color: colors.orangeColor,
     fontSize: 20,
     marginRight: 5,
   },

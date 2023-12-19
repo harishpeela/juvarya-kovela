@@ -6,8 +6,8 @@ import {
   Pressable,
   ScrollView,
 } from 'react-native';
-import React, { useState } from 'react';
-import { styles } from './styles';
+import React, {useState} from 'react';
+import {styles} from './styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   BackgroundImage,
@@ -17,27 +17,26 @@ import {
   PrimaryButton,
   TextInput2,
 } from '../../components';
-import { BackHeaderNew } from '../../components';
-import { allTexts, colors } from '../../common';
+import {BackHeaderNew} from '../../components';
+import {allTexts, colors} from '../../common';
 import Icon2 from 'react-native-vector-icons/EvilIcons';
-import { BackgroundImage2 } from '../../components/backgroundImage';
+import {BackgroundImage2} from '../../components/backgroundImage';
 import Btn from '../../components/btn';
-import { Formik, Field } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {Formik, Field} from 'formik';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon3 from 'react-native-vector-icons/Entypo';
 
-const EventDetails = ({ navigation, route }) => {
-
+const EventDetails = ({navigation, route}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const [eventPage, setEventPage] = useState(false);
   const {
-    placeHolders: { emailPlace },
+    placeHolders: {emailPlace},
     headings: {
-      inputTitles: { phoneNo, email },
+      inputTitles: {phoneNo, email},
     },
   } = allTexts;
-  const { item } = route.params || {};
+  const {item} = route.params || {};
   console.log('route', item);
   const handlePress = () => {
     if (eventPage) {
@@ -155,9 +154,7 @@ const EventDetails = ({ navigation, route }) => {
           <ScrollView>
             <View style={styles.toggleData}>
               {currentIndex === 1 && (
-                <TouchableOpacity
-                  onPress={handlePress}
-                >
+                <TouchableOpacity onPress={handlePress}>
                   <EventCard3 onPress={handlePress} />
                   <EventCard3 />
                   <EventCard3 />
@@ -167,7 +164,7 @@ const EventDetails = ({ navigation, route }) => {
                 </TouchableOpacity>
               )}
               {currentIndex === 2 && (
-                <View style={styles.infoContainer} >
+                <View style={styles.infoContainer}>
                   <View style={styles.btnContainer}>
                     <Btn />
                     <Btn />
@@ -178,16 +175,16 @@ const EventDetails = ({ navigation, route }) => {
                   <View style={styles.desContainer}>
                     <Text style={styles.des}>Description: </Text>
                     <Text style={styles.desData}>
-                      The build will continue, but you are strongly encouraged to
-                      update your project to Lorem ipsum dolor sit amet
+                      The build will continue, but you are strongly encouraged
+                      to update your project to Lorem ipsum dolor sit amet
                       consectetur. Enim sed commodo maecenas sed nisl ultrices.
                       Mauris amet quisque placerat sit mi risus lorem. Tincidunt
                       nam sit sit pharetra. Varius tincidunt mi elementum libero
                       nisl condimentum nisi mauris. Erat sed vel lectus cras ut
-                      pellentesque sem. Nunc ut et sed ac et tristique nunc aenean
-                      varius. Phasellus sit parturient sed sed ut vitae. Porttitor
-                      facilisi dui mauris sit donec eget augue pretium. Id magna
-                      arcu sit tortor.
+                      pellentesque sem. Nunc ut et sed ac et tristique nunc
+                      aenean varius. Phasellus sit parturient sed sed ut vitae.
+                      Porttitor facilisi dui mauris sit donec eget augue
+                      pretium. Id magna arcu sit tortor.
                     </Text>
                   </View>
                 </View>
@@ -278,7 +275,9 @@ const EventDetails = ({ navigation, route }) => {
                     <Text style={styles.locationText}>Event Location </Text>
                   </View>
                 )} */}
-              {currentIndex === 4 && <Text style={styles.locationText}>Maps displaying 4</Text>}
+              {currentIndex === 4 && (
+                <Text style={styles.locationText}>Maps displaying 4</Text>
+              )}
             </View>
           </ScrollView>
         </View>
@@ -289,10 +288,8 @@ const EventDetails = ({ navigation, route }) => {
           <Text style={styles.intButtonText}>Interested</Text>
         </TouchableOpacity>
       ) : (
-        <>
-        </>
+        <></>
       )}
-
     </View>
   );
 };

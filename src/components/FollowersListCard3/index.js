@@ -8,12 +8,10 @@ import {
 } from 'react-native';
 import React from 'react';
 import {styles} from './styles';
-import {PrimaryButton} from '../primary-button';
-import {allTexts, colors, fontSize} from '../../common';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import {allTexts} from '../../common';
 
 const FollowersListCard3 = ({data, navigation}) => {
-  console.log('item======>', data);
+
   return (
     <View>
       <FlatList

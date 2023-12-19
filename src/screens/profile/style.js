@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingTop: '10%',
   },
   logoutbtnContainer: {
-    marginTop: '20%',
+    marginTop: '10%',
     width: '50%',
     alignSelf: 'center',
     alignItems: 'center',

@@ -5,7 +5,7 @@ import {allTexts} from '../../common';
 import {styles} from './styles';
 import {MemberShipDetails} from '../../utils/api';
 const ProfileMemberShips = ({navigation, route}) => {
-  const {roleId} = route.params || {};
+  const {roleId, trfdata} = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const data = [
@@ -19,8 +19,8 @@ const ProfileMemberShips = ({navigation, route}) => {
   const MembershipData = async () => {
     setLoader(true);
     try {
-      let result = await MemberShipDetails(0, 20);
-      console.log('res', result?.data?.data.length);
+      let result = await MemberShipDetails(0, 100);
+      console.log('ressssssssssssssssssss', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -42,7 +42,7 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={styles.header}>
         <BackHeaderNew
           txt={'MemberShips'}
-          isArrrow={true}
+          isArrow={true}
           onPress={() => navigation.goBack()}
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (
@@ -50,6 +50,7 @@ const ProfileMemberShips = ({navigation, route}) => {
             onPress={() => {
               navigation.navigate(allTexts.screenNames.addMembershipDetails, {
                 roleId: roleId,
+                jtProfileId: trfdata?.jtProfile,
               });
             }}>
             <Text style={styles.joinText}>Create</Text>

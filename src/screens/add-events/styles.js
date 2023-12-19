@@ -5,4 +5,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  header: {
+    marginTop: '10%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: '2%',
+    justifyContent: 'space-between'
+  },
 });

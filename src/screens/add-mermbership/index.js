@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -9,33 +9,34 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import { BackgroundImage, BackHeaderNew } from '../../components';
-import { styles } from './styles';
+import SelectDropdown from 'react-native-select-dropdown';
+import {BackgroundImage, BackHeaderNew} from '../../components';
+import {styles} from './styles';
 import Snackbar from 'react-native-snackbar';
-import { MemberShipCreate } from '../../utils/api'
+import {MemberShipCreate} from '../../utils/api';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const AddMemebershipDetails = ({ route, navigation }) => {
-
+const AddMemebershipDetails = ({route, navigation}) => {
+  const {jtProfileId} = route.params || {};
+  console.log('jtProfileId', jtProfileId);
   const [memType, setMemType] = useState();
   const [memName, setMemName] = useState();
   // const [memFee, setMemFee] = useState('');
   // const [memDur, setMemDur] = useState('');
-  const [memberShip, setMemberShip] = useState([])
+  const [memberShip, setMemberShip] = useState([]);
   const submit = async () => {
     const payload = {
-      name: "commitee",
-      profileId: 1,
-      type: "TEMPORARY"
-    }
+      name: memName,
+      profileId: jtProfileId,
+      type: memType,
+    };
+    console.log('payload', payload);
     try {
       // Invoke MemberShipInvite with the id and email
       let result = await MemberShipCreate(payload);
-      console.log("result =>>>>>>>>>>>>" + result)
       if (result) {
         setMemberShip(result?.data);
-        console.log("New_Member");
-        console.log(result?.data)
-        // Show a custom alert for a successful API call
+        console.log(result?.data);
         Snackbar.show({
           text: 'MemberShip Created Successfully',
           backgroundColor: 'green',
@@ -43,9 +44,11 @@ const AddMemebershipDetails = ({ route, navigation }) => {
           action: {
             text: 'Ok',
             textColor: 'white',
-            onPress: () => { <></> },
-          }
-        })
+            onPress: () => {
+              <></>;
+            },
+          },
+        });
         Alert.alert(
           'Create New MemberShip',
           'Navigating to MemberShips Screen',
@@ -53,8 +56,7 @@ const AddMemebershipDetails = ({ route, navigation }) => {
             {
               text: 'New',
               onPress: () => {
-                setMemName(""),
-                  setMemType("")
+                setMemName(''), setMemType('');
               },
             },
             {
@@ -62,7 +64,7 @@ const AddMemebershipDetails = ({ route, navigation }) => {
               onPress: () => navigation.pop(),
             },
           ],
-          { cancelable: false }
+          {cancelable: false},
         );
       } else {
         setMemberShip(0);
@@ -79,13 +81,10 @@ const AddMemebershipDetails = ({ route, navigation }) => {
             onPress: () => console.log('OK Pressed'),
           },
         ],
-        { cancelable: false }
+        {cancelable: false},
       );
     }
-  }
-
-
-
+  };
 
   const onPressDone = () => {
     if (memType == undefined) {
@@ -98,47 +97,55 @@ const AddMemebershipDetails = ({ route, navigation }) => {
             onPress: () => console.log('OK Pressed'),
           },
         ],
-        { cancelable: false }
+        {cancelable: false},
       );
     } else if (memName == undefined) {
-      console.log("It is  printing inside the MemName")
+      console.log('It is  printing inside the MemName');
       Alert.alert(
         'INVALID INPUT',
         'Please Enter the Name of the MemberShip.',
         [
-
           {
             text: 'OK',
             onPress: () => console.log('OK Pressed'),
           },
         ],
-        { cancelable: false }
+        {cancelable: false},
       );
     } else {
       submit();
     }
-  }
+  };
+
+  let donationType = ['BASIC', 'PRIMIUM'];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <BackgroundImage />
-      <View style={{ marginHorizontal: '5%', marginVertical: '10%' }}>
+      <View style={{marginHorizontal: '5%', marginVertical: '10%'}}>
         <BackHeaderNew
-          txt={"Add Membership"}
+          txt={'Add Membership'}
           onPress={() => navigation.goBack()}
-          isArrrow={true}
+          isArrow={true}
         />
-        <View>
-          <TextInput
-            style={styles.inputTextStyle}
-            placeholder="Type"
-            onChangeText={(v) => setMemType(v)}
-            value={memType}
+        <View style={{marginTop: '35%'}}>
+          <SelectDropdown
+            data={donationType}
+            defaultValue={memType}
+            buttonTextStyle={styles.DTextStyle}
+            onSelect={e => setMemType(e)}
+            buttonStyle={styles.DbuttonStyle}
+            defaultButtonText="Select-Type"
+            renderDropdownIcon={() => (
+              <View>
+                <Icon color={'black'} size={20} name="down" />
+              </View>
+            )}
           />
           <TextInput
             style={styles.inputTextStyle}
             placeholder="MemberShip Name"
-            onChangeText={(v) => setMemName(v)}
+            onChangeText={v => setMemName(v)}
             value={memName}
           />
           {/* <TextInput

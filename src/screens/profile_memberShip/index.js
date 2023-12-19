@@ -3,10 +3,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, SafeAreaView, FlatList, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
 import {
-  BackgroundImage,
   BackHeaderNew,
   Loader,
   FollowersListCard3,
@@ -14,8 +13,6 @@ import {
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
-import Icon from "react-native-vector-icons/AntDesign"
-import { useFocusEffect } from '@react-navigation/native';
 
 
 const ProfileMembership = ({ route, navigation }) => {
@@ -27,7 +24,7 @@ const ProfileMembership = ({ route, navigation }) => {
     setaLoader(true);
     try {
       let result = await MemberShipDetails(0, 100);
-      console.log('res', result?.data);
+      console.log('resssss', result?.data);
       let responce = result?.data?.data;
       if (responce) {
         let dataList = responce?.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
@@ -43,6 +40,9 @@ const ProfileMembership = ({ route, navigation }) => {
       alert(error);
     }
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
   useEffect(() => {
     MembershipData();
   }, []);
@@ -52,7 +52,7 @@ const ProfileMembership = ({ route, navigation }) => {
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
-            isArrrow={true}
+            isArrow={true}
             onPress={() => navigation.goBack()}
           />
           <TouchableOpacity onPress={() => {
@@ -66,6 +66,7 @@ const ProfileMembership = ({ route, navigation }) => {
                 navigation.navigate(allTexts.screenNames.invitationScreen, {
                   navigation: navigation,
                   roleId: roleId,
+                  onSelect: onSelect,
                 })
               }}>
                 {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
