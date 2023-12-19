@@ -1,4 +1,4 @@
-import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, SafeAreaView, Alert,StatusBar} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -51,31 +51,65 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
-    let payload = {
-      primaryContact: data?.email,
-      password: data.password,
-    };
-    try {
-      let result = await loginUser1(payload);
-      if (result && result.status === 200) {
-        const {
-          data: {accessToken, tokenType},
-        } = result;
-        await saveLoginSessionDetails(tokenType, accessToken);
-        ApiData();
-        setLoginDetails(accessToken);
+    if (data.email.length > 10) {
+      let payload = {
+        // primaryContact: data?.email,
+        email: data?.email,
+        password: data.password,
+      };
+      console.log('playload with email', payload);
+      try {
+        let result = await loginUser1(payload);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else if (!result && result.status === 200){
+          actions.setSubmitting(false);
+          console.log('error login', result?.data);
+          Alert.alert('Errors', result?.data?.message);
+        }
+      } catch (error) {
         actions.setSubmitting(false);
-      } else {
-        actions.setSubmitting(false);
-        Alert.alert('Error', result?.message);
       }
-    } catch (error) {
-      actions.setSubmitting(false);
+    } else {
+      let payload = {
+        primaryContact: data?.email,
+        password: data.password,
+      };
+      console.log('playload with mobile', payload);
+
+      try {
+        let result = await loginUser1(payload);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else {
+          actions.setSubmitting(false);
+          Alert.alert('Error', result?.message);
+        }
+      } catch (error) {
+        actions.setSubmitting(false);
+      }
     }
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <StatusBar
+        backgroundColor="transparent"
+        barStyle="dark-content"
+        translucent={true}
+      />
       <View style={styles.signinTextContainer}>
         {/* <Text style={styles.signinText}>h</Text> */}
       </View>
@@ -106,14 +140,14 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number'}
-                  isFlag
-                  keyboardType={'numeric'}
+                  title={'Mobile number / email'}
+                  // isFlag
+                  // keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  maxLength={10}
+                  maxLength={20}
                 />
                 <View style={{height: 20}} />
                 <View>

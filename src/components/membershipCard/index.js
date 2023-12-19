@@ -5,64 +5,66 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../../common';
-export const MemberShipCard = ({data, onPress}) => {
+export const MemberShipCard = ({data, onPress, length, txt}) => {
   return (
     <View>
       <FlatList
         data={data}
         keyboardShouldPersistTaps="handled"
-        keyExtractor={({item, index}) => index}
+        keyExtractor={({item, index}) => item}
         renderItem={({item, index}) => (
-          <LinearGradient
-            colors={['#f7f307', '#aba944']}
-            style={{
-              padding: 20,
-              margin: 5,
-              height: 200,
-              borderRadius: 20,
-            }}>
-            <View style={styles.logo}>
-              {item?.type === 'PREMIUM' && (
-                <View style={{alignItems: 'center'}}>
-                  <FontAwesome5 name="crown" color={'green'} size={40} />
-                  <Text style={styles.typetext}>PRIMIUM</Text>
-                </View>
-              )}
-              {item?.type === 'AVERAGE' && (
-                <View style={{alignItems: 'center'}}>
-                  <MaterialCommunityIcons
-                    name="shield-crown"
-                    color={'#eb15e0'}
-                    size={40}
-                  />
-                  <Text style={styles.typetext}>AVERAGE</Text>
-                </View>
-              )}
-              {item?.type === 'BASIC' && (
-                <View style={{alignItems: 'center'}}>
-                  <MaterialCommunityIcons
-                    name="shield-sun-outline"
-                    color={'white'}
-                    size={40}
-                  />
-                  <Text style={styles.typetext}>BASIC</Text>
-                </View>
-              )}
-              <Text style={styles.name}> {item?.type}</Text>
-            </View>
-            <View style={styles.underLine} />
-            <View>
-              <View style={styles.secondContainer}>
-                <View style={{alignItems: 'center'}}>
-                  <Text style={styles.orgprice}> $ 499</Text>
-                  <Text style={styles.offerPrice}> $ 299</Text>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
-                  <Text style={styles.buttext}>Upgrade </Text>
-                </TouchableOpacity>
+          <TouchableOpacity onPress={onPress}>
+            <LinearGradient
+              colors={['#f7f307', '#aba944']}
+              style={{
+                padding: 20,
+                margin: 5,
+                height: 200,
+                borderRadius: 20,
+              }}>
+              <View style={styles.logo}>
+                {item?.type === 'PREMIUM' && (
+                  <View style={{alignItems: 'center'}}>
+                    <FontAwesome5 name="crown" color={'green'} size={40} />
+                    <Text style={styles.typetext}>PRIMIUM</Text>
+                  </View>
+                )}
+                {item?.type === 'AVERAGE' && (
+                  <View style={{alignItems: 'center'}}>
+                    <MaterialCommunityIcons
+                      name="shield-crown"
+                      color={'#eb15e0'}
+                      size={40}
+                    />
+                    <Text style={styles.typetext}>AVERAGE</Text>
+                  </View>
+                )}
+                {item?.type === 'BASIC' && (
+                  <View style={{alignItems: 'center'}}>
+                    <MaterialCommunityIcons
+                      name="shield-sun-outline"
+                      color={'white'}
+                      size={40}
+                    />
+                    <Text style={styles.typetext}>BASIC</Text>
+                  </View>
+                )}
+                {/* <View style={{alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={styles.name}>{length} </Text>
+                <Text style={styles.name}> {item?.type}</Text>
+              </View> */}
               </View>
-            </View>
-          </LinearGradient>
+              <View style={styles.underLine} />
+              <View>
+                <View style={styles.secondContainer}>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={styles.offerPrice}> $ 299</Text>
+                  </View>
+                  {txt && <Text style={styles.buttext}>{txt} </Text>}
+                </View>
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
         )}
       />
     </View>

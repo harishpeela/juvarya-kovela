@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import {View, ToastAndroid, useColorScheme} from 'react-native';
 import React, {useContext} from 'react';
-import {PrimaryButton} from '../../components';
+import {BackHeaderNew, PrimaryButton} from '../../components';
 import {PasswordField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -16,11 +16,10 @@ const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-      inputTitles: {currentPassword,Newpassword, confirmPassword},
+      inputTitles: {currentPassword, Newpassword, confirmPassword},
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -72,8 +71,9 @@ const UpdatePassword = ({navigation}) => {
       }}>
       <BackgroundImage />
       <View style={styles.headerContainer}>
-        <BackHeader
-          onBackPress={() => {
+        <BackHeaderNew
+          isArrow={true}
+          onPress={() => {
             navigation.goBack();
           }}
           txt={updatePassword}
@@ -103,8 +103,7 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
-
-                 <PasswordField
+                <PasswordField
                   title={currentPassword}
                   value={values.password}
                   titleColor={colors.orangeColor}
@@ -114,7 +113,7 @@ const UpdatePassword = ({navigation}) => {
                   setState={handleChange('password')}
                 />
                 <PasswordField
-                  title={Newpassword}
+                  title={'New Password'}
                   value={values.password}
                   titleColor={colors.orangeColor}
                   placeholder={passwordPlace}
@@ -124,7 +123,7 @@ const UpdatePassword = ({navigation}) => {
                 />
                 {/* <View style={{height: 30}} /> */}
                 <PasswordField
-                  title={confirmPassword}
+                  title={'confirm new Password'}
                   value={values.confirmPassword}
                   titleColor={colors.orangeColor}
                   placeholder={confirmPasswordPlace}
@@ -135,12 +134,10 @@ const UpdatePassword = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
-                    radius={25}
-                    width={100}
-                    textColor={'white'}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={updatePassword}
+                    radius={25}
                   />
                 </View>
               </View>

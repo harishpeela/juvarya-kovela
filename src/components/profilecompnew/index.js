@@ -12,17 +12,20 @@ import {
 } from '../backgroundFlower';
 export const FollowersComp = ({followCount, onPressFollowers}) => {
   return (
-    <TouchableOpacity onPress={onPressFollowers} style={styles.followersView}>
+    <TouchableOpacity style={styles.followersView} onPress={onPressFollowers}>
       <Text style={styles.postText1}>{followCount}</Text>
       <Text style={styles.postText}>Followers</Text>
     </TouchableOpacity>
   );
 };
-export const CommunityComp = ({itemCommunity, onPressmembership}) => {
+
+export const CommunityComp = ({onPress, itemCommunity}) => {
   return (
-    <TouchableOpacity onPress={onPressmembership} style={styles.followersView}>
-      <Text style={styles.postText1}>{itemCommunity}</Text>
-      <Text style={styles.postText}> Members </Text>
+    <TouchableOpacity onPress={onPress} style={styles.followersView}>
+      <Text style={styles.postText1}>
+        {itemCommunity ? itemCommunity : '0'}
+      </Text>
+      <Text style={styles.postText}> Events </Text>
     </TouchableOpacity>
   );
 };
@@ -65,13 +68,6 @@ export const FolloUnfollowComp = ({
     </View>
   );
 };
-// export const ContactTabcomp = ({onPressContact}) => {
-//   return (
-//     <Pressable onPress={onPressContact} style={styles.voidButton}>
-//       <Text style={styles.voidButton.text}>Contact</Text>
-//     </Pressable>
-//   );
-// };
 export const ContactTabcomp = ({onPressContact}) => {
   return (
     <TouchableOpacity style={[styles.voidButton, styles.button]}>
@@ -80,21 +76,24 @@ export const ContactTabcomp = ({onPressContact}) => {
     </TouchableOpacity>
   );
 };
-// export const DirectionsTabComp = () => {
-//   return (
-//     <Pressable
-//       onPress={() => console.log('pressed directions')}
-//       style={styles.voidButton}>
-//       <Text style={styles.voidButton.text}>Directions</Text>
-//     </Pressable>
-//   );
-// };
-export const DirectionsTabComp = ({role}) => {
+export const DirectionsTabComp = ({roleId,trfData,navigation}) => {
   return (
-    <TouchableOpacity style={[styles.voidButton1, styles.button]}>
+    <TouchableOpacity
+      style={[styles.voidButton1, styles.button]}
+
+      onPress={() => {
+        navigation.navigate(
+          allTexts.screenNames.profilememberships,
+          {
+            trfdata: trfData,
+            roleId: roleId,
+          },
+        );
+      }}
+      >
       <BackgroundSmallFlowerUser />
       <Text style={styles.voidButton1Text}>
-        {role ? 'Add a Member' : 'Become a member'}
+        {roleId ? 'Add a Member' : 'Become a member'}
       </Text>
     </TouchableOpacity>
   );
