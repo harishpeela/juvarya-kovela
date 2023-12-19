@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   checkIcon: {
-    fontSize: 16,
+    fontSize: 12,
     marginRight: 5,
   },
  

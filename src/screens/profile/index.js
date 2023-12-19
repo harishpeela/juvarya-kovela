@@ -18,16 +18,20 @@ import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
+import {UploadPhoto} from '../../utils/svgs';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {GetProfilePic, PostProfilePic, AdminTemples} from '../../utils/api';
+import {GetProfilePic, PostProfilePic} from '../../utils/api';
 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
+  const {
+    constants: {role},
+  } = allTexts;
   // console.log('user details', userDetails);
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -39,7 +43,7 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [templeAdmins, setTempleAdmins] = useState([]);
+  const [dob, setDob] = useState(true);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -52,19 +56,9 @@ const Profile = ({navigation}) => {
       setRoleType('ROLE_AGENT');
     }
   };
-  const RoleAdminTemples = async () => {
-    try {
-      let result = await AdminTemples();
-      setTempleAdmins(result?.data);
-      console.log('result od admin temples', result?.data);
-    } catch (error) {
-      console.log('error in temple admin', error);
-    }
-  };
   useEffect(() => {
     Type();
     GetCustProfilePic();
-    RoleAdminTemples();
   }, []);
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
@@ -131,12 +125,13 @@ const Profile = ({navigation}) => {
   const TC = () => {
     setClicked(true);
     if (clicked === true) {
+      // alert('T & C under development');
       setTcModal(true);
     } else {
+      // alert('T & C under development');
       setTcModal(true);
     }
   };
-  console.log('temple admins', templeAdmins?.length);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -176,10 +171,11 @@ const Profile = ({navigation}) => {
               {profPic ? (
                 <Image source={{uri: profPic}} style={styles.profileImage} />
               ) : (
+                // <UploadPhoto />
                 <View style={styles.profileImage}>
-                  <Icon name="camera" size={80} color={colors.orangeColor} />
+                  <Icon name="camera" size={90} color={colors.orangeColor} />
                 </View>
-
+                
               )}
             </TouchableOpacity>
           )}
@@ -192,7 +188,9 @@ const Profile = ({navigation}) => {
       </View>
       <View style={styles.profileItemsHeader}>
         <View style={styles.profileItemsContainer}>
-          {templeAdmins && (
+          {/* <Item svg={<Demo />} text={bookings} />
+        <Item svg={<AccountIcon2 />} text={donations} /> */}
+          {(roleType === role.admin || roleType === role.agent) && (
             <Item
               svg={
                 <Image
@@ -237,14 +235,6 @@ const Profile = ({navigation}) => {
               }}
             />
           )} */}
-          <Item
-            svg={<Icon name="user" size={20} />}
-            text={t('user Info')}
-            onPress={() => {
-              // alert('under development');
-              navigation.navigate(allTexts.screenNames.userinfo);
-            }}
-          />
         </View>
         <View>
           <TouchableOpacity onPress={() => TC()}>

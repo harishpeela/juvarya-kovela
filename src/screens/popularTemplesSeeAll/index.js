@@ -91,16 +91,12 @@ const SeeAll = ({navigation}) => {
                   }>
                   <View style={{flexDirection: 'row', alignItems: 'center'}}>
                     <Image
-                      source={{
-                        uri: item.logo
-                          ? item?.logo
-                          : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
-                      }}
+                      source={{uri: item.logo}}
                       style={{height: 70, width: 70, borderRadius: 70 / 2}}
                     />
                     <View style={{marginLeft: 10}}>
                       <Text>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '85%'}}>
+                      <Text numberOfLines={2} style={{maxWidth: '95%'}}>
                         {item.desciption}{' '}
                       </Text>
                     </View>
