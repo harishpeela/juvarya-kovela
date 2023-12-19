@@ -1,17 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity, Pressable} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {colors} from '../../common';
 
 export const BackHeaderNew = ({
-  txtColor,
   onPress,
   txt,
   isPlus,
-  onPlusPress,
   isArrow, // Corrected typo in the prop name
 }) => {
   return (

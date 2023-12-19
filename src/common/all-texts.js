@@ -157,12 +157,12 @@ export const allTexts = {
     donationslist: 'DonationsList',
     forgetPassword:'ForgetPassword',
     updateProfile:'UpdateProfile',
-    forgotPasswordOtpScreen:'ForgotPassword',
     eventDetails: 'EventDetails',
     createEvent: 'CreateEvent',
     profilememberships: 'ProfileMemberShips',
     invitationScreen: 'InvitationScreen',
     membershipdetails: 'MemberShipDetails',
+    userinfo: 'UserInfo',
   },
   homeHeader: {
     welcome: 'Welcome ',

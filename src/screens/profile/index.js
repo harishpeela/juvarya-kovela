@@ -237,6 +237,14 @@ const Profile = ({navigation}) => {
               }}
             />
           )} */}
+          <Item
+            svg={<Icon name="user" size={20} />}
+            text={t('user Info')}
+            onPress={() => {
+              // alert('under development');
+              navigation.navigate(allTexts.screenNames.userinfo);
+            }}
+          />
         </View>
         <View>
           <TouchableOpacity onPress={() => TC()}>
