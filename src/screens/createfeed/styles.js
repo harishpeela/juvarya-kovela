@@ -27,13 +27,4 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: colors.orangeColor,
   },
-  profileImage: {
-    alignItems: 'center',
-    height: 100,
-    width: 100,
-    justifyContent: 'center',
-    borderWidth: 2,
-    borderRadius: 100 / 2,
-    borderColor: colors.orangeColor,
-  },
 });

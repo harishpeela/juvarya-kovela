@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BackHeader, Loader, SearchBar, BackgroundImage, BackHeaderNew} from '../../components';
+import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
@@ -60,9 +60,8 @@ const MyTamples = ({navigation}) => {
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImage />
       <View style={styles.headerContainer}>
-        <BackHeaderNew
-          isArrow={true}
-          onPress={() => {
+        <BackHeader
+          onBackPress={() => {
             navigation.goBack();
           }}
           txt={'My Temples'}

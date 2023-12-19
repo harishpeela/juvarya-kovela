@@ -8,33 +8,33 @@ export const Data = d => {
     eventsEnabled: d?.jtProfileDTO?.eventsEnabled
       ? d?.jtProfileDTO?.eventsEnabled
       : d?.eventsEnabled
-        ? d?.eventsEnabled
-        : false,
+      ? d?.eventsEnabled
+      : false,
     ecommerceEnabled: d?.jtProfileDTO?.ecommerceEnabled
       ? d?.jtProfileDTO?.ecommerceEnabled
       : d?.ecommerceEnabled
-        ? d?.ecommerceEnabled
-        : false,
+      ? d?.ecommerceEnabled
+      : false,
     popular: d?.jtProfileDTO?.popular
       ? d?.jtProfileDTO?.popular
       : d?.popular
-        ? d?.popular
-        : false,
+      ? d?.popular
+      : false,
     seasonal: d?.jtProfileDTO?.seasonal
       ? d?.jtProfileDTO?.seasonal
       : d?.seasonal
-        ? d?.seasonal
-        : false,
+      ? d?.seasonal
+      : false,
     servicesEnabled: d?.jtProfileDTO?.servicesEnabled
       ? d?.jtProfileDTO?.servicesEnabled
       : d?.servicesEnabled
-        ? d?.servicesEnabled
-        : false,
+      ? d?.servicesEnabled
+      : false,
     templeClass: d?.jtProfileDTO?.templeClass
       ? d?.jtProfileDTO?.templeClass
       : d?.templeClass
-        ? d?.templeClass
-        : '',
+      ? d?.templeClass
+      : '',
     jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
     logo: d?.logo ? d?.logo : d?.jtProfileDTO?.logo,
   };

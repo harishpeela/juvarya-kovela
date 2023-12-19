@@ -78,7 +78,7 @@ export const PopularTemplesVerticalList = ({
         margin: 10,
       }}
       onPress={() => {
-        pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
+        pageNav?.navigate(allTexts.screenNames.viewProfile, {
           data: post,
           onSelect: onSelect,
         });

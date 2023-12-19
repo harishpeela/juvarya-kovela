@@ -155,14 +155,10 @@ export const allTexts = {
     memberShip: 'MemberShip',
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
+    eventsDetails: 'EventDetails',
     forgetPassword:'ForgetPassword',
     updateProfile:'UpdateProfile',
-    eventDetails: 'EventDetails',
-    createEvent: 'CreateEvent',
-    profilememberships: 'ProfileMemberShips',
-    invitationScreen: 'InvitationScreen',
-    membershipdetails: 'MemberShipDetails',
-    userinfo: 'UserInfo',
+    forgotPasswordOtpScreen:'ForgotPassword'
   },
   homeHeader: {
     welcome: 'Welcome ',
