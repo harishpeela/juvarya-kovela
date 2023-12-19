@@ -16,11 +16,10 @@ const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-      inputTitles: {currentPassword,Newpassword, confirmPassword},
+      inputTitles: {currentPassword, Newpassword, confirmPassword},
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -73,7 +72,7 @@ const UpdatePassword = ({navigation}) => {
       <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeaderNew
-          isArrrow={true}
+          isArrow={true}
           onPress={() => {
             navigation.goBack();
           }}
@@ -104,8 +103,7 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
-
-                 <PasswordField
+                <PasswordField
                   title={currentPassword}
                   value={values.password}
                   titleColor={colors.orangeColor}

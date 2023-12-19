@@ -61,7 +61,7 @@ const MyTamples = ({navigation}) => {
       <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeaderNew
-          isArrrow={true}
+          isArrow={true}
           onPress={() => {
             navigation.goBack();
           }}

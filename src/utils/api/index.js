@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {
   authAxiousInstance,
   axiousInstance,
@@ -15,6 +16,7 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
+  axiosAddressData1,
 } from './api';
 
 const endpoints = {
@@ -38,6 +40,7 @@ const endpoints = {
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
+  ADDRESS_UPDATE: 'jtAddress/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
@@ -95,8 +98,6 @@ export const loginUser1 = async data => {
     console.log('error in login', error);
     return error;
   }
-  
-  
 };
 
 export const forgotPassword = async data => {
@@ -110,13 +111,20 @@ export const forgotPassword = async data => {
     console.log('error in login', error);
     return error;
   }
-  
-  
 };
 
 export const DonationsPost = async data => {
   try {
     let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
+export const AddressUpdate = async () => {
+  try {
+    let result = await axiosAddressData1.post(`${endpoints.ADDRESS_UPDATE}`);
     return result;
   } catch (error) {
     console.log('error in login', error);
