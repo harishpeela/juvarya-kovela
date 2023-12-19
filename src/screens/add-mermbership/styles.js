@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily, fontSize} from '../../common';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   inputTextStyle: {
     height: 50,
@@ -13,26 +13,18 @@ export const styles = StyleSheet.create({
     borderRadius: 9,
     fontFamily: fontFamily.medium,
   },
-  loginText: {
+  login: {
     fontFamily: fontFamily.medium,
     color: colors.white,
+    height: 50,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: '#FD8C00',
+    backgroundColor: '#FD8C00',
+    borderStyle: 'solid',
     fontSize: 15,
     textAlign: 'center',
-    fontSize:fontSize.large,
-    fontWeight:'700'
+    borderRadius: 11,
   },
-  btnContainer:{
-    alignItems:'center',
-    justifyContent:'center',
-    width:'85%',
-    borderWidth:2,
-    backgroundColor: '#FD8C00',
-    height: 40,
-    borderColor: '#FD8C00',
-    borderStyle: 'solid',
-    borderRadius:12,
-    alignContent:'center',
-    alignSelf:'center',
-    marginTop:'5%',
-  }
 });

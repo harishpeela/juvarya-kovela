@@ -21,12 +21,6 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.black,
       },
-      rs: {color: colors.black,
-        paddingHorizontal:10,
-        fontWeight: 'bold', fontSize: 16},
-      textContainer:{
-        flexDirection:'column',
-        justifyContent:'space-between',
-        marginHorizontal:10
-      }
+      rs: {color: colors.black, fontWeight: 'bold', fontSize: 16},
+     
 })

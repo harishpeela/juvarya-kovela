@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {ImageBackground, Image, TouchableOpacity,StatusBar} from 'react-native';
+import {ImageBackground, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useContext} from 'react';
 import {allTexts} from '../../common';
 import {styles} from './styles';
@@ -33,11 +33,6 @@ const Splash = ({navigation}) => {
       resizeMode="cover"
       style={styles.imgBackGround}
       source={require('../../utils/assets/images/newsplash.png')}>
-        <StatusBar
-        backgroundColor="transparent"
-        barStyle="dark-content"
-        translucent={true}
-      />
       <TouchableOpacity
         style={{
           flex: 1,

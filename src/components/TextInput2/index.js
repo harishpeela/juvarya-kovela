@@ -11,7 +11,7 @@ const TextInput2 = ({ title, placeholder, width }) => {
                 style={styles.input}
                 // onChangeText={onChangeText}
                 // value={`${placeholder}`}
-                placeholder={`   ${placeholder}`}
+                placeholder={`${placeholder}`}
             />
         </View>
     )
