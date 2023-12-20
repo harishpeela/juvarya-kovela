@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Image, Text} from 'react-native';
@@ -13,17 +14,15 @@ export const Danation_Add_Card = ({onPress, roleId}) => {
           height={40}
           width={40}
         />
-        <View style={{marginLeft: 10}}>
-          <Text style={styles.secondText}>Top Donation by Juvarya..</Text>
-          <Text style={styles.rs}>
-            ₹201 {''} {'>'}{' '}
-          </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.secondText}>Top Donation by Juvarya </Text>
+          {roleId ? <Text style={styles.rs}>₹201</Text> : <></>}
         </View>
       </View>
       {roleId ? (
         <Donation_Button buttonWidth={'30%'} onPress={onPress} />
       ) : (
-        <></>
+        <Text style={styles.rs}>₹201</Text>
       )}
     </View>
   );

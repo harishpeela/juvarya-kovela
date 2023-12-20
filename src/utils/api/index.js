@@ -40,7 +40,9 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
+  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
+  MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
+  MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
@@ -115,6 +117,18 @@ export const forgotPassword = async data => {
 export const DonationsPost = async data => {
   try {
     let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
+export const AddressUpdate = async data => {
+  try {
+    let result = await axiosAddressData1.post(
+      `${endpoints.ADDRESS_UPDATE}`,
+      data,
+    );
     return result;
   } catch (error) {
     console.log('error in login', error);
@@ -247,7 +261,7 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
 export const getDonationsList = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosDonation.get(
-      `${endpoints.DONATIONS_LIST}${custId}?pageNo=${pgno}&pageSize=${pgSize}`,
+      `${endpoints.DONATIONS_LIST}?pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
     );
     return result;
   } catch (error) {
@@ -288,6 +302,31 @@ export const MemberShipDetails = async id => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipInvite = async payload => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_INVITE}`,
+      payload,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const MemberShipCreate = async payload => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_CREATE}`,
+      payload,
     );
     return result;
   } catch (error) {

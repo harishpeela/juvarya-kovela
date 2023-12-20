@@ -1,26 +1,39 @@
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Pressable, Button } from 'react-native'
-import React, { useState } from 'react'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { BackgroundImage, BackgroundImageAClass, EventCard3, InputField, PrimaryButton, TextInput2 } from '../../components';
 import {
-  BackHeaderNew,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Pressable,
+  Button,
+} from 'react-native';
+import React, {useState} from 'react';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  BackgroundImage,
+  BackgroundImageAClass,
+  EventCard3,
+  InputField,
+  PrimaryButton,
+  TextInput2,
 } from '../../components';
-import { allTexts, colors } from '../../common';
-import Icon2 from 'react-native-vector-icons/EvilIcons'
-import { BackgroundImage2 } from '../../components/backgroundImage';
+import {BackHeaderNew} from '../../components';
+import {allTexts, colors} from '../../common';
+import Icon2 from 'react-native-vector-icons/EvilIcons';
+import {BackgroundImage2} from '../../components/backgroundImage';
 import Btn from '../../components/btn';
-import { Formik, Field } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { PasswordField } from '../../components/inputfield';
-import { Picker } from '@react-native-picker/picker';
-import { styles } from './styles'
+import {Formik, Field} from 'formik';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {PasswordField} from '../../components/inputfield';
+import {Picker} from '@react-native-picker/picker';
+import {styles} from './styles';
 
-const EventDetails = ({ navigation }) => {
+const EventDetails = ({navigation}) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
   const {
-    screenNames: { signin, otpScreen },
-    paragraphs: { alreadyAccount },
+    screenNames: {signin, otpScreen},
+    paragraphs: {alreadyAccount},
     placeHolders: {
       fistNamePlace,
       lastNamePlace,
@@ -29,23 +42,18 @@ const EventDetails = ({ navigation }) => {
       passwordPlace,
     },
     headings: {
-      inputTitles: {
-        phoneNo,
-        email,
-        username,
-        Gender
-      },
+      inputTitles: {phoneNo, email, username, Gender},
     },
   } = allTexts;
 
   const genders = [
-    { label: "Male", value: "male" },
-    { label: "Female", value: "female" },
+    {label: 'Male', value: 'male'},
+    {label: 'Female', value: 'female'},
   ];
 
   return (
     <View style={styles.container}>
-      <ScrollView  >
+      <ScrollView>
         <BackgroundImage2 />
         <View style={styles.header}>
           <TouchableOpacity
@@ -60,21 +68,19 @@ const EventDetails = ({ navigation }) => {
             />
           </TouchableOpacity>
           <TouchableOpacity style={styles.round2}>
-            <Icon
-              name="share"
-              size={22}
-              color={colors.black}
-            />
+            <Icon name="share" size={22} color={colors.black} />
           </TouchableOpacity>
         </View>
         <View style={styles.secondContainer}>
           <View style={styles.secondContainer2}>
-            <Text style={[styles.festivalText]} >Ganesh festival</Text>
+            <Text style={[styles.festivalText]}>Ganesh festival</Text>
             <View style={styles.dateAndLocation}>
               <Text style={styles.dateText}>07 July</Text>
               <View style={styles.locationIcon}>
-                <Icon2 name='location' color={colors.red1} size={24} />
-                <Text style={[color = colors.gray, styles.locText]}>Vizag</Text>
+                <Icon2 name="location" color={colors.red1} size={24} />
+                <Text style={[(color = colors.gray), styles.locText]}>
+                  Vizag
+                </Text>
               </View>
             </View>
           </View>
@@ -82,30 +88,74 @@ const EventDetails = ({ navigation }) => {
             <View style={styles.toggleHead}>
               <Pressable onPress={() => setCurrentIndex(1)}>
                 <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 1 && styles.orangeColor]}>HighLights</Text>
-                  <View style={[styles.border, currentIndex === 1 && styles.orangeColor]} />
+                  <Text
+                    style={[
+                      styles.separateContainerText,
+                      currentIndex === 1 && styles.orangeColor,
+                    ]}>
+                    HighLights
+                  </Text>
+                  <View
+                    style={[
+                      styles.border,
+                      currentIndex === 1 && styles.orangeColor,
+                    ]}
+                  />
                 </View>
               </Pressable>
               <Pressable onPress={() => setCurrentIndex(2)}>
                 <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 2 && styles.orangeColor]}>Info</Text>
-                  <View style={[styles.border, currentIndex === 2 && styles.orangeColor]} />
+                  <Text
+                    style={[
+                      styles.separateContainerText,
+                      currentIndex === 2 && styles.orangeColor,
+                    ]}>
+                    Info
+                  </Text>
+                  <View
+                    style={[
+                      styles.border,
+                      currentIndex === 2 && styles.orangeColor,
+                    ]}
+                  />
                 </View>
               </Pressable>
               <Pressable onPress={() => setCurrentIndex(3)}>
                 <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 3 && styles.orangeColor]}>Contribute</Text>
-                  <View style={[styles.border, currentIndex === 3 && styles.orangeColor]} />
+                  <Text
+                    style={[
+                      styles.separateContainerText,
+                      currentIndex === 3 && styles.orangeColor,
+                    ]}>
+                    Contribute
+                  </Text>
+                  <View
+                    style={[
+                      styles.border,
+                      currentIndex === 3 && styles.orangeColor,
+                    ]}
+                  />
                 </View>
               </Pressable>
               <Pressable onPress={() => setCurrentIndex(4)}>
                 <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 4 && styles.orangeColor]}>Events</Text>
-                  <View style={[styles.border, currentIndex === 4 && styles.orangeColor]} />
+                  <Text
+                    style={[
+                      styles.separateContainerText,
+                      currentIndex === 4 && styles.orangeColor,
+                    ]}>
+                    Events
+                  </Text>
+                  <View
+                    style={[
+                      styles.border,
+                      currentIndex === 4 && styles.orangeColor,
+                    ]}
+                  />
                 </View>
               </Pressable>
             </View>
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView>
               <View style={styles.toggleData}>
                 {currentIndex === 1 && (
                   <ScrollView>
@@ -130,8 +180,18 @@ const EventDetails = ({ navigation }) => {
                     </View>
                     <View style={styles.desContainer}>
                       <Text style={styles.des}>Description: </Text>
-                      <Text style={styles.desData}>The build will continue, but you are strongly encouraged to update your project to
-                        Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem. Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+                      <Text style={styles.desData}>
+                        The build will continue, but you are strongly encouraged
+                        to update your project to Lorem ipsum dolor sit amet
+                        consectetur. Enim sed commodo maecenas sed nisl
+                        ultrices. Mauris amet quisque placerat sit mi risus
+                        lorem. Tincidunt nam sit sit pharetra. Varius tincidunt
+                        mi elementum libero nisl condimentum nisi mauris. Erat
+                        sed vel lectus cras ut pellentesque sem. Nunc ut et sed
+                        ac et tristique nunc aenean varius. Phasellus sit
+                        parturient sed sed ut vitae. Porttitor facilisi dui
+                        mauris sit donec eget augue pretium. Id magna arcu sit
+                        tortor.
                       </Text>
                     </View>
                   </View>
@@ -140,7 +200,9 @@ const EventDetails = ({ navigation }) => {
                   <KeyboardAwareScrollView>
                     <View style={styles.formContainer}>
                       <View style={styles.registrationContainer}>
-                        <Text style={styles.registrationText}>Registration Form</Text>
+                        <Text style={styles.registrationText}>
+                          Registration Form
+                        </Text>
                       </View>
                       <View style={styles.formik}>
                         <Formik
@@ -201,16 +263,18 @@ const EventDetails = ({ navigation }) => {
                                     width={'25%'}
                                   />
                                   <TouchableOpacity style={styles.subBtn}>
-                                    <Text style={styles.subBtnText}>Submit</Text>
+                                    <Text style={styles.subBtnText}>
+                                      Submit
+                                    </Text>
                                   </TouchableOpacity>
                                 </View>
-                                <View style={styles.buttonContainer}></View>
+                                <View style={styles.buttonContainer} />
                                 <TouchableOpacity
                                   style={styles.alreadyAcc}
                                   onPress={() => {
                                     navigation.navigate(signin);
-                                  }}>
-                                </TouchableOpacity>
+                                  }}
+                                />
                               </View>
                             );
                           }}
@@ -219,12 +283,9 @@ const EventDetails = ({ navigation }) => {
                     </View>
                   </KeyboardAwareScrollView>
                 )}
-                {currentIndex === 4 && (
-                  <Text>Maps displaying 4</Text>
-                )}
+                {currentIndex === 4 && <Text>Maps displaying 4</Text>}
               </View>
             </KeyboardAwareScrollView>
-
           </View>
         </View>
       </ScrollView>
