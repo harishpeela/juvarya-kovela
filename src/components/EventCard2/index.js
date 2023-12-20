@@ -48,9 +48,8 @@ const EventCard2 = ({ onPress, data, navigation }) => {
             </View>
           </View>
         </TouchableOpacity>
-      )}
-    />
-  );
-};
+    )
+}
 
-export default EventCard2;
+export default EventCard2
+

@@ -4,11 +4,17 @@ import { styles } from './styles';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Loader,
+  ContactModal,
+  TempleProfile_PostsCard,
+  BackgroundImageAClass,
+  BackgroundImageFlower,
   BackHeaderNew,
+  EventCard,
+  Ellipsis,
   SearchBar,
   Sort,
   EventCard2,
-  BackgroundImage,
+  EventCard3,
 } from '../../components';
 import { allTexts, colors } from '../../common';
 import { EventList } from '../../utils/api';
@@ -17,7 +23,12 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const EventsScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
-  const [eventsData, setEventsData] = useState([]);
+  // const [filteredData, setFilteredData] = useState(followersList);
+  // const {id} = route.params || {};
+  const [followersFirstName, setFollowersFirstName] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [eventsData, setEventsData] = useState();
   const [eventsLoader, setEventsLoader] = useState(false);
 
 
@@ -41,15 +52,16 @@ const EventsScreen = ({ navigation }) => {
     EventsList();
   }, []);
 
+  console.log('EventsScreen =>>>>>>>>>' + eventsData);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <BackgroundImage />
       <View style={styles.Header}>
         <BackHeaderNew
-          txt={'Events'}
+          txt={'EventsScreen'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
-          isArrow={true}
         />
         <TouchableOpacity
           onPress={() => {
@@ -61,19 +73,19 @@ const EventsScreen = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
-        {/* <View style={styles.searchAndFilter}>
+        <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}>
             <SearchBar
-              value={searchedText}
-              onTextChange={text => {
-                setSearchedText(text);
-                // handleSearch(text);
-              }}
-              loading={eventsLoader}
-              onCrossPress={() => {
-                setSearchedText('');
-                // setFilteredData([]);
-              }}
+              // value={searchedText}
+              // onTextChange={text => {
+              //   setSearchedText(text);
+              //   handleSearch(text);
+              // }}
+              // loading={loading}
+              // onCrossPress={() => {
+              //   setSearchedText('');
+              //   setFilteredData([]);
+              // }}
               placeHolder={'Search here'}
               style={styles.customSearch}
               showCrossPress={false}
@@ -107,3 +119,31 @@ const EventsScreen = ({ navigation }) => {
   );
 };
 export default EventsScreen;
+
+{
+  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
+            {searchedText && filteredData.length > 0 ? (
+            //       <FlatList
+            //         style={styles.list}
+            //         data={filteredData}
+            //         contentContainerStyle={styles.flatListStyle}
+            //         keyExtractor={item => item.user.id.toString()}
+            //         renderItem={({ item }) => (
+            //           <FollowersListCard2
+            //             name={item.user.firstName}
+            //             img={item.user.url}
+            //             data={item.user}
+            //             donation={item.user.donation}
+            //           />
+            //         )}
+            //       />
+            //     ) : (
+            //       <View style={styles.noDataContainer}>
+            //         <Text style={styles.noDataText}>
+            //           No Followers to Display
+            //         </Text>
+            //       </View>
+            //     )}
+            //   </ScrollView>
+            // </> */
+}

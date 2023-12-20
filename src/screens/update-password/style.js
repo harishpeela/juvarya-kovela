@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
-    marginTop: 45
+    
   },
   keyBoardStyle: {
     margin: 10,
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fieldContainer: {
-    marginTop: -30,
+    marginTop: 30,
     
   },
   buttonContainer: {

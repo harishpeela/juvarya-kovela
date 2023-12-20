@@ -84,8 +84,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  console.log('RoleId ====>>>>>>>>>>>' + roleId);
-
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -230,11 +228,10 @@ const ViewTempleProfile = ({route, navigation}) => {
   }, []);
   const EventsList = async () => {
     setEventsLoader(true);
-    let result = await EventList(0, 100, 85);
-    console.log('eventsdata', result?.data);
+    let result = await EventList(0, 100);
     if (result?.status === 200) {
       setEventsLoader(false);
-      setEventsData(result?.data?.data);
+      setEventsData(result?.data?.events);
     } else {
       setEventsLoader(false);
     }
@@ -262,9 +259,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   });
                 }}>
                 <BackHeaderNew
-                  // txt={`${followersList?.length} Followers`}
-                  // txt={'Followers'}
-                  isArrrow={true}
+                  isArrow={true}
                   onPress={() => navigation.goBack()}
                   txtColor={colors.black}
                   isPlus={false}
@@ -322,62 +317,50 @@ const ViewTempleProfile = ({route, navigation}) => {
                         allTexts.screenNames.followersmembership,
                         {
                           id: trfData?.jtProfile,
-                          roleId: roleId,
                         },
                       )
                     }
                   />
-                  {/* <TouchableOpacity onPress={() =>
-                    navigation.navigate(
-                      allTexts.screenNames.invitationScreen, {
-                      roleId: roleId
-                    }
-                    )
-                  }> */}
                   <CommunityComp
-                    // itemCommunity={memberShip?.membershipCount}
-                    onPress={
-                      () => alert('page under development')
-                      // navigation.navigate(
-                      //   allTexts.screenNames.profilemembership,
-                      //   {
-                      //     trfdata: trfData,
-                      //   },
-                      // )
+                    itemCommunity={memberShip?.membershipCount}
+                    onPressmembership={() =>
+                      navigation.navigate(
+                        allTexts.screenNames.profilemembership,
+                        {
+                          id: trfData?.jtProfile,
+                        },
+                      )
                     }
                   />
-                  {/* </TouchableOpacity> */}
                 </View>
               </View>
               <View style={styles.followtab}>
-                {/* <View
-                  // alignSelf="center"
-                  // align
-                  style={styles.horizontalContainer}> */}
-                <FolloUnfollowComp
-                  style={styles.followingContainer}
-                  followBtnDisable={followBtnDisable}
-                  followTemples={() => FOLLOW(trfData?.jtProfile)}
-                  followVisible={followVisible}
-                  isFollow={isFollow}
-                  shadow={true}
-                />
-                {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
-                <DirectionsTabComp
-                  navigation={navigation}
-                  roleId={roleId}
-                  trfData={trfData}
-                />
-                {/* <CreateFeedTabComp
+                <ScrollView
+                  alignSelf="center"
+                  align
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                  style={styles.horizontalContainer}>
+                  <FolloUnfollowComp
+                    style={styles.followingContainer}
+                    followBtnDisable={followBtnDisable}
+                    followTemples={() => FOLLOW(trfData?.jtProfile)}
+                    followVisible={followVisible}
+                    isFollow={isFollow}
+                    shadow={true}
+                  />
+                  <ContactTabcomp onPressContact={() => setIsModal(true)} />
+                  <DirectionsTabComp />
+                  <CreateFeedTabComp
                     roleId={roleId}
                     onPlusPress={() =>
                       navigation.navigate(allTexts?.screenNames.createfeed, {
                         data: data,
                       })
                     }
-                  /> */}
+                  />
+                </ScrollView>
               </View>
-              {/* </View> */}
               <Danation_Add_Card
                 roleId={roleId}
                 onPress={() =>
@@ -425,12 +408,12 @@ const ViewTempleProfile = ({route, navigation}) => {
               )}
             </View>
           )}
-          {/* {currentIndex === 2 && (
+          {currentIndex === 2 && (
             <View>
               <Feather name="camera-off" size={40} style={styles.noPosts} />
               <Text style={styles.noPosts.text}>No Reels Yet</Text>
             </View>
-          )} */}
+          )}
           {currentIndex === 3 && (
             // <EventCard />
             <View>
@@ -453,6 +436,16 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <Text style={styles.noPosts.text}>No Events Yet</Text>
                 </View>
               ) : (
+                // <FlatList
+                //   data={eventsData}
+                //   style={styles.ImagesContainer}
+                //   keyExtractor={({item, index}) => index}
+                //   renderItem={({item, index}) => (
+                //     <TouchableOpacity style={styles.eventsCard}>
+                //       <Text> Name: {item?.name}</Text>
+                //     </TouchableOpacity>
+                //   )}
+                // />
                 <EventCard navigation={navigation} data={eventsData} />
               )}
             </ScrollView>
@@ -487,9 +480,12 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View>
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate(allTexts.screenNames.profilemembership, {
-                  id: trfData?.jtProfile,
-                })
+                navigation.navigate(
+                  allTexts.screenNames.profilemembership,
+                  //    {
+                  //   id: trfData?.jtProfile,
+                  // }
+                )
               }>
               <View style={styles.modalContent}>
                 <MaterialIcons

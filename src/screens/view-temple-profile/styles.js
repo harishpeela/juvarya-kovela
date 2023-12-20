@@ -51,6 +51,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     // borderWidth:2,
+    paddingHorizontal: '1%',
   },
   menuAndAlert: {
     flexDirection: 'row',
@@ -83,8 +84,7 @@ export const styles = StyleSheet.create({
   followtab: {
     flexDirection: 'row',
     // marginTop: '3%',
-    justifyContent: 'space-evenly',
-    alignItems: 'center',
+    justifyContent: 'space-around',
   },
   disPlayContent: {
     marginTop: '-60%',
@@ -155,8 +155,7 @@ export const styles = StyleSheet.create({
     // paddingTop:'1%',
   },
   horizontalContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // borderWidth:2,
   },
   plusContainer: {
     backgroundColor: colors.white,

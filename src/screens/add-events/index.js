@@ -1,11 +1,10 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
-import {SafeAreaView} from 'react-native';
-import {AddEvent, EventHeader} from '../../components';
+import {SafeAreaView, View} from 'react-native';
+import {AddEvent, BackgroundImage, BackHeaderNew} from '../../components';
 import {styles} from './styles';
 import ApplicationContext from '../../utils/context-api/Context';
-
 
 const AddEvents = ({navigation, route}) => {
   const [data, setdata] = useState('');
@@ -20,7 +19,14 @@ const AddEvents = ({navigation, route}) => {
   }, [id]);
   return (
     <SafeAreaView style={styles.container}>
-      <EventHeader txt={'Add Events'} onBackPress={() => navigation.goBack()} />
+      <BackgroundImage />
+      <View style={styles.header}>
+        <BackHeaderNew
+          txt={'Add Events'}
+          isArrow={true}
+          onPress={() => navigation.goBack()}
+        />
+      </View>
       <AddEvent data={data} navigation={navigation} />
     </SafeAreaView>
   );

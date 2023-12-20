@@ -5,7 +5,6 @@ import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
 
-
 import {
   Splash,
   SignUp,
@@ -44,9 +43,8 @@ import {
   EventsScreen,
   DonationsList,
   EventDetails,
-  CreateEvent,
-  ProfileMemberShips,
-  InvitationScreen
+  ForgetPassword,
+  UpdateProfile,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -104,10 +102,9 @@ const App = () => {
       memberShip,
       eventsScreen,
       donationslist,
-      eventDetails,
-      createEvent,
-      profilememberships,
-      invitationScreen
+      eventsDetails,
+      forgetPassword,
+      updateProfile,
     },
   } = allTexts;
   useEffect(() => {
@@ -127,7 +124,6 @@ const App = () => {
   }, []);
   const AuthStack = () => {
     return (
-      
       <Stack.Navigator>
         <Stack.Screen
           name={splash}
@@ -157,6 +153,15 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={forgetPassword}
+          component={ForgetPassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+       
+         
       </Stack.Navigator>
     );
   };
@@ -215,6 +220,21 @@ const App = () => {
         <Stack.Screen
           name={updatePassword}
           component={UpdatePassword}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={updateProfile}
+          component={UpdateProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+<Stack.Screen
+          name={forgotPasswordOtpScreen}
+          component={ForgotPasswordOtpScreen}
           options={{
             headerShown: false,
           }}
@@ -417,7 +437,7 @@ const App = () => {
         />
         <Stack.Screen
           name={eventsScreen}
-          component={EventsScreen}
+          component={eventsScreen}
           options={{
             headerShown: false,
           }}
@@ -430,33 +450,13 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={eventDetails}
+          name={eventsDetails}
           component={EventDetails}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name={createEvent}
-          component={CreateEvent}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={profilememberships}
-          component={ProfileMemberShips}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={invitationScreen}
-          component={InvitationScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
+        
       </Stack.Navigator>
     );
   };

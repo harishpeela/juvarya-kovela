@@ -8,9 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
-import {BackHeaderNew, SearchBar} from '../../components';
+import {BackHeaderNew, Donations_list_Card, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {BackgroundImage, FollowersListCard3, Loader} from '../../components';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
@@ -19,11 +20,15 @@ const DonationsList = ({navigation, route}) => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
   const {data} = route.params || {};
+  // console.log('data.id', data);
   const customerProfilePic = async e => {
+    // console.log('e', e.email);
     try {
       let result = await GetProfilePic(e?.email);
+      // console.log('profilepic', result?.data);
       if (result?.data) {
         let responce = {...e, url: result?.data?.url};
+        // console.log('responce', responce);
         setApiData(array => [...array, responce]);
         setLoader(false);
       } else {
@@ -33,11 +38,13 @@ const DonationsList = ({navigation, route}) => {
       console.log('error in profile pic api in donations', error);
     }
   };
+  console.log('dislay data', apiData);
   const DonationListApi = async () => {
     try {
       let id = data?.jtProfile;
       let result = await getDonationsList(id, 0, 60);
-      let donationDTO = result?.data?.donationDTO;
+      let donationDTO = result?.data?.data;
+      console.log('list of donations', donationDTO);
       donationDTO.map(e => {
         customerProfilePic(e);
       });
@@ -64,10 +71,15 @@ const DonationsList = ({navigation, route}) => {
       <BackgroundImage />
       <View style={styles.followersHeader}>
         <BackHeaderNew
+          isArrow={true}
           txt={'Donations'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
+        <TouchableOpacity
+          onPress={() => navigation.navigate(allTexts.screenNames.donations)}>
+          <AntDesign name="plus" size={24} color={colors.black} />
+        </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>
@@ -99,42 +111,45 @@ const DonationsList = ({navigation, route}) => {
             <>
               {searchedText === '' &&
                 (apiData?.length ? (
-                  <FlatList
-                    style={styles.list}
-                    showsVerticalScrollIndicator={false}
-                    data={apiData}
-                    contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={(item, index) => item?.id?.toString()}
-                    renderItem={({item}) => (
-                      <FollowersListCard3
-                        name={item?.email}
-                        rs={item?.donation}
-                        description={item?.description}
-                        img={item?.url}
-                      />
-                    )}
-                  />
+                  <Donations_list_Card data={apiData} />
                 ) : (
+                  // <FlatList
+                  //   style={styles.list}
+                  //   showsVerticalScrollIndicator={false}
+                  //   data={apiData}
+                  //   contentContainerStyle={styles.flatListStyle}
+                  //   keyExtractor={(item, index) => item?.id?.toString()}
+                  //   renderItem={({item}) => (
+                  //     <Donations_list_Card
+                  //       data={item}
+                  //       // name={item?.email}
+                  //       // rs={item?.donation}
+                  //       // description={item?.description}
+                  //       // img={item?.url}
+                  //     />
+                  //   )}
+                  // />
                   ''
                 ))}
 
               {searchedText && filteredData?.length > 0 ? (
-                <FlatList
-                  showsVerticalScrollIndicator={false}
-                  style={styles.list}
-                  data={filteredData}
-                  contentContainerStyle={styles.flatListStyle}
-                  keyExtractor={item => item?.id.toString()}
-                  renderItem={({item}) => (
-                    <FollowersListCard3
-                      name={item?.email}
-                      rs={item?.donation}
-                      description={item?.description}
-                      img={item?.url}
-                    />
-                  )}
-                />
+                <Donations_list_Card data={filteredData} />
               ) : (
+                // <FlatList
+                //   showsVerticalScrollIndicator={false}
+                //   style={styles.list}
+                //   data={filteredData}
+                //   contentContainerStyle={styles.flatListStyle}
+                //   keyExtractor={item => item?.id.toString()}
+                //   renderItem={({item}) => (
+                //     <Donations_list_Card
+                //       name={item?.email}
+                //       rs={item?.donation}
+                //       description={item?.description}
+                //       img={item?.url}
+                //     />
+                //   )}
+                // />
                 <View style={styles.noDataContainer}>
                   <Text style={styles.noDataText}>
                     No items in donation list
@@ -145,7 +160,7 @@ const DonationsList = ({navigation, route}) => {
           )}
         </View>
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         onPress={() => navigation.navigate(allTexts.screenNames.donations)}
         style={{
           position: 'absolute',
@@ -160,7 +175,7 @@ const DonationsList = ({navigation, route}) => {
         <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
           Add Donation
         </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };

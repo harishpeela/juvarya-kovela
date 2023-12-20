@@ -41,9 +41,10 @@ import MemberShip from './Membership/Index';
 import EventsScreen from './EventsScreen';
 import DonationsList from './DonationsList';
 import EventDetails from './eventDetails';
-import CreateEvent from './CreateEvent';
-import ProfileMemberShips from './ProfileMemberShips';
-import InvitationScreen from './Invitation';
+import ForgetPassword from './forgetPassword';
+import UpdateProfile from './updateProfile';
+import ForgotPasswordOtpScreen from './forgot-password-otp-screen';
+
 
 
 export {
@@ -90,7 +91,8 @@ export {
   EventsScreen,
   DonationsList,
   EventDetails,
-  CreateEvent,
-  ProfileMemberShips,
-  InvitationScreen
+  ForgetPassword,
+  UpdateProfile,
+  ForgotPasswordOtpScreen
+
 };

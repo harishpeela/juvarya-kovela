@@ -28,7 +28,7 @@ export const allTexts = {
       phoneNo: 'phone number',
       lastName: 'last name',
       email: 'Email',
-      password: 'password',
+      Newpassword: 'New password',
       tName: 'Enter Temple Name',
       tDescription: 'Description',
       tCommunity: 'Community',
@@ -42,6 +42,12 @@ export const allTexts = {
       eventname: 'Event Name',
       pickadate: 'Pick a date for darshan',
       feedevent: 'Add this Event to the Feed',
+      password:'create password',
+      dateOfBirth:'Date-of-birth',
+      gender:'Gender',
+      gotra:'Gotra',
+      userAddress:'User Address',
+      updateProfile:'Update Profile'
     },
     accountItems: {
       profile: 'profile',
@@ -149,10 +155,10 @@ export const allTexts = {
     memberShip: 'MemberShip',
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
-    eventDetails: 'EventDetails',
-    createEvent: 'CreateEvent',
-    profilememberships: 'ProfileMemberShips',
-    invitationScreen: 'InvitationScreen',
+    eventsDetails: 'EventDetails',
+    forgetPassword:'ForgetPassword',
+    updateProfile:'UpdateProfile',
+    forgotPasswordOtpScreen:'ForgotPassword'
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -51,61 +51,33 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
-    if (data.email.length > 10) {
-      let payload = {
-        // primaryContact: data?.email,
-        email: data?.email,
-        password: data.password,
-      };
-      console.log('playload with email', payload);
-      try {
-        let result = await loginUser1(payload);
-        if (result && result.status === 200) {
-          const {
-            data: {accessToken, tokenType},
-          } = result;
-          await saveLoginSessionDetails(tokenType, accessToken);
-          ApiData();
-          setLoginDetails(accessToken);
-          actions.setSubmitting(false);
-        } else {
-          actions.setSubmitting(false);
-          Alert.alert('Error', result?.message);
-        }
-      } catch (error) {
+    let payload = {
+      primaryContact: data?.email,
+      password: data.password,
+    };
+    try {
+      let result = await loginUser1(payload);
+      if (result && result.status === 200) {
+        const {
+          data: {accessToken, tokenType},
+        } = result;
+        await saveLoginSessionDetails(tokenType, accessToken);
+        ApiData();
+        setLoginDetails(accessToken);
         actions.setSubmitting(false);
-      }
-    } else {
-      let payload = {
-        primaryContact: data?.email,
-        password: data.password,
-      };
-      console.log('playload with mobile', payload);
-
-      try {
-        let result = await loginUser1(payload);
-        if (result && result.status === 200) {
-          const {
-            data: {accessToken, tokenType},
-          } = result;
-          await saveLoginSessionDetails(tokenType, accessToken);
-          ApiData();
-          setLoginDetails(accessToken);
-          actions.setSubmitting(false);
-        } else {
-          actions.setSubmitting(false);
-          Alert.alert('Error', result?.message);
-        }
-      } catch (error) {
+      } else {
         actions.setSubmitting(false);
+        Alert.alert('Error', result?.message);
       }
+    } catch (error) {
+      actions.setSubmitting(false);
     }
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={styles.signinTextContainer}>
-        <Text style={styles.signinText}>{login}</Text>
+        {/* <Text style={styles.signinText}>h</Text> */}
       </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
@@ -134,14 +106,14 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number / email'}
+                  title={'Mobile number'}
                   isFlag
-                  // keyboardType={'numeric'}
+                  keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  maxLength={20}
+                  maxLength={10}
                 />
                 <View style={{height: 20}} />
                 <View>
@@ -155,12 +127,13 @@ const Signin = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.btnContainer}>
-                  <PrimaryButton
+                  <PrimaryButton 
                     bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
                     radius={25}
+                     
                   />
                 </View>
                 <TouchableOpacity
@@ -172,6 +145,19 @@ const Signin = ({navigation}) => {
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
                 </TouchableOpacity>
+                
+
+                <TouchableOpacity
+                 onPress={() => {
+                  navigation.navigate(allTexts.screenNames.forgetPassword);
+                }}>
+                <View>
+
+                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
+                </View>
+                </TouchableOpacity>
+
+                
               </View>
             );
           }}

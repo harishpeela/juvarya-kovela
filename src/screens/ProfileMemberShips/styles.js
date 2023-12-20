@@ -126,9 +126,10 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   joinText:{
-    color:colors.orangeColor,
-    fontWeight:'900',
-    fontSize:fontSize.xxlarge
+    color: colors.orangeColor,
+    fontWeight: '900',
+    fontSize: fontSize.xxlarge,
+    marginRight: 20,
   },
 
 });

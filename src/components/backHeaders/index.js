@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { styles } from './styles';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { colors } from '../../common';
 
 export const BackHeaderNew = ({
   txtColor,
@@ -12,7 +11,6 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
-  isArrow, // Corrected typo in the prop name
 }) => {
   return (
     <View style={styles.header}>
@@ -36,18 +34,22 @@ export const BackHeaderNew = ({
             style={{
               fontSize: 20,
               fontWeight: '500',
-              color: 'black',
+              marginHorizontal: 10,
+              color: txtColor === undefined ? <></> : txtColor,
             }}>
             {txt}
           </Text>
-        ) : null}
+        ) : (
+          <></>
+        )}
       </View>
+
       {isPlus && (
-        <TouchableOpacity onPress={onPlusPress}> {/* Added onPress prop for the plus icon */}
+        <TouchableOpacity onPress={onPlusPress}>
           <AntDesign
             name="plus"
             size={24}
-            color={colors.black}
+            color={txtColor === undefined ? <></> : txtColor}
           />
         </TouchableOpacity>
       )}

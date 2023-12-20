@@ -5,7 +5,7 @@ import {allTexts} from '../../common';
 import {styles} from './styles';
 import {MemberShipDetails} from '../../utils/api';
 const ProfileMemberShips = ({navigation, route}) => {
-  const {roleId} = route.params || {};
+  const {roleId, trfdata} = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const data = [
@@ -19,8 +19,8 @@ const ProfileMemberShips = ({navigation, route}) => {
   const MembershipData = async () => {
     setLoader(true);
     try {
-      let result = await MemberShipDetails(0, 20);
-      console.log('res', result?.data?.data.length);
+      let result = await MemberShipDetails(0, 100);
+      console.log('ressssssssssssssssssss', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -42,13 +42,16 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={styles.header}>
         <BackHeaderNew
           txt={'MemberShips'}
-          isArrrow={true}
+          isArrow={true}
           onPress={() => navigation.goBack()}
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.addMembershipDetails);
+              navigation.navigate(allTexts.screenNames.addMembershipDetails, {
+                roleId: roleId,
+                jtProfileId: trfdata?.jtProfile,
+              });
             }}>
             <Text style={styles.joinText}>Create</Text>
           </TouchableOpacity>
@@ -57,8 +60,11 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
         <MemberShipCard
           data={data}
-          length={membership.length ? membership.length : '0'}
-          txt={roleId === 'ROLE_ITEM_ADMIN' ? 'Invite' : 'Join Now'}
+          txt={
+            roleId === 'ROLE_ITEM_ADMIN'
+              ? `${membership?.length} Memberships`
+              : 'Join Now'
+          }
           onPress={() =>
             navigation.navigate(allTexts.screenNames.profilemembership, {
               roleId: roleId,
