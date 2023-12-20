@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily, fontSize} from '../../common';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   inputTextStyle: {
     height: 50,
@@ -14,9 +14,16 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.medium,
     textTransform: 'uppercase',
   },
-  loginText: {
+  login: {
     fontFamily: fontFamily.medium,
     color: colors.white,
+    height: 50,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: '#FD8C00',
+    backgroundColor: '#FD8C00',
+    borderStyle: 'solid',
     fontSize: 15,
     textAlign: 'center',
     fontWeight: '700',

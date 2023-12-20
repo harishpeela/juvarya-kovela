@@ -6,7 +6,7 @@ import Donation_Button from '../Donate_Button';
 import {styles} from './style';
 export const Danation_Add_Card = ({onPress, roleId}) => {
   return (
-    <View style={[styles.container]}>
+    <View style={styles.container}>
       <View style={styles.second}>
         <Image
           source={require('../../../assets/images/tempimg4.jpg')}

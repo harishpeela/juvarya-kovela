@@ -1,22 +1,14 @@
-/* eslint-disable no-sparse-arrays */
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity, ScrollView } from 'react-native';
-import {
-  BackHeaderNew,
-  Loader,
-  FollowersListCard3,
-} from '../../components';
-import { MemberShipDetails } from '../../utils/api';
-import { styles } from './styles';
-import { colors, allTexts } from '../../common';
-
-
-const ProfileMembership = ({ route, navigation }) => {
-  const {roleId } = route.params || {};
+import React, {useEffect, useState} from 'react';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import {BackHeaderNew, Loader, MemberShipCard} from '../../components';
+import {MemberShipDetails} from '../../utils/api';
+import {styles} from './styles';
+import {colors, allTexts} from '../../common';
+const ProfileMembership = ({route, navigation}) => {
+  const {id} = route.params || {};
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
 
@@ -27,10 +19,16 @@ const ProfileMembership = ({ route, navigation }) => {
       console.log('resssss', result?.data);
       let responce = result?.data?.data;
       if (responce) {
-        let dataList = responce?.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+        let dataList = responce
+          ?.filter(item => item)
+          .map(({membershipDto, loggedInUser, membershipId}) => ({
+            membershipDto,
+            loggedInUser,
+            membershipId,
+          }));
         console.log('dayta of members list', dataList);
         setaLoader(false);
-        setData(dataList);
+        setData(result?.data?.memberships);
       } else {
         setaLoader(false);
       }
@@ -46,8 +44,15 @@ const ProfileMembership = ({ route, navigation }) => {
   useEffect(() => {
     MembershipData();
   }, []);
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     MembershipData();
+  //     return () => {};
+  //   }, []),
+  // );
   return (
     <SafeAreaView>
+      <BackgroundImage />
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <BackHeaderNew
@@ -55,22 +60,31 @@ const ProfileMembership = ({ route, navigation }) => {
             isArrow={true}
             onPress={() => navigation.goBack()}
           />
-          <TouchableOpacity onPress={() => {
-            // navigation.navigate(allTexts.screenNames.in)
-            alert('under development');
-          }}>
+          <TouchableOpacity
+            onPress={() => {
+              // navigation.navigate(allTexts.screenNames.in)
+              alert('under development');
+            }}>
             {roleId !== 'ROLE_ITEM_ADMIN' ? (
               <Text style={styles.joinText}>Join</Text>
             ) : (
-              <TouchableOpacity onPress={() => {
-                navigation.navigate(allTexts.screenNames.invitationScreen, {
-                  navigation: navigation,
-                  roleId: roleId,
-                  onSelect: onSelect,
-                })
-              }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.invitationScreen, {
+                    navigation: navigation,
+                    roleId: roleId,
+                    onSelect: onSelect,
+                  });
+                }}>
                 {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
-                <Text style={{fontSize: 20, color: colors.orangeColor, fontWeight: 'bold'}}>Invite</Text>
+                <Text
+                  style={{
+                    fontSize: 20,
+                    color: colors.orangeColor,
+                    fontWeight: 'bold',
+                  }}>
+                  Invite
+                </Text>
               </TouchableOpacity>
             )}
           </TouchableOpacity>
@@ -80,9 +94,12 @@ const ProfileMembership = ({ route, navigation }) => {
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <ScrollView showsVerticalScrollIndicator={false} style={{marginTop: '10%'}}>
+          <View style={{marginTop: '10%'}}>
             {data?.length ? (
-              <FollowersListCard3 data={data} navigation={navigation} />
+              <MemberShipCard
+                onPress={() => alert('under development')}
+                data={data}
+              />
             ) : (
               <View
                 style={{
@@ -93,7 +110,7 @@ const ProfileMembership = ({ route, navigation }) => {
                 <Text> no memberships for this temple</Text>
               </View>
             )}
-          </ScrollView>
+          </View>
         )}
       </View>
     </SafeAreaView>

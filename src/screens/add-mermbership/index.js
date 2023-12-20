@@ -117,7 +117,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
     }
   };
 
-  let donationType = ['BASIC', 'PRIMIUM'];
+  let donationType = ['BASIC', 'Primium'];
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -135,13 +135,14 @@ const AddMemebershipDetails = ({route, navigation}) => {
             buttonTextStyle={styles.DTextStyle}
             onSelect={e => setMemType(e)}
             buttonStyle={styles.DbuttonStyle}
-            defaultButtonText="Select-Type"
+            defaultButtonText="Type"
             renderDropdownIcon={() => (
               <View>
-                <Icon color={'black'} size={20} name="down" />
+                <Icon color={'white'} size={20} name="down" />
               </View>
             )}
           />
+
           <TextInput
             style={styles.inputTextStyle}
             placeholder="MemberShip Name"

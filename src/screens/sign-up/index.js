@@ -56,20 +56,18 @@ const Signup = ({navigation}) => {
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data.phone,
-      emailAddress: data.email,
     };
     try {
       let response = await NewVerifyOTP(otpPayload);
-      console.log('responce', response.data);
       const {
-        data: {primaryContact, otp, emailAddress},
+        data: {primaryContact, otp},
       } = response || {};
       let result = await loginUser1(LogInPayload);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
       } else {
-        if ((response && primaryContact, emailAddress)) {
+        if (response && primaryContact) {
           let otpPayload = {
             otp,
             data,
@@ -182,7 +180,6 @@ const Signup = ({navigation}) => {
                   style={styles.checkView}>
                   <Ionicons
                     name={isChecked ? 'checkbox' : 'square-outline'}
-                    size={25}
                     style={{
                       ...styles.checkIcon,
                       color: isChecked ? colors.orangeColor : '#7a98fa',

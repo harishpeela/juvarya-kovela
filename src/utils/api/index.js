@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import {
   authAxiousInstance,
   axiousInstance,
@@ -16,7 +15,6 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
-  axiosAddressData1,
 } from './api';
 
 const endpoints = {
@@ -40,7 +38,6 @@ const endpoints = {
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
-  ADDRESS_UPDATE: 'jtAddress/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
@@ -98,6 +95,8 @@ export const loginUser1 = async data => {
     console.log('error in login', error);
     return error;
   }
+  
+  
 };
 
 export const forgotPassword = async data => {
@@ -111,6 +110,8 @@ export const forgotPassword = async data => {
     console.log('error in login', error);
     return error;
   }
+  
+  
 };
 
 export const DonationsPost = async data => {
@@ -297,10 +298,10 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipDetails = async (pageNo, pageSize) => {
+export const MemberShipDetails = async id => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pageNo}&pageSize=${pageSize}`,
+      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
     );
     return result;
   } catch (error) {
