@@ -45,6 +45,9 @@ const endpoints = {
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
+  EVENT_DETAILS: 'jtevent/details',
+  EVENT_INTERESTED: 'jtInterestedEvents/save',
+  EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -278,6 +281,41 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
+
+export const EventDetail = async (id) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_DETAILS}/${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
+export const EventInterested = async (payload) => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENT_INTERESTED}`, payload
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+export const EventInterestedCount = async (id) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_INTERESTED_COUNT}?eventId=${id}&pageNo=${0}&pageSize=${50}`
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export const GetProfilePicture = async id => {
   try {
     let result = await axiosNewData1.get(

@@ -7,7 +7,7 @@ import {
   saveUserDetails,
 } from '../preferences/localStorage';
 import Snackbar from 'react-native-snackbar';
-import {allTexts} from '../../common';
+import { allTexts } from '../../common';
 import RNRestart from 'react-native-restart';
 
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
@@ -244,7 +244,7 @@ axiousInstance.interceptors.response.use(
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
-    const {config, message} = error;
+    const { config, message } = error;
     if (!config || !config.retry) {
       return Promise.reject(error);
     }
@@ -265,7 +265,7 @@ axiousInstance.interceptors.response.use(
       action: {
         text: 'Try again',
         textColor: 'green',
-        onPress: () => {},
+        onPress: () => { },
       },
     });
     return delayRetryRequest.then(() => axios(config));

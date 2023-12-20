@@ -1,17 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  FlatList,
-} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {styles} from './styles';
-import {
-  SafeAreaFrameContext,
-  SafeAreaView,
-} from 'react-native-safe-area-context';
+import { View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { styles } from './styles';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import {
   Loader,
   ContactModal,
@@ -26,10 +16,11 @@ import {
   EventCard2,
   EventCard3,
 } from '../../components';
-import {colors} from '../../common';
-import {EventList} from '../../utils/api';
+import { allTexts, colors } from '../../common';
+import { EventList } from '../../utils/api';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const EventsScreen = ({navigation}) => {
+const EventsScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   // const [filteredData, setFilteredData] = useState(followersList);
@@ -40,17 +31,21 @@ const EventsScreen = ({navigation}) => {
   const [eventsData, setEventsData] = useState();
   const [eventsLoader, setEventsLoader] = useState(false);
 
+
   const EventsList = async () => {
     setEventsLoader(true);
-    let result = await EventList(0, 100);
-    // console.log('list of evengts', result?.data);
-    if (result.status === 200) {
-      setEventsLoader(false);
-      console.log('true', eventsLoader);
-      setEventsData(result?.data?.events);
-    } else {
-      setEventsLoader(false);
-      console.log('false', eventsLoader);
+    try {
+      let result = await EventList(0, 100);
+      console.log('data ==>', result?.data);
+      if (result.status === 200) {
+        setEventsData(result?.data?.events);
+        console.log("eventsID=>>>>>>" + eventsData)
+        setEventsLoader(false);
+      } else {
+        setEventsLoader(false);
+      }
+    } catch (error) {
+      console.log("we are getting the error")
     }
   };
   useEffect(() => {
@@ -60,7 +55,8 @@ const EventsScreen = ({navigation}) => {
   console.log('EventsScreen =>>>>>>>>>' + eventsData);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <BackgroundImage />
       <View style={styles.Header}>
         <BackHeaderNew
           txt={'EventsScreen'}
@@ -68,7 +64,6 @@ const EventsScreen = ({navigation}) => {
           txtColor={colors.black}
         />
         <TouchableOpacity
-          style={{marginRight: 20}}
           onPress={() => {
             navigation.navigate(allTexts.screenNames.addevents, {
               navigation: navigation,
@@ -108,32 +103,15 @@ const EventsScreen = ({navigation}) => {
               // srHeight={"100%"}
             />
           </View>
-        </View>
-        <View style={styles.followersContainer}>
-          {loader ? (
-            <Loader size={'large'} color={colors.orangeColor} />
+        </View> */}
+        <View style={styles.ListContainer}>
+          {eventsLoader ? (
+            <View
+              style={styles.loaderContainer}>
+              <Loader size={'large'} color={colors.orangeColor} />
+            </View>
           ) : (
-            <>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                {searchedText === '' && (
-                  <FlatList
-                    numColumns={2}
-                    data={eventsData}
-                    contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={(item, index) => item.toString()}
-                    renderItem={({item}) => (
-                      <EventCard2
-                        navigation={navigation}
-                        // name={item.user.firstName}
-                        // img={item.user.url}
-                        // data={item.user}
-                        // donation={item.user.donation}
-                      />
-                    )}
-                  />
-                )}
-              </ScrollView>
-            </>
+            <View style={styles.container}>{searchedText === '' && <EventCard2 data={eventsData} navigation={navigation} />}</View>
           )}
         </View>
       </View>
