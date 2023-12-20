@@ -16,8 +16,8 @@ import { MemberShipCreate } from '../../utils/api'
 
 const AddMemebershipDetails = ({ route, navigation }) => {
 
-  const [memType, setMemType] = useState();
-  const [memName, setMemName] = useState();
+  const [memType, setMemType] = useState()
+  const [memName, setMemName] = useState()
   // const [memFee, setMemFee] = useState('');
   // const [memDur, setMemDur] = useState('');
   const [memberShip, setMemberShip] = useState([])

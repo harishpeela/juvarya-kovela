@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: colors.white,
+    // borderWidth:3,
+    // borderColor:'red'
   },
   header: {
     marginTop: '10%',
@@ -25,7 +27,7 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     paddingLeft: 5,
-    height: '67%'
+    height: '68%'
   },
   locationIcon: {
     flexDirection: 'row',
@@ -35,7 +37,7 @@ export const styles = StyleSheet.create({
   },
   festivalText: {
     color: colors.black,
-    fontSize: fontSize.h1,
+    fontSize: fontSize.h3,
     fontWeight: '700',
     marginVertical: '1%',
   },
@@ -70,7 +72,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     // borderWidth:2,
     // borderColor:'red',
-    marginHorizontal: '1%',
+    // marginHorizontal: '1%',
   },
   secondContainer2: {
     marginHorizontal: '3%',
@@ -86,7 +88,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100 / 2,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2
+    // borderWidth: 2
   },
   round2: {
     backgroundColor: colors.white,
@@ -101,7 +103,9 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'column',
     marginTop: '6%',
-    height: '100%',
+    height: '80%',
+    // borderWidth:2,
+    // borderColor:'blue'
   },
   separateContainer: {
     alignSelf: 'center',
@@ -201,8 +205,6 @@ export const styles = StyleSheet.create({
   },
   intButton: {
     backgroundColor: colors.orangeColor,
-    borderWidth: 1,
-    borderColor: colors.gray,
     width: '95%',
     alignContent: 'center',
     alignSelf: 'center',
@@ -212,7 +214,8 @@ export const styles = StyleSheet.create({
     elevation: 2,
     shadowColor: colors.black,
     alignItems:'center',
-    justifyContent:'center'
+    justifyContent:'center',
+    marginTop:5
   },
   locationText:{
     textAlign:'center',
@@ -222,5 +225,24 @@ export const styles = StyleSheet.create({
     color:colors.white,
     fontWeight:'700',
     fontSize:fontSize.h6
+  },
+  favoriteContainer:{
+    flexDirection:'column',
+    alignItems:'center',
+    // justifyContent:'space-around',
+    marginHorizontal:10,
+    // borderWidth:2,
+    // borderColor:'red'
+  },
+  eventNameContainer:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+  },
+  interestedText:{
+    color:colors.black,
+    textAlign:'center',
+    fontWeight:'700',
+    fontSize:fontSize.large
   }
 });

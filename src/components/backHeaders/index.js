@@ -22,16 +22,15 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        {isArrow && ( // Corrected condition for arrow rendering
-          <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-            <Fontisto
-              name="arrow-left"
-              color={'white'}
-              size={17}
-              color={colors.black}
-            />
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+          <Fontisto
+            name="arrow-left"
+            color={'white'}
+            size={17}
+            // color={color?(<></>):(<></>)}
+            color={colors.black}
+          />
+        </TouchableOpacity>
         {txt ? (
           <Text
             style={{

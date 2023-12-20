@@ -1,5 +1,5 @@
-import {StyleSheet, Dimensions} from 'react-native';
-import {colors, fontSize} from '../../common';
+import { StyleSheet, Dimensions } from 'react-native';
+import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({
   Header: {
     // marginHorizontal: '3%',
@@ -8,13 +8,16 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal:'2%'
+    marginHorizontal: '3%',
   },
 
   bodyContainer: {
-    marginHorizontal: '4%',
+    marginHorizontal: '3%',
     display: 'flex',
     flexDirection: 'column',
+    marginTop: 20,
+    // borderWidth: 2,
+    // borderColor: 'green',
   },
   searchAndFilter: {
     display: 'flex',
@@ -35,19 +38,14 @@ export const styles = StyleSheet.create({
     margin: '2%',
   },
   ListContainer: {
-    height: '100%',
-    borderWidth:2,
-    marginTop:20
+    height: '97%',
   },
   sortContainer: {
     display: 'flex',
     width: '20%',
     height: '100%',
-
-    // borderWidth:2,
   },
   list: {
-    marginBottom: 300,
   },
   noDataContainer: {
     alignItems: 'center',
@@ -57,10 +55,19 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
-  flatListStyle: {
-    justifyContent: 'space-between',
+  loaderContainer: {
     alignItems: 'center',
-    borderWidth: 2,
-    paddingBottom: 500,
+    justifyContent: 'center'
   },
+  card: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container: {
+    alignContent: 'center',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  }
 });
