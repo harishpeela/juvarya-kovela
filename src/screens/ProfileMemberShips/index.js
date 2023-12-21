@@ -5,7 +5,7 @@ import {allTexts} from '../../common';
 import {styles} from './styles';
 import {MemberShipList} from '../../utils/api';
 const ProfileMemberShips = ({navigation, route}) => {
-  const {roleId} = route.params || {};
+  const {roleId, trfdata} = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const data = [
@@ -50,6 +50,7 @@ const ProfileMemberShips = ({navigation, route}) => {
             onPress={() => {
               navigation.navigate(allTexts.screenNames.addMembershipDetails, {
                 roleId: roleId,
+                jtProfileId: trfdata?.jtProfile,
               });
             }}>
             <Text style={styles.joinText}>Create</Text>

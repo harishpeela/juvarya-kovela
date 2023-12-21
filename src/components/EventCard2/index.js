@@ -1,23 +1,25 @@
-import {Text, View, Image, TouchableOpacity} from 'react-native';
+import { Text, View, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
-import {styles} from './styles';
+import { styles } from './styles';
 import Icon from 'react-native-vector-icons/EvilIcons';
-import {allTexts, colors} from '../../common';
-import {FlatList} from 'react-native-gesture-handler';
+import { allTexts, colors } from '../../common';
+import { FlatList } from 'react-native-gesture-handler';
 
-const EventCard2 = ({onPress, data, navigation}) => {
+const EventCard2 = ({ onPress, data, navigation }) => {
+  console.log("Data  =====>>>>>>>>" + data)
   return (
     <FlatList
+      showsVerticalScrollIndicator={false}
       data={data}
       numColumns={2}
-      keyExtractor={({item, index}) => index}
-      renderItem={({item, index}) => (
+      keyExtractor={({ item, index }) => index}
+      renderItem={({ item, index }) => (
         <TouchableOpacity
           style={styles.container}
           onPress={() =>
             //  alert('page under development')
             navigation.navigate(allTexts.screenNames.eventDetails, {
-              item: item?.profileId,
+              data: item,
             })
           }>
           <Image
@@ -31,14 +33,14 @@ const EventCard2 = ({onPress, data, navigation}) => {
           <View style={styles.container2}>
             <View style={styles.dateContainer}>
               <Text style={styles.dateText}>
-                {item?.creationTime.split(0, 2)}
+                {item?.creationTime.slice(0, 10)}
               </Text>
             </View>
             <View style={styles.secondContainer}>
-              <Text style={[styles.festivalText]}>{item?.name} </Text>
+              <Text numberOfLines={1} ellipsizeMode='tail' style={[styles.festivalText]}>{item?.name.slice(0, 15).toUpperCase()}</Text>
               <View style={styles.locationIcon}>
-                <Icon name="location" color={colors.red1} size={20} />
-                <Text style={{color: colors.gray}}>Vizag</Text>
+                <Icon name="location" color={colors.red1} size={16} />
+                <Text style={{ color: colors.gray }}>Vizag</Text>
               </View>
             </View>
             <View style={styles.rightContainer}>
@@ -46,8 +48,8 @@ const EventCard2 = ({onPress, data, navigation}) => {
             </View>
           </View>
         </TouchableOpacity>
-      )}
-    />
-  );
-};
-export default EventCard2;
+    )
+}
+
+export default EventCard2
+

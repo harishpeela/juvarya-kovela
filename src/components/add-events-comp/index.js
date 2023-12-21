@@ -13,18 +13,18 @@ import CalenderIcon from 'react-native-vector-icons/AntDesign';
 import RadioForm from 'react-native-simple-radio-button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ApplicationContext from '../../utils/context-api/Context';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
 
-export const AddEvent = ({data, navigation}) => {
-  const {id} = useContext(ApplicationContext);
+export const AddEvent = ({ data, navigation }) => {
+  const { id } = useContext(ApplicationContext);
   const {
-    buttonTexts: {addevents},
-    placeHolders: {tampleNameP, descriptionP},
+    buttonTexts: { addevents },
+    placeHolders: { tampleNameP, descriptionP },
     headings: {
-      inputTitles: {eventname, tDescription, pickadate},
+      inputTitles: { eventname, tDescription, pickadate },
     },
   } = allTexts;
 
@@ -56,8 +56,8 @@ export const AddEvent = ({data, navigation}) => {
       : '';
   };
   var radio_prop = [
-    {label: 'Single day', value: 0},
-    {label: 'more days', value: 1},
+    { label: 'Single day', value: 0 },
+    { label: 'more days', value: 1 },
   ];
   const CreateEvent = async () => {
     let Token = await getAuthTokenDetails();
@@ -242,7 +242,7 @@ export const AddEvent = ({data, navigation}) => {
                   onBlur={handleBlur('eventName')}
                   setState={handleChange('eventName')}
                 />
-                <View style={{height: 20}} />
+                <View style={{ height: 20 }} />
                 <InputField
                   value={values.description}
                   title={tDescription}
@@ -252,7 +252,7 @@ export const AddEvent = ({data, navigation}) => {
                   onBlur={handleBlur('description')}
                   setState={handleChange('description')}
                 />
-                <View style={{alignSelf: 'center', marginTop: '5%'}}>
+                <View style={{ alignSelf: 'center', marginTop: '5%' }}>
                   <RadioForm
                     radio_props={radio_prop}
                     initial={isRegular}
@@ -271,9 +271,9 @@ export const AddEvent = ({data, navigation}) => {
                 </View>
                 {!isRegular ? (
                   <View>
-                    <View style={{height: 20}} />
+                    <View style={{ height: 20 }} />
                     <Text style={styles.pickDateTxt}>{pickadate} </Text>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       <InputField1
                         value={data.date || GetDate()}
                         titleColor={colors.orangeColor}
@@ -300,11 +300,11 @@ export const AddEvent = ({data, navigation}) => {
                   </View>
                 ) : (
                   <View>
-                    <View style={{height: 20}} />
+                    <View style={{ height: 20 }} />
                     <Text style={styles.pickDateTxt}>
                       {'select dates for dharsan'}
                     </Text>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       <InputField1
                         value={values.fromDate}
                         titleColor={colors.green2}
@@ -328,7 +328,7 @@ export const AddEvent = ({data, navigation}) => {
                         onCancel={HideDatePicker}
                       />
                     </View>
-                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                       <InputField1
                         value={values.toDate}
                         titleColor={colors.orangeColor}
@@ -394,7 +394,7 @@ const InputField1 = ({
         <Text
           style={[
             styles.title,
-            {color: titleColor ? titleColor : colors.darkBrown},
+            { color: titleColor ? titleColor : colors.darkBrown },
           ]}>
           {title}
         </Text>

@@ -2,7 +2,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {AddEvent, BackgroundImage, BackHeaderNew, Create_Event} from '../../components';
+import {
+  AddEvent,
+  BackgroundImage,
+  BackHeaderNew,
+  Create_Event,
+} from '../../components';
 import {styles} from './styles';
 import ApplicationContext from '../../utils/context-api/Context';
 

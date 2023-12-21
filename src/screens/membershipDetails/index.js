@@ -7,7 +7,6 @@ import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const MemberShipDetails = ({navigation, route}) => {
   const {data} = route.params || {};
-  console.log('data route', data);
   useEffect(() => {}, [data]);
   const [index, setIndex] = useState(0);
   return (

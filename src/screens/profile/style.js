@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingTop: '10%',
   },
   logoutbtnContainer: {
-    marginTop: '20%',
+    marginTop: '10%',
     width: '50%',
     alignSelf: 'center',
     alignItems: 'center',
@@ -53,11 +53,11 @@ export const styles = StyleSheet.create({
     borderRadius: '50%',
   },
   profileImage: {
-    alignItems: 'center',
+    alignContent: 'center',
+    alignSelf: 'center',
     height: 100,
     width: 100,
     borderRadius: 100 / 2,
-    justifyContent: 'center',
   },
   crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
   preViewImage: {

@@ -1,5 +1,4 @@
 import {StyleSheet} from 'react-native';
-import { color } from 'react-native-reanimated';
 import { colors } from '../../common';
 export const styles = StyleSheet.create({
   headerContainer: {
@@ -53,4 +52,9 @@ export const styles = StyleSheet.create({
     height: 150,
     borderRadius: 20,
   },
+  butText: {
+    fontSize: 15,
+    color: colors.white,
+    fontWeight: 'bold'
+  }
 });

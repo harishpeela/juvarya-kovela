@@ -14,5 +14,4 @@ export const TempleInput = ({label, placeholder, width, value}) => {
       value={value}
     />
   );
-}
-
+};

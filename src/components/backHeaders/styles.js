@@ -13,10 +13,12 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
-    backgroundColor: colors.orangeColor,
-    marginLeft: 5,
-    elevation: 3,
-    shadowColor: colors.black,
-    marginHorizontal: 15,
+    // elevation:3,
+    // shadowOffset:{
+    //   width:1,
+    //   height:1
+    // },
+    // shadowColor:colors.black,
+    // backgroundColor:colors.white,
   },
 });

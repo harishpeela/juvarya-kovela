@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
     color: colors.orangeColor,
     fontWeight: '900',
     fontSize: fontSize.xxlarge,
-    marginRight: 15,
+    marginRight: 20,
   },
 
 });

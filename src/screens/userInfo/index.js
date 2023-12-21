@@ -68,8 +68,8 @@ const UserInfo = ({navigation}) => {
               // label={'Contact Number'}
               placeholder={'Contact Number'}
               width={'100%'}
-              value={data?.contactNumber}
-              // onChangeText={text => setData({...data, contactNumber: text})}
+              value={data.contactNumber}
+              onChangeText={text => setData({...data, contactNumber: text})}
             />
           </View>
           <View style={styles.subFormElement}>
@@ -92,7 +92,7 @@ const UserInfo = ({navigation}) => {
           </View>
           <View style={styles.subFormElement}>
             <TempleInput
-              // label={'Locality'}
+              label={'Locality'}
               placeholder={'Locality'}
               width={'100%'}
               value={data.locality}
@@ -101,7 +101,7 @@ const UserInfo = ({navigation}) => {
           </View>
           <View style={styles.subFormElement}>
             <TempleInput
-              // label={'City'}
+              label={'City'}
               placeholder={'City'}
               width={'100%'}
               value={data.city}
@@ -110,7 +110,7 @@ const UserInfo = ({navigation}) => {
           </View>
           {/* <View style={styles.subFormElement}> */}
           <TempleInput
-            // label={'PostalCode'}
+            label={'PostalCode'}
             placeholder={'Enter postalCode'}
             width={'100%'}
             value={data.postalCode}
