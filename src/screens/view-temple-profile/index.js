@@ -264,7 +264,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <BackHeaderNew
                   // txt={`${followersList?.length} Followers`}
                   // txt={'Followers'}
-                  isArrrow={true}
+                  isArrow={true}
                   onPress={() => navigation.goBack()}
                   txtColor={colors.black}
                   isPlus={false}

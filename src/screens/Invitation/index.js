@@ -52,7 +52,7 @@ const InvitationScreen = ({navigation, id, route}) => {
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
           txt={'Inviation'}
-          isArrrow={true}
+          isArrow={true}
           isPlus={false}
         />
       </View>

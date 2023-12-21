@@ -59,7 +59,7 @@ const FollowersMembership = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.followersHeader}>
         <BackHeaderNew
-          isArrrow={true}
+          isArrow={true}
           txt={
             // followersList.length > 0
             //   ? `${followersList.length}
@@ -69,7 +69,7 @@ const FollowersMembership = ({route, navigation}) => {
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
-        <Ellipsis txtColor={colors.black} />
+        {/* <Ellipsis txtColor={colors.black} /> */}
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>

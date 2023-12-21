@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {MemberShipCard, BackgroundImage, BackHeaderNew} from '../../components';
 import {allTexts} from '../../common';
 import {styles} from './styles';
-import {MemberShipDetails} from '../../utils/api';
+import {MemberShipList} from '../../utils/api';
 const ProfileMemberShips = ({navigation, route}) => {
   const {roleId} = route.params || {};
   const [loader, setLoader] = useState();
@@ -19,7 +19,7 @@ const ProfileMemberShips = ({navigation, route}) => {
   const MembershipData = async () => {
     setLoader(true);
     try {
-      let result = await MemberShipDetails(0, 20);
+      let result = await MemberShipList(0, 100);
       console.log('res', result?.data?.data.length);
       if (result) {
         setLoader(false);
@@ -42,7 +42,7 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={styles.header}>
         <BackHeaderNew
           txt={'MemberShips'}
-          isArrrow={true}
+          isArrow={true}
           onPress={() => navigation.goBack()}
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (

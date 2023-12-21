@@ -12,6 +12,7 @@ import {BackHeaderNew, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {BackgroundImage, FollowersListCard3, Loader} from '../../components';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
@@ -67,7 +68,11 @@ const DonationsList = ({navigation, route}) => {
           txt={'Donations'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
+          isArrow={true}
         />
+        <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.donations)}>
+          <AntDesign name="plus" size={24} color={colors.black} />
+        </TouchableOpacity>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>
@@ -145,22 +150,6 @@ const DonationsList = ({navigation, route}) => {
           )}
         </View>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate(allTexts.screenNames.donations)}
-        style={{
-          position: 'absolute',
-          bottom: '15%',
-          left: '30%',
-          width: '40%',
-          alignItems: 'center',
-          padding: 10,
-          backgroundColor: colors.red6,
-          borderRadius: 20,
-        }}>
-        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-          Add Donation
-        </Text>
-      </TouchableOpacity>
     </SafeAreaView>
   );
 };

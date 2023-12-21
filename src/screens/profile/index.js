@@ -41,6 +41,7 @@ const Profile = ({navigation}) => {
   const [tcModal, setTcModal] = useState(false);
   const [templeAdmins, setTempleAdmins] = useState([]);
 
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;

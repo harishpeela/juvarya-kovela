@@ -47,7 +47,7 @@ const EventsScreen = ({navigation}) => {
         <TouchableOpacity
           style={{marginRight: 20}}
           onPress={() => {
-            navigation.navigate(allTexts.screenNames.createEvent, {
+            navigation.navigate(allTexts.screenNames.addevents, {
               navigation: navigation,
             });
           }}>

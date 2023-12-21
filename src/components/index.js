@@ -87,10 +87,11 @@ import EventCard from './EventCard';
 import EventCard2 from './EventCard2';
 import {Donations_list_Card} from './donation_list';
 import {MemberShipCard} from './membershipCard';
-import EventCard3 from './EventCard3'
+import EventCard3 from './EventCard3';
 import Btn from './btn';
 import TextInput2 from './TextInput2';
 import FollowersListCard3 from './FollowersListCard3';
+import {Create_Event} from './create_event_component';
 
 export {
   Loader,
@@ -174,5 +175,6 @@ export {
   MemberShipCard,
   EventCard3,
   TextInput2,
-  FollowersListCard3
+  FollowersListCard3,
+  Create_Event,
 };

@@ -44,6 +44,7 @@ const endpoints = {
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
+  MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
@@ -298,6 +299,16 @@ export const MemberShipDetails = async (pageNo, pageSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pageNo}&pageSize=${pageSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipList = async (pageNo, pageSize) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
     );
     return result;
   } catch (error) {

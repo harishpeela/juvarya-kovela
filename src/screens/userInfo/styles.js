@@ -1,4 +1,6 @@
 import {StyleSheet} from 'react-native';
+import { color } from 'react-native-reanimated';
+import { colors } from '../../common';
 export const styles = StyleSheet.create({
   headerContainer: {
     margin: 10,
@@ -19,6 +21,17 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 20,
+    width: '40%',
+    alignSelf: 'center',
+    padding: 10,
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: colors.orangeColor,
+  },
+  butText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   subFormHeading: {
     fontSize: 18,

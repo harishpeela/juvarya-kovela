@@ -52,7 +52,7 @@ const ProfileMembership = ({ route, navigation }) => {
         <View style={styles.header}>
           <BackHeaderNew
             txt={'Members'}
-            isArrrow={true}
+            isArrow={true}
             onPress={() => navigation.goBack()}
           />
           <TouchableOpacity onPress={() => {
