@@ -43,9 +43,8 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [dob, setDob] = useState(true);
 
-  const Type = () => { 
+  const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
     var roleAgent = ROLES?.indexOf('ROLE_AGENT') > -1;

@@ -2,13 +2,7 @@
 import {styles} from './style';
 import {TextInput} from '@react-native-material/core';
 
-export const TempleInput = ({
-  label,
-  placeholder,
-  width,
-  onChangeText,
-  value,
-}) => {
+export const TempleInput = ({label, placeholder, width, value}) => {
   return (
     <TextInput
       variant="outlined"
@@ -17,7 +11,6 @@ export const TempleInput = ({
       color={'#FFA001'}
       leadingContainerStyle={styles.inputField}
       style={{width: width}}
-      onChangeText={onChangeText}
       value={value}
     />
   );

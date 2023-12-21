@@ -3,7 +3,7 @@ import React, {useState, useEffect} from 'react';
 import {MemberShipCard, BackgroundImage, BackHeaderNew} from '../../components';
 import {allTexts} from '../../common';
 import {styles} from './styles';
-import {MemberShipDetails} from '../../utils/api';
+import {MemberShipList} from '../../utils/api';
 const ProfileMemberShips = ({navigation, route}) => {
   const {roleId, trfdata} = route.params || {};
   const [loader, setLoader] = useState();
@@ -19,8 +19,8 @@ const ProfileMemberShips = ({navigation, route}) => {
   const MembershipData = async () => {
     setLoader(true);
     try {
-      let result = await MemberShipDetails(0, 100);
-      console.log('ressssssssssssssssssss', result?.data);
+      let result = await MemberShipList(0, 100);
+      console.log('res', result?.data?.data.length);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);

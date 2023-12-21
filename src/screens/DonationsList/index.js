@@ -1,18 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
 import {BackHeaderNew, Donations_list_Card, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {BackgroundImage, FollowersListCard3, Loader} from '../../components';
+import {BackgroundImage, Loader} from '../../components';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
@@ -75,6 +69,7 @@ const DonationsList = ({navigation, route}) => {
           txt={'Donations'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
+          isArrow={true}
         />
         <TouchableOpacity
           onPress={() => navigation.navigate(allTexts.screenNames.donations)}>
@@ -160,22 +155,6 @@ const DonationsList = ({navigation, route}) => {
           )}
         </View>
       </View>
-      {/* <TouchableOpacity
-        onPress={() => navigation.navigate(allTexts.screenNames.donations)}
-        style={{
-          position: 'absolute',
-          bottom: '15%',
-          left: '30%',
-          width: '40%',
-          alignItems: 'center',
-          padding: 10,
-          backgroundColor: colors.red6,
-          borderRadius: 20,
-        }}>
-        <Text style={{color: 'white', fontSize: 16, fontWeight: 'bold'}}>
-          Add Donation
-        </Text>
-      </TouchableOpacity> */}
     </SafeAreaView>
   );
 };

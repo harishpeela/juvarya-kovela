@@ -87,11 +87,10 @@ import EventCard from './EventCard';
 import EventCard2 from './EventCard2';
 import {Donations_list_Card} from './donation_list';
 import {MemberShipCard} from './membershipCard';
-import {FollowersListCard3} from './FollowersListCard2';
 import EventCard3 from './EventCard3'
 import Btn from './btn';
 import TextInput2 from './TextInput2';
-
+import FollowersListCard3 from './FollowersListCard3';
 
 export {
   Loader,

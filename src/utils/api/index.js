@@ -40,7 +40,8 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
+  MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
+  MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
@@ -346,7 +347,17 @@ export const MemberShipDetails = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipInvite = async payload => {
+export const MemberShipList = async (pageNo, pageSize) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipInvite = async (payload) => {
   try {
     // Provide the data payload in the axios post call
     let result = await axiosMultiPartFormDataMem.post(

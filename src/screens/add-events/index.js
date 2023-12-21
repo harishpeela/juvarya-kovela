@@ -2,7 +2,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext} from 'react';
 import {SafeAreaView, View} from 'react-native';
-import {AddEvent, BackgroundImage, BackHeaderNew} from '../../components';
+import {
+  AddEvent,
+  BackgroundImage,
+  BackHeaderNew,
+  Create_Event,
+} from '../../components';
 import {styles} from './styles';
 import ApplicationContext from '../../utils/context-api/Context';
 
@@ -27,7 +32,7 @@ const AddEvents = ({navigation, route}) => {
           onPress={() => navigation.goBack()}
         />
       </View>
-      <AddEvent data={data} navigation={navigation} />
+      <Create_Event data={data} navigation={navigation} />
     </SafeAreaView>
   );
 };

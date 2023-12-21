@@ -21,8 +21,6 @@ const AddMemebershipDetails = ({route, navigation}) => {
   console.log('jtProfileId', jtProfileId);
   const [memType, setMemType] = useState();
   const [memName, setMemName] = useState();
-  // const [memFee, setMemFee] = useState('');
-  // const [memDur, setMemDur] = useState('');
   const [memberShip, setMemberShip] = useState([]);
   const submit = async () => {
     const payload = {
@@ -149,34 +147,6 @@ const AddMemebershipDetails = ({route, navigation}) => {
             onChangeText={v => setMemName(v)}
             value={memName}
           />
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={v => setMemType(v)}
-            value={memType}
-            placeholder="Type"
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemName(v)}
-            value={memName}
-            placeholder="Membership name"
-            keyboardType="numeric"
-          /> */}
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemFee()}
-            value={memFee}
-            placeholder="Membership fee"
-            keyboardType="numeric"
-          /> */}
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemDur()}
-            value={memDur}
-            placeholder="Duration"
-            keyboardType="numeric"
-          /> */}
           <TouchableOpacity onPress={onPressDone} style={styles.btnContainer}>
             <Text style={styles.loginText}>{'CREATE'}</Text>
           </TouchableOpacity>
