@@ -4,7 +4,6 @@ import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
 import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
-
 import {
   Splash,
   SignUp,
@@ -45,7 +44,11 @@ import {
   EventDetails,
   ForgetPassword,
   UpdateProfile,
+  CreateEvent,
   ProfileMemberShips,
+  InvitationScreen,
+  MemberShipDetails,
+  UserInfo,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -104,10 +107,14 @@ const App = () => {
       memberShip,
       eventsScreen,
       donationslist,
-      eventsDetails,
       forgetPassword,
       updateProfile,
+      eventDetails,
+      createEvent,
       profilememberships,
+      invitationScreen,
+      membershipdetails,
+      userinfo,
     },
   } = allTexts;
   useEffect(() => {
@@ -162,7 +169,7 @@ const App = () => {
           options={{
             headerShown: false,
           }}
-        />  
+        />
       </Stack.Navigator>
     );
   };
@@ -219,13 +226,20 @@ const App = () => {
           }}
         />
         <Stack.Screen
+          name={userinfo}
+          component={UserInfo}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name={updatePassword}
           component={UpdatePassword}
           options={{
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={updateProfile}
           component={UpdateProfile}
           options={{
@@ -235,6 +249,13 @@ const App = () => {
         <Stack.Screen
           name={myTamples}
           component={MyTamples}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={membershipdetails}
+          component={MemberShipDetails}
           options={{
             headerShown: false,
           }}
@@ -443,22 +464,29 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={eventsDetails}
+          name={eventDetails}
           component={EventDetails}
           options={{
             headerShown: false,
           }}
         />
-         {/* <Stack.Screen
+        <Stack.Screen
           name={createEvent}
           component={CreateEvent}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name={profilememberships}
           component={ProfileMemberShips}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={invitationScreen}
+          component={InvitationScreen}
           options={{
             headerShown: false,
           }}
