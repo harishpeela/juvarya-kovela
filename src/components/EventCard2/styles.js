@@ -23,7 +23,8 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'space-between',
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        fontSize:'10'
     },
   
     Image: {
@@ -59,6 +60,7 @@ export const styles = StyleSheet.create({
         alignSelf:'center',
         alignItems:'center',
         height:'30%',
+       
     }
     // dateContainer:{
     //     flexDirection:'row',

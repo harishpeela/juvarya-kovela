@@ -3,7 +3,7 @@ import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({
  
     Header: {
-        marginHorizontal: '-2%',
+        marginHorizontal: '6%',
         marginVertical: 10,
         marginTop: 10,
         display: 'flex',

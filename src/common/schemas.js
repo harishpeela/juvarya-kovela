@@ -72,3 +72,18 @@ export const createPostScheme = Yup.object({
 export const Gotra = Yup.object({
   caption: Yup.string().required('Enter your Gotra'),
 });
+
+
+export const forgotPasswordSchema = Yup.object({
+ 
+  password: Yup.string()
+    .trim()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
+      'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
+    )
+    .required('Password required'),
+  confirmPassword: Yup.string()
+    .required('Confirm Your Password')
+    .oneOf([Yup.ref('password'), null], 'Password not Matched'),
+});

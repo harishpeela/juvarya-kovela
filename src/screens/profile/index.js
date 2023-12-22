@@ -43,7 +43,6 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [dob, setDob] = useState(true);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -175,7 +174,6 @@ const Profile = ({navigation}) => {
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={90} color={colors.orangeColor} />
                 </View>
-                
               )}
             </TouchableOpacity>
           )}
@@ -204,6 +202,7 @@ const Profile = ({navigation}) => {
               }}
             />
           )}
+
 
           <Item
             svg={<Icon name="unlock" size={20} />}
@@ -273,6 +272,7 @@ const Profile = ({navigation}) => {
           </Text>
         </View>
       </View>
+
 
       <Modal
         visible={isVisible}

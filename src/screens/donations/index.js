@@ -69,8 +69,12 @@ const Donations = ({route, navigation}) => {
       <ScrollView style={styles.container}>
         <View style={styles.header}>
           <BackHeaderNew
+            txt={'Add Donation'}
             txtColor={'black'}
+            isArrow={true}
             onPress={() => navigation.goBack()}
+            isArrow={true}
+            txt={'Donation'}
           />
         </View>
         <Donation_first_Tab title={data?.name} rating={'3.5 (18 rating)'} />

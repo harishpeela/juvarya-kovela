@@ -21,11 +21,11 @@ export const BackHeaderNew = ({
           justifyContent: 'center',
         }}>
         <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-          {/* <Fontisto
+          <Fontisto
             name="arrow-left"
-            color={txtColor === undefined ? <></> : txtColor}
             size={17}
-          /> */}
+            color={'black'}
+          />
         </TouchableOpacity>
         {txt ? (
           <Text
@@ -33,7 +33,7 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color: 'black',
             }}>
             {txt}
           </Text>

@@ -45,6 +45,7 @@ import {
   EventDetails,
   ForgetPassword,
   UpdateProfile,
+  ProfileMemberShips,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -106,6 +107,7 @@ const App = () => {
       eventsDetails,
       forgetPassword,
       updateProfile,
+      profilememberships,
     },
   } = allTexts;
   useEffect(() => {
@@ -160,9 +162,7 @@ const App = () => {
           options={{
             headerShown: false,
           }}
-        />
-       
-         
+        />  
       </Stack.Navigator>
     );
   };
@@ -228,14 +228,6 @@ const App = () => {
           <Stack.Screen
           name={updateProfile}
           component={UpdateProfile}
-          options={{
-            headerShown: false,
-          }}
-        />
-
-<Stack.Screen
-          name={forgotPasswordOtpScreen}
-          component={ForgotPasswordOtpScreen}
           options={{
             headerShown: false,
           }}
@@ -438,7 +430,7 @@ const App = () => {
         />
         <Stack.Screen
           name={eventsScreen}
-          component={eventsScreen}
+          component={EventsScreen}
           options={{
             headerShown: false,
           }}
@@ -457,7 +449,20 @@ const App = () => {
             headerShown: false,
           }}
         />
-        
+         {/* <Stack.Screen
+          name={createEvent}
+          component={CreateEvent}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
+        <Stack.Screen
+          name={profilememberships}
+          component={ProfileMemberShips}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
