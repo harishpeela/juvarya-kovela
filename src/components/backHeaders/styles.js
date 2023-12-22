@@ -19,6 +19,6 @@ export const styles = StyleSheet.create({
     //   height:1
     // },
     // shadowColor:colors.black,
-    // backgroundColor:colors.white,
+    backgroundColor:colors.orangeColor,
   },
 });

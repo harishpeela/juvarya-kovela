@@ -9,19 +9,9 @@ import {
   Create_Event,
 } from '../../components';
 import {styles} from './styles';
-import ApplicationContext from '../../utils/context-api/Context';
 
 const AddEvents = ({navigation, route}) => {
   const [data, setdata] = useState('');
-  const {
-    params: {id},
-  } = route || {};
-  const {setId} = useContext(ApplicationContext);
-  useEffect(() => {
-    if (id) {
-      setId(id);
-    }
-  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <BackgroundImage />

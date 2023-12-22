@@ -23,10 +23,9 @@ export const BackHeaderNew = ({
         <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
           <Fontisto
             name="arrow-left"
-            color={'white'}
             size={17}
-            // color={color?(<></>):(<></>)}
-            color={colors.black}
+            color={'black'}
+
           />
         </TouchableOpacity>
         {txt ? (
@@ -35,7 +34,7 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color: 'black',
             }}>
             {txt}
           </Text>

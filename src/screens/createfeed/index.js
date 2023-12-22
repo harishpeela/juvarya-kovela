@@ -14,6 +14,7 @@ import {styles} from './styles';
 import {
   BackgroundImage,
   BackHeader,
+  BackHeaderNew,
   InputField,
   PrimaryButton,
 } from '../../components';
@@ -143,10 +144,10 @@ const CreateFeed = ({route, navigation}) => {
   return (
     <SafeAreaView>
       <BackgroundImage />
-      <View style={{marginHorizontal: 20}}>
-        <BackHeader
+      <View style={{marginHorizontal: 30, marginTop: 30}}>
+        <BackHeaderNew
           txt={'Create Feed'}
-          onBackPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
       </View>
       <View style={{margin: 30}}>

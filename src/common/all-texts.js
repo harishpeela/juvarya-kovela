@@ -12,8 +12,10 @@ export const allTexts = {
     contactUs: 'Contact Us',
     next: 'Next',
     updatePassword: 'Update Password',
+    updateProfile:'Update Profile',
     add: 'Add',
     addevents: 'Add Event',
+    updateProfile: 'Update Profile'
   },
 
   headings: {
@@ -120,6 +122,7 @@ export const allTexts = {
     otpScreen: 'OtpScreen',
     homeDetails: 'HomeDetails',
     updatePassword: 'UpdatePassword',
+    updateProfile:'Update Profile',
     myTamples: 'MyTamples',
     addTample: 'AddTample',
     service: 'Services',
@@ -158,7 +161,8 @@ export const allTexts = {
     eventsDetails: 'EventDetails',
     forgetPassword:'ForgetPassword',
     updateProfile:'UpdateProfile',
-    forgotPasswordOtpScreen:'ForgotPassword'
+    forgotPasswordOtpScreen:'ForgotPassword',
+    profilememberships:'ProfileMemberShips',
   },
   homeHeader: {
     welcome: 'Welcome ',

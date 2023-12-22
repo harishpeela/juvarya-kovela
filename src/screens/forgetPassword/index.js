@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  Alert
 } from 'react-native';
 
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
@@ -14,9 +15,9 @@ import * as Yup from 'yup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {allTexts} from '../../common';
 import {useState} from 'react';
-
+import { MemberShipCreate } from '../../utils/api';
 // import { responsiveScreenHeight } from 'react-native-responsive-dimensions'
-
+import Snackbar from 'react-native-snackbar';
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Email is Required'),
 });

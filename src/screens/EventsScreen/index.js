@@ -15,6 +15,7 @@ import {
   Sort,
   EventCard2,
   EventCard3,
+  BackgroundImage
 } from '../../components';
 import { allTexts, colors } from '../../common';
 import { EventList } from '../../utils/api';
@@ -65,9 +66,7 @@ const EventsScreen = ({ navigation }) => {
         />
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate(allTexts.screenNames.addevents, {
-              navigation: navigation,
-            });
+            navigation.navigate(allTexts.screenNames.addevents);
           }}>
           <Icon name="pluscircleo" size={24} color={colors.black} />
         </TouchableOpacity>
@@ -103,7 +102,7 @@ const EventsScreen = ({ navigation }) => {
               // srHeight={"100%"}
             />
           </View>
-        </View> */}
+        </View> 
         <View style={styles.ListContainer}>
           {eventsLoader ? (
             <View
@@ -119,31 +118,3 @@ const EventsScreen = ({ navigation }) => {
   );
 };
 export default EventsScreen;
-
-{
-  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            {searchedText && filteredData.length > 0 ? (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={filteredData}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={item => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     ) : (
-            //       <View style={styles.noDataContainer}>
-            //         <Text style={styles.noDataText}>
-            //           No Followers to Display
-            //         </Text>
-            //       </View>
-            //     )}
-            //   </ScrollView>
-            // </> */
-}
