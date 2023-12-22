@@ -25,6 +25,7 @@ export const BackHeaderNew = ({
             name="arrow-left"
             size={17}
             color={'black'}
+
           />
         </TouchableOpacity>
         {txt ? (
