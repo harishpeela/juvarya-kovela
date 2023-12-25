@@ -101,10 +101,10 @@ export const Create_Event = ({data, navigation}) => {
             Alert.alert('Success', result?.message, [
               {
                 text: 'Ok',
-                // onPress: () =>
-                //   navigation.navigate(allTexts.screenNames.profilemembership, {
-                //     roleId: roleId,
-                //   }),
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.profilemembership, {
+                    roleId: roleId,
+                  }),
               },
             ]);
           } else {
