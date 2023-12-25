@@ -69,7 +69,6 @@ const DonationsList = ({navigation, route}) => {
           txt={'Donations'}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
-          isArrow={true}
         />
         <TouchableOpacity
           onPress={() => navigation.navigate(allTexts.screenNames.donations)}>

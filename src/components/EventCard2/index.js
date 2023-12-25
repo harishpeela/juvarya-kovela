@@ -8,9 +8,8 @@ const EventCard2 = ({navigation}) => {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => {
-        navigation.navigate(allTexts.screenNames.eventsDetails, {
-          navigation: navigation,
+      onPress={() => { 
+        navigation.navigate(allTexts.screenNames.eventdetailsnew, {
         });
       }}>
       <Image

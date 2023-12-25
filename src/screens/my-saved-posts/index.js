@@ -79,7 +79,7 @@ const MySavedPosts = ({navigation}) => {
                   isLikeTrue={item?.feedDTO?.like}
                   id={item?.id}
                   onPressTitle={() =>
-                    navigation.navigate(allTexts.screenNames.viewProfile, {
+                    navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                       data: item,
                       onSelect: onSelect,
                     })

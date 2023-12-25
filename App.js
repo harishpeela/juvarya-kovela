@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
-import {LogBox} from 'react-native';
+import {LogBox, Text} from 'react-native';
 import {allTexts} from './src/common';
 import {
   Splash,
@@ -49,6 +49,7 @@ import {
   InvitationScreen,
   MemberShipDetails,
   UserInfo,
+  EventDetailsNew,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -66,6 +67,8 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
 const App = () => {
+  console.log('22233');
+  console.log('working');
   const {
     screenNames: {
       signin,
@@ -114,9 +117,58 @@ const App = () => {
       profilememberships,
       invitationScreen,
       membershipdetails,
-      userinfo,
+      // userinfo,
+      eventdetailsnew,
     },
   } = allTexts;
+  // console.log("bjhjhbbh",  signin,
+  // otpScreen,
+  // signup,
+  // splash,
+  // bottomTab,
+  // homeDetails,
+  // updatePassword,
+  // myTamples,
+  // addTample,
+  // service,
+  // seemore,
+  // poojari,
+  // events,
+  // favlist,
+  // occasions,
+  // manage,
+  // addevents,
+  // nearByProducts,
+  // nearByServices,
+  // viewProfile,
+  // menu,
+  // addtemplenew,
+  // createfeed,
+  // userFeedScreen,
+  // feed,
+  // profile,
+  // mySavedPosts,
+  // posts,
+  // followersmembership,
+  // profilemembership,
+  // addMembershipDetails,
+  // seeall,
+  // feeds,
+  // notification,
+  // viewtempleprofile,
+  // donations,
+  // memberShip,
+  // eventsScreen,
+  // donationslist,
+  // forgetPassword,
+  // updateProfile,
+  // // eventsDetails,
+  // createEvent,
+  // profilememberships,
+  // invitationScreen,
+  // // membershipdetails,
+  // // userinfo,
+  // )
   useEffect(() => {
     getLoginDetails();
   }, []);
@@ -175,14 +227,7 @@ const App = () => {
   };
   const HomeStack = () => {
     return (
-      <Stack.Navigator initialRouteName="BottomTab">
-        <Stack.Screen
-          name={splash}
-          component={Splash}
-          options={{
-            headerShown: false,
-          }}
-        />
+      <Stack.Navigator initialRouteName={bottomTab}>
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
@@ -226,8 +271,8 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={userinfo}
-          component={UserInfo}
+          name={eventdetailsnew}
+          component={EventDetailsNew}
           options={{
             headerShown: false,
           }}
@@ -253,13 +298,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={membershipdetails}
           component={MemberShipDetails}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={addTample}
           component={AddTample}
@@ -449,13 +494,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={eventsScreen}
           component={EventsScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={memberShip}
           component={MemberShip}
@@ -470,13 +515,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={createEvent}
           component={CreateEvent}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={profilememberships}
           component={ProfileMemberShips}
@@ -484,13 +529,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={invitationScreen}
           component={InvitationScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
       </Stack.Navigator>
     );
   };
@@ -570,6 +615,7 @@ const App = () => {
             <AuthStack />
           ) : (
             <HomeStack />
+            // <Text> hello</Text>
           )}
         </NavigationContainer>
       </SafeAreaProvider>

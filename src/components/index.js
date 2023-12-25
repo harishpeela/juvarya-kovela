@@ -91,7 +91,8 @@ import EventCard3 from './EventCard3'
 import Btn from './btn';
 import TextInput2 from './TextInput2';
 import FollowersListCard3 from './FollowersListCard3';
-
+import { TopBarcard } from './topBar1/topBarCard';
+import { NewBackHeader } from './new-back-header';
 export {
   Loader,
   SearchBar,
@@ -175,4 +176,6 @@ export {
   FollowersListCard3,
   EventCard3,
   TextInput2,
+  TopBarcard,
+  NewBackHeader,
 };

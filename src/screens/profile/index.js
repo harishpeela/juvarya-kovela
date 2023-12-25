@@ -235,7 +235,23 @@ const Profile = ({navigation}) => {
             />
           )} */}
         </View>
-        <View>
+        <View style={styles.logoutbtnContainer}>
+          <PrimaryButton
+            onPress={async () => {
+              await removeLoginSessionDetails();
+              setLoginDetails(null);
+            }}
+            bgColor={colors.black}
+            loading={false}
+            radius={25}
+            text={'Log out'}
+            shadow={true}
+            textColor={colors.white}
+          />
+          <Text style={styles.versionText}>
+            Version&ensp;{allTexts.appVersion.version}
+          </Text>
+          <View>
           <TouchableOpacity onPress={() => TC()}>
             <Text
               style={{
@@ -254,22 +270,6 @@ const Profile = ({navigation}) => {
             />
           )}
         </View>
-        <View style={styles.logoutbtnContainer}>
-          <PrimaryButton
-            onPress={async () => {
-              await removeLoginSessionDetails();
-              setLoginDetails(null);
-            }}
-            bgColor={colors.black}
-            loading={false}
-            radius={25}
-            text={'Log out'}
-            shadow={true}
-            textColor={colors.white}
-          />
-          <Text style={styles.versionText}>
-            Version&ensp;{allTexts.appVersion.version}
-          </Text>
         </View>
       </View>
 
