@@ -2,25 +2,27 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { colors, fontSize } from '../../common';
 export const styles = StyleSheet.create({ 
     Header: {
-        marginHorizontal: '6%',
-        marginVertical: 10,
-        marginTop: 10,
+        // marginHorizontal: '-2%',
+        // marginVertical: 10,
+        // marginTop: 10,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        
     },
 
     bodyContainer: {
         marginHorizontal: '4%',
         display: 'flex',
         flexDirection: 'column',
+        marginTop:-50
     },
     searchAndFilter: {
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: '5%',
-        marginTop: '5%',
+        // marginTop: '5%',
         paddingHorizontal: '1%',
         justifyContent: 'space-between',
         height: "7%",
@@ -62,7 +64,46 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center'
     },
-
+    eventContainer:{
+        padding:24,
+        backgroundColor:colors.orangeColor,
+        height:170,
+        borderBottomLeftRadius:24,
+        borderBottomRightRadius:24,
+       },
+    searchAndNew:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+    text:{
+        color:"#FFFFFF",
+        fontSize:25,
+        marginHorizontal:'35%',
+        marginBottom:20,
+        fontWeight:'bold'
+    },
+    plusIcon:{
+        color:colors.orangeColor
+        
+    },
+    eventAndPlus:{
+        flexDirection:'row'
+    },
+    notificationContainer:{
+    
+   
+    },
+    plusContainer:{
+        backgroundColor:'#FFFFFF',
+        justifyContent:'center',
+        alignItems:'center',
+        borderRadius:100,
+        marginLeft:10,
+        textAlign:'center',
+        height:40,
+        width:40
+    },
   bodyContainer: {
     marginHorizontal: '3%',
     display: 'flex',

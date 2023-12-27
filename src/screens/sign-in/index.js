@@ -160,7 +160,7 @@ const Signin = ({navigation}) => {
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
-                    radius={25}
+                    radius={25}      
                   />
                 </View>
                 <TouchableOpacity
@@ -171,6 +171,15 @@ const Signin = ({navigation}) => {
                     {dontHaveAccount}
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
+                </TouchableOpacity>          
+                <TouchableOpacity
+                 onPress={() => {
+                  navigation.navigate(allTexts.screenNames.forgetPassword);
+                }}>
+                <View>
+
+                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
+                </View>
                 </TouchableOpacity>
               </View>
             );
