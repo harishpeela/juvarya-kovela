@@ -233,13 +233,13 @@ const App = () => {
           }}
         />
 
-<Stack.Screen
+{/* <Stack.Screen
           name={forgotPasswordOtpScreen}
           component={ForgotPasswordOtpScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={myTamples}
           component={MyTamples}
