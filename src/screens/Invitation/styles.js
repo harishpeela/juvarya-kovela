@@ -4,16 +4,17 @@ import { colors, fontSize } from '../../common'
 export const styles = StyleSheet.create({
     Header:{
         marginTop:"12%",
-        marginHorizontal:10
+        marginHorizontal:20
     },
     textInputContainer:{
         marginHorizontal:'7%',
-        marginTop:30
+        marginTop:'40%',
     },
-    textInput:{
-        borderWidth:1,
+    input: { borderWidth:1,
         borderRadius:15,
-        borderColor:colors.black
+        borderColor:colors.black},
+    textInput:{
+       marginLeft: 10,
     },
     subBtn: {
         backgroundColor: colors.orangeColor,

@@ -5,17 +5,21 @@ import {styles} from './styles';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { BackgroundImage, BackHeaderNew } from '../../components';
+let url = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Fpainting-mountain-lake-with-mountain-background_188544-9126.jpg&tbnid=ASMDFNsL7Vw1YM&vet=12ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz..i&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fbackground&docid=bKJ3gdlWTtaNoM&w=626&h=358&q=images&ved=2ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz'
 const MemberShipDetails = ({navigation, route}) => {
   const {data} = route.params || {};
+  console.log('data ==><', data?.loggedInUser);
   useEffect(() => {}, [data]);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(1);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <Image
         source={{
           uri: data?.loggedInUser?.customerProfileUrl
             ? data?.loggedInUser?.customerProfileUrl
-            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+            : url
+            // 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
         }}
         style={styles.img}
       />
@@ -23,10 +27,10 @@ const MemberShipDetails = ({navigation, route}) => {
         <TouchableOpacity
           style={styles.iconContainer}
           onPress={() => navigation.goBack()}>
-          <Fontisto name="arrow-left" color={'white'} size={17} />
+          <Fontisto name="arrow-left" color={'black'} size={17} />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.round2}>
-          <Icon name="share" size={22} color={colors.white} />
+        <TouchableOpacity style={styles.round2} onPress={() => alert('under development')}>
+          <Icon name="share" size={22} color={colors.black} />
         </TouchableOpacity>
       </View>
       <View style={styles.dataContainer}>

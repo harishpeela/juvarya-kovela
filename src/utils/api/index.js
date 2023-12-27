@@ -333,10 +333,10 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipDetails = async id => {
+export const MemberShipDetails = async (pgNo, pgSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+      `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pgNo}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {

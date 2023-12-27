@@ -44,7 +44,6 @@ import {
   EventDetails,
   ForgetPassword,
   UpdateProfile,
-  CreateEvent,
   ProfileMemberShips,
   InvitationScreen,
   MemberShipDetails,
@@ -121,54 +120,6 @@ const App = () => {
       eventdetailsnew,
     },
   } = allTexts;
-  // console.log("bjhjhbbh",  signin,
-  // otpScreen,
-  // signup,
-  // splash,
-  // bottomTab,
-  // homeDetails,
-  // updatePassword,
-  // myTamples,
-  // addTample,
-  // service,
-  // seemore,
-  // poojari,
-  // events,
-  // favlist,
-  // occasions,
-  // manage,
-  // addevents,
-  // nearByProducts,
-  // nearByServices,
-  // viewProfile,
-  // menu,
-  // addtemplenew,
-  // createfeed,
-  // userFeedScreen,
-  // feed,
-  // profile,
-  // mySavedPosts,
-  // posts,
-  // followersmembership,
-  // profilemembership,
-  // addMembershipDetails,
-  // seeall,
-  // feeds,
-  // notification,
-  // viewtempleprofile,
-  // donations,
-  // memberShip,
-  // eventsScreen,
-  // donationslist,
-  // forgetPassword,
-  // updateProfile,
-  // // eventsDetails,
-  // createEvent,
-  // profilememberships,
-  // invitationScreen,
-  // // membershipdetails,
-  // // userinfo,
-  // )
   useEffect(() => {
     getLoginDetails();
   }, []);
@@ -298,13 +249,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name={membershipdetails}
           component={MemberShipDetails}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name={addTample}
           component={AddTample}
@@ -529,13 +480,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
+        <Stack.Screen
           name={invitationScreen}
           component={InvitationScreen}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
       </Stack.Navigator>
     );
   };

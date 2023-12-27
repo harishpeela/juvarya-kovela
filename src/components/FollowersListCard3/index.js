@@ -21,12 +21,12 @@ const FollowersListCard3 = ({data, navigation}) => {
         renderItem={({item, index}) => (
           <TouchableOpacity
             style={styles.listItemContainer}
-            // onPress={() => {
-            //   navigation.navigate(allTexts.screenNames.membershipdetails, {
-            //     data: item,
-            //   }),
-            //     console.log('item', item);
-            // }}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.membershipdetails, {
+                data: item,
+              }),
+                console.log('item', item);
+            }}
             
             >
             <View style={styles.cardContainer}>

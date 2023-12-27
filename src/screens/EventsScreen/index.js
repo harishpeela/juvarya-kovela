@@ -13,6 +13,7 @@ import {
   SafeAreaFrameContext,
   SafeAreaView,
 } from 'react-native-safe-area-context';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   Loader,
   ContactModal,
@@ -26,8 +27,9 @@ import {
   Sort,
   EventCard2,
   EventCard3,
+  BackgroundImage,
 } from '../../components';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
 
 const EventsScreen = ({navigation}) => {
@@ -58,18 +60,14 @@ const EventsScreen = ({navigation}) => {
     EventsList();
   }, []);
 
-  console.log('EventsScreen =>>>>>>>>>' + eventsData);
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: '#D5DFDC'}}>
      
      <View style={styles.eventContainer}>
       <View style={styles.eventAndPlus}>
-      <Text style={styles.text}>Events</Text>
-     
+      <Text style={styles.text}>Events </Text> 
       <FeatherIcon style={styles.notificationIcon} name="bell" size={30} color="white" />
-      
-      </View>
+        </View>
      <View style={styles.searchAndNew}>
      <SearchBar
               // value={searchedText}
@@ -138,6 +136,7 @@ const EventsScreen = ({navigation}) => {
           )}
         </View>
       </View>
+</View>
     </SafeAreaView>
   );
 };

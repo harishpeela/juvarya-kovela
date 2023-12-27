@@ -70,7 +70,7 @@ const Signin = ({navigation}) => {
           actions.setSubmitting(false);
         } else {
           actions.setSubmitting(false);
-          Alert.alert('Error', result?.message);
+          Alert.alert('Error', 'Invalid Credentials');
         }
       } catch (error) {
         actions.setSubmitting(false);
@@ -94,7 +94,7 @@ const Signin = ({navigation}) => {
           actions.setSubmitting(false);
         } else {
           actions.setSubmitting(false);
-          Alert.alert('Error', result?.message);
+          Alert.alert('Error', 'Invalid Credentials');
         }
       } catch (error) {
         actions.setSubmitting(false);

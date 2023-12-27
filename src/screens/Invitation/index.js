@@ -7,7 +7,6 @@ import {MemberShipInvite} from '../../utils/api';
 
 const InvitationScreen = ({navigation, route}) => {
   const {onSelect} = route.params || {};
-  console.log('route', onSelect);
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
@@ -23,7 +22,7 @@ const InvitationScreen = ({navigation, route}) => {
       };
       try {
         let result = await MemberShipInvite(payload);
-        console.log('result of invite api', result?.data);
+        // console.log('result of invite api', result?.data);
         if (result.data?.message) {
           Alert.alert('Success', result?.data?.message, [
             {
@@ -53,10 +52,6 @@ const InvitationScreen = ({navigation, route}) => {
         <BackHeaderNew
           onPress={() => {
             navigation.goBack();
-            route?.params?.onSelect({
-              // selected: isFollow,
-              // selectedId: !isFollow ? trfData?.jtProfile : '',
-            });
           }}
           txtColor={colors.black}
           txt={'Inviation'}
@@ -66,6 +61,7 @@ const InvitationScreen = ({navigation, route}) => {
       </View>
       <View style={styles.textInputContainer}>
         {/* <Text style={styles.email}>Enter User Email</Text> */}
+        <View style={styles.input}>
         <TextInput
           style={[styles.textInput, !isValidEmail && styles.invalidInput]}
           placeholder="Enter the Email"
@@ -73,6 +69,7 @@ const InvitationScreen = ({navigation, route}) => {
           maxLength={30}
           value={email}
         />
+        </View>
         {error && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>Email is Not valid </Text>
