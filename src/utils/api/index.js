@@ -99,13 +99,11 @@ export const loginUser1 = async data => {
     console.log('error in login', error);
     return error;
   }
-  
-  
-};
+}
 
 export const forgotPassword = async data => {
   try {
-    let result = await authAxiousForgotPassword.post(
+    let result = await authAxiousInstance1.put(
       `${endpoints.FORGOT_PASSWORD}`,
       data,
     );
@@ -114,9 +112,7 @@ export const forgotPassword = async data => {
     console.log('error in login', error);
     return error;
   }
-  
-  
-};
+}
 
 export const DonationsPost = async data => {
   try {
@@ -496,7 +492,8 @@ export const getTempleDetails = async id => {
   } catch (error) {
     return error;
   }
-};
+}
+
 export const NewRegistesrUser = async data => {
   try {
     let result = await axiousInstanceNewSignIn.post(

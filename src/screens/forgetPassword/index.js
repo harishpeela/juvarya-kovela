@@ -1,52 +1,114 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
   TextInput,
-  Alert
+  handleChange,
+  Alert,
+  Modal,
 } from 'react-native';
 
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 // import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {allTexts} from '../../common';
+import {allTexts, colors} from '../../common';
 import {useState} from 'react';
-import { MemberShipCreate } from '../../utils/api';
-// import { responsiveScreenHeight } from 'react-native-responsive-dimensions'
+import {NewVerifyOTP, forgotPassword} from '../../utils/api';
+import {styles} from './styles';
+import {Pressable} from 'react-native';
+import OTPTextInput from 'react-native-otp-textinput';
+import {Formik} from 'formik';
+import {forgotPasswordSchema} from '../../common/schemas';
+import {PasswordField} from '../../components/inputfield';
+import {PrimaryButton} from '../../components';
 import Snackbar from 'react-native-snackbar';
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Email is Required'),
-});
 
+// import { responsiveScreenHeight } from 'react-native-responsive-dimensions'
 const ForgetPassword = () => {
   const navigation = useNavigation();
-
-  const [memType, setMemType] = useState();
-  const [memName, setMemName] = useState();
-  // const [memFee, setMemFee] = useState('');
-  // const [memDur, setMemDur] = useState('');
   const [memberShip, setMemberShip] = useState([]);
-  const submit = async () => {
+  const [userEmail, setUserEmail] = useState('');
+  const [error, setError] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [timer, setTimer] = useState('00');
+  const [secLeft, setSecLeft] = useState(30);
+  const [otp, setOtp] = useState('000000');
+  let otpInput = useRef(null);
+  const Ref = useRef(null);
+
+  const getTimeRemaining = e => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    return {
+      total,
+      minutes,
+      seconds,
+    };
+  };
+  const startTimer = e => {
+    let {total, minutes, seconds} = getTimeRemaining(e);
+    if (total >= 0) {
+      setTimer(
+        (minutes > 9 ? minutes : '0' + minutes) +
+          ':' +
+          (seconds > 9 ? seconds : '0' + seconds),
+      );
+    }
+  };
+  const startTime = e => {
+    if (Ref.current) {
+      clearInterval(Ref.current);
+    }
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+  const getDeadTime = newTime => {
+    if (newTime) {
+      let deadline = new Date();
+      deadline.setSeconds(deadline.getSeconds() + secLeft);
+      return deadline;
+    } else {
+      let deadline = new Date();
+      deadline.setSeconds(deadline.getSeconds() + secLeft);
+      return deadline;
+    }
+  };
+  useEffect(() => {
+    const setText = () => {
+      otpInput?.current?.setValue(`${otp}`);
+    };
+    setText();
+  }, otp);
+
+  useEffect(() => {
+    setSecLeft(secLeft + 30);
+    const newTime = getDeadTime(true);
+    startTime(newTime);
+  }, []);
+  const otpGeneration = async email => {
     const payload = {
-      name: 'commitee',
-      profileId: 1,
-      type: 'TEMPORARY',
+      otpType: 'FORGOT_PASSWORD',
+      emailAddress: email,
     };
     try {
-      // Invoke MemberShipInvite with the id and email
-      let result = await MemberShipCreate(payload);
-      console.log('result =>>>>>>>>>>>>' + result);
+      // console.log('email =>>>>>>>>' + payload);
+      let result = await NewVerifyOTP(payload);
+      // console.log('otpGeneration =>>>>>>>>>>>>' + result);
       if (result) {
-        setMemberShip(result?.data);
-        console.log('New_Member');
-        console.log(result?.data);
-        // Show a custom alert for a successful API call
+        setTimeout(() => {
+          setOtp(result?.data?.otp);
+        }, 2000);
+        // console.log('data is coming here =>>>>');
         Snackbar.show({
-          text: 'MemberShip Created Successfully',
+          text: 'OTP Generated Successfully',
           backgroundColor: 'green',
           duration: 2000,
           action: {
@@ -57,278 +119,275 @@ const ForgetPassword = () => {
             },
           },
         });
-        Alert.alert(
-          'Create New MemberShip',
-          'Navigating to MemberShips Screen',
-          [
-            {
-              text: 'New',
-              onPress: () => {
-                setMemName(''), setMemType('');
-              },
-            },
-            {
-              text: 'Ok',
-              onPress: () => navigation.pop(),
-            },
-          ],
-          {cancelable: false},
-        );
       } else {
         setMemberShip(0);
       }
     } catch (error) {
-      console.log('Error in sending the request', error);
-      // Handle error and show an appropriate alert if needed
-      Alert.alert(
-        'Error',
-        'Failed to Create MemberShip...Please try again.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
+      Snackbar.show({
+        text: 'Error while Generating the OTP',
+        backgroundColor: 'red',
+        duration: 2000,
+        action: {
+          text: 'Ok',
+          textColor: 'white',
+          onPress: () => {
+            <></>;
           },
-        ],
-        {cancelable: false},
-      );
+        },
+      });
     }
   };
-
+  const validateEmail = text => {
+    // Use a regular expression for basic email validation
+    const isValid = text.toLowerCase().endsWith('@gmail.com');
+    console.log('isValid =>>>>>> ' + isValid);
+    setValidEmail(isValid);
+    setUserEmail(text);
+  };
   const onPressDone = () => {
-    if (memType == undefined) {
-      Alert.alert(
-        'INVALID INPUT',
-        'Please Enter the type of the MemberShip.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    } else if (memName == undefined) {
-      console.log('It is  printing inside the MemName');
-      Alert.alert(
-        'INVALID INPUT',
-        'Please Enter the Name of the MemberShip.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
+    if (validEmail && userEmail !== '') {
+      otpGeneration(userEmail);
+      setModalVisible(true);
+      console.log('Email is valid:', userEmail);
     } else {
-      submit();
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
+      console.log('Invalid email:', userEmail);
     }
+  };
+  const userPasswordHandler = async values => {
+    console.log("inside the userPAsswordHandler")
+    const payload = {
+      email:userEmail,
+      password:values.password,
+      otp:otp
+    }
+    console.log("payload 23456=>>>>>>>>>>> " +  payload.password);
+    try {
+      console.log('values =>>>>>> ' + values.password);
+      let result = await forgotPassword(payload);
+      console.log('passwordCreation =>>>>>>>>>>>>' + result);
+      if (result) {
+        // setOtp()
+        console.log('data is coming here =>>>>' + result);
+        
+        Snackbar.show({
+          text: 'Password Created Successfully',
+          backgroundColor: 'green',
+          duration: 2000,
+          action: {
+            text: 'Ok',
+            textColor: 'white',
+            onPress: () => {
+              // navigation.navigate(allTexts.screenNames.signin);
+            },
+          },
+        });
+        setTimeout(()=>{
+          setModalVisible(false)
+          navigation.navigate(allTexts.screenNames.signin)
+      },1500)
+      } else {
+        setMemberShip(0);
+      }
+    } catch (error) {
+      Snackbar.show({
+        text: 'Error try Again',
+        backgroundColor: 'red',
+        duration: 2000,
+        action: {
+          text: 'Ok',
+          textColor: 'white',
+          onPress: () => {
+            <></>;
+          },
+        },
+      });
+    }
+  };
+  const closeToggleModal = () => {
+    console.log('Close button is trigeering');
+    setModalVisible(false);
+  };
+  const isChecked = true;
+  const resetHandler = () => {
+    console.log('reset is trigerring here ');
+    otpGeneration();
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.logoContainer}>
-        {/* <View style={styles.logoStyle}></View> */}
         <Ionicons
-          onPress={() => navigation.navigate(allTexts.screenNames.signin)}
+          onPress={() => navigation.goBack()}
           size={30}
           style={styles.backButton}
           color={'black'}
           name="arrow-back"
         />
       </View>
-      {/* <Formik
-       initialValues={{
-         email:'',
-         password:'',
-         
-       }}
-       validationSchema={SignupSchema}
-       onSubmit={values => {
-        console.log('values', values);
-      }}
-     >
-        {({ errors,touched,values,handleChange,handleBlur,handleSubmit }) => (
-      <View style={styles.signupContainer}>
-        <Text style={styles.text}>Forgot Password?</Text>
-        <View style={styles.alrdContainer}>
-        <Text style={styles.Alrdmember}>Don't worry we have got your back! Just enter your email and reset your password</Text>
-        </View>
-        <View style={styles.textinputContainer}>
-        <MaterialIconsIcon name='alternate-email' color="#454545" size={19} style={styles.userIcon}/>
-        <View style={styles.line} /> 
-        <TextInput style={styles.textinput}
-         placeholder='Email Address' 
-         keyboardType='email-address'
-         value={values.email}
-         onChangeText={handleChange('email')}
-         onBlur={handleBlur('email')}
-         />
-        </View>
-        {errors.email && touched.email ? (
-             <Text style={styles.errtxt}>{errors.email}</Text>
-           ):null}
-        <TouchableOpacity style={styles.signupButton}  onPress={() => handleSubmit()}>
-          <Text style={styles.signupText}>SEND</Text>
-        </TouchableOpacity>
-      </View>
-          )}
-      </Formik> */}
-
       <TextInput
         style={styles.textinputContainer}
-        placeholder="Type"
-        onChangeText={v => setMemType(v)}
-        value={memType}
+        placeholder="Enter your email"
+        keyboardType="email-address"
+        onChangeText={validateEmail}
+        value={userEmail}
       />
-      <TextInput
-        style={styles.textinputContainer}
-        placeholder="MemberShip Name"
-        onChangeText={v => setMemName(v)}
-        value={memName}
-      />
-
-
-
+      {error ? (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}>Email is Not Valid</Text>
+        </View>
+      ) : (
+        <></>
+      )}
       <TouchableOpacity
         style={styles.signupButton}
-        onPress={() => handleSubmit()}>
+        onPress={() => onPressDone()}>
         <Text style={styles.signupText}>SEND</Text>
       </TouchableOpacity>
 
-      <View style={styles.loginContainer}>
-        {/* <View style={styles.loginTextLine}>
-        <TouchableOpacity style={styles.loginTouchable} onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.loginText}>Login Again</Text>
-        </TouchableOpacity>
-      </View> */}
-      </View>
+      {modalVisible ? (
+        <Modal animationType="fade" transparent={true} visible={modalVisible}>
+          <Pressable style={[styles.overlay]} onPress={closeToggleModal}>
+            <View style={[styles.centeredView]}>
+              <View style={[styles.otpContainer]}>
+                <Text style={styles.emailText}>
+                  Enter otp sent to {userEmail}
+                </Text>
+                <OTPTextInput
+                  ref={otpInput}
+                  inputCount={6}
+                  tintColor={colors.green2}
+                  textInputStyle={styles.otpTextInput}
+                  containerStyle={{
+                    marginTop: 5,
+                    marginBottom: 5,
+                  }}
+                />
+                <View style={styles.timeContainer}>
+                  {timer != '00:00' && (
+                    <Text style={styles.expectOtp}>
+                      Expect OTP in
+                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                    </Text>
+                  )}
+                     {timer === '00:00' && (
+                    <Text style={styles.expectOtp}>
+                      Expect OTP in
+                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                    </Text>
+                  )}
+
+                  <TouchableOpacity onPress={() => resetHandler()}>
+                    <Text>Resend OTP</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <Formik
+                onSubmit={(values, formikActions) => {
+                  userPasswordHandler(values);
+                  console.log('values', values);
+                }}
+                validationSchema={forgotPasswordSchema}
+                initialValues={{
+                  password: '',
+                  confirmPassword: '',
+                }}>
+                {({
+                  errors,
+                  touched,
+                  handleChange,
+                  handleBlur,
+                  handleSubmit,
+                  isSubmitting,
+                  values,
+                }) => {
+                  return (
+                    <View style={styles.fieldContainer}>
+                      {/* <InputField
+                  title={fName}
+                  placeholder={fistNamePlace}
+                  error={touched.firstName && errors.firstName}
+                  onBlur={handleBlur('firstName')}
+                  setState={handleChange('firstName')}
+                />
+                <InputField
+                  title={lastName}
+                  placeholder={fistNamePlace}
+                  error={touched.lastName && errors.lastName}
+                  onBlur={handleBlur('lastName')}
+                  setState={handleChange('lastName')}
+                /> */}
+                      <PasswordField
+                        value={values.password}
+                        title={'password'}
+                        placeholder={'Enter your Password'}
+                        error={touched.password && errors.password}
+                        onBlur={handleBlur('password')}
+                        setState={handleChange('password')}
+                      />
+                      <PasswordField
+                        value={values.confirmPassword}
+                        title={'confirm Password'}
+                        placeholder={'Confirm your Password'}
+                        error={
+                          touched.confirmPassword && errors.confirmPassword
+                        }
+                        onBlur={handleBlur('confirmPassword')}
+                        setState={handleChange('confirmPassword')}
+                      />
+
+                      <View style={styles.buttonContainer}>
+                        {isChecked ? (
+                          <PrimaryButton
+                            bgColor={colors.orangeColor}
+                            loading={false}
+                            onPress={handleSubmit}
+                            text={'submit'}
+                            radius={25}
+                          />
+                        ) : (
+                          <PrimaryButton
+                            textColor={'white'}
+                            bgColor={'gray'}
+                            loading={false}
+                            onPress={() =>
+                              alert('Accept terms and conditions to continue..')
+                            }
+                            text={'Submit'}
+                            radius={25}
+                          />
+                        )}
+                      </View>
+                    </View>
+                  );
+                }}
+              </Formik>
+              {/* <View>
+                <TextInput
+                  style={styles.textinputContainer}
+                  placeholder="Enter your Password"
+                  keyboardType="email-address"
+                  onChangeText={validateEmail}
+                  value={userEmail}
+                />
+                <TextInput
+                  style={styles.textinputContainer}
+                  placeholder="Enter your Password"
+                  keyboardType="email-address"
+                  onChangeText={validateEmail}
+                  value={userEmail}
+                />
+              </View> */}
+            </View>
+          </Pressable>
+        </Modal>
+      ) : (
+        <></>
+      )}
     </View>
   );
 };
-
 export default ForgetPassword;
-
-const styles = StyleSheet.create({
-  logoStyle: {
-    height: 60,
-    width: 20,
-    backgroundColor: '#e4007c',
-    marginTop: 10,
-    borderRadius: 30,
-    marginLeft: -10,
-  },
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  logo: {
-    fontSize: 35,
-    // fontFamily:'SedgwickAve-Regular',
-    color: 'black',
-    marginLeft: 15,
-    marginTop: 10,
-    height: 60,
-  },
-  text: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    color: 'black',
-  },
-  signupContainer: {
-    flex: 1,
-    marginHorizontal: 20,
-    marginVertical: '40%',
-  },
-  logoContainer: {
-    flexDirection: 'row',
-  },
-  Alrdmember: {
-    fontSize: 15,
-  },
-  alrdContainer: {
-    flexDirection: 'row',
-    marginTop: 10,
-  },
-  loginLink: {
-    color: '#e4007c',
-    marginLeft: 5,
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  textinputContainer: {
-    // borderWidth:0.3,
-    borderRadius: 50,
-    // height:responsiveScreenHeight(5),
-    alignItems: 'center',
-    flexDirection: 'row',
-    paddingHorizontal: 10,
-    marginTop: 20,
-    shadowColor: '#FFFFFF',
-    shadowOffset: {width: -2, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 3,
-    elevation: 20,
-    backgroundColor: '#E5E4E2',
-  },
-  line: {
-    borderWidth: 0.5,
-    height: 30,
-    marginLeft: 25,
-  },
-  textinput: {
-    marginLeft: 20,
-    fontSize: 14,
-  },
-  userIcon: {
-    left: 10,
-  },
-  signupButton: {
-    marginTop: 30,
-    borderRadius: 20,
-    height: 45,
-    // height:responsiveScreenHeight(5),
-    backgroundColor: 'orange',
-    justifyContent: 'center',
-    fontSize: 14,
-  },
-  signupText: {
-    fontSize: 15,
-    textAlign: 'center',
-    color: 'white',
-  },
-  emailIcon: {
-    left: 10,
-  },
-
-  loginContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  loginText: {
-    marginBottom: 1,
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: 'black',
-    textAlign: 'center',
-    marginTop: '3%',
-    justifyContent: 'flex-end',
-    alignItems: 'flex-end',
-  },
-  loginTextLine: {
-    borderTopWidth: 0.2,
-    width: '90%',
-    marginTop: '30%',
-  },
-  backButton: {
-    marginTop: '2%',
-    marginLeft: '2%',
-  },
-  
-  errtxt: {
-    marginLeft: 55,
-    marginTop: 10,
-    color: '#FFA001',
-  },
-});

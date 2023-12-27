@@ -285,6 +285,13 @@ const App = () => {
           }}
         />
         <Stack.Screen
+          name={forgotPasswordOtpScreen}
+          component={ForgotPasswordOtpScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name={updateProfile}
           component={UpdateProfile}
           options={{

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
   SafeAreaFrameContext,
   SafeAreaView,
@@ -60,19 +61,17 @@ const EventsScreen = ({navigation}) => {
   console.log('EventsScreen =>>>>>>>>>' + eventsData);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={styles.Header}>
-        <BackHeaderNew
-          txt={`EventsScreen`}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-        />
-        {/* <Ellipsis txtColor={colors.black} /> */}
+    <SafeAreaView style={{flex: 1, backgroundColor: '#D5DFDC'}}>
+     
+     <View style={styles.eventContainer}>
+      <View style={styles.eventAndPlus}>
+      <Text style={styles.text}>Events</Text>
+     
+      <FeatherIcon style={styles.notificationIcon} name="bell" size={30} color="white" />
+      
       </View>
-      <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
+     <View style={styles.searchAndNew}>
+     <SearchBar
               // value={searchedText}
               // onTextChange={text => {
               //   setSearchedText(text);
@@ -90,16 +89,26 @@ const EventsScreen = ({navigation}) => {
               brColor={colors.gray2}
               brWidth={1}
             />
-          </View>
-          <View style={styles.sortContainer}>
+            {/* <View style={styles.sortContainer}>
             <Sort
               style={styles.sort}
               brColor={colors.gray2}
-              txtColor={colors.orangeColor}
+              txtColor={colors.black}
               srWidth={'100%'}
               // srHeight={"100%"}
             />
+          </View> */}
+          <View style={styles.plusContainer}>
+          <FeatherIcon style={styles.plusIcon} name="plus" size={35} color="white" />
           </View>
+          
+
+     </View>
+    
+     </View>
+      <View style={styles.bodyContainer}>
+        <View style={styles.searchAndFilter}>
+          <View style={styles.searchContainer}></View>
         </View>
         <View style={styles.followersContainer}>
           {loader ? (

@@ -7,6 +7,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginHorizontal: 10,
+    width:260
+    
   },
 
   field: {
