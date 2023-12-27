@@ -38,5 +38,4 @@ const EventCard2 = ({ navigation }) => {
     </TouchableOpacity>
   );
 };
-
 export default EventCard2;

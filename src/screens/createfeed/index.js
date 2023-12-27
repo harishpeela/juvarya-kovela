@@ -14,10 +14,10 @@ import {styles} from './styles';
 import {
   BackgroundImage,
   BackHeader,
+  BackHeaderNew,
   InputField,
   PrimaryButton,
 } from '../../components';
-import {UploadPhoto} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
@@ -92,8 +92,8 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          maxHeight: 2080,
-          maxWidth: 2080,
+          // maxHeight: 2080,
+          // maxWidth: 2080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
@@ -144,10 +144,10 @@ const CreateFeed = ({route, navigation}) => {
   return (
     <SafeAreaView>
       <BackgroundImage />
-      <View style={{marginHorizontal: 20}}>
-        <BackHeader
+      <View style={{marginHorizontal: 30, marginTop: 30}}>
+        <BackHeaderNew
           txt={'Create Feed'}
-          onBackPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
       </View>
       <View style={{margin: 30}}>
@@ -176,7 +176,9 @@ const CreateFeed = ({route, navigation}) => {
               onPress={() => {
                 uploadPhoto();
               }}>
-              <UploadPhoto />
+              <View style={styles.profileImage}>
+                <Icon name="camera" size={70} color={colors.orangeColor} />
+              </View>
             </TouchableOpacity>
           )}
         </View>

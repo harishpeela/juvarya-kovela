@@ -38,6 +38,8 @@ export const UserFeedCompList = ({
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
   const isDarkMode = useColorScheme() === 'dark';
+  console.log("likes =>>>>>>>>> "+ likes)
+  console.log("isLiked =>>>>>>>>>>>>>>>>>>>>>>>>" + isLiked)
 
   const likeUnLikeHandler = async () => {
     setIsLiked(!isLiked);

@@ -40,9 +40,15 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  MEMBER_SHIP_DETAILS: '/jtProfileMembership/list',
+  MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
+  MEMBER_SHIP_LIST: '/jtProfileMembership/list',
+  MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
+  MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
+  EVENT_DETAILS: 'jtevent/details',
+  EVENT_INTERESTED: 'jtInterestedEvents/save',
+  EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
@@ -111,6 +117,18 @@ export const forgotPassword = async data => {
 export const DonationsPost = async data => {
   try {
     let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
+export const AddressUpdate = async data => {
+  try {
+    let result = await axiosAddressData1.post(
+      `${endpoints.ADDRESS_UPDATE}`,
+      data,
+    );
     return result;
   } catch (error) {
     console.log('error in login', error);
@@ -243,7 +261,7 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
 export const getDonationsList = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosDonation.get(
-      `${endpoints.DONATIONS_LIST}${custId}?pageNo=${pgno}&pageSize=${pgSize}`,
+      `${endpoints.DONATIONS_LIST}?pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
     );
     return result;
   } catch (error) {
@@ -260,6 +278,41 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
+
+export const EventDetail = async (id) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_DETAILS}/${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
+export const EventInterested = async (payload) => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENT_INTERESTED}`, payload
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+export const EventInterestedCount = async (id) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_INTERESTED_COUNT}?eventId=${id}&pageNo=${0}&pageSize=${50}`
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export const GetProfilePicture = async id => {
   try {
     let result = await axiosNewData1.get(
@@ -284,6 +337,41 @@ export const MemberShipDetails = async id => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipList = async (pageNo, pageSize) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipInvite = async (payload) => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_INVITE}`,
+      payload,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const MemberShipCreate = async payload => {
+  try {
+    // Provide the data payload in the axios post call
+    let result = await axiosMultiPartFormDataMem.post(
+      `${endpoints.MEMBER_SHIP_CREATE}`,
+      payload,
     );
     return result;
   } catch (error) {

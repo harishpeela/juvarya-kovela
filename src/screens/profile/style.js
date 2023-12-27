@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingTop: '10%',
   },
   logoutbtnContainer: {
-    marginTop: '20%',
+    marginTop: '10%',
     width: '50%',
     alignSelf: 'center',
     alignItems: 'center',
@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
   versionText: {
     color: colors.gray2,
     // borderWidth:2,
-    fontSize: fontSize.small,
+    fontSize: 10,
   },
   profileItemsHeader: {
     alignItems: 'center',
@@ -95,8 +95,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabs: {
-    marginTop: '10%',
-    fontSize: 18,
+    marginTop: '4%',
+    fontSize: 10,
     marginVertical: 10,
     color: colors.gray4,
   },

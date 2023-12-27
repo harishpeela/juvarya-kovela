@@ -34,7 +34,6 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               marginHorizontal:'30%',
-              
             }}>
             {txt}
           </Text>

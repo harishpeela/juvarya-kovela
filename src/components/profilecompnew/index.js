@@ -22,7 +22,7 @@ export const CommunityComp = ({itemCommunity, onPressmembership}) => {
   return (
     <TouchableOpacity onPress={onPressmembership} style={styles.followersView}>
       <Text style={styles.postText1}>{itemCommunity}</Text>
-      <Text style={styles.postText}> Members </Text>
+      <Text style={styles.postText}> Events </Text>
     </TouchableOpacity>
   );
 };
@@ -65,13 +65,6 @@ export const FolloUnfollowComp = ({
     </View>
   );
 };
-// export const ContactTabcomp = ({onPressContact}) => {
-//   return (
-//     <Pressable onPress={onPressContact} style={styles.voidButton}>
-//       <Text style={styles.voidButton.text}>Contact</Text>
-//     </Pressable>
-//   );
-// };
 export const ContactTabcomp = ({onPressContact}) => {
   return (
     <TouchableOpacity style={[styles.voidButton, styles.button]}>
@@ -80,18 +73,11 @@ export const ContactTabcomp = ({onPressContact}) => {
     </TouchableOpacity>
   );
 };
-// export const DirectionsTabComp = () => {
-//   return (
-//     <Pressable
-//       onPress={() => console.log('pressed directions')}
-//       style={styles.voidButton}>
-//       <Text style={styles.voidButton.text}>Directions</Text>
-//     </Pressable>
-//   );
-// };
-export const DirectionsTabComp = ({role}) => {
+export const DirectionsTabComp = ({role, onPress}) => {
   return (
-    <TouchableOpacity style={[styles.voidButton1, styles.button]}>
+    <TouchableOpacity
+      style={[styles.voidButton1, styles.button]}
+      onPress={onPress}>
       <BackgroundSmallFlowerUser />
       <Text style={styles.voidButton1Text}>
         {role ? 'Add a Member' : 'Become a member'}

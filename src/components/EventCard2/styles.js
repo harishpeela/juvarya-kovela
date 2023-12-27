@@ -84,7 +84,6 @@ export const styles = StyleSheet.create({
     },
     text:{
         fontSize:10,
-        
     },
     locationText: {
         fontSize: 12,
@@ -95,7 +94,6 @@ export const styles = StyleSheet.create({
         height: '30%',
         flexDirection: 'row'
     },
-   
     // dateContainer:{
     //     flexDirection:'row',
     //     // borderWidth:1,
@@ -111,3 +109,4 @@ export const styles = StyleSheet.create({
     // }
 
 })
+
