@@ -93,6 +93,9 @@ import TextInput2 from './TextInput2';
 import FollowersListCard3 from './FollowersListCard3';
 import { TopBarcard } from './topBar1/topBarCard';
 import { NewBackHeader } from './new-back-header';
+import { Create_Event } from './create_event_component';
+import AddEventImage from './event-images-comp';
+import EventInput from './eventCreateInput';
 export {
   Loader,
   SearchBar,
@@ -178,4 +181,7 @@ export {
   TextInput2,
   TopBarcard,
   NewBackHeader,
+  Create_Event,
+  AddEventImage,
+  EventInput,
 };

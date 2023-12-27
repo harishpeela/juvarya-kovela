@@ -65,10 +65,10 @@ const ProfileMemberShips = ({navigation, route}) => {
               ? `${membership?.length} Memberships`
               : 'Join Now'
           }
-          onPress={() => alert('underDevelopment')
-            // navigation.navigate(allTexts.screenNames.profilemembership, {
-            //   roleId: roleId,
-            // })
+          onPress={() => 
+            navigation.navigate(allTexts.screenNames.profilemembership, {
+              roleId: roleId,
+            })
           }
         />
       </View>

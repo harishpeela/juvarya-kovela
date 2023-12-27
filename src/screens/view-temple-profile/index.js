@@ -229,7 +229,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const EventsList = async () => {
     setEventsLoader(true);
     let result = await EventList(0, 100, 85);
-    console.log('eventsdata', result?.data);
+    // console.log('eventsdata', result?.data);
     if (result?.status === 200) {
       setEventsLoader(false);
       setEventsData(result?.data?.data);
@@ -324,7 +324,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                     }
                   />
                   <CommunityComp
-                    itemCommunity={memberShip?.membershipCount}
+                    itemCommunity={'0'}
                     onPressmembership={
                       () => alert('page under development')
                       // navigation.navigate(

@@ -14,7 +14,7 @@ export const BASE_URL = 'http://20.235.89.214:8082/api/';
 export const BASEURL = 'https://kovela.app/customer/api/';
 export const BASE = 'https://kovela.app/media/';
 export const POPULARURL = 'https://kovela.app/profile/';
-export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
+export const MEMBER_SHIP_URL = 'https://kovela.app/membership';
 export const EVENTS_URL = 'https://kovela.app/events/';
 export const DONATION_URL = 'https://kovela.app/donations/';
 
@@ -117,7 +117,6 @@ export const axiosEventsData1 = axios.create({
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
-  // console.log('Sending req with this token', token);
   config.headers.Authorization = token;
   return config;
 });

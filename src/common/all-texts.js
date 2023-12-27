@@ -163,7 +163,10 @@ export const allTexts = {
     updateProfile:'UpdateProfile',
     forgotPasswordOtpScreen:'ForgotPassword',
     profilememberships:'ProfileMemberShips',
-    eventdetailsnew: 'EventDetailsNew'
+    eventdetailsnew: 'EventDetailsNew',
+    invitationScreen: 'InvitationScreen',
+    createEvent: 'CreateEvent',
+    membershipdetails: 'MemberShipDetails',
   },
   homeHeader: {
     welcome: 'Welcome ',

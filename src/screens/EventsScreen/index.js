@@ -12,6 +12,7 @@ import {
   SafeAreaFrameContext,
   SafeAreaView,
 } from 'react-native-safe-area-context';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   Loader,
   ContactModal,
@@ -25,8 +26,9 @@ import {
   Sort,
   EventCard2,
   EventCard3,
+  BackgroundImage,
 } from '../../components';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
 
 const EventsScreen = ({navigation}) => {
@@ -57,16 +59,24 @@ const EventsScreen = ({navigation}) => {
     EventsList();
   }, []);
 
-  console.log('EventsScreen =>>>>>>>>>' + eventsData);
-
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <BackgroundImage />
       <View style={styles.Header}>
         <BackHeaderNew
           txt={`EventsScreen`}
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
+        <View>
+        <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)}>
+          <AntDesign
+            name="plus"
+            size={24}
+            color={'black'}
+          />
+        </TouchableOpacity>
+        </View>
         {/* <Ellipsis txtColor={colors.black} /> */}
       </View>
       <View style={styles.bodyContainer}>

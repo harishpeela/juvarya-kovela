@@ -26,7 +26,8 @@ export const NewBackHeader = ({
                         size={17}
                         color={'black'}
                     /> */}
-                    <Image source={require('../../../assets/images/backarrow.png')} style={{height: 10, width: 8}} />
+                    <Image source={require('../../../assets/images/backarrow.png')} 
+                    style={{height: 10, width:6}} />
                 </TouchableOpacity>
                 {txt && (
                     <Text
@@ -71,7 +72,6 @@ const styles = StyleSheet.create({
         height: 30,
         width: 30,
         borderRadius: 100,
-        alignContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.white,
         justifyContent: 'center',

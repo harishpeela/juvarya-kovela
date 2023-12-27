@@ -256,7 +256,7 @@ const Profile = ({navigation}) => {
             <Text
               style={{
                 ...styles.tabs,
-                color: clicked === true ? colors.orangeColor : 'gray',
+                color: 'gray',
                 textDecorationLine: clicked === true ? 'underline' : 'none',
                 fontWeight: clicked === true ? 'bold' : '400',
               }}>
