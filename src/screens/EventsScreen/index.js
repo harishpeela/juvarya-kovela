@@ -35,8 +35,6 @@ import {EventList} from '../../utils/api';
 const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
-  // const [filteredData, setFilteredData] = useState(followersList);
-  // const {id} = route.params || {};
   const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
