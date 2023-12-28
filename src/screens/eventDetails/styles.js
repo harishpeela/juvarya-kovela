@@ -4,7 +4,7 @@ import { colors, fontFamily, fontSize } from '../../common'
 export const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: colors.gray3
+        backgroundColor: colors.white
     },
     header: {
         marginTop: '10%',
@@ -123,10 +123,13 @@ export const styles = StyleSheet.create({
         fontSize: fontSize.large,
         fontWeight: '400',
         paddingVertical: 2,
-        fontSize:18,
+        fontSize:10,
         backgroundColor:colors.orangeColor,
-        padding:8,
-        borderRadius:24
+        borderRadius:24,
+        padding:10,
+        marginRight:22,
+        marginLeft:3
+        
     },
     container1:{
 marginTop:10
@@ -134,7 +137,9 @@ marginTop:10
     toggleHead: {
         width: '100%',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        // justifyContent: 'space-around',
+        marginLeft:18,
+    
     },
     orangeColor: {
         borderBottomWidth: 1,
@@ -151,6 +156,7 @@ marginTop:10
     },
     desContainer: {
         marginHorizontal: '5%',
+        
         
     },
     des: {
@@ -229,6 +235,7 @@ eventTextContainer:{
 },
 pincode:{
     fontSize:10,
+    color:colors.orangeColor
     
 },
 festlocation:{

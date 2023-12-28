@@ -116,18 +116,18 @@ const EventDetails = ({ navigation }) => {
                   <View style={[styles.border, currentIndex === 2 && styles.orangeColor]} />
                 </View>
               </Pressable>
-              <Pressable onPress={() => setCurrentIndex(3)}>
+              {/* <Pressable onPress={() => setCurrentIndex(3)}>
                 <View style={styles.separateContainer}>
                   <Text style={[styles.separateContainerText, currentIndex === 3 && styles.orangeColor]}>Contribute</Text>
                   <View style={[styles.border, currentIndex === 3 && styles.orangeColor]} />
                 </View>
-              </Pressable>
-              <Pressable onPress={() => setCurrentIndex(4)}>
+              </Pressable> */}
+              {/* <Pressable onPress={() => setCurrentIndex(4)}>
                 <View style={styles.separateContainer}>
                   <Text style={[styles.separateContainerText, currentIndex === 4 && styles.orangeColor]}>Events</Text>
                   <View style={[styles.border, currentIndex === 4 && styles.orangeColor]} />
                 </View>
-              </Pressable>
+              </Pressable> */}
             </View>
 
         <View style={styles.secondContainer}>
@@ -135,7 +135,7 @@ const EventDetails = ({ navigation }) => {
 
           <View style={styles.toggleContainer}>
            
-            <KeyboardAwareScrollView >
+            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
               <View style={styles.toggleData}>
                 {currentIndex === 1 && (
                   <ScrollView>
@@ -161,7 +161,7 @@ const EventDetails = ({ navigation }) => {
 
                     <View style={styles.desContainer}>
                       <View style={styles.HeadingAndIcon}>
-                      <Text style={styles.des}>Description </Text>
+                      <Text style={styles.des}>Description</Text>
                       <Icon2 name='editOutlined' style={{color:colors.red1, marginTop:15}} size={20} />
                       </View>
                      
@@ -171,13 +171,13 @@ const EventDetails = ({ navigation }) => {
                     </View>
                   </View>
                 )}
-                {currentIndex === 3 && (
+                {/* {currentIndex === 3 && (
                   <KeyboardAwareScrollView>
                     <View style={styles.formContainer}>
-                      {/* <View style={styles.registrationContainer}>
+                      <View style={styles.registrationContainer}>
                         <Text style={styles.registrationText}>Registration Form</Text>
-                      </View> */}
-                      {/* <View style={styles.formik}>
+                      </View>
+                      <View style={styles.formik}>
                         <Formik
                           onSubmit={(values, formikActions) => {
                             UserRegisterHandler(values, formikActions);
@@ -250,10 +250,10 @@ const EventDetails = ({ navigation }) => {
                             );
                           }}
                         </Formik>
-                      </View> */}
+                      </View>
                     </View>
                   </KeyboardAwareScrollView>
-                )}
+                )} */}
                 {currentIndex === 4 && (
                   <Text>Maps displaying 4</Text>
                 )}

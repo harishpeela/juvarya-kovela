@@ -93,7 +93,7 @@ const EventsScreen = ({navigation}) => {
             />
           </View> */}
           <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
-          <FeatherIcon style={styles.plusIcon} name="plus" size={35} color="white" />
+          <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
           </TouchableOpacity>
      </View>  
      </View>

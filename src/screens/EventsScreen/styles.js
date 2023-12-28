@@ -48,10 +48,12 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
     },
+    
+
     eventContainer:{
         padding:24,
         backgroundColor:colors.orangeColor,
-        height:170,
+        height:150,
         borderBottomLeftRadius:24,
         borderBottomRightRadius:24,
        },
@@ -82,8 +84,9 @@ export const styles = StyleSheet.create({
         borderRadius:100,
         marginLeft:10,
         textAlign:'center',
-        height:40,
-        width:40
+        height:30,
+        width:30,
+        marginRight:10
     },
   searchAndFilter: {
     display: 'flex',

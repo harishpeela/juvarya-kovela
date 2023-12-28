@@ -22,9 +22,22 @@ export const styles = StyleSheet.create({
     dateAndLocation:{
         flexDirection:'row',
         alignContent:'center',
-        justifyContent:'flex-start',
+        justifyContent:'space-between',
         
-        
+    },
+    eventDate:{
+    fontSize:10,
+    marginTop:15
+    },
+    calenderDate:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    width:80
+    
+    },
+    textContainer:{
+    width:200
     },
     imageContainer:{
         height:'100%',
