@@ -153,13 +153,13 @@ const Signup = ({navigation}) => {
                   setState={handleChange('phone')}
                   maxLength={10}
                 />
-                <InputField
+                {/* <InputField
                   title={username}
                   placeholder={'user Name'}
                   error={touched.userName && errors.userName}
                   onBlur={handleBlur('userName')}
                   setState={handleChange('userName')}
-                />
+                /> */}
                 <PasswordField
                   value={values.password}
                   title={password}

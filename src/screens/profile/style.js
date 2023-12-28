@@ -35,8 +35,8 @@ export const styles = StyleSheet.create({
   versionText: {
     color: colors.gray2,
     // borderWidth:2,
-    fontSize: 10,
-    marginTop: '3%',
+    fontSize: fontSize.small,
+    marginTop:20
   },
   profileItemsHeader: {
     alignItems: 'center',

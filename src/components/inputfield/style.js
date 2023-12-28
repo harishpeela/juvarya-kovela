@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: fontFamily.popinMedium,
     color: colors.darkBrown,
-    textTransform: 'capitalize',
+    // textTransform: 'capitalize',
   },
   inputText: {
     padding: 8,

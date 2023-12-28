@@ -115,7 +115,7 @@ const EventsScreen = ({navigation}) => {
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                       <EventCard2
-                        // navigation={navigation}
+                        navigation={navigation}
                         data={item}
                         // name={item.user.firstName}
                         // img={item.user.url}

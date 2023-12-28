@@ -63,7 +63,7 @@ export const AddTampleSchemaS3 = Yup.object({
     .required('Employee id required'),
 });
 export const LoginValidationSchema = Yup.object({
-  email: Yup.string().required('Mobile number required'),
+  email: Yup.string().required('Mobile number or Email required'),
   password: Yup.string().trim().required('Password required'),
 });
 export const createPostScheme = Yup.object({

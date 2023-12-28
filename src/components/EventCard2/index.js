@@ -10,10 +10,10 @@ const EventCard2 = ({ navigation, data }) => {
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        alert('under development');
-        // navigation.navigate(allTexts.screenNames.eventsDetails, {
-        //   navigation: navigation,
-        // });
+        // alert('under development');
+        navigation.navigate(allTexts.screenNames.eventsDetails, {
+          navigation: navigation,
+        });
       }}>
       <Image
         source={{

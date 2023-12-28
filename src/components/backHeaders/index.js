@@ -27,8 +27,8 @@ export const BackHeaderNew = ({
             style={{
               fontSize: 20,
               fontWeight: '500',
-              color: 'black',
-              marginLeft: '25%'
+              marginHorizontal: 10,
+              color:'black',
             }}>
             {txt}
           </Text>

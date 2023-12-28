@@ -6,6 +6,7 @@ import { colors } from '../../common'
 import Icon3 from 'react-native-vector-icons/AntDesign'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
 
+
 const EventCard3 = () => {
   return (
     <View style={styles.container}>
@@ -19,18 +20,21 @@ const EventCard3 = () => {
           />
         </View>
         <View style={styles.info}>
-          <Text style={styles.eventText} >Event Name</Text>
+          <View style={styles.EventNameAndIcon}>
+          <Text style={styles.eventText} >Event Names</Text>
+
+          <Icon3 name='like1' size={20} color={colors.orangeColor} />
+          </View>
+          
           <View style={styles.dateAndLocation}>
-            <Text style={styles.dateText}>07 July</Text>
-            <View style={styles.locationIcon}>
-              <Icon2 name='location' color={colors.red1} size={22} />
-              <Text style={[color = colors.gray, styles.locText]}>Vizag</Text>
-            </View>
+            <Text style={styles.dateText}>Anakapalli is a residential neighborhood in the city of Visakhapatnam, also the headquarters of Anakapalli district of Andhra Pradesh. In 2015 Anakapalli municipality wa</Text>
+            <Icon3 name='like1' size={20} style={{marginTop:15}} color={colors.orangeColor} />
+            
           </View>
         </View>
       </View>
 
-      <Icon3 name='like1' size={26} color={colors.orangeColor} />
+      
 
 
     </View>
