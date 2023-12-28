@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   container: {backgroundColor: 'white', flex: 1},
-  header: {marginTop: 50, marginHorizontal: 10},
+  header: {margin: '5%', marginVertical: '8%'},
   secondTab: {
     backgroundColor: '#FFF3E5',
     margin: 10,

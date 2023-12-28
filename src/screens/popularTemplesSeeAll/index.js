@@ -59,7 +59,7 @@ const SeeAll = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <BackgroundImage />
-      <View style={{margin: '5%', marginTop: '10%', marginLeft: '10%'}}>
+      <View style={{margin: '5%', marginTop: '10%', marginLeft: '5%'}}>
         <BackHeaderNew
           txt={'Popular Temples'}
           onPress={() => navigation.goBack()}
@@ -95,8 +95,8 @@ const SeeAll = ({navigation}) => {
                       style={{height: 70, width: 70, borderRadius: 70 / 2}}
                     />
                     <View style={{marginLeft: 10}}>
-                      <Text>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '95%'}}>
+                      <Text style={{color : isDarkMode ? 'black' : 'black'}}>{item.name}</Text>
+                      <Text numberOfLines={2} style={{maxWidth: '90%', color: isDarkMode ? 'black' : 'black'}}>
                         {item.desciption}{' '}
                       </Text>
                     </View>

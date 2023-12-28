@@ -49,19 +49,14 @@ const EventsScreen = ({navigation}) => {
       console.log('1');
       let filtering = result?.data?.events;
       setEventsData(result?.data?.events);
-      // console.log(filtering, '========>============<');
-      // let FilteredData = filtering?.filter(item => item)?.map(({addressToEventDTO, profileId, mediaList, description, name, creationTime, id}) => ({addressToEventDTO, profileId, mediaList, description, name, creationTime, id}));
-      // console.loh('filterdata ===>', FilteredData);
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
-      console.log('false', eventsLoader);
     }
   };
   useEffect(() => {
     EventsList();
   }, []);
-console.log('filtereeesdsf', eventsData);
   return (
     <SafeAreaView style={{flex: 1}}>
      <View style={styles.eventContainer}>

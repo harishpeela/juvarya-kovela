@@ -1,24 +1,31 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../common';
+import { color } from 'react-native-reanimated';
 export const styles = StyleSheet.create({
   header: {
     // borderWidth:2,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
-  },
+    },
+    backheader: {
+      backgroundColor: colors.orangeColor,
+      borderRadius: 100,
+      padding:10,
+
+    },
   iconContainer: {
-    padding: 7,
+    padding:2,
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
-    // elevation:3,
-    // shadowOffset:{
-    //   width:1,
-    //   height:1
-    // },
-    // shadowColor:colors.black,
-    // backgroundColor:colors.white,
+    backgroundColor:colors.orangeColor,
+  },
+  notificationText:{
+              fontSize: 20,
+              fontWeight: '500',
+              marginHorizontal: 100,
+              color:'black',
+              justifyContent:'center',     
   },
 });
