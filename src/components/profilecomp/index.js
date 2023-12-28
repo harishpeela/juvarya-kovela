@@ -245,7 +245,7 @@ export const ProfileFourthTab = ({
             </Text>
           </Pressable>
         )}
-        {templeDetails?.servicesEnabled && (
+        {/* {templeDetails?.servicesEnabled && (
           <Pressable
             style={{
               ...styles.controlPanel.item,
@@ -260,7 +260,7 @@ export const ProfileFourthTab = ({
               style={styles.Icon}
             />
           </Pressable>
-        )}
+        )} */}
         {templeDetails && (
           <Pressable
             style={{

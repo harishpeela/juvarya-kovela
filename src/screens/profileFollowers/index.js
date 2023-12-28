@@ -62,7 +62,7 @@ const FollowersMembership = ({ route, navigation }) => {
         <BackHeaderNew
           txt={
             followersList.length > 0
-              ? `${followersList.length} Followers`
+              ? `Followers`
               : null // or any fallback value you want when followersList is not greater than 0
           }
           onPress={() => navigation.goBack()}
@@ -112,6 +112,7 @@ const FollowersMembership = ({ route, navigation }) => {
                 <FlatList
                   style={styles.list}
                   data={followersList}
+                  showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
                   keyExtractor={(item, index) => item.user.id.toString()}
                   renderItem={({ item }) => (

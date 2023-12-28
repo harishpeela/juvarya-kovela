@@ -1,33 +1,20 @@
 import {
-  StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  ScrollView,
   FlatList,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
-  SafeAreaFrameContext,
   SafeAreaView,
 } from 'react-native-safe-area-context';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   Loader,
-  ContactModal,
-  TempleProfile_PostsCard,
-  BackgroundImageAClass,
-  BackgroundImageFlower,
-  BackHeaderNew,
-  EventCard,
-  Ellipsis,
   SearchBar,
   Sort,
   EventCard2,
-  EventCard3,
-  BackgroundImage,
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';

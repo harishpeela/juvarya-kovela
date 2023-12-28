@@ -467,7 +467,9 @@ const ViewTempleProfile = ({route, navigation}) => {
           <View style={styles.modalView}>
             <View style={styles.line} />
 
-            <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.createfeed)} style={styles.modalContent}>
+            <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.createfeed, {
+              data: data,
+            })} style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
               <Text style={styles.modalContentText}>Create a Post</Text>
             </TouchableOpacity>

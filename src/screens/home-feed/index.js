@@ -122,7 +122,7 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <View style={styles.navBarContainer}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity

@@ -19,6 +19,7 @@ export const NewBackHeader = ({
                     flexDirection: 'row',
                     alignItems: 'center',
                     justifyContent: 'center',
+
                 }}>
                 <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
                     {/* <Fontisto
@@ -66,7 +67,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginTop: '8%'
+        marginTop: '8%',
+        backgroundColor: 'red'
     },
     iconContainer: {
         height: 30,

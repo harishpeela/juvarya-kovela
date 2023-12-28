@@ -25,11 +25,14 @@ const EventCard2 = ({ navigation, data }) => {
       <View style={styles.locationContainer}>
         <View style={styles.icon}>
           <Icon name="location" style={styles.iconSize} color={colors.orangeColor} size={20} />
-          <Text style={styles.text}>{data?.creationTime.slice('0', '10')} </Text>
+          <Icon name="location" color={colors.orangeColor} size={20} />
         </View>
         <View style={styles.icon}>
-          <Icon name="location" color={colors.orangeColor} size={20} />
-          <Text style={styles.text}>{`${data?.addressToEventDTO?.city} , ${data?.addressToEventDTO?.district} ,${data?.addressToEventDTO?.state}`} </Text>
+          <Text style={styles.text}>{data?.creationTime.slice('0', '10')} </Text>
+          <Text style={styles.text}>
+            {data?.addressToEventDTO?.city ? `${data?.addressToEventDTO?.city} , ${data?.addressToEventDTO?.district} ,${data?.addressToEventDTO?.state}`
+              : 'no data'}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>

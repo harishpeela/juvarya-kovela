@@ -39,8 +39,7 @@ const FollowersListCard2 = ({
         </View>
         <View
           style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
+           
           }}
         />
         <View style={styles.listFirstItem}>

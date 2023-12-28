@@ -2,11 +2,12 @@
 import React, {useEffect, useState} from 'react';
 import {View, Text} from 'react-native';
 import {getNotifications} from '../../utils/api';
-import {Loader} from '../../components';
+import {Loader, TopBarcard} from '../../components';
 import {
   BackHeaderNew,
   BackgroundImage,
   NotificationCard,
+  NewBackHeader
 } from '../../components';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../common';
@@ -36,13 +37,14 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{backgroundColor: colors.white, flex: 1}}>
-      <BackgroundImage />
       <View style={{marginTop: '10%', margin: 15}}>
-        <BackHeaderNew
+        {/* <NewBackHeader
           txt={'Notifications'}
           onPress={() => navigation.goBack()}
-        />
-        <View style={{marginTop: '5%'}}>
+        
+        /> */}
+        <TopBarcard  />
+        <View style={{marginTop: 10}}>
           {loader ? (
             <Loader size={'small'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (

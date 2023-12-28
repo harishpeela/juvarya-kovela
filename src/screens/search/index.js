@@ -7,7 +7,7 @@ const Search = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <View style={{marginTop: 80}}>
         <PopularTemplesList pageNav={navigation} seeallnav={navigation} />
       </View>
