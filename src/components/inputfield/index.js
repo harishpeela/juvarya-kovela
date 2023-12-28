@@ -30,13 +30,6 @@ export const InputField = ({
           {title}
         </Text>
         <View style={styles.fieldContainer}>
-          {/* {isFlag && (
-            <View style={styles.imgContainer}>
-              <PhoneIcon name="user" style={styles.image} size={20} />
-              {/* <Text style={styles.code}>+91</Text> */}
-            </View>
-          )} */}
-
 {isUser && (
             <View style={styles.imgContainer}>
               <PhoneIcon name="user" style={styles.image} size={20} />

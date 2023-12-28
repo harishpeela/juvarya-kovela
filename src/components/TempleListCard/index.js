@@ -54,7 +54,7 @@ export const TempleListCard = ({
           `Successfully you are  ${
             results?.data?.message === 'Success: following'
               ? 'Following'
-              : 'unFollowing'
+              : 'UnFollowing'
           } the temple`,
           ToastAndroid.SHORT,
         );

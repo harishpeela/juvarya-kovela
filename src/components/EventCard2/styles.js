@@ -59,12 +59,14 @@ export const styles = StyleSheet.create({
         margin: 5,
         padding:3,
         borderRadius:14,
-        height:'20%'
-        
+        height:'20%',
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     icon:{
         justifyContent:'flex-start',
-        flexDirection:'row',
+        // flexDirection:'row',
+        marginTop: 5,
     },
     text:{
         fontSize:10,

@@ -99,7 +99,7 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
+      {/* <BackgroundImage /> */}
       <View style={styles.headerContainer} />
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>

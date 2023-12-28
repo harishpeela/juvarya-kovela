@@ -45,6 +45,7 @@ const CreateFeed = ({route, navigation}) => {
     }
   };
   const NewFeed = async id => {
+    console.log('id', id);
     setLoading(true);
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -53,7 +54,7 @@ const CreateFeed = ({route, navigation}) => {
 
     var formdata = new FormData();
     formdata.append('description', description);
-    formdata.append('feedType', 'profile ');
+    formdata.append('feedType', 'profile');
     formdata.append('jtProfile', id);
     img.forEach(element => {
       formdata.append('files', element);
@@ -68,16 +69,18 @@ const CreateFeed = ({route, navigation}) => {
     fetch('https://kovela.app/media/jtfeed/create', requestOptions)
       .then(response => response.json())
       .then(result => {
+        console.log('resut of create feed', result);
         if (result?.message === 'Feed created') {
           Alert.alert('Success', `${result?.message} successfully`, [
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.userFeedScreen),
+                navigation.navigate(allTexts.screenNames.bottomTab),
             },
           ]);
         } else {
           alert('somet thing went wrong');
+          setLoading(false);
         }
       })
       .catch(error => alert(error));
@@ -140,10 +143,8 @@ const CreateFeed = ({route, navigation}) => {
       console.log('nope');
     }
   }, [data]);
-  console.log('trfData', trfData);
   return (
-    <SafeAreaView>
-      <BackgroundImage />
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{marginHorizontal: 30, marginTop: 30}}>
         <BackHeaderNew
           txt={'Create Feed'}

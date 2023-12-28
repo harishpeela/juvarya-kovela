@@ -10,27 +10,27 @@ import {
   FlatList,
   Platform,
 } from 'react-native';
-import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
+import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import React, {useContext, useState, useEffect} from 'react';
-import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
+import React, { useContext, useState, useEffect } from 'react';
+import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
-import {styles} from './style';
-import {PrimaryButton, ProfileInfo, Loader, Item} from '../../components';
-import {UploadPhoto} from '../../utils/svgs';
-import {allTexts, colors} from '../../common';
-import {useTranslation} from 'react-i18next';
-import i18next, {resources} from '../../../languages/language';
+import { styles } from './style';
+import { PrimaryButton, ProfileInfo, Loader, Item } from '../../components';
+import { UploadPhoto } from '../../utils/svgs';
+import { allTexts, colors } from '../../common';
+import { useTranslation } from 'react-i18next';
+import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {GetProfilePic, PostProfilePic} from '../../utils/api';
+import { launchImageLibrary } from 'react-native-image-picker';
+import { GetProfilePic, PostProfilePic, AdminTemples } from '../../utils/api';
 
-const Profile = ({navigation}) => {
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  const {t} = useTranslation();
+const Profile = ({ navigation }) => {
+  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  const { t } = useTranslation();
   const {
-    constants: {role},
+    constants: { role },
   } = allTexts;
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -42,6 +42,7 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
+  const [Admin, setAdmin] = useState([]);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -131,7 +132,17 @@ const Profile = ({navigation}) => {
       setTcModal(true);
     }
   };
-  // console.log('profilepic', profPic);
+  const TempleAdmins = async () => {
+    let result = await AdminTemples();
+    if (result?.status === 200) {
+      setAdmin(result?.data);
+    } else {
+      setAdmin([]);
+    }
+  }
+  useEffect(() => {
+    TempleAdmins();
+  })
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -155,7 +166,7 @@ const Profile = ({navigation}) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{uri: image?.uri}}
+                source={{ uri: image?.uri }}
               />
             </View>
           ) : isLoading ? (
@@ -169,7 +180,7 @@ const Profile = ({navigation}) => {
                 uploadPhoto();
               }}>
               {profPic ? (
-                <Image source={{uri: profPic?.url}} style={styles.profileImage} />
+                <Image source={{ uri: profPic?.url }} style={styles.profileImage} />
                 // <Image source={{uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17036713072161703671306767.jpg'}} style={styles.profileImage} />
                 // <Image source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}} style={styles.profileImage} />
               ) : (
@@ -183,19 +194,19 @@ const Profile = ({navigation}) => {
         <ProfileInfo
           name={userDetails?.username}
           email={userDetails?.email}
-          // dob={dob}
+        // dob={dob}
         />
       </View>
       <View style={styles.profileItemsHeader}>
         <View style={styles.profileItemsContainer}>
           {/* <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} /> */}
-          {(roleType === role.admin || roleType === role.agent) && (
+          {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item
               svg={
                 <Image
                   source={require('../../../assets/images/templeIcon.png')}
-                  style={{height: 20, width: 20}}
+                  style={{ height: 20, width: 20 }}
                 />
               }
               text={t('myTemple')}
@@ -203,9 +214,21 @@ const Profile = ({navigation}) => {
                 navigation.navigate(allTexts.screenNames.myTamples);
               }}
             />
+          )} */}
+          {Admin && (
+            <Item
+              svg={
+                <Image
+                  source={require('../../../assets/images/templeIcon.png')}
+                  style={{ height: 20, width: 20 }}
+                />
+              }
+              text={t('myTemple')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.myTamples)
+              }}
+            />
           )}
-
-
           <Item
             svg={<Icon name="unlock" size={20} />}
             text={t('updatepassword')}
@@ -254,24 +277,24 @@ const Profile = ({navigation}) => {
             Version&ensp;{allTexts.appVersion.version}
           </Text>
           <View>
-          <TouchableOpacity onPress={() => TC()}>
-            <Text
-              style={{
-                ...styles.tabs,
-                color: 'gray',
-                textDecorationLine: clicked === true ? 'underline' : 'none',
-                fontWeight: clicked === true ? 'bold' : '400',
-              }}>
-              Terms & Conditions{' '}
-            </Text>
-          </TouchableOpacity>
-          {tcModal && (
-            <Terms_And_Conditions
-              isModal={tcModal}
-              onPress={() => setTcModal(false)}
-            />
-          )}
-        </View>
+            <TouchableOpacity onPress={() => TC()}>
+              <Text
+                style={{
+                  ...styles.tabs,
+                  color: 'gray',
+                  textDecorationLine: clicked === true ? 'underline' : 'none',
+                  fontWeight: clicked === true ? 'bold' : '400',
+                }}>
+                Terms & Conditions{' '}
+              </Text>
+            </TouchableOpacity>
+            {tcModal && (
+              <Terms_And_Conditions
+                isModal={tcModal}
+                onPress={() => setTcModal(false)}
+              />
+            )}
+          </View>
         </View>
       </View>
 
@@ -279,7 +302,7 @@ const Profile = ({navigation}) => {
       <Modal
         visible={isVisible}
         transparent={true}
-        style={{position: 'absolute', left: 20}}
+        style={{ position: 'absolute', left: 20 }}
         onRequestClose={() => setIsVisible(false)}>
         <View
           style={{
@@ -291,9 +314,9 @@ const Profile = ({navigation}) => {
           }}>
           <FlatList
             data={Object.keys(resources)}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <TouchableOpacity onPress={() => changelan(item)}>
-                <Text style={{fontSize: 12, margin: 5}}>{lan[item]?.lan} </Text>
+                <Text style={{ fontSize: 12, margin: 5 }}>{lan[item]?.lan} </Text>
               </TouchableOpacity>
             )}
           />
@@ -308,14 +331,14 @@ const Profile = ({navigation}) => {
             onPress={() => {
               updateProfilePicture(), setIsModal(false);
             }}>
-            <Text style={{color: 'white'}}> update profile Pictue</Text>
+            <Text style={{ color: 'white' }}> update profile Pictue</Text>
           </TouchableOpacity>
-          <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
+          <View style={{ borderWidth: 0.5, width: '100%', margin: 5 }} />
           <TouchableOpacity
             onPress={() => {
               setImage(null), setIsModal(false), setIsCross(false);
             }}>
-            <Text style={{color: 'white'}}>Cancel</Text>
+            <Text style={{ color: 'white' }}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>

@@ -48,18 +48,18 @@ const styles = StyleSheet.create({
     borderColor: colors.gray2,
   },
   img: {
-    height: 40,
-    width: 40,
-    borderRadius: 40 / 2,
+    height: 60,
+    width: 60,
+    borderRadius: 60 / 2,
   },
   cardView: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   imgView: {
-    height: 50,
-    width: 50,
-    borderRadius: 50 / 2,
+    height: 70,
+    width: 70,
+    borderRadius: 70 / 2,
     borderWidth: 1,
     borderColor: colors.orangeColor,
     alignItems: 'center',
@@ -85,6 +85,6 @@ const styles = StyleSheet.create({
   date: {
     color: 'black',
     fontWeight: 'bold',
-    marginRight: '8%'
+    marginRight: '17%'
   }
 });
