@@ -95,7 +95,7 @@ import { TopBarcard } from './topBar1/topBarCard';
 import { NewBackHeader } from './new-back-header';
 import { Create_Event } from './create_event_component';
 import AddEventImage from './event-images-comp';
-import EventInput from './eventCreateInput';
+import {EventInput, EventInput1} from './eventCreateInput';
 export {
   Loader,
   SearchBar,
@@ -184,4 +184,5 @@ export {
   Create_Event,
   AddEventImage,
   EventInput,
+  EventInput1
 };

@@ -11,7 +11,7 @@ import {styles} from './style';
 import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { Terms_And_Conditions } from '../../components';
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
     <Image
@@ -23,6 +23,7 @@ export const KovelaIcon = () => (
 );
 const Signup = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [tcModal, setTcModal] = useState(false);
   const {
     buttonTexts: {login, sigup},
     screenNames: {signin, otpScreen},
@@ -176,7 +177,7 @@ const Signup = ({navigation}) => {
                   setState={handleChange('confirmPassword')}
                 />
                 <TouchableOpacity
-                  onPress={() => setIsChecked(!isChecked)}
+                  onPress={() => setTcModal(true)}
                   style={styles.checkView}>
                   <Ionicons
                     name={isChecked ? 'checkbox' : 'square-outline'}
@@ -228,6 +229,12 @@ const Signup = ({navigation}) => {
             );
           }}
         </Formik>
+        {tcModal && (
+            <Terms_And_Conditions
+              isModal={tcModal}
+              onPress={() => {setTcModal(false), setIsChecked(true)}}
+            />
+          )}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

@@ -186,6 +186,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
+        console.log('medaia', media);
         setloader(false);
       } else {
         setPostImages(0);
@@ -260,10 +261,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   });
                 }}>
                 <BackHeaderNew
-                  isArrow={true}
                   onPress={() => navigation.goBack()}
-                  txtColor={colors.black}
-                  isPlus={false}
                 />
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>

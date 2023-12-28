@@ -141,7 +141,7 @@ const Signin = ({navigation}) => {
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  maxLength={20}
+                  maxLength={40}
                 />
                 <View style={{height: 20}} />
                 <View>
@@ -178,7 +178,7 @@ const Signin = ({navigation}) => {
                 }}>
                 <View>
 
-                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
+                  <Text style={styles.forgotPassword}>Forgot Password</Text>
                 </View>
                 </TouchableOpacity>
               </View>

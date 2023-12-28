@@ -10,26 +10,10 @@ export const styles = StyleSheet.create({
         justifyContent: 'space-between',
         
     },
-
     bodyContainer: {
         marginHorizontal: '4%',
         display: 'flex',
         flexDirection: 'column',
-        marginTop:-50
-    },
-    searchAndFilter: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginBottom: '5%',
-        // marginTop: '5%',
-        paddingHorizontal: '1%',
-        justifyContent: 'space-between',
-        height: "7%",
-        width: "100%",
-        padding: "1%",
-        alignContent: 'center',
-        alignItems: 'center',
     },
     searchContainer: {
         width: '82%',
@@ -62,7 +46,7 @@ export const styles = StyleSheet.create({
     },
     flatListStyle:{
         justifyContent:'space-between',
-        alignItems:'center'
+        alignItems:'center',
     },
     eventContainer:{
         padding:24,
@@ -74,7 +58,7 @@ export const styles = StyleSheet.create({
     searchAndNew:{
         flexDirection:'row',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
     },
     text:{
         color:"#FFFFFF",
@@ -84,15 +68,12 @@ export const styles = StyleSheet.create({
         fontWeight:'bold'
     },
     plusIcon:{
-        color:colors.orangeColor
-        
+        color:colors.orangeColor,
     },
     eventAndPlus:{
-        flexDirection:'row'
+        flexDirection:'row',
     },
     notificationContainer:{
-    
-   
     },
     plusContainer:{
         backgroundColor:'#FFFFFF',
@@ -104,23 +85,13 @@ export const styles = StyleSheet.create({
         height:40,
         width:40
     },
-  bodyContainer: {
-    marginHorizontal: '3%',
-    display: 'flex',
-    flexDirection: 'column',
-    marginTop: 20,
-    // borderWidth: 2,
-    // borderColor: 'green',
-  },
   searchAndFilter: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: '5%',
-    marginTop: '5%',
     paddingHorizontal: '1%',
     justifyContent: 'space-between',
-    height: '7%',
     width: '100%',
     padding: '1%',
     alignContent: 'center',
