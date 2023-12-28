@@ -83,7 +83,7 @@ export const TempleListCard = ({
             : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
         }}
         style={{height: 200, width: 200, borderRadius: 60}}
-        imageStyle={{borderRadius: 20}}>
+        imageStyle={{borderRadius: 20,}}>
         <View
           style={{
             flexDirection: 'row',

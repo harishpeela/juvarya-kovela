@@ -44,9 +44,11 @@ import EventDetails from './eventDetails';
 import ForgetPassword from './forgetPassword';
 import UpdateProfile from './updateProfile';
 import ForgotPasswordOtpScreen from './forgot-password-otp-screen';
-
-
-
+import UserInfo from './userInfo';
+import ProfileMemberShips from './ProfileMemberShips';
+import MemberShipDetails from './membershipDetails';
+import InvitationScreen from './Invitation';
+import EventDetailsNew from '../components/Event-Details';
 export {
   CreatePost,
   Seemore,
@@ -93,6 +95,10 @@ export {
   EventDetails,
   ForgetPassword,
   UpdateProfile,
-  ForgotPasswordOtpScreen
-
+  ForgotPasswordOtpScreen,
+  UserInfo,
+  ProfileMemberShips,
+  MemberShipDetails,
+  InvitationScreen,
+  EventDetailsNew,
 };

@@ -32,7 +32,6 @@ const Profile = ({navigation}) => {
   const {
     constants: {role},
   } = allTexts;
-  // console.log('user details', userDetails);
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
   const [image, setImage] = useState(null);
@@ -43,13 +42,11 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [dob, setDob] = useState(true);
 
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
     var roleAgent = ROLES?.indexOf('ROLE_AGENT') > -1;
-    console.log('role', roleAdmin, roleAgent);
     if (roleAdmin) {
       setRoleType('ROLE_ADMIN');
     } else if (roleAgent) {
@@ -71,10 +68,12 @@ const Profile = ({navigation}) => {
   };
   const GetCustProfilePic = async () => {
     setIsLoading(true);
+    console.log('21');
     try {
       let result = await GetProfilePic(userDetails?.email);
+      console.log('profilepic ===>', result?.data)
       if (result) {
-        setProfPic(result?.data?.url);
+        setProfPic(result?.data);
         setIsLoading(false);
       } else {
         setIsLoading(false);
@@ -132,6 +131,7 @@ const Profile = ({navigation}) => {
       setTcModal(true);
     }
   };
+  // console.log('profilepic', profPic);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -169,13 +169,13 @@ const Profile = ({navigation}) => {
                 uploadPhoto();
               }}>
               {profPic ? (
-                <Image source={{uri: profPic}} style={styles.profileImage} />
+                <Image source={{uri: profPic?.url}} style={styles.profileImage} />
+                // <Image source={{uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17036713072161703671306767.jpg'}} style={styles.profileImage} />
+                // <Image source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}} style={styles.profileImage} />
               ) : (
-                // <UploadPhoto />
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={90} color={colors.orangeColor} />
                 </View>
-                
               )}
             </TouchableOpacity>
           )}
@@ -205,6 +205,7 @@ const Profile = ({navigation}) => {
             />
           )}
 
+
           <Item
             svg={<Icon name="unlock" size={20} />}
             text={t('updatepassword')}
@@ -212,13 +213,13 @@ const Profile = ({navigation}) => {
               navigation.navigate(allTexts.screenNames.updatePassword);
             }}
           />
-          {/* <Item
+          <Item
             svg={<FontAwesome5 name="save" size={20} />}
             text={t('posts')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
-          /> */}
+          />
           <Item
             svg={<Icon name="profile" size={20} />}
             text={t('update Profile')}
@@ -236,25 +237,6 @@ const Profile = ({navigation}) => {
             />
           )} */}
         </View>
-        <View>
-          <TouchableOpacity onPress={() => TC()}>
-            <Text
-              style={{
-                ...styles.tabs,
-                color: clicked === true ? colors.orangeColor : 'gray',
-                textDecorationLine: clicked === true ? 'underline' : 'none',
-                fontWeight: clicked === true ? 'bold' : '400',
-              }}>
-              Terms & Conditions{' '}
-            </Text>
-          </TouchableOpacity>
-          {tcModal && (
-            <Terms_And_Conditions
-              isModal={tcModal}
-              onPress={() => setTcModal(false)}
-            />
-          )}
-        </View>
         <View style={styles.logoutbtnContainer}>
           <PrimaryButton
             onPress={async () => {
@@ -271,8 +253,28 @@ const Profile = ({navigation}) => {
           <Text style={styles.versionText}>
             Version&ensp;{allTexts.appVersion.version}
           </Text>
+          <View>
+          <TouchableOpacity onPress={() => TC()}>
+            <Text
+              style={{
+                ...styles.tabs,
+                color: 'gray',
+                textDecorationLine: clicked === true ? 'underline' : 'none',
+                fontWeight: clicked === true ? 'bold' : '400',
+              }}>
+              Terms & Conditions{' '}
+            </Text>
+          </TouchableOpacity>
+          {tcModal && (
+            <Terms_And_Conditions
+              isModal={tcModal}
+              onPress={() => setTcModal(false)}
+            />
+          )}
+        </View>
         </View>
       </View>
+
 
       <Modal
         visible={isVisible}

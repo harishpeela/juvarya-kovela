@@ -96,8 +96,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabs: {
-    marginTop: '10%',
-    fontSize: 18,
+    marginTop: '4%',
+    fontSize: 10,
     marginVertical: 10,
     color: colors.gray4,
   },

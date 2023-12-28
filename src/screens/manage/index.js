@@ -41,7 +41,7 @@ const Manage = ({navigation, route}) => {
         <Item1
           svg={require('../../../assets/images/calander.png')}
           text={'Calander'}
-          onPress={() => navigation.navigate(allTexts.screenNames.calender)}
+          // onPress={() => navigation.navigate(allTexts.screenNames.calender)}
         />
         {(userDetails?.role == role.admin ||
           userDetails?.role == role.agent) && (

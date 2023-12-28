@@ -1,6 +1,8 @@
 import React from 'react';
-import {Image} from 'react-native';
-import {styles} from './style'
+import { Image,View } from 'react-native';
+import { styles } from './style';
+
+import imageUrl from '../../utils/assets/images/temple.png';
 
 
 export const BackgroundImage = () => (
@@ -16,12 +18,19 @@ export const BackgroundImageAClass = () => (
     style={styles.backgroundA}
   />
 );
-export const BackgroundImage2 = () => (
-  <Image
-    source={require('../../utils/assets/images/temple.png')}
-    style={styles.backgroundImage2}
-  />
-);
+export const BackgroundImage2 = ({ templeImage }) => {
+  // const imageUrl = uri ? uri : templeImage;
+  return (
+    <View style={styles.backgroundImage2Container}>
+      <Image
+        source={{
+          uri: templeImage ? templeImage : ''
+        }}
+        style={styles.backgroundImage2}
+      />
+    </View>
+  );
+};
 export const BackgroundImageFlower = () => (
   <Image
     source={require('../../../assets/images/bgflower.png')}

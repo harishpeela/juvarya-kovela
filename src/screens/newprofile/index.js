@@ -240,7 +240,7 @@ const TempleProfile = ({route, navigation}) => {
               <TouchableOpacity
                 style={styles.circularButton}
                 onPress={() =>
-                  navigation.navigate(allTexts.screenNames.viewProfile, {
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                     id: id,
                     title: title,
                     profileImg: profileImg,
@@ -397,7 +397,7 @@ const TempleProfile = ({route, navigation}) => {
               <TouchableOpacity
                 style={styles.circularButton}
                 onPress={() =>
-                  navigation.navigate(allTexts.screenNames.viewProfile, {
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                     id: id,
                     title: title,
                     profileImg: profileImg,

@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     width: 240,
     padding: 15,
     borderRadius: 30,
-    backgroundColor: colors.blue2,
+    backgroundColor: colors.orangeColor,
     alignItems: 'center',
   },
   textTitle: {

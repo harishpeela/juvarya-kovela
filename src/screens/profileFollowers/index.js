@@ -68,7 +68,7 @@ const FollowersMembership = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
-        <Ellipsis txtColor={colors.black} />
+        {/* <Ellipsis txtColor={colors.black} /> */}
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>

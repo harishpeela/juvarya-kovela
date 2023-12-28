@@ -4,8 +4,39 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    marginTop: '30%',
+    marginTop: '10%',
     backgroundColor: colors.white,
+  },
+  uploadContainer: {
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  preViewImageContainer: {
+    borderWidth: 0.5,
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  crossIconContainer: {position: 'absolute', right: 20, zIndex: 100},
+  preViewImage: {
+    height: undefined,
+    width: undefined,
+    flex: 1,
+    borderRadius: 75,
+  },
+  uploadPic: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileImage: {
+    alignItems: 'center',
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 100 / 2,
+    borderColor: colors.orangeColor,
   },
   keyBoardStyle: {
     width: '100%',
@@ -35,7 +66,7 @@ export const styles = StyleSheet.create({
     marginLeft: 50,
   },
   pickDateTxt: {
-    color: colors.green2,
+    color: colors.orangeColor,
     textTransform: 'capitalize',
     fontFamily: fontFamily.popinRegular,
   },
@@ -47,7 +78,7 @@ export const styles = StyleSheet.create({
   icon: {
     height: 40,
     width: 40,
-    backgroundColor: colors.blue3,
+    backgroundColor: colors.orangeColor,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
@@ -59,7 +90,7 @@ export const styles = StyleSheet.create({
   },
   radioLabelStyle: {
     fontSize: 16,
-    color: colors.green2,
+    color: colors.orangeColor,
     letterSpacing: -0.33,
     fontFamily: fontFamily.bold,
     paddingBottom: 4,
@@ -81,12 +112,12 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   rememberMeText: {
-    color: '#444444',
+    color: 'black',
     fontSize: 18,
     // fontFamily: ,
   },
   checkIcon: {
-    color: 'blue',
+    color: colors.orangeColor,
     fontSize: 20,
     marginRight: 5,
   },
