@@ -3,20 +3,22 @@ import {colors} from '../../common';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 'auto'
   },
   header: {
-    height: '32%',
+    height: 250,
     width: '100%',
+    backgroundColor: '#FFAB0F',
   },
   imgCard: {
-    position: 'absolute',
-    height: '20%', width: '90%',
-    top: '10%',
+    height: 140, 
+    width: '90%',
     alignSelf: 'center',
     backgroundColor: colors.white,
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: '5%'
     
   },
   camera: {
@@ -41,4 +43,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 20,
   },
+  iconContainer: {
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    justifyContent: 'center',
+},
 });

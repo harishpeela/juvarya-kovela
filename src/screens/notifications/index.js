@@ -10,25 +10,21 @@ import {
 } from '../../components';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../common';
+import { setDefaultNamespace } from 'i18next';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
-  const [loader, setLoader] = useState();
-  const [name, setname] = useState();
+  const [loader, setLoader] = useState(true);
+  const [name, setName] = useState();
 
   const GetNotifications = async () => {
-    setLoader(true);
     try {
       let result = await getNotifications();
-      let Data = result?.data[0]?.notifications;
-      let mapping = result?.data[0]?.jtProfileDTO;
-      let tempName = mapping?.name;
-      if (Data) {
-        setNotificationData(Data);
-        setname(tempName);
-        setLoader(false);
-      } else {
-        setLoader(false);
-      }
+      let Data = result?.data?.customerRoles;
+      let mapping = Data?.filter(item => item)?.map(({notifications}) => ({notifications}));
+      let FilteredData = mapping[0]?.notifications;
+      console.log('filterd', FilteredData);
+      setNotificationData(FilteredData)
+      setLoader(false);
     } catch (error) {
       console.log('error in notifications', error);
       setLoader(false);
@@ -41,26 +37,24 @@ const Notifications = ({navigation}) => {
   return (
     <View style={{backgroundColor: colors.white, flex: 1}}>
       <BackgroundImage />
-      <View style={{marginTop: '20%', margin: 15}}>
+      <View style={{marginTop: '10%', margin: 15}}>
         <BackHeaderNew
           txt={'Notifications'}
           onPress={() => navigation.goBack()}
         />
-        <View>
+        <View style={{marginTop: '5%'}}>
           {loader ? (
             <Loader size={'small'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (
-            <ScrollView>
               <FlatList
                 keyboardShouldPersistTaps="handled"
                 data={notificationdata}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
-                  <NotificationCard data={item} name={name} />
+                  <NotificationCard data={item} />
                 )}
               />
-            </ScrollView>
           ) : (
             <View
               style={{

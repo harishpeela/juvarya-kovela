@@ -138,9 +138,17 @@ const App = () => {
   const AuthStack = () => {
     return (
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name={splash}
           component={Splash}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
+        
+        <Stack.Screen
+          name={signin}
+          component={Signin}
           options={{
             headerShown: false,
           }}
@@ -148,13 +156,6 @@ const App = () => {
         <Stack.Screen
           name={signup}
           component={SignUp}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={signin}
-          component={Signin}
           options={{
             headerShown: false,
           }}

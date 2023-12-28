@@ -67,7 +67,6 @@ export const TempleListCard = ({
   useEffect(() => {
     setisFollow(isFollowingTrue);
   }, [isFollowingTrue, isFocused]);
-  console.log('postlogo', post?.logo);
   return (
     <TouchableOpacity
       style={{marginLeft: 10}}

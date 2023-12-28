@@ -7,13 +7,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop:-80,
-    padding:24,
-    backgroundColor:colors.orangeColor,
-    borderBottomLeftRadius:30,
-    borderBottomRightRadius:30,
-    color:colors.white
+    },
+    backheader: {
+      backgroundColor: colors.orangeColor,
+      borderRadius: 100,
+      padding:10,
 
     },
   iconContainer: {
@@ -21,18 +19,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
-    
-  
-    // elevation:3,
-    // shadowOffset:{
-    //   width:1,
-    //   height:1
-    // },
-    // shadowColor:colors.black,
     backgroundColor:colors.orangeColor,
-  },
-  notificationContainer:{
-  
   },
   notificationText:{
               fontSize: 20,
@@ -40,5 +27,5 @@ export const styles = StyleSheet.create({
               marginHorizontal: 100,
               color:'black',
               justifyContent:'center',     
-  }
+  },
 });

@@ -47,6 +47,7 @@ export default BottomTabBase = ({ navigation }) => {
 
   return (
     <SafeAreaView
+      keyboardHidesTabBar={true}
       style={{ flex: 1, borderWidth: 4 }}
       showsVerticalScrollIndicator={false}>
       {homeFeedListData === undefined ? (
@@ -67,12 +68,12 @@ export default BottomTabBase = ({ navigation }) => {
           tabBarOptions={
             {
               style:{
-                height: '8%',
+                height: '10%',
                 width: '95%',
                 flexDirection: 'row',
-                marginBottom: '2%',
+                marginBottom: '-2%',
                 borderRadius: 15,
-                alignSelf: 'center',
+                alignSelf: 'center',              
               },
             activeTintColor: colors.orangeColor,
             keyboardHidesTabBar: true,
@@ -120,7 +121,7 @@ export default BottomTabBase = ({ navigation }) => {
          
           <Tab.Screen
             name={allTexts.screenNames.eventsScreen}
-            component={EventsScreen}
+            component={GetEventScreen}
             options={{
               tabBarStyle: {
                 height: 200,
@@ -153,7 +154,6 @@ export default BottomTabBase = ({ navigation }) => {
           <Tab.Screen
             name={allTexts.tabNames.profile}
             component={GetProfileScreen}
-            // name={"sas"}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <View style={styles.container}>

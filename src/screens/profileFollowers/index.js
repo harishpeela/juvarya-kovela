@@ -60,7 +60,6 @@ const FollowersMembership = ({ route, navigation }) => {
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={styles.followersHeader}>
         <BackHeaderNew
-          isArrow={true}
           txt={
             followersList.length > 0
               ? `${followersList.length} Followers`

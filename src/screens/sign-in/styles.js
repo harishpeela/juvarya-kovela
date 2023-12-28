@@ -57,4 +57,9 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
   },
+  forgotPassword: {
+    textAlign:'center',
+   color:'orange',
+    marginTop:'5%',
+  }
 });
