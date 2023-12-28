@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fieldContainer: {
-    marginTop: 30,
+    // marginTop: 30,
     
   },
   buttonContainer: {

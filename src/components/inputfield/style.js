@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     width: undefined,
     flex: 1,
     borderRadius: 3,
+    color:colors.orangeColor
   },
   imgContainer: {
     width: 57,

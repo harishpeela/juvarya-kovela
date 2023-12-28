@@ -17,11 +17,31 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     flex: 1,
-    marginTop:'0%'
+    marginTop:'0%',
+    justifyContent:'center'
   },
   fieldContainer: {
-    // marginTop: 30,
+    marginTop: 30,
+    justifyContent:'center',
+    alignItems:'center',
+    flex:1,
     
+    
+  },
+  TextStyle:{
+    fontSize:10,
+   
+  },
+  buttonStyle:{
+    color:colors.black,
+    height:30,
+    
+  },
+  genderText:{
+  marginRight:325,
+  color:colors.orangeColor,
+  fontWeight:'normal',
+  marginBottom:8
   },
   buttonContainer: {
     marginTop: 15,
@@ -34,4 +54,40 @@ export const styles = StyleSheet.create({
     color: colors.red3,
     paddingLeft: 50,
   },
+  centeredButtonContainer:{
+    marginTop:'10%'
+  },
+  pickerContainer: {
+    marginTop: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.orangeColor,
+  },
+  pickerStyle: {
+    height: 40,
+    width: '100%',
+    color: colors.orangeColor,
+  },
+  buttonStyle: {
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    height:35
+
+  },
+  dropdownStyle: {
+    backgroundColor: 'white',
+    borderColor: 'black',
+    borderWidth: 1,
+    borderRadius: 8,
+  
+  },
+  textStyle:{
+    fontSize:12,
+    
+  }
+
+
 });
