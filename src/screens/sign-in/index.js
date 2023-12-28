@@ -14,6 +14,7 @@ import {
 } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
 
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
@@ -106,7 +107,7 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number'}
+                  title={'Mobile number or Email'}
                   isFlag
                   keyboardType={'numeric'}
                   placeholder={emailPlace}

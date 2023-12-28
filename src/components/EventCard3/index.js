@@ -27,8 +27,16 @@ const EventCard3 = () => {
           </View>
           
           <View style={styles.dateAndLocation}>
-            <Text style={styles.dateText}>Anakapalli is a residential neighborhood in the city of Visakhapatnam, also the headquarters of Anakapalli district of Andhra Pradesh. In 2015 Anakapalli municipality wa</Text>
-            <Icon3 name='like1' size={20} style={{marginTop:15}} color={colors.orangeColor} />
+            <View style={styles.textContainer}>
+            <Text style={styles.dateText}>Anakapalli is a residential neighborhood  Visakhapatnam</Text>
+            </View>
+            <View style={styles.calenderDate}>
+            <Icon3 name='like1' size={12} style={{marginTop:15}} color={colors.orangeColor} />
+            <Text style={styles.eventDate}>
+              28-12-2023
+            </Text>
+            </View>
+           
             
           </View>
         </View>
