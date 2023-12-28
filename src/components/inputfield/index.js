@@ -32,8 +32,8 @@ export const InputField = ({
         <View style={styles.fieldContainer}>
           {/* {isFlag && (
             <View style={styles.imgContainer}>
-              <PhoneIcon name="phone" style={styles.image} size={20} />
-              <Text style={styles.code}>+91</Text>
+              <PhoneIcon name="user" style={styles.image} size={20} />
+              {/* <Text style={styles.code}>+91</Text> */}
             </View>
           )} */}
 
@@ -43,6 +43,7 @@ export const InputField = ({
               
             </View>
           )}
+         
           <TextInput
             value={value}
             placeholderTextColor={colors.gray2}

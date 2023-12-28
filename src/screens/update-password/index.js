@@ -11,16 +11,16 @@ import {styles} from './style';
 import {BackHeader, BackgroundImage} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
+import {TextInput} from 'react-native-gesture-handler';
 
 const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
     headings: {
-      inputTitles: {currentPassword,Newpassword, confirmPassword},
+      inputTitles: {currentPassword, Newpassword, confirmPassword},
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
@@ -89,7 +89,8 @@ const UpdatePassword = ({navigation}) => {
           }}
           validationSchema={UpdatePasswordValidation}
           initialValues={{
-            password: '',
+            currentPassword: '',
+            newPassword: '',
             confirmPassword: '',
           }}>
           {({
@@ -103,26 +104,26 @@ const UpdatePassword = ({navigation}) => {
           }) => {
             return (
               <View style={styles.fieldContainer}>
-
-                 <PasswordField
+                <PasswordField
                   title={currentPassword}
-                  value={values.password}
+                  value={values.currentPassword}
                   titleColor={colors.orangeColor}
                   placeholder={passwordPlace}
-                  error={touched.password && errors.password}
-                  onBlur={handleBlur('password')}
-                  setState={handleChange('password')}
+                  error={touched.currentPassword && errors.currentPassword}
+                  onBlur={handleBlur('currentPassword')}
+                  setState={handleChange('currentPassword')}
                 />
+
                 <PasswordField
                   title={Newpassword}
-                  value={values.password}
+                  value={values.newPassword}
                   titleColor={colors.orangeColor}
                   placeholder={passwordPlace}
-                  error={touched.password && errors.password}
-                  onBlur={handleBlur('password')}
-                  setState={handleChange('password')}
+                  error={touched.newPassword && errors.newPassword}
+                  onBlur={handleBlur('newPassword')}
+                  setState={handleChange('newPassword')}
                 />
-                {/* <View style={{height: 30}} /> */}
+
                 <PasswordField
                   title={confirmPassword}
                   value={values.confirmPassword}
@@ -132,6 +133,7 @@ const UpdatePassword = ({navigation}) => {
                   onBlur={handleBlur('confirmPassword')}
                   setState={handleChange('confirmPassword')}
                 />
+
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}

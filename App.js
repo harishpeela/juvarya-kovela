@@ -248,7 +248,7 @@ const App = () => {
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={membershipdetails}
           component={MemberShipDetails}
