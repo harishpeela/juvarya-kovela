@@ -96,7 +96,7 @@ const SeeAll = ({navigation}) => {
                     />
                     <View style={{marginLeft: 10}}>
                       <Text>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '95%'}}>
+                      <Text numberOfLines={2} style={{maxWidth: '90%'}}>
                         {item.desciption}{' '}
                       </Text>
                     </View>

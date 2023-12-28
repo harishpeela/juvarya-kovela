@@ -11,6 +11,7 @@ export const BackHeaderNew = ({
   txt,
   isPlus,
   onPlusPress,
+  color
 }) => {
   return (
     <View style={styles.header}>
@@ -20,20 +21,19 @@ export const BackHeaderNew = ({
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-          {/* <Fontisto
+        <TouchableOpacity  onPress={onPress}>
+          <Fontisto
             name="arrow-left"
-            color={txtColor === undefined ? <></> : txtColor}
+           color={color}
             size={17}
-          /> */}
+          />
         </TouchableOpacity>
         {txt ? (
           <Text
             style={{
               fontSize: 20,
               fontWeight: '500',
-              marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              marginHorizontal:'30%',
             }}>
             {txt}
           </Text>

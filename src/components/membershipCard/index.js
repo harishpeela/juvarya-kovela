@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {colors} from '../../common';
-export const MemberShipCard = ({data, onPress}) => {
+export const MemberShipCard = ({data, onPress, txt}) => {
   return (
     <View>
       <FlatList
@@ -39,26 +39,24 @@ export const MemberShipCard = ({data, onPress}) => {
                 </View>
               )}
               {item?.type === 'BASIC' && (
-                <View style={{alignItems: 'center'}}>
+                <TouchableOpacity style={{alignItems: 'center'}}>
                   <MaterialCommunityIcons
                     name="shield-sun-outline"
                     color={'white'}
                     size={40}
                   />
                   <Text style={styles.typetext}>BASIC</Text>
-                </View>
+                </TouchableOpacity>
               )}
-              <Text style={styles.name}> {item?.type}</Text>
             </View>
             <View style={styles.underLine} />
             <View>
               <View style={styles.secondContainer}>
                 <View style={{alignItems: 'center'}}>
-                  <Text style={styles.orgprice}> $ 499</Text>
                   <Text style={styles.offerPrice}> $ 299</Text>
                 </View>
                 <TouchableOpacity style={styles.button} onPress={onPress}>
-                  <Text style={styles.buttext}>Upgrade </Text>
+                  <Text style={styles.buttext}>{txt}</Text>
                 </TouchableOpacity>
               </View>
             </View>
@@ -97,7 +95,6 @@ const styles = StyleSheet.create({
   button: {
     padding: 10,
     borderRadius: 15,
-    backgroundColor: colors.orangeColor,
   },
   buttext: {
     color: 'white',

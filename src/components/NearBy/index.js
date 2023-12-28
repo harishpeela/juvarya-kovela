@@ -24,6 +24,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     setLoader(true);
     try {
       let result = await PopularTemples();
+      console.log('populattemples', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);

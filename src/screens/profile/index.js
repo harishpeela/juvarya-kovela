@@ -43,7 +43,6 @@ const Profile = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
-  const [dob, setDob] = useState(true);
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -175,7 +174,6 @@ const Profile = ({navigation}) => {
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={90} color={colors.orangeColor} />
                 </View>
-                
               )}
             </TouchableOpacity>
           )}
@@ -204,6 +202,7 @@ const Profile = ({navigation}) => {
               }}
             />
           )}
+
 
           <Item
             svg={<Icon name="unlock" size={20} />}
@@ -236,25 +235,6 @@ const Profile = ({navigation}) => {
             />
           )} */}
         </View>
-        <View>
-          <TouchableOpacity onPress={() => TC()}>
-            <Text
-              style={{
-                ...styles.tabs,
-                color: clicked === true ? colors.orangeColor : 'gray',
-                textDecorationLine: clicked === true ? 'underline' : 'none',
-                fontWeight: clicked === true ? 'bold' : '400',
-              }}>
-              Terms & Conditions{' '}
-            </Text>
-          </TouchableOpacity>
-          {tcModal && (
-            <Terms_And_Conditions
-              isModal={tcModal}
-              onPress={() => setTcModal(false)}
-            />
-          )}
-        </View>
         <View style={styles.logoutbtnContainer}>
           <PrimaryButton
             onPress={async () => {
@@ -271,8 +251,28 @@ const Profile = ({navigation}) => {
           <Text style={styles.versionText}>
             Version&ensp;{allTexts.appVersion.version}
           </Text>
+          <View>
+          <TouchableOpacity onPress={() => TC()}>
+            <Text
+              style={{
+                ...styles.tabs,
+                color: 'gray',
+                textDecorationLine: clicked === true ? 'underline' : 'none',
+                fontWeight: clicked === true ? 'bold' : '400',
+              }}>
+              Terms & Conditions{' '}
+            </Text>
+          </TouchableOpacity>
+          {tcModal && (
+            <Terms_And_Conditions
+              isModal={tcModal}
+              onPress={() => setTcModal(false)}
+            />
+          )}
+        </View>
         </View>
       </View>
+
 
       <Modal
         visible={isVisible}
