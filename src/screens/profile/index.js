@@ -261,7 +261,7 @@ const Profile = ({navigation}) => {
               await removeLoginSessionDetails();
               setLoginDetails(null);
             }}
-            bgColor={colors.black}
+            bgColor={colors.orangeColor}
             loading={false}
             radius={25}
             text={'Log out'}

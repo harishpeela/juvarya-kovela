@@ -153,5 +153,4 @@ const UpdatePassword = ({navigation}) => {
     </View>
   );
 };
-
 export default UpdatePassword;

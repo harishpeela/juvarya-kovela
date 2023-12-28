@@ -13,20 +13,22 @@ export const styles = StyleSheet.create({
         borderRadius:10,
         paddingHorizontal:'2%',
         paddingVertical:'2%',
-        marginVertical:'0.5%'
+        marginVertical:'0.5%',
     },
     info:{
-
+    width:'100%',
+    marginRight:5
     },
     dateAndLocation:{
         flexDirection:'row',
         alignContent:'center',
-        justifyContent:'center',
-        alignContent:'center'
+        justifyContent:'flex-start',
+        
+        
     },
     imageContainer:{
         height:'100%',
-        width:'30%',
+        width:'100%',
         borderRadius:20,
         // borderWidth:2
     },
@@ -53,10 +55,14 @@ export const styles = StyleSheet.create({
     },
     dateText:{
         color:colors.orangeColor,
-        fontSize:fontSize.large
+        fontSize:10
     },
     infoContainer:{
         borderWidth:2,
     },
+    EventNameAndIcon:{
+        flexDirection:'row',
+        justifyContent:'space-between'
+    }
 
 })

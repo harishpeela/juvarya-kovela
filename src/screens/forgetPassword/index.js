@@ -64,7 +64,7 @@ const ForgetPassword = () => {
   const startTime = e => {
     if (Ref.current) {
       clearInterval(Ref.current);
-    }
+    } 
     const id = setInterval(() => {
       startTimer(e);
     }, 1000);
@@ -80,7 +80,7 @@ const ForgetPassword = () => {
       deadline.setSeconds(deadline.getSeconds() + secLeft);
       return deadline;
     }
-  };
+  }; 
   useEffect(() => {
     const setText = () => {
       otpInput?.current?.setValue(`${otp}`);

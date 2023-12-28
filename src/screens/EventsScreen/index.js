@@ -1,7 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity,ScrollView,FlatList } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { styles } from './styles'
-import { SafeAreaFrameContext, SafeAreaView } from 'react-native-safe-area-context'
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {styles} from './styles';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import {
+  SafeAreaFrameContext,
+  SafeAreaView,
+} from 'react-native-safe-area-context';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import {
   Loader,
   ContactModal,
@@ -15,59 +27,50 @@ import {
   Sort,
   EventCard2,
   EventCard3,
+  BackgroundImage,
 } from '../../components';
-import { colors } from '../../common';
-import { EventList } from '../../utils/api';
+import {allTexts, colors} from '../../common';
+import {EventList} from '../../utils/api';
 
-
-
-
-const EventsScreen = ({ navigation }) => {
-
+const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
-  const [searchedText, setSearchedText] = useState("");
-  // const [filteredData, setFilteredData] = useState(followersList);
-  // const {id} = route.params || {};
+  const [searchedText, setSearchedText] = useState('');
   const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
-  const [eventsData, setEventsData] = useState();
+  const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
-
 
   const EventsList = async () => {
     setEventsLoader(true);
-    let result = await EventList(0, 100);
+    let result = await EventList(0, 200);
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
-      setEventsLoader(false);
-      console.log('true', eventsLoader);
+      console.log('1');
+      let filtering = result?.data?.events;
       setEventsData(result?.data?.events);
+      // console.log(filtering, '========>============<');
+      // let FilteredData = filtering?.filter(item => item)?.map(({addressToEventDTO, profileId, mediaList, description, name, creationTime, id}) => ({addressToEventDTO, profileId, mediaList, description, name, creationTime, id}));
+      // console.loh('filterdata ===>', FilteredData);
+      setEventsLoader(false);
     } else {
       setEventsLoader(false);
       console.log('false', eventsLoader);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
-  }, [])
-
-  console.log("EventsScreen =>>>>>>>>>" + eventsData)
-
+  }, []);
+console.log('filtereeesdsf', eventsData);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={styles.Header}>
-        <BackHeaderNew
-          txt={`EventsScreen`}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-        />
-        {/* <Ellipsis txtColor={colors.black} /> */}
-      </View>
-      <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
+    <SafeAreaView style={{flex: 1}}>
+     <View style={styles.eventContainer}>
+      <View style={styles.eventAndPlus}>
+      <Text style={styles.text}>Events </Text> 
+      <FeatherIcon style={styles.notificationIcon} name="bell" size={30} color="white" />
+        </View>
+     <View style={styles.searchAndNew}>
+          <SearchBar
               // value={searchedText}
               // onTextChange={text => {
               //   setSearchedText(text);
@@ -85,32 +88,40 @@ const EventsScreen = ({ navigation }) => {
               brColor={colors.gray2}
               brWidth={1}
             />
-          </View>
-          <View style={styles.sortContainer}>
+            {/* <View style={styles.sortContainer}>
             <Sort
               style={styles.sort}
               brColor={colors.gray2}
-              txtColor={colors.orangeColor}
+              txtColor={colors.black}
               srWidth={'100%'}
-            // srHeight={"100%"}
+              // srHeight={"100%"}
             />
-          </View>
+          </View> */}
+          <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
+          <FeatherIcon style={styles.plusIcon} name="plus" size={35} color="white" />
+          </TouchableOpacity>
+     </View>  
+     </View>
+      <View style={styles.bodyContainer}>
+        <View style={styles.searchAndFilter}>
+          <View style={styles.searchContainer}></View>
         </View>
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              <ScrollView showsVerticalScrollIndicator={false}>
                 {searchedText === '' && (
                   <FlatList
-                  numColumns={2}
+                    numColumns={2}
                     data={eventsData}
                     contentContainerStyle={styles.flatListStyle}
-                    keyExtractor={(item, index) => item.toString()}
-                    renderItem={({ item }) => (
+                    style={{marginBottom: '70%'}}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({item}) => (
                       <EventCard2
-                      navigation={navigation}
+                        navigation={navigation}
+                        data={item}
                         // name={item.user.firstName}
                         // img={item.user.url}
                         // data={item.user}
@@ -119,41 +130,11 @@ const EventsScreen = ({ navigation }) => {
                     )}
                   />
                 )}
-              </ScrollView>
             </>
-
           )}
         </View>
       </View>
     </SafeAreaView>
-  )
-}
-export default EventsScreen
-
-
-
-{/* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            {searchedText && filteredData.length > 0 ? (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={filteredData}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={item => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     ) : (
-            //       <View style={styles.noDataContainer}>
-            //         <Text style={styles.noDataText}>
-            //           No Followers to Display
-            //         </Text>
-            //       </View>
-            //     )}
-            //   </ScrollView>
-            // </> */}
+  );
+};
+export default EventsScreen;

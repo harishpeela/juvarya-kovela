@@ -19,8 +19,8 @@ const Notifications = ({navigation}) => {
     setLoader(true);
     try {
       let result = await getNotifications();
-      let Data = result?.data[0]?.notifications;
-      let mapping = result?.data[0]?.jtProfileDTO;
+      let Data = result?.data?.customerRoles;
+      let mapping = Data?.filter(item => item).map(({notifications}) => ({notifications}))
       let tempName = mapping?.name;
       if (Data) {
         setNotificationData(Data);

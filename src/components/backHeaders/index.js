@@ -33,7 +33,7 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color:'black',
             }}>
             {txt}
           </Text>
