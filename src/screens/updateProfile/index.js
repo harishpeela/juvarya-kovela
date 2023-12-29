@@ -8,11 +8,9 @@ import { Formik } from 'formik';
 import { UpdateProfileValidation } from '../../common/schemas';
 import { styles } from './styles'; // Update this import based on your project structure
 import { BackHeader, BackgroundImage } from '../../components';
-import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import isRoleSelected from 'react-native-select-dropdown';
-import dropDownError from 'react-native-select-dropdown';
+import { Update_Profile } from '../../utils/api';
 
 const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,7 +21,6 @@ const UpdateProfile = ({ navigation }) => {
       inputTitles: { dateOfBirth, gender, gotra },
     },
   } = allTexts;
-  const { userDetails } = useContext(ApplicationContext);
 
   const [dateOfBirthValue, setDateOfBirthValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
@@ -34,16 +31,13 @@ const UpdateProfile = ({ navigation }) => {
   const fetchGenderData = async (data,actions) => {
     let payload = {
       dob: dateOfBirthValue,
-   gender: genderValue,
-   gothra: gotraValue
+      gender: genderValue,
+      gothra: gotraValue
     } 
     console.log(payload, 'payload');
     try {
-      const response = await fetch(
-        'https://kovela.app/customer/api/customer/userDetails', payload
-      );
-      const data = await response.json();
-      console.log('data gothra', data);
+      let responce = await Update_Profile(payload);
+      console.log('data gothra', responce?.data);
       setGenderValue(data.gender);
     } catch (error) {
       console.error('Error fetching gender data:', error);

@@ -51,13 +51,19 @@ const Signup = ({navigation}) => {
 
   const UserRegisterHandler = async (data, action) => {
     let LogInPayload = {
-      username: data.phone,
-      password: data.password,
+      primaryContact: data?.phone,
+      password: data?.password,
+    };
+    let LogInPayload2 = {
+      primaryContact: data?.phone,
+      password: data?.password,
     };
     const otpPayload = {
       otpType: 'SIGNUP',
-      primaryContact: data.phone,
+      primaryContact: data?.phone,
+      emailAddress: data?.email,
     };
+    console.log('payload otp', otpPayload);
     try {
       let response = await NewVerifyOTP(otpPayload);
       const {
@@ -74,7 +80,6 @@ const Signup = ({navigation}) => {
             data,
             primaryContact: data?.phone,
             password: data?.confirmPassword,
-            username: data?.phone,
           };
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
@@ -107,7 +112,7 @@ const Signup = ({navigation}) => {
             password: '',
             confirmPassword: '',
             lastName: '',
-            userName: '',
+            // username: '',
           }}>
           {({
             errors,

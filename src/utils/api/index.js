@@ -38,6 +38,7 @@ const endpoints = {
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
+  UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
@@ -96,7 +97,7 @@ export const loginUser1 = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in login', error);
+    console.log('error in login===', error);
     return error;
   }
 }
@@ -191,6 +192,17 @@ export const PostProfilePic = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
       `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const Update_Profile = async data => {
+  try {
+    let result = await axiousInstanceNew1.post(
+      `${endpoints.UPDATE_PROFILE}`,
       data,
     );
     return result;

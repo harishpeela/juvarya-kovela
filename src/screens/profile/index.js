@@ -9,6 +9,7 @@ import {
   Modal,
   FlatList,
   Platform,
+  useColorScheme
 } from 'react-native';
 import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -43,6 +44,7 @@ const Profile = ({ navigation }) => {
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
   const [Admin, setAdmin] = useState([]);
+  const isDarkMode = useColorScheme() === 'dark';
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -230,21 +232,21 @@ const Profile = ({ navigation }) => {
             />
           )}
           <Item
-            svg={<Icon name="unlock" size={20} />}
+            svg={<Icon name="unlock" size={20} color={isDarkMode ? 'black' : 'black'} />}
             text={t('updatepassword')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.updatePassword);
             }}
           />
           <Item
-            svg={<FontAwesome5 name="save" size={20} />}
+            svg={<FontAwesome5 name="save" size={20} color={isDarkMode ? 'black' : 'black'} />}
             text={t('posts')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.mySavedPosts);
             }}
           />
           <Item
-            svg={<Icon name="profile" size={20} />}
+            svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
             text={t('update Profile')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.updateProfile)
