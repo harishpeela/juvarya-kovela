@@ -4,7 +4,7 @@ import { colors, fontFamily, fontSize } from '../../common'
 export const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: colors.white
+        backgroundColor: colors.gray1
     },
     header: {
         marginTop: '10%',
@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '5%',
     },
     secondContainer: {
-        marginTop: 5,
+        marginTop:5,
         flexDirection: 'column',
         width: '100%',
-        paddingTop: '5%',
+        paddingTop: '2%',
         shadowColor: colors.black,
         height: '50%',
         // borderWidth:5,
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     dateText: {
         color: colors.orangeColor,
         fontSize:11,
-        marginLeft:10,
+        marginLeft:16,
         justifyContent:'flex-start',
         
     },
@@ -49,7 +49,14 @@ export const styles = StyleSheet.create({
         height: '6%',
         alignItems: 'center',
         backgroundColor: 'transparent',
-        alignContent: 'center'
+        alignContent: 'center',
+        marginTop:10
+    },
+    
+
+    festivalIcon:{
+    color:colors.orangeColor,
+    marginLeft:3
     },
     button: {
         width: '85%',
@@ -60,6 +67,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         elevation: 2,
     },
+  
     btnText: {
         color: colors.white,
         fontWeight: '400',
@@ -128,7 +136,8 @@ export const styles = StyleSheet.create({
         borderRadius:24,
         padding:10,
         marginRight:22,
-        marginLeft:3
+        marginLeft:3,
+        height:20
         
     },
     container1:{
@@ -191,6 +200,9 @@ marginTop:10
     },
     toggleData: {
         marginBottom: 300,
+    },
+    bg:{
+    //    backgroundColor:colors.red4 
     },
     subBtn: {
         justifyContent: 'center', // Center vertically
@@ -286,7 +298,13 @@ infoContainer:{
 },
 HeadingAndIcon:{
     flexDirection:'row',
-    justifyContent:'space-between'
+    justifyContent:'space-between',
+    alignItems:'center'
+},
+editIconContainer:{
+    backgroundColor:colors.orangeColor,
+    padding:6,
+    borderRadius:100
 }
 
 })

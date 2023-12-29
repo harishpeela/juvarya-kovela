@@ -5,6 +5,9 @@ import Icon2 from 'react-native-vector-icons/EvilIcons'
 import { colors } from '../../common'
 import Icon3 from 'react-native-vector-icons/AntDesign'
 import { Colors } from 'react-native/Libraries/NewAppScreen'
+import Feather from 'react-native-vector-icons/Feather';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
 
 
 const EventCard3 = () => {
@@ -23,15 +26,18 @@ const EventCard3 = () => {
           <View style={styles.EventNameAndIcon}>
           <Text style={styles.eventText} >Event Names</Text>
 
-          <Icon3 name='like1' size={20} color={colors.orangeColor} />
+          {/* <Icon3 name='like1' size={20} color={colors.orangeColor} /> */}
+          <View style={styles.editIconContainer}>
+                       <EntypoIcon name="pencil"  color={colors.white} size={12} />
+              </View>
           </View>
           
           <View style={styles.dateAndLocation}>
             <View style={styles.textContainer}>
-            <Text style={styles.dateText}>Anakapalli is a residential neighborhood  Visakhapatnam</Text>
+            <Text style={styles.dateText}>Anakapalli AnakapalliAnakapalliAnakapalliAnakapalliAnakapalliAnakapalli is a residential neighborhood  Visakhapatnam</Text>
             </View>
             <View style={styles.calenderDate}>
-            <Icon3 name='like1' size={12} style={{marginTop:15}} color={colors.orangeColor} />
+            <FontistoIcon style={{color:colors.orangeColor}} name="date" size={14} />
             <Text style={styles.eventDate}>
               28-12-2023
             </Text>

@@ -14,6 +14,14 @@ export const styles = StyleSheet.create({
         paddingHorizontal:'2%',
         paddingVertical:'2%',
         marginVertical:'0.5%',
+        marginBottom:10,
+        shadowOpacity:10
+    },
+    editIconContainer:{
+        backgroundColor:colors.orangeColor,
+        padding:6,
+        borderRadius:100
+    
     },
     info:{
     width:'100%',
@@ -27,14 +35,19 @@ export const styles = StyleSheet.create({
     },
     eventDate:{
     fontSize:10,
-    marginTop:15
+   
     },
     calenderDate:{
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    width:80
-    
+    width:80,
+    },
+    pencilIcon:{
+    marginLeft:14
+    },
+    editIcon:{
+    // backgroundColor:colors.orangeColor
     },
     textContainer:{
     width:200
@@ -67,7 +80,7 @@ export const styles = StyleSheet.create({
         borderRadius:60,
     },
     dateText:{
-        color:colors.orangeColor,
+        
         fontSize:10
     },
     infoContainer:{
@@ -75,7 +88,8 @@ export const styles = StyleSheet.create({
     },
     EventNameAndIcon:{
         flexDirection:'row',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        width:283
     }
 
 })
