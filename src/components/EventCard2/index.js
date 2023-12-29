@@ -11,7 +11,7 @@ const EventCard2 = ({ navigation, data }) => {
       style={styles.container}
       onPress={() => {
         // alert('under development');
-        navigation.navigate(allTexts.screenNames.eventsDetails, {
+        navigation.navigate(allTexts.screenNames.eventDetails, {
           navigation: navigation,
         });
       }}>

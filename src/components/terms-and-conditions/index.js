@@ -32,7 +32,7 @@ export const Terms_And_Conditions = ({isModal, onPress}) => {
           1.1. In order to use this app, you must be at least 18 years old. By
           utilizing the App, you guarantee that you are at least 18 years old.
         </Text>
-        <Text style={styles.peragraph}>
+        <Text style={{...styles.peragraph, color: isDarkMode ? 'black' : 'black'}}>
           1.2. You acknowledge that you will only use the App for the updates
           and information it is designed to deliver about the temple.
         </Text>
