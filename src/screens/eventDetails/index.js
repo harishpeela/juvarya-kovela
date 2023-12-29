@@ -16,6 +16,10 @@ import { Picker } from '@react-native-picker/picker';
 import { styles } from './styles';
 import { AntDesign } from '@expo/vector-icons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import FontistoIcon from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const EventDetails = ({ navigation }) => {
@@ -82,65 +86,66 @@ const EventDetails = ({ navigation }) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Imagecontainer}>
+          
         </View>
 
         <View style={styles.festivaldetails}>
           <View style={styles.festivalContainer}>
-            <Icon2 name='location' style={{ color: colors.red1 }} size={25} />
+            {/* <MaterialIcons style={styles.festivalIcon} name="festival" size={25} />
+             */}
             <Text style={[styles.festivalText]} >Ganesh festival</Text>
           </View>
           <View style={styles.festlocation}>
             <View style={styles.dateAndLocation}>
-              <Icon2 name='location' style={{ color: colors.red1 }} size={15} />
+              <FontistoIcon style={{ color: colors.orangeColor }} name="date" size={14} />
               <Text style={styles.dateText}>07 December 2023</Text>
             </View>
             <View style={styles.locationPincode}>
-              <Icon2 name='location' style={{color:colors.red1, marginRight:10}} size={15} />
+              <Icon2 name='location' style={{ color: colors.red1, marginRight: 10 }} size={15} />
               <Text style={styles.pincode}>
                 Gavarapalem,531001,Anakapalli
               </Text>
             </View>
           </View>
         </View>
-        
-         <View style={styles.toggleHead}>
-              <Pressable onPress={() => setCurrentIndex(1)}>
-                <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 1 && styles.orangeColor]}>HighLights</Text>
-                  <View style={[styles.border, currentIndex === 1 && styles.orangeColor]} />
-                </View>
-              </Pressable>
-              <Pressable onPress={() => setCurrentIndex(2)}>
-                <View style={styles.separateContainer}>
-                  <Text style={[styles.separateContainerText, currentIndex === 2 && styles.orangeColor]}>Info</Text>
-                  <View style={[styles.border, currentIndex === 2 && styles.orangeColor]} />
-                </View>
-              </Pressable>
-              {/* <Pressable onPress={() => setCurrentIndex(3)}>
+
+        <View style={styles.toggleHead}>
+          <Pressable onPress={() => setCurrentIndex(1)}>
+            <View style={styles.separateContainer}>
+              <Text style={[styles.separateContainerText, currentIndex === 1 && styles.orangeColor]}>HighLights</Text>
+              <View style={[styles.border, currentIndex === 1 && styles.orangeColor]} />
+            </View>
+          </Pressable>
+          <Pressable onPress={() => setCurrentIndex(2)}>
+            <View style={styles.separateContainer}>
+              <Text style={[styles.separateContainerText, currentIndex === 2 && styles.orangeColor]}>Info</Text>
+              <View style={[styles.border, currentIndex === 2 && styles.orangeColor]} />
+            </View>
+          </Pressable>
+          {/* <Pressable onPress={() => setCurrentIndex(3)}>
                 <View style={styles.separateContainer}>
                   <Text style={[styles.separateContainerText, currentIndex === 3 && styles.orangeColor]}>Contribute</Text>
                   <View style={[styles.border, currentIndex === 3 && styles.orangeColor]} />
                 </View>
               </Pressable> */}
-              {/* <Pressable onPress={() => setCurrentIndex(4)}>
+          {/* <Pressable onPress={() => setCurrentIndex(4)}>
                 <View style={styles.separateContainer}>
                   <Text style={[styles.separateContainerText, currentIndex === 4 && styles.orangeColor]}>Events</Text>
                   <View style={[styles.border, currentIndex === 4 && styles.orangeColor]} />
                 </View>
               </Pressable> */}
-            </View>
+        </View>
 
         <View style={styles.secondContainer}>
 
 
           <View style={styles.toggleContainer}>
-           
-            <KeyboardAwareScrollView showsVerticalScrollIndicator={false} >
+
+            <KeyboardAwareScrollView style={styles.bg} showsVerticalScrollIndicator={false} >
               <View style={styles.toggleData}>
                 {currentIndex === 1 && (
                   <ScrollView>
                     <View style={styles.container1}>
-                      <EventCard3 />
                       <EventCard3 />
                       <EventCard3 />
                       <EventCard3 />
@@ -161,10 +166,14 @@ const EventDetails = ({ navigation }) => {
 
                     <View style={styles.desContainer}>
                       <View style={styles.HeadingAndIcon}>
-                      <Text style={styles.des}>Description</Text>
-                      <Icon2 name='editOutlined' style={{color:colors.red1, marginTop:15}} size={20} />
+                        <Text style={styles.des}>Description</Text>
+
+                        <View style={styles.editIconContainer}>
+                          <EntypoIcon name="pencil" color={colors.white} size={14} />
+                        </View>
+
                       </View>
-                     
+
                       <Text style={styles.desData}>The build will continue, but you are strongly encouraged to update your project to
                         Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem. Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
                       </Text>
