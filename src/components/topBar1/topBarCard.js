@@ -1,10 +1,95 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { NewBackHeader } from "../new-back-header";
-export const TopBarcard = ({navigation, txt, isBell, isCard}) => {
-    return(
-        <View style={{flex: 1, backgroundColor: '#FFAB0F', borderBottomRightRadius: 30, borderBottomLeftRadius: 30}}>
-            <NewBackHeader txt={txt} isBell={isBell} onPress={() => navigation.goBack()} />
+/* eslint-disable react-native/no-inline-styles */
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { colors } from '../../common';
+export const TopBarcard = ({
+    txtColor,
+    onPress,
+    txt,
+    isPlus,
+    onPlusPress,
+    isBell,
+    arrow,
+    cancel,
+    children,
+}) => {
+    return (
+       <View style={styles.container}>
+         <View style={styles.header}>
+            <View
+                style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: '15%',
+                }}>
+                {arrow && (
+                    <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+                        <Image source={require('../../../assets/images/backarrow.png')}
+                            style={{ height: 10, width: 6 }} />
+                    </TouchableOpacity>
+                )}
+                {cancel && (
+                    <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+                        <MaterialIcons name='cancel' size={20} color={colors.orangeColor} />
+                    </TouchableOpacity>
+                )}
+                {txt && (
+                    <Text
+                        style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginHorizontal: '25%',
+                            color: 'white',
+                            alignSelf: 'center'
+                        }}>
+                        {txt}
+                    </Text>
+                )}
+            </View>
+
+            {isPlus && (
+                <TouchableOpacity style={{}} onPress={onPlusPress}>
+                    <AntDesign
+                        name="plus"
+                        size={24}
+                        color='black'
+                    />
+                </TouchableOpacity>
+            )}
+            {isBell && (
+                <TouchableOpacity>
+                    <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
+                </TouchableOpacity>
+            )}
         </View>
+        {children}
+       </View>
     );
 };
+const styles = StyleSheet.create({
+    container: {
+        flex: 1, 
+        backgroundColor: '#FFAB0F', 
+        borderBottomRightRadius: 20,
+        borderBottomLeftRadius: 20,
+     },
+    header: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+       
+    },
+    iconContainer: {
+        height: 30,
+        width: 30,
+        borderRadius: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+    },
+})

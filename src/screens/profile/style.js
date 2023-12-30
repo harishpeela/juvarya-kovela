@@ -55,10 +55,11 @@ export const styles = StyleSheet.create({
   },
   profileImage: {
     alignContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
     height: 100,
     width: 100,
     borderRadius: 100 / 2,
+    justifyContent: 'center'
   },
   crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
   preViewImage: {

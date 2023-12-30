@@ -9,6 +9,7 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
+import { TopBarcard } from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
 import {BackgroundImage} from '../../components';

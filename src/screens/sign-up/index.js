@@ -66,15 +66,21 @@ const Signup = ({navigation}) => {
     console.log('payload otp', otpPayload);
     try {
       let response = await NewVerifyOTP(otpPayload);
+      // console.log('responce of otp', response?.data);
       const {
-        data: {primaryContact, otp},
+        data: {emailAddress, otp},
       } = response || {};
+      console.log('Logdata', LogInPayload);
       let result = await loginUser1(LogInPayload);
+
+      console.log('resstatus', result);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
       } else {
-        if (response && primaryContact) {
+        console.log('amsjhxvJAHSBX', response?.data, emailAddress);
+        if (response && emailAddress) {
+          console.log('amsjhxvJAHSBX =====>', emailAddress);
           let otpPayload = {
             otp,
             data,
@@ -84,6 +90,8 @@ const Signup = ({navigation}) => {
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
           alert(response?.data?.message);
+        } else {
+          console.log('error')
         }
         action.setSubmitting(false);
       }
@@ -112,7 +120,6 @@ const Signup = ({navigation}) => {
             password: '',
             confirmPassword: '',
             lastName: '',
-            // username: '',
           }}>
           {({
             errors,
