@@ -9,6 +9,7 @@ import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
+import { TopBarcard } from '../topBar1/topBarCard';
 export const PopularTemplesList = ({pageNav, seeallnav}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
@@ -67,6 +68,9 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   return (
     <View>
+      <View style={{minHeight: 100}}>
+      <TopBarcard txt={'Search'}/>
+      </View>
       <View style={styles.searchContainer}>
         <SearchBar
           value={searchedText}

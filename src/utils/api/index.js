@@ -97,7 +97,7 @@ export const loginUser1 = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in login===', error);
+    console.log('error in login===>>', error);
     return error;
   }
 }
