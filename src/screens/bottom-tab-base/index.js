@@ -52,7 +52,6 @@ export default BottomTabBase = ({ navigation }) => {
       showsVerticalScrollIndicator={false}>
       {homeFeedListData === undefined ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <BackgroundImage />
           <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
@@ -80,13 +79,13 @@ export default BottomTabBase = ({ navigation }) => {
             showLabel: false,           
           }}>
            <Tab.Screen
-            name={allTexts.tabNames.home}
-            component={UserFeedScreen}
+            name={allTexts.screenNames.eventsScreen}
+            component={GetEventScreen}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <View style={styles.container}>
-                  <FeatherIcon name="home" color={color} size={23} />
-                  <Text style={{ color: color }}>Home</Text>
+                  <MaterialIcons name="event" color={color} size={23} />
+                  <Text style={{ color: color }}>Events</Text>
                 </View>
               ),
             }}
@@ -120,8 +119,8 @@ export default BottomTabBase = ({ navigation }) => {
         /> */}
          
           <Tab.Screen
-            name={allTexts.screenNames.eventsScreen}
-            component={GetEventScreen}
+            name={allTexts.tabNames.home}
+            component={UserFeedScreen}
             options={{
               tabBarStyle: {
                 height: 200,

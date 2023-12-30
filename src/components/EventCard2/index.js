@@ -1,11 +1,12 @@
 import { Text, View, Image, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React,{useState} from 'react';
 import { styles } from './styles';
 import Icon from 'react-native-vector-icons/EvilIcons';
 import { allTexts, colors } from '../../common';
-
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const EventCard2 = ({ navigation, data }) => {
   // console.log('medialist', data?.mediaList[0]?.url);
+  const [isHearto, setIsHearto] = useState(false);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -15,6 +16,9 @@ const EventCard2 = ({ navigation, data }) => {
           navigation: navigation,
         });
       }}>
+        <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{position: 'absolute', right:15, top: 12}}>
+            <AntDesign name={!isHearto ? 'hearto' : 'heart'} size={18} color={isHearto ? 'red' : 'gray'} />
+        </TouchableOpacity>
       <Image
         source={{
           uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://th.bing.com/th/id/OIP.iAhcp6m_91O-ClK79h8EQQHaFj?rs=1&pid=ImgDetMain',

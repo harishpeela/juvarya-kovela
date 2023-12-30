@@ -15,11 +15,13 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinRegular,
     fontSize: 14,
     padding: 8,
-    height: 50,
+    height: 40,
   },
   iconContainer: {
     padding: 8,
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 15
   },
 });

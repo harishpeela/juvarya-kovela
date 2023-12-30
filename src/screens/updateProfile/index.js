@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { View, ToastAndroid, useColorScheme,Text } from 'react-native';
+import { View, ToastAndroid, useColorScheme, Text, Alert } from 'react-native';
 import { PrimaryButton } from '../../components';
 import { InputField } from '../../components/inputfield';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -11,6 +11,7 @@ import { BackHeader, BackgroundImage } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
 import { Update_Profile } from '../../utils/api';
+import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 
 const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,58 +29,55 @@ const UpdateProfile = ({ navigation }) => {
   const [isRoleSelected, setIsRoleSelected] = useState('');
   const [dropDownError, setDropDownError] = useState('');
 
-  const fetchGenderData = async (data,actions) => {
+  const ProfileUpdate = async (data, actions) => {
+//     console.log('1');
+//     console.log('date', data);
+//     let Token = await getAuthTokenDetails();
+//     var myHeaders = new Headers();
+//     myHeaders.append("Content-Type", "application/json");
+//     myHeaders.append("Authorization", Token);
+
+//     var raw = JSON.stringify({
+//       "dob": data?.dateOfBirth,
+//       "gender": genderValue,
+//       "gothra": data?.gotra,
+//     });
+// console.log('sjhasb', raw);
+//     var requestOptions = {
+//       method: 'PUT',
+//       headers: myHeaders,
+//       body: raw,
+//       redirect: 'follow'
+//     };
+//     console.log('logs', data?.dateOfBirth, genderValue, data.gotra);
+//     fetch("https://kovela.app/customer/api/customer/userDetails", requestOptions)
+//       .then(response => response.json())
+//       .then(result => console.log(result, '=========>'))
+//       .catch(error => console.log('error', error));
     let payload = {
-      dob: dateOfBirthValue,
+      dob: data?.dateOfBirth,
       gender: genderValue,
-      gothra: gotraValue
+      gothra: data?.gotra
     } 
     console.log(payload, 'payload');
     try {
+      console.log(payload, 'payload try');
       let responce = await Update_Profile(payload);
-      console.log('data gothra', responce?.data);
-      setGenderValue(data.gender);
+      if(responce?.status === 200){
+        Alert.alert('Success', responce?.data?.message, [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.goBack(),
+          },
+        ]);
+      } else  {
+        alert('some thing went wrong');
+      }
     } catch (error) {
       console.error('Error fetching gender data:', error);
     }
   };
-
-  const fetchDateOfBirthData = async () => {
-    try {
-      const response = await fetch(
-        'https://kovela.app/customer/api/customer/userDetails'
-      );
-      const data = await response.json();
-      setDateOfBirthValue(data.dateOfBirth);
-    } catch (error) {
-      console.error('Error fetching date of birth data:', error);
-    }
-  };
-
-  const fetchGotraData = async () => {
-    try {
-      const response = await fetch(
-        'https://kovela.app/customer/api/customer/userDetails'
-      );
-      const data = await response.json();
-      setGotraValue(data.gotra);
-    } catch (error) {
-      console.error('Error fetching gotra data:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchGenderData();
-    fetchDateOfBirthData();
-    fetchGotraData();
-  }, []);
-
-  const UpdateProfileInfo = async (values, formikActions) => {
-   
-    ToastAndroid.show('Profile information updated successfully', ToastAndroid.SHORT);
-    navigation.goBack();
-  };
-
   return (
     <View
       style={{
@@ -101,89 +99,90 @@ const UpdateProfile = ({ navigation }) => {
         style={styles.keyBoardStyle}
         contentContainerStyle={styles.scrollContainer}
       >
-      
 
-<Formik
-  onSubmit={(values, formikActions) => {
-    if (
-      values.dateOfBirth === dateOfBirthValue &&
-      values.gender === genderValue &&
-      values.gotra === gotraValue
-    ) {
-      ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
-    } else {
-      fetchGenderData(values, formikActions);
-    }
-  }}
-  validationSchema={UpdateProfileValidation}
-  initialValues={{
-    dateOfBirth: dateOfBirthValue,
-    gender: genderValue,
-    gotra: gotraValue,
-  }}
->
-  {({
-    errors,
-    touched,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    isSubmitting,
-    values,
-  }) => {
-    return (
-      <View style={styles.fieldContainer}>
-        <InputField
-          title={dateOfBirth}
-          titleColor={colors.orangeColor}
-          onBlur={handleBlur('dateOfBirth')}
-          setState={handleChange('dateOfBirth')}
-          value={values.dateOfBirth}
-        />
-      <View style={styles.dropDownContainer}>
-  <Text style={styles.genderText}>Gender</Text>
-  <SelectDropdown
-    data={['Male', 'Female', 'Others']}
-    buttonTextStyle={styles.textStyle}
-    defaultValue={isRoleSelected}
-    onSelect={e => {
-      setIsRoleSelected(e);
-      setDropDownError(false);
-    }}
-    buttonStyle={styles.buttonStyle}
-    dropdownStyle={styles.dropdownStyle}
-    defaultButtonText="Select your Gender"
-    renderDropdownIcon={() => (
-      <View>
-        {/* You can add an icon here if needed */}
-      </View>
-    )}
-  />
-</View>
 
-        <InputField
-          title={gotra}
-          titleColor={colors.orangeColor}
-          onBlur={handleBlur('gotra')}
-          setState={handleChange('gotra')}
-          value={values.gotra}
-        />
+        <Formik
+          onSubmit={(values, formikActions) => {
+            if (
+              values.dateOfBirth === dateOfBirthValue &&
+              values.gender === genderValue &&
+              values.gotra === gotraValue
+            ) {
+              ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
+            } else {
+              ProfileUpdate(values, formikActions);
+            }
+          }}
+          validationSchema={UpdateProfileValidation}
+          initialValues={{
+            dateOfBirth: '',
+            gender: '',
+            gotra: '',
+          }}
+        >
+          {({
+            errors,
+            touched,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            isSubmitting,
+            values,
+          }) => {
+            return (
+              <View style={styles.fieldContainer}>
+                <InputField
+                  title={dateOfBirth}
+                  titleColor={colors.orangeColor}
+                  onBlur={handleBlur('dateOfBirth')}
+                  setState={handleChange('dateOfBirth')}
+                  value={values.dateOfBirth}
+                />
+                <View style={styles.dropDownContainer}>
+                  <Text style={styles.genderText}>Gender</Text>
+                  <SelectDropdown
+                    data={['Male', 'Female', 'Others']}
+                    buttonTextStyle={styles.textStyle}
+                    defaultValue={isRoleSelected}
+                    onSelect={e => {
+                      setIsRoleSelected(e);
+                      setDropDownError(false);
+                      setGenderValue(e);
+                    }}
+                    buttonStyle={styles.buttonStyle}
+                    dropdownStyle={styles.dropdownStyle}
+                    defaultButtonText="Select your Gender"
+                    renderDropdownIcon={() => (
+                      <View>
+                        {/* You can add an icon here if needed */}
+                      </View>
+                    )}
+                  />
+                </View>
 
-        <View style={styles.centeredButtonContainer}>
-          <PrimaryButton
-            bgColor={colors.orangeColor}
-            radius={25}
-            width={150}
-            marginTop={200}
-            textColor={'white'}
-            onPress={handleSubmit}
-            text={'Update Details'}
-          />
-        </View>
-      </View>
-    );
-  }}
-</Formik>
+                <InputField
+                  title={gotra}
+                  titleColor={colors.orangeColor}
+                  onBlur={handleBlur('gotra')}
+                  setState={handleChange('gotra')}
+                  value={values.gotra}
+                />
+
+                <View style={styles.centeredButtonContainer}>
+                  <PrimaryButton
+                    bgColor={colors.orangeColor}
+                    radius={25}
+                    width={150}
+                    marginTop={200}
+                    textColor={'white'}
+                    onPress={handleSubmit}
+                    text={'Update Details'}
+                  />
+                </View>
+              </View>
+            );
+          }}
+        </Formik>
       </KeyboardAwareScrollView>
     </View>
   );

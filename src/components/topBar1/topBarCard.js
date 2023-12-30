@@ -4,7 +4,8 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { colors } from '../../common';
+import Entypo from 'react-native-vector-icons/Entypo'
+import { allTexts, colors } from '../../common';
 export const TopBarcard = ({
     txtColor,
     onPress,
@@ -15,6 +16,8 @@ export const TopBarcard = ({
     arrow,
     cancel,
     children,
+    menu,
+    navigation,
 }) => {
     return (
        <View style={styles.container}>
@@ -23,8 +26,9 @@ export const TopBarcard = ({
                 style={{
                     flexDirection: 'row',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    justifyContent: isBell ? 'space-between' : 'space-evenly',
                     marginTop: '15%',
+                    marginHorizontal:30 
                 }}>
                 {arrow && (
                     <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
@@ -32,6 +36,11 @@ export const TopBarcard = ({
                             style={{ height: 10, width: 6 }} />
                     </TouchableOpacity>
                 )}
+                    {menu && (
+                        <TouchableOpacity onPress={() => alert('under Development')}>
+                            <Entypo name='menu' size={20} color={'white'} />
+                        </TouchableOpacity>
+            )}
                 {cancel && (
                     <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
                         <MaterialIcons name='cancel' size={20} color={colors.orangeColor} />
@@ -61,10 +70,11 @@ export const TopBarcard = ({
                 </TouchableOpacity>
             )}
             {isBell && (
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
                     <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
                 </TouchableOpacity>
             )}
+        
         </View>
         {children}
        </View>

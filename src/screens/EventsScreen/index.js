@@ -32,15 +32,17 @@ const EventsScreen = ({navigation}) => {
 
   const EventsList = async () => {
     setEventsLoader(true);
+    setLoader(true);
     let result = await EventList(0, 200);
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
-      console.log('1');
       let filtering = result?.data?.events;
       setEventsData(result?.data?.events);
+      setLoader(false)
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
+      setLoader(false)
     }
   };
   useEffect(() => {

@@ -51,10 +51,12 @@ export const styles = StyleSheet.create({
     
 
     eventContainer:{
-        backgroundColor:colors.orangeColor,
-        height: 100,
+        padding:24,
+        backgroundColor:'#FFAB0F',
+        height:150,
         borderBottomLeftRadius:24,
         borderBottomRightRadius:24,
+        marginTop: -10
        },
     searchAndNew:{
         flexDirection:'row',
