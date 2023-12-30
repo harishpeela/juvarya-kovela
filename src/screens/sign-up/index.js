@@ -58,6 +58,8 @@ const Signup = ({navigation}) => {
       primaryContact: data?.phone,
       password: data?.password,
     };
+    console.log('log in signup');
+  
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data?.phone,

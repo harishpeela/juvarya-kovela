@@ -3,10 +3,12 @@ import {
   View,
   TouchableOpacity,
   FlatList,
+  Image,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {styles} from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {
   SafeAreaView,
 } from 'react-native-safe-area-context';
@@ -18,7 +20,7 @@ import {
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
-
+import Card from '../../common/Card';
 const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -51,7 +53,6 @@ const EventsScreen = ({navigation}) => {
      <View style={styles.eventContainer}>
       <View style={styles.eventAndPlus}>
       <Text style={styles.text}>Events </Text> 
-      <FeatherIcon style={styles.notificationIcon} name="bell" size={30} color="white" />
         </View>
      <View style={styles.searchAndNew}>
           <SearchBar
@@ -87,9 +88,30 @@ const EventsScreen = ({navigation}) => {
      </View>  
      </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
+        {/* <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}></View>
-        </View>
+        </View> */}
+        <Card style={styles.card}>
+          <AntDesignIcon style={{position: 'absolute', right: 10, top: 10}} name="heart" size={20} color="red" />
+          <View>
+            <Image 
+            style={{height: 120, width: 120, borderRadius: 60}} 
+            source={require('../../../assets/images/tempimg1.jpg')}/>
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize: 16, fontWeight: '600', color: 'black', marginVertical: 10}}>Holi Festival</Text>
+            <View style={{borderRadius: 10, backgroundColor: '#f1f1f1', paddingVertical: 5, width: 150}}>
+               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
+                <Text style={{fontSize: 10, color:'black', marginLeft: 10}}>10-21-2023, November</Text>
+               </View>
+               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
+               <Text style={{color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue}}>Anakapalle</Text>
+               </View>
+            </View>
+          </View>
+        </Card>
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />

@@ -62,19 +62,20 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
+        marginVertical: 10,
     },
     text:{
         color:"#FFFFFF",
-        fontSize:25,
-        marginHorizontal:'35%',
-        marginBottom:20,
-        fontWeight:'bold'
+        fontSize:18,
+        marginStart:'40%',
+        fontWeight:'bold',
     },
     plusIcon:{
         color:colors.orangeColor,
     },
     eventAndPlus:{
         flexDirection:'row',
+        alignItems: 'center'
     },
     notificationContainer:{
     },
@@ -137,5 +138,17 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
 
-  }
+  },
+    notificationIcon: {
+      marginStart: '35%'
+  },
+  customSearch: {
+    height: 20,
+  },
+  card: {
+    marginVertical: 20,
+    width: '50%',
+    justifyContent: 'center', //Centered vertically
+    alignItems: 'center', // Centered horizontally
+  },
 });
