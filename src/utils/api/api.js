@@ -183,8 +183,7 @@ export const axiousInstanceNew1 = axios.create({
 });
 axiousInstanceNew1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
-  let clientToken = await getClientCredentials();
-  config.headers.Authorization = token || clientToken.clientToken;
+  config.headers.Authorization = token;
   return config;
 });
 
@@ -219,9 +218,6 @@ axiosMultiPartFormData.interceptors.request.use(async function (config) {
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
 })
-
-
-
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {

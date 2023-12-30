@@ -201,7 +201,7 @@ export const PostProfilePic = async data => {
 };
 export const Update_Profile = async data => {
   try {
-    let result = await axiousInstanceNew1.post(
+    let result = await axiousInstanceNew1.put(
       `${endpoints.UPDATE_PROFILE}`,
       data,
     );

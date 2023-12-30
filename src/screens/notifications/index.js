@@ -38,22 +38,10 @@ const Notifications = ({navigation}) => {
     <View style={{ flex: 1}}>
       <StatusBar backgroundColor={'#FFAB0F'} animated={true} />
       <View style={{}}>
-        <View style={{height: 90}}>
-        {/* <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()}>
-          <Text> hello </Text>
-        </TopBarcard> */}
-        <HeaderComponent
-        titleName={'Account'}
-        // rightFirstImage={IC_CHAT_ROUND}
-        // rightSecondImage={IC_NOTIFICATION_ACCOUNT}
-        subContainerStyle={{ backgroundColor: colors.orangeColor }}
-        onRightSecondImagePress={() =>
-          navigation.goBack()
-        }
-        onRightFirstImagePress={() => alert('welcome')}
-      />
+        <View style={{height: 80}}>
+        <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()} />
         </View>
-        <View style={{marginTop: 50}}>
+        <View style={{marginTop: 40}}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (

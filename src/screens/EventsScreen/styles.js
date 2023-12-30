@@ -52,10 +52,11 @@ export const styles = StyleSheet.create({
 
     eventContainer:{
         padding:24,
-        backgroundColor:colors.orangeColor,
+        backgroundColor:'#FFAB0F',
         height:150,
         borderBottomLeftRadius:24,
         borderBottomRightRadius:24,
+        marginTop: -10
        },
     searchAndNew:{
         flexDirection:'row',

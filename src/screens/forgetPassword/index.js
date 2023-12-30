@@ -140,7 +140,6 @@ const ForgetPassword = () => {
   const validateEmail = text => {
     // Use a regular expression for basic email validation
     const isValid = text.toLowerCase().endsWith('@gmail.com');
-    console.log('isValid =>>>>>> ' + isValid);
     setValidEmail(isValid);
     setUserEmail(text);
   };

@@ -9,7 +9,7 @@ const Search = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       
       <View style={{flex: 1}}>
-        <PopularTemplesList pageNav={navigation} seeallnav={navigation} />
+        <PopularTemplesList pageNav={navigation} seeallnav={navigation} navigation={navigation} />
       </View>
     </View>
   );
