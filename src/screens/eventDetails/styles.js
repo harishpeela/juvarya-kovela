@@ -4,7 +4,7 @@ import { colors, fontFamily, fontSize } from '../../common'
 export const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: colors.gray1
+        backgroundColor: '#f1f1f1'
     },
     header: {
         marginTop: '10%',
@@ -48,15 +48,9 @@ export const styles = StyleSheet.create({
     buttonContainer: {
         height: '6%',
         alignItems: 'center',
-        backgroundColor: 'transparent',
         alignContent: 'center',
-        marginTop:10
-    },
-    
-
-    festivalIcon:{
-    color:colors.orangeColor,
-    marginLeft:3
+                backgroundColor: '#f1f1f1',
+borderWidth: 0,
     },
     button: {
         width: '85%',
@@ -298,13 +292,17 @@ infoContainer:{
 },
 HeadingAndIcon:{
     flexDirection:'row',
-    justifyContent:'space-between',
-    alignItems:'center'
+    justifyContent:'space-between'
 },
-editIconContainer:{
-    backgroundColor:colors.orangeColor,
-    padding:6,
-    borderRadius:100
-}
-
+highLightCard: {
+    margin: 10,
+    alignItems: 'center', //Centered horizontally
+    padding: 10
+  },
+  contributeCard: {
+        marginVertical: 20,
+        width: '50%',
+        justifyContent: 'center', //Centered vertically
+        alignItems: 'center', // Centered horizontally
+      },
 })
