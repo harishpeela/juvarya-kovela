@@ -16,10 +16,10 @@ export const styles = StyleSheet.create({
         paddingHorizontal: '5%',
     },
     secondContainer: {
-        marginTop: 5,
+        marginTop:5,
         flexDirection: 'column',
         width: '100%',
-        paddingTop: '5%',
+        paddingTop: '2%',
         shadowColor: colors.black,
         height: '50%',
         // borderWidth:5,
@@ -41,7 +41,7 @@ export const styles = StyleSheet.create({
     dateText: {
         color: colors.orangeColor,
         fontSize:11,
-        marginLeft:10,
+        marginLeft:16,
         justifyContent:'flex-start',
         
     },
@@ -61,6 +61,7 @@ borderWidth: 0,
         alignItems: 'center',
         elevation: 2,
     },
+  
     btnText: {
         color: colors.white,
         fontWeight: '400',
@@ -129,7 +130,8 @@ borderWidth: 0,
         borderRadius:24,
         padding:10,
         marginRight:22,
-        marginLeft:3
+        marginLeft:3,
+        height:20
         
     },
     container1:{
@@ -192,6 +194,9 @@ marginTop:10
     },
     toggleData: {
         marginBottom: 300,
+    },
+    bg:{
+    //    backgroundColor:colors.red4 
     },
     subBtn: {
         justifyContent: 'center', // Center vertically

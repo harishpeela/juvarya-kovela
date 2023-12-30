@@ -30,7 +30,7 @@ export const SearchBar = ({
           {borderWidth: brWidth ? brWidth : 0},
           {borderColor: brColor ? brColor : colors.white},
           {height: srHeight ? srHeight : 50},
-          ,
+          
         ]}>
         <View style={styles.iconContainer}>
           <Icon name="search1" size={20} color={colors.gray} />

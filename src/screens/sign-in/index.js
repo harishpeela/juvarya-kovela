@@ -153,6 +153,7 @@ const Signin = ({navigation}) => {
                     error={touched.password && errors.password}
                     onBlur={handleBlur('password')}
                     setState={handleChange('password')}
+                    
                   />
                 </View>
                 <View style={styles.btnContainer}>

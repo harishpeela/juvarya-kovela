@@ -1,17 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StatusBar} from 'react-native';
 import {getNotifications} from '../../utils/api';
 import {Loader, TopBarcard} from '../../components';
 import {
   BackHeaderNew,
-  BackgroundImage,
   NotificationCard,
   NewBackHeader
 } from '../../components';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import { HeaderComponent } from '../../components/header_comp/HeaderComponent';
+import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
-import { setDefaultNamespace } from 'i18next';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -36,17 +35,27 @@ const Notifications = ({navigation}) => {
     GetNotifications();
   }, []);
   return (
-    <View style={{backgroundColor: colors.white, flex: 1}}>
-      <View style={{marginTop: '10%', margin: 15}}>
-        {/* <NewBackHeader
-          txt={'Notifications'}
-          onPress={() => navigation.goBack()}
-        
-        /> */}
-        <TopBarcard  />
-        <View style={{marginTop: 10}}>
+    <View style={{ flex: 1}}>
+      <StatusBar backgroundColor={'#FFAB0F'} animated={true} />
+      <View style={{}}>
+        <View style={{height: 90}}>
+        {/* <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()}>
+          <Text> hello </Text>
+        </TopBarcard> */}
+        <HeaderComponent
+        titleName={'Account'}
+        // rightFirstImage={IC_CHAT_ROUND}
+        // rightSecondImage={IC_NOTIFICATION_ACCOUNT}
+        subContainerStyle={{ backgroundColor: colors.orangeColor }}
+        onRightSecondImagePress={() =>
+          navigation.goBack()
+        }
+        onRightFirstImagePress={() => alert('welcome')}
+      />
+        </View>
+        <View style={{marginTop: 50}}>
           {loader ? (
-            <Loader size={'small'} color={colors.orangeColor} />
+            <Loader size={'large'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (
               <FlatList
                 keyboardShouldPersistTaps="handled"
@@ -64,7 +73,7 @@ const Notifications = ({navigation}) => {
                 justifyContent: 'center',
                 marginTop: '40%',
               }}>
-              <Text>No notifications for this user</Text>
+              <Text style={{color: 'black'}}>No notifications for this user</Text>
             </View>
           )}
         </View>

@@ -561,13 +561,12 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
-        <StatusBar backgroundColor="transparent" translucent={true} />
+        <StatusBar backgroundColor="#FFAB0F" translucent={true} />
         <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />
           ) : (
             <HomeStack />
-            // <Text> hello</Text>
           )}
         </NavigationContainer>
       </SafeAreaProvider>
