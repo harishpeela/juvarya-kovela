@@ -138,7 +138,7 @@ const AddEvents = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '7%', marginLeft: '6%' }}>
+        <View style={{ flexDirection: 'row', marginTop: '8%', marginLeft: '6%' }}>
           <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
             <Image source={require('../../../assets/images/backarrow.png')}
               style={{ height: 10, width: 6 }} />

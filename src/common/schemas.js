@@ -23,12 +23,8 @@ export const RegisterValidationSchema = Yup.object({
     .oneOf([Yup.ref('password'), null], 'Password not Matched'),
 });
 export const UpdatePasswordValidation = Yup.object({
-  password: Yup.string()
+  currentPassword: Yup.string()
     .trim()
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
-      'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
-    )
     .required('Password required'),
     newPassword: Yup.string()
     .trim()

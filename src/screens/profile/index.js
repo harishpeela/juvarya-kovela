@@ -187,7 +187,7 @@ const Profile = ({ navigation }) => {
                 // <Image source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}} style={styles.profileImage} />
               ) : (
                 <View style={styles.profileImage}>
-                  <Icon name="camera" size={90} color={colors.orangeColor} />
+                  <Icon name="camera" size={60} color={colors.orangeColor} />
                 </View>
               )}
             </TouchableOpacity>

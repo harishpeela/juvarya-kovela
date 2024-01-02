@@ -233,6 +233,7 @@ const ForgetPassword = () => {
         keyboardType="email-address"
         onChangeText={validateEmail}
         value={userEmail}
+        placeholderTextColor={'black'}
       />
       {error ? (
         <View style={styles.errorContainer}>
