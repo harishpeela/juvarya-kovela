@@ -11,7 +11,6 @@ const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
-
   const getPostsList = async () => {
     setLoading(true);
     try {
@@ -56,11 +55,12 @@ const MySavedPosts = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Feather name="arrow-left" color={colors.black} size={28} />
           </TouchableOpacity>
+<
           <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10, color: isDarkMode ? 'black' : 'black'}}>
             Saved Posts
           </Text>
         </View>
-        <View style={{height: '85%'}}>
+        <View style={{height: '85%'}}>x``
           {loading ? (
             <View>
               <Loader color={colors.orangeColor} size={'small'} />
