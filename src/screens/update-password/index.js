@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, ToastAndroid, useColorScheme} from 'react-native';
+import {View, ToastAndroid, useColorScheme, Alert} from 'react-native';
 import React, {useContext} from 'react';
 import {PrimaryButton} from '../../components';
 import {PasswordField} from '../../components/inputfield';
@@ -9,12 +9,9 @@ import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader} from '../../components';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-import ApplicationContext from '../../utils/context-api/Context';
-
+import { NewUpdateUserPassword } from '../../utils/api';
 const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-
   const {
     buttonTexts: {updatePassword},
     placeHolders: {confirmPasswordPlace, passwordPlace},
@@ -22,46 +19,24 @@ const UpdatePassword = ({navigation}) => {
       inputTitles: {currentPassword, Newpassword, confirmPassword},
     },
   } = allTexts;
-  const {userDetails} = useContext(ApplicationContext);
   const PasswordUpdate = async (values, formikActions) => {
-    let token = await getAuthTokenDetails();
-    var myHeaders = new Headers();
-    myHeaders.append('Content-Type', 'application/json');
-    myHeaders.append('Authorization', token);
-
-    var raw = JSON.stringify({
-      primaryContact: userDetails?.primaryContact,
-      oldPassword: values?.password,
-      password: values?.confirmPassword
-    });
-    console.log('raw', raw);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: raw,
-      redirect: 'follow',
-    };
-
-    fetch('https://kovela.app/customer/api/customer/password', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('result', result);
-        // formikActions.setSubmitting(false);
-        if (result) {
-          ToastAndroid.show(
-            // 'మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది ..!',
-            'Your Password saved sucessfully',
-            ToastAndroid.SHORT,
-          );
-          navigation.goBack();
-        } else {
-          ToastAndroid.show(
-            'Error in Updating your Password!',
-            ToastAndroid.SHORT,
-          );
-        }
-      })
-      .catch(error => console.log('error', error));
+    let payLoad = {
+      oldPassword: values?.currentPassword,
+      password: values?.newPassword
+    }
+    console.log('payload', payLoad);
+    try{
+      let result = await NewUpdateUserPassword(payLoad);
+      console.log('result of update password', result?.data);
+      Alert.alert('Success', result?.data?.message, [
+        {
+          text: 'Ok',
+          onPress: () =>
+            navigation.navigate(allTexts.tabNames.profile)
+        },
+      ]);    } catch(error){
+      console.log('error in update passwords', error);
+    }
   };
 
   return (
@@ -85,7 +60,7 @@ const UpdatePassword = ({navigation}) => {
         <Formik
           onSubmit={(values, formikActions) => {
             console.log(values, '====<>');
-            PasswordUpdate(values);
+            PasswordUpdate(values, formikActions);
           }}
           validationSchema={UpdatePasswordValidation}
           initialValues={{
@@ -137,12 +112,10 @@ const UpdatePassword = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
-                    radius={25}
-                    width={100}
-                    textColor={'white'}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={updatePassword}
+                    radius={25}  
                   />
                 </View>
               </View>

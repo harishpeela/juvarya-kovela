@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    marginTop: 60,
+    marginTop: 20,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',

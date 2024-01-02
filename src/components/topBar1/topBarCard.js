@@ -28,7 +28,7 @@ export const TopBarcard = ({
                     alignItems: 'center',
                     justifyContent: isBell ? 'space-between' : 'space-evenly',
                     marginTop: '15%',
-                    marginHorizontal:30 
+                    marginHorizontal:20 
                 }}>
                 {arrow && (
                     <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-between',
-       
     },
     iconContainer: {
         height: 30,

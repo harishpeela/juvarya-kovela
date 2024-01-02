@@ -589,7 +589,7 @@ export const NewVerifyOTP = async data => {
 };
 export const NewUpdateUserPassword = async data => {
   try {
-    let result = await axiousInstanceNew.post(
+    let result = await axiousInstanceNew1.put(
       `${endpoints.NEW_UPDATE_PASSWORD}`,
       data,
     );

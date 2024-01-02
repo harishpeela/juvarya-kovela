@@ -139,8 +139,7 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   nodatatext: {
-    fontSize: 24,
-    textTransform: 'capitalize',
+    fontSize: 16,
     fontWeight: 'bold',
     color: colors.orangeColor,
   },

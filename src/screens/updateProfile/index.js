@@ -111,7 +111,7 @@ const UpdateProfile = ({ navigation }) => {
                   setState={handleChange('dateOfBirth')}
                   value={values.dateOfBirth}
                 />
-                <View style={styles.dropDownContainer}>
+                <View style={{}}>
                   <Text style={styles.genderText}>Gender</Text>
                   <SelectDropdown
                     data={['Male', 'Female', 'Others']}

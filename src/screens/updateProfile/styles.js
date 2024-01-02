@@ -33,12 +33,12 @@ export const styles = StyleSheet.create({
    
   },
   buttonStyle:{
-    color:colors.black,
+    color:colors.back,
     height:30,
     
   },
   genderText:{
-  marginRight:325,
+  marginRight:'87%',
   color:colors.orangeColor,
   fontWeight:'normal',
   marginBottom:8
@@ -75,19 +75,20 @@ export const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 15,
     height:35
-
   },
   dropdownStyle: {
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
     borderRadius: 8,
-  
   },
   textStyle:{
     fontSize:12,
-    
-  }
+  },
+  dropDownContianer: {
+    marginHorizontal: 10,
+    marginTop: 30,
+  },
 
 
 });
