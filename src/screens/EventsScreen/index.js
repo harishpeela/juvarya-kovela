@@ -91,7 +91,7 @@ const EventsScreen = ({navigation}) => {
         {/* <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}></View>
         </View> */}
-        <Card style={styles.card}>
+        {/* <Card style={styles.card}>
           <AntDesignIcon style={{position: 'absolute', right: 10, top: 10}} name="heart" size={20} color="red" />
           <View>
             <Image 
@@ -111,7 +111,7 @@ const EventsScreen = ({navigation}) => {
                </View>
             </View>
           </View>
-        </Card>
+        </Card> */}
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
@@ -122,7 +122,7 @@ const EventsScreen = ({navigation}) => {
                     numColumns={2}
                     data={eventsData}
                     contentContainerStyle={styles.flatListStyle}
-                    style={{marginBottom: '70%'}}
+                    style={{marginBottom: '35%'}}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({item}) => (
                       <EventCard2

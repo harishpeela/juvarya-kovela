@@ -70,7 +70,7 @@ export const TopBarcard = ({
                 </TouchableOpacity>
             )}
             {isBell && (
-                <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
+                <TouchableOpacity style={{marginRight: '4%'}} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
                     <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
                 </TouchableOpacity>
             )}

@@ -38,7 +38,7 @@ const Notifications = ({navigation}) => {
     <View style={{ flex: 1}}>
       <StatusBar backgroundColor={'#FFAB0F'} animated={true} />
       <View style={{}}>
-        <View style={{height: 80}}>
+        <View style={{height: 80, marginTop: 10}}>
         <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()} />
         </View>
         <View style={{marginTop: 40}}>

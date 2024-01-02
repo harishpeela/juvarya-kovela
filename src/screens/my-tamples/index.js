@@ -58,7 +58,6 @@ const MyTamples = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {

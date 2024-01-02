@@ -8,10 +8,9 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
-import {BackHeader, BackgroundImage} from '../../components';
+import {BackHeader} from '../../components';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
-import {TextInput} from 'react-native-gesture-handler';
 
 const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,7 +23,6 @@ const UpdatePassword = ({navigation}) => {
     },
   } = allTexts;
   const {userDetails} = useContext(ApplicationContext);
-
   const PasswordUpdate = async (values, formikActions) => {
     let token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -32,8 +30,9 @@ const UpdatePassword = ({navigation}) => {
     myHeaders.append('Authorization', token);
 
     var raw = JSON.stringify({
-      username: userDetails?.username,
-      password: values.password,
+      primaryContact: userDetails?.primaryContact,
+      oldPassword: values?.password,
+      password: values?.confirmPassword
     });
     console.log('raw', raw);
     var requestOptions = {
@@ -46,7 +45,8 @@ const UpdatePassword = ({navigation}) => {
     fetch('https://kovela.app/customer/api/customer/password', requestOptions)
       .then(response => response.json())
       .then(result => {
-        formikActions.setSubmitting(false);
+        console.log('result', result);
+        // formikActions.setSubmitting(false);
         if (result) {
           ToastAndroid.show(
             // 'మీ పాస్‌వర్డ్ విజయవంతంగా మార్చబడింది ..!',
@@ -70,7 +70,6 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {
@@ -85,7 +84,8 @@ const UpdatePassword = ({navigation}) => {
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            PasswordUpdate(values, formikActions);
+            console.log(values, '====<>');
+            PasswordUpdate(values);
           }}
           validationSchema={UpdatePasswordValidation}
           initialValues={{

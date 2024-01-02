@@ -30,12 +30,19 @@ export const UpdatePasswordValidation = Yup.object({
       'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
     )
     .required('Password required'),
+    newPassword: Yup.string()
+    .trim()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
+      'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
+    )
+    .required('New Password required'),
   confirmPassword: Yup.string()
     .required('Confirm Your Password')
-    .oneOf([Yup.ref('password'), null], 'Password not Matched'),
-    gotra: Yup.string()
-    .required('Confirm Your Password')
-    .oneOf([Yup.ref('password'), null], 'Enter your Gotra'),
+    .oneOf([Yup.ref('newPassword'), null], 'Password not Matched'),
+    // gotra: Yup.string()
+    // .required('Confirm Your Password')
+    // .oneOf([Yup.ref('password'), null], 'Enter your Gotra'),
 
 });
 

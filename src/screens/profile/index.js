@@ -26,7 +26,7 @@ import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { GetProfilePic, PostProfilePic, AdminTemples } from '../../utils/api';
-
+import { StatusBar } from 'react-native';
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();

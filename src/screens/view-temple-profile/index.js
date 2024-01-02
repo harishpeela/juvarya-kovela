@@ -479,10 +479,10 @@ const ViewTempleProfile = ({route, navigation}) => {
               <Text style={styles.modalContentText}>User groups</Text>
             </View>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.profilemembership, {
-                  id: trfData?.jtProfile,
-                })
+              onPress={() => alert('page under development')
+                // navigation.navigate(allTexts.screenNames.profilemembership, {
+                //   id: trfData?.jtProfile,
+                // })
               }>
               <View style={styles.modalContent}>
                 <MaterialIcons

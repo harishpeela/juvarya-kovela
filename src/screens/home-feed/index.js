@@ -124,11 +124,12 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      {/* <BackgroundImage /> */}
-      <View style={styles.navBarContainer}>
+        <View style={{height: 90}}>
+        <TopBarcard>
+        <View style={styles.navBarContainer}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(allTexts.screenNames.menu)}>
+            onPress={() => navigation.navigate(allTexts.tabNames.profile)}>
             <View style={styles.sidebarIcon}>
               <View style={[styles.bar, styles.shortestBar]} />
               <View style={[styles.bar, styles.mediumBar]} />
@@ -136,7 +137,6 @@ const UserFeedScreen = ({navigation}) => {
             </View>
           </TouchableOpacity>
         </View>
-        {/* {adminRole ? ( */}
         <TouchableOpacity
           style={styles.circle}
           onPress={() =>
@@ -148,9 +148,11 @@ const UserFeedScreen = ({navigation}) => {
             color={isDarkMode ? 'black' : 'black'}
             style={styles.bellIcon}
           />
-          <View style={styles.notificationDot} />
+          {/* <View style={styles.notificationDot} /> */}
         </TouchableOpacity>
       </View>
+        </TopBarcard>
+        </View>
       <>
         {homeFeedList?.length > 0 ? (
           <FlatList
