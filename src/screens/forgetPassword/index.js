@@ -8,8 +8,8 @@ import {
   handleChange,
   Alert,
   Modal,
+  useColorScheme,
 } from 'react-native';
-
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 // import {Formik} from 'formik';
@@ -64,7 +64,7 @@ const ForgetPassword = () => {
   const startTime = e => {
     if (Ref.current) {
       clearInterval(Ref.current);
-    } 
+    }
     const id = setInterval(() => {
       startTimer(e);
     }, 1000);
@@ -80,7 +80,7 @@ const ForgetPassword = () => {
       deadline.setSeconds(deadline.getSeconds() + secLeft);
       return deadline;
     }
-  }; 
+  };
   useEffect(() => {
     const setText = () => {
       otpInput?.current?.setValue(`${otp}`);
@@ -157,13 +157,13 @@ const ForgetPassword = () => {
     }
   };
   const userPasswordHandler = async values => {
-    console.log("inside the userPAsswordHandler")
+    console.log('inside the userPAsswordHandler');
     const payload = {
-      email:userEmail,
-      password:values.password,
-      otp:otp
-    }
-    console.log("payload 23456=>>>>>>>>>>> " +  payload.password);
+      email: userEmail,
+      password: values.password,
+      otp: otp,
+    };
+    console.log('payload 23456=>>>>>>>>>>> ' + payload.password);
     try {
       console.log('values =>>>>>> ' + values.password);
       let result = await forgotPassword(payload);
@@ -171,7 +171,7 @@ const ForgetPassword = () => {
       if (result) {
         // setOtp()
         console.log('data is coming here =>>>>' + result);
-        
+
         Snackbar.show({
           text: 'Password Created Successfully',
           backgroundColor: 'green',
@@ -184,10 +184,10 @@ const ForgetPassword = () => {
             },
           },
         });
-        setTimeout(()=>{
-          setModalVisible(false)
-          navigation.navigate(allTexts.screenNames.signin)
-      },1500)
+        setTimeout(() => {
+          setModalVisible(false);
+          navigation.navigate(allTexts.screenNames.signin);
+        }, 1500);
       } else {
         setMemberShip(0);
       }
@@ -214,11 +214,14 @@ const ForgetPassword = () => {
   const resetHandler = () => {
     console.log('reset is trigerring here ');
     otpGeneration();
-  };
+  }
+  const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
+    <View style={[styles.container,{backgroundColor: isDarkMode ? 'white' : 'white'},]}>
+      <View
+        style={
+          styles.logoContainer}>
         <Ionicons
           onPress={() => navigation.goBack()}
           size={30}
@@ -233,6 +236,7 @@ const ForgetPassword = () => {
         keyboardType="email-address"
         onChangeText={validateEmail}
         value={userEmail}
+        placeholderTextColor="black"
       />
       {error ? (
         <View style={styles.errorContainer}>
@@ -272,7 +276,7 @@ const ForgetPassword = () => {
                       <Text style={styles.black}>{` ${timer} seconds`}</Text>
                     </Text>
                   )}
-                     {timer === '00:00' && (
+                  {timer === '00:00' && (
                     <Text style={styles.expectOtp}>
                       Expect OTP in
                       <Text style={styles.black}>{` ${timer} seconds`}</Text>
