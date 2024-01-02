@@ -62,6 +62,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 20,
     backgroundColor: '#E5E4E2',
+    color:'black'
   },
   line: {
     borderWidth: 0.5,
