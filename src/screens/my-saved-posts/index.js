@@ -50,7 +50,6 @@ const MySavedPosts = ({navigation}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
       <View style={styles.footerBackground}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>

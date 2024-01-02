@@ -14,14 +14,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 60,
-    paddingHorizontal:"2.5%",
+    marginTop: '-5%'
   },
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    height: 50,
     borderBottomColor: '#ccc',
     paddingHorizontal: 10,
     justifyContent: 'center',
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     height: 2,
-    backgroundColor: colors.black,
+    backgroundColor: colors.white,
   },
   shortestBar: {
     width: 12,

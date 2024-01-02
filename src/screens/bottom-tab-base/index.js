@@ -70,7 +70,7 @@ export default BottomTabBase = ({ navigation }) => {
                 height: '10%',
                 width: '95%',
                 flexDirection: 'row',
-                marginBottom: '-2%',
+                // marginBottom: '-2%',
                 borderRadius: 15,
                 alignSelf: 'center',              
               },

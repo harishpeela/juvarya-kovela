@@ -1,9 +1,11 @@
 import React from "react";
-import { View, TextInput, StyleSheet, Text, TouchableOpacity } from "react-native";
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, useColorScheme } from "react-native";
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { colors } from "../../common";
 export  const EventInput = ({ lable, placeholder, height, calendar, location, onChangeText, value, onPressCalendar}) => {
+    const isDarkMode = useColorScheme() === 'dark';
+
     return (
         <View>
             <Text style={styles.label}>{lable}</Text>
@@ -21,10 +23,10 @@ export  const EventInput = ({ lable, placeholder, height, calendar, location, on
                 )}
                 {location && (
                     <TouchableOpacity>
-                      <EvilIcons name='location' size={25} color={colors.orangeColor} style={{marginLeft: 10}} />
+                      <EvilIcons name='location' size={20} color={colors.orangeColor} style={{marginLeft: 10}}  />
                     </TouchableOpacity>
                 )}
-                <TextInput value={value} placeholder={placeholder}  style={{ marginLeft: 5, width: '90%'}} multiline={true}  onChangeText={onChangeText} />
+                <TextInput value={value} placeholder={placeholder} placeholderTextColor={isDarkMode ? 'gray' : 'gray'}  style={{ marginLeft: 5, width: '90%'}} multiline={true}  onChangeText={onChangeText} />
             </View>
         </View>
     );

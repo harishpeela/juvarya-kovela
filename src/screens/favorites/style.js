@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     width: '100%',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    // paddingVertical: 10,
+    // paddingHorizontal: 10,
   },
   noAvailable: {
     color: colors.orange,
@@ -31,7 +31,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     margin: 8,
-    marginTop: 40,
+    marginTop: '5%',
   },
   bell: {marginLeft: 10, marginTop: 10},
   flatListStyle: {

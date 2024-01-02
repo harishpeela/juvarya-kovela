@@ -58,7 +58,6 @@ const SeeAll = ({navigation}) => {
   const onSelect = data => {};
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <BackgroundImage />
       <View style={{margin: '5%', marginTop: '10%', marginLeft: '5%'}}>
         <BackHeaderNew
           txt={'Popular Temples'}

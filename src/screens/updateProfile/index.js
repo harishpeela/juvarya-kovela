@@ -30,30 +30,6 @@ const UpdateProfile = ({ navigation }) => {
   const [dropDownError, setDropDownError] = useState('');
 
   const ProfileUpdate = async (data, actions) => {
-//     console.log('1');
-//     console.log('date', data);
-//     let Token = await getAuthTokenDetails();
-//     var myHeaders = new Headers();
-//     myHeaders.append("Content-Type", "application/json");
-//     myHeaders.append("Authorization", Token);
-
-//     var raw = JSON.stringify({
-//       "dob": data?.dateOfBirth,
-//       "gender": genderValue,
-//       "gothra": data?.gotra,
-//     });
-// console.log('sjhasb', raw);
-//     var requestOptions = {
-//       method: 'PUT',
-//       headers: myHeaders,
-//       body: raw,
-//       redirect: 'follow'
-//     };
-//     console.log('logs', data?.dateOfBirth, genderValue, data.gotra);
-//     fetch("https://kovela.app/customer/api/customer/userDetails", requestOptions)
-//       .then(response => response.json())
-//       .then(result => console.log(result, '=========>'))
-//       .catch(error => console.log('error', error));
     let payload = {
       dob: data?.dateOfBirth,
       gender: genderValue,
@@ -85,7 +61,6 @@ const UpdateProfile = ({ navigation }) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}
     >
-      <BackgroundImage />
       <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {
@@ -99,8 +74,6 @@ const UpdateProfile = ({ navigation }) => {
         style={styles.keyBoardStyle}
         contentContainerStyle={styles.scrollContainer}
       >
-
-
         <Formik
           onSubmit={(values, formikActions) => {
             if (
