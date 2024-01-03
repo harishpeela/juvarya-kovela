@@ -65,8 +65,6 @@ LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
 const App = () => {
-  console.log('22233');
-  console.log('working');
   const {
     screenNames: {
       signin,

@@ -145,7 +145,7 @@ export const allTexts = {
     createfeed: 'CreateFeed',
     feed: 'Feed',
     profile: 'Profile',
-    mySavedPosts: 'My Saved Posts',
+    mySavedPosts: 'MySavedPosts',
     posts: 'Posts',
     followersmembership: 'FollowersMembership',
     profilemembership: 'ProfileMembership',

@@ -22,6 +22,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
+    console.log('1====>');
     setLoader(true);
     try {
       let result = await PopularTemples();
@@ -69,7 +70,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   return (
     <View>
       <View style={{minHeight: 160, marginTop: 10}}>
-      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
       <View style={styles.searchContainer}>
         <SearchBar
           value={searchedText}
@@ -88,7 +89,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       </View>
       </TopBarcard>
       </View>
-     
       <>
         {loader ? (
           <View

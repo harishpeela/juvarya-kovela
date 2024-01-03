@@ -17,6 +17,7 @@ import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
+import { TopBarcard } from '../../components';
 const EventDetails = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
@@ -141,38 +142,7 @@ const EventDetails = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ borderWidth: 0 }} >
-        {/* <BackgroundImage2 /> */}
-        <View style={styles.HeaderImage}>
-          {/* <TouchableOpacity
-            style={styles.round}
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <BackHeaderNew
-              onPress={() => navigation.goBack()}
-              txtColor={colors.black}
-              isPlus={false}
-            />
-          </TouchableOpacity> */}
-          <TouchableOpacity style={styles.round2} onPress={() => {
-            navigation.goBack();
-          }} >
-            <Icon
-              onPress={() => navigation.goBack()}
-              color={colors.orangeColor}
-              size={22}
-              isPlus={false}
-              name="step-backward"
-            />
-          </TouchableOpacity>
-          <View style={styles.eventTextContainer}>
-            <Text style={styles.eventText}>Event Details</Text>
-          </View>
-          <TouchableOpacity style={styles.round2}>
-            <FeatherIcon style={styles.notificationIcon} name="bell" size={20} color="white" />
-
-          </TouchableOpacity>
-        </View>
+        <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
         <ImageBackground
           source={scroolImagesArray[activeImgIndex]?.img}
           style={{ height: 250, marginHorizontal: 20, marginTop: 20 }}
