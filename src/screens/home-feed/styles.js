@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: '-5%'
+    marginTop: '-5%',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ccc',
     paddingHorizontal: 10,
     justifyContent: 'center',
+    marginHorizontal: '3%',
   },
   button: {
     paddingVertical: 11,
@@ -153,12 +154,11 @@ const styles = StyleSheet.create({
     top: 4,
     left: 20,
   },
-  flatListStyle:{
-  },
-  homeCard:{
+  flatListStyle: {},
+  homeCard: {
     // borderWidth:10,
     // borderColor:'red'
-  }
+  },
 });
 
 export default styles;
