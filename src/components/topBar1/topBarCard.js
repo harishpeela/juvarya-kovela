@@ -21,7 +21,7 @@ export const TopBarcard = ({
     navigation,
     back,
     navBack
-    navMenu,
+    // navMenu,
 }) => {
     return (
         <View style={styles.container}>

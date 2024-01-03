@@ -209,5 +209,15 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     margin: 30,
-  }
+  },
+  iconContainer: {
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+   
+    
+    
+}
 });

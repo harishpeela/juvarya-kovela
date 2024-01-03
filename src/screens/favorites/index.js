@@ -104,7 +104,7 @@ const Favorite = ({ navigation }) => {
           <View style={styles.searchbarContainer}>
             <View>
               <SearchBar
-                value={seracherdText}
+                placeHolder={'search  temples'}
                 onCrossPress={() => {
                   setSeracherdText('');
                   getTemples();
