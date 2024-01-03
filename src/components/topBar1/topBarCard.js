@@ -21,6 +21,7 @@ export const TopBarcard = ({
     navigation,
     back,
     navBack
+    navMenu,
 }) => {
     return (
         <View style={styles.container}>
@@ -49,7 +50,7 @@ export const TopBarcard = ({
                     )}
 
                     {menu && (
-                        <TouchableOpacity onPress={() => alert('under Development')}>
+                        <TouchableOpacity onPress={() => navMenu.navigate(allTexts.tabNames.profile)}>
                             <Entypo name='menu' size={20} color={'white'} />
                         </TouchableOpacity>
                     )}

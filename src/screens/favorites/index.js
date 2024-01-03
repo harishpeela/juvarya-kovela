@@ -100,7 +100,7 @@ const Favorite = ({ navigation }) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Favourites'} isBell={true} menu={true} navigation={navigation} >
+        <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
           <View style={styles.searchbarContainer}>
             <View>
               <SearchBar
@@ -128,7 +128,7 @@ const Favorite = ({ navigation }) => {
           [
             filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
-                <Text style={{color: colors.orangeColor}}>{'No Temples Available'}</Text>
+                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>{'No Temples Available'}</Text>
               </View>
             ) : (
               <FlatList

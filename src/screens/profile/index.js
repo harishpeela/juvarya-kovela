@@ -19,14 +19,12 @@ import { removeLoginSessionDetails } from '../../utils/preferences/localStorage'
 import ApplicationContext from '../../utils/context-api/Context';
 import { styles } from './style';
 import { PrimaryButton, ProfileInfo, Loader, Item } from '../../components';
-import { UploadPhoto } from '../../utils/svgs';
 import { allTexts, colors } from '../../common';
 import { useTranslation } from 'react-i18next';
 import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { GetProfilePic, PostProfilePic, AdminTemples } from '../../utils/api';
-import { StatusBar } from 'react-native';
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
@@ -44,6 +42,7 @@ const Profile = ({ navigation }) => {
   const [clicked, setClicked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
   const [Admin, setAdmin] = useState([]);
+  const [loader, setLoader] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const Type = () => {
@@ -135,16 +134,23 @@ const Profile = ({ navigation }) => {
     }
   };
   const TempleAdmins = async () => {
+    setLoader(true);
+    console.log('loader first', loader)
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
+      setLoader(false)
+      console.log('loader second', loader)
     } else {
       setAdmin([]);
+      setLoader(false);
+      console.log('loader third', loader)
+
     }
   }
   useEffect(() => {
     TempleAdmins();
-  })
+  }, []);
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -217,7 +223,25 @@ const Profile = ({ navigation }) => {
               }}
             />
           )} */}
-          {Admin && (
+          {loader ? (
+            <Loader size={'small'} color={colors.orangeColor} />
+          ) : (
+            Admin ? (
+              <Item
+              svg={
+                <Image
+                  source={require('../../../assets/images/templeIcon.png')}
+                  style={{ height: 20, width: 20 }}
+                />
+              }
+              text={t('myTemple')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.myTamples)
+              }}
+            />
+            ) : ''
+          )}
+          {/* {Admin && (
             <Item
               svg={
                 <Image
@@ -230,7 +254,7 @@ const Profile = ({ navigation }) => {
                 navigation.navigate(allTexts.screenNames.myTamples)
               }}
             />
-          )}
+          )} */}
           <Item
             svg={<Icon name="unlock" size={20} color={isDarkMode ? 'black' : 'black'} />}
             text={t('updatepassword')}

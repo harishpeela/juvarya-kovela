@@ -22,6 +22,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
+    console.log('1====>');
     setLoader(true);
     try {
       let result = await PopularTemples();
@@ -88,7 +89,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       </View>
       </TopBarcard>
       </View>
-     
       <>
         {loader ? (
           <View

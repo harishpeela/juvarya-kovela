@@ -4,9 +4,10 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  useColorScheme,
 } from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {styles} from './styles';
+import React, { useState, useEffect } from 'react';
+import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {
@@ -17,20 +18,23 @@ import {
   SearchBar,
   Sort,
   EventCard2,
+  TopBarcard,
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
 import { TopBarcard } from '../../components';
 import Card from '../../common/Card';
-const EventsScreen = ({navigation}) => {
+const EventsScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchLoading, setSearchLoading] = useState(false);
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
-
+  const [isHeart, setIsHeart] = useState(false);
+  const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setEventsLoader(true);
     setLoader(true);
@@ -38,6 +42,7 @@ const EventsScreen = ({navigation}) => {
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.events;
+      console.log('filtering', filtering);
       setEventsData(result?.data?.events);
       setLoader(false)
       setEventsLoader(false);
@@ -46,8 +51,17 @@ const EventsScreen = ({navigation}) => {
       setLoader(false)
     }
   };
+  const TempleAdmins = async () => {
+    let result = await AdminTemples();
+    if (result?.status === 200) {
+      setAdmin(result?.data);
+    } else {
+      setAdmin([]);
+    }
+  }
   useEffect(() => {
     EventsList();
+    TempleAdmins();
   }, []);
   return (
     <View>
@@ -101,25 +115,23 @@ const EventsScreen = ({navigation}) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-                {searchedText === '' && (
-                  <FlatList
-                    numColumns={2}
-                    data={eventsData}
-                    contentContainerStyle={styles.flatListStyle}
-                    style={{marginBottom: '35%'}}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({item}) => (
-                      <EventCard2
-                        navigation={navigation}
-                        data={item}
-                        // name={item.user.firstName}
-                        // img={item.user.url}
-                        // data={item.user}
-                        // donation={item.user.donation}
-                      />
-                    )}
+              <FlatList
+                numColumns={2}
+                data={eventsData}
+                contentContainerStyle={styles.flatListStyle}
+                style={{ marginBottom: '35%', marginTop: '3%' }}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <EventCard2
+                    navigation={navigation}
+                    data={item}
+                  // name={item.user.firstName}
+                  // img={item.user.url}
+                  // data={item.user}
+                  // donation={item.user.donation}
                   />
                 )}
+              />
             </>
           )}
         </View>
