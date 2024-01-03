@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30
   },
+  updateProfileTopCard:{
+ height:100
+  },
   container:{
     flex: 1,
     borderWidth: 1,

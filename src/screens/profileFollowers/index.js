@@ -14,6 +14,7 @@ import { Loader } from '../../components';
 import { colors } from '../../common';
 import { styles } from './styles';
 import { Ellipsis } from '../../components';
+import { TopBarcard } from '../../components';
 
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
@@ -58,6 +59,26 @@ const FollowersMembership = ({ route, navigation }) => {
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} back={true} isBell={true} navigation={navigation}>
+      <View style={styles.searchContainer}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSearchedText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
+        />
+      </View>
+      </TopBarcard>
+      </View>
       <View style={styles.followersHeader}>
         <BackHeaderNew
           txt={

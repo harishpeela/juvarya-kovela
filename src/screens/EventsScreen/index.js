@@ -20,8 +20,9 @@ import {
   EventCard2,
   TopBarcard,
 } from '../../components';
-import { allTexts, colors } from '../../common';
-import { EventList, AdminTemples } from '../../utils/api';
+import {allTexts, colors} from '../../common';
+import {EventList} from '../../utils/api';
+import { TopBarcard } from '../../components';
 import Card from '../../common/Card';
 const EventsScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
@@ -63,25 +64,26 @@ const EventsScreen = ({ navigation }) => {
     TempleAdmins();
   }, []);
   return (
-    <View style={{ flex: 1, backgroundColor: isDarkMode ? 'white' : 'white' }}>
-      <View style={{ minHeight: 160 }}>
-        <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation}>
-          <View style={{ ...styles.searchAndNew, marginHorizontal: admin ? 40 : 0 }}>
-            <SearchBar
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={false}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-            {admin && (
-              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
-                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
-              </TouchableOpacity>
-            )}
-          </View>
-        </TopBarcard>
+    <View>
+     <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
+      <View style={styles.searchContainer}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSearchedText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
+        />
+      </View>
+      </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
         {/* <View style={styles.searchAndFilter}>
@@ -134,7 +136,7 @@ const EventsScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-    </View>
+      </View>
   );
 };
 export default EventsScreen;

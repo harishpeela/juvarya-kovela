@@ -69,8 +69,8 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   return (
     <View>
-      <View style={{minHeight: 160, marginTop: 10}}>
-      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
       <View style={styles.searchContainer}>
         <SearchBar
           value={searchedText}

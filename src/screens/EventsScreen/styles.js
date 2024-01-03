@@ -14,12 +14,17 @@ export const styles = StyleSheet.create({
         marginHorizontal: '4%',
         display: 'flex',
         flexDirection: 'column',
+        padding:10
     },
     searchContainer: {
-        width: '82%',
-        height: '100%',
-        
-       
+      margin: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    updateProfileTopCard:{
+      height:100,
+      
     },
     followersContainer: {
         height: '100%',

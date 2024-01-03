@@ -10,6 +10,7 @@ import {UpdatePasswordValidation} from '../../common/schemas';
 import {styles} from './style';
 import {BackHeader} from '../../components';
 import { NewUpdateUserPassword } from '../../utils/api';
+import { TopBarcard } from '../../components';
 const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {
@@ -45,12 +46,13 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={styles.headerContainer}>
-        <BackHeader
-          onBackPress={() => {
-            navigation.goBack();
-          }}
-          txt={updatePassword}
+     <View style={styles.updateProfileTopCard}>
+        <TopBarcard
+          back={true}
+          txt={'updatePassword'}
+          navBack={navigation}
+          
+
         />
       </View>
       <KeyboardAwareScrollView
