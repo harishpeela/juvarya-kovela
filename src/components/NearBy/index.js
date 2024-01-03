@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';

@@ -1,20 +1,63 @@
-
-
 import {StyleSheet, useColorScheme} from 'react-native';
 import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  headerContainer: {
-    backgroundColor:colors.orangeColor,
-    height:100,
-    borderBottomLeftRadius:24,
-    borderBottomRightRadius:24,
+  topBarCard: {
+    minHeight: '20%',
   },
-  updateProfileTopCard:{
-    height:100,
-    
+  headerContainer: {
+    padding: 10,
+  },
+  preViewImageContainer: {
+    height: 50,
+    width: 50,
+    borderRadius: '50%',
+  },
+  preViewImage: {
+    height: 100,
+    width: 100,
+    borderRadius: 100 / 2,
+    alignContent: 'center',
+    alignSelf: 'center',
+    borderWidth: 5,
+    borderColor: colors.orangeColor,
+  },
+  profileContainer: {
+    borderWidth: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    minHeight: 'auto',
+    height: '10%',
+    alignContent: 'center',
+    paddingTop: '10%',
+    width: '20%',
+    borderRadius: 50,
+    bottom: '5%',
+    marginLeft: '40%',
+  },
+  // uploadPic: {
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   borderWidth: 3,
+  //   borderColor: colors.orangeColor,
+  //   borderRadius: 120 / 2,
+  //   padding: 1,
+  // },
+  profileImage: {
+    alignContent: 'center',
+    alignItems: 'center',
+    height: 100,
+    width: 100,
+    borderRadius: 100 / 2,
+    justifyContent: 'center',
+    bottom: '30%',
+  },
+  editProfile: {
+    bottom: '50%',
+    left: '62%',
+    // position: 'absolute',
   },
   keyBoardStyle: {
     margin: 10,
@@ -23,31 +66,27 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     margin: 10,
     flex: 1,
-    marginTop:'0%',
-    justifyContent:'center'
+    marginTop: '0%',
+    justifyContent: 'center',
   },
   fieldContainer: {
     marginTop: 30,
-    justifyContent:'center',
-    alignItems:'center',
-    flex:1,
-    
-    
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
   },
-  TextStyle:{
-    fontSize:10,
-   
+  TextStyle: {
+    fontSize: 10,
   },
-  buttonStyle:{
-    color:colors.back,
-    height:30,
-    
+  buttonStyle: {
+    color: colors.black,
+    height: 30,
   },
-  genderText:{
-  marginRight:'87%',
-  color:colors.orangeColor,
-  fontWeight:'normal',
-  marginBottom:8
+  genderText: {
+    marginRight: 325,
+    color: colors.orangeColor,
+    fontWeight: 'normal',
+    marginBottom: 8,
   },
   buttonContainer: {
     marginTop: 15,
@@ -60,8 +99,8 @@ export const styles = StyleSheet.create({
     color: colors.red3,
     paddingLeft: 50,
   },
-  centeredButtonContainer:{
-    marginTop:'10%'
+  centeredButtonContainer: {
+    marginTop: '10%',
   },
   pickerContainer: {
     marginTop: 10,
@@ -80,7 +119,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    height:35
+    height: 35,
   },
   dropdownStyle: {
     backgroundColor: 'white',
@@ -88,13 +127,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
   },
-  textStyle:{
-    fontSize:12,
+  textStyle: {
+    fontSize: 12,
   },
-  dropDownContianer: {
-    marginHorizontal: 10,
-    marginTop: 30,
-  },
-
-
 });
