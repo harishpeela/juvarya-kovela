@@ -55,12 +55,11 @@ const MySavedPosts = ({navigation}) => {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Feather name="arrow-left" color={colors.black} size={28} />
           </TouchableOpacity>
-<
           <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10, color: isDarkMode ? 'black' : 'black'}}>
             Saved Posts
           </Text>
         </View>
-        <View style={{height: '85%'}}>x``
+        <View style={{height: '85%'}}>
           {loading ? (
             <View>
               <Loader color={colors.orangeColor} size={'small'} />

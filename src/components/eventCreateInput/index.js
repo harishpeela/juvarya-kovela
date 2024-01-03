@@ -26,7 +26,7 @@ export  const EventInput = ({ lable, placeholder, height, calendar, location, on
                       <EvilIcons name='location' size={20} color={colors.orangeColor} style={{marginLeft: 10}}  />
                     </TouchableOpacity>
                 )}
-                <TextInput value={value} placeholder={placeholder} placeholderTextColor={isDarkMode ? 'gray' : 'gray'}  style={{ marginLeft: 5, width: '90%'}} multiline={true}  onChangeText={onChangeText} />
+                <TextInput value={value} placeholder={placeholder} placeholderTextColor={isDarkMode ? 'black' : 'black'}  style={{ marginLeft: 5, width: '90%'}} multiline={true}  onChangeText={onChangeText} />
             </View>
         </View>
     );
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         borderRadius: 5,
         backgroundColor: 'white',
+        alignItems: 'center'
     },
     label: {
         marginLeft: '10%',
@@ -47,6 +48,7 @@ const styles = StyleSheet.create({
     }
 });
 export  const EventInput1 = ({ lable, placeholder, height, calendar, location, onChangeText, onPressCalendar2, onPressCalendar, value1, value2}) => {
+    const isDarkMode = useColorScheme() === 'dark';
     return (
         <View>
             <Text style={styles.label}>{lable}</Text>
@@ -60,7 +62,7 @@ export  const EventInput1 = ({ lable, placeholder, height, calendar, location, o
                     <TouchableOpacity onPress={onPressCalendar}>
                       <FontAwesome name='calendar' size={20} color={colors.orangeColor} style={{marginLeft: 10}} />
                     </TouchableOpacity>
-                    <TextInput value={value1} placeholder={placeholder}  style={{ marginLeft: 5, width: '40%'}} onChangeText={onChangeText} />
+                    <TextInput value={value1} placeholder={placeholder} placeholderTextColor={isDarkMode ? 'black' : 'black'}  style={{ marginLeft: 5, width: '40%'}} onChangeText={onChangeText} />
 
                     <TouchableOpacity onPress={onPressCalendar2}>
                       <FontAwesome name='calendar' size={20} color={colors.orangeColor} style={{marginLeft: 10}} />

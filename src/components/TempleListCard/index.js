@@ -80,28 +80,26 @@ export const TempleListCard = ({
         source={{
           uri: post?.logo
             ? post?.logo
-            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+            : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17041996227071704199620350.jpg',
         }}
         style={{height: 200, width: 200, borderRadius: 60}}
-        imageStyle={{borderRadius: 20,}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '80%',
-          }}>
-          <Text style={styles.textCard} numberOfLines={1}>
-            {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
-          </Text>
-          <TouchableOpacity onPress={() => FollowandUnFollow(templeId)}>
+        imageStyle={{borderRadius: 20}}>
+           <TouchableOpacity style={{alignSelf: 'flex-end', marginTop: '5%'}} onPress={() => FollowandUnFollow(templeId)}>
             <Icon
               name={isLiked ? 'heart' : 'heart-o'}
               size={20}
-              color={isLiked ? colors.red1 : 'black'}
+              color={isLiked ? colors.red1 : colors.orangeColor}
               style={{marginRight: 20}}
             />
           </TouchableOpacity>
+        <View
+          style={{
+            marginTop: '65%'
+          }}>
+          <Text style={styles.textCard} numberOfLines={1}>
+            {name.length < 15 ? `${name}` : `${name.substring(0, 15)}..`}
+          </Text>
+         
         </View>
       </ImageBackground>
     </TouchableOpacity>
