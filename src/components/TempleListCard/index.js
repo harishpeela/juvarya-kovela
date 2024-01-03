@@ -40,15 +40,17 @@ export const TempleListCard = ({
   };
   const followTemples = async d => {
     const payload = {
-      jtCustomer: userDetails?.id,
-      type: 'ITEM',
-      jtProfile: d,
-      following: !isLiked,
+      jtProfile:d,
+      following:!isLiked
+      // jtCustomer: userDetails?.id,
+      // type: 'ITEM',
+      // jtProfile: d,
+      // following: !isLiked,
     };
     console.log('payload of follw', payload);
     try {
       let results = await FollowUnFollow(payload);
-      // console.log('77777777777', results?.data);
+      console.log('77777777777', results?.data);
       if (results && results.status === 200) {
         ToastAndroid.show(
           `Successfully you are  ${

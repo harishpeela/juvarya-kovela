@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo'
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -20,8 +20,8 @@ export const TopBarcard = ({
     menu,
     navigation,
     back,
-    navBack
-    // navMenu,
+    navBack,
+    navMenu,
 }) => {
     return (
         <View style={styles.container}>

@@ -138,14 +138,17 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
   const followTemples = async id => {
     const payload = {
-      jtCustomer: userDetails?.id,
-      type: 'ITEM',
       jtProfile: id,
       following: !isFollow,
+      // jtCustomer: userDetails?.id,
+      // type: 'ITEM',
+      // jtProfile: id,
+      // following: !isFollow,
     };
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
+      console.log('result of follow temple in view temple profile', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -156,6 +159,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
           ToastAndroid.SHORT,
         );
       } else {
+        alert('some thing went wrong')
       }
     } catch (error) {
       console.log('error in folow temples api in view profile page', error);
@@ -256,6 +260,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <TouchableOpacity
                 style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
+                  console.log('isfollow',isFollow, 'second', trfData?.jtProfile);
                   navigation.goBack();
                   route?.params?.onSelect({
                     selected: isFollow,

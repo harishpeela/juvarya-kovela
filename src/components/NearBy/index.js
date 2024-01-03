@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
@@ -10,7 +17,7 @@ import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import { TopBarcard } from '../topBar1/topBarCard';
-export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
+export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +74,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       console.log('error in search pop temp', error);
     }
   };
+  console.log('routings', route?.params)
   return (
     <View>
       <View style={{minHeight: 160, marginTop: '3%'}}>

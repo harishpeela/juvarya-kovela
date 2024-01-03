@@ -1,17 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { View, SafeAreaView, FlatList, Text, useColorScheme } from 'react-native';
-import React, { useEffect, useState, useContext } from 'react';
-import { Loader, SearchBar, BackgroundImage, TopBarcard } from '../../components';
-import { allTexts, colors } from '../../common';
-import { styles } from './style';
-import { GetMyTemples, getTempledetailsWithId } from '../../utils/api';
-import { useIsFocused } from '@react-navigation/native';
+import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
+import React, {useEffect, useState, useContext} from 'react';
+import {Loader, SearchBar, BackgroundImage, TopBarcard} from '../../components';
+import {allTexts, colors} from '../../common';
+import {styles} from './style';
+import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
+import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
-import { FavTempleListCard } from '../../components';
-const Favorite = ({ navigation }) => {
+import {FavTempleListCard} from '../../components';
+const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
+  const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState();
@@ -42,7 +42,7 @@ const Favorite = ({ navigation }) => {
       setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
       if (result) {
-        let templesArray = { ...d, ...result?.data };
+        let templesArray = {...d, ...result?.data};
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
         setLoading(false);
@@ -60,7 +60,7 @@ const Favorite = ({ navigation }) => {
       ? setfilteredArray([])
       : '';
   };
-  useEffect(() => { }, [isFocused]);
+  useEffect(() => {}, [isFocused]);
   const performFilter = value => {
     setfilteredArray(
       templeList.filter(item =>
@@ -141,7 +141,7 @@ const Favorite = ({ navigation }) => {
                 onEndReachedThreshold={0.5}
                 decelerationRate={0.5}
                 keyExtractor={item => item?.id}
-                renderItem={({ item }) => {
+                renderItem={({item}) => {
                   if (item?.name) {
                     return (
                       <FavTempleListCard
