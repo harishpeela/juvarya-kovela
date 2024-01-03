@@ -22,7 +22,6 @@ import {
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
-import { TopBarcard } from '../../components';
 import Card from '../../common/Card';
 const EventsScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
