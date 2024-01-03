@@ -68,4 +68,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
+  updateProfileTopCard:{
+    height:100
+  }
 });

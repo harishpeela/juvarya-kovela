@@ -14,6 +14,7 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
 import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
+import { TopBarcard } from '../../components';
 
 const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -58,10 +59,19 @@ const SeeAll = ({navigation}) => {
   const onSelect = data => {};
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{margin: '5%', marginTop: '10%', marginLeft: '5%'}}>
+      {/* <View style={{margin: '5%', marginTop: '10%', marginLeft: '5%'}}>
         <BackHeaderNew
           txt={'Popular Temples'}
           onPress={() => navigation.goBack()}
+        />
+      </View> */}
+      <View style={styles.updateProfileTopCard}>
+        <TopBarcard
+          back={true}
+          txt={'All Temples'}
+          navBack={navigation}
+          
+
         />
       </View>
       {!popTemples?.length > 0 ? (
