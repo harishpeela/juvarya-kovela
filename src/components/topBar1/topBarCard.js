@@ -20,7 +20,7 @@ export const TopBarcard = ({
     menu,
     navigation,
     back,
-    navBack
+    navBack,
     navMenu,
 }) => {
     return (
