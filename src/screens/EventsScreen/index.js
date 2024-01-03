@@ -1,18 +1,12 @@
 import {
-  Text,
   View,
   TouchableOpacity,
   FlatList,
-  Image,
   useColorScheme,
 } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import {
-  SafeAreaView,
-} from 'react-native-safe-area-context';
 import {
   Loader,
   SearchBar,
@@ -20,6 +14,7 @@ import {
   EventCard2,
   TopBarcard,
 } from '../../components';
+import { AdminTemples } from '../../utils/api';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
 import Card from '../../common/Card';
@@ -41,7 +36,6 @@ const EventsScreen = ({ navigation }) => {
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.events;
-      console.log('filtering', filtering);
       setEventsData(result?.data?.events);
       setLoader(false)
       setEventsLoader(false);
@@ -54,6 +48,7 @@ const EventsScreen = ({ navigation }) => {
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
+      console.log('admin data', result?.data);
     } else {
       setAdmin([]);
     }
@@ -62,13 +57,13 @@ const EventsScreen = ({ navigation }) => {
     EventsList();
     TempleAdmins();
   }, []);
+  console.log('admin', admin);
   return (
     <View>
      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
-      <View style={styles.searchContainer}>
+      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} >
+      <View style={{...styles.searchAndNew, marginHorizontal: admin ? 40 : 0}}>
         <SearchBar
-          value={searchedText}
           onTextChange={e => {
             setSearchedText(e);
             SearchPopTemp(e);
@@ -81,7 +76,13 @@ const EventsScreen = ({ navigation }) => {
           bgColor={colors.gray4}
           placeHolder={'Search'}
         />
+        {admin && (
+              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
+                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
+              </TouchableOpacity>
+            )}
       </View>
+      
       </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>

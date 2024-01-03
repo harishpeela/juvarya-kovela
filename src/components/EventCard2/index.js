@@ -9,7 +9,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const EventCard2 = ({ navigation, data }) => {
   // console.log('medialist', data?.mediaList[0]?.url);
   const [isHearto, setIsHearto] = useState(false);
-  console.log('===============><><><', data);
   return (
     <TouchableOpacity
       style={styles.container}
