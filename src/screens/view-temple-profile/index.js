@@ -55,17 +55,18 @@ import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { style } from '../newprofile/styles';
 
 const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -310,7 +311,13 @@ const ViewTempleProfile = ({route, navigation}) => {
               {'(15.3k Ratings)'}
             </Text>
             <View style={{marginTop: 10}}>
-              <ProfileTimingTabs />
+              {!data?.seasonal ? (
+                <TouchableOpacity style={styles.seasonal}>
+                  <Text style={styles.seasonalText}> View Temple Crew</Text>
+                </TouchableOpacity>
+              ) : (
+                <ProfileTimingTabs />
+              )}
             </View>
             <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />

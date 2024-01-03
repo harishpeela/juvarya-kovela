@@ -36,6 +36,7 @@ const EventsScreen = ({ navigation }) => {
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.events;
+      console.log('events sctreen data', filtering);
       setEventsData(result?.data?.events);
       setLoader(false)
       setEventsLoader(false);
@@ -57,7 +58,6 @@ const EventsScreen = ({ navigation }) => {
     EventsList();
     TempleAdmins();
   }, []);
-  console.log('admin', admin);
   return (
     <View>
      <View style={{minHeight: 160, marginTop: '3%'}}>
