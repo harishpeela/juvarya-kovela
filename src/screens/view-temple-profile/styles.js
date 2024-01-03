@@ -220,5 +220,5 @@ export const styles = StyleSheet.create({
     color: colors.white,
     fontWeight: 'bold',
     fontSize: 16,
-  }
+  },
 });
