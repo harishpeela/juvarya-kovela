@@ -9,8 +9,11 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
-import { TopBarcard } from '../../components';
+import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 import styles from './styles';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
@@ -123,14 +126,72 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-        <View style={{height: 90}}>
-        <TopBarcard isBell={true} menu={true} txt={'Feed'} navMenu={navigation}>
-        <View style={styles.navBarContainer}>
-        <View style={styles.buttonContainer}>
-        </View>
-      </View>
+      <View style={{height: 90}}>
+        <TopBarcard userIcon={true}>
+          <View style={styles.navBarContainer}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.profile)
+                }
+                style={{
+                  borderWidth: 1,
+                  borderRadius: 50,
+                  padding: 1,
+                  backgroundColor: 'white',
+                  height: 35,
+                  width: 35,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <AntDesign
+                  name="user"
+                  size={25}
+                  color={colors.black}
+                  style={{
+                    marginLeft: 10,
+                    right: 7,
+                    top: 10,
+                  }}
+                />
+                <TouchableOpacity
+                  style={{
+                    borderWidth: 1,
+                    borderRadius: 50,
+                    padding: 1,
+                    backgroundColor: 'white',
+                    height: 20,
+                    width: 20,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    left: 18,
+                    padding: 1,
+                  }}>
+                  <Feather
+                    name="menu"
+                    size={15}
+                    color={colors.black}
+                    style={{}}
+                  />
+                </TouchableOpacity>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={styles.circle}
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.notification)
+              }>
+              <FontAwesome
+                name="bell-o"
+                size={24}
+                color={isDarkMode ? 'black' : 'black'}
+                style={styles.bellIcon}
+              />
+              {/* <View style={styles.notificationDot} /> */}
+            </TouchableOpacity>
+          </View>
         </TopBarcard>
-        </View>
+      </View>
       <>
         {homeFeedList?.length > 0 ? (
           <FlatList
@@ -184,4 +245,4 @@ const UserFeedScreen = ({navigation}) => {
   );
 };
 
-export default UserFeedScreen
+export default UserFeedScreen;
