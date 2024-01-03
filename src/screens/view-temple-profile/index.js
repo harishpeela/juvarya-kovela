@@ -58,6 +58,7 @@ import { PostsComp } from '../../components/profilecompnew/postsComp';
 import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { style } from '../newprofile/styles';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -313,8 +314,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
             </Text>
-            <View style={{ marginTop: 10 }}>
-              <ProfileTimingTabs />
+            <View style={{marginTop: 10}}>
+              {!data?.seasonal ? (
+                <TouchableOpacity style={styles.seasonal}>
+                  <Text style={styles.seasonalText}> View Temple Crew</Text>
+                </TouchableOpacity>
+              ) : (
+                <ProfileTimingTabs />
+              )}
             </View>
             <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />

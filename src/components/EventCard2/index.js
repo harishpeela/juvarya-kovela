@@ -23,7 +23,7 @@ const EventCard2 = ({ navigation, data }) => {
       </TouchableOpacity>
       <Image
         source={{
-          uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17042617086241704261705836.jpg',
+          uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17042617067851704261704290.jpg',
         }}
         style={styles.Image}
       />
