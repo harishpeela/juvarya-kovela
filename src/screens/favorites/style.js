@@ -17,6 +17,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  
   loaderContainer: {
     height: '90%',
     alignItems: 'center',

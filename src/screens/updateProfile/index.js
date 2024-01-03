@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { View, ToastAndroid, useColorScheme, Text, Alert } from 'react-native';
-import { PrimaryButton } from '../../components';
+import { PrimaryButton, TopBarcard } from '../../components';
 import { InputField } from '../../components/inputfield';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { allTexts, colors } from '../../common';
@@ -34,12 +34,12 @@ const UpdateProfile = ({ navigation }) => {
       dob: data?.dateOfBirth,
       gender: genderValue,
       gothra: data?.gotra
-    } 
+    }
     console.log(payload, 'payload');
     try {
       console.log(payload, 'payload try');
       let responce = await Update_Profile(payload);
-      if(responce?.status === 200){
+      if (responce?.status === 200) {
         Alert.alert('Success', responce?.data?.message, [
           {
             text: 'Ok',
@@ -47,7 +47,7 @@ const UpdateProfile = ({ navigation }) => {
               navigation.goBack(),
           },
         ]);
-      } else  {
+      } else {
         alert('some thing went wrong');
       }
     } catch (error) {
@@ -61,14 +61,23 @@ const UpdateProfile = ({ navigation }) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}
     >
-      <View style={styles.headerContainer}>
-        <BackHeader
+
+      <View style={styles.updateProfileTopCard}>
+        <TopBarcard
+          back={true}
+          txt={updateProfile}
+          navBack={navigation}
+          
+
+        />
+      </View>
+      {/* <BackHeader
           onBackPress={() => {
             navigation.goBack();
           }}
           txt={updateProfile}
-        />
-      </View>
+        /> */}
+
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}

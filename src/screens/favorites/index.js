@@ -100,9 +100,9 @@ const Favorite = ({ navigation }) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Favourites'} isBell={true}  navigation={navigation} >
+        <TopBarcard txt={'Favourites'} isBell={true} menu={true} navigation={navigation} >
           <View style={styles.searchbarContainer}>
-            <View style={{ width: '100%' }}>
+            <View>
               <SearchBar
                 value={seracherdText}
                 onCrossPress={() => {

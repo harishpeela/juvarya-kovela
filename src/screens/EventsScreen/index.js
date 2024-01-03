@@ -20,6 +20,7 @@ import {
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
+import { TopBarcard } from '../../components';
 import Card from '../../common/Card';
 const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
@@ -49,44 +50,27 @@ const EventsScreen = ({navigation}) => {
     EventsList();
   }, []);
   return (
-    <SafeAreaView style={{flex: 1}}>
-     <View style={styles.eventContainer}>
-      <View style={styles.eventAndPlus}>
-      <Text style={styles.text}>Events </Text> 
-        </View>
-     <View style={styles.searchAndNew}>
-          <SearchBar
-              // value={searchedText}
-              // onTextChange={text => {
-              //   setSearchedText(text);
-              //   handleSearch(text);
-              // }}
-              // loading={loading}
-              // onCrossPress={() => {
-              //   setSearchedText('');
-              //   setFilteredData([]);
-              // }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={false}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-            {/* <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.black}
-              srWidth={'100%'}
-              // srHeight={"100%"}
-            />
-          </View> */}
-          <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
-          <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
-          </TouchableOpacity>
-     </View>  
-     </View>
+    <View>
+     <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
+      <View style={styles.searchContainer}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSearchedText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
+        />
+      </View>
+      </TopBarcard>
+      </View>
       <View style={styles.bodyContainer}>
         {/* <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}></View>
@@ -140,7 +124,7 @@ const EventsScreen = ({navigation}) => {
           )}
         </View>
       </View>
-    </SafeAreaView>
+      </View>
   );
 };
 export default EventsScreen;

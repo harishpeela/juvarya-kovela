@@ -6,7 +6,13 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
-    
+    backgroundColor:colors.orangeColor,
+    height:100,
+    borderBottomLeftRadius:24,
+    borderBottomRightRadius:24,
+  },
+  updateProfileTopCard:{
+    height:100
   },
   keyBoardStyle: {
     margin: 10,
