@@ -99,10 +99,10 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: '23%', marginTop: '4%'}}>
-        <TopBarcard txt={'Favourites'} isBell={true} navigation={navigation}>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
+        <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
           <View style={styles.searchbarContainer}>
-            <View style={{width: '100%'}}>
+            <View>
               <SearchBar
                 value={seracherdText}
                 onCrossPress={() => {
@@ -128,7 +128,7 @@ const Favorite = ({navigation}) => {
           [
             filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
-                <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
+                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>{'No Temples Available'}</Text>
               </View>
             ) : (
               <FlatList

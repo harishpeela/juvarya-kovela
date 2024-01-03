@@ -29,6 +29,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
+    console.log('1====>');
     setLoader(true);
     try {
       let result = await PopularTemples();
@@ -75,31 +76,26 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   return (
     <View>
-      <View style={{minHeight: 160, marginTop: 10}}>
-        <TopBarcard
-          txt={'Search'}
-          menu={true}
-          isBell={true}
-          navigation={navigation}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              value={searchedText}
-              onTextChange={e => {
-                setSearchedText(e);
-                SearchPopTemp(e);
-              }}
-              loading={false}
-              onCrossPress={async () => {
-                setSearchedText('');
-                await PopularTemplesss(pageNo, 20);
-              }}
-              bgColor={colors.gray4}
-              placeHolder={'Search'}
-            />
-          </View>
-        </TopBarcard>
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
+      <View style={styles.searchContainer}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSearchedText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
+        />
       </View>
-
+      </TopBarcard>
+      </View>
       <>
         {loader ? (
           <View

@@ -12,10 +12,8 @@ import {
   TicketConfirmation,
   UserFeedScreen,
 } from '..';
-import {BackgroundImage, Loader} from '../../components';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-import FoundationIcon from 'react-native-vector-icons/Foundation';
+import {Loader } from '../../components';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import ApplicationContext from '../../utils/context-api/Context';

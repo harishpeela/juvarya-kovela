@@ -61,13 +61,10 @@ import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
-import ForgotPasswordOtpScreen from './src/screens/forgot-password-otp-screen';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
 const App = () => {
-  console.log('22233');
-  console.log('working');
   const {
     screenNames: {
       signin,

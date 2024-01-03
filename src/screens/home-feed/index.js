@@ -15,7 +15,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
 import styles from './styles';
-import {BackgroundImage} from '../../components';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
@@ -58,7 +57,7 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('========>', result?.data);
+      // console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
@@ -233,7 +232,7 @@ const UserFeedScreen = ({navigation}) => {
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
-            <Text style={styles.nodatatext}>no items to display</Text>
+            <Text style={styles.nodatatext}>No items to display</Text>
           </View>
         ) : (
           <View

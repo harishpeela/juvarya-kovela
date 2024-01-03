@@ -8,16 +8,16 @@ export const styles = StyleSheet.create({
     // paddingVertical: 10,
     // paddingHorizontal: 10,
   },
-  noAvailable: {
-    color: colors.orange,
-    fontFamily: fontFamily.popinBold,
-  },
+  // noAvailable: {
+  //   fontFamily: fontFamily.popinBold,
+  // },
   searchbarContainer: {
     margin: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  
   loaderContainer: {
     height: '90%',
     alignItems: 'center',

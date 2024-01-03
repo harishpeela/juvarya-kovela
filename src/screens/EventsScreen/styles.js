@@ -14,12 +14,17 @@ export const styles = StyleSheet.create({
         marginHorizontal: '4%',
         display: 'flex',
         flexDirection: 'column',
+        padding:10
     },
     searchContainer: {
-        width: '82%',
-        height: '100%',
-        
-       
+      margin: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    updateProfileTopCard:{
+      height:100,
+      
     },
     followersContainer: {
         height: '100%',
@@ -48,21 +53,17 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center',
     },
-    
-
     eventContainer:{
         padding:24,
         backgroundColor:'#FFAB0F',
         height:150,
         borderBottomLeftRadius:24,
         borderBottomRightRadius:24,
-        marginTop: -10
        },
     searchAndNew:{
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center',
-        marginVertical: 10,
     },
     text:{
         color:"#FFFFFF",
@@ -75,7 +76,9 @@ export const styles = StyleSheet.create({
     },
     eventAndPlus:{
         flexDirection:'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        marginTop: 10
     },
     notificationContainer:{
     },
@@ -128,10 +131,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  card: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  // card: {
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
   container: {
     alignContent: 'center',
     width: '100%',

@@ -226,7 +226,6 @@ export const EventInput1 = ({
     </View>
   );
 };
-
 export const EventInput2 = ({
   lable,
   placeholder,

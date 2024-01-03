@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
 import {
   AddEvent,
   AddEventImage,
@@ -27,7 +27,7 @@ const AddEvents = ({ navigation, route }) => {
   const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
-
+const isDarkMode = useColorScheme() === 'dark';
   const CreateEvent = async () => {
     let Token = await getAuthTokenDetails();
     let img = getImageObj(image);
@@ -138,7 +138,7 @@ const AddEvents = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '7%', marginLeft: '6%' }}>
+        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
           <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
             <Image source={require('../../../assets/images/backarrow.png')}
               style={{ height: 10, width: 6 }} />
@@ -159,8 +159,8 @@ const AddEvents = ({ navigation, route }) => {
             <Image source={require('../../../assets/images/cameranew.png')} style={styles.camera} />
           </TouchableOpacity>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontWeight: 'bold' }}> Upload Photo</Text>
-            <Text style={{ fontSize: 7 }}>[Upload upto 5 photos]</Text>
+            <Text style={{ fontWeight: 'bold', color: isDarkMode ? 'gray' : 'gray' }}> Upload Photo</Text>
+            <Text style={{ fontSize: 7, color: isDarkMode ? 'gray' : 'gray' }}>[Upload upto 5 photos]</Text>
           </View>
           {image && (
             <AddEventImage data={image} />
