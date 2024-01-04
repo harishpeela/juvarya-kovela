@@ -202,8 +202,8 @@ const UpdateProfile = ({navigation}) => {
       <View style={styles.wrapper}>
         <View style={{minHeight: '20%'}}>
           <TopBarcard
-            txt={' Update Profile'}
-            menu={true}
+            txt={'Update Profile'}
+            back={true}
             isBell={true}
             navigation={navigation}></TopBarcard>
         </View>

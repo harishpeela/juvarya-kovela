@@ -52,6 +52,7 @@ const UpdatePassword = ({ navigation }) => {
         <TopBarcard
           back={true}
           txt={'updatePassword'}
+          navBack={navigation}
         />
       </View> */}
 
