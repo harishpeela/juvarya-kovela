@@ -9,7 +9,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const EventCard2 = ({ navigation, data }) => {
   // console.log('medialist', data?.mediaList[0]?.url);
   const [isHearto, setIsHearto] = useState(false);
-  console.log('===============><><><', data);
   return (
     <TouchableOpacity
       style={styles.container}
@@ -24,7 +23,7 @@ const EventCard2 = ({ navigation, data }) => {
       </TouchableOpacity>
       <Image
         source={{
-          uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17042617086241704261705836.jpg',
+          uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17042617067851704261704290.jpg',
         }}
         style={styles.Image}
       />

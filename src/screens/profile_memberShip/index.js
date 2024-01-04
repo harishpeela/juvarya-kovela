@@ -3,14 +3,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState, useCallback } from 'react';
-import useFocusEffect from '@react-navigation/native';
+import React, { useEffect, useState} from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  useColorScheme,
 } from 'react-native';
 import {
   BackgroundImage,
@@ -26,7 +26,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
   console.log('roleid', roleId);
-
+const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -130,7 +130,6 @@ const Split = () => {
   }, []);
   return (
     <SafeAreaView>
-      {/* <BackgroundImage /> */}
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <BackHeaderNew
@@ -177,7 +176,7 @@ const Split = () => {
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text> no memberships for this temple</Text>
+                <Text style={{color: isDarkMode ? 'black' : 'black'}}> no memberships for this temple</Text>
               </View>
             )}
           </View>

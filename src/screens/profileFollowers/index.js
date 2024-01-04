@@ -6,7 +6,7 @@ import {
   BackHeaderNew,
   FollowersListCard2,
   SearchBar,
-  Sort,
+  Sort
 } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TempleFollowersList } from '../../utils/api';
@@ -58,28 +58,37 @@ const FollowersMembership = ({ route, navigation }) => {
     }, 500);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Search'} back={true} isBell={true} navigation={navigation}>
-      <View style={styles.searchContainer}>
-        <SearchBar
-          value={searchedText}
-          onTextChange={e => {
-            setSearchedText(e);
-            SearchPopTemp(e);
-          }}
-          loading={false}
-          onCrossPress={async () => {
-            setSearchedText('');
-            await PopularTemplesss(pageNo, 20);
-          }}
-          bgColor={colors.gray4}
-          placeHolder={'Search'}
+    <View>
+     
+     {/* <View style={styles.updateProfileTopCard}>
+        <TopBarcard
+          back={true}
+          txt={'Followers'}
+          navBack={navigation}
+          
+
         />
+      </View> */}
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
+        <TopBarcard txt={'Followers'} isBell={true} back={true}  navigation={navigation} navBack={navigation} >
+          <View style={styles.searchbarContainer}>
+            <View>
+              <SearchBar
+                placeHolder={'Search followers'}
+                onCrossPress={() => {
+                  setSeracherdText('');
+                  getTemples();
+                }}
+                onTextChange={e => {
+                  setSeracherdText(e);
+                  performFilter(e);
+                }}
+              />
+            </View>
+          </View>
+        </TopBarcard>
       </View>
-      </TopBarcard>
-      </View>
-      <View style={styles.followersHeader}>
+      {/* <View style={styles.followersHeader}>
         <BackHeaderNew
           txt={
             followersList.length > 0
@@ -89,10 +98,10 @@ const FollowersMembership = ({ route, navigation }) => {
           onPress={() => navigation.goBack()}
           txtColor={colors.black}
         />
-        {/* <Ellipsis txtColor={colors.black} /> */}
-      </View>
+        <Ellipsis txtColor={colors.black} />
+      </View> */}
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
+        {/* <View style={styles.searchAndFilter}>
           <View style={styles.searchContainer}>
             <SearchBar
               value={searchedText}
@@ -122,7 +131,7 @@ const FollowersMembership = ({ route, navigation }) => {
             // srHeight={"100%"}
             />
           </View>
-        </View>
+        </View> */}
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
@@ -174,7 +183,7 @@ const FollowersMembership = ({ route, navigation }) => {
           )}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default FollowersMembership;

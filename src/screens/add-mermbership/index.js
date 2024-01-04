@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   Alert,
+  useColorScheme,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {BackgroundImage, BackHeaderNew} from '../../components';
@@ -18,6 +19,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { allTexts, colors } from '../../common';
 
 const AddMemebershipDetails = ({route, navigation}) => {
+  const isDarkMode = useColorScheme() === 'dark';
   const {jtProfileId, roleId} = route.params || {};
   const [memType, setMemType] = useState('');
   const [typeError, setTypeError] = useState(false);
@@ -112,10 +114,11 @@ const AddMemebershipDetails = ({route, navigation}) => {
                 <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>
           )}
           <TextInput
-            style={styles.inputTextStyle}
+            style={{...styles.inputTextStyle, color: isDarkMode ? 'black' : 'black'}}
             placeholder="MemberShip Name"
             onChangeText={v => setMemName(v)}
             value={memName}
+            placeholderTextColor={isDarkMode ? 'black' : 'black'}
           />
            {memberShipError && (
             <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>

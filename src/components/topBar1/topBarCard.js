@@ -20,7 +20,7 @@ export const TopBarcard = ({
     menu,
     navigation,
     back,
-    navBack
+    navBack,
     navMenu,
 }) => {
     return (
@@ -31,8 +31,8 @@ export const TopBarcard = ({
                         flexDirection: 'row',
                         alignItems: 'center',
                         justifyContent: isBell ? 'space-between' : 'space-evenly',
-                        marginTop: '15%',
-                        marginHorizontal: 20
+                        marginTop: '20%',
+                        marginHorizontal: 20,
                     }}>
                     {arrow && (
                         <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
@@ -83,11 +83,10 @@ export const TopBarcard = ({
                     </TouchableOpacity>
                 )}
                 {isBell && (
-                    <TouchableOpacity style={{ marginRight: '4%' }} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
+                    <TouchableOpacity style={{ marginRight: '4%'}} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
                         <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
                     </TouchableOpacity>
                 )}
-
             </View>
             {children}
         </View>

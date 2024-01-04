@@ -132,7 +132,7 @@ const UserFeedScreen = ({navigation}) => {
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate(allTexts.screenNames.profile)
+                  navigation.navigate(allTexts.tabNames.profile)
                 }
                 style={{
                   borderWidth: 1,

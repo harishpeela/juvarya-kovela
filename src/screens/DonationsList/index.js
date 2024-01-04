@@ -6,7 +6,7 @@ import {BackHeaderNew, Donations_list_Card, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {BackgroundImage, Loader} from '../../components';
+import {Loader} from '../../components';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
@@ -62,7 +62,6 @@ const DonationsList = ({navigation, route}) => {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
       <View style={styles.followersHeader}>
         <BackHeaderNew
           isArrow={true}

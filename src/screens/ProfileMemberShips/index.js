@@ -20,7 +20,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     setLoader(true);
     try {
       let result = await MemberShipList(0, 100);
-      console.log('res', result?.data?.data.length);
+      console.log('res', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -38,7 +38,6 @@ const ProfileMemberShips = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1}}>
-      <BackgroundImage />
       <View style={styles.header}>
         <BackHeaderNew
           txt={'MemberShips'}
@@ -62,7 +61,7 @@ const ProfileMemberShips = ({navigation, route}) => {
           data={data}
           txt={
             roleId === 'ROLE_ITEM_ADMIN'
-              ? `${membership?.length} Memberships`
+              ? `${membership?.length ? membership?.length : '0'} Memberships`
               : 'Join Now'
           }
           onPress={() => 
