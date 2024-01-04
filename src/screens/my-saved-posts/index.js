@@ -8,6 +8,7 @@ import {getSavedPostsList, Feed} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
 import {allTexts, colors} from '../../common';
 import { TopBarcard } from '../../components';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -60,7 +61,7 @@ const MySavedPosts = ({navigation}) => {
             Saved Posts
           </Text>
         </View> */}
-        <View style={styles.updateProfileTopCard}>
+        {/* <View style={styles.updateProfileTopCard}>
         <TopBarcard
           back={true}
           txt={'Saved Posts'}
@@ -68,6 +69,18 @@ const MySavedPosts = ({navigation}) => {
           
 
         />
+      </View> */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'Saved Posts'}</Text>
       </View>
         <View style={{height: '85%'}}>
           {loading ? (

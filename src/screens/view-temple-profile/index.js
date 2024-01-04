@@ -13,6 +13,8 @@ import {
   Modal,
   Pressable,
   Image,
+  navBack,
+
 } from 'react-native';
 import {
   Loader,
@@ -22,7 +24,7 @@ import {
   BackgroundImageFlower,
   BackHeaderNew,
   EventCard,
- 
+
 } from '../../components';
 import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -30,6 +32,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { allTexts } from '../../common';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Data } from '../home-feed/formateDetails';
 import {
   FollowUnFollow,
@@ -49,8 +52,7 @@ import {
   FolloUnfollowComp,
   DirectionsTabComp,
   ProfileTimingTabs,
-  Danation_Add_Card,
-  navBack
+  Danation_Add_Card
 } from '../../components';
 import { ProfileImage } from '../../components';
 import { colors } from '../../common';
@@ -260,7 +262,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <TouchableOpacity
                 style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
-                  console.log('isfollow',isFollow, 'second', trfData?.jtProfile);
+                  console.log('isfollow', isFollow, 'second', trfData?.jtProfile);
                   navigation.goBack();
                   route?.params?.onSelect({
                     selected: isFollow,
@@ -272,10 +274,21 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 /> */}
                 {/* {back && ( */}
 
-                  <TouchableOpacity style={styles.iconContainer} onPress={() => navBack.goBack()} navBack={navigation}>
-                    <Image source={require('../../../assets/images/backarrow.png')}
-                      style={{ height: 10, width: 6 }} />
-                  </TouchableOpacity>
+                <TouchableOpacity style={styles.iconContainer} onPress={() => {
+                  console.log('isfollow', isFollow, 'second', trfData?.jtProfile);
+                  navigation.goBack();
+                  route?.params?.onSelect({
+                    selected: isFollow,
+                    selectedId: !isFollow ? trfData?.jtProfile : '',
+                  });
+                }} >
+                  <Ionicons
+                    name="caret-back"
+                    size={25}
+                    color={'#FFA001'}
+
+                  />
+                </TouchableOpacity>
 
                 {/* )} */}
               </TouchableOpacity>

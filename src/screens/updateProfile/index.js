@@ -209,7 +209,7 @@ const UpdateProfile = ({navigation}) => {
       <View style={styles.wrapper}>
         <View style={{minHeight: '20%'}}>
           <TopBarcard
-            txt={'Update Profile'}
+            txt={' Update Profile'}
             menu={true}
             isBell={true}
             navigation={navigation}></TopBarcard>

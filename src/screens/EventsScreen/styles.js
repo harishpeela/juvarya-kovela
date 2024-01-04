@@ -16,6 +16,12 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         padding:10
     },
+    searchContainer:{
+      margin: 5,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
     searchContainer: {
       margin: 5,
       flexDirection: 'row',

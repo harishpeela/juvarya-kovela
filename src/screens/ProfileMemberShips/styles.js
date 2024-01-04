@@ -9,11 +9,10 @@ export const styles = StyleSheet.create({
 
   },
   header:{
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: '10%',
-    margin: '5%',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
+   
   },
   container1: {
     // borderWidth: 2,
