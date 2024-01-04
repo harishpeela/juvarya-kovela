@@ -5,6 +5,8 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {MemberShipInvite} from '../../utils/api';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 const InvitationScreen = ({navigation, route}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [email, setEmail] = useState('');
@@ -48,7 +50,7 @@ const InvitationScreen = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <View style={styles.Header}>
-        <BackHeaderNew
+        {/* <BackHeaderNew
           onPress={() => {
             navigation.goBack();
           }}
@@ -56,7 +58,19 @@ const InvitationScreen = ({navigation, route}) => {
           txt={'Inviation'}
           isArrow={true}
           isPlus={false}
-        />
+        /> */}
+      </View>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'Invite'}</Text>
       </View>
       <View style={styles.textInputContainer}>
         {/* <Text style={styles.email}>Enter User Email</Text> */}

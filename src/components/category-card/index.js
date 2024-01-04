@@ -9,19 +9,20 @@ import {
   Animated,
   useColorScheme,
 } from 'react-native';
-import {colors} from '../../common';
-import React, {useState, useRef, useMemo} from 'react';
-import {styles} from './styles';
-import {NewSaveFeed} from '../../utils/api';
+import { colors } from '../../common';
+import React, { useState, useRef, useMemo } from 'react';
+import { styles } from './styles';
+import { NewSaveFeed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {NewLikeOrUnlikeFeed, DeleteSavedFeed} from '../../utils/api';
-import {FlatList} from 'react-native-gesture-handler';
-const {width} = Dimensions.get('window');
-import {DotsNation} from '../dotsNation';
-import {Loader} from '../loader';
+import { NewLikeOrUnlikeFeed, DeleteSavedFeed } from '../../utils/api';
+import { FlatList } from 'react-native-gesture-handler';
+const { width } = Dimensions.get('window');
+import { DotsNation } from '../dotsNation';
+import { Loader } from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import '../../../languages/language';
+import { TopBarcard } from '../topBar1/topBarCard';
 
 export const UserFeedCompList = ({
   post,
@@ -102,7 +103,7 @@ export const UserFeedCompList = ({
       },
     )(event);
   };
-  const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
+  const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
     setIndex(viewableItems[0]?.index);
   }).current;
 
@@ -111,9 +112,13 @@ export const UserFeedCompList = ({
   }).current;
 
   return (
+    
     <View style={styles.postContainer} key={post?.id}>
+      
       <View style={styles.postHeader}>
-        <TouchableOpacity style={{marginBottom: 5}} onPress={onPressTitle}>
+
+        <TouchableOpacity style={{ marginBottom: 5 }} onPress={onPressTitle}>
+
           <Image
             source={{
               uri:
@@ -136,6 +141,7 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
+
       <View>
         <FlatList
           data={post?.mediaList}
@@ -147,13 +153,13 @@ export const UserFeedCompList = ({
           onScroll={handleOnScroll}
           onViewableItemsChanged={handleOnViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
-          keyExtractor={({item, index}) => index}
-          renderItem={({item, index}) => {
+          keyExtractor={({ item, index }) => index}
+          renderItem={({ item, index }) => {
             return (
               <View>
                 {!item?.uri ? (
                   <Image
-                    source={{uri: item?.url}}
+                    source={{ uri: item?.url }}
                     style={{
                       flex: 1,
                       height: 350,
@@ -203,8 +209,8 @@ export const UserFeedCompList = ({
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{paddingHorizontal: 15}}>
-        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+      <View style={{ paddingHorizontal: 15 }}>
+        <Text style={{ ...styles.likes, color: isDarkMode ? 'gray' : 'gray' }}>
           {likeCount} Likes
         </Text>
       </View>

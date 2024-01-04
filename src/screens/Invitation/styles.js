@@ -2,10 +2,10 @@ import { StyleSheet} from 'react-native'
 import { colors, fontSize } from '../../common'
 
 export const styles = StyleSheet.create({
-    Header:{
-        marginTop:"12%",
-        marginHorizontal:20
-    },
+    // Header:{
+    //     marginTop:"12%",
+    //     marginHorizontal:20
+    // },
     textInputContainer:{
         marginHorizontal:'7%',
         marginTop:'40%',
@@ -15,6 +15,22 @@ export const styles = StyleSheet.create({
         borderColor:colors.black},
     textInput:{
        marginLeft: 10,
+    },
+    headingText:{
+        marginRight:170,
+        fontWeight:'bold',
+        color:'#ffffff',
+        fontSize:20
+    },
+    headerContainer:{
+        padding: 10,
+        backgroundColor:'#FFAB0F',
+        height:100,
+        borderBottomLeftRadius:24,
+        borderBottomRightRadius:24,
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'space-between'
     },
     subBtn: {
         backgroundColor: colors.orangeColor,

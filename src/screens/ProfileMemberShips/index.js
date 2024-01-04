@@ -1,11 +1,11 @@
-import {Text, View, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {MemberShipCard, BackgroundImage, BackHeaderNew} from '../../components';
-import {allTexts} from '../../common';
-import {styles} from './styles';
-import {MemberShipList} from '../../utils/api';
-const ProfileMemberShips = ({navigation, route}) => {
-  const {roleId, trfdata} = route.params || {};
+import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { MemberShipCard, TopBarcard, BackgroundImage, BackHeaderNew } from '../../components';
+import { allTexts } from '../../common';
+import { styles } from './styles';
+import { MemberShipList } from '../../utils/api';
+const ProfileMemberShips = ({ navigation, route }) => {
+  const { roleId, trfdata } = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const data = [
@@ -39,10 +39,10 @@ const ProfileMemberShips = ({navigation, route}) => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
-        <BackHeaderNew
-          txt={'MemberShips'}
-          isArrow={true}
-          onPress={() => navigation.goBack()}
+        <TopBarcard
+          back={true}
+          txt={'Memberships'}
+          navigation={navigation}
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
@@ -56,7 +56,7 @@ const ProfileMemberShips = ({navigation, route}) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
+      <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
         <MemberShipCard
           data={data}
           txt={
@@ -64,7 +64,7 @@ const ProfileMemberShips = ({navigation, route}) => {
               ? `${membership?.length ? membership?.length : '0'} Memberships`
               : 'Join Now'
           }
-          onPress={() => 
+          onPress={() =>
             navigation.navigate(allTexts.screenNames.profilemembership, {
               roleId: roleId,
             })

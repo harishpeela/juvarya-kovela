@@ -11,6 +11,22 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30
   },
+  headerContainer:{
+    padding: 10,
+    backgroundColor:'#FFAB0F',
+    height:100,
+    borderBottomLeftRadius:24,
+    borderBottomRightRadius:24,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  headingText:{
+    marginRight:140,
+    fontWeight:'bold',
+    color:'#ffffff',
+    fontSize:20
+   },
   updateProfileTopCard:{
  height:100
   },

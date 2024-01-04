@@ -42,7 +42,7 @@ export const TopBarcard = ({
                     )}
                     {back && (
 
-                        <TouchableOpacity style={styles.iconContainer} onPress={() => navBack.goBack()}>
+                        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
                             <Image source={require('../../../assets/images/backarrow.png')}
                                 style={{ height: 10, width: 6 }} />
                         </TouchableOpacity>
@@ -64,7 +64,7 @@ export const TopBarcard = ({
                             style={{
                                 fontSize: 20,
                                 fontWeight: 'bold',
-                                marginHorizontal: '25%',
+                                marginHorizontal: '20%',
                                 color: 'white',
                                 alignSelf: 'center'
                             }}>
@@ -94,10 +94,14 @@ export const TopBarcard = ({
 };
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        height:160,
         backgroundColor: '#FFAB0F',
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 20,
+        marginBottom:10,
+        
+        
+        
     },
     header: {
         flexDirection: 'row',

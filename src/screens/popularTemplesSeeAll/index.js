@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   View,
   Text,
@@ -65,7 +66,7 @@ const SeeAll = ({navigation}) => {
           onPress={() => navigation.goBack()}
         />
       </View> */}
-      <View style={styles.updateProfileTopCard}>
+      {/* <View style={styles.updateProfileTopCard}>
         <TopBarcard
           back={true}
           txt={'All Temples'}
@@ -73,6 +74,18 @@ const SeeAll = ({navigation}) => {
           
 
         />
+      </View> */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'All temples'}</Text>
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
