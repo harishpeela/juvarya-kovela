@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100 / 2,
     justifyContent: 'center'
   },
-  crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
+  crossIconContainer: {position: 'absolute',right: -5, zIndex: 100},
   preViewImage: {
     height: 100,
     width: 100,

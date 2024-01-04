@@ -19,6 +19,8 @@ import {
 import {InputField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure
@@ -30,36 +32,49 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {EventInput2} from '../../components/eventCreateInput';
-
 const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
     buttonTexts: {updateProfile},
     headings: {
-      inputTitles: {dateOfBirth, gender, gotra},
+      inputTitles: {},
     },
   } = allTexts;
 
   const [dateOfBirthValue, setDateOfBirthValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [gotraValue, setGotraValue] = useState('');
-  const [isRoleSelected, setIsRoleSelected] = useState('');
   const [dropDownError, setDropDownError] = useState('');
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [profPic, setProfPic] = useState(null);
-  const [eventName, setEventName] = useState('');
-  const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [gender, setGneder] = useState('');
+  const [gotra, setGotra] = useState('');
+  const [dob, setDob] = useState('');
+  const [pincode, setPincode] = useState('');
   const [eventError, setEventError] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   // const [datePickerVisible1, setDatePickerVisible1] = useState(false);
   const [AE, setAE] = useState(false);
   const [DE, setDE] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [toDate, setToDate] = useState(new Date());
   const [calendar, setCalendar] = useState(false);
+  const [isRoleSelected, setIsRoleSelected] = useState('');
+  const [selected, setSelected] = useState('');
+  const [newDate, setNewDate] = useState(new Date());
+  const [toDate, setToDate] = useState(new Date());
+
+  const demo = () => {
+    console.log(name);
+    console.log(isRoleSelected);
+    console.log(gotra);
+    console.log(toDate);
+    console.log(pincode);
+  };
 
   const HandleCnfrm = datedata => {
     if (datedata) {
@@ -116,30 +131,8 @@ const UpdateProfile = ({navigation}) => {
     //       txt={updateProfile}
     //     />
     //   </View>
-    //   <KeyboardAwareScrollView
-    //     keyboardShouldPersistTaps="handled"
-    //     style={styles.keyBoardStyle}
-    //     contentContainerStyle={styles.scrollContainer}
-    //   >
-    //     <Formik
-    //       onSubmit={(values, formikActions) => {
-    //         if (
-    //           values.dateOfBirth === dateOfBirthValue &&
-    //           values.gender === genderValue &&
-    //           values.gotra === gotraValue
-    //         ) {
-    //           ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
-    //         } else {
-    //           ProfileUpdate(values, formikActions);
-    //         }
-    //       }}
-    //       validationSchema={UpdateProfileValidation}
-    //       initialValues={{
-    //         dateOfBirth: '',
-    //         gender: '',
-    //         gotra: '',
-    //       }}
-    //     >
+    //
+
     //       {({
     //         errors,
     //         touched,
@@ -285,122 +278,187 @@ const UpdateProfile = ({navigation}) => {
           </View>
         </View>
         <View style={{}}>
-          <View style={{bottom: '8%'}}>
-            <EventInput
-              lable={'Name'}
-              user={true}
-              placeholder={'Name'}
-              height={50}
-              onChangeText={e => setEventName(e)}
-              value={eventName}
-            />
-            {eventError && (
-              <Text
-                style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                please enter Event Name
-              </Text>
-            )}
-            <EventInput
-              lable={'Email'}
-              email={true}
-              placeholder={'Email'}
-              height={50}
-              onChangeText={text => setDescription(text)}
-              value={description}
-            />
-            {DE && (
-              <Text style={{color: 'red', alignSelf: 'center'}}>
-                please enter description
-              </Text>
-            )}
-            <View>
+          <Formik
+            onSubmit={(values, formikActions) => {
+              if (
+                values.name === name &&
+                values.gender === isRoleSelected &&
+                values.gotra === gotra &&
+                values.pincode === pincode
+              ) {
+                ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
+              } else {
+                ProfileUpdate(values, formikActions);
+              }
+            }}
+            validationSchema={UpdateProfileValidation}
+            initialValues={{
+              name: '',
+              gender: '',
+              gotra: '',
+              pincode: '',
+            }}>
+            <View style={{bottom: '8%'}}>
               <EventInput
-                lable={'Phone Number'}
-                placeholder={'Phone Number'}
-                phone={true}
+                lable={'Name'}
+                user={true}
+                placeholder={'Name'}
                 height={50}
-                onChangeText={text => setAddress(text)}
+                onChangeText={e => setName(e)}
+                value={name}
               />
-              {AE && <Text>Phone Number</Text>}
-            </View>
-            <EventInput
-              lable={'Gender'}
-              placeholder={'Gender'}
-              height={50}
-              gender={true}
-              onChangeText={text => setDescription(text)}
-              value={description}
-            />
-            {DE && (
-              <Text
-                style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                please enter description
-              </Text>
-            )}
-            <EventInput
-              lable={'Gotra'}
-              gotra={true}
-              placeholder={'Gotra'}
-              height={50}
-              onChangeText={text => setDescription(text)}
-              value={description}
-            />
-            {DE && (
-              <Text
-                style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                please enter description
-              </Text>
-            )}
-            <View
-              style={{
-                flexDirection: 'row',
-                marginLeft: '6%',
-              }}>
-              <View style={{width: '47%'}}>
-                <EventInput2
-                  lable={'Date of Birth'}
-                  height={50}
-                  value1={toDate?.toDateString()}
-                  calendar={true}
-                  onPressCalendar={() => ShowDatePicker()}
-                />
-                <DateTimePickerModal
-                  isVisible={datePickerVisible}
-                  mode={date}
-                  onConfirm={HandleCnfrm}
-                  onCancel={HideDatePicker}
-                />
-              </View>
-              <View style={{width: '47%'}}>
+              {eventError && (
+                <Text
+                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
+                  please enter Event Name
+                </Text>
+              )}
+              <EventInput
+                lable={'Email'}
+                email={true}
+                placeholder={'Email'}
+                height={50}
+                onChangeText={text => setEmail(text)}
+                value={email}
+              />
+              {DE && (
+                <Text style={{color: 'red', alignSelf: 'center'}}>
+                  please enter description
+                </Text>
+              )}
+              <View>
                 <EventInput
-                  lable={'Pin Code'}
-                  // keyboardType={true}
-                  pincode={true}
-                  placeholder={'Pincode'}
+                  lable={'Phone Number'}
+                  placeholder={'Phone Number'}
+                  phone={true}
                   height={50}
-                  onChangeText={text => setDescription(text)}
-                  value={description}
+                  value={phone}
+                  onChangeText={text => setPhone(text)}
                 />
-                {DE && (
+                {AE && <Text>Phone Number</Text>}
+              </View>
+              {DE && (
+                <Text
+                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
+                  please enter description
+                </Text>
+              )}
+              <TouchableOpacity>
+                <View>
                   <Text
                     style={{
-                      color: 'red',
-                      alignSelf: 'center',
-                      marginTop: '2%',
+                      marginLeft: '10%',
+                      marginVertical: '2%',
+                      color: 'black',
+                      fontSize: 16,
+                      fontWeight: 'bold',
                     }}>
-                    please enter description
+                    Gender
                   </Text>
-                )}
+                  <SelectDropdown
+                    data={['Male', 'Female', 'Others']}
+                    buttonTextStyle={{
+                      fontSize: 14,
+                      marginRight: '70%',
+                      color: colors.gray,
+                    }}
+                    defaultValue={isRoleSelected}
+                    buttonStyle={{
+                      backgroundColor: 'white',
+                      borderColor: 'black',
+                      borderWidth: 0.5,
+                      borderRadius: 8,
+                      height: 45,
+                      width: '80%',
+                      marginHorizontal: '10%',
+                    }}
+                    dropdownIconPosition="left"
+                    defaultButtonText="Gender"
+                    dropdownStyle={{paddingTop: 10, borderRadius: 20}}
+                    onSelect={e => {
+                      setIsRoleSelected(e);
+                      setDropDownError(false);
+                      setGenderValue(e);
+                    }}
+                    renderDropdownIcon={() => (
+                      <View>
+                        <FontAwesome
+                          name="transgender-alt"
+                          size={20}
+                          color={colors.orangeColor}
+                          style={{marginLeft: 10}}
+                        />
+                      </View>
+                    )}
+                  />
+                </View>
+              </TouchableOpacity>
+
+              <EventInput
+                lable={'Gotra'}
+                gotra={true}
+                placeholder={'Gotra'}
+                height={50}
+                onChangeText={text => setGotra(text)}
+                value={gotra}
+              />
+              {DE && (
+                <Text
+                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
+                  please enter description
+                </Text>
+              )}
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginLeft: '6%',
+                }}>
+                <View style={{width: '60%', marginTop: 5}}>
+                  <EventInput2
+                    lable={'Date of Birth'}
+                    height={50}
+                    value1={toDate?.toLocaleDateString()}
+                    calendar={true}
+                    onPressCalendar={() => ShowDatePicker()}
+                  />
+                  <DateTimePickerModal
+                    isVisible={datePickerVisible}
+                    mode={date}
+                    onConfirm={HandleCnfrm}
+                    onCancel={HideDatePicker}
+                  />
+                </View>
+                <View style={{width: '45%', right: 45, marginTop: 5}}>
+                  <EventInput
+                    lable={'Pin Code'}
+                    // keyboardType={true}
+                    pincode={true}
+                    placeholder={'Pincode'}
+                    height={50}
+                    onChangeText={text => setPincode(text)}
+                    value={pincode}
+                  />
+                  {DE && (
+                    <Text
+                      style={{
+                        color: 'red',
+                        alignSelf: 'center',
+                        marginTop: '2%',
+                      }}>
+                      please enter description
+                    </Text>
+                  )}
+                </View>
+              </View>
+              <View style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
+                <PrimaryButton
+                  text={'Update'}
+                  bgColor={colors.orangeColor}
+                  onPress={() => demo()}
+                />
               </View>
             </View>
-            <View style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
-              <PrimaryButton
-                text={'Update'}
-                bgColor={colors.orangeColor}
-                onPress={() => CreateEvent()}
-              />
-            </View>
-          </View>
+          </Formik>
         </View>
       </View>
     </ScrollView>

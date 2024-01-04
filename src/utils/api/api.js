@@ -18,13 +18,14 @@ export const MEMBER_SHIP_URL = 'https://kovela.app/membership';
 export const EVENTS_URL = 'https://kovela.app/events/';
 export const DONATION_URL = 'https://kovela.app/donations/';
 
-
 // export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'http://20.235.89.214:9092/api/';
-// export const BASE = 'http://20.235.89.214:9094/';
-// export const POPULARURL = 'http://20.235.89.214:9096/';
-// export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
-// export const EVENTS_URL = 'http://20.235.89.214:9060/';
+// export const BASEURL = 'https://4.240.68.49:9443/customer/api/';
+// export const BASE = 'https://4.240.68.49:9443/media/';
+// export const POPULARURL = 'https://4.240.68.49:9443/profile/';
+// export const MEMBER_SHIP_URL = 'https://4.240.68.49:9443/membership';
+// export const EVENTS_URL = 'https://4.240.68.49:9443/events/';
+// export const DONATION_URL = 'https://4.240.68.49:9443/donations/';
+
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({

@@ -60,6 +60,7 @@ import { PostsComp } from '../../components/profilecompnew/postsComp';
 import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { style } from '../newprofile/styles';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -88,7 +89,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [eventsData, setEventsData] = useState();
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-
+  const [roleType, setRoleType] = useState();
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -126,6 +127,16 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   }, []);
 
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    var roleAgent = ROLES?.indexOf('ROLE_AGENT') > -1;
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    } else if (roleAgent) {
+      setRoleType('ROLE_AGENT');
+    }
+  };
   const followingCount = async id => {
     try {
       let result = await NewFollowCount(id);
@@ -234,6 +245,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
   useEffect(() => {
     EventsList();
+    Type();
   }, []);
   const EventsList = async () => {
     setEventsLoader(true);
@@ -262,7 +274,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <TouchableOpacity
                 style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
-                  console.log('isfollow', isFollow, 'second', trfData?.jtProfile);
                   navigation.goBack();
                   route?.params?.onSelect({
                     selected: isFollow,
@@ -303,7 +314,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     <Text style={{ color: 'white', fontWeight: 'bold' }}>2</Text>
                   </View>
                 </TouchableOpacity>
-                {roleId === 'ROLE_ITEM_ADMIN' ? (
+                {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
                   <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                     <View style={styles.menu}>
                       <Feather name="menu" size={28} color={colors.black} />
@@ -326,8 +337,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
             </Text>
-            <View style={{ marginTop: 10 }}>
-              <ProfileTimingTabs />
+            <View style={{marginTop: 10}}>
+              {!data?.seasonal ? (
+                <TouchableOpacity style={styles.seasonal}>
+                  <Text style={styles.seasonalText}> View Temple Crew</Text>
+                </TouchableOpacity>
+              ) : (
+                <ProfileTimingTabs />
+              )}
             </View>
             <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />

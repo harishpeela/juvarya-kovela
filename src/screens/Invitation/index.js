@@ -1,4 +1,4 @@
-import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, TextInput, TouchableOpacity, View, useColorScheme} from 'react-native';
 import React, {useState} from 'react';
 import {BackHeaderNew, BackgroundImage} from '../../components';
 import {styles} from './styles';
@@ -8,7 +8,7 @@ import {MemberShipInvite} from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const InvitationScreen = ({navigation, route}) => {
-  const {onSelect} = route.params || {};
+  const isDarkMode = useColorScheme() === 'dark';
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
@@ -49,7 +49,6 @@ const InvitationScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      {/* <BackgroundImage /> */}
       <View style={styles.Header}>
         {/* <BackHeaderNew
           onPress={() => {
@@ -82,6 +81,7 @@ const InvitationScreen = ({navigation, route}) => {
           onChangeText={e => setEmail(e)}
           maxLength={30}
           value={email}
+          placeholderTextColor={isDarkMode ? 'black' : 'black'}
         />
         </View>
         {error && (

@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   secondContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   button: {
     padding: 10,
