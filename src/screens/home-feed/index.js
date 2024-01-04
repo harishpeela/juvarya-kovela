@@ -134,16 +134,7 @@ const UserFeedScreen = ({navigation}) => {
                 onPress={() =>
                   navigation.navigate(allTexts.tabNames.profile)
                 }
-                style={{
-                  borderWidth: 1,
-                  borderRadius: 50,
-                  padding: 1,
-                  backgroundColor: 'white',
-                  height: 35,
-                  width: 35,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                style={styles.userIcon}>
                 <AntDesign
                   name="user"
                   size={25}
@@ -155,18 +146,7 @@ const UserFeedScreen = ({navigation}) => {
                   }}
                 />
                 <TouchableOpacity
-                  style={{
-                    borderWidth: 1,
-                    borderRadius: 50,
-                    padding: 1,
-                    backgroundColor: 'white',
-                    height: 20,
-                    width: 20,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    left: 18,
-                    padding: 1,
-                  }}>
+                  style={styles.menuIcon}>
                   <Feather
                     name="menu"
                     size={15}

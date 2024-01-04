@@ -209,11 +209,11 @@ export const UserFeedCompList = ({
         </Text>
       </View>
       <Text style={styles.username}>
-        {post?.jtProfileDTO?.name}
-        {''}
-        {''}{' '}
         <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
-          {post?.description}
+        {post?.description?.length < 50
+                    ? `${post?.description}`
+                    : `${post?.description?.substring(0, 50)}...`}
+          {/* {post?.description} */}
         </Text>
       </Text>
     </View>

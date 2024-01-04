@@ -153,11 +153,34 @@ const styles = StyleSheet.create({
     top: 4,
     left: 20,
   },
-  flatListStyle: {},
+  flatListStyle: {
+  },
   homeCard: {
     // borderWidth:10,
     // borderColor:'red'
   },
+  userIcon: {
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 1,
+    backgroundColor: 'white',
+    height: 35,
+    width: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  menuIcon: {
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 1,
+    backgroundColor: 'white',
+    height: 20,
+    width: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 18,
+    padding: 1,
+  }
 });
 
 export default styles;

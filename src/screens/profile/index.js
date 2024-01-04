@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, { useContext, useState, useEffect } from 'react';
 import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
@@ -28,6 +29,7 @@ import { GetProfilePic, PostProfilePic, AdminTemples } from '../../utils/api';
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
+  console.log('userdetails', userDetails);
   const {
     constants: { role },
   } = allTexts;
@@ -65,7 +67,7 @@ const Profile = ({ navigation }) => {
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
     if (result) {
-      setIsCross(false);
+      setIsCross(true);
     }
   };
   const GetCustProfilePic = async () => {
@@ -161,11 +163,12 @@ const Profile = ({ navigation }) => {
             <View style={styles.preViewImageContainer}>
               {isCross && (
                 <View style={styles.crossIconContainer}>
-                  <Icon
+                  <EvilIcons
                     onPress={() => {
                       setImage(null);
+                      uploadPhoto();
                     }}
-                    name="closecircle"
+                    name="pencil"
                     color={colors.orangeColor}
                     size={25}
                   />
@@ -226,7 +229,7 @@ const Profile = ({ navigation }) => {
           {loader ? (
             <Loader size={'small'} color={colors.orangeColor} />
           ) : (
-            Admin ? (
+            Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
               svg={
                 <Image
