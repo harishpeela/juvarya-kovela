@@ -150,7 +150,7 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.profile}
-            component={GetProfileScreen}
+            component={Profile}
             options={{
               tabBarIcon: ({color, size}) => (
                 <View style={styles.container}>

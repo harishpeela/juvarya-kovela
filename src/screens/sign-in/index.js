@@ -85,6 +85,7 @@ const Signin = ({navigation}) => {
 
       try {
         let result = await loginUser1(payload);
+        console.log('result of login', result?.data);
         if (result && result.status === 200) {
           const {
             data: {accessToken, tokenType},
