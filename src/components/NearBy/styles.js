@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: -20,
   },
   searchTextInput: {fontSize: 18, maxWidth: '75%'},
   upComingTextTab: {

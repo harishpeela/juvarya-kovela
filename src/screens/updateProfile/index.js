@@ -210,9 +210,7 @@ const UpdateProfile = ({navigation}) => {
         <View style={{minHeight: '20%'}}>
           <TopBarcard
             txt={'Update Profile'}
-            menu={true}
-            isBell={true}
-            navigation={navigation}></TopBarcard>
+            navigation={navigation} />
         </View>
         <View style={styles.profileContainer}>
           <View style={styles.uploadContainer}>

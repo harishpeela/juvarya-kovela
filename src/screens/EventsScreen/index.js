@@ -61,7 +61,7 @@ const EventsScreen = ({ navigation }) => {
   return (
     <View>
      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} >
+      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
       <View style={{...styles.searchAndNew, marginHorizontal: admin ? 40 : 0}}>
         <SearchBar
           onTextChange={e => {
