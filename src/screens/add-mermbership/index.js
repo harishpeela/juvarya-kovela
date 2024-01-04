@@ -89,7 +89,6 @@ const AddMemebershipDetails = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
       <View style={{marginHorizontal: '5%', marginVertical: '10%'}}>
         <BackHeaderNew
           txt={'Add Membership'}

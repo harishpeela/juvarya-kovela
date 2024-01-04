@@ -22,7 +22,7 @@ import Card from '../../common/Card';
 const EventsScreen = ({ navigation }) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState();
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
@@ -45,6 +45,7 @@ const EventsScreen = ({ navigation }) => {
     }
   };
   const TempleAdmins = async () => {
+    console.log('admin temples api starting');
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
@@ -87,11 +88,11 @@ const EventsScreen = ({ navigation }) => {
           bgColor={colors.gray4}
           placeHolder={'Search'}
         />
-        {admin || roleType === 'ROLE_ADMIN' && (
+        {admin || roleType === 'ROLE_ADMIN' ? (
               <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
                 <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
               </TouchableOpacity>
-            )}
+            ) : ''}
       </View>
       
       </TopBarcard>
