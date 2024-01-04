@@ -51,8 +51,6 @@ const UpdatePassword = ({navigation}) => {
           back={true}
           txt={'updatePassword'}
           navBack={navigation}
-          
-
         />
       </View>
       <KeyboardAwareScrollView

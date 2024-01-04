@@ -261,7 +261,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <TouchableOpacity
                 style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
-                  console.log('isfollow',isFollow, 'second', trfData?.jtProfile);
                   navigation.goBack();
                   route?.params?.onSelect({
                     selected: isFollow,
@@ -273,7 +272,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 /> */}
                 {/* {back && ( */}
 
-                  <TouchableOpacity style={styles.iconContainer} onPress={() => navBack.goBack()} navBack={navigation}>
+                  <TouchableOpacity style={styles.iconContainer} onPress={() =>{
+                     navigation.goBack();
+                     route?.params?.onSelect({
+                      selected: isFollow,
+                      selectedId: !isFollow ? trfData?.jtProfile : '',
+                    });
+                     }} navBack={navigation}>
                     <Image source={require('../../../assets/images/backarrow.png')}
                       style={{ height: 10, width: 6 }} />
                   </TouchableOpacity>

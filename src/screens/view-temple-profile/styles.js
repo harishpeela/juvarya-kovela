@@ -221,4 +221,12 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  iconContainer: {
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+},
 });

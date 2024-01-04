@@ -1,8 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Image, useColorScheme } from 'react-native';
 import { colors } from '../../common';
 export const NotificationCard = ({ data, name }) => {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <TouchableOpacity style={styles.contatainer}>
       <View style={styles.cardView}>
@@ -22,7 +23,7 @@ export const NotificationCard = ({ data, name }) => {
             textTransform: 'uppercase',
             fontWeight: 'bold',
           }}>{data?.jtCustomer?.firstName} </Text>
-          <Text style={styles.description}>{data?.jtProfileDTO?.desciption} </Text>
+          <Text style={{...styles.description, color: isDarkMode ? 'black' : 'black'}}>{data?.jtProfileDTO?.desciption} </Text>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
           <View style={styles.typeView}>
           <Text
@@ -80,11 +81,11 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
-    marginVertical: 5
+    marginRight: '15%'
   },
   date: {
     color: 'black',
     fontWeight: 'bold',
-    marginRight: '17%'
-  }
+    marginRight: '17%',
+  },
 });
