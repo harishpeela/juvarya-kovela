@@ -4,8 +4,8 @@ import {
   FlatList,
   useColorScheme,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { styles } from './styles';
+import React, {useState, useEffect} from 'react';
+import {styles} from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
   Loader,
@@ -18,7 +18,7 @@ import { AdminTemples } from '../../utils/api';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
 import Card from '../../common/Card';
-const EventsScreen = ({ navigation }) => {
+const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -38,11 +38,11 @@ const EventsScreen = ({ navigation }) => {
       let filtering = result?.data?.events;
       console.log('events sctreen data', filtering);
       setEventsData(result?.data?.events);
-      setLoader(false)
+      setLoader(false);
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
-      setLoader(false)
+      setLoader(false);
     }
   };
   const TempleAdmins = async () => {
@@ -53,7 +53,7 @@ const EventsScreen = ({ navigation }) => {
     } else {
       setAdmin([]);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
     TempleAdmins();
@@ -119,16 +119,16 @@ const EventsScreen = ({ navigation }) => {
                 numColumns={2}
                 data={eventsData}
                 contentContainerStyle={styles.flatListStyle}
-                style={{ marginBottom: '35%', marginTop: '3%' }}
+                style={{marginBottom: '35%', marginTop: '3%'}}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <EventCard2
                     navigation={navigation}
                     data={item}
-                  // name={item.user.firstName}
-                  // img={item.user.url}
-                  // data={item.user}
-                  // donation={item.user.donation}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
                   />
                 )}
               />
@@ -136,7 +136,7 @@ const EventsScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-      </View>
+    </View>
   );
 };
 export default EventsScreen;
