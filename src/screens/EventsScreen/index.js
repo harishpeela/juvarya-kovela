@@ -37,11 +37,11 @@ const EventsScreen = ({ navigation }) => {
       let filtering = result?.data?.events;
       // console.log('events sctreen data', filtering);
       setEventsData(result?.data?.events);
-      setLoader(false)
+      setLoader(false);
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
-      setLoader(false)
+      setLoader(false);
     }
   };
   const TempleAdmins = async () => {
@@ -52,7 +52,7 @@ const EventsScreen = ({ navigation }) => {
     } else {
       setAdmin([]);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
     TempleAdmins();
@@ -130,16 +130,16 @@ const EventsScreen = ({ navigation }) => {
                 numColumns={2}
                 data={eventsData}
                 contentContainerStyle={styles.flatListStyle}
-                style={{ marginBottom: '35%', marginTop: '3%' }}
+                style={{marginBottom: '35%', marginTop: '3%'}}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <EventCard2
                     navigation={navigation}
                     data={item}
-                  // name={item.user.firstName}
-                  // img={item.user.url}
-                  // data={item.user}
-                  // donation={item.user.donation}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
                   />
                 )}
               />
@@ -147,7 +147,7 @@ const EventsScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-      </View>
+    </View>
   );
 };
 export default EventsScreen;

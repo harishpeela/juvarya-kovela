@@ -115,19 +115,24 @@ export const styles = StyleSheet.create({
   buttonStyle: {
     backgroundColor: 'white',
     borderColor: 'black',
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 15,
-    height: 35,
+    height: 45,
+    width: '80%',
+    marginHorizontal: '10%',
+    marginTop: '10%',
   },
   dropdownStyle: {
     backgroundColor: 'white',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 4,
   },
   textStyle: {
     fontSize: 12,
+    marginRight: '40%',
+    color: colors.gray,
   },
 });

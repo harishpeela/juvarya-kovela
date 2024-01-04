@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   TextInput,
@@ -14,6 +14,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Icon3 from 'react-native-vector-icons/Octicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SelectDropdown from 'react-native-select-dropdown';
 
 import {colors} from '../../common';
 export const EventInput = ({
@@ -34,6 +35,10 @@ export const EventInput = ({
   onPressCalendar,
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
+
+  const [isRoleSelected, setIsRoleSelected] = useState('');
+  const [dropDownError, setDropDownError] = useState(true);
+  const [genderValue, setGenderValue] = useState('');
 
   return (
     <View>
@@ -243,7 +248,8 @@ export const EventInput2 = ({
         style={{
           ...styles.input,
           height: height,
-          width: '80%',
+          width: '70%',
+          marginRight: 30,
           flexDirection: calendar || location ? 'row' : 'column',
           alignItems: calendar || location ? 'center' : 'flex-start',
         }}>
@@ -258,7 +264,11 @@ export const EventInput2 = ({
         <TextInput
           value={value1}
           placeholder={placeholder}
-          style={{marginLeft: 25, width: '40%', flexDirection: 'row'}}
+          style={{
+            marginLeft: 15,
+            width: '50%',
+            flexDirection: 'row',
+          }}
           onChangeText={onChangeText}
         />
       </View>
