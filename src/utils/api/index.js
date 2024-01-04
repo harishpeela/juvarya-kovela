@@ -176,7 +176,7 @@ export const AdminTemples = async () => {
     let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in temple admins', error);
   }
 };
 export const GetProfilePic = async mailId => {
