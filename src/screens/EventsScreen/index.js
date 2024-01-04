@@ -6,13 +6,11 @@ import {
   Image,
   useColorScheme,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { styles } from './styles';
+import React, {useState, useEffect} from 'react';
+import {styles} from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
-import {
-  SafeAreaView,
-} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   Loader,
   SearchBar,
@@ -22,9 +20,8 @@ import {
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
-import { TopBarcard } from '../../components';
 import Card from '../../common/Card';
-const EventsScreen = ({ navigation }) => {
+const EventsScreen = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -44,11 +41,11 @@ const EventsScreen = ({ navigation }) => {
       let filtering = result?.data?.events;
       console.log('filtering', filtering);
       setEventsData(result?.data?.events);
-      setLoader(false)
+      setLoader(false);
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
-      setLoader(false)
+      setLoader(false);
     }
   };
   const TempleAdmins = async () => {
@@ -58,32 +55,36 @@ const EventsScreen = ({ navigation }) => {
     } else {
       setAdmin([]);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
     TempleAdmins();
   }, []);
   return (
     <View>
-     <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation}>
-      <View style={styles.searchContainer}>
-        <SearchBar
-          value={searchedText}
-          onTextChange={e => {
-            setSearchedText(e);
-            SearchPopTemp(e);
-          }}
-          loading={false}
-          onCrossPress={async () => {
-            setSearchedText('');
-            await PopularTemplesss(pageNo, 20);
-          }}
-          bgColor={colors.gray4}
-          placeHolder={'Search'}
-        />
-      </View>
-      </TopBarcard>
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+        <TopBarcard
+          txt={'Search'}
+          menu={true}
+          isBell={true}
+          navigation={navigation}>
+          <View style={styles.searchContainer}>
+            <SearchBar
+              value={searchedText}
+              onTextChange={e => {
+                setSearchedText(e);
+                SearchPopTemp(e);
+              }}
+              loading={false}
+              onCrossPress={async () => {
+                setSearchedText('');
+                await PopularTemplesss(pageNo, 20);
+              }}
+              bgColor={colors.gray4}
+              placeHolder={'Search'}
+            />
+          </View>
+        </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
         {/* <View style={styles.searchAndFilter}>
@@ -119,16 +120,16 @@ const EventsScreen = ({ navigation }) => {
                 numColumns={2}
                 data={eventsData}
                 contentContainerStyle={styles.flatListStyle}
-                style={{ marginBottom: '35%', marginTop: '3%' }}
+                style={{marginBottom: '35%', marginTop: '3%'}}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <EventCard2
                     navigation={navigation}
                     data={item}
-                  // name={item.user.firstName}
-                  // img={item.user.url}
-                  // data={item.user}
-                  // donation={item.user.donation}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
                   />
                 )}
               />
@@ -136,7 +137,7 @@ const EventsScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-      </View>
+    </View>
   );
 };
 export default EventsScreen;
