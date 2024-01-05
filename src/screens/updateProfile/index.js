@@ -14,6 +14,7 @@ import {
   EventInput1,
   Input,
   PrimaryButton,
+  ProfileInfo,
   TopBarcard,
 } from '../../components';
 import {InputField} from '../../components/inputfield';
@@ -31,7 +32,8 @@ import {Update_Profile} from '../../utils/api';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {EventInput2} from '../../components/eventCreateInput';
+import {EventInput2, EventInput3} from '../../components/eventCreateInput';
+
 const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -42,9 +44,11 @@ const UpdateProfile = ({navigation}) => {
     },
   } = allTexts;
 
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+
   const [dateOfBirthValue, setDateOfBirthValue] = useState('');
-  const [genderValue, setGenderValue] = useState('');
   const [gotraValue, setGotraValue] = useState('');
+  const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
   const [image, setImage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -67,6 +71,8 @@ const UpdateProfile = ({navigation}) => {
   const [selected, setSelected] = useState('');
   const [newDate, setNewDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
+  const [profileName, setProfileName] = useState('');
+  const [profileEmail, setProfileEmail] = useState('');
 
   const demo = () => {
     console.log(name);
@@ -91,17 +97,18 @@ const UpdateProfile = ({navigation}) => {
     setDatePickerVisible(false);
     setDatePickerVisible(false);
   };
-
   const ProfileUpdate = async (data, actions) => {
     let payload = {
-      dob: data?.dateOfBirth,
-      gender: genderValue,
-      gothra: data?.gotra,
+      toDate: toDate,
+      gender: isRoleSelected,
+      gotra: gotra,
     };
     console.log(payload, 'payload');
     try {
-      console.log(payload, 'payload try');
       let responce = await Update_Profile(payload);
+      console.log(payload, 'payload try');
+      console.log('Update Profile', responce?.data);
+
       if (responce?.status === 200) {
         Alert.alert('Success', responce?.data?.message, [
           {
@@ -117,97 +124,16 @@ const UpdateProfile = ({navigation}) => {
     }
   };
   return (
-    // <View
-    //   style={{
-    //     ...styles.wrapper,
-    //     backgroundColor: isDarkMode ? 'white' : 'white',
-    //   }}
-    // >
-    //   <View style={styles.headerContainer}>
-    //     <BackHeader
-    //       onBackPress={() => {
-    //         navigation.goBack();
-    //       }}
-    //       txt={updateProfile}
-    //     />
-    //   </View>
-    //
-
-    //       {({
-    //         errors,
-    //         touched,
-    //         handleChange,
-    //         handleBlur,
-    //         handleSubmit,
-    //         isSubmitting,
-    //         values,
-    //       }) => {
-    //         return (
-    //           <View style={styles.fieldContainer}>
-    //             <InputField
-    //               title={dateOfBirth}
-    //               titleColor={colors.orangeColor}
-    //               onBlur={handleBlur('dateOfBirth')}
-    //               setState={handleChange('dateOfBirth')}
-    //               value={values.dateOfBirth}
-    //             />
-    //             <View style={styles.dropDownContainer}>
-    //               <Text style={styles.genderText}>Gender</Text>
-    //               <SelectDropdown
-    //                 data={['Male', 'Female', 'Others']}
-    //                 buttonTextStyle={styles.textStyle}
-    //                 defaultValue={isRoleSelected}
-    //                 onSelect={e => {
-    //                   setIsRoleSelected(e);
-    //                   setDropDownError(false);
-    //                   setGenderValue(e);
-    //                 }}
-    //                 buttonStyle={styles.buttonStyle}
-    //                 dropdownStyle={styles.dropdownStyle}
-    //                 defaultButtonText="Select your Gender"
-    //                 renderDropdownIcon={() => (
-    //                   <View>
-    //                     {/* You can add an icon here if needed */}
-    //                   </View>
-    //                 )}
-    //               />
-    //             </View>
-
-    //             <InputField
-    //               title={gotra}
-    //               titleColor={colors.orangeColor}
-    //               onBlur={handleBlur('gotra')}
-    //               setState={handleChange('gotra')}
-    //               value={values.gotra}
-    //             />
-
-    //             <View style={styles.centeredButtonContainer}>
-    //               <PrimaryButton
-    //                 bgColor={colors.orangeColor}
-    //                 radius={25}
-    //                 width={150}
-    //                 marginTop={200}
-    //                 textColor={'white'}
-    //                 onPress={handleSubmit}
-    //                 text={'Update Details'}
-    //               />
-    //             </View>
-    //           </View>
-    //         );
-    //       }}
-    //     </Formik>
-    //   </KeyboardAwareScrollView>
-    // </View>
     <ScrollView>
       <View style={styles.wrapper}>
-        <View style={{minHeight: '20%'}}>
+        <View style={{minHeight: '10%'}}>
           <TopBarcard
             txt={'Update Profile'}
             back={true}
             isBell={true}
             navigation={navigation}></TopBarcard>
         </View>
-        <View style={styles.profileContainer}>
+        {/* <View style={styles.profileContainer}>
           <View style={styles.uploadContainer}>
             {image !== null ? (
               <View style={styles.preViewImageContainer}>
@@ -276,15 +202,17 @@ const UpdateProfile = ({navigation}) => {
               </TouchableOpacity>
             )}
           </View>
-        </View>
-        <View style={{}}>
+        </View> */}
+        <View style={{marginTop: '25%'}}>
           <Formik
             onSubmit={(values, formikActions) => {
+              const {dob, isRoleSelected, gotra} = values;
+              console.log('values', values);
+              Update_Profile(values, formikActions);
               if (
-                values.name === name &&
                 values.gender === isRoleSelected &&
                 values.gotra === gotra &&
-                values.pincode === pincode
+                values.dob === dob
               ) {
                 ToastAndroid.show('No changes detected.', ToastAndroid.SHORT);
               } else {
@@ -293,171 +221,176 @@ const UpdateProfile = ({navigation}) => {
             }}
             validationSchema={UpdateProfileValidation}
             initialValues={{
-              name: '',
               gender: '',
               gotra: '',
-              pincode: '',
+              dob: '',
             }}>
-            <View style={{bottom: '8%'}}>
-              <EventInput
-                lable={'Name'}
-                user={true}
-                placeholder={'Name'}
-                height={50}
-                onChangeText={e => setName(e)}
-                value={name}
-              />
-              {eventError && (
-                <Text
-                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                  please enter Event Name
-                </Text>
-              )}
-              <EventInput
-                lable={'Email'}
-                email={true}
-                placeholder={'Email'}
-                height={50}
-                onChangeText={text => setEmail(text)}
-                value={email}
-              />
-              {DE && (
-                <Text style={{color: 'red', alignSelf: 'center'}}>
-                  please enter description
-                </Text>
-              )}
-              <View>
-                <EventInput
-                  lable={'Phone Number'}
-                  placeholder={'Phone Number'}
-                  phone={true}
-                  height={50}
-                  value={phone}
-                  onChangeText={text => setPhone(text)}
-                />
-                {AE && <Text>Phone Number</Text>}
-              </View>
-              {DE && (
-                <Text
-                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                  please enter description
-                </Text>
-              )}
-              <TouchableOpacity>
-                <View>
-                  <Text
-                    style={{
-                      marginLeft: '10%',
-                      marginVertical: '2%',
-                      color: 'black',
-                      fontSize: 16,
-                      fontWeight: 'bold',
-                    }}>
-                    Gender
-                  </Text>
-                  <SelectDropdown
-                    data={['Male', 'Female', 'Others']}
-                    buttonTextStyle={{
-                      fontSize: 14,
-                      marginRight: '70%',
-                      color: colors.gray,
-                    }}
-                    defaultValue={isRoleSelected}
-                    buttonStyle={{
-                      backgroundColor: 'white',
-                      borderColor: 'black',
-                      borderWidth: 0.5,
-                      borderRadius: 8,
-                      height: 45,
-                      width: '80%',
-                      marginHorizontal: '10%',
-                    }}
-                    dropdownIconPosition="left"
-                    defaultButtonText="Gender"
-                    dropdownStyle={{paddingTop: 10, borderRadius: 20}}
-                    onSelect={e => {
-                      setIsRoleSelected(e);
-                      setDropDownError(false);
-                      setGenderValue(e);
-                    }}
-                    renderDropdownIcon={() => (
-                      <View>
-                        <FontAwesome
-                          name="transgender-alt"
-                          size={20}
-                          color={colors.orangeColor}
-                          style={{marginLeft: 10}}
-                        />
-                      </View>
-                    )}
-                  />
-                </View>
-              </TouchableOpacity>
-
-              <EventInput
-                lable={'Gotra'}
-                gotra={true}
-                placeholder={'Gotra'}
-                height={50}
-                onChangeText={text => setGotra(text)}
-                value={gotra}
-              />
-              {DE && (
-                <Text
-                  style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
-                  please enter description
-                </Text>
-              )}
-              <View
-                style={{
-                  flexDirection: 'row',
-                  marginLeft: '6%',
-                }}>
-                <View style={{width: '60%', marginTop: 5}}>
-                  <EventInput2
-                    lable={'Date of Birth'}
-                    height={50}
-                    value1={toDate?.toLocaleDateString()}
-                    calendar={true}
-                    onPressCalendar={() => ShowDatePicker()}
-                  />
-                  <DateTimePickerModal
-                    isVisible={datePickerVisible}
-                    mode={date}
-                    onConfirm={HandleCnfrm}
-                    onCancel={HideDatePicker}
-                  />
-                </View>
-                <View style={{width: '45%', right: 45, marginTop: 5}}>
+            {({
+              errors,
+              touched,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting,
+              values,
+            }) => {
+              return (
+                <View style={{bottom: '8%'}}>
                   <EventInput
-                    lable={'Pin Code'}
-                    // keyboardType={true}
-                    pincode={true}
-                    placeholder={'Pincode'}
+                    lable={'Name'}
+                    user={true}
+                    placeholder={'Enter Name'}
                     height={50}
-                    onChangeText={text => setPincode(text)}
-                    value={pincode}
+                    onChangeText={e => setName(e)}
+                    value={name}
+                    setState={handleChange('name')}
+                    onBlur={handleBlur('name')}
                   />
-                  {DE && (
+                  {eventError && (
                     <Text
                       style={{
                         color: 'red',
                         alignSelf: 'center',
                         marginTop: '2%',
                       }}>
+                      please enter Event Name
+                    </Text>
+                  )}
+                  <EventInput3
+                    lable={'Email'}
+                    email={true}
+                    placeholder={userDetails?.email}
+                    height={50}
+                    onChangeText={text => setEmail(text)}
+                    value={email}
+                  />
+                  {DE && (
+                    <Text style={{color: 'red', alignSelf: 'center'}}>
                       please enter description
                     </Text>
                   )}
+                  <View>
+                    <EventInput
+                      lable={'Phone Number'}
+                      placeholder={'Phone Number'}
+                      phone={true}
+                      height={50}
+                      value={phone}
+                      onChangeText={text => setPhone(text)}
+                    />
+                  </View>
+                  <TouchableOpacity>
+                    <View>
+                      <Text
+                        style={{
+                          marginLeft: '10%',
+                          marginVertical: '2%',
+                          color: 'black',
+                          fontSize: 16,
+                          fontWeight: 'bold',
+                        }}>
+                        Gender
+                      </Text>
+                      <SelectDropdown
+                        data={['Male', 'Female', 'Others']}
+                        buttonTextStyle={{
+                          fontSize: 14,
+                          marginRight: '70%',
+                          color: colors.gray,
+                        }}
+                        defaultValue={isRoleSelected}
+                        buttonStyle={{
+                          backgroundColor: 'white',
+                          borderColor: 'black',
+                          borderWidth: 0.5,
+                          borderRadius: 8,
+                          height: 45,
+                          width: '80%',
+                          marginHorizontal: '10%',
+                        }}
+                        dropdownIconPosition="left"
+                        defaultButtonText="Gender"
+                        dropdownStyle={{paddingTop: 10, borderRadius: 20}}
+                        onSelect={e => {
+                          setIsRoleSelected(e);
+                          setDropDownError(false);
+                          setGenderValue(e);
+                        }}
+                        renderDropdownIcon={() => (
+                          <View>
+                            <FontAwesome
+                              name="transgender-alt"
+                              size={20}
+                              color={colors.orangeColor}
+                              style={{marginLeft: 10}}
+                            />
+                          </View>
+                        )}
+                      />
+                      {errors.gender && touched.gender ? (
+                        <Text style={styles.errors}>{errors.gender}</Text>
+                      ) : null}
+                    </View>
+                  </TouchableOpacity>
+                  <View>
+                    <EventInput
+                      lable={'Gotra'}
+                      gotra={true}
+                      placeholder={'Gotra'}
+                      height={50}
+                      onChangeText={text => setGotra(text)}
+                      value={gotra}
+                    />
+                    {errors.gotra && touched.gotra ? (
+                      <Text style={styles.errors}>{errors.gotra}</Text>
+                    ) : null}
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      marginLeft: '6%',
+                    }}>
+                    <View style={{width: '60%', marginTop: 5}}>
+                      <EventInput2
+                        lable={'Date of Birth'}
+                        height={50}
+                        value1={toDate?.toLocaleDateString()}
+                        calendar={true}
+                        onPressCalendar={() => ShowDatePicker()}
+                      />
+                      <DateTimePickerModal
+                        isVisible={datePickerVisible}
+                        mode={date}
+                        onConfirm={HandleCnfrm}
+                        onCancel={HideDatePicker}
+                      />
+                      {errors.dob && touched.dob ? (
+                        <Text style={styles.errors}>{errors.dob}</Text>
+                      ) : null}
+                    </View>
+                    <View style={{width: '45%', right: 45, marginTop: 5}}>
+                      <EventInput
+                        lable={'Pin Code'}
+                        // keyboardType={true}
+                        pincode={true}
+                        placeholder={'Pincode'}
+                        height={50}
+                        onChangeText={text => setPincode(text)}
+                        value={pincode}
+                      />
+                    </View>
+                  </View>
+                  <View
+                    style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
+                    <PrimaryButton
+                      text={'Update'}
+                      bgColor={colors.orangeColor}
+                      onPress={() => ProfileUpdate()}
+                    />
+                  </View>
                 </View>
-              </View>
-              <View style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
-                <PrimaryButton
-                  text={'Update'}
-                  bgColor={colors.orangeColor}
-                  onPress={() => demo()}
-                />
-              </View>
-            </View>
+              );
+            }}
           </Formik>
         </View>
       </View>

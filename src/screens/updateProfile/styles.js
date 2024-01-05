@@ -135,4 +135,9 @@ export const styles = StyleSheet.create({
     marginRight: '40%',
     color: colors.gray,
   },
+  errors: {
+    color: 'red',
+    marginLeft: '10%',
+    marginTop: 2,
+  },
 });
