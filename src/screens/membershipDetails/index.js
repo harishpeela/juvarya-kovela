@@ -5,7 +5,6 @@ import {styles} from './styles';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {colors} from '../../common';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { BackgroundImage, BackHeaderNew } from '../../components';
 let url = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Fpainting-mountain-lake-with-mountain-background_188544-9126.jpg&tbnid=ASMDFNsL7Vw1YM&vet=12ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz..i&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fbackground&docid=bKJ3gdlWTtaNoM&w=626&h=358&q=images&ved=2ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz'
 const MemberShipDetails = ({navigation, route}) => {
   const {data} = route.params || {};

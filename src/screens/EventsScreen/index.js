@@ -4,7 +4,7 @@ import {
   FlatList,
   useColorScheme,
 } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
@@ -17,17 +17,16 @@ import {
 import { AdminTemples } from '../../utils/api';
 import {allTexts, colors} from '../../common';
 import {EventList} from '../../utils/api';
+import ApplicationContext from '../../utils/context-api/Context';
 import Card from '../../common/Card';
 const EventsScreen = ({ navigation }) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
-  const [admin, setAdmin] = useState(false);
+  const [admin, setAdmin] = useState();
   const [searchedText, setSearchedText] = useState('');
-  const [followersFirstName, setFollowersFirstName] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchLoading, setSearchLoading] = useState(false);
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
-  const [isHeart, setIsHeart] = useState(false);
+  const [roleType, setRoleType] = useState('')
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setEventsLoader(true);
@@ -36,15 +35,17 @@ const EventsScreen = ({ navigation }) => {
     // console.log('list of evengts', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.events;
+      // console.log('events sctreen data', filtering);
       setEventsData(result?.data?.events);
-      setLoader(false)
+      setLoader(false);
       setEventsLoader(false);
     } else {
       setEventsLoader(false);
-      setLoader(false)
+      setLoader(false);
     }
   };
   const TempleAdmins = async () => {
+    console.log('admin temples api starting');
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
@@ -52,16 +53,27 @@ const EventsScreen = ({ navigation }) => {
     } else {
       setAdmin([]);
     }
-  }
+  };
   useEffect(() => {
     EventsList();
     TempleAdmins();
+    Type();
   }, []);
-  console.log('admin', admin);
+  
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    } else {
+      console.log('')
+    }
+    }
+
   return (
     <View>
      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} >
+      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
       <View style={{...styles.searchAndNew, marginHorizontal: admin ? 40 : 0}}>
         <SearchBar
           onTextChange={e => {
@@ -76,11 +88,11 @@ const EventsScreen = ({ navigation }) => {
           bgColor={colors.gray4}
           placeHolder={'Search'}
         />
-        {admin && (
+        {admin || roleType === 'ROLE_ADMIN' ? (
               <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
                 <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
               </TouchableOpacity>
-            )}
+            ) : ''}
       </View>
       
       </TopBarcard>
@@ -119,16 +131,16 @@ const EventsScreen = ({ navigation }) => {
                 numColumns={2}
                 data={eventsData}
                 contentContainerStyle={styles.flatListStyle}
-                style={{ marginBottom: '35%', marginTop: '3%' }}
+                style={{marginBottom: '35%', marginTop: '3%'}}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
+                renderItem={({item}) => (
                   <EventCard2
                     navigation={navigation}
                     data={item}
-                  // name={item.user.firstName}
-                  // img={item.user.url}
-                  // data={item.user}
-                  // donation={item.user.donation}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
                   />
                 )}
               />
@@ -136,7 +148,7 @@ const EventsScreen = ({ navigation }) => {
           )}
         </View>
       </View>
-      </View>
+    </View>
   );
 };
 export default EventsScreen;

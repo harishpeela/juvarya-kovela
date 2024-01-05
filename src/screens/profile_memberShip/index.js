@@ -12,6 +12,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  useColorScheme,
 } from 'react-native';
 import {
   BackgroundImage,
@@ -27,7 +28,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
   console.log('roleid', roleId);
-
+const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -131,7 +132,6 @@ const ProfileMembership = ({ route, navigation }) => {
   }, []);
   return (
     <SafeAreaView>
-      {/* <BackgroundImage /> */}
       <View style={styles.mainContainer}>
         <View style={styles.header}>
           <View style={styles.headerContainer}>
@@ -180,7 +180,7 @@ const ProfileMembership = ({ route, navigation }) => {
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text> no memberships for this temple</Text>
+                <Text style={{color: isDarkMode ? 'black' : 'black'}}> no memberships for this temple</Text>
               </View>
             )}
           </View>

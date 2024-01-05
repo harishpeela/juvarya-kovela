@@ -20,7 +20,7 @@ const ProfileMemberShips = ({ navigation, route }) => {
     setLoader(true);
     try {
       let result = await MemberShipList(0, 100);
-      console.log('res', result?.data?.data);
+      console.log('res', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -37,17 +37,12 @@ const ProfileMemberShips = ({ navigation, route }) => {
     MembershipData();
   }, []);
   return (
-    <View >
-      <BackgroundImage />
+    <View style={{flex: 1}}>
       <View style={styles.header}>
-
-
         <TopBarcard
           back={true}
           txt={'Memberships'}
           navigation={navigation}
-
-
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity

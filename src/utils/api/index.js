@@ -90,6 +90,7 @@ export const getInitialToken = async () => {
 };
 
 export const loginUser1 = async data => {
+  console.log('login api develop', data, endpoints?.NEW_SIGN_IN);
   try {
     let result = await authAxiousInstance1.post(
       `${endpoints.NEW_SIGN_IN}`,
@@ -175,7 +176,7 @@ export const AdminTemples = async () => {
     let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in temple admins', error);
   }
 };
 export const GetProfilePic = async mailId => {

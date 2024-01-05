@@ -146,11 +146,10 @@ const EventDetails = ({ navigation }) => {
         <ImageBackground
           source={scroolImagesArray[activeImgIndex]?.img}
           style={{ height: 250, marginHorizontal: 20, marginTop: 20 }}
-          imageStyle={{ borderRadius: 20 }}
-        >
-          <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', flex: 1 }}>
-            <AntDesignIcon name="left" size={50} color="white" disabled={activeImgIndex === 0} onPress={() => setActiveImgIndex((imgIndex) => imgIndex - 1)} />
-            <AntDesignIcon name="right" size={50} color="white" disabled={activeImgIndex === (scroolImagesArray?.length - 1)} onPress={() => setActiveImgIndex((imgIndex) => imgIndex + 1)} />
+          imageStyle={{ borderRadius: 20 }}>
+          <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', flex: 1, }}>
+            <AntDesignIcon name="left" size={20} color="white" disabled={activeImgIndex === 0} onPress={() => setActiveImgIndex((imgIndex) => imgIndex - 1)} />
+            <AntDesignIcon name="right" size={20} color="white" disabled={activeImgIndex === (scroolImagesArray?.length - 1)} onPress={() => setActiveImgIndex((imgIndex) => imgIndex + 1)} />
           </View>
           <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center', marginBottom: 15 }}>
             {

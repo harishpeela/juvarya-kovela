@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 10,
     paddingVertical: 10,
-    marginTop: 10,
   },
   imageContainer: {
     borderWidth: 2,
