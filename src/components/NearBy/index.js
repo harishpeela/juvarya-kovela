@@ -29,7 +29,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
-    console.log('1====>');
     setLoader(true);
     try {
       let result = await PopularTemples();
@@ -74,7 +73,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
       console.log('error in search pop temp', error);
     }
   };
-  console.log('routings', route?.params)
   return (
     <View>
       <View style={{minHeight: 160, marginTop: '3%'}}>

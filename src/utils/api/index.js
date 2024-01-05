@@ -157,7 +157,7 @@ export const SearchPopularTemples = async txt => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in searched popular temples', error);
   }
 };
 export const SearchTempleRoleWithId = async profId => {
@@ -168,7 +168,6 @@ export const SearchTempleRoleWithId = async profId => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
   }
 };
 export const AdminTemples = async () => {
@@ -186,7 +185,7 @@ export const GetProfilePic = async mailId => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in profilepic get', error);
   }
 };
 export const PostProfilePic = async data => {
@@ -197,7 +196,7 @@ export const PostProfilePic = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in post profile pic', error);
   }
 };
 export const Update_Profile = async data => {
