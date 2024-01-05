@@ -24,6 +24,15 @@ export const styles = StyleSheet.create({
       // paddingVertical:5,
       // marginVertical:10,
     },
+    focusedContainer: {
+      height: 80,
+      alignItems: 'center',
+      borderRadius: 100,
+      justifyContent: 'center',
+      backgroundColor: 'white', 
+      padding: 10,
+      marginBottom: 20
+    },
     mainContainer1:{
       // borderWidth:2
     },
@@ -40,4 +49,5 @@ export const styles = StyleSheet.create({
       height:50,
       width:50,
     },
+    dot: {borderBottomRightRadius: 10, borderBottomLeftRadius: 10, borderBottomColor: 'gray', backgroundColor: colors.gray3}
   });
