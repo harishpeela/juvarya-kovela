@@ -17,6 +17,7 @@ import { allTexts, colors } from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 const AddEvents = ({ navigation, route }) => {
   const [date, setDate] = useState(new Date());
+  console.log(date);
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');

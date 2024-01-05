@@ -6,6 +6,7 @@ import {allTexts, colors} from '../../common';
 import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
 import {PrimaryButton} from '../../components';
+import {StatusBar} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {loginUser1, NewRegistesrUser, getUserInfoNew} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -138,6 +139,7 @@ const OTPScreen = ({navigation, route}) => {
   };
   return (
     <View style={styles.wrapper}>
+       <StatusBar backgroundColor="#FFAB0F" translucent={true} />
       <View style={styles.topContainer}>
         <TouchableOpacity
           onPress={() => {

@@ -103,6 +103,7 @@ const Signup = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
+      
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}

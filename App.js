@@ -61,6 +61,7 @@ import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
+import bottomTabBase from './src/screens/bottom-tab-base';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -134,7 +135,7 @@ const App = () => {
   }, []);
   const AuthStack = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={OTPScreen}>
         {/* <Stack.Screen
           name={splash}
           component={Splash}
@@ -176,7 +177,7 @@ const App = () => {
   };
   const HomeStack = () => {
     return (
-      <Stack.Navigator initialRouteName={bottomTab}>
+      <Stack.Navigator initialRouteName={bottomTabBase}>
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}

@@ -12,6 +12,7 @@ import {
   saveLoginSessionDetails,
   saveUserDetails,
 } from '../../utils/preferences/localStorage';
+import {StatusBar} from 'react-native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
@@ -102,9 +103,11 @@ const Signin = ({navigation}) => {
       }
     }
   };
+  
 
   return (
     <SafeAreaView style={styles.wrapper}>
+       <StatusBar backgroundColor="black" translucent={true} />
       <View style={styles.signinTextContainer}>
         <Text style={styles.signinText}>{login}</Text>
       </View>
