@@ -49,7 +49,6 @@ const EventsScreen = ({ navigation }) => {
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
-      console.log('admin data', result?.data);
     } else {
       setAdmin([]);
     }

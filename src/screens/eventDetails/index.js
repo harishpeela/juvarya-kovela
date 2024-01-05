@@ -142,7 +142,9 @@ const EventDetails = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{ borderWidth: 0 }} >
+        <View style={{minHeight: '10%'}}>
         <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
+        </View>
         <ImageBackground
           source={scroolImagesArray[activeImgIndex]?.img}
           style={{ height: 250, marginHorizontal: 20, marginTop: 20 }}
