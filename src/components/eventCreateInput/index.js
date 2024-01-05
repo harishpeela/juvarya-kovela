@@ -24,6 +24,8 @@ export const EventInput = ({
   user,
   calendar,
   gender,
+  editable,
+  setState,
   email,
   gotra,
   location,
@@ -31,6 +33,7 @@ export const EventInput = ({
   onChangeText,
   keyboardType,
   pincode,
+  onBlur,
   value,
   onPressCalendar,
 }) => {
@@ -82,16 +85,7 @@ export const EventInput = ({
             />
           </TouchableOpacity>
         )}
-        {email && (
-          <TouchableOpacity>
-            <Fontisto
-              name="email"
-              size={20}
-              color={colors.orangeColor}
-              style={{marginLeft: 10, top: 15}}
-            />
-          </TouchableOpacity>
-        )}
+
         {gender && (
           <TouchableOpacity>
             <FontAwesome
@@ -155,6 +149,7 @@ export const EventInput = ({
           }}
           multiline={true}
           onChangeText={onChangeText}
+          editable={true}
         />
       </View>
     </View>
@@ -270,6 +265,46 @@ export const EventInput2 = ({
             flexDirection: 'row',
           }}
           onChangeText={onChangeText}
+        />
+      </View>
+    </View>
+  );
+};
+
+export const EventInput3 = ({
+  lable,
+  placeholder,
+  height,
+  value1,
+  email,
+  editable,
+}) => {
+  return (
+    <View>
+      <Text style={styles.label}>{lable}</Text>
+      <View
+        style={{
+          ...styles.input,
+          height: height,
+          width: '80%',
+          flexDirection: email ? 'row' : 'column',
+          alignItems: email ? 'center' : 'flex-start',
+        }}>
+        {email && (
+          <TouchableOpacity>
+            <Fontisto
+              name="email"
+              size={20}
+              color={colors.orangeColor}
+              style={{marginLeft: 10}}
+            />
+          </TouchableOpacity>
+        )}
+        <TextInput
+          value={value1}
+          placeholder={placeholder}
+          style={{marginLeft: 5, width: '60%', flexDirection: 'row'}}
+          editable={false}
         />
       </View>
     </View>
