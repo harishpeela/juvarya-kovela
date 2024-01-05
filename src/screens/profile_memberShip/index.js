@@ -3,7 +3,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import useFocusEffect from '@react-navigation/native';
 import {
   View,
   Text,
@@ -96,12 +98,12 @@ const isDarkMode = useColorScheme() === 'dark';
     },
     ,
   ];
-const Split = () => {
-  let result = DataApi;
-  let dataList = result.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
-  console.log('dayta of members list', dataList);
-  setData(dataList);
-};
+  const Split = () => {
+    let result = DataApi;
+    let dataList = result.filter(item => item).map(({ membershipDto, loggedInUser, membershipId }) => ({ membershipDto, loggedInUser, membershipId }));
+    console.log('dayta of members list', dataList);
+    setData(dataList);
+  };
 
   const MembershipData = async () => {
     setaLoader(true);
@@ -110,7 +112,7 @@ const Split = () => {
       console.log('res', result?.data);
       let responce = result?.data?.data;
       if (responce) {
-        let dataList = responce.filter(item => item).map(({membershipDto, loggedInUser, membershipId}) => ({membershipDto, loggedInUser, membershipId}));
+        let dataList = responce.filter(item => item).map(({ membershipDto, loggedInUser, membershipId }) => ({ membershipDto, loggedInUser, membershipId }));
         console.log('dayta of members list', dataList);
         setaLoader(false);
         setData(dataList);
@@ -132,41 +134,43 @@ const Split = () => {
     <SafeAreaView>
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <BackHeaderNew
-            txt={'Members'}
-            isArrrow={true}
-            onPress={() => navigation.navigate(allTexts.screenNames.profilememberships, {
-              roleId: roleId,
-            })}
-          // onPlusPress={() =>
-          //   navigation.navigate(allTexts.screenNames.addMembershipDetails)
-          // }
-          />
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.profilememberships);
-            }}>
-            {!roleId ? (
-              <>
-              </>
-            ) : (
-              <TouchableOpacity onPress={() => {
-                navigation.navigate(allTexts.screenNames.invitationScreen, {
-                  roleId: roleId,
-                })
+          <View style={styles.headerContainer}>
+            <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+              <Ionicons
+                name="caret-back-circle"
+                size={36}
+                color={'#ffffff'}
+                style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
+              />
+
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.profilememberships);
               }}>
-                {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
-                <Text style={{fontSize: 20, color: colors.orangeColor}}>Invite</Text>
-              </TouchableOpacity>
-            )}
-          </TouchableOpacity>
+              {!roleId ? (
+                <>
+                </>
+              ) : (
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate(allTexts.screenNames.invitationScreen, {
+                    roleId: roleId,
+                  })
+                }}>
+                  {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
+                  <Text style={{ fontSize:20,fontWeight:'bold',marginRight:30, color: colors.white }}>Invite</Text>
+                </TouchableOpacity>
+              )}
+            </TouchableOpacity>
+          </View>
+
         </View>
         {loader ? (
           <View>
             <Loader size={'small'} color={colors.orangeColor} />
           </View>
         ) : (
-          <View style={{marginTop: '10%'}}>
+          <View style={{ marginTop: '10%' }}>
             {data?.length ? (
               <FollowersListCard3 data={data} navigation={navigation} />
             ) : (

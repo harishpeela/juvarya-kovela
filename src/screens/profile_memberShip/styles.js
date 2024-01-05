@@ -4,16 +4,31 @@ export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
     backgroundColor: colors.white,
-    paddingTop: 40,
-    paddingHorizontal: 15,
 
+  },
+  headerContainer: {
+    padding: 10,
+    backgroundColor:'#FFAB0F',
+    height:100,
+    width:'100%',
+    borderBottomLeftRadius:24,
+    borderBottomRightRadius:24,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  headingText:{
+   marginRight:120,
+   fontWeight:'bold',
+   color:'#ffffff',
+   fontSize:20
   },
   header:{
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
     marginTop:20,
-    marginHorizontal: '4%',
+    // marginHorizontal: '4%',
   },
   container1: {
     height: '100%',
