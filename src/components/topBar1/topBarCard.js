@@ -64,7 +64,7 @@ export const TopBarcard = ({
                             style={{
                                 fontSize: 20,
                                 fontWeight: 'bold',
-                                marginHorizontal: '20%',
+                                marginHorizontal: '25%',
                                 color: 'white',
                                 alignSelf: 'center'
                             }}>

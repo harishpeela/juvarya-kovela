@@ -156,6 +156,7 @@ const UserFeedScreen = ({navigation}) => {
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>
+            <Text style={{fontSize: 20, color: colors.white, fontWeight: 'bold'}}> Feeds</Text>
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>

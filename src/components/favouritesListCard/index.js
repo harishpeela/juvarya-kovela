@@ -21,7 +21,7 @@ export const FavTempleListCard = ({name, location, date, onPress, img}) => {
             <Text numberOfLines={1} style={styles.itemAdmin}>
               Temple
             </Text>
-            <Text style={styles.itemLocation}>{`location-${location}`}</Text>
+            {/* <Text style={styles.itemLocation}>{`location-${location}`}</Text> */}
           </View>
         </View>
       </View>

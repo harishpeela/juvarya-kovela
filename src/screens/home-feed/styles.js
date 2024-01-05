@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   flatListStyle: {
+    marginTop: '15%'
   },
   homeCard: {
     // borderWidth:10,
