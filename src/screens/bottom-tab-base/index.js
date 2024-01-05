@@ -84,7 +84,7 @@ export default BottomTabBase = ({ navigation }) => {
                   {focused && (
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
-                  <MaterialIcons name="event" color={color} size={focused ? 30 : 23} />
+                  <MaterialIcons name="event" color={color} size={focused ? 28 : 23} />
                   <Text style={{ color: color }}>Events</Text>
                 </View>
               ),
@@ -99,7 +99,7 @@ export default BottomTabBase = ({ navigation }) => {
                    {focused && (
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
-                  <FeatherIcon name="search" color={color} size={23} />
+                  <FeatherIcon name="search" color={color} size={focused ? 28 : 23} />
                   <Text style={{ color: color }}>Search</Text>
                 </View>
               ),
@@ -135,10 +135,7 @@ export default BottomTabBase = ({ navigation }) => {
                   )}
                   <Image
                     source={require('../../utils/assets/images/Kovela-logo.png')}
-                    style={{
-                      height: 50,
-                      width: 50,
-                    }}
+                    style={focused ? styles.imageFocused : styles.imageNormal}
                   />
                 </View>
               ),
@@ -153,7 +150,7 @@ export default BottomTabBase = ({ navigation }) => {
                    {focused && (
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
-                  <FontistoIcon name="heart-alt" color={color} size={20} />
+                  <FontistoIcon name="heart-alt" color={color} size={focused ? 28 : 23} />
                   <Text style={{ color: color }}>Favorite</Text>
                 </View>
               ),
@@ -168,7 +165,7 @@ export default BottomTabBase = ({ navigation }) => {
                    {focused && (
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
-                  <FeatherIcon name="user" color={color} size={23} />
+                  <FeatherIcon name="user" color={color} size={focused ? 28 : 23} />
                   <Text style={{ color: color }}>Profile</Text>
                 </View>
               ),

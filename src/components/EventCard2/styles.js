@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         elevation: 3,
         shadowColor: colors.black,
         backgroundColor: colors.white,
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         borderRadius: 24,
     },
     secondContainer: {
@@ -23,9 +23,9 @@ export const styles = StyleSheet.create({
     },
 
     Image: {
-        height: "50%",
-        width: "70%",
-        borderRadius: 100,
+        height: 120,
+        width: 120,
+        borderRadius: 120 / 2,
         marginLeft: '15%',
         marginTop: 15
     },
