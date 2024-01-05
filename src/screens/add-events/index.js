@@ -16,6 +16,7 @@ import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import { allTexts, colors } from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 const AddEvents = ({ navigation, route }) => {
+  console.log('events screen')
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -196,6 +197,8 @@ const isDarkMode = useColorScheme() === 'dark';
         mode={date}
         onConfirm={HandleCnfrm}
         onCancel={HideDatePicker}
+        buttonTextColorIOS= 'black'
+
       />
       <DateTimePickerModal
         isVisible={datePickerVisible1}

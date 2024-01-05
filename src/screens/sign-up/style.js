@@ -73,7 +73,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     flexDirection: 'row',
     marginTop: 10,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   checkIcon: {
     fontSize: 12,

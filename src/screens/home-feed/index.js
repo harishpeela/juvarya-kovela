@@ -126,7 +126,7 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 90}}>
+      <View style={{height: 50}}>
         <TopBarcard userIcon={true}>
           <View style={styles.navBarContainer}>
             <View style={styles.buttonContainer}>
@@ -172,7 +172,7 @@ const UserFeedScreen = ({navigation}) => {
           </View>
         </TopBarcard>
       </View>
-      <>
+      <View style={{marginTop: '20%'}}>
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
@@ -186,6 +186,7 @@ const UserFeedScreen = ({navigation}) => {
               />
             }
             contentContainerStyle={styles.flatListStyle}
+            showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             // decelerationRate={0.3}
             keyExtractor={(item, index) => index}
@@ -220,7 +221,7 @@ const UserFeedScreen = ({navigation}) => {
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
-      </>
+        </View>
     </View>
   );
 };
