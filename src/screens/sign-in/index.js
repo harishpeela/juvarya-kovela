@@ -6,6 +6,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
 import {KovelaIcon} from '../sign-up/index.js';
+import {StatusBar} from 'react-native';
 import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
@@ -106,6 +107,7 @@ const Signin = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <StatusBar backgroundColor="black" translucent={true} />
       <View style={styles.signinTextContainer}>
         <Text style={styles.signinText}>{login}</Text>
       </View>
@@ -154,7 +156,6 @@ const Signin = ({navigation}) => {
                     error={touched.password && errors.password}
                     onBlur={handleBlur('password')}
                     setState={handleChange('password')}
-                    
                   />
                 </View>
                 <View style={styles.btnContainer}>
@@ -163,7 +164,7 @@ const Signin = ({navigation}) => {
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
-                    radius={25}      
+                    radius={25}
                   />
                 </View>
                 <TouchableOpacity
@@ -174,15 +175,14 @@ const Signin = ({navigation}) => {
                     {dontHaveAccount}
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
-                </TouchableOpacity>          
+                </TouchableOpacity>
                 <TouchableOpacity
-                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.forgetPassword);
-                }}>
-                <View>
-
-                  <Text style={styles.forgotPassword}>Forgot Password</Text>
-                </View>
+                  onPress={() => {
+                    navigation.navigate(allTexts.screenNames.forgetPassword);
+                  }}>
+                  <View>
+                    <Text style={styles.forgotPassword}>Forgot Password</Text>
+                  </View>
                 </TouchableOpacity>
               </View>
             );
