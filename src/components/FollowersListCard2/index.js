@@ -28,14 +28,6 @@ const FollowersListCard2 = ({
             }}
             style={styles.image}
           />
-          <Image
-            source={{
-              uri: img
-                ? img
-                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
-            }}
-            style={styles.backgroundImage}
-          />
         </View>
         <View
           style={{

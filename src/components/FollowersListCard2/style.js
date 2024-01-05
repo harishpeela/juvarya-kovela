@@ -30,7 +30,9 @@ export const styles = StyleSheet.create({
     width: 70,
     borderWidth: 1,
     borderRadius: 100,
-    borderColor: colors.orangeColor
+    borderColor: colors.orangeColor,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   listFirstItem: {
     display: 'flex',

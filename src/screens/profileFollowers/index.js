@@ -71,7 +71,7 @@ const FollowersMembership = ({ route, navigation }) => {
       </View> */}
       <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard txt={'Followers'} isBell={true} back={true}  navigation={navigation} navBack={navigation} >
-          <View style={styles.searchbarContainer}>
+          <View style={{...styles.searchbarContainer, marginTop: '-5%'}}>
             <View>
               <SearchBar
                 placeHolder={'Search followers'}
@@ -88,56 +88,12 @@ const FollowersMembership = ({ route, navigation }) => {
           </View>
         </TopBarcard>
       </View>
-      {/* <View style={styles.followersHeader}>
-        <BackHeaderNew
-          txt={
-            followersList.length > 0
-              ? `Followers`
-              : null // or any fallback value you want when followersList is not greater than 0
-          }
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-        />
-        <Ellipsis txtColor={colors.black} />
-      </View> */}
       <View style={styles.bodyContainer}>
-        {/* <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              value={searchedText}
-              onTextChange={text => {
-                setSearchedText(text);
-                handleSearch(text);
-              }}
-              loading={loading}
-              onCrossPress={() => {
-                setSearchedText('');
-                setFilteredData([]);
-              }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={true}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-          </View>
-          <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.orangeColor}
-              srWidth={'100%'}
-            // srHeight={"100%"}
-            />
-          </View>
-        </View> */}
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              {/* <ScrollView showsVerticalScrollIndicator={false}> */}
               {searchedText === '' && (
                 <FlatList
                   style={styles.list}
@@ -155,9 +111,6 @@ const FollowersMembership = ({ route, navigation }) => {
                   )}
                 />
               )}
-              {/* </ScrollView> */}
-
-              {/* <ScrollView style={{height: searchedText ? '85%' : 0}}> */}
               {searchedText && filteredData.length > 0 ? (
                 <FlatList
                   style={styles.list}
@@ -178,7 +131,6 @@ const FollowersMembership = ({ route, navigation }) => {
                   <Text style={styles.noDataText}>No Followers to Display</Text>
                 </View>
               )}
-              {/* </ScrollView> */}
             </>
           )}
         </View>

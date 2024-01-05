@@ -195,6 +195,7 @@ const Signup = ({navigation}) => {
                   style={styles.checkView}>
                   <Ionicons
                     name={isChecked ? 'checkbox' : 'square-outline'}
+                    size={30}
                     style={{
                       ...styles.checkIcon,
                       color: isChecked ? colors.orangeColor : '#7a98fa',

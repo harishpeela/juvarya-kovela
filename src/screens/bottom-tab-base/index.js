@@ -154,7 +154,7 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FontistoIcon name="heart-alt" color={color} size={20} />
-                  <Text style={{ color: color }}>Favorites</Text>
+                  <Text style={{ color: color }}>Favorite</Text>
                 </View>
               ),
             }}

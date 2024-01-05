@@ -339,7 +339,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
             </Text>
             <View style={{marginTop: 10}}>
               {!data?.seasonal ? (
-                <TouchableOpacity style={styles.seasonal}>
+                <TouchableOpacity style={styles.seasonal} onPress={() => alert('under development')}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (

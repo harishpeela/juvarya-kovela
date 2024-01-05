@@ -69,11 +69,11 @@ const MyTamples = ({navigation}) => {
       </View> */}
       <View style={{minHeight: 160, marginTop: '3%'}}>
       <TopBarcard txt={'My Temples'} back={true}  navigation={navigation}>
-      <View style={styles.searchContainer}>
+      <View style={{...styles.searchContainer, marginTop: '-5%'}}>
         <SearchBar
           value={searchedText}
           onTextChange={e => {
-            setSearchedText(e);
+            setSeracherdText(e);
             SearchPopTemp(e);
           }}
           loading={false}
