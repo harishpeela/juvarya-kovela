@@ -54,14 +54,10 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('========>', result?.data);
+      console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
-        // let responce = result?.data?.jtFeeds;
-        // responce === null ? setNoData(true) : setNoData(false);
-        // responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
         setRefrsh(false);
       } else {
@@ -123,7 +119,7 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 50}}>
+      <View style={{height: 160}}>
         <TopBarcard userIcon={true}>
           <View style={styles.navBarContainer}>
             <View style={styles.buttonContainer}>
@@ -170,7 +166,7 @@ const UserFeedScreen = ({navigation}) => {
           </View>
         </TopBarcard>
       </View>
-      <View style={{marginTop: '20%'}}>
+      <View style={{marginBottom: '40%'}}>
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}

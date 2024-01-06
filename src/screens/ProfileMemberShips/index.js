@@ -1,13 +1,16 @@
 import { Text, View, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { MemberShipCard, TopBarcard, BackgroundImage, BackHeaderNew } from '../../components';
+import React, { useState, useEffect, useContext } from 'react';
+import { MemberShipCard, TopBarcard} from '../../components';
 import { allTexts } from '../../common';
 import { styles } from './styles';
 import { MemberShipList } from '../../utils/api';
+import ApplicationContext from '../../utils/context-api/Context';
 const ProfileMemberShips = ({ navigation, route }) => {
+  const {userDetails} = useContext(ApplicationContext);
   const { roleId, trfdata } = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
+  const [roleType, setRoleType] = useState();
   const data = [
     {
       id: 1,
@@ -15,7 +18,14 @@ const ProfileMemberShips = ({ navigation, route }) => {
       type: 'BASIC',
     },
   ];
-
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    console.log('role===>', roleAdmin);
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    }
+  };
   const MembershipData = async () => {
     setLoader(true);
     try {
@@ -35,7 +45,9 @@ const ProfileMemberShips = ({ navigation, route }) => {
   };
   useEffect(() => {
     MembershipData();
+    Type();
   }, []);
+  console.log('roleType', roleType);
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
@@ -43,24 +55,16 @@ const ProfileMemberShips = ({ navigation, route }) => {
           back={true}
           txt={'Memberships'}
           navigation={navigation}
+          roleId={roleId}
+          roleType={roleType}
+          navCreate={navigation}
         />
-        {roleId === 'ROLE_ITEM_ADMIN' && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.addMembershipDetails, {
-                roleId: roleId,
-                jtProfileId: trfdata?.jtProfile,
-              });
-            }}>
-            <Text style={styles.joinText}>Create</Text>
-          </TouchableOpacity>
-        )}
       </View>
       <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
         <MemberShipCard
           data={data}
           txt={
-            roleId === 'ROLE_ITEM_ADMIN'
+            roleId === 'ROLE_ITEM_ADMIN'  || roleType === 'ROLE_ADMIN' 
               ? `${membership?.length ? membership?.length : '0'} Memberships`
               : 'Join Now'
           }

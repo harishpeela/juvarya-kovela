@@ -128,10 +128,8 @@ const Profile = ({ navigation }) => {
   const TC = () => {
     setClicked(true);
     if (clicked === true) {
-      // alert('T & C under development');
       setTcModal(true);
     } else {
-      // alert('T & C under development');
       setTcModal(true);
     }
   };
