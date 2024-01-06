@@ -36,10 +36,10 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{ flex: 1}}>
-      <StatusBar backgroundColor={'#FFAB0F'} />
-      <View style={{}}>
-        <TopBarcard txt={'Notifications'} back={true} navBack={navigation} navigation={navigation} />
-        <View style={{marginTop: 40}}>
+        <View style={{height: 120}}>
+        <TopBarcard txt={'Notifications'} back={true} navBack={navigation} navigation={navigation} height={120} />
+        </View>
+        <View style={{}}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (
@@ -63,7 +63,6 @@ const Notifications = ({navigation}) => {
             </View>
           )}
         </View>
-      </View>
     </View>
   );
 };
