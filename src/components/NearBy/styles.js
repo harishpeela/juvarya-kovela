@@ -37,8 +37,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   popularTextContainer: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '500',
     color: 'black',
   },
   nodataView: {

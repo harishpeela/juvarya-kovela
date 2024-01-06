@@ -14,9 +14,7 @@ import {
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
-import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
-import { TopBarcard } from '../../components';
-
+import {Loader} from '../../components';
 const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
@@ -40,7 +38,7 @@ const SeeAll = ({navigation}) => {
     return !isLoading ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
         {' '}
-        No Items to display
+        {/* No Items to display */}{''}
       </Text>
     ) : (
       <View>
@@ -60,21 +58,6 @@ const SeeAll = ({navigation}) => {
   const onSelect = data => {};
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      {/* <View style={{margin: '5%', marginTop: '10%', marginLeft: '5%'}}>
-        <BackHeaderNew
-          txt={'Popular Temples'}
-          onPress={() => navigation.goBack()}
-        />
-      </View> */}
-      {/* <View style={styles.updateProfileTopCard}>
-        <TopBarcard
-          back={true}
-          txt={'All Temples'}
-          navBack={navigation}
-          
-
-        />
-      </View> */}
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
         <Ionicons
@@ -83,7 +66,6 @@ const SeeAll = ({navigation}) => {
         color={'#ffffff'}
         style={{alignSelf: 'flex-start', justifyContent: 'center'}}
       />
-     
         </TouchableOpacity>
         <Text style={styles.headingText}>{'All temples'}</Text>
       </View>
