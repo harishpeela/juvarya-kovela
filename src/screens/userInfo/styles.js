@@ -21,11 +21,16 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     marginTop: 20,
     width: '40%',
-    padding: 15,
     alignSelf: 'center',
-    borderRadius: 25,
-    backgroundColor: colors.orangeColor,
+    padding: 10,
     alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: colors.orangeColor,
+  },
+  butText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   subFormHeading: {
     fontSize: 18,

@@ -26,7 +26,9 @@ const FollowersListCard3 = ({data, navigation}) => {
                 data: item,
               }),
                 console.log('item', item);
-            }}>
+            }}
+            
+            >
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
                 <Image

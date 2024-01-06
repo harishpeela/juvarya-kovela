@@ -1,53 +1,31 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-} from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { styles } from './styles';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Pressable, Image, Button, ImageBackground } from 'react-native'
+import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { BackgroundImage, BackgroundImageAClass, EventCard3, InputField, PrimaryButton, TextInput2 } from '../../components';
 import {
-  BackgroundImage,
-  BackgroundImageAClass,
-  EventCard3,
-  InputField,
-  PrimaryButton,
-  TextInput2,
+  BackHeaderNew,
 } from '../../components';
-import {BackHeaderNew} from '../../components';
-import {allTexts, colors} from '../../common';
-import Icon2 from 'react-native-vector-icons/EvilIcons';
-import {BackgroundImage2} from '../../components/backgroundImage';
-import Btn from '../../components/btn';
-import { Formik, Field } from 'formik';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Icon3 from 'react-native-vector-icons/Entypo';
-import {
-  EventDetail,
-  EventInterested,
-  EventInterestedCount,
-} from '../../utils/api';
-import Icon4 from 'react-native-vector-icons/MaterialIcons';
-import Snackbar from 'react-native-snackbar';
-
-const EventDetails = ({ navigation, route }) => {
-  const { data } = route.params || {};
-  console.log('data =>>>>>> ' + data.id);
+import { allTexts, colors, Car } from '../../common';
+import Icon2 from 'react-native-vector-icons/EvilIcons'
+import { BackgroundImage2 } from '../../components/backgroundImage';
+import { Picker } from '@react-native-picker/picker';
+import { styles } from './styles';
+import { AntDesign } from '@expo/vector-icons';
+import FeatherIcon from 'react-native-vector-icons/Feather';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
+import F5Icon from 'react-native-vector-icons/FontAwesome5';
+import FontisoIcon from 'react-native-vector-icons/Fontisto';
+import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
+import Card from '../../common/Card';
+import { TopBarcard } from '../../components';
+const EventDetails = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isChecked, setIsChecked] = useState(false);
-  const [eventPage, setEventPage] = useState(false);
-  const [eventData, setEventData] = useState();
-  const [eventLoader, setEventLoader] = useState(false);
-  const [formattedDate, setFormattedDate] = useState('');
-  const [interested, setInterested] = useState(false);
-  const [url, setUrl] = useState('');
-  const [interestedCount, setInterestedCount] = useState(0)
+  const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [activeImgIndex, setActiveImgIndex] = useState(0);
   const {
-    screenNames: {signin, otpScreen},
-    paragraphs: {alreadyAccount},
+    screenNames: { signin, otpScreen },
+    paragraphs: { alreadyAccount },
     placeHolders: {
       fistNamePlace,
       lastNamePlace,
@@ -56,479 +34,189 @@ const EventDetails = ({ navigation, route }) => {
       passwordPlace,
     },
     headings: {
-      inputTitles: {phoneNo, email, username, Gender},
+      inputTitles: {
+        phoneNo,
+        email,
+        username,
+        Gender
+      },
     },
   } = allTexts;
-  const EventDetailSubmit = async () => {
-    setEventLoader(true);
-    console.log('id', data?.id)
-    try {
-      let result = await EventDetail(data.id);
-      console.log('Eventsdata ========>', result?.data);
-      setEventData(result?.data);
-      // console.log('data  2 =====>>>>>>' + data)
-      console.log(result.status);
-      console.log('events list =>>>>>>>>>>>>> ' + eventData);
-      if (result?.data?.mediaList[0].url) {
-        setUrl(result?.data?.mediaList[0].url);
-        console.log(
-          '______________________________+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++',
-        );
 
-        getCount()
-      }
-      if (result.status === 200) {
-        setEventData(result?.data);
-        console(
-          'MediaList =>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>' +
-          eventData,
-        )
-        setEventLoader(false);
-        console.log(formattedDate);
-      } else {
-        setEventLoader(false);
-      }
-    } catch (error) {
-      console.log('Error ======>>>>>>>>>' + error);
-    }
+  const genders = [
+    { label: "Male", value: "male" },
+    { label: "Female", value: "female" },
+  ];
+  const renderHighlight = () => {
+    return (
+      <Card style={styles.highLightCard}>
+        <AntDesignIcon style={{ position: 'absolute', right: 10, top: 10 }} name="heart" size={15} color="red" />
+        <View style={{ flexDirection: 'row' }}>
+          <Image
+            source={require('../../../assets/images/tempimg1.jpg')}
+            style={{ height: 80, width: 80, borderRadius: 20 }}
+          />
+          <View style={{ marginLeft: 10 }}>
+            <Text style={{ fontSize: 18, fontWeight: '700' }}>Ganga Dursheera</Text>
+            <Text numberOfLines={2} ellipsizeMode='tail' style={{ width: 250 }}>
+              Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
+              Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', position: 'absolute', bottom: 5, right: 20, alignItems: 'center' }}>
+          <FontisoIcon style={{ backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={10} color={colors.orangeColor} />
+          <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
+        </View>
+      </Card>
+    )
   };
-  useEffect(() => {
-    EventDetailSubmit();
-    // getCount();
-  }, []);
 
-  const hitInterested = async () => {
-    if (interested) {
-      setInterested(false);
-    } else {
-      setInterested(true);
-    }
-    const payload = {
-      eventId: data.id,
-      interested: interested,
-    };
-    console.log(
-      'eventInterested =>>>>>> ' + payload.eventId,
-      payload.interested,
-    );
-    try {
-      let result = await EventInterested(payload);
-      console.log(result?.data);
-      if (result) {
-        if (interested) {
-          Snackbar.show({
-            text: 'removed from the Interest',
-            backgroundColor: 'green',
-            duration: 2000,
-            action: {
-              text: 'Ok',
-              textColor: 'white',
-              onPress: () => {
-                <></>;
-              },
-            },
-          });
-        } else {
-          Snackbar.show({
-            text: 'Added to the Interest',
-            backgroundColor: 'green',
-            duration: 2000,
-            action: {
-              text: 'Ok',
-              textColor: 'white',
-              onPress: () => {
-                <></>;
-              },
-            },
-          });
-        }
-      } else {
-        setMemberShip(0);
-      }
-    } catch (error) {
-      console.log('It is in error block');
-      Snackbar.show({
-        text: 'Facing the Error',
-        backgroundColor: 'red',
-        duration: 2000,
-        action: {
-          text: 'Ok',
-          textColor: 'white',
-          onPress: () => {
-            <></>;
-          },
-        },
-      });
-    }
+  const renderInfo = () => {
+    return (
+      <Card>
+        <Text style={{ fontSize: 16, fontWeight: '700', color: 'black' }}>makar sankranthi</Text>
+        <Text>
+          Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
+          Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+        </Text>
+      </Card>
+    )
+  };
+
+  const renderContribute = () => {
+    return (
+      <Card style={styles.contributeCard}>
+        <Text style={{
+          backgroundColor: colors.orangeColor, paddingHorizontal: 10, paddingVertical: 5,
+          position: 'absolute', left: 10, top: 10, borderRadius: 10
+        }}>Temple</Text>
+        <AntDesignIcon style={{ position: 'absolute', right: 10, top: 10 }} name="heart" size={20} color="red" />
+        <View style={{ marginTop: 30 }}>
+          <Image
+            style={{ height: 120, width: 120, borderRadius: 60 }}
+            source={require('../../../assets/images/tempimg1.jpg')} />
+        </View>
+        <View style={{ alignItems: 'center' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'black', marginVertical: 5 }}>Holi Festival</Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <AntDesignIcon name="heart" size={15} color={colors.orangeColor} />
+            <Text style={{ fontSize: 14, fontWeight: '400', color: 'black', marginLeft: 10 }}>Shiva prasad</Text>
+          </View>
+        </View>
+      </Card>
+    )
   }
-
-
-
-  const getCount = async () => {
-    try {
-      let result = await EventInterestedCount(data.id)
-      console.log("result.statues ----->>>>>>> " + (result?.data))
-      if (result.status === 200) {
-        console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + result?.data?.totalItems)
-        setInterestedCount(result?.data?.totalItems)
-      }
-      if (result) {
-      } else {
-      }
-    } catch (error) {
-      console.error(error);
+  const actionsArr = [
+    {
+      id: 1,
+      label: 'Highlights',
+      component: renderHighlight,
+      activeTab: false,
+    },
+    {
+      id: 2,
+      label: 'Info',
+      component: renderInfo,
+      activeTab: false,
+    },
+    {
+      id: 3,
+      label: 'Contribute',
+      component: renderContribute,
+      activeTab: false,
     }
-  }
-  useEffect(() => {
-    const dateObject = new Date(eventData?.creationTime);
-    let modifyDate = dateObject.toLocaleString('default', {
-      day: '2-digit',
-      month: 'short',
-    });
-    setFormattedDate(modifyDate);
-  }, [eventData?.creationTime]);
+  ];
 
-  useEffect(() => {
-    console.log(formattedDate);
-  }, [formattedDate]);
-
-  const handlePress = () => {
-    if (eventPage) {
-      setEventPage(false);
-      setCurrentIndex(1);
-    } else {
-      setEventPage(true);
-      setCurrentIndex(2);
+  const scroolImagesArray = [
+    {
+      id: 1,
+      img: require('../../../assets/images/tempimg1.jpg')
+    },
+    {
+      id: 2,
+      img: require('../../../assets/images/tempimg2.jpg')
     }
-  }
-
-
-  console.log("EventsData ===>>>>>>>>>>> " + eventData)
+  ]
 
   return (
     <View style={styles.container}>
-      {/* <ScrollView> */}
-      <BackgroundImage2
-        templeImage={eventData?.mediaList[0]?.url}
-      // uri={
-      //   eventData?.mediaList[0]?.url
-      //     ? eventData?.mediaList[0]?.url
-      //     : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702037767542durga.png'
-      // }
-      />
-      <View style={styles.header}>
-        <BackHeaderNew
-          onPress={() => {
-            if (eventPage && currentIndex === 2) {
-              handlePress();
-            } else {
-              navigation.goBack();
-            }
-          }}
-          txtColor={colors.black}
-          isPlus={false}
-          isArrow={true}
-        />
-        <TouchableOpacity style={styles.round2}>
-          <Icon name="share" size={22} color={colors.black} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.secondContainer}>
-        <View style={styles.secondContainer2}>
-          <View style={styles.eventNameContainer}>
-            <Text style={[styles.festivalText]}>
-              {eventData?.name ? eventData.name.charAt(0).toUpperCase() + eventData.name.slice(1) : ''}
-            </Text>
-            <View style={styles.favoriteContainer}>
-              <Icon4 name="favorite" size={32} color={colors.orangeColor} />
-              {interestedCount > 0 ? (<Text style={styles.interestedText}>{interestedCount}</Text>) : (<></>)}
-            </View>
-          </View>
-          <View style={styles.dateAndLocation}>
-            <Text style={styles.dateText}>{formattedDate}</Text>
-            <View style={styles.locationIcon}>
-              <Icon3 name="location-pin" color={colors.red1} size={20} />
-              <Text style={[(color = colors.gray), styles.locText]}>{eventData?.addressToEventDTO?.city}</Text>
-            </View>
-          </View>
-          <View style={styles.toggleContainer}>
-            <View style={styles.toggleHead}>
-              <Pressable onPress={() => setCurrentIndex(1)}>
-                <View style={styles.separateContainer}>
-                  <Text
-                    style={[
-                      styles.separateContainerText,
-                      currentIndex === 1 && styles.orangeColor,
-                    ]}>
-                    HighLights
-                  </Text>
-                  <View
-                    style={[
-                      styles.border,
-                      currentIndex === 1 && styles.orangeColor,
-                    ]}
-                  />
-                </View>
-              </Pressable>
-            )}
-            <Pressable onPress={() => setCurrentIndex(2)}>
-              <View style={styles.separateContainer}>
-                <Text
-                  style={[
-                    styles.separateContainerText,
-                    currentIndex === 2 && styles.orangeColor,
-                  ]}>
-                  Info
-                </Text>
-                <View style={[currentIndex === 2 && styles.orangeColor]} />
-              </View>
-            </Pressable>
-            <Pressable onPress={() => setCurrentIndex(3)}>
-              <View style={styles.separateContainer}>
-                <Text
-                  style={[
-                    styles.separateContainerText,
-                    currentIndex === 3 && styles.orangeColor,
-                  ]}>
-                  Contribute
-                </Text>
-                <View
-                  style={[
-                    styles.border,
-                    currentIndex === 3 && styles.orangeColor,
-                  ]}
-                />
-              </View>
-            </Pressable>
-            <Pressable onPress={() => setCurrentIndex(4)}>
-              <View style={styles.separateContainer}>
-                <Text
-                  style={[
-                    styles.separateContainerText,
-                    currentIndex === 4 && styles.orangeColor,
-                  ]}>
-                  Location
-                </Text>
-                <View
-                  style={[
-                    styles.border,
-                    currentIndex === 4 && styles.orangeColor,
-                  ]}
-                />
-              </View>
-            </Pressable>
-          </View>
-          <ScrollView>
-            <View style={styles.toggleData}>
-              {currentIndex === 1 && (
-                <TouchableOpacity onPress={handlePress}>
-                  <EventCard3 onPress={handlePress} />
-                  <EventCard3 />
-                  <EventCard3 />
-                  <EventCard3 />
-                  <EventCard3 />
-                  <EventCard3 />
-                </TouchableOpacity>
-              )}
-              {currentIndex === 2 && (
-                <View style={styles.infoContainer}>
-                  <View style={styles.btnContainer}>
-                    <Btn />
-                    <Btn />
-                    <Btn />
-                    <Btn />
-                    <Btn />
-                  </View>
-                  <View style={styles.desContainer}>
-                    <Text style={styles.des}>Description: </Text>
-                    <Text style={styles.desData}>
-                      The build will continue, but you are strongly encouraged
-                      to update your project to Lorem ipsum dolor sit amet
-                      consectetur. Enim sed commodo maecenas sed nisl ultrices.
-                      Mauris amet quisque placerat sit mi risus lorem. Tincidunt
-                      nam sit sit pharetra. Varius tincidunt mi elementum libero
-                      nisl condimentum nisi mauris. Erat sed vel lectus cras ut
-                      pellentesque sem. Nunc ut et sed ac et tristique nunc
-                      aenean varius. Phasellus sit parturient sed sed ut vitae.
-                      Porttitor facilisi dui mauris sit donec eget augue
-                      pretium. Id magna arcu sit tortor.
-                    </Text>
-                  </View>
-                </View>
-              </Pressable>
-              <Pressable onPress={() => setCurrentIndex(4)}>
-                <View style={styles.separateContainer}>
-                  <Text
-                    style={[
-                      styles.separateContainerText,
-                      currentIndex === 4 && styles.orangeColor,
-                    ]}>
-                    Events
-                  </Text>
-                  <View
-                    style={[
-                      styles.border,
-                      currentIndex === 4 && styles.orangeColor,
-                    ]}
-                  />
-                </View>
-              </Pressable>
-            </View>
-            <KeyboardAwareScrollView>
-              <View style={styles.toggleData}>
-                {currentIndex === 1 && (
-                  <ScrollView>
-                    <View style={styles.container1}>
-                      <EventCard3 />
-                      <EventCard3 />
-                      <EventCard3 />
-                      <EventCard3 />
-                      <EventCard3 />
-                      <EventCard3 />
-                    </View>
-                  </ScrollView>
-                )}
-                {currentIndex === 2 && (
-                  <View style={styles.infoContainer}>
-                    <View style={styles.btnContainer}>
-                      <Btn />
-                      <Btn />
-                      <Btn />
-                      <Btn />
-                      <Btn />
-                    </View>
-                    <View style={styles.desContainer}>
-                      <Text style={styles.des}>Description: </Text>
-                      <Text style={styles.desData}>
-                        The build will continue, but you are strongly encouraged
-                        to update your project to Lorem ipsum dolor sit amet
-                        consectetur. Enim sed commodo maecenas sed nisl
-                        ultrices. Mauris amet quisque placerat sit mi risus
-                        lorem. Tincidunt nam sit sit pharetra. Varius tincidunt
-                        mi elementum libero nisl condimentum nisi mauris. Erat
-                        sed vel lectus cras ut pellentesque sem. Nunc ut et sed
-                        ac et tristique nunc aenean varius. Phasellus sit
-                        parturient sed sed ut vitae. Porttitor facilisi dui
-                        mauris sit donec eget augue pretium. Id magna arcu sit
-                        tortor.
-                      </Text>
-                    </View>
-                  </View>
-                )}
-                {currentIndex === 3 && (
-                  <KeyboardAwareScrollView>
-                    <View style={styles.formContainer}>
-                      <View style={styles.registrationContainer}>
-                        <Text style={styles.registrationText}>
-                          Registration Form
-                        </Text>
-                      </View>
-                      <View style={styles.formik}>
-                        <Formik
-                          onSubmit={(values, formikActions) => {
-                            UserRegisterHandler(values, formikActions);
-                            console.log('values', values);
-                          }}
-                          initialValues={{
-                            phone: '',
-                            email: '',
-                            userName: '',
-                            Gender: '',
-                          }}>
-                          {({
-                            errors,
-                            touched,
-                            handleChange,
-                            handleBlur,
-                            handleSubmit,
-                            isSubmitting,
-                            values,
-                          }) => {
-                            return (
-                              <View style={styles.fieldContainer}>
-                                <TextInput2
-                                  title={'UserName'}
-                                  placeholder={'Enter Your Name'}
-                                  error={touched.userName && errors.userName}
-                                  onBlur={handleBlur('userName')}
-                                  setState={handleChange('userName')}
-                                />
-                                <TextInput2
-                                  title={phoneNo}
-                                  isFlag
-                                  keyboardType={'numeric'}
-                                  placeholder={'Enter Your Phone Number'}
-                                  error={touched.phone && errors.phone}
-                                  onBlur={handleBlur('phone')}
-                                  setState={handleChange('phone')}
-                                  maxLength={10}
-                                />
-                                <TextInput2
-                                  title={email}
-                                  placeholder={emailPlace}
-                                  error={touched.email && errors.email}
-                                  onBlur={handleBlur('email')}
-                                  setState={handleChange('email')}
-                                  autoCapitalize="none"
-                                />
-                                <View style={styles.inputAndBtnContainer}>
-                                  <TextInput2
-                                    title={'Gender'}
-                                    placeholder={'Gender'}
-                                    error={touched.email && errors.email}
-                                    onBlur={handleBlur('email')}
-                                    setState={handleChange('email')}
-                                    autoCapitalize="none"
-                                    width={'25%'}
-                                  />
-                                  <TouchableOpacity style={styles.subBtn}>
-                                    <Text style={styles.subBtnText}>
-                                      Submit
-                                    </Text>
-                                  </TouchableOpacity>
-                                </View>
-                                <View style={styles.buttonContainer} />
-                                <TouchableOpacity
-                                  style={styles.alreadyAcc}
-                                  onPress={() => {
-                                    navigation.navigate(signin);
-                                  }}
-                                />
-                              </View>
-                            );
-                          }}
-                        </Formik>
-                      </View>
-                    </View>
-                  </View>
-                </KeyboardAwareScrollView>
-              )}
-              {/* {currentIndex === 4 && (
-                  <View style={styles.locationContainer}>
-                    <Text style={styles.locationText}>Event Location </Text>
-                  </View>
-                )} */}
-              {currentIndex === 4 && (
-                <Text style={styles.locationText}>Maps displaying 4</Text>
-              )}
-            </View>
-          </ScrollView>
+      <ScrollView style={{ borderWidth: 0 }} >
+        <View style={{minHeight: '10%'}}>
+        <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
         </View>
-      </View>
-      {currentIndex !== 3 ? (
-        <TouchableOpacity
-          style={styles.intButton}
-          onPress={() => hitInterested()}>
-          {interested ? (
-            <Text style={styles.intButtonText}>Interested</Text>
-          ) : (
-            <Text style={styles.intButtonText}>Interest</Text>
-          )}
+        <ImageBackground
+          source={scroolImagesArray[activeImgIndex]?.img}
+          style={{ height: 250, marginHorizontal: 20, marginTop: 20 }}
+          imageStyle={{ borderRadius: 20 }}>
+          <View style={{ justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', flex: 1, }}>
+            <AntDesignIcon name="left" size={20} color="white" disabled={activeImgIndex === 0} onPress={() => setActiveImgIndex((imgIndex) => imgIndex - 1)} />
+            <AntDesignIcon name="right" size={20} color="white" disabled={activeImgIndex === (scroolImagesArray?.length - 1)} onPress={() => setActiveImgIndex((imgIndex) => imgIndex + 1)} />
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center', marginBottom: 15 }}>
+            {
+              scroolImagesArray?.map((img, index) => {
+                return (
+                  <TouchableOpacity
+                    style={{ borderWidth: 2, borderRadius: 10, borderColor: 'white', marginHorizontal: 5 }}
+                    onPress={() => setActiveImgIndex(index)}
+                    key={img?.id?.toString()}>
+                    <Image source={img.img}
+                      style={{ height: 50, width: 50, borderRadius: 10 }}
+                    />
+                  </TouchableOpacity>
+                )
+              })
+            }
+          </View>
+        </ImageBackground>
+        <View>
+          <View style={{ flexDirection: 'row', margin: 20, alignItems: 'center' }}>
+            <F5Icon style={{ backgroundColor: 'white' }} name="archway" size={30} color={colors.orangeColor} />
+            <Text style={{ fontSize: 24, fontWeight: '700', color: 'black', marginLeft: 10 }}>Holi Festival</Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
+            <FontisoIcon style={{ color: colors.orangeColor, backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={20} color="white" />
+            <Text style={{ fontSize: 14, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
+            <FontAwsIcon style={{ color: colors.orangeColor, backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="location-arrow" size={20} color="white" />
+            <Text style={{ color: colors.blue, fontSize: 14, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue }}>Anakapalle</Text>
+          </View>
+        </View>
+        <View style={{
+          borderStyle: 'dashed',
+          borderWidth: 0.5,
+          borderColor: colors.gray,
+          marginVertical: 10,
+        }}>
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          {
+            actionsArr.map((action, index) => {
+              return (
+                <TouchableOpacity
+                  key={action?.id?.toString()}
+                  onPress={() => setActiveTabIndex(index)}
+                  style={{ backgroundColor: activeTabIndex === index ? colors.orangeColor : '#dddddd', borderRadius: 30, paddingHorizontal: 15, paddingVertical: 5, marginHorizontal: 10 }}>
+                  <Text style={{ color: activeTabIndex === index ? 'white' : 'grey', fontWeight: '400' }}>{action.label}</Text>
+                </TouchableOpacity>
+              )
+            })
+          }
+        </View>
+        <View style={{ margin: 10 }}>
+          {actionsArr[activeTabIndex].component()}
+        </View>
+
+      </ScrollView>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.btnText}>Interested</Text>
         </TouchableOpacity>
-      ) : (
-        <></>
-      )}
-      {/* </ScrollView> */}
+      </View>
     </View>
   );
 };

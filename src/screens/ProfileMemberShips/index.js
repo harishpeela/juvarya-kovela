@@ -1,11 +1,11 @@
-import {Text, View, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect} from 'react';
-import {MemberShipCard, BackgroundImage, BackHeaderNew} from '../../components';
-import {allTexts} from '../../common';
-import {styles} from './styles';
-import {MemberShipDetails} from '../../utils/api';
-const ProfileMemberShips = ({navigation, route}) => {
-  const {roleId, trfdata} = route.params || {};
+import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { MemberShipCard, TopBarcard, BackgroundImage, BackHeaderNew } from '../../components';
+import { allTexts } from '../../common';
+import { styles } from './styles';
+import { MemberShipList } from '../../utils/api';
+const ProfileMemberShips = ({ navigation, route }) => {
+  const { roleId, trfdata } = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const data = [
@@ -19,8 +19,8 @@ const ProfileMemberShips = ({navigation, route}) => {
   const MembershipData = async () => {
     setLoader(true);
     try {
-      let result = await MemberShipDetails(0, 100);
-      console.log('ressssssssssssssssssss', result?.data);
+      let result = await MemberShipList(0, 100);
+      console.log('res', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -38,12 +38,11 @@ const ProfileMemberShips = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1}}>
-      <BackgroundImage />
       <View style={styles.header}>
-        <BackHeaderNew
-          txt={'MemberShips'}
-          isArrow={true}
-          onPress={() => navigation.goBack()}
+        <TopBarcard
+          back={true}
+          txt={'Memberships'}
+          navigation={navigation}
         />
         {roleId === 'ROLE_ITEM_ADMIN' && (
           <TouchableOpacity
@@ -57,12 +56,12 @@ const ProfileMemberShips = ({navigation, route}) => {
           </TouchableOpacity>
         )}
       </View>
-      <View style={{marginTop: '10%', marginHorizontal: '5%'}}>
+      <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
         <MemberShipCard
           data={data}
           txt={
             roleId === 'ROLE_ITEM_ADMIN'
-              ? `${membership?.length} Memberships`
+              ? `${membership?.length ? membership?.length : '0'} Memberships`
               : 'Join Now'
           }
           onPress={() =>

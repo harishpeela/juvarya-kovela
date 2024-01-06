@@ -1,34 +1,30 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StatusBar} from 'react-native';
 import {getNotifications} from '../../utils/api';
-import {Loader} from '../../components';
+import {Loader, TopBarcard} from '../../components';
 import {
   BackHeaderNew,
-  BackgroundImage,
   NotificationCard,
+  NewBackHeader
 } from '../../components';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
+import { HeaderComponent } from '../../components/header_comp/HeaderComponent';
+import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
-  const [loader, setLoader] = useState();
-  const [name, setname] = useState();
+  const [loader, setLoader] = useState(true);
+  const [name, setName] = useState();
 
   const GetNotifications = async () => {
-    setLoader(true);
     try {
       let result = await getNotifications();
-      let Data = result?.data[0]?.notifications;
-      let mapping = result?.data[0]?.jtProfileDTO;
-      let tempName = mapping?.name;
-      if (Data) {
-        setNotificationData(Data);
-        setname(tempName);
-        setLoader(false);
-      } else {
-        setLoader(false);
-      }
+      let Data = result?.data?.customerRoles;
+      let mapping = Data?.filter(item => item)?.map(({notifications}) => ({notifications}));
+      let FilteredData = mapping[0]?.notifications;
+      console.log('filterd', FilteredData);
+      setNotificationData(FilteredData)
+      setLoader(false);
     } catch (error) {
       console.log('error in notifications', error);
       setLoader(false);
@@ -39,28 +35,25 @@ const Notifications = ({navigation}) => {
     GetNotifications();
   }, []);
   return (
-    <View style={{backgroundColor: colors.white, flex: 1}}>
-      <BackgroundImage />
-      <View style={{marginTop: '20%', margin: 15}}>
-        <BackHeaderNew
-          txt={'Notifications'}
-          onPress={() => navigation.goBack()}
-        />
-        <View>
+    <View style={{ flex: 1}}>
+      <StatusBar backgroundColor={'#FFAB0F'} animated={true} />
+      <View style={{}}>
+        <View style={{height: 80, marginTop: 10}}>
+        <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()} />
+        </View>
+        <View style={{marginTop: 40}}>
           {loader ? (
-            <Loader size={'small'} color={colors.orangeColor} />
+            <Loader size={'large'} color={colors.orangeColor} />
           ) : notificationdata?.length ? (
-            <ScrollView>
               <FlatList
                 keyboardShouldPersistTaps="handled"
                 data={notificationdata}
                 showsVerticalScrollIndicator={false}
                 keyExtractor={({item, index}) => index}
                 renderItem={({item, index}) => (
-                  <NotificationCard data={item} name={name} />
+                  <NotificationCard data={item} />
                 )}
               />
-            </ScrollView>
           ) : (
             <View
               style={{
@@ -68,7 +61,7 @@ const Notifications = ({navigation}) => {
                 justifyContent: 'center',
                 marginTop: '40%',
               }}>
-              <Text>No notifications for this user</Text>
+              <Text style={{color: 'black'}}>No notifications for this user</Text>
             </View>
           )}
         </View>

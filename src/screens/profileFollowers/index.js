@@ -6,7 +6,7 @@ import {
   BackHeaderNew,
   FollowersListCard2,
   SearchBar,
-  Sort,
+  Sort
 } from '../../components';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TempleFollowersList } from '../../utils/api';
@@ -14,6 +14,7 @@ import { Loader } from '../../components';
 import { colors } from '../../common';
 import { styles } from './styles';
 import { Ellipsis } from '../../components';
+import { TopBarcard } from '../../components';
 
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
@@ -57,61 +58,37 @@ const FollowersMembership = ({ route, navigation }) => {
     }, 500);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={styles.followersHeader}>
-        <BackHeaderNew
-          txt={
-            followersList.length > 0
-              ? `${followersList.length} Followers`
-              : null // or any fallback value you want when followersList is not greater than 0
-          }
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-        />
-        <Ellipsis txtColor={colors.black} />
+    <View>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
+        <TopBarcard txt={'Followers'} isBell={true} back={true}  navigation={navigation} navBack={navigation} >
+          <View style={{...styles.searchbarContainer, marginTop: '-5%'}}>
+            <View>
+              <SearchBar
+                placeHolder={'Search followers'}
+                onCrossPress={() => {
+                  setSeracherdText('');
+                  getTemples();
+                }}
+                onTextChange={e => {
+                  setSeracherdText(e);
+                  performFilter(e);
+                }}
+              />
+            </View>
+          </View>
+        </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              value={searchedText}
-              onTextChange={text => {
-                setSearchedText(text);
-                handleSearch(text);
-              }}
-              loading={loading}
-              onCrossPress={() => {
-                setSearchedText('');
-                setFilteredData([]);
-              }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={true}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-          </View>
-          <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.orangeColor}
-              srWidth={'100%'}
-            // srHeight={"100%"}
-            />
-          </View>
-        </View>
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              {/* <ScrollView showsVerticalScrollIndicator={false}> */}
               {searchedText === '' && (
                 <FlatList
                   style={styles.list}
                   data={followersList}
+                  showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
                   keyExtractor={(item, index) => item.user.id.toString()}
                   renderItem={({ item }) => (
@@ -124,9 +101,6 @@ const FollowersMembership = ({ route, navigation }) => {
                   )}
                 />
               )}
-              {/* </ScrollView> */}
-
-              {/* <ScrollView style={{height: searchedText ? '85%' : 0}}> */}
               {searchedText && filteredData.length > 0 ? (
                 <FlatList
                   style={styles.list}
@@ -147,12 +121,11 @@ const FollowersMembership = ({ route, navigation }) => {
                   <Text style={styles.noDataText}>No Followers to Display</Text>
                 </View>
               )}
-              {/* </ScrollView> */}
             </>
           )}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default FollowersMembership;

@@ -7,7 +7,6 @@ export const RegisterValidationSchema = Yup.object({
     .max(25, 'Maximum 25 Charachers Allow')
     .required('First Name required'),
   lastName: Yup.string().trim().required('Last Name required'),
-  userName: Yup.string().trim().required('user Name required'),
   phone: Yup.string().trim().required('phone number required'),
   email: Yup.string()
     .email('Invalid Email Address')
@@ -24,19 +23,22 @@ export const RegisterValidationSchema = Yup.object({
     .oneOf([Yup.ref('password'), null], 'Password not Matched'),
 });
 export const UpdatePasswordValidation = Yup.object({
-  password: Yup.string()
+  currentPassword: Yup.string()
+    .trim()
+    .required('Password required'),
+    newPassword: Yup.string()
     .trim()
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
       'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
     )
-    .required('Password required'),
+    .required('New Password required'),
   confirmPassword: Yup.string()
     .required('Confirm Your Password')
-    .oneOf([Yup.ref('password'), null], 'Password not Matched'),
-    gotra: Yup.string()
-    .required('Confirm Your Password')
-    .oneOf([Yup.ref('password'), null], 'Enter your Gotra'),
+    .oneOf([Yup.ref('newPassword'), null], 'Password not Matched'),
+    // gotra: Yup.string()
+    // .required('Confirm Your Password')
+    // .oneOf([Yup.ref('password'), null], 'Enter your Gotra'),
 
 });
 
@@ -63,7 +65,7 @@ export const AddTampleSchemaS3 = Yup.object({
     .required('Employee id required'),
 });
 export const LoginValidationSchema = Yup.object({
-  email: Yup.string().required('Mobile number required'),
+  email: Yup.string().required('Mobile number or Email required'),
   password: Yup.string().trim().required('Password required'),
 });
 export const createPostScheme = Yup.object({
@@ -71,4 +73,19 @@ export const createPostScheme = Yup.object({
 });
 export const Gotra = Yup.object({
   caption: Yup.string().required('Enter your Gotra'),
+});
+
+
+export const forgotPasswordSchema = Yup.object({
+ 
+  password: Yup.string()
+    .trim()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
+      'Must Contain 6 Characters, One Uppercase, One Lowercase and One Special Case Character',
+    )
+    .required('Password required'),
+  confirmPassword: Yup.string()
+    .required('Confirm Your Password')
+    .oneOf([Yup.ref('password'), null], 'Password not Matched'),
 });

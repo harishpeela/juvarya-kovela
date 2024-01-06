@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect} from 'react';
-import {View, Text, FlatList, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
@@ -9,7 +16,8 @@ import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
-export const PopularTemplesList = ({pageNav, seeallnav}) => {
+import { TopBarcard } from '../topBar1/topBarCard';
+export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +32,7 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
     setLoader(true);
     try {
       let result = await PopularTemples();
+      console.log('populattemples', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -66,6 +75,8 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
   };
   return (
     <View>
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation} navMenu={navigation}>
       <View style={styles.searchContainer}>
         <SearchBar
           value={searchedText}
@@ -79,8 +90,10 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
             await PopularTemplesss(pageNo, 20);
           }}
           bgColor={colors.gray4}
-          placeHolder={'Search here'}
+          placeHolder={'Search'}
         />
+      </View>
+      </TopBarcard>
       </View>
       <>
         {loader ? (
@@ -95,14 +108,14 @@ export const PopularTemplesList = ({pageNav, seeallnav}) => {
         ) : (
           <>
             <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Popular Temple</Text>
+              <Text style={styles.popularTextContainer}>Popular Temples</Text>
               <TouchableOpacity
                 onPress={() => {
                   seeallnav.navigate(allTexts.screenNames.seeall, {
                     data: filteredList,
                   });
                 }}>
-                <Text style={{color: colors.black, fontSize: 18}}>See all</Text>
+                <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
               </TouchableOpacity>
             </View>
             <ScrollView>

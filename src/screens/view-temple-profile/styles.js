@@ -209,5 +209,24 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     margin: 30,
-  }
+  },
+  seasonal: {
+    alignSelf: 'center',
+    padding: 5,
+    borderRadius: 10,
+    backgroundColor: colors.orangeColor
+  },
+  seasonalText: {
+    color: colors.white,
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
+  iconContainer: {
+    height: 30,
+    width: 30,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+},
 });

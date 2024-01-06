@@ -4,8 +4,39 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    marginTop: '30%',
+    marginTop: '10%',
     backgroundColor: colors.white,
+  },
+  uploadContainer: {
+    marginBottom: 50,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  preViewImageContainer: {
+    borderWidth: 0.5,
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
+  crossIconContainer: {position: 'absolute', right: 20, zIndex: 100},
+  preViewImage: {
+    height: undefined,
+    width: undefined,
+    flex: 1,
+    borderRadius: 75,
+  },
+  uploadPic: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  profileImage: {
+    alignItems: 'center',
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 100 / 2,
+    borderColor: colors.orangeColor,
   },
   keyBoardStyle: {
     width: '100%',

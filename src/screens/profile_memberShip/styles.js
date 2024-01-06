@@ -3,11 +3,34 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
-    marginTop: 40,
-    margin: '5%'
+    backgroundColor: colors.white,
+
+  },
+  headerContainer: {
+    padding: 10,
+    backgroundColor:'#FFAB0F',
+    height:100,
+    width:'100%',
+    borderBottomLeftRadius:24,
+    borderBottomRightRadius:24,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'space-between'
+  },
+  headingText:{
+   marginRight:120,
+   fontWeight:'bold',
+   color:'#ffffff',
+   fontSize:20
+  },
+  header:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    alignItems:'center',
+    marginTop:20,
+    // marginHorizontal: '4%',
   },
   container1: {
-    borderWidth: 2,
     height: '100%',
   },
   card: {
@@ -97,4 +120,30 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
   },
+  followersContainer: {
+    height: '100%',
+  },
+  sortContainer: {
+    display: 'flex',
+    width: '15%',
+    height: '100%',
+  },
+  list: {
+    marginBottom: 240,
+    marginTop:20,
+  },
+  noDataContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  noDataText: {
+    fontSize: fontSize.xlarge,
+    color: colors.black,
+  },
+  joinText:{
+    color:colors.orangeColor,
+    fontWeight:'900',
+    fontSize:fontSize.xxlarge
+  },
+
 });

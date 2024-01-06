@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     borderRadius: 9,
     fontFamily: fontFamily.medium,
-    textTransform: 'uppercase',
   },
   login: {
     fontFamily: fontFamily.medium,

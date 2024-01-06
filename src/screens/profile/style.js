@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     paddingTop: '10%',
   },
   logoutbtnContainer: {
-    marginTop: '10%',
+    marginTop: '20%',
     width: '50%',
     alignSelf: 'center',
     alignItems: 'center',
@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
     color: colors.gray2,
     // borderWidth:2,
     fontSize: fontSize.small,
+    marginTop:20
   },
   profileItemsHeader: {
     alignItems: 'center',
@@ -54,12 +55,13 @@ export const styles = StyleSheet.create({
   },
   profileImage: {
     alignContent: 'center',
-    alignSelf: 'center',
+    alignItems: 'center',
     height: 100,
     width: 100,
     borderRadius: 100 / 2,
+    justifyContent: 'center'
   },
-  crossIconContainer: {position: 'absolute', right: 10, zIndex: 100},
+  crossIconContainer: {position: 'absolute',right: -5, zIndex: 100},
   preViewImage: {
     height: 100,
     width: 100,
@@ -95,8 +97,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabs: {
-    marginTop: '10%',
-    fontSize: 18,
+    marginTop: '4%',
+    fontSize: 10,
     marginVertical: 10,
     color: colors.gray4,
   },

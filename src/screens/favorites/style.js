@@ -5,19 +5,20 @@ export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     width: '100%',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
+    // paddingVertical: 10,
+    // paddingHorizontal: 10,
   },
-  noAvailable: {
-    color: colors.orange,
-    fontFamily: fontFamily.popinBold,
-  },
+  // noAvailable: {
+  //   fontFamily: fontFamily.popinBold,
+  // },
   searchbarContainer: {
     margin: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: -20,
   },
+  
   loaderContainer: {
     height: '90%',
     alignItems: 'center',
@@ -31,7 +32,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     margin: 8,
-    marginTop: 40,
+    marginTop: '5%',
   },
   bell: {marginLeft: 10, marginTop: 10},
   flatListStyle: {

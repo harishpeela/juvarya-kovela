@@ -9,9 +9,12 @@ import {
   Text,
   useColorScheme,
 } from 'react-native';
+import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 import styles from './styles';
-import {BackgroundImage} from '../../components';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
 import {Loader} from '../../components';
@@ -54,10 +57,11 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
+      // console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
+        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
         // let responce = result?.data?.jtFeeds;
         // responce === null ? setNoData(true) : setNoData(false);
         // responce && setHomeFeedList([...homeFeedList, ...responce]);
@@ -122,34 +126,54 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
-      <View style={styles.navBarContainer}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate(allTexts.screenNames.menu)}>
-            <View style={styles.sidebarIcon}>
-              <View style={[styles.bar, styles.shortestBar]} />
-              <View style={[styles.bar, styles.mediumBar]} />
-              <View style={[styles.bar, styles.longestBar]} />
+      <View style={{height: 50}}>
+        <TopBarcard userIcon={true}>
+          <View style={styles.navBarContainer}>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(allTexts.tabNames.profile)
+                }
+                style={styles.userIcon}>
+                <AntDesign
+                  name="user"
+                  size={25}
+                  color={colors.black}
+                  style={{
+                    marginLeft: 10,
+                    right: 7,
+                    top: 10,
+                  }}
+                />
+                <TouchableOpacity
+                  style={styles.menuIcon}>
+                  <Feather
+                    name="menu"
+                    size={15}
+                    color={colors.black}
+                    style={{}}
+                  />
+                </TouchableOpacity>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
-        </View>
-        {/* {adminRole ? ( */}
-        <TouchableOpacity
-          style={styles.circle}
-          onPress={() =>
-            navigation.navigate(allTexts.screenNames.notification)
-          }>
-          <FontAwesome
-            name="bell-o"
-            size={24}
-            color={isDarkMode ? 'black' : 'black'}
-            style={styles.bellIcon}
-          />
-          <View style={styles.notificationDot} />
-        </TouchableOpacity>
+            <Text style={{fontSize: 20, color: colors.white, fontWeight: 'bold'}}> Feeds</Text>
+            <TouchableOpacity
+              style={styles.circle}
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.notification)
+              }>
+              <FontAwesome
+                name="bell-o"
+                size={24}
+                color={isDarkMode ? 'black' : 'black'}
+                style={styles.bellIcon}
+              />
+              {/* <View style={styles.notificationDot} /> */}
+            </TouchableOpacity>
+          </View>
+        </TopBarcard>
       </View>
-      <>
+      <View style={{marginTop: '20%'}}>
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
@@ -163,6 +187,7 @@ const UserFeedScreen = ({navigation}) => {
               />
             }
             contentContainerStyle={styles.flatListStyle}
+            showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             // decelerationRate={0.3}
             keyExtractor={(item, index) => index}
@@ -189,7 +214,7 @@ const UserFeedScreen = ({navigation}) => {
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
-            <Text style={styles.nodatatext}>no items to display</Text>
+            <Text style={styles.nodatatext}>No items to display</Text>
           </View>
         ) : (
           <View
@@ -197,9 +222,9 @@ const UserFeedScreen = ({navigation}) => {
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
-      </>
+        </View>
     </View>
   );
 };
 
-export default UserFeedScreen
+export default UserFeedScreen;

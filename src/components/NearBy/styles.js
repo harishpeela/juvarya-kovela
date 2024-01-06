@@ -10,7 +10,11 @@ export const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
   },
   searchContainer: {
-    paddingHorizontal: 10,
+    margin: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: -20,
   },
   searchTextInput: {fontSize: 18, maxWidth: '75%'},
   upComingTextTab: {
@@ -33,8 +37,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   popularTextContainer: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '500',
     color: 'black',
   },
   nodataView: {

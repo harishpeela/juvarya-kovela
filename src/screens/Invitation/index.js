@@ -1,13 +1,14 @@
-import {Alert, Text, TextInput, TouchableOpacity, View} from 'react-native';
+import {Alert, Text, TextInput, TouchableOpacity, View, useColorScheme} from 'react-native';
 import React, {useState} from 'react';
 import {BackHeaderNew, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {MemberShipInvite} from '../../utils/api';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 const InvitationScreen = ({navigation, route}) => {
-  const {onSelect} = route.params || {};
-  console.log('route', onSelect);
+  const isDarkMode = useColorScheme() === 'dark';
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
@@ -23,7 +24,7 @@ const InvitationScreen = ({navigation, route}) => {
       };
       try {
         let result = await MemberShipInvite(payload);
-        console.log('result of invite api', result?.data);
+        // console.log('result of invite api', result?.data);
         if (result.data?.message) {
           Alert.alert('Success', result?.data?.message, [
             {
@@ -48,31 +49,41 @@ const InvitationScreen = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <BackgroundImage />
       <View style={styles.Header}>
-        <BackHeaderNew
+        {/* <BackHeaderNew
           onPress={() => {
             navigation.goBack();
-            route?.params?.onSelect({
-              // selected: isFollow,
-              // selectedId: !isFollow ? trfData?.jtProfile : '',
-            });
           }}
           txtColor={colors.black}
           txt={'Inviation'}
           isArrow={true}
           isPlus={false}
-        />
+        /> */}
+      </View>
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'Invite'}</Text>
       </View>
       <View style={styles.textInputContainer}>
         {/* <Text style={styles.email}>Enter User Email</Text> */}
+        <View style={styles.input}>
         <TextInput
           style={[styles.textInput, !isValidEmail && styles.invalidInput]}
           placeholder="Enter the Email"
           onChangeText={e => setEmail(e)}
           maxLength={30}
           value={email}
+          placeholderTextColor={isDarkMode ? 'black' : 'black'}
         />
+        </View>
         {error && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>Email is Not valid </Text>

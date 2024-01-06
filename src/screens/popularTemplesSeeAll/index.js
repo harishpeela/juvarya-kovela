@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   View,
   Text,
@@ -13,8 +14,7 @@ import {
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
-import {BackgroundImage, BackHeaderNew, Loader} from '../../components';
-
+import {Loader} from '../../components';
 const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
@@ -38,7 +38,7 @@ const SeeAll = ({navigation}) => {
     return !isLoading ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
         {' '}
-        No Items to display
+        {/* No Items to display */}{''}
       </Text>
     ) : (
       <View>
@@ -58,12 +58,16 @@ const SeeAll = ({navigation}) => {
   const onSelect = data => {};
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <BackgroundImage />
-      <View style={{margin: '5%', marginTop: '10%', marginLeft: '10%'}}>
-        <BackHeaderNew
-          txt={'Popular Temples'}
-          onPress={() => navigation.goBack()}
-        />
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'All temples'}</Text>
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
@@ -95,8 +99,8 @@ const SeeAll = ({navigation}) => {
                       style={{height: 70, width: 70, borderRadius: 70 / 2}}
                     />
                     <View style={{marginLeft: 10}}>
-                      <Text>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '95%'}}>
+                      <Text style={{color : isDarkMode ? 'black' : 'black'}}>{item.name}</Text>
+                      <Text numberOfLines={2} style={{maxWidth: '90%', color: isDarkMode ? 'black' : 'black'}}>
                         {item.desciption}{' '}
                       </Text>
                     </View>

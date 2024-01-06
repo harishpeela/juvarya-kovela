@@ -10,21 +10,16 @@ import Snackbar from 'react-native-snackbar';
 import { allTexts } from '../../common';
 import RNRestart from 'react-native-restart';
 
+
+//developent apis //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://kovela.app/customer/api/';
-export const BASE = 'https://kovela.app/media/';
-export const POPULARURL = 'https://kovela.app/profile/';
-export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
-export const EVENTS_URL = 'https://kovela.app/events/';
-export const DONATION_URL = 'https://kovela.app/donations/';
+export const BASEURL = 'https://fanfun.in/customer/api/';
+export const BASE = 'https://fanfun.in/media/';
+export const POPULARURL = 'https://fanfun.in/profile/';
+export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
+export const EVENTS_URL = 'https://fanfun.in/events/';
+export const DONATION_URL = 'https://fanfun.in/donations/';
 
-
-// export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'http://20.235.89.214:9092/api/';
-// export const BASE = 'http://20.235.89.214:9094/';
-// export const POPULARURL = 'http://20.235.89.214:9096/';
-// export const MEMBER_SHIP_URL = 'http://20.235.89.214:9095';
-// export const EVENTS_URL = 'http://20.235.89.214:9060/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -117,7 +112,6 @@ export const axiosEventsData1 = axios.create({
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
-  // console.log('Sending req with this token', token);
   config.headers.Authorization = token;
   return config;
 });
@@ -184,8 +178,7 @@ export const axiousInstanceNew1 = axios.create({
 });
 axiousInstanceNew1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
-  let clientToken = await getClientCredentials();
-  config.headers.Authorization = token || clientToken.clientToken;
+  config.headers.Authorization = token;
   return config;
 });
 
@@ -220,9 +213,6 @@ axiosMultiPartFormData.interceptors.request.use(async function (config) {
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
 })
-
-
-
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
