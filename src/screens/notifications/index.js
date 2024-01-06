@@ -36,11 +36,9 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{ flex: 1}}>
-      <StatusBar backgroundColor={'#FFAB0F'} animated={true} />
+      <StatusBar backgroundColor={'#FFAB0F'} />
       <View style={{}}>
-        <View style={{height: 80, marginTop: 10}}>
-        <TopBarcard txt={'Notifications'} cancel={true} onPress={() => navigation.goBack()} />
-        </View>
+        <TopBarcard txt={'Notifications'} back={true} navBack={navigation} navigation={navigation} />
         <View style={{marginTop: 40}}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />

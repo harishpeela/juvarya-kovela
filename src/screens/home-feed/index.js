@@ -8,6 +8,7 @@ import {
   RefreshControl,
   Text,
   useColorScheme,
+  ScrollView,
 } from 'react-native';
 import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -50,18 +51,15 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
+  console.log('homeFeedList', homeFeedList);
   const listFeed = async (pgNo, pgSize) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('========>', result?.data);
+      console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
-        // let responce = result?.data?.jtFeeds;
-        // responce === null ? setNoData(true) : setNoData(false);
-        // responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
         setRefrsh(false);
       } else {
@@ -123,14 +121,12 @@ const UserFeedScreen = ({navigation}) => {
         flex: 1,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 50}}>
+      <View style={{height: '15%'}}>
         <TopBarcard userIcon={true}>
           <View style={styles.navBarContainer}>
             <View style={styles.buttonContainer}>
               <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(allTexts.tabNames.profile)
-                }
+                onPress={() => navigation.navigate(allTexts.tabNames.profile)}
                 style={styles.userIcon}>
                 <AntDesign
                   name="user"
@@ -143,7 +139,10 @@ const UserFeedScreen = ({navigation}) => {
                   }}
                 />
                 <TouchableOpacity
-                  style={styles.menuIcon}>
+                  style={styles.menuIcon}
+                  onPress={() =>
+                    navigation.navigate(allTexts.tabNames.profile)
+                  }>
                   <Feather
                     name="menu"
                     size={15}
@@ -153,7 +152,11 @@ const UserFeedScreen = ({navigation}) => {
                 </TouchableOpacity>
               </TouchableOpacity>
             </View>
-            <Text style={{fontSize: 20, color: colors.white, fontWeight: 'bold'}}> Feeds</Text>
+            <Text
+              style={{fontSize: 20, color: colors.white, fontWeight: 'bold'}}>
+              {' '}
+              Feeds
+            </Text>
             <TouchableOpacity
               style={styles.circle}
               onPress={() =>
@@ -170,7 +173,7 @@ const UserFeedScreen = ({navigation}) => {
           </View>
         </TopBarcard>
       </View>
-      <View style={{marginTop: '20%'}}>
+      <View style={{marginBottom: '30%'}}>
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
@@ -187,6 +190,7 @@ const UserFeedScreen = ({navigation}) => {
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             // decelerationRate={0.3}
+            // style={{bottom: 100}}
             keyExtractor={(item, index) => index}
             renderItem={({item, index}) => (
               <UserFeedCompList
@@ -219,7 +223,7 @@ const UserFeedScreen = ({navigation}) => {
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
-        </View>
+      </View>
     </View>
   );
 };
