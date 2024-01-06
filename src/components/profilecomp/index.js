@@ -199,13 +199,13 @@ export const ProfileFourthTab = ({
             size={24}
             styles={styles.Icon}
           />
-          <Text
+          {/* <Text
             style={{
               ...styles.controlPanel.item.postText,
               color: currentIndex === 1 ? '#CC4501' : colors.gray2,
             }}>
             POSTS
-          </Text>
+          </Text> */}
         </Pressable>
         {templeDetails && (
           <Pressable
@@ -245,7 +245,7 @@ export const ProfileFourthTab = ({
             </Text>
           </Pressable>
         )}
-        {templeDetails?.servicesEnabled && (
+        {/* {templeDetails?.servicesEnabled && (
           <Pressable
             style={{
               ...styles.controlPanel.item,
@@ -260,7 +260,7 @@ export const ProfileFourthTab = ({
               style={styles.Icon}
             />
           </Pressable>
-        )}
+        )} */}
         {templeDetails && (
           <Pressable
             style={{

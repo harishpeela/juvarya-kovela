@@ -7,6 +7,7 @@ import {
   BackHeaderNew,
   Loader,
   UserFeedCompList,
+  TopBarcard
 } from '../../components';
 import {Feed, GetPosts} from '../../utils/api';
 import {allTexts, colors} from '../../common';
@@ -54,10 +55,20 @@ const Feeds = ({route, navigation}) => {
   }, [itemDetails]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
-      <View style={{margin: '5%', marginVertical: '5%', marginTop: 80}}>
-        <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} />
+      <View style={{height:100}}>
+      <TopBarcard 
+       back={true}
+       txt={'Feeds'}
+       navigation={navigation}
+      />
       </View>
+     
+      
+      <View>
+        
+        {/* <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} /> */}
+      </View>
+      
       {loader ? (
         <Loader size={'medium'} color={colors.orangeColor} />
       ) : (

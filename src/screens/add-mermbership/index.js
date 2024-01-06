@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   TextInput,
   Alert,
+  useColorScheme,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {BackgroundImage, BackHeaderNew} from '../../components';
@@ -15,15 +16,16 @@ import {styles} from './styles';
 import Snackbar from 'react-native-snackbar';
 import {MemberShipCreate} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { allTexts, colors } from '../../common';
 
 const AddMemebershipDetails = ({route, navigation}) => {
-  const {jtProfileId} = route.params || {};
-  console.log('jtProfileId', jtProfileId);
-  const [memType, setMemType] = useState();
-  const [memName, setMemName] = useState();
-  // const [memFee, setMemFee] = useState('');
-  // const [memDur, setMemDur] = useState('');
-  const [memberShip, setMemberShip] = useState([]);
+  const isDarkMode = useColorScheme() === 'dark';
+  const {jtProfileId, roleId} = route.params || {};
+  const [memType, setMemType] = useState('');
+  const [typeError, setTypeError] = useState(false);
+  const [memberShipError, setMemberShipError] = useState(false);
+  const [memName, setMemName] = useState('');
+  const [memberShip, setMemberShip] = useState(false);
   const submit = async () => {
     const payload = {
       name: memName,
@@ -32,46 +34,24 @@ const AddMemebershipDetails = ({route, navigation}) => {
     };
     console.log('payload', payload);
     try {
-      // Invoke MemberShipInvite with the id and email
       let result = await MemberShipCreate(payload);
-      if (result) {
+      if (result.status === 200) {
         setMemberShip(result?.data);
         console.log(result?.data);
-        Snackbar.show({
-          text: 'MemberShip Created Successfully',
-          backgroundColor: 'green',
-          duration: 2000,
-          action: {
+        Alert.alert('Success', `membership was added`, [
+          {
             text: 'Ok',
-            textColor: 'white',
-            onPress: () => {
-              <></>;
-            },
+            onPress: () =>
+              navigation.navigate(allTexts.screenNames.profilemembership, {
+                roleId: roleId,
+              }),
           },
-        });
-        Alert.alert(
-          'Create New MemberShip',
-          'Navigating to MemberShips Screen',
-          [
-            {
-              text: 'New',
-              onPress: () => {
-                setMemName(''), setMemType('');
-              },
-            },
-            {
-              text: 'Ok',
-              onPress: () => navigation.pop(),
-            },
-          ],
-          {cancelable: false},
-        );
+        ]);
       } else {
         setMemberShip(0);
       }
     } catch (error) {
       console.log('Error in sending the request', error);
-      // Handle error and show an appropriate alert if needed
       Alert.alert(
         'Error',
         'Failed to Create MemberShip...Please try again.',
@@ -85,34 +65,22 @@ const AddMemebershipDetails = ({route, navigation}) => {
       );
     }
   };
-
   const onPressDone = () => {
-    if (memType == undefined) {
-      Alert.alert(
-        'INVALID INPUT',
-        'Please Enter the type of the MemberShip.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    } else if (memName == undefined) {
-      console.log('It is  printing inside the MemName');
-      Alert.alert(
-        'INVALID INPUT',
-        'Please Enter the Name of the MemberShip.',
-        [
-          {
-            text: 'OK',
-            onPress: () => console.log('OK Pressed'),
-          },
-        ],
-        {cancelable: false},
-      );
-    } else {
+    if (!memType && !memName) {
+      console.log('1');
+      setTypeError(true);
+      setMemberShipError(true);
+    } else if (!memName && memType) {
+      console.log('2');
+      setMemberShipError(true);
+      setTypeError(false);
+    } else if(memName && !memType){
+      setMemberShipError(false);
+      setTypeError(true);
+    } else if (memType && memName){
+      console.log('3');
+      setTypeError(false);
+      setMemberShipError(false);
       submit();
     }
   };
@@ -121,7 +89,6 @@ const AddMemebershipDetails = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
       <View style={{marginHorizontal: '5%', marginVertical: '10%'}}>
         <BackHeaderNew
           txt={'Add Membership'}
@@ -142,41 +109,19 @@ const AddMemebershipDetails = ({route, navigation}) => {
               </View>
             )}
           />
-
+          {typeError && (
+                <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>
+          )}
           <TextInput
-            style={styles.inputTextStyle}
+            style={{...styles.inputTextStyle, color: isDarkMode ? 'black' : 'black'}}
             placeholder="MemberShip Name"
             onChangeText={v => setMemName(v)}
             value={memName}
+            placeholderTextColor={isDarkMode ? 'black' : 'black'}
           />
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={v => setMemType(v)}
-            value={memType}
-            placeholder="Type"
-            keyboardType="numeric"
-          />
-          <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemName(v)}
-            value={memName}
-            placeholder="Membership name"
-            keyboardType="numeric"
-          /> */}
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemFee()}
-            value={memFee}
-            placeholder="Membership fee"
-            keyboardType="numeric"
-          /> */}
-          {/* <TextInput
-            style={styles.inputTextStyle}
-            onChangeText={() => setMemDur()}
-            value={memDur}
-            placeholder="Duration"
-            keyboardType="numeric"
-          /> */}
+           {memberShipError && (
+            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>
+          )}
           <TouchableOpacity onPress={onPressDone} style={styles.btnContainer}>
             <Text style={styles.loginText}>{'CREATE'}</Text>
           </TouchableOpacity>

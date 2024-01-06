@@ -21,10 +21,18 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     alignItems: 'center',
+    borderBottomColor: 'black',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   imageContainer: {
     display: 'flex',
-    width: '15%',
+    height: 70,
+    width: 70,
+    borderWidth: 1,
+    borderRadius: 100,
+    borderColor: colors.orangeColor,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   listFirstItem: {
     display: 'flex',
@@ -33,8 +41,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: '100%',
     width: '75%',
-    borderBottomWidth: 0.8,
-    borderBottomColor: colors.gray2,
   },
   image: {
     height: 60,

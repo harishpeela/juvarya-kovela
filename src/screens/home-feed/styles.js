@@ -14,17 +14,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 60,
-    paddingHorizontal:"2.5%",
+    marginTop: '-5%',
   },
   buttonContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    height: 50,
     borderBottomColor: '#ccc',
     paddingHorizontal: 10,
     justifyContent: 'center',
+    marginHorizontal: '3%',
   },
   button: {
     paddingVertical: 11,
@@ -43,7 +42,7 @@ const styles = StyleSheet.create({
   },
   bar: {
     height: 2,
-    backgroundColor: colors.black,
+    backgroundColor: colors.white,
   },
   shortestBar: {
     width: 12,
@@ -141,8 +140,7 @@ const styles = StyleSheet.create({
     marginTop: '10%',
   },
   nodatatext: {
-    fontSize: 24,
-    textTransform: 'capitalize',
+    fontSize: 16,
     fontWeight: 'bold',
     color: colors.orangeColor,
   },
@@ -155,11 +153,34 @@ const styles = StyleSheet.create({
     top: 4,
     left: 20,
   },
-  flatListStyle:{
+  flatListStyle: {
+    marginTop: '15%'
   },
-  homeCard:{
+  homeCard: {
     // borderWidth:10,
     // borderColor:'red'
+  },
+  userIcon: {
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 1,
+    backgroundColor: 'white',
+    height: 35,
+    width: 35,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  menuIcon: {
+    borderWidth: 1,
+    borderRadius: 50,
+    padding: 1,
+    backgroundColor: 'white',
+    height: 20,
+    width: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 18,
+    padding: 1,
   }
 });
 

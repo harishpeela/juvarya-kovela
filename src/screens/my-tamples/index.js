@@ -1,13 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {View, SafeAreaView, FlatList, Text} from 'react-native';
+import {View, SafeAreaView, FlatList, Text,searchedText} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
+import { TopBarcard } from '../../components';
 
 const MyTamples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
@@ -58,18 +59,37 @@ const MyTamples = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      <BackgroundImage />
-      <View style={styles.headerContainer}>
+      {/* <View style={styles.headerContainer}>
         <BackHeader
           onBackPress={() => {
             navigation.goBack();
           }}
           txt={'My Temples'}
         />
+      </View> */}
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'My Temples'} back={true}  navigation={navigation}>
+      <View style={{...styles.searchContainer, marginTop: '-5%'}}>
+        <SearchBar
+          value={searchedText}
+          onTextChange={e => {
+            setSeracherdText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
+        />
+      </View>
+      </TopBarcard>
       </View>
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
-          <SearchBar
+          {/* <SearchBar
             value={seracherdText}
             onCrossPress={() => {
               setSeracherdText('');
@@ -79,7 +99,7 @@ const MyTamples = ({navigation}) => {
               setSeracherdText(e);
               performFilter(e);
             }}
-          />
+          /> */}
         </View>
       </View>
 

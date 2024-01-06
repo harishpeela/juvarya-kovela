@@ -6,6 +6,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
 import {KovelaIcon} from '../sign-up/index.js';
+import {StatusBar} from 'react-native';
 import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
@@ -14,6 +15,7 @@ import {
 } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
+import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
 
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
@@ -51,33 +53,63 @@ const Signin = ({navigation}) => {
     }
   };
   const signinHandler = async (data, actions) => {
-    let payload = {
-      primaryContact: data?.email,
-      password: data.password,
-    };
-    try {
-      let result = await loginUser1(payload);
-      if (result && result.status === 200) {
-        const {
-          data: {accessToken, tokenType},
-        } = result;
-        await saveLoginSessionDetails(tokenType, accessToken);
-        ApiData();
-        setLoginDetails(accessToken);
+    if (data.email.length > 10) {
+      let payload = {
+        // primaryContact: data?.email,
+        email: data?.email,
+        password: data.password,
+      };
+      console.log('playload with email', payload);
+      try {
+        let result = await loginUser1(payload);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else {
+          actions.setSubmitting(false);
+          Alert.alert('Error', 'Invalid Credentials');
+        }
+      } catch (error) {
         actions.setSubmitting(false);
-      } else {
-        actions.setSubmitting(false);
-        Alert.alert('Error', result?.message);
       }
-    } catch (error) {
-      actions.setSubmitting(false);
+    } else {
+      let payload = {
+        primaryContact: data?.email,
+        password: data.password,
+      };
+      console.log('playload with mobile', payload);
+
+      try {
+        let result = await loginUser1(payload);
+        console.log('result of login', result?.data);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+          actions.setSubmitting(false);
+        } else {
+          actions.setSubmitting(false);
+          Alert.alert('Error', 'Invalid Credentials');
+        }
+      } catch (error) {
+        actions.setSubmitting(false);
+      }
     }
   };
 
   return (
     <SafeAreaView style={styles.wrapper}>
+      <StatusBar backgroundColor="black" translucent={true} />
       <View style={styles.signinTextContainer}>
-        {/* <Text style={styles.signinText}>h</Text> */}
+        <Text style={styles.signinText}>{login}</Text>
       </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
@@ -106,14 +138,14 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number'}
+                  title={'Mobile number or Email'}
                   isFlag
-                  keyboardType={'numeric'}
+                  // keyboardType={'numeric'}
                   placeholder={emailPlace}
                   error={touched.email && errors.email}
                   onBlur={handleBlur('email')}
                   setState={handleChange('email')}
-                  maxLength={10}
+                  maxLength={40}
                 />
                 <View style={{height: 20}} />
                 <View>
@@ -127,13 +159,12 @@ const Signin = ({navigation}) => {
                   />
                 </View>
                 <View style={styles.btnContainer}>
-                  <PrimaryButton 
+                  <PrimaryButton
                     bgColor={colors.orangeColor}
                     loading={isSubmitting}
                     onPress={handleSubmit}
                     text={login}
                     radius={25}
-                     
                   />
                 </View>
                 <TouchableOpacity
@@ -145,19 +176,14 @@ const Signin = ({navigation}) => {
                     <Text style={styles.login}>{sigup}</Text>
                   </Text>
                 </TouchableOpacity>
-                
-
                 <TouchableOpacity
-                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.forgetPassword);
-                }}>
-                <View>
-
-                  <Text   style={styles.forgotPassword}>Forgot Password</Text>
-                </View>
+                  onPress={() => {
+                    navigation.navigate(allTexts.screenNames.forgetPassword);
+                  }}>
+                  <View>
+                    <Text style={styles.forgotPassword}>Forgot Password</Text>
+                  </View>
                 </TouchableOpacity>
-
-                
               </View>
             );
           }}

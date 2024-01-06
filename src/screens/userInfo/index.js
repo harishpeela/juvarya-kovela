@@ -56,7 +56,16 @@ const UserInfo = ({navigation}) => {
           <Text style={styles.subFormHeading}>Address</Text>
           <View style={styles.subFormElement}>
             <TempleInput
-              label={'Contact Number'}
+              label={'Description'}
+              placeholder={'Type here'}
+              width={'100%'}
+              onChangeText={text => setData({...data, contactNumber: text})}
+              value={data?.contactNumber}
+            />
+          </View>
+          <View style={styles.subFormElement}>
+            <TempleInput
+              // label={'Contact Number'}
               placeholder={'Contact Number'}
               width={'100%'}
               value={data.contactNumber}
@@ -65,7 +74,7 @@ const UserInfo = ({navigation}) => {
           </View>
           <View style={styles.subFormElement}>
             <TempleInput
-              label={'Address Line 1'}
+              // label={'Address Line 1'}
               placeholder={'Address Line 1'}
               width={'100%'}
               value={data.line1}
@@ -74,7 +83,7 @@ const UserInfo = ({navigation}) => {
           </View>
           <View style={styles.subFormElement}>
             <TempleInput
-              label={'Address Line 2'}
+              // label={'Address Line 2'}
               placeholder={'Adress Line 2'}
               width={'100%'}
               value={data.line2}

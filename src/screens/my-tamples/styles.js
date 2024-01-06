@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     width: '100%',
     paddingVertical: 10,
-    paddingHorizontal: 10,
+    // paddingHorizontal: 10,
   },
   noAvailable: {
     color: colors.orangeColor,

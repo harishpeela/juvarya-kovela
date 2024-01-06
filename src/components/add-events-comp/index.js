@@ -1,20 +1,22 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import { View, Text } from 'react-native';
-import React, { useState, useContext } from 'react';
-import { InputField, PrimaryEventButton } from '../../components';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { allTexts, colors } from '../../common';
-import { Formik } from 'formik';
-import { AddEventSchema } from '../../common/schemas';
-import { styles } from './styles';
-import { TextInput, TouchableOpacity } from 'react-native';
+import {View, Text, Platform, Image} from 'react-native';
+import React, {useState, useContext} from 'react';
+import {InputField, PrimaryEventButton, Loader} from '../../components';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {allTexts, colors} from '../../common';
+import {Formik} from 'formik';
+import {AddEventSchema} from '../../common/schemas';
+import {styles} from './styles';
+import {TextInput, TouchableOpacity} from 'react-native';
 import CalenderIcon from 'react-native-vector-icons/AntDesign';
 import RadioForm from 'react-native-simple-radio-button';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import ApplicationContext from '../../utils/context-api/Context';
 import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {launchImageLibrary} from 'react-native-image-picker';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 export const AddEvent = ({ data, navigation }) => {
   const { id } = useContext(ApplicationContext);
@@ -28,9 +30,15 @@ export const AddEvent = ({ data, navigation }) => {
 
   const [isRegular, setIsRegular] = useState(data.type);
   const [occasionData, setOccasionData] = useState();
+  const [image, setImage] = useState();
   const [date, setDate] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
+  const [imageUploaded, setimageUploaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isCross, setIsCross] = useState(true);
+
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -52,43 +60,146 @@ export const AddEvent = ({ data, navigation }) => {
     { label: 'more days', value: 1 },
   ];
   const CreateEvent = async () => {
-    var myHeaders = new Headers();
-    myHeaders.append('Authorization', token);
-    let token = await getAuthTokenDetails();
-    let Access_Token = token.replace('bearer ', '');
-    var formdata = new FormData();
-    formdata.append('name', occasionData?.eventName);
-    formdata.append('fromDate', occasionData?.fromDate);
-    formdata.append('countryWide', 'true');
-    formdata.append('regionWide', 'true');
-    formdata.append('country', 'IN');
-    formdata.append('description', occasionData?.description);
-    formdata.append('itemId', id);
-    formdata.append('city', 'IN-AP-AKP');
-    formdata.append('createFeed', 'true');
-    formdata.append('toDate', occasionData?.toDate);
+    let Token = await getAuthTokenDetails();
+    console.log(Token, 'token');
+    // try {
+    //   var myHeaders = new Headers();
+    //   myHeaders.append('Authorization', Token);
 
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
+    //   var formdata = new FormData();
+    //   formdata.append('profileId', '28');
+    //   formdata.append('name', 'ganesh chaturthi');
+    //   formdata.append('fromData', '18/09/2023');
+    //   formdata.append('toDate', '18/09/2023');
+    //   formdata.append('worldWide', 'false');
+    //   formdata.append('countryWide', 'true');
+    //   formdata.append('regionWide', 'true');
+    //   formdata.append('cityWide', 'true');
+    //   formdata.append('country', '2');
+    //   formdata.append('description', 'its a seasonal festival');
+    //   formdata.append('createFeed', 'true');
+    //   formdata.append('eventType', 'ganesh chaturdhi');
+    //   formdata.append('date', '18/09/2023');
+
+    //   var requestOptions = {
+    //     method: 'POST',
+    //     headers: myHeaders,
+    //     body: formdata,
+    //     redirect: 'follow',
+    //   };
+
+    //   fetch('http://20.235.89.214:9060/jtevent/save', requestOptions)
+    //     .then(response => response.json())
+    //     .then(result => console.log('result', result))
+    //     .catch(error => console.log('error', error));
+    // } catch (error) {
+    //   console.log('error', error);
+    // }
+
+    // var myHeaders = new Headers();
+    // myHeaders.append('Authorization', token);
+    // let token = await getAuthTokenDetails();
+    // let Access_Token = token.replace('bearer ', '');
+    // var formdata = new FormData();
+    // formdata.append('name', occasionData?.eventName);
+    // formdata.append('fromDate', occasionData?.fromDate);
+    // formdata.append('countryWide', 'true');
+    // formdata.append('regionWide', 'true');
+    // formdata.append('country', 'IN');
+    // formdata.append('description', occasionData?.description);
+    // formdata.append('itemId', id);
+    // formdata.append('city', 'IN-AP-AKP');
+    // formdata.append('createFeed', 'true');
+    // formdata.append('toDate', occasionData?.toDate);
+
+    // var requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: formdata,
+    //   redirect: 'follow',
+    // };
+
+    // fetch(
+    //   `http://20.255.59.150:8082/api/v1/occasion/save?access_token=${Access_Token}`,
+    //   requestOptions,
+    // )
+    //   .then(response => response.json())
+    //   .then(result => {
+    //     if (result?.id) {
+    //       navigation.navigate(allTexts.screenNames.events, {idparam: id});
+    //     }
+    //   })
+    //   .catch(error => console.log('error', error));
+  };
+
+  const uploadPhoto = () => {
+    try {
+      launchImageLibrary(
+        {
+          mediaType: 'photo',
+          saveToPhotos: true,
+          includeBase64: true,
+          // maxHeight: 1080,
+          // maxWidth: 1080,
+        },
+        res => {
+          if (!res?.didCancel && !res?.errorCode) {
+            setImage(res?.assets[0]);
+            setimageUploaded(false);
+            setIsModal(true);
+          } else {
+            console.log(res?.errorMessage);
+          }
+        },
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const getImageObj = img => {
+    let newUri =
+      Platform.OS === 'ios' ? img?.uri : img?.uri?.replace('file://', 'file:');
+    let imageObj = {
+      uri: newUri,
+      name: `${Date.now()}.jpg`,
+      type: 'image/jpeg',
     };
-
-    fetch(
-      `http://20.255.59.150:8082/api/v1/occasion/save?access_token=${Access_Token}`,
-      requestOptions,
-    )
-      .then(response => response.json())
-      .then(result => {
-        if (result?.id) {
-          navigation.navigate(allTexts.screenNames.events, { idparam: id });
-        }
-      })
-      .catch(error => console.log('error', error));
+    return imageObj;
   };
   return (
     <View style={styles.wrapper}>
+      <View style={styles.uploadContainer}>
+        {image !== null ? (
+          <View style={styles.preViewImageContainer}>
+            <View style={styles.crossIconContainer}>
+              <Icon
+                onPress={() => {
+                  setImage(null);
+                }}
+                name="closecircle"
+                color={colors.orangeColor}
+                size={25}
+              />
+            </View>
+            <Image
+              resizeMode="cover"
+              style={styles.preViewImage}
+              source={{uri: image?.uri}}
+            />
+          </View>
+        ) : (
+          <TouchableOpacity
+            style={styles.uploadPic}
+            onPress={() => {
+              uploadPhoto();
+            }}>
+            <View style={styles.profileImage}>
+              <Icon name="camera" size={70} color={colors.orangeColor} />
+            </View>
+          </TouchableOpacity>
+        )}
+      </View>
+
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}

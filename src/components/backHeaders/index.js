@@ -4,9 +4,9 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import { style } from '../profilecomp/styles';
 
 export const BackHeaderNew = ({
-  txtColor,
   onPress,
   txt,
   isPlus,
@@ -14,19 +14,12 @@ export const BackHeaderNew = ({
 }) => {
   return (
     <View style={styles.header}>
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+      
+        <TouchableOpacity style={styles.backheader}  onPress={onPress}>
           <Fontisto
             name="arrow-left"
-            color={'white'}
+           color={'black'}
             size={17}
-            // color={color?(<></>):(<></>)}
-            color={colors.black}
           />
         </TouchableOpacity>
         {txt ? (
@@ -35,21 +28,20 @@ export const BackHeaderNew = ({
               fontSize: 20,
               fontWeight: '500',
               marginHorizontal: 10,
-              color: txtColor === undefined ? <></> : txtColor,
+              color:'black',
             }}>
             {txt}
           </Text>
         ) : (
           <></>
         )}
-      </View>
 
       {isPlus && (
         <TouchableOpacity onPress={onPlusPress}>
           <AntDesign
             name="plus"
             size={24}
-            color={txtColor === undefined ? <></> : txtColor}
+            color={'black'}
           />
         </TouchableOpacity>
       )}

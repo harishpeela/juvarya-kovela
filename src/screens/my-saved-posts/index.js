@@ -1,16 +1,18 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, FlatList} from 'react-native';
-import {BackgroundImage, Loader} from '../../components';
+import {View, Text, TouchableOpacity, FlatList, useColorScheme} from 'react-native';
+import {Loader} from '../../components';
 import {styles} from './styles';
 import Feather from 'react-native-vector-icons/Feather';
 import {getSavedPostsList, Feed} from '../../utils/api';
 import {SaveFeedComp} from '../../components';
 import {allTexts, colors} from '../../common';
+import { TopBarcard } from '../../components';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
-
+  const isDarkMode = useColorScheme() === 'dark';
   const getPostsList = async () => {
     setLoading(true);
     try {
@@ -50,16 +52,36 @@ const MySavedPosts = ({navigation}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <BackgroundImage />
       <View style={styles.footerBackground}>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Feather name="arrow-left" color={colors.black} size={28} />
           </TouchableOpacity>
-          <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10}}>
+          <Text style={{fontSize: 20, fontWeight: '500', marginHorizontal: 10, color: isDarkMode ? 'black' : 'black'}}>
             Saved Posts
           </Text>
-        </View>
+        </View> */}
+        {/* <View style={styles.updateProfileTopCard}>
+        <TopBarcard
+          back={true}
+          txt={'Saved Posts'}
+          navBack={navigation}
+          
+
+        />
+      </View> */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'Saved Posts'}</Text>
+      </View>
         <View style={{height: '85%'}}>
           {loading ? (
             <View>
@@ -79,7 +101,7 @@ const MySavedPosts = ({navigation}) => {
                   isLikeTrue={item?.feedDTO?.like}
                   id={item?.id}
                   onPressTitle={() =>
-                    navigation.navigate(allTexts.screenNames.viewProfile, {
+                    navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                       data: item,
                       onSelect: onSelect,
                     })

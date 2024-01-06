@@ -38,9 +38,11 @@ const endpoints = {
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   DONATIONS: '/jtDonation/save',
+  UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
-  MEMBER_SHIP_DETAILS: 'jtProfileMembership/members/list',
+  MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
+  MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   FEED: '/jtfeed/',
@@ -88,6 +90,7 @@ export const getInitialToken = async () => {
 };
 
 export const loginUser1 = async data => {
+  console.log('login api develop', data, endpoints?.NEW_SIGN_IN);
   try {
     let result = await authAxiousInstance1.post(
       `${endpoints.NEW_SIGN_IN}`,
@@ -95,16 +98,14 @@ export const loginUser1 = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in login', error);
+    console.log('error in login===>>', error);
     return error;
   }
-  
-  
-};
+}
 
 export const forgotPassword = async data => {
   try {
-    let result = await authAxiousForgotPassword.post(
+    let result = await authAxiousInstance1.put(
       `${endpoints.FORGOT_PASSWORD}`,
       data,
     );
@@ -113,9 +114,7 @@ export const forgotPassword = async data => {
     console.log('error in login', error);
     return error;
   }
-  
-  
-};
+}
 
 export const DonationsPost = async data => {
   try {
@@ -158,7 +157,7 @@ export const SearchPopularTemples = async txt => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in searched popular temples', error);
   }
 };
 export const SearchTempleRoleWithId = async profId => {
@@ -169,7 +168,6 @@ export const SearchTempleRoleWithId = async profId => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
   }
 };
 export const AdminTemples = async () => {
@@ -177,7 +175,7 @@ export const AdminTemples = async () => {
     let result = await axiosNewData.get(`${endpoints.ADMIN_TEMPLES}`);
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in temple admins', error);
   }
 };
 export const GetProfilePic = async mailId => {
@@ -187,13 +185,24 @@ export const GetProfilePic = async mailId => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in profilepic get', error);
   }
 };
 export const PostProfilePic = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
       `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in post profile pic', error);
+  }
+};
+export const Update_Profile = async data => {
+  try {
+    let result = await axiousInstanceNew1.put(
+      `${endpoints.UPDATE_PROFILE}`,
       data,
     );
     return result;
@@ -336,17 +345,27 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MemberShipDetails = async id => {
+export const MemberShipDetails = async (pgNo, pgSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_DETAILS}/${id}`,
+      `${endpoints.MEMBER_SHIP_DETAILS}?pageNo=${pgNo}&pageSize=${pgSize}`,
     );
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
-export const MemberShipInvite = async payload => {
+export const MemberShipList = async (pageNo, pageSize) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const MemberShipInvite = async (payload) => {
   try {
     // Provide the data payload in the axios post call
     let result = await axiosMultiPartFormDataMem.post(
@@ -485,7 +504,8 @@ export const getTempleDetails = async id => {
   } catch (error) {
     return error;
   }
-};
+}
+
 export const NewRegistesrUser = async data => {
   try {
     let result = await axiousInstanceNewSignIn.post(
@@ -569,7 +589,7 @@ export const NewVerifyOTP = async data => {
 };
 export const NewUpdateUserPassword = async data => {
   try {
-    let result = await axiousInstanceNew.post(
+    let result = await axiousInstanceNew1.put(
       `${endpoints.NEW_UPDATE_PASSWORD}`,
       data,
     );

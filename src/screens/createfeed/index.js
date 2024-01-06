@@ -14,10 +14,10 @@ import {styles} from './styles';
 import {
   BackgroundImage,
   BackHeader,
+  BackHeaderNew,
   InputField,
   PrimaryButton,
 } from '../../components';
-import {UploadPhoto} from '../../utils/svgs';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
@@ -45,6 +45,7 @@ const CreateFeed = ({route, navigation}) => {
     }
   };
   const NewFeed = async id => {
+    console.log('id', id);
     setLoading(true);
     let Token = await getAuthTokenDetails();
     var myHeaders = new Headers();
@@ -53,7 +54,7 @@ const CreateFeed = ({route, navigation}) => {
 
     var formdata = new FormData();
     formdata.append('description', description);
-    formdata.append('feedType', 'profile ');
+    formdata.append('feedType', 'profile');
     formdata.append('jtProfile', id);
     img.forEach(element => {
       formdata.append('files', element);
@@ -68,16 +69,18 @@ const CreateFeed = ({route, navigation}) => {
     fetch('https://kovela.app/media/jtfeed/create', requestOptions)
       .then(response => response.json())
       .then(result => {
+        console.log('resut of create feed', result);
         if (result?.message === 'Feed created') {
           Alert.alert('Success', `${result?.message} successfully`, [
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.userFeedScreen),
+                navigation.navigate(allTexts.screenNames.bottomTab),
             },
           ]);
         } else {
           alert('somet thing went wrong');
+          setLoading(false);
         }
       })
       .catch(error => alert(error));
@@ -92,8 +95,8 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          maxHeight: 2080,
-          maxWidth: 2080,
+          // maxHeight: 2080,
+          // maxWidth: 2080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
@@ -140,14 +143,12 @@ const CreateFeed = ({route, navigation}) => {
       console.log('nope');
     }
   }, [data]);
-  console.log('trfData', trfData);
   return (
-    <SafeAreaView>
-      <BackgroundImage />
-      <View style={{marginHorizontal: 20}}>
-        <BackHeader
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{marginHorizontal: 30, marginTop: 30}}>
+        <BackHeaderNew
           txt={'Create Feed'}
-          onBackPress={() => navigation.goBack()}
+          onPress={() => navigation.goBack()}
         />
       </View>
       <View style={{margin: 30}}>
@@ -176,7 +177,9 @@ const CreateFeed = ({route, navigation}) => {
               onPress={() => {
                 uploadPhoto();
               }}>
-              <UploadPhoto />
+              <View style={styles.profileImage}>
+                <Icon name="camera" size={70} color={colors.orangeColor} />
+              </View>
             </TouchableOpacity>
           )}
         </View>

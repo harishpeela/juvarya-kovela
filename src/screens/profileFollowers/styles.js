@@ -17,8 +17,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   followersHeader: {
-    marginHorizontal: '5%',
-    marginVertical: -10,
+    marginHorizontal: '10%',
     marginTop: 35,
     display: 'flex',
     flexDirection: 'row',
@@ -69,4 +68,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
+  updateProfileTopCard:{
+    height:100
+  }
 });

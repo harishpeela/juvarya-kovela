@@ -2,7 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
 import React, {useEffect, useState, useContext} from 'react';
-import {Loader, SearchBar, BackgroundImage} from '../../components';
+import {Loader, SearchBar, BackgroundImage, TopBarcard} from '../../components';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
@@ -99,24 +99,26 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <BackgroundImage />
-      <View style={styles.headerContainer} />
-      <View style={styles.searchbarContainer}>
-        <View style={{width: '100%'}}>
-          <SearchBar
-            value={seracherdText}
-            onCrossPress={() => {
-              setSeracherdText('');
-              getTemples();
-            }}
-            onTextChange={e => {
-              setSeracherdText(e);
-              performFilter(e);
-            }}
-          />
-        </View>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
+        <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
+          <View style={styles.searchbarContainer}>
+            <View>
+              <SearchBar
+                placeHolder={'search  temples'}
+                onCrossPress={() => {
+                  setSeracherdText('');
+                  getTemples();
+                }}
+                onTextChange={e => {
+                  setSeracherdText(e);
+                  performFilter(e);
+                }}
+              />
+            </View>
+          </View>
+        </TopBarcard>
       </View>
-
+      <View style={styles.headerContainer} />
       <View style={styles.cardContainer}>
         {loading ? (
           <View style={styles.loaderContainer}>
@@ -126,7 +128,7 @@ const Favorite = ({navigation}) => {
           [
             filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
-                <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
+                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>{'No Temples Available'}</Text>
               </View>
             ) : (
               <FlatList

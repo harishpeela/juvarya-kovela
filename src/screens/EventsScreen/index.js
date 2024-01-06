@@ -1,149 +1,153 @@
-import { View, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import {
+  View,
+  TouchableOpacity,
+  FlatList,
+  useColorScheme,
+} from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
 import { styles } from './styles';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
   Loader,
-  ContactModal,
-  TempleProfile_PostsCard,
-  BackgroundImageAClass,
-  BackgroundImageFlower,
-  BackHeaderNew,
-  EventCard,
-  Ellipsis,
   SearchBar,
   Sort,
   EventCard2,
-  EventCard3,
+  TopBarcard,
 } from '../../components';
-import { allTexts, colors } from '../../common';
-import { EventList } from '../../utils/api';
-import Icon from 'react-native-vector-icons/AntDesign';
-
+import { AdminTemples } from '../../utils/api';
+import {allTexts, colors} from '../../common';
+import {EventList} from '../../utils/api';
+import ApplicationContext from '../../utils/context-api/Context';
+import Card from '../../common/Card';
 const EventsScreen = ({ navigation }) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
+  const [admin, setAdmin] = useState();
   const [searchedText, setSearchedText] = useState('');
-  // const [filteredData, setFilteredData] = useState(followersList);
-  // const {id} = route.params || {};
-  const [followersFirstName, setFollowersFirstName] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [searchLoading, setSearchLoading] = useState(false);
-  const [eventsData, setEventsData] = useState();
+  const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
-
-
+  const [roleType, setRoleType] = useState('')
+  const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setEventsLoader(true);
-    try {
-      let result = await EventList(0, 100);
-      console.log('data ==>', result?.data);
-      if (result.status === 200) {
-        setEventsData(result?.data?.events);
-        console.log("eventsID=>>>>>>" + eventsData)
-        setEventsLoader(false);
-      } else {
-        setEventsLoader(false);
-      }
-    } catch (error) {
-      console.log("we are getting the error")
+    setLoader(true);
+    let result = await EventList(0, 200);
+    // console.log('list of evengts', result?.data);
+    if (result.status === 200) {
+      let filtering = result?.data?.events;
+      // console.log('events sctreen data', filtering);
+      setEventsData(result?.data?.events);
+      setLoader(false);
+      setEventsLoader(false);
+    } else {
+      setEventsLoader(false);
+      setLoader(false);
+    }
+  };
+  const TempleAdmins = async () => {
+    console.log('admin temples api starting');
+    let result = await AdminTemples();
+    if (result?.status === 200) {
+      setAdmin(result?.data);
+    } else {
+      setAdmin([]);
     }
   };
   useEffect(() => {
     EventsList();
+    TempleAdmins();
+    Type();
   }, []);
-
-  console.log('EventsScreen =>>>>>>>>>' + eventsData);
+  
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    } else {
+      console.log('')
+    }
+    }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <BackgroundImage />
-      <View style={styles.Header}>
-        <BackHeaderNew
-          txt={'EventsScreen'}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
+    <View style={{flex:1}}>
+     <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
+      <View style={{...styles.searchAndNew, marginHorizontal: admin ? 40 : 0}}>
+        <SearchBar
+          onTextChange={e => {
+            setSearchedText(e);
+            SearchPopTemp(e);
+          }}
+          loading={false}
+          onCrossPress={async () => {
+            setSearchedText('');
+            await PopularTemplesss(pageNo, 20);
+          }}
+          bgColor={colors.gray4}
+          placeHolder={'Search'}
         />
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate(allTexts.screenNames.addevents, {
-              navigation: navigation,
-            });
-          }}>
-          <Icon name="pluscircleo" size={24} color={colors.black} />
-        </TouchableOpacity>
+        {admin || roleType === 'ROLE_ADMIN' ? (
+              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
+                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
+              </TouchableOpacity>
+            ) : ''}
+      </View>
+      
+      </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              // value={searchedText}
-              // onTextChange={text => {
-              //   setSearchedText(text);
-              //   handleSearch(text);
-              // }}
-              // loading={loading}
-              // onCrossPress={() => {
-              //   setSearchedText('');
-              //   setFilteredData([]);
-              // }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={false}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-          </View>
-          <View style={styles.sortContainer}>
-            <Sort
-              style={styles.sort}
-              brColor={colors.gray2}
-              txtColor={colors.orangeColor}
-              srWidth={'100%'}
-              // srHeight={"100%"}
-            />
-          </View>
+        {/* <View style={styles.searchAndFilter}>
+          <View style={styles.searchContainer}></View>
         </View> */}
-        <View style={styles.ListContainer}>
-          {eventsLoader ? (
-            <View
-              style={styles.loaderContainer}>
-              <Loader size={'large'} color={colors.orangeColor} />
+        {/* <Card style={styles.card}>
+          <AntDesignIcon style={{position: 'absolute', right: 10, top: 10}} name="heart" size={20} color="red" />
+          <View>
+            <Image 
+            style={{height: 120, width: 120, borderRadius: 60}} 
+            source={require('../../../assets/images/tempimg1.jpg')}/>
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Text style={{fontSize: 16, fontWeight: '600', color: 'black', marginVertical: 10}}>Holi Festival</Text>
+            <View style={{borderRadius: 10, backgroundColor: '#f1f1f1', paddingVertical: 5, width: 150}}>
+               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
+                <Text style={{fontSize: 10, color:'black', marginLeft: 10}}>10-21-2023, November</Text>
+               </View>
+               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
+               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
+               <Text style={{color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue}}>Anakapalle</Text>
+               </View>
             </View>
+          </View>
+        </Card> */}
+        <View style={styles.followersContainer}>
+          {loader ? (
+            <Loader size={'large'} color={colors.orangeColor} />
           ) : (
-            <View style={styles.container}>{searchedText === '' && <EventCard2 data={eventsData} navigation={navigation} />}</View>
+            <>
+              <FlatList
+                numColumns={2}
+                data={eventsData}
+                contentContainerStyle={styles.flatListStyle}
+                style={{marginBottom: '35%', marginTop: '3%'}}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => (
+                  <EventCard2
+                    navigation={navigation}
+                    data={item}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
+                  />
+                )}
+              />
+            </>
           )}
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 export default EventsScreen;
-
-{
-  /* <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
-            {searchedText && filteredData.length > 0 ? (
-            //       <FlatList
-            //         style={styles.list}
-            //         data={filteredData}
-            //         contentContainerStyle={styles.flatListStyle}
-            //         keyExtractor={item => item.user.id.toString()}
-            //         renderItem={({ item }) => (
-            //           <FollowersListCard2
-            //             name={item.user.firstName}
-            //             img={item.user.url}
-            //             data={item.user}
-            //             donation={item.user.donation}
-            //           />
-            //         )}
-            //       />
-            //     ) : (
-            //       <View style={styles.noDataContainer}>
-            //         <Text style={styles.noDataText}>
-            //           No Followers to Display
-            //         </Text>
-            //       </View>
-            //     )}
-            //   </ScrollView>
-            // </> */
-}

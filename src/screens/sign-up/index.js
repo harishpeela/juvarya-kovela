@@ -11,7 +11,7 @@ import {styles} from './style';
 import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-
+import { Terms_And_Conditions } from '../../components';
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
     <Image
@@ -23,6 +23,7 @@ export const KovelaIcon = () => (
 );
 const Signup = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
+  const [tcModal, setTcModal] = useState(false);
   const {
     buttonTexts: {login, sigup},
     screenNames: {signin, otpScreen},
@@ -50,34 +51,49 @@ const Signup = ({navigation}) => {
 
   const UserRegisterHandler = async (data, action) => {
     let LogInPayload = {
-      username: data.phone,
-      password: data.password,
+      primaryContact: data?.phone,
+      password: data?.password,
     };
+    let LogInPayload2 = {
+      primaryContact: data?.phone,
+      password: data?.password,
+    };
+    console.log('log in signup');
+  
     const otpPayload = {
       otpType: 'SIGNUP',
-      primaryContact: data.phone,
+      primaryContact: data?.phone,
+      emailAddress: data?.email,
     };
+    console.log('payload otp', otpPayload);
     try {
       let response = await NewVerifyOTP(otpPayload);
+      // console.log('responce of otp', response?.data);
       const {
-        data: {primaryContact, otp},
+        data: {emailAddress, otp},
       } = response || {};
+      console.log('Logdata', LogInPayload);
       let result = await loginUser1(LogInPayload);
+
+      console.log('resstatus', result);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
       } else {
-        if (response && primaryContact) {
+        console.log('amsjhxvJAHSBX', response?.data, emailAddress);
+        if (response && emailAddress) {
+          console.log('amsjhxvJAHSBX =====>', emailAddress);
           let otpPayload = {
             otp,
             data,
             primaryContact: data?.phone,
             password: data?.confirmPassword,
-            username: data?.phone,
           };
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
           alert(response?.data?.message);
+        } else {
+          console.log('error')
         }
         action.setSubmitting(false);
       }
@@ -106,7 +122,6 @@ const Signup = ({navigation}) => {
             password: '',
             confirmPassword: '',
             lastName: '',
-            userName: '',
           }}>
           {({
             errors,
@@ -152,13 +167,13 @@ const Signup = ({navigation}) => {
                   setState={handleChange('phone')}
                   maxLength={10}
                 />
-                <InputField
+                {/* <InputField
                   title={username}
                   placeholder={'user Name'}
                   error={touched.userName && errors.userName}
                   onBlur={handleBlur('userName')}
                   setState={handleChange('userName')}
-                />
+                /> */}
                 <PasswordField
                   value={values.password}
                   title={password}
@@ -176,10 +191,11 @@ const Signup = ({navigation}) => {
                   setState={handleChange('confirmPassword')}
                 />
                 <TouchableOpacity
-                  onPress={() => setIsChecked(!isChecked)}
+                  onPress={() => setTcModal(true)}
                   style={styles.checkView}>
                   <Ionicons
                     name={isChecked ? 'checkbox' : 'square-outline'}
+                    size={30}
                     style={{
                       ...styles.checkIcon,
                       color: isChecked ? colors.orangeColor : '#7a98fa',
@@ -228,6 +244,12 @@ const Signup = ({navigation}) => {
             );
           }}
         </Formik>
+        {tcModal && (
+            <Terms_And_Conditions
+              isModal={tcModal}
+              onPress={() => {setTcModal(false), setIsChecked(true)}}
+            />
+          )}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
