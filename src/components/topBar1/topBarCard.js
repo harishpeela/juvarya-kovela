@@ -1,11 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Feather from 'react-native-vector-icons/Feather';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo'
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { allTexts, colors } from '../../common';
 export const TopBarcard = ({
     txtColor,
@@ -22,6 +19,9 @@ export const TopBarcard = ({
     back,
     navBack,
     navMenu,
+    roleId,
+    roleType,
+    navCreate,
 }) => {
     return (
         <View style={styles.container}>
@@ -30,7 +30,7 @@ export const TopBarcard = ({
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: isBell ? 'space-between' : 'space-evenly',
+                        justifyContent: isBell || roleType || roleId ? 'space-between' : 'space-evenly',
                         marginTop: '20%',
                         marginHorizontal: 20,
                     }}>
@@ -83,8 +83,20 @@ export const TopBarcard = ({
                     </TouchableOpacity>
                 )}
                 {isBell && (
-                    <TouchableOpacity style={{ marginRight: '4%'}} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
+                    <TouchableOpacity style={{ marginRight: '4%' }} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
                         <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
+                    </TouchableOpacity>
+                )}
+                {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' && (
+                    <TouchableOpacity
+                        style={{}}
+                        onPress={() => {
+                            navCreate.navigate(allTexts.screenNames.addMembershipDetails, {
+                                roleId: roleId,
+                                jtProfileId: trfdata?.jtProfile,
+                            });
+                        }}>
+                        <Text style={styles.joinText}>Create</Text>
                     </TouchableOpacity>
                 )}
             </View>
@@ -97,8 +109,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFAB0F',
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 20,
-        marginBottom:10,
-        flex: 1,     
+        marginBottom: 10,
+        flex: 1,
     },
     header: {
         flexDirection: 'row',
@@ -113,5 +125,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
+    },
+    joinText: {
+        color: colors.white,
+        fontWeight: '900',
+        fontSize: 20,
     },
 })

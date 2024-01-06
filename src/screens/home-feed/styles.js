@@ -134,15 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 10,
   },
   nodataView: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '10%',
+    marginTop: '50%',
   },
   nodatatext: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.orangeColor,
+    color: colors.black,
   },
   notificationDot: {
     width: 10,
@@ -154,7 +153,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   flatListStyle: {
-    marginTop: '15%'
+    marginTop: '15%',
   },
   homeCard: {
     // borderWidth:10,
