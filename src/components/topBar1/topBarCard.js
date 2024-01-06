@@ -22,10 +22,11 @@ export const TopBarcard = ({
     roleId,
     roleType,
     navCreate,
+    height,
 }) => {
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
+            <View style={{...styles.header, height: height ? height : 120}}>
                 <View
                     style={{
                         flexDirection: 'row',
@@ -90,12 +91,7 @@ export const TopBarcard = ({
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' && (
                     <TouchableOpacity
                         style={{}}
-                        onPress={() => {
-                            navCreate.navigate(allTexts.screenNames.addMembershipDetails, {
-                                roleId: roleId,
-                                jtProfileId: trfdata?.jtProfile,
-                            });
-                        }}>
+                        onPress={navCreate}>
                         <Text style={styles.joinText}>Create</Text>
                     </TouchableOpacity>
                 )}

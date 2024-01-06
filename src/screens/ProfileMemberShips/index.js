@@ -57,7 +57,12 @@ const ProfileMemberShips = ({ navigation, route }) => {
           navigation={navigation}
           roleId={roleId}
           roleType={roleType}
-          navCreate={navigation}
+          navCreate={() => {
+            navigation.navigate(allTexts.screenNames.addMembershipDetails, {
+                roleId: roleId,
+                jtProfileId: trfdata?.jtProfile,
+            });
+        }}
         />
       </View>
       <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>

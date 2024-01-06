@@ -77,7 +77,7 @@ const SeeAll = ({navigation}) => {
         popTemples?.length >= 0 && (
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{marginHorizontal: '5%'}}>
+            style={{margin: '5%'}}>
             <FlatList
               data={popTemples}
               keyExtractor={({item, index}) => index}
