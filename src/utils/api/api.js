@@ -11,27 +11,6 @@ import { allTexts } from '../../common';
 import RNRestart from 'react-native-restart';
 
 
-//****   production Api base urls   *** //
-// export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'https://kovela.app/customer/api/';
-// export const BASE = 'https://kovela.app/media/';
-// export const POPULARURL = 'https://kovela.app/profile/';
-// export const MEMBER_SHIP_URL = 'https://kovela.app/membership';
-// export const EVENTS_URL = 'https://kovela.app/events/';
-// export const DONATION_URL = 'https://kovela.app/donations/';
-
-
-//ip address apis old //
-
-// export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'https://4.240.68.49:9443/customer/api/';
-// export const BASE = 'https://4.240.68.49:9443/media/';
-// export const POPULARURL = 'https://4.240.68.49:9443/profile/';
-// export const MEMBER_SHIP_URL = 'https://4.240.68.49:9443/membership';
-// export const EVENTS_URL = 'https://4.240.68.49:9443/events/';
-// export const DONATION_URL = 'https://4.240.68.49:9443/donations/';
-
-
 //developent apis //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
 export const BASEURL = 'https://fanfun.in/customer/api/';
