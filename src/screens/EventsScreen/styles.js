@@ -161,4 +161,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center', //Centered vertically
     alignItems: 'center', // Centered horizontally
   },
+  noData: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1
+  },
+  noText: {
+    fontSize: 20,
+    color: colors.orangeColor,
+    fontWeight: 'bold',
+  }
 });
