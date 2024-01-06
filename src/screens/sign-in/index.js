@@ -138,7 +138,7 @@ const Signin = ({navigation}) => {
             return (
               <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile number or Email'}
+                  title={'Mobile or Email'}
                   isFlag
                   // keyboardType={'numeric'}
                   placeholder={emailPlace}
@@ -151,7 +151,7 @@ const Signin = ({navigation}) => {
                 <View>
                   <PasswordField
                     value={values.password}
-                    title={'password'}
+                    title={'Password'}
                     placeholder={passwordPlace}
                     error={touched.password && errors.password}
                     onBlur={handleBlur('password')}

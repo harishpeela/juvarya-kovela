@@ -64,7 +64,7 @@ export default BottomTabBase = ({ navigation }) => {
           }
           tabBarOptions={{
             style: {
-              height: '10%',
+              height: '8%',
               width: '95%',
               // flexDirection: 'row',
               // marginBottom: '2%',

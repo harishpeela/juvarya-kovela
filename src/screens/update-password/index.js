@@ -96,7 +96,7 @@ const UpdatePassword = ({ navigation }) => {
             return (
               <View style={styles.fieldContainer}>
                 <PasswordField
-                  title={'currentPassword'}
+                  title={'Current Password'}
                   value={values.currentPassword}
                   titleColor={colors.orangeColor}
                   placeholder={passwordPlace}

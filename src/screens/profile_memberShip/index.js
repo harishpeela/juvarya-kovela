@@ -3,7 +3,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useFocusEffect from '@react-navigation/native';
 import {
@@ -23,87 +23,17 @@ import {
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
-import Icon from 'react-native-vector-icons/AntDesign';
-
+import ApplicationContext from '../../utils/context-api/Context';
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
-  console.log('roleid', roleId);
+  const {userDetails} = useContext(ApplicationContext);
 const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
-
-  const DataApi = [
-    {
-      id: 1,
-      customerID: 19,
-      membershipId: 8,
-      membershipDto: {
-        id: 8,
-        name: 'BASIC',
-        profileId: 88,
-        type: 'BASIC',
-      },
-      loggedInUser: {
-        id: 19,
-        email: 'syamala.pacharla@juvarya.com',
-        firstName: 'syamala pacharla',
-        roles: ['ROLE_USER', 'ROLE_ADMIN'],
-        customerProfileUrl:
-          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
-        primaryContact: '8888888888',
-      },
-    },
-    {
-      id: 2,
-      customerID: 19,
-      membershipId: 8,
-      membershipDto: {
-        id: 8,
-        name: 'BASIC',
-        profileId: 88,
-        type: 'BASIC',
-      },
-      loggedInUser: {
-        id: 19,
-        email: 'syamala.pacharla@juvarya.com',
-        firstName: 'syamala pacharla',
-        roles: ['ROLE_USER', 'ROLE_ADMIN'],
-        customerProfileUrl:
-          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
-        primaryContact: '8888888888',
-      },
-    },
-    {
-      id: 3,
-      customerID: 19,
-      membershipId: 8,
-      membershipDto: {
-        id: 8,
-        name: 'BASIC',
-        profileId: 88,
-        type: 'BASIC',
-      },
-      loggedInUser: {
-        id: 19,
-        email: 'syamala.pacharla@juvarya.com',
-        firstName: 'syamala pacharla',
-        roles: ['ROLE_USER', 'ROLE_ADMIN'],
-        customerProfileUrl:
-          'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1702035902920krishna.png',
-        primaryContact: '8888888888',
-      },
-    },
-    ,
-  ];
-  const Split = () => {
-    let result = DataApi;
-    let dataList = result.filter(item => item).map(({ membershipDto, loggedInUser, membershipId }) => ({ membershipDto, loggedInUser, membershipId }));
-    console.log('dayta of members list', dataList);
-    setData(dataList);
-  };
+  const [roleType, setRoleType] = useState();
 
   const MembershipData = async () => {
     setaLoader(true);
@@ -125,11 +55,20 @@ const isDarkMode = useColorScheme() === 'dark';
       alert(error);
     }
   };
-  console.log('data', data);
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    console.log('role===>', roleAdmin);
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    }
+  };
   useEffect(() => {
     MembershipData();
-    // Split();
+    Type();
   }, []);
+  console.log('roleid', roleId, roleType);
+
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
@@ -142,23 +81,20 @@ const isDarkMode = useColorScheme() === 'dark';
                 color={'#ffffff'}
                 style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
               />
-
             </TouchableOpacity>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20}}> Memberships</Text>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.profilememberships);
               }}>
-              {!roleId ? (
-                <>
-                </>
-              ) : (
+              {roleId || roleType  && (
                 <TouchableOpacity onPress={() => {
                   navigation.navigate(allTexts.screenNames.invitationScreen, {
                     roleId: roleId,
                   })
                 }}>
                   {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
-                  <Text style={{ fontSize:20,fontWeight:'bold',marginRight:30, color: colors.white }}>Invite</Text>
+                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white }}>Invite</Text>
                 </TouchableOpacity>
               )}
             </TouchableOpacity>

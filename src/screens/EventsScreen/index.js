@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
   FlatList,
   useColorScheme,
+  Text,
 } from 'react-native';
 import React, { useState, useEffect, useContext } from 'react';
 import { styles } from './styles';
@@ -73,7 +74,7 @@ const EventsScreen = ({ navigation }) => {
     <View style={{flex:1}}>
      <View style={{minHeight: 160, marginTop: '3%'}}>
       <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
-      <View style={{...styles.searchAndNew, marginHorizontal: admin ? 40 : 0}}>
+      <View style={{...styles.searchAndNew, marginHorizontal: admin || roleType === 'ROLE_ADMIN' ? 40 : 0}}>
         <SearchBar
           onTextChange={e => {
             setSearchedText(e);
@@ -126,7 +127,8 @@ const EventsScreen = ({ navigation }) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              <FlatList
+              {eventsData?.length ? (
+                <FlatList
                 numColumns={2}
                 data={eventsData}
                 contentContainerStyle={styles.flatListStyle}
@@ -143,6 +145,9 @@ const EventsScreen = ({ navigation }) => {
                   />
                 )}
               />
+              ) : (
+                <Text> no Data to display</Text>
+              )}
             </>
           )}
         </View>

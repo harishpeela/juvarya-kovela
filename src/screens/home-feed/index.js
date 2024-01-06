@@ -38,9 +38,6 @@ const UserFeedScreen = ({navigation}) => {
       message: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
       URL: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
       title: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
-      // message: 'https://play.google.com/apps/test/com.kovela/4004',
-      // URL: 'https://play.google.com/apps/test/com.kovela/4004',
-      // title: item?.jtProfileDTO?.desciption,
     };
     const options = {
       message: item?.jtProfileDTO?.name,
@@ -59,14 +56,10 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('========>', result?.data);
+      console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
-        // console.log('=============>', result?.data?.jtFeeds[0]?.jtProfileDTO);
-        // let responce = result?.data?.jtFeeds;
-        // responce === null ? setNoData(true) : setNoData(false);
-        // responce && setHomeFeedList([...homeFeedList, ...responce]);
         setIsLoading(false);
         setRefrsh(false);
       } else {
