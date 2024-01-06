@@ -192,8 +192,6 @@ const Profile = ({ navigation }) => {
               }}>
               {profPic ? (
                 <Image source={{ uri: profPic?.url }} style={styles.profileImage} />
-                // <Image source={{uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17036713072161703671306767.jpg'}} style={styles.profileImage} />
-                // <Image source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}} style={styles.profileImage} />
               ) : (
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={60} color={colors.orangeColor} />
