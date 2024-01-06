@@ -29,6 +29,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const PopularTemplesss = async () => {
+    console.log('poptemples');
     setLoader(true);
     try {
       let result = await PopularTemples();

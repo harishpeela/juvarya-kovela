@@ -9,9 +9,9 @@ export const styles = StyleSheet.create({
 
   },
   header:{
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    // alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
    
   },
   container1: {
@@ -124,11 +124,6 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
-  joinText:{
-    color: colors.orangeColor,
-    fontWeight: '900',
-    fontSize: fontSize.xxlarge,
-    marginRight: 20,
-  },
+ 
 
 });

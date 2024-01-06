@@ -7,7 +7,7 @@ export const ProfileImage = ({profileImg}) => {
       return (
         <Image
           source={{
-            uri: 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+            uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17041996227071704199620350.jpg',
           }}
           style={styles.profileView}
         />
