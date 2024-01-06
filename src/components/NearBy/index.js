@@ -108,14 +108,14 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
         ) : (
           <>
             <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Popular Temple</Text>
+              <Text style={styles.popularTextContainer}>Popular Temples</Text>
               <TouchableOpacity
                 onPress={() => {
                   seeallnav.navigate(allTexts.screenNames.seeall, {
                     data: filteredList,
                   });
                 }}>
-                <Text style={{color: colors.black, fontSize: 18}}>See all</Text>
+                <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
               </TouchableOpacity>
             </View>
             <ScrollView>

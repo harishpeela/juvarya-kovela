@@ -94,14 +94,11 @@ export const TopBarcard = ({
 };
 const styles = StyleSheet.create({
     container: {
-        height:160,
         backgroundColor: '#FFAB0F',
         borderBottomRightRadius: 20,
         borderBottomLeftRadius: 20,
         marginBottom:10,
-        
-        
-        
+        flex: 1,     
     },
     header: {
         flexDirection: 'row',
