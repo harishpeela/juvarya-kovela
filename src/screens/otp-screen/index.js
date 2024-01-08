@@ -60,7 +60,7 @@ const OTPScreen = ({navigation, route}) => {
     params: {otp, email, password, data},
   } = route || {};
   const setText = () => {
-    otpInput?.current?.setValue(otp);
+    otpInput?.current?.setValue('');
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
 
@@ -113,7 +113,7 @@ const OTPScreen = ({navigation, route}) => {
     setText();
   }, []);
 
-  const UserRegisterHandler = async () => {
+  const UserRegisterHandler = async (pOtp) => {
     let registerPayload = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -121,7 +121,7 @@ const OTPScreen = ({navigation, route}) => {
       username: data?.userName,
       email: data?.email?.toLowerCase(),
       password: data?.password,
-      otp: otp,
+      otp: pOtp,
     };
     try {
       let result = await NewRegistesrUser(registerPayload);
@@ -179,7 +179,7 @@ const OTPScreen = ({navigation, route}) => {
               ?.toString()
               .replace(/,/g, '');
             if (otpOutPut !== '') {
-              UserRegisterHandler();
+              UserRegisterHandler(otpOutPut);
             }
           }}
         />
