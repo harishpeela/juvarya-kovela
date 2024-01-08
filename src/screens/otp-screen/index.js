@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Alert} from 'react-native';
 import React, {useRef, useEffect, useState, useContext} from 'react';
 import {allTexts, colors} from '../../common';
 import OTPTextInput from 'react-native-otp-textinput';
@@ -118,18 +118,18 @@ const OTPScreen = ({navigation, route}) => {
       firstName: data.firstName,
       lastName: data.lastName,
       primaryContact: data.phone,
-      username: data?.userName,
       email: data?.email?.toLowerCase(),
       password: data?.password,
       otp: pOtp,
     };
     try {
       let result = await NewRegistesrUser(registerPayload);
+      console.log("gnjg", result, registerPayload)
       if (result.status === 200) {
         signinHandler();
       } else {
         console.log(result?.data?.message, 'error');
-        alert(result?.data?.message);
+        Alert.alert("Kovela", result?.data?.message || "Invalid OTP");
       }
     } catch (error) {
       console.log('error', error);
