@@ -1,13 +1,13 @@
-import { Text, View, TouchableOpacity } from 'react-native';
-import React, { useState, useEffect, useContext } from 'react';
-import { MemberShipCard, TopBarcard} from '../../components';
-import { allTexts } from '../../common';
-import { styles } from './styles';
-import { MemberShipList } from '../../utils/api';
+import {Text, View, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect, useContext} from 'react';
+import {MemberShipCard, TopBarcard} from '../../components';
+import {allTexts} from '../../common';
+import {styles} from './styles';
+import {MemberShipList} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-const ProfileMemberShips = ({ navigation, route }) => {
+const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
-  const { roleId, trfdata } = route.params || {};
+  const {roleId, trfdata} = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
@@ -59,18 +59,19 @@ const ProfileMemberShips = ({ navigation, route }) => {
           roleType={roleType}
           navCreate={() => {
             navigation.navigate(allTexts.screenNames.addMembershipDetails, {
-                roleId: roleId,
-                jtProfileId: trfdata?.jtProfile,
+              roleId: roleId,
+              jtProfileId: trfdata?.jtProfile,
             });
-        }}
+          }}
         />
       </View>
       <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
-        <MemberShipCard
+        {membership?.length  ? (
+          <MemberShipCard
           data={data}
           txt={
-            roleId === 'ROLE_ITEM_ADMIN'  || roleType === 'ROLE_ADMIN' 
-              ? `${membership?.length ? membership?.length : '0'} Memberships`
+            roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+              ? `${membership?.length ? membership?.length : '0'} Membership`
               : 'Join Now'
           }
           onPress={() =>
@@ -79,6 +80,11 @@ const ProfileMemberShips = ({ navigation, route }) => {
             })
           }
         />
+        ) : (
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text> No data to display</Text>
+            </View>
+        )}
       </View>
     </View>
   );

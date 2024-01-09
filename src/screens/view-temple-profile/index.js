@@ -61,17 +61,19 @@ import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { style } from '../newprofile/styles';
+import EventsScreen from '../EventsScreen';
+import UpdatePassword from '../update-password';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -205,7 +207,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
-        console.log('medaia', media);
+        console.log('media', media);
         setloader(false);
       } else {
         setPostImages(0);
@@ -337,9 +339,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
             </Text>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               {data?.seasonal ? (
-                <TouchableOpacity style={styles.seasonal} onPress={() => alert('under development')}>
+                <TouchableOpacity style={styles.seasonal} onPress={() => navigation.navigate('FollowersMembership')}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
@@ -395,6 +397,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
+                role={roleId === 'ROLE_ITEM_ADMIN'}
                   onPress={() => {
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
@@ -415,14 +418,16 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   /> */}
               </View>
               {/* </View> */}
-              <Danation_Add_Card
-                roleId={roleId}
-                onPress={() =>
-                  navigation.navigate(allTexts?.screenNames?.donationslist, {
-                    data: trfData,
-                  })
-                }
-              />
+              <TouchableOpacity  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })
+                  }>
+                <Danation_Add_Card
+                  roleId={roleId}
+                 
+                />
+              </TouchableOpacity>
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}

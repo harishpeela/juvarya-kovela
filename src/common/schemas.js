@@ -89,3 +89,9 @@ export const forgotPasswordSchema = Yup.object({
     .required('Confirm Your Password')
     .oneOf([Yup.ref('password'), null], 'Password not Matched'),
 });
+export const UpdateProfileValidation = Yup.object({
+  name: Yup.string().trim().required('Name required'),
+  phone: Yup.string().trim().required('phone number required'),
+
+
+})
