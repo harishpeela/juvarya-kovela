@@ -5,7 +5,7 @@ import React, {useRef, useEffect, useState, useContext} from 'react';
 import {allTexts, colors} from '../../common';
 import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
-import {PrimaryButton} from '../../components';
+import {PrimaryButton, TopBarcard} from '../../components';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {loginUser1, NewRegistesrUser, getUserInfoNew} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -18,6 +18,7 @@ const OTPScreen = ({navigation, route}) => {
   const [timer, setTimer] = useState('00');
   const [loading, setLoading] = useState(false);
   const Ref = useRef(null);
+
   var secLeft = 30;
   const getTimeRemaining = e => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -56,6 +57,7 @@ const OTPScreen = ({navigation, route}) => {
   };
 
   let otpInput = useRef(null);
+  // const {otpPayload} = route.params || {};
   const {
     params: {otp, email, password, data},
   } = route || {};
@@ -94,6 +96,7 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await loginUser1(payload);
+      console.log('result', result);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType},
@@ -113,7 +116,7 @@ const OTPScreen = ({navigation, route}) => {
     setText();
   }, []);
 
-  const UserRegisterHandler = async (pOtp) => {
+  const UserRegisterHandler = async pOtp => {
     let registerPayload = {
       firstName: data.firstName,
       lastName: data.lastName,
@@ -124,12 +127,12 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await NewRegistesrUser(registerPayload);
-      console.log("gnjg", result, registerPayload)
+      console.log('gnjg', result, registerPayload);
       if (result.status === 200) {
         signinHandler();
       } else {
         console.log(result?.data?.message, 'error');
-        Alert.alert("Kovela", result?.data?.message || "Invalid OTP");
+        Alert.alert('Kovela', result?.data?.message || 'Invalid OTP');
       }
     } catch (error) {
       console.log('error', error);
@@ -138,20 +141,18 @@ const OTPScreen = ({navigation, route}) => {
   };
   return (
     <View style={styles.wrapper}>
+      <View style={{minHeight: '13%', marginTop: 20}}>
+        <TopBarcard
+          back={true}
+          txt={'Confirm OTP'}
+          navigation={navigation}
+          onPress={() => navigation.navigate(allTexts.screenNames.signup)}
+        />
+      </View>
       <View style={styles.topContainer}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-          style={styles.backIcon}>
-          <AntIcon name="left" size={25} color={colors.black} />
-        </TouchableOpacity>
         <View style={styles.textContainer}>
           <Text style={styles.heading}>{allTexts.headings.verfiyEmail}</Text>
-          <Text
-            style={
-              styles.detail
-            }>{`${allTexts.placeHolders.otpSend} ${email}`}</Text>
+          <Text style={styles.detail}>Enter OTP sent to {data?.email}</Text>
         </View>
       </View>
       <OTPTextInput
@@ -160,7 +161,7 @@ const OTPScreen = ({navigation, route}) => {
         tintColor={colors.green2}
         textInputStyle={styles.textInput}
         containerStyle={{
-          marginTop: 15,
+          marginTop: 1,
         }}
       />
       <View style={styles.btnContainer}>
@@ -173,7 +174,7 @@ const OTPScreen = ({navigation, route}) => {
         <PrimaryButton
           text={'Continue'}
           loading={loading}
-          bgColor={colors.green2}
+          bgColor={colors.orangeColor}
           onPress={() => {
             let otpOutPut = otpInput?.current?.state?.otpText
               ?.toString()

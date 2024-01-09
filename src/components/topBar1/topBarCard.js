@@ -1,28 +1,30 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo'
-import { allTexts, colors } from '../../common';
+import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
+import {allTexts, colors} from '../../common';
 export const TopBarcard = ({
-    txtColor,
-    onPress,
-    txt,
-    isPlus,
-    onPlusPress,
-    isBell,
-    arrow,
-    cancel,
-    children,
-    menu,
-    navigation,
-    back,
-    navBack,
-    navMenu,
-    roleId,
-    roleType,
-    navCreate,
-    height,
+  txtColor,
+  onPress,
+  txt,
+  isPlus,
+  onPlusPress,
+  isBell,
+  arrow,
+  cancel,
+  children,
+  menu,
+  navigation,
+  back,
+  navBack,
+  navMenu,
+  roleId,
+  roleType,
+  navCreate,
+  height,
 }) => {
   return (
     <View style={styles.container}>
@@ -32,35 +34,41 @@ export const TopBarcard = ({
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent:
-              isBell || roleType || roleId ? 'space-between' : 'space-evenly',
-            marginTop: '20%',
+              menu || isBell || roleType || roleId || back
+                ? 'space-between'
+                : 'space-evenly',
+            marginTop: '22%',
             marginHorizontal: 10,
           }}>
           {menu && (
-            <TouchableOpacity
-              onPress={() => navigation.navigate(allTexts.tabNames.profile)}
-              style={styles.userIcon}>
-              <AntDesign
-                name="user"
-                size={25}
-                color={colors.white}
-                style={{
-                  marginLeft: 10,
-                  right: 7,
-                  top: 10,
-                }}
-              />
+            <View style={{marginLeft: 10}}>
               <TouchableOpacity
-                style={styles.menuIcon}
-                onPress={() => navigation.navigate(allTexts.tabNames.profile)}>
-                <Feather
-                  name="menu"
-                  size={15}
+                onPress={() => navigation.navigate(allTexts.tabNames.profile)}
+                style={styles.userIcon}>
+                <AntDesign
+                  name="user"
+                  size={20}
                   color={colors.white}
-                  style={{}}
+                  style={{
+                    marginLeft: 10,
+                    right: 6,
+                    top: 10,
+                  }}
                 />
+                <TouchableOpacity
+                  style={styles.menuIcon}
+                  onPress={() =>
+                    navigation.navigate(allTexts.tabNames.profile)
+                  }>
+                  <Feather
+                    name="menu"
+                    size={15}
+                    color={colors.white}
+                    style={{}}
+                  />
+                </TouchableOpacity>
               </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
           )}
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
@@ -73,17 +81,8 @@ export const TopBarcard = ({
           {back && (
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => navigation.goBack()}>
-              <Image
-                source={require('../../../assets/images/backarrow.png')}
-                style={{height: 10, width: 6}}
-              />
-            </TouchableOpacity>
-          )}
-          {back && (
-            <TouchableOpacity
-              style={styles.iconContainer}
-              onPress={() => navigation.goBack()}>
+              onPress={() => navigation.goBack()}
+              navigation={navigation}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 6}}
@@ -105,15 +104,38 @@ export const TopBarcard = ({
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                marginHorizontal: '20%',
+                marginHorizontal: '25%',
                 color: 'white',
                 alignSelf: 'center',
               }}>
               {txt}
             </Text>
           )}
+          {isBell && (
+            <TouchableOpacity
+              style={{marginLeft: '5%'}}
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.notification)
+              }>
+              <Image
+                source={require('../../../assets/images/bell.png')}
+                style={{height: 25, width: 25, marginRight: '2%'}}
+              />
+            </TouchableOpacity>
+          )}
+          {roleId === 'ROLE_ITEM_ADMIN' ||
+            (roleType === 'ROLE_ADMIN' && (
+              <TouchableOpacity
+                style={{position: 'absolute', right: '-8%'}}
+                onPress={navCreate}>
+                <Text style={styles.joinText}>Create</Text>
+              </TouchableOpacity>
+            ))}
         </View>
-    );
+      </View>
+      {children}
+    </View>
+  );
 };
 const styles = StyleSheet.create({
   container: {
@@ -121,6 +143,8 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     marginBottom: 10,
+    alignItems: 'flex-start',
+    // justifyContent: 'center',
     flex: 1,
   },
   header: {
