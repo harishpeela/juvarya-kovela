@@ -26,6 +26,7 @@ export const styles = StyleSheet.create({
     },
     focusedContainer: {
       height: 80,
+      width:80,
       alignItems: 'center',
       borderRadius: 100,
       justifyContent: 'center',
