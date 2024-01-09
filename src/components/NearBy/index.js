@@ -91,7 +91,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
             await PopularTemplesss(pageNo, 20);
           }}
           bgColor={colors.gray4}
-          placeHolder={'Search'}
+          placeHolder={'Search Temples'}
         />
       </View>
       </TopBarcard>
