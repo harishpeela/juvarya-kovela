@@ -90,7 +90,7 @@ export const TopBarcard = ({
                 )}
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' && (
                     <TouchableOpacity
-                        style={{}}
+                        style={{position: 'absolute', top: 40, right: '7%'}}
                         onPress={navCreate}>
                         <Text style={styles.joinText}>Create</Text>
                     </TouchableOpacity>
