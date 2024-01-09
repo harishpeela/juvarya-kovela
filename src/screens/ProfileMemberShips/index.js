@@ -66,7 +66,8 @@ const ProfileMemberShips = ({ navigation, route }) => {
         />
       </View>
       <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
-        <MemberShipCard
+        {membership?.length  ? (
+          <MemberShipCard
           data={data}
           txt={
             roleId === 'ROLE_ITEM_ADMIN'  || roleType === 'ROLE_ADMIN' 
@@ -79,6 +80,11 @@ const ProfileMemberShips = ({ navigation, route }) => {
             })
           }
         />
+        ) : (
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <Text> No data to display</Text>
+            </View>
+        )}
       </View>
     </View>
   );

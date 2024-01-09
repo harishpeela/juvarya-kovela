@@ -66,12 +66,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -395,6 +395,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
+                role={roleId === 'ROLE_ITEM_ADMIN'}
                   onPress={() => {
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
