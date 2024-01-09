@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
       height:50,
       width:50,
     },
-    dot: {borderBottomRightRadius: 10, borderBottomLeftRadius: 10, borderBottomColor: 'gray', backgroundColor: colors.gray3},
+    // dot: { backgroundColor: colors.gray3},
     imageNormal:  {
       height: 50,
       width: 50,

@@ -1,30 +1,28 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import Feather from 'react-native-vector-icons/Feather';
-import {allTexts, colors} from '../../common';
+import Entypo from 'react-native-vector-icons/Entypo'
+import { allTexts, colors } from '../../common';
 export const TopBarcard = ({
-  txtColor,
-  onPress,
-  txt,
-  isPlus,
-  onPlusPress,
-  isBell,
-  userIcon,
-  arrow,
-  cancel,
-  children,
-  menu,
-  navigation,
-  back,
-  navBack,
-  navMenu,
-  roleId,
-  roleType,
-  navCreate,
+    txtColor,
+    onPress,
+    txt,
+    isPlus,
+    onPlusPress,
+    isBell,
+    arrow,
+    cancel,
+    children,
+    menu,
+    navigation,
+    back,
+    navBack,
+    navMenu,
+    roleId,
+    roleType,
+    navCreate,
+    height,
 }) => {
   return (
     <View style={styles.container}>
@@ -115,41 +113,7 @@ export const TopBarcard = ({
             </Text>
           )}
         </View>
-
-        {isPlus && (
-          <TouchableOpacity style={{}} onPress={onPlusPress}>
-            <AntDesign name="plus" size={24} color="black" />
-          </TouchableOpacity>
-        )}
-        {isBell && (
-          <TouchableOpacity
-            style={{marginRight: '4%'}}
-            onPress={() =>
-              navigation.navigate(allTexts.screenNames.notification)
-            }>
-            <Image
-              source={require('../../../assets/images/bell.png')}
-              style={{height: 25, width: 25, marginRight: '2%'}}
-            />
-          </TouchableOpacity>
-        )}
-        {roleId === 'ROLE_ITEM_ADMIN' ||
-          (roleType === 'ROLE_ADMIN' && (
-            <TouchableOpacity
-              style={{marginLeft: '1%'}}
-              onPress={() => {
-                navCreate.navigate(allTexts.screenNames.addMembershipDetails, {
-                  roleId: roleId,
-                  jtProfileId: trfdata?.jtProfile,
-                });
-              }}>
-              <Text style={styles.joinText}>Create</Text>
-            </TouchableOpacity>
-          ))}
-      </View>
-      {children}
-    </View>
-  );
+    );
 };
 const styles = StyleSheet.create({
   container: {

@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     height: 40,
   },
   iconContainer: {
-    // padding: 5,
+    paddingLeft:8,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
