@@ -84,7 +84,7 @@ const Signup = ({navigation}) => {
         if (response && emailAddress) {
           console.log('amsjhxvJAHSBX =====>', emailAddress);
           let otpPayload = {
-            otp,
+            otp: '123456',
             data,
             primaryContact: data?.phone,
             password: data?.confirmPassword,
