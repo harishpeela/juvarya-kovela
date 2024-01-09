@@ -32,7 +32,7 @@ export const SearchBar = ({
           {height: srHeight ? srHeight : 30},
         ]}>
         <View style={styles.iconContainer}>
-          <Icon name="search1" size={20} color={colors.gray} />
+          <Icon name="search1" size={16} color={colors.gray} />
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}

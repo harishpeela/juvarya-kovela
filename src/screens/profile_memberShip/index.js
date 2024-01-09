@@ -82,7 +82,10 @@ const isDarkMode = useColorScheme() === 'dark';
                 style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
               />
             </TouchableOpacity>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20}}> Memberships</Text>
+            <View>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20,paddingRight:'10%'}}> Memberships</Text>
+            </View>
+
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.profilememberships);
