@@ -68,6 +68,7 @@ const Notifications = ({navigation}) => {
         </View>
       </View>
     </View>
+    </View>
   );
 };
 export default Notifications;

@@ -91,27 +91,62 @@ export const TopBarcard = ({
             </TouchableOpacity>
           )}
 
-          {cancel && (
-            <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
-              <MaterialIcons
-                name="cancel"
-                size={20}
-                color={colors.orangeColor}
-              />
-            </TouchableOpacity>
-          )}
-          {txt && (
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginHorizontal: '20%',
-                color: 'white',
-                alignSelf: 'center',
-              }}>
-              {txt}
-            </Text>
-          )}
+                        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+                            <Image source={require('../../../assets/images/backarrow.png')}
+                                style={{ height: 10, width: 6 }} />
+                        </TouchableOpacity>
+
+                    )}
+
+                    {menu && (
+                        <TouchableOpacity onPress={() => navMenu.navigate(allTexts.tabNames.profile)}>
+                            <Entypo name='menu' size={20} color={'white'} />
+                        </TouchableOpacity>
+                    )}
+                    {cancel && (
+                        <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+                            <MaterialIcons name='cancel' size={20} color={colors.orangeColor} />
+                        </TouchableOpacity>
+                    )}
+                   
+                </View>
+                {txt && (
+                        <Text
+                            style={{
+                                fontSize: 20,
+                                fontWeight: 'bold',
+                                marginRight: isBell || roleType || roleId ? 0 : '35%',
+                                color: 'white',
+                                alignSelf: 'center',
+                                
+                            }}>
+                            {txt}
+                        </Text>
+                    )}
+
+                {isPlus && (
+                    <TouchableOpacity style={{}} onPress={onPlusPress}>
+                        <AntDesign
+                            name="plus"
+                            size={24}
+                            color='black'
+                        />
+                    </TouchableOpacity>
+                )}
+                {isBell && (
+                    <TouchableOpacity style={{ marginRight: '4%' }} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
+                        <Image source={require('../../../assets/images/bell.png')} style={{ height: 25, width: 25, marginRight: '2%' }} />
+                    </TouchableOpacity>
+                )}
+                {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' && (
+                    <TouchableOpacity
+                        style={{position: 'absolute', top: 40, right: '7%'}}
+                        onPress={navCreate}>
+                        <Text style={styles.joinText}>Create</Text>
+                    </TouchableOpacity>
+                )}
+            </View>
+            {children}
         </View>
     );
 };
