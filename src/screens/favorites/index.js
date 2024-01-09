@@ -9,6 +9,7 @@ import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
+
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
@@ -99,8 +100,13 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
+      <View style={{minHeight: 170, marginTop: '2%'}}>
+        <TopBarcard
+          txt={'Favourites'}
+          isBell={true}
+          menu={true}
+          navigation={navigation}
+          navMenu={navigation}>
           <View style={styles.searchbarContainer}>
             <View>
               <SearchBar
@@ -128,7 +134,9 @@ const Favorite = ({navigation}) => {
           [
             filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
-                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>{'No Temples Available'}</Text>
+                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
+                  {'No Temples Available'}
+                </Text>
               </View>
             ) : (
               <FlatList

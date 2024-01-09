@@ -5,9 +5,11 @@ import {
   useColorScheme,
   Text,
 } from 'react-native';
-import React, { useState, useEffect, useContext } from 'react';
-import { styles } from './styles';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import React, {useState, useEffect, useContext} from 'react';
+import {styles} from './styles';
+import Feather from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 import {
   Loader,
   SearchBar,
@@ -15,19 +17,19 @@ import {
   EventCard2,
   TopBarcard,
 } from '../../components';
-import { AdminTemples } from '../../utils/api';
-import { allTexts, colors } from '../../common';
-import { EventList } from '../../utils/api';
+import {AdminTemples} from '../../utils/api';
+import {allTexts, colors} from '../../common';
+import {EventList} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import Card from '../../common/Card';
-const EventsScreen = ({ navigation }) => {
-  const { userDetails } = useContext(ApplicationContext);
+const EventsScreen = ({navigation}) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState();
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
-  const [roleType, setRoleType] = useState('')
+  const [roleType, setRoleType] = useState('');
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setEventsLoader(true);
@@ -65,15 +67,23 @@ const EventsScreen = ({ navigation }) => {
     if (roleAdmin) {
       setRoleType('ROLE_ADMIN');
     } else {
-      console.log('')
+      console.log('');
     }
-  }
+  };
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
-          <View style={{ ...styles.searchAndNew, marginHorizontal: admin || roleType === 'ROLE_ADMIN' ? 40 : 0 }}>
+    <View style={{flex: 1}}>
+      <View style={{minHeight: 170, marginTop: '2%'}}>
+        <TopBarcard
+          menu={true}
+          txt={'Events'}
+          isBell={true}
+          navigation={navigation}>
+          <View
+            style={{
+              ...styles.searchAndNew,
+              marginHorizontal: admin || roleType === 'ROLE_ADMIN' ? 40 : 0,
+            }}>
             <SearchBar
               onTextChange={e => {
                 setSearchedText(e);
@@ -84,16 +94,26 @@ const EventsScreen = ({ navigation }) => {
                 setSearchedText('');
                 await PopularTemplesss(pageNo, 20);
               }}
-              bgColor={colors.white}
+              bgColor={colors.gray4}
               placeHolder={'Search'}
             />
             {admin || roleType === 'ROLE_ADMIN' ? (
-              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
-                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color="white" />
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.addevents)
+                }
+                style={styles.plusContainer}>
+                <Feather
+                  style={styles.plusIcon}
+                  name="plus"
+                  size={30}
+                  color="white"
+                />
               </TouchableOpacity>
-            ) : ''}
+            ) : (
+              ''
+            )}
           </View>
-
         </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
@@ -131,23 +151,30 @@ const EventsScreen = ({ navigation }) => {
                   numColumns={2}
                   data={eventsData}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{ marginBottom: '35%', marginTop: '3%' }}
+                  style={{marginBottom: '35%', marginTop: '3%'}}
                   keyExtractor={(item, index) => index.toString()}
-                  renderItem={({ item }) => (
+                  renderItem={({item}) => (
                     <EventCard2
                       navigation={navigation}
                       data={item}
-                    // name={item.user.firstName}
-                    // img={item.user.url}
-                    // data={item.user}
-                    // donation={item.user.donation}
+                      // name={item.user.firstName}
+                      // img={item.user.url}
+                      // data={item.user}
+                      // donation={item.user.donation}
                     />
                   )}
                 />
               ) : (
-                <View style={styles.noData}>
-                  <Text style={styles.noText}> No Data to display</Text>
-                </View>
+                <Text
+                  style={{
+                    fontSize: 16,
+                    textAlign: 'center',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                  {' '}
+                  No Data to display
+                </Text>
               )}
             </>
           )}

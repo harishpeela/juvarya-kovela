@@ -16,7 +16,7 @@ import {TempleListCard} from '../TempleListCard';
 import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
-import { TopBarcard } from '../topBar1/topBarCard';
+import {TopBarcard} from '../topBar1/topBarCard';
 export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
@@ -76,25 +76,30 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   };
   return (
     <View>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Search'} menu={true} isBell={true} navigation={navigation} navMenu={navigation}>
-      <View style={styles.searchContainer}>
-        <SearchBar
-          value={searchedText}
-          onTextChange={e => {
-            setSearchedText(e);
-            SearchPopTemp(e);
-          }}
-          loading={false}
-          onCrossPress={async () => {
-            setSearchedText('');
-            await PopularTemplesss(pageNo, 20);
-          }}
-          bgColor={colors.gray4}
-          placeHolder={'Search'}
-        />
-      </View>
-      </TopBarcard>
+      <View style={{minHeight: 170, marginTop: '2%'}}>
+        <TopBarcard
+          txt={'Search'}
+          menu={true}
+          isBell={true}
+          navigation={navigation}
+          navMenu={navigation}>
+          <View style={styles.searchContainer}>
+            <SearchBar
+              value={searchedText}
+              onTextChange={e => {
+                setSearchedText(e);
+                SearchPopTemp(e);
+              }}
+              loading={false}
+              onCrossPress={async () => {
+                setSearchedText('');
+                await PopularTemplesss(pageNo, 20);
+              }}
+              bgColor={colors.gray4}
+              placeHolder={'Search'}
+            />
+          </View>
+        </TopBarcard>
       </View>
       <>
         {loader ? (
@@ -116,7 +121,9 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                     data: filteredList,
                   });
                 }}>
-                <Text style={{color: colors.orangeColor, fontSize: 18}}>See all</Text>
+                <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                  See all
+                </Text>
               </TouchableOpacity>
             </View>
             <ScrollView>
