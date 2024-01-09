@@ -70,7 +70,7 @@ const ProfileMemberShips = ({ navigation, route }) => {
           data={data}
           txt={
             roleId === 'ROLE_ITEM_ADMIN'  || roleType === 'ROLE_ADMIN' 
-              ? `${membership?.length ? membership?.length : '0'} Memberships`
+              ? `${membership?.length ? membership?.length : '0'} Membership`
               : 'Join Now'
           }
           onPress={() =>

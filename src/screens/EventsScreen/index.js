@@ -73,7 +73,7 @@ const EventsScreen = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard txt={'Events'} menu={true} isBell={true} navigation={navigation} navMenu={navigation} >
-          <View style={{ ...styles.searchAndNew, marginHorizontal: admin || roleType === 'ROLE_ADMIN' ? 40 : 0 }}>
+          <View style={styles.searchContainers}>
             <SearchBar
               onTextChange={e => {
                 setSearchedText(e);

@@ -69,7 +69,8 @@ export const TopBarcard = ({
                                 fontWeight: 'bold',
                                 marginRight: isBell || roleType || roleId ? 0 : '35%',
                                 color: 'white',
-                                alignSelf: 'center'
+                                alignSelf: 'center',
+                                
                             }}>
                             {txt}
                         </Text>
