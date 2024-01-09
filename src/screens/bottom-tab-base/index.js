@@ -158,7 +158,7 @@ export default BottomTabBase = ({ navigation }) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.profile}
-            component={Profile}
+            component={GetProfileScreen}
             options={{
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={!focused ? styles.container : styles.focusedContainer}>

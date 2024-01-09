@@ -150,6 +150,7 @@ export const EventInput = ({
           multiline={true}
           onChangeText={onChangeText}
           editable={true}
+          keyboardType={keyboardType}
         />
       </View>
     </View>

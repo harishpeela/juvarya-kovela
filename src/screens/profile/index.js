@@ -137,6 +137,7 @@ const Profile = ({ navigation }) => {
     setLoader(true);
     console.log('loader first', loader)
     let result = await AdminTemples();
+    console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
       setLoader(false)

@@ -26,6 +26,7 @@ export const TopBarcard = ({
   navCreate,
   height,
 }) => {
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -131,7 +132,6 @@ export const TopBarcard = ({
                 <Text style={styles.joinText}>Create</Text>
               </TouchableOpacity>
             ))}
-
         </View>
       </View>
       {children}
