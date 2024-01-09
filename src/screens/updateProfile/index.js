@@ -130,7 +130,6 @@ const UpdateProfile = ({navigation}) => {
           <TopBarcard
             txt={'Update Profile'}
             back={true}
-            isBell={true}
             navigation={navigation}></TopBarcard>
         </View>
         {/* <View style={styles.profileContainer}>

@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
-    padding: 20,
+    // padding: 20,
   },
   heading: {
     color: colors.black,
@@ -16,23 +16,26 @@ export const styles = StyleSheet.create({
   detail: {
     color: colors.gray,
     fontFamily: fontFamily.popinLight,
-    fontSize: 10,
+    fontSize: 12,
+    textAlign: 'center',
   },
   textContainer: {
     marginTop: 20,
+    marginLeft: '20%',
   },
   backIcon: {
     alignSelf: 'flex-start',
-    padding: 10,
+    top: 22,
+    marginRight: '10%',
   },
   textInput: {
     borderWidth: 1,
     borderColor: colors.gray,
     borderRadius: 4,
-    height: 40,
-    width: 40,
+    height: 38,
+    width: 38,
     fontSize: 14,
-    margin: 5,
+    margin: 15,
     borderBottomWidth: 1,
     backgroundColor: colors.white,
   },
@@ -49,5 +52,8 @@ export const styles = StyleSheet.create({
   },
   black: {
     color: colors.black,
+  },
+  topContainer: {
+    flexDirection: 'row',
   },
 });
