@@ -31,7 +31,7 @@ export const TopBarcard = ({
                     style={{
                         flexDirection: 'row',
                         alignItems: 'center',
-                        justifyContent: isBell || roleType || roleId ? 'space-between' : 'space-evenly',
+                        justifyContent: isBell || roleType || roleId ? 'space-between' : 'space-around',
                         marginTop: '20%',
                         marginHorizontal: 20,
                     }}>
@@ -60,19 +60,20 @@ export const TopBarcard = ({
                             <MaterialIcons name='cancel' size={20} color={colors.orangeColor} />
                         </TouchableOpacity>
                     )}
-                    {txt && (
+                   
+                </View>
+                {txt && (
                         <Text
                             style={{
                                 fontSize: 20,
                                 fontWeight: 'bold',
-                                marginHorizontal: '20%',
+                                marginRight: isBell || roleType || roleId ? 0 : '35%',
                                 color: 'white',
                                 alignSelf: 'center'
                             }}>
                             {txt}
                         </Text>
                     )}
-                </View>
 
                 {isPlus && (
                     <TouchableOpacity style={{}} onPress={onPlusPress}>

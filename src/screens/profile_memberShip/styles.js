@@ -27,8 +27,6 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:20,
-    // marginHorizontal: '4%',
   },
   container1: {
     height: '100%',
