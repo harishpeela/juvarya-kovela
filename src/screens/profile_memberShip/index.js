@@ -19,6 +19,7 @@ import {
   BackHeaderNew,
   Loader,
   FollowersListCard3,
+  TopBarcard,
 } from '../../components';
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
@@ -102,7 +103,6 @@ const isDarkMode = useColorScheme() === 'dark';
               )}
             </TouchableOpacity>
           </View>
-
         </View>
         {loader ? (
           <View>
