@@ -208,7 +208,7 @@ const UpdateProfile = ({navigation}) => {
             onSubmit={(values, formikActions) => {
               const {dob, isRoleSelected, gotra} = values;
               console.log('values', values);
-              Update_Profile(values, formikActions);
+              ProfileUpdate(values, formikActions);
               if (
                 values.gender === isRoleSelected &&
                 values.gotra === gotra &&

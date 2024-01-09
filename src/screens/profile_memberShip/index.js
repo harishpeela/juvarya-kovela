@@ -19,6 +19,7 @@ import {
   BackHeaderNew,
   Loader,
   FollowersListCard3,
+  TopBarcard,
 } from '../../components';
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
@@ -73,33 +74,7 @@ const isDarkMode = useColorScheme() === 'dark';
     <SafeAreaView>
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="caret-back-circle"
-                size={36}
-                color={'#ffffff'}
-                style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
-              />
-            </TouchableOpacity>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20}}> Memberships</Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.profilememberships);
-              }}>
-              {roleId || roleType  && (
-                <TouchableOpacity onPress={() => {
-                  navigation.navigate(allTexts.screenNames.invitationScreen, {
-                    roleId: roleId,
-                  })
-                }}>
-                  {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
-                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white }}>Invite</Text>
-                </TouchableOpacity>
-              )}
-            </TouchableOpacity>
-          </View>
-
+         <TopBarcard back={true}  txt={'Members List'} navigation={navigation} />
         </View>
         {loader ? (
           <View>

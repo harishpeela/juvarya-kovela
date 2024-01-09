@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   View,
@@ -11,11 +11,11 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from 'react-native';
-import {styles} from './styles';
-import {allTexts, colors} from '../../common';
-import {PopularTemples} from '../../utils/api';
-import {Loader} from '../../components';
-const SeeAll = ({navigation}) => {
+import { styles } from './styles';
+import { allTexts, colors } from '../../common';
+import { PopularTemples } from '../../utils/api';
+import { Loader } from '../../components';
+const SeeAll = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ const SeeAll = ({navigation}) => {
 
   const renderLoder = () => {
     return !isLoading ? (
-      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
+      <Text style={{ alignSelf: 'center', marginBottom: '5%', color: 'black' }}>
         {' '}
         {/* No Items to display */}{''}
       </Text>
@@ -55,33 +55,33 @@ const SeeAll = ({navigation}) => {
       PopularSeeAllTemples(apiPageNo, 20);
     }
   }, []);
-  const onSelect = data => {};
+  const onSelect = data => { };
   return (
-    <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
+    <View style={{ flex: 1, backgroundColor: isDarkMode ? 'white' : 'white' }}>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-        <Ionicons
-        name="caret-back-circle"
-        size={36}
-        color={'#ffffff'}
-        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
-      />
+          <Ionicons
+            name="caret-back-circle"
+            size={36}
+            color={'#ffffff'}
+            style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
+          />
         </TouchableOpacity>
-        <Text style={styles.headingText}>{'All temples'}</Text>
+        <Text style={styles.headingText}>{'All Temples'}</Text>
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
           <Loader color={colors.orangeColor} />
         </View>
       ) : (
-        popTemples?.length >= 0 && (
+        !popTemples?.length === 0 ? (
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={{margin: '5%'}}>
+            style={{ margin: '5%' }}>
             <FlatList
               data={popTemples}
-              keyExtractor={({item, index}) => index}
-              renderItem={({item, index}) => (
+              keyExtractor={({ item, index }) => index}
+              renderItem={({ item, index }) => (
                 <TouchableOpacity
                   style={styles.card}
                   onPress={() =>
@@ -93,14 +93,14 @@ const SeeAll = ({navigation}) => {
                       },
                     )
                   }>
-                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
-                      source={{uri: item.logo}}
-                      style={{height: 70, width: 70, borderRadius: 70 / 2}}
+                      source={{ uri: item.logo }}
+                      style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
                     />
-                    <View style={{marginLeft: 10}}>
-                      <Text style={{color : isDarkMode ? 'black' : 'black'}}>{item.name}</Text>
-                      <Text numberOfLines={2} style={{maxWidth: '90%', color: isDarkMode ? 'black' : 'black'}}>
+                    <View style={{ marginLeft: 10 }}>
+                      <Text style={{ color: isDarkMode ? 'black' : 'black' }}>{item.name}</Text>
+                      <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
                         {item.desciption}{' '}
                       </Text>
                     </View>
@@ -112,6 +112,11 @@ const SeeAll = ({navigation}) => {
               onEndReachedThreshold={0.5}
             />
           </ScrollView>
+        ) : (
+          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+            <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}> No items to display</Text>
+
+          </View>
         )
       )}
     </View>

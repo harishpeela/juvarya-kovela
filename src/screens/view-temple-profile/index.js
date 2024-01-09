@@ -66,12 +66,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -338,7 +338,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {'(15.3k Ratings)'}
             </Text>
             <View style={{marginTop: 10}}>
-              {!data?.seasonal ? (
+              {data?.seasonal ? (
                 <TouchableOpacity style={styles.seasonal} onPress={() => alert('under development')}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
