@@ -131,6 +131,7 @@ export const TopBarcard = ({
                 <Text style={styles.joinText}>Create</Text>
               </TouchableOpacity>
             ))}
+
         </View>
       </View>
       {children}

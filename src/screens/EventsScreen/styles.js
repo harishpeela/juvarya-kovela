@@ -16,18 +16,16 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         padding:10
     },
-    searchContainer:{
+    searchContainers: {
       margin: 5,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
+      marginTop: -20,
+      width:'80%',
+      marginLeft:15
     },
-    searchContainer: {
-      margin: 5,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-    },
+   
     updateProfileTopCard:{
       height:100,
       
