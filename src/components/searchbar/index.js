@@ -26,10 +26,10 @@ export const SearchBar = ({
         // eslint-disable-next-line no-sparse-arrays
         style={[
           styles.searchContainer,
-          {backgroundColor: bgColor ? bgColor : colors.gray4},
+          {backgroundColor: bgColor ? bgColor : colors.white},
           {borderWidth: brWidth ? brWidth : 0},
           {borderColor: brColor ? brColor : colors.white},
-          {height: srHeight ? srHeight : 50},
+          {height: srHeight ? srHeight : 30},
         ]}>
         <View style={styles.iconContainer}>
           <Icon name="search1" size={20} color={colors.gray} />

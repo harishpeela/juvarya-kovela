@@ -48,7 +48,6 @@ const EventsScreen = ({navigation}) => {
     }
   };
   const TempleAdmins = async () => {
-    console.log('admin temples api starting');
     let result = await AdminTemples();
     if (result?.status === 200) {
       setAdmin(result?.data);
