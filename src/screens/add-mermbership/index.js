@@ -11,6 +11,7 @@ import {
   useColorScheme,
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {BackgroundImage, BackHeaderNew} from '../../components';
 import {styles} from './styles';
 import Snackbar from 'react-native-snackbar';
@@ -89,13 +90,25 @@ const AddMemebershipDetails = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{marginHorizontal: '5%', marginVertical: '10%'}}>
-        <BackHeaderNew
+      <View >
+        {/* <BackHeaderNew
           txt={'Add Membership'}
           onPress={() => navigation.goBack()}
           isArrow={true}
-        />
-        <View style={{marginTop: '35%'}}>
+        /> */}
+        <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{'Add Membership'}</Text>
+      </View>
+        <View style={{marginTop: '35%',padding:'5%'}}>
           <SelectDropdown
             data={donationType}
             defaultValue={memType}

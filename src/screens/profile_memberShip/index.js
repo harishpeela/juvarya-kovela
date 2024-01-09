@@ -74,7 +74,35 @@ const isDarkMode = useColorScheme() === 'dark';
     <SafeAreaView>
       <View style={styles.mainContainer}>
         <View style={styles.header}>
-         <TopBarcard back={true}  txt={'Members List'} navigation={navigation} />
+          <View style={styles.headerContainer}>
+            <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+              <Ionicons
+                name="caret-back-circle"
+                size={36}
+                color={'#ffffff'}
+                style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
+              />
+            </TouchableOpacity>
+            <View>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20,paddingRight:'10%'}}> Memberships</Text>
+            </View>
+
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.profilememberships);
+              }}>
+              {roleId || roleType  && (
+                <TouchableOpacity onPress={() => {
+                  navigation.navigate(allTexts.screenNames.invitationScreen, {
+                    roleId: roleId,
+                  })
+                }}>
+                  {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
+                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white }}>Invite</Text>
+                </TouchableOpacity>
+              )}
+            </TouchableOpacity>
+          </View>
         </View>
         {loader ? (
           <View>
