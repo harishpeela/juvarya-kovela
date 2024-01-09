@@ -3,7 +3,7 @@ export const Data = d => {
     name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
     description: d?.jtProfileDTO?.desciption
       ? d?.jtProfileDTO?.desciption
-      : d?.desciption || 'no description',
+      : d?.description || 'no description',
     url: d?.url ? d?.url : '',
     eventsEnabled: d?.jtProfileDTO?.eventsEnabled
       ? d?.jtProfileDTO?.eventsEnabled

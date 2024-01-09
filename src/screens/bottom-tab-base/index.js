@@ -97,7 +97,7 @@ export default BottomTabBase = ({ navigation }) => {
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={!focused ? styles.container : styles.focusedContainer}>
                    {focused && (
-                      <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
+                      <Entypo name='dot-single' size={15} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FeatherIcon name="search" color={color} size={focused ? 28 : 23} />
                   <Text style={{ color: color }}>Search</Text>
