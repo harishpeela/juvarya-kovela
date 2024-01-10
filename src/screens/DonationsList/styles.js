@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
   searchContainer: {
     width: '82%',
     height: '100%',
+    marginTop: -15
   },
   sortContainer: {
     display: 'flex',
@@ -63,6 +64,7 @@ export const styles = StyleSheet.create({
   },
   noDataText: {
     fontSize: fontSize.xlarge,
-    color: colors.black,
+    color: colors.orangeColor,
+    fontWeight: 'bold'
   },
 });

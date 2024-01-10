@@ -11,7 +11,6 @@ import {styles} from './styles';
 import {allTexts} from '../../common';
 
 const FollowersListCard3 = ({data, navigation}) => {
-
   return (
     <View>
       <FlatList
@@ -26,16 +25,14 @@ const FollowersListCard3 = ({data, navigation}) => {
                 data: item,
               }),
                 console.log('item', item);
-            }}
-            
-            >
+            }}>
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
                 <Image
                   source={{
                     uri: item?.loggedInUser?.customerProfileUrl
                       ? item?.loggedInUser?.customerProfileUrl
-                      : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+                      : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                   }}
                   style={styles.image}
                 />

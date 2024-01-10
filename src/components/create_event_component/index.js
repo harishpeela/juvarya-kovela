@@ -13,7 +13,7 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {launchImageLibrary} from 'react-native-image-picker';
 import Icon from 'react-native-vector-icons/AntDesign';
-
+import { CreateEvent } from '../../utils/api';
 export const Create_Event = ({data, navigation}) => {
   const {
     headings: {
@@ -32,7 +32,6 @@ export const Create_Event = ({data, navigation}) => {
   const [isCross, setIsCross] = useState(true);
   const [description, setDescription] = useState('');
   const [titleName, setTitleName] = useState('');
-  const [city, setCity] = useState('');
   const [fromDate, setFromDate] = useState('');
   const [toDate, setToDate] = useState('');
 
@@ -72,33 +71,18 @@ export const Create_Event = ({data, navigation}) => {
     {label: 'more days', value: 1},
   ];
   const CreateEvent = async () => {
-    let Token = await getAuthTokenDetails();
-    console.log(Token, 'token');
     let img = getImageObj(image);
     try {
-      var myHeaders = new Headers();
-      myHeaders.append('Authorization', Token);
-
       var formdata = new FormData();
       formdata.append('name', titleName);
       formdata.append('profileId', '1');
       formdata.append('files', img);
       formdata.append('eventType', 'EVENT');
       formdata.append('description', description);
-
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow',
-      };
-
-      fetch('https://kovela.app/events/jtevent/save', requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          console.log('result', result?.status, result);
+      let result = await CreateEvent(formdata);
+      console.log('create event result', result?.data);
           if (result) {
-            Alert.alert('Success', result?.message, [
+            Alert.alert('Success', result?.data?.message, [
               {
                 text: 'Ok',
                 onPress: () =>
@@ -110,8 +94,6 @@ export const Create_Event = ({data, navigation}) => {
           } else {
             console.log('1');
           }
-        })
-        .catch(error => console.log('error', error));
     } catch (error) {
       console.log(error);
     }

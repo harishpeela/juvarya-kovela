@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
         color: colors.black,
         paddingLeft:10
       },
-      rs: {color: colors.black, fontWeight: 'bold', fontSize: 16},
+      rs: {color: colors.black, fontWeight: 'bold', fontSize: 16, paddingLeft:10
+    },
      
 })

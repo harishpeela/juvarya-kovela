@@ -24,6 +24,7 @@ const SeeAll = ({ navigation }) => {
     setIsLoading(true);
     try {
       let result = await PopularTemples(pgNo, pgToNo);
+      // console.log('see all', result?.data);
       if (result.status === 200) {
         let PopData = result?.data?.data;
         setPopTemples([...popTemples, ...PopData]);
@@ -55,7 +56,7 @@ const SeeAll = ({ navigation }) => {
       PopularSeeAllTemples(apiPageNo, 20);
     }
   }, []);
-  const onSelect = data => { };
+  console.log('pop see all temples', popTemples);
   return (
     <View style={{ flex: 1, backgroundColor: isDarkMode ? 'white' : 'white' }}>
       <View style={styles.headerContainer}>
@@ -74,7 +75,7 @@ const SeeAll = ({ navigation }) => {
           <Loader color={colors.orangeColor} />
         </View>
       ) : (
-        !popTemples?.length === 0 ? (
+        popTemples?.length >= 0 ? (
           <ScrollView
             showsVerticalScrollIndicator={false}
             style={{ margin: '5%' }}>
@@ -101,7 +102,7 @@ const SeeAll = ({ navigation }) => {
                     <View style={{ marginLeft: 10 }}>
                       <Text style={{ color: isDarkMode ? 'black' : 'black' }}>{item.name}</Text>
                       <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
-                        {item.desciption}{' '}
+                        {item.description}{' '}
                       </Text>
                     </View>
                   </View>
@@ -114,7 +115,7 @@ const SeeAll = ({ navigation }) => {
           </ScrollView>
         ) : (
           <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-            <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}> No items to display</Text>
+            <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}> No items to displayy</Text>
 
           </View>
         )

@@ -14,6 +14,7 @@ import {
   Pressable,
   Image,
   navBack,
+
 } from 'react-native';
 import {
   Loader,
@@ -23,15 +24,16 @@ import {
   BackgroundImageFlower,
   BackHeaderNew,
   EventCard,
+
 } from '../../components';
-import {styles} from './styles';
+import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import React, {useState, useEffect, useContext} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {allTexts} from '../../common';
+import { allTexts } from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Data} from '../home-feed/formateDetails';
+import { Data } from '../home-feed/formateDetails';
 import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
@@ -41,7 +43,7 @@ import {
   EventList,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import {ProfileSeconTab, ProfileFourthTab} from '../../components';
+import { ProfileSeconTab, ProfileFourthTab } from '../../components';
 import {
   CommunityComp,
   FollowersComp,
@@ -50,28 +52,28 @@ import {
   FolloUnfollowComp,
   DirectionsTabComp,
   ProfileTimingTabs,
-  Danation_Add_Card,
+  Danation_Add_Card
 } from '../../components';
-import {ProfileImage} from '../../components';
-import {colors} from '../../common';
-import {PostsComp} from '../../components/profilecompnew/postsComp';
-import {SearchTempleRoleWithId} from '../../utils/api';
+import { ProfileImage } from '../../components';
+import { colors } from '../../common';
+import { PostsComp } from '../../components/profilecompnew/postsComp';
+import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {style} from '../newprofile/styles';
+import { style } from '../newprofile/styles';
 import EventsScreen from '../EventsScreen';
 import UpdatePassword from '../update-password';
 
-const ViewTempleProfile = ({route, navigation}) => {
+const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
-  const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  const { userDetails } = useContext(ApplicationContext);
+  const { data } = route.params || {};
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
@@ -161,22 +163,18 @@ const ViewTempleProfile = ({route, navigation}) => {
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
-      console.log(
-        'result of follow temple in view temple profile',
-        results?.data,
-      );
+      console.log('result of follow temple in view temple profile', results?.data);
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
         FollowingCount();
         ToastAndroid.show(
-          `Successfully you are ${
-            !isFollow ? ' Following' : 'unFollwing'
+          `Successfully you are ${!isFollow ? ' Following' : 'unFollwing'
           } the temple !`,
           ToastAndroid.SHORT,
         );
       } else {
-        alert('some thing went wrong');
+        alert('some thing went wrong')
       }
     } catch (error) {
       console.log('error in folow temples api in view profile page', error);
@@ -205,7 +203,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
-        ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
+        ?.map(({ mediaList, id, jtProfile }) => ({ mediaList, id, jtProfile }));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
@@ -276,7 +274,7 @@ const ViewTempleProfile = ({route, navigation}) => {
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
-                style={{backgroundColor: 'white', borderRadius: 28 / 2}}
+                style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
                   navigation.goBack();
                   route?.params?.onSelect({
@@ -289,22 +287,20 @@ const ViewTempleProfile = ({route, navigation}) => {
                 /> */}
                 {/* {back && ( */}
 
-                <TouchableOpacity
-                  style={styles.iconContainer}
-                  onPress={() => {
-                    console.log(
-                      'isfollow',
-                      isFollow,
-                      'second',
-                      trfData?.jtProfile,
-                    );
-                    navigation.goBack();
-                    route?.params?.onSelect({
-                      selected: isFollow,
-                      selectedId: !isFollow ? trfData?.jtProfile : '',
-                    });
-                  }}>
-                  <Ionicons name="caret-back" size={25} color={'#FFA001'} />
+                <TouchableOpacity style={styles.iconContainer} onPress={() => {
+                  console.log('isfollow', isFollow, 'second', trfData?.jtProfile);
+                  navigation.goBack();
+                  route?.params?.onSelect({
+                    selected: isFollow,
+                    selectedId: !isFollow ? trfData?.jtProfile : '',
+                  });
+                }} >
+                  <Ionicons
+                    name="caret-back"
+                    size={25}
+                    color={'#FFA001'}
+
+                  />
                 </TouchableOpacity>
 
                 {/* )} */}
@@ -317,7 +313,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                     color={isDarkMode ? 'black' : 'black'}
                   />
                   <View style={styles.notificationNum}>
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
+                    <Text style={{ color: 'white', fontWeight: 'bold' }}>2</Text>
                   </View>
                 </TouchableOpacity>
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
@@ -331,7 +327,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 )}
               </View>
             </View>
-            <View style={{alignSelf: 'center', marginTop: -15}}>
+            <View style={{ alignSelf: 'center', marginTop: -15 }}>
               <ProfileImage profileImg={trfData} />
             </View>
             <Text style={styles.titleHeader}>
@@ -343,18 +339,16 @@ const ViewTempleProfile = ({route, navigation}) => {
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
             </Text>
-            <View style={{marginTop: 10}}>
+            <View style={{ marginTop: 10 }}>
               {data?.seasonal ? (
-                <TouchableOpacity
-                  style={styles.seasonal}
-                  onPress={() => navigation.navigate('FollowersMembership')}>
+                <TouchableOpacity style={styles.seasonal} onPress={() => navigation.navigate('FollowersMembership')}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs data={data} />
+                <ProfileTimingTabs />
               )}
             </View>
-            <View style={{marginLeft: 15}}>
+            <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
@@ -403,7 +397,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
-                  role={roleId === 'ROLE_ITEM_ADMIN'}
+                role={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
                   onPress={() => {
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
@@ -424,14 +418,18 @@ const ViewTempleProfile = ({route, navigation}) => {
                   /> */}
               </View>
               {/* </View> */}
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(allTexts?.screenNames?.donationslist, {
-                    data: trfData,
-                  })
-                }>
-                <Danation_Add_Card roleId={roleId} />
-              </TouchableOpacity>
+              {/* <TouchableOpacity  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })
+                  }> */}
+                <Danation_Add_Card onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })}
+                  roleId={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
+                />
+              {/* </TouchableOpacity> */}
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
@@ -462,9 +460,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <FlatList
                   numColumns={3}
                   data={postImages}
-                  keyExtractor={({item, index}) => index}
+                  keyExtractor={({ item, index }) => index}
                   style={styles.ImagesContainer}
-                  renderItem={({item, index}) => (
+                  renderItem={({ item, index }) => (
                     <TempleProfile_PostsCard nav={navigation} item={item} />
                   )}
                 />
@@ -489,7 +487,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               showsVerticalScrollIndicator={false}
               style={styles.contentDisplay}>
               {eventsLoader && (
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Loader color={colors.orangeColor} size={30} />
                 </View>
               )}
@@ -521,28 +519,23 @@ const ViewTempleProfile = ({route, navigation}) => {
           <View style={styles.modalView}>
             <View style={styles.line} />
 
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.createfeed, {
-                  data: data,
-                })
-              }
-              style={styles.modalContent}>
+            <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.createfeed, {
+              data: data,
+            })} style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
               <Text style={styles.modalContentText}>Create a Post</Text>
             </TouchableOpacity>
-            {/* <View style={styles.modalContent}>
+            <View style={styles.modalContent}>
               <Icon color={colors.black} name="people-outline" size={22} />
 
               <Text style={styles.modalContentText}>User groups</Text>
-            </View> */}
+            </View>
             <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.profilememberships, {
-                  trfdata: trfData,
-                  roleId: roleId,
-                });
-              }}>
+              onPress={() => alert('page under development')
+                // navigation.navigate(allTexts.screenNames.profilemembership, {
+                //   id: trfData?.jtProfile,
+                // })
+              }>
               <View style={styles.modalContent}>
                 <MaterialIcons
                   color={colors.black}
