@@ -55,7 +55,6 @@ export const styles = StyleSheet.create({
     },
     flatListStyle:{
         justifyContent:'space-between',
-        alignItems:'center',
     },
     eventContainer:{
         padding:24,
