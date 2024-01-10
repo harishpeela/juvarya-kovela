@@ -64,6 +64,7 @@ export const styles = StyleSheet.create({
   },
   noDataText: {
     fontSize: fontSize.xlarge,
-    color: colors.black,
+    color: colors.orangeColor,
+    fontWeight: 'bold'
   },
 });
