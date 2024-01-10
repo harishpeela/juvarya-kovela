@@ -87,7 +87,7 @@ export const PopularTemplesVerticalList = ({
         source={{
           uri: post?.logo
             ? post?.logo
-            : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686296312205image.jpg',
+            : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
         }}
         style={{height: '100%', width: '100%', borderRadius: 60}}
         imageStyle={{
