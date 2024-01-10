@@ -15,6 +15,7 @@ import {
   BackHeaderNew,
   InputField,
   PrimaryButton,
+  TopBarcard,
 } from '../../components';
 import { Create_Feed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
@@ -25,9 +26,10 @@ const CreateFeed = ({route, navigation}) => {
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
-  const [titleName, setTitleName] = useState('');
-  const [description, setDescription] = useState('');
-  const [city, setCity] = useState('');
+  const [imageProp, setImageProp] = useState('');
+
+  console.log('data', data);
+
   const [trfData, setTrfData] = useState();
   const Valid = id => {
     if (image === null) {
@@ -98,6 +100,7 @@ const CreateFeed = ({route, navigation}) => {
             // }
             setImage(res.assets);
             setimageUploaded(false);
+            setImageProp(res.assets);
           } else {
             console.log(res.errorMessage);
           }
@@ -119,21 +122,34 @@ const CreateFeed = ({route, navigation}) => {
       return imageObj;
     });
   };
+  // useEffect(() => {
+  //   let result = Data(data);
+  //   if (result) {
+  //     setTrfData(result);
+  //   } else {
+  //     console.log('nope');
+  //   }
+  // }, [data]);
+
   useEffect(() => {
-    let result = Data(data);
-    if (result) {
-      setTrfData(result);
-    } else {
-      console.log('nope');
+    if (image === null) {
+      uploadPhoto();
     }
-  }, [data]);
+  });
+
+  const imageSending = () => {
+    setImageProp(image);
+    navigation.navigate(allTexts.screenNames.createFeedDescription, {
+      imageProp,
+      data,
+    });
+  };
+  console.log('imageProp', image);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{marginHorizontal: 30, marginTop: 30}}>
-        <BackHeaderNew
-          txt={'Create Feed'}
-          onPress={() => navigation.goBack()}
-        />
+      <View style={{minHeight: '15%'}}>
+        <TopBarcard back={true} txt={'Upload Photo'} navigation={navigation} />
       </View>
       <View style={{margin: 30}}>
         <View style={styles.uploadContainer}>
@@ -156,52 +172,21 @@ const CreateFeed = ({route, navigation}) => {
               />
             </View>
           ) : (
-            <TouchableOpacity
-              style={styles.uploadPic}
-              onPress={() => {
-                uploadPhoto();
-              }}>
+            <TouchableOpacity style={styles.uploadPic}>
               <View style={styles.profileImage}>
                 <Icon name="camera" size={70} color={colors.orangeColor} />
               </View>
             </TouchableOpacity>
           )}
         </View>
-        <View>
-          <InputField
-            value={titleName}
-            title={'Name'}
-            titleColor={colors.orangeColor}
-            placeholder={'feed name'}
-            // error={touched.tampleName && errors.tampleName}
-            // onBlur={handleBlur('tampleName')}
-            setState={e => setTitleName(e)}
-          />
-          <InputField
-            value={description}
-            title={'description'}
-            titleColor={colors.orangeColor}
-            placeholder={'description'}
-            // error={touched.tampleName && errors.tampleName}
-            // onBlur={handleBlur('tampleName')}
-            setState={e => setDescription(e)}
-          />
-          <InputField
-            value={city}
-            title={'City'}
-            titleColor={colors.orangeColor}
-            placeholder={'description'}
-            // error={touched.tampleName && errors.tampleName}
-            // onBlur={handleBlur('tampleName')}
-            setState={e => setCity(e)}
-          />
-        </View>
-        <View style={{marginHorizontal: 90, marginTop: 40}}>
+
+        <View style={{marginHorizontal: 70, marginBottom: 20}}>
           <PrimaryButton
-            text={'submit'}
+            text={'Next'}
             bgColor={colors.orangeColor}
             loading={loading}
-            onPress={() => Valid(trfData?.jtProfile)}
+            // onPress={() => Valid(trfData?.jtProfile)}
+            onPress={() => imageSending()}
           />
         </View>
       </View>

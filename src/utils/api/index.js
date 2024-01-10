@@ -48,6 +48,8 @@ const endpoints = {
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
+  MEMBERS_LIST: 'jtprofile/find/users',
+  TEMPLE_CREW:'/jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
@@ -143,6 +145,17 @@ export const AddressUpdate = async data => {
 export const PopularTemples = async () => {
   try {
     let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
+      // retry: 5,
+      // retryDelay: 3000,
+    });
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+export const NewTempleCrew = async (id) => {
+  try {
+    let result = await axiosNewData.get(`${endpoints.TEMPLE_CREW}?profileId=${id}`, {
       // retry: 5,
       // retryDelay: 3000,
     });
@@ -379,6 +392,16 @@ export const MemberShipCount = async id => {
     return result;
   } catch (error) {
     console.log('error', error);
+  }
+};
+export const MembersList = async (id) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MEMBERS_LIST}?profileId=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in members list', error);
   }
 };
 export const MemberShipDetails = async (pgNo, pgSize) => {

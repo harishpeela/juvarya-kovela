@@ -14,7 +14,6 @@ import {
   Pressable,
   Image,
   navBack,
-
 } from 'react-native';
 import {
   Loader,
@@ -24,7 +23,6 @@ import {
   BackgroundImageFlower,
   BackHeaderNew,
   EventCard,
-
 } from '../../components';
 import { styles } from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -41,6 +39,7 @@ import {
   GetPosts,
   MemberShipCount,
   EventList,
+  getDonationsList,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import { ProfileSeconTab, ProfileFourthTab } from '../../components';
@@ -52,7 +51,7 @@ import {
   FolloUnfollowComp,
   DirectionsTabComp,
   ProfileTimingTabs,
-  Danation_Add_Card
+  Danation_Add_Card,
 } from '../../components';
 import { ProfileImage } from '../../components';
 import { colors } from '../../common';
@@ -74,7 +73,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
   //   // '<==============',
   //   // userDetails,
   // );
+  console.log('data', data);;
   const [loader, setloader] = useState(false);
+  const [donationLoader,setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -92,6 +93,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [isModal, setIsModal] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [roleType, setRoleType] = useState();
+  const [donationValue, setDonationValue] = useState([]);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -121,6 +123,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
         Posts(result?.jtProfile);
         TempleRoleSearchWithId(result?.jtProfile);
         followingCount(result?.jtProfile);
+        dontationValue(result.jtProfile);
         MemberShip(result?.jtProfile);
       } else {
       }
@@ -163,7 +166,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
-      console.log('result of follow temple in view temple profile', results?.data);
+      console.log(
+        'result of follow temple in view temple profile',
+        results?.data,
+      );
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -174,7 +180,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
           ToastAndroid.SHORT,
         );
       } else {
-        alert('some thing went wrong')
+        alert('some thing went wrong');
       }
     } catch (error) {
       console.log('error in folow temples api in view profile page', error);
@@ -261,6 +267,21 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
+  const dontationValue = async id => {
+    console.log(id,'kkk')
+    setDonationLoader(true)
+    let result = await getDonationsList(id, 0, 20);
+    console.log('hhh', result.data);
+    if (result) {
+      setDonationValue(result?.data?.data);
+      setDonationLoader(false)
+    
+    }
+    else{
+      setDonationLoader(false)
+    }
+  };
+
   return (
     <ScrollView
       style={{
@@ -287,20 +308,22 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 /> */}
                 {/* {back && ( */}
 
-                <TouchableOpacity style={styles.iconContainer} onPress={() => {
-                  console.log('isfollow', isFollow, 'second', trfData?.jtProfile);
-                  navigation.goBack();
-                  route?.params?.onSelect({
-                    selected: isFollow,
-                    selectedId: !isFollow ? trfData?.jtProfile : '',
-                  });
-                }} >
-                  <Ionicons
-                    name="caret-back"
-                    size={25}
-                    color={'#FFA001'}
-
-                  />
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  onPress={() => {
+                    console.log(
+                      'isfollow',
+                      isFollow,
+                      'second',
+                      trfData?.jtProfile,
+                    );
+                    navigation.goBack();
+                    route?.params?.onSelect({
+                      selected: isFollow,
+                      selectedId: !isFollow ? trfData?.jtProfile : '',
+                    });
+                  }}>
+                  <Ionicons name="caret-back" size={25} color={'#FFA001'} />
                 </TouchableOpacity>
 
                 {/* )} */}
@@ -341,7 +364,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
             </Text>
             <View style={{ marginTop: 10 }}>
               {data?.seasonal ? (
-                <TouchableOpacity style={styles.seasonal} onPress={() => navigation.navigate('FollowersMembership')}>
+                <TouchableOpacity
+                  style={styles.seasonal}
+                  onPress={() => navigation.navigate('TempleCrew')}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
@@ -397,7 +422,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
-                role={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
+                  role={
+                    roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                  }
                   onPress={() => {
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
@@ -423,12 +450,33 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       data: trfData,
                     })
                   }> */}
-                <Danation_Add_Card onPress={() =>
+              {donationLoader ? (
+                <Loader size={'small'} color={colors.orangeColor} />
+              ):(
+                donationValue?.length  >0?  (
+                  <Danation_Add_Card
+                  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })
+                    
+                  }
+              roleId={
+                roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+              }
+                />
+                ):(
+                  ""
+                )
+              )}
+              
+              
+              {/* <Danation_Add_Card onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
                       data: trfData,
                     })}
                   roleId={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
-                />
+                /> */}
               {/* </TouchableOpacity> */}
               <ProfileFourthTab
                 currentIndex={currentIndex}
@@ -519,9 +567,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
           <View style={styles.modalView}>
             <View style={styles.line} />
 
-            <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.createfeed, {
-              data: data,
-            })} style={styles.modalContent}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.createfeed, {
+                  data: data,
+                })
+              }
+              style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
               <Text style={styles.modalContentText}>Create a Post</Text>
             </TouchableOpacity>
@@ -531,7 +583,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <Text style={styles.modalContentText}>User groups</Text>
             </View>
             <TouchableOpacity
-              onPress={() => alert('page under development')
+              onPress={
+                () => alert('page under development')
                 // navigation.navigate(allTexts.screenNames.profilemembership, {
                 //   id: trfData?.jtProfile,
                 // })

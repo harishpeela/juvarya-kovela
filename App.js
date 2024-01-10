@@ -49,6 +49,8 @@ import {
   MemberShipDetails,
   UserInfo,
   EventDetailsNew,
+  TempleCrew,
+  createFeedDescription,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -61,6 +63,7 @@ import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
 import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
+import CreateFeedDescription from './src/screens/createFeedDiscription/CreateFeedDescription';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -115,6 +118,8 @@ const App = () => {
       membershipdetails,
       // userinfo,
       eventdetailsnew,
+      templecrew,
+      createFeedDescription,
     },
   } = allTexts;
   useEffect(() => {
@@ -142,7 +147,7 @@ const App = () => {
             headerShown: false,
           }}
         /> */}
-        
+
         <Stack.Screen
           name={signin}
           component={Signin}
@@ -150,6 +155,7 @@ const App = () => {
             headerShown: false,
           }}
         />
+         
         <Stack.Screen
           name={signup}
           component={SignUp}
@@ -190,6 +196,15 @@ const App = () => {
           options={{
             headerShown: false,
           }}
+          
+        />
+        <Stack.Screen
+          name={templecrew}
+          component={TempleCrew}
+          options={{
+            headerShown: false,
+          }}
+          
         />
         <Stack.Screen
           name={mySavedPosts}
@@ -481,6 +496,13 @@ const App = () => {
         <Stack.Screen
           name={invitationScreen}
           component={InvitationScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={createFeedDescription}
+          component={CreateFeedDescription}
           options={{
             headerShown: false,
           }}
