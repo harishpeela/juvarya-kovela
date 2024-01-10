@@ -84,7 +84,7 @@ const isDarkMode = useColorScheme() === 'dark';
               />
             </TouchableOpacity>
             <View>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20,paddingRight:'10%'}}> Memberships</Text>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20,paddingRight:'10%'}}> Members List</Text>
             </View>
 
             <TouchableOpacity

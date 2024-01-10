@@ -43,7 +43,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
           {
             text: 'Ok',
             onPress: () =>
-              navigation.navigate(allTexts.screenNames.profilemembership, {
+              navigation.navigate(allTexts.tabNames.search, {
                 roleId: roleId,
               }),
           },
