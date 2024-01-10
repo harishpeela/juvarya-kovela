@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     marginHorizontal: 10,    
+    
   },
 
   field: {
@@ -18,7 +19,7 @@ export const styles = StyleSheet.create({
     height: 40,
   },
   iconContainer: {
-    // padding: 5,
+    paddingLeft:8,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',

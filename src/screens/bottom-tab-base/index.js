@@ -85,9 +85,9 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <MaterialIcons name="event" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color }}>Events</Text>
+                  <Text style={{ color: color,fontSize:14 }}>Events</Text>
                 </View>
-              ),
+              )
             }}
           />
           <Tab.Screen
@@ -97,10 +97,10 @@ export default BottomTabBase = ({ navigation }) => {
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={!focused ? styles.container : styles.focusedContainer}>
                    {focused && (
-                      <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
+                      <Entypo name='dot-single' size={15} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FeatherIcon name="search" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color }}>Search</Text>
+                  <Text style={{ color: color,fontSize:14 }}>Search</Text>
                 </View>
               ),
             }}
@@ -150,15 +150,15 @@ export default BottomTabBase = ({ navigation }) => {
                    {focused && (
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
-                  <FontistoIcon name="heart-alt" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color }}>Favorite</Text>
+                  <FontistoIcon name="heart-alt" color={color} size={focused ? 22 : 23} />
+                  <Text style={{ color: color ,fontSize:14}}>Favorites</Text>
                 </View>
               ),
             }}
           />
           <Tab.Screen
             name={allTexts.tabNames.profile}
-            component={Profile}
+            component={GetProfileScreen}
             options={{
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={!focused ? styles.container : styles.focusedContainer}>
@@ -166,7 +166,7 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FeatherIcon name="user" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color }}>Profile</Text>
+                  <Text style={{ color: color,fontSize:14 }}>Profile</Text>
                 </View>
               ),
             }}

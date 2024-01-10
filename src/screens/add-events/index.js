@@ -12,9 +12,9 @@ import {
 } from '../../components';
 import { styles } from './styles';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import { allTexts, colors } from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { Save_Event } from '../../utils/api';
 const AddEvents = ({ navigation, route }) => {
   console.log('events screen')
   const [date, setDate] = useState(new Date());
@@ -40,8 +40,6 @@ const isDarkMode = useColorScheme() === 'dark';
       setAE(true);
     }
     else if (image, description, eventName, address) {
-      var myHeaders = new Headers();
-      myHeaders.append("Authorization", Token);
       var formdata = new FormData();
       formdata.append("name", eventName);
       formdata.append("profileId", 1);
@@ -56,11 +54,9 @@ const isDarkMode = useColorScheme() === 'dark';
         body: formdata,
         redirect: 'follow'
       };
-
-      fetch("https://kovela.app/events/jtevent/save", requestOptions)
-        .then(response => response.json())
-        .then(result => {
-          if (result?.message === "save Event") {
+      let result = await Save_Event(formdata);
+      console.log('result of save events', result?.data);
+          if (result?.data?.message === "save Event") {
             Alert.alert('Success', `Event created successfully`, [
               {
                 text: 'Ok',
@@ -69,8 +65,6 @@ const isDarkMode = useColorScheme() === 'dark';
               },
             ]);
           }
-        })
-        .catch(error => console.log('error', error));
     } else {
       alert('some thing went wrong try again');
       console.log('error')

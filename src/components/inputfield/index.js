@@ -43,6 +43,7 @@ export const InputField = ({
             onChangeText={val => setState(val)}
             style={styles.inputText}
             multiline={true}
+            autoCapitalize='none'
             {...props}
           />
         </View>
@@ -129,6 +130,7 @@ export const PasswordField = ({
             onChangeText={val => setState(val)}
             style={styles.inputText}
             secureTextEntry={isShowPassword}
+            autoCapitalize='none'
             {...props}
           />
           {value?.length > 0 && (

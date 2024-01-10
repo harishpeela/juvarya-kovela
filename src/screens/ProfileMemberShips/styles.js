@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-   
+    
   },
   container1: {
     // borderWidth: 2,
@@ -124,6 +124,10 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
- 
+  joinText: {
+    color: colors.white,
+    fontWeight: '900',
+    fontSize: 20,
+  },
 
 });

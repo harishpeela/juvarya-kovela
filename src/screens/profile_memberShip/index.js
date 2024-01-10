@@ -19,6 +19,7 @@ import {
   BackHeaderNew,
   Loader,
   FollowersListCard3,
+  TopBarcard,
 } from '../../components';
 import { MemberShipDetails } from '../../utils/api';
 import { styles } from './styles';
@@ -34,7 +35,7 @@ const isDarkMode = useColorScheme() === 'dark';
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
   const [roleType, setRoleType] = useState();
-
+ 
   const MembershipData = async () => {
     setaLoader(true);
     try {
@@ -58,23 +59,21 @@ const isDarkMode = useColorScheme() === 'dark';
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
-    console.log('role===>', roleAdmin);
     if (roleAdmin) {
-      setRoleType('ROLE_ADMIN');
+      setRoleType(roleAdmin);
+    } else{
+      setRoleType(roleAdmin);
     }
   };
   useEffect(() => {
     MembershipData();
     Type();
-  }, []);
-  console.log('roleid', roleId, roleType);
-
+  }, []); 
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
-        <View style={styles.header}>
           <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+            <TouchableOpacity  onPress={() => navigation.goBack()}>
               <Ionicons
                 name="caret-back-circle"
                 size={36}
@@ -82,24 +81,18 @@ const isDarkMode = useColorScheme() === 'dark';
                 style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
               />
             </TouchableOpacity>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20}}> Memberships</Text>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.profilememberships);
-              }}>
-              {roleId || roleType  && (
-                <TouchableOpacity onPress={() => {
+            <View>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
+            </View>
+            {(roleId === 'ROLE_ITEM_ADMIN' || roleType) && (
+                <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
                   navigation.navigate(allTexts.screenNames.invitationScreen, {
                     roleId: roleId,
                   })
                 }}>
-                  {/* <Icon name="pluscircleo" size={24} color={colors.black} /> */}
-                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white }}>Invite</Text>
+                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white}}>Invite</Text>
                 </TouchableOpacity>
               )}
-            </TouchableOpacity>
-          </View>
-
         </View>
         {loader ? (
           <View>

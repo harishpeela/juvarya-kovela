@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: '-5%',
+    marginTop: '-15%',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   flatListStyle: {
-    marginTop: '15%',
+    // marginTop: '15%',
   },
   homeCard: {
     // borderWidth:10,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     left: 18,
     padding: 1,
-  }
+  },
 });
 
 export default styles;

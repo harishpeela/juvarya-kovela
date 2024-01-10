@@ -2,11 +2,12 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
-import {BackHeaderNew, Donations_list_Card, SearchBar} from '../../components';
+import {BackHeaderNew, Donations_list_Card, SearchBar, TopBarcard} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Loader} from '../../components';
+ 
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
@@ -37,6 +38,7 @@ const DonationsList = ({navigation, route}) => {
     try {
       let id = data?.jtProfile;
       let result = await getDonationsList(id, 0, 60);
+      console.log('data', result?.data);
       let donationDTO = result?.data?.data;
       console.log('list of donations', donationDTO);
       donationDTO.map(e => {
@@ -62,22 +64,11 @@ const DonationsList = ({navigation, route}) => {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={styles.followersHeader}>
-        <BackHeaderNew
-          isArrow={true}
-          txt={'Donations'}
-          onPress={() => navigation.goBack()}
-          txtColor={colors.black}
-        />
-        <TouchableOpacity
-          onPress={() => navigation.navigate(allTexts.screenNames.donations)}>
-          <AntDesign name="plus" size={24} color={colors.black} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-            <SearchBar
+      <View>
+      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <TopBarcard txt={'Donation List'} back={true}  navigation={navigation} navMenu={navigation}>
+      <View style={styles.searchContainer}>
+      <SearchBar
               value={searchedText}
               onTextChange={text => {
                 setSearchedText(text);
@@ -95,6 +86,15 @@ const DonationsList = ({navigation, route}) => {
               brColor={colors.gray2}
               brWidth={1}
             />
+            
+      </View>
+      </TopBarcard>
+      </View>
+      </View>
+      <View style={styles.bodyContainer}>
+        <View style={styles.searchAndFilter}>
+          <View style={styles.searchContainer}>
+           
           </View>
         </View>
         <View style={styles.followersContainer}>
@@ -106,43 +106,12 @@ const DonationsList = ({navigation, route}) => {
                 (apiData?.length ? (
                   <Donations_list_Card data={apiData} />
                 ) : (
-                  // <FlatList
-                  //   style={styles.list}
-                  //   showsVerticalScrollIndicator={false}
-                  //   data={apiData}
-                  //   contentContainerStyle={styles.flatListStyle}
-                  //   keyExtractor={(item, index) => item?.id?.toString()}
-                  //   renderItem={({item}) => (
-                  //     <Donations_list_Card
-                  //       data={item}
-                  //       // name={item?.email}
-                  //       // rs={item?.donation}
-                  //       // description={item?.description}
-                  //       // img={item?.url}
-                  //     />
-                  //   )}
-                  // />
                   ''
                 ))}
-
+ 
               {searchedText && filteredData?.length > 0 ? (
                 <Donations_list_Card data={filteredData} />
               ) : (
-                // <FlatList
-                //   showsVerticalScrollIndicator={false}
-                //   style={styles.list}
-                //   data={filteredData}
-                //   contentContainerStyle={styles.flatListStyle}
-                //   keyExtractor={item => item?.id.toString()}
-                //   renderItem={({item}) => (
-                //     <Donations_list_Card
-                //       name={item?.email}
-                //       rs={item?.donation}
-                //       description={item?.description}
-                //       img={item?.url}
-                //     />
-                //   )}
-                // />
                 <View style={styles.noDataContainer}>
                   <Text style={styles.noDataText}>
                     No items in donation list
@@ -157,3 +126,4 @@ const DonationsList = ({navigation, route}) => {
   );
 };
 export default DonationsList;
+ 

@@ -51,7 +51,7 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
-  console.log('homeFeedList', homeFeedList);
+  // console.log('homeFeedList', homeFeedList);
   const listFeed = async (pgNo, pgSize) => {
     setloader(true);
     try {
@@ -122,58 +122,9 @@ const UserFeedScreen = ({navigation}) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
-        <TopBarcard userIcon={true}>
-          <View style={styles.navBarContainer}>
-            <View style={styles.buttonContainer}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate(allTexts.tabNames.profile)}
-                style={styles.userIcon}>
-                <AntDesign
-                  name="user"
-                  size={25}
-                  color={colors.black}
-                  style={{
-                    marginLeft: 10,
-                    right: 7,
-                    top: 10,
-                  }}
-                />
-                <TouchableOpacity
-                  style={styles.menuIcon}
-                  onPress={() =>
-                    navigation.navigate(allTexts.tabNames.profile)
-                  }>
-                  <Feather
-                    name="menu"
-                    size={15}
-                    color={colors.black}
-                    style={{}}
-                  />
-                </TouchableOpacity>
-              </TouchableOpacity>
-            </View>
-            <Text
-              style={{fontSize: 20, color: colors.white, fontWeight: 'bold'}}>
-              {' '}
-              Feeds
-            </Text>
-            <TouchableOpacity
-              style={styles.circle}
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.notification)
-              }>
-              <FontAwesome
-                name="bell-o"
-                size={24}
-                color={isDarkMode ? 'black' : 'black'}
-                style={styles.bellIcon}
-              />
-              {/* <View style={styles.notificationDot} /> */}
-            </TouchableOpacity>
-          </View>
-        </TopBarcard>
+        <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
       </View>
-      <View style={{marginBottom: '30%'}}>
+      <View style={{marginBottom: '35%'}}>
         {homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
