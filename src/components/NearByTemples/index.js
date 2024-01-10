@@ -16,7 +16,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import ApplicationContext from '../../utils/context-api/Context';
 import { FollowUnFollow } from '../../utils/api';
 
-export const TempleListCard = ({
+export const NearByTemple = ({
   name,
   post,
   pageNav,
@@ -70,36 +70,37 @@ export const TempleListCard = ({
   }, [isFollowingTrue, isFocused]);
   return (
     <TouchableOpacity
-      style={{borderRadius: 20, margin: 5, backgroundColor: 'white', height: 150, width: 250, elevation: 4, shadowOpacity: 5}}
+      style={{borderRadius: 20, margin: 5, backgroundColor: 'white', height: 120, width: 120, elevation: 4, shadowOpacity: 5,padding:8}}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
           data: post,
           onSelect: onSelect,
         });
       }}>
-      <View style={{  alignItems: 'center', marginTop: 5, height: '70%'}}>
+         <TouchableOpacity style={{ position:'absolute',top:7,right:10}} onPress={() => FollowandUnFollow(templeId)}>
+          <Icon
+            name={isLiked ? 'heart' : 'heart-o'}
+            size={14}
+            color={isLiked ? colors.red1 : colors.orangeColor}
+            style={{ marginLeft:5}}
+          />
+        </TouchableOpacity>
+      <View style={{  alignItems: 'center', marginTop: 15, height: '70%',backgroundColor:'white'}}>
         <Image
           source={{
             uri: post?.logo
               ? post?.logojpg
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
-          style={{ height: '100%', width: 230, borderRadius: 20, resizeMode: 'cover' }}
+          style={{ height: '100%', width: 90, borderRadius: 15, resizeMode: 'cover' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 
-      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 15, marginVertical: 10}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 15, marginVertical:5}}>
         <Text style={styles.textCard} numberOfLines={1}>
           {name?.length < 15 ? `${name}` : `${name?.substring(0, 15)}..`}
         </Text>
-        <TouchableOpacity style={{ }} onPress={() => FollowandUnFollow(templeId)}>
-          <Icon
-            name={isLiked ? 'heart' : 'heart-o'}
-            size={20}
-            color={isLiked ? colors.red1 : colors.orangeColor}
-            style={{ }}
-          />
-        </TouchableOpacity>
+       
       </View>
     </TouchableOpacity>
   );
