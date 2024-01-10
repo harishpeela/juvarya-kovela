@@ -49,6 +49,8 @@ import {
   MemberShipDetails,
   UserInfo,
   EventDetailsNew,
+  TempleCrew,
+  createFeedDescription,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -116,6 +118,7 @@ const App = () => {
       membershipdetails,
       // userinfo,
       eventdetailsnew,
+      templecrew,
       createFeedDescription,
     },
   } = allTexts;
@@ -152,6 +155,7 @@ const App = () => {
             headerShown: false,
           }}
         />
+         
         <Stack.Screen
           name={signup}
           component={SignUp}
@@ -192,6 +196,15 @@ const App = () => {
           options={{
             headerShown: false,
           }}
+          
+        />
+        <Stack.Screen
+          name={templecrew}
+          component={TempleCrew}
+          options={{
+            headerShown: false,
+          }}
+          
         />
         <Stack.Screen
           name={mySavedPosts}

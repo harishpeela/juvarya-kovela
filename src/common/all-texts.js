@@ -167,6 +167,7 @@ export const allTexts = {
     invitationScreen: 'InvitationScreen',
     createEvent: 'CreateEvent',
     membershipdetails: 'MemberShipDetails',
+    templecrew: 'TempleCrew',
     createFeedDescription: 'CreateFeedDescription',
   },
   homeHeader: {

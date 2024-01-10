@@ -2,25 +2,17 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {colors, fontFamily, fontSize} from '../../common';
-export const FavTempleListCard = ({name, location, date, onPress, img}) => {
+export const CrewCard = ({data, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
       <View style={styles.secondaryContainer}>
-        <View>
-          <Image
-            source={{uri: img ? img : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg'}}
-            style={{height: 70, width: 70, borderRadius: 70 / 2}}
-          />
-        </View>
         <View style={styles.listFirstItem}>
           <View style={styles.bulletConatianer}>
-            {/* <View style={styles.bullet} /> */}
+            <View style={styles.bullet} />
           </View>
           <View>
-            <Text style={styles.itemHeading}>{name}</Text>
-            {/* <Text numberOfLines={1} style={styles.itemAdmin}>
-              Temple
-            </Text> */}
+            <Text style={styles.itemHeading}>{data?.firstName}</Text>
+
             {/* <Text style={styles.itemLocation}>{`location-${location}`}</Text> */}
           </View>
         </View>
@@ -56,7 +48,7 @@ const styles = StyleSheet.create({
     width: 5,
     height: 5,
     borderRadius: 2.5,
-    backgroundColor: colors.black,
+    backgroundColor: colors.orangeColor,
   },
   itemHeading: {
     color: colors.orangeColor,
