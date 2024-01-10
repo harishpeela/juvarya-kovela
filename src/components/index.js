@@ -28,6 +28,7 @@ import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
 import {SaveFeedComp} from './savefeedcomp';
+import { CrewCard } from './crew-card-comp';
 import {
   NearBy,
   NearByMainTab,
@@ -184,5 +185,6 @@ export {
   Create_Event,
   AddEventImage,
   EventInput,
-  EventInput1
+  EventInput1,
+  CrewCard
 };

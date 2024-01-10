@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   upComingTextTab: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: '5%',
+    margin: '4%',
     alignItems: 'center',
   },
   iconsearch: {
