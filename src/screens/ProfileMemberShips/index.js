@@ -21,7 +21,6 @@ const ProfileMemberShips = ({navigation, route}) => {
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
-    console.log('role===>', roleAdmin);
     if (roleAdmin) {
       setRoleType('ROLE_ADMIN');
     }
@@ -47,7 +46,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     MembershipData();
     Type();
   }, []);
-  console.log('roleType', roleType);
+  console.log('roleType roletype', roleType, roleId);
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>

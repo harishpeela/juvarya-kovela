@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {colors} from '../../common';
@@ -7,25 +8,13 @@ export const ProfileTimingTabs = ({data}) => {
   console.log('1=====>');
   return (
     <View style={styles.container}>
-      {data?.templeClass === 'A' || 'B' || 'C' ? (
-        <View style={styles.toptemp}>
-          <Text
-            style={{
-              padding: 5,
-              width: 30,
-              textAlign: 'center',
-              marginRight: 25,
-              color: colors.white,
-              backgroundColor: colors.orangeColor,
-            }}>
-            {data?.templeClass}
-          </Text>
-          <Text style={{color: colors.black, right: 10}}> Top Temple</Text>
-        </View>
-      ) : (
-        <Text>Hello</Text>
-      )}
-
+      <View style={styles.toptemp}>
+        <Image
+          source={require('../../../assets/images/Vector.png')}
+          style={{height: 20, width: 20}}
+        />
+        <Text style={{color: colors.black}}> Top Temple</Text>
+      </View>
       <View style={styles.time}>
         <AntDesign name="clockcircleo" size={20} />
         <Text style={{color: '#228C08'}}> Open Now</Text>

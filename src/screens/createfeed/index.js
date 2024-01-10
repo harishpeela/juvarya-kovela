@@ -12,15 +12,13 @@ import {
 import {allTexts, colors} from '../../common';
 import {styles} from './styles';
 import {
-  BackgroundImage,
-  BackHeader,
   BackHeaderNew,
   InputField,
   PrimaryButton,
 } from '../../components';
+import { Create_Feed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {Data} from '../home-feed/formateDetails';
 const CreateFeed = ({route, navigation}) => {
   const {data} = route.params || {};
@@ -45,13 +43,8 @@ const CreateFeed = ({route, navigation}) => {
     }
   };
   const NewFeed = async id => {
-    console.log('id', id);
     setLoading(true);
-    let Token = await getAuthTokenDetails();
-    var myHeaders = new Headers();
     let img = getImageObj(image);
-    myHeaders.append('Authorization', Token);
-
     var formdata = new FormData();
     formdata.append('description', description);
     formdata.append('feedType', 'profile');
@@ -60,18 +53,9 @@ const CreateFeed = ({route, navigation}) => {
       formdata.append('files', element);
     });
     console.log('formdata', formdata);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
-    };
-    fetch('https://kovela.app/media/jtfeed/create', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('resut of create feed', result);
-        if (result?.message === 'Feed created') {
-          Alert.alert('Success', `${result?.message} successfully`, [
+    let result = await Create_Feed(formdata);
+        if (result?.data?.message === 'Feed created') {
+          Alert.alert('Success', `${result?.data?.message} successfully`, [
             {
               text: 'Ok',
               onPress: () =>
@@ -82,8 +66,8 @@ const CreateFeed = ({route, navigation}) => {
           alert('somet thing went wrong');
           setLoading(false);
         }
-      })
-      .catch(error => alert(error));
+      // })
+      // .catch(error => alert(error));
   };
 
   const uploadPhoto = () => {
