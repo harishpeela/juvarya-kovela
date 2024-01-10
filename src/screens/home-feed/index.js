@@ -51,7 +51,7 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in share', error);
     }
   };
-  console.log('homeFeedList', homeFeedList);
+  // console.log('homeFeedList', homeFeedList);
   const listFeed = async (pgNo, pgSize) => {
     setloader(true);
     try {

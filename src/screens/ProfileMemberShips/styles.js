@@ -124,6 +124,10 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.xlarge,
     color: colors.black,
   },
- 
+  joinText: {
+    color: colors.white,
+    fontWeight: '900',
+    fontSize: 20,
+  },
 
 });
