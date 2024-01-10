@@ -345,7 +345,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs />
+                <ProfileTimingTabs data={data}/>
               )}
             </View>
             <View style={{ marginLeft: 15 }}>
