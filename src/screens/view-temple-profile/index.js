@@ -397,7 +397,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                 <DirectionsTabComp
-                role={roleId === 'ROLE_ITEM_ADMIN'}
+                role={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
                   onPress={() => {
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
@@ -418,16 +418,18 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   /> */}
               </View>
               {/* </View> */}
-              <TouchableOpacity  onPress={() =>
+              {/* <TouchableOpacity  onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
                       data: trfData,
                     })
-                  }>
-                <Danation_Add_Card
-                  roleId={roleId}
-                 
+                  }> */}
+                <Danation_Add_Card onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })}
+                  roleId={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
                 />
-              </TouchableOpacity>
+              {/* </TouchableOpacity> */}
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
