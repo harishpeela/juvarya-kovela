@@ -1,36 +1,28 @@
-/* eslint-disable no-alert */
-/* eslint-disable react-native/no-inline-styles */
+import {StyleSheet, Text, View, Image, Alert} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {
-  View,
-  SafeAreaView,
-  TouchableOpacity,
-  Platform,
-  Image,
-  Alert,
-} from 'react-native';
-import {allTexts, colors} from '../../common';
-import {styles} from './styles';
-import {
-  BackHeaderNew,
+  EventInput,
   InputField,
   PrimaryButton,
   TopBarcard,
 } from '../../components';
-import { Create_Feed } from '../../utils/api';
-import Icon from 'react-native-vector-icons/AntDesign';
-import {launchImageLibrary} from 'react-native-image-picker';
+import {allTexts, colors} from '../../common';
 import {Data} from '../home-feed/formateDetails';
-const CreateFeed = ({route, navigation}) => {
-  const {data} = route.params || {};
-  const [image, setImage] = useState(null);
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
+import {ScrollView} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+
+const CreateFeedDescription = ({route, navigation}) => {
+  const {imageProp, data} = route.params || {};
+  const [titleName, setTitleName] = useState('');
+  const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
+
+  const [image, setImage] = useState(imageProp);
   const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
-  const [imageProp, setImageProp] = useState('');
-
-  console.log('data', data);
-
   const [trfData, setTrfData] = useState();
+  console.log('trfdata', trfData);
   const Valid = id => {
     if (image === null) {
       alert('please upload a image');
@@ -45,8 +37,14 @@ const CreateFeed = ({route, navigation}) => {
     }
   };
   const NewFeed = async id => {
+    console.log('id', id);
     setLoading(true);
+    let Token = await getAuthTokenDetails();
+    var myHeaders = new Headers();
     let img = getImageObj(image);
+    console.log('img', img);
+    myHeaders.append('Authorization', Token);
+
     var formdata = new FormData();
     formdata.append('description', description);
     formdata.append('feedType', 'profile');
@@ -55,9 +53,18 @@ const CreateFeed = ({route, navigation}) => {
       formdata.append('files', element);
     });
     console.log('formdata', formdata);
-    let result = await Create_Feed(formdata);
-        if (result?.data?.message === 'Feed created') {
-          Alert.alert('Success', `${result?.data?.message} successfully`, [
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow',
+    };
+    fetch('https://fanfun.in/media/jtfeed/create', requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        console.log('resut of create feed', result);
+        if (result?.message === 'Feed created') {
+          Alert.alert('Success', `${result?.message} successfully`, [
             {
               text: 'Ok',
               onPress: () =>
@@ -68,8 +75,8 @@ const CreateFeed = ({route, navigation}) => {
           alert('somet thing went wrong');
           setLoading(false);
         }
-      // })
-      // .catch(error => alert(error));
+      })
+      .catch(error => alert(error));
   };
 
   const uploadPhoto = () => {
@@ -100,7 +107,6 @@ const CreateFeed = ({route, navigation}) => {
             // }
             setImage(res.assets);
             setimageUploaded(false);
-            setImageProp(res.assets);
           } else {
             console.log(res.errorMessage);
           }
@@ -122,75 +128,64 @@ const CreateFeed = ({route, navigation}) => {
       return imageObj;
     });
   };
-  // useEffect(() => {
-  //   let result = Data(data);
-  //   if (result) {
-  //     setTrfData(result);
-  //   } else {
-  //     console.log('nope');
-  //   }
-  // }, [data]);
-
   useEffect(() => {
-    if (image === null) {
-      uploadPhoto();
+    let result = Data(data);
+    if (result) {
+      setTrfData(result);
+    } else {
+      console.log('nope');
     }
-  });
-
-  const imageSending = () => {
-    setImageProp(image);
-    navigation.navigate(allTexts.screenNames.createFeedDescription, {
-      imageProp,
-      data,
-    });
-  };
-  console.log('imageProp', image);
+  }, [data]);
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <View>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} txt={'Upload Photo'} navigation={navigation} />
+        <TopBarcard back={true} navigation={navigation} txt={'Fill Deatils'} />
       </View>
-      <View style={{margin: 30}}>
-        <View style={styles.uploadContainer}>
-          {image !== null ? (
-            <View style={styles.preViewImageContainer}>
-              <View style={styles.crossIconContainer}>
-                <Icon
-                  onPress={() => {
-                    setImage(null);
-                  }}
-                  name="closecircle"
-                  color={colors.orangeColor}
-                  size={25}
-                />
-              </View>
-              <Image
-                resizeMode="cover"
-                style={styles.preViewImage}
-                source={{uri: image[0]?.uri}}
-              />
-            </View>
-          ) : (
-            <TouchableOpacity style={styles.uploadPic}>
-              <View style={styles.profileImage}>
-                <Icon name="camera" size={70} color={colors.orangeColor} />
-              </View>
-            </TouchableOpacity>
-          )}
-        </View>
+      <Image
+        source={{uri: imageProp[0]?.uri}}
+        style={{
+          marginTop: '5%',
+          height: '30%',
+          width: '70%',
+          alignSelf: 'center',
+          resizeMode: 'contain',
+        }}
+      />
+      <View>
+        <EventInput
+          value={titleName}
+          lable={'Name'}
+          placeholder={'Enter Name'}
+          onChangeText={e => setTitleName(e)}
+        />
+        <EventInput
+          lable={'Description'}
+          value={description}
+          height={100}
+          placeholder={'Description'}
+          onChangeText={e => setDescription(e)}
+        />
+        <EventInput
+          lable={'City'}
+          value={city}
+          placeholder={'City'}
+          onChangeText={e => setCity(e)}
+        />
 
-        <View style={{marginHorizontal: 70, marginBottom: 20}}>
+        <View style={{marginHorizontal: 50, marginTop: 20}}>
           <PrimaryButton
-            text={'Next'}
+            text={'Submit'}
             bgColor={colors.orangeColor}
             loading={loading}
-            // onPress={() => Valid(trfData?.jtProfile)}
-            onPress={() => imageSending()}
+            onPress={() => Valid(trfData?.jtProfile)}
           />
         </View>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
-export default CreateFeed;
+
+export default CreateFeedDescription;
+
+const styles = StyleSheet.create({});

@@ -65,8 +65,8 @@ import UpdatePassword from '../update-password';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
-  const { data } = route.params || {};
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,
@@ -362,7 +362,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs />
+                <ProfileTimingTabs data={data}/>
               )}
             </View>
             <View style={{ marginLeft: 15 }}>

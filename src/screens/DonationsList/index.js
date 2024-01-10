@@ -86,6 +86,7 @@ const DonationsList = ({navigation, route}) => {
               brColor={colors.gray2}
               brWidth={1}
             />
+            
       </View>
       </TopBarcard>
       </View>
@@ -105,43 +106,12 @@ const DonationsList = ({navigation, route}) => {
                 (apiData?.length ? (
                   <Donations_list_Card data={apiData} />
                 ) : (
-                  // <FlatList
-                  //   style={styles.list}
-                  //   showsVerticalScrollIndicator={false}
-                  //   data={apiData}
-                  //   contentContainerStyle={styles.flatListStyle}
-                  //   keyExtractor={(item, index) => item?.id?.toString()}
-                  //   renderItem={({item}) => (
-                  //     <Donations_list_Card
-                  //       data={item}
-                  //       // name={item?.email}
-                  //       // rs={item?.donation}
-                  //       // description={item?.description}
-                  //       // img={item?.url}
-                  //     />
-                  //   )}
-                  // />
                   ''
                 ))}
  
               {searchedText && filteredData?.length > 0 ? (
                 <Donations_list_Card data={filteredData} />
               ) : (
-                // <FlatList
-                //   showsVerticalScrollIndicator={false}
-                //   style={styles.list}
-                //   data={filteredData}
-                //   contentContainerStyle={styles.flatListStyle}
-                //   keyExtractor={item => item?.id.toString()}
-                //   renderItem={({item}) => (
-                //     <Donations_list_Card
-                //       name={item?.email}
-                //       rs={item?.donation}
-                //       description={item?.description}
-                //       img={item?.url}
-                //     />
-                //   )}
-                // />
                 <View style={styles.noDataContainer}>
                   <Text style={styles.noDataText}>
                     No items in donation list

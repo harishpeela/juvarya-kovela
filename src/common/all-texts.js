@@ -168,6 +168,7 @@ export const allTexts = {
     createEvent: 'CreateEvent',
     membershipdetails: 'MemberShipDetails',
     templecrew: 'TempleCrew',
+    createFeedDescription: 'CreateFeedDescription',
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -11,7 +11,7 @@ import { allTexts } from '../../common';
 import RNRestart from 'react-native-restart';
 
 
-//developent apis //
+// ****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
 export const BASEURL = 'https://fanfun.in/customer/api/';
 export const BASE = 'https://fanfun.in/media/';

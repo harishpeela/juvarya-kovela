@@ -37,6 +37,9 @@ const endpoints = {
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: '/jtfollwer/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
+  CEATE_FEED: 'jtfeed/create',
+  CREATE_EVENT: 'jtevent/save',
+  EVENT_SAVE: 'jtevent/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
@@ -212,6 +215,17 @@ export const PostProfilePic = async data => {
     console.log('error in post profile pic', error);
   }
 };
+export const Create_Feed = async data => {
+  try {
+    let result = await axiosMultiPartFormData1.post(
+      `${endpoints.CEATE_FEED}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in post profile pic', error);
+  }
+};
 export const Update_Profile = async data => {
   try {
     let result = await axiousInstanceNew1.put(
@@ -320,6 +334,28 @@ export const EventInterested = async (payload) => {
   try {
     let result = await axiosEventsData1.post(
       `${endpoints.EVENT_INTERESTED}`, payload
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+export const CreateEvent = async (payload) => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.CREATE_EVENT}`, payload
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
+export const Save_Event = async (payload) => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENT_SAVE}`, payload
     );
     return result;
   } catch (error) {

@@ -124,14 +124,14 @@ export const TopBarcard = ({
               />
             </TouchableOpacity>
           )}
-          {roleId === 'ROLE_ITEM_ADMIN' ||
-            (roleType === 'ROLE_ADMIN' && (
+          {(roleId === 'ROLE_ITEM_ADMIN' ||
+            roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 style={{position: 'absolute', right: '-8%'}}
                 onPress={navCreate}>
                 <Text style={styles.joinText}>Create</Text>
               </TouchableOpacity>
-            ))}
+            )}
         </View>
       </View>
       {children}
