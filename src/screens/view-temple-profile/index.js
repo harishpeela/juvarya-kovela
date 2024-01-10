@@ -75,6 +75,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   // );
   console.log('data', data);;
   const [loader, setloader] = useState(false);
+  const [donationLoader,setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -267,10 +268,17 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const dontationValue = async id => {
+    console.log(id,'kkk')
+    setDonationLoader(true)
     let result = await getDonationsList(id, 0, 20);
     console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
+      setDonationLoader(false)
+    
+    }
+    else{
+      setDonationLoader(false)
     }
   };
 
@@ -442,9 +450,11 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       data: trfData,
                     })
                   }> */}
-              {donationValue && (
-                
-                <Danation_Add_Card
+              {donationLoader ? (
+                <Loader size={'small'} color={colors.orangeColor} />
+              ):(
+                donationValue?.length  >0?  (
+                  <Danation_Add_Card
                   onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
                       data: trfData,
@@ -455,7 +465,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
               }
                 />
+                ):(
+                  ""
+                )
               )}
+              
+              
               {/* <Danation_Add_Card onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
                       data: trfData,
