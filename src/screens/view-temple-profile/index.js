@@ -66,8 +66,8 @@ import UpdatePassword from '../update-password';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
-  const { data } = route.params || {};
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,

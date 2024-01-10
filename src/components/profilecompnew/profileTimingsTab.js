@@ -3,7 +3,9 @@ import React from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 import {colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-export const ProfileTimingTabs = () => {
+export const ProfileTimingTabs = ({data}) => {
+  console.log('profileTimeing tab', data);
+  console.log('1=====>');
   return (
     <View style={styles.container}>
       <View style={styles.toptemp}>
