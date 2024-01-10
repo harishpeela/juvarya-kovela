@@ -97,30 +97,6 @@ const EventsScreen = ({ navigation }) => {
         </TopBarcard>
       </View>
       <View style={styles.bodyContainer}>
-        {/* <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}></View>
-        </View> */}
-        {/* <Card style={styles.card}>
-          <AntDesignIcon style={{position: 'absolute', right: 10, top: 10}} name="heart" size={20} color="red" />
-          <View>
-            <Image 
-            style={{height: 120, width: 120, borderRadius: 60}} 
-            source={require('../../../assets/images/tempimg1.jpg')}/>
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Text style={{fontSize: 16, fontWeight: '600', color: 'black', marginVertical: 10}}>Holi Festival</Text>
-            <View style={{borderRadius: 10, backgroundColor: '#f1f1f1', paddingVertical: 5, width: 150}}>
-               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
-               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
-                <Text style={{fontSize: 10, color:'black', marginLeft: 10}}>10-21-2023, November</Text>
-               </View>
-               <View style={{flexDirection: 'row', alignItems: 'center', margin: 5}}>
-               <FeatherIcon style={{color:colors.orangeColor, backgroundColor: 'white'}} name="plus" size={15} color="white" />
-               <Text style={{color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue}}>Anakapalle</Text>
-               </View>
-            </View>
-          </View>
-        </Card> */}
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
@@ -130,8 +106,9 @@ const EventsScreen = ({ navigation }) => {
                 <FlatList
                   numColumns={2}
                   data={eventsData}
+                  showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{ marginBottom: '35%', marginTop: '3%' }}
+                  style={{ marginBottom: '50%', marginTop: '3%' }}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <EventCard2
