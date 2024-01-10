@@ -122,12 +122,7 @@ const UserFeedScreen = ({navigation}) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
-        <TopBarcard
-          menu={true}
-          txt={'Feeds'}
-          isBell={true}
-          navigation={navigation}
-        />
+        <TopBarcard menu={true} txt={'Feeds'} isBell={true} />
       </View>
       <View style={{marginBottom: '35%'}}>
         {homeFeedList?.length > 0 ? (
