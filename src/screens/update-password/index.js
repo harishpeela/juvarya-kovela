@@ -1,39 +1,31 @@
 /* eslint-disable react-native/no-inline-styles */
-import {
-  View,
-  ToastAndroid,
-  useColorScheme,
-  Alert,
-  TouchableOpacity,
-  Image,
-  Text,
-} from 'react-native';
-import React, {useContext} from 'react';
-import {PrimaryButton} from '../../components';
-import {PasswordField} from '../../components/inputfield';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {allTexts, colors} from '../../common';
-import {Formik} from 'formik';
-import {UpdatePasswordValidation} from '../../common/schemas';
-import {styles} from './style';
-import {BackHeader} from '../../components';
-import {NewUpdateUserPassword} from '../../utils/api';
-import {TopBarcard} from '../../components';
+import { View, ToastAndroid, useColorScheme, Alert, TouchableOpacity, Image, Text } from 'react-native';
+import React, { useContext } from 'react';
+import { PrimaryButton } from '../../components';
+import { PasswordField } from '../../components/inputfield';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { allTexts, colors } from '../../common';
+import { Formik } from 'formik';
+import { UpdatePasswordValidation } from '../../common/schemas';
+import { styles } from './style';
+import { BackHeader } from '../../components';
+import { NewUpdateUserPassword } from '../../utils/api';
+import { TopBarcard } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-const UpdatePassword = ({navigation}) => {
+const UpdatePassword = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {
-    buttonTexts: {updatePassword},
-    placeHolders: {confirmPasswordPlace, passwordPlace},
+    buttonTexts: { updatePassword },
+    placeHolders: { confirmPasswordPlace, passwordPlace },
     headings: {
-      inputTitles: {currentPassword, Newpassword, confirmPassword},
+      inputTitles: { currentPassword, Newpassword, confirmPassword },
     },
   } = allTexts;
   const PasswordUpdate = async (values, formikActions) => {
     let payLoad = {
       oldPassword: values?.currentPassword,
-      password: values?.newPassword,
-    };
+      password: values?.newPassword
+    }
     console.log('payload', payLoad);
     try {
       let result = await NewUpdateUserPassword(payLoad);
@@ -41,7 +33,8 @@ const UpdatePassword = ({navigation}) => {
       Alert.alert('Success', result?.data?.message, [
         {
           text: 'Ok',
-          onPress: () => navigation.navigate(allTexts.tabNames.profile),
+          onPress: () =>
+            navigation.navigate(allTexts.tabNames.profile)
         },
       ]);
     } catch (error) {
@@ -55,12 +48,25 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{minHeight: '15%'}}>
+      {/* <View style={styles.updateProfileTopCard}>
         <TopBarcard
           back={true}
-          txt={'Update Password'}
-          navigation={navigation}
+          txt={'updatePassword'}
+          navBack={navigation}
         />
+      </View> */}
+
+      <View style={styles.headerContainer}>
+        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <Ionicons
+        name="caret-back-circle"
+        size={36}
+        color={'#ffffff'}
+        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+      />
+     
+        </TouchableOpacity>
+        <Text style={styles.headingText}>{updatePassword}</Text>
       </View>
 
       <KeyboardAwareScrollView

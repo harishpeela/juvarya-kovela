@@ -16,7 +16,7 @@ export const Danation_Add_Card = ({onPress, roleId}) => {
         />
         <View style={styles.textContainer}>
           <Text style={styles.secondText}>Top Donation by Juvarya </Text>
-          {roleId ? <Text style={styles.rs}>₹201</Text> : <></>}
+          {roleId && <Text style={styles.rs}>₹201</Text>}
         </View>
       </View>
       {roleId ? (

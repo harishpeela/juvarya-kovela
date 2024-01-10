@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   mainContainer: {
     height: '100%',
     backgroundColor: colors.white,
-
   },
   headerContainer: {
     padding: 10,
@@ -15,7 +14,7 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius:24,
     flexDirection:'row',
     alignItems:'center',
-    justifyContent:'space-between'
+    // justifyContent:'space-between'
   },
   headingText:{
    marginRight:120,
@@ -24,9 +23,9 @@ export const styles = StyleSheet.create({
    fontSize:20
   },
   header:{
-    flexDirection:'row',
+    // flexDirection:'row',
     justifyContent:'space-between',
-    alignItems:'center',
+    // alignItems:'center',
   },
   container1: {
     height: '100%',
