@@ -65,10 +65,10 @@ export default BottomTabBase = ({ navigation }) => {
           tabBarOptions={{
             style: {
               height: '8%',
-              width: '95%',
-              // flexDirection: 'row',
+              // width: '95%',
+              flexDirection: 'row',
               // marginBottom: '2%',
-              borderRadius: 15,
+              // borderRadius: 15,
               alignSelf: 'center',
             },
             activeTintColor: colors.orangeColor,

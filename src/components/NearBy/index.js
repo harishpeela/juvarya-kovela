@@ -75,7 +75,6 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation, route }) =>
       console.log('error in search pop temp', error);
     }
   };
-  console.log('filtered list', filteredList);
   return (
     <View>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
