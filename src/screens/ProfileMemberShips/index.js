@@ -47,7 +47,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     MembershipData();
     Type();
   }, []);
-  // console.log('roleType roletype', membership);
+  console.log('roleType roletype', roleId);
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
@@ -72,6 +72,7 @@ const ProfileMemberShips = ({navigation, route}) => {
           membership?.length  ? (
             <MemberShipCard
             data={membership}
+            roleId={roleId}
             txt={
               roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                 ?  'Membership'

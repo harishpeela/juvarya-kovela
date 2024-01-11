@@ -12,6 +12,7 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     borderRadius: 9,
     fontFamily: fontFamily.medium,
+    textAlign: 'center'
   },
   headerContainer: {
     padding:10,
@@ -46,7 +47,7 @@ export const styles = StyleSheet.create({
   DTextStyle: {
     fontFamily: fontFamily.popinRegular,
     fontSize: 15,
-    color: colors.gray,
+    color: colors.black,
     textTransform: 'uppercase',
     fontWeight: 'bold',
   },
@@ -71,4 +72,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: '5%',
   },
+  loginText: {
+    fontWeight: 'bold',
+    color: colors.white
+  }
 });
