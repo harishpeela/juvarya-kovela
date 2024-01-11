@@ -46,6 +46,7 @@ const UpdateProfile = ({ navigation }) => {
   } = allTexts;
 
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  console.log('userDe', userDetails);
 
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
@@ -157,12 +158,11 @@ const UpdateProfile = ({ navigation }) => {
         </View>
         <View style={{ marginTop: '25%' }}>
           <View style={{ bottom: '8%' }}>
-            <EventInput
+            <EventInput3
               lable={'Name'}
               user={true}
-              placeholder={'Enter Name'}
+              placeholder={userDetails?.username}
               height={50}
-              onChangeText={e => { setName(e); setEventError(false) }}
               value={name}
             />
             {eventError && (

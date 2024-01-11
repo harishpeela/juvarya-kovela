@@ -50,7 +50,6 @@ import {
   UserInfo,
   EventDetailsNew,
   TempleCrew,
-  createFeedDescription,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -122,6 +121,7 @@ const App = () => {
       createFeedDescription,
     },
   } = allTexts;
+
   useEffect(() => {
     getLoginDetails();
   }, []);

@@ -140,7 +140,7 @@ const CreateFeedDescription = ({route, navigation}) => {
   return (
     <View>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} navigation={navigation} txt={'Fill Deatils'} />
+        <TopBarcard back={true} navigation={navigation} txt={'Create Feed'} />
       </View>
       <Image
         source={{uri: imageProp[0]?.uri}}

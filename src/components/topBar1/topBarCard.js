@@ -37,7 +37,7 @@ export const TopBarcard = ({
             justifyContent:
               menu || isBell || roleType || roleId || back
                 ? 'space-between'
-                : 'space-evenly',
+                : 'space-between',
             marginTop: '22%',
             marginHorizontal: 10,
           }}>

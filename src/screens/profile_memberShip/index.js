@@ -21,12 +21,13 @@ import {
   FollowersListCard3,
   TopBarcard,
 } from '../../components';
-import { MemberShipDetails } from '../../utils/api';
+import { MemberShipDetails, MembersList } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
 import ApplicationContext from '../../utils/context-api/Context';
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
+  console.log('id====', id);
   const {userDetails} = useContext(ApplicationContext);
 const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
@@ -39,11 +40,11 @@ const isDarkMode = useColorScheme() === 'dark';
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MemberShipDetails(0, 100);
+      let result = await MembersList(0, 100);
       console.log('res', result?.data);
       let responce = result?.data?.data;
       if (responce) {
-        let dataList = responce.filter(item => item).map(({ membershipDto, loggedInUser, membershipId }) => ({ membershipDto, loggedInUser, membershipId }));
+        let dataList = responce.filter(item => item).map(({ invitedCustomer, membershipDto, membershipId }) => ({ membershipDto, invitedCustomer, membershipId }));
         console.log('dayta of members list', dataList);
         setaLoader(false);
         setData(dataList);
@@ -69,6 +70,7 @@ const isDarkMode = useColorScheme() === 'dark';
     MembershipData();
     Type();
   }, []); 
+  console.log('data in memberslist', data);
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
