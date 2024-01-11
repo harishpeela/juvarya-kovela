@@ -329,7 +329,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 {/* )} */}
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>
-                <TouchableOpacity style={styles.bell}>
+                <TouchableOpacity style={styles.bell} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
                   <FontAwesome
                     name="bell-o"
                     size={24}

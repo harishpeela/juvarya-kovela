@@ -4,7 +4,7 @@ import {colors, fontFamily, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     alignContent: 'center',
     alignSelf: 'center',
     width: '100%',

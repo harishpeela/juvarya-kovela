@@ -112,14 +112,14 @@ export const SaveFeedComp = ({post, isLikeTrue, likes, id, onPressTitle}) => {
           keyExtractor={({item, index}) => index}
           renderItem={({item, index}) => {
             return (
-              <View>
+              <View style={{backgroundColor: 'black'}}>
                 {!item?.uri ? (
                   <Image
                     source={{uri: item?.url}}
                     style={{
                       height: 400,
                       width,
-                      resizeMode: 'stretch',
+                      resizeMode: 'contain',
                     }}
                   />
                 ) : (

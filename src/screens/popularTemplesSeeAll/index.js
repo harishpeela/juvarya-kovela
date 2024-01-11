@@ -90,7 +90,6 @@ const SeeAll = ({ navigation }) => {
                       allTexts.screenNames.viewtempleprofile,
                       {
                         data: item,
-                        onSelect: onSelect,
                       },
                     )
                   }>
