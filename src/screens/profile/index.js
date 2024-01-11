@@ -193,7 +193,8 @@ const Profile = ({ navigation }) => {
                 <Image source={{ uri: profPic?.url }} style={styles.profileImage} />
               ) : (
                 <View style={styles.profileImage}>
-                  <Icon name="camera" size={60} color={colors.orangeColor} />
+                  {/* <Icon name="camera" size={60} color={colors.orangeColor} /> */}
+                  <Image source={{ uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg' }} style={styles.profileImage} />
                 </View>
               )}
             </TouchableOpacity>
