@@ -14,7 +14,7 @@ export const ProfileTimingTabs = ({ data }) => {
               padding: 5,
               width: 30,
               textAlign: 'center',
-              marginRight: 25,
+              marginRight: 10,
               color: colors.white,
               backgroundColor: colors.orangeColor,
             }}>
@@ -23,7 +23,7 @@ export const ProfileTimingTabs = ({ data }) => {
           <Text style={{ color: colors.black, right: 10 }}> Top Temple</Text>
         </View>
       ) : (
-        <Text>Hello</Text>
+        ''
       )}
 
       <View style={styles.time}>
