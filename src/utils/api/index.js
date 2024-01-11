@@ -19,6 +19,7 @@ import {
 
 const endpoints = {
   NEW_SIGN_IN: 'auth/signin',
+  NEAR_BY_TEMPLE: 'jtprofile/byTempleClass',
   NEW_SIGN_UP: 'auth/signup',
   FORGOT_PASSWORD: 'auth/forgot/password',
   NEW_OTP: 'auth/jtuserotp/trigger',
@@ -49,7 +50,7 @@ const endpoints = {
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   MEMBERS_LIST: 'jtprofile/find/users',
-  TEMPLE_CREW:'/jtprofile/find/users',
+  TEMPLE_CREW: '/jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
@@ -106,7 +107,7 @@ export const loginUser1 = async data => {
     console.log('error in login===>>', error);
     return error;
   }
-}
+};
 
 export const forgotPassword = async data => {
   try {
@@ -119,7 +120,7 @@ export const forgotPassword = async data => {
     console.log('error in login', error);
     return error;
   }
-}
+};
 
 export const DonationsPost = async data => {
   try {
@@ -153,17 +154,45 @@ export const PopularTemples = async () => {
     console.log('error in popular temples', error);
   }
 };
-export const NewTempleCrew = async (id) => {
+export const NearByTempleClass = async (classType, pgno, pgsize) => {
   try {
-    let result = await axiosNewData.get(`${endpoints.TEMPLE_CREW}?profileId=${id}`, {
-      // retry: 5,
-      // retryDelay: 3000,
-    });
+    let result = await axiosNewData.get(
+      `${endpoints.NEAR_BY_TEMPLE}?templeClass=${classType}&pageNo=${pgno}&pageSize=${pgsize}`,
+      {
+        // retry: 5,
+        // retryDelay: 3000,
+      },
+    );
     return result;
   } catch (error) {
     console.log('error in popular temples', error);
   }
 };
+export const NewTempleCrew = async id => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.TEMPLE_CREW}?profileId=${id}`,
+      {
+        // retry: 5,
+        // retryDelay: 3000,
+      },
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+// export const NearByTemple = async (id) => {
+//   try {
+//     let result = await axiosNewData.get(`${endpoints.NearByTemple}?profileId=${id}`, {
+//       // retry: 5,
+//       // retryDelay: 3000,
+//     });
+//     return result;
+//   } catch (error) {
+//     console.log('error in popular temples', error);
+//   }
+// };
 
 export const SearchPopularTemples = async txt => {
   try {
@@ -183,8 +212,7 @@ export const SearchTempleRoleWithId = async profId => {
       {retry: 5, retryDelay: 3000},
     );
     return result;
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 export const AdminTemples = async () => {
   try {
@@ -318,10 +346,20 @@ export const EventList = async (pgno, pgSize) => {
   }
 };
 
-export const EventDetail = async (id) => {
+export const EventDetail = async id => {
   try {
-    let result = await axiosEventsData1.get(
-      `${endpoints.EVENT_DETAILS}/${id}`,
+    let result = await axiosEventsData1.get(`${endpoints.EVENT_DETAILS}/${id}`);
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const EventInterested = async payload => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENT_INTERESTED}`,
+      payload,
     );
     return result;
   } catch (error) {
@@ -329,50 +367,40 @@ export const EventDetail = async (id) => {
   }
 };
 
-
-export const EventInterested = async (payload) => {
+export const CreateEvent = async payload => {
   try {
     let result = await axiosEventsData1.post(
-      `${endpoints.EVENT_INTERESTED}`, payload
+      `${endpoints.CREATE_EVENT}`,
+      payload,
     );
     return result;
   } catch (error) {
     console.log('error', error);
   }
-}
+};
 
-export const CreateEvent = async (payload) => {
+export const Save_Event = async payload => {
   try {
     let result = await axiosEventsData1.post(
-      `${endpoints.CREATE_EVENT}`, payload
+      `${endpoints.EVENT_SAVE}`,
+      payload,
     );
     return result;
   } catch (error) {
     console.log('error', error);
   }
-}
+};
 
-export const Save_Event = async (payload) => {
-  try {
-    let result = await axiosEventsData1.post(
-      `${endpoints.EVENT_SAVE}`, payload
-    );
-    return result;
-  } catch (error) {
-    console.log('error', error);
-  }
-}
-
-export const EventInterestedCount = async (id) => {
+export const EventInterestedCount = async id => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENT_INTERESTED_COUNT}?eventId=${id}&pageNo=${0}&pageSize=${50}`
+      `${endpoints.EVENT_INTERESTED_COUNT}?eventId=${id}&pageNo=${0}&pageSize=${50}`,
     );
     return result;
   } catch (error) {
     console.log('error', error);
   }
-}
+};
 
 export const GetProfilePicture = async id => {
   try {
@@ -394,7 +422,7 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MembersList = async (id) => {
+export const MembersList = async id => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MEMBERS_LIST}?profileId=${id}`,
@@ -424,7 +452,7 @@ export const MemberShipList = async (pageNo, pageSize) => {
     console.log('error', error);
   }
 };
-export const MemberShipInvite = async (payload) => {
+export const MemberShipInvite = async payload => {
   try {
     // Provide the data payload in the axios post call
     let result = await axiosMultiPartFormDataMem.post(
@@ -563,7 +591,7 @@ export const getTempleDetails = async id => {
   } catch (error) {
     return error;
   }
-}
+};
 
 export const NewRegistesrUser = async data => {
   try {

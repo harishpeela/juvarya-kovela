@@ -151,6 +151,7 @@ export const allTexts = {
     profilemembership: 'ProfileMembership',
     addMembershipDetails: 'AddMemebershipDetails',
     seeall: 'SeeAll',
+    nearByTempleSeeAll:'NearByTemplesSeeAll',
     feeds: 'Feeds',
     notification: 'Notifications',
     viewtempleprofile: 'ViewTempleProfile',
