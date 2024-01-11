@@ -96,7 +96,7 @@ const SeeAll = ({ navigation }) => {
                   }>
                   <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
-                      source={{ uri: item.logo }}
+                      source={{ uri: item?.logo ? item?.logo : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg' }}
                       style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
                     />
                     <View style={{ marginLeft: 10 }}>

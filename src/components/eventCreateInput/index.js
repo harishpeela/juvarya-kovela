@@ -304,7 +304,7 @@ export const EventInput3 = ({
         <TextInput
           value={value1}
           placeholder={placeholder}
-          style={{marginLeft: 5, width: '60%', flexDirection: 'row'}}
+          style={{marginLeft: 5, width: '100%', flexDirection: 'row'}}
           editable={false}
         />
       </View>
