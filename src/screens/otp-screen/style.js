@@ -35,7 +35,7 @@ export const styles = StyleSheet.create({
     height: 38,
     width: 38,
     fontSize: 14,
-    margin: 15,
+    margin: 12,
     borderBottomWidth: 1,
     backgroundColor: colors.white,
   },
