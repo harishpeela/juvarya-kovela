@@ -30,15 +30,17 @@ const InvitationScreen = ({navigation, route}) => {
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.profilemembership, {
+                navigation.navigate(allTexts.screenNames.profilememberships, {
                   roleId: roleId,
                 }),
             },
           ]);
         } else {
+          alert('some thing went wrong')
           console.log(error, 'error');
         }
       } catch (error) {
+        alert('some thing went wrong');
         console.log('error in invite membership api', error);
       }
     } else {

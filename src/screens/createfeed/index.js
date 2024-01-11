@@ -159,6 +159,7 @@ const CreateFeed = ({route, navigation}) => {
                 <Icon
                   onPress={() => {
                     setImage(null);
+                    navigation.goBack();
                   }}
                   name="closecircle"
                   color={colors.orangeColor}

@@ -119,7 +119,7 @@ const UserFeedScreen = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: isDarkMode ? 'white' : 'white',
+        // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
         <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
