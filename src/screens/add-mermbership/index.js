@@ -118,7 +118,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
             defaultButtonText="Type"
             renderDropdownIcon={() => (
               <View>
-                <Icon color={'white'} size={20} name="down" />
+                <Icon color={'black'} size={20} name="down" />
               </View>
             )}
           />

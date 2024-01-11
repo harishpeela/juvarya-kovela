@@ -81,6 +81,7 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
+          didCancel: navigation.navigate(allTexts.screenNames.viewtempleprofile),
           // maxHeight: 2080,
           // maxWidth: 2080,
         },
@@ -144,7 +145,6 @@ const CreateFeed = ({route, navigation}) => {
       data,
     });
   };
-  console.log('imageProp', image);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -159,7 +159,7 @@ const CreateFeed = ({route, navigation}) => {
                 <Icon
                   onPress={() => {
                     setImage(null);
-                    navigation.goBack();
+                    console.log('clicked')
                   }}
                   name="closecircle"
                   color={colors.orangeColor}

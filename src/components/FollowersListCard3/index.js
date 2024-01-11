@@ -20,11 +20,10 @@ const FollowersListCard3 = ({data, navigation}) => {
         renderItem={({item, index}) => (
           <TouchableOpacity
             style={styles.listItemContainer}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.membershipdetails, {
-                data: item,
-              }),
-                console.log('item', item);
+            onPress={() => { alert('page under development')
+              // navigation.navigate(allTexts.screenNames.membershipdetails, {
+              //   data: item,
+              // })
             }}>
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
