@@ -366,7 +366,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
-                  onPress={() => navigation.navigate('TempleCrew')}>
+                  onPress={() => navigation.navigate('TempleCrew', {
+                    id:trfdata?.jtProfile
+                  })}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (

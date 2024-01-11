@@ -34,6 +34,7 @@ import {
   ProfileMembership,
   AddMemebershipDetails,
   SeeAll,
+  NearByTemplesSeeAll,
   Feeds,
   Notifications,
   ViewTempleProfile,
@@ -101,6 +102,7 @@ const App = () => {
       profilemembership,
       addMembershipDetails,
       seeall,
+      nearByTempleSeeAll,
       feeds,
       notification,
       viewtempleprofile,
@@ -433,6 +435,13 @@ const App = () => {
         <Stack.Screen
           name={seeall}
           component={SeeAll}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={nearByTempleSeeAll}
+          component={NearByTemplesSeeAll}
           options={{
             headerShown: false,
           }}

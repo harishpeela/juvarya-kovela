@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect,useContext} from 'react';
 import {View, Text, FlatList} from 'react-native';
 import { CrewCard } from '../../components';
+import ApplicationContext from '../../utils/context-api/Context';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {
   BackHeaderNew,
@@ -20,6 +21,7 @@ import {Ellipsis} from '../../components';
 import {TopBarcard} from '../../components';
 import {NewTempleCrew} from '../../utils/api';
 const TempleCrew = ({route, navigation}) => {
+  
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -49,7 +51,7 @@ const TempleCrew = ({route, navigation}) => {
 
   const templeCrewDetails = async () => {
     setLoader(true);
-    let result = await NewTempleCrew(1);
+    let result = await NewTempleCrew(id);
     console.log('result.date', result.data);
     if(result){
         setData(result?.data);
