@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { allTexts, colors } from '../../common';
-export const MemberShipCard = ({ data, onPress, txt, nav }) => {
+export const MemberShipCard = ({ data, onPress, txt, nav, roleId }) => {
   console.log(data?.id, '==========');
   //salePrice//
   return (
@@ -65,7 +65,8 @@ export const MemberShipCard = ({ data, onPress, txt, nav }) => {
                 //   <Text style={styles.typetext}>BASIC</Text>
                 // </TouchableOpacity>
                 <TouchableOpacity style={{width: '100%'}} onPress={() => nav.navigate(allTexts.screenNames.profilemembership, {
-                  id: item?.id
+                  id: item?.id,
+                  roleId:roleId
                 })}>
                   <View style={{ }}>
                   <MaterialCommunityIcons
@@ -88,17 +89,6 @@ export const MemberShipCard = ({ data, onPress, txt, nav }) => {
                 </TouchableOpacity>
               )}
             </View>
-            {/* <View style={styles.underLine} />
-            <View>
-              <View style={styles.secondContainer}>
-                <View style={{ alignItems: 'center' }}>
-                  <Text style={styles.offerPrice}> ₹299</Text>
-                </View>
-                <TouchableOpacity style={styles.button} onPress={onPress}>
-                  <Text style={styles.buttext}>{txt}</Text>
-                </TouchableOpacity>
-              </View>
-            </View> */}
           </LinearGradient>
         )}
       />
