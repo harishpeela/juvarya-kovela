@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   View,
   ToastAndroid,
@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import {
   EventInput,
   EventInput1,
@@ -18,34 +18,34 @@ import {
   ProfileInfo,
   TopBarcard,
 } from '../../components';
-import { InputField } from '../../components/inputfield';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { allTexts, colors } from '../../common';
+import {InputField} from '../../components/inputfield';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { Formik } from 'formik';
-import { UpdateProfileValidation } from '../../common/schemas';
-import { styles } from './styles'; // Update this import based on your project structure
-import { BackHeader, BackgroundImage } from '../../components';
+import {Formik} from 'formik';
+import {UpdateProfileValidation} from '../../common/schemas';
+import {styles} from './styles'; // Update this import based on your project structure
+import {BackHeader, BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import { Update_Profile } from '../../utils/api';
-import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
+import {Update_Profile} from '../../utils/api';
+import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
+import {EventInput2, EventInput3} from '../../components/eventCreateInput';
 
-const UpdateProfile = ({ navigation }) => {
+const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const {
-    buttonTexts: { updateProfile },
+    buttonTexts: {updateProfile},
     headings: {
-      inputTitles: { },
+      inputTitles: {},
     },
   } = allTexts;
 
-  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   console.log('userDe', userDetails);
 
   const [gotraValue, setGotraValue] = useState('');
@@ -63,7 +63,7 @@ const UpdateProfile = ({ navigation }) => {
   const [isRoleSelected, setIsRoleSelected] = useState('');
   const [toDate, setToDate] = useState(new Date());
   const [DE, setDE] = useState(false);
-  const [pinErr, setPinErr] = useState(false)
+  const [pinErr, setPinErr] = useState(false);
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -82,7 +82,7 @@ const UpdateProfile = ({ navigation }) => {
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
     console.log('frondatew', date);
-    var formattedDate = format(date, "dd-MM-yyyy");
+    var formattedDate = format(date, 'dd-MM-yyyy');
     console.log(formattedDate, '====<> date');
     let payload = {
       dob: formattedDate,
@@ -90,20 +90,34 @@ const UpdateProfile = ({ navigation }) => {
       gothra: gotraValue,
     };
     console.log(payload, 'payload');
-    if (toDate === '' || isRoleSelected === '' || gotraValue === '' || phone === '' || name === '' || pincode === '') {
+    if (
+      toDate === '' ||
+      isRoleSelected === '' ||
+      gotraValue === '' ||
+      phone === '' ||
+      name === '' ||
+      pincode === ''
+    ) {
       setEventError(true);
       console.log('1');
       setPV(true);
       setGV(true);
       setDropDownError(true);
       setDE(true);
-      setPinErr(true)
-    } else if (gotraValue && toDate && isRoleSelected && pincode && phone && name) {
+      setPinErr(true);
+    } else if (
+      gotraValue &&
+      toDate &&
+      isRoleSelected &&
+      pincode &&
+      phone &&
+      name
+    ) {
       setEventError(false);
       setPV(false);
       setGV(false);
-      setDropDownError(false)
-      setPinErr(false)
+      setDropDownError(false);
+      setPinErr(false);
       setDE(true);
       console.log('jhasb', toDate, isRoleSelected, gotraValue, phone, pincode);
       try {
@@ -123,28 +137,27 @@ const UpdateProfile = ({ navigation }) => {
       } catch (error) {
         console.error('Error fetching gender data:', error);
       }
-    }
-    else if (toDate) {
+    } else if (toDate) {
       console.log('2');
-      setDE(false)
+      setDE(false);
     } else if (isRoleSelected) {
       console.log('6');
 
-      setDropDownError(false)
+      setDropDownError(false);
     } else if (gotraValue) {
       console.log('3');
-      setGV(false)
+      setGV(false);
     } else if (phone?.length < 10 || phone?.length > 10) {
       console.log('4');
-      setPV(true)
+      setPV(true);
     } else if (phone?.length === 10) {
-      setPV(false)
+      setPV(false);
     } else if (name) {
       console.log('5');
-      setEventError(false)
+      setEventError(false);
     } else if (pincode) {
       console.log('7');
-      setPinErr(false)
+      setPinErr(false);
     }
   };
   return (
@@ -156,8 +169,8 @@ const UpdateProfile = ({ navigation }) => {
             back={true}
             navigation={navigation}></TopBarcard>
         </View>
-        <View style={{ marginTop: '25%' }}>
-          <View style={{ bottom: '8%' }}>
+        <View style={{marginTop: '25%'}}>
+          <View style={{bottom: '8%'}}>
             <EventInput3
               lable={'Name'}
               user={true}
@@ -184,16 +197,22 @@ const UpdateProfile = ({ navigation }) => {
             />
             <EventInput
               lable={'Phone Number'}
-              placeholder={'Phone Number'}
+              placeholder={userDetails?.primaryContact}
               phone={true}
               height={50}
               value={phone}
               keyboardType={'numeric'}
-              onChangeText={text => { setPhone(text); setPV(false) }}
+              onChangeText={text => {
+                setPhone(text);
+                setPV(false);
+              }}
             />
             {PV && (
-              <View style={{ alignItems: 'center' }}>
-                <Text style={{ color: colors.red1 }}> please enter phone number</Text>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{color: colors.red1}}>
+                  {' '}
+                  please enter phone number
+                </Text>
               </View>
             )}
             <TouchableOpacity>
@@ -227,7 +246,7 @@ const UpdateProfile = ({ navigation }) => {
                   }}
                   dropdownIconPosition="left"
                   defaultButtonText="Gender"
-                  dropdownStyle={{ paddingTop: 10, borderRadius: 20 }}
+                  dropdownStyle={{paddingTop: 10, borderRadius: 20}}
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
@@ -239,7 +258,7 @@ const UpdateProfile = ({ navigation }) => {
                         name="transgender-alt"
                         size={20}
                         color={colors.orangeColor}
-                        style={{ marginLeft: 10 }}
+                        style={{marginLeft: 10}}
                       />
                     </View>
                   )}
@@ -247,8 +266,8 @@ const UpdateProfile = ({ navigation }) => {
               </View>
             </TouchableOpacity>
             {dropDownError && (
-              <View style={{ alignItems: 'center' }}>
-                <Text style={{ color: colors.red1 }}> please select gender</Text>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{color: colors.red1}}> please select gender</Text>
               </View>
             )}
             <EventInput
@@ -256,12 +275,15 @@ const UpdateProfile = ({ navigation }) => {
               gotra={true}
               placeholder={'Gotra'}
               height={50}
-              onChangeText={text => { setGotraValue(text); setGV(false) }}
+              onChangeText={text => {
+                setGotraValue(text);
+                setGV(false);
+              }}
               value={gotraValue}
             />
             {GV && (
-              <View style={{ alignItems: 'center' }}>
-                <Text style={{ color: colors.red1 }}> please enter Gotra</Text>
+              <View style={{alignItems: 'center'}}>
+                <Text style={{color: colors.red1}}> please enter Gotra</Text>
               </View>
             )}
             <View
@@ -269,7 +291,7 @@ const UpdateProfile = ({ navigation }) => {
                 flexDirection: 'row',
                 marginLeft: '6%',
               }}>
-              <View style={{ width: '60%', marginTop: 5 }}>
+              <View style={{width: '60%', marginTop: 5}}>
                 <EventInput2
                   lable={'Date of Birth'}
                   height={50}
@@ -283,27 +305,31 @@ const UpdateProfile = ({ navigation }) => {
                   onConfirm={HandleCnfrm}
                   onCancel={HideDatePicker}
                 />
-
               </View>
-              <View style={{ width: '45%', right: 45, marginTop: 5 }}>
+              <View style={{width: '45%', right: 45, marginTop: 5}}>
                 <EventInput
                   lable={'Pin Code'}
                   // keyboardType={true}
                   pincode={true}
                   placeholder={'Pincode'}
                   height={50}
-                  onChangeText={text => { setPincode(text); setPinErr(false) }}
+                  onChangeText={text => {
+                    setPincode(text);
+                    setPinErr(false);
+                  }}
                   value={pincode}
                 />
                 {pinErr && (
-                  <View style={{ alignItems: 'center' }}>
-                    <Text style={{ color: colors.red1 }}> please enter Gotra</Text>
+                  <View style={{alignItems: 'center'}}>
+                    <Text style={{color: colors.red1}}>
+                      {' '}
+                      please enter Gotra
+                    </Text>
                   </View>
                 )}
               </View>
             </View>
-            <View
-              style={{ width: '80%', alignSelf: 'center', marginTop: 50 }}>
+            <View style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
               <PrimaryButton
                 text={'Update'}
                 bgColor={colors.orangeColor}
