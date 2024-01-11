@@ -67,7 +67,7 @@ const ProfileMemberShips = ({navigation, route}) => {
       <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
         {membership?.length  ? (
           <MemberShipCard
-          data={data}
+          data={membership}
           txt={
             roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
               ? `${membership?.length ? membership?.length : '0'} Membership`

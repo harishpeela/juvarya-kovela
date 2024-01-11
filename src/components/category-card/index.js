@@ -112,18 +112,14 @@ export const UserFeedCompList = ({
   }).current;
 
   return (
-    
     <View style={styles.postContainer} key={post?.id}>
-      
       <View style={styles.postHeader}>
-
         <TouchableOpacity style={{ marginBottom: 5 }} onPress={onPressTitle}>
-
           <Image
             source={{
               uri:
                 post?.jtProfileDTO?.logo ||
-                'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1686287797319img.jpg',
+                'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
             }}
             style={styles.profileImage}
           />
@@ -141,7 +137,6 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
-
       <View>
         <FlatList
           data={post?.mediaList}
@@ -164,7 +159,7 @@ export const UserFeedCompList = ({
                       flex: 1,
                       height: 350,
                       width,
-                      resizeMode: 'stretch',
+                      // resizeMode: 'stretch',
                       backgroundColor: 'black',
                     }}
                   />
