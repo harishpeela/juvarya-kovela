@@ -104,7 +104,7 @@ const Favorite = ({navigation}) => {
           <View style={styles.searchbarContainer}>
             <View>
               <SearchBar
-                placeHolder={'Search Temples'}
+                placeHolder={'Search Favourites'}
                 onCrossPress={() => {
                   setSeracherdText('');
                   getTemples();
@@ -118,7 +118,7 @@ const Favorite = ({navigation}) => {
           </View>
         </TopBarcard>
       </View>
-      <View style={styles.headerContainer} />
+      {/* <View style={styles.headerContainer} /> */}
       <View style={styles.cardContainer}>
         {loading ? (
           <View style={styles.loaderContainer}>
