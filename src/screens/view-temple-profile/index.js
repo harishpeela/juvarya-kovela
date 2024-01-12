@@ -73,7 +73,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
   //   // '<==============',
   //   // userDetails,
   // );
-  console.log('data', data);;
   const [loader, setloader] = useState(false);
   const [donationLoader,setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
@@ -213,7 +212,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
-        console.log('media', media);
         setloader(false);
       } else {
         setPostImages(0);
@@ -281,7 +279,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setDonationLoader(false)
     }
   };
-
+console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
       style={{
@@ -366,7 +364,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
-                  onPress={() => navigation.navigate('TempleCrew')}>
+                  onPress={() => navigation.navigate('TempleCrew', {
+                    id:trfdata?.jtProfile
+                  })}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
@@ -426,6 +426,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }
                   onPress={() => {
+                     console.log('jha sjxh amjsh xmhb asm ja s', roleId);
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
                       {
@@ -435,21 +436,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     );
                   }}
                 />
-                {/* <CreateFeedTabComp
-                    roleId={roleId}
-                    onPlusPress={() =>
-                      navigation.navigate(allTexts?.screenNames.createfeed, {
-                        data: data,
-                      })
-                    }
-                  /> */}
               </View>
-              {/* </View> */}
-              {/* <TouchableOpacity  onPress={() =>
-                    navigation.navigate(allTexts?.screenNames?.donationslist, {
-                      data: trfData,
-                    })
-                  }> */}
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ):(
@@ -469,15 +456,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   ""
                 )
               )}
-              
-              
-              {/* <Danation_Add_Card onPress={() =>
-                    navigation.navigate(allTexts?.screenNames?.donationslist, {
-                      data: trfData,
-                    })}
-                  roleId={roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'}
-                /> */}
-              {/* </TouchableOpacity> */}
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
@@ -569,9 +547,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
 
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate(allTexts.screenNames.createfeed, {
+                {navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
-                })
+                }); setIsVisible(!isVisible)}
               }
               style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />

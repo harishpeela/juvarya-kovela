@@ -26,12 +26,12 @@ export const TopBarcard = ({
   navCreate,
   height,
 }) => {
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <View
           style={{
+            flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent:
@@ -39,10 +39,10 @@ export const TopBarcard = ({
                 ? 'space-between'
                 : 'space-between',
             marginTop: '22%',
-            marginHorizontal: 10,
+            marginHorizontal: 5,
           }}>
           {menu && (
-            <View style={{marginLeft: 10}}>
+            <View style={{marginLeft: 10, flex: 1}}>
               <TouchableOpacity
                 onPress={() => navigation.navigate(allTexts.tabNames.profile)}
                 style={styles.userIcon}>
@@ -104,17 +104,18 @@ export const TopBarcard = ({
             <Text
               style={{
                 fontSize: 20,
+                flex: 10,
                 fontWeight: 'bold',
-                marginHorizontal: '25%',
+                marginHorizontal: '20%',
                 color: 'white',
-                alignSelf: 'center',
+                textAlign: 'center',
               }}>
               {txt}
             </Text>
           )}
           {isBell && (
             <TouchableOpacity
-              style={{marginLeft: '5%'}}
+              style={{marginRight: '5%', flex: 1}}
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.notification)
               }>
@@ -124,14 +125,13 @@ export const TopBarcard = ({
               />
             </TouchableOpacity>
           )}
-          {(roleId === 'ROLE_ITEM_ADMIN' ||
-            roleType === 'ROLE_ADMIN') && (
-              <TouchableOpacity
-                style={{position: 'absolute', right: '-8%'}}
-                onPress={navCreate}>
-                <Text style={styles.joinText}>Create</Text>
-              </TouchableOpacity>
-            )}
+          {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
+            <TouchableOpacity
+              style={{position: 'absolute', right: '-8%'}}
+              onPress={navCreate}>
+              <Text style={styles.joinText}>Create</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
       {children}
