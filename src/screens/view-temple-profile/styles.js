@@ -104,13 +104,14 @@ export const styles = StyleSheet.create({
     },
   },
   titleHeader: {
-    fontSize: 28,
+    fontSize: 18,
     fontWeight: 'bold',
     alignSelf: 'center',
+    justifyContent:'center',
     fontFamily: 'icomoon',
     color: '#CC4501',
-    marginTop: 20,
     textTransform: 'capitalize',
+    
   },
   eventsCard: {
     borderWidth: 1,
