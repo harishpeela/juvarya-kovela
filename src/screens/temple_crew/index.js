@@ -35,9 +35,9 @@ const TempleCrew = ({ route, navigation }) => {
     setLoader(true);
     try {
       let result = await NewTempleCrew(id, 0, 20);
-      console.log('result.date in temple crew', result);
+      console.log('result.date in temple crew', result?.data);
       if (result) {
-        setData(result?.data);
+        setData(result?.data?.customerRoles);
         setLoader(false);
       } else {
         setData([]);
@@ -45,7 +45,7 @@ const TempleCrew = ({ route, navigation }) => {
       }
     } catch (error) {
       setLoader(false);
-      console.log('error', error)
+      console.log('error in crew', error)
     }
   };
   useEffect(() => {

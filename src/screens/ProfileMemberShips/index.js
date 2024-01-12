@@ -31,7 +31,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     setLoader(true);
     try {
       let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
-      console.log('res', result);
+      // console.log('res', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
