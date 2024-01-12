@@ -84,7 +84,7 @@ export const TempleListCard = ({
               ? post?.logo
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
-          style={{ height: '100%', width: 230, borderRadius: 20, resizeMode:'stretch' }}
+          style={{ height: '100%', width: 230, borderRadius: 20, resizeMode:'cover' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 

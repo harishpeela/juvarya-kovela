@@ -209,7 +209,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
     justifyContent: 'space-around',
-    margin: 30,
+    margin: 15,
   },
   seasonal: {
     alignSelf: 'center',

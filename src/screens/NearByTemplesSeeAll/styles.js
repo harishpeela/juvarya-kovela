@@ -6,8 +6,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card: {
-    margin: 5,
-    padding: 5,
+    margin: 3,
+    padding: 3,
+    marginBottom:8,
     borderWidth: 1,
     borderColor: 'lightgray',
     borderRadius: 10,
