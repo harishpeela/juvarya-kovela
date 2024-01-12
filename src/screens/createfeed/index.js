@@ -17,7 +17,7 @@ import {
   PrimaryButton,
   TopBarcard,
 } from '../../components';
-import { Create_Feed } from '../../utils/api';
+import {Create_Feed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Data} from '../home-feed/formateDetails';
@@ -56,20 +56,19 @@ const CreateFeed = ({route, navigation}) => {
     });
     console.log('formdata', formdata);
     let result = await Create_Feed(formdata);
-        if (result?.data?.message === 'Feed created') {
-          Alert.alert('Success', `${result?.data?.message} successfully`, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.bottomTab),
-            },
-          ]);
-        } else {
-          alert('somet thing went wrong');
-          setLoading(false);
-        }
-      // })
-      // .catch(error => alert(error));
+    if (result?.data?.message === 'Feed created') {
+      Alert.alert('Success', `${result?.data?.message} successfully`, [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.bottomTab),
+        },
+      ]);
+    } else {
+      alert('somet thing went wrong');
+      setLoading(false);
+    }
+    // })
+    // .catch(error => alert(error));
   };
 
   const uploadPhoto = () => {
@@ -81,7 +80,9 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          didCancel: navigation.navigate(allTexts.screenNames.viewtempleprofile),
+          didCancel: navigation.navigate(
+            allTexts.screenNames.viewtempleprofile,
+          ),
           // maxHeight: 2080,
           // maxWidth: 2080,
         },
