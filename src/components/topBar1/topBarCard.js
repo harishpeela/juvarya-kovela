@@ -34,10 +34,10 @@ export const TopBarcard = ({
             flex: 1,
             flexDirection: 'row',
             alignItems: 'center',
-            // justifyContent:
-            //   menu || isBell || roleType || roleId || back
-            //     ? 'space-evenly'
-            //     : 'space-evenly',
+            justifyContent:
+              menu || isBell || roleType || roleId || back
+                ? 'space-between'
+                : 'space-between',
             marginTop: '22%',
             marginHorizontal: 5,
           }}>

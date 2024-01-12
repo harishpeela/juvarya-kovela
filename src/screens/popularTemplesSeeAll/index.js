@@ -51,6 +51,10 @@ const SeeAll = ({ navigation }) => {
     setApiPageNo(apiPageNo + 1);
     setIsLoading(false);
   };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+    // FollowandUnFollow(data?.selectedId);
+  };
   useEffect(() => {
     if (apiPageNo >= 0) {
       PopularSeeAllTemples(apiPageNo, 20);
@@ -100,10 +104,10 @@ const SeeAll = ({ navigation }) => {
                       style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
                     />
                     <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: isDarkMode ? 'black' : 'black' }}>{item.name}</Text>
-                      <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
+                      <Text style={{ color: colors.orangeColor }}>{item.name}</Text>
+                      {/* <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
                         {item.description}{' '}
-                      </Text>
+                      </Text> */}
                     </View>
                   </View>
                 </TouchableOpacity>

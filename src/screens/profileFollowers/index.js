@@ -8,7 +8,6 @@ import {
   SearchBar,
   Sort
 } from '../../components';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { TempleFollowersList } from '../../utils/api';
 import { Loader } from '../../components';
 import { colors } from '../../common';
@@ -66,11 +65,11 @@ const FollowersMembership = ({ route, navigation }) => {
               <SearchBar
                 placeHolder={'Search followers'}
                 onCrossPress={() => {
-                  setSeracherdText('');
+                  setSearchedText('');
                   getTemples();
                 }}
                 onTextChange={e => {
-                  setSeracherdText(e);
+                  setSearchedText(e);
                   performFilter(e);
                 }}
               />

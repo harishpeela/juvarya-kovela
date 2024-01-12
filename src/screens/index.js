@@ -50,6 +50,7 @@ import MemberShipDetails from './membershipDetails';
 import InvitationScreen from './Invitation';
 import EventDetailsNew from '../components/Event-Details';
 import TempleCrew from './temple_crew';
+import NearByTemplesSeeAll from './NearByTemplesSeeAll';
 export {
   CreatePost,
   Seemore,
@@ -103,4 +104,5 @@ export {
   InvitationScreen,
   EventDetailsNew,
   TempleCrew,
+  NearByTemplesSeeAll,
 };

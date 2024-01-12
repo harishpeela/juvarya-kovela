@@ -14,7 +14,7 @@ const Favorite = ({navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
-  const [loading, setLoading] = useState();
+  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [seracherdText, setSeracherdText] = useState('');
   const [pageNo, setPageNo] = useState(0);
@@ -97,7 +97,7 @@ const Favorite = ({navigation}) => {
     <SafeAreaView
       style={{
         ...styles.wrapper,
-        backgroundColor: isDarkMode ? 'white' : 'white',
+        // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >

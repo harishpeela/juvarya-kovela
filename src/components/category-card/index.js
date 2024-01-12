@@ -159,7 +159,7 @@ export const UserFeedCompList = ({
                       flex: 1,
                       height: 350,
                       width,
-                      // resizeMode: 'stretch',
+                      resizeMode: 'contain',
                       backgroundColor: 'black',
                     }}
                   />

@@ -45,9 +45,7 @@ const UpdateProfile = ({navigation}) => {
     },
   } = allTexts;
 
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  console.log('userDe', userDetails);
-
+  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
@@ -169,8 +167,8 @@ const UpdateProfile = ({navigation}) => {
             back={true}
             navigation={navigation}></TopBarcard>
         </View>
-        <View style={{marginTop: '25%'}}>
-          <View style={{bottom: '8%'}}>
+        <View style={{ marginTop: '25%' }}>
+          <View style={{ bottom: '8%' }}>
             <EventInput3
               lable={'Name'}
               user={true}

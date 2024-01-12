@@ -146,7 +146,6 @@ const CreateFeed = ({route, navigation}) => {
       data,
     });
   };
-  console.log('imageProp', image);
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -161,6 +160,7 @@ const CreateFeed = ({route, navigation}) => {
                 <Icon
                   onPress={() => {
                     setImage(null);
+                    console.log('clicked')
                   }}
                   name="closecircle"
                   color={colors.orangeColor}

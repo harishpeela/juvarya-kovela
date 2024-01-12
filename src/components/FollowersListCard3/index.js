@@ -20,11 +20,10 @@ const FollowersListCard3 = ({data, navigation}) => {
         renderItem={({item, index}) => (
           <TouchableOpacity
             style={styles.listItemContainer}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.membershipdetails, {
-                data: item,
-              }),
-                console.log('item', item);
+            onPress={() => { alert('page under development')
+              // navigation.navigate(allTexts.screenNames.membershipdetails, {
+              //   data: item,
+              // })
             }}>
             <View style={styles.cardContainer}>
               <View style={styles.imageContainer}>
@@ -49,9 +48,9 @@ const FollowersListCard3 = ({data, navigation}) => {
                     numberOfLines={1}
                     ellipsizeMode="tail"
                     style={styles.firstName}>
-                    {item.loggedInUser?.firstName}
+                    {item.invitedCustomer?.firstName}
                   </Text>
-                  <Text> MemberShip Id :{item?.membershipId} </Text>
+                  <Text>MemberShip Id :{item?.membershipId} </Text>
                   <View style={styles.textContainer2}>
                     <Text style={styles.premiumText}>
                       {item?.membershipDto?.type}

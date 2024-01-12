@@ -56,7 +56,7 @@ const UserFeedScreen = ({navigation}) => {
     setloader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('========>', result?.data);
+      // console.log('========>', result?.data);
       if (result && result?.status === 200) {
         setloader(false);
         setHomeFeedList(result?.data?.jtFeeds);
@@ -119,7 +119,7 @@ const UserFeedScreen = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: isDarkMode ? 'white' : 'white',
+        // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
         <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />

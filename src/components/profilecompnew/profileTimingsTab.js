@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { colors } from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProfileTimingTabs = ({ data }) => {
-  console.log('profileTimeing tab', data);
   console.log('1=====>');
   return (
     <View style={styles.container}>
@@ -14,7 +13,7 @@ export const ProfileTimingTabs = ({ data }) => {
               padding: 5,
               width: 30,
               textAlign: 'center',
-              marginRight: 25,
+              marginRight: 10,
               color: colors.white,
               backgroundColor: colors.orangeColor,
             }}>
@@ -23,7 +22,7 @@ export const ProfileTimingTabs = ({ data }) => {
           <Text style={{ color: colors.black, right: 10 }}> Top Temple</Text>
         </View>
       ) : (
-        <Text>Hello</Text>
+        ''
       )}
 
       <View style={styles.time}>

@@ -1,10 +1,11 @@
 import {Text, View, TouchableOpacity} from 'react-native';
 import React, {useState, useEffect, useContext} from 'react';
 import {MemberShipCard, TopBarcard} from '../../components';
-import {allTexts} from '../../common';
+import {allTexts, colors} from '../../common';
 import {styles} from './styles';
 import {MemberShipList} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
+import { Loader } from '../../components';
 const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {roleId, trfdata} = route.params || {};
@@ -46,7 +47,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     MembershipData();
     Type();
   }, []);
-  console.log('roleType roletype', roleType, roleId);
+  console.log('roleType roletype', roleId);
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
@@ -64,26 +65,34 @@ const ProfileMemberShips = ({navigation, route}) => {
           }}
         />
       </View>
-      <View style={{ marginTop: '10%', marginHorizontal: '5%' }}>
-        {membership?.length  ? (
-          <MemberShipCard
-          data={membership}
-          txt={
-            roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-              ? `${membership?.length ? membership?.length : '0'} Membership`
-              : 'Join Now'
-          }
-          onPress={() =>
-            navigation.navigate(allTexts.screenNames.profilemembership, {
-              roleId: roleId,
-            })
-          }
-        />
+      <View style={{ marginTop: '2%', marginHorizontal: '2%' }}>
+        {loader ? (
+          <Loader size={'small'} color={colors.orangeColor} />
         ) : (
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <Text> No data to display</Text>
-            </View>
+          membership?.length  ? (
+            <MemberShipCard
+            data={membership}
+            roleId={roleId}
+            txt={
+              roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                ?  'Membership'
+                : 'Join Now'
+            }
+            nav={navigation}
+            // onPress={() =>
+            //   navigation.navigate(allTexts.screenNames.profilemembership, {
+            //     roleId: roleId,
+            //   })
+            // }
+           
+          />
+          ) : (
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+              <Text> No data to display</Text>
+              </View>
+          )
         )}
+        
       </View>
     </View>
   );

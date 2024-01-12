@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         elevation: 3,
         shadowColor: colors.black,
         backgroundColor: colors.white,
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         borderRadius: 24,
     },
     secondContainer: {
@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         width: 120,
         borderRadius: 120 / 2,
         marginLeft: '15%',
-        marginTop: 15
+        marginTop: 15,
     },
     dateContainer: {
         borderRadius: 2,
@@ -44,7 +44,8 @@ export const styles = StyleSheet.create({
         color: colors.black,
         fontSize: fontSize.small,
         fontWeight: '50',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginTop: '5%'
     },
     locationAddressContainer: {
         marginTop: 5,
