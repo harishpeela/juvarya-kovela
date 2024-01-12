@@ -66,7 +66,7 @@ export const ProfileSeconTab = ({title, nameData}) => {
 
       <View style={styles.footerBody}>
         <Text
-          style={{...styles.desciption, color: isDarkMode ? 'gray' : 'gray'}}>
+          style={{...styles.desciption, color: isDarkMode ? 'gray' : 'gray',fontSize:13}}>
           {nameData?.description}
         </Text>
         {/* •  */}

@@ -20,42 +20,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
-  // const PopularSeeAllTemples = async (pgNo, pgToNo) => {
-  //   setIsLoading(true);
-  //   try {
-  //     let result = await PopularTemples(pgNo, pgToNo);
-  //     // console.log('see all', result?.data);
-  //     if (result.status === 200) {
-  //       let PopData = result?.data?.data;
-  //       setPopTemples([...popTemples, ...PopData]);
-  //       setIsLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in see all popular temples api', error);
-  //   }
-  // };
-
-  // const renderLoder = () => {
-  //   return !isLoading ? (
-  //     <Text style={{ alignSelf: 'center', marginBottom: '5%', color: 'black' }}>
-  //       {' '}
-  //       {/* No Items to display */}{''}
-  //     </Text>
-  //   ) : (
-  //     <View>
-  //       <Loader size={'large'} color={colors.orangeColor} />
-  //     </View>
-  //   );
-  // };
-  // const loadMoreItems = () => {
-  //   setApiPageNo(apiPageNo + 1);
-  //   setIsLoading(false);
-  // };
-  // useEffect(() => {
-  //   if (apiPageNo >= 0) {
-  //     PopularSeeAllTemples(apiPageNo, 20);
-  //   }
-  // }, []);
+ 
   console.log('pop see all temples', popTemples);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
@@ -96,7 +61,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                         ? item?.logo
                         : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                     }}
-                    style={{height: 70, width: 70, borderRadius: 70 / 2}}
+                    style={{height: 60, width: 60, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
                     <Text style={{color: isDarkMode ? 'black' : 'black'}}>

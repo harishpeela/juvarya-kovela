@@ -143,7 +143,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                     data: filteredList,
                   });
                 }}>
-                <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                <Text style={{color: colors.orangeColor, fontSize: 16}}>
                   See all
                 </Text>
               </TouchableOpacity>
@@ -206,7 +206,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                     data: NearByData,
                   });
                 }}>
-                <Text style={{color: colors.orangeColor, fontSize: 18}}>
+                <Text style={{color: colors.orangeColor, fontSize: 16}}>
                   See all
                 </Text>
               </TouchableOpacity>

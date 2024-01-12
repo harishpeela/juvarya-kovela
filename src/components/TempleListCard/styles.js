@@ -4,6 +4,6 @@ export const styles = StyleSheet.create({
   textCard: {
     color: colors.black,
     fontWeight: '500',
-    fontSize: 16,
+    fontSize: 14,
   },
 });

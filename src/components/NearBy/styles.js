@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   popularTextContainer: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '500',
     color: 'black',
   },
