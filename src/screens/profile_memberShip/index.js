@@ -40,8 +40,8 @@ const isDarkMode = useColorScheme() === 'dark';
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MembersList(0, 100);
-      console.log('res', result?.data);
+      let result = await MembersList( id ,0, 100);
+      console.log('res=====>', result?.data);
       let responce = result?.data?.data;
       if (responce) {
         let dataList = responce.filter(item => item).map(({ invitedCustomer, membershipDto, membershipId }) => ({ membershipDto, invitedCustomer, membershipId }));
