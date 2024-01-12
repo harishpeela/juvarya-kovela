@@ -28,7 +28,7 @@ const EventCard2 = ({ navigation, data }) => {
         style={styles.Image}
       />
       <Text style={[styles.festivalText]}>{data?.name?.length < 12 ? data?.name : `${data?.name?.substring(0, 12)} ...`}</Text>
-      <View style={{ borderRadius: 10, backgroundColor: colors.gray,  width: '80%',height: '20%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%' }}>
+      <View style={{ borderRadius: 10, backgroundColor: colors.gray0,  width: '80%',height: '20%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
           <FeatherIcon style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="calendar" size={15} color="white" />
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>{data?.creationTime.slice('0', '10')}</Text>

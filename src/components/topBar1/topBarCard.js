@@ -127,7 +127,7 @@ export const TopBarcard = ({
           )}
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
             <TouchableOpacity
-              style={{position: 'absolute', right: '-8%'}}
+              style={{position: 'absolute', right: '2%'}}
               onPress={navCreate}>
               <Text style={styles.joinText}>Create</Text>
             </TouchableOpacity>
@@ -161,6 +161,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+    marginLeft: 10
   },
   joinText: {
     color: colors.white,
