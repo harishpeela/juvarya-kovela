@@ -382,7 +382,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() => navigation.navigate('TempleCrew', {
-                    id: trfData?.jtProfile
+                    id:trfData?.jtProfile
                   })}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>

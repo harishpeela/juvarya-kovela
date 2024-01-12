@@ -71,5 +71,15 @@ export const styles = StyleSheet.create({
   },
   updateProfileTopCard:{
     height:100
-  }
+  },
+  noText: {
+    flex: 1,
+    alignItems: 'center',
+    marginTop: '75%',
+    ntext: {
+      fontWeight: 'bold',
+      color: colors.orangeColor,
+      fontSize: 20
+    }
+  },
 });
