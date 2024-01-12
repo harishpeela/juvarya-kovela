@@ -355,7 +355,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
 
 
             <View>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '11%' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '13%' }}>
                 <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
                   <Text style={styles.titleHeader}>
                     {trfData?.name?.length < 25
