@@ -77,18 +77,18 @@ export const TempleListCard = ({
           onSelect: onSelect,
         });
       }}>
-      <View style={{  alignItems: 'center', marginTop: 5, height: '70%'}}>
+      <View style={{  alignItems: 'center', marginTop: 5, height: '70%',padding:3,marginTop:8}}>
         <Image
           source={{
             uri: post?.logo
               ? post?.logo
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
-          style={{ height: '100%', width: 230, borderRadius: 20, resizeMode: 'cover' }}
+          style={{ height: '100%', width: 230, borderRadius: 20, resizeMode:'stretch' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 
-      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 15, marginVertical: 10}}>
+      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 15, marginVertical: 6}}>
         <Text style={styles.textCard} numberOfLines={1}>
           {name?.length < 15 ? `${name}` : `${name?.substring(0, 15)}..`}
         </Text>

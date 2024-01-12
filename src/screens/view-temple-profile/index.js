@@ -65,8 +65,8 @@ import UpdatePassword from '../update-password';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
-  const {data} = route.params || {};
+  const { userDetails } = useContext(ApplicationContext);
+  const { data } = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,
@@ -74,7 +74,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   //   // userDetails,
   // );
   const [loader, setloader] = useState(false);
-  const [donationLoader,setDonationLoader] = useState(false);
+  const [donationLoader, setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
   const [trfData, setTrfData] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
@@ -266,20 +266,20 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const dontationValue = async id => {
-    console.log(id,'kkk')
+    console.log(id, 'kkk')
     setDonationLoader(true)
     let result = await getDonationsList(id, 0, 20);
     console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
       setDonationLoader(false)
-    
+
     }
-    else{
+    else {
       setDonationLoader(false)
     }
   };
-console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
+  console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
       style={{
@@ -351,15 +351,32 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
             <View style={{ alignSelf: 'center', marginTop: -15 }}>
               <ProfileImage profileImg={trfData} />
             </View>
-            <Text style={styles.titleHeader}>
-              {trfData?.name?.length < 25
-                ? `${trfData?.name}`
-                : `${trfData?.name?.substring(0, 25)}...`}
-            </Text>
-            <Text style={styles.ratingText}>
+
+
+
+            <View>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '11%' }}>
+                <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
+                  <Text style={styles.titleHeader}>
+                    {trfData?.name?.length < 25
+                      ? `${trfData?.name}`
+                      : `${trfData?.name?.substring(0, 25)}...`}
+                  </Text>
+                </View>
+                {/* <View> */}
+                {/* <Text style={{ width: 50, textAlign: 'center' }}></Text> */}
+                {/* </View> */}
+                {/* <View style={{ flex: 1, height: 1, backgroundColor:'FFF3E5' }} /> */}
+              </View>
+
+            </View>
+
+
+
+            {/* <Text style={styles.ratingText}>
               <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
               {'(15.3k Ratings)'}
-            </Text>
+            </Text> */}
             <View style={{ marginTop: 10 }}>
               {data?.seasonal ? (
                 <TouchableOpacity
@@ -370,7 +387,7 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs data={data}/>
+                <ProfileTimingTabs data={data} />
               )}
             </View>
             <View style={{ marginLeft: 15 }}>
@@ -426,7 +443,7 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }
                   onPress={() => {
-                     console.log('jha sjxh amjsh xmhb asm ja s', roleId);
+                    console.log('jha sjxh amjsh xmhb asm ja s', roleId);
                     navigation.navigate(
                       allTexts.screenNames.profilememberships,
                       {
@@ -439,20 +456,20 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
               </View>
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
-              ):(
-                donationValue?.length  >0?  (
+              ) : (
+                donationValue?.length > 0 ? (
                   <Danation_Add_Card
-                  onPress={() =>
-                    navigation.navigate(allTexts?.screenNames?.donationslist, {
-                      data: trfData,
-                    })
-                    
-                  }
-              roleId={
-                roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-              }
-                />
-                ):(
+                    onPress={() =>
+                      navigation.navigate(allTexts?.screenNames?.donationslist, {
+                        data: trfData,
+                      })
+
+                    }
+                    roleId={
+                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                    }
+                  />
+                ) : (
                   ""
                 )
               )}
@@ -546,10 +563,11 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
             <View style={styles.line} />
 
             <TouchableOpacity
-              onPress={() =>
-                {navigation.navigate(allTexts.screenNames.createfeed, {
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
-                }); setIsVisible(!isVisible)}
+                }); setIsVisible(!isVisible)
+              }
               }
               style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
@@ -562,10 +580,10 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
             </View>
             <TouchableOpacity
               onPress={
-                () => alert('page under development')
-                // navigation.navigate(allTexts.screenNames.profilemembership, {
-                //   id: trfData?.jtProfile,
-                // })
+                () =>
+                  navigation.navigate(allTexts.screenNames.profilememberships, {
+                    id: trfData?.jtProfile,
+                  })
               }>
               <View style={styles.modalContent}>
                 <MaterialIcons
