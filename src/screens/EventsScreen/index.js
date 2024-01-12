@@ -85,7 +85,7 @@ const EventsScreen = ({ navigation }) => {
                 await PopularTemplesss(pageNo, 20);
               }}
               bgColor={colors.white}
-              placeHolder={'Search'}
+              placeHolder={'Search Events'}
             />
             {admin || roleType === 'ROLE_ADMIN' ? (
               <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.addevents)} style={styles.plusContainer}>
