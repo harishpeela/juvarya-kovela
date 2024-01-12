@@ -11,9 +11,7 @@ export const CrewCard = ({data, onPress}) => {
             <View style={styles.bullet} />
           </View>
           <View>
-            <Text style={styles.itemHeading}>{data?.firstName}</Text>
-
-            {/* <Text style={styles.itemLocation}>{`location-${location}`}</Text> */}
+            <Text style={styles.itemHeading}>{data?.name}</Text>
           </View>
         </View>
       </View>

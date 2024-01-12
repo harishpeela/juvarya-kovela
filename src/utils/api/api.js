@@ -20,6 +20,7 @@ export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
 export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
 
+
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
