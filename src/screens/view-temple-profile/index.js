@@ -365,7 +365,7 @@ console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() => navigation.navigate('TempleCrew', {
-                    id:trfdata?.jtProfile
+                    id:trfData?.jtProfile
                   })}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>

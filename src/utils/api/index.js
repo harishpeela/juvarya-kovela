@@ -50,7 +50,7 @@ const endpoints = {
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   MEMBERS_LIST: '/jtProfileMembership/members/list?',
-  TEMPLE_CREW:'/jtprofile/find/users',
+  TEMPLE_CREW:'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
@@ -168,10 +168,10 @@ export const NearByTempleClass = async (classType, pgno, pgsize) => {
     console.log('error in popular temples', error);
   }
 };
-export const NewTempleCrew = async id => {
+export const NewTempleCrew = async (id, pgNo, pgSz) => {
   try {
     let result = await axiosNewData.get(
-      `${endpoints.TEMPLE_CREW}?profileId=${id}`,
+      `${endpoints.TEMPLE_CREW}?profileId=${id}&pageNo=${pgNo}&pageSize=${pgSz}`,
       {
         // retry: 5,
         // retryDelay: 3000,
@@ -179,7 +179,7 @@ export const NewTempleCrew = async id => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in temple crew', error);
   }
 };
 // export const NearByTemple = async (id) => {
