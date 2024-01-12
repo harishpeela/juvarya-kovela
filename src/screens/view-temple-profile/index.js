@@ -358,9 +358,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '13%' }}>
                 <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
                   <Text style={styles.titleHeader}>
-                    {trfData?.name?.length < 25
+                    {/* {trfData?.name?.length < 25
                       ? `${trfData?.name}`
-                      : `${trfData?.name?.substring(0, 25)}...`}
+                      : `${trfData?.name?.substring(0, 25)}...`} */}
+                      {trfData?.name}
                   </Text>
                 </View>
                 {/* <View> */}
