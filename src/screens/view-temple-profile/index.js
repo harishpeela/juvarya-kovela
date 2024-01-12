@@ -387,7 +387,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs data={data} />
+                <ProfileTimingTabs data={trfData} />
               )}
             </View>
             <View style={{ marginLeft: 15 }}>
@@ -566,6 +566,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
+                  classType: trfData?.templeClass,
                 }); setIsVisible(!isVisible)
               }
               }
