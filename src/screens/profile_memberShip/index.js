@@ -90,6 +90,7 @@ const isDarkMode = useColorScheme() === 'dark';
                 <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
                   navigation.navigate(allTexts.screenNames.invitationScreen, {
                     roleId: roleId,
+                    id: id,
                   })
                 }}>
                   <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white}}>Invite</Text>

@@ -12,14 +12,15 @@ const InvitationScreen = ({navigation, route}) => {
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
-  const {roleId} = route.params || {};
+  const {roleId, id} = route.params || {};
+  console.log('-=-=-=-=-=->>', id);
   const MemberShipInviteApi = async () => {
     if (email === '') {
       setError(true);
     } else if (email.includes('.com')) {
       setError(false);
       let payload = {
-        id: 24,
+        id: id,
         email: email,
       };
       try {
@@ -81,7 +82,7 @@ const InvitationScreen = ({navigation, route}) => {
           style={[styles.textInput, !isValidEmail && styles.invalidInput]}
           placeholder="Enter the Email"
           onChangeText={e => setEmail(e)}
-          maxLength={30}
+          maxLength={35}
           value={email}
           placeholderTextColor={isDarkMode ? 'black' : 'black'}
         />
