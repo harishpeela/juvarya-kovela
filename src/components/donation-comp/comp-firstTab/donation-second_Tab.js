@@ -23,10 +23,6 @@ export const Donation_Second_Tab = ({
   dropData,
   onSelect,
   valueRs,
-  mobileValue,
-  emailValue,
-  onChangeEmail,
-  onChangeMobile,
 }) => {
   const [activeIndex, setActiveIndex] = useState();
 
@@ -73,7 +69,7 @@ export const Donation_Second_Tab = ({
           defaultButtonText="Donation Type"
           renderDropdownIcon={() => (
             <View>
-              <Icon color={colors.white} size={16} name="down" />
+              <Icon color={colors.white} size={20} name="down" />
             </View>
           )}
         />
@@ -86,24 +82,6 @@ export const Donation_Second_Tab = ({
           keyboardType="number-pad"
           onChangeText={onChange}
           value={valueRs}
-        />
-      </View>
-      <View style={styles.inputEmail}>
-        <TextInput
-          placeholder="Email Address"
-          style={styles.input}
-          keyboardType="number-pad"
-          onChangeText={onChangeEmail}
-          value={emailValue}
-        />
-      </View>
-      <View style={styles.inputEmail}>
-        <TextInput
-          placeholder="Mobile Number"
-          style={styles.input}
-          keyboardType="number-pad"
-          onChangeText={onChangeMobile}
-          value={mobileValue}
         />
       </View>
       <View style={styles.border} />
@@ -144,7 +122,7 @@ const styles = StyleSheet.create({
   flatlist: {
     padding: 5,
     margin: 5,
-    width: 80,
+    width: 100,
     flexDirection: 'row',
     borderRadius: 25,
     marginTop: 10,
@@ -168,17 +146,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 30,
   },
-  inputEmail: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    marginTop: '2%',
-    backgroundColor: colors.white,
-    borderRadius: 20,
-  },
   input: {
     marginLeft: 40,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: '400',
   },
   border: {
@@ -216,7 +186,7 @@ const styles = StyleSheet.create({
   },
   DTextStyle: {
     fontFamily: fontFamily.popinRegular,
-    fontSize: 16,
+    fontSize: 18,
     color: colors.white,
     textTransform: 'capitalize',
     fontWeight: 'bold',

@@ -87,9 +87,7 @@ const DonationsList = ({navigation, route}) => {
               brColor={colors.gray2}
               brWidth={1}
             />
-              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.donations, {
-                data: data,
-              })} style={styles.plusContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.donations)} style={styles.plusContainer}>
                 <FeatherIcon style={styles.plusIcon} name="plus" size={30} color= {colors.orangeColor} />
               </TouchableOpacity>
       </View>
