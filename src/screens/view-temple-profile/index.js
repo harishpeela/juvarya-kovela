@@ -464,7 +464,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       data: trfData,
                     })
                   }
-                  text={donationValue ? 'no donation yet' : 'No Donation Yet'}
+                  text={donationValue ? 'value' : 'No Donation Yet'}
                   roleId={
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }
