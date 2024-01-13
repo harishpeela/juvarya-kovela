@@ -16,7 +16,6 @@ export const Danation_Add_Card = ({onPress, roleId, text}) => {
         />
         <View style={styles.textContainer}>
           <Text style={styles.secondText}>{text}</Text>
-          
         </View>
       </View>
       {roleId ? (
