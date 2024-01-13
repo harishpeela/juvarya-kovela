@@ -66,7 +66,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   useEffect(() => {
     NearByTemples();
   }, []);
-  console.log('crew datakx====>', NearByData);
 
   const renderLoder = () => {
     return loader ? (

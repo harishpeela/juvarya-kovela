@@ -11,7 +11,7 @@ import { allTexts } from '../../common';
 import RNRestart from 'react-native-restart';
 
 
-// ****   develope Api base urls   *** //
+// ****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
 export const BASEURL = 'https://fanfun.in/customer/api/';
 export const BASE = 'https://fanfun.in/media/';
@@ -20,7 +20,7 @@ export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
 export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
  
-
+ 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,

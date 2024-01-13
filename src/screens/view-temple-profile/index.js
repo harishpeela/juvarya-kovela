@@ -273,7 +273,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
     if (result) {
       setDonationValue(result?.data?.data);
       setDonationLoader(false)
-
     }
     else {
       setDonationLoader(false)
@@ -358,9 +357,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '13%' }}>
                 <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
                   <Text style={styles.titleHeader}>
-                    {trfData?.name?.length < 25
+                    {/* {trfData?.name?.length < 25
                       ? `${trfData?.name}`
-                      : `${trfData?.name?.substring(0, 25)}...`}
+                      : `${trfData?.name?.substring(0, 25)}...`} */}
+                      {trfData?.name}
                   </Text>
                 </View>
                 {/* <View> */}
@@ -382,12 +382,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() => navigation.navigate('TempleCrew', {
-                    id: trfData?.jtProfile
+                    id:trfData?.jtProfile
                   })}>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs data={data} />
+                <ProfileTimingTabs data={trfData} />
               )}
             </View>
             <View style={{ marginLeft: 15 }}>
@@ -457,20 +457,20 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : (
-                donationValue?.length > 0 ? (
+                roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
                   <Danation_Add_Card
-                    onPress={() =>
-                      navigation.navigate(allTexts?.screenNames?.donationslist, {
-                        data: trfData,
-                      })
-
-                    }
-                    roleId={
-                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                    }
-                  />
+                  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })
+                  }
+                  text={donationValue ? 'value' : 'No Donation Yet'}
+                  roleId={
+                    roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                  }
+                />
                 ) : (
-                  ""
+                 ''
                 )
               )}
               <ProfileFourthTab
@@ -566,6 +566,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
+                  classType: trfData?.templeClass,
                 }); setIsVisible(!isVisible)
               }
               }

@@ -80,31 +80,21 @@ const CreateFeed = ({route, navigation}) => {
           includeBase64: true,
           selectionLimit: 10,
           quality: 1,
-          didCancel: navigation.navigate(
-            allTexts.screenNames.viewtempleprofile,
-          ),
+          // didCancel: navigation.navigate(
+          //   allTexts.screenNames.viewtempleprofile,
+          // ),
           // maxHeight: 2080,
           // maxWidth: 2080,
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
-            // // console.log('usha', res);
-            // const fileSize = res.assets[0].base64.length * (3 / 4) - 2;
-            // console.log('usha', res?.assets[0].height);
-            // if (fileSize < 3000000) {
-            //   // alert('ushshs');
-            //   // setFileSizeError(true);
-            //   setImage(res.assets);
-            //   setimageUploaded(false);
-            // } else {
-            //   setImage(res.assets);
-            //   setimageUploaded(false);
-            // }
             setImage(res.assets);
             setimageUploaded(false);
             setImageProp(res.assets);
+            console.log('jahbjabhs');
           } else {
-            console.log(res.errorMessage);
+            navigation.goBack()
+            console.log(res.errorMessage, 'erro in image');
           }
         },
       );
@@ -124,19 +114,12 @@ const CreateFeed = ({route, navigation}) => {
       return imageObj;
     });
   };
-  // useEffect(() => {
-  //   let result = Data(data);
-  //   if (result) {
-  //     setTrfData(result);
-  //   } else {
-  //     console.log('nope');
-  //   }
-  // }, [data]);
 
   useEffect(() => {
     if (image === null) {
       uploadPhoto();
     }
+    
   });
 
   const imageSending = () => {
@@ -159,8 +142,7 @@ const CreateFeed = ({route, navigation}) => {
               <View style={styles.crossIconContainer}>
                 <Icon
                   onPress={() => {
-                    setImage(null);
-                    console.log('clicked')
+                    navigation.goBack();
                   }}
                   name="closecircle"
                   color={colors.orangeColor}

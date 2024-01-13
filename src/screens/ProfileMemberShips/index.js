@@ -9,6 +9,7 @@ import { Loader } from '../../components';
 const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {roleId, trfdata} = route.params || {};
+  console.log('profileid', trfdata?.jtProfile)
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
@@ -27,10 +28,11 @@ const ProfileMemberShips = ({navigation, route}) => {
     }
   };
   const MembershipData = async () => {
+    console.log('membershipid', trfdata?.jtProfile)
     setLoader(true);
     try {
-      let result = await MemberShipList(0, 100);
-      console.log('res', result?.data);
+      let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
+      console.log('res ==><><<>>', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -69,7 +71,7 @@ const ProfileMemberShips = ({navigation, route}) => {
         {loader ? (
           <Loader size={'small'} color={colors.orangeColor} />
         ) : (
-          membership?.length  ? (
+          membership?.length ? (
             <MemberShipCard
             data={membership}
             roleId={roleId}
@@ -79,16 +81,10 @@ const ProfileMemberShips = ({navigation, route}) => {
                 : 'Join Now'
             }
             nav={navigation}
-            // onPress={() =>
-            //   navigation.navigate(allTexts.screenNames.profilemembership, {
-            //     roleId: roleId,
-            //   })
-            // }
-           
           />
           ) : (
-            <View style={{ alignItems: 'center', justifyContent: 'center'}}>
-              <Text> No data to display</Text>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={{fontSize: 20, color: colors.orangeColor, fontWeight: 'bold', marginTop: '70%'}}> No Memberships available</Text>
               </View>
           )
         )}

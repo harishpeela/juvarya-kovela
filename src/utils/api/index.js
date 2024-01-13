@@ -49,8 +49,8 @@ const endpoints = {
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
-  MEMBERS_LIST: '/jtProfileMembership/members/list?',
-  TEMPLE_CREW:'/jtprofile/find/users',
+  MEMBERS_LIST: '/jtProfileMembership/profile/members?membershipId',
+  TEMPLE_CREW:'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
@@ -170,10 +170,10 @@ export const NearByTempleClass = async (classType, pgno, pgsize) => {
     console.log('error in popular temples', error);
   }
 };
-export const NewTempleCrew = async id => {
+export const NewTempleCrew = async (id, pgNo, pgSz) => {
   try {
     let result = await axiosNewData.get(
-      `${endpoints.TEMPLE_CREW}?profileId=${id}`,
+      `${endpoints.TEMPLE_CREW}?profileId=${id}&pageNo=${pgNo}&pageSize=${pgSz}`,
       {
         // retry: 5,
         // retryDelay: 3000,
@@ -181,7 +181,7 @@ export const NewTempleCrew = async id => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in temple crew', error);
   }
 };
 // export const NearByTemple = async (id) => {
@@ -428,10 +428,12 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MembersList = async (pgno, pgsz) => {
+export const MembersList = async (membershipId, pgno, pgsz) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBERS_LIST}pageNo=${pgno}&pageSize=${pgsz}`,
+      `${endpoints.MEMBERS_LIST}=${membershipId}&pageNo=${pgno}&pageSize=${pgsz}`,
+        //=3&pageNo=0&pageSize=100
+
     );
     return result;
   } catch (error) {
@@ -462,10 +464,10 @@ export const MemberShipDetails = async (pgNo, pgSize) => {
     console.log('error', error);
   }
 };
-export const MemberShipList = async (pageNo, pageSize) => {
+export const MemberShipList = async (id, pageNo, pageSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
+      `${endpoints.MEMBER_SHIP_LIST}?profileId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`,
     );
     return result;
   } catch (error) {

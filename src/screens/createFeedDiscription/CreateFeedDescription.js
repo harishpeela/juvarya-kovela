@@ -11,7 +11,7 @@ import {Data} from '../home-feed/formateDetails';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import {ScrollView} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
+import { Create_Feed } from '../../utils/api';
 const CreateFeedDescription = ({route, navigation}) => {
   const {imageProp, data} = route.params || {};
   const [titleName, setTitleName] = useState('');
@@ -22,7 +22,7 @@ const CreateFeedDescription = ({route, navigation}) => {
   const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
   const [trfData, setTrfData] = useState();
-  console.log('trfdata', trfData);
+  // console.log('trfdata', trfData);
   const Valid = id => {
     if (image === null) {
       alert('please upload a image');
@@ -37,14 +37,8 @@ const CreateFeedDescription = ({route, navigation}) => {
     }
   };
   const NewFeed = async id => {
-    console.log('id', id);
     setLoading(true);
-    let Token = await getAuthTokenDetails();
-    var myHeaders = new Headers();
     let img = getImageObj(image);
-    console.log('img', img);
-    myHeaders.append('Authorization', Token);
-
     var formdata = new FormData();
     formdata.append('description', description);
     formdata.append('feedType', 'profile');
@@ -53,30 +47,20 @@ const CreateFeedDescription = ({route, navigation}) => {
       formdata.append('files', element);
     });
     console.log('formdata', formdata);
-    var requestOptions = {
-      method: 'POST',
-      headers: myHeaders,
-      body: formdata,
-      redirect: 'follow',
-    };
-    fetch('https://fanfun.in/media/jtfeed/create', requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('resut of create feed', result);
-        if (result?.message === 'Feed created') {
-          Alert.alert('Success', `${result?.message} successfully`, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.bottomTab),
-            },
-          ]);
-        } else {
-          alert('somet thing went wrong');
-          setLoading(false);
-        }
-      })
-      .catch(error => alert(error));
+    let result = await Create_Feed(formdata);
+    if (result?.data?.message === 'Feed created') {
+      Alert.alert('Success', `${result?.data?.message} successfully`, [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.bottomTab),
+        },
+      ]);
+    } else {
+      alert('somet thing went wrong');
+      setLoading(false);
+    }
+    // })
+    // .catch(error => alert(error));
   };
 
   const uploadPhoto = () => {
@@ -93,18 +77,6 @@ const CreateFeedDescription = ({route, navigation}) => {
         },
         res => {
           if (!res.didCancel && !res.errorCode) {
-            // // console.log('usha', res);
-            // const fileSize = res.assets[0].base64.length * (3 / 4) - 2;
-            // console.log('usha', res?.assets[0].height);
-            // if (fileSize < 3000000) {
-            //   // alert('ushshs');
-            //   // setFileSizeError(true);
-            //   setImage(res.assets);
-            //   setimageUploaded(false);
-            // } else {
-            //   setImage(res.assets);
-            //   setimageUploaded(false);
-            // }
             setImage(res.assets);
             setimageUploaded(false);
           } else {
