@@ -54,7 +54,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const NearByTemples = async () => {
     setLoader(true);
     let result = await NearByTempleClass('A', 0, 20);
-    console.log('result.date ====>', result.data);
+    // console.log('result.date ====>', result.data);
     if (result) {
       setNearByData(result?.data.data);
       setLoader(false);
