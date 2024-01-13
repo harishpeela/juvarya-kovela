@@ -60,4 +60,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     // borderWidth:2
   },
+  donationText: {
+    color: 'black'
+  }
 });

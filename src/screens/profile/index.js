@@ -25,7 +25,7 @@ import { useTranslation } from 'react-i18next';
 import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { GetProfilePic, PostProfilePic, AdminTemples } from '../../utils/api';
+import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships } from '../../utils/api';
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
@@ -45,6 +45,7 @@ const Profile = ({ navigation }) => {
   const [tcModal, setTcModal] = useState(false);
   const [Admin, setAdmin] = useState([]);
   const [loader, setLoader] = useState(false);
+  const [myMemberships,setMyMemberships] = useState([])
   const isDarkMode = useColorScheme() === 'dark';
 
   const Type = () => {
@@ -152,6 +153,24 @@ const Profile = ({ navigation }) => {
   useEffect(() => {
     TempleAdmins();
   }, []);
+
+  const MyMembershipsData = async () => {
+    setLoader(true);
+    let result = await MyMemberships( 1,0, 20);
+    console.log('result.date ====>', result.data);
+    if (result) {
+      setMyMemberships(result?.data.data);
+      setLoader(false);
+    } else {
+      setMyMemberships([]);
+      setLoader(false);
+    }
+  };
+  useEffect(() => {
+    MyMembershipsData();
+  }, []);
+  console.log('membership Data====>', myMemberships);
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -277,6 +296,17 @@ const Profile = ({ navigation }) => {
               navigation.navigate(allTexts.screenNames.updateProfile)
             }}
           />
+          {
+            myMemberships && (
+              <Item
+            svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
+            text={t('My Memberships')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.profilememberships)
+            }}
+          />
+            )
+          }
           {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
               svg={require('../../../assets/images/priest.webp')}
