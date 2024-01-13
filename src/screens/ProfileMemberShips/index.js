@@ -87,7 +87,7 @@ const ProfileMemberShips = ({navigation, route}) => {
            
           />
           ) : (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{ alignItems: 'center', justifyContent: 'center'}}>
               <Text> No data to display</Text>
               </View>
           )
