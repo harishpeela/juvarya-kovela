@@ -35,7 +35,7 @@ export const TopBarcard = ({
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent:
-              menu || isBell || roleType || roleId || back
+              menu || isBell || roleType || roleId || back || txt
                 ? 'space-between'
                 : 'space-between',
             marginTop: '22%',

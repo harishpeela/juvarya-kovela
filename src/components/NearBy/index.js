@@ -11,6 +11,7 @@ import {
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
+
 import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {NearByTemple} from '../NearByTemples';
@@ -53,7 +54,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const NearByTemples = async () => {
     setLoader(true);
     let result = await NearByTempleClass('A', 0, 20);
-    console.log('result.date ====>', result.data);
+    // console.log('result.date ====>', result.data);
     if (result) {
       setNearByData(result?.data.data);
       setLoader(false);
