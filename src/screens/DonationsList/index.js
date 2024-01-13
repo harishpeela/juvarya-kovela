@@ -67,7 +67,7 @@ const DonationsList = ({navigation, route}) => {
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View>
       <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Donation List'} back={true}  navigation={navigation} navMenu={navigation}>
+      <TopBarcard txt={'Donations'} back={true}  navigation={navigation} navMenu={navigation}>
       <View style={styles.searchContainer}>
       <SearchBar
               value={searchedText}
