@@ -7,7 +7,8 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Loader} from '../../components';
- 
+import FeatherIcon from 'react-native-vector-icons/Feather';
+
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
   const [searchedText, setSearchedText] = useState('');
@@ -86,7 +87,9 @@ const DonationsList = ({navigation, route}) => {
               brColor={colors.gray2}
               brWidth={1}
             />
-            
+              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.donations)} style={styles.plusContainer}>
+                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color= {colors.orangeColor} />
+              </TouchableOpacity>
       </View>
       </TopBarcard>
       </View>

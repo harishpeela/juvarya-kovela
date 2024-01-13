@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     alignContent: 'center',
   },
   searchContainer: {
+    flexDirection: 'row',
     width: '82%',
     height: '100%',
     marginTop: -15
@@ -67,4 +68,15 @@ export const styles = StyleSheet.create({
     color: colors.orangeColor,
     fontWeight: 'bold'
   },
+  plusContainer:{
+    backgroundColor:'#FFFFFF',
+    justifyContent:'center',
+    alignItems:'center',
+    borderRadius:100,
+    marginLeft:10,
+    textAlign:'center',
+    height:30,
+    width:30,
+    marginRight:10
+},
 });

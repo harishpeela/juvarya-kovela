@@ -49,7 +49,7 @@ const endpoints = {
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
-  MEMBERS_LIST: '/jtProfileMembership/members/list?',
+  MEMBERS_LIST: '/jtProfileMembership/profile/members?membershipId',
   TEMPLE_CREW:'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
@@ -85,6 +85,8 @@ const endpoints = {
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
+  MY_MEMBERSHIPS:'/jtProfileMembership/list',
+  
 };
 export const getInitialToken = async () => {
   try {
@@ -205,6 +207,8 @@ export const SearchPopularTemples = async txt => {
     console.log('error in searched popular temples', error);
   }
 };
+
+
 export const SearchTempleRoleWithId = async profId => {
   try {
     let result = await axiosNewData.get(
@@ -232,6 +236,8 @@ export const GetProfilePic = async mailId => {
     console.log('error in profilepic get', error);
   }
 };
+
+
 export const PostProfilePic = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
@@ -422,16 +428,32 @@ export const MemberShipCount = async id => {
     console.log('error', error);
   }
 };
-export const MembersList = async (pgno, pgsz) => {
+export const MembersList = async (membershipId, pgno, pgsz) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBERS_LIST}pageNo=${pgno}&pageSize=${pgsz}`,
+      `${endpoints.MEMBERS_LIST}=${membershipId}&pageNo=${pgno}&pageSize=${pgsz}`,
+        //=3&pageNo=0&pageSize=100
+
     );
     return result;
   } catch (error) {
     console.log('error in members list', error);
   }
 };
+
+
+export const MyMemberships = async (profileId,pgno, pgsz) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MY_MEMBERSHIPS}?profileId=${profileId}&pageNo=${pgno}&pageSize=${pgsz}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in members list', error);
+  }
+};
+
+
 export const MemberShipDetails = async (pgNo, pgSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
@@ -442,10 +464,10 @@ export const MemberShipDetails = async (pgNo, pgSize) => {
     console.log('error', error);
   }
 };
-export const MemberShipList = async (pageNo, pageSize) => {
+export const MemberShipList = async (id, pageNo, pageSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
-      `${endpoints.MEMBER_SHIP_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`,
+      `${endpoints.MEMBER_SHIP_LIST}?profileId=${id}&pageNo=${pageNo}&pageSize=${pageSize}`,
     );
     return result;
   } catch (error) {
