@@ -14,6 +14,8 @@ import {DonationsPost} from '../../utils/api';
 import {allTexts} from '../../common';
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
+  const [email, setEmail] = useState();
+  const [mobileNum, setMobileNum] = useState();
   const [dropValue, setDropValue] = useState();
   let Data = [
     {id: 1, rs: '101'},
@@ -30,11 +32,12 @@ const Donations = ({route, navigation}) => {
   ];
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
+  console.log('data route', data);
   const PostDonations = async () => {
     let payload = {
       donation: value,
       description: dropValue,
-      email: userDetails?.email,
+      email: email,
       jtProfile: data?.jtProfile,
     };
     console.log('payload', payload);
@@ -86,6 +89,10 @@ const Donations = ({route, navigation}) => {
               dropData={donationType}
               onSelect={e => setDropValue(e)}
               valueRs={value}
+              emailValue={email}
+              mobileValue={mobileNum}
+              onChangeEmail={e => setEmail(e)}
+              onChangeMobile={e => setMobileNum(e)}
             />
           </View>
           <View style={{marginHorizontal: 10}}>
