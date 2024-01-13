@@ -11,6 +11,7 @@ import {
 import {styles} from './styles';
 import {SearchBar} from '../searchbar';
 import {Loader} from '../loader';
+
 import {allTexts, colors} from '../../common';
 import {TempleListCard} from '../TempleListCard';
 import {NearByTemple} from '../NearByTemples';
