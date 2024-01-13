@@ -78,11 +78,10 @@ const ProfileMemberShips = ({navigation, route}) => {
             //     roleId: roleId,
             //   })
             // }
-           
           />
           ) : (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-              <Text> No data to display</Text>
+            <View style={{alignItems: 'center', justifyContent: 'center', marginTop: '70%'}}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: colors.orangeColor, }}> No data to display</Text>
               </View>
           )
         )}

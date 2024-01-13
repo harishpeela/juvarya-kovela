@@ -30,18 +30,15 @@ const EventsScreen = ({ navigation }) => {
   const [roleType, setRoleType] = useState('')
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
-    setEventsLoader(true);
     setLoader(true);
     let result = await EventList(0, 200);
-    // console.log('list of evengts', result?.data);
+    console.log('list of events', result?.data);
     if (result.status === 200) {
-      let filtering = result?.data?.events;
-      // console.log('events sctreen data', filtering);
-      setEventsData(result?.data?.events);
+      let filtering = result?.data?.data;
+      console.log('events sctreen data', filtering[0]);
+      setEventsData(result?.data?.data);
       setLoader(false);
-      setEventsLoader(false);
     } else {
-      setEventsLoader(false);
       setLoader(false);
     }
   };

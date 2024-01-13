@@ -30,7 +30,6 @@ const AddEvents = ({ navigation, route }) => {
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
 const isDarkMode = useColorScheme() === 'dark';
   const CreateEvent = async () => {
-    let Token = await getAuthTokenDetails();
     let img = getImageObj(image);
     if (eventName === '') {
       setEventError(true);
@@ -48,12 +47,6 @@ const isDarkMode = useColorScheme() === 'dark';
       });
       formdata.append("eventType", "EVENT");
       formdata.append("description", description);
-      var requestOptions = {
-        method: 'POST',
-        headers: myHeaders,
-        body: formdata,
-        redirect: 'follow'
-      };
       let result = await Save_Event(formdata);
       console.log('result of save events', result?.data);
           if (result?.data?.message === "save Event") {
