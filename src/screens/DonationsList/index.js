@@ -21,9 +21,9 @@ const DonationsList = ({navigation, route}) => {
     // console.log('e', e.email);
     try {
       let result = await GetProfilePic(e?.email);
-      // console.log('profilepic', result?.data);
+      console.log('profilepic', result?.data);
       if (result?.data) {
-        let responce = {...e, url: result?.data?.url};
+        let responce = {...e, url: result?.data?.url, name: result?.data?.name};
         // console.log('responce', responce);
         setApiData(array => [...array, responce]);
         setLoader(false);
@@ -64,7 +64,7 @@ const DonationsList = ({navigation, route}) => {
     DonationListApi();
   }, []);
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1}}>
       <View>
       <View style={{minHeight: 160, marginTop: '3%'}}>
       <TopBarcard txt={'Donations'} back={true}  navigation={navigation} navMenu={navigation}>
@@ -95,11 +95,6 @@ const DonationsList = ({navigation, route}) => {
       </View>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-           
-          </View>
-        </View>
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.black} />
