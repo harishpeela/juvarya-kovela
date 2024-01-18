@@ -19,13 +19,14 @@ import React, { useContext, useState, useEffect } from 'react';
 import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import { styles } from './style';
-import { PrimaryButton, ProfileInfo, Loader, Item } from '../../components';
+import { PrimaryButton, ProfileInfo, Loader, Item, Danation_Add_Card } from '../../components';
 import { allTexts, colors } from '../../common';
 import { useTranslation } from 'react-i18next';
 import i18next, { resources } from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships } from '../../utils/api';
+import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships,MyDonations} from '../../utils/api';
+
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
@@ -45,7 +46,8 @@ const Profile = ({ navigation }) => {
   const [tcModal, setTcModal] = useState(false);
   const [Admin, setAdmin] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [myMemberships,setMyMemberships] = useState([])
+  const [myMemberships, setMyMemberships] = useState([])
+  const [MyDonationsList, setMyDonationsList] = useState([])
   const isDarkMode = useColorScheme() === 'dark';
 
   const Type = () => {
@@ -156,7 +158,7 @@ const Profile = ({ navigation }) => {
 
   const MyMembershipsData = async () => {
     setLoader(true);
-    let result = await MyMemberships( 1,0, 20);
+    let result = await MyMemberships(1, 0, 20);
     console.log('result.date ====>', result.data);
     if (result) {
       setMyMemberships(result?.data.data);
@@ -170,6 +172,23 @@ const Profile = ({ navigation }) => {
     MyMembershipsData();
   }, []);
   console.log('membership Data====>', myMemberships);
+
+  const MyDonationsData = async () => {
+    setLoader(true);
+    let result = await MyDonations(35);
+    console.log('result.date ====kkk>', result?.data);
+    if (result) {
+      setMyDonationsList(result?.data.data);
+      setLoader(false);
+    } else {
+      setMyDonationsList([]);
+      setLoader(false);
+    }
+  };
+  useEffect(() => {
+    MyDonationsData();
+  }, []);
+  console.log('Donation Data====>', MyDonationsList);
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -248,17 +267,17 @@ const Profile = ({ navigation }) => {
           ) : (
             Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
-              svg={
-                <Image
-                  source={require('../../../assets/images/templeIcon.png')}
-                  style={{ height: 20, width: 20 }}
-                />
-              }
-              text={t('myTemple')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.myTamples)
-              }}
-            />
+                svg={
+                  <Image
+                    source={require('../../../assets/images/templeIcon.png')}
+                    style={{ height: 20, width: 20 }}
+                  />
+                }
+                text={t('myTemple')}
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.myTamples)
+                }}
+              />
             ) : ''
           )}
           {/* {Admin && (
@@ -299,14 +318,30 @@ const Profile = ({ navigation }) => {
           {
             myMemberships && (
               <Item
+                svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
+                text={t('My Memberships')}
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.profilememberships)
+                }}
+              />
+            )
+          }
+
+        
+           {
+            MyDonations && (
+          <Item
             svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
-            text={t('My Memberships')}
+            text={t('My Donations')}
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.profilememberships)
+              navigation.navigate(allTexts.screenNames.donationslist)
             }}
           />
             )
-          }
+           }
+
+
+
           {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1
               svg={require('../../../assets/images/priest.webp')}
