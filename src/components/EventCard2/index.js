@@ -16,7 +16,7 @@ const EventCard2 = ({ navigation, data }) => {
       onPress={() => {
         // alert('under development');
         navigation.navigate(allTexts.screenNames.eventDetails, {
-          navigation: navigation,
+          item: data,
         });
       }}>
       <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 12 }}>

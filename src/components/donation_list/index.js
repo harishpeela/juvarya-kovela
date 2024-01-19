@@ -8,37 +8,51 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {colors} from '../../common';
-export const Donations_list_Card = ({data}) => {
+import { colors } from '../../common';
+export const Donations_list_Card = ({ data }) => {
   return (
     <FlatList
       data={data}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={'handled'}
-      keyExtractor={({item, index}) => index}
-      renderItem={({item, index}) => (
+      keyExtractor={({ item, index }) => index}
+      renderItem={({ item, index }) => (
         <TouchableOpacity style={styles.container}>
           <Image
             source={{
               uri: item?.url
                 ? item?.url
-                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+                : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17055723004711705572300104.jpg',
             }}
-            style={{height: 70, width: 70, borderRadius: 70 / 2}}
+            style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
           />
-          <View>
-            <Text style={{fontSize: 16, fontWeight: 'bold'}}>
+          <View style={{ width: '80%', marginLeft: '3%', marginTop: '2%' }}>
+            <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.black, textTransform: 'capitalize' }}>
               {' '}
-              {item?.email}
+              {item?.name}
             </Text>
-            {item?.description && (
-              <Text style={{color: colors.orangeColor, fontSize: 14}}>
-                {' '}
-                for {item?.description}{' '}
-              </Text>
-            )}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+              {item?.description && (
+                <Text style={{ color: colors.black, fontSize: 14 }}>
+                  {' '}
+                  {item?.description}{' '}
+                </Text>
+              )}
+            </View>
+            <View style={{
+              padding: 8,
+              elevation:3,
+              width: 90,
+              alignSelf: 'flex-end',
+              alignItems: 'center',
+              shadowOpacity: 3,
+              shadowColor: 'gray',
+              borderWidth: 1,
+              borderColor: 'white'
+            }}>
+              <Text style={styles.rs}>₹{item?.donation}</Text>
+            </View>
           </View>
-          <Text style={styles.rs}>₹ {item?.donation}</Text>
         </TouchableOpacity>
       )}
     />
@@ -47,18 +61,21 @@ export const Donations_list_Card = ({data}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    borderWidth: 1,
     padding: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    borderRadius: 10,
-    borderColor: 'lightgray',
+    // justifyContent: 'space-between',
     alignItems: 'center',
-    margin: '1%',
+    backgroundColor: 'white',
+    elevation: 2,
+    shadowColor: 'black',
+    marginVertical: '1%',
+    width: '100%'
+
   },
   rs: {
     fontSize: 16,
-    color: 'black',
+    color: colors.orangeColor,
     fontWeight: 'bold',
+
   },
 });
