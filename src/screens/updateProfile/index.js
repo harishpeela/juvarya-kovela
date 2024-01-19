@@ -79,7 +79,6 @@ const UpdateProfile = ({navigation}) => {
   };
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
-    console.log('frondatew', date);
     var formattedDate = format(date, 'dd-MM-yyyy');
     console.log(formattedDate, '====<> date');
     let payload = {
@@ -93,11 +92,8 @@ const UpdateProfile = ({navigation}) => {
       isRoleSelected === '' ||
       gotraValue === '' ||
       phone === '' ||
-      name === '' ||
       pincode === ''
     ) {
-      setEventError(true);
-      console.log('1');
       setPV(true);
       setGV(true);
       setDropDownError(true);
@@ -108,10 +104,8 @@ const UpdateProfile = ({navigation}) => {
       toDate &&
       isRoleSelected &&
       pincode &&
-      phone &&
-      name
+      phone
     ) {
-      setEventError(false);
       setPV(false);
       setGV(false);
       setDropDownError(false);
@@ -121,7 +115,7 @@ const UpdateProfile = ({navigation}) => {
       try {
         let responce = await Update_Profile(payload);
         console.log(payload, 'payload try');
-        console.log('Update Profile', responce?.data);
+        console.log('Update Profile', responce);
         if (responce?.status === 200) {
           Alert.alert('Success', responce?.data?.message, [
             {
@@ -130,7 +124,7 @@ const UpdateProfile = ({navigation}) => {
             },
           ]);
         } else {
-          alert('some thing went wrong');
+          alert('some thing went wrong please try after some time');
         }
       } catch (error) {
         console.error('Error fetching gender data:', error);
@@ -150,9 +144,6 @@ const UpdateProfile = ({navigation}) => {
       setPV(true);
     } else if (phone?.length === 10) {
       setPV(false);
-    } else if (name) {
-      console.log('5');
-      setEventError(false);
     } else if (pincode) {
       console.log('7');
       setPinErr(false);
@@ -174,7 +165,7 @@ const UpdateProfile = ({navigation}) => {
               user={true}
               placeholder={userDetails?.username}
               height={50}
-              value={name}
+              value={userDetails?.username}
             />
             {eventError && (
               <Text
@@ -315,6 +306,7 @@ const UpdateProfile = ({navigation}) => {
                     setPincode(text);
                     setPinErr(false);
                   }}
+                  maxLength={6}
                   value={pincode}
                 />
                 {pinErr && (
