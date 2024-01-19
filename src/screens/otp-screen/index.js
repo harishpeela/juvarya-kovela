@@ -57,7 +57,6 @@ const OTPScreen = ({navigation, route}) => {
   };
 
   let otpInput = useRef(null);
-  // const {otpPayload} = route.params || {};
   const {
     params: {otp, email, password, data},
   } = route || {};
