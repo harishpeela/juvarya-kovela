@@ -64,8 +64,7 @@ const EventsScreen = ({navigation}) => {
     } else {
       console.log('');
     }
-  };
-
+  }
   return (
     <View style={{flex: 1}}>
       <View style={{minHeight: 160, marginTop: '3%'}}>
@@ -79,12 +78,13 @@ const EventsScreen = ({navigation}) => {
             <SearchBar
               onTextChange={e => {
                 setSearchedText(e);
-                SearchPopTemp(e);
+                // SearchPopTemp(e);
               }}
+              value={searchedText}
               loading={false}
               onCrossPress={async () => {
                 setSearchedText('');
-                await PopularTemplesss(pageNo, 20);
+                await EventsList();
               }}
               bgColor={colors.white}
               placeHolder={'Search Events'}

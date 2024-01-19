@@ -30,7 +30,7 @@ import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships,MyDonations}
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
-  console.log('userdetails', userDetails);
+  // console.log('userdetails', userDetails);
   const {
     constants: { role },
   } = allTexts;

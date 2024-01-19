@@ -1,5 +1,5 @@
-import {Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
-import React, { useState } from 'react'
+import { Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
+import React, { useState, useEffect } from 'react'
 import { colors } from '../../common';
 import { styles } from './styles';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -8,11 +8,26 @@ import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
 import { TopBarcard } from '../../components';
+import { IntrestedEvents } from '../../utils/api';
 const EventDetails = ({ navigation, route }) => {
-  const {item} = route?.params || {};
+  const { item } = route?.params || {};
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
-console.log('item ', item);
+  const EventsIntrested = async () => {
+    let payload = {
+      eventId: item?.id,
+      interested: true
+    }
+    console.log('payload', payload);
+    try {
+      let result = await IntrestedEvents(payload);
+      console.log('result of intrested', result?.data);
+    } catch (error) {
+      console.log('error in event details intresteed api', error);
+    }
+  }
+  console.log('item ', item);
+
   const renderHighlight = () => {
     return (
       <Card style={styles.highLightCard}>
@@ -108,11 +123,11 @@ console.log('item ', item);
   return (
     <View style={styles.container}>
       <ScrollView style={{ borderWidth: 0 }} >
-        <View style={{minHeight: '10%'}}>
-        <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
+        <View style={{ minHeight: '10%' }}>
+          <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
         </View>
         <ImageBackground
-          source={{uri: item?.mediaList[activeImgIndex]?.url}}
+          source={{ uri: item?.mediaList[activeImgIndex]?.url }}
           style={styles.bgImg}
           imageStyle={styles.bgImg1}>
           <View style={styles.bgContainer}>
@@ -127,7 +142,7 @@ console.log('item ', item);
                     style={styles.clickImg}
                     onPress={() => setActiveImgIndex(index)}
                     key={url?.id?.toString()}>
-                    <Image source={{ uri: url?.url}}
+                    <Image source={{ uri: url?.url }}
                       style={{ height: 50, width: 50, borderRadius: 10 }}
                     />
                   </TouchableOpacity>
@@ -174,7 +189,7 @@ console.log('item ', item);
 
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => EventsIntrested()}>
           <Text style={styles.btnText}>Interested</Text>
         </TouchableOpacity>
       </View>
