@@ -102,7 +102,7 @@ const MySavedPosts = ({navigation}) => {
               {loading ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : (
-                <Text style={{color: colors.orangeColor}}>
+                <Text style={{color: colors.orangeColor, fontWeight: 'bold', fontSize: 20}}>
                   {' '}
                   Yet Not saved any post ...!
                 </Text>

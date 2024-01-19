@@ -354,7 +354,7 @@ export const EventList = async (pgno, pgSize) => {
   }
 };
 
-export const IntrestedEvents = async (data) => {
+export const IntrestedEvents = async data => {
   try {
     let result = await axiosEventsData1.post(
       `${endpoints.EVENTS_LIST}`,data
