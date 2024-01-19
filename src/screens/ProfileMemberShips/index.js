@@ -14,13 +14,7 @@ const ProfileMemberShips = ({navigation, route}) => {
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
-  const data = [
-    {
-      id: 1,
-      name: 'harish',
-      type: 'BASIC',
-    },
-  ];
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -81,6 +75,11 @@ const ProfileMemberShips = ({navigation, route}) => {
                 : 'Join Now'
             }
             nav={navigation}
+            // onPress={() =>
+            //   navigation.navigate(allTexts.screenNames.profilemembership, {
+            //     roleId: roleId,
+            //   })
+            // }
           />
         ) : (
           <View style={{alignItems: 'center', justifyContent: 'center'}}>

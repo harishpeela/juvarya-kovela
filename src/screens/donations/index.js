@@ -16,6 +16,8 @@ import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
   const [dropValue, setDropValue] = useState();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   let Data = [
     {id: 1, rs: '101'},
     {id: 3, rs: '301'},
@@ -85,6 +87,10 @@ const Donations = ({route, navigation}) => {
               dropData={donationType}
               onSelect={e => setDropValue(e)}
               valueRs={value}
+              onChangeEmail={e => setEmail(e)}
+              valueEmail={email}
+              onChangeName={e => setName(e)}
+              valueName={name}
             />
           </View>
           <View style={{marginHorizontal: 10}}>

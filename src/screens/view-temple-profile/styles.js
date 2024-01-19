@@ -84,7 +84,7 @@ export const styles = StyleSheet.create({
   followtab: {
     flexDirection: 'row',
     // marginTop: '3%',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
   },
   disPlayContent: {
     marginTop: '-60%',

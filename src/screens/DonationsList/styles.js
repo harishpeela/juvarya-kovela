@@ -25,7 +25,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bodyContainer: {
-    marginHorizontal: '4%',
     display: 'flex',
     flexDirection: 'column',
     // borderWidth:5,

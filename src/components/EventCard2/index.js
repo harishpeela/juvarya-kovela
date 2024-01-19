@@ -7,6 +7,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const EventCard2 = ({ navigation, data }) => {
+  console.log('data in event cad', data?.mediaList[0]?.url)
   // console.log('medialist', data?.mediaList[0]?.url);
   const [isHearto, setIsHearto] = useState(false);
   return (
@@ -15,7 +16,7 @@ const EventCard2 = ({ navigation, data }) => {
       onPress={() => {
         // alert('under development');
         navigation.navigate(allTexts.screenNames.eventDetails, {
-          navigation: navigation,
+          item: data,
         });
       }}>
       <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 12 }}>
@@ -23,7 +24,7 @@ const EventCard2 = ({ navigation, data }) => {
       </TouchableOpacity>
       <Image
         source={{
-          uri: data?.mediaList?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17042617067851704261704290.jpg',
+          uri: data?.mediaList[0]?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17051275477141705127546621.jpg',
         }}
         style={styles.Image}
       />
