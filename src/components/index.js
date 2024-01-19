@@ -29,6 +29,8 @@ import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
 import {SaveFeedComp} from './savefeedcomp';
 import { CrewCard } from './crew-card-comp';
+
+
 import {
   NearBy,
   NearByMainTab,
@@ -97,6 +99,8 @@ import { NewBackHeader } from './new-back-header';
 import { Create_Event } from './create_event_component';
 import AddEventImage from './event-images-comp';
 import {EventInput, EventInput1} from './eventCreateInput';
+import {NearByTempleComp} from './NearByTempleComp'
+
 export {
   Loader,
   SearchBar,
@@ -186,5 +190,6 @@ export {
   AddEventImage,
   EventInput,
   EventInput1,
-  CrewCard
+  CrewCard,
+  NearByTempleComp
 };

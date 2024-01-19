@@ -144,6 +144,6 @@ export const textStyles = (textColor, fontSize) =>
       fontSize: fontSize || 11,
       color: textColor || colors.white,
       fontFamily: fontFamily.popinBold,
-      textTransform: 'uppercase',
+      // textTransform: 'lowercase',
     },
   });
