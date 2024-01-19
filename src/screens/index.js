@@ -50,6 +50,7 @@ import MemberShipDetails from './membershipDetails';
 import InvitationScreen from './Invitation';
 import TempleCrew from './temple_crew';
 import NearByTemplesSeeAll from './NearByTemplesSeeAll';
+
 export {
   CreatePost,
   Seemore,
@@ -102,5 +103,6 @@ export {
   MemberShipDetails,
   InvitationScreen,
   TempleCrew,
-  NearByTemplesSeeAll,
+ 
+  
 };

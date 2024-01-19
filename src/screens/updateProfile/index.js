@@ -34,6 +34,7 @@ import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {EventInput2, EventInput3} from '../../components/eventCreateInput';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -45,7 +46,7 @@ const UpdateProfile = ({navigation}) => {
     },
   } = allTexts;
 
-  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
@@ -153,13 +154,13 @@ const UpdateProfile = ({navigation}) => {
     <ScrollView>
       <View style={styles.wrapper}>
         <View style={{}}>
-          <TopBarcard
+          <TopBarCard2
             txt={'Update Profile'}
             back={true}
-            navigation={navigation}></TopBarcard>
+            navigation={navigation}></TopBarCard2>
         </View>
-        <View style={{ marginTop: '25%' }}>
-          <View style={{ bottom: '8%' }}>
+        <View style={{marginTop: '25%'}}>
+          <View style={{bottom: '8%'}}>
             <EventInput3
               lable={'Name'}
               user={true}

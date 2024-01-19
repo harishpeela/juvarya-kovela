@@ -46,12 +46,13 @@ export const BackgroundSmallFlowerUser = () => {
     <ImageBackground
       source={require('../../../assets/images/smallflower.png')}
       style={{
-        height: 30,
-        width: 30,
+        height: 10,
+        width: 10,
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft: 10,
+        marginRight: 10,
         marginTop: -5,
       }}>
       <Image

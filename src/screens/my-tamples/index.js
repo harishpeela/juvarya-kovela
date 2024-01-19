@@ -1,14 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-import {View, SafeAreaView, FlatList, Text,searchedText} from 'react-native';
+import {View, SafeAreaView, FlatList, Text, searchedText} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
-import { TopBarcard } from '../../components';
+import {TopBarcard} from '../../components';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const MyTamples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
@@ -68,24 +69,24 @@ const MyTamples = ({navigation}) => {
         />
       </View> */}
       <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'My Temples'} back={true}  navigation={navigation}>
-      <View style={{...styles.searchContainer, marginTop: '-5%'}}>
-        <SearchBar
-          value={searchedText}
-          onTextChange={e => {
-            setSeracherdText(e);
-            SearchPopTemp(e);
-          }}
-          loading={false}
-          onCrossPress={async () => {
-            setSearchedText('');
-            await PopularTemplesss(pageNo, 20);
-          }}
-          bgColor={colors.gray4}
-          placeHolder={'Search'}
-        />
-      </View>
-      </TopBarcard>
+        <TopBarCard2 txt={'My Temples'} back={true} navigation={navigation}>
+          <View style={{...styles.searchContainer, marginTop: '-5%'}}>
+            <SearchBar
+              value={searchedText}
+              onTextChange={e => {
+                setSeracherdText(e);
+                SearchPopTemp(e);
+              }}
+              loading={false}
+              onCrossPress={async () => {
+                setSearchedText('');
+                await PopularTemplesss(pageNo, 20);
+              }}
+              bgColor={colors.gray4}
+              placeHolder={'Search'}
+            />
+          </View>
+        </TopBarCard2>
       </View>
       <View style={styles.searchbarContainer}>
         <View style={{width: '100%'}}>
