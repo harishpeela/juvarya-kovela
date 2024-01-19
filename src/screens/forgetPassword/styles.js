@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontSize,fontFamily} from '../../common';
+import {colors, fontSize, fontFamily} from '../../common';
 
 export const styles = StyleSheet.create({
   logoStyle: {
@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 20,
+    // padding: 20,
   },
   logo: {
     fontSize: 35,
@@ -54,7 +54,8 @@ export const styles = StyleSheet.create({
     // height:responsiveScreenHeight(5),
     alignItems: 'center',
     flexDirection: 'row',
-    paddingHorizontal: 10,
+    paddingHorizontal: 30,
+    marginHorizontal: 15,
     marginTop: 20,
     shadowColor: '#FFFFFF',
     shadowOffset: {width: -2, height: 4},
@@ -62,7 +63,7 @@ export const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 20,
     backgroundColor: '#E5E4E2',
-    color:'black'
+    color: 'black',
   },
   line: {
     borderWidth: 0.5,
@@ -83,6 +84,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'orange',
     justifyContent: 'center',
     fontSize: 14,
+    marginHorizontal: 50,
   },
   signupText: {
     fontSize: 15,
@@ -130,24 +132,23 @@ export const styles = StyleSheet.create({
     fontSize: fontSize.small,
   },
   overlay: {
-    borderWidth:2,
-    alignItems:'center',
-    justifyContent:'center',
-    borderColor:'red',
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: 'red',
     height: '100%',
     backgroundColor: 'rgba(0, 0, 0, 0.1)', // semi-transparent background
   },
   centeredView: {
     // borderWidth:2,
     // borderColor:'green',
-    width:'85%',
-    minHeight:'35%',
-    borderRadius:10,
+    width: '85%',
+    minHeight: '35%',
+    borderRadius: 10,
     backgroundColor: 'white',
-    paddingHorizontal:5,
-    justifyContent:'space-around',
-    paddingVertical:20
-
+    paddingHorizontal: 5,
+    justifyContent: 'space-around',
+    paddingVertical: 20,
   },
   otpContainer: {
     // borderWidth:2,
@@ -160,10 +161,10 @@ export const styles = StyleSheet.create({
   },
   modalText: {
     textAlign: 'center',
-    color:colors.gray,
-    fontSize:fontSize.small
+    color: colors.gray,
+    fontSize: fontSize.small,
   },
-  otpTextInput:{
+  otpTextInput: {
     borderWidth: 1,
     borderColor: colors.gray,
     borderRadius: 4,
@@ -174,28 +175,25 @@ export const styles = StyleSheet.create({
     borderBottomWidth: 1,
     backgroundColor: colors.white,
   },
-  emailText:{
-    color:colors.black,
-    marginHorizontal:5
+  emailText: {
+    color: colors.black,
+    marginHorizontal: 5,
   },
-  btnContainer: {
-
-  },
+  btnContainer: {},
   expectOtp: {
     color: colors.green2,
     fontFamily: fontFamily.popinRegular,
     fontSize: 10,
-    marginHorizontal:5
-
+    marginHorizontal: 5,
   },
   black: {
     color: colors.black,
   },
-  buttonContainer:{
-    marginTop:10
+  buttonContainer: {
+    marginTop: 10,
   },
-  timeContainer:{
-    flexDirection:'row',
-    justifyContent:'space-between'
-  }
+  timeContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });

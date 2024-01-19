@@ -26,6 +26,7 @@ import { forgotPasswordSchema } from '../../common/schemas';
 import { PasswordField } from '../../components/inputfield';
 import { PrimaryButton } from '../../components';
 import Snackbar from 'react-native-snackbar';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const ForgetPassword = () => {
   const navigation = useNavigation();
@@ -210,20 +211,20 @@ const ForgetPassword = () => {
   const resetHandler = () => {
     console.log('reset is trigerring here ');
     otpGeneration();
-  }
+  };
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View style={[styles.container, { backgroundColor: isDarkMode ? 'white' : 'white' },]}>
-      <View
-        style={
-          styles.logoContainer}>
-        <Ionicons
-          onPress={() => navigation.goBack()}
-          size={30}
-          style={styles.backButton}
-          color={'black'}
-          name="arrow-back"
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: isDarkMode ? 'white' : 'white'},
+      ]}>
+      <View style={{minHeight: '13%'}}>
+        <TopBarCard2
+          back={true}
+          txt={'Forgot Password'}
+          navigation={navigation}
         />
       </View>
       <TextInput
@@ -315,7 +316,6 @@ const ForgetPassword = () => {
                 }) => {
                   return (
                     <View style={styles.fieldContainer}>
-
                       <PasswordField
                         value={values.password}
                         title={'password'}
@@ -334,9 +334,7 @@ const ForgetPassword = () => {
                         onBlur={handleBlur('confirmPassword')}
                         setState={handleChange('confirmPassword')}
                       />
-
                       <View style={styles.buttonContainer}>
-                        {isChecked ? (
                           <PrimaryButton
                             bgColor={colors.orangeColor}
                             loading={false}
@@ -344,18 +342,6 @@ const ForgetPassword = () => {
                             text={'submit'}
                             radius={25}
                           />
-                        ) : (
-                          <PrimaryButton
-                            textColor={'white'}
-                            bgColor={'gray'}
-                            loading={false}
-                            onPress={() =>
-                              alert('Accept terms and conditions to continue..')
-                            }
-                            text={'Submit'}
-                            radius={25}
-                          />
-                        )}
                       </View>
                     </View>
                   );

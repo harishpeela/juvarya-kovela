@@ -58,9 +58,9 @@ const Notifications = ({navigation}) => {
               style={{
                 alignSelf: 'center',
                 justifyContent: 'center',
-                marginTop: '40%',
+                marginTop: '50%',
               }}>
-              <Text style={{color: 'black'}}>
+              <Text style={{color: colors.orangeColor, fontWeight: 'bold', fontSize: 20}}>
                 No notifications for this user
               </Text>
             </View>
