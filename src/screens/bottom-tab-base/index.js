@@ -54,6 +54,7 @@ export default BottomTabBase = ({ navigation }) => {
         </View>
       ) : (
         <Tab.Navigator
+        backBehavior={"history"}
           screenOptions={{
             tabBarStyle: { innerHeight: '5%' },
           }}

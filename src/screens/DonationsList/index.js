@@ -18,19 +18,26 @@ const DonationsList = ({navigation, route}) => {
   const {data} = route.params || {};
   // console.log('data.id', data);
   const customerProfilePic = async e => {
-    // console.log('e', e.email);
     try {
       let result = await GetProfilePic(e?.email);
       console.log('profilepic', result?.data);
       if (result?.data) {
         let responce = {...e, url: result?.data?.url, name: result?.data?.name};
         // console.log('responce', responce);
-        setApiData(array => [...array, responce]);
-        setLoader(false);
+        if (responce){
+          setApiData(array => [...array, responce]);
+          setLoader(false);
+        } else{
+          console.log('eeeeee', e);
+          setLoader(false);
+        }
       } else {
+        console.log('e state', e);
+        setApiData([e]);
         setLoader(false);
       }
     } catch (error) {
+      setApiData(e);
       console.log('error in profile pic api in donations', error);
     }
   };
@@ -112,7 +119,7 @@ const DonationsList = ({navigation, route}) => {
               ) : (
                 <View style={styles.noDataContainer}>
                   <Text style={styles.noDataText}>
-                    No items in donation list
+                    No donations Yet
                   </Text>
                 </View>
               )}
