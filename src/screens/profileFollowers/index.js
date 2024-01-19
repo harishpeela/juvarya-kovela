@@ -30,10 +30,9 @@ const FollowersMembership = ({ route, navigation }) => {
         console.log('data of temple followers', result?.data);
         setLoader(false);
         // if(result?.data?.data)
-        if (result?.data?.data !== undefined) {
+        if (result?.data?.data !== undefined ) {
           setFollowersList(result?.data?.data);
-
-        }
+        } 
       } else {
         setLoader(false);
       }
@@ -56,6 +55,7 @@ const FollowersMembership = ({ route, navigation }) => {
       setLoading(false);
     }, 500);
   };
+
   return (
     <View>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
@@ -70,7 +70,7 @@ const FollowersMembership = ({ route, navigation }) => {
                 }}
                 onTextChange={e => {
                   setSearchedText(e);
-                  performFilter(e);
+                  handleSearch(e);
                 }}
               />
             </View>
@@ -83,42 +83,50 @@ const FollowersMembership = ({ route, navigation }) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             <>
-              {searchedText === '' && (
-                <FlatList
-                  style={styles.list}
-                  data={followersList}
-                  showsVerticalScrollIndicator={false}
-                  contentContainerStyle={styles.flatListStyle}
-                  keyExtractor={(item, index) => item.user.id.toString()}
-                  renderItem={({ item }) => (
-                    <FollowersListCard2
-                      name={item.user.firstName}
-                      img={item.user.url}
-                      data={item.user}
-                      donation={item.user.donation}
-                    />
-                  )}
-                />
-              )}
-              {searchedText && filteredData.length > 0 ? (
-                <FlatList
-                  style={styles.list}
-                  data={filteredData}
-                  contentContainerStyle={styles.flatListStyle}
-                  keyExtractor={item => item.user.id.toString()}
-                  renderItem={({ item }) => (
-                    <FollowersListCard2
-                      name={item.user.firstName}
-                      img={item.user.url}
-                      data={item.user}
-                      donation={item.user.donation}
-                    />
-                  )}
-                />
-              ) : (
+              {followersList.length === 0 && searchedText === '' ? (
                 <View style={styles.noDataContainer}>
-                  <Text style={styles.noDataText}>No Followers to Display</Text>
+                  <Text style={styles.noDataText}>No followers yet</Text>
                 </View>
+              ) : (
+                <>
+                  {searchedText === '' && (
+                    <FlatList
+                      style={styles.list}
+                      data={followersList}
+                      showsVerticalScrollIndicator={false}
+                      contentContainerStyle={styles.flatListStyle}
+                      keyExtractor={(item, index) => item.user.id.toString()}
+                      renderItem={({ item }) => (
+                        <FollowersListCard2
+                          name={item.user.firstName}
+                          img={item.user.url}
+                          data={item.user}
+                          donation={item.user.donation}
+                        />
+                      )}
+                    />
+                  )}
+                  {searchedText && filteredData.length > 0 ? (
+                    <FlatList
+                      style={styles.list}
+                      data={filteredData}
+                      contentContainerStyle={styles.flatListStyle}
+                      keyExtractor={item => item.user.id.toString()}
+                      renderItem={({ item }) => (
+                        <FollowersListCard2
+                          name={item.user.firstName}
+                          img={item.user.url}
+                          data={item.user}
+                          donation={item.user.donation}
+                        />
+                      )}
+                    />
+                  ) : searchedText && filteredData.length === 0 ? (
+                    <View style={styles.noDataContainer}>
+                      <Text style={styles.noDataText}>No followers found</Text>
+                    </View>
+                  ) : null}
+                </>
               )}
             </>
           )}
@@ -127,4 +135,5 @@ const FollowersMembership = ({ route, navigation }) => {
     </View>
   );
 };
+
 export default FollowersMembership;

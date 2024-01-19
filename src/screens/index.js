@@ -104,5 +104,4 @@ export {
   InvitationScreen,
   TempleCrew,
   NearByTemplesSeeAll,
-  
 };
