@@ -32,6 +32,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { allTexts } from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Data } from '../home-feed/formateDetails';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
@@ -62,6 +63,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { style } from '../newprofile/styles';
 import EventsScreen from '../EventsScreen';
 import UpdatePassword from '../update-password';
+import NearByTempleComp from '../../components/NearByTempleComp';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -353,10 +355,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <ProfileImage profileImg={trfData} />
             </View>
 
+            <View style={{justifyContent:'center',alignItems:'center',marginTop:'5%'}}>
+              <Text>God Name</Text>
+            </View>
+
 
 
             <View>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '13%' }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '5%' }}>
                 <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
                   <Text style={styles.titleHeader}>
                     {/* {trfData?.name?.length < 25
@@ -372,7 +378,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
               </View>
 
             </View>
-
+ 
+ 
+            <View style={{marginTop:5,marginLeft:'8%',justifyContent:'center',alignItems:'center'}}>
+             <View style={{flexDirection:'row',width:'50%',marginLeft:12}}>
+             <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={15} color="white" />
+             <Text style={{fontSize:10}}>Gavarapalem , Anakapalli</Text>
+             </View>
+            </View>
 
 
             {/* <Text style={styles.ratingText}>
@@ -392,6 +405,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <ProfileTimingTabs data={trfData} />
               )}
             </View>
+
+
+
+
             <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
@@ -454,6 +471,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       },
                     );
                   }}
+                />
+                <NearByTempleComp
+                onPress={()=>{
+                  
+                  navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
+                }}
+                 
                 />
               </View>
               {donationLoader ? (

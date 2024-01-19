@@ -73,7 +73,7 @@ const UserFeedScreen = ({navigation}) => {
 
   const renderLoder = () => {
     return isLoading ? (
-      <View>
+      <View style={{marginTop: '70%'}}>
         <Loader size={'large'} color={colors.orangeColor} />
       </View>
     ) : noData ? (
@@ -122,7 +122,12 @@ const UserFeedScreen = ({navigation}) => {
         // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
-        <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
+        <TopBarcard
+          menu={true}
+          txt={'Feeds'}
+          isBell={true}
+          navigation={navigation}
+        />
       </View>
       <View style={{marginBottom: '29%'}}>
         {homeFeedList?.length > 0 ? (
@@ -169,8 +174,7 @@ const UserFeedScreen = ({navigation}) => {
             <Text style={styles.nodatatext}>No items to display</Text>
           </View>
         ) : (
-          <View
-            style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{marginTop: '70%'}}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         )}
