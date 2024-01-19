@@ -70,7 +70,7 @@ const FollowersMembership = ({ route, navigation }) => {
                 }}
                 onTextChange={e => {
                   setSearchedText(e);
-                  performFilter(e);
+                  handleSearch(e);
                 }}
               />
             </View>
@@ -84,21 +84,25 @@ const FollowersMembership = ({ route, navigation }) => {
           ) : (
             <>
               {searchedText === '' && (
+               followersList?.length ? (
                 <FlatList
-                  style={styles.list}
-                  data={followersList}
-                  showsVerticalScrollIndicator={false}
-                  contentContainerStyle={styles.flatListStyle}
-                  keyExtractor={(item, index) => item.user.id.toString()}
-                  renderItem={({ item }) => (
-                    <FollowersListCard2
-                      name={item.user.firstName}
-                      img={item.user.url}
-                      data={item.user}
-                      donation={item.user.donation}
-                    />
-                  )}
-                />
+                style={styles.list}
+                data={followersList}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.flatListStyle}
+                keyExtractor={(item, index) => item.user.id.toString()}
+                renderItem={({ item }) => (
+                  <FollowersListCard2
+                    name={item.user.firstName}
+                    img={item.user.url}
+                    data={item.user}
+                    donation={item.user.donation}
+                  />
+                )}
+              />
+               ) : (
+                ''
+               )
               )}
               {searchedText && filteredData.length > 0 ? (
                 <FlatList

@@ -315,7 +315,6 @@ const ForgetPassword = () => {
                 }) => {
                   return (
                     <View style={styles.fieldContainer}>
-
                       <PasswordField
                         value={values.password}
                         title={'password'}
@@ -334,9 +333,7 @@ const ForgetPassword = () => {
                         onBlur={handleBlur('confirmPassword')}
                         setState={handleChange('confirmPassword')}
                       />
-
                       <View style={styles.buttonContainer}>
-                        {isChecked ? (
                           <PrimaryButton
                             bgColor={colors.orangeColor}
                             loading={false}
@@ -344,18 +341,6 @@ const ForgetPassword = () => {
                             text={'submit'}
                             radius={25}
                           />
-                        ) : (
-                          <PrimaryButton
-                            textColor={'white'}
-                            bgColor={'gray'}
-                            loading={false}
-                            onPress={() =>
-                              alert('Accept terms and conditions to continue..')
-                            }
-                            text={'Submit'}
-                            radius={25}
-                          />
-                        )}
                       </View>
                     </View>
                   );
