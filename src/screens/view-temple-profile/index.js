@@ -304,11 +304,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     selectedId: !isFollow ? trfData?.jtProfile : '',
                   });
                 }}>
-                {/* <BackHeaderNew
-                  onPress={() => navigation.goBack()}
-                /> */}
-                {/* {back && ( */}
-
                 <TouchableOpacity
                   style={styles.iconContainer}
                   onPress={() => {
@@ -358,9 +353,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '5%' }}>
               <Text>God Name</Text>
             </View>
-
-
-
             <View>
               <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '5%' }}>
                 <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
@@ -371,27 +363,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     {trfData?.name}
                   </Text>
                 </View>
-                {/* <View> */}
-                {/* <Text style={{ width: 50, textAlign: 'center' }}></Text> */}
-                {/* </View> */}
-                {/* <View style={{ flex: 1, height: 1, backgroundColor:'FFF3E5' }} /> */}
               </View>
-
             </View>
-
-
             <View style={{ marginTop: 5, marginLeft: '8%', justifyContent: 'center', alignItems: 'center' }}>
               <View style={{ flexDirection: 'row', width: '50%', marginLeft: 12 }}>
                 <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={15} color="white" />
                 <Text style={{ fontSize: 11 }}>Gavarapalem , Anakapalli</Text>
               </View>
             </View>
-
-
-            {/* <Text style={styles.ratingText}>
-              <AntDesign name={'star'} color={'#FFA001'} size={16} /> {'4.8'}{' '}
-              {'(15.3k Ratings)'}
-            </Text> */}
             <View style={{ marginTop: 10 }}>
               {data?.seasonal ? (
                 <TouchableOpacity
@@ -405,10 +384,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <ProfileTimingTabs data={trfData} />
               )}
             </View>
-
-
-
-
             <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
@@ -477,7 +452,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
 
                     navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
                   }}
-
                 />
               </View>
               {donationLoader ? (
