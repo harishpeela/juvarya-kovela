@@ -12,7 +12,6 @@ export const styles = StyleSheet.create({
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'space-between',
-        // borderWidth:2,
         paddingHorizontal: '5%',
     },
     secondContainer: {
@@ -22,8 +21,6 @@ export const styles = StyleSheet.create({
         paddingTop: '2%',
         shadowColor: colors.black,
         height: '50%',
-        // borderWidth:5,
-        // borderColor:'red',
         backgroundColor: colors.white,
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
@@ -61,7 +58,6 @@ borderWidth: 0,
         alignItems: 'center',
         elevation: 2,
     },
-  
     btnText: {
         color: colors.white,
         fontWeight: '400',
@@ -71,15 +67,12 @@ borderWidth: 0,
     dateAndLocation: {
         flexDirection: 'row',
         width: '50%',
-        justifyContent:'flex-start'
-       
-        
+        justifyContent:'flex-start'        
     },
     secondContainer2: {
         marginHorizontal: '3%',
         borderTopLeftRadius: 15,
         borderTopRightRadius: 15,
-       
     },
     locText: {
         color: colors.gray,
@@ -117,7 +110,6 @@ borderWidth: 0,
         alignContent: 'center',
         justifyContent: 'space-around',
         marginBottom: 4,
-
     },
     separateContainerText: {
         textAlign: 'center',
@@ -132,7 +124,6 @@ borderWidth: 0,
         marginRight:22,
         marginLeft:3,
         height:20
-        
     },
     container1:{
 marginTop:10
@@ -142,7 +133,6 @@ marginTop:10
         flexDirection: 'row',
         // justifyContent: 'space-around',
         marginLeft:18,
-    
     },
     orangeColor: {
         borderBottomWidth: 1,
@@ -159,8 +149,6 @@ marginTop:10
     },
     desContainer: {
         marginHorizontal: '5%',
-        
-        
     },
     des: {
         color: colors.black,
@@ -173,9 +161,7 @@ marginTop:10
         fontStyle: fontFamily.PoetsenOneRegular
     },
     formContainer: {
-        // borderWidth:1,
         marginBottom: 300,
-
     },
     registrationText: {
         color: colors.black,
@@ -195,12 +181,9 @@ marginTop:10
     toggleData: {
         marginBottom: 300,
     },
-    bg:{
-    //    backgroundColor:colors.red4 
-    },
     subBtn: {
-        justifyContent: 'center', // Center vertically
-        alignItems: 'center', // Center horizontally
+        justifyContent: 'center',
+        alignItems: 'center',
         backgroundColor: colors.white,
         borderRadius: 5,
         alignSelf: 'flex-end',
@@ -256,13 +239,9 @@ festivaldetails:{
 marginTop:10,
 marginBottom:10,
 justifyContent:'flex-start',
-// backgroundColor:colors.white,
 padding:24,
 borderRadius:24,
 margin:10
-
-
-
 },
 Imagecontainer:{
     minHeight:'25%',
@@ -277,18 +256,13 @@ festivalContainer:{
     justifyContent:'flex-start',
     alignItems:'center',
     marginTop:-10,
-    marginLeft:-15
-    
-    
-    
-}
-,
+    marginLeft:-15  
+},
 locationPincode:{
     flexDirection:'row'
 },
 infoContainer:{
-    marginTop:10,
-    
+    marginTop:10,  
 },
 HeadingAndIcon:{
     flexDirection:'row',
@@ -304,5 +278,32 @@ highLightCard: {
         width: '50%',
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', // Centered horizontally
+      },
+      heartIcon: { position: 'absolute', right: 10, top: 10 },
+      img1: { height: 80, width: 80, borderRadius: 20 },
+      tab3: { fontSize: 18, fontWeight: '700' },
+      tab3Text: { flexDirection: 'row', position: 'absolute', bottom: 5, right: 20, alignItems: 'center' },
+      tab2Text: { fontSize: 16, fontWeight: '700', color: 'black' },
+      tab1Img: { height: 120, width: 120, borderRadius: 60 },
+      tab1Text: { fontSize: 16, fontWeight: '600', color: 'black', marginVertical: 5 },
+      tab1Name: { fontSize: 14, fontWeight: '400', color: 'black', marginLeft: 10 },
+      bgImg: { height: 250, marginHorizontal: 20, marginTop: 20 },
+      bgImg1: { borderRadius: 20, height: '100%' },
+      bgContainer: { justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', flex: 1},
+      multiImgs: { flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'center', marginBottom: 15 },
+      clickImg: { borderWidth: 2, borderRadius: 10, borderColor: 'white', marginHorizontal: 5 },
+      eveName: { flexDirection: 'row', margin: 20, alignItems: 'center' },
+      eveText: { fontSize: 18, fontWeight: '700', color: 'black', marginLeft: 10, textTransform: 'capitalize' },
+      dateCon: { flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: '5%' },
+      dateIcon: { color: colors.orangeColor, backgroundColor: 'white', padding: 5, borderRadius: 10 },
+      dateText: { fontSize: 14, color: 'black', marginLeft: 10 },
+      locCon: { flexDirection: 'row', alignItems: 'center', margin: 5 },
+      locIcon: { color: colors.orangeColor, backgroundColor: 'white', padding: 5, borderRadius: 10 },
+      locText: { color: colors.blue, fontSize: 14, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue },
+      underline: {
+        borderStyle: 'dashed',
+        borderWidth: 0.5,
+        borderColor: colors.gray,
+        marginVertical: 10,
       },
 })
