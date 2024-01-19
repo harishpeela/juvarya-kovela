@@ -5,11 +5,12 @@ import {allTexts, colors} from '../../common';
 import {styles} from './styles';
 import {MemberShipList} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import { Loader } from '../../components';
+import {Loader} from '../../components';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {roleId, trfdata} = route.params || {};
-  console.log('profileid', trfdata?.jtProfile)
+  console.log('profileid', trfdata?.jtProfile);
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
@@ -22,7 +23,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     }
   };
   const MembershipData = async () => {
-    console.log('membershipid', trfdata?.jtProfile)
+    console.log('membershipid', trfdata?.jtProfile);
     setLoader(true);
     try {
       let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
@@ -47,7 +48,7 @@ const ProfileMemberShips = ({navigation, route}) => {
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>
-        <TopBarcard
+        <TopBarCard2
           back={true}
           txt={'Memberships'}
           navigation={navigation}
@@ -61,17 +62,16 @@ const ProfileMemberShips = ({navigation, route}) => {
           }}
         />
       </View>
-      <View style={{ marginTop: '2%', marginHorizontal: '2%' }}>
+      <View style={{marginTop: '2%', marginHorizontal: '2%'}}>
         {loader ? (
           <Loader size={'small'} color={colors.orangeColor} />
-        ) : (
-          membership?.length ? (
-            <MemberShipCard
+        ) : membership?.length ? (
+          <MemberShipCard
             data={membership}
             roleId={roleId}
             txt={
               roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                ?  'Membership'
+                ? 'Membership'
                 : 'Join Now'
             }
             nav={navigation}
@@ -81,13 +81,20 @@ const ProfileMemberShips = ({navigation, route}) => {
             //   })
             // }
           />
-          ) : (
-            <View style={{alignItems: 'center', justifyContent: 'center', marginTop: '70%'}}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: colors.orangeColor, }}> No data to display</Text>
-              </View>
-          )
+        ) : (
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: colors.orangeColor,
+                fontWeight: 'bold',
+                marginTop: '70%',
+              }}>
+              {' '}
+              No Memberships available
+            </Text>
+          </View>
         )}
-        
       </View>
     </View>
   );

@@ -6,13 +6,11 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingTop: 40,
     paddingHorizontal: 30,
-
   },
-  header:{
+  header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
   },
   container1: {
     // borderWidth: 2,
@@ -99,7 +97,7 @@ export const styles = StyleSheet.create({
     elevation: 2,
     height: 20,
     width: 80,
-    padding:1,
+    padding: 1,
   },
   firstDetailsTextContainer: {
     flexDirection: 'column',
@@ -129,5 +127,4 @@ export const styles = StyleSheet.create({
     fontWeight: '900',
     fontSize: 20,
   },
-
 });

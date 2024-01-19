@@ -71,7 +71,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
     return loader ? (
       <Text>no temples to Display</Text>
     ) : (
-      <View style={{marginTop: 90}}>
+      <View style={{}}>
         <Loader size={'large'} color={colors.orangeColor} />
       </View>
     );
@@ -127,9 +127,10 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
         {loader ? (
           <View
             style={{
-              alignItems: 'center',
-              justifyContent: 'center',
+              // alignItems: 'center',
+              // justifyContent: 'center',
               height: '100%',
+              marginTop: '70%',
             }}>
             <Loader color={colors.orangeColor} />
           </View>

@@ -15,6 +15,7 @@ import {SaveFeedComp} from '../../components';
 import {allTexts, colors} from '../../common';
 import {TopBarcard} from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -60,7 +61,11 @@ const MySavedPosts = ({navigation}) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.footerBackground}>
         <View style={{minHeight: '15%'}}>
-          <TopBarcard back={true} txt={'Saved Posts'} navigation={navigation} />
+          <TopBarCard2
+            back={true}
+            txt={'Saved Posts'}
+            navigation={navigation}
+          />
         </View>
         <View style={{height: '85%'}}>
           {loading ? (
