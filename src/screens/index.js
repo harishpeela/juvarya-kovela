@@ -103,6 +103,5 @@ export {
   MemberShipDetails,
   InvitationScreen,
   TempleCrew,
- 
-  
+  NearByTemplesSeeAll,
 };

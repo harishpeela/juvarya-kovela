@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,24 +11,23 @@ import {
   useColorScheme,
 } from 'react-native';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 // import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {allTexts, colors} from '../../common';
-import {useState} from 'react';
-import {NewVerifyOTP, forgotPassword} from '../../utils/api';
-import {styles} from './styles';
-import {Pressable} from 'react-native';
+import { allTexts, colors } from '../../common';
+import { useState } from 'react';
+import { NewVerifyOTP, forgotPassword } from '../../utils/api';
+import { styles } from './styles';
+import { Pressable } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import {Formik} from 'formik';
-import {forgotPasswordSchema} from '../../common/schemas';
-import {PasswordField} from '../../components/inputfield';
-import {PrimaryButton} from '../../components';
+import { Formik } from 'formik';
+import { forgotPasswordSchema } from '../../common/schemas';
+import { PasswordField } from '../../components/inputfield';
+import { PrimaryButton } from '../../components';
 import Snackbar from 'react-native-snackbar';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
-// import { responsiveScreenHeight } from 'react-native-responsive-dimensions'
 const ForgetPassword = () => {
   const navigation = useNavigation();
   const [memberShip, setMemberShip] = useState([]);
@@ -53,12 +52,12 @@ const ForgetPassword = () => {
     };
   };
   const startTimer = e => {
-    let {total, minutes, seconds} = getTimeRemaining(e);
+    let { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : '0' + minutes) +
-          ':' +
-          (seconds > 9 ? seconds : '0' + seconds),
+        ':' +
+        (seconds > 9 ? seconds : '0' + seconds),
       );
     }
   };
@@ -82,19 +81,19 @@ const ForgetPassword = () => {
       return deadline;
     }
   };
-  useEffect(() => {
-    const setText = () => {
-      otpInput?.current?.setValue(`${otp}`);
-    };
-    setText();
-  }, otp);
+  // useEffect(() => {
+  //   const setText = () => {
+  //     otpInput?.current?.setValue(`${otp}`);
+  //   };
+  //   setText();
+  // }, otp);
 
   useEffect(() => {
     setSecLeft(secLeft + 30);
     const newTime = getDeadTime(true);
     startTime(newTime);
   }, []);
-  const otpGeneration = async email => {
+  const otpGeneration = async (email, Ootp) => {
     const payload = {
       otpType: 'FORGOT_PASSWORD',
       emailAddress: email,
@@ -105,9 +104,9 @@ const ForgetPassword = () => {
       // console.log('otpGeneration =>>>>>>>>>>>>' + result);
       if (result) {
         setTimeout(() => {
-          setOtp(result?.data?.otp);
+          setOtp(Ootp);
         }, 2000);
-        // console.log('data is coming here =>>>>');
+        console.log('data is coming here =>>>>');
         Snackbar.show({
           text: 'OTP Generated Successfully',
           backgroundColor: 'green',
@@ -139,14 +138,15 @@ const ForgetPassword = () => {
     }
   };
   const validateEmail = text => {
-    // Use a regular expression for basic email validation
-    const isValid = text.toLowerCase().endsWith('@gmail.com');
+    const isValid = text.toLowerCase().endsWith('.com');
     setValidEmail(isValid);
     setUserEmail(text);
   };
-  const onPressDone = () => {
+  const onPressDone = (Ootp) => {
+    console.log('otp', Ootp);
     if (validEmail && userEmail !== '') {
-      otpGeneration(userEmail);
+      otpGeneration(userEmail, Ootp);
+      setOtp(Ootp)
       setModalVisible(true);
       console.log('Email is valid:', userEmail);
     } else {
@@ -158,21 +158,19 @@ const ForgetPassword = () => {
     }
   };
   const userPasswordHandler = async values => {
-    console.log('inside the userPAsswordHandler');
+    let otpOutPut = otpInput?.current?.state?.otpText
+      ?.toString()
+      .replace(/,/g, '');
+      console.log('otpoutput', otpOutPut);
     const payload = {
       email: userEmail,
       password: values.password,
-      otp: otp,
+      otp: otpOutPut,
     };
-    console.log('payload 23456=>>>>>>>>>>> ' + payload.password);
+    console.log('forgot password payload', payload);
     try {
-      console.log('values =>>>>>> ' + values.password);
       let result = await forgotPassword(payload);
-      console.log('passwordCreation =>>>>>>>>>>>>' + result);
       if (result) {
-        // setOtp()
-        console.log('data is coming here =>>>>' + result);
-
         Snackbar.show({
           text: 'Password Created Successfully',
           backgroundColor: 'green',
@@ -180,9 +178,6 @@ const ForgetPassword = () => {
           action: {
             text: 'Ok',
             textColor: 'white',
-            onPress: () => {
-              // navigation.navigate(allTexts.screenNames.signin);
-            },
           },
         });
         setTimeout(() => {
@@ -190,6 +185,7 @@ const ForgetPassword = () => {
           navigation.navigate(allTexts.screenNames.signin);
         }, 1500);
       } else {
+        console.log('error in forgotpassword')
         setMemberShip(0);
       }
     } catch (error) {
@@ -248,7 +244,17 @@ const ForgetPassword = () => {
       )}
       <TouchableOpacity
         style={styles.signupButton}
-        onPress={() => onPressDone()}>
+        onPress={() => {
+          let otpOutPut = otpInput?.current?.state?.otpText
+            ?.toString()
+            .replace(/,/g, '');
+          if (otpOutPut !== '') {
+            console.log(otpOutPut, 'otpoutput');
+            setOtp(otpOutPut);
+            onPressDone(otpOutPut);
+          }
+        }}
+      >
         <Text style={styles.signupText}>SEND</Text>
       </TouchableOpacity>
 
@@ -310,20 +316,7 @@ const ForgetPassword = () => {
                 }) => {
                   return (
                     <View style={styles.fieldContainer}>
-                      {/* <InputField
-                  title={fName}
-                  placeholder={fistNamePlace}
-                  error={touched.firstName && errors.firstName}
-                  onBlur={handleBlur('firstName')}
-                  setState={handleChange('firstName')}
-                />
-                <InputField
-                  title={lastName}
-                  placeholder={fistNamePlace}
-                  error={touched.lastName && errors.lastName}
-                  onBlur={handleBlur('lastName')}
-                  setState={handleChange('lastName')}
-                /> */}
+
                       <PasswordField
                         value={values.password}
                         title={'password'}
@@ -369,22 +362,6 @@ const ForgetPassword = () => {
                   );
                 }}
               </Formik>
-              {/* <View>
-                <TextInput
-                  style={styles.textinputContainer}
-                  placeholder="Enter your Password"
-                  keyboardType="email-address"
-                  onChangeText={validateEmail}
-                  value={userEmail}
-                />
-                <TextInput
-                  style={styles.textinputContainer}
-                  placeholder="Enter your Password"
-                  keyboardType="email-address"
-                  onChangeText={validateEmail}
-                  value={userEmail}
-                />
-              </View> */}
             </View>
           </Pressable>
         </Modal>
