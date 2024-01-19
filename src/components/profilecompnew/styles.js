@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   voidButton1: {
     flexDirection: 'row',
     height: 40,
-    width: 170,
+    width: 120,
     borderRadius: 20,
     marginRight: 10,
     alignItems: 'center',
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
   voidButton1Text: {
     color: '#CC4501',
     marginLeft: '24%',
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
   },
   followLoader: {
