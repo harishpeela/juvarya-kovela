@@ -12,6 +12,7 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {DonationsPost} from '../../utils/api';
 import {allTexts} from '../../common';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
   const [dropValue, setDropValue] = useState();
@@ -70,12 +71,10 @@ const Donations = ({route, navigation}) => {
     <>
       <ScrollView style={styles.container}>
         <View style={styles.header}>
-          <BackHeaderNew
+          <TopBarCard2
+            back={true}
             txt={'Add Donation'}
-            txtColor={'black'}
-            isArrow={true}
-            onPress={() => navigation.goBack()}
-            // isArrow={true}
+            navigation={navigation}
           />
         </View>
         <Donation_first_Tab title={data?.name} rating={'3.5 (18 rating)'} />
