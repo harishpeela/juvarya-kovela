@@ -63,12 +63,11 @@ export const styles = StyleSheet.create({
   noDataContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:'50%'
-    
+    marginTop: '50%'
   },
   noDataText: {
-    fontSize: fontSize.xlarge,
-    color: colors.black,
+    fontSize: 20,
+    color: colors.orangeColor,
   },
   updateProfileTopCard:{
     height:100

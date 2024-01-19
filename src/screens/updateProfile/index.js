@@ -69,7 +69,6 @@ const UpdateProfile = ({navigation}) => {
       HideDatePicker();
     }
   };
-
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -83,9 +82,12 @@ const UpdateProfile = ({navigation}) => {
     var formattedDate = format(date, 'dd-MM-yyyy');
     console.log(formattedDate, '====<> date');
     let payload = {
-      dob: formattedDate,
-      gender: isRoleSelected,
-      gothra: gotraValue,
+    dob: formattedDate,
+    gender: isRoleSelected,
+    gothra: gotraValue,
+    whatsAppEnabled: true,
+    zodiacSign: '',
+    primaryContact: ''
     };
     console.log(payload, 'payload');
     if (
@@ -116,7 +118,7 @@ const UpdateProfile = ({navigation}) => {
       try {
         let responce = await Update_Profile(payload);
         console.log(payload, 'payload try');
-        console.log('Update Profile', responce);
+        console.log('Update Profile', responce?.data);
         if (responce?.status === 200) {
           Alert.alert('Success', responce?.data?.message, [
             {
@@ -159,7 +161,7 @@ const UpdateProfile = ({navigation}) => {
             back={true}
             navigation={navigation}></TopBarCard2>
         </View>
-        <View style={{marginTop: '25%'}}>
+        <View style={{marginTop: '15%'}}>
           <View style={{bottom: '8%'}}>
             <EventInput3
               lable={'Name'}
