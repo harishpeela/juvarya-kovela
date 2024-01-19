@@ -12,6 +12,7 @@ import {FavTempleListCard} from '../../components';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
+  console.log('userDetais =====><<><<', userDetails);
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setfilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);

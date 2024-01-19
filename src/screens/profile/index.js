@@ -241,7 +241,6 @@ const Profile = ({ navigation }) => {
         <ProfileInfo
           name={userDetails?.username}
           email={userDetails?.email}
-        // dob={dob}
         />
       </View>
       <View style={styles.profileItemsHeader}>

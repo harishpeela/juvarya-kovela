@@ -266,19 +266,21 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const dontationValue = async id => {
-    console.log(id, 'kkk')
+    console.log(id, 'kkk', donationLoader)
     setDonationLoader(true)
     let result = await getDonationsList(id, 0, 20);
-    console.log('hhh', result.data);
+    console.log('hhh', result.data?.data);
     if (result) {
       setDonationValue(result?.data?.data);
       setDonationLoader(false)
+      console.log('loader donation 1', donationLoader)
     }
     else {
       setDonationLoader(false)
+      console.log('loader donation 2', donationLoader)
     }
   };
-  console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
+  // console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
       style={{
@@ -464,7 +466,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       data: trfData,
                     })
                   }
-                  text={donationValue ? 'value' : 'No Donation Yet'}
+                  text={donationValue ? `${donationValue[0]?.description}` : 'No Donations Yet'}
                   roleId={
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }

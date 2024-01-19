@@ -22,7 +22,7 @@ export const Donations_list_Card = ({ data }) => {
             source={{
               uri: item?.url
                 ? item?.url
-                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+                : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17055723004711705572300104.jpg',
             }}
             style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
           />

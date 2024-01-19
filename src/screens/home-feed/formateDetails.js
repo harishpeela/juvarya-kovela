@@ -2,7 +2,7 @@ export const Data = d => {
   let myDataDetails = {
     name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
     description: d?.jtProfileDTO?.desciption
-      ? d?.jtProfileDTO?.desciption
+      ? d?.jtProfileDTO?.description
       : d?.description || 'no description',
     url: d?.url ? d?.url : '',
     eventsEnabled: d?.jtProfileDTO?.eventsEnabled
