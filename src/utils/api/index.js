@@ -41,6 +41,7 @@ const endpoints = {
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
   EVENT_SAVE: 'jtevent/save',
+  INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
@@ -346,6 +347,17 @@ export const EventList = async (pgno, pgSize) => {
   try {
     let result = await axiosEventsData1.get(
       `${endpoints.EVENTS_LIST}?&page=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const IntrestedEvents = async (data) => {
+  try {
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENTS_LIST}`,data
     );
     return result;
   } catch (error) {
