@@ -65,6 +65,7 @@ export const FolloUnfollowComp = ({
     </View>
   );
 };
+
 export const ContactTabcomp = ({onPressContact}) => {
   return (
     <TouchableOpacity style={[styles.voidButton, styles.button]}>
@@ -85,6 +86,10 @@ export const DirectionsTabComp = ({role, onPress}) => {
     </TouchableOpacity>
   );
 };
+
+
+
+
 export const CreateFeedTabComp = ({roleId, onPlusPress}) => {
   return (
     <View style={styles.feedContainer}>

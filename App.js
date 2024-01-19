@@ -49,7 +49,6 @@ import {
   InvitationScreen,
   MemberShipDetails,
   UserInfo,
-  EventDetailsNew,
   TempleCrew,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -118,7 +117,6 @@ const App = () => {
       invitationScreen,
       membershipdetails,
       // userinfo,
-      eventdetailsnew,
       templecrew,
       createFeedDescription,
     },
@@ -232,13 +230,6 @@ const App = () => {
         <Stack.Screen
           name={notification}
           component={Notifications}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={eventdetailsnew}
-          component={EventDetailsNew}
           options={{
             headerShown: false,
           }}

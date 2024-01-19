@@ -85,6 +85,9 @@ const endpoints = {
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
+  MY_MEMBERSHIPS:'/jtProfileMembership/list',
+  MY_DONATIONS:'jtDonation/user/donations'
+  
 };
 export const getInitialToken = async () => {
   try {
@@ -205,6 +208,8 @@ export const SearchPopularTemples = async txt => {
     console.log('error in searched popular temples', error);
   }
 };
+
+
 export const SearchTempleRoleWithId = async profId => {
   try {
     let result = await axiosNewData.get(
@@ -232,6 +237,8 @@ export const GetProfilePic = async mailId => {
     console.log('error in profilepic get', error);
   }
 };
+
+
 export const PostProfilePic = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
@@ -434,6 +441,32 @@ export const MembersList = async (membershipId, pgno, pgsz) => {
     console.log('error in members list', error);
   }
 };
+
+
+export const MyMemberships = async (profileId,pgno, pgsz) => {
+  try {
+    let result = await axiosMultiPartFormDataMem.get(
+      `${endpoints.MY_MEMBERSHIPS}?profileId=${profileId}&pageNo=${pgno}&pageSize=${pgsz}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in members list', error);
+  }
+};
+
+export const MyDonations = async (profileId) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.MY_DONATIONS}?profileId=${profileId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
+
 export const MemberShipDetails = async (pgNo, pgSize) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(

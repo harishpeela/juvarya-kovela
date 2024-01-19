@@ -3,11 +3,12 @@ import React from 'react';
 import {styles} from './style';
 
 export const ProfileInfo = ({img, name, email, dob}) => {
+  console?.log('name===', name);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.nameText}>
         {' '}
-        {name?.length < 14 ? `${name}` : `${name?.substring(0, 14)}...`}{' '}
+        {name?.length < 14 ? `${name}` : `${name?.subString(0, 14)}...`}{' '}
       </Text>
       <Text style={styles.emailText}>{email}</Text>
       {dob && (

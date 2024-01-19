@@ -23,6 +23,10 @@ export const Donation_Second_Tab = ({
   dropData,
   onSelect,
   valueRs,
+  onChangeEmail,
+  valueEmail,
+  onChangeName,
+  valueName,
 }) => {
   const [activeIndex, setActiveIndex] = useState();
 
@@ -82,6 +86,24 @@ export const Donation_Second_Tab = ({
           keyboardType="number-pad"
           onChangeText={onChange}
           value={valueRs}
+        />
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          placeholder="Email"
+          style={styles.input}
+          keyboardType="number-pad"
+          onChangeText={onChangeEmail}
+          value={valueEmail}
+        />
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          placeholder="Name"
+          style={styles.input}
+          keyboardType="number-pad"
+          onChangeText={onChangeName}
+          value={valueName}
         />
       </View>
       <View style={styles.border} />
@@ -148,7 +170,7 @@ const styles = StyleSheet.create({
   },
   input: {
     marginLeft: 40,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '400',
   },
   border: {
