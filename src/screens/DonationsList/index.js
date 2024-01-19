@@ -2,12 +2,18 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
-import {BackHeaderNew, Donations_list_Card, SearchBar, TopBarcard} from '../../components';
+import {
+  BackHeaderNew,
+  Donations_list_Card,
+  SearchBar,
+  TopBarcard,
+} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {Loader} from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(true);
@@ -66,39 +72,51 @@ const DonationsList = ({navigation, route}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
-      <TopBarcard txt={'Donation List'} back={true}  navigation={navigation} navMenu={navigation}>
-      <View style={styles.searchContainer}>
-      <SearchBar
-              value={searchedText}
-              onTextChange={text => {
-                setSearchedText(text);
-                handleSearch(text);
-              }}
-              loading={loading}
-              onCrossPress={() => {
-                setSearchedText('');
-                setFilteredData([]);
-              }}
-              placeHolder={'Search here'}
-              style={styles.customSearch}
-              showCrossPress={true}
-              bgColor={colors.white}
-              brColor={colors.gray2}
-              brWidth={1}
-            />
-              <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.donations)} style={styles.plusContainer}>
-                <FeatherIcon style={styles.plusIcon} name="plus" size={30} color= {colors.orangeColor} />
+        <View style={{minHeight: '18.5%', marginTop: '3%'}}>
+          <TopBarCard2
+            txt={'Donation List'}
+            back={true}
+            // isBell={true}
+            navigation={navigation}
+            navMenu={navigation}>
+            <View style={styles.searchContainer}>
+              <SearchBar
+                value={searchedText}
+                onTextChange={text => {
+                  setSearchedText(text);
+                  handleSearch(text);
+                }}
+                loading={loading}
+                onCrossPress={() => {
+                  setSearchedText('');
+                  setFilteredData([]);
+                }}
+                placeHolder={'Search here'}
+                style={styles.customSearch}
+                showCrossPress={true}
+                bgColor={colors.white}
+                brColor={colors.gray2}
+                brWidth={1}
+              />
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.donations)
+                }
+                style={styles.plusContainer}>
+                <FeatherIcon
+                  style={styles.plusIcon}
+                  name="plus"
+                  size={30}
+                  color={colors.orangeColor}
+                />
               </TouchableOpacity>
-      </View>
-      </TopBarcard>
-      </View>
+            </View>
+          </TopBarCard2>
+        </View>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}>
-           
-          </View>
+          <View style={styles.searchContainer}></View>
         </View>
         <View style={styles.followersContainer}>
           {loader ? (
@@ -106,12 +124,8 @@ const DonationsList = ({navigation, route}) => {
           ) : (
             <>
               {searchedText === '' &&
-                (apiData?.length ? (
-                  <Donations_list_Card data={apiData} />
-                ) : (
-                  ''
-                ))}
- 
+                (apiData?.length ? <Donations_list_Card data={apiData} /> : '')}
+
               {searchedText && filteredData?.length > 0 ? (
                 <Donations_list_Card data={filteredData} />
               ) : (
@@ -129,4 +143,3 @@ const DonationsList = ({navigation, route}) => {
   );
 };
 export default DonationsList;
- 

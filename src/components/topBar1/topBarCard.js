@@ -33,11 +33,11 @@ export const TopBarcard = ({
           style={{
             flex: 1,
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent:
-              menu || isBell || roleType || roleId || back
-                ? 'space-between'
-                : 'space-between',
+            // alignItems: 'center',
+            // justifyContent:
+            //   menu || isBell || roleType || roleId || back
+            //     ? 'space-between'
+            //     : 'space-between',
             marginTop: '22%',
             marginHorizontal: 5,
           }}>
@@ -106,9 +106,10 @@ export const TopBarcard = ({
                 fontSize: 20,
                 flex: 10,
                 fontWeight: 'bold',
-                marginHorizontal: '20%',
+                marginLeft: '1%',
                 color: 'white',
                 textAlign: 'center',
+                // backgroundColor: 'red',
               }}>
               {txt}
             </Text>
@@ -126,8 +127,75 @@ export const TopBarcard = ({
             </TouchableOpacity>
           )}
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
+            <TouchableOpacity onPress={navCreate}>
+              <Text style={styles.joinText}>Create</Text>
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
+      {children}
+    </View>
+  );
+};
+
+export const TopBarCard2 = ({
+  onPress,
+  txt,
+  arrow,
+  children,
+  navigation,
+  back,
+  roleId,
+  roleType,
+  navCreate,
+  height,
+}) => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            marginTop: '22%',
+            marginHorizontal: 1,
+          }}>
+          {arrow && (
+            <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+              <Image
+                source={require('../../../assets/images/backarrow.png')}
+                style={{height: 10, width: 6}}
+              />
+            </TouchableOpacity>
+          )}
+          {back && (
             <TouchableOpacity
-              style={{position: 'absolute', right: '2%'}}
+              style={styles.iconContainer}
+              onPress={() => navigation.goBack()}
+              navigation={navigation}>
+              <Image
+                source={require('../../../assets/images/backarrow.png')}
+                style={{height: 10, width: 6}}
+              />
+            </TouchableOpacity>
+          )}
+
+          {txt && (
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: 'bold',
+                marginLeft: txt.length >= 12 ? '23%' : '25%',
+                color: 'white',
+                textAlign: 'center',
+                // backgroundColor: 'red',
+              }}>
+              {txt}
+            </Text>
+          )}
+          {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
+            <TouchableOpacity
+              style={{flex: 1, marginLeft: '10%', marginTop: 2}}
               onPress={navCreate}>
               <Text style={styles.joinText}>Create</Text>
             </TouchableOpacity>
@@ -138,6 +206,7 @@ export const TopBarcard = ({
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFAB0F',
@@ -161,12 +230,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    marginLeft: 10
+    marginLeft: 10,
+    // backgroundColor: 'red',
   },
   joinText: {
     color: colors.white,
     fontWeight: '900',
-    fontSize: 20,
+    fontSize: 18,
+    textAlign: 'center',
   },
   userIcon: {
     borderWidth: 2,
