@@ -36,6 +36,7 @@ export const EventInput = ({
   onBlur,
   value,
   onPressCalendar,
+  maxLength,
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -151,6 +152,7 @@ export const EventInput = ({
           onChangeText={onChangeText}
           editable={true}
           keyboardType={keyboardType}
+          maxLength={maxLength}
         />
       </View>
     </View>
