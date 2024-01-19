@@ -48,7 +48,6 @@ import {
   ProfileMemberShips,
   InvitationScreen,
   MemberShipDetails,
-  UserInfo,
   TempleCrew,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
