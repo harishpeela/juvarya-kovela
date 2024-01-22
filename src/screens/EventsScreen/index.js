@@ -67,7 +67,8 @@ const EventsScreen = ({navigation}) => {
   }
   return (
     <View style={{flex: 1}}>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <View style={{minHeight: 160, marginTop: '3%'
+    ,marginBottom:'-4%'}}>
         <TopBarcard
           txt={'Events'}
           menu={true}
@@ -122,7 +123,7 @@ const EventsScreen = ({navigation}) => {
                   data={eventsData}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{marginBottom: '50%', marginTop: '3%'}}
+                  style={{marginBottom: '46%'}}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (
                     <EventCard2
