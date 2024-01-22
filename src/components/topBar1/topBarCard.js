@@ -149,6 +149,7 @@ export const TopBarCard2 = ({
   roleType,
   navCreate,
   height,
+  bData
 }) => {
   return (
     <View style={styles.container}>
@@ -171,7 +172,9 @@ export const TopBarCard2 = ({
           {back && (
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => navigation.goBack()}
+              onPress={() => {navigation.goBack(), {
+                data: bData
+              }}}
               navigation={navigation}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
