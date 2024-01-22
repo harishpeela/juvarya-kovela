@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { colors } from '../../common';
 export const Donations_list_Card = ({ data }) => {
+  // console.log('nsxbjahsb xmhb ams xan snx', data);
   return (
     <FlatList
       data={data}
