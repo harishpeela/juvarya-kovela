@@ -45,6 +45,7 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
+  DELETE_DONATION: 'delete?donationId',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',

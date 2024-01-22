@@ -24,7 +24,7 @@ const FollowersListCard2 = ({
             source={{
               uri: img
                 ? img
-                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
+                : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
             }}
             style={styles.image}
           />
