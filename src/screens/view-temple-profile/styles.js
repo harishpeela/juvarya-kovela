@@ -85,6 +85,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     // marginTop: '3%',
     justifyContent: 'space-evenly',
+    flex: 1,
   },
   disPlayContent: {
     marginTop: '-60%',
@@ -107,11 +108,10 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     alignSelf: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     fontFamily: 'icomoon',
     color: '#CC4501',
     textTransform: 'capitalize',
-    
   },
   eventsCard: {
     borderWidth: 1,
@@ -215,7 +215,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 5,
     borderRadius: 10,
-    backgroundColor: colors.orangeColor
+    backgroundColor: colors.orangeColor,
   },
   seasonalText: {
     color: colors.white,
@@ -229,5 +229,5 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-},
+  },
 });
