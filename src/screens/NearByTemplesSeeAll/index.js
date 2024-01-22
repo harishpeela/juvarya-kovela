@@ -14,28 +14,19 @@ import {
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {Loader} from '../../components';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const NearByTemplesSeeAll = ({navigation, route}) => {
   const {data} = route?.params || {};
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
- 
+
   console.log('pop see all temples', popTemples);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity
-          style={styles.iconContainer}
-          onPress={() => navigation.goBack()}>
-          <Ionicons
-            name="caret-back-circle"
-            size={36}
-            color={'#ffffff'}
-            style={{alignSelf: 'flex-start', justifyContent: 'center'}}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headingText}>{'All Temples'}</Text>
+      <View style={{minHeight: '15%'}}>
+        <TopBarCard2 back={true} txt={'All Temples'} navigation={navigation} />
       </View>
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
@@ -49,7 +40,8 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
             renderItem={({item, index}) => (
               <TouchableOpacity
                 style={styles.card}
-                onPress={() => alert('page under development')
+                onPress={
+                  () => alert('page under development')
                   // navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                   //   data: item,
                   // })
