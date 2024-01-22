@@ -26,7 +26,7 @@ const DonationsList = ({navigation, route}) => {
   const customerProfilePic = async e => {
     try {
       let result = await GetProfilePic(e?.email);
-      console.log('profilepic', result?.data);
+      // console.log('profilepic', result?.data);
       if (result?.data) {
         let responce = {...e, url: result?.data?.url, name: result?.data?.name};
         // console.log('responce', responce);
@@ -34,11 +34,9 @@ const DonationsList = ({navigation, route}) => {
           setApiData(array => [...array, responce]);
           setLoader(false);
         } else{
-          console.log('eeeeee', e);
           setLoader(false);
         }
       } else {
-        console.log('e state', e);
         setApiData([e]);
         setLoader(false);
       }
@@ -52,9 +50,9 @@ const DonationsList = ({navigation, route}) => {
     try {
       let id = data?.jtProfile;
       let result = await getDonationsList(id, 0, 60);
-      console.log('data', result?.data);
+      // console.log('data', result?.data);
       let donationDTO = result?.data?.data;
-      console.log('list of donations', donationDTO);
+      // console.log('list of donations', donationDTO);
       donationDTO.map(e => {
         customerProfilePic(e);
       });
@@ -122,9 +120,6 @@ const DonationsList = ({navigation, route}) => {
         </View>
       </View>
       <View style={styles.bodyContainer}>
-        <View style={styles.searchAndFilter}>
-          <View style={styles.searchContainer}></View>
-        </View>
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.black} />

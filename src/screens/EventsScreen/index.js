@@ -31,7 +31,8 @@ const EventsScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setLoader(true);
-    let result = await EventList(0, 200);
+    try{
+      let result = await EventList(0, 200);
     console.log('list of events', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.data;
@@ -40,6 +41,10 @@ const EventsScreen = ({navigation}) => {
       setLoader(false);
     } else {
       setLoader(false);
+    }
+    } catch(error){
+      console.log('error in events list', error)
+      setLoader(false)
     }
   };
   const TempleAdmins = async () => {
