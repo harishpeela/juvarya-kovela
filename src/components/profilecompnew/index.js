@@ -49,7 +49,7 @@ export const FolloUnfollowComp = ({
           disabled={followBtnDisable}
           radius={10}
           padding={9}
-          width={90}
+          width={70}
           onPress={followTemples}
           textColor={colors.white}
           fontSize={12}
@@ -86,9 +86,6 @@ export const DirectionsTabComp = ({role, onPress}) => {
     </TouchableOpacity>
   );
 };
-
-
-
 
 export const CreateFeedTabComp = ({roleId, onPlusPress}) => {
   return (

@@ -188,6 +188,7 @@ export const TopBarCard2 = ({
                 marginLeft: txt.length >= 12 ? '23%' : '25%',
                 color: 'white',
                 textAlign: 'center',
+                marginTop: 5,
                 // backgroundColor: 'red',
               }}>
               {txt}
@@ -231,6 +232,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     marginLeft: 10,
+    marginTop: 5,
     // backgroundColor: 'red',
   },
   joinText: {
