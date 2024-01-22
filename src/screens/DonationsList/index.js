@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
 import {getDonationsList, GetProfilePic} from '../../utils/api';
+
 import {
   BackHeaderNew,
   Donations_list_Card,
@@ -15,8 +16,9 @@ import {Loader} from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
+
 const DonationsList = ({navigation, route}) => {
-  const [loader, setLoader] = useState(true);
+  const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [filteredData, setFilteredData] = useState(apiData);
   const [apiData, setApiData] = useState([]);
@@ -29,7 +31,7 @@ const DonationsList = ({navigation, route}) => {
       // console.log('profilepic', result?.data);
       if (result?.data) {
         let responce = {...e, url: result?.data?.url, name: result?.data?.name};
-        // console.log('responce', responce);
+        console.log('responce', responce);
         if (responce){
           setApiData(array => [...array, responce]);
           setLoader(false);
@@ -50,14 +52,15 @@ const DonationsList = ({navigation, route}) => {
     try {
       let id = data?.jtProfile;
       let result = await getDonationsList(id, 0, 60);
-      // console.log('data', result?.data);
+      console.log('data', result?.data);
       let donationDTO = result?.data?.data;
+      setApiData(donationDTO)
       // console.log('list of donations', donationDTO);
-      donationDTO.map(e => {
-        customerProfilePic(e);
-      });
+      // donationDTO.map(e => {
+      //   customerProfilePic(e);
+      // });
     } catch (error) {
-      console.log('error in donations list api', error);
+      // console.log('error in donations list api', error);
       setLoader(false);
     }
   };
