@@ -1,5 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 import {
   View,
   StyleSheet,
@@ -9,8 +10,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors } from '../../common';
+import { deleteDonations } from '../../utils/api';
+
+
 export const Donations_list_Card = ({ data }) => {
-  // console.log('nsxbjahsb xmhb ams xan snx', data);
+  console.log("datadonations",data)
+ 
+  const DeleteDonations = async (id) => {
+    console.log(id,"idididididid")
+    let result = await deleteDonations(id)
+    console.log(result.data,"resultkkkkkkk")
+    if (result.status === 200){
+      
+    }
+  }
   return (
     <FlatList
       data={data}
@@ -19,12 +32,15 @@ export const Donations_list_Card = ({ data }) => {
       keyExtractor={({ item, index }) => index}
       renderItem={({ item, index }) => (
         <TouchableOpacity style={styles.container}>
+        <EntypoIcon name="cross" size={20} onPress={() =>DeleteDonations(item.id)} style={{position:'absolute' , top:5,right:5}}/>
           <Image
             source={{
               uri: item?.url
                 ? item?.url
                 : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17055723004711705572300104.jpg',
             }}
+
+          
             style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
           />
           <View style={{ width: '80%', marginLeft: '3%', marginTop: '2%' }}>

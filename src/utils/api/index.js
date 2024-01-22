@@ -45,7 +45,7 @@ const endpoints = {
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
   DONATIONS_LIST: 'jtDonation/list/',
-  DELETE_DONATION: 'delete?donationId',
+  DELETE_DONATIONS:'jtDonation/delete?donationId',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
@@ -344,6 +344,19 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
+
+export const deleteDonations = async (custId) => {
+  try {
+    let result = await axiosDonation.delete(
+      `${endpoints.DELETE_DONATIONS}=${custId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in delete donation', error);
+  }
+};
+
+
 export const EventList = async (pgno, pgSize) => {
   try {
     let result = await axiosEventsData1.get(
