@@ -314,8 +314,7 @@ const Profile = ({ navigation }) => {
               navigation.navigate(allTexts.screenNames.updateProfile)
             }}
           />
-          {
-            myMemberships && (
+          
               <Item
                 svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
                 text={t('My Memberships')}
@@ -323,9 +322,8 @@ const Profile = ({ navigation }) => {
                   navigation.navigate(allTexts.screenNames.profilememberships)
                 }}
               />
-            )
-          }
-
+            
+          
         
            {
             MyDonations && (
