@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     // borderWidth:5,
-    // marginBottom:200,
+    marginBottom:110,
   },
   searchAndFilter: {
     display: 'flex',
