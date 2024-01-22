@@ -39,6 +39,8 @@ const Donations = ({route, navigation}) => {
       description: dropValue,
       email: userDetails?.email,
       jtProfile: data?.jtProfile,
+      contactNumber: "1234567897",
+      type: "FOOD"
     };
     console.log('payload', payload);
     try {

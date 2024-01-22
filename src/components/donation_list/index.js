@@ -24,8 +24,6 @@ export const Donations_list_Card = ({ data }) => {
       
     }
   }
-
-
   return (
     <FlatList
       data={data}
