@@ -66,8 +66,9 @@ export const styles = StyleSheet.create({
     marginTop: '50%'
   },
   noDataText: {
-    fontSize: 20,
+    fontSize: 15,
     color: colors.orangeColor,
+    fontFamily:'Poppins-Medium'
   },
   updateProfileTopCard:{
     height:100

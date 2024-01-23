@@ -11,7 +11,7 @@ export const styles = (bgColor, height, radius, paddidng, width) =>
       justifyContent: 'center',
       padding: 10,
       // height:height?height:'100%',
-      marginBottom: 20,
+      marginBottom: 10,
     },
   });
 export const textStyles = (textColor, fontSize) =>
