@@ -31,6 +31,7 @@ export const Donation_Second_Tab = ({
   onPressCheck,
   isChecked,
   donationText,
+  donurl,
 }) => {
   const [activeIndex, setActiveIndex] = useState();
   return (
@@ -130,7 +131,7 @@ export const Donation_Second_Tab = ({
             imageStyle={{ height: 60, width: 60 }}
             style={{ alignItems: 'center', width: 50 }}>
             <Image
-              source={require('../../../../assets/images/hanuman.png')}
+              source={{uri: donurl ? donurl : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg'}}
               style={styles.userimg}
             />
           </ImageBackground>

@@ -320,7 +320,7 @@ const Profile = ({ navigation }) => {
                 svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
                 text={t('My Memberships')}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.profilememberships)
+                  navigation.navigate(allTexts.screenNames.profileMyMemberships)
                 }}
               />
             
@@ -332,7 +332,7 @@ const Profile = ({ navigation }) => {
             svg={<FontAwesome5 name="donate" size={18} style={{marginLeft:1 }} color={isDarkMode ? 'black' : 'black'} />}
             text={t('My Donations')}
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.donationslist)
+              navigation.navigate(allTexts.screenNames.profileDonations)
             }}
           />
             )

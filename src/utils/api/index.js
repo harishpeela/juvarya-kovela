@@ -44,7 +44,8 @@ const endpoints = {
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
-  DONATIONS_LIST: 'jtDonation/donars',
+  TOP_DONATION: 'jtDonation/donars',
+  DONATION_LIST: 'jtDonation/list',
   DELETE_DONATIONS:'jtDonation/delete?donationId',
   DONATION_TYPES: 'donationtype/list',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
@@ -237,7 +238,7 @@ export const GetProfilePic = async mailId => {
     );
     return result;
   } catch (error) {
-    console.log('error in profilepic get', error);
+    // console.log('error in profilepic get', error);
   }
 };
 
@@ -335,10 +336,10 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const getDonationsList = async (custId, pgno, pgSize) => {
+export const getTopDonation = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosDonation.get(
-      `${endpoints.DONATIONS_LIST}?jtProfile=${custId}&pageNo=${pgno}&pageSize=${pgSize}&active=false`,
+      `${endpoints.TOP_DONATION}?jtProfile=${custId}&pageNo=${pgno}&pageSize=${pgSize}&active=false`,
     );
     return result;
   } catch (error) {
@@ -346,6 +347,16 @@ export const getDonationsList = async (custId, pgno, pgSize) => {
   }
 };
 
+export const getDonationList = async (custId, pgno, pgSize) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.DONATION_LIST}?&pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in get donation list', error);
+  }
+};
 export const deleteDonations = async (custId) => {
   try {
     let result = await axiosDonation.delete(
