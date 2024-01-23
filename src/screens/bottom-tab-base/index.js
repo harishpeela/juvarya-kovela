@@ -46,7 +46,7 @@ export default BottomTabBase = ({ navigation }) => {
   return (
     <SafeAreaView
       keyboardHidesTabBar={true}
-      style={{ flex: 1, borderWidth: 4 }}
+      style={{ flex: 1}}
       showsVerticalScrollIndicator={false}>
       {homeFeedListData === undefined ? (
         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
