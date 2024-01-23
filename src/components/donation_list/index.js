@@ -8,20 +8,27 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { colors } from '../../common';
 import { deleteDonations } from '../../utils/api';
-
-
-export const Donations_list_Card = ({ data }) => {
+export const Donations_list_Card = ({ data, navigation }) => {
   console.log("datadonations",data)
- 
   const DeleteDonations = async (id) => {
     console.log(id,"idididididid")
+    Alert.alert('Success', 'Are you sure you want to delete this donation ?', [
+      {
+        text: 'Yes',
+        onPress: () => navigation.goBack()
+      },
+      {
+        text: 'No',
+      }
+    ]);
     let result = await deleteDonations(id)
     console.log(result.data,"resultkkkkkkk")
     if (result.status === 200){
-      
+
     }
   }
   return (
@@ -30,6 +37,7 @@ export const Donations_list_Card = ({ data }) => {
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps={'handled'}
       keyExtractor={({ item, index }) => index}
+      style={{}}
       renderItem={({ item, index }) => (
         <TouchableOpacity style={styles.container}>
         <EntypoIcon name="cross" size={20} onPress={() =>DeleteDonations(item.id)} style={{position:'absolute' , top:5,right:5}}/>
@@ -80,7 +88,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
     elevation: 2,
