@@ -499,7 +499,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   }
                   text={
                     donationValue
-                      ? `${donationValue[0]?.description}`
+                      ? `Top donation by ${donationValue[0]?.donorName ? donationValue[0]?.donorName : donationValue[0]?.name }`
                       : 'No Donations Yet'
                   }
                   roleId={
