@@ -97,7 +97,7 @@ export const Donation_Second_Tab = ({
           value={valueEmail}
         />
       </View>
-      <View style={styles.inputView}>
+      {/* <View style={styles.inputView}>
         <TextInput
           placeholder="Name"
           style={styles.input}
@@ -105,7 +105,7 @@ export const Donation_Second_Tab = ({
           onChangeText={onChangeName}
           value={valueName}
         />
-      </View>
+      </View> */}
       <View style={styles.border} />
       <View style={styles.donationUser}>
         <Text style={{color: colors.black, fontSize: 12}}>

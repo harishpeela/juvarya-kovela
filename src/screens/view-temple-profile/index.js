@@ -271,15 +271,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
     console.log(id, 'kkk', donationLoader)
     setDonationLoader(true)
     let result = await getDonationsList(id, 0, 20);
-    console.log('hhh', result.data?.data);
+    console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
       setDonationLoader(false)
-      console.log('loader donation 1', donationLoader)
+      console.log('loader donation 1', )
     }
     else {
       setDonationLoader(false)
-      console.log('loader donation 2', donationLoader)
     }
   };
   // console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
@@ -449,7 +448,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 <NearByTempleComp
                   onPress={() => {
-
                     navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
                   }}
                 />
@@ -464,7 +462,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                         data: trfData,
                       })
                     }
-                    text={donationValue ? `${donationValue[0]?.description}` : 'No Donations Yet'}
+                    text={donationValue ? `Top Donation by ${donationValue[0]?.name}` : 'No Donations Yet'}
                     roleId={
                       roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                     }

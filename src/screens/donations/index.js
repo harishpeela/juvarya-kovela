@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, TouchableOpacity, Text, ScrollView, Alert} from 'react-native';
 import {styles} from './styles';
 import {
@@ -10,7 +10,7 @@ import {
   Donation_Third_Tab,
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
-import {DonationsPost} from '../../utils/api';
+import {DonationsPost, getDonationTypes} from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const Donations = ({route, navigation}) => {
@@ -18,29 +18,34 @@ const Donations = ({route, navigation}) => {
   const [dropValue, setDropValue] = useState();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const donTypes = async() => {
+    let result = await getDonationTypes(0, 100);
+    console.log('types of donations', result?.data);
+  }
   let Data = [
     {id: 1, rs: '101'},
     {id: 3, rs: '301'},
     {id: 5, rs: '501'},
   ];
   let donationType = [
-    'Food',
-    'Prasadam',
-    'Temple',
-    'Roads',
-    'Education',
-    'Others',
+    'ANNADHANAM',
+    'Vigrah Seva',
+    'Sadhu Bhojan',
+    'Gau Seva',
   ];
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
+  console.log('data =====><', data);
   const PostDonations = async () => {
     let payload = {
       donation: value,
       description: dropValue,
-      email: userDetails?.email,
+      email: email,
       jtProfile: data?.jtProfile,
-      contactNumber: "1234567897",
-      type: "FOOD"
+      contactNumber: userDetails?.primaryContact,
+      type: dropValue,
+      active: false,
+
     };
     console.log('payload', payload);
     try {
@@ -48,6 +53,8 @@ const Donations = ({route, navigation}) => {
         alert('please enter amount');
       } else if (!dropValue) {
         alert('please select donation type');
+      } else if(email === '' ){
+        alert('please enter email')
       } else {
         let result = await DonationsPost(payload);
         if (result) {
@@ -68,7 +75,9 @@ const Donations = ({route, navigation}) => {
       console.log('error in donations api', error);
     }
   };
-
+useEffect(() => {
+  donTypes();
+},[ ]);
   return (
     <>
       <ScrollView style={styles.container}>
@@ -91,8 +100,8 @@ const Donations = ({route, navigation}) => {
               valueRs={value}
               onChangeEmail={e => setEmail(e)}
               valueEmail={email}
-              onChangeName={e => setName(e)}
-              valueName={name}
+              // onChangeName={e => setName(e)}
+              // valueName={name}
             />
           </View>
           <View style={{marginHorizontal: 10}}>
