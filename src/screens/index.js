@@ -50,6 +50,8 @@ import MemberShipDetails from './membershipDetails';
 import InvitationScreen from './Invitation';
 import TempleCrew from './temple_crew';
 import NearByTemplesSeeAll from './NearByTemplesSeeAll';
+import ProfileDonations from './profileDonations';
+import ProfileMyMemberships from './profileMyMemberships';
 
 export {
   CreatePost,
@@ -104,4 +106,6 @@ export {
   InvitationScreen,
   TempleCrew,
   NearByTemplesSeeAll,
+  ProfileDonations,
+  ProfileMyMemberships
 };

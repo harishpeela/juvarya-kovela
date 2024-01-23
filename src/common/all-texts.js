@@ -169,6 +169,8 @@ export const allTexts = {
     membershipdetails: 'MemberShipDetails',
     templecrew: 'TempleCrew',
     createFeedDescription: 'CreateFeedDescription',
+    profileDonations:'ProfileDonations',
+    profileMyMemberships:'ProfileMyMemberships'
   },
   homeHeader: {
     welcome: 'Welcome ',
