@@ -448,7 +448,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 />
                 <NearByTempleComp
                   onPress={() => {
-
                     navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
                   }}
                 />
