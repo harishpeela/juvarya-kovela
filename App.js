@@ -49,6 +49,8 @@ import {
   InvitationScreen,
   MemberShipDetails,
   TempleCrew,
+  ProfileDonations,
+  ProfileMyMemberships,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -118,6 +120,8 @@ const App = () => {
       // userinfo,
       templecrew,
       createFeedDescription,
+      profileDonations,
+      profileMyMemberships
     },
   } = allTexts;
 
@@ -432,6 +436,20 @@ const App = () => {
          <Stack.Screen
           name={nearByTempleSeeAll}
           component={NearByTemplesSeeAll}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profileDonations}
+          component={ProfileDonations}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profileMyMemberships}
+          component={ProfileMyMemberships}
           options={{
             headerShown: false,
           }}
