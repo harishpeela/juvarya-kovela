@@ -132,11 +132,11 @@ const DonationsList = ({ navigation, route }) => {
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
-            searchedText === '' && apiData ? (
+            searchedText === '' && apiData.length > 0 ? (
               <Donations_list_Card data={apiData} navigation={navigation} />
             ) : (
-              <View style={{}}>
-                <Text> no</Text>
+              <View style={{display:'flex',alignItems:'center',flexDirection:'column',marginTop:'50%'}}>
+                <Text style={{color:colors.orangeColor,fontSize:15,fontFamily:"Poppins-Medium"}}> No donations to display</Text>
               </View>
             ))}
         </View>

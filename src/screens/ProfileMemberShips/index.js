@@ -85,10 +85,11 @@ const ProfileMemberShips = ({navigation, route}) => {
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 15,
                 color: colors.orangeColor,
-                fontWeight: 'bold',
-                marginTop: '70%',
+                
+                marginTop: '50%',
+                fontFamily:'Poppins-Medium'
               }}>
               {' '}
               No Memberships available

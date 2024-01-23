@@ -60,7 +60,7 @@ const Notifications = ({navigation}) => {
                 justifyContent: 'center',
                 marginTop: '50%',
               }}>
-              <Text style={{color: colors.orangeColor, fontWeight: 'bold', fontSize: 20}}>
+              <Text style={{color: colors.orangeColor,fontFamily:'Poppins-Medium', fontSize:15}}>
                 No notifications for this user
               </Text>
             </View>
