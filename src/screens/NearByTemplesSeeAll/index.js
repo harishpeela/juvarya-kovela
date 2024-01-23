@@ -30,9 +30,10 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
       </View>
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
-          <Loader color={colors.orangeColor} />
+          {/* <Loader color={colors.orangeColor} /> */}
+          <Text>No items to display</Text>
         </View>
-      ) : data?.length >= 0 ? (
+      ) : data?.length ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{margin: '5%'}}>
           <FlatList
             data={data}
