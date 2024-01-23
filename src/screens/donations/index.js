@@ -10,7 +10,7 @@ import {
   Donation_Third_Tab,
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
-import {DonationsPost, getDonationTypes} from '../../utils/api';
+import {DonationsPost, getDonationTypes, getDonationsList, GetProfilePic} from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const Donations = ({route, navigation}) => {
@@ -18,6 +18,9 @@ const Donations = ({route, navigation}) => {
   const [dropValue, setDropValue] = useState();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [isChecked, setIsChecked] = useState(true);
+  const [topDonation, setTopDonation] = useState([]);
+  const [donationLoader, setDonationLoader] = useState(false);
   const donTypes = async() => {
     let result = await getDonationTypes(0, 100);
     console.log('types of donations', result?.data);
@@ -35,7 +38,7 @@ const Donations = ({route, navigation}) => {
   ];
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log('data =====><', data);
+  // console.log('data =====><', data);
   const PostDonations = async () => {
     let payload = {
       donation: value,
@@ -44,8 +47,8 @@ const Donations = ({route, navigation}) => {
       jtProfile: data?.jtProfile,
       contactNumber: userDetails?.primaryContact,
       type: dropValue,
-      active: false,
-
+      active: !isChecked,
+      donorName: name,
     };
     console.log('payload', payload);
     try {
@@ -55,7 +58,10 @@ const Donations = ({route, navigation}) => {
         alert('please select donation type');
       } else if(email === '' ){
         alert('please enter email')
-      } else {
+      } else if(name === ''){
+        alert('please enetr name')
+      }
+      else {
         let result = await DonationsPost(payload);
         if (result) {
           console.log('message', result?.data);
@@ -63,9 +69,10 @@ const Donations = ({route, navigation}) => {
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.bottomTab, {
+                {navigation.navigate(allTexts.screenNames.donationslist, {
                   data: data,
-                }),
+                });
+              }
             },
           ]);
         }
@@ -75,8 +82,35 @@ const Donations = ({route, navigation}) => {
       console.log('error in donations api', error);
     }
   };
+  const profilePic = async (e) => {
+    let responce = await GetProfilePic(e.email);
+    if(responce){
+      setTopDonation(responce);
+      setDonationLoader(false);
+    }
+  }
+  const dontationValue = async () => {
+    let id = data?.jtProfile;
+    console.log(id, 'kkk');
+    setDonationLoader(true);
+    let result = await getDonationsList(id, 0, 20);
+    console.log('donation card', result.data);
+    if (result) {
+      let res = result?.data?.data;
+      if(res){
+        res.map(e =>  {
+          profilePic(e);
+        })
+      }
+      console.log('loader donation 1', donationLoader);
+    } else {
+      setDonationLoader(false);
+      console.log('loader donation 2', donationLoader);
+    }
+  };
 useEffect(() => {
   donTypes();
+  dontationValue();
 },[ ]);
   return (
     <>
@@ -100,8 +134,11 @@ useEffect(() => {
               valueRs={value}
               onChangeEmail={e => setEmail(e)}
               valueEmail={email}
-              // onChangeName={e => setName(e)}
-              // valueName={name}
+              onChangeName={e => setName(e)}
+              valueName={name}
+              onPressCheck={() => setIsChecked(!isChecked)}
+              isChecked={isChecked}
+              donationText={`top donation by ${topDonation[0]?.donorName}`}
             />
           </View>
           <View style={{marginHorizontal: 10}}>

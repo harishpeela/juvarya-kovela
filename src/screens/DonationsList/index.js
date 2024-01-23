@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity,  Alert} from 'react-native';
 import { getDonationsList, GetProfilePic } from '../../utils/api';
 import {
   BackHeaderNew,
@@ -14,7 +14,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Loader } from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-
+import { FlatList } from 'react-native-gesture-handler';
+import { deleteDonations } from '../../utils/api';
 const DonationsList = ({ navigation, route }) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -26,7 +27,7 @@ const DonationsList = ({ navigation, route }) => {
   const customerProfilePic = async e => {
     try {
       let result = await GetProfilePic(e?.email);
-      console.log('profilepic', result?.data);
+      // console.log('profilepic', result?.data);
       if (result?.status === 200) {
         let responce = { ...e, url: result?.data?.url };
         // console.log('responce', responce);
@@ -34,18 +35,16 @@ const DonationsList = ({ navigation, route }) => {
           setApiData(array => [...array, responce]);
           setLoader(false);
         } else {
-          console.log('eeeeee', e);
           setLoader(false);
         }
       } else {
-        console.log('e state', e);
         setLoader(false);
       }
     } catch (error) {
       console.log('error in profile pic api in donations', error);
     }
   };
-  console.log('dislay data', apiData);
+
   const DonationListApi = async () => {
     setLoader(true);
     try {
@@ -53,7 +52,7 @@ const DonationsList = ({ navigation, route }) => {
       let result = await getDonationsList(id, 0, 60);
       console.log('data', result?.data);
       let donationDTO = result?.data?.data;
-      console.log('list of donations', donationDTO);
+      // console.log('list of donations', donationDTO);
       if (donationDTO) {
         donationDTO.map(e => {
           customerProfilePic(e);
@@ -76,9 +75,35 @@ const DonationsList = ({ navigation, route }) => {
       setLoading(false);
     }, 500);
   };
+  const DeleteDonations = async (id) => {
+    // console.log(id,"idididididid")
+    Alert.alert('Success', 'Are you sure you want to delete this donation ?', [
+      {
+        text: 'Yes',
+      },
+      {
+        text: 'No',
+      }
+      
+    ]);
+    try{
+      let result = await deleteDonations(id);
+    if (result.status === 200){
+     await DonationListApi();
+    //  navigation.navigate(allTexts.screenNames.viewtempleprofile)
+    } else{
+      DonationListApi();
+    }
+    } catch(error){
+      console.log('error in delete api', error);
+    }
+  }
+  const onSelect = data => {
+  };
   useEffect(() => {
     DonationListApi();
   }, []);
+  console.log('display data', apiData);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
@@ -86,7 +111,6 @@ const DonationsList = ({ navigation, route }) => {
           <TopBarCard2
             txt={'Donation List'}
             back={true}
-            // isBell={true}
             navigation={navigation}
             navMenu={navigation}>
             <View style={styles.searchContainer}>
@@ -112,6 +136,7 @@ const DonationsList = ({ navigation, route }) => {
                 onPress={() =>
                   navigation.navigate(allTexts.screenNames.donations, {
                     data: data,
+                    onSelect: onSelect,
                   })
                 }
                 style={styles.plusContainer}>
@@ -133,7 +158,16 @@ const DonationsList = ({ navigation, route }) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             searchedText === '' && apiData ? (
-              <Donations_list_Card data={apiData} navigation={navigation} />
+              <FlatList
+                data={apiData}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps={'handled'}
+                keyExtractor={({ item, index }) => index}
+                style={{}}
+                renderItem={({ item, index }) => (
+                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => DeleteDonations(item?.id)} />
+                )}
+              />
             ) : (
               <View style={{}}>
                 <Text> no</Text>

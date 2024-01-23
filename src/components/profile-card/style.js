@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     color: colors.black,
+    textTransform: 'capitalize'
   },
   emailText: {
     fontFamily: fontFamily.popinLight,
