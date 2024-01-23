@@ -44,8 +44,9 @@ const endpoints = {
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
-  DONATIONS_LIST: 'jtDonation/list/',
+  DONATIONS_LIST: 'jtDonation/donars',
   DELETE_DONATIONS:'jtDonation/delete?donationId',
+  DONATION_TYPES: 'donationtype/list',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
@@ -337,7 +338,7 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
 export const getDonationsList = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosDonation.get(
-      `${endpoints.DONATIONS_LIST}?pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
+      `${endpoints.DONATIONS_LIST}?jtProfile=${custId}&pageNo=${pgno}&pageSize=${pgSize}&active=false`,
     );
     return result;
   } catch (error) {
@@ -890,6 +891,15 @@ export const getSavedPostsList = async () => {
 export const getNotifications = async () => {
   try {
     let result = await axiosNotifications.get(`${endpoints.NOTIFICATIONS}`);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getDonationTypes = async (pgNo, pgSz) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.DONATION_TYPES}?pageNo=${pgNo}&pageSize=${pgSz}`);
     return result;
   } catch (error) {
     return error;

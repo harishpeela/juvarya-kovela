@@ -3,7 +3,7 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   CardContainer: {},
   followersContainer: {
-    height: '100%',
+    height: '100%'
   },
   footerContainer: {
     paddingHorizontal: 30,
@@ -24,17 +24,11 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  bodyContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    // borderWidth:5,
-    // marginBottom:200,
-  },
+
   searchAndFilter: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: '5%',
     marginTop: '5%',
     paddingHorizontal: '1%',
     justifyContent: 'space-between',
@@ -55,12 +49,11 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
   list: {
-    marginBottom: 50,
   },
   noDataContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '50%',
+    marginTop: '36%',
   },
   noDataText: {
     fontSize: fontSize.xlarge,

@@ -272,7 +272,7 @@ const ViewTempleProfile = ({route, navigation}) => {
     console.log(id, 'kkk', donationLoader);
     setDonationLoader(true);
     let result = await getDonationsList(id, 0, 20);
-    console.log('hhh', result.data?.data);
+    console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
       setDonationLoader(false);
@@ -507,7 +507,21 @@ const ViewTempleProfile = ({route, navigation}) => {
                   }
                 />
               ) : (
-                ''
+                roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
+                  <Danation_Add_Card
+                    onPress={() =>
+                      navigation.navigate(allTexts?.screenNames?.donationslist, {
+                        data: trfData,
+                      })
+                    }
+                    text={donationValue ? `Top Donation by ${donationValue[0]?.name}` : 'No Donations Yet'}
+                    roleId={
+                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                    }
+                  />
+                ) : (
+                  ''
+                )
               )}
               <ProfileFourthTab
                 currentIndex={currentIndex}
