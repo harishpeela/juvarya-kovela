@@ -10,7 +10,7 @@ import {
   Donation_Third_Tab,
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
-import {DonationsPost, getDonationTypes, getDonationsList, GetProfilePic} from '../../utils/api';
+import {DonationsPost, getDonationTypes, getTopDonation, GetProfilePic} from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const Donations = ({route, navigation}) => {
@@ -70,8 +70,10 @@ const Donations = ({route, navigation}) => {
               text: 'Ok',
               onPress: () =>
                 {navigation.navigate(allTexts.screenNames.donationslist, {
+                  message: 200,
                   data: data,
                 });
+                // dontationValue();
               }
             },
           ]);
@@ -83,9 +85,12 @@ const Donations = ({route, navigation}) => {
     }
   };
   const profilePic = async (e) => {
+    // console.log('proooooooooooooo', e?.email)
     let responce = await GetProfilePic(e.email);
+    console.log('responce', responce.data);
     if(responce){
-      setTopDonation(responce);
+      let res = {...e, url: responce?.data?.url}
+      setTopDonation(array => [...array, res]);
       setDonationLoader(false);
     }
   }
@@ -93,7 +98,7 @@ const Donations = ({route, navigation}) => {
     let id = data?.jtProfile;
     console.log(id, 'kkk');
     setDonationLoader(true);
-    let result = await getDonationsList(id, 0, 20);
+    let result = await getTopDonation(id, 0, 20);
     console.log('donation card', result.data);
     if (result) {
       let res = result?.data?.data;
@@ -138,7 +143,9 @@ useEffect(() => {
               valueName={name}
               onPressCheck={() => setIsChecked(!isChecked)}
               isChecked={isChecked}
-              donationText={`top donation by ${topDonation[0]?.donorName}`}
+              donationText={topDonation[0]?.donorName ? `top donation by ${topDonation[0]?.donorName}` : topDonation[0]?.name ? topDonation[0]?.name : 'No donations yet'}
+              // donationText={`top donation by ${topDonation[0]?.donorName ? topDonation[0]?.donorName : topDonation[0]?.name ? topDonation[0]?.name : 'no donations yet'}`}
+              donurl={topDonation[0]?.url}
             />
           </View>
           <View style={{marginHorizontal: 10}}>

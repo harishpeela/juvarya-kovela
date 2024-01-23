@@ -1,7 +1,8 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, TouchableOpacity,  Alert} from 'react-native';
-import { getDonationsList, GetProfilePic } from '../../utils/api';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
+import { getDonationList, GetProfilePic } from '../../utils/api';
 import {
   BackHeaderNew,
   Donations_list_Card,
@@ -22,17 +23,18 @@ const DonationsList = ({ navigation, route }) => {
   const [filteredData, setFilteredData] = useState(apiData);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { data } = route.params || {};
+  const [refrsh, setRefrsh] = useState(true);
+  const { data, message } = route.params || {};
   // console.log('data.id', data);
   const customerProfilePic = async e => {
     try {
       let result = await GetProfilePic(e?.email);
-      // console.log('profilepic', result?.data);
+      console.log('profilepic', result?.data);
       if (result?.status === 200) {
         let responce = { ...e, url: result?.data?.url };
         // console.log('responce', responce);
         if (responce) {
-          setApiData(array => [...array, responce]);
+          // setApiData(array => [...array, responce]);
           setLoader(false);
         } else {
           setLoader(false);
@@ -46,17 +48,21 @@ const DonationsList = ({ navigation, route }) => {
   };
 
   const DonationListApi = async () => {
+    console.log('11')
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      let result = await getDonationsList(id, 0, 60);
+      console.log('id', id)
+      let result = await getDonationList(id, 0, 60);
       console.log('data', result?.data);
       let donationDTO = result?.data?.data;
       // console.log('list of donations', donationDTO);
       if (donationDTO) {
-        donationDTO.map(e => {
-          customerProfilePic(e);
-        });
+        // donationDTO.map(e => {
+        //   customerProfilePic(e);
+        setApiData(donationDTO);
+        setLoader(false);
+        // });
       } else {
         setLoader(false)
       }
@@ -76,34 +82,47 @@ const DonationsList = ({ navigation, route }) => {
     }, 500);
   };
   const DeleteDonations = async (id) => {
-    // console.log(id,"idididididid")
+    
     Alert.alert('Success', 'Are you sure you want to delete this donation ?', [
       {
         text: 'Yes',
+        onPress: async () => {
+          Del(id)
+        }
       },
       {
         text: 'No',
       }
-      
     ]);
-    try{
-      let result = await deleteDonations(id);
-    if (result.status === 200){
-     await DonationListApi();
-    //  navigation.navigate(allTexts.screenNames.viewtempleprofile)
-    } else{
+   
+          
+    // try{
+    //   let result = await deleteDonations(id);
+    // if (result.status === 200){
+    //  await DonationListApi();
+    // //  navigation.navigate(allTexts.screenNames.viewtempleprofile)
+    // } else{
+    //   DonationListApi();
+    // }
+    // } catch(error){
+    //   console.log('error in delete api', error);
+    // }
+  }
+const Del = async (id) => {
+  let result = await deleteDonations(id);
+  console.log('result', result?.data);
+  if (result?.status === 200) {
+    DonationListApi();
+  } else{
+    alert('some thing went wrong')
+  }
+}
+  useEffect(() => {
+    if (message === 200 || message === undefined) {
       DonationListApi();
     }
-    } catch(error){
-      console.log('error in delete api', error);
-    }
-  }
-  const onSelect = data => {
-  };
-  useEffect(() => {
-    DonationListApi();
-  }, []);
-  console.log('display data', apiData);
+  }, [message]);
+  // console.log('display data', apiData);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
@@ -136,7 +155,6 @@ const DonationsList = ({ navigation, route }) => {
                 onPress={() =>
                   navigation.navigate(allTexts.screenNames.donations, {
                     data: data,
-                    onSelect: onSelect,
                   })
                 }
                 style={styles.plusContainer}>
@@ -169,8 +187,8 @@ const DonationsList = ({ navigation, route }) => {
                 )}
               />
             ) : (
-              <View style={{display:'flex',alignItems:'center',flexDirection:'column',marginTop:'50%'}}>
-                <Text style={{color:colors.orangeColor,fontSize:15,fontFamily:"Poppins-Medium"}}> No donations to display</Text>
+              <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '50%' }}>
+                <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: "Poppins-Medium" }}> No donations to display</Text>
               </View>
             ))}
         </View>

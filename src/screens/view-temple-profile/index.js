@@ -12,8 +12,6 @@ import {
   useColorScheme,
   Modal,
   Pressable,
-  Image,
-  navBack,
 } from 'react-native';
 import {
   Loader,
@@ -21,11 +19,9 @@ import {
   TempleProfile_PostsCard,
   BackgroundImageAClass,
   BackgroundImageFlower,
-  BackHeaderNew,
   EventCard,
 } from '../../components';
 import {styles} from './styles';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -38,9 +34,8 @@ import {
   NewGetFollowUmFollowById,
   NewFollowCount,
   GetPosts,
-  xCount,
   EventList,
-  getDonationsList,
+  getTopDonation,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -60,9 +55,6 @@ import {PostsComp} from '../../components/profilecompnew/postsComp';
 import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {style} from '../newprofile/styles';
-import EventsScreen from '../EventsScreen';
-import UpdatePassword from '../update-password';
 import NearByTempleComp from '../../components/NearByTempleComp';
 
 const ViewTempleProfile = ({route, navigation}) => {
@@ -271,7 +263,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const dontationValue = async id => {
     console.log(id, 'kkk', donationLoader);
     setDonationLoader(true);
-    let result = await getDonationsList(id, 0, 20);
+    let result = await getTopDonation(id, 0, 20);
     console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
