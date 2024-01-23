@@ -1,9 +1,10 @@
 import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   loaderContainer: {
-    height: '90%',
+    
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:'50%'
   },
   card: {
     margin: 3,

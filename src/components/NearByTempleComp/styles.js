@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
 
 voidButton1Text: {
     color: '#CC4501',
-    marginLeft: '15%',
-    fontSize: 11,
+    marginLeft: '11%',
+    fontSize: 12,
     fontWeight: '600',
     textAlign:'center'
   },
