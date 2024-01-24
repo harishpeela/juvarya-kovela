@@ -281,7 +281,7 @@ highLightCard: {
       },
       
       img1: { height: 80, width: 80, borderRadius: 20 },
-      tab3: { fontSize: 18, fontWeight: '700' },
+      tab3: { fontSize: 18, fontWeight: '700', color: colors.black },
       tab3Text: { flexDirection: 'row', position: 'absolute', bottom: 5, right: 20, alignItems: 'center' },
       tab2Text: { fontSize: 16, fontWeight: '700', color: 'black' },
       tab1Img: { height: 120, width: 120, borderRadius: 60 },
