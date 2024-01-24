@@ -149,6 +149,7 @@ export const TopBarCard2 = ({
   roleType,
   navCreate,
   height,
+  bData
 }) => {
   return (
     <View style={styles.container}>
@@ -171,7 +172,9 @@ export const TopBarCard2 = ({
           {back && (
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => navigation.goBack()}
+              onPress={() => {navigation.goBack(), {
+                data: bData
+              }}}
               navigation={navigation}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
@@ -188,6 +191,7 @@ export const TopBarCard2 = ({
                 marginLeft: txt.length >= 12 ? '23%' : '25%',
                 color: 'white',
                 textAlign: 'center',
+                marginTop: 5,
                 // backgroundColor: 'red',
               }}>
               {txt}
@@ -231,6 +235,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white',
     marginLeft: 10,
+    marginTop: 5,
     // backgroundColor: 'red',
   },
   joinText: {

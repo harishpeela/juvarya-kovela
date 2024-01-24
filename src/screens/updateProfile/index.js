@@ -322,7 +322,7 @@ const UpdateProfile = ({navigation}) => {
                 )}
               </View>
             </View>
-            <View style={{width: '80%', alignSelf: 'center', marginTop: 50}}>
+            <View style={{width: '80%', alignSelf: 'center', marginTop: 100}}>
               <PrimaryButton
                 text={'Update'}
                 bgColor={colors.orangeColor}

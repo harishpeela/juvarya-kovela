@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     // borderWidth:5,
-    // marginBottom:200,
+    marginBottom:110,
   },
   searchAndFilter: {
     display: 'flex',
@@ -66,8 +66,9 @@ export const styles = StyleSheet.create({
     marginTop: '50%'
   },
   noDataText: {
-    fontSize: 20,
+    fontSize: 15,
     color: colors.orangeColor,
+    fontFamily:'Poppins-Medium'
   },
   updateProfileTopCard:{
     height:100

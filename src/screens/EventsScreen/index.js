@@ -31,7 +31,8 @@ const EventsScreen = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setLoader(true);
-    let result = await EventList(0, 200);
+    try{
+      let result = await EventList(0, 200);
     console.log('list of events', result?.data);
     if (result.status === 200) {
       let filtering = result?.data?.data;
@@ -40,6 +41,10 @@ const EventsScreen = ({navigation}) => {
       setLoader(false);
     } else {
       setLoader(false);
+    }
+    } catch(error){
+      console.log('error in events list', error)
+      setLoader(false)
     }
   };
   const TempleAdmins = async () => {
@@ -67,7 +72,8 @@ const EventsScreen = ({navigation}) => {
   }
   return (
     <View style={{flex: 1}}>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <View style={{minHeight: 160, marginTop: '3%'
+    ,marginBottom:'-4%'}}>
         <TopBarcard
           txt={'Events'}
           menu={true}
@@ -122,7 +128,7 @@ const EventsScreen = ({navigation}) => {
                   data={eventsData}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{marginBottom: '50%', marginTop: '3%'}}
+                  style={{marginBottom: '46%'}}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({item}) => (
                     <EventCard2

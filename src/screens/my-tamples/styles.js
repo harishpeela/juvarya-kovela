@@ -11,7 +11,10 @@ export const styles = StyleSheet.create({
   },
   noAvailable: {
     color: colors.orangeColor,
-    fontFamily: fontFamily.popinBold,
+    fontFamily: fontFamily.popinMedium,
+  marginTop:'50%',
+  fontSize:15,
+  // fontWeight:'bold'
   },
   searchbarContainer: {
     // borderWidth: 1,
@@ -21,7 +24,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   loaderContainer: {
-    height: '90%',
     alignItems: 'center',
     justifyContent: 'center',
   },

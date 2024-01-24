@@ -15,6 +15,7 @@ import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import React, { useContext, useState, useEffect } from 'react';
 import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -30,7 +31,7 @@ import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships,MyDonations}
 const Profile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
-  // console.log('userdetails', userDetails);
+  console.log('userdetails', userDetails);
   const {
     constants: { role },
   } = allTexts;
@@ -308,32 +309,30 @@ const Profile = ({ navigation }) => {
             }}
           />
           <Item
-            svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
+            svg={<FontAwesome5 name="user-edit" size={16} style={{marginLeft:4 }} color={isDarkMode ? 'black' : 'black'} />}
             text={t('update Profile')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.updateProfile)
             }}
           />
-          {
-            myMemberships && (
+          
               <Item
                 svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
                 text={t('My Memberships')}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.profilememberships)
+                  navigation.navigate(allTexts.screenNames.profileMyMemberships)
                 }}
               />
-            )
-          }
-
+            
+          
         
            {
             MyDonations && (
           <Item
-            svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
+            svg={<FontAwesome5 name="donate" size={18} style={{marginLeft:1 }} color={isDarkMode ? 'black' : 'black'} />}
             text={t('My Donations')}
             onPress={() => {
-              navigation.navigate(allTexts.screenNames.donationslist)
+              navigation.navigate(allTexts.screenNames.profileDonations)
             }}
           />
             )

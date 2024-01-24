@@ -44,7 +44,10 @@ const endpoints = {
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
-  DONATIONS_LIST: 'jtDonation/list/',
+  TOP_DONATION: 'jtDonation/donars',
+  DONATION_LIST: 'jtDonation/list',
+  DELETE_DONATIONS:'jtDonation/delete?donationId',
+  DONATION_TYPES: 'donationtype/list',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
   MEMBER_SHIP_LIST: '/jtProfileMembership/list',
@@ -235,7 +238,7 @@ export const GetProfilePic = async mailId => {
     );
     return result;
   } catch (error) {
-    console.log('error in profilepic get', error);
+    // console.log('error in profilepic get', error);
   }
 };
 
@@ -333,16 +336,39 @@ export const GetMyTemples = async (custId, pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const getDonationsList = async (custId, pgno, pgSize) => {
+export const getTopDonation = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosDonation.get(
-      `${endpoints.DONATIONS_LIST}?pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
+      `${endpoints.TOP_DONATION}?jtProfile=${custId}&pageNo=${pgno}&pageSize=${pgSize}&active=false`,
     );
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log('error in donation api', error);
   }
 };
+
+export const getDonationList = async (custId, pgno, pgSize) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.DONATION_LIST}?&pageNo=${pgno}&pageSize=${pgSize}&profileId=${custId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in get donation list', error);
+  }
+};
+export const deleteDonations = async (custId) => {
+  try {
+    let result = await axiosDonation.delete(
+      `${endpoints.DELETE_DONATIONS}=${custId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in delete donation', error);
+  }
+};
+
+
 export const EventList = async (pgno, pgSize) => {
   try {
     let result = await axiosEventsData1.get(
@@ -876,6 +902,15 @@ export const getSavedPostsList = async () => {
 export const getNotifications = async () => {
   try {
     let result = await axiosNotifications.get(`${endpoints.NOTIFICATIONS}`);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getDonationTypes = async (pgNo, pgSz) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.DONATION_TYPES}?pageNo=${pgNo}&pageSize=${pgSz}`);
     return result;
   } catch (error) {
     return error;

@@ -52,6 +52,8 @@ import {
   EditHighlights,
   EditContribute,
   EditInfo,
+  ProfileDonations,
+  ProfileMyMemberships,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -124,6 +126,8 @@ const App = () => {
       editHightlights,
       editContribute,
       editInfo,
+      profileDonations,
+      profileMyMemberships
     },
   } = allTexts;
 
@@ -459,6 +463,20 @@ const App = () => {
          <Stack.Screen
           name={nearByTempleSeeAll}
           component={NearByTemplesSeeAll}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profileDonations}
+          component={ProfileDonations}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profileMyMemberships}
+          component={ProfileMyMemberships}
           options={{
             headerShown: false,
           }}

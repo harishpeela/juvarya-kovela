@@ -12,8 +12,6 @@ import {
   useColorScheme,
   Modal,
   Pressable,
-  Image,
-  navBack,
 } from 'react-native';
 import {
   Loader,
@@ -21,29 +19,26 @@ import {
   TempleProfile_PostsCard,
   BackgroundImageAClass,
   BackgroundImageFlower,
-  BackHeaderNew,
   EventCard,
 } from '../../components';
-import { styles } from './styles';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import React, { useState, useEffect, useContext } from 'react';
+import {styles} from './styles';
+import React, {useState, useEffect, useContext} from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { allTexts } from '../../common';
+import {allTexts} from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Data } from '../home-feed/formateDetails';
+import {Data} from '../home-feed/formateDetails';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
   NewFollowCount,
   GetPosts,
-  xCount,
   EventList,
-  getDonationsList,
+  getTopDonation,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import { ProfileSeconTab, ProfileFourthTab } from '../../components';
+import {ProfileSeconTab, ProfileFourthTab} from '../../components';
 import {
   CommunityComp,
   FollowersComp,
@@ -54,21 +49,18 @@ import {
   ProfileTimingTabs,
   Danation_Add_Card,
 } from '../../components';
-import { ProfileImage } from '../../components';
-import { colors } from '../../common';
-import { PostsComp } from '../../components/profilecompnew/postsComp';
-import { SearchTempleRoleWithId } from '../../utils/api';
+import {ProfileImage} from '../../components';
+import {colors} from '../../common';
+import {PostsComp} from '../../components/profilecompnew/postsComp';
+import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { style } from '../newprofile/styles';
-import EventsScreen from '../EventsScreen';
-import UpdatePassword from '../update-password';
 import NearByTempleComp from '../../components/NearByTempleComp';
 
-const ViewTempleProfile = ({ route, navigation }) => {
+const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const { userDetails } = useContext(ApplicationContext);
-  const { data } = route.params || {};
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,
@@ -176,7 +168,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
         setFollowBtnDisable(false);
         FollowingCount();
         ToastAndroid.show(
-          `Successfully you are ${!isFollow ? ' Following' : 'unFollwing'
+          `Successfully you are ${
+            !isFollow ? ' Following' : 'unFollwing'
           } the temple !`,
           ToastAndroid.SHORT,
         );
@@ -210,7 +203,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
-        ?.map(({ mediaList, id, jtProfile }) => ({ mediaList, id, jtProfile }));
+        ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
@@ -268,20 +261,26 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const dontationValue = async id => {
-    console.log(id, 'kkk', donationLoader)
-    setDonationLoader(true)
-    let result = await getDonationsList(id, 0, 20);
-    console.log('hhh', result.data?.data);
+    console.log(id, 'kkk', donationLoader);
+    setDonationLoader(true);
+   try{
+    let result = await getTopDonation(id, 0, 20);
+    console.log('hhh', result.data);
     if (result) {
       setDonationValue(result?.data?.data);
-      setDonationLoader(false)
-      console.log('loader donation 1', donationLoader)
+      setDonationLoader(false);
+      console.log('loader donation 1', donationLoader);
+    } else {
+      setDonationValue([]);
+      setDonationLoader(false);
+      console.log('loader donation 2', donationLoader);
     }
-    else {
-      setDonationLoader(false)
-      console.log('loader donation 2', donationLoader)
-    }
+   } catch(error){
+    setDonationLoader(false);
+    console.log('error in top donations api', error);
+   }
   };
+  console.log('donation value', donationValue);
   // console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
@@ -296,7 +295,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
-                style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
+                style={{backgroundColor: 'white', borderRadius: 28 / 2}}
                 onPress={() => {
                   navigation.goBack();
                   route?.params?.onSelect({
@@ -325,14 +324,18 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 {/* )} */}
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>
-                <TouchableOpacity style={styles.bell} onPress={() => navigation.navigate(allTexts.screenNames.notification)}>
+                <TouchableOpacity
+                  style={styles.bell}
+                  onPress={() =>
+                    navigation.navigate(allTexts.screenNames.notification)
+                  }>
                   <FontAwesome
                     name="bell-o"
                     size={24}
                     color={isDarkMode ? 'black' : 'black'}
                   />
                   <View style={styles.notificationNum}>
-                    <Text style={{ color: 'white', fontWeight: 'bold' }}>2</Text>
+                    <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
                   </View>
                 </TouchableOpacity>
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
@@ -346,16 +349,33 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 )}
               </View>
             </View>
-            <View style={{ alignSelf: 'center', marginTop: -15 }}>
+            <View style={{alignSelf: 'center', marginTop: -15}}>
               <ProfileImage profileImg={trfData} />
             </View>
 
-            <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: '5%' }}>
+            <View
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: '5%',
+              }}>
               <Text>God Name</Text>
             </View>
             <View>
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: '5%' }}>
-                <View style={{ height: 35, width: '100%', backgroundColor: '#FFF3E5', borderRadius: 8, justifyContent: 'center' }}>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  marginTop: '5%',
+                }}>
+                <View
+                  style={{
+                    height: 35,
+                    width: '100%',
+                    backgroundColor: '#FFF3E5',
+                    borderRadius: 8,
+                    justifyContent: 'center',
+                  }}>
                   <Text style={styles.titleHeader}>
                     {/* {trfData?.name?.length < 25
                       ? `${trfData?.name}`
@@ -365,26 +385,40 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            <View style={{ marginTop: 5, marginLeft: '8%', justifyContent: 'center', alignItems: 'center' }}>
-              <View style={{ flexDirection: 'row', width: '50%', marginLeft: 12 }}>
-                <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={15} color="white" />
-                <Text style={{ fontSize: 11 }}>Gavarapalem , Anakapalli</Text>
+            <View
+              style={{
+                marginTop: 5,
+                marginLeft: '8%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{flexDirection: 'row', width: '50%', marginLeft: 12}}>
+                <EvilIcons
+                  style={{color: colors.orangeColor, backgroundColor: 'white'}}
+                  name="location"
+                  size={15}
+                  color="white"
+                />
+                <Text style={{fontSize: 11}}>Gavarapalem , Anakapalli</Text>
               </View>
             </View>
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               {data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
-                  onPress={() => navigation.navigate('TempleCrew', {
-                    id: trfData?.jtProfile
-                  })}>
+                  onPress={() =>
+                    navigation.navigate('TempleCrew', {
+                      id: trfData?.jtProfile,
+                    })
+                  }>
                   <Text style={styles.seasonalText}> View Temple Crew</Text>
                 </TouchableOpacity>
               ) : (
                 <ProfileTimingTabs data={trfData} />
               )}
             </View>
-            <View style={{ marginLeft: 15 }}>
+            <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={trfData} title={trfData?.name} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
@@ -448,31 +482,29 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   }}
                 />
                 <NearByTempleComp
-                  onPress={() => {
-
+                  onPress={() =>
                     navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
-                  }}
+                  }
                 />
               </View>
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
-              ) : (
-                roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
-                  <Danation_Add_Card
-                    onPress={() =>
-                      navigation.navigate(allTexts?.screenNames?.donationslist, {
-                        data: trfData,
-                      })
-                    }
-                    text={donationValue ? `${donationValue[0]?.description}` : 'No Donations Yet'}
-                    roleId={
-                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                    }
-                  />
-                ) : (
-                  ''
-                )
-              )}
+              ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
+                <Danation_Add_Card
+                  onPress={() =>
+                    navigation.navigate(allTexts?.screenNames?.donationslist, {
+                      data: trfData,
+                    })
+                  }
+                  text={
+                    donationValue?.length
+                      ? `Top donation by ${donationValue[0]?.donorName ? donationValue[0]?.donorName : donationValue[0]?.name }`
+                      : 'No Donations Yet'
+                  }
+                  roleId={
+                    roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                  }
+                />  ) : ('') }
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
@@ -503,9 +535,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <FlatList
                   numColumns={3}
                   data={postImages}
-                  keyExtractor={({ item, index }) => index}
+                  keyExtractor={({item, index}) => index}
                   style={styles.ImagesContainer}
-                  renderItem={({ item, index }) => (
+                  renderItem={({item, index}) => (
                     <TempleProfile_PostsCard nav={navigation} item={item} />
                   )}
                 />
@@ -530,7 +562,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               showsVerticalScrollIndicator={false}
               style={styles.contentDisplay}>
               {eventsLoader && (
-                <View style={{ flex: 1 }}>
+                <View style={{flex: 1}}>
                   <Loader color={colors.orangeColor} size={30} />
                 </View>
               )}
@@ -567,9 +599,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
                   classType: trfData?.templeClass,
-                }); setIsVisible(!isVisible)
-              }
-              }
+                });
+                setIsVisible(!isVisible);
+              }}
               style={styles.modalContent}>
               <Icon color={colors.black} name="create-outline" size={22} />
               <Text style={styles.modalContentText}>Create a Post</Text>
@@ -580,11 +612,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
               <Text style={styles.modalContentText}>User groups</Text>
             </View>
             <TouchableOpacity
-              onPress={
-                () =>
-                  navigation.navigate(allTexts.screenNames.profilememberships, {
-                    id: trfData?.jtProfile,
-                  })
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.profilememberships, {
+                  id: trfData?.jtProfile,
+                })
               }>
               <View style={styles.modalContent}>
                 <MaterialIcons

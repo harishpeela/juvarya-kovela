@@ -175,7 +175,7 @@ const isDarkMode = useColorScheme() === 'dark';
             please enter Event Name
           </Text>
         )}
-        <View style={{ width: '80%', alignSelf: 'center', marginTop: 50 }}>
+        <View style={{ width: '80%', alignSelf: 'center', marginTop:100 }}>
           <PrimaryButton text={'Update'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
         </View>
       </ScrollView>

@@ -29,18 +29,24 @@ const EventCard2 = ({ navigation, data }) => {
         style={styles.Image}
       />
       <Text style={[styles.festivalText]}>{data?.name?.length < 12 ? data?.name : `${data?.name?.substring(0, 12)} ...`}</Text>
-      <View style={{ borderRadius: 10, backgroundColor: colors.gray0,  width: '80%',height: '20%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%' }}>
+      <View style={{ borderRadius: 10, backgroundColor: colors.gray0, width: '80%', height: '20%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
-          <FeatherIcon style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="calendar" size={15} color="white" />
+          <View style={{ backgroundColor: 'white', height: 16, width: 16, justifyContent: 'center', alignItems: 'center',borderRadius:3 }}>
+            <FeatherIcon style={{ color: colors.orangeColor }} name="calendar" size={12} color="white" />
+          </View>
+
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>{data?.creationTime.slice('0', '10')}</Text>
         </View>
         {data?.eventType ? (
           <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
-          <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={15} color="white" />
-          <Text style={{ color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue }}>{data?.eventType}</Text>
-        </View>
+            <View style={{ backgroundColor: 'white', height: 15, width: 15, justifyContent: 'center', alignItems: 'center',borderRadius:3  }}>
+              <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={12} color="white" />
+            </View>
+            <Text style={{ color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue }}>{data?.eventType}</Text>
+          </View>
         ) : (
           ''
+
         )}
       </View>
     </TouchableOpacity>

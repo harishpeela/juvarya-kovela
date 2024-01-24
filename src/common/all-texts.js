@@ -172,6 +172,8 @@ export const allTexts = {
     editHightlights: 'EditHighlights',
     editInfo: 'EditInfo',
     editContribute:'EditContribute',
+    profileDonations:'ProfileDonations',
+    profileMyMemberships:'ProfileMyMemberships'
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     padding: 10,
+    marginBottom:'-3%'
   },
   searchContainers: {
     margin: 5,

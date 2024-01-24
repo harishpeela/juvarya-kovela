@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   View,
@@ -11,11 +11,12 @@ import {
   TouchableOpacity,
   useColorScheme,
 } from 'react-native';
-import { styles } from './styles';
-import { allTexts, colors } from '../../common';
-import { PopularTemples } from '../../utils/api';
-import { Loader } from '../../components';
-const SeeAll = ({ navigation }) => {
+import {styles} from './styles';
+import {allTexts, colors} from '../../common';
+import {PopularTemples} from '../../utils/api';
+import {Loader} from '../../components';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
+const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,9 +38,10 @@ const SeeAll = ({ navigation }) => {
 
   const renderLoder = () => {
     return !isLoading ? (
-      <Text style={{ alignSelf: 'center', marginBottom: '5%', color: 'black' }}>
+      <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
         {' '}
-        {/* No Items to display */}{''}
+        {/* No Items to display */}
+        {''}
       </Text>
     ) : (
       <View>
@@ -62,67 +64,58 @@ const SeeAll = ({ navigation }) => {
   }, []);
   console.log('pop see all temples', popTemples);
   return (
-    <View style={{ flex: 1, backgroundColor: isDarkMode ? 'white' : 'white' }}>
-      <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-          <Ionicons
-            name="caret-back-circle"
-            size={36}
-            color={'#ffffff'}
-            style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headingText}>{'All Temples'}</Text>
+    <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
+      <View style={{minHeight: '15%'}}>
+        <TopBarCard2 back={true} txt={'All Temples'} navigation={navigation} />
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
           <Loader color={colors.orangeColor} />
         </View>
-      ) : (
-        popTemples?.length >= 0 ? (
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={{ margin: '5%' }}>
-            <FlatList
-              data={popTemples}
-              keyExtractor={({ item, index }) => index}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity
-                  style={styles.card}
-                  onPress={() =>
-                    navigation.navigate(
-                      allTexts.screenNames.viewtempleprofile,
-                      {
-                        data: item,
-                        onSelect: onSelect,
-                      },
-                    )
-                  }>
-                  <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image
-                      source={{ uri: item?.logo ? item?.logo : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg' }}
-                      style={{ height: 60, width: 60, borderRadius: 70 / 2 }}
-                    />
-                    <View style={{ marginLeft: 10 }}>
-                      <Text style={{ color: colors.orangeColor }}>{item.name}</Text>
-                      {/* <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
+      ) : popTemples?.length >= 0 ? (
+        <ScrollView showsVerticalScrollIndicator={false} style={{margin: '5%'}}>
+          <FlatList
+            data={popTemples}
+            keyExtractor={({item, index}) => index}
+            renderItem={({item, index}) => (
+              <TouchableOpacity
+                style={styles.card}
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                    data: item,
+                    onSelect: onSelect,
+                  })
+                }>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Image
+                    source={{
+                      uri: item?.logo
+                        ? item?.logo
+                        : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+                    }}
+                    style={{height: 60, width: 60, borderRadius: 70 / 2}}
+                  />
+                  <View style={{marginLeft: 10}}>
+                    <Text style={{color: colors.orangeColor}}>{item.name}</Text>
+                    {/* <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
                         {item.description}{' '}
                       </Text> */}
-                    </View>
                   </View>
-                </TouchableOpacity>
-              )}
-              ListFooterComponent={renderLoder}
-              onEndReached={loadMoreItems}
-              onEndReachedThreshold={0.5}
-            />
-          </ScrollView>
-        ) : (
-          <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
-            <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}> No items to displayy</Text>
-
-          </View>
-        )
+                </View>
+              </TouchableOpacity>
+            )}
+            ListFooterComponent={renderLoder}
+            onEndReached={loadMoreItems}
+            onEndReachedThreshold={0.5}
+          />
+        </ScrollView>
+      ) : (
+        <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
+          <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
+            {' '}
+            No items to displayy
+          </Text>
+        </View>
       )}
     </View>
   );
