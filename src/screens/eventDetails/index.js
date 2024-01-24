@@ -1,6 +1,6 @@
 import { Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { colors } from '../../common';
+import { colors, allTexts } from '../../common';
 import { styles } from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -29,8 +29,9 @@ const EventDetails = ({ navigation, route }) => {
   }
   console.log('item ', item);
 
-  const renderHighlight = () => {
+  const renderHighlight = (highlights = false) => {
     return (
+      highlights ?
       <Card style={styles.highLightCard}>
         <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
         <EntypoIcon
@@ -58,11 +59,18 @@ const EventDetails = ({ navigation, route }) => {
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
         </View>
       </Card>
-    )
+      :
+       <TouchableOpacity 
+       style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
+       onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
+        <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
+       </TouchableOpacity>
+       )
   };
 
-  const renderInfo = () => {
+  const renderInfo = (info = false) => {
     return (
+      info ?
       <Card>
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={styles.tab2Text}>makar sankranthi</Text>
@@ -80,11 +88,19 @@ const EventDetails = ({ navigation, route }) => {
           Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
         </Text>
       </Card>
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo)}
+     >
+      <Text style={{color: colors.blue}}>+ No info here at this time</Text>
+     </TouchableOpacity>
     )
   };
 
-  const renderContribute = () => {
+  const renderContribute = (contribute = false) => {
     return (
+      contribute ?
       <Card style={styles.contributeCard}>
         <View style={{flexDirection:'row',justifyContent:'space-between',width:'110%'}}>
         <Text style={{
@@ -113,6 +129,12 @@ const EventDetails = ({ navigation, route }) => {
           </View>
         </View>
       </Card>
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editContribute)}>
+      <Text style={{color: colors.blue}}>+ No contributes here at this time</Text>
+     </TouchableOpacity>
     )
   }
   const actionsArr = [
@@ -135,17 +157,6 @@ const EventDetails = ({ navigation, route }) => {
       activeTab: false,
     }
   ];
-
-  const scroolImagesArray = [
-    {
-      id: 1,
-      img: require('../../../assets/images/tempimg1.jpg')
-    },
-    {
-      id: 2,
-      img: require('../../../assets/images/tempimg2.jpg')
-    }
-  ]
 
   return (
     <View style={styles.container}>
