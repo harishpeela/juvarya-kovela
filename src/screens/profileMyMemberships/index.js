@@ -41,7 +41,7 @@ const DonationsList = ({ navigation, route }) => {
       }
     } catch (error) {
       console.log('error in profile pic api in donations', error);
-    }
+    } 
   };
 
   const DonationListApi = async () => {
