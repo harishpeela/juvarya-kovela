@@ -7,8 +7,8 @@ export const ProfileInfo = ({img, name, email, dob}) => {
   return (
     <View style={styles.wrapper}>
       <Text style={styles.nameText}>
-        {' '}
-        {name?.length < 14 ? `${name}` : `${name?.subString(0, 14)}...`}{' '}
+        {/* {name?.length < 14 ? `${name}` : `${name?.subString(0, 10)}...`} */}
+        {name}
       </Text>
       <Text style={styles.emailText}>{email}</Text>
       {dob && (

@@ -8,59 +8,30 @@ import {
   Text,
   Image,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { colors } from '../../common';
-import { deleteDonations } from '../../utils/api';
-export const Donations_list_Card = ({ data, navigation }) => {
-  console.log("datadonations",data)
-  const DeleteDonations = async (id) => {
-    console.log(id,"idididididid")
-    Alert.alert('Success', 'Are you sure you want to delete this donation ?', [
-      {
-        text: 'Yes',
-        onPress: () => navigation.goBack()
-      },
-      {
-        text: 'No',
-      }
-    ]);
-    let result = await deleteDonations(id)
-    console.log(result.data,"resultkkkkkkk")
-    if (result.status === 200){
-
-    }
-  }
+export const Donations_list_Card = ({ data, navigation, onPressDel}) => {  
   return (
-    <FlatList
-      data={data}
-      showsVerticalScrollIndicator={false}
-      keyboardShouldPersistTaps={'handled'}
-      keyExtractor={({ item, index }) => index}
-      style={{}}
-      renderItem={({ item, index }) => (
         <TouchableOpacity style={styles.container}>
-        <EntypoIcon name="cross" size={20} onPress={() =>DeleteDonations(item.id)} style={{position:'absolute' , top:5,right:5}}/>
+          <EntypoIcon name="cross" size={20} onPress={onPressDel} style={{position:'absolute' , top:5, right:5}}/>
           <Image
             source={{
-              uri: item?.url
-                ? item?.url
+              uri: data?.url
+                ? data?.url
                 : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17055723004711705572300104.jpg',
             }}
-
-          
             style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
           />
           <View style={{ width: '80%', marginLeft: '3%', marginTop: '2%' }}>
             <Text style={{ fontSize: 16, fontWeight: 'bold', color: colors.black, textTransform: 'capitalize' }}>
               {' '}
-              {item?.name}
+              {data?.donorName ? data?.donorName : data?.name}
             </Text>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-              {item?.description && (
+              {data?.description && (
                 <Text style={{ color: colors.black, fontSize: 14 }}>
                   {' '}
-                  {item?.description}{' '}
+                  {data?.description}{' '}
                 </Text>
               )}
             </View>
@@ -75,12 +46,10 @@ export const Donations_list_Card = ({ data, navigation }) => {
               borderWidth: 1,
               borderColor: 'white'
             }}>
-              <Text style={styles.rs}>₹{item?.donation}</Text>
+              <Text style={styles.rs}>₹{data?.donation}</Text>
             </View>
           </View>
         </TouchableOpacity>
-      )}
-    />
   );
 };
 const styles = StyleSheet.create({
