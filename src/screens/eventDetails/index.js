@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from
 import React, { useState, useEffect } from 'react'
 import { colors } from '../../common';
 import { styles } from './styles';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
@@ -31,7 +32,14 @@ const EventDetails = ({ navigation, route }) => {
   const renderHighlight = () => {
     return (
       <Card style={styles.highLightCard}>
-        <AntDesignIcon style={styles.heartIcon} name="heart" size={15} color="red" />
+        <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+        <EntypoIcon
+            name="edit"
+            size={13}
+            style={{color:'white'}}
+            
+          />
+        </View>
         <View style={{ flexDirection: 'row' }}>
           <Image
             source={require('../../../assets/images/tempimg1.jpg')}
@@ -56,7 +64,17 @@ const EventDetails = ({ navigation, route }) => {
   const renderInfo = () => {
     return (
       <Card>
+        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={styles.tab2Text}>makar sankranthi</Text>
+        <View style={{marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+        <EntypoIcon
+            name="edit"
+            size={13}
+            style={{color:'white'}}
+            
+          />
+        </View>
+        </View>
         <Text>
           Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
           Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
@@ -68,11 +86,20 @@ const EventDetails = ({ navigation, route }) => {
   const renderContribute = () => {
     return (
       <Card style={styles.contributeCard}>
+        <View style={{flexDirection:'row',justifyContent:'space-between',width:'110%'}}>
         <Text style={{
           backgroundColor: colors.orangeColor, paddingHorizontal: 10, paddingVertical: 5,
-          position: 'absolute', left: 10, top: 10, borderRadius: 10
+           borderRadius: 10
         }}>Temple</Text>
-        <AntDesignIcon style={{ position: 'absolute', right: 10, top: 10 }} name="heart" size={20} color="red" />
+         <View style={{backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+        <EntypoIcon
+            name="edit"
+            size={13}
+            style={{color:'white'}}
+            
+          />
+        </View>
+        </View>
         <View style={{ marginTop: 30 }}>
           <Image
             style={styles.tab1Img}
@@ -153,7 +180,7 @@ const EventDetails = ({ navigation, route }) => {
         </ImageBackground>
         <View>
           <View style={styles.eveName}>
-            <F5Icon style={{ backgroundColor: 'white' }} name="archway" size={30} color={colors.orangeColor} />
+            <F5Icon  name="archway" size={30} color={colors.orangeColor} />
             <Text style={styles.eveText}>{item?.name} </Text>
           </View>
         </View>

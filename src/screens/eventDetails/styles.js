@@ -279,7 +279,7 @@ highLightCard: {
         justifyContent: 'center', //Centered vertically
         alignItems: 'center', // Centered horizontally
       },
-      heartIcon: { position: 'absolute', right: 10, top: 10 },
+      
       img1: { height: 80, width: 80, borderRadius: 20 },
       tab3: { fontSize: 18, fontWeight: '700' },
       tab3Text: { flexDirection: 'row', position: 'absolute', bottom: 5, right: 20, alignItems: 'center' },
