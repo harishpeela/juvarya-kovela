@@ -343,7 +343,7 @@ export const getTopDonation = async (custId, pgno, pgSize) => {
     );
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log('error in donation api', error);
   }
 };
 
