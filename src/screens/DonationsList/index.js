@@ -1,17 +1,14 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import { View, Text, SafeAreaView, TouchableOpacity, Alert, RefreshControl } from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { getDonationList, GetProfilePic } from '../../utils/api';
 import {
-  BackHeaderNew,
   Donations_list_Card,
   SearchBar,
   TopBarcard,
 } from '../../components';
 import { styles } from './styles';
 import { allTexts, colors } from '../../common';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Loader } from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
@@ -20,7 +17,7 @@ import { deleteDonations } from '../../utils/api';
 const DonationsList = ({ navigation, route }) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState(apiData);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refrsh, setRefrsh] = useState(true);
@@ -29,8 +26,10 @@ const DonationsList = ({ navigation, route }) => {
   const customerProfilePic = async e => {
     try {
       let result = await GetProfilePic(e?.email);
+      console.log('profilepic', result?.data);
       if (result?.status === 200) {
         let responce = { ...e, url: result?.data?.url };
+        // console.log('responce', responce);
         if (responce) {
           // setApiData(array => [...array, responce]);
           setLoader(false);
@@ -50,8 +49,11 @@ const DonationsList = ({ navigation, route }) => {
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      let result = await getDonationsList(id, 0, 60);
+      console.log('id', id)
+      let result = await getDonationList(id, 0, 60);
+      console.log('data', result?.data);
       let donationDTO = result?.data?.data;
+      // console.log('list of donations', donationDTO);
       if (donationDTO) {
         // donationDTO.map(e => {
         //   customerProfilePic(e);
@@ -59,14 +61,13 @@ const DonationsList = ({ navigation, route }) => {
         setLoader(false);
         // });
       } else {
-        setLoader(false);
+        setLoader(false)
       }
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
     }
   };
-
   const handleSearch = query => {
     setLoading(true);
     const filteredUserData = apiData?.filter(item =>
@@ -90,19 +91,6 @@ const DonationsList = ({ navigation, route }) => {
         text: 'No',
       }
     ]);
-   
-          
-    // try{
-    //   let result = await deleteDonations(id);
-    // if (result.status === 200){
-    //  await DonationListApi();
-    // //  navigation.navigate(allTexts.screenNames.viewtempleprofile)
-    // } else{
-    //   DonationListApi();
-    // }
-    // } catch(error){
-    //   console.log('error in delete api', error);
-    // }
   }
 const Del = async (id) => {
   let result = await deleteDonations(id);
@@ -166,11 +154,10 @@ const Del = async (id) => {
         </View>
       </View>
       <View style={styles.bodyContainer}>
+
         <View style={styles.followersContainer}>
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
-          ) : searchedText === '' && apiData.length > 0 ? (
-            <Donations_list_Card data={apiData} navigation={navigation} />
           ) : (
             searchedText === '' && apiData ? (
               <FlatList
@@ -191,18 +178,19 @@ const Del = async (id) => {
         </View>
         {searchedText && filteredData?.length > 0 ? (
           <Donations_list_Card data={filteredData} />
-        ) : loader ? (
-          <Loader size={'small'} color={colors.orangeColor} />
         ) : (
-          <View style={styles.noDataContainer}>
-            <Text style={styles.noDataText}>
-              No donations Yet
-            </Text>
-          </View>
+          loader ? (
+            <Loader size={'small'} color={colors.orangeColor} />
+          ) : (
+            <View style={styles.noDataContainer}>
+              <Text style={styles.noDataText}>
+                No donations Yet
+              </Text>
+            </View>
+          )
         )}
       </View>
     </SafeAreaView>
   );
 };
-
 export default DonationsList;
