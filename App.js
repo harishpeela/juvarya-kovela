@@ -49,6 +49,9 @@ import {
   InvitationScreen,
   MemberShipDetails,
   TempleCrew,
+  EditHighlights,
+  EditContribute,
+  EditInfo,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -118,6 +121,9 @@ const App = () => {
       // userinfo,
       templecrew,
       createFeedDescription,
+      editHightlights,
+      editContribute,
+      editInfo,
     },
   } = allTexts;
 
@@ -341,6 +347,27 @@ const App = () => {
         <Stack.Screen
           name={addevents}
           component={AddEvents}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={editHightlights}
+          component={EditHighlights}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={editContribute}
+          component={EditContribute}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={editInfo}
+          component={EditInfo}
           options={{
             headerShown: false,
           }}

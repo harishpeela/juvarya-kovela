@@ -50,7 +50,9 @@ import MemberShipDetails from './membershipDetails';
 import InvitationScreen from './Invitation';
 import TempleCrew from './temple_crew';
 import NearByTemplesSeeAll from './NearByTemplesSeeAll';
-
+import EditHighlights from './EditHighlights';
+import EditContribute from './EditContribute';
+import EditInfo from './EditInfo';
 export {
   CreatePost,
   Seemore,
@@ -104,4 +106,7 @@ export {
   InvitationScreen,
   TempleCrew,
   NearByTemplesSeeAll,
+  EditHighlights,
+  EditContribute,
+  EditInfo
 };
