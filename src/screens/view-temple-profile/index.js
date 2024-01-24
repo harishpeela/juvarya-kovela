@@ -263,6 +263,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const dontationValue = async id => {
     console.log(id, 'kkk', donationLoader);
     setDonationLoader(true);
+   try{
     let result = await getTopDonation(id, 0, 20);
     console.log('hhh', result.data);
     if (result) {
@@ -270,10 +271,16 @@ const ViewTempleProfile = ({route, navigation}) => {
       setDonationLoader(false);
       console.log('loader donation 1', donationLoader);
     } else {
+      setDonationValue([]);
       setDonationLoader(false);
       console.log('loader donation 2', donationLoader);
     }
+   } catch(error){
+    setDonationLoader(false);
+    console.log('error in top donations api', error);
+   }
   };
+  console.log('donation value', donationValue);
   // console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
@@ -490,31 +497,14 @@ const ViewTempleProfile = ({route, navigation}) => {
                     })
                   }
                   text={
-                    donationValue
+                    donationValue?.length
                       ? `Top donation by ${donationValue[0]?.donorName ? donationValue[0]?.donorName : donationValue[0]?.name }`
                       : 'No Donations Yet'
                   }
                   roleId={
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }
-                />
-              ) : (
-                roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
-                  <Danation_Add_Card
-                    onPress={() =>
-                      navigation.navigate(allTexts?.screenNames?.donationslist, {
-                        data: trfData,
-                      })
-                    }
-                    text={donationValue ? `Top Donation by ${donationValue[0]?.name}` : 'No Donations Yet'}
-                    roleId={
-                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                    }
-                  />
-                ) : (
-                  ''
-                )
-              )}
+                />  ) : ('') }
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}
