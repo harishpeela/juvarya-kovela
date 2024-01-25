@@ -13,7 +13,7 @@ export const Danation_Add_Card = ({onPress, roleId, text}) => {
           style={{height: 30, wight: 30, borderRadius: 40 / 2}}
           height={40}
           width={40}
-        />
+        /> 
         <View style={styles.textContainer}>
           <Text style={styles.secondText}>{text}</Text>
           

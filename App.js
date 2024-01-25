@@ -49,6 +49,9 @@ import {
   InvitationScreen,
   MemberShipDetails,
   TempleCrew,
+  EditHighlights,
+  EditContribute,
+  EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
 } from './src/screens';
@@ -120,6 +123,9 @@ const App = () => {
       // userinfo,
       templecrew,
       createFeedDescription,
+      editHightlights,
+      editContribute,
+      editInfo,
       profileDonations,
       profileMyMemberships
     },
@@ -345,6 +351,27 @@ const App = () => {
         <Stack.Screen
           name={addevents}
           component={AddEvents}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={editHightlights}
+          component={EditHighlights}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={editContribute}
+          component={EditContribute}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={editInfo}
+          component={EditInfo}
           options={{
             headerShown: false,
           }}
