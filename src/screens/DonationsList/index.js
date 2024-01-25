@@ -150,10 +150,10 @@ const DonationsList = ({ navigation, route }) => {
     ]);
   }
 const Del = async (id) => {
+  console.log('id', id)
   let result = await deleteDonations(id);
-  // console.log('result delete', result?.status);
   if (result?.status === 200) {
-    DonationListApi();
+    console.log('0000000000000000000000')
   } else{
     alert('some thing went wrong')
   }
@@ -234,7 +234,7 @@ useEffect(() => {
                 keyboardShouldPersistTaps={'handled'}
                 keyExtractor={item => item?.id?.toString()}
                 renderItem={({ item, index }) => (
-                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => DeleteDonations(item?.id)} />
+                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => alert('clicked dots')} />
                 )}
               />
             ) : (
