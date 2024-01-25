@@ -9,11 +9,13 @@ import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
 import { TopBarcard } from '../../components';
-import { IntrestedEvents } from '../../utils/api';
+import { IntrestedEvents, Event_Highlights } from '../../utils/api';
+import { FlatList } from 'react-native-gesture-handler';
 const EventDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
+  const [highlights, setHighlights] = useState([]);
   const EventsIntrested = async () => {
     let payload = {
       eventId: item?.id,
@@ -27,45 +29,55 @@ const EventDetails = ({ navigation, route }) => {
       console.log('error in event details intresteed api', error);
     }
   }
-  console.log('item ', item);
-
-  const renderHighlight = (highlights = false) => {
+  // console.log('item ', item);
+const EventHighLights = async() => {
+  try{
+    let result = await Event_Highlights(item?.id);
+    console.log('res of hightlightevents', result?.data);
+    if(result?.data){
+      setHighlights(result?.data);
+    } else {
+      setHighlights([]);
+    }
+  } catch(error){
+    console.log('error in event highlights screen api', error);
+  }
+}
+  const renderHighlight = () => {
     return (
-      highlights ?
-      <Card style={styles.highLightCard}>
-        <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
-        <EntypoIcon
-            name="edit"
-            size={13}
-            style={{color:'white'}}
-            
-          />
-        </View>
-        <View style={{ flexDirection: 'row' }}>
-          <Image
-            source={require('../../../assets/images/tempimg1.jpg')}
-            style={styles.img1}
-          />
-          <View style={{ marginLeft: 10 }}>
-            <Text style={styles.tab3}>Ganga Dursheera</Text>
-            <Text numberOfLines={2} ellipsizeMode='tail' style={{ width: 250 }}>
-              Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
-              Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
-            </Text>
+      <FlatList 
+        data={highlights}
+        keyExtractor={({item, index}) => index}
+        renderItem={({item, index}) => (
+          <Card style={styles.highLightCard}>
+          <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+          <EntypoIcon
+              name="edit"
+              size={13}
+              style={{color:'white'}}
+              
+            />
           </View>
-        </View>
-        <View style={styles.tab3Text}>
-          <FontisoIcon style={{ backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={10} color={colors.orangeColor} />
-          <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
-        </View>
-      </Card>
-      :
-       <TouchableOpacity 
-       style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
-       onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
-        <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
-       </TouchableOpacity>
-       )
+          <View style={{ flexDirection: 'row' }}>
+            <Image
+              source={require('../../../assets/images/tempimg1.jpg')}
+              style={styles.img1}
+            />
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.tab3}>{item?.highLight} </Text>
+              <Text numberOfLines={2} ellipsizeMode='tail' style={{ width: 250 }}>
+                {item?.description}
+              </Text>
+            </View>
+          </View>
+          {/* <View style={styles.tab3Text}>
+            <FontisoIcon style={{ backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={10} color={colors.orangeColor} />
+            <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
+          </View> */}
+        </Card>
+        )}
+      />
+    )
   };
 
   const renderInfo = (info = false) => {
@@ -158,6 +170,9 @@ const EventDetails = ({ navigation, route }) => {
     }
   ];
 
+useEffect(() => {
+  EventHighLights();
+}, []);
   return (
     <View style={styles.container}>
       <ScrollView style={{ borderWidth: 0 }} >

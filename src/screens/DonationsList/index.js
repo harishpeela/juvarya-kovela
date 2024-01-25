@@ -31,7 +31,7 @@ const DonationsList = ({ navigation, route }) => {
         let responce = { ...e, url: result?.data?.url };
         // console.log('responce', responce);
         if (responce) {
-          // setApiData(array => [...array, responce]);
+          setApiData(array => [...array, responce]);
           setLoader(false);
         } else {
           setLoader(false);
@@ -45,24 +45,24 @@ const DonationsList = ({ navigation, route }) => {
   };
 
   const DonationListApi = async () => {
-    console.log('11')
     setLoader(true);
     try {
       let id = data?.jtProfile;
       console.log('id', id)
       let result = await getDonationList(id, 0, 60);
-      console.log('data', result?.data);
+      console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
-      // console.log('list of donations', donationDTO);
-      if (donationDTO) {
-        // donationDTO.map(e => {
-        //   customerProfilePic(e);
-        setApiData(donationDTO);
+      setApiData(donationDTO);
         setLoader(false);
-        // });
-      } else {
-        setLoader(false)
-      }
+      // if (donationDTO) {
+      //   donationDTO.map(e => {
+      //     customerProfilePic(e);
+      //   // setApiData(donationDTO);
+      //   // setLoader(false);
+      //   });
+      // } else {
+      //   setLoader(false)
+      // }
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
@@ -79,7 +79,6 @@ const DonationsList = ({ navigation, route }) => {
     }, 500);
   };
   const DeleteDonations = async (id) => {
-    
     Alert.alert('Success', 'Are you sure you want to delete this donation ?', [
       {
         text: 'Yes',
@@ -93,20 +92,24 @@ const DonationsList = ({ navigation, route }) => {
     ]);
   }
 const Del = async (id) => {
+  console.log('id', id)
   let result = await deleteDonations(id);
-  console.log('result', result?.data);
+  console.log('result delete', result?.status);
   if (result?.status === 200) {
-    DonationListApi();
+    console.log('0000000000000000000000')
   } else{
     alert('some thing went wrong')
   }
 }
+console.log('data ===out', message);
+
   useEffect(() => {
+    console.log('data ===?', message);
     if (message === 200 || message === undefined) {
       DonationListApi();
     }
   }, [message]);
-  // console.log('display data', apiData);
+  console.log('display data', apiData, searchedText);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
@@ -159,7 +162,7 @@ const Del = async (id) => {
           {loader ? (
             <Loader size={'large'} color={colors.orangeColor} />
           ) : (
-            searchedText === '' && apiData ? (
+            searchedText === '' && apiData?.length ? (
               <FlatList
                 data={apiData}
                 showsVerticalScrollIndicator={false}
@@ -167,12 +170,12 @@ const Del = async (id) => {
                 keyExtractor={({ item, index }) => index}
                 style={{}}
                 renderItem={({ item, index }) => (
-                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => DeleteDonations(item?.id)} />
+                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => alert('clicked dots')} />
                 )}
               />
             ) : (
-              <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '50%' }}>
-                <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: "Poppins-Medium" }}> No donations to display</Text>
+              <View style={{ alignItems: 'center', marginTop: '60%'}}>
+                <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
             ))}
         </View>

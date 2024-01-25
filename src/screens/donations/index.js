@@ -23,7 +23,7 @@ const Donations = ({route, navigation}) => {
   const [donationLoader, setDonationLoader] = useState(false);
   const donTypes = async() => {
     let result = await getDonationTypes(0, 100);
-    console.log('types of donations', result?.data);
+    // console.log('types of donations', result?.data);
   }
   let Data = [
     {id: 1, rs: '101'},
@@ -73,6 +73,7 @@ const Donations = ({route, navigation}) => {
                   message: 200,
                   data: data,
                 });
+                console.log('logg')
                 // dontationValue();
               }
             },
@@ -87,7 +88,7 @@ const Donations = ({route, navigation}) => {
   const profilePic = async (e) => {
     // console.log('proooooooooooooo', e?.email)
     let responce = await GetProfilePic(e.email);
-    console.log('responce', responce.data);
+    // console.log('responce', responce.data);
     if(responce){
       let res = {...e, url: responce?.data?.url}
       setTopDonation(array => [...array, res]);
@@ -99,7 +100,7 @@ const Donations = ({route, navigation}) => {
     console.log(id, 'kkk');
     setDonationLoader(true);
     let result = await getTopDonation(id, 0, 20);
-    console.log('donation card', result.data);
+    // console.log('donation card', result.data);
     if (result) {
       let res = result?.data?.data;
       if(res){
