@@ -56,11 +56,12 @@ const CreateFeed = ({route, navigation}) => {
     });
     console.log('formdata', formdata);
     let result = await Create_Feed(formdata);
+    console.log('res of feed', result?.data);
     if (result?.data?.message === 'Feed created') {
       Alert.alert('Success', `${result?.data?.message} successfully`, [
         {
           text: 'Ok',
-          onPress: () => navigation.navigate(allTexts.screenNames.bottomTab),
+          onPress: () => navigation.navigate(allTexts.tabNames.home),
         },
       ]);
     } else {
