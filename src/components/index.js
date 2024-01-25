@@ -29,6 +29,7 @@ import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
 import {SaveFeedComp} from './savefeedcomp';
 import { CrewCard } from './crew-card-comp';
+import {ProfileDonationsCard} from './profileDonationsCard'
 
 
 import {
@@ -191,5 +192,6 @@ export {
   EventInput,
   EventInput1,
   CrewCard,
+  ProfileDonationsCard,
   NearByTempleComp
 };

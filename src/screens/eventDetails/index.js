@@ -1,6 +1,6 @@
 import { Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
 import React, { useState, useEffect } from 'react'
-import { colors } from '../../common';
+import { colors, allTexts } from '../../common';
 import { styles } from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
@@ -80,8 +80,9 @@ const EventHighLights = async() => {
     )
   };
 
-  const renderInfo = () => {
+  const renderInfo = (info = false) => {
     return (
+      info ?
       <Card>
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={styles.tab2Text}>makar sankranthi</Text>
@@ -99,11 +100,19 @@ const EventHighLights = async() => {
           Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
         </Text>
       </Card>
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo)}
+     >
+      <Text style={{color: colors.blue}}>+ No info here at this time</Text>
+     </TouchableOpacity>
     )
   };
 
-  const renderContribute = () => {
+  const renderContribute = (contribute = false) => {
     return (
+      contribute ?
       <Card style={styles.contributeCard}>
         <View style={{flexDirection:'row',justifyContent:'space-between',width:'110%'}}>
         <Text style={{
@@ -132,6 +141,12 @@ const EventHighLights = async() => {
           </View>
         </View>
       </Card>
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '15%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editContribute)}>
+      <Text style={{color: colors.blue}}>+ No contributes here at this time</Text>
+     </TouchableOpacity>
     )
   }
   const actionsArr = [
@@ -154,11 +169,9 @@ const EventHighLights = async() => {
       activeTab: false,
     }
   ];
-
 useEffect(() => {
   EventHighLights();
 }, []);
-
   return (
     <View style={styles.container}>
       <ScrollView style={{ borderWidth: 0 }} >

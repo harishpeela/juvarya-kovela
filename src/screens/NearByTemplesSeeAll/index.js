@@ -31,7 +31,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
           {/* <Loader color={colors.orangeColor} /> */}
-          <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>No items to display</Text>
+          <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>No Temples to display</Text>
         </View>
       ) : data?.length ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{margin: '5%'}}>
