@@ -90,7 +90,9 @@ const endpoints = {
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
   MY_MEMBERSHIPS:'/jtProfileMembership/list',
-  MY_DONATIONS:'jtDonation/user/donations'
+  MY_DONATIONS:'jtDonation/user/donations',
+  PROFILE_DONATIONS:'jtDonation/user/donations/list',
+  PROFILE_MEMBERSHIPS:'jtProfileMembership/user/memberships'
   
 };
 export const getInitialToken = async () => {
@@ -502,6 +504,29 @@ export const MyDonations = async (profileId) => {
     console.log('error', error);
   }
 };
+
+export const ProfileDonationsData = async () => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.PROFILE_DONATIONS}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const ProfileMembershipsData = async (profileId,pgsz) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.PROFILE_MEMBERSHIPS}?profileId=${profileId}&pageSize=${pgsz}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 
 
 
