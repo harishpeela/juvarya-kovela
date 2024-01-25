@@ -108,10 +108,8 @@ const Donations = ({route, navigation}) => {
           profilePic(e);
         })
       }
-      console.log('loader donation 1', donationLoader);
     } else {
       setDonationLoader(false);
-      console.log('loader donation 2', donationLoader);
     }
   };
 useEffect(() => {
