@@ -281,7 +281,7 @@ const ViewTempleProfile = ({route, navigation}) => {
    }
   };
   console.log('donation value', donationValue);
-  // console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
+  console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
       style={{

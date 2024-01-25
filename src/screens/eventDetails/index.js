@@ -169,7 +169,6 @@ const EventHighLights = async() => {
       activeTab: false,
     }
   ];
-
 useEffect(() => {
   EventHighLights();
 }, []);

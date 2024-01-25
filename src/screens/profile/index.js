@@ -333,6 +333,7 @@ const Profile = ({ navigation }) => {
             text={t('My Donations')}
             onPress={() => {
               navigation.navigate(allTexts.screenNames.profileDonations)
+
             }}
           />
             )

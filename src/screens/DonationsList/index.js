@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity, Alert } from 'react-native';
 import { getDonationList, GetProfilePic } from '../../utils/api';
+import { useIsFocused } from '@react-navigation/native';
 import {
   Donations_list_Card,
   SearchBar,
@@ -10,7 +11,7 @@ import {
 import { styles } from './styles';
 import { allTexts, colors } from '../../common';
 import { Loader } from '../../components';
-import FeatherIcon from 'react-native-vector-icons/Feather';
+import FeatherIcon from 'react-native-vector-icons/Feather'
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { FlatList } from 'react-native-gesture-handler';
 import { deleteDonations } from '../../utils/api';
@@ -23,7 +24,55 @@ const DonationsList = ({ navigation, route }) => {
   const [refrsh, setRefrsh] = useState(true);
   const { data, message } = route.params || {};
   // console.log('data.id', data);
-  const customerProfilePic = async e => {
+  const isFocused = useIsFocused();
+  // const customerProfilePic = async e => {
+  //   try {
+  //     let result = await GetProfilePic(e?.email);
+  //     console.log('profilepic', result?.data);
+  //     if (result?.status === 200) {
+  //       let responce = { ...e, url: result?.data?.url};
+  //       // console.log('responce', responce);
+  //       if (responce) {
+  //         setApiData(array => [...array, responce]);
+  //         setLoader(false);
+  //       } else {
+  //         setLoader(false);
+  //       }
+  //     } else {
+  //       setLoader(false);
+  //       setApiData(array => [...array, e]);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in profile pic api in donations', error);
+  //   }
+  // };
+
+  // const DonationListApi = async () => {
+  //   setLoader(true);
+  //   try {
+  //     let id = data?.jtProfile;
+  //     console.log('id', id)
+  //     let result = await getDonationList(id, 0, 60);
+  //     console.log('data in donation list', result?.data);
+  //     let donationDTO = result?.data?.data;
+  //     // setApiData(donationDTO);
+  //     //   setLoader(false);
+  //     if (donationDTO) {
+  //       donationDTO.map(e => {
+  //         customerProfilePic(e);
+  //       // setApiData(donationDTO);
+  //       // setLoader(false);
+  //       });
+  //     } else {
+  //       setLoader(false)
+  //     }
+  //   } catch (error) {
+  //     console.log('error in donations list api', error);
+  //     setLoader(false);
+  //   }
+  // };
+  
+  const customerProfilePic = async (e, index) => {
     try {
       let result = await GetProfilePic(e?.email);
       console.log('profilepic', result?.data);
@@ -31,12 +80,20 @@ const DonationsList = ({ navigation, route }) => {
         let responce = { ...e, url: result?.data?.url };
         // console.log('responce', responce);
         if (responce) {
-          setApiData(array => [...array, responce]);
+          let updateArray = apiData;
+          updateArray[index] = responce
+          console.log('updateArray', updateArray);
+          setApiData(updateArray);
           setLoader(false);
         } else {
           setLoader(false);
         }
       } else {
+        let updateArray = apiData;
+        updateArray[index] = e
+        console.log('e', updateArray);
+        setApiData(updateArray);
+        setApiData(updateArray);
         setLoader(false);
       }
     } catch (error) {
@@ -48,26 +105,27 @@ const DonationsList = ({ navigation, route }) => {
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      console.log('id', id)
+      // console.log('id', id)
       let result = await getDonationList(id, 0, 60);
-      console.log('data in donation list', result?.data);
+      // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
-      setApiData(donationDTO);
-        setLoader(false);
-      // if (donationDTO) {
-      //   donationDTO.map(e => {
-      //     customerProfilePic(e);
-      //   // setApiData(donationDTO);
-      //   // setLoader(false);
-      //   });
-      // } else {
-      //   setLoader(false)
-      // }
+      // setApiData(donationDTO);
+        // setLoader(false);
+      if (donationDTO) {
+        donationDTO.map((e, index) => {
+          customerProfilePic(e, index);
+        // setApiData(donationDTO);
+        // setLoader(false);
+        });
+      } else {
+        setLoader(false)
+      }
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
     }
   };
+  
   const handleSearch = query => {
     setLoading(true);
     const filteredUserData = apiData?.filter(item =>
@@ -94,22 +152,29 @@ const DonationsList = ({ navigation, route }) => {
 const Del = async (id) => {
   console.log('id', id)
   let result = await deleteDonations(id);
-  console.log('result delete', result?.status);
   if (result?.status === 200) {
     console.log('0000000000000000000000')
   } else{
     alert('some thing went wrong')
   }
 }
-console.log('data ===out', message);
-
-  useEffect(() => {
-    console.log('data ===?', message);
-    if (message === 200 || message === undefined) {
-      DonationListApi();
+useEffect(() => {
+  if (message === 200 || message === undefined || isFocused) {
+    async function prepare() {
+      try {
+        new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        DonationListApi();
+      }
     }
-  }, [message]);
-  console.log('display data', apiData, searchedText);
+    prepare();
+    
+  }
+}, [isFocused]);
+  // console.log('display data', apiData);
+  
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>
@@ -167,8 +232,7 @@ console.log('data ===out', message);
                 data={apiData}
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps={'handled'}
-                keyExtractor={({ item, index }) => index}
-                style={{}}
+                keyExtractor={item => item?.id?.toString()}
                 renderItem={({ item, index }) => (
                   <Donations_list_Card data={item} navigation={navigation} onPressDel={() => alert('clicked dots')} />
                 )}

@@ -265,7 +265,7 @@ export const Create_Feed = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in post profile pic', error);
+    console.log('error in post feed', error);
   }
 };
 export const Update_Profile = async data => {
