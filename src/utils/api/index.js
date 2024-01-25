@@ -41,6 +41,7 @@ const endpoints = {
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
   EVENT_SAVE: 'jtevent/save',
+  EVENTS_HIGHLIGHTS : 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
@@ -264,7 +265,7 @@ export const Create_Feed = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in post profile pic', error);
+    console.log('error in post feed', error);
   }
 };
 export const Update_Profile = async data => {
@@ -431,6 +432,17 @@ export const Save_Event = async payload => {
     let result = await axiosEventsData1.post(
       `${endpoints.EVENT_SAVE}`,
       payload,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const Event_Highlights = async eveId => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENTS_HIGHLIGHTS}/${eveId}`
     );
     return result;
   } catch (error) {
