@@ -21,7 +21,7 @@ const DonationsList = ({ navigation, route }) => {
   const [filteredData, setFilteredData] = useState(apiData);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [refrsh, setRefrsh] = useState(true);
+  const [apiProfile, setApiprofile] = useState([]);
   const { data, message } = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
@@ -72,34 +72,7 @@ const DonationsList = ({ navigation, route }) => {
   //   }
   // };
   
-  const customerProfilePic = async (e, index) => {
-    try {
-      let result = await GetProfilePic(e?.email);
-      console.log('profilepic', result?.data);
-      if (result?.status === 200) {
-        let responce = { ...e, url: result?.data?.url };
-        // console.log('responce', responce);
-        if (responce) {
-          let updateArray = apiData;
-          updateArray[index] = responce
-          console.log('updateArray', updateArray);
-          setApiData(updateArray);
-          setLoader(false);
-        } else {
-          setLoader(false);
-        }
-      } else {
-        let updateArray = apiData;
-        updateArray[index] = e
-        console.log('e', updateArray);
-        setApiData(updateArray);
-        setApiData(updateArray);
-        setLoader(false);
-      }
-    } catch (error) {
-      console.log('error in profile pic api in donations', error);
-    }
-  };
+ 
 
   const DonationListApi = async () => {
     setLoader(true);
@@ -109,17 +82,9 @@ const DonationsList = ({ navigation, route }) => {
       let result = await getDonationList(id, 0, 60);
       // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
-      // setApiData(donationDTO);
-        // setLoader(false);
-      if (donationDTO) {
-        donationDTO.map((e, index) => {
-          customerProfilePic(e, index);
-        // setApiData(donationDTO);
-        // setLoader(false);
-        });
-      } else {
-        setLoader(false)
-      }
+      console.log("bjfbhjfbhj", donationDTO?.length)
+      setApiData(donationDTO);
+        setLoader(false);
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
