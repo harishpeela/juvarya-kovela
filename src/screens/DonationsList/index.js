@@ -159,7 +159,7 @@ useEffect(() => {
               <View style={{ alignItems: 'center', marginTop: '60%'}}>
                 <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
-            )}
+            ))}
           </View>
           {searchedText && filteredData?.length > 0 ? (
             <Donations_list_Card data={filteredData} />
@@ -173,7 +173,7 @@ useEffect(() => {
             </View>
           )}
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
