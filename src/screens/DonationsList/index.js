@@ -25,7 +25,6 @@ const DonationsList = ({ navigation, route }) => {
   const { data, message } = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
-  
 
   const DonationListApi = async () => {
     setLoader(true);
@@ -72,6 +71,7 @@ const Del = async (id) => {
   let result = await deleteDonations(id);
   if (result?.status === 200) {
     console.log('0000000000000000000000')
+    DonationListApi();
   } else{
     alert('some thing went wrong')
   }
@@ -152,7 +152,7 @@ useEffect(() => {
                 keyboardShouldPersistTaps={'handled'}
                 keyExtractor={item => item?.id?.toString()}
                 renderItem={({ item, index }) => (
-                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => alert('clicked dots')} />
+                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => DeleteDonations(item?.id)} />
                 )}
               />
             ) : (

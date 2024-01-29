@@ -59,17 +59,7 @@ const [donData, setDonData] = useState({});
                 </Text>
               )}
             </View>
-            <View style={{
-              padding: 8,
-              elevation:3,
-              width: 90,
-              alignSelf: 'flex-end',
-              alignItems: 'center',
-              shadowOpacity: 3,
-              shadowColor: 'gray',
-              borderWidth: 1,
-              borderColor: 'white'
-            }}>
+            <View style={styles.donText}>
               <Text style={styles.rs}>₹{donData?.donation}</Text>
             </View>
           </View>
@@ -87,12 +77,21 @@ const styles = StyleSheet.create({
     shadowColor: 'black',
     marginVertical: '1%',
     width: '100%'
-
   },
   rs: {
     fontSize: 16,
     color: colors.orangeColor,
     fontWeight: 'bold',
-
+  },
+  donText: {
+    padding: 8,
+    elevation:3,
+    width: 90,
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    shadowOpacity: 3,
+    shadowColor: 'gray',
+    borderWidth: 1,
+    borderColor: 'white'
   },
 });
