@@ -57,14 +57,14 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                     style={{height: 60, width: 60, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
-                    <Text style={{color: isDarkMode ? 'black' : 'black'}}>
+                    <Text style={{color: isDarkMode ? 'black' : 'orange'}}>
                       {item.name}
                     </Text>
                     <Text
                       numberOfLines={2}
                       style={{
                         maxWidth: '90%',
-                        color: isDarkMode ? 'black' : 'black',
+                        color: isDarkMode ? 'black' : 'orange',
                       }}>
                       {item.description}{' '}
                     </Text>

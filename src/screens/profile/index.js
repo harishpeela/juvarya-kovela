@@ -9,30 +9,43 @@ import {
   Modal,
   FlatList,
   Platform,
-  useColorScheme
+  useColorScheme,
+  ScrollView,
 } from 'react-native';
-import { BackgroundImageAClass, Terms_And_Conditions } from '../../components';
+import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, { useContext, useState, useEffect } from 'react';
 import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
-import { styles } from './style';
-import { PrimaryButton, ProfileInfo, Loader, Item, Danation_Add_Card } from '../../components';
-import { allTexts, colors } from '../../common';
-import { useTranslation } from 'react-i18next';
-import i18next, { resources } from '../../../languages/language';
+import {styles} from './style';
+import {
+  PrimaryButton,
+  ProfileInfo,
+  Loader,
+  Item,
+  Danation_Add_Card,
+} from '../../components';
+import {allTexts, colors} from '../../common';
+import {useTranslation} from 'react-i18next';
+import i18next, {resources} from '../../../languages/language';
 import lan from '../../../languages/lan.json';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { GetProfilePic, PostProfilePic, AdminTemples, MyMemberships,MyDonations} from '../../utils/api';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {
+  GetProfilePic,
+  PostProfilePic,
+  AdminTemples,
+  MyMemberships,
+  MyDonations,
+} from '../../utils/api';
 
-const Profile = ({ navigation }) => {
-  const { userDetails, setLoginDetails } = useContext(ApplicationContext);
-  const { t } = useTranslation();
+const Profile = ({navigation}) => {
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+  const {t} = useTranslation();
   console.log('userdetails', userDetails);
   const {
-    constants: { role },
+    constants: {role},
   } = allTexts;
   const [roleType, setRoleType] = useState();
   const [isVisible, setIsVisible] = useState(false);
@@ -46,8 +59,8 @@ const Profile = ({ navigation }) => {
   const [tcModal, setTcModal] = useState(false);
   const [Admin, setAdmin] = useState([]);
   const [loader, setLoader] = useState(false);
-  const [myMemberships, setMyMemberships] = useState([])
-  const [MyDonationsList, setMyDonationsList] = useState([])
+  const [myMemberships, setMyMemberships] = useState([]);
+  const [MyDonationsList, setMyDonationsList] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
 
   const Type = () => {
@@ -78,7 +91,7 @@ const Profile = ({ navigation }) => {
     console.log('21');
     try {
       let result = await GetProfilePic(userDetails?.email);
-      console.log('profilepic ===>', result?.data)
+      console.log('profilepic ===>', result?.data);
       if (result) {
         setProfPic(result?.data);
         setIsLoading(false);
@@ -136,20 +149,19 @@ const Profile = ({ navigation }) => {
   };
   const TempleAdmins = async () => {
     setLoader(true);
-    console.log('loader first', loader)
+    console.log('loader first', loader);
     let result = await AdminTemples();
     console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
-      setLoader(false)
-      console.log('loader second', loader)
+      setLoader(false);
+      console.log('loader second', loader);
     } else {
       setAdmin([]);
       setLoader(false);
-      console.log('loader third', loader)
-
+      console.log('loader third', loader);
     }
-  }
+  };
   useEffect(() => {
     TempleAdmins();
   }, []);
@@ -212,7 +224,7 @@ const Profile = ({ navigation }) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{ uri: image?.uri }}
+                source={{uri: image?.uri}}
               />
             </View>
           ) : isLoading ? (
@@ -226,26 +238,32 @@ const Profile = ({ navigation }) => {
                 uploadPhoto();
               }}>
               {profPic ? (
-                <Image source={{ uri: profPic?.url }} style={styles.profileImage} />
+                <Image
+                  source={{uri: profPic?.url}}
+                  style={styles.profileImage}
+                />
               ) : (
                 <View style={styles.profileImage}>
                   {/* <Icon name="camera" size={60} color={colors.orangeColor} /> */}
-                  <Image source={{ uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg' }} style={styles.profileImage} />
+                  <Image
+                    source={{
+                      uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+                    }}
+                    style={styles.profileImage}
+                  />
                 </View>
               )}
             </TouchableOpacity>
           )}
         </View>
-        <ProfileInfo
-          name={userDetails?.username}
-          email={userDetails?.email}
-        />
+        <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
       </View>
-      <View style={styles.profileItemsHeader}>
-        <View style={styles.profileItemsContainer}>
-          {/* <Item svg={<Demo />} text={bookings} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={styles.profileItemsHeader}>
+          <View style={styles.profileItemsContainer}>
+            {/* <Item svg={<Demo />} text={bookings} />
         <Item svg={<AccountIcon2 />} text={donations} /> */}
-          {/* {(roleType === role.admin || roleType === role.agent) && (
+            {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item
               svg={
                 <Image
@@ -259,16 +277,15 @@ const Profile = ({ navigation }) => {
               }}
             />
           )} */}
-          {loader ? (
-            <Loader size={'small'} color={colors.orangeColor} />
-          ) : (
-            Admin || roleType === 'ROLE_ADMIN' ? (
+            {loader ? (
+              <Loader size={'small'} color={colors.orangeColor} />
+            ) : Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
-                svg={<FontAwesome5 name="gopuram" size={20} color={isDarkMode ? 'black' : 'black'} />}
 
+                svg={<FontAwesome5 name="gopuram" size={20} color={isDarkMode ? 'black' : 'black'} />}
                 text={t('myTemple')}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.myTamples)
+                  navigation.navigate(allTexts.screenNames.myTamples);
                 }}
               />
             ) : ''
@@ -295,10 +312,17 @@ const Profile = ({ navigation }) => {
             }}
           />
               <Item
-                svg={<Icon name="profile" size={20} color={isDarkMode ? 'black' : 'black'} />}
-                text={t('My Memberships')}
+                svg={
+                  <FontAwesome5
+                    name="donate"
+                    size={18}
+                    style={{marginLeft: 1}}
+                    color={isDarkMode ? 'black' : 'black'}
+                  />
+                }
+                text={t('My Donations')}
                 onPress={() => {
-                  navigation.navigate(allTexts.screenNames.profileMyMemberships)
+                  navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
               />
            {
@@ -321,48 +345,49 @@ const Profile = ({ navigation }) => {
               }}
             />
           )} */}
-        </View>
-        <View style={styles.logoutbtnContainer}>
-          <PrimaryButton
-            onPress={async () => {
-              await removeLoginSessionDetails();
-              setLoginDetails(null);
-            }}
-            bgColor={colors.orangeColor}
-            loading={false}
-            radius={25}
-            text={'Log out'}
-            shadow={true}
-            textColor={colors.white}
-          />
-          <Text style={styles.versionText}>
-            Version&ensp;{allTexts.appVersion.version}
-          </Text>
-          <View>
-            <TouchableOpacity onPress={() => TC()}>
-              <Text
-                style={{
-                  ...styles.tabs,
-                  color: 'gray',
-                  textDecorationLine: clicked === true ? 'underline' : 'none',
-                  fontWeight: clicked === true ? 'bold' : '400',
-                }}>
-                Terms & Conditions{' '}
-              </Text>
-            </TouchableOpacity>
-            {tcModal && (
-              <Terms_And_Conditions
-                isModal={tcModal}
-                onPress={() => setTcModal(false)}
-              />
-            )}
+          </View>
+          <View style={styles.logoutbtnContainer}>
+            <PrimaryButton
+              onPress={async () => {
+                await removeLoginSessionDetails();
+                setLoginDetails(null);
+              }}
+              bgColor={colors.orangeColor}
+              loading={false}
+              radius={25}
+              text={'Log out'}
+              shadow={true}
+              textColor={colors.white}
+            />
+            <Text style={styles.versionText}>
+              Version&ensp;{allTexts.appVersion.version}
+            </Text>
+            <View>
+              <TouchableOpacity onPress={() => TC()}>
+                <Text
+                  style={{
+                    ...styles.tabs,
+                    color: 'gray',
+                    textDecorationLine: clicked === true ? 'underline' : 'none',
+                    fontWeight: clicked === true ? 'bold' : '400',
+                  }}>
+                  Terms & Conditions{' '}
+                </Text>
+              </TouchableOpacity>
+              {tcModal && (
+                <Terms_And_Conditions
+                  isModal={tcModal}
+                  onPress={() => setTcModal(false)}
+                />
+              )}
+            </View>
           </View>
         </View>
       </View>
       <Modal
         visible={isVisible}
         transparent={true}
-        style={{ position: 'absolute', left: 20 }}
+        style={{position: 'absolute', left: 20}}
         onRequestClose={() => setIsVisible(false)}>
         <View
           style={{
@@ -374,9 +399,9 @@ const Profile = ({ navigation }) => {
           }}>
           <FlatList
             data={Object.keys(resources)}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <TouchableOpacity onPress={() => changelan(item)}>
-                <Text style={{ fontSize: 12, margin: 5 }}>{lan[item]?.lan} </Text>
+                <Text style={{fontSize: 12, margin: 5}}>{lan[item]?.lan} </Text>
               </TouchableOpacity>
             )}
           />
@@ -391,14 +416,14 @@ const Profile = ({ navigation }) => {
             onPress={() => {
               updateProfilePicture(), setIsModal(false);
             }}>
-            <Text style={{ color: 'white' }}> update profile Pictue</Text>
+            <Text style={{color: 'white'}}> update profile Pictue</Text>
           </TouchableOpacity>
-          <View style={{ borderWidth: 0.5, width: '100%', margin: 5 }} />
+          <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
           <TouchableOpacity
             onPress={() => {
               setImage(null), setIsModal(false), setIsCross(false);
             }}>
-            <Text style={{ color: 'white' }}>Cancel</Text>
+            <Text style={{color: 'white'}}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>

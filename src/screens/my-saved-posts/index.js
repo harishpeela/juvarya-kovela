@@ -70,7 +70,9 @@ const MySavedPosts = ({navigation}) => {
         <View style={{height: '85%'}}>
           {loading ? (
             <View>
-              <Loader color={colors.orangeColor} size={'small'} />
+              <View style={{marginTop: '60%'}}>
+                <Loader color={colors.orangeColor} size={'large'} />
+              </View>
             </View>
           ) : filteredArray?.length > 0 ? (
             <FlatList
@@ -100,7 +102,9 @@ const MySavedPosts = ({navigation}) => {
           ) : (
             <View style={{alignItems: 'center', marginTop: '65%'}}>
               {loading ? (
-                <Loader size={'small'} color={colors.orangeColor} />
+                <View style={{marginTop: '60%'}}>
+                  <Loader size={'small'} color={colors.orangeColor} />
+                </View>
               ) : (
                 <Text style={{color: colors.orangeColor,fontFamily:'Poppins-Medium', fontSize: 15}}>
                   {' '}

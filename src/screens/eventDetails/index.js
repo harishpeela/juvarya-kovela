@@ -1,7 +1,14 @@
-import { Text, View, TouchableOpacity, ScrollView, Image, ImageBackground } from 'react-native'
-import React, { useState, useEffect } from 'react'
-import { colors, allTexts } from '../../common';
-import { styles } from './styles';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Image,
+  ImageBackground,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {colors, allTexts} from '../../common';
+import {styles} from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import F5Icon from 'react-native-vector-icons/FontAwesome5';
@@ -19,8 +26,8 @@ const EventDetails = ({ navigation, route }) => {
   const EventsIntrested = async () => {
     let payload = {
       eventId: item?.id,
-      interested: true
-    }
+      interested: true,
+    };
     console.log('payload', payload);
     try {
       let result = await IntrestedEvents(payload);
@@ -85,23 +92,31 @@ const EventHighLights = async() => {
   };
 
   const renderInfo = (info = false) => {
-    return (
-      info ?
+    return info ? (
       <Card>
-        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-        <Text style={styles.tab2Text}>makar sankranthi</Text>
-        <View style={{marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
-        <EntypoIcon
-            name="edit"
-            size={13}
-            style={{color:'white'}}
-            
-          />
-        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={styles.tab2Text}>makar sankranthi</Text>
+          <View
+            style={{
+              marginBottom: '-3%',
+              backgroundColor: 'orange',
+              height: 25,
+              width: 25,
+              borderRadius: 20,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
+          </View>
         </View>
         <Text>
-          Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
-          Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec eget augue pretium. Id magna arcu sit tortor.
+          Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed
+          nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
+          Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero
+          nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque
+          sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit
+          parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec
+          eget augue pretium. Id magna arcu sit tortor.
         </Text>
       </Card>
       :
@@ -115,31 +130,44 @@ const EventHighLights = async() => {
   };
 
   const renderContribute = (contribute = false) => {
-    return (
-      contribute ?
+    return contribute ? (
       <Card style={styles.contributeCard}>
-        <View style={{flexDirection:'row',justifyContent:'space-between',width:'110%'}}>
-        <Text style={{
-          backgroundColor: colors.orangeColor, paddingHorizontal: 10, paddingVertical: 5,
-           borderRadius: 10
-        }}>Temple</Text>
-         <View style={{backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
-        <EntypoIcon
-            name="edit"
-            size={13}
-            style={{color:'white'}}
-            
-          />
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '110%',
+          }}>
+          <Text
+            style={{
+              backgroundColor: colors.orangeColor,
+              paddingHorizontal: 10,
+              paddingVertical: 5,
+              borderRadius: 10,
+            }}>
+            Temple
+          </Text>
+          <View
+            style={{
+              backgroundColor: 'orange',
+              height: 25,
+              width: 25,
+              borderRadius: 20,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
+          </View>
         </View>
-        </View>
-        <View style={{ marginTop: 30 }}>
+        <View style={{marginTop: 30}}>
           <Image
             style={styles.tab1Img}
-            source={require('../../../assets/images/tempimg1.jpg')} />
+            source={require('../../../assets/images/tempimg1.jpg')}
+          />
         </View>
-        <View style={{ alignItems: 'center' }}>
+        <View style={{alignItems: 'center'}}>
           <Text style={styles.tab1Text}>Holi Festival</Text>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <AntDesignIcon name="heart" size={15} color={colors.orangeColor} />
             <Text style={styles.tab1Name}>Shiva prasad</Text>
           </View>
@@ -171,81 +199,119 @@ const EventHighLights = async() => {
       label: 'Contribute',
       component: renderContribute,
       activeTab: false,
-    }
+    },
   ];
 useEffect(() => {
   EventHighLights();
 }, []);
   return (
     <View style={styles.container}>
-      <ScrollView style={{ borderWidth: 0 }} >
-        <View style={{ minHeight: '10%' }}>
-          <TopBarcard txt={'Event Details'} arrow={true} onPress={() => navigation.goBack()} />
+      <ScrollView style={{borderWidth: 0}}>
+        <View style={{minHeight: '10%'}}>
+          <TopBarCard2
+            txt={'Event Details'}
+            arrow={true}
+            onPress={() => navigation.goBack()}
+          />
         </View>
         <ImageBackground
-          source={{ uri: item?.mediaList[activeImgIndex]?.url }}
+          source={{uri: item?.mediaList[activeImgIndex]?.url}}
           style={styles.bgImg}
           imageStyle={styles.bgImg1}>
           <View style={styles.bgContainer}>
-            <AntDesignIcon name="left" size={20} color="white" disabled={activeImgIndex === 0} onPress={() => setActiveImgIndex((imgIndex) => imgIndex - 1)} />
-            <AntDesignIcon name="right" size={20} color="white" disabled={activeImgIndex === (item?.mediaList?.length - 1)} onPress={() => setActiveImgIndex((imgIndex) => imgIndex + 1)} />
+            <AntDesignIcon
+              name="left"
+              size={20}
+              color="white"
+              disabled={activeImgIndex === 0}
+              onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+            />
+            <AntDesignIcon
+              name="right"
+              size={20}
+              color="white"
+              disabled={activeImgIndex === item?.mediaList?.length - 1}
+              onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
+            />
           </View>
           <View style={styles.multiImgs}>
-            {
-              item?.mediaList?.map((url, index) => {
-                return (
-                  <TouchableOpacity
-                    style={styles.clickImg}
-                    onPress={() => setActiveImgIndex(index)}
-                    key={url?.id?.toString()}>
-                    <Image source={{ uri: url?.url }}
-                      style={{ height: 50, width: 50, borderRadius: 10 }}
-                    />
-                  </TouchableOpacity>
-                )
-              })
-            }
+            {item?.mediaList?.map((url, index) => {
+              return (
+                <TouchableOpacity
+                  style={styles.clickImg}
+                  onPress={() => setActiveImgIndex(index)}
+                  key={url?.id?.toString()}>
+                  <Image
+                    source={{uri: url?.url}}
+                    style={{height: 50, width: 50, borderRadius: 10}}
+                  />
+                </TouchableOpacity>
+              );
+            })}
           </View>
         </ImageBackground>
         <View>
           <View style={styles.eveName}>
-            <F5Icon  name="archway" size={30} color={colors.orangeColor} />
+            <F5Icon name="archway" size={30} color={colors.orangeColor} />
             <Text style={styles.eveText}>{item?.name} </Text>
           </View>
         </View>
         <View style={styles.dateCon}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <FontisoIcon style={styles.dateIcon} name="date" size={20} color="white" />
-            <Text style={styles.dateText}>{item?.creationTime.slice(0, 10)}</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <FontisoIcon
+              style={styles.dateIcon}
+              name="date"
+              size={20}
+              color="white"
+            />
+            <Text style={styles.dateText}>
+              {item?.creationTime.slice(0, 10)}
+            </Text>
           </View>
           <View style={styles.locCon}>
-            <FontAwsIcon style={styles.locIcon} name="location-arrow" size={20} color="white" />
+            <FontAwsIcon
+              style={styles.locIcon}
+              name="location-arrow"
+              size={20}
+              color="white"
+            />
             <Text style={styles.locText}>Anakapalle</Text>
           </View>
         </View>
-        <View style={styles.underline}>
+        <View style={styles.underline}></View>
+        <View style={{flexDirection: 'row'}}>
+          {actionsArr.map((action, index) => {
+            return (
+              <TouchableOpacity
+                key={action?.id?.toString()}
+                onPress={() => setActiveTabIndex(index)}
+                style={{
+                  backgroundColor:
+                    activeTabIndex === index ? colors.orangeColor : '#dddddd',
+                  borderRadius: 30,
+                  paddingHorizontal: 15,
+                  paddingVertical: 5,
+                  marginHorizontal: 10,
+                }}>
+                <Text
+                  style={{
+                    color: activeTabIndex === index ? 'white' : 'grey',
+                    fontWeight: '400',
+                  }}>
+                  {action.label}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
-        <View style={{ flexDirection: 'row' }}>
-          {
-            actionsArr.map((action, index) => {
-              return (
-                <TouchableOpacity
-                  key={action?.id?.toString()}
-                  onPress={() => setActiveTabIndex(index)}
-                  style={{ backgroundColor: activeTabIndex === index ? colors.orangeColor : '#dddddd', borderRadius: 30, paddingHorizontal: 15, paddingVertical: 5, marginHorizontal: 10 }}>
-                  <Text style={{ color: activeTabIndex === index ? 'white' : 'grey', fontWeight: '400' }}>{action.label}</Text>
-                </TouchableOpacity>
-              )
-            })
-          }
-        </View>
-        <View style={{ margin: 10 }}>
+        <View style={{margin: 10}}>
           {actionsArr[activeTabIndex].component()}
         </View>
-
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => EventsIntrested()}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => EventsIntrested()}>
           <Text style={styles.btnText}>Interested</Text>
         </TouchableOpacity>
       </View>

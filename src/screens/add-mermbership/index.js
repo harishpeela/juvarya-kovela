@@ -17,7 +17,8 @@ import {styles} from './styles';
 import Snackbar from 'react-native-snackbar';
 import {MemberShipCreate} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { allTexts, colors } from '../../common';
+import {allTexts, colors} from '../../common';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const AddMemebershipDetails = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -75,10 +76,10 @@ const AddMemebershipDetails = ({route, navigation}) => {
       console.log('2');
       setMemberShipError(true);
       setTypeError(false);
-    } else if(memName && !memType){
+    } else if (memName && !memType) {
       setMemberShipError(false);
       setTypeError(true);
-    } else if (memType && memName){
+    } else if (memType && memName) {
       console.log('3');
       setTypeError(false);
       setMemberShipError(false);
@@ -90,25 +91,20 @@ const AddMemebershipDetails = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View >
+      <View>
         {/* <BackHeaderNew
           txt={'Add Membership'}
           onPress={() => navigation.goBack()}
           isArrow={true}
         /> */}
-        <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-        <Ionicons
-        name="caret-back-circle"
-        size={36}
-        color={'#ffffff'}
-        style={{alignSelf: 'flex-start', justifyContent: 'center'}}
-      />
-     
-        </TouchableOpacity>
-        <Text style={styles.headingText}>{'Add Membership'}</Text>
-      </View>
-        <View style={{marginTop: '35%',padding:'5%'}}>
+        <View style={{minHeight: '15%'}}>
+          <TopBarCard2
+            back={true}
+            txt={'Add Membership'}
+            navigation={navigation}
+          />
+        </View>
+        <View style={{marginTop: '35%', padding: '5%'}}>
           <SelectDropdown
             data={donationType}
             defaultValue={memType}
@@ -123,17 +119,24 @@ const AddMemebershipDetails = ({route, navigation}) => {
             )}
           />
           {typeError && (
-                <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>
+            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>
+              please select type{' '}
+            </Text>
           )}
           <TextInput
-            style={{...styles.inputTextStyle, color: isDarkMode ? 'black' : 'black'}}
+            style={{
+              ...styles.inputTextStyle,
+              color: isDarkMode ? 'black' : 'black',
+            }}
             placeholder="MemberShip Name"
             onChangeText={v => setMemName(v)}
             value={memName}
             placeholderTextColor={isDarkMode ? 'black' : 'black'}
           />
-           {memberShipError && (
-            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>please select type </Text>
+          {memberShipError && (
+            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>
+              please select type{' '}
+            </Text>
           )}
           <TouchableOpacity onPress={onPressDone} style={styles.btnContainer}>
             <Text style={styles.loginText}>{'CREATE'}</Text>

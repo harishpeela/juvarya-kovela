@@ -58,12 +58,12 @@ const DonationsList = ({ navigation, route }) => {
       {
         text: 'Yes',
         onPress: async () => {
-          Del(id)
-        }
+          Del(id);
+        },
       },
       {
         text: 'No',
-      }
+      },
     ]);
   }
 const Del = async (id) => {
@@ -94,9 +94,9 @@ useEffect(() => {
   // console.log('display data', apiData);
   
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <View>
-        <View style={{ minHeight: '18.5%', marginTop: '3%' }}>
+        <View style={{minHeight: '19%', marginTop: '3%'}}>
           <TopBarCard2
             txt={'Donation List'}
             back={true}
@@ -159,22 +159,21 @@ useEffect(() => {
               <View style={{ alignItems: 'center', marginTop: '60%'}}>
                 <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
-            ))}
-        </View>
-        {searchedText && filteredData?.length > 0 ? (
-          <Donations_list_Card data={filteredData} />
-        ) : (
-          loader ? (
-            <Loader size={'small'} color={colors.orangeColor} />
+            )}
+          </View>
+          {searchedText && filteredData?.length > 0 ? (
+            <Donations_list_Card data={filteredData} />
+          ) : loader ? (
+            <View style={{marginTop: '50%'}}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
           ) : (
             <View style={styles.noDataContainer}>
-              <Text style={styles.noDataText}>
-                No donations Yet
-              </Text>
+              <Text style={styles.noDataText}>No donations Yet</Text>
             </View>
-          )
-        )}
-      </View>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
