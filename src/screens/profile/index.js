@@ -381,8 +381,19 @@ const Profile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
-              />
-            )}
+              />       
+           {
+            MyDonations && (
+          <Item
+            svg={<FontAwesome5 name="donate" size={18} style={{marginLeft:1 }} color={isDarkMode ? 'black' : 'black'} />}
+            text={t('My Donations')}
+            onPress={() => {
+              navigation.navigate(allTexts.screenNames.profileDonations)
+
+            }}
+          />
+            )
+           }
 
             {/* {(roleType === role.admin || roleType === role.agent) && (
             <Item1

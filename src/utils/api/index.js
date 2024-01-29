@@ -41,6 +41,7 @@ const endpoints = {
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
   EVENT_SAVE: 'jtevent/save',
+  EVENTS_HIGHLIGHTS : 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
@@ -90,7 +91,9 @@ const endpoints = {
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
   MY_MEMBERSHIPS:'/jtProfileMembership/list',
-  MY_DONATIONS:'jtDonation/user/donations'
+  MY_DONATIONS:'jtDonation/user/donations',
+  PROFILE_DONATIONS:'jtDonation/user/donations/list',
+  PROFILE_MEMBERSHIPS:'jtProfileMembership/user/memberships'
   
 };
 export const getInitialToken = async () => {
@@ -262,7 +265,7 @@ export const Create_Feed = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in post profile pic', error);
+    console.log('error in post feed', error);
   }
 };
 export const Update_Profile = async data => {
@@ -436,6 +439,17 @@ export const Save_Event = async payload => {
   }
 };
 
+export const Event_Highlights = async eveId => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENTS_HIGHLIGHTS}/${eveId}`
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 export const EventInterestedCount = async id => {
   try {
     let result = await axiosEventsData1.get(
@@ -502,6 +516,29 @@ export const MyDonations = async (profileId) => {
     console.log('error', error);
   }
 };
+
+export const ProfileDonationsData = async () => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.PROFILE_DONATIONS}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const ProfileMembershipsData = async (profileId,pgsz) => {
+  try {
+    let result = await axiosDonation.get(
+      `${endpoints.PROFILE_MEMBERSHIPS}?profileId=${profileId}&pageSize=${pgsz}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 
 
 
