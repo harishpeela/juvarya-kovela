@@ -381,29 +381,8 @@ const Profile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
-              />       
-           {
-            MyDonations && (
-          <Item
-            svg={<FontAwesome5 name="donate" size={18} style={{marginLeft:1 }} color={isDarkMode ? 'black' : 'black'} />}
-            text={t('My Donations')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.profileDonations)
-
-            }}
-          />
-            )
-           }
-
-            {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item1
-              svg={require('../../../assets/images/priest.webp')}
-              text={t('poojari')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.poojari);
-              }}
-            />
-          )} */}
+              />
+            )}
           </View>
           <View style={styles.logoutbtnContainer}>
             <PrimaryButton
