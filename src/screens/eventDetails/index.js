@@ -16,7 +16,6 @@ import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
-import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { IntrestedEvents, Event_Highlights } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 const EventDetails = ({ navigation, route }) => {

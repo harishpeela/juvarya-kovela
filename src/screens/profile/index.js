@@ -261,22 +261,6 @@ const Profile = ({navigation}) => {
       <View showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-            {/* <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} /> */}
-            {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item
-              svg={
-                <Image
-                  source={require('../../../assets/images/templeIcon.png')}
-                  style={{ height: 20, width: 20 }}
-                />
-              }
-              text={t('myTemple')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.myTamples);
-              }}
-            />
-          )} */}
             {loader ? (
               <Loader size={'small'} color={colors.orangeColor} />
             ) : Admin || roleType === 'ROLE_ADMIN' ? (
@@ -323,8 +307,7 @@ const Profile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
-              />
-            )}
+              />       
           </View>
           <View style={styles.logoutbtnContainer}>
             <PrimaryButton
