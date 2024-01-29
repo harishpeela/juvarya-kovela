@@ -1,20 +1,9 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
 import {
-  SafeAreaView,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-  useColorScheme,
-} from 'react-native';
-import {
-  AddEvent,
   AddEventImage,
-  TopBarcard,
   EventInput,
   PrimaryButton,
   EventInput1,
@@ -23,9 +12,8 @@ import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {Save_Event} from '../../utils/api';
-const AddEvents = ({navigation, route}) => {
-  console.log('events screen');
+import { Save_Event } from '../../utils/api';
+const AddEvents = ({ navigation, route }) => {
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -55,22 +43,31 @@ const AddEvents = ({navigation, route}) => {
       img.forEach(element => {
         formdata.append('files', element);
       });
-      formdata.append('eventType', 'EVENT');
-      formdata.append('description', description);
+      formdata.append("eventType", "EVENT");
+      formdata.append("description", description);
+      console.log('payload', formdata);
       let result = await Save_Event(formdata);
       console.log('result of save events', result?.data);
-      if (result?.data?.message === 'save Event') {
-        Alert.alert('Success', `Event created successfully`, [
-          {
-            text: 'Ok',
-            onPress: () =>
-              navigation.navigate(allTexts.screenNames.eventsScreen),
-          },
-        ]);
-      }
+          if (result?.data?.message === "save Event") {
+            Alert.alert('Success', `Event created successfully`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          } 
+          else{
+            Alert.alert('error', result?.data?.message, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
     } else {
-      alert('some thing went wrong try again');
-      console.log('error');
+      console.log('error')
     }
   };
   const UpLoadPhoto = () => {
