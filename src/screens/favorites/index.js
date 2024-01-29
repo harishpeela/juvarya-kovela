@@ -128,7 +128,7 @@ const Favorite = ({navigation}) => {
           [
             filteredArray?.length === 0 ? (
               <View style={styles.loaderContainer}>
-                <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>{'No Temples Available'}</Text>
+                <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
               </View>
             ) : (
               <FlatList

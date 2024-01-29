@@ -41,7 +41,7 @@ const EventCard2 = ({ navigation, data }) => {
           <View style={{ backgroundColor: 'white', height: 16, width: 16, justifyContent: 'center', alignItems: 'center',borderRadius:3 }}>
             <FeatherIcon style={{ color: colors.orangeColor }} name="calendar" size={12} color="white" />
           </View>
-
+ 
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>{data?.creationTime.slice('0', '10')}</Text>
         </View>
         {data?.eventType ? (
@@ -59,3 +59,4 @@ const EventCard2 = ({ navigation, data }) => {
   );
 };
 export default EventCard2;
+ 
