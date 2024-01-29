@@ -52,7 +52,8 @@ const EventHighLights = async() => {
 }
   const renderHighlight = () => {
     return (
-      <FlatList 
+      highlights?.length ? (
+        <FlatList 
         data={highlights}
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
@@ -77,13 +78,16 @@ const EventHighLights = async() => {
               </Text>
             </View>
           </View>
-          {/* <View style={styles.tab3Text}>
-            <FontisoIcon style={{ backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={10} color={colors.orangeColor} />
-            <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
-          </View> */}
         </Card>
         )}
       />
+      ): (
+        <TouchableOpacity 
+        style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+        onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
+        <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
+       </TouchableOpacity>
+      )
     )
   };
 
@@ -115,17 +119,14 @@ const EventHighLights = async() => {
           eget augue pretium. Id magna arcu sit tortor.
         </Text>
       </Card>
-    ) : (
-      <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '15%',
-        }}
-        onPress={() => navigation.navigate(allTexts.screenNames.editInfo)}>
-        <Text style={{color: colors.blue}}>+ No info here at this time</Text>
-      </TouchableOpacity>
-    );
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo)}
+     >
+      <Text style={{color: colors.blue}}>+ No info here at this time</Text>
+     </TouchableOpacity>
+    )
   };
 
   const renderContribute = (contribute = false) => {
@@ -172,22 +173,14 @@ const EventHighLights = async() => {
           </View>
         </View>
       </Card>
-    ) : (
-      <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '15%',
-        }}
-        onPress={() =>
-          navigation.navigate(allTexts.screenNames.editContribute)
-        }>
-        <Text style={{color: colors.blue}}>
-          + No contributes here at this time
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editContribute)}>
+      <Text style={{color: colors.blue}}>+ No contributes here at this time</Text>
+     </TouchableOpacity>
+    )
+  }
   const actionsArr = [
     {
       id: 1,
