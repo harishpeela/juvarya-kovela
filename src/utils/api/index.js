@@ -153,9 +153,9 @@ export const AddressUpdate = async data => {
     return error;
   }
 };
-export const PopularTemples = async () => {
+export const PopularTemples = async (pgNo, pgSz) => {
   try {
-    let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}`, {
+    let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}?pageNo=${pgNo}&pageSize=${pgSz}`, {
       // retry: 5,
       // retryDelay: 3000,
     });

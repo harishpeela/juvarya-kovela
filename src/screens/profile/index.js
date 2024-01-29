@@ -181,7 +181,7 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  console.log('membership Data====>', myMemberships);
+  // console.log('membership Data====>', myMemberships);
 
   const MyDonationsData = async () => {
     setLoader(true);
@@ -198,7 +198,7 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
-  console.log('Donation Data====>', MyDonationsList);
+  // console.log('Donation Data====>', MyDonationsList);
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -258,7 +258,7 @@ const Profile = ({navigation}) => {
         </View>
         <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <View showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
             {/* <Item svg={<Demo />} text={bookings} />
@@ -288,7 +288,7 @@ const Profile = ({navigation}) => {
                 }}
               />
             ) : ''
-          )}
+          }
           <Item
             svg={<Icon name="unlock" size={20} color={isDarkMode ? 'black' : 'black'} />}
             text={t('updatepassword')}
