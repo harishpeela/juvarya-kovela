@@ -72,8 +72,7 @@ const EventsScreen = ({navigation}) => {
   }
   return (
     <View style={{flex: 1}}>
-      <View style={{minHeight: 160, marginTop: '3%'
-    ,marginBottom:'-4%'}}>
+      <View style={{minHeight: 160, marginTop: '3%', marginBottom:'-4%'}}>
         <TopBarcard
           txt={'Events'}
           menu={true}

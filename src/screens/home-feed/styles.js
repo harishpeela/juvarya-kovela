@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   nodatatext: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.black,
+    color: colors.orangeColor,
   },
   notificationDot: {
     width: 10,

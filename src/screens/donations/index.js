@@ -97,7 +97,6 @@ const Donations = ({route, navigation}) => {
   }
   const dontationValue = async () => {
     let id = data?.jtProfile;
-    console.log(id, 'kkk');
     setDonationLoader(true);
     let result = await getTopDonation(id, 0, 20);
     // console.log('donation card', result.data);
