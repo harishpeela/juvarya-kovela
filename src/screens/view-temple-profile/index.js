@@ -280,6 +280,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in top donations api', error);
     }
   };
+  console.log('result', result);
   console.log('donation value', donationValue);
   console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
@@ -359,7 +360,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                 alignItems: 'center',
                 marginTop: '5%',
               }}>
-              <Text>God Name</Text>
+              <Text>
+                {result.communityDTO ? (
+                  <Text>{result.communityDTO.name}</Text>
+                ) : (
+                  <Text></Text>
+                )}
+              </Text>
             </View>
             <View>
               <View
