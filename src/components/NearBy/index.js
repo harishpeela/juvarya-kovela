@@ -37,7 +37,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
     console.log('poptemples');
     setLoader(true);
     try {
-      let result = await PopularTemples();
+      let result = await PopularTemples(0, 100);
       // console.log('populattemples', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
@@ -83,7 +83,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   useEffect(() => {}, [isFocused]);
   useEffect(() => {
     if (pageNo >= 0) {
-      PopularTemplesss();
+      PopularTemplesss(0, 100);
     }
   }, [pageNo]);
   const SearchPopTemp = async txt => {

@@ -30,7 +30,6 @@ const DonationsList = ({ navigation, route }) => {
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      // console.log('id', id)
       let result = await getDonationList(id, 0, 60);
       // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
@@ -173,7 +172,6 @@ useEffect(() => {
             </View>
           )}
         </View>
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };
