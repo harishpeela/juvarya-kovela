@@ -30,7 +30,6 @@ const DonationsList = ({ navigation, route }) => {
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      // console.log('id', id)
       let result = await getDonationList(id, 0, 60);
       // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
@@ -159,7 +158,7 @@ useEffect(() => {
               <View style={{ alignItems: 'center', marginTop: '60%'}}>
                 <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
-            )}
+            ))}
           </View>
           {searchedText && filteredData?.length > 0 ? (
             <Donations_list_Card data={filteredData} />
@@ -173,7 +172,6 @@ useEffect(() => {
             </View>
           )}
         </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };
