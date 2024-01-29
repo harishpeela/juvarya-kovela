@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -11,20 +11,20 @@ import {
   useColorScheme,
 } from 'react-native';
 import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 // import {Formik} from 'formik';
 import * as Yup from 'yup';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { allTexts, colors } from '../../common';
-import { useState } from 'react';
-import { NewVerifyOTP, forgotPassword } from '../../utils/api';
-import { styles } from './styles';
-import { Pressable } from 'react-native';
+import {allTexts, colors} from '../../common';
+import {useState} from 'react';
+import {NewVerifyOTP, forgotPassword} from '../../utils/api';
+import {styles} from './styles';
+import {Pressable} from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import { Formik } from 'formik';
-import { forgotPasswordSchema } from '../../common/schemas';
-import { PasswordField } from '../../components/inputfield';
-import { PrimaryButton } from '../../components';
+import {Formik} from 'formik';
+import {forgotPasswordSchema} from '../../common/schemas';
+import {PasswordField} from '../../components/inputfield';
+import {PrimaryButton} from '../../components';
 import Snackbar from 'react-native-snackbar';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
@@ -52,12 +52,12 @@ const ForgetPassword = () => {
     };
   };
   const startTimer = e => {
-    let { total, minutes, seconds } = getTimeRemaining(e);
+    let {total, minutes, seconds} = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : '0' + minutes) +
-        ':' +
-        (seconds > 9 ? seconds : '0' + seconds),
+          ':' +
+          (seconds > 9 ? seconds : '0' + seconds),
       );
     }
   };
@@ -142,11 +142,11 @@ const ForgetPassword = () => {
     setValidEmail(isValid);
     setUserEmail(text);
   };
-  const onPressDone = (Ootp) => {
+  const onPressDone = Ootp => {
     console.log('otp', Ootp);
     if (validEmail && userEmail !== '') {
       otpGeneration(userEmail, Ootp);
-      setOtp(Ootp)
+      setOtp(Ootp);
       setModalVisible(true);
       console.log('Email is valid:', userEmail);
     } else {
@@ -161,7 +161,7 @@ const ForgetPassword = () => {
     let otpOutPut = otpInput?.current?.state?.otpText
       ?.toString()
       .replace(/,/g, '');
-      console.log('otpoutput', otpOutPut);
+    console.log('otpoutput', otpOutPut);
     const payload = {
       email: userEmail,
       password: values.password,
@@ -185,7 +185,7 @@ const ForgetPassword = () => {
           navigation.navigate(allTexts.screenNames.signin);
         }, 1500);
       } else {
-        console.log('error in forgotpassword')
+        console.log('error in forgotpassword');
         setMemberShip(0);
       }
     } catch (error) {
@@ -220,7 +220,7 @@ const ForgetPassword = () => {
         styles.container,
         {backgroundColor: isDarkMode ? 'white' : 'white'},
       ]}>
-      <View style={{minHeight: '13%'}}>
+      <View style={{minHeight: '15%'}}>
         <TopBarCard2
           back={true}
           txt={'Forgot Password'}
@@ -253,8 +253,7 @@ const ForgetPassword = () => {
             setOtp(otpOutPut);
             onPressDone(otpOutPut);
           }
-        }}
-      >
+        }}>
         <Text style={styles.signupText}>SEND</Text>
       </TouchableOpacity>
 
@@ -335,13 +334,13 @@ const ForgetPassword = () => {
                         setState={handleChange('confirmPassword')}
                       />
                       <View style={styles.buttonContainer}>
-                          <PrimaryButton
-                            bgColor={colors.orangeColor}
-                            loading={false}
-                            onPress={handleSubmit}
-                            text={'submit'}
-                            radius={25}
-                          />
+                        <PrimaryButton
+                          bgColor={colors.orangeColor}
+                          loading={false}
+                          onPress={handleSubmit}
+                          text={'submit'}
+                          radius={25}
+                        />
                       </View>
                     </View>
                   );

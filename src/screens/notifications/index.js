@@ -44,7 +44,9 @@ const Notifications = ({navigation}) => {
         </View>
         <View style={{marginTop: 40}}>
           {loader ? (
-            <Loader size={'large'} color={colors.orangeColor} />
+            <View style={{marginTop: '60%'}}>
+              <Loader size={'large'} color={colors.orangeColor} />
+            </View>
           ) : notificationdata?.length ? (
             <FlatList
               keyboardShouldPersistTaps="handled"
@@ -60,7 +62,12 @@ const Notifications = ({navigation}) => {
                 justifyContent: 'center',
                 marginTop: '50%',
               }}>
-              <Text style={{color: colors.orangeColor,fontFamily:'Poppins-Medium', fontSize:15}}>
+              <Text
+                style={{
+                  color: colors.orangeColor,
+                  fontFamily: 'Poppins-Medium',
+                  fontSize: 15,
+                }}>
                 No notifications for this user
               </Text>
             </View>

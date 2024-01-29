@@ -112,5 +112,5 @@ export {
   EditContribute,
   EditInfo,
   ProfileDonations,
-  ProfileMyMemberships
+  ProfileMyMemberships,
 };

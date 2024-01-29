@@ -263,22 +263,22 @@ const ViewTempleProfile = ({route, navigation}) => {
   const dontationValue = async id => {
     console.log(id, 'kkk', donationLoader);
     setDonationLoader(true);
-   try{
-    let result = await getTopDonation(id, 0, 20);
-    console.log('hhh', result.data);
-    if (result) {
-      setDonationValue(result?.data?.data);
+    try {
+      let result = await getTopDonation(id, 0, 20);
+      console.log('hhh', result.data);
+      if (result) {
+        setDonationValue(result?.data?.data);
+        setDonationLoader(false);
+        console.log('loader donation 1', donationLoader);
+      } else {
+        setDonationValue([]);
+        setDonationLoader(false);
+        console.log('loader donation 2', donationLoader);
+      }
+    } catch (error) {
       setDonationLoader(false);
-      console.log('loader donation 1', donationLoader);
-    } else {
-      setDonationValue([]);
-      setDonationLoader(false);
-      console.log('loader donation 2', donationLoader);
+      console.log('error in top donations api', error);
     }
-   } catch(error){
-    setDonationLoader(false);
-    console.log('error in top donations api', error);
-   }
   };
   console.log('donation value', donationValue);
   console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
@@ -392,8 +392,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <View
-                style={{flexDirection: 'row', width: '50%', marginLeft: 12}}>
+              <View style={{flexDirection: 'row', width: '55%'}}>
                 <EvilIcons
                   style={{color: colors.orangeColor, backgroundColor: 'white'}}
                   name="location"
@@ -452,41 +451,47 @@ const ViewTempleProfile = ({route, navigation}) => {
                   />
                 </View>
               </View>
-              <View style={styles.followtab}>
-                {/* <View
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+                <View style={styles.followtab}>
+                  {/* <View
                   // alignSelf="center"
                   // align
                   style={styles.horizontalContainer}> */}
-                <FolloUnfollowComp
-                  style={styles.followingContainer}
-                  followBtnDisable={followBtnDisable}
-                  followTemples={() => FOLLOW(trfData?.jtProfile)}
-                  followVisible={followVisible}
-                  isFollow={isFollow}
-                  shadow={true}
-                />
-                {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
-                <DirectionsTabComp
-                  role={
-                    roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                  }
-                  onPress={() => {
-                    console.log('jha sjxh amjsh xmhb asm ja s', roleId);
-                    navigation.navigate(
-                      allTexts.screenNames.profilememberships,
-                      {
-                        trfdata: trfData,
-                        roleId: roleId,
-                      },
-                    );
-                  }}
-                />
-                <NearByTempleComp
-                  onPress={() =>
-                    navigation.navigate(allTexts.screenNames.nearByTempleSeeAll)
-                  }
-                />
-              </View>
+                  <FolloUnfollowComp
+                    style={styles.followingContainer}
+                    followBtnDisable={followBtnDisable}
+                    followTemples={() => FOLLOW(trfData?.jtProfile)}
+                    followVisible={followVisible}
+                    isFollow={isFollow}
+                    shadow={true}
+                  />
+                  {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
+                  <DirectionsTabComp
+                    role={
+                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                    }
+                    onPress={() => {
+                      console.log('jha sjxh amjsh xmhb asm ja s', roleId);
+                      navigation.navigate(
+                        allTexts.screenNames.profilememberships,
+                        {
+                          trfdata: trfData,
+                          roleId: roleId,
+                        },
+                      );
+                    }}
+                  />
+                  <NearByTempleComp
+                    onPress={() =>
+                      navigation.navigate(
+                        allTexts.screenNames.nearByTempleSeeAll,
+                      )
+                    }
+                  />
+                </View>
+              </ScrollView>
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
@@ -498,13 +503,20 @@ const ViewTempleProfile = ({route, navigation}) => {
                   }
                   text={
                     donationValue?.length
-                      ? `Top donation by ${donationValue[0]?.donorName ? donationValue[0]?.donorName : donationValue[0]?.name }`
+                      ? `Top donation by ${
+                          donationValue[0]?.donorName
+                            ? donationValue[0]?.donorName
+                            : donationValue[0]?.name
+                        }`
                       : 'No Donations Yet'
                   }
                   roleId={
                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
                   }
-                />  ) : ('') }
+                />
+              ) : (
+                ''
+              )}
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}

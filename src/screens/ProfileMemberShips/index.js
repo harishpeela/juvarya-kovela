@@ -62,9 +62,12 @@ const ProfileMemberShips = ({navigation, route}) => {
           }}
         />
       </View>
-      <View style={{marginTop: '2%', marginHorizontal: '2%'}}>
+      <View
+        style={{marginTop: '2%', marginHorizontal: '2%', marginBottom: '10%'}}>
         {loader ? (
-          <Loader size={'small'} color={colors.orangeColor} />
+          <View style={{marginTop: '70%'}}>
+            <Loader size={'large'} color={colors.orangeColor} />
+          </View>
         ) : membership?.length ? (
           <MemberShipCard
             data={membership}
@@ -87,9 +90,9 @@ const ProfileMemberShips = ({navigation, route}) => {
               style={{
                 fontSize: 15,
                 color: colors.orangeColor,
-                
+
                 marginTop: '50%',
-                fontFamily:'Poppins-Medium'
+                fontFamily: 'Poppins-Medium',
               }}>
               {' '}
               No Memberships available
