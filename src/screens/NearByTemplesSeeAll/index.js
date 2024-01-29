@@ -31,7 +31,14 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
           {/* <Loader color={colors.orangeColor} /> */}
-          <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>No items to display</Text>
+          <Text
+            style={{
+              fontFamily: 'Poppins-Medium',
+              color: 'orange',
+              fontSize: 15,
+            }}>
+            No items to display
+          </Text>
         </View>
       ) : data?.length ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{margin: '5%'}}>
@@ -57,14 +64,14 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                     style={{height: 60, width: 60, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
-                    <Text style={{color: isDarkMode ? 'black' : 'black'}}>
+                    <Text style={{color: isDarkMode ? 'black' : 'orange'}}>
                       {item.name}
                     </Text>
                     <Text
                       numberOfLines={2}
                       style={{
                         maxWidth: '90%',
-                        color: isDarkMode ? 'black' : 'black',
+                        color: isDarkMode ? 'black' : 'orange',
                       }}>
                       {item.description}{' '}
                     </Text>

@@ -82,12 +82,12 @@ const UpdateProfile = ({navigation}) => {
     var formattedDate = format(date, 'dd-MM-yyyy');
     console.log(formattedDate, '====<> date');
     let payload = {
-    dob: formattedDate,
-    gender: isRoleSelected,
-    gothra: gotraValue,
-    whatsAppEnabled: true,
-    zodiacSign: '',
-    primaryContact: ''
+      dob: formattedDate,
+      gender: isRoleSelected,
+      gothra: gotraValue,
+      whatsAppEnabled: true,
+      zodiacSign: '',
+      primaryContact: '',
     };
     console.log(payload, 'payload');
     if (
@@ -102,13 +102,7 @@ const UpdateProfile = ({navigation}) => {
       setDropDownError(true);
       setDE(true);
       setPinErr(true);
-    } else if (
-      gotraValue &&
-      toDate &&
-      isRoleSelected &&
-      pincode &&
-      phone
-    ) {
+    } else if (gotraValue && toDate && isRoleSelected && pincode && phone) {
       setPV(false);
       setGV(false);
       setDropDownError(false);
@@ -199,19 +193,19 @@ const UpdateProfile = ({navigation}) => {
                 setPV(false);
               }}
             />
-            {PV && (
+            {/* {PV && (
               <View style={{alignItems: 'center'}}>
                 <Text style={{color: colors.red1}}>
                   {' '}
                   please enter phone number
                 </Text>
               </View>
-            )}
+            )} */}
             <TouchableOpacity>
               <View>
                 <Text
                   style={{
-                    marginLeft: '10%',
+                    marginLeft: '8%',
                     marginVertical: '2%',
                     color: 'black',
                     fontSize: 16,
@@ -223,7 +217,7 @@ const UpdateProfile = ({navigation}) => {
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
                     fontSize: 14,
-                    marginRight: '70%',
+                    marginRight: '72%',
                     color: colors.gray,
                   }}
                   defaultValue={isRoleSelected}
@@ -233,8 +227,8 @@ const UpdateProfile = ({navigation}) => {
                     borderWidth: 0.5,
                     borderRadius: 8,
                     height: 45,
-                    width: '80%',
-                    marginHorizontal: '10%',
+                    width: '84%',
+                    marginHorizontal: '8%',
                   }}
                   dropdownIconPosition="left"
                   defaultButtonText="Gender"
@@ -250,7 +244,7 @@ const UpdateProfile = ({navigation}) => {
                         name="transgender-alt"
                         size={20}
                         color={colors.orangeColor}
-                        style={{marginLeft: 10}}
+                        style={{marginLeft: 5}}
                       />
                     </View>
                   )}
@@ -281,7 +275,7 @@ const UpdateProfile = ({navigation}) => {
             <View
               style={{
                 flexDirection: 'row',
-                marginLeft: '6%',
+                marginLeft: '4%',
               }}>
               <View style={{width: '60%', marginTop: 5}}>
                 <EventInput2
@@ -298,7 +292,7 @@ const UpdateProfile = ({navigation}) => {
                   onCancel={HideDatePicker}
                 />
               </View>
-              <View style={{width: '45%', right: 45, marginTop: 5}}>
+              <View style={{width: '45%', right: 35, marginTop: 5}}>
                 <EventInput
                   lable={'Pin Code'}
                   // keyboardType={true}

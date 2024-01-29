@@ -1,22 +1,31 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  useColorScheme,
+} from 'react-native';
 import {
   AddEvent,
   AddEventImage,
   TopBarcard,
   EventInput,
   PrimaryButton,
-  EventInput1
+  EventInput1,
 } from '../../components';
-import { styles } from './styles';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { allTexts, colors } from '../../common';
+import {styles} from './styles';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event } from '../../utils/api';
-const AddEvents = ({ navigation, route }) => {
-  console.log('events screen')
+import {Save_Event} from '../../utils/api';
+const AddEvents = ({navigation, route}) => {
+  console.log('events screen');
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -28,39 +37,40 @@ const AddEvents = ({ navigation, route }) => {
   const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
-const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'dark';
   const CreateEvent = async () => {
     let img = getImageObj(image);
     if (eventName === '') {
       setEventError(true);
-    } if (description === '') {
-      setDE(true)
-    } if (address === '') {
-      setAE(true);
     }
-    else if (image, description, eventName, address) {
+    if (description === '') {
+      setDE(true);
+    }
+    if (address === '') {
+      setAE(true);
+    } else if ((image, description, eventName, address)) {
       var formdata = new FormData();
-      formdata.append("name", eventName);
-      formdata.append("profileId", 1);
+      formdata.append('name', eventName);
+      formdata.append('profileId', 1);
       img.forEach(element => {
         formdata.append('files', element);
       });
-      formdata.append("eventType", "EVENT");
-      formdata.append("description", description);
+      formdata.append('eventType', 'EVENT');
+      formdata.append('description', description);
       let result = await Save_Event(formdata);
       console.log('result of save events', result?.data);
-          if (result?.data?.message === "save Event") {
-            Alert.alert('Success', `Event created successfully`, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
-          }
+      if (result?.data?.message === 'save Event') {
+        Alert.alert('Success', `Event created successfully`, [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(allTexts.screenNames.eventsScreen),
+          },
+        ]);
+      }
     } else {
       alert('some thing went wrong try again');
-      console.log('error')
+      console.log('error');
     }
   };
   const UpLoadPhoto = () => {
@@ -79,7 +89,7 @@ const isDarkMode = useColorScheme() === 'dark';
           if (!res?.didCancel && !res?.errorCode) {
             let assets = res?.assets;
             if (assets) {
-              let images = assets.filter(item => item).map(({ uri }) => ({ uri }));
+              let images = assets.filter(item => item).map(({uri}) => ({uri}));
               console.log('images', images);
               setImage(images);
             }
@@ -126,10 +136,15 @@ const isDarkMode = useColorScheme() === 'dark';
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../../assets/images/backarrow.png')}
-              style={{ height: 10, width: 6 }} />
+        <View
+          style={{flexDirection: 'row', marginTop: '10%', marginLeft: '6%'}}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../../../assets/images/backarrow.png')}
+              style={{height: 10, width: 6}}
+            />
           </TouchableOpacity>
           <Text
             style={{
@@ -137,46 +152,84 @@ const isDarkMode = useColorScheme() === 'dark';
               fontWeight: 'bold',
               marginHorizontal: '25%',
               color: 'white',
-              alignSelf: 'center'
+              alignSelf: 'center',
             }}>
             Add Event
           </Text>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
-            <Image source={require('../../../assets/images/cameranew.png')} style={styles.camera} />
+            <Image
+              source={require('../../../assets/images/cameranew.png')}
+              style={styles.camera}
+            />
           </TouchableOpacity>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Text style={{ fontWeight: 'bold', color: isDarkMode ? 'gray' : 'gray' }}> Upload Photo</Text>
-            <Text style={{ fontSize: 7, color: isDarkMode ? 'gray' : 'gray' }}>[Upload upto 5 photos]</Text>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text
+              style={{fontWeight: 'bold', color: isDarkMode ? 'gray' : 'gray'}}>
+              {' '}
+              Upload Photo
+            </Text>
+            <Text style={{fontSize: 7, color: isDarkMode ? 'gray' : 'gray'}}>
+              [Upload upto 5 photos]
+            </Text>
           </View>
-          {image && (
-            <AddEventImage data={image} />
-          )}
+          {image && <AddEventImage data={image} />}
         </View>
       </View>
-      <ScrollView style={{ marginTop: '3%' }}>
-        <EventInput lable={'Event Name'} placeholder={'Event Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
+      <ScrollView style={{marginTop: '3%'}}>
+        <EventInput
+          lable={'Event Name'}
+          placeholder={'Event Name'}
+          height={50}
+          onChangeText={e => setEventName(e)}
+          value={eventName}
+        />
         {eventError && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
+          <Text style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
             please enter Event Name
           </Text>
         )}
-        <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
+        <EventInput
+          lable={'Description'}
+          placeholder={'Description'}
+          height={100}
+          onChangeText={text => setDescription(text)}
+          value={description}
+        />
         {DE && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
+          <Text style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
             please enter description
           </Text>
         )}
-        <EventInput1 lable={'From Date and To date'} placeholder={'from date'} height={50} value1={date?.toDateString()} onPressCalendar2={() => ShowDatePicker()} value2={toDate?.toDateString()} calendar={true} onPressCalendar={() => ShowDatePicker()} />
-        <EventInput lable={'Address'} placeholder={'Address'} height={50} location={true} onChangeText={(text) => setAddress(text)} />
+        <EventInput1
+          lable={'From Date and To date'}
+          placeholder={'from date'}
+          height={50}
+          value1={date?.toDateString()}
+          onPressCalendar2={() => ShowDatePicker()}
+          value2={toDate?.toDateString()}
+          calendar={true}
+          onPressCalendar={() => ShowDatePicker()}
+        />
+        <EventInput
+          lable={'Address'}
+          placeholder={'Address'}
+          height={50}
+          location={true}
+          onChangeText={text => setAddress(text)}
+        />
         {AE && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
+          <Text style={{color: 'red', alignSelf: 'center', marginTop: '2%'}}>
             please enter Event Name
           </Text>
         )}
-        <View style={{ width: '80%', alignSelf: 'center', marginTop:100 }}>
-          <PrimaryButton text={'Update'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
+        <View style={{width: '80%', alignSelf: 'center', marginTop: '20%'}}>
+          <PrimaryButton
+            text={'Update'}
+            bgColor={colors.orangeColor}
+            onPress={() => CreateEvent()}
+          />
         </View>
       </ScrollView>
       <DateTimePickerModal
@@ -184,8 +237,7 @@ const isDarkMode = useColorScheme() === 'dark';
         mode={date}
         onConfirm={HandleCnfrm}
         onCancel={HideDatePicker}
-        buttonTextColorIOS= 'black'
-
+        buttonTextColorIOS="black"
       />
       <DateTimePickerModal
         isVisible={datePickerVisible1}

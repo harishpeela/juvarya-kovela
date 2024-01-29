@@ -3,11 +3,11 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   CardContainer: {},
   followersContainer: {
-    height: '100%'
+    height: '100%',
   },
   footerContainer: {
     paddingHorizontal: 30,
-    paddingTop: 20,
+    paddingTop: 10,
     marginTop: '5%',
   },
   header: {
@@ -32,43 +32,42 @@ export const styles = StyleSheet.create({
     marginTop: '5%',
     paddingHorizontal: '1%',
     justifyContent: 'space-between',
-    height:'7%',
-    width:'100%',
-    padding:'1%',
+    height: '7%',
+    width: '100%',
+    padding: '1%',
     alignContent: 'center',
   },
   searchContainer: {
     flexDirection: 'row',
     width: '82%',
     height: '100%',
-    marginTop: -15
+    marginTop: -15,
   },
   sortContainer: {
     display: 'flex',
     width: '15%',
     height: '100%',
   },
-  list: {
-  },
+  list: {},
   noDataContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '36%',
+    marginTop: '1%',
   },
   noDataText: {
     fontSize: fontSize.xlarge,
     color: colors.orangeColor,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-  plusContainer:{
-    backgroundColor:'#FFFFFF',
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:100,
-    marginLeft:10,
-    textAlign:'center',
-    height:30,
-    width:30,
-    marginRight:10
-},
+  plusContainer: {
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 100,
+    marginLeft: 10,
+    textAlign: 'center',
+    height: 30,
+    width: 30,
+    marginRight: 10,
+  },
 });

@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   nodataView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '50%',
+    marginTop: '60%',
     color: colors.orangeColor,
   },
   nodatatext: {

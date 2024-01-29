@@ -110,7 +110,7 @@ export {
   NearByTemplesSeeAll,
   EditHighlights,
   EditContribute,
-  EditInfo
+  EditInfo,
   ProfileDonations,
-  ProfileMyMemberships
+  ProfileMyMemberships,
 };
