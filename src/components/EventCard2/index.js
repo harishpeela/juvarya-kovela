@@ -7,7 +7,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 const EventCard2 = ({ navigation, data }) => {
- 
   const [isHearto, setIsHearto] = useState(false);
   return (
     <TouchableOpacity
@@ -24,7 +23,7 @@ const EventCard2 = ({ navigation, data }) => {
       {data?.mediaList ? (
        <Image
         source={{
-          uri: data?.mediaList[0]?.url ? data?.mediaList[0]?.url : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17051275477141705127546621.jpg',
+          uri: data?.mediaList[0]?.url ? data?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/17065220870951706522085550.jpg',
         }}
         style={styles.Image}
       />
@@ -54,7 +53,6 @@ const EventCard2 = ({ navigation, data }) => {
           </View>
         ) : (
           ''
- 
         )}
       </View>
     </TouchableOpacity>
