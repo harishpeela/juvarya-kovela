@@ -41,13 +41,13 @@ const endpoints = {
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
   EVENT_SAVE: 'jtevent/save',
-  EVENTS_HIGHLIGHTS : 'jtEventHighlights/list/byEvent',
+  EVENTS_HIGHLIGHTS: 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
   UPDATE_PROFILE: 'customer/userDetails',
   TOP_DONATION: 'jtDonation/donars',
   DONATION_LIST: 'jtDonation/list',
-  DELETE_DONATIONS:'jtDonation/delete?donationId',
+  DELETE_DONATIONS: 'jtDonation/delete?donationId',
   DONATION_TYPES: 'donationtype/list',
   MEMBER_SHIP_COUNT: 'jtProfileMembership/count?profileId',
   MEMBER_SHIP_DETAILS: '/jtProfileMembership/members/list',
@@ -55,7 +55,7 @@ const endpoints = {
   MEMBER_SHIP_INVITE: '/jtProfileMembership/invite',
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   MEMBERS_LIST: '/jtProfileMembership/profile/members?membershipId',
-  TEMPLE_CREW:'jtprofile/find/users',
+  TEMPLE_CREW: 'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
@@ -90,11 +90,11 @@ const endpoints = {
   GENERATE_TOKEN:
     'v1/oauth/token?grant_type=client_credentials&client_id=skillrat-client&client_secret=skillrat@2021',
   SAVE_FEED: 'v1/jtfeedtocustomer/save',
-  MY_MEMBERSHIPS:'/jtProfileMembership/list',
-  MY_DONATIONS:'jtDonation/user/donations',
-  PROFILE_DONATIONS:'jtDonation/user/donations/list',
-  PROFILE_MEMBERSHIPS:'jtProfileMembership/user/memberships'
-  
+  MY_MEMBERSHIPS: '/jtProfileMembership/list',
+  MY_DONATIONS: 'jtDonation/user/donations',
+  PROFILE_DONATIONS: 'jtDonation/user/donations/list',
+  PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
+  TEMPLE_COMMUNITY: 'jtprofile/',
 };
 export const getInitialToken = async () => {
   try {
@@ -153,15 +153,29 @@ export const AddressUpdate = async data => {
     return error;
   }
 };
-export const PopularTemples = async (pgNo, pgSz) => {
+export const PopularTemples = async (pgNo, pgsize) => {
   try {
-    let result = await axiosNewData.get(`${endpoints.NEW_POPULAR_TEMPLES}?pageNo=${pgNo}&pageSize=${pgSz}`, {
-      // retry: 5,
-      // retryDelay: 3000,
-    });
+    let result = await axiosNewData.get(
+      `${endpoints.NEW_POPULAR_TEMPLES}?pageNo=${pgNo}&pageSize=${pgsize}`,
+      {
+        // retry: 5,
+        // retryDelay: 3000,
+      },
+    );
     return result;
   } catch (error) {
     console.log('error in popular temples', error);
+  }
+};
+export const TempleCommunity = async templeId => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.TEMPLE_COMMUNITY}/${templeId}`,
+      {},
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular community temples', error);
   }
 };
 export const NearByTempleClass = async (classType, pgno, pgsize) => {
@@ -216,7 +230,6 @@ export const SearchPopularTemples = async txt => {
   }
 };
 
-
 export const SearchTempleRoleWithId = async profId => {
   try {
     let result = await axiosNewData.get(
@@ -244,7 +257,6 @@ export const GetProfilePic = async mailId => {
     // console.log('error in profilepic get', error);
   }
 };
-
 
 export const PostProfilePic = async data => {
   try {
@@ -360,7 +372,7 @@ export const getDonationList = async (custId, pgno, pgSize) => {
     console.log('error in get donation list', error);
   }
 };
-export const deleteDonations = async (custId) => {
+export const deleteDonations = async custId => {
   try {
     let result = await axiosDonation.delete(
       `${endpoints.DELETE_DONATIONS}=${custId}`,
@@ -370,7 +382,6 @@ export const deleteDonations = async (custId) => {
     console.log('error in delete donation', error);
   }
 };
-
 
 export const EventList = async (pgno, pgSize) => {
   try {
@@ -385,9 +396,7 @@ export const EventList = async (pgno, pgSize) => {
 
 export const IntrestedEvents = async data => {
   try {
-    let result = await axiosEventsData1.post(
-      `${endpoints.EVENTS_LIST}`,data
-    );
+    let result = await axiosEventsData1.post(`${endpoints.EVENTS_LIST}`, data);
     return result;
   } catch (error) {
     console.log('error', error);
@@ -442,7 +451,7 @@ export const Save_Event = async payload => {
 export const Event_Highlights = async eveId => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_HIGHLIGHTS}/${eveId}`
+      `${endpoints.EVENTS_HIGHLIGHTS}/${eveId}`,
     );
     return result;
   } catch (error) {
@@ -485,8 +494,7 @@ export const MembersList = async (membershipId, pgno, pgsz) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MEMBERS_LIST}=${membershipId}&pageNo=${pgno}&pageSize=${pgsz}`,
-        //=3&pageNo=0&pageSize=100
-
+      //=3&pageNo=0&pageSize=100
     );
     return result;
   } catch (error) {
@@ -494,8 +502,7 @@ export const MembersList = async (membershipId, pgno, pgsz) => {
   }
 };
 
-
-export const MyMemberships = async (profileId,pgno, pgsz) => {
+export const MyMemberships = async (profileId, pgno, pgsz) => {
   try {
     let result = await axiosMultiPartFormDataMem.get(
       `${endpoints.MY_MEMBERSHIPS}?profileId=${profileId}&pageNo=${pgno}&pageSize=${pgsz}`,
@@ -506,7 +513,7 @@ export const MyMemberships = async (profileId,pgno, pgsz) => {
   }
 };
 
-export const MyDonations = async (profileId) => {
+export const MyDonations = async profileId => {
   try {
     let result = await axiosDonation.get(
       `${endpoints.MY_DONATIONS}?profileId=${profileId}`,
@@ -519,16 +526,14 @@ export const MyDonations = async (profileId) => {
 
 export const ProfileDonationsData = async () => {
   try {
-    let result = await axiosDonation.get(
-      `${endpoints.PROFILE_DONATIONS}`,
-    );
+    let result = await axiosDonation.get(`${endpoints.PROFILE_DONATIONS}`);
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
 
-export const ProfileMembershipsData = async (profileId,pgsz) => {
+export const ProfileMembershipsData = async (profileId, pgsz) => {
   try {
     let result = await axiosDonation.get(
       `${endpoints.PROFILE_MEMBERSHIPS}?profileId=${profileId}&pageSize=${pgsz}`,
@@ -538,9 +543,6 @@ export const ProfileMembershipsData = async (profileId,pgsz) => {
     console.log('error', error);
   }
 };
-
-
-
 
 export const MemberShipDetails = async (pgNo, pgSize) => {
   try {
@@ -947,7 +949,9 @@ export const getNotifications = async () => {
 
 export const getDonationTypes = async (pgNo, pgSz) => {
   try {
-    let result = await axiosNotifications.get(`${endpoints.DONATION_TYPES}?pageNo=${pgNo}&pageSize=${pgSz}`);
+    let result = await axiosNotifications.get(
+      `${endpoints.DONATION_TYPES}?pageNo=${pgNo}&pageSize=${pgSz}`,
+    );
     return result;
   } catch (error) {
     return error;

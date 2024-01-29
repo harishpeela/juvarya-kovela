@@ -323,18 +323,8 @@ const Profile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
-              />       
-)}
-
-            {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item1
-              svg={require('../../../assets/images/priest.webp')}
-              text={t('poojari')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.poojari);
-              }}
-            />
-          )} */}
+              />
+            )}
           </View>
           <View style={styles.logoutbtnContainer}>
             <PrimaryButton
