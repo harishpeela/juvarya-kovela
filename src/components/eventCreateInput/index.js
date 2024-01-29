@@ -51,7 +51,7 @@ export const EventInput = ({
         style={{
           ...styles.input,
           height: height,
-          width: '80%',
+          width: '84%',
           flexDirection:
             calendar ||
             location ||
@@ -134,7 +134,7 @@ export const EventInput = ({
               size={20}
               color={colors.orangeColor}
               style={{
-                marginLeft: 15,
+                marginLeft: 10,
                 top: 15,
               }}
             />
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   label: {
-    marginLeft: '10%',
+    marginLeft: '8%',
     marginVertical: '2%',
     color: 'black',
     fontSize: 16,
@@ -192,7 +192,7 @@ export const EventInput1 = ({
         style={{
           ...styles.input,
           height: height,
-          width: '80%',
+          width: '84%',
           flexDirection: calendar || location ? 'row' : 'column',
           alignItems: calendar || location ? 'center' : 'flex-start',
         }}>
@@ -281,6 +281,7 @@ export const EventInput3 = ({
   value1,
   email,
   editable,
+  user,
 }) => {
   return (
     <View>
@@ -289,14 +290,24 @@ export const EventInput3 = ({
         style={{
           ...styles.input,
           height: height,
-          width: '80%',
-          flexDirection: email ? 'row' : 'column',
-          alignItems: email ? 'center' : 'flex-start',
+          width: '84%',
+          flexDirection: email || user ? 'row' : 'column',
+          alignItems: email || user ? 'center' : 'flex-start',
         }}>
         {email && (
           <TouchableOpacity>
             <Fontisto
               name="email"
+              size={20}
+              color={colors.orangeColor}
+              style={{marginLeft: 10}}
+            />
+          </TouchableOpacity>
+        )}
+        {user && (
+          <TouchableOpacity>
+            <AntDesign
+              name="user"
               size={20}
               color={colors.orangeColor}
               style={{marginLeft: 10}}

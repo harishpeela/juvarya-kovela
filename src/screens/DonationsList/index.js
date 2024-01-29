@@ -25,54 +25,7 @@ const DonationsList = ({ navigation, route }) => {
   const { data, message } = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
-  // const customerProfilePic = async e => {
-  //   try {
-  //     let result = await GetProfilePic(e?.email);
-  //     console.log('profilepic', result?.data);
-  //     if (result?.status === 200) {
-  //       let responce = { ...e, url: result?.data?.url};
-  //       // console.log('responce', responce);
-  //       if (responce) {
-  //         setApiData(array => [...array, responce]);
-  //         setLoader(false);
-  //       } else {
-  //         setLoader(false);
-  //       }
-  //     } else {
-  //       setLoader(false);
-  //       setApiData(array => [...array, e]);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in profile pic api in donations', error);
-  //   }
-  // };
-
-  // const DonationListApi = async () => {
-  //   setLoader(true);
-  //   try {
-  //     let id = data?.jtProfile;
-  //     console.log('id', id)
-  //     let result = await getDonationList(id, 0, 60);
-  //     console.log('data in donation list', result?.data);
-  //     let donationDTO = result?.data?.data;
-  //     // setApiData(donationDTO);
-  //     //   setLoader(false);
-  //     if (donationDTO) {
-  //       donationDTO.map(e => {
-  //         customerProfilePic(e);
-  //       // setApiData(donationDTO);
-  //       // setLoader(false);
-  //       });
-  //     } else {
-  //       setLoader(false)
-  //     }
-  //   } catch (error) {
-  //     console.log('error in donations list api', error);
-  //     setLoader(false);
-  //   }
-  // };
   
- 
 
   const DonationListApi = async () => {
     setLoader(true);
@@ -106,12 +59,12 @@ const DonationsList = ({ navigation, route }) => {
       {
         text: 'Yes',
         onPress: async () => {
-          Del(id)
-        }
+          Del(id);
+        },
       },
       {
         text: 'No',
-      }
+      },
     ]);
   }
 const Del = async (id) => {
@@ -141,9 +94,9 @@ useEffect(() => {
   // console.log('display data', apiData);
   
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <View>
-        <View style={{ minHeight: '18.5%', marginTop: '3%' }}>
+        <View style={{minHeight: '19%', marginTop: '3%'}}>
           <TopBarCard2
             txt={'Donation List'}
             back={true}
@@ -206,22 +159,21 @@ useEffect(() => {
               <View style={{ alignItems: 'center', marginTop: '60%'}}>
                 <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
-            ))}
-        </View>
-        {searchedText && filteredData?.length > 0 ? (
-          <Donations_list_Card data={filteredData} />
-        ) : (
-          loader ? (
-            <Loader size={'small'} color={colors.orangeColor} />
+            )}
+          </View>
+          {searchedText && filteredData?.length > 0 ? (
+            <Donations_list_Card data={filteredData} />
+          ) : loader ? (
+            <View style={{marginTop: '50%'}}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
           ) : (
             <View style={styles.noDataContainer}>
-              <Text style={styles.noDataText}>
-                No donations Yet
-              </Text>
+              <Text style={styles.noDataText}>No donations Yet</Text>
             </View>
-          )
-        )}
-      </View>
+          )}
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

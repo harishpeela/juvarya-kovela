@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   voidButton1: {
     flexDirection: 'row',
     height: 40,
-    width: 120,
+    width: 130,
     borderRadius: 20,
     marginRight: 10,
     alignItems: 'center',
@@ -53,8 +53,8 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontWeight: 'bold',
   },
-  button:{
-    elevation:2,
+  button: {
+    elevation: 2,
     backgroundColor: 'white',
     shadowColor: 'black', // Shadow color
     shadowOffset: {width: 2, height: 2}, // Shadow offset

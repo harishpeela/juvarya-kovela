@@ -86,7 +86,7 @@ function Events({navigation, route}) {
       )}
     </SafeAreaView>
   );
-};
+}
 export default Events;
 
 const EventsCard = ({

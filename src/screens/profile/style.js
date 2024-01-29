@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
     color: colors.gray2,
     // borderWidth:2,
     fontSize: fontSize.small,
-    marginTop:'1%'
+    marginTop: '1%',
   },
   profileItemsHeader: {
     alignItems: 'center',
@@ -59,9 +59,9 @@ export const styles = StyleSheet.create({
     height: 100,
     width: 100,
     borderRadius: 100 / 2,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-  crossIconContainer: {position: 'absolute',right: -5, zIndex: 100},
+  crossIconContainer: {position: 'absolute', right: -5, zIndex: 100},
   preViewImage: {
     height: 100,
     width: 100,
