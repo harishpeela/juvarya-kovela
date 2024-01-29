@@ -281,7 +281,6 @@ const Profile = ({navigation}) => {
               <Loader size={'small'} color={colors.orangeColor} />
             ) : Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
-
                 svg={<FontAwesome5 name="gopuram" size={20} color={isDarkMode ? 'black' : 'black'} />}
                 text={t('myTemple')}
                 onPress={() => {
