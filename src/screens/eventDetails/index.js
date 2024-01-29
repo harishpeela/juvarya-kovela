@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import React, {useState, useEffect} from 'react';
 import {colors, allTexts} from '../../common';
 import {styles} from './styles';
