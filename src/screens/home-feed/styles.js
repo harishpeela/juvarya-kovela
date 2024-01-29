@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
   },
   nodatatext: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.black,
+    fontFamily:'Poppins-Medium',
+    color: colors.orangeColor,
   },
   notificationDot: {
     width: 10,

@@ -6,6 +6,7 @@ import {
   Image,
   ImageBackground,
 } from 'react-native';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import React, {useState, useEffect} from 'react';
 import {colors, allTexts} from '../../common';
 import {styles} from './styles';
@@ -15,7 +16,7 @@ import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
-import { TopBarcard } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { IntrestedEvents, Event_Highlights } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 const EventDetails = ({ navigation, route }) => {
@@ -52,7 +53,8 @@ const EventHighLights = async() => {
 }
   const renderHighlight = () => {
     return (
-      <FlatList 
+      highlights?.length ? (
+        <FlatList 
         data={highlights}
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
@@ -77,18 +79,21 @@ const EventHighLights = async() => {
               </Text>
             </View>
           </View>
-          {/* <View style={styles.tab3Text}>
-            <FontisoIcon style={{ backgroundColor: 'white', padding: 5, borderRadius: 10 }} name="date" size={10} color={colors.orangeColor} />
-            <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>10-21-2023, November</Text>
-          </View> */}
         </Card>
         )}
       />
+      ): (
+        <TouchableOpacity 
+        style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+        onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
+        <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
+       </TouchableOpacity>
+      )
     )
   };
 
   const renderInfo = (info = false) => {
-    return info ? (
+    return info ? 
       <Card>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.tab2Text}>makar sankranthi</Text>
@@ -115,21 +120,18 @@ const EventHighLights = async() => {
           eget augue pretium. Id magna arcu sit tortor.
         </Text>
       </Card>
-    ) : (
-      <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '15%',
-        }}
-        onPress={() => navigation.navigate(allTexts.screenNames.editInfo)}>
-        <Text style={{color: colors.blue}}>+ No info here at this time</Text>
-      </TouchableOpacity>
-    );
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo)}
+     >
+      <Text style={{color: colors.blue}}>+ No info here at this time</Text>
+     </TouchableOpacity>
+    
   };
 
   const renderContribute = (contribute = false) => {
-    return contribute ? (
+    return contribute ? 
       <Card style={styles.contributeCard}>
         <View
           style={{
@@ -172,22 +174,14 @@ const EventHighLights = async() => {
           </View>
         </View>
       </Card>
-    ) : (
-      <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '15%',
-        }}
-        onPress={() =>
-          navigation.navigate(allTexts.screenNames.editContribute)
-        }>
-        <Text style={{color: colors.blue}}>
-          + No contributes here at this time
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+      :
+      <TouchableOpacity 
+      style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editContribute)}>
+      <Text style={{color: colors.blue}}>+ No contributes here at this time</Text>
+     </TouchableOpacity>
+    
+  }
   const actionsArr = [
     {
       id: 1,
@@ -221,42 +215,49 @@ useEffect(() => {
             onPress={() => navigation.goBack()}
           />
         </View>
-        <ImageBackground
-          source={{uri: item?.mediaList[activeImgIndex]?.url}}
+        {item?.mediaList ? (
+            <ImageBackground
+            source={{uri: item?.mediaList[activeImgIndex]?.url}}
+            style={styles.bgImg}
+            imageStyle={styles.bgImg1}>
+            <View style={styles.bgContainer}>
+              <AntDesignIcon
+                name="left"
+                size={20}
+                color="white"
+                disabled={activeImgIndex === 0}
+                onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+              />
+              <AntDesignIcon
+                name="right"
+                size={20}
+                color="white"
+                disabled={activeImgIndex === item?.mediaList?.length - 1}
+                onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
+              />
+            </View>
+            <View style={styles.multiImgs}>
+              {item?.mediaList?.map((url, index) => {
+                return (
+                  <TouchableOpacity
+                    style={styles.clickImg}
+                    onPress={() => setActiveImgIndex(index)}
+                    key={url?.id?.toString()}>
+                    <Image
+                      source={{uri: url?.url}}
+                      style={{height: 50, width: 50, borderRadius: 10}}
+                    />
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          </ImageBackground>
+        ): (
+          <ImageBackground
+          source={{uri: 'https://fanfun.s3.ap-south-1.amazonaws.com/17065220870951706522085550.jpg'}}
           style={styles.bgImg}
-          imageStyle={styles.bgImg1}>
-          <View style={styles.bgContainer}>
-            <AntDesignIcon
-              name="left"
-              size={20}
-              color="white"
-              disabled={activeImgIndex === 0}
-              onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
-            />
-            <AntDesignIcon
-              name="right"
-              size={20}
-              color="white"
-              disabled={activeImgIndex === item?.mediaList?.length - 1}
-              onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
-            />
-          </View>
-          <View style={styles.multiImgs}>
-            {item?.mediaList?.map((url, index) => {
-              return (
-                <TouchableOpacity
-                  style={styles.clickImg}
-                  onPress={() => setActiveImgIndex(index)}
-                  key={url?.id?.toString()}>
-                  <Image
-                    source={{uri: url?.url}}
-                    style={{height: 50, width: 50, borderRadius: 10}}
-                  />
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </ImageBackground>
+          imageStyle={styles.bgImg1} />
+        )}
         <View>
           <View style={styles.eveName}>
             <F5Icon name="archway" size={30} color={colors.orangeColor} />

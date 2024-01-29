@@ -120,7 +120,6 @@ const App = () => {
       profilememberships,
       invitationScreen,
       membershipdetails,
-      // userinfo,
       templecrew,
       createFeedDescription,
       editHightlights,
@@ -623,7 +622,7 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
-        <StatusBar backgroundColor="#FFAB0F" translucent={true} />
+        <StatusBar backgroundColor="#FFAB0F" barStyle="dark-content" translucent={true} />
         <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />

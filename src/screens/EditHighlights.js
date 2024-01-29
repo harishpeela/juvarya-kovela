@@ -16,7 +16,6 @@ import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../utils/api';
 const EditHighlight = ({ navigation, route }) => {
-  console.log('events screen')
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
