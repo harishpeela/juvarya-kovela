@@ -25,7 +25,7 @@ const DonationsList = ({ navigation, route }) => {
   const { data, message } = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
-
+ 
   const DonationListApi = async () => {
     setLoader(true);
     try {
@@ -138,7 +138,7 @@ const Del = async (id) => {
         </View>
       </View>
       <View style={styles.bodyContainer}>
-
+ 
         <View style={styles.followersContainer}>
           {loader ? (
             <View style={{ marginTop: '50%' }}>

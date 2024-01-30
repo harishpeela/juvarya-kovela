@@ -121,6 +121,7 @@ const App = () => {
       profilememberships,
       invitationScreen,
       membershipdetails,
+      // userinfo,
       templecrew,
       createFeedDescription,
       editHightlights,
