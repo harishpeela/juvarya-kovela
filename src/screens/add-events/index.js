@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
 import {
   AddEventImage,
@@ -14,6 +14,7 @@ import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../../utils/api';
 const AddEvents = ({ navigation, route }) => {
+  const {id} = route?.params || {};
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -39,7 +40,7 @@ const AddEvents = ({ navigation, route }) => {
     } else if ((image, description, eventName, address)) {
       var formdata = new FormData();
       formdata.append('name', eventName);
-      formdata.append('profileId', 1);
+      formdata.append('profileId', id);
       img.forEach(element => {
         formdata.append('files', element);
       });
@@ -130,6 +131,9 @@ const AddEvents = ({ navigation, route }) => {
     setDatePickerVisible(false);
     setDatePickerVisible1(false);
   };
+  useEffect(() => {
+
+  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
