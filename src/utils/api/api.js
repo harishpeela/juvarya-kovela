@@ -116,6 +116,7 @@ export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
     Authorization: bearer_token,
+    'Content-Type': 'application/json',
   },
 });
 axiosEventsData1.interceptors.request.use(async function (config) {

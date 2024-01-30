@@ -41,7 +41,7 @@ const endpoints = {
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
-  EVENT_SAVE: 'jtevent/save',
+  EVENT_SAVE: 'jtEventInformation/save',
   EVENTS_HIGHLIGHTS: 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
@@ -97,6 +97,7 @@ const endpoints = {
   PROFILE_DONATIONS: 'jtDonation/user/donations/list',
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
+  EVENT_HIGHLIGHTS:'jtEventHighlights/save'
   TEMPLE_ADDRESS: 'jtAddress/default',
 };
 export const getInitialToken = async () => {
@@ -558,6 +559,16 @@ export const ProfileDonationsData = async () => {
     console.log('error', error);
   }
 };
+
+export const EventHighLights = async () => {
+  try {
+    let result = await axiosEventsData1.post(`${endpoints.EVENT_HIGHLIGHTS}`);
+    return result;
+  } catch (error) {
+    console.log('error in edit high lights', error);
+  }
+};
+
 
 export const ProfileMembershipsData = async (profileId, pgsz) => {
   try {
