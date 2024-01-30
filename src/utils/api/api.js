@@ -18,6 +18,7 @@ export const POPULARURL = 'https://kovela.app/profile/';
 export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
 export const EVENTS_URL = 'https://kovela.app/events/';
 export const DONATION_URL = 'https://kovela.app/donations/';
+export const TEMPLE_ADDRESS = 'https://kovela.app/customer/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -28,6 +29,18 @@ export const authAxiousInstance = axios.create({
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic' + base64.encode('skillrat-client:skillrat@2021'),
   },
+});
+
+export const axiousInstanceNew2 = axios.create({
+  baseURL: TEMPLE_ADDRESS,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiousInstanceNew2.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  config.headers.Authorization = token;
+  return config;
 });
 
 export const authAxiousInstance1 = axios.create({
