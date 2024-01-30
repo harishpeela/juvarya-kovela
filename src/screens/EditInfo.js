@@ -15,8 +15,9 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../utils/api';
+
 const EditInfo = ({ navigation, route }) => {
-  console.log('events screen')
+  console.log('eventskkkasasasa screen')
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -28,41 +29,45 @@ const EditInfo = ({ navigation, route }) => {
   const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
+
 const isDarkMode = useColorScheme() === 'dark';
-  const CreateEvent = async () => {
-    let img = getImageObj(image);
-    if (eventName === '') {
-      setEventError(true);
-    } if (description === '') {
-      setDE(true)
-    } if (address === '') {
-      setAE(true);
+
+  // const CreateEvent = async () => {
+  //   let img = getImageObj(image);
+  //   if (eventName === '') {
+  //     setEventError(true);
+  //   } if (description === '') {
+  //     setDE(true)
+  //   } if (address === '') {
+  //     setAE(true);
+  //   }
+  //   else if (image, description, eventName, address) {
+  // let payload = {
+  //   information:eventName,
+  //   type:description,
+  //   eventId:"13" 
+  // }
+  // console.log("payload",payload);
+          
+  //   } 
+  // };
+
+  const CreateEvent  = async () => {
+    let payload = {
+      information:eventName,
+      type:description,
+      eventId:"13"
     }
-    else if (image, description, eventName, address) {
-      var formdata = new FormData();
-      formdata.append("name", eventName);
-      formdata.append("profileId", 1);
-      img.forEach(element => {
-        formdata.append('files', element);
-      });
-      formdata.append("eventType", "EVENT");
-      formdata.append("description", description);
-      let result = await Save_Event(formdata);
-      console.log('result of save events', result?.data);
-          if (result?.data?.message === "save Event") {
-            Alert.alert('Success', `Event created successfully`, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
-          }
-    } else {
-      alert('some thing went wrong try again');
-      console.log('error')
-    }
-  };
+    console.log("payload",payload);
+    const result  = await Save_Event(payload);
+    console.log("result",result?.data);
+  }
+
+  useEffect(() => {
+    CreateEvent()
+  })
+
+
   const UpLoadPhoto = () => {
     try {
       launchImageLibrary(
@@ -76,7 +81,8 @@ const isDarkMode = useColorScheme() === 'dark';
           // maxWidth: 1080,
         },
         res => {
-          if (!res?.didCancel && !res?.errorCode) {
+          if (!res?.didCancel 
+            && !res?.errorCode) {
             let assets = res?.assets;
             if (assets) {
               let images = assets.filter(item => item).map(({ uri }) => ({ uri }));

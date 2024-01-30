@@ -36,6 +36,8 @@ import {
   GetPosts,
   EventList,
   getTopDonation,
+  TempleCommunity,
+  TempleAddress,
   getProfileEvents,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -57,12 +59,13 @@ import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NearByTempleComp from '../../components/NearByTempleComp';
-import { even } from '@react-native-material/core';
+import {TEMPLE_ADDRESS} from '../../utils/api/api';
 
 const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
+  // console.log('data================', data);
   // console.log(
   //   '<=============================>',
   //   data,
@@ -89,6 +92,8 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [roleType, setRoleType] = useState();
   const [donationValue, setDonationValue] = useState([]);
+  const [communityList, setCommunityList] = useState();
+  const [templeaddress, setTempleAddress] = useState();
   const [events, setEvents] = useState([]);
   const FOLLOW = id => {
     if (isFollow) {
@@ -110,6 +115,33 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in membership count', error);
     }
   };
+
+  const CommunityTemple = async templeId => {
+    try {
+      let result = await TempleCommunity(templeId);
+      if (result) {
+        const dty = result?.data || [];
+        setCommunityList(dty);
+      }
+    } catch (error) {
+      console.log('error in popular temples', error);
+    }
+  };
+
+  const TempleAddressDetails = async templeId => {
+    console.log('temple Address');
+    try {
+      let result = await TempleAddress(templeId);
+      console.log('templeAddress', result?.data);
+      if (result) {
+        const dty = result?.data || [];
+        setTempleAddress(dty);
+      }
+    } catch (error) {
+      console.log('error in popular temples', error);
+    }
+  };
+
   let result = Data(data);
   useEffect(() => {
     if (result) {
@@ -117,10 +149,13 @@ const ViewTempleProfile = ({route, navigation}) => {
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
         Posts(result?.jtProfile);
+        CommunityTemple(result?.jtProfile);
+
         TempleRoleSearchWithId(result?.jtProfile);
         followingCount(result?.jtProfile);
         dontationValue(result.jtProfile);
         MemberShip(result?.jtProfile);
+        TempleAddressDetails(result?.jtProfile);
         eventList(result?.jtProfile);
       } else {
       }
@@ -353,12 +388,10 @@ const ViewTempleProfile = ({route, navigation}) => {
                 alignItems: 'center',
                 marginTop: '5%',
               }}>
-              <Text>
-                {result.communityDTO ? (
-                  <Text>{result.communityDTO.name}</Text>
-                ) : (
-                  <Text></Text>
-                )}
+              <Text style={{fontSize: 15}}>
+                {communityList?.communityDTO?.name
+                  ? communityList?.communityDTO?.name
+                  : 'God Name'}
               </Text>
             </View>
             <View>
@@ -399,7 +432,10 @@ const ViewTempleProfile = ({route, navigation}) => {
                   size={15}
                   color="white"
                 />
-                <Text style={{fontSize: 11}}>Gavarapalem , Anakapalli</Text>
+                <Text style={{fontSize: 12}}>
+                  {templeaddress?.locality},{' '}
+                  {templeaddress?.postalCodeDTO?.city?.name}
+                </Text>
               </View>
             </View>
             <View style={{marginTop: 10}}>

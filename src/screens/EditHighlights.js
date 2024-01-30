@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
+import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme, Platform } from 'react-native';
 import {
   AddEvent,
   AddEventImage,
@@ -14,9 +14,10 @@ import { styles } from './add-events/styles';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event } from '../utils/api';
+import { Save_Event ,EventHighLights} from '../utils/api';
 const EditHighlight = ({ navigation, route }) => {
   const [date, setDate] = useState(new Date());
+  const [loader, setLoader] = useState(false);
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');
@@ -27,6 +28,7 @@ const EditHighlight = ({ navigation, route }) => {
   const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
+  const [EventHighLightsData, setEventHighLightsData] = useState('');
 const isDarkMode = useColorScheme() === 'dark';
   const CreateEvent = async () => {
     let img = getImageObj(image);
@@ -34,34 +36,56 @@ const isDarkMode = useColorScheme() === 'dark';
       setEventError(true);
     } if (description === '') {
       setDE(true)
-    } if (address === '') {
-      setAE(true);
     }
-    else if (image, description, eventName, address) {
+    else if (image, description, eventName) {
       var formdata = new FormData();
-      formdata.append("name", eventName);
-      formdata.append("profileId", 1);
+      // formdata.append("name", eventName);
+      formdata.append("eventId", 9);
       img.forEach(element => {
         formdata.append('files', element);
       });
-      formdata.append("eventType", "EVENT");
+      formdata.append("highLight", eventName);
       formdata.append("description", description);
-      let result = await Save_Event(formdata);
+      console.log('formData', formdata)
+
+      let result = await EventHighLights(formdata);
       console.log('result of save events', result?.data);
-          if (result?.data?.message === "save Event") {
-            Alert.alert('Success', `Event created successfully`, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
+          if (result?.data) {
+            console.log('gvsxhgv', result?.data);
+            console.log('EventHightlights')
+            // Alert.alert('Success', `Event created successfully`, [
+            //   {
+            //     text: 'Ok',
+            //     onPress: () =>
+            //       navigation.navigate(allTexts.screenNames.eventsScreen),
+            //   },
+            // ]);
           }
     } else {
       alert('some thing went wrong try again');
       console.log('error')
     }
   };
+
+  const EventHighlights = async () => {
+    var formdata = new FormData();
+      // formdata.append("name", eventName);
+      formdata.append("eventId", 10);
+      img.forEach(element => {
+        formdata.append('files', element);
+      });
+      formdata.append("highLight", eventName);
+      formdata.append("description", description);
+      console.log('formData', formdata)
+      let result = await EventHighLights(formdata);
+      console.log('result of save highlights', result?.data);
+  }
+
+  useEffect(()=>{
+    EventHighlights()
+  },[])
+
+
   const UpLoadPhoto = () => {
     try {
       launchImageLibrary(
@@ -122,6 +146,11 @@ const isDarkMode = useColorScheme() === 'dark';
     setDatePickerVisible(false);
     setDatePickerVisible1(false);
   };
+
+  
+
+
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -168,11 +197,11 @@ const isDarkMode = useColorScheme() === 'dark';
           </Text>
         )}
         <EventInput1 lable={'From Date and To date'} placeholder={'from date'} height={50} value1={date?.toDateString()} onPressCalendar2={() => ShowDatePicker()} value2={toDate?.toDateString()} calendar={true} onPressCalendar={() => ShowDatePicker()} />
-        {AE && (
+        {/* {AE && (
           <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
             please enter Event Name
           </Text>
-        )}
+        )} */}
       </ScrollView>
       <DateTimePickerModal
         isVisible={datePickerVisible}

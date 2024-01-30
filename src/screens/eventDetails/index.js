@@ -40,7 +40,7 @@ const EventDetails = ({ navigation, route }) => {
 const EventHighLights = async() => {
   try{
     let result = await Event_Highlights(item?.id);
-    console.log('res of hightlightevents', result?.data);
+    // console.log('res of hightlightevents', result?.data);
     if(result?.data){
       setHighlights(result?.data);
     } else {

@@ -30,6 +30,18 @@ export const authAxiousInstance = axios.create({
   },
 });
 
+export const axiousInstanceNew2 = axios.create({
+  baseURL: TEMPLE_ADDRESS,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiousInstanceNew2.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  config.headers.Authorization = token;
+  return config;
+});
+
 export const authAxiousInstance1 = axios.create({
   baseURL: BASEURL,
   headers: {
@@ -104,6 +116,7 @@ export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
     Authorization: bearer_token,
+    'Content-Type': 'application/json',
   },
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
