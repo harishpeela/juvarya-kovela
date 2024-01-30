@@ -59,6 +59,7 @@ const endpoints = {
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
+  PROFILE_EVENTS: 'jtevent/upcoming/item',
   EVENT_INTERESTED: 'jtInterestedEvents/save',
   EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
@@ -393,7 +394,16 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
-
+export const getProfileEvents = async (pgno, pgSize, profId) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.PROFILE_EVENTS}?page=${pgno}&pageSize=${pgSize}&profileId=${profId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in profile events', error);
+  }
+};
 export const IntrestedEvents = async data => {
   try {
     let result = await axiosEventsData1.post(`${endpoints.EVENTS_LIST}`, data);
