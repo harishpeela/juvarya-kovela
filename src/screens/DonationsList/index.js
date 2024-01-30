@@ -21,86 +21,11 @@ const DonationsList = ({ navigation, route }) => {
   const [filteredData, setFilteredData] = useState(apiData);
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [refrsh, setRefrsh] = useState(true);
-  const {data, message} = route.params || {};
+  const [apiProfile, setApiprofile] = useState([]);
+  const { data, message } = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
-  // const customerProfilePic = async e => {
-  //   try {
-  //     let result = await GetProfilePic(e?.email);
-  //     console.log('profilepic', result?.data);
-  //     if (result?.status === 200) {
-  //       let responce = { ...e, url: result?.data?.url};
-  //       // console.log('responce', responce);
-  //       if (responce) {
-  //         setApiData(array => [...array, responce]);
-  //         setLoader(false);
-  //       } else {
-  //         setLoader(false);
-  //       }
-  //     } else {
-  //       setLoader(false);
-  //       setApiData(array => [...array, e]);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in profile pic api in donations', error);
-  //   }
-  // };
-
-  // const DonationListApi = async () => {
-  //   setLoader(true);
-  //   try {
-  //     let id = data?.jtProfile;
-  //     console.log('id', id)
-  //     let result = await getDonationList(id, 0, 60);
-  //     console.log('data in donation list', result?.data);
-  //     let donationDTO = result?.data?.data;
-  //     // setApiData(donationDTO);
-  //     //   setLoader(false);
-  //     if (donationDTO) {
-  //       donationDTO.map(e => {
-  //         customerProfilePic(e);
-  //       // setApiData(donationDTO);
-  //       // setLoader(false);
-  //       });
-  //     } else {
-  //       setLoader(false)
-  //     }
-  //   } catch (error) {
-  //     console.log('error in donations list api', error);
-  //     setLoader(false);
-  //   }
-  // };
-  
-  const customerProfilePic = async (e, index) => {
-    try {
-      let result = await GetProfilePic(e?.email);
-      console.log('profilepic', result?.data);
-      if (result?.status === 200) {
-        let responce = {...e, url: result?.data?.url};
-        // console.log('responce', responce);
-        if (responce) {
-          let updateArray = apiData;
-          updateArray[index] = responce
-          console.log('updateArray', updateArray);
-          setApiData(updateArray);
-          setLoader(false);
-        } else {
-          setLoader(false);
-        }
-      } else {
-        let updateArray = apiData;
-        updateArray[index] = e
-        console.log('e', updateArray);
-        setApiData(updateArray);
-        setApiData(updateArray);
-        setLoader(false);
-      }
-    } catch (error) {
-      console.log('error in profile pic api in donations', error);
-    }
-  };
-
+ 
   const DonationListApi = async () => {
     setLoader(true);
     try {
@@ -108,22 +33,15 @@ const DonationsList = ({ navigation, route }) => {
       let result = await getDonationList(id, 0, 60);
       // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
-      // setApiData(donationDTO);
-        // setLoader(false);
-      if (donationDTO) {
-        donationDTO.map((e, index) => {
-          customerProfilePic(e, index);
-        // setApiData(donationDTO);
-        // setLoader(false);
-        });
-      } else {
+      console.log("bjfbhjfbhj", donationDTO?.length)
+      setApiData(donationDTO);
         setLoader(false);
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
     }
   };
-
+  
   const handleSearch = query => {
     setLoading(true);
     const filteredUserData = apiData?.filter(item =>
@@ -152,6 +70,7 @@ const Del = async (id) => {
   let result = await deleteDonations(id);
   if (result?.status === 200) {
     console.log('0000000000000000000000')
+    DonationListApi();
   } else{
     alert('some thing went wrong')
   }
@@ -172,11 +91,11 @@ useEffect(() => {
   }
 }, [isFocused]);
   // console.log('display data', apiData);
-
+  
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <View>
-        <View style={{ minHeight: '19%', marginTop: '3%' }}>
+        <View style={{minHeight: '19%', marginTop: '3%'}}>
           <TopBarCard2
             txt={'Donation List'}
             back={true}
@@ -220,12 +139,10 @@ useEffect(() => {
         </View>
       </View>
       <View style={styles.bodyContainer}>
-
+ 
         <View style={styles.followersContainer}>
           {loader ? (
-            <View style={{ marginTop: '50%' }}>
-              <Loader size={'large'} color={colors.orangeColor} />
-            </View>
+            <Loader size={'large'} color={colors.orangeColor} />
           ) : (
             searchedText === '' && apiData?.length ? (
               <FlatList
@@ -238,8 +155,8 @@ useEffect(() => {
                 )}
               />
             ) : (
-              <View style={{ alignItems: 'center', marginTop: '60%' }}>
-                <Text style={{ color: colors.orangeColor, fontSize: 15 }}> No donations to display</Text>
+              <View style={{ alignItems: 'center', marginTop: '60%'}}>
+                <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
               </View>
             ))}
           </View>
@@ -255,7 +172,6 @@ useEffect(() => {
             </View>
           )}
         </View>
-      {/* </ScrollView> */}
     </SafeAreaView>
   );
 };

@@ -12,12 +12,12 @@ import RNRestart from 'react-native-restart';
 
 // ****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://kovela.app/customer/api/';
-export const BASE = 'https://kovela.app/media/';
-export const POPULARURL = 'https://kovela.app/profile/';
-export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
-export const EVENTS_URL = 'https://kovela.app/events/';
-export const DONATION_URL = 'https://kovela.app/donations/';
+export const BASEURL = 'https://fanfun.in/customer/api/';
+export const BASE = 'https://fanfun.in/media/';
+export const POPULARURL = 'https://fanfun.in/profile/';
+export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
+export const EVENTS_URL = 'https://fanfun.in/events/';
+export const DONATION_URL = 'https://fanfun.in/donations/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -104,6 +104,7 @@ export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
     Authorization: bearer_token,
+    'Content-Type': 'application/json',
   },
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
