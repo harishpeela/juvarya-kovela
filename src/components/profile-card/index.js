@@ -1,9 +1,9 @@
-import {View, Text, Image} from 'react-native';
+import {View, Text} from 'react-native';
 import React from 'react';
 import {styles} from './style';
 
-export const ProfileInfo = ({img, name, email, dob}) => {
-  console?.log('name===', name);
+export const ProfileInfo = ({name, email, dob}) => {
+  console?.log('name===', name, email);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.nameText}>

@@ -22,7 +22,7 @@ const DonationsList = ({ navigation, route }) => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [refrsh, setRefrsh] = useState(true);
-  const { data, message } = route.params || {};
+  const {data, message} = route.params || {};
   // console.log('data.id', data);
   const isFocused = useIsFocused();
   // const customerProfilePic = async e => {
@@ -71,13 +71,13 @@ const DonationsList = ({ navigation, route }) => {
   //     setLoader(false);
   //   }
   // };
-
+  
   const customerProfilePic = async (e, index) => {
     try {
       let result = await GetProfilePic(e?.email);
       console.log('profilepic', result?.data);
       if (result?.status === 200) {
-        let responce = { ...e, url: result?.data?.url };
+        let responce = {...e, url: result?.data?.url};
         // console.log('responce', responce);
         if (responce) {
           let updateArray = apiData;
@@ -105,21 +105,19 @@ const DonationsList = ({ navigation, route }) => {
     setLoader(true);
     try {
       let id = data?.jtProfile;
-      // console.log('id', id)
       let result = await getDonationList(id, 0, 60);
       // console.log('data in donation list', result?.data);
       let donationDTO = result?.data?.data;
       // setApiData(donationDTO);
-      // setLoader(false);
+        // setLoader(false);
       if (donationDTO) {
         donationDTO.map((e, index) => {
           customerProfilePic(e, index);
-          // setApiData(donationDTO);
-          // setLoader(false);
+        // setApiData(donationDTO);
+        // setLoader(false);
         });
       } else {
         setLoader(false);
-      }
     } catch (error) {
       console.log('error in donations list api', error);
       setLoader(false);
@@ -149,30 +147,30 @@ const DonationsList = ({ navigation, route }) => {
       },
     ]);
   }
-  const Del = async (id) => {
-    console.log('id', id)
-    let result = await deleteDonations(id);
-    if (result?.status === 200) {
-      console.log('0000000000000000000000')
-    } else {
-      alert('some thing went wrong')
-    }
+const Del = async (id) => {
+  console.log('id', id)
+  let result = await deleteDonations(id);
+  if (result?.status === 200) {
+    console.log('0000000000000000000000')
+  } else{
+    alert('some thing went wrong')
   }
-  useEffect(() => {
-    if (message === 200 || message === undefined || isFocused) {
-      async function prepare() {
-        try {
-          new Promise(resolve => setTimeout(resolve, 2000));
-        } catch (e) {
-          console.warn(e);
-        } finally {
-          DonationListApi();
-        }
+}
+useEffect(() => {
+  if (message === 200 || message === undefined || isFocused) {
+    async function prepare() {
+      try {
+        new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        DonationListApi();
       }
-      prepare();
-
     }
-  }, [isFocused]);
+    prepare();
+    
+  }
+}, [isFocused]);
   // console.log('display data', apiData);
 
   return (
@@ -236,7 +234,7 @@ const DonationsList = ({ navigation, route }) => {
                 keyboardShouldPersistTaps={'handled'}
                 keyExtractor={item => item?.id?.toString()}
                 renderItem={({ item, index }) => (
-                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => alert('clicked dots')} />
+                  <Donations_list_Card data={item} navigation={navigation} onPressDel={() => DeleteDonations(item?.id)} />
                 )}
               />
             ) : (
@@ -244,19 +242,19 @@ const DonationsList = ({ navigation, route }) => {
                 <Text style={{ color: colors.orangeColor, fontSize: 15 }}> No donations to display</Text>
               </View>
             ))}
+          </View>
+          {searchedText && filteredData?.length > 0 ? (
+            <Donations_list_Card data={filteredData} />
+          ) : loader ? (
+            <View style={{marginTop: '50%'}}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
+          ) : (
+            <View style={styles.noDataContainer}>
+              <Text style={styles.noDataText}>No donations Yet</Text>
+            </View>
+          )}
         </View>
-        {searchedText && filteredData?.length > 0 ? (
-          <Donations_list_Card data={filteredData} />
-        ) : loader ? (
-          <View style={{ marginTop: '50%' }}>
-            <Loader size={'small'} color={colors.orangeColor} />
-          </View>
-        ) : (
-          <View style={styles.noDataContainer}>
-            <Text style={styles.noDataText}>No donations Yet</Text>
-          </View>
-        )}
-      </View>
       {/* </ScrollView> */}
     </SafeAreaView>
   );
