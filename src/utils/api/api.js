@@ -7,20 +7,18 @@ import {
   saveUserDetails,
 } from '../preferences/localStorage';
 import Snackbar from 'react-native-snackbar';
-import { allTexts } from '../../common';
+import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
-
 
 // ****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://fanfun.in/customer/api/';
-export const BASE = 'https://fanfun.in/media/';
-export const POPULARURL = 'https://fanfun.in/profile/';
-export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
-export const EVENTS_URL = 'https://fanfun.in/events/';
-export const DONATION_URL = 'https://fanfun.in/donations/';
- 
- 
+export const BASEURL = 'https://kovela.app/customer/api/';
+export const BASE = 'https://kovela.app/media/';
+export const POPULARURL = 'https://kovela.app/profile/';
+export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
+export const EVENTS_URL = 'https://kovela.app/events/';
+export const DONATION_URL = 'https://kovela.app/donations/';
+
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
@@ -45,8 +43,6 @@ export const authAxiousForgotPassword = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-
 
 export const authAxiosAddTempId = axios.create({
   baseURL: BASE_URL,
@@ -156,13 +152,13 @@ export const axiosNewData1 = axios.create({
   headers: {
     Authorization: bearer_token,
   },
-})
+});
 
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
   return config;
-})
+});
 
 export const axiousInstanceNew = axios.create({
   baseURL: BASEURL,
@@ -193,8 +189,7 @@ axiousInstance.interceptors.request.use(async function (config) {
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-})
-
+});
 
 export const axiosMultiPartFormData = axios.create({
   baseURL: BASE_URL,
@@ -204,15 +199,14 @@ export const axiosMultiPartFormData = axios.create({
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
   },
-})
-
+});
 
 axiosMultiPartFormData.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-})
+});
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
@@ -229,12 +223,12 @@ axiousInstance.interceptors.response.use(
     }
     return Promise.reject(error);
   },
-)
+);
 
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
-    const { config, message } = error;
+    const {config, message} = error;
     if (!config || !config.retry) {
       return Promise.reject(error);
     }
@@ -255,9 +249,9 @@ axiousInstance.interceptors.response.use(
       action: {
         text: 'Try again',
         textColor: 'green',
-        onPress: () => { },
+        onPress: () => {},
       },
     });
     return delayRetryRequest.then(() => axios(config));
   },
-)
+);
