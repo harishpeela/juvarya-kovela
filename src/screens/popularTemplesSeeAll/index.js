@@ -59,7 +59,7 @@ const SeeAll = ({navigation}) => {
   };
   useEffect(() => {
     if (apiPageNo >= 0) {
-      PopularSeeAllTemples(apiPageNo, 20);
+      PopularSeeAllTemples(apiPageNo, 40);
     }
   }, []);
   console.log('pop see all temples', popTemples);

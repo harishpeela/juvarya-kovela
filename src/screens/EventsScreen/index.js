@@ -8,14 +8,12 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import FeatherIcon from 'react-native-vector-icons/Feather';
 import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
 import { AdminTemples } from '../../utils/api';
 import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import { allTexts, colors } from '../../common';
 import { styles } from './styles';
-import Card from '../../common/Card';
 
 const modalStyles = {
   centeredView: {
@@ -46,7 +44,8 @@ const modalStyles = {
   },
 };
 
-const EventsScreen = ({ navigation }) => {
+const EventsScreen = ({ navigation, route }) => {
+const {id, data} = route?.params || {};
   const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState([]);
@@ -57,7 +56,6 @@ const EventsScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedTemple, setSelectedTemple] = useState(null);
   const [userAdminTemples, setUserAdminTemples] = useState([]);
-
   const isDarkMode = useColorScheme() === 'dark';
 
   const EventsList = async () => {
@@ -105,7 +103,7 @@ const EventsScreen = ({ navigation }) => {
     Type();
   }, []);
 
-  console.log(admin, 'hhhhhhhh');
+  // console.log(admin, 'hhhhhhhh');
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -116,7 +114,7 @@ const EventsScreen = ({ navigation }) => {
       console.log('');
     }
   };
-
+  console.log('route data in events screen', id);
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -148,7 +146,7 @@ const EventsScreen = ({ navigation }) => {
               bgColor={colors.white}
               placeHolder={'Search Events'}
             />
-            {(userAdminTemples.length > 0 || roleType === 'ROLE_ADMIN') && (
+            {/* {(userAdminTemples.length > 0 || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 onPress={() => setModalVisible(true)}
                 style={styles.plusContainer}
@@ -160,7 +158,7 @@ const EventsScreen = ({ navigation }) => {
                   color="white"
                 />
               </TouchableOpacity>
-            )}
+            )} */}
           </View>
         </TopBarcard>
       </View>
@@ -223,7 +221,19 @@ const EventsScreen = ({ navigation }) => {
                     setModalVisible(!modalVisible);
                   }}
                 >
-                  <Text style={{fontFamily:'Poppins-Medium',color:'orange',marginTop:'20%',fontSize:16}}>{item}</Text>
+                  <View style={{marginTop:'10%'}}>
+                  <Text style={{fontFamily:'Poppins-Medium',
+                  color:'orange',
+                  fontSize:16,borderWidth:0.3, borderStyle:'solid',
+                   borderRadius:1,
+                   borderColor:'orange',
+                   borderTopWidth:0,
+                   borderLeftWidth:0,
+                   borderBottom:20,
+                   borderRightWidth:0}}>{item}
+                   </Text>
+                
+                  </View>
                 </Pressable>
                 </View>
               )}

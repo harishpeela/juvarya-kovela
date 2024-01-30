@@ -42,7 +42,7 @@ const FollowersListCard2 = ({
               style={styles.firstName}>
               {name}
             </Text>
-            <Text style={styles.donationText}>
+            {/* <Text style={styles.donationText}>
               {donation === undefined ? (
                 <Text>No donations yet</Text>
               ) : (
@@ -50,7 +50,7 @@ const FollowersListCard2 = ({
                   Donation <Icon name="rupee" />{' '}
                 </>
               )}
-            </Text>
+            </Text> */}
           </View>
           {/* <View>
             <PrimaryButton
