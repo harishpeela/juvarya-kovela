@@ -22,7 +22,7 @@ const FollowersMembership = ({ route, navigation }) => {
   const [filteredData, setFilteredData] = useState(followersList);
   const { id } = route.params || {};
   const [loading, setLoading] = useState(false);
-
+console.log('id ===> ', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);

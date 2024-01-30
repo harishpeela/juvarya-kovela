@@ -15,6 +15,7 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
+  axiousInstanceNew2,
 } from './api';
 
 const endpoints = {
@@ -59,6 +60,7 @@ const endpoints = {
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
   EVENT_DETAILS: 'jtevent/details',
+  PROFILE_EVENTS: 'jtevent/upcoming/item',
   EVENT_INTERESTED: 'jtInterestedEvents/save',
   EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
@@ -96,6 +98,7 @@ const endpoints = {
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
   EVENT_HIGHLIGHTS:'jtEventHighlights/save'
+  TEMPLE_ADDRESS: 'jtAddress/default',
 };
 export const getInitialToken = async () => {
   try {
@@ -168,6 +171,7 @@ export const PopularTemples = async (pgNo, pgsize) => {
     console.log('error in popular temples', error);
   }
 };
+
 export const TempleCommunity = async templeId => {
   try {
     let result = await axiosNewData.get(
@@ -179,6 +183,19 @@ export const TempleCommunity = async templeId => {
     console.log('error in popular community temples', error);
   }
 };
+
+export const TempleAddress = async templeId => {
+  try {
+    let result = await axiousInstanceNew2.get(
+      `${endpoints.TEMPLE_ADDRESS}/${templeId}`,
+      {},
+    );
+    return result;
+  } catch (error) {
+    console.log('error in temples Address', error);
+  }
+};
+
 export const NearByTempleClass = async (classType, pgno, pgsize) => {
   try {
     let result = await axiosNewData.get(
@@ -394,7 +411,16 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
-
+export const getProfileEvents = async (pgno, pgSize, profId) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.PROFILE_EVENTS}?page=${pgno}&pageSize=${pgSize}&profileId=${profId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in profile events', error);
+  }
+};
 export const IntrestedEvents = async data => {
   try {
     let result = await axiosEventsData1.post(`${endpoints.EVENTS_LIST}`, data);

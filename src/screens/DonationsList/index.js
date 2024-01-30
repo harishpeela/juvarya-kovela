@@ -41,7 +41,7 @@ const DonationsList = ({ navigation, route }) => {
       setLoader(false);
     }
   };
-  
+
   const handleSearch = query => {
     setLoading(true);
     const filteredUserData = apiData?.filter(item =>
@@ -74,28 +74,27 @@ const Del = async (id) => {
   } else{
     alert('some thing went wrong')
   }
-}
-useEffect(() => {
-  if (message === 200 || message === undefined || isFocused) {
-    async function prepare() {
-      try {
-        new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        DonationListApi();
+  useEffect(() => {
+    if (message === 200 || message === undefined || isFocused) {
+      async function prepare() {
+        try {
+          new Promise(resolve => setTimeout(resolve, 2000));
+        } catch (e) {
+          console.warn(e);
+        } finally {
+          DonationListApi();
+        }
       }
+      prepare();
+
     }
-    prepare();
-    
-  }
-}, [isFocused]);
+  }, [isFocused]);
   // console.log('display data', apiData);
-  
+
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <View>
-        <View style={{minHeight: '19%', marginTop: '3%'}}>
+        <View style={{ minHeight: '19%', marginTop: '3%' }}>
           <TopBarCard2
             txt={'Donation List'}
             back={true}
@@ -142,7 +141,9 @@ useEffect(() => {
  
         <View style={styles.followersContainer}>
           {loader ? (
-            <Loader size={'large'} color={colors.orangeColor} />
+            <View style={{ marginTop: '50%' }}>
+              <Loader size={'large'} color={colors.orangeColor} />
+            </View>
           ) : (
             searchedText === '' && apiData?.length ? (
               <FlatList
@@ -155,22 +156,10 @@ useEffect(() => {
                 )}
               />
             ) : (
-              <View style={{ alignItems: 'center', marginTop: '60%'}}>
-                <Text style={{ color: colors.orangeColor, fontSize: 15}}> No donations to display</Text>
+              <View style={{ alignItems: 'center', marginTop: '60%' }}>
+                <Text style={{ color: colors.orangeColor, fontSize: 15 }}> No donations to display</Text>
               </View>
             ))}
-          </View>
-          {searchedText && filteredData?.length > 0 ? (
-            <Donations_list_Card data={filteredData} />
-          ) : loader ? (
-            <View style={{marginTop: '50%'}}>
-              <Loader size={'small'} color={colors.orangeColor} />
-            </View>
-          ) : (
-            <View style={styles.noDataContainer}>
-              <Text style={styles.noDataText}>No donations Yet</Text>
-            </View>
-          )}
         </View>
     </SafeAreaView>
   );

@@ -5,29 +5,54 @@ import {
   useColorScheme,
   Text,
 } from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
-import {styles} from './styles';
-import FeatherIcon from 'react-native-vector-icons/Feather';
-import {
-  Loader,
-  SearchBar,
-  Sort,
-  EventCard2,
-  TopBarcard,
-} from '../../components';
-import {AdminTemples} from '../../utils/api';
-import {allTexts, colors} from '../../common';
-import {EventList} from '../../utils/api';
+import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
+import { AdminTemples } from '../../utils/api';
+import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import Card from '../../common/Card';
-const EventsScreen = ({navigation}) => {
-  const {userDetails} = useContext(ApplicationContext);
+import { allTexts, colors } from '../../common';
+import { styles } from './styles';
+
+const modalStyles = {
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    marginTop: '-39%',
+    marginRight: '-35%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 35,
+    height: '50%',
+    width: '50%',
+    alignItems: 'center',
+    color:'black',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+};
+
+const EventsScreen = ({ navigation, route }) => {
+const {id, data} = route?.params || {};
+  const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState();
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
   const [roleType, setRoleType] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedTemple, setSelectedTemple] = useState(null);
+  const [userAdminTemples, setUserAdminTemples] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
   const EventsList = async () => {
     setLoader(true);
@@ -69,7 +94,6 @@ const EventsScreen = ({navigation}) => {
     } else {
       console.log('');
     }
-  }
   return (
     <View style={{flex: 1}}>
       <View style={{minHeight: 160, marginTop: '3%'
@@ -95,7 +119,7 @@ const EventsScreen = ({navigation}) => {
               bgColor={colors.white}
               placeHolder={'Search Events'}
             />
-            {admin || roleType === 'ROLE_ADMIN' ? (
+            {/* {(userAdminTemples.length > 0 || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate(allTexts.screenNames.addevents)
@@ -108,9 +132,7 @@ const EventsScreen = ({navigation}) => {
                   color="white"
                 />
               </TouchableOpacity>
-            ) : (
-              ''
-            )}
+            )} */}
           </View>
         </TopBarcard>
       </View>
@@ -150,6 +172,49 @@ const EventsScreen = ({navigation}) => {
           )}
         </View>
       </View>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={modalStyles.centeredView}>
+          <View style={modalStyles.modalView}>
+            <Text style={{fontFamily:'Poppins-Medium'}}>Select a Temple</Text>
+            <FlatList
+              data={userAdminTemples}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <View >
+                <Pressable
+                  onPress={() => {
+                    setSelectedTemple(item);
+                    setModalVisible(!modalVisible);
+                  }}
+                >
+                  <View style={{marginTop:'10%'}}>
+                  <Text style={{fontFamily:'Poppins-Medium',
+                  color:'orange',
+                  fontSize:16,borderWidth:0.3, borderStyle:'solid',
+                   borderRadius:1,
+                   borderColor:'orange',
+                   borderTopWidth:0,
+                   borderLeftWidth:0,
+                   borderBottom:20,
+                   borderRightWidth:0}}>{item}
+                   </Text>
+                
+                  </View>
+                </Pressable>
+                </View>
+              )}
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };

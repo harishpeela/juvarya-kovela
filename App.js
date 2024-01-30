@@ -54,6 +54,7 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Profile_Events
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -127,7 +128,8 @@ const App = () => {
       editContribute,
       editInfo,
       profileDonations,
-      profileMyMemberships
+      profileMyMemberships,
+      profileEvents
     },
   } = allTexts;
 
@@ -195,6 +197,13 @@ const App = () => {
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={profileEvents}
+          component={Profile_Events}
           options={{
             headerShown: false,
           }}
