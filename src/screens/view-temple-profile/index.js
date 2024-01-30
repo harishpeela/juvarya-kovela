@@ -36,6 +36,7 @@ import {
   GetPosts,
   EventList,
   getTopDonation,
+  getProfileEvents,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -56,6 +57,7 @@ import {SearchTempleRoleWithId} from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NearByTempleComp from '../../components/NearByTempleComp';
+import { even } from '@react-native-material/core';
 
 const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -87,6 +89,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [roleType, setRoleType] = useState();
   const [donationValue, setDonationValue] = useState([]);
+  const [events, setEvents] = useState([]);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -118,13 +121,22 @@ const ViewTempleProfile = ({route, navigation}) => {
         followingCount(result?.jtProfile);
         dontationValue(result.jtProfile);
         MemberShip(result?.jtProfile);
+        eventList(result?.jtProfile);
       } else {
       }
     } else {
       setTrfData();
     }
   }, []);
+  const eventList = async (id) => {
+    let result = await getProfileEvents(0, 40, id);
+    console.log('result of events', result?.data);
+    if(result?.data){
+      setEvents(result?.data)
+    }
 
+
+  }
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -245,44 +257,25 @@ const ViewTempleProfile = ({route, navigation}) => {
     }
   };
   useEffect(() => {
-    EventsList();
     Type();
   }, []);
-  const EventsList = async () => {
-    setEventsLoader(true);
-    let result = await EventList(0, 100, 85);
-    // console.log('eventsdata', result?.data);
-    if (result?.status === 200) {
-      setEventsLoader(false);
-      setEventsData(result?.data?.data);
-    } else {
-      setEventsLoader(false);
-    }
-  };
 
   const dontationValue = async id => {
-    console.log(id, 'kkk', donationLoader);
     setDonationLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
-      console.log('hhh', result.data);
       if (result) {
         setDonationValue(result?.data?.data);
         setDonationLoader(false);
-        console.log('loader donation 1', donationLoader);
       } else {
         setDonationValue([]);
         setDonationLoader(false);
-        console.log('loader donation 2', donationLoader);
       }
     } catch (error) {
       setDonationLoader(false);
       console.log('error in top donations api', error);
     }
   };
-  console.log('result', result);
-  console.log('donation value', donationValue);
-  console.log('rokeid ===>', roleId, 'roleType ====>', roleType);
   return (
     <ScrollView
       style={{
@@ -445,15 +438,17 @@ const ViewTempleProfile = ({route, navigation}) => {
                     }
                   />
                   <CommunityComp
-                    itemCommunity={'0'}
+                    itemCommunity={events?.data?.length ? events?.data?.length : '0'}
                     onPressmembership={
-                      () => alert('page under development')
-                      // navigation.navigate(
-                      //   allTexts.screenNames.profilemembership,
-                      //   {
-                      //     trfdata: trfData,
-                      //   },
-                      // )
+                      () => 
+                      navigation.navigate(
+                        allTexts.screenNames.profileEvents,
+                        {
+                          id: trfData?.jtProfile,
+                          data: events?.data,
+                          role: roleId,
+                          roleItemType: roleType
+                        })
                     }
                   />
                 </View>
@@ -462,10 +457,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
                 <View style={styles.followtab}>
-                  {/* <View
-                  // alignSelf="center"
-                  // align
-                  style={styles.horizontalContainer}> */}
                   <FolloUnfollowComp
                     style={styles.followingContainer}
                     followBtnDisable={followBtnDisable}
@@ -474,7 +465,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                  {/* <ContactTabcomp onPressContact={() => setIsModal(true)} /> */}
                   <DirectionsTabComp
                     role={
                       roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
