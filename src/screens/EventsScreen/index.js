@@ -223,7 +223,19 @@ const EventsScreen = ({ navigation }) => {
                     setModalVisible(!modalVisible);
                   }}
                 >
-                  <Text style={{fontFamily:'Poppins-Medium',color:'orange',marginTop:'20%',fontSize:16}}>{item}</Text>
+                  <View style={{marginTop:'10%'}}>
+                  <Text style={{fontFamily:'Poppins-Medium',
+                  color:'orange',
+                  fontSize:16,borderWidth:0.3, borderStyle:'solid',
+                   borderRadius:1,
+                   borderColor:'orange',
+                   borderTopWidth:0,
+                   borderLeftWidth:0,
+                   borderBottom:20,
+                   borderRightWidth:0}}>{item}
+                   </Text>
+                
+                  </View>
                 </Pressable>
                 </View>
               )}
