@@ -15,6 +15,7 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
+  axiousInstanceNew2,
 } from './api';
 
 const endpoints = {
@@ -96,6 +97,7 @@ const endpoints = {
   PROFILE_DONATIONS: 'jtDonation/user/donations/list',
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
+  TEMPLE_ADDRESS: 'jtAddress/default',
 };
 export const getInitialToken = async () => {
   try {
@@ -168,6 +170,7 @@ export const PopularTemples = async (pgNo, pgsize) => {
     console.log('error in popular temples', error);
   }
 };
+
 export const TempleCommunity = async templeId => {
   try {
     let result = await axiosNewData.get(
@@ -179,6 +182,19 @@ export const TempleCommunity = async templeId => {
     console.log('error in popular community temples', error);
   }
 };
+
+export const TempleAddress = async templeId => {
+  try {
+    let result = await axiousInstanceNew2.get(
+      `${endpoints.TEMPLE_ADDRESS}/${templeId}`,
+      {},
+    );
+    return result;
+  } catch (error) {
+    console.log('error in temples Address', error);
+  }
+};
+
 export const NearByTempleClass = async (classType, pgno, pgsize) => {
   try {
     let result = await axiosNewData.get(
