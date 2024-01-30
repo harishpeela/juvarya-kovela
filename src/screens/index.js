@@ -55,6 +55,7 @@ import EditContribute from './EditContribute';
 import EditInfo from './EditInfo';
 import ProfileDonations from './profileDonations';
 import ProfileMyMemberships from './profileMyMemberships';
+import Profile_Events from './profile-events';
 export {
   CreatePost,
   Seemore,
@@ -113,4 +114,5 @@ export {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Profile_Events,
 };
