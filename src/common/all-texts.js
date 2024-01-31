@@ -173,7 +173,8 @@ export const allTexts = {
     editInfo: 'EditInfo',
     editContribute:'EditContribute',
     profileDonations:'ProfileDonations',
-    profileMyMemberships:'ProfileMyMemberships'
+    profileMyMemberships:'ProfileMyMemberships',
+    info:'Info'
   },
   homeHeader: {
     welcome: 'Welcome ',

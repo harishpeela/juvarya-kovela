@@ -26,7 +26,7 @@ export const TempleListCard = ({
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
   const [isFollow, setisFollow] = useState();
   let isFocused = useIsFocused();
-  const FollowandUnFollow = d => {
+  const FollowandUnFollow = d => {[]
     setIsLiked(!isLiked);
     if (!isLiked) {
       followTemples(d);

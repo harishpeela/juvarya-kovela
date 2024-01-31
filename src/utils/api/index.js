@@ -95,7 +95,9 @@ const endpoints = {
   PROFILE_DONATIONS: 'jtDonation/user/donations/list',
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
-  EVENT_HIGHLIGHTS:'jtEventHighlights/save'
+  EVENT_HIGHLIGHTS:'jtEventHighlights/save',
+  EVENTS_INFO:'jtEventInformation/listByType'
+  
 };
 export const getInitialToken = async () => {
   try {
@@ -447,7 +449,7 @@ export const Save_Event = async payload => {
   } catch (error) {
     console.log('error', error);
   }
-};
+};  
 
 export const Event_Highlights = async eveId => {
   try {
@@ -459,6 +461,21 @@ export const Event_Highlights = async eveId => {
     console.log('error', error);
   }
 };
+
+export const Event_Info = async (pgno,pgsz,eventId) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENTS_INFO}?pageNo=${pgno}&pageSize=${pgsz}&eventType=DESCRIPTION&eventId=${eventId}`,
+      // https://fanfun.in/events/jtEventInformation/listByType?pageNo=0&pageSize=50&eventType=information&eventId=13
+
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
 
 export const EventInterestedCount = async id => {
   try {

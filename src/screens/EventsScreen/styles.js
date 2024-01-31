@@ -161,8 +161,9 @@ export const styles = StyleSheet.create({
     marginTop: '70%',
   },
   noText: {
-    fontSize: 20,
+    fontSize:15,
     color: colors.orangeColor,
-    fontWeight: 'bold',
+    fontFamily:'Poppins-Medium'
+   
   },
 });

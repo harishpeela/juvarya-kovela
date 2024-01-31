@@ -54,6 +54,7 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Info
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -127,7 +128,8 @@ const App = () => {
       editContribute,
       editInfo,
       profileDonations,
-      profileMyMemberships
+      profileMyMemberships,
+      info
     },
   } = allTexts;
 
@@ -406,6 +408,13 @@ const App = () => {
         <Stack.Screen
           name={addtemplenew}
           component={AddTempleNew}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={info}
+          component={Info}
           options={{
             headerShown: false,
           }}
