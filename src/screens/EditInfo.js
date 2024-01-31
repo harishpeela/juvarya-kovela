@@ -17,6 +17,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../utils/api';
 
 const EditInfo = ({ navigation, route }) => {
+  const {data} = route.params || {};
+  console.log('editInfo========================>>>>>>>>>>>>>> screen', data);
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [eventName, setEventName] = useState('');
@@ -29,14 +31,32 @@ const isDarkMode = useColorScheme() === 'dark';
   const Event_Info  = async () => {
     let payload = {
       information:eventName,
-      type:description,
-      eventId:"13"
+      type:"DESCRIPTION",
+      eventId: id
     }
     console.log("payload",payload);
     const result  = await Save_Event(payload);
-    console.log("result",result?.data);
-    if(result?.status === 200){
-      Alert.alert('Success', 'your info was updated', [
+    console.log('result of save events', result?.data);
+          if (result.status === 200) {
+            Alert.alert('Success', `Info created successfully`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
+     else {
+      alert('some thing went wrong try again');
+      console.log('error')
+    }
+  }
+
+
+
+  const UpLoadPhoto = () => {
+    try {
+      launchImageLibrary(
         {
           text: 'Ok',
           onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen)         
@@ -91,12 +111,12 @@ const isDarkMode = useColorScheme() === 'dark';
               color: 'white',
               alignSelf: 'center'
             }}>
-            Edit Info
+             Info
           </Text>
         </View>
       </View>
       <ScrollView style={{ marginTop: '3%' }}>
-        <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
+        <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={data[0]?.information} />
         <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
       </ScrollView>
       <DateTimePickerModal
