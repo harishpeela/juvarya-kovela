@@ -16,8 +16,8 @@ import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import React, { useContext, useState, useEffect } from 'react';
-import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
+import React, {useContext, useState, useEffect} from 'react';
+import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import {
@@ -25,7 +25,6 @@ import {
   ProfileInfo,
   Loader,
   Item,
-  Danation_Add_Card,
 } from '../../components';
 import {allTexts, colors} from '../../common';
 import {useTranslation} from 'react-i18next';
@@ -39,7 +38,7 @@ import {
   MyMemberships,
   MyDonations,
 } from '../../utils/api';
-
+ 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
@@ -62,7 +61,7 @@ const Profile = ({navigation}) => {
   const [myMemberships, setMyMemberships] = useState([]);
   const [MyDonationsList, setMyDonationsList] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
-
+ 
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -80,6 +79,7 @@ const Profile = ({navigation}) => {
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
     let formdata = new FormData();
+    console.log('img===>', img)
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
     if (result) {
@@ -102,7 +102,7 @@ const Profile = ({navigation}) => {
       console.log('error in get profile picture', error);
     }
   };
-
+ 
   const uploadPhoto = () => {
     try {
       launchImageLibrary(
@@ -110,6 +110,8 @@ const Profile = ({navigation}) => {
           mediaType: 'photo',
           saveToPhotos: true,
           includeBase64: true,
+          // maxHeight: 1080,
+          // maxWidth: 1080,
         },
         res => {
           if (!res?.didCancel && !res?.errorCode) {
@@ -165,7 +167,7 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     TempleAdmins();
   }, []);
-
+ 
   const MyMembershipsData = async () => {
     setLoader(true);
     let result = await MyMemberships(1, 0, 20);
@@ -181,8 +183,8 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  // console.log('membership Data====>', myMemberships);
-
+  console.log('membership Data====>', myMemberships);
+ 
   const MyDonationsData = async () => {
     setLoader(true);
     let result = await MyDonations(35);
@@ -198,8 +200,8 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
-  // console.log('Donation Data====>', MyDonationsList);
-
+  console.log('Donation Data====>', MyDonationsList);
+ 
   return (
     <SafeAreaView style={styles.wrapper}>
       <BackgroundImageAClass />
@@ -258,42 +260,113 @@ const Profile = ({navigation}) => {
         </View>
         <ProfileInfo name={userDetails?.username} email={userDetails?.email} />
       </View>
-      <View showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
+            {/* <Item svg={<Demo />} text={bookings} />
+        <Item svg={<AccountIcon2 />} text={donations} /> */}
+            {/* {(roleType === role.admin || roleType === role.agent) && (
+            <Item
+              svg={
+                <Image
+                  source={require('../../../assets/images/templeIcon.png')}
+                  style={{ height: 20, width: 20 }}
+                />
+              }
+              text={t('myTemple')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.myTamples);
+              }}
+            />
+          )} */}
             {loader ? (
               <Loader size={'small'} color={colors.orangeColor} />
             ) : Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
-                svg={<FontAwesome5 name="gopuram" size={20} color={isDarkMode ? 'black' : 'black'} />}
+                svg={
+                  <Image
+                    source={require('../../../assets/images/templeIcon.png')}
+                    style={{height: 20, width: 20}}
+                  />
+                }
                 text={t('myTemple')}
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.myTamples);
                 }}
               />
-            ) : ''
-          }
-          <Item
-            svg={<Icon name="unlock" size={20} color={isDarkMode ? 'black' : 'black'} />}
-            text={t('updatepassword')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.updatePassword);
-            }}
-          />
-          <Item
-            svg={<FontAwesome5 name="save" size={20} color={isDarkMode ? 'black' : 'black'} />}
-            text={t('posts')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.mySavedPosts);
-            }}
-          />
-          <Item
-            svg={<FontAwesome5 name="user-edit" size={16} style={{marginLeft:4 }} color={isDarkMode ? 'black' : 'black'} />}
-            text={t('update Profile')}
-            onPress={() => {
-              navigation.navigate(allTexts.screenNames.updateProfile)
-            }}
-          />
+            ) : (
+              ''
+            )}
+            {/* {Admin && (
+            <Item
+              svg={
+                <Image
+                  source={require('../../../assets/images/templeIcon.png')}
+                  style={{ height: 20, width: 20 }}
+                />
+              }
+              text={t('myTemple')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.myTamples)
+              }}
+            />
+          )} */}
+            <Item
+              svg={
+                <Icon
+                  name="unlock"
+                  size={20}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
+              }
+              text={t('updatepassword')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.updatePassword);
+              }}
+            />
+            <Item
+              svg={
+                <FontAwesome5
+                  name="save"
+                  size={20}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
+              }
+              text={t('posts')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.mySavedPosts);
+              }}
+            />
+            <Item
+              svg={
+                <FontAwesome5
+                  name="user-edit"
+                  size={16}
+                  style={{marginLeft: 4}}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
+              }
+              text={t('update Profile')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.updateProfile);
+              }}
+            />
+ 
+            <Item
+              svg={
+                <Icon
+                  name="profile"
+                  size={20}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
+              }
+              text={t('My Memberships')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.profileMyMemberships);
+              }}
+            />
+ 
+            {MyDonations && (
               <Item
                 svg={
                   <FontAwesome5
@@ -307,7 +380,18 @@ const Profile = ({navigation}) => {
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.profileDonations);
                 }}
-              />       
+              />      
+)}
+ 
+            {/* {(roleType === role.admin || roleType === role.agent) && (
+            <Item1
+              svg={require('../../../assets/images/priest.webp')}
+              text={t('poojari')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.poojari);
+              }}
+            />
+          )} */}
           </View>
           <View style={styles.logoutbtnContainer}>
             <PrimaryButton
@@ -346,7 +430,8 @@ const Profile = ({navigation}) => {
             </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
+ 
       <Modal
         visible={isVisible}
         transparent={true}
@@ -394,3 +479,4 @@ const Profile = ({navigation}) => {
   );
 };
 export default Profile;
+ 

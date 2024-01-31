@@ -16,13 +16,14 @@ import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
-import { IntrestedEvents, Event_Highlights } from '../../utils/api';
+import { IntrestedEvents, Event_Highlights,Event_Info } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 const EventDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
+  const [Info, setInfo] = useState([]);
   const EventsIntrested = async () => {
     let payload = {
       eventId: item?.id,
@@ -40,7 +41,7 @@ const EventDetails = ({ navigation, route }) => {
 const EventHighLights = async() => {
   try{
     let result = await Event_Highlights(item?.id);
-    // console.log('res of hightlightevents', result?.data);
+    console.log('res of hightlightevents', result?.data);
     if(result?.data){
       setHighlights(result?.data);
     } else {
@@ -50,6 +51,33 @@ const EventHighLights = async() => {
     console.log('error in event highlights screen api', error);
   }
 }
+useEffect(() => {
+  EventHighLights();
+}, []);
+
+const EventInfo = async() => {
+  console.log('item?.ir', item?.id)
+  try{
+    let result = await Event_Info(0,50, item?.id);
+    console.log('res of info', result?.data);
+    if(result?.data){
+      setInfo(result?.data);
+    } else {
+      setInfo([]);
+    }
+  } catch(error){
+    console.log('error in event Info screen api', error);
+  }
+  
+}
+console.log("info ",Info?.data)
+
+useEffect(() => {
+  EventInfo();
+}, [item]);
+
+
+
   const renderHighlight = () => {
     return (
       highlights?.length ? (
@@ -58,14 +86,16 @@ const EventHighLights = async() => {
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
           <Card style={styles.highLightCard}>
-          <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+          <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.editHightlights, {
+            item: item,
+          })} style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
           <EntypoIcon
               name="edit"
               size={13}
               style={{color:'white'}}
               
             />
-          </View>
+          </TouchableOpacity>
           <View style={{ flexDirection: 'row' }}>
             <Image
               source={require('../../../assets/images/tempimg1.jpg')}
@@ -84,18 +114,20 @@ const EventHighLights = async() => {
       ): (
         <TouchableOpacity 
         style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
-        onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
+        onPress={()=> navigation.navigate(allTexts.screenNames.savehighlight, {
+          id: item?.id
+        })}>
         <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
        </TouchableOpacity>
       )
     )
   };
 
-  const renderInfo = (info = false) => {
-    return info ? 
+  const renderInfo = () => {
+    return Info?.data ? 
       <Card>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.tab2Text}>makar sankranthi</Text>
+          <Text style={styles.tab2Text}>{Info?.data[0]?.information}</Text>
           <View
             style={{
               marginBottom: '-3%',
@@ -106,23 +138,22 @@ const EventHighLights = async() => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
+            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.editInfo,{data:Info?.data})}>
             <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
+            </TouchableOpacity>
+            
           </View>
         </View>
         <Text>
-          Lorem ipsum dolor sit amet consectetur. Enim sed commodo maecenas sed
-          nisl ultrices. Mauris amet quisque placerat sit mi risus lorem.
-          Tincidunt nam sit sit pharetra. Varius tincidunt mi elementum libero
-          nisl condimentum nisi mauris. Erat sed vel lectus cras ut pellentesque
-          sem. Nunc ut et sed ac et tristique nunc aenean varius. Phasellus sit
-          parturient sed sed ut vitae. Porttitor facilisi dui mauris sit donec
-          eget augue pretium. Id magna arcu sit tortor.
+        {Info?.data[0]?.eventDto?.description}
         </Text>
       </Card>
       :
       <TouchableOpacity 
       style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
-      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo)}
+      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo, {
+        id: item?.id
+      })}
      >
       <Text style={{color: colors.blue}}>+ No info here at this time</Text>
      </TouchableOpacity>
@@ -201,9 +232,7 @@ const EventHighLights = async() => {
       activeTab: false,
     },
   ];
-useEffect(() => {
-  EventHighLights();
-}, []);
+
   return (
     <View style={styles.container}>
       <ScrollView style={{borderWidth: 0}}>

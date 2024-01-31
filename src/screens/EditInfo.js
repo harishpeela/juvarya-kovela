@@ -17,99 +17,65 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../utils/api';
 
 const EditInfo = ({ navigation, route }) => {
-  console.log('eventskkkasasasa screen')
+  const {data} = route.params || {};
+  console.log('editInfo========================>>>>>>>>>>>>>> screen', data);
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
-  const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');
   const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
-  const [eventError, setEventError] = useState(false);
-  const [AE, setAE] = useState(false);
-  const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
 
 const isDarkMode = useColorScheme() === 'dark';
 
-  // const CreateEvent = async () => {
-  //   let img = getImageObj(image);
-  //   if (eventName === '') {
-  //     setEventError(true);
-  //   } if (description === '') {
-  //     setDE(true)
-  //   } if (address === '') {
-  //     setAE(true);
-  //   }
-  //   else if (image, description, eventName, address) {
-  // let payload = {
-  //   information:eventName,
-  //   type:description,
-  //   eventId:"13" 
-  // }
-  // console.log("payload",payload);
-          
-  //   } 
-  // };
-
-  const CreateEvent  = async () => {
+  const Event_Info  = async () => {
     let payload = {
       information:eventName,
-      type:description,
-      eventId:"13"
+      type:"DESCRIPTION",
+      eventId: id
     }
     console.log("payload",payload);
     const result  = await Save_Event(payload);
-    console.log("result",result?.data);
+    console.log('result of save events', result?.data);
+          if (result.status === 200) {
+            Alert.alert('Success', `Info created successfully`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
+     else {
+      alert('some thing went wrong try again');
+      console.log('error')
+    }
   }
 
-  useEffect(() => {
-    CreateEvent()
-  })
 
 
   const UpLoadPhoto = () => {
     try {
       launchImageLibrary(
         {
-          mediaType: 'photo',
-          saveToPhotos: true,
-          includeBase64: true,
-          selectionLimit: 5,
-          quality: 1,
-          // maxHeight: 1080,
-          // maxWidth: 1080,
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen)         
         },
-        res => {
-          if (!res?.didCancel 
-            && !res?.errorCode) {
-            let assets = res?.assets;
-            if (assets) {
-              let images = assets.filter(item => item).map(({ uri }) => ({ uri }));
-              console.log('images', images);
-              setImage(images);
-            }
-          } else {
-            console.log(res?.errorMessage);
-          }
+      ]);
+    } else {
+      Alert.alert('error', 'something went wrong ...!', [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen)         
         },
-      );
-    } catch (error) {
-      console.error(error);
+      ]);
     }
-  };
-  const getImageObj = img => {
-    return img?.map(oImg => {
-      let newUri =
-        Platform.OS === 'ios' ? oImg.uri : oImg.uri.replace('file://', 'file:');
-      let imageObj = {
-        uri: newUri,
-        name: `${Date.now()}.jpg`,
-        type: 'image/jpeg',
-      };
-      return imageObj;
-    });
-  };
+  }
+
+  useEffect(() => {
+    // CreateEvent()
+  }, []);
+
   const HandleCnfrm = datedata => {
     if (datedata) {
       setDate(datedata);
@@ -145,12 +111,12 @@ const isDarkMode = useColorScheme() === 'dark';
               color: 'white',
               alignSelf: 'center'
             }}>
-            Edit Info
+             Info
           </Text>
         </View>
       </View>
       <ScrollView style={{ marginTop: '3%' }}>
-        <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
+        <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={data[0]?.information} />
         <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
       </ScrollView>
       <DateTimePickerModal
@@ -168,7 +134,7 @@ const isDarkMode = useColorScheme() === 'dark';
         onCancel={HideDatePicker}
       />
        <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
-          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
+          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => Event_Info()} />
         </View>
     </SafeAreaView>
   );

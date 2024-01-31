@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
 import {
   AddEventImage,
@@ -12,8 +12,11 @@ import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event } from '../../utils/api';
+import { CreateEvent } from '../../utils/api';
+import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
+
 const AddEvents = ({ navigation, route }) => {
+  const {id} = route?.params || {};
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -26,7 +29,7 @@ const AddEvents = ({ navigation, route }) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
-  const CreateEvent = async () => {
+  const Create_Event = async () => {
     let img = getImageObj(image);
     if (eventName === '') {
       setEventError(true);
@@ -38,15 +41,15 @@ const AddEvents = ({ navigation, route }) => {
       setAE(true);
     } else if ((image, description, eventName, address)) {
       var formdata = new FormData();
-      formdata.append('name', eventName);
-      formdata.append('profileId', 1);
-      img.forEach(element => {
-        formdata.append('files', element);
-      });
-      formdata.append("eventType", "EVENT");
-      formdata.append("description", description);
+      formdata.append("name", eventName);
+       formdata.append("profileId", id);
+       img.forEach(element => {
+              formdata.append('files', element);
+            });
+       formdata.append("eventType", "EVENT");
+       formdata.append("description", description);
       console.log('payload', formdata);
-      let result = await Save_Event(formdata);
+      let result = await CreateEvent(formdata);
       console.log('result of save events', result?.data);
           if (result?.data?.message === "save Event") {
             Alert.alert('Success', `Event created successfully`, [
@@ -130,6 +133,9 @@ const AddEvents = ({ navigation, route }) => {
     setDatePickerVisible(false);
     setDatePickerVisible1(false);
   };
+  useEffect(() => {
+
+  }, [id]);
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -225,7 +231,7 @@ const AddEvents = ({ navigation, route }) => {
           <PrimaryButton
             text={'Update'}
             bgColor={colors.orangeColor}
-            onPress={() => CreateEvent()}
+            onPress={() => Create_Event()}
           />
         </View>
       </ScrollView>

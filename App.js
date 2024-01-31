@@ -54,6 +54,9 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Info
+  Profile_Events,
+  Save_Highlight
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -120,14 +123,16 @@ const App = () => {
       profilememberships,
       invitationScreen,
       membershipdetails,
-      // userinfo,
       templecrew,
       createFeedDescription,
       editHightlights,
       editContribute,
       editInfo,
       profileDonations,
-      profileMyMemberships
+      profileMyMemberships,
+      info
+      profileEvents,
+      savehighlight,
     },
   } = allTexts;
 
@@ -199,9 +204,24 @@ const App = () => {
             headerShown: false,
           }}
         />
+        
         <Stack.Screen
           name={profile}
           component={Profile}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={profileEvents}
+          component={Profile_Events}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={savehighlight}
+          component={Save_Highlight}
           options={{
             headerShown: false,
           }}
@@ -406,6 +426,13 @@ const App = () => {
         <Stack.Screen
           name={addtemplenew}
           component={AddTempleNew}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={info}
+          component={Info}
           options={{
             headerShown: false,
           }}

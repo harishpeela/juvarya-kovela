@@ -26,7 +26,7 @@ export const TempleListCard = ({
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
   const [isFollow, setisFollow] = useState();
   let isFocused = useIsFocused();
-  const FollowandUnFollow = d => {
+  const FollowandUnFollow = d => {[]
     setIsLiked(!isLiked);
     if (!isLiked) {
       followTemples(d);
@@ -41,9 +41,9 @@ export const TempleListCard = ({
   const followTemples = async d => {
     const payload = {
       jtProfile: d,
-      following: !isLiked
+      following: !isLiked,
       // jtCustomer: userDetails?.id,
-      // type: 'ITEM',
+      type: 'ITEM',
       // jtProfile: d,
       // following: !isLiked,
     };

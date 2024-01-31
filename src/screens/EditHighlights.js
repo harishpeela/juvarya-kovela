@@ -14,8 +14,11 @@ import { styles } from './add-events/styles';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event ,EventHighLights} from '../utils/api';
+import { EventHighLights } from '../utils/api';
+import { EVENTS_URL } from '../utils/api/api';
+import { getAuthTokenDetails } from '../utils/preferences/localStorage';
 const EditHighlight = ({ navigation, route }) => {
+  const {id} = route.params || {};
   const [date, setDate] = useState(new Date());
   const [loader, setLoader] = useState(false);
   const [toDate, setToDate] = useState(new Date());
@@ -29,62 +32,67 @@ const EditHighlight = ({ navigation, route }) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
   const [EventHighLightsData, setEventHighLightsData] = useState('');
-const isDarkMode = useColorScheme() === 'dark';
-  const CreateEvent = async () => {
+  const isDarkMode = useColorScheme() === 'dark';
+
+  const eventHighlights = async () => {
     let img = getImageObj(image);
+    let token = await getAuthTokenDetails();
+
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", token);
+    var formdata = new FormData();
+    formdata.append("eventId", id);
+    formdata.append("highLight", eventName);
+    formdata.append("description", description);
+    img?.forEach(element => {
+      formdata.append('files', element);
+    });
+
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: formdata,
+      redirect: 'follow'
+    };
+
+    if(img === null || img === ''){
+      alert('please upload image')
+    }
     if (eventName === '') {
-      setEventError(true);
+     alert('please fill event name')
     } if (description === '') {
-      setDE(true)
+      alert('please fill description')
     }
     else if (image, description, eventName) {
-      var formdata = new FormData();
-      // formdata.append("name", eventName);
-      formdata.append("eventId", 9);
-      img.forEach(element => {
-        formdata.append('files', element);
-      });
-      formdata.append("highLight", eventName);
-      formdata.append("description", description);
-      console.log('formData', formdata)
-
-      let result = await EventHighLights(formdata);
-      console.log('result of save events', result?.data);
-          if (result?.data) {
-            console.log('gvsxhgv', result?.data);
-            console.log('EventHightlights')
-            // Alert.alert('Success', `Event created successfully`, [
-            //   {
-            //     text: 'Ok',
-            //     onPress: () =>
-            //       navigation.navigate(allTexts.screenNames.eventsScreen),
-            //   },
-            // ]);
-          }
+      fetch(`${EVENTS_URL}jtEventHighlights/save`, requestOptions)
+      .then(response => response.json())
+      .then(result => {
+        if (result) {
+          Alert.alert('Success', `hightlights created successfully`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.screenNames.eventsScreen),
+            },
+          ]);
+        } else {
+          Alert.alert('error', `some thing went wrong try again`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.screenNames.eventsScreen),
+            },
+          ]);
+        }
+      })
+      .catch(error => console.log('error', error));
     } else {
       alert('some thing went wrong try again');
       console.log('error')
     }
+
+    
   };
-
-  const EventHighlights = async () => {
-    var formdata = new FormData();
-      // formdata.append("name", eventName);
-      formdata.append("eventId", 10);
-      img.forEach(element => {
-        formdata.append('files', element);
-      });
-      formdata.append("highLight", eventName);
-      formdata.append("description", description);
-      console.log('formData', formdata)
-      let result = await EventHighLights(formdata);
-      console.log('result of save highlights', result?.data);
-  }
-
-  useEffect(()=>{
-    EventHighlights()
-  },[])
-
 
   const UpLoadPhoto = () => {
     try {
@@ -147,10 +155,6 @@ const isDarkMode = useColorScheme() === 'dark';
     setDatePickerVisible1(false);
   };
 
-  
-
-
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -191,11 +195,11 @@ const isDarkMode = useColorScheme() === 'dark';
           </Text>
         )}
         <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
-        {DE && (
+        {/* {DE && (
           <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
             please enter description
           </Text>
-        )}
+        )} */}
         <EventInput1 lable={'From Date and To date'} placeholder={'from date'} height={50} value1={date?.toDateString()} onPressCalendar2={() => ShowDatePicker()} value2={toDate?.toDateString()} calendar={true} onPressCalendar={() => ShowDatePicker()} />
         {/* {AE && (
           <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
@@ -208,7 +212,7 @@ const isDarkMode = useColorScheme() === 'dark';
         mode={date}
         onConfirm={HandleCnfrm}
         onCancel={HideDatePicker}
-        buttonTextColorIOS= 'black'
+        buttonTextColorIOS='black'
 
       />
       <DateTimePickerModal
@@ -217,9 +221,9 @@ const isDarkMode = useColorScheme() === 'dark';
         onConfirm={HandleCnfrm1}
         onCancel={HideDatePicker}
       />
-      <View style={{ width: '80%', alignSelf: 'center', marginTop: 50,position: 'absolute', bottom: 10 }}>
-          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
-        </View>
+      <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
+        <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => eventHighlights()} />
+      </View>
     </SafeAreaView>
   );
 };

@@ -22,14 +22,6 @@ import Entypo from 'react-native-vector-icons/Entypo';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({ navigation }) => {
   // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
-  // const GetHomeScreen = () => {
-  //   return(
-  //     <Tab.Navigator
-  //     initialRouteName={allTexts.screenNames.userFeedScreen}
-  //     screenOptions={{headerShown: false}}
-  //     component
-  //   )
-  // }
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetFavScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
