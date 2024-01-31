@@ -41,7 +41,8 @@ const isDarkMode = useColorScheme() === 'dark';
       var formdata = new FormData();
       // formdata.append("name", eventName);
       formdata.append("eventId", 9);
-      img.forEach(element => {
+      img?.forEach(element => {
+        // console.log('imgsaj', element);
         formdata.append('files', element);
       });
       formdata.append("highLight", eventName);
@@ -52,7 +53,6 @@ const isDarkMode = useColorScheme() === 'dark';
       console.log('result of save events', result?.data);
           if (result?.data) {
             console.log('gvsxhgv', result?.data);
-            console.log('EventHightlights')
             // Alert.alert('Success', `Event created successfully`, [
             //   {
             //     text: 'Ok',
