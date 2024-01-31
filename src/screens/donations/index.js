@@ -79,14 +79,12 @@ const Donations = ({route, navigation}) => {
             },
           ]);
         }
-        console.log('result of post donations', result?.data);
       }
     } catch (error) {
       console.log('error in donations api', error);
     }
   };
   const profilePic = async (e) => {
-    // console.log('proooooooooooooo', e?.email)
     let responce = await GetProfilePic(e.email);
     // console.log('responce', responce.data);
     if(responce){

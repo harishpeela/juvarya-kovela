@@ -1,9 +1,12 @@
+import React, { useState, useEffect, useContext } from 'react';
 import {
   View,
   TouchableOpacity,
   FlatList,
   useColorScheme,
   Text,
+  Modal,
+  Pressable,
 } from 'react-native';
 import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
 import { AdminTemples } from '../../utils/api';
@@ -42,10 +45,9 @@ const modalStyles = {
 };
 
 const EventsScreen = ({ navigation, route }) => {
-const {id, data} = route?.params || {};
   const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
-  const [admin, setAdmin] = useState();
+  const [admin, setAdmin] = useState([]);
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [eventsLoader, setEventsLoader] = useState(false);
@@ -54,59 +56,49 @@ const {id, data} = route?.params || {};
   const [selectedTemple, setSelectedTemple] = useState(null);
   const [userAdminTemples, setUserAdminTemples] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
+
   const EventsList = async () => {
     setLoader(true);
-    try{
+    try {
       let result = await EventList(0, 200);
-    console.log('list of events', result?.data);
-    if (result.status === 200) {
-      let filtering = result?.data?.data;
-      console.log('events sctreen data', filtering[0]);
-      setEventsData(result?.data?.data);
+      console.log('list of events', result?.data);
+      if (result.status === 200) {
+        let filtering = result?.data?.data;
+        console.log('events screen data', filtering[0]);
+        setEventsData(result?.data?.data);
+        setLoader(false);
+      } else {
+        setLoader(false);
+      }
+    } catch (error) {
+      console.log('error in events list', error);
       setLoader(false);
-    } else {
-      setLoader(false);
-    }
-    } catch(error){
-      console.log('error in events list', error)
-      setLoader(false)
     }
   };
-  const TempleAdmins = async () => {
-    let result = await AdminTemples();
-    if (result?.status === 200) {
-      setAdmin(result?.data);
-    } else {
-      setAdmin([]);
-    }
-  };
+
   useEffect(() => {
     EventsList();
-    TempleAdmins();
-    Type();
   }, []);
 
-  const Type = () => {
-    let ROLES = userDetails?.role;
-    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
-    if (roleAdmin) {
-      setRoleType('ROLE_ADMIN');
-    } else {
-      console.log('');
-    }
   return (
-    <View style={{flex: 1}}>
-      <View style={{minHeight: 160, marginTop: '3%'
-    ,marginBottom:'-4%'}}>
+    <View style={{ flex: 1 }}>
+      <View
+        style={{
+          minHeight: 160,
+          marginTop: '3%',
+          marginBottom: '3%',
+        }}
+      >
         <TopBarcard
           txt={'Events'}
           menu={true}
           isBell={true}
           navigation={navigation}
-          navMenu={navigation}>
+          navMenu={navigation}
+        >
           <View style={styles.searchContainers}>
             <SearchBar
-              onTextChange={e => {
+              onTextChange={(e) => {
                 setSearchedText(e);
                 // SearchPopTemp(e);
               }}
@@ -121,10 +113,9 @@ const {id, data} = route?.params || {};
             />
             {/* {(userAdminTemples.length > 0 || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.addevents)
-                }
-                style={styles.plusContainer}>
+                onPress={() => setModalVisible(true)}
+                style={styles.plusContainer}
+              >
                 <FeatherIcon
                   style={styles.plusIcon}
                   name="plus"
@@ -139,7 +130,7 @@ const {id, data} = route?.params || {};
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-            <View style={{marginTop: '70%'}}>
+            <View style={{ marginTop: '70%' }}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : (
@@ -150,9 +141,9 @@ const {id, data} = route?.params || {};
                   data={eventsData}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{marginBottom: '46%'}}
+                  style={{ marginBottom: '46%' }}
                   keyExtractor={(item, index) => index.toString()}
-                  renderItem={({item}) => (
+                  renderItem={({ item }) => (
                     <EventCard2
                       navigation={navigation}
                       data={item}
@@ -195,19 +186,7 @@ const {id, data} = route?.params || {};
                     setModalVisible(!modalVisible);
                   }}
                 >
-                  <View style={{marginTop:'10%'}}>
-                  <Text style={{fontFamily:'Poppins-Medium',
-                  color:'orange',
-                  fontSize:16,borderWidth:0.3, borderStyle:'solid',
-                   borderRadius:1,
-                   borderColor:'orange',
-                   borderTopWidth:0,
-                   borderLeftWidth:0,
-                   borderBottom:20,
-                   borderRightWidth:0}}>{item}
-                   </Text>
-                
-                  </View>
+                  <Text style={{fontFamily:'Poppins-Medium',color:'orange',marginTop:'20%',fontSize:16}}>{item}</Text>
                 </Pressable>
                 </View>
               )}
@@ -218,4 +197,5 @@ const {id, data} = route?.params || {};
     </View>
   );
 };
+
 export default EventsScreen;
