@@ -34,7 +34,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const [filteredData, setFilteredData] = useState();
   const [NearByData, setNearByData] = useState();
   const PopularTemplesss = async () => {
-    console.log('poptemples');
     setLoader(true);
     try {
       let result = await PopularTemples(0, 100);

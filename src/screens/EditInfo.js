@@ -19,42 +19,16 @@ import { Save_Event } from '../utils/api';
 const EditInfo = ({ navigation, route }) => {
   const {data} = route.params || {};
   console.log('editInfo========================>>>>>>>>>>>>>> screen', data);
-
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
-  const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');
   const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
-  const [eventError, setEventError] = useState(false);
-  const [AE, setAE] = useState(false);
-  const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
 
 const isDarkMode = useColorScheme() === 'dark';
 
-  // const CreateEvent = async () => {
-  //   let img = getImageObj(image);
-  //   if (eventName === '') {
-  //     setEventError(true);
-  //   } if (description === '') {
-  //     setDE(true)
-  //   } if (address === '') {
-  //     setAE(true);
-  //   }
-  //   else if (image, description, eventName, address) {
-  // let payload = {
-  //   information:eventName,
-  //   type:description,
-  //   eventId:"13" 
-  // }
-  // console.log("payload",payload);
-          
-  //   } 
-  // };
-
-  const CreateEvent  = async () => {
+  const Event_Info  = async () => {
     let payload = {
       information:eventName,
       type:"DESCRIPTION",
@@ -84,44 +58,24 @@ const isDarkMode = useColorScheme() === 'dark';
     try {
       launchImageLibrary(
         {
-          mediaType: 'photo',
-          saveToPhotos: true,
-          includeBase64: true,
-          selectionLimit: 5,
-          quality: 1,
-          // maxHeight: 1080,
-          // maxWidth: 1080,
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen)         
         },
-        res => {
-          if (!res?.didCancel 
-            && !res?.errorCode) {
-            let assets = res?.assets;
-            if (assets) {
-              let images = assets.filter(item => item).map(({ uri }) => ({ uri }));
-              console.log('images', images);
-              setImage(images);
-            }
-          } else {
-            console.log(res?.errorMessage);
-          }
+      ]);
+    } else {
+      Alert.alert('error', 'something went wrong ...!', [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen)         
         },
-      );
-    } catch (error) {
-      console.error(error);
+      ]);
     }
-  };
-  const getImageObj = img => {
-    return img?.map(oImg => {
-      let newUri =
-        Platform.OS === 'ios' ? oImg.uri : oImg.uri.replace('file://', 'file:');
-      let imageObj = {
-        uri: newUri,
-        name: `${Date.now()}.jpg`,
-        type: 'image/jpeg',
-      };
-      return imageObj;
-    });
-  };
+  }
+
+  useEffect(() => {
+    // CreateEvent()
+  }, []);
+
   const HandleCnfrm = datedata => {
     if (datedata) {
       setDate(datedata);
@@ -180,7 +134,7 @@ const isDarkMode = useColorScheme() === 'dark';
         onCancel={HideDatePicker}
       />
        <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
-          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
+          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => Event_Info()} />
         </View>
     </SafeAreaView>
   );

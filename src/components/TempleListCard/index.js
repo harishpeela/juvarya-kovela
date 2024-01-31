@@ -41,9 +41,9 @@ export const TempleListCard = ({
   const followTemples = async d => {
     const payload = {
       jtProfile: d,
-      following: !isLiked
+      following: !isLiked,
       // jtCustomer: userDetails?.id,
-      // type: 'ITEM',
+      type: 'ITEM',
       // jtProfile: d,
       // following: !isLiked,
     };

@@ -109,6 +109,7 @@ export const allTexts = {
     ticket: 'ticket',
     favorites: 'favorites',
     profile: 'profile',
+    eventsScreen: 'EventsScreen',
   },
   screenTitles: {},
   screenNames: {
@@ -175,6 +176,8 @@ export const allTexts = {
     profileDonations:'ProfileDonations',
     profileMyMemberships:'ProfileMyMemberships',
     info:'Info'
+    profileEvents: 'Profile_Events',
+    savehighlight: 'Save_Highlight',
   },
   homeHeader: {
     welcome: 'Welcome ',
