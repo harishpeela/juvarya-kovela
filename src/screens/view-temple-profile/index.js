@@ -65,7 +65,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log('data================', data);
   // console.log(
   //   '<=============================>',
   //   data,
@@ -103,18 +102,18 @@ const ViewTempleProfile = ({route, navigation}) => {
       setisFollow(!isFollow);
     }
   };
-  const MemberShip = async id => {
-    try {
-      let result = await MemberShipCount(id);
-      if (result) {
-        setMemberShip(result?.data);
-      } else {
-        setMemberShip(0);
-      }
-    } catch (error) {
-      console.log('error in membership count', error);
-    }
-  };
+  // const MemberShip = async id => {
+  //   try {
+  //     let result = await MemberShipCount(id);
+  //     if (result) {
+  //       setMemberShip(result?.data);
+  //     } else {
+  //       setMemberShip(0);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in membership count', error);
+  //   }
+  // };
 
   const CommunityTemple = async templeId => {
     try {
@@ -129,10 +128,9 @@ const ViewTempleProfile = ({route, navigation}) => {
   };
 
   const TempleAddressDetails = async templeId => {
-    console.log('temple Address');
     try {
       let result = await TempleAddress(templeId);
-      console.log('templeAddress', result?.data);
+      // console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setTempleAddress(dty);
@@ -142,10 +140,11 @@ const ViewTempleProfile = ({route, navigation}) => {
     }
   };
 
-  let result = Data(data);
   useEffect(() => {
+    let result = Data(data);
     if (result) {
       setTrfData(result);
+      console.log('trfdata', result);
       if (result?.jtProfile) {
         getFollowValue(result?.jtProfile);
         Posts(result?.jtProfile);
@@ -154,7 +153,7 @@ const ViewTempleProfile = ({route, navigation}) => {
         TempleRoleSearchWithId(result?.jtProfile);
         followingCount(result?.jtProfile);
         dontationValue(result.jtProfile);
-        MemberShip(result?.jtProfile);
+        // MemberShip(result?.jtProfile);
         TempleAddressDetails(result?.jtProfile);
         eventList(result?.jtProfile);
       } else {
@@ -165,12 +164,10 @@ const ViewTempleProfile = ({route, navigation}) => {
   }, []);
   const eventList = async (id) => {
     let result = await getProfileEvents(0, 40, id);
-    console.log('result of events', result?.data);
+    // console.log('result of events', result?.data);
     if(result?.data){
       setEvents(result?.data)
     }
-
-
   }
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -381,7 +378,6 @@ const ViewTempleProfile = ({route, navigation}) => {
             <View style={{alignSelf: 'center', marginTop: -15}}>
               <ProfileImage profileImg={trfData} />
             </View>
-
             <View
               style={{
                 justifyContent: 'center',
@@ -489,10 +485,10 @@ const ViewTempleProfile = ({route, navigation}) => {
                   />
                 </View>
               </View>
-              <ScrollView
+              <View
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}>
-                <View style={styles.followtab}>
+                <View style={{...styles.followtab, justifyContent: trfData?.membershipsEnabled ? 'space-evenly' : 'space-evenly'}}>
                   <FolloUnfollowComp
                     style={styles.followingContainer}
                     followBtnDisable={followBtnDisable}
@@ -501,21 +497,22 @@ const ViewTempleProfile = ({route, navigation}) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                  <DirectionsTabComp
-                    role={
-                      roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                    }
-                    onPress={() => {
-                      console.log('jha sjxh amjsh xmhb asm ja s', roleId);
-                      navigation.navigate(
-                        allTexts.screenNames.profilememberships,
-                        {
-                          trfdata: trfData,
-                          roleId: roleId,
-                        },
-                      );
-                    }}
-                  />
+                 {trfData?.membershipsEnabled  && (
+                   <DirectionsTabComp
+                   role={
+                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
+                   }
+                   onPress={() => {
+                     navigation.navigate(
+                       allTexts.screenNames.profilememberships,
+                       {
+                         trfdata: trfData,
+                         roleId: roleId,
+                       },
+                     );
+                   }}
+                 />
+                 )}
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
@@ -524,7 +521,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                     }
                   />
                 </View>
-              </ScrollView>
+              </View>
               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
