@@ -54,6 +54,7 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Info
   Profile_Events,
   Save_Highlight
 } from './src/screens';
@@ -129,6 +130,7 @@ const App = () => {
       editInfo,
       profileDonations,
       profileMyMemberships,
+      info
       profileEvents,
       savehighlight,
     },
@@ -424,6 +426,13 @@ const App = () => {
         <Stack.Screen
           name={addtemplenew}
           component={AddTempleNew}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={info}
+          component={Info}
           options={{
             headerShown: false,
           }}

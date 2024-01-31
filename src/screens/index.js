@@ -55,6 +55,7 @@ import EditContribute from './EditContribute';
 import EditInfo from './EditInfo';
 import ProfileDonations from './profileDonations';
 import ProfileMyMemberships from './profileMyMemberships';
+import Info from './Info';
 import Profile_Events from './profile-events';
 import Save_Highlight from './highlights-save';
 export {
@@ -115,6 +116,7 @@ export {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
+  Info
   Profile_Events,
   Save_Highlight,
 };
