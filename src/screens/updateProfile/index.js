@@ -38,19 +38,10 @@ import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-
-  const {
-    buttonTexts: {updateProfile},
-    headings: {
-      inputTitles: {},
-    },
-  } = allTexts;
-
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+  const {userDetails} = useContext(ApplicationContext);
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
-  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [pincode, setPincode] = useState('');
@@ -90,25 +81,9 @@ const UpdateProfile = ({navigation}) => {
       primaryContact: '',
     };
     console.log(payload, 'payload');
-    if (
-      toDate === '' ||
-      isRoleSelected === '' ||
-      gotraValue === '' ||
-      phone === '' ||
-      pincode === ''
-    ) {
-      setPV(true);
-      setGV(true);
-      setDropDownError(true);
-      setDE(true);
-      setPinErr(true);
-    } else if (gotraValue && toDate && isRoleSelected && pincode && phone) {
-      setPV(false);
-      setGV(false);
-      setDropDownError(false);
-      setPinErr(false);
-      setDE(true);
-      console.log('jhasb', toDate, isRoleSelected, gotraValue, phone, pincode);
+    if( gotraValue === ''  && isRoleSelected === '' && pincode === '' ) {
+      alert('please fill one filed');
+    } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
         console.log(payload, 'payload try');
@@ -120,30 +95,10 @@ const UpdateProfile = ({navigation}) => {
               onPress: () => navigation.goBack(),
             },
           ]);
-        } else {
-          alert('some thing went wrong please try after some time');
         }
       } catch (error) {
         console.error('Error fetching gender data:', error);
       }
-    } else if (toDate) {
-      console.log('2');
-      setDE(false);
-    } else if (isRoleSelected) {
-      console.log('6');
-
-      setDropDownError(false);
-    } else if (gotraValue) {
-      console.log('3');
-      setGV(false);
-    } else if (phone?.length < 10 || phone?.length > 10) {
-      console.log('4');
-      setPV(true);
-    } else if (phone?.length === 10) {
-      setPV(false);
-    } else if (pincode) {
-      console.log('7');
-      setPinErr(false);
     }
   };
   return (
@@ -251,11 +206,11 @@ const UpdateProfile = ({navigation}) => {
                 />
               </View>
             </TouchableOpacity>
-            {dropDownError && (
+            {/* {dropDownError && (
               <View style={{alignItems: 'center'}}>
                 <Text style={{color: colors.red1}}> please select gender</Text>
               </View>
-            )}
+            )} */}
             <EventInput
               lable={'Gotra'}
               gotra={true}
@@ -267,11 +222,11 @@ const UpdateProfile = ({navigation}) => {
               }}
               value={gotraValue}
             />
-            {GV && (
+            {/* {GV && (
               <View style={{alignItems: 'center'}}>
                 <Text style={{color: colors.red1}}> please enter Gotra</Text>
               </View>
-            )}
+            )} */}
             <View
               style={{
                 flexDirection: 'row',
@@ -306,14 +261,14 @@ const UpdateProfile = ({navigation}) => {
                   maxLength={6}
                   value={pincode}
                 />
-                {pinErr && (
+                {/* {pinErr && (
                   <View style={{alignItems: 'center'}}>
                     <Text style={{color: colors.red1}}>
                       {' '}
                       please enter Gotra
                     </Text>
                   </View>
-                )}
+                )} */}
               </View>
             </View>
             <View style={{width: '80%', alignSelf: 'center', marginTop: 100}}>
