@@ -9,15 +9,16 @@ import {
   EventInput,
   PrimaryButton,
   EventInput1
-} from '../components';
-import { styles } from './add-events/styles';
+} from '../../components';
+import { styles } from './styles';
 import { launchImageLibrary } from 'react-native-image-picker';
-import { allTexts, colors } from '../common';
+import { allTexts, colors } from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EventHighLights } from '../utils/api';
-import { EVENTS_URL } from '../utils/api/api';
-import { getAuthTokenDetails } from '../utils/preferences/localStorage';
-const EditHighlight = ({ navigation, route }) => {
+import { EVENTS_URL } from '../../utils/api/api';
+import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
+import { id } from 'date-fns/locale';
+const Save_Highlight = ({ navigation, route }) => {
   const {id} = route.params || {};
   const [date, setDate] = useState(new Date());
   const [loader, setLoader] = useState(false);
@@ -160,7 +161,7 @@ const EditHighlight = ({ navigation, route }) => {
       <View style={styles.header}>
         <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
           <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../assets/images/backarrow.png')}
+            <Image source={require('../../../assets/images/backarrow.png')}
               style={{ height: 10, width: 6 }} />
           </TouchableOpacity>
           <Text
@@ -176,7 +177,7 @@ const EditHighlight = ({ navigation, route }) => {
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
-            <Image source={require('../../assets/images/cameranew.png')} style={styles.camera} />
+            <Image source={require('../../../assets/images/cameranew.png')} style={styles.camera} />
           </TouchableOpacity>
           <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Text style={{ fontWeight: 'bold', color: isDarkMode ? 'gray' : 'gray' }}> Upload Photo</Text>
@@ -227,4 +228,4 @@ const EditHighlight = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-export default EditHighlight;
+export default Save_Highlight;

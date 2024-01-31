@@ -18,7 +18,6 @@ export const POPULARURL = 'https://fanfun.in/profile/';
 export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
 export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
-export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -29,18 +28,6 @@ export const authAxiousInstance = axios.create({
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic' + base64.encode('skillrat-client:skillrat@2021'),
   },
-});
-
-export const axiousInstanceNew2 = axios.create({
-  baseURL: TEMPLE_ADDRESS,
-  headers: {
-    Authorization: bearer_token,
-  },
-});
-axiousInstanceNew2.interceptors.request.use(async function (config) {
-  let token = await getAuthTokenDetails();
-  config.headers.Authorization = token;
-  return config;
 });
 
 export const authAxiousInstance1 = axios.create({
@@ -117,7 +104,8 @@ export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
     Authorization: bearer_token,
-    // 'Content-Type': 'application/json',
+    // 'Content-Type': 'multipart/form-data',
+    // accept: 'application/json',
   },
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
