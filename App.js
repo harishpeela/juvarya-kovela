@@ -121,7 +121,6 @@ const App = () => {
       profilememberships,
       invitationScreen,
       membershipdetails,
-      // userinfo,
       templecrew,
       createFeedDescription,
       editHightlights,
@@ -201,16 +200,17 @@ const App = () => {
             headerShown: false,
           }}
         />
+        
         <Stack.Screen
-          name={profileEvents}
-          component={Profile_Events}
+          name={profile}
+          component={Profile}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name={profile}
-          component={Profile}
+          <Stack.Screen
+          name={profileEvents}
+          component={Profile_Events}
           options={{
             headerShown: false,
           }}

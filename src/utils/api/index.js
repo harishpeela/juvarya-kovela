@@ -97,7 +97,7 @@ const endpoints = {
   PROFILE_DONATIONS: 'jtDonation/user/donations/list',
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
-  EVENT_HIGHLIGHTS:'jtEventHighlights/save'
+  EVENT_HIGHLIGHTS:'jtEventHighlights/save',
   TEMPLE_ADDRESS: 'jtAddress/default',
 };
 export const getInitialToken = async () => {
