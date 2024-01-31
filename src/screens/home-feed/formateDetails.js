@@ -1,4 +1,5 @@
 export const Data = d => {
+  console.log('ddddddd', d);
   let myDataDetails = {
     name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
     description: d?.jtProfileDTO?.desciption
@@ -37,6 +38,7 @@ export const Data = d => {
       : '',
     jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
     logo: d?.logo ? d?.logo : d?.jtProfileDTO?.logo,
+    membershipsEnabled: d?.membershipsEnabled ? d?.membershipsEnabled : false,
   };
   return myDataDetails;
 };

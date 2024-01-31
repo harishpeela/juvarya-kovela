@@ -54,7 +54,8 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
-  Profile_Events
+  Profile_Events,
+  Save_Highlight
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -128,7 +129,8 @@ const App = () => {
       editInfo,
       profileDonations,
       profileMyMemberships,
-      profileEvents
+      profileEvents,
+      savehighlight,
     },
   } = allTexts;
 
@@ -211,6 +213,13 @@ const App = () => {
           <Stack.Screen
           name={profileEvents}
           component={Profile_Events}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={savehighlight}
+          component={Save_Highlight}
           options={{
             headerShown: false,
           }}

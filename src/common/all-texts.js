@@ -176,6 +176,7 @@ export const allTexts = {
     profileDonations:'ProfileDonations',
     profileMyMemberships:'ProfileMyMemberships',
     profileEvents: 'Profile_Events',
+    savehighlight: 'Save_Highlight',
   },
   homeHeader: {
     welcome: 'Welcome ',

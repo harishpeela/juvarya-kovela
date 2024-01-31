@@ -20,6 +20,7 @@ import { IntrestedEvents, Event_Highlights } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 const EventDetails = ({ navigation, route }) => {
   const { item } = route?.params || {};
+  console.log('iten,.', item?.id);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
@@ -40,7 +41,7 @@ const EventDetails = ({ navigation, route }) => {
 const EventHighLights = async() => {
   try{
     let result = await Event_Highlights(item?.id);
-    // console.log('res of hightlightevents', result?.data);
+    console.log('res of hightlightevents', result?.data);
     if(result?.data){
       setHighlights(result?.data);
     } else {
@@ -58,14 +59,16 @@ const EventHighLights = async() => {
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
           <Card style={styles.highLightCard}>
-          <View style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+          <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.editHightlights, {
+            item: item,
+          })} style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
           <EntypoIcon
               name="edit"
               size={13}
               style={{color:'white'}}
               
             />
-          </View>
+          </TouchableOpacity>
           <View style={{ flexDirection: 'row' }}>
             <Image
               source={require('../../../assets/images/tempimg1.jpg')}
@@ -84,7 +87,9 @@ const EventHighLights = async() => {
       ): (
         <TouchableOpacity 
         style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
-        onPress={()=> navigation.navigate(allTexts.screenNames.editHightlights)}>
+        onPress={()=> navigation.navigate(allTexts.screenNames.savehighlight, {
+          id: item?.id
+        })}>
         <Text style={{color: colors.blue}}>+ No Highlights here at this time</Text>
        </TouchableOpacity>
       )
