@@ -79,6 +79,7 @@ const Profile = ({navigation}) => {
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
     let formdata = new FormData();
+    console.log('img===>', img)
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
     if (result) {

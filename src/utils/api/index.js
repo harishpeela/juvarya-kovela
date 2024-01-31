@@ -16,6 +16,7 @@ import {
   axiosNotifications,
   axiosDonation,
   axiousInstanceNew2,
+  axiosEventsData9,
 } from './api';
 
 const endpoints = {
@@ -459,7 +460,7 @@ export const CreateEvent = async payload => {
     );
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log('error in create event', error);
   }
 };
 
