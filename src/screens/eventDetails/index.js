@@ -108,7 +108,7 @@ const EventInfo = async() => {
           </TouchableOpacity>
           <View style={{ flexDirection: 'row' }}>
             <Image
-              source={require('../../../assets/images/tempimg1.jpg')}
+              source={{uri: item?.mediaList ?  item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1706689562424annadanam.jpeg'}}
               style={styles.img1}
             />
             <View style={{ marginLeft: 10 }}>
