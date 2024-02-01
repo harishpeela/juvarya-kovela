@@ -59,7 +59,7 @@ const EventInfo = async() => {
   console.log('item?.id', item?.id)
   try{
     let result = await Event_Info(item?.id);
-    console.log('res of info', result?.data);
+    console.log('res of info', result?.status);
     if(result?.data){
       setInfo(result?.data);
     } else {
@@ -70,7 +70,7 @@ const EventInfo = async() => {
   }
   
 }
-console.log("info ",Info)
+// console.log("info ",Info)
 
 useEffect(() => {
   EventInfo();
@@ -87,7 +87,7 @@ useEffect(() => {
         renderItem={({item, index}) => (
           <Card style={styles.highLightCard}>
           <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.editHightlights, {
-            item: item,
+            data: item,
           })} style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
           <EntypoIcon
               name="edit"
@@ -124,7 +124,7 @@ useEffect(() => {
   };
 
   const renderInfo = () => {
-    return Info ? 
+    return Info[0]?.information ? 
       <Card>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={styles.tab2Text}>{Info[0]?.information}</Text>
@@ -145,9 +145,6 @@ useEffect(() => {
             
           </View>
         </View>
-        {/* <Text>
-        {Info?.data[0]?.eventDto?.description}
-        </Text> */}
       </Card>
       :
       <TouchableOpacity 
