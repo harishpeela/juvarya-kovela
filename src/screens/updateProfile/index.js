@@ -29,7 +29,11 @@ import {styles} from './styles'; // Update this import based on your project str
 import {BackHeader, BackgroundImage} from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import {Update_Profile} from '../../utils/api';
+import {
+  GetCurrentCustomer,
+  Update_Profile,
+  getUserInfoNew,
+} from '../../utils/api';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -54,6 +58,7 @@ const UpdateProfile = ({navigation}) => {
   const [toDate, setToDate] = useState(new Date());
   const [DE, setDE] = useState(false);
   const [pinErr, setPinErr] = useState(false);
+  const [currentCustomer, setCurrentCustomer] = useState([]);
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -81,13 +86,16 @@ const UpdateProfile = ({navigation}) => {
       primaryContact: '',
     };
     console.log(payload, 'payload');
-    if( gotraValue === ''  && isRoleSelected === '' && pincode === '' ) {
+    if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
       alert('please fill one filed');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
         console.log(payload, 'payload try');
-        console.log('Update Profile', responce?.data);
+        console.log(
+          'Update Profile==================>>>>>>>>>>>',
+          responce?.data,
+        );
         if (responce?.status === 200) {
           Alert.alert('Success', responce?.data?.message, [
             {
@@ -101,6 +109,28 @@ const UpdateProfile = ({navigation}) => {
       }
     }
   };
+
+  const getCustomer = async () => {
+    try {
+      let result = await getUserInfoNew();
+      console.log('templeAddress', result?.data);
+      if (result) {
+        const dty = result?.data || [];
+        console.log('dty', dty);
+        setCurrentCustomer(dty);
+      }
+    } catch (error) {
+      console.log('error in popular temples', error);
+    }
+  };
+
+  useEffect(() => {
+    getCustomer();
+  }, []);
+  console.log('Current Customer', currentCustomer);
+
+  var dateofBirth = currentCustomer?.dob.slice(0, 10);
+
   return (
     <ScrollView>
       <View style={styles.wrapper}>
@@ -172,7 +202,7 @@ const UpdateProfile = ({navigation}) => {
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
                     fontSize: 14,
-                    marginRight: '72%',
+                    marginRight: '62%',
                     color: colors.gray,
                   }}
                   defaultValue={isRoleSelected}
@@ -186,7 +216,9 @@ const UpdateProfile = ({navigation}) => {
                     marginHorizontal: '8%',
                   }}
                   dropdownIconPosition="left"
-                  defaultButtonText="Gender"
+                  defaultButtonText={
+                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
+                  }
                   dropdownStyle={{paddingTop: 10, borderRadius: 20}}
                   onSelect={e => {
                     setIsRoleSelected(e);
@@ -199,7 +231,7 @@ const UpdateProfile = ({navigation}) => {
                         name="transgender-alt"
                         size={20}
                         color={colors.orangeColor}
-                        style={{marginLeft: 5}}
+                        style={{marginLeft: 2}}
                       />
                     </View>
                   )}
@@ -220,7 +252,9 @@ const UpdateProfile = ({navigation}) => {
                 setGotraValue(text);
                 setGV(false);
               }}
-              value={gotraValue}
+              value={
+                currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
+              }
             />
             {/* {GV && (
               <View style={{alignItems: 'center'}}>
@@ -236,7 +270,11 @@ const UpdateProfile = ({navigation}) => {
                 <EventInput2
                   lable={'Date of Birth'}
                   height={50}
-                  value1={toDate?.toLocaleDateString()}
+                  value1={
+                    currentCustomer?.dob
+                      ? dateofBirth
+                      : toDate?.toLocaleDateString()
+                  }
                   calendar={true}
                   onPressCalendar={() => ShowDatePicker()}
                 />
