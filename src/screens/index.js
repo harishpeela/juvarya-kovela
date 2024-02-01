@@ -116,7 +116,7 @@ export {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
-  Info
+  Info,
   Profile_Events,
   Save_Highlight,
 };

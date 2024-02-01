@@ -54,7 +54,7 @@ import {
   EditInfo,
   ProfileDonations,
   ProfileMyMemberships,
-  Info
+  Info,
   Profile_Events,
   Save_Highlight
 } from './src/screens';
@@ -130,7 +130,7 @@ const App = () => {
       editInfo,
       profileDonations,
       profileMyMemberships,
-      info
+      info,
       profileEvents,
       savehighlight,
     },
