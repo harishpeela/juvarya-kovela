@@ -135,21 +135,22 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
           </View>
         ) : (
           <>
-            <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Popular Temples</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  seeallnav.navigate(allTexts.screenNames.seeall, {
-                    data: filteredList,
-                  });
-                }}>
-                <Text style={{color: colors.orangeColor, fontSize: 16}}>
-                  See all
-                </Text>
-              </TouchableOpacity>
-            </View>
             <ScrollView style={{paddingLeft: 12}}>
               {searchedText === '' && (
+               <>
+                <View style={styles.upComingTextTab}>
+                <Text style={styles.popularTextContainer}>Popular Temples</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    seeallnav.navigate(allTexts.screenNames.seeall, {
+                      data: filteredList,
+                    });
+                  }}>
+                  <Text style={{color: colors.orangeColor, fontSize: 16}}>
+                    See all
+                  </Text>
+                </TouchableOpacity>
+              </View>
                 <FlatList
                   data={filteredList}
                   horizontal
@@ -168,6 +169,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                   onEndReachedThreshold={0.5}
                   decelerationRate={0.8}
                 />
+               </>
               )}
             </ScrollView>
             <ScrollView style={{height: searchedText ? '85%' : 0}}>

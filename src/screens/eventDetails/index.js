@@ -41,7 +41,7 @@ const EventDetails = ({ navigation, route }) => {
 const EventHighLights = async() => {
   try{
     let result = await Event_Highlights(item?.id);
-    // console.log('res of hightlightevents', result?.data);
+    console.log('res of hightlightevents', result?.data);
     if(result?.data){
       setHighlights(result?.data);
     } else {
@@ -98,7 +98,7 @@ useEffect(() => {
           </TouchableOpacity>
           <View style={{ flexDirection: 'row' }}>
             <Image
-              source={require('../../../assets/images/tempimg1.jpg')}
+              source={{uri: item?.mediaList ?  item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1706689562424annadanam.jpeg'}}
               style={styles.img1}
             />
             <View style={{ marginLeft: 10 }}>
