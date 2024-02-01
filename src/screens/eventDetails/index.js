@@ -138,7 +138,8 @@ useEffect(() => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.editInfo,{data: Info?.data})}>
+            <TouchableOpacity onPress={() => alert('page under development')}>
+            {/* navigation.navigate(allTexts.screenNames.editInfo,{data: Info?.data}) */}
             <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
             </TouchableOpacity>
             
