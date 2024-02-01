@@ -16,7 +16,6 @@ import {
   axiosNotifications,
   axiosDonation,
   axiousInstanceNew2,
-  axiosEventsData9,
 } from './api';
 
 const endpoints = {
