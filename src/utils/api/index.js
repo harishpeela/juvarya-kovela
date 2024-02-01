@@ -43,6 +43,7 @@ const endpoints = {
   CEATE_FEED: 'jtfeed/create',
   CREATE_EVENT: 'jtevent/save',
   EVENT_SAVE: 'jtEventInformation/save',
+  EVENT_UPDATE: 'jtEventInformation/update',
   EVENTS_HIGHLIGHTS: 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
@@ -465,6 +466,8 @@ export const CreateEvent = async payload => {
   }
 };
 
+
+
 export const Save_Event = async payload => {
   try {
     let result = await axiosEventsData1.post(
@@ -476,6 +479,19 @@ export const Save_Event = async payload => {
     console.log('error', error);
   }
 };  
+
+export const UpdateInfo = async payload => {
+  try {
+    let result = await axiosEventsData1.put(
+      `${endpoints.EVENT_UPDATE}`,
+      payload,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};  
+
 
 export const Event_Highlights = async eveId => {
   try {

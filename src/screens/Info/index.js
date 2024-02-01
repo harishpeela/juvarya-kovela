@@ -88,11 +88,11 @@ const isDarkMode = useColorScheme() === 'dark';
             style={{
               fontSize: 20,
               fontWeight: 'bold',
-              marginHorizontal: '25%',
+              marginHorizontal: '20%',
               color: 'white',
               alignSelf: 'center'
             }}>
-             Info
+             Event Information
           </Text>
         </View>
       </View>
