@@ -13,10 +13,10 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { CreateEvent } from '../../utils/api';
-import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 
 const AddEvents = ({ navigation, route }) => {
   const {id} = route?.params || {};
+  console.log('id ==>', id);
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
