@@ -102,18 +102,6 @@ const ViewTempleProfile = ({route, navigation}) => {
       setisFollow(!isFollow);
     }
   };
-  // const MemberShip = async id => {
-  //   try {
-  //     let result = await MemberShipCount(id);
-  //     if (result) {
-  //       setMemberShip(result?.data);
-  //     } else {
-  //       setMemberShip(0);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in membership count', error);
-  //   }
-  // };
 
   const CommunityTemple = async templeId => {
     try {
