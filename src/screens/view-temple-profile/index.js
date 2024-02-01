@@ -102,18 +102,6 @@ const ViewTempleProfile = ({route, navigation}) => {
       setisFollow(!isFollow);
     }
   };
-  // const MemberShip = async id => {
-  //   try {
-  //     let result = await MemberShipCount(id);
-  //     if (result) {
-  //       setMemberShip(result?.data);
-  //     } else {
-  //       setMemberShip(0);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in membership count', error);
-  //   }
-  // };
 
   const CommunityTemple = async templeId => {
     try {
@@ -654,11 +642,15 @@ const ViewTempleProfile = ({route, navigation}) => {
               <Text style={styles.modalContentText}>User groups</Text>
             </View>
             <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.profilememberships, {
-                  id: trfData?.jtProfile,
-                })
-              }>
+               onPress={() => {
+                navigation.navigate(
+                  allTexts.screenNames.profilememberships,
+                  {
+                    trfdata: trfData,
+                    roleId: roleId,
+                  },
+                );
+              }}>
               <View style={styles.modalContent}>
                 <MaterialIcons
                   color={colors.black}
@@ -669,16 +661,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <Text style={styles.modalContentText}>Manage Memberships</Text>
               </View>
             </TouchableOpacity>
-            {/* <View style={styles.modalContent}>
-              <Feather color={colors.black} name="camera-off" size={20}  />
-
-              <Text style={styles.modalContentText}>sdasdd</Text>
-            </View>
-            <View style={styles.modalContent}>
-              <Feather  color={colors.black} name="camera-off" size={20}  />
-
-              <Text style={styles.modalContentText}>sdasdd</Text>
-            </View> */}
           </View>
         </Pressable>
       </Modal>

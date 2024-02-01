@@ -51,6 +51,22 @@ const EventDetails = ({ navigation, route }) => {
       console.log('error in event highlights screen api', error);
     }
   };
+const EventInfo = async() => {
+  console.log('item?.id', item?.id)
+  try{
+    let result = await Event_Info(item?.id);
+    console.log('res of info', result?.status);
+    if(result?.data){
+      setInfo(result?.data);
+    } else {
+      setInfo([]);
+    }
+  } catch(error){
+    console.log('error in event Info screen api', error);
+  }
+  
+}
+// console.log("info ",Info)
 
   useEffect(() => {
     EventHighLights();
@@ -80,38 +96,26 @@ const EventDetails = ({ navigation, route }) => {
         keyExtractor={({ item, index }) => index}
         renderItem={({ item, index }) => (
           <Card style={styles.highLightCard}>
-            <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.editHightlights, {
-                  item: item,
-                })
-              }
-              style={{
-                marginLeft: '94%',
-                marginBottom: '-3%',
-                backgroundColor: 'orange',
-                height: 25,
-                width: 25,
-                borderRadius: 20,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <EntypoIcon name="edit" size={13} style={{ color: 'white' }} />
-            </TouchableOpacity>
-            <View style={{ flexDirection: 'row' }}>
-              <Image
-                source={require('../../../assets/images/tempimg1.jpg')}
-                style={styles.img1}
-              />
-              <View style={{ marginLeft: 10 }}>
-                <Text style={styles.tab3}>{item?.highLight} </Text>
-                <Text
-                  numberOfLines={2}
-                  ellipsizeMode="tail"
-                  style={{ width: 250 }}>
-                  {item?.description}
-                </Text>
-              </View>
+          <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.editHightlights, {
+            data: item,
+          })} style={{marginLeft:'94%',marginBottom:'-3%',backgroundColor:'orange',height:25,width:25,borderRadius:20,justifyContent:'center',alignItems:'center'}}>
+          <EntypoIcon
+              name="edit"
+              size={13}
+              style={{color:'white'}}
+              
+            />
+          </TouchableOpacity>
+          <View style={{ flexDirection: 'row' }}>
+            <Image
+              source={require('../../../assets/images/tempimg1.jpg')}
+              style={styles.img1}
+            />
+            <View style={{ marginLeft: 10 }}>
+              <Text style={styles.tab3}>{item?.highLight} </Text>
+              <Text numberOfLines={2} ellipsizeMode='tail' style={{ width: 250 }}>
+                {item?.description}
+              </Text>
             </View>
           </Card>
         )}

@@ -16,7 +16,6 @@ import {
   axiosNotifications,
   axiosDonation,
   axiousInstanceNew2,
-  axiosEventsData9,
 } from './api';
 
 const endpoints = {
@@ -100,6 +99,7 @@ const endpoints = {
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
   EVENT_HIGHLIGHTS:'jtEventHighlights/save',
+  EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
   EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
 };
@@ -600,6 +600,14 @@ export const EventHighLights = async () => {
   }
 };
 
+export const EventEditHighLights = async () => {
+  try {
+    let result = await axiosEventsData1.post(`${endpoints.EVENT_HIGHLIGHTS}`);
+    return result;
+  } catch (error) {
+    console.log('error in edit high lights', error);
+  }
+};
 
 export const ProfileMembershipsData = async (profileId, pgsz) => {
   try {
