@@ -1,91 +1,115 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
+import React, {useState} from 'react';
 import {
-  AddEvent,
-  AddEventImage,
-  TopBarcard,
-  EventInput,
-  PrimaryButton,
-  EventInput1
-} from '../components';
-import { styles } from './add-events/styles';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { allTexts, colors } from '../common';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event } from '../utils/api';
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert
+} from 'react-native';
+import {EventInput, PrimaryButton} from '../components';
+import {styles} from './add-events/styles';
+import {colors,allTexts} from '../common';
+import { UpdateInfo } from '../utils/api';
 
-const EditInfo = ({ navigation, route }) => {
-    const {data} = route.params || {};
-    console.log('info==================>>>>>>>>>>>>>>>>>>>>> screen', data);
-    const [date, setDate] = useState(new Date());
-    const [toDate, setToDate] = useState(new Date());
-    const [image, setImage] = useState(null);
-    const [eventName, setEventName] = useState('');
-    const [description, setDescription] = useState('');
+const EditInfo = ({navigation, route}) => {
+  const {data} = route.params || {};
+  console.log('info==================>>>>>>>>>>>>>>>>>>>>> screen', data);
 
-    const HandleCnfrm = datedata => {
-      if (datedata) {
-        setDate(datedata);
-        HideDatePicker();
-      }
-    };
-    const HandleCnfrm1 = datedata => {
-      if (datedata) {
-        setToDate(datedata);
-        HideDatePicker();
-      }
-    };
-    const ShowDatePicker = () => {
-      setDatePickerVisible1(true);
-    };
-    const HideDatePicker = () => {
-      setDatePickerVisible(false);
-      setDatePickerVisible1(false);
-    };
-    return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-            <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-              <Image source={require('../../assets/images/backarrow.png')}
-                style={{ height: 10, width: 6 }} />
-            </TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: 'bold',
-                marginHorizontal: '25%',
-                color: 'white',
-                alignSelf: 'center'
-              }}>
-               Info
-            </Text>
-          </View>
-        </View>
-        <ScrollView style={{ marginTop: '3%' }}>
-          <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
-          <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
-        </ScrollView>
-        {/* <DateTimePickerModal
-          isVisible={datePickerVisible}
-          mode={date}
-          onConfirm={HandleCnfrm}
-          onCancel={HideDatePicker}
-          buttonTextColorIOS= 'black'
+  const [eventName, setEventName] = useState('');
+  const [loader, setLoader] = useState(false);
+  const [description, setDescription] = useState(data?.information || '');
   
+
+
+  const UpdateInfoData  = async () => {
+    console.log('data?.id', data?.id);
+    let payload = {
+      
+      information:description,
+      id: data?.id
+    }
+    console.log("payload",payload);
+
+
+
+  let result  = await UpdateInfo(payload);
+    console.log('result of save events', result?.data);
+          if (result.status === 200) {
+            Alert.alert( `Success`,'Information Updated successfully', [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
+     else {
+      alert('some thing went wrong try again');
+      console.log('error')
+    }
+  }
+  
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <View
+          style={{flexDirection: 'row', marginTop: '10%', marginLeft: '6%'}}>
+          <TouchableOpacity
+            style={styles.iconContainer}
+            onPress={() => navigation.goBack()}>
+            <Image
+              source={require('../../assets/images/backarrow.png')}
+              style={{height: 10, width: 6}}
+            />
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginHorizontal: '20%',
+              color: 'white',
+              alignSelf: 'center',
+            }}>
+            Edit Information
+          </Text>
+        </View>
+      </View>
+      <ScrollView style={{marginTop: '3%'}}>
+        <EventInput
+          lable={'Info Name'}
+          placeholder={'Info Name'}
+          height={50}
+          onChangeText={e => setEventName(e)}
+          value={eventName}
         />
-        <DateTimePickerModal
-          isVisible={datePickerVisible1}
-          mode={toDate}
-          onConfirm={HandleCnfrm1}
-          onCancel={HideDatePicker}
-        /> */}
-         <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
-            <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
-          </View>
-      </SafeAreaView>
-    );
-  };
+        <EventInput
+          lable={'Description'}
+          placeholder={'Description'}
+          height={100}
+          onChangeText={text => setDescription(text)}
+          value={description}
+        />
+      </ScrollView>
+      <View
+        style={{
+          width: '80%',
+          alignSelf: 'center',
+          marginTop: 50,
+          position: 'absolute',
+          bottom: 10,
+        }}>
+        <PrimaryButton
+          text={'Edit'}
+          bgColor={colors.orangeColor}
+          onPress={() => UpdateInfoData()}
+        />
+      </View>
+    </SafeAreaView>
+  );
+};
 export default EditInfo;

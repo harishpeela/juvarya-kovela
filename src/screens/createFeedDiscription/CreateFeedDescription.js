@@ -124,12 +124,14 @@ const CreateFeedDescription = ({route, navigation}) => {
           resizeMode: 'contain',
         }}
       />
+      <KeyboardAwareScrollView>
       <View>
         <EventInput
           value={titleName}
           lable={'Name'}
           placeholder={'Enter Name'}
           onChangeText={e => setTitleName(e)}
+          onFocus={() => Keyboard.dismiss()}
         />
         <EventInput
           lable={'Description'}
@@ -137,12 +139,14 @@ const CreateFeedDescription = ({route, navigation}) => {
           height={100}
           placeholder={'Description'}
           onChangeText={e => setDescription(e)}
+          onFocus={() => Keyboard.dismiss()}
         />
         <EventInput
           lable={'City'}
           value={city}
           placeholder={'City'}
           onChangeText={e => setCity(e)}
+          onFocus={() => Keyboard.dismiss()}
         />
 
         <View style={{marginHorizontal: 50, marginTop: 20}}>
@@ -151,9 +155,11 @@ const CreateFeedDescription = ({route, navigation}) => {
             bgColor={colors.orangeColor}
             loading={loading}
             onPress={() => Valid(trfData?.jtProfile)}
+            onFocus={() => Keyboard.dismiss()}
           />
         </View>
       </View>
+      </KeyboardAwareScrollView>
     </View>
   );
 };
