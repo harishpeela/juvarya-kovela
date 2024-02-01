@@ -20,6 +20,6 @@ export const textStyles = (textColor, fontSize) =>
       fontSize: fontSize || 14,
       color: textColor ? textColor : colors.white,
       fontFamily: fontFamily.popinBold,
-      textTransform: 'uppercase',
+      
     },
   });
