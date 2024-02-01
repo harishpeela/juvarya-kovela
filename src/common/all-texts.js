@@ -175,7 +175,7 @@ export const allTexts = {
     editContribute:'EditContribute',
     profileDonations:'ProfileDonations',
     profileMyMemberships:'ProfileMyMemberships',
-    info:'Info'
+    info:'Info',
     profileEvents: 'Profile_Events',
     savehighlight: 'Save_Highlight',
   },

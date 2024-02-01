@@ -17,48 +17,26 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../../utils/api';
 
 const Info = ({ navigation, route }) => {
+  console.log('log info')
   const {data} = route.params || {};
-  console.log('info==================>>>>>>>>>>>>>>>>>>>>> screen', data);
+  console.log('log info data', data)
 
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');
   const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
-  const [eventError, setEventError] = useState(false);
-  const [AE, setAE] = useState(false);
-  const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
 
 const isDarkMode = useColorScheme() === 'dark';
 
-  // const CreateEvent = async () => {
-  //   let img = getImageObj(image);
-  //   if (eventName === '') {
-  //     setEventError(true);
-  //   } if (description === '') {
-  //     setDE(true)
-  //   } if (address === '') {
-  //     setAE(true);
-  //   }
-  //   else if (image, description, eventName, address) {
-  // let payload = {
-  //   information:eventName,
-  //   type:description,
-  //   eventId:"13" 
-  // }
-  // console.log("payload",payload);
-          
-  //   } 
-  // };
-
   const CreateEvent  = async () => {
+    console.log('data?.id', data?.id);
     let payload = {
       information:eventName,
       type:"DESCRIPTION",
-      eventId: id
+      eventId: data?.id
     }
     console.log("payload",payload);
     const result  = await Save_Event(payload);
@@ -79,49 +57,6 @@ const isDarkMode = useColorScheme() === 'dark';
   }
 
 
-
-  const UpLoadPhoto = () => {
-    try {
-      launchImageLibrary(
-        {
-          mediaType: 'photo',
-          saveToPhotos: true,
-          includeBase64: true,
-          selectionLimit: 5,
-          quality: 1,
-          // maxHeight: 1080,
-          // maxWidth: 1080,
-        },
-        res => {
-          if (!res?.didCancel 
-            && !res?.errorCode) {
-            let assets = res?.assets;
-            if (assets) {
-              let images = assets.filter(item => item).map(({ uri }) => ({ uri }));
-              console.log('images', images);
-              setImage(images);
-            }
-          } else {
-            console.log(res?.errorMessage);
-          }
-        },
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const getImageObj = img => {
-    return img?.map(oImg => {
-      let newUri =
-        Platform.OS === 'ios' ? oImg.uri : oImg.uri.replace('file://', 'file:');
-      let imageObj = {
-        uri: newUri,
-        name: `${Date.now()}.jpg`,
-        type: 'image/jpeg',
-      };
-      return imageObj;
-    });
-  };
   const HandleCnfrm = datedata => {
     if (datedata) {
       setDate(datedata);
