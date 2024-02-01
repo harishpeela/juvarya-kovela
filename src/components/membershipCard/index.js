@@ -6,8 +6,6 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { allTexts, colors } from '../../common';
 export const MemberShipCard = ({ data, onPress, txt, nav, roleId }) => {
-  console.log(data?.id, '==========');
-  //salePrice//
   return (
     <View style={{}}>
       <FlatList
@@ -18,7 +16,7 @@ export const MemberShipCard = ({ data, onPress, txt, nav, roleId }) => {
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (
           <LinearGradient
-            colors={['#f7f307', '#aba944']}
+            colors={['#FFA001', '#ECF219', '#FFA001']}
             style={{
               padding: 20,
               margin: 5,

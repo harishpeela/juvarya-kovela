@@ -14,34 +14,28 @@ import { styles } from './add-events/styles';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { EventHighLights } from '../utils/api';
 import { EVENTS_URL } from '../utils/api/api';
 import { getAuthTokenDetails } from '../utils/preferences/localStorage';
 const EditHighlight = ({ navigation, route }) => {
-  const {id} = route.params || {};
+  const {data} = route.params || {};
+  // console.log('route===', data);
   const [date, setDate] = useState(new Date());
   const [loader, setLoader] = useState(false);
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
   const [eventName, setEventName] = useState('');
   const [description, setDescription] = useState('');
-  const [address, setAddress] = useState('');
-  const [eventError, setEventError] = useState(false);
-  const [AE, setAE] = useState(false);
-  const [DE, setDE] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
-  const [EventHighLightsData, setEventHighLightsData] = useState('');
   const isDarkMode = useColorScheme() === 'dark';
-
-  const eventHighlights = async () => {
+  const eventEditHighlights = async () => {
     let img = getImageObj(image);
     let token = await getAuthTokenDetails();
 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", token);
     var formdata = new FormData();
-    formdata.append("eventId", id);
+    formdata.append("id", data?.id);
     formdata.append("highLight", eventName);
     formdata.append("description", description);
     img?.forEach(element => {
@@ -49,7 +43,7 @@ const EditHighlight = ({ navigation, route }) => {
     });
 
     var requestOptions = {
-      method: 'POST',
+      method: 'PUT',
       headers: myHeaders,
       body: formdata,
       redirect: 'follow'
@@ -64,11 +58,12 @@ const EditHighlight = ({ navigation, route }) => {
       alert('please fill description')
     }
     else if (image, description, eventName) {
-      fetch(`${EVENTS_URL}jtEventHighlights/save`, requestOptions)
+      fetch(`${EVENTS_URL}jtEventHighlights/update`, requestOptions)
       .then(response => response.json())
       .then(result => {
+        console.log('result of edit high', result);
         if (result) {
-          Alert.alert('Success', `hightlights created successfully`, [
+          Alert.alert('Success', result?.message, [
             {
               text: 'Ok',
               onPress: () =>
@@ -182,30 +177,17 @@ const EditHighlight = ({ navigation, route }) => {
             <Text style={{ fontWeight: 'bold', color: isDarkMode ? 'gray' : 'gray' }}> Upload Photo</Text>
             <Text style={{ fontSize: 7, color: isDarkMode ? 'gray' : 'gray' }}>[Upload upto 5 photos]</Text>
           </View>
-          {image && (
+          {data?.mediaList ? (
+            <AddEventImage data={data?.mediaList} />
+          ):(
             <AddEventImage data={image} />
           )}
         </View>
       </View>
       <ScrollView style={{ marginTop: '3%' }}>
         <EventInput lable={'Event Name'} placeholder={'Event Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
-        {eventError && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
-            please enter Event Name
-          </Text>
-        )}
         <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
-        {/* {DE && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
-            please enter description
-          </Text>
-        )} */}
         <EventInput1 lable={'From Date and To date'} placeholder={'from date'} height={50} value1={date?.toDateString()} onPressCalendar2={() => ShowDatePicker()} value2={toDate?.toDateString()} calendar={true} onPressCalendar={() => ShowDatePicker()} />
-        {/* {AE && (
-          <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>
-            please enter Event Name
-          </Text>
-        )} */}
       </ScrollView>
       <DateTimePickerModal
         isVisible={datePickerVisible}
@@ -222,7 +204,7 @@ const EditHighlight = ({ navigation, route }) => {
         onCancel={HideDatePicker}
       />
       <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
-        <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => eventHighlights()} />
+        <PrimaryButton text={'Edit'} bgColor={colors.orangeColor} onPress={() => eventEditHighlights()} />
       </View>
     </SafeAreaView>
   );

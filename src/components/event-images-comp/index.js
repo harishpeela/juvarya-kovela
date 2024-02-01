@@ -11,13 +11,12 @@ const AddEventImage = ({ data }) => {
             renderItem={({ item, index }) => (
                 <>
                     <TouchableOpacity style={styles.container}>
-                        <Image source={{ uri: item?.uri }} style={styles.img} />
+                        <Image source={{ uri: item?.uri ? item?.uri : item?.url }} style={styles.img} />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.cancel} onPress={() => alert('click')}>
                        <MaterialIcons name="cancel" size={16} color={'black'} />
                     </TouchableOpacity>
                 </>
-
             )}
         />
     );
