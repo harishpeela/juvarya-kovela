@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -8,20 +8,20 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
-import {styles} from './styles';
-import {SearchBar} from '../searchbar';
-import {Loader} from '../loader';
+import { styles } from './styles';
+import { SearchBar } from '../searchbar';
+import { Loader } from '../loader';
 
-import {allTexts, colors} from '../../common';
-import {TempleListCard} from '../TempleListCard';
-import {NearByTemple} from '../NearByTemples';
-import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
-import {PopularTemples, SearchPopularTemples} from '../../utils/api';
-import {useIsFocused} from '@react-navigation/native';
-import {TopBarcard} from '../topBar1/topBarCard';
-import {NearByTempleClass} from '../../utils/api';
+import { allTexts, colors } from '../../common';
+import { TempleListCard } from '../TempleListCard';
+import { NearByTemple } from '../NearByTemples';
+import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
+import { PopularTemples, SearchPopularTemples } from '../../utils/api';
+import { useIsFocused } from '@react-navigation/native';
+import { TopBarcard } from '../topBar1/topBarCard';
+import { NearByTempleClass } from '../../utils/api';
 
-export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
+export const PopularTemplesList = ({ pageNav, seeallnav, navigation, route }) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,11 +33,11 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const [NearByData, setNearByData] = useState();
+
   const PopularTemplesss = async () => {
     setLoader(true);
     try {
       let result = await PopularTemples(0, 100);
-      // console.log('populattemples', result?.data);
       if (result) {
         const dty = result?.data?.data || [];
         setLoading(false);
@@ -53,7 +53,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   const NearByTemples = async () => {
     setLoader(true);
     let result = await NearByTempleClass('A', 0, 20);
-    // console.log('result.date ====>', result.data);
     if (result) {
       setNearByData(result?.data.data);
       setLoader(false);
@@ -62,29 +61,32 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
       setLoader(false);
     }
   };
+
   useEffect(() => {
     NearByTemples();
   }, []);
 
-  const renderLoder = () => {
+  const renderLoader = () => {
     return loader ? (
-      <Text>no temples to Display</Text>
-    ) : (
-      <View style={{}}>
-        <Loader size={'large'} color={colors.orangeColor} />
+      <View style={{ height: '100%', marginTop: '70%' }}>
+        <Loader color={colors.orangeColor} />
       </View>
-    );
+    ) : null;
   };
+
   const loadMoreItems = () => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
+
   useEffect(() => {}, [isFocused]);
+
   useEffect(() => {
     if (pageNo >= 0) {
       PopularTemplesss(0, 100);
     }
   }, [pageNo]);
+
   const SearchPopTemp = async txt => {
     try {
       let result = await SearchPopularTemples(txt);
@@ -95,9 +97,10 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
       console.log('error in search pop temp', error);
     }
   };
+
   return (
     <View>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard
           txt={'Search'}
           menu={true}
@@ -123,15 +126,18 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
         </TopBarcard>
       </View>
       <>
-        {loader ? (
-          <View
-            style={{
-              // alignItems: 'center',
-              // justifyContent: 'center',
-              height: '100%',
-              marginTop: '70%',
-            }}>
-            <Loader color={colors.orangeColor} />
+        {renderLoader()}
+        {filteredList.length > 0 && (
+          <View style={styles.upComingTextTab}>
+            <Text style={styles.popularTextContainer}>Popular Temples</Text>
+            <TouchableOpacity
+              onPress={() => {
+                seeallnav.navigate(allTexts.screenNames.seeall, {
+                  data: filteredList,
+                });
+              }}>
+              <Text style={{ color: colors.orangeColor, fontSize: 16 }}>See all</Text>
+            </TouchableOpacity>
           </View>
         ) : (
           <>
@@ -171,73 +177,75 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                 />
                </>
               )}
-            </ScrollView>
-            <ScrollView style={{height: searchedText ? '85%' : 0}}>
-              {searchedText && filteredData ? (
-                <FlatList
-                  data={filteredData}
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={({item, index}) => item?.id}
-                  renderItem={({item, index}) => (
-                    <PopularTemplesVerticalList
-                      post={item}
-                      name={item.name}
-                      templeId={item.id}
-                      date={item.creationTime}
-                      isFollowingTrue={isFollow}
-                      pageNav={pageNav}
-                    />
-                  )}
-                  onEndReachedThreshold={0.5}
-                  decelerationRate={0.8}
+              onEndReachedThreshold={0.5}
+              decelerationRate={0.8}
+            />
+          )}
+        </ScrollView>
+        <ScrollView style={{ height: searchedText ? '85%' : 0 }}>
+          {searchedText && filteredData ? (
+            <FlatList
+              data={filteredData}
+              keyboardShouldPersistTaps="handled"
+              keyExtractor={({ item, index }) => item?.id}
+              renderItem={({ item, index }) => (
+                <PopularTemplesVerticalList
+                  post={item}
+                  name={item.name}
+                  templeId={item.id}
+                  date={item.creationTime}
+                  isFollowingTrue={isFollow}
+                  pageNav={pageNav}
                 />
-              ) : (
-                <View style={{alignItems: 'center'}}>
-                  <Text style={{fontSize: 18, color: 'black'}}>
-                    No Temples to Display
-                  </Text>
-                </View>
               )}
-            </ScrollView>
-
-            <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Nearby Temples</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {
-                    data: NearByData,
-                  });
-                }}>
-                <Text style={{color: colors.orangeColor, fontSize: 16}}>
-                  See all
-                </Text>
-              </TouchableOpacity>
+              onEndReachedThreshold={0.5}
+              decelerationRate={0.8}
+            />
+          ) : (
+            <View style={{ alignItems: 'center' }}>
+              <Text style={{ fontSize: 18, color: 'orange', fontFamily: 'Poppins-Medium' }}>
+                No Temples to Display
+              </Text>
             </View>
+          )}
+        </ScrollView>
 
-            <ScrollView style={{paddingLeft: 12}}>
-              {searchedText === '' && (
-                <FlatList
-                  data={NearByData}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={({item, index}) => item?.id}
-                  renderItem={({item, index}) => (
-                    <NearByTemple
-                      post={item}
-                      name={item.name}
-                      templeId={item.templeClass}
-                      isFollowingTrue={item?.follow}
-                      pageNav={pageNav}
-                    />
-                  )}
-                  onEndReachedThreshold={0.5}
-                  decelerationRate={0.8}
+        {NearByData.length > 0 && (
+          <View style={styles.upComingTextTab}>
+            <Text style={styles.popularTextContainer}>Nearby Temples</Text>
+            <TouchableOpacity
+              onPress={() => {
+                seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {
+                  data: NearByData,
+                });
+              }}>
+              <Text style={{ color: colors.orangeColor, fontSize: 16 }}>See all</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+
+        <ScrollView style={{ paddingLeft: 12 }}>
+          {searchedText === '' && NearByData.length > 0 && (
+            <FlatList
+              data={NearByData}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              keyExtractor={({ item, index }) => item?.id}
+              renderItem={({ item, index }) => (
+                <NearByTemple
+                  post={item}
+                  name={item.name}
+                  templeId={item.templeClass}
+                  isFollowingTrue={item?.follow}
+                  pageNav={pageNav}
                 />
               )}
-            </ScrollView>
-          </>
-        )}
+              onEndReachedThreshold={0.5}
+              decelerationRate={0.8}
+            />
+          )}
+        </ScrollView>
       </>
     </View>
   );

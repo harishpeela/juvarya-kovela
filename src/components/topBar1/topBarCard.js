@@ -42,7 +42,7 @@ export const TopBarcard = ({
             marginHorizontal: 5,
           }}>
           {menu && (
-            <View style={{marginLeft: 10, flex: 1}}>
+            <View style={{marginLeft: 18, flex: 1}}>
               <TouchableOpacity
                 onPress={() => navigation.navigate(allTexts.tabNames.profile)}
                 style={styles.userIcon}>
