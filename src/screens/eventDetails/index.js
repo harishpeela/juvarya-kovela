@@ -29,10 +29,10 @@ const EventDetails = ({ navigation, route }) => {
       eventId: item?.id,
       interested: true,
     };
-    console.log('payload', payload);
+    // console.log('payload', payload);
     try {
       let result = await IntrestedEvents(payload);
-      console.log('result of intrested', result?.data);
+      // console.log('result of intrested', result?.data);
     } catch (error) {
       console.log('error in event details intresteed api', error);
     }
@@ -41,7 +41,7 @@ const EventDetails = ({ navigation, route }) => {
 const EventHighLights = async() => {
   try{
     let result = await Event_Highlights(item?.id);
-    console.log('res of hightlightevents', result?.data);
+    // console.log('res of hightlightevents', result?.data);
     if(result?.data){
       setHighlights(result?.data);
     } else {
@@ -56,9 +56,9 @@ useEffect(() => {
 }, []);
 
 const EventInfo = async() => {
-  console.log('item?.ir', item?.id)
+  console.log('item?.id', item?.id)
   try{
-    let result = await Event_Info(0,50, item?.id);
+    let result = await Event_Info(item?.id);
     console.log('res of info', result?.data);
     if(result?.data){
       setInfo(result?.data);
@@ -70,7 +70,7 @@ const EventInfo = async() => {
   }
   
 }
-console.log("info ",Info?.data)
+console.log("info ",Info)
 
 useEffect(() => {
   EventInfo();
@@ -124,10 +124,10 @@ useEffect(() => {
   };
 
   const renderInfo = () => {
-    return Info?.data ? 
+    return Info ? 
       <Card>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <Text style={styles.tab2Text}>{Info?.data[0]?.information}</Text>
+          <Text style={styles.tab2Text}>{Info[0]?.information}</Text>
           <View
             style={{
               marginBottom: '-3%',
@@ -138,21 +138,21 @@ useEffect(() => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.editInfo,{data:Info?.data})}>
+            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.editInfo,{data: Info?.data})}>
             <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
             </TouchableOpacity>
             
           </View>
         </View>
-        <Text>
+        {/* <Text>
         {Info?.data[0]?.eventDto?.description}
-        </Text>
+        </Text> */}
       </Card>
       :
       <TouchableOpacity 
       style={{justifyContent:'center',alignItems:'center', marginTop: '20%'}}
-      onPress={()=> navigation.navigate(allTexts.screenNames.editInfo, {
-        id: item?.id
+      onPress={()=> navigation.navigate(allTexts.screenNames.info, {
+        data: item
       })}
      >
       <Text style={{color: colors.blue}}>+ No info here at this time</Text>

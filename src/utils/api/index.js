@@ -99,7 +99,7 @@ const endpoints = {
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
   EVENT_HIGHLIGHTS:'jtEventHighlights/save',
-  EVENTS_INFO:'jtEventInformation/listByType',
+  EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
 };
 export const getInitialToken = async () => {
@@ -488,12 +488,10 @@ export const Event_Highlights = async eveId => {
   }
 };
 
-export const Event_Info = async (pgno,pgsz,eventId) => {
+export const Event_Info = async (eventId) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.EVENTS_INFO}?pageNo=${pgno}&pageSize=${pgsz}&eventType=DESCRIPTION&eventId=${eventId}`,
-      // https://fanfun.in/events/jtEventInformation/listByType?pageNo=0&pageSize=50&eventType=information&eventId=13
-
+      `${endpoints.EVENTS_INFO}?eventId=${eventId}`,
     );
     return result;
   } catch (error) {
