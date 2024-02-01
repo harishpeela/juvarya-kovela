@@ -284,6 +284,7 @@ const ViewTempleProfile = ({route, navigation}) => {
     setDonationLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
+      console.log('top donation', result?.data);
       if (result) {
         setDonationValue(result?.data?.data);
         setDonationLoader(false);
@@ -519,6 +520,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                       data: trfData,
                     })
                   }
+                  id={donationValue[0]?.email}
                   text={
                     donationValue?.length
                       ? `Top donation by ${
