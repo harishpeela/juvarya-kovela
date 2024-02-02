@@ -171,6 +171,12 @@ const UserFeedScreen = ({navigation}) => {
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
+            <MaterialIcon
+              name="feed"
+              color={color}
+              size={30}
+              style={{marginBottom: '5%'}}
+            />
             <Text style={styles.nodatatext}>No items to display</Text>
           </View>
         ) : (

@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
   noAvailable: {
     color: colors.orangeColor,
     fontFamily: fontFamily.popinMedium,
-  marginTop:'50%',
+  marginTop:'5%',
   fontSize:15,
   // fontWeight:'bold'
   },

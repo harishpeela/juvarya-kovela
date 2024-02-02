@@ -149,6 +149,9 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 5,
     justifyContent: 'space-around',
     paddingVertical: 20,
+    marginTop:'48%',
+    marginLeft:'8%',
+    elevation:20
   },
   otpContainer: {
     // borderWidth:2,

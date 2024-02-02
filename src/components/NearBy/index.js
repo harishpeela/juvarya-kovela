@@ -20,6 +20,7 @@ import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import {TopBarcard} from '../topBar1/topBarCard';
 import {NearByTempleClass} from '../../utils/api';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
   let isFocused = useIsFocused();
@@ -193,8 +194,15 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                   decelerationRate={0.8}
                 />
               ) : (
-                <View style={{alignItems: 'center'}}>
-                  <Text style={{fontSize: 18, color: 'black'}}>
+                <View style={{alignItems: 'center',marginTop:'50%'}}>
+                   <FontAwesome5
+                  name="gopuram"
+                  size={50}
+                  color={'orange'}
+                  style={{marginBottom:'5%'}}
+                 
+                />
+                  <Text style={{fontSize: 18, color: 'orange',fontFamily:'Poppins-Medium'}}>
                     No Temples to Display
                   </Text>
                 </View>

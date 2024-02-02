@@ -73,7 +73,8 @@ const ProfileMyMemberships = ({ navigation, route }) => {
                 )}
               />
           ) : (
-            <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '50%' }}>
+            <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '60%' }}>
+              <AntDesign  style={{marginBottom:'5%'}} name="idcard" size={50} color={colors.orangeColor} />
               <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: 'Poppins-Medium' }}>
                 No Memberships to display
               </Text>
