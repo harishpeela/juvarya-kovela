@@ -27,6 +27,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: '4%',
     display: 'flex',
     flexDirection: 'column',
+    marginTop: '5%'
     // borderWidth:5,
     // marginBottom:200,
   },
