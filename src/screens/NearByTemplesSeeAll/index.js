@@ -57,7 +57,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                     style={{height: 60, width: 60, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
-                    <Text style={{color: isDarkMode ? 'black' : 'orange'}}>
+                    <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%'}}>
                       {item.name}
                     </Text>
                     <Text
@@ -66,7 +66,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                         maxWidth: '90%',
                         color: isDarkMode ? 'black' : 'orange',
                       }}>
-                      {item.description}{' '}
+                      {/* {item.description}{' '} */}
                     </Text>
                   </View>
                 </View>

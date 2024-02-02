@@ -16,6 +16,8 @@ import {allTexts, colors} from '../../common';
 import {TopBarcard} from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
@@ -100,16 +102,24 @@ const MySavedPosts = ({navigation}) => {
               )}
             />
           ) : (
-            <View style={{alignItems: 'center', marginTop: '65%'}}>
+            <View style={{alignItems: 'center', marginTop: '60%'}}>
               {loading ? (
                 <View style={{marginTop: '60%'}}>
                   <Loader size={'small'} color={colors.orangeColor} />
                 </View>
               ) : (
+                <View>
+                   <FontAwesome5
+                  name="save"
+                  size={50}
+                  color={'orange'}
+                  style={{marginLeft:'10%',marginBottom:'5%'}}
+                />
                 <Text style={{color: colors.orangeColor,fontFamily:'Poppins-Medium', fontSize: 15}}>
                   {' '}
                   No Saved Posts
                 </Text>
+                </View>
               )}
             </View>
           )}

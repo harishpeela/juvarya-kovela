@@ -14,6 +14,7 @@ import {
 } from 'react-native';
 import {BackgroundImageAClass, Terms_And_Conditions} from '../../components';
 import Icon from 'react-native-vector-icons/AntDesign';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, {useContext, useState, useEffect} from 'react';
@@ -263,22 +264,6 @@ const Profile = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-            {/* <Item svg={<Demo />} text={bookings} />
-        <Item svg={<AccountIcon2 />} text={donations} /> */}
-            {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item
-              svg={
-                <Image
-                  source={require('../../../assets/images/templeIcon.png')}
-                  style={{ height: 20, width: 20 }}
-                />
-              }
-              text={t('myTemple')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.myTamples);
-              }}
-            />
-          )} */}
             {loader ? (
               <Loader size={'small'} color={colors.orangeColor} />
             ) : Admin || roleType === 'ROLE_ADMIN' ? (
@@ -354,11 +339,7 @@ const Profile = ({navigation}) => {
  
             <Item
               svg={
-                <Icon
-                  name="profile"
-                  size={20}
-                  color={isDarkMode ? 'black' : 'black'}
-                />
+                <AntDesign name="idcard" size={20} color={colors.black} />
               }
               text={t('My Memberships')}
               onPress={() => {
