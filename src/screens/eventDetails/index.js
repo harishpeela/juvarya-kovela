@@ -72,18 +72,6 @@ const EventInfo = async() => {
     EventHighLights();
   }, []);
 
-  const EventInfo = async () => {
-    try {
-      let result = await Event_Info(item?.id);
-      if (result?.data) {
-        setInfo(result?.data);
-      } else {
-        setInfo([]);
-      }
-    } catch (error) {
-      console.log('error in event Info screen api', error);
-    }
-  };
 
   useEffect(() => {
     EventInfo();
@@ -116,6 +104,7 @@ const EventInfo = async() => {
               <Text numberOfLines={2} ellipsizeMode='tail' style={{ width: 250 }}>
                 {item?.description}
               </Text>
+            </View>
             </View>
           </Card>
         )}
