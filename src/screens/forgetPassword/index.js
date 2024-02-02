@@ -1,32 +1,19 @@
-import React, {useEffect, useRef} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  TextInput,
-  handleChange,
-  Alert,
-  Modal,
-  useColorScheme,
-} from 'react-native';
-import MaterialIconsIcon from 'react-native-vector-icons/MaterialIcons';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
-// import {Formik} from 'formik';
-import * as Yup from 'yup';
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert, Modal, useColorScheme } from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {allTexts, colors} from '../../common';
-import {useState} from 'react';
-import {NewVerifyOTP, forgotPassword} from '../../utils/api';
-import {styles} from './styles';
-import {Pressable} from 'react-native';
+import { allTexts, colors } from '../../common';
+import { useState } from 'react';
+import { NewVerifyOTP, forgotPassword } from '../../utils/api';
+import { styles } from './styles';
+import { Pressable } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import {Formik} from 'formik';
-import {forgotPasswordSchema} from '../../common/schemas';
-import {PasswordField} from '../../components/inputfield';
-import {PrimaryButton} from '../../components';
+import { Formik } from 'formik';
+import { forgotPasswordSchema } from '../../common/schemas';
+import { PasswordField } from '../../components/inputfield';
+import { PrimaryButton } from '../../components';
 import Snackbar from 'react-native-snackbar';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
 const ForgetPassword = () => {
   const navigation = useNavigation();
@@ -51,16 +38,18 @@ const ForgetPassword = () => {
       seconds,
     };
   };
+
   const startTimer = e => {
-    let {total, minutes, seconds} = getTimeRemaining(e);
+    let { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : '0' + minutes) +
-          ':' +
-          (seconds > 9 ? seconds : '0' + seconds),
+        ':' +
+        (seconds > 9 ? seconds : '0' + seconds),
       );
     }
   };
+
   const startTime = e => {
     if (Ref.current) {
       clearInterval(Ref.current);
@@ -70,6 +59,7 @@ const ForgetPassword = () => {
     }, 1000);
     Ref.current = id;
   };
+
   const getDeadTime = newTime => {
     if (newTime) {
       let deadline = new Date();
@@ -81,44 +71,35 @@ const ForgetPassword = () => {
       return deadline;
     }
   };
-  // useEffect(() => {
-  //   const setText = () => {
-  //     otpInput?.current?.setValue(`${otp}`);
-  //   };
-  //   setText();
-  // }, otp);
 
   useEffect(() => {
     setSecLeft(secLeft + 30);
     const newTime = getDeadTime(true);
     startTime(newTime);
   }, []);
+
   const otpGeneration = async (email, Ootp) => {
     const payload = {
       otpType: 'FORGOT_PASSWORD',
       emailAddress: email,
     };
     try {
-      // console.log('email =>>>>>>>>' + payload);
       let result = await NewVerifyOTP(payload);
-      // console.log('otpGeneration =>>>>>>>>>>>>' + result);
       if (result) {
-        setTimeout(() => {
-          setOtp(Ootp);
-        }, 2000);
+        setOtp(Ootp);
         console.log('data is coming here =>>>>');
-        Snackbar.show({
-          text: 'OTP Generated Successfully',
-          backgroundColor: 'green',
-          duration: 2000,
-          action: {
-            text: 'Ok',
-            textColor: 'white',
-            onPress: () => {
-              <></>;
+        setTimeout(() => {
+          Snackbar.show({
+            text: 'OTP Generated Successfully',
+            backgroundColor: 'green',
+            duration: 2000,
+            action: {
+              text: 'Ok',
+              textColor: 'white',
+              onPress: () => { },
             },
-          },
-        });
+          });
+        }, 2000);
       } else {
         setMemberShip(0);
       }
@@ -130,25 +111,24 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => {
-            <></>;
-          },
+          onPress: () => { },
         },
       });
     }
   };
+
   const validateEmail = text => {
     const isValid = text.toLowerCase().endsWith('.com');
     setValidEmail(isValid);
     setUserEmail(text);
   };
+
   const onPressDone = Ootp => {
     console.log('otp', Ootp);
     if (validEmail && userEmail !== '') {
       otpGeneration(userEmail, Ootp);
-      setOtp(Ootp);
-      setModalVisible(true);
       console.log('Email is valid:', userEmail);
+      setModalVisible(true);
     } else {
       setError(true);
       setTimeout(() => {
@@ -157,6 +137,7 @@ const ForgetPassword = () => {
       console.log('Invalid email:', userEmail);
     }
   };
+
   const userPasswordHandler = async values => {
     let otpOutPut = otpInput?.current?.state?.otpText
       ?.toString()
@@ -196,36 +177,35 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => {
-            <></>;
-          },
+          onPress: () => { },
         },
       });
     }
   };
+
   const closeToggleModal = () => {
     console.log('Close button is trigeering');
     setModalVisible(false);
   };
-  const isChecked = true;
+
   const resetHandler = () => {
     console.log('reset is trigerring here ');
     otpGeneration();
   };
+
+  const isChecked = true;
+
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <View
       style={[
         styles.container,
-        {backgroundColor: isDarkMode ? 'white' : 'white'},
-      ]}>
-      <View style={{minHeight: '15%'}}>
-        <TopBarCard2
-          back={true}
-          txt={'Forgot Password'}
-          navigation={navigation}
-        />
+        { backgroundColor: isDarkMode ? 'white' : 'white' },
+      ]}
+    >
+      <View style={{ minHeight: '15%' }}>
+        <TopBarCard2 back={true} txt={'Forgot Password'} navigation={navigation} />
       </View>
       <TextInput
         style={styles.textinputContainer}
@@ -250,89 +230,86 @@ const ForgetPassword = () => {
             .replace(/,/g, '');
           if (otpOutPut !== '') {
             console.log(otpOutPut, 'otpoutput');
-            setOtp(otpOutPut);
             onPressDone(otpOutPut);
           }
-        }}>
+        }}
+      >
         <Text style={styles.signupText}>SEND</Text>
       </TouchableOpacity>
 
       {modalVisible ? (
         <Modal animationType="fade" transparent={true} visible={modalVisible}>
-          <Pressable style={[styles.overlay]} onPress={closeToggleModal}>
-            <View style={[styles.centeredView]}>
-              <View style={[styles.otpContainer]}>
-                <Text style={styles.emailText}>
-                  Enter otp sent to {userEmail}
-                </Text>
-                <OTPTextInput
-                  ref={otpInput}
-                  inputCount={6}
-                  tintColor={colors.green2}
-                  textInputStyle={styles.otpTextInput}
-                  containerStyle={{
-                    marginTop: 5,
-                    marginBottom: 5,
-                  }}
-                />
-                <View style={styles.timeContainer}>
-                  {timer != '00:00' && (
-                    <Text style={styles.expectOtp}>
-                      Expect OTP in
-                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
-                    </Text>
-                  )}
-                  {timer === '00:00' && (
-                    <Text style={styles.expectOtp}>
-                      Expect OTP in
-                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
-                    </Text>
-                  )}
-
-                  <TouchableOpacity onPress={() => resetHandler()}>
-                    <Text>Resend OTP</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-              <Formik
-                onSubmit={(values, formikActions) => {
-                  userPasswordHandler(values);
-                  console.log('values', values);
+          <View style={[styles.centeredView]}>
+            <View style={[styles.otpContainer]}>
+              <Text style={styles.emailText}>Enter otp sent to {userEmail}</Text>
+              <OTPTextInput
+                ref={otpInput}
+                inputCount={6}
+                tintColor={colors.green2}
+                textInputStyle={styles.otpTextInput}
+                containerStyle={{
+                  marginTop: 5,
+                  marginBottom: 5,
                 }}
-                validationSchema={forgotPasswordSchema}
-                initialValues={{
-                  password: '',
-                  confirmPassword: '',
-                }}>
-                {({
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-                  values,
-                }) => {
-                  return (
-                    <View style={styles.fieldContainer}>
-                      <PasswordField
-                        value={values.password}
-                        title={'password'}
-                        placeholder={'Enter your Password'}
-                        error={touched.password && errors.password}
-                        onBlur={handleBlur('password')}
-                        setState={handleChange('password')}
-                      />
-                      <PasswordField
-                        value={values.confirmPassword}
-                        title={'confirm Password'}
-                        placeholder={'Confirm your Password'}
-                        error={
-                          touched.confirmPassword && errors.confirmPassword
-                        }
-                        onBlur={handleBlur('confirmPassword')}
-                        setState={handleChange('confirmPassword')}
-                      />
+              />
+              <View style={styles.timeContainer}>
+                {timer != '00:00' && (
+                  <Text style={styles.expectOtp}>
+                    Expect OTP in
+                    <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                  </Text>
+                )}
+                {timer === '00:00' && (
+                  <Text style={styles.expectOtp}>
+                    Expect OTP in
+                    <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                  </Text>
+                )}
+
+                <TouchableOpacity onPress={() => resetHandler()}>
+                  <Text>Resend OTP</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <Formik
+              onSubmit={(values, formikActions) => {
+                userPasswordHandler(values);
+                console.log('values', values);
+              }}
+              validationSchema={forgotPasswordSchema}
+              initialValues={{
+                password: '',
+                confirmPassword: '',
+              }}
+            >
+              {({
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+                values,
+              }) => {
+                return (
+                  <View style={styles.fieldContainer}>
+                    <PasswordField
+                      value={values.password}
+                      title={'password'}
+                      placeholder={'Enter your Password'}
+                      error={touched.password && errors.password}
+                      onBlur={handleBlur('password')}
+                      setState={handleChange('password')}
+                    />
+                    <PasswordField
+                      value={values.confirmPassword}
+                      title={'confirm Password'}
+                      placeholder={'Confirm your Password'}
+                      error={touched.confirmPassword && errors.confirmPassword}
+                      onBlur={handleBlur('confirmPassword')}
+                      setState={handleChange('confirmPassword')}
+                    />
+                    <TouchableOpacity onPress={() => setModalVisible(false)}>
                       <View style={styles.buttonContainer}>
                         <PrimaryButton
                           bgColor={colors.orangeColor}
@@ -342,12 +319,12 @@ const ForgetPassword = () => {
                           radius={25}
                         />
                       </View>
-                    </View>
-                  );
-                }}
-              </Formik>
-            </View>
-          </Pressable>
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
+            </Formik>
+          </View>
         </Modal>
       ) : (
         <></>
@@ -355,4 +332,5 @@ const ForgetPassword = () => {
     </View>
   );
 };
+
 export default ForgetPassword;

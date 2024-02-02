@@ -10,6 +10,7 @@ import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
 import {TopBarcard} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const MyTamples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
@@ -112,7 +113,14 @@ const MyTamples = ({navigation}) => {
         ) : (
           [
             filteredArray.length === 0 ? (
+              
               <View style={styles.loaderContainer}>
+                <FontAwesome5
+                  name="gopuram"
+                  size={50}
+                  color={'orange'}
+                 
+                />
                 <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
               </View>
             ) : (

@@ -15,6 +15,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import { Loader } from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const UserProfileDonationsData = ({ navigation, route }) => {
   const [loader, setLoader] = useState(false);
@@ -73,6 +74,13 @@ const UserProfileDonationsData = ({ navigation, route }) => {
               />
           ) : (
             <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '50%' }}>
+                <FontAwesome5
+                  name="donate"
+                  size={50}
+                  color={'orange'}
+                  style={{marginBottom:'5%'}}
+                 
+                />
               <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: 'Poppins-Medium' }}>
                 No donations to display
               </Text>
