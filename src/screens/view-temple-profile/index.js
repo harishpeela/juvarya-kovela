@@ -284,9 +284,9 @@ const ViewTempleProfile = ({route, navigation}) => {
     setDonationLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
-      console.log('top donation', result?.data);
+      console.log('top donation', result?.data?.data[0]);
       if (result) {
-        setDonationValue(result?.data?.data);
+        setDonationValue(result?.data?.data[0]);
         setDonationLoader(false);
       } else {
         setDonationValue([]);
@@ -424,7 +424,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             <View style={{marginTop: 10}}>
-              {data?.seasonal ? (
+              {!data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() =>
@@ -520,13 +520,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                       data: trfData,
                     })
                   }
-                  id={donationValue[0]?.email}
+                  id={donationValue?.email}
                   text={
-                    donationValue?.length
+                    donationValue
                       ? `Top donation by ${
-                          donationValue[0]?.donorName
-                            ? donationValue[0]?.donorName
-                            : donationValue[0]?.name
+                          donationValue?.donorName
+                            ? donationValue?.donorName
+                            : donationValue?.name
                         }`
                       : 'No Donations Yet'
                   }
