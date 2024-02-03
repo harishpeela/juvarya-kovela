@@ -64,7 +64,7 @@ const EventsScreen = ({ navigation, route }) => {
       console.log('list of events', result?.data);
       if (result.status === 200) {
         let filtering = result?.data?.data;
-        console.log('events screen data', filtering[0]);
+        console.log('events screenk data', filtering[0]);
         setEventsData(result?.data?.data);
         setLoader(false);
       } else {
