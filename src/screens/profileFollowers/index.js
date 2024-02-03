@@ -14,6 +14,7 @@ import { colors } from '../../common';
 import { styles } from './styles';
 import { Ellipsis } from '../../components';
 import { TopBarcard } from '../../components';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
@@ -22,7 +23,7 @@ const FollowersMembership = ({ route, navigation }) => {
   const [filteredData, setFilteredData] = useState(followersList);
   const { id } = route.params || {};
   const [loading, setLoading] = useState(false);
-console.log('id ===> ', id);
+  console.log('id ===> ', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
@@ -30,9 +31,9 @@ console.log('id ===> ', id);
         console.log('data of temple followers', result?.data);
         setLoader(false);
         // if(result?.data?.data)
-        if (result?.data?.data !== undefined ) {
+        if (result?.data?.data !== undefined) {
           setFollowersList(result?.data?.data);
-        } 
+        }
       } else {
         setLoader(false);
       }
@@ -59,8 +60,8 @@ console.log('id ===> ', id);
   return (
     <View>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Followers'} isBell={true} back={true}  navigation={navigation} navBack={navigation} >
-          <View style={{...styles.searchbarContainer, marginTop: '-5%'}}>
+        <TopBarcard txt={'Followers'} isBell={true} back={true} navigation={navigation} navBack={navigation} >
+          <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
             <View>
               <SearchBar
                 placeHolder={'Search followers'}
@@ -85,7 +86,13 @@ console.log('id ===> ', id);
             <>
               {followersList.length === 0 && searchedText === '' ? (
                 <View style={styles.noDataContainer}>
-                  <Text style={styles.noDataText}>No followers yet</Text>
+                  <SimpleLineIcons
+                    name="user-unfollow"
+                    color={'orange'}
+                    size={30}
+                    style={{ marginBottom: '5%' }}
+                  />
+                  <Text style={styles.nodatatext}>No Followers yet</Text>
                 </View>
               ) : (
                 <>
@@ -123,7 +130,16 @@ console.log('id ===> ', id);
                     />
                   ) : searchedText && filteredData.length === 0 ? (
                     <View style={styles.noDataContainer}>
-                      <Text style={styles.noDataText}>No followers found</Text>
+                      <View style={styles.noDataContainer}>
+                        <SimpleLineIcons
+
+                          name="user-unfollow"
+                          color={'orange'}
+                          size={30}
+                          style={{ marginBottom: '5%' }}
+                        />
+                        <Text style={{fontFamily:'Poppins-Medium',fontSize:15,color:'orange'}}>No Followers Found</Text>
+                      </View>
                     </View>
                   ) : null}
                 </>

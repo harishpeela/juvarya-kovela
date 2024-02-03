@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     height: '90%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:'-10%'
   },
   bellContainer: {
     height: 60,

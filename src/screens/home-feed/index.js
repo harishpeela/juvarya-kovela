@@ -22,6 +22,7 @@ import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import Share from 'react-native-share';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState();
@@ -171,9 +172,10 @@ const UserFeedScreen = ({navigation}) => {
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
-            <MaterialIcon
+            <FontAwesome
+              
               name="feed"
-              color={color}
+              color={'orange'}
               size={30}
               style={{marginBottom: '5%'}}
             />
