@@ -41,6 +41,7 @@ const Notifications = ({navigation}) => {
             txt={'Notifications'}
             cancel={true}
             onPress={() => navigation.goBack()}
+            
           />
         </View>
         <View style={{marginTop: 40}}>
