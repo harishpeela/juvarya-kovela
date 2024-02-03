@@ -10,9 +10,10 @@ import {
   Donation_Third_Tab,
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
-import {DonationsPost, getDonationTypes, getTopDonation, GetProfilePic} from '../../utils/api';
+import {DonationsPost, getDonationTypes, getTopDonation, GetProfilePic, DonationsType} from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
   const [dropValue, setDropValue] = useState();
@@ -21,6 +22,10 @@ const Donations = ({route, navigation}) => {
   const [isChecked, setIsChecked] = useState(true);
   const [topDonation, setTopDonation] = useState([]);
   const [donationLoader, setDonationLoader] = useState(false);
+  const {userDetails} = useContext(ApplicationContext);
+  const {data} = route.params || {};
+  // console.log('data =====><', data);
+  const [typeData, setTypeData] = useState();
   const donTypes = async() => {
     let result = await getDonationTypes(0, 100);
     // console.log('types of donations', result?.data);
@@ -31,14 +36,19 @@ const Donations = ({route, navigation}) => {
     {id: 5, rs: '501'},
   ];
   let donationType = [
-    'ANNADHANAM',
-    'Vigrah Seva',
-    'Sadhu Bhojan',
-    'Gau Seva',
+    'FOOD',
+    'EVENT',
+    'PERMANENT',
   ];
-  const {userDetails} = useContext(ApplicationContext);
-  const {data} = route.params || {};
-  // console.log('data =====><', data);
+
+  const donType = async (e) => {
+    // console.log('type', e);
+    let result = await DonationsType(e);
+    console.log('res of donat6ype', result?.data)
+    if(result?.data){
+      setTypeData(result?.data);
+    }
+  }
   const PostDonations = async () => {
     let payload = {
       donation: value,
@@ -131,7 +141,7 @@ useEffect(() => {
               Data={Data}
               onChange={e => setValue(e)}
               dropData={donationType}
-              onSelect={e => setDropValue(e)}
+              onSelect={e => {setDropValue(e); donType(e)}}
               valueRs={value}
               onChangeEmail={e => setEmail(e)}
               valueEmail={email}
@@ -145,7 +155,8 @@ useEffect(() => {
             />
           </View>
           <View style={{marginHorizontal: 10}}>
-            <Donation_Third_Tab />
+            <Donation_Third_Tab url={typeData?.mediaList ? typeData?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1706881490111food donation.jpeg'}
+             description={typeData?.description ? typeData?.description : 'please select donation type'} />
           </View>
         </View>
       </ScrollView>

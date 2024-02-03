@@ -9,7 +9,7 @@ import {
   Pressable,
 } from 'react-native';
 import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
-import { AdminTemples } from '../../utils/api';
+import { AdminTemples, EventSearch } from '../../utils/api';
 import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import { allTexts, colors } from '../../common';
@@ -32,7 +32,7 @@ const modalStyles = {
     height: '50%',
     width: '50%',
     alignItems: 'center',
-    color:'black',
+    color: 'black',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -75,7 +75,10 @@ const EventsScreen = ({ navigation, route }) => {
       setLoader(false);
     }
   };
-
+  const searchEvent = async (txt) => {
+    let result = await EventSearch(txt);
+    console.log('res of search', result?.data);
+  }
   useEffect(() => {
     EventsList();
   }, []);
@@ -100,7 +103,7 @@ const EventsScreen = ({ navigation, route }) => {
             <SearchBar
               onTextChange={(e) => {
                 setSearchedText(e);
-                // SearchPopTemp(e);
+                searchEvent(e);
               }}
               value={searchedText}
               loading={false}
@@ -147,10 +150,10 @@ const EventsScreen = ({ navigation, route }) => {
                     <EventCard2
                       navigation={navigation}
                       data={item}
-                      // name={item.user.firstName}
-                      // img={item.user.url}
-                      // data={item.user}
-                      // donation={item.user.donation}
+                    // name={item.user.firstName}
+                    // img={item.user.url}
+                    // data={item.user}
+                    // donation={item.user.donation}
                     />
                   )}
                 />
@@ -174,20 +177,20 @@ const EventsScreen = ({ navigation, route }) => {
       >
         <View style={modalStyles.centeredView}>
           <View style={modalStyles.modalView}>
-            <Text style={{fontFamily:'Poppins-Medium'}}>Select a Temple</Text>
+            <Text style={{ fontFamily: 'Poppins-Medium' }}>Select a Temple</Text>
             <FlatList
               data={userAdminTemples}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
                 <View >
-                <Pressable
-                  onPress={() => {
-                    setSelectedTemple(item);
-                    setModalVisible(!modalVisible);
-                  }}
-                >
-                  <Text style={{fontFamily:'Poppins-Medium',color:'orange',marginTop:'20%',fontSize:16}}>{item}</Text>
-                </Pressable>
+                  <Pressable
+                    onPress={() => {
+                      setSelectedTemple(item);
+                      setModalVisible(!modalVisible);
+                    }}
+                  >
+                    <Text style={{ fontFamily: 'Poppins-Medium', color: 'orange', marginTop: '20%', fontSize: 16 }}>{item}</Text>
+                  </Pressable>
                 </View>
               )}
             />

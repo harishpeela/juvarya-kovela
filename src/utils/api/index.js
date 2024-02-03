@@ -46,6 +46,7 @@ const endpoints = {
   EVENTS_HIGHLIGHTS: 'jtEventHighlights/list/byEvent',
   INTRESTED_EVENTS: 'jtInterestedEvents/save',
   DONATIONS: '/jtDonation/save',
+  DONATION_TYPE: 'jtDonationType/byType',
   UPDATE_PROFILE: 'customer/userDetails',
   TOP_DONATION: 'jtDonation/donars',
   DONATION_LIST: 'jtDonation/list',
@@ -60,6 +61,7 @@ const endpoints = {
   TEMPLE_CREW: 'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
+  EVENT_SEARCH: 'jtevent/byName',
   EVENT_DETAILS: 'jtevent/details',
   PROFILE_EVENTS: 'jtevent/upcoming/item',
   EVENT_INTERESTED: 'jtInterestedEvents/save',
@@ -142,6 +144,15 @@ export const forgotPassword = async data => {
 export const DonationsPost = async data => {
   try {
     let result = await axiosDonation.post(`${endpoints.DONATIONS}`, data);
+    return result;
+  } catch (error) {
+    console.log('error in login', error);
+    return error;
+  }
+};
+export const DonationsType = async type => {
+  try {
+    let result = await axiosDonation.get(`${endpoints.DONATION_TYPE}/${type}`,);
     return result;
   } catch (error) {
     console.log('error in login', error);
@@ -414,6 +425,18 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
+
+export const EventSearch = async (txt) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_SEARCH}?eventName=${txt}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
 export const getProfileEvents = async (pgno, pgSize, profId) => {
   try {
     let result = await axiosEventsData1.get(
