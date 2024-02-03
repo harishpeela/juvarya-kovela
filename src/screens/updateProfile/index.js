@@ -8,6 +8,8 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+  dateofBirth
+  
 } from 'react-native';
 import {format} from 'date-fns';
 import {
@@ -22,7 +24,7 @@ import {InputField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure
@@ -133,6 +135,8 @@ const UpdateProfile = ({navigation}) => {
   }, []);
   console.log('Current Customer', currentCustomer);
 
+  var dateofBirth = currentCustomer?.dob.slice(0, 10);
+
   return (
     <ScrollView>
       <View style={styles.wrapper}>
@@ -200,6 +204,7 @@ const UpdateProfile = ({navigation}) => {
                   }}>
                   Gender
                 </Text>
+                
                 <SelectDropdown
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
@@ -230,7 +235,7 @@ const UpdateProfile = ({navigation}) => {
                   renderDropdownIcon={() => (
                     <View>
                       <FontAwesome
-                        name="transgender-alt"
+                        name="transgender"
                         size={20}
                         color={colors.orangeColor}
                         style={{marginLeft: 2}}
