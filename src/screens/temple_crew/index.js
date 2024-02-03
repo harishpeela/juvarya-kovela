@@ -42,70 +42,70 @@ const infoData = [
     donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
     artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
   },
-  {
-    id: 4,
-    donarName: 'siva kumar Dadi',
-    artist: 'durga naidu',
-    year: '2021',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
+  // {
+  //   id: 4,
+  //   donarName: 'siva kumar Dadi',
+  //   artist: 'durga naidu',
+  //   year: '2021',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
 
-  },
-  {
-    id: 5,
-    donarName: 'Jagan sai Karri',
-    artist: 'chiranjeevi',
-    year: '2020',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-  },
-  {
-    id: 6,
-    donarName: 'vamsi chadaram',
-    artist: 'Prasad',
-    year: '2019',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-  },
-  {
-    id: 7,
-    donarName: 'Jagan sai Karri',
-    artist: 'chiranjeevi',
-    year: '2020',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-  },
-  {
-    id: 8,
-    donarName: 'vamsi chadaram',
-    artist: 'Prasad',
-    year: '2019',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-  },
-  {
-    id: 9,
-    donarName: 'Jagan sai Karri',
-    artist: 'chiranjeevi',
-    year: '2020',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-  },
-  {
-    id: 10,
-    donarName: 'vamsi chadaram',
-    artist: 'Prasad',
-    year: '2019',
-    occation: 'dhussera',
-    donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-  },
+  // },
+  // {
+  //   id: 5,
+  //   donarName: 'Jagan sai Karri',
+  //   artist: 'chiranjeevi',
+  //   year: '2020',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
+  // },
+  // {
+  //   id: 6,
+  //   donarName: 'vamsi chadaram',
+  //   artist: 'Prasad',
+  //   year: '2019',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
+  // },
+  // {
+  //   id: 7,
+  //   donarName: 'Jagan sai Karri',
+  //   artist: 'chiranjeevi',
+  //   year: '2020',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
+  // },
+  // {
+  //   id: 8,
+  //   donarName: 'vamsi chadaram',
+  //   artist: 'Prasad',
+  //   year: '2019',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
+  // },
+  // {
+  //   id: 9,
+  //   donarName: 'Jagan sai Karri',
+  //   artist: 'chiranjeevi',
+  //   year: '2020',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
+  // },
+  // {
+  //   id: 10,
+  //   donarName: 'vamsi chadaram',
+  //   artist: 'Prasad',
+  //   year: '2019',
+  //   occation: 'dhussera',
+  //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
+  //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
+  // },
 ]
 
   const templeCrewDetails = async () => {
@@ -131,7 +131,7 @@ const infoData = [
   }, []);
   console.log('crew data====>', data);
   return (
-    <View>
+    <View style={{backgroundColor: 'white'}}>
       <View style={{ minHeight: 120, marginTop: '3%' }}>
         <TopBarcard
           txt={'Temple crew'}
@@ -153,7 +153,7 @@ const infoData = [
             <View style={{alignItems: 'center'}}>
               {item?.artistPic ? (
                 <TouchableOpacity style={{height: 70, width: 70, borderRadius: 100 /2, borderWidth: 2, flexDirection: 'row', overflow: 'hidden', margin: 2, borderColor: colors.orangeColor}}>
-                <Image source={{uri: item?.donarPic}} height={60} width={30} style={{height: 65, width: 30, overflow: 'hidden'}} />
+                <Image source={{uri: item?.donarPic}} height={60} width={30} style={{height: 65, width: 30, overflow: 'hidden', marginRight: 2}} />
                 <Image source={{uri: item?.artistPic}} height={60} width={30} style={{height: 65, width: 30}} />
               </TouchableOpacity>
               ): (

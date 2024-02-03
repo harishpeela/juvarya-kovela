@@ -22,7 +22,7 @@ import {InputField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure

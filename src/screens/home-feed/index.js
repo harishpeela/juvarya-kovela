@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+
 
 import styles from './styles';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
@@ -171,9 +170,9 @@ const UserFeedScreen = ({navigation}) => {
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
-            <MaterialIcon
+            <FontAwesome
               name="feed"
-              color={color}
+              color={colors.orangeColor}
               size={30}
               style={{marginBottom: '5%'}}
             />
