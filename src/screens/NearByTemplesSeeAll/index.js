@@ -15,6 +15,7 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {Loader} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 const NearByTemplesSeeAll = ({navigation, route}) => {
   const {data} = route?.params || {};
   const isDarkMode = useColorScheme() === 'dark';
@@ -31,7 +32,14 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
           {/* <Loader color={colors.orangeColor} /> */}
-          <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>No Temples to display</Text>
+          <FontAwesome5
+                  name="gopuram"
+                  size={50}
+                  color={'orange'}
+                  style={{marginBottom:'5%'}}
+                 
+                />
+                <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>{'No Temples Available'}</Text>
         </View>
       ) : data?.length ? (
         <ScrollView showsVerticalScrollIndicator={false} style={{margin: '5%'}}>

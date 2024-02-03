@@ -7,6 +7,7 @@ import {BackHeaderNew, NotificationCard, NewBackHeader} from '../../components';
 import {HeaderComponent} from '../../components/header_comp/HeaderComponent';
 import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -62,14 +63,13 @@ const Notifications = ({navigation}) => {
                 justifyContent: 'center',
                 marginTop: '50%',
               }}>
-              <Text
-                style={{
-                  color: colors.orangeColor,
-                  fontFamily: 'Poppins-Medium',
-                  fontSize: 15,
-                }}>
-                No notifications for this user
-              </Text>
+               <FontAwesome
+                    name="bell-slash"
+                    color={'orange'}
+                    size={30}
+                    style={{ marginBottom: '5%',alignSelf:'center' }}
+                  />
+                  <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:15}}>No Notifications yet </Text>
             </View>
           )}
         </View>
