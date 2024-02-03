@@ -24,9 +24,7 @@ import {InputField} from '../../components/inputfield';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/AntDesign';
-
-
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure
@@ -63,6 +61,8 @@ const UpdateProfile = ({navigation}) => {
   const [DE, setDE] = useState(false);
   const [pinErr, setPinErr] = useState(false);
   const [currentCustomer, setCurrentCustomer] = useState([]);
+  const [dob, setDob] = useState(' ');
+
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -120,20 +120,22 @@ const UpdateProfile = ({navigation}) => {
       console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
-        console.log('dty', dty);
         setCurrentCustomer(dty);
+        setDob(dty?.dob);
       }
     } catch (error) {
       console.log('error in popular temples', error);
     }
   };
 
+  console.log('dob', dob);
+
   useEffect(() => {
     getCustomer();
   }, []);
   console.log('Current Customer', currentCustomer);
 
-  // var dateofBirth = currentCustomer?.dob.slice(0, 10);
+  var dateofBirth = currentCustomer?.dob.slice(0, 10);
 
   return (
     <ScrollView>
@@ -275,11 +277,7 @@ const UpdateProfile = ({navigation}) => {
                 <EventInput2
                   lable={'Date of Birth'}
                   height={50}
-                  value1={
-                    currentCustomer?.dob
-                      ? dateofBirth
-                      : toDate?.toLocaleDateString()
-                  }
+                  value1={dob ? dob.slice(0, 10) : toDate?.toLocaleDateString()}
                   calendar={true}
                   onPressCalendar={() => ShowDatePicker()}
                 />

@@ -150,13 +150,13 @@ const ViewTempleProfile = ({route, navigation}) => {
       setTrfData();
     }
   }, []);
-  const eventList = async (id) => {
+  const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
     // console.log('result of events', result?.data);
-    if(result?.data){
-      setEvents(result?.data)
+    if (result?.data) {
+      setEvents(result?.data);
     }
-  }
+  };
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -284,9 +284,9 @@ const ViewTempleProfile = ({route, navigation}) => {
     setDonationLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
-      console.log('top donation', result?.data);
+      console.log('top donation', result?.data?.data[0]);
       if (result) {
-        setDonationValue(result?.data?.data);
+        setDonationValue(result?.data?.data[0]);
         setDonationLoader(false);
       } else {
         setDonationValue([]);
@@ -424,7 +424,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             <View style={{marginTop: 10}}>
-              {data?.seasonal ? (
+              {!data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() =>
@@ -459,25 +459,28 @@ const ViewTempleProfile = ({route, navigation}) => {
                     }
                   />
                   <CommunityComp
-                    itemCommunity={events?.data?.length ? events?.data?.length : '0'}
-                    onPressmembership={
-                      () => 
-                      navigation.navigate(
-                        allTexts.screenNames.profileEvents,
-                        {
-                          id: trfData?.jtProfile,
-                          data: events?.data,
-                          role: roleId,
-                          roleItemType: roleType
-                        })
+                    itemCommunity={
+                      events?.data?.length ? events?.data?.length : '0'
+                    }
+                    onPressmembership={() =>
+                      navigation.navigate(allTexts.screenNames.profileEvents, {
+                        id: trfData?.jtProfile,
+                        data: events?.data,
+                        role: roleId,
+                        roleItemType: roleType,
+                      })
                     }
                   />
                 </View>
               </View>
-              <View
-                horizontal={true}
-                showsHorizontalScrollIndicator={false}>
-                <View style={{...styles.followtab, justifyContent: trfData?.membershipsEnabled ? 'space-evenly' : 'space-evenly'}}>
+              <View horizontal={true} showsHorizontalScrollIndicator={false}>
+                <View
+                  style={{
+                    ...styles.followtab,
+                    justifyContent: trfData?.membershipsEnabled
+                      ? 'space-evenly'
+                      : 'space-evenly',
+                  }}>
                   <FolloUnfollowComp
                     style={styles.followingContainer}
                     followBtnDisable={followBtnDisable}
@@ -486,22 +489,23 @@ const ViewTempleProfile = ({route, navigation}) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                 {trfData?.membershipsEnabled  && (
-                   <DirectionsTabComp
-                   role={
-                     roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN'
-                   }
-                   onPress={() => {
-                     navigation.navigate(
-                       allTexts.screenNames.profilememberships,
-                       {
-                         trfdata: trfData,
-                         roleId: roleId,
-                       },
-                     );
-                   }}
-                 />
-                 )}
+                  {trfData?.membershipsEnabled && (
+                    <DirectionsTabComp
+                      role={
+                        roleId === 'ROLE_ITEM_ADMIN' ||
+                        roleType === 'ROLE_ADMIN'
+                      }
+                      onPress={() => {
+                        navigation.navigate(
+                          allTexts.screenNames.profilememberships,
+                          {
+                            trfdata: trfData,
+                            roleId: roleId,
+                          },
+                        );
+                      }}
+                    />
+                  )}
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
@@ -520,13 +524,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                       data: trfData,
                     })
                   }
-                  id={donationValue[0]?.email}
+                  id={donationValue?.email}
                   text={
-                    donationValue?.length
+                    donationValue
                       ? `Top donation by ${
-                          donationValue[0]?.donorName
-                            ? donationValue[0]?.donorName
-                            : donationValue[0]?.name
+                          donationValue?.donorName
+                            ? donationValue?.donorName
+                            : donationValue?.name
                         }`
                       : 'No Donations Yet'
                   }
@@ -644,14 +648,11 @@ const ViewTempleProfile = ({route, navigation}) => {
               <Text style={styles.modalContentText}>User groups</Text>
             </View>
             <TouchableOpacity
-               onPress={() => {
-                navigation.navigate(
-                  allTexts.screenNames.profilememberships,
-                  {
-                    trfdata: trfData,
-                    roleId: roleId,
-                  },
-                );
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.profilememberships, {
+                  trfdata: trfData,
+                  roleId: roleId,
+                });
               }}>
               <View style={styles.modalContent}>
                 <MaterialIcons
