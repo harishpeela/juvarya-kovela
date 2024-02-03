@@ -15,7 +15,7 @@ export const BASE_URL = 'http://20.235.89.214:8082/api/';
 export const BASEURL = 'https://fanfun.in/customer/api/';
 export const BASE = 'https://fanfun.in/media/';
 export const POPULARURL = 'https://fanfun.in/profile/';
-export const MEMBER_SHIP_URL = 'https://fanfun.in/membership/';
+export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
 export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
 export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
@@ -115,8 +115,6 @@ export const axiosEventsData1 = axios.create({
   baseURL: EVENTS_URL,
   headers: {
     Authorization: bearer_token,
-    // 'Content-Type': 'multipart/form-data',
-    // accept: 'application/json',
   },
 });
 axiosEventsData1.interceptors.request.use(async function (config) {
