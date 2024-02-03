@@ -24,6 +24,11 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
   const [apiPageNo, setApiPageNo] = useState(0);
 
   console.log('pop see all temples', popTemples);
+
+  const onSelect = data => {
+   
+    // FollowandUnFollow(data?.selectedId);
+  };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
@@ -50,10 +55,11 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
               <TouchableOpacity
                 style={styles.card}
                 onPress={
-                  () => alert('page under development')
-                  // navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                  //   data: item,
-                  // })
+                  () => 
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                    data: item,
+                    onSelect: onSelect
+                  })
                 }>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image

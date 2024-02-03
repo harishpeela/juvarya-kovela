@@ -106,7 +106,7 @@ export const TopBarcard = ({
                 fontSize: 20,
                 flex: 10,
                 fontWeight: 'bold',
-                marginLeft: '1%',
+                marginLeft: '-5%',
                 color: 'white',
                 textAlign: 'center',
                 // backgroundColor: 'red',
