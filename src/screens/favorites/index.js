@@ -134,7 +134,6 @@ const Favorite = ({navigation}) => {
                   size={50}
                   color={'orange'}
                   style={{marginBottom:'5%'}}
-                 
                 />
                 <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
               </View>
