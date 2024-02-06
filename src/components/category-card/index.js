@@ -8,6 +8,8 @@ import {
   Dimensions,
   Animated,
   useColorScheme,
+  Alert,
+  Modal,
 } from 'react-native';
 import { colors } from '../../common';
 import React, { useState, useRef, useMemo } from 'react';
@@ -21,9 +23,9 @@ const { width } = Dimensions.get('window');
 import { DotsNation } from '../dotsNation';
 import { Loader } from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import '../../../languages/language';
-import { TopBarcard } from '../topBar1/topBarCard';
-
+import RNFetchBlob from "rn-fetch-blob";
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -38,6 +40,7 @@ export const UserFeedCompList = ({
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const likeUnLikeHandler = async () => {
@@ -111,6 +114,38 @@ export const UserFeedCompList = ({
     itemVisiblePercentThreshold: 50,
   }).current;
 
+  // const REMOTE_IMAGE_PATH = 'https://fanfun.s3.ap-south-1.amazonaws.com/17068733451971706873343586.jpg';
+
+  const downloadImageRemote = (REMOTE_IMAGE_PATH) => {
+    let date = new Date();
+    let image_URL = REMOTE_IMAGE_PATH;
+    let ext = getExtention(image_URL);
+    ext = "." + ext[0];
+
+    const { config, fs } = RNFetchBlob;
+    let PictureDir = fs.dirs.PictureDir;
+    let options = {
+      fileCache: true,
+      addAndroidDownloads: {
+        useDownloadManager: true,
+        notification: true,
+        path: PictureDir + "/image_" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
+        description: "Image"
+      }
+    };
+    config(options)
+      .fetch("GET", image_URL)
+      .then(res => {
+        console.log("res -> ", JSON.stringify(res));
+        Alert.alert("Alert", "image Downloaded successfully....!");
+      });
+  };
+  const getExtention = filename => {
+    // To get the file extension
+    return /[.]/.exec(filename) ?
+      /[^.]+$/.exec(filename) : undefined;
+  };
+
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -153,16 +188,25 @@ export const UserFeedCompList = ({
             return (
               <View>
                 {!item?.uri ? (
-                  <Image
-                    source={{ uri: item?.url }}
-                    style={{
-                      flex: 1,
-                      height: 350,
-                      width,
-                      resizeMode: 'contain',
-                      backgroundColor: 'black',
-                    }}
-                  />
+                  <View>
+                    <Image
+                      source={{ uri: item?.url }}
+                      style={{
+                        flex: 1,
+                        height: 350,
+                        width,
+                        resizeMode: 'contain',
+                        backgroundColor: 'black',
+                      }}
+                    />
+                    <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
+                    {isVisible && (
+                       <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10}}
+                       onPress={() => {setIsVisible(!isVisible); downloadImageRemote(item?.url)}}>
+                       <Text style={{fontWeight: 'bold'}}> Download</Text>
+                     </TouchableOpacity>
+                    )}
+                  </View>
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
                 )}
@@ -202,6 +246,9 @@ export const UserFeedCompList = ({
               size={20}
             />
           </TouchableOpacity>
+          {/* <TouchableOpacity onPress={() => downloadImageRemote(item?.url)} style={{marginLeft: '5%'}}>
+            <AntDesign name='download' size={20} color={'black'} />
+          </TouchableOpacity> */}
         </View>
       </View>
       <View style={{ paddingHorizontal: 15 }}>
@@ -210,10 +257,10 @@ export const UserFeedCompList = ({
         </Text>
       </View>
       <Text style={styles.username}>
-        <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
-        {post?.description?.length < 50
-                    ? `${post?.description}`
-                    : `${post?.description?.substring(0, 50)}...`}
+        <Text style={{ color: isDarkMode ? 'gray' : 'gray' }}>
+          {post?.description?.length < 50
+            ? `${post?.description}`
+            : `${post?.description?.substring(0, 50)}...`}
           {/* {post?.description} */}
         </Text>
       </Text>
