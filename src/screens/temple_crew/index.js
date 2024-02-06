@@ -129,7 +129,7 @@ const infoData = [
   useEffect(() => {
     templeCrewDetails();
   }, []);
-  console.log('crew data====>', data);
+  console.log('crew data KKKK====>', data);
   return (
     <View style={{backgroundColor: 'white'}}>
       <View style={{ minHeight: 120, marginTop: '3%' }}>
