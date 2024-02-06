@@ -28,7 +28,7 @@ export const NearByTemple = ({
   let isFocused = useIsFocused();
   const FollowandUnFollow = d => {
     setIsLiked(!isLiked);
-    if (!isLiked) {
+    if (!isLiked) {``
       followTemples(d);
     } else if (isLiked) {
       followTemples(d);

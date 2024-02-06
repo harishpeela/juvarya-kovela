@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
   noDataContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '25%'
+    marginTop: '50%'
   },
   noDataText: {
     fontSize: 15,

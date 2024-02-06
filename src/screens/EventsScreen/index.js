@@ -14,6 +14,7 @@ import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import { allTexts, colors } from '../../common';
 import { styles } from './styles';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const modalStyles = {
   centeredView: {
@@ -55,6 +56,7 @@ const EventsScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedTemple, setSelectedTemple] = useState(null);
   const [userAdminTemples, setUserAdminTemples] = useState([]);
+  const [searchError, setSearchError] = useState(false); // New state variable
   const isDarkMode = useColorScheme() === 'dark';
 
   const EventsList = async () => {
@@ -64,7 +66,7 @@ const EventsScreen = ({ navigation, route }) => {
       console.log('list of events', result?.data);
       if (result.status === 200) {
         let filtering = result?.data?.data;
-        console.log('events screenk data', filtering[0]);
+        console.log('events screen data', filtering[0]);
         setEventsData(result?.data?.data);
         setLoader(false);
       } else {
@@ -75,10 +77,25 @@ const EventsScreen = ({ navigation, route }) => {
       setLoader(false);
     }
   };
+
   const searchEvent = async (txt) => {
-    let result = await EventSearch(txt);
-    console.log('res of search', result?.data);
-  }
+    try {
+      let result = await EventSearch(txt);
+      console.log('res of search', result?.data);
+
+      if (result?.data?.data.length === 0) {
+        setSearchError(true);
+      } else {
+        setSearchError(false);
+        // Update eventsData state only when there is data
+        setEventsData(result?.data?.data);
+      }
+    } catch (error) {
+      console.log('error in events search', error);
+      setSearchError(true);
+    }
+  };
+
   useEffect(() => {
     EventsList();
   }, []);
@@ -114,19 +131,6 @@ const EventsScreen = ({ navigation, route }) => {
               bgColor={colors.white}
               placeHolder={'Search Events'}
             />
-            {/* {(userAdminTemples.length > 0 || roleType === 'ROLE_ADMIN') && (
-              <TouchableOpacity
-                onPress={() => setModalVisible(true)}
-                style={styles.plusContainer}
-              >
-                <FeatherIcon
-                  style={styles.plusIcon}
-                  name="plus"
-                  size={30}
-                  color="white"
-                />
-              </TouchableOpacity>
-            )} */}
           </View>
         </TopBarcard>
       </View>
@@ -138,7 +142,17 @@ const EventsScreen = ({ navigation, route }) => {
             </View>
           ) : (
             <>
-              {eventsData?.length ? (
+              {searchError ? (
+                <View style={styles.noData}>
+                   <MaterialIcons
+                  color={colors.orangeColor}
+                  name="event"
+                  size={50}
+                  style={{marginBottom:'5%'}}
+                />
+                  <Text style={styles.noText}>No Events to Display</Text>
+                </View>
+              ) : (
                 <FlatList
                   numColumns={2}
                   data={eventsData}
@@ -150,17 +164,9 @@ const EventsScreen = ({ navigation, route }) => {
                     <EventCard2
                       navigation={navigation}
                       data={item}
-                    // name={item.user.firstName}
-                    // img={item.user.url}
-                    // data={item.user}
-                    // donation={item.user.donation}
                     />
                   )}
                 />
-              ) : (
-                <View style={styles.noData}>
-                  <Text style={styles.noText}> No Data to display</Text>
-                </View>
               )}
             </>
           )}
@@ -182,7 +188,7 @@ const EventsScreen = ({ navigation, route }) => {
               data={userAdminTemples}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => (
-                <View >
+                <View>
                   <Pressable
                     onPress={() => {
                       setSelectedTemple(item);
