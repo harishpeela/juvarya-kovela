@@ -25,14 +25,6 @@ export const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'red',
   },
-  // imageContainer2: {
-  //   borderWidth: 10,
-  //   borderColor: 'yellow',
-  //   width: '100%',
-  //   height: 350,
-  //   borderWidth:5,
-
-  // },
   button: {
     paddingVertical: 11,
     paddingHorizontal: 4,
@@ -94,6 +86,7 @@ export const styles = StyleSheet.create({
   postFooterLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-evenly',
   },
   icon: {
     marginLeft: 10,
