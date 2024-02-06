@@ -158,7 +158,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     // flex: 1,
-    marginTop: '70%',
+    marginTop: '50%',
   },
   noText: {
     fontSize:15,

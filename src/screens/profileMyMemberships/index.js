@@ -40,7 +40,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  console.log('Donation Data====>', allUserMyMemberships);
+  console.log('Membership Data====>', allUserMyMemberships);
 
 
   return (
