@@ -12,8 +12,7 @@ import {
 } from 'react-native';
 import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
-
+import RNFetchBlob from 'rn-fetch-blob';
 import styles from './styles';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
@@ -104,6 +103,10 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in notifications', error);
     }
   };
+
+
+
+
   useEffect(() => {
     GetNotifications();
   }, []);
@@ -119,7 +122,6 @@ const UserFeedScreen = ({navigation}) => {
     <View
       style={{
         flex: 1,
-        // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{height: '15%'}}>
         <TopBarcard

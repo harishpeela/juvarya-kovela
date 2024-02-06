@@ -424,7 +424,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             <View style={{marginTop: 10}}>
-              {!data?.seasonal ? (
+              {data?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() =>
