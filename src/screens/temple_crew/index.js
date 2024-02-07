@@ -6,7 +6,7 @@ import { CrewCard } from '../../components';
 import { Loader } from '../../components';
 import { colors } from '../../common';
 import { styles } from './styles';
-import { TopBarcard } from '../../components';
+import { TopBarcard2 } from '../../components';
 import { NewTempleCrew } from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Entypo';
 const TempleCrew = ({ route, navigation }) => {
@@ -133,7 +133,7 @@ const infoData = [
   return (
     <View style={{backgroundColor: 'white'}}>
       <View style={{ minHeight: 120, marginTop: '3%' }}>
-        <TopBarcard
+        <TopBarcard2
           txt={'Temple crew'}
           isBell={true}
           back={true}
@@ -141,7 +141,7 @@ const infoData = [
           navBack={navigation}>
           <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
           </View>
-        </TopBarcard>
+        </TopBarcard2>
       </View>
       <View style={{marginLeft: '5%'}}>
         <FlatList
