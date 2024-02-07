@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -11,7 +11,6 @@ import {
 import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
 import { AdminTemples, EventSearch } from '../../utils/api';
 import { EventList } from '../../utils/api';
-import ApplicationContext from '../../utils/context-api/Context';
 import { allTexts, colors } from '../../common';
 import { styles } from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -46,7 +45,6 @@ const modalStyles = {
 };
 
 const EventsScreen = ({ navigation, route }) => {
-  const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [admin, setAdmin] = useState([]);
   const [searchedText, setSearchedText] = useState('');

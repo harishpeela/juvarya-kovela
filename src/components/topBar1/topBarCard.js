@@ -1,11 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {allTexts, colors} from '../../common';
+import { GetProfilePic } from '../../utils/api';
+import ApplicationContext from '../../utils/context-api/Context';
 export const TopBarcard = ({
   txtColor,
   onPress,
@@ -25,8 +27,20 @@ export const TopBarcard = ({
   roleType,
   navCreate,
   height,
-  onPressCancel,
 }) => {
+  const {userDetails} = useContext(ApplicationContext);
+  const [img, setImg] = useState(null);
+  const ProfilePic = async () => {
+    let result = await GetProfilePic(userDetails?.email);
+    if(result?.data){
+      setImg(result?.data);
+    } else {
+      setImg(null);
+    }
+  };
+  useEffect(() => {
+    ProfilePic();
+  })
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -42,16 +56,17 @@ export const TopBarcard = ({
               <TouchableOpacity
                 onPress={() => navigation.navigate(allTexts.tabNames.profile)}
                 style={styles.userIcon}>
-                <AntDesign
+                {img ? (
+                  <Image source={{uri: img?.url}} height={40} width={40} style={{height: 30, width: 30, borderRadius: 80 / 2}} />
+                ) : (
+                  <View style={{borderWidth: 1, borderRadius: 60 / 2, height: 30, width: 30, alignItems: 'center', justifyContent: 'center', borderColor: 'white'}}>
+                    <AntDesign
                   name="user"
                   size={20}
                   color={colors.white}
-                  style={{
-                    marginLeft: 10,
-                    right: 6,
-                    top: 10,
-                  }}
                 />
+                  </View>
+                )}
                 <TouchableOpacity
                   style={styles.menuIcon}
                   onPress={() =>
@@ -78,7 +93,7 @@ export const TopBarcard = ({
           {back && (
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => navigation.goBack()}>
+              onPress={navBack}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 6}}
@@ -171,8 +186,7 @@ export const TopBarCard2 = ({
                   {
                     data: bData,
                   };
-              }}
-              navigation={navigation}>
+              }}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 6}}
@@ -242,14 +256,11 @@ const styles = StyleSheet.create({
     top: 5,
   },
   userIcon: {
-    borderWidth: 2,
-    borderRadius: 50,
-    padding: 1,
-    // backgroundColor: 'white',
-    height: 35,
-    borderColor: 'white',
     alignItems: 'center',
-    justifyContent: 'center',
+    borderRadius: 50,
+    // backgroundColor: 'white',
+    height: 30,
+    borderColor: 'white',
     width: 35,
   },
   menuIcon: {
@@ -260,8 +271,9 @@ const styles = StyleSheet.create({
     // backgroundColor: 'white',
     height: 20,
     width: 20,
-    left: 18,
+    left: 15,
     padding: 1,
+    top: -15
   },
   userContainer: {},
 });
