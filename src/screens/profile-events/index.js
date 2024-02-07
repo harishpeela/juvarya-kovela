@@ -8,7 +8,7 @@ import {
   Modal,
   Pressable,
 } from 'react-native';
-import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
+import { Loader, SearchBar, TopBarCard2, EventCard2 } from '../../components';
 import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {colors, allTexts } from '../../common';
@@ -85,7 +85,7 @@ console.log('route', id, 'data==>', role, roleItemType)
           marginBottom: '3%',
         }}
       >
-        <TopBarcard
+        <TopBarCard2
           txt={'Temple Events'}
         //   menu={true}
           back={true}
@@ -124,7 +124,7 @@ console.log('route', id, 'data==>', role, roleItemType)
               </TouchableOpacity>
             )}
           </View>
-        </TopBarcard>
+        </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>

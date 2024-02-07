@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import {View, TextInput} from 'react-native';
+import {View, TextInput, useColorScheme} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
@@ -20,6 +20,7 @@ export const SearchBar = ({
   brWidth,
   srHeight,
 }) => {
+  const isDarkMode = useColorScheme() === 'dark';
   return (
     <View>
       <View
@@ -37,7 +38,7 @@ export const SearchBar = ({
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
             placeholder={placeHolder || 'Search temples'}
-            style={styles.field}
+            style={{...styles.field, color: isDarkMode ? colors.black : colors.black}}
             value={value}
             onSubmitEditing={onSubmit}
             autoCapitalize={false}
