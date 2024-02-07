@@ -120,7 +120,8 @@ const ViewTempleProfile = ({route, navigation}) => {
       let result = await TempleAddress(templeId);
       // console.log('templeAddress', result?.data);
       if (result) {
-        const dty = result?.data || [];
+        const dty = result?.data || {};
+        console.log('dtyasmjb', dty);
         setTempleAddress(dty);
       }
     } catch (error) {
@@ -403,26 +404,20 @@ const ViewTempleProfile = ({route, navigation}) => {
                 </View>
               </View>
             </View>
-            <View
-              style={{
-                marginTop: 5,
-                marginLeft: '8%',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <View style={{flexDirection: 'row', width: '55%'}}>
-                <EvilIcons
-                  style={{color: colors.orangeColor, backgroundColor: 'white'}}
-                  name="location"
-                  size={15}
-                  color="white"
-                />
-                <Text style={{fontSize: 12}}>
-                  {templeaddress?.locality},{' '}
-                  {templeaddress?.postalCodeDTO?.city?.name}
-                </Text>
-              </View>
-            </View>
+           {templeaddress?.locality && (
+             <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '2%'}}>
+               <EvilIcons
+                 style={{color: colors.orangeColor, backgroundColor: 'white'}}
+                 name="location"
+                 size={15}
+                 color="white"
+               />
+               <Text style={{fontSize: 12}}>
+                 {templeaddress?.locality},{' '}
+                 {templeaddress?.postalCodeDTO?.city?.name}
+               </Text>
+             </View>
+           )}
             <View style={{marginTop: 10}}>
               {data?.seasonal ? (
                 <TouchableOpacity
