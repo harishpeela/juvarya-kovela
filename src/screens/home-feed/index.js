@@ -4,15 +4,12 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import {
   View,
-  TouchableOpacity,
   RefreshControl,
   Text,
   useColorScheme,
-  ScrollView,
 } from 'react-native';
 import {TopBarcard} from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import RNFetchBlob from 'rn-fetch-blob';
 import styles from './styles';
 import {getHomeFeedList, getNotifications} from '../../utils/api';
 import {UserFeedCompList} from '../../components';
@@ -20,7 +17,6 @@ import {Loader} from '../../components';
 import {allTexts, colors} from '../../common';
 import {FlatList} from 'react-native-gesture-handler';
 import Share from 'react-native-share';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons'
 
 const UserFeedScreen = ({navigation}) => {
   const [loader, setloader] = useState();
@@ -103,9 +99,6 @@ const UserFeedScreen = ({navigation}) => {
       console.log('error in notifications', error);
     }
   };
-
-
-
 
   useEffect(() => {
     GetNotifications();
