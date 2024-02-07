@@ -8,6 +8,7 @@ import {HeaderComponent} from '../../components/header_comp/HeaderComponent';
 import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -37,10 +38,11 @@ const Notifications = ({navigation}) => {
     <View style={{flex: 1}}>
       <View style={{}}>
         <View style={{minHeight: '15%', marginTop: 10}}>
-          <TopBarcard
+          <TopBarCard2
             txt={'Notifications'}
-            cancel={true}
-            onPress={() => navigation.goBack()}
+            // cancel={true}
+            back={true}
+           navigation={navigation}
             
           />
         </View>
