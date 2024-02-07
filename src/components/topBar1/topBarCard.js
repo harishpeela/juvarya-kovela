@@ -25,7 +25,9 @@ export const TopBarcard = ({
   roleType,
   navCreate,
   height,
+  onPressCancel,
 }) => {
+  console.log('s,ams');
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -33,11 +35,6 @@ export const TopBarcard = ({
           style={{
             flex: 1,
             flexDirection: 'row',
-            // alignItems: 'center',
-            // justifyContent:
-            //   menu || isBell || roleType || roleId || back
-            //     ? 'space-between'
-            //     : 'space-between',
             marginTop: '22%',
             marginHorizontal: 5,
           }}>
@@ -82,17 +79,15 @@ export const TopBarcard = ({
           {back && (
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => navigation.goBack()}
-              navigation={navigation}>
+              onPress={() => navigation.goBack()}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 6}}
               />
             </TouchableOpacity>
           )}
-
           {cancel && (
-            <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
+            <TouchableOpacity style={styles.iconContainer} onPress={() => alert('kajns')}>
               <MaterialIcons
                 name="cancel"
                 size={20}
@@ -239,7 +234,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginLeft: 10,
     marginTop: 5,
-    // backgroundColor: 'red',
   },
   joinText: {
     color: colors.white,
