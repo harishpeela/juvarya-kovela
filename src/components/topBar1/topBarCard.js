@@ -27,7 +27,6 @@ export const TopBarcard = ({
   height,
   onPressCancel,
 }) => {
-  console.log('s,ams');
   return (
     <View style={styles.container}>
       <View style={styles.header}>
