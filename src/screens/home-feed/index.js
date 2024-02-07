@@ -104,9 +104,6 @@ const UserFeedScreen = ({navigation}) => {
     }
   };
 
-
-
-
   useEffect(() => {
     GetNotifications();
   }, []);

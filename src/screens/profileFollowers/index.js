@@ -60,7 +60,7 @@ const FollowersMembership = ({ route, navigation }) => {
   return (
     <View>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Followers'} isBell={true} back={true} navigation={navigation} navBack={navigation} >
+        <TopBarcard txt={'Followers'} isBell={true} back={true} navBack={() => navigation.goBack()} navigation={navigation} >
           <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
             <View>
               <SearchBar
