@@ -1,4 +1,11 @@
-import {View, Text, TouchableOpacity, SafeAreaView, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  SafeAreaView,
+  Alert,
+  StatusBar,
+} from 'react-native';
 import React, {useContext, useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -6,7 +13,6 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
 import {KovelaIcon} from '../sign-up/index.js';
-import {StatusBar} from 'react-native';
 import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
@@ -107,7 +113,7 @@ const Signin = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar backgroundColor="black" translucent={true} />
+      <StatusBar backgroundColor={'#FFAB0F'} translucent={true} />
       <View style={styles.signinTextContainer}>
         <Text style={styles.signinText}>{login}</Text>
       </View>
