@@ -30,7 +30,7 @@ export default BottomTabBase = ({ navigation }) => {
     <TicketConfirmation navigation={navigation} />
   );
   const { homeFeedListData } = useContext(ApplicationContext);
-  const [feedLength, setFeedLength] = useState(0);
+  const [feedLength, setFeedLength] = useState(0); 
   useEffect(() => {
     setFeedLength(homeFeedListData?.length);
   }, [homeFeedListData, navigation]);
