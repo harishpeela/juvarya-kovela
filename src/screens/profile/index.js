@@ -39,7 +39,6 @@ import {
   MyMemberships,
   MyDonations,
 } from '../../utils/api';
- 
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
