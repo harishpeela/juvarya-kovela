@@ -37,7 +37,7 @@ const Notifications = ({navigation}) => {
   return (
     <View style={{flex: 1}}>
       <View style={{}}>
-        <View style={{minHeight: '15%', marginTop: 10}}>
+        <View style={{minHeight: '15%'}}>
           <TopBarCard2
             txt={'Notifications'}
             // cancel={true}
@@ -46,7 +46,7 @@ const Notifications = ({navigation}) => {
             
           />
         </View>
-        <View style={{marginTop: 40}}>
+        <View style={{marginBottom:'68%'}}>
           {loader ? (
             <View style={{marginTop: '60%'}}>
               <Loader size={'large'} color={colors.orangeColor} />

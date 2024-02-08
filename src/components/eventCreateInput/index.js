@@ -300,7 +300,7 @@ export const EventInput3 = ({
               name="email"
               size={20}
               color={colors.orangeColor}
-              style={{marginLeft: 10}}
+              style={{marginLeft: 10,marginRight:5}}
             />
           </TouchableOpacity>
         )}

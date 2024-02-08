@@ -268,12 +268,13 @@ const Profile = ({navigation}) => {
               <Loader size={'small'} color={colors.orangeColor} />
             ) : Admin || roleType === 'ROLE_ADMIN' ? (
               <Item
-                svg={
-                  <Image
-                    source={require('../../../assets/images/templeIcon.png')}
-                    style={{height: 20, width: 20}}
-                  />
-                }
+              svg={
+                <FontAwesome5
+                  name="gopuram"
+                  size={20}
+                  color={isDarkMode ? 'black' : 'black'}
+                />
+              }
                 text={t('myTemple')}
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.myTamples);
