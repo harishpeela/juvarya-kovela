@@ -68,7 +68,7 @@ const Signup = ({navigation}) => {
     console.log('payload otp', otpPayload);
     try {
       let response = await NewVerifyOTP(otpPayload);
-      // console.log('responce of otp', response?.data);
+      console.log('responce of otp', response?.data);
       const {
         data: {emailAddress, otp},
       } = response || {};
