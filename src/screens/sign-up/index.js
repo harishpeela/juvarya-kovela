@@ -1,6 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-alert */
-import {View, Text, Image, TouchableOpacity, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from 'react-native';
 import React, {useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -11,7 +18,7 @@ import {styles} from './style';
 import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Terms_And_Conditions } from '../../components';
+import {Terms_And_Conditions} from '../../components';
 export const KovelaIcon = () => (
   <View style={styles.imageContainer}>
     <Image
@@ -44,7 +51,6 @@ const Signup = ({navigation}) => {
         password,
         confirmPassword,
         username,
-        
       },
     },
   } = allTexts;
@@ -59,7 +65,7 @@ const Signup = ({navigation}) => {
       password: data?.password,
     };
     console.log('log in signup');
-  
+
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data?.phone,
@@ -93,7 +99,7 @@ const Signup = ({navigation}) => {
         } else if (response?.status == 403) {
           alert(response?.data?.message);
         } else {
-          console.log('error')
+          console.log('error');
         }
         action.setSubmitting(false);
       }
@@ -103,6 +109,7 @@ const Signup = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
+      <StatusBar backgroundColor={'#FFAB0F'} />
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}
@@ -245,11 +252,13 @@ const Signup = ({navigation}) => {
           }}
         </Formik>
         {tcModal && (
-            <Terms_And_Conditions
-              isModal={tcModal}
-              onPress={() => {setTcModal(false), setIsChecked(true)}}
-            />
-          )}
+          <Terms_And_Conditions
+            isModal={tcModal}
+            onPress={() => {
+              setTcModal(false), setIsChecked(true);
+            }}
+          />
+        )}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

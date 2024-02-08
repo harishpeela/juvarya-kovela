@@ -1,25 +1,35 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  useColorScheme,
+} from 'react-native';
 import {
   AddEvent,
   AddEventImage,
   TopBarcard,
   EventInput,
   PrimaryButton,
-  EventInput1
+  EventInput1,
 } from '../../components';
-import { styles } from './styles';
-import { launchImageLibrary } from 'react-native-image-picker';
-import { allTexts,colors } from '../../common';
+import {styles} from './styles';
+import {launchImageLibrary} from 'react-native-image-picker';
+import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { Save_Event } from '../../utils/api';
+import {Save_Event} from '../../utils/api';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
-const Info = ({ navigation, route }) => {
-  console.log('log info')
+const Info = ({navigation, route}) => {
+  console.log('log info');
   const {data} = route.params || {};
-  console.log('log info data', data)
+  console.log('log info data', data);
 
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
@@ -29,33 +39,30 @@ const Info = ({ navigation, route }) => {
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [datePickerVisible1, setDatePickerVisible1] = useState(false);
 
-const isDarkMode = useColorScheme() === 'dark';
+  const isDarkMode = useColorScheme() === 'dark';
 
-  const CreateEvent  = async () => {
+  const CreateEvent = async () => {
     console.log('data?.id', data?.id);
     let payload = {
-      information:eventName,
-      type:"DESCRIPTION",
-      eventId: data?.id
-    }
-    console.log("payload",payload);
-    const result  = await Save_Event(payload);
+      information: eventName,
+      type: 'DESCRIPTION',
+      eventId: data?.id,
+    };
+    console.log('payload', payload);
+    const result = await Save_Event(payload);
     console.log('result of save events', result?.data);
-          if (result.status === 200) {
-            Alert.alert('Success', `Info created successfully`, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
-          }
-     else {
+    if (result.status === 200) {
+      Alert.alert('Success', `Info created successfully`, [
+        {
+          text: 'Ok',
+          onPress: () => navigation.navigate(allTexts.screenNames.eventsScreen),
+        },
+      ]);
+    } else {
       alert('some thing went wrong try again');
-      console.log('error')
+      console.log('error');
     }
-  }
-
+  };
 
   const HandleCnfrm = datedata => {
     if (datedata) {
@@ -78,35 +85,37 @@ const isDarkMode = useColorScheme() === 'dark';
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../../assets/images/backarrow.png')}
-              style={{ height: 10, width: 6 }} />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginHorizontal: '20%',
-              color: 'white',
-              alignSelf: 'center'
-            }}>
-             Event Information
-          </Text>
+      <View>
+        <View style={{minHeight: '15%'}}>
+          <TopBarCard2
+            back={true}
+            txt={'Event Information'}
+            navigation={navigation}
+          />
         </View>
       </View>
-      <ScrollView style={{ marginTop: '3%' }}>
-        <EventInput lable={'Info Name'} placeholder={'Info Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
-        <EventInput lable={'Description'} placeholder={'Description'} height={100} onChangeText={text => setDescription(text)} value={description} />
+      <ScrollView style={{marginTop: '3%'}}>
+        <EventInput
+          lable={'Info Name'}
+          placeholder={'Info Name'}
+          height={50}
+          onChangeText={e => setEventName(e)}
+          value={eventName}
+        />
+        <EventInput
+          lable={'Description'}
+          placeholder={'Description'}
+          height={100}
+          onChangeText={text => setDescription(text)}
+          value={description}
+        />
       </ScrollView>
       <DateTimePickerModal
         isVisible={datePickerVisible}
         mode={date}
         onConfirm={HandleCnfrm}
         onCancel={HideDatePicker}
-        buttonTextColorIOS= 'black'
-
+        buttonTextColorIOS="black"
       />
       <DateTimePickerModal
         isVisible={datePickerVisible1}
@@ -114,9 +123,20 @@ const isDarkMode = useColorScheme() === 'dark';
         onConfirm={HandleCnfrm1}
         onCancel={HideDatePicker}
       />
-       <View style={{ width: '80%', alignSelf: 'center', marginTop: 50, position: 'absolute', bottom: 10 }}>
-          <PrimaryButton text={'Save'} bgColor={colors.orangeColor} onPress={() => CreateEvent()} />
-        </View>
+      <View
+        style={{
+          width: '80%',
+          alignSelf: 'center',
+          marginTop: 50,
+          position: 'absolute',
+          bottom: 10,
+        }}>
+        <PrimaryButton
+          text={'Save'}
+          bgColor={colors.orangeColor}
+          onPress={() => CreateEvent()}
+        />
+      </View>
     </SafeAreaView>
   );
 };

@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import {View, Text, TouchableOpacity, Alert} from 'react-native';
+import {View, Text, TouchableOpacity, Alert, StatusBar} from 'react-native';
 import React, {useRef, useEffect, useState, useContext} from 'react';
 import {allTexts, colors} from '../../common';
 import OTPTextInput from 'react-native-otp-textinput';
@@ -13,6 +13,7 @@ import {
   saveLoginSessionDetails,
   saveUserDetails,
 } from '../../utils/preferences/localStorage';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const OTPScreen = ({navigation, route}) => {
   const [timer, setTimer] = useState('00');
@@ -140,8 +141,9 @@ const OTPScreen = ({navigation, route}) => {
   };
   return (
     <View style={styles.wrapper}>
-      <View style={{minHeight: '13%', marginTop: 20}}>
-        <TopBarcard
+      <StatusBar backgroundColor={'#FFAB0F'} />
+      <View style={{minHeight: '15%', marginTop: 20}}>
+        <TopBarCard2
           back={true}
           txt={'Confirm OTP'}
           navigation={navigation}
@@ -170,19 +172,21 @@ const OTPScreen = ({navigation, route}) => {
             <Text style={styles.black}>{` ${timer} seconds`}</Text>
           </Text>
         )}
-        <PrimaryButton
-          text={'Continue'}
-          loading={loading}
-          bgColor={colors.orangeColor}
-          onPress={() => {
-            let otpOutPut = otpInput?.current?.state?.otpText
-              ?.toString()
-              .replace(/,/g, '');
-            if (otpOutPut !== '') {
-              UserRegisterHandler(otpOutPut);
-            }
-          }}
-        />
+        <View style={{marginHorizontal: 30, marginBottom: '5%'}}>
+          <PrimaryButton
+            text={'Continue'}
+            loading={loading}
+            bgColor={colors.orangeColor}
+            onPress={() => {
+              let otpOutPut = otpInput?.current?.state?.otpText
+                ?.toString()
+                .replace(/,/g, '');
+              if (otpOutPut !== '') {
+                UserRegisterHandler(otpOutPut);
+              }
+            }}
+          />
+        </View>
       </View>
     </View>
   );
