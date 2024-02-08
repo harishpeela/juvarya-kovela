@@ -1,19 +1,29 @@
-import React, { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, TextInput, Alert, Modal, useColorScheme } from 'react-native';
-import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import React, {useEffect, useRef} from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Alert,
+  Modal,
+  useColorScheme,
+  StatusBar,
+} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { allTexts, colors } from '../../common';
-import { useState } from 'react';
-import { NewVerifyOTP, forgotPassword } from '../../utils/api';
-import { styles } from './styles';
-import { Pressable } from 'react-native';
+import {allTexts, colors} from '../../common';
+import {useState} from 'react';
+import {NewVerifyOTP, forgotPassword} from '../../utils/api';
+import {styles} from './styles';
+import {Pressable} from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import { Formik } from 'formik';
-import { forgotPasswordSchema } from '../../common/schemas';
-import { PasswordField } from '../../components/inputfield';
-import { PrimaryButton } from '../../components';
+import {Formik} from 'formik';
+import {forgotPasswordSchema} from '../../common/schemas';
+import {PasswordField} from '../../components/inputfield';
+import {PrimaryButton} from '../../components';
 import Snackbar from 'react-native-snackbar';
-import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const ForgetPassword = () => {
   const navigation = useNavigation();
@@ -40,12 +50,12 @@ const ForgetPassword = () => {
   };
 
   const startTimer = e => {
-    let { total, minutes, seconds } = getTimeRemaining(e);
+    let {total, minutes, seconds} = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : '0' + minutes) +
-        ':' +
-        (seconds > 9 ? seconds : '0' + seconds),
+          ':' +
+          (seconds > 9 ? seconds : '0' + seconds),
       );
     }
   };
@@ -96,7 +106,7 @@ const ForgetPassword = () => {
             action: {
               text: 'Ok',
               textColor: 'white',
-              onPress: () => { },
+              onPress: () => {},
             },
           });
         }, 2000);
@@ -111,7 +121,7 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => { },
+          onPress: () => {},
         },
       });
     }
@@ -177,7 +187,7 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => { },
+          onPress: () => {},
         },
       });
     }
@@ -201,11 +211,15 @@ const ForgetPassword = () => {
     <View
       style={[
         styles.container,
-        { backgroundColor: isDarkMode ? 'white' : 'white' },
-      ]}
-    >
-      <View style={{ minHeight: '15%' }}>
-        <TopBarCard2 back={true} txt={'Forgot Password'} navigation={navigation} />
+        {backgroundColor: isDarkMode ? 'white' : 'white'},
+      ]}>
+      <StatusBar backgroundColor={'#FFAB0F'} />
+      <View style={{minHeight: '15%'}}>
+        <TopBarCard2
+          back={true}
+          txt={'Forgot Password'}
+          navigation={navigation}
+        />
       </View>
       <TextInput
         style={styles.textinputContainer}
@@ -232,8 +246,7 @@ const ForgetPassword = () => {
             console.log(otpOutPut, 'otpoutput');
             onPressDone(otpOutPut);
           }
-        }}
-      >
+        }}>
         <Text style={styles.signupText}>SEND</Text>
       </TouchableOpacity>
 
@@ -241,7 +254,9 @@ const ForgetPassword = () => {
         <Modal animationType="fade" transparent={true} visible={modalVisible}>
           <View style={[styles.centeredView]}>
             <View style={[styles.otpContainer]}>
-              <Text style={styles.emailText}>Enter otp sent to {userEmail}</Text>
+              <Text style={styles.emailText}>
+                Enter otp sent to {userEmail}
+              </Text>
               <OTPTextInput
                 ref={otpInput}
                 inputCount={6}
@@ -280,8 +295,7 @@ const ForgetPassword = () => {
               initialValues={{
                 password: '',
                 confirmPassword: '',
-              }}
-            >
+              }}>
               {({
                 errors,
                 touched,

@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
   },
   textContainer: {
     marginTop: 20,
-    marginLeft: '20%',
+    textAlign: 'center',
   },
   backIcon: {
     alignSelf: 'flex-start',
@@ -33,10 +33,13 @@ export const styles = StyleSheet.create({
     borderColor: colors.gray,
     borderRadius: 4,
     height: 38,
-    width: 38,
+    width: 36,
     fontSize: 14,
     margin: 12,
     borderBottomWidth: 1,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: colors.white,
   },
   btnContainer: {
@@ -55,5 +58,7 @@ export const styles = StyleSheet.create({
   },
   topContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
