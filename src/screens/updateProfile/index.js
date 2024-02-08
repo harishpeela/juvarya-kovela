@@ -8,8 +8,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-  dateofBirth
-  
 } from 'react-native';
 import {format} from 'date-fns';
 import {
@@ -25,6 +23,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure
@@ -184,14 +183,6 @@ const UpdateProfile = ({navigation}) => {
                 setPV(false);
               }}
             />
-            {/* {PV && (
-              <View style={{alignItems: 'center'}}>
-                <Text style={{color: colors.red1}}>
-                  {' '}
-                  please enter phone number
-                </Text>
-              </View>
-            )} */}
             <TouchableOpacity>
               <View>
                 <Text
@@ -209,7 +200,7 @@ const UpdateProfile = ({navigation}) => {
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
                     fontSize: 14,
-                    marginRight: '62%',
+                    marginRight: '70%',
                     color: colors.gray,
                   }}
                   defaultValue={isRoleSelected}
@@ -234,40 +225,49 @@ const UpdateProfile = ({navigation}) => {
                   }}
                   renderDropdownIcon={() => (
                     <View>
-                      <FontAwesome
-                        name="transgender"
-                        size={20}
-                        color={colors.orangeColor}
-                        style={{marginLeft: 2}}
-                      />
+                      {isRoleSelected === 'Male' && (
+                        <FontAwesome
+                          name="male"
+                          size={20}
+                          color={colors.orangeColor}
+                          style={{marginLeft: 2}}
+                        />
+                      )}
+                      {isRoleSelected === 'Female' && (
+                        <FontAwesome
+                          name="female"
+                          size={20}
+                          color={colors.orangeColor}
+                          style={{marginLeft: 2}}
+                        />
+                      )}
+                      {/* {isRoleSelected === 'Others' && (
+                        <FontAwesome
+                          name="transgender"
+                          size={20}
+                          color={colors.orangeColor}
+                          style={{marginLeft: 2}}
+                        />
+                      )} */}
                     </View>
                   )}
                 />
               </View>
             </TouchableOpacity>
-            {/* {dropDownError && (
-              <View style={{alignItems: 'center'}}>
-                <Text style={{color: colors.red1}}> please select gender</Text>
-              </View>
-            )} */}
             <EventInput
               lable={'Gotra'}
               gotra={true}
-              placeholder={'Gotra'}
+              placeholder={currentCustomer?.gothra ? currentCustomer?.gothra : 'gotra'}
               height={50}
               onChangeText={text => {
                 setGotraValue(text);
-                setGV(false);
+                console.log('gotraaaaaaaaaaaaaaaaaaa',text)
+                
               }}
-              value={
-                currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
-              }
+              // value={
+              //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
+              // }
             />
-            {/* {GV && (
-              <View style={{alignItems: 'center'}}>
-                <Text style={{color: colors.red1}}> please enter Gotra</Text>
-              </View>
-            )} */}
             <View
               style={{
                 flexDirection: 'row',
@@ -291,7 +291,6 @@ const UpdateProfile = ({navigation}) => {
               <View style={{width: '45%', right: 35, marginTop: 5}}>
                 <EventInput
                   lable={'Pin Code'}
-                  // keyboardType={true}
                   pincode={true}
                   placeholder={'Pincode'}
                   height={50}
@@ -302,14 +301,6 @@ const UpdateProfile = ({navigation}) => {
                   maxLength={6}
                   value={pincode}
                 />
-                {/* {pinErr && (
-                  <View style={{alignItems: 'center'}}>
-                    <Text style={{color: colors.red1}}>
-                      {' '}
-                      please enter Gotra
-                    </Text>
-                  </View>
-                )} */}
               </View>
             </View>
             <View style={{width: '80%', alignSelf: 'center', marginTop: 100}}>
