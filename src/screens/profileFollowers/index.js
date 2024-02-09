@@ -13,9 +13,8 @@ import { Loader } from '../../components';
 import { colors } from '../../common';
 import { styles } from './styles';
 import { Ellipsis } from '../../components';
-import { TopBarcard } from '../../components';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -23,12 +22,11 @@ const FollowersMembership = ({ route, navigation }) => {
   const [filteredData, setFilteredData] = useState(followersList);
   const { id } = route.params || {};
   const [loading, setLoading] = useState(false);
-  console.log('id ===> ', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
       if (result.status === 200) {
-        console.log('data of temple followers', result?.data);
+        // console.log('data of temple followers', result?.data);
         setLoader(false);
         // if(result?.data?.data)
         if (result?.data?.data !== undefined) {
@@ -60,7 +58,7 @@ const FollowersMembership = ({ route, navigation }) => {
   return (
     <View>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Followers'} isBell={true} back={true} navBack={() => navigation.goBack()} navigation={navigation} >
+        <TopBarCard2 txt={'Followers'} isBell={true} back={true} navBack={() => navigation.goBack()} navigation={navigation} >
           <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
             <View>
               <SearchBar
@@ -76,7 +74,7 @@ const FollowersMembership = ({ route, navigation }) => {
               />
             </View>
           </View>
-        </TopBarcard>
+        </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>

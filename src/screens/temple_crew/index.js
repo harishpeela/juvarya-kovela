@@ -113,7 +113,7 @@ const infoData = [
     setLoader(true);
     try {
       let result = await NewTempleCrew(id, 0, 20);
-      console.log('result.date in temple crew', result?.data);
+      // console.log('result.date in temple crew', result?.data);
       if (result) {
         setData(result?.data?.customerRoles);
         setLoader(false);
@@ -129,7 +129,6 @@ const infoData = [
   useEffect(() => {
     templeCrewDetails();
   }, []);
-  console.log('crew data KKKK====>', data);
   return (
     <View style={{backgroundColor: 'white'}}>
       <View style={{ minHeight: 120, marginTop: '3%' }}>

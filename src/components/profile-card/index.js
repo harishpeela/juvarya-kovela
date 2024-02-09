@@ -3,7 +3,6 @@ import React from 'react';
 import {styles} from './style';
 
 export const ProfileInfo = ({name, email, dob}) => {
-  console?.log('name===', name, email);
   return (
     <View style={styles.wrapper}>
       <Text style={styles.nameText}>

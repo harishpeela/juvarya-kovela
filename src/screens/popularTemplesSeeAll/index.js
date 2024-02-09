@@ -62,7 +62,7 @@ const SeeAll = ({navigation}) => {
       PopularSeeAllTemples(apiPageNo, 40);
     }
   }, []);
-  console.log('pop see all temples', popTemples);
+  // console.log('pop see all temples', popTemples);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>

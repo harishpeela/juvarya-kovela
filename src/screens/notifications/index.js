@@ -22,7 +22,7 @@ const Notifications = ({navigation}) => {
         notifications,
       }));
       let FilteredData = mapping[0]?.notifications;
-      console.log('filterd', FilteredData);
+      // console.log('filterd', FilteredData);
       setNotificationData(FilteredData);
       setLoader(false);
     } catch (error) {

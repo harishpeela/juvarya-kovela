@@ -10,7 +10,6 @@ import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {roleId, trfdata} = route.params || {};
-  console.log('profileid', trfdata?.jtProfile);
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
@@ -23,11 +22,11 @@ const ProfileMemberShips = ({navigation, route}) => {
     }
   };
   const MembershipData = async () => {
-    console.log('membershipid', trfdata?.jtProfile);
+    // console.log('membershipid', trfdata?.jtProfile);
     setLoader(true);
     try {
       let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
-      console.log('res ==><><<>>', result?.data);
+      // console.log('res ==><><<>>', result?.data);
       if (result) {
         setLoader(false);
         setMemberShipData(result?.data?.data);
@@ -44,7 +43,6 @@ const ProfileMemberShips = ({navigation, route}) => {
     MembershipData();
     Type();
   }, []);
-  console.log('roleType roletype', roleId);
   return (
     <View style={{flex: 1}}>
       <View style={styles.header}>

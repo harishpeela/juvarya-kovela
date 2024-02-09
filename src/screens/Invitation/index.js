@@ -13,7 +13,6 @@ const InvitationScreen = ({navigation, route}) => {
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
   const {roleId, id} = route.params || {};
-  console.log('-=-=-=-=-=->>', id);
   const MemberShipInviteApi = async () => {
     if (email === '') {
       setError(true);
