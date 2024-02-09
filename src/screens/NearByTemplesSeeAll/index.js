@@ -23,7 +23,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
 
-  console.log('pop see all temples', popTemples);
+  // console.log('pop see all temples', popTemples);
 
   const onSelect = data => {
    

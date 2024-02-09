@@ -96,7 +96,7 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await loginUser1(payload);
-      console.log('result', result);
+      // console.log('result', result);
       if (result && result.status === 200) {
         const {
           data: {accessToken, tokenType},
@@ -127,7 +127,7 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await NewRegistesrUser(registerPayload);
-      console.log('gnjg', result, registerPayload);
+      // console.log('gnjg', result, registerPayload);
       if (result.status === 200) {
         signinHandler();
       } else {
