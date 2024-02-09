@@ -21,14 +21,18 @@ const Favorite = ({navigation}) => {
   const [pageNo, setPageNo] = useState(0);
   let isFocused = useIsFocused();
   const getTemples = async (userid, pgno, pgsz) => {
+    console.log('1');
     setIsLoading(true);
     setLoading(true);
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
+      console.log('2');
+      console.log('3', response?.data);
       if (response?.data?.totalItems === 0) {
         setLoading(false);
       } else if (response.data) {
         let data = response?.data?.data;
+        console.log('4');
         data?.map(a => {
           TempleDetails(a);
         });
@@ -38,12 +42,15 @@ const Favorite = ({navigation}) => {
     }
   };
   const TempleDetails = async d => {
+    console.log('5');
     try {
       setfilteredArray([]);
       setTempleList([]);
       let result = await getTempledetailsWithId(d?.jtProfile);
+      console.log('6');
       if (result) {
         let templesArray = {...d, ...result?.data};
+        console.log('fav list ====', templesArray);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
         setLoading(false);
@@ -177,5 +184,5 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
+ 
 export default Favorite;

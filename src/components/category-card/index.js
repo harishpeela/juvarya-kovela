@@ -17,7 +17,7 @@ import { styles } from './styles';
 import { NewSaveFeed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { NewLikeOrUnlikeFeed, DeleteSavedFeed } from '../../utils/api';
+import { NewLikeOrUnlikeFeed, DeleteSavedFeed, DeleteFeedData } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 const { width } = Dimensions.get('window');
 import { DotsNation } from '../dotsNation';
@@ -35,12 +35,15 @@ export const UserFeedCompList = ({
   saveid,
   onSharePress,
   savedFeed,
+  onPressDelete,
+  isVisible,
+  onPressDots
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  
   const isDarkMode = useColorScheme() === 'dark';
 
   const likeUnLikeHandler = async () => {
@@ -89,6 +92,7 @@ export const UserFeedCompList = ({
   const DeleteFeed = async () => {
     let result = await DeleteSavedFeed(id);
   };
+
   const scrollX = useRef(new Animated.Value(0)).current;
   const handleOnScroll = event => {
     Animated.event(
@@ -172,6 +176,15 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
+      <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={onPressDots} />
+      {isVisible && (
+        <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
+          onPress= { onPressDelete }>
+
+          <Text style={{ fontWeight: 'bold' }}> Delete</Text>
+
+        </TouchableOpacity>
+      )}
       <View>
         <FlatList
           data={post?.mediaList}
@@ -199,13 +212,6 @@ export const UserFeedCompList = ({
                         backgroundColor: 'black',
                       }}
                     />
-                    <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
-                    {isVisible && (
-                       <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10}}
-                       onPress={() => {setIsVisible(!isVisible); downloadImageRemote(item?.url)}}>
-                       <Text style={{fontWeight: 'bold'}}> Download</Text>
-                     </TouchableOpacity>
-                    )}
                   </View>
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
