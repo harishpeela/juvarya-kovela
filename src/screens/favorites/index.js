@@ -184,5 +184,5 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
+ 
 export default Favorite;

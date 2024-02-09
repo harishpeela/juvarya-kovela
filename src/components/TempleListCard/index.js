@@ -23,6 +23,7 @@ export const TempleListCard = ({
   templeId,
   isFollowingTrue,
 }) => {
+  // console.log('Component rendered at time:', new Date().toLocaleTimeString());
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
   const [isFollow, setisFollow] = useState();
   let isFocused = useIsFocused();
