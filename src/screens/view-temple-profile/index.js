@@ -637,11 +637,11 @@ const ViewTempleProfile = ({route, navigation}) => {
               <Icon color={colors.black} name="create-outline" size={22} />
               <Text style={styles.modalContentText}>Create a Post</Text>
             </TouchableOpacity>
-            <View style={styles.modalContent}>
+            {/* <View style={styles.modalContent}>
               <Icon color={colors.black} name="people-outline" size={22} />
 
               <Text style={styles.modalContentText}>User groups</Text>
-            </View>
+            </View> */}
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.profilememberships, {
