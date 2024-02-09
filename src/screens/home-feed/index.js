@@ -62,6 +62,10 @@ const UserFeedScreen = ({ navigation }) => {
     }
   };
 
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
+  };
+
   const DeleteFeedPost = async id => {
     Alert.alert(
       'Confirmation',
@@ -137,7 +141,7 @@ const UserFeedScreen = ({ navigation }) => {
                 isLikeTrue={item.like}
                 savedFeed={item.savedFeed}
                 isVisible={isVisible}
-                onPressDots={() => setIsVisible(!isVisible)}
+                // onPressDots={() => setIsVisible(!isVisible)}
                 onPressDelete={() => DeleteFeedPost(item.id)}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewtempleprofile, {
