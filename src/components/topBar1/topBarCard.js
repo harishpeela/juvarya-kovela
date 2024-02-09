@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import {allTexts, colors} from '../../common';
-import { GetProfilePic } from '../../utils/api';
-import ApplicationContext from '../../utils/context-api/Context';
+// import { GetProfilePic } from '../../utils/api';
+// import ApplicationContext from '../../utils/context-api/Context';
 export const TopBarcard = ({
   txtColor,
   onPress,
@@ -28,19 +28,19 @@ export const TopBarcard = ({
   navCreate,
   height,
 }) => {
-  const {userDetails} = useContext(ApplicationContext);
+  // const {userDetails} = useContext(ApplicationContext);
   const [img, setImg] = useState(null);
-  const ProfilePic = async () => {
-    let result = await GetProfilePic(userDetails?.email);
-    if(result?.data){
-      setImg(result?.data);
-    } else {
-      setImg(null);
-    }
-  };
-  useEffect(() => {
-    ProfilePic();
-  })
+  // const ProfilePic = async () => {
+  //   let result = await GetProfilePic(userDetails?.email);
+  //   if(result?.data){
+  //     setImg(result?.data);
+  //   } else {
+  //     setImg(null);
+  //   }
+  // };
+  // useEffect(() => {
+  //   ProfilePic();
+  // })
   return (
     <View style={styles.container}>
       <View style={styles.header}>
