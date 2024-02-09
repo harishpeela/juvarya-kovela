@@ -29,7 +29,7 @@ const UserProfileDonationsData = ({ navigation, route }) => {
   const MyDonationsData = async () => {
     setLoader(true);
     let result = await ProfileDonationsData();
-    console.log('result.date ====kkknn>', result?.data);
+    // console.log('result.date ====kkknn>', result?.data);
     if (result) {
       setAllUserProfileDonationData(result?.data);
       setLoader(false);
@@ -41,7 +41,6 @@ const UserProfileDonationsData = ({ navigation, route }) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
-  console.log('Donation Data====>', allUserProfileDonationData);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View>

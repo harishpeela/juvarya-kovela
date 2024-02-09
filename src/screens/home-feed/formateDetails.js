@@ -1,5 +1,4 @@
 export const Data = d => {
-  console.log('ddddddd', d);
   let myDataDetails = {
     name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
     description: d?.jtProfileDTO?.desciption

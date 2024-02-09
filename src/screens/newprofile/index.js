@@ -73,7 +73,7 @@ const TempleProfile = ({route, navigation}) => {
     try {
       setFollowVisible(true);
       let result = await getTempleDetails(id);
-      console.log('res', result?.data);
+      // console.log('res', result?.data);
       let feedList = await getFeedList(0, 20, id);
       if (result && result.status === 200 && feedList.status === 200) {
         setloader(false);

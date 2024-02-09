@@ -42,7 +42,7 @@ import {
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
-  console.log('userdetails', userDetails);
+  // console.log('userdetails', userDetails);
   const {
     constants: {role},
   } = allTexts;
@@ -79,7 +79,6 @@ const Profile = ({navigation}) => {
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
     let formdata = new FormData();
-    console.log('img===>', img)
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
     if (result) {
@@ -88,10 +87,9 @@ const Profile = ({navigation}) => {
   };
   const GetCustProfilePic = async () => {
     setIsLoading(true);
-    console.log('21');
     try {
       let result = await GetProfilePic(userDetails?.email);
-      console.log('profilepic ===>', result?.data);
+      // console.log('profilepic ===>', result?.data);
       if (result) {
         setProfPic(result?.data);
         setIsLoading(false);
@@ -151,17 +149,14 @@ const Profile = ({navigation}) => {
   };
   const TempleAdmins = async () => {
     setLoader(true);
-    console.log('loader first', loader);
     let result = await AdminTemples();
-    console.log('admins temples', result?.data);
+    // console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
       setLoader(false);
-      console.log('loader second', loader);
     } else {
       setAdmin([]);
       setLoader(false);
-      console.log('loader third', loader);
     }
   };
   useEffect(() => {
@@ -171,7 +166,7 @@ const Profile = ({navigation}) => {
   const MyMembershipsData = async () => {
     setLoader(true);
     let result = await MyMemberships(1, 0, 20);
-    console.log('result.date ====>', result.data);
+    // console.log('result.date ====>', result.data);
     if (result) {
       setMyMemberships(result?.data.data);
       setLoader(false);
@@ -183,12 +178,11 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  console.log('membership Data====>', myMemberships);
  
   const MyDonationsData = async () => {
     setLoader(true);
     let result = await MyDonations(35);
-    console.log('result.date ====kkk>', result?.data);
+    // console.log('result.date ====kkk>', result?.data);
     if (result) {
       setMyDonationsList(result?.data.data);
       setLoader(false);
@@ -200,7 +194,6 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
-  console.log('Donation Data====>', MyDonationsList);
  
   return (
     <SafeAreaView style={styles.wrapper}>

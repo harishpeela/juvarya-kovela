@@ -17,7 +17,6 @@ const MemberShip = ({route, navigation}) => {
   const {id} = route.params || {};
   const [followersFirstName, setFollowersFirstName] = useState([]);
   const [loading, setLoading] = useState(false);
-  console.log('id', id);
   let TempleFolowers = async () => {
     try {
       let result = await TempleFollowersList(id);
@@ -32,7 +31,6 @@ const MemberShip = ({route, navigation}) => {
       console.log('error in temple folowers', error);
     }
   };
-  console.log('rs', followersList);
   useEffect(() => {
     TempleFolowers();
   }, [route]);
