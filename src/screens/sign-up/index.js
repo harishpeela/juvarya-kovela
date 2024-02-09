@@ -64,17 +64,16 @@ const Signup = ({navigation}) => {
       primaryContact: data?.phone,
       password: data?.password,
     };
-    console.log('log in signup');
 
     const otpPayload = {
       otpType: 'SIGNUP',
       primaryContact: data?.phone,
       emailAddress: data?.email,
     };
-    console.log('payload otp', otpPayload);
+    // console.log('payload otp', otpPayload);
     try {
       let response = await NewVerifyOTP(otpPayload);
-      console.log('responce of otp', response?.data);
+      // console.log('responce of otp', response?.data);
       const {
         data: {emailAddress, otp},
       } = response || {};
@@ -86,9 +85,8 @@ const Signup = ({navigation}) => {
         alert('user already registered');
         action.setSubmitting(false);
       } else {
-        console.log('amsjhxvJAHSBX', response?.data, emailAddress);
+        // console.log('amsjhxvJAHSBX', response?.data, emailAddress);
         if (response && emailAddress) {
-          console.log('amsjhxvJAHSBX =====>', emailAddress);
           let otpPayload = {
             otp: '123456',
             data,
@@ -119,7 +117,6 @@ const Signup = ({navigation}) => {
         <Formik
           onSubmit={(values, formikActions) => {
             UserRegisterHandler(values, formikActions);
-            console.log('values', values);
           }}
           validationSchema={RegisterValidationSchema}
           initialValues={{

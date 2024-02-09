@@ -7,7 +7,6 @@ import {getInitialToken} from '../../utils/api';
 import {saveClientCredentials} from '../../utils/preferences/localStorage';
 
 const Splash = ({navigation}) => {
-  console.log("hvggfhvccgfgfc", navigation)
   const {
     screenNames: {signin},
   } = allTexts;

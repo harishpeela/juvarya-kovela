@@ -61,10 +61,10 @@ const EventsScreen = ({ navigation, route }) => {
     setLoader(true);
     try {
       let result = await EventList(0, 200);
-      console.log('list of events', result?.data);
+      // console.log('list of events', result?.data);
       if (result.status === 200) {
         let filtering = result?.data?.data;
-        console.log('events screen data', filtering[0]);
+        // console.log('events screen data', filtering[0]);
         setEventsData(result?.data?.data);
         setLoader(false);
       } else {
@@ -79,7 +79,7 @@ const EventsScreen = ({ navigation, route }) => {
   const searchEvent = async (txt) => {
     try {
       let result = await EventSearch(txt);
-      console.log('res of search', result?.data);
+      // console.log('res of search', result?.data);
 
       if (result?.data?.data.length === 0) {
         setSearchError(true);

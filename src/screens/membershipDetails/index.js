@@ -8,7 +8,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 let url = 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Fpainting-mountain-lake-with-mountain-background_188544-9126.jpg&tbnid=ASMDFNsL7Vw1YM&vet=12ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz..i&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fbackground&docid=bKJ3gdlWTtaNoM&w=626&h=358&q=images&ved=2ahUKEwjJ7uTazqyDAxUGSmwGHR8RD4gQMygAegQIARBz'
 const MemberShipDetails = ({navigation, route}) => {
   const {data} = route.params || {};
-  console.log('data ==><', data?.loggedInUser);
   useEffect(() => {}, [data]);
   const [index, setIndex] = useState(1);
   return (
@@ -18,7 +17,6 @@ const MemberShipDetails = ({navigation, route}) => {
           uri: data?.loggedInUser?.customerProfileUrl
             ? data?.loggedInUser?.customerProfileUrl
             : url
-            // 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/1688133109358jai hanuman.jpg',
         }}
         style={styles.img}
       />

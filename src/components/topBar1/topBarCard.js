@@ -74,7 +74,7 @@ export const TopBarcard = ({
                   }>
                   <Feather
                     name="menu"
-                    size={15}
+                    size={13}
                     color={colors.white}
                     style={{}}
                   />
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: 'white',
     padding: 1,
-    // backgroundColor: 'white',
+    backgroundColor: 'gray',
     height: 20,
     width: 20,
     left: 15,

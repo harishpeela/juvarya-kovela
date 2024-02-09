@@ -36,7 +36,6 @@ const Signin = ({navigation}) => {
 
   const ApiData = async () => {
     let result = await getUserInfoNew();
-    console.log('userifo', result?.data?.firstName + result?.data?.lastName);
     try {
       if (result) {
         saveUserDetails({
@@ -65,7 +64,7 @@ const Signin = ({navigation}) => {
         email: data?.email,
         password: data.password,
       };
-      console.log('playload with email', payload);
+      // console.log('playload with email', payload);
       try {
         let result = await loginUser1(payload);
         if (result && result.status === 200) {
@@ -88,11 +87,11 @@ const Signin = ({navigation}) => {
         primaryContact: data?.email,
         password: data.password,
       };
-      console.log('playload with mobile', payload);
+      // console.log('playload with mobile', payload);
 
       try {
         let result = await loginUser1(payload);
-        console.log('result of login', result?.data);
+        // console.log('result of login', result?.data);
         if (result && result.status === 200) {
           const {
             data: {accessToken, tokenType},

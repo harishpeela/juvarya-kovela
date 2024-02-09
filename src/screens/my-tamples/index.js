@@ -8,7 +8,6 @@ import {styles} from './styles';
 import {allTexts, colors} from '../../common';
 import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
-import {TopBarcard} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -19,15 +18,14 @@ const MyTamples = ({navigation}) => {
   const [seracherdText, setSeracherdText] = useState('');
 
   const TempleDetails = async d => {
-    setLoading(true);
     try {
       let result = await getTempledetailsWithId(d?.id);
       if (result) {
         let templesArray = {...d, ...result?.data};
-        console?.log('res', templesArray);
-        setLoading(false);
+        console?.log('res ====><', templesArray);
         setTempleList(array => [...array, templesArray]);
         setfilteredArray(array => [...array, templesArray]);
+        setLoading(false);
       } else {
         setLoading(false);
       }
@@ -36,8 +34,10 @@ const MyTamples = ({navigation}) => {
     }
   };
   const AdminTempleDetails = async () => {
+    setLoading(true);
     try {
       let result = await AdminTemples();
+      // console.log('result od admi temples', result?.data);
       let adminData = result?.data;
       adminData.map(e => {
         TempleDetails(e);
@@ -89,21 +89,6 @@ const MyTamples = ({navigation}) => {
           </View>
         </TopBarCard2>
       </View>
-      <View style={styles.searchbarContainer}>
-        <View style={{width: '100%'}}>
-          {/* <SearchBar
-            value={seracherdText}
-            onCrossPress={() => {
-              setSeracherdText('');
-              filteredArray.length ? getTemples() : '';
-            }}
-            onTextChange={e => {
-              setSeracherdText(e);
-              performFilter(e);
-            }}
-          /> */}
-        </View>
-      </View>
 
       <View style={styles.cardContainer}>
         {loading === true ? (
@@ -112,18 +97,7 @@ const MyTamples = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray.length === 0 ? (
-              
-              <View style={styles.loaderContainer}>
-                <FontAwesome5
-                  name="gopuram"
-                  size={50}
-                  color={'orange'}
-                 
-                />
-                <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
-              </View>
-            ) : (
+            filteredArray?.length  ? (
               <FlatList
                 data={filteredArray}
                 showsVerticalScrollIndicator={false}
@@ -152,6 +126,16 @@ const MyTamples = ({navigation}) => {
                   }
                 }}
               />
+            ) : (
+              <View style={styles.loaderContainer}>
+              <FontAwesome5
+                name="gopuram"
+                size={50}
+                color={'orange'}
+              />
+              <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
+            </View>
+             
             ),
           ]
         )}

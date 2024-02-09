@@ -21,10 +21,10 @@ const UserInfo = ({navigation}) => {
       city: data?.city,
       locality: data?.locality,
     };
-    console.log('payload', payload);
+    // console.log('payload', payload);
     try {
       let result = await AddressUpdate(payload);
-      console.log('results of address update', result?.data);
+      // console.log('results of address update', result?.data);
 
       if (result && result.status === 200) {
         Alert.alert('Success', 'Address update was success', [
