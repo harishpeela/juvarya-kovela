@@ -67,6 +67,7 @@ const endpoints = {
   EVENT_INTERESTED: 'jtInterestedEvents/save',
   EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
+  DELETE_FEED: 'jtfeed/delete/feed?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
   TEMPLE_FOLLOWERS_LIST: '/jtfollwer/profile?profileId',
@@ -363,6 +364,20 @@ export const DeleteSavedFeed = async id => {
     console.log(error);
   }
 };
+
+export const DeleteFeedData = async id => {
+  try {
+    let result = await axiosMultiPartFormData1.delete(
+      `${endpoints.DELETE_FEED}=${id}`,
+      {retry: 5, retryDelay: 3000},
+    );
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 export const GetsearchPopularTemples = async name => {
   try {
     let result = await axiosNewData.get(
