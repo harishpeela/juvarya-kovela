@@ -37,14 +37,13 @@ export const UserFeedCompList = ({
   onSharePress,
   savedFeed,
   onPressDelete,
-  isVisible,
   onPressDots
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
-  
+  const [isVisible, setIsVisible ]= useState(false);
   const isDarkMode = useColorScheme() === 'dark';
 
   const likeUnLikeHandler = async () => {
@@ -183,7 +182,7 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
-      <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={onPressDots} />
+      <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
       {isVisible && (
         <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
           onPress= { onPressDelete }>
