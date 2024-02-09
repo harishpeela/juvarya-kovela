@@ -112,7 +112,7 @@ const Save_Highlight = ({ navigation, route }) => {
             let assets = res?.assets;
             if (assets) {
               let images = assets.filter(item => item).map(({ uri }) => ({ uri }));
-              console.log('images', images);
+              // console.log('images', images);
               setImage(images);
             }
           } else {

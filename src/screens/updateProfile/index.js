@@ -79,7 +79,7 @@ const UpdateProfile = ({navigation}) => {
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'dd-MM-yyyy');
-    console.log(formattedDate, '====<> date');
+    // console.log(formattedDate, '====<> date');
     let payload = {
       dob: formattedDate,
       gender: isRoleSelected,
@@ -88,17 +88,12 @@ const UpdateProfile = ({navigation}) => {
       zodiacSign: '',
       primaryContact: '',
     };
-    console.log(payload, 'payload');
+    // console.log(payload, 'payload');
     if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
       alert('please fill one filed');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
-        console.log(payload, 'payload try');
-        console.log(
-          'Update Profile==================>>>>>>>>>>>',
-          responce?.data,
-        );
         if (responce?.status === 200) {
           Alert.alert('Success', responce?.data?.message, [
             {
@@ -116,7 +111,7 @@ const UpdateProfile = ({navigation}) => {
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
-      console.log('templeAddress', result?.data);
+      // console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
@@ -126,15 +121,9 @@ const UpdateProfile = ({navigation}) => {
       console.log('error in popular temples', error);
     }
   };
-
-  console.log('dob', dob);
-
   useEffect(() => {
     getCustomer();
   }, []);
-  console.log('Current Customer', currentCustomer);
-
-  // var dateofBirth = currentCustomer?.dob.slice(0, 10);
 
   return (
     <ScrollView>
@@ -261,8 +250,6 @@ const UpdateProfile = ({navigation}) => {
               height={50}
               onChangeText={text => {
                 setGotraValue(text);
-                console.log('gotraaaaaaaaaaaaaaaaaaa',text)
-                
               }}
               // value={
               //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue

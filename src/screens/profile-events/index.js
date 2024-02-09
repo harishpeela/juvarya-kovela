@@ -46,7 +46,6 @@ const modalStyles = {
 
 const Profile_Events = ({ navigation, route }) => {
 const {id, data, role, roleItemType} = route?.params || {};
-console.log('route', id, 'data==>', role, roleItemType)
   const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -59,10 +58,9 @@ console.log('route', id, 'data==>', role, roleItemType)
     setLoader(true);
     try {
       let result = await EventList(0, 200);
-      console.log('list of events', result?.data);
+      // console.log('list of events', result?.data);
       if (result.status === 200) {
         let filtering = result?.data?.data;
-        console.log('events screen data', filtering[0]);
         setEventsData(result?.data?.data);
         setLoader(false);
       } else {

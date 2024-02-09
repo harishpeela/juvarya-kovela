@@ -26,6 +26,7 @@ import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import '../../../languages/language';
 import RNFetchBlob from "rn-fetch-blob";
+import AntDesign from 'react-native-vector-icons/AntDesign'
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -121,9 +122,13 @@ export const UserFeedCompList = ({
   // const REMOTE_IMAGE_PATH = 'https://fanfun.s3.ap-south-1.amazonaws.com/17068733451971706873343586.jpg';
 
   const downloadImageRemote = (REMOTE_IMAGE_PATH) => {
+    console.log('REMOTE_IMAGE_PATH', REMOTE_IMAGE_PATH);
+
     let date = new Date();
     let image_URL = REMOTE_IMAGE_PATH;
+    console.log('imgurl', image_URL);
     let ext = getExtention(image_URL);
+    console.log('ext', ext);
     ext = "." + ext[0];
 
     const { config, fs } = RNFetchBlob;
@@ -144,11 +149,13 @@ export const UserFeedCompList = ({
         Alert.alert("Alert", "image Downloaded successfully....!");
       });
   };
+  
   const getExtention = filename => {
     // To get the file extension
     return /[.]/.exec(filename) ?
-      /[^.]+$/.exec(filename) : undefined;
+             /[^.]+$/.exec(filename) : undefined;
   };
+
 
   return (
     <View style={styles.postContainer} key={post?.id}>
@@ -212,6 +219,13 @@ export const UserFeedCompList = ({
                         backgroundColor: 'black',
                       }}
                     />
+                    {/* <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
+                    {isVisible && (
+                       <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10}}
+                       onPress={() => {setIsVisible(!isVisible); downloadImageRemote(item?.url)}}>
+                       <Text style={{fontWeight: 'bold'}}> Download</Text>
+                     </TouchableOpacity>
+                    )} */}
                   </View>
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />
@@ -252,9 +266,9 @@ export const UserFeedCompList = ({
               size={20}
             />
           </TouchableOpacity>
-          {/* <TouchableOpacity onPress={() => downloadImageRemote(item?.url)} style={{marginLeft: '5%'}}>
+          <TouchableOpacity onPress={() => downloadImageRemote(post?.mediaList[0]?.url)} style={{marginLeft: '5%'}}>
             <AntDesign name='download' size={20} color={'black'} />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
         </View>
       </View>
       <View style={{ paddingHorizontal: 15 }}>

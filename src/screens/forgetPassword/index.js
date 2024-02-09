@@ -97,7 +97,6 @@ const ForgetPassword = () => {
       let result = await NewVerifyOTP(payload);
       if (result) {
         setOtp(Ootp);
-        console.log('data is coming here =>>>>');
         setTimeout(() => {
           Snackbar.show({
             text: 'OTP Generated Successfully',
@@ -134,7 +133,6 @@ const ForgetPassword = () => {
   };
 
   const onPressDone = Ootp => {
-    console.log('otp', Ootp);
     if (validEmail && userEmail !== '') {
       otpGeneration(userEmail, Ootp);
       console.log('Email is valid:', userEmail);
@@ -152,13 +150,12 @@ const ForgetPassword = () => {
     let otpOutPut = otpInput?.current?.state?.otpText
       ?.toString()
       .replace(/,/g, '');
-    console.log('otpoutput', otpOutPut);
     const payload = {
       email: userEmail,
       password: values.password,
       otp: otpOutPut,
     };
-    console.log('forgot password payload', payload);
+    // console.log('forgot password payload', payload);
     try {
       let result = await forgotPassword(payload);
       if (result) {
@@ -176,7 +173,6 @@ const ForgetPassword = () => {
           navigation.navigate(allTexts.screenNames.signin);
         }, 1500);
       } else {
-        console.log('error in forgotpassword');
         setMemberShip(0);
       }
     } catch (error) {
@@ -243,7 +239,6 @@ const ForgetPassword = () => {
             ?.toString()
             .replace(/,/g, '');
           if (otpOutPut !== '') {
-            console.log(otpOutPut, 'otpoutput');
             onPressDone(otpOutPut);
           }
         }}>
@@ -289,7 +284,7 @@ const ForgetPassword = () => {
             <Formik
               onSubmit={(values, formikActions) => {
                 userPasswordHandler(values);
-                console.log('values', values);
+                // console.log('values', values);
               }}
               validationSchema={forgotPasswordSchema}
               initialValues={{

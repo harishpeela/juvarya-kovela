@@ -947,7 +947,6 @@ export const getFeedList = async (pageNo, pageSize, id) => {
       `${endpoints.GET_FEED_LIST_IN_DETAILS}?page=${pageNo}&pageSize=${pageSize}&itemId=${id}&popular=true`,
       {retry: 5, retryDelay: 3000},
     );
-    console.log(result.headers['x-response-time']);
     return result;
   } catch (error) {
     return error;

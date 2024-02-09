@@ -27,10 +27,7 @@ import {Save_Event} from '../../utils/api';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
 const Info = ({navigation, route}) => {
-  console.log('log info');
   const {data} = route.params || {};
-  console.log('log info data', data);
-
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
@@ -42,15 +39,14 @@ const Info = ({navigation, route}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const CreateEvent = async () => {
-    console.log('data?.id', data?.id);
     let payload = {
       information: eventName,
       type: 'DESCRIPTION',
       eventId: data?.id,
     };
-    console.log('payload', payload);
+    // console.log('payload', payload);
     const result = await Save_Event(payload);
-    console.log('result of save events', result?.data);
+    // console.log('result of save events', result?.data);
     if (result.status === 200) {
       Alert.alert('Success', `Info created successfully`, [
         {

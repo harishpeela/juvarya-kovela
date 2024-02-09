@@ -52,7 +52,6 @@ const Services = ({navigation, route}) => {
       .then(result => console.log('result', result))
       .catch(error => console.log('error', error));
   };
-  console.log('get', name.serviceCategories);
   useEffect(() => {
     ActiveData();
   }, []);
@@ -73,7 +72,6 @@ const Services = ({navigation, route}) => {
             size="medium"
             onToggle={isOn => {
               let ArrData = servicesData?.serviceCategories;
-              console.log('AeeData', ArrData[itemIndex]);
               ArrData[itemIndex] = {
                 active: !data?.active,
                 icon: {

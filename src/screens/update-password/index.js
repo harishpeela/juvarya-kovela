@@ -35,10 +35,10 @@ const UpdatePassword = ({navigation}) => {
       oldPassword: values?.currentPassword,
       password: values?.newPassword,
     };
-    console.log('payload', payLoad);
+    // console.log('payload', payLoad);
     try {
       let result = await NewUpdateUserPassword(payLoad);
-      console.log('result of update password', result?.data);
+      // console.log('result of update password', result?.data);
       Alert.alert('Success', result?.data?.message, [
         {
           text: 'Ok',
@@ -78,7 +78,6 @@ const UpdatePassword = ({navigation}) => {
         contentContainerStyle={styles.scrollContainer}>
         <Formik
           onSubmit={(values, formikActions) => {
-            console.log(values, '====<>');
             PasswordUpdate(values, formikActions);
           }}
           validationSchema={UpdatePasswordValidation}

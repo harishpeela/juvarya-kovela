@@ -28,7 +28,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
   const MyMembershipsData = async () => {
     setLoader(true);
     let result = await ProfileMembershipsData();
-    console.log('result.date ====kkknn>', result?.data);
+    // console.log('result.date ====kkknn>', result?.data);
     if (result) {
       setAllUserMemberships(result?.data);
       setLoader(false);
@@ -40,7 +40,6 @@ const ProfileMyMemberships = ({ navigation, route }) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  console.log('Membership Data====>', allUserMyMemberships);
 
 
   return (
