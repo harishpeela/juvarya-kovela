@@ -93,7 +93,7 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={15} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FeatherIcon name="search" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color,fontSize:14 }}>Search</Text>
+                  <Text style={{ color: color,fontSize:14 }}>Search</Text> 
                 </View>
               ),
             }}
