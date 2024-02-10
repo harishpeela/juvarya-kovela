@@ -464,7 +464,7 @@ export const getProfileEvents = async (pgno, pgSize, profId) => {
 };
 export const IntrestedEvents = async data => {
   try {
-    let result = await axiosEventsData1.post(`${endpoints.EVENTS_LIST}`, data);
+    let result = await axiosEventsData1.post(`${endpoints.EVENT_INTERESTED}`, data);
     return result;
   } catch (error) {
     console.log('error', error);
