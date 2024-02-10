@@ -43,6 +43,7 @@ const MyTamples = ({navigation}) => {
         TempleDetails(e);
       });
     } catch (error) {
+      setLoading(false)
       console.log('error in admin temples', error);
     }
   };
