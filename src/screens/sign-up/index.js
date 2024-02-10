@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
+  Alert,
 } from 'react-native';
 import React, {useState} from 'react';
 import {InputField, PrimaryButton} from '../../components';
@@ -79,8 +80,6 @@ const Signup = ({navigation}) => {
       } = response || {};
       console.log('Logdata', LogInPayload);
       let result = await loginUser1(LogInPayload);
-
-      console.log('resstatus', result);
       if (result?.status === 200) {
         alert('user already registered');
         action.setSubmitting(false);
@@ -96,8 +95,14 @@ const Signup = ({navigation}) => {
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
           alert(response?.data?.message);
-        } else {
-          console.log('error');
+        } else if (response){
+          console.log('error in signup', response?.data, response?.status);
+          Alert.alert('USER ALREADY REGISTERED', 'Please check mobile number or email', [
+            {
+              text: 'Ok',
+              
+            },
+          ]);
         }
         action.setSubmitting(false);
       }
