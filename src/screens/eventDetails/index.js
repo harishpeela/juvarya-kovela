@@ -5,6 +5,7 @@ import {
   ScrollView,
   Image,
   ImageBackground,
+  Alert,
 } from 'react-native';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import React, {useState, useEffect} from 'react';
@@ -32,8 +33,27 @@ const EventDetails = ({navigation, route}) => {
       eventId: item?.id,
       interested: true,
     };
+    console.log('paload', payload);
     try {
       let result = await IntrestedEvents(payload);
+      console.log('res of intresred', result?.data);
+      if(result?.status === 200){
+        Alert.alert('Success', 'This event is added to your intrested events list', [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(allTexts.tabNames.eventsScreen)
+          },
+        ]);
+      } else {
+        Alert.alert('Error', result?.data?.message, [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(allTexts.tabNames.eventsScreen)
+          },
+        ]);
+      }
     } catch (error) {
       console.log('error in event details intresteed api', error);
     }
