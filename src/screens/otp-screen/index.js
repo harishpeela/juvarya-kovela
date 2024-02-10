@@ -132,7 +132,12 @@ const OTPScreen = ({navigation, route}) => {
         signinHandler();
       } else {
         console.log(result?.data?.message, 'error');
-        Alert.alert('Kovela', result?.data?.message || 'Invalid OTP');
+        Alert.alert('Kovela', result?.data?.message || 'Invalid OTP', [
+          {
+            text: 'Ok',
+            onPress: navigation.goBack(),
+          },
+        ]);
       }
     } catch (error) {
       console.log('error', error);

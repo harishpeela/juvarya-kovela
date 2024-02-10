@@ -104,3 +104,130 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
   );
 };
 export default NearByTemplesSeeAll;
+
+// import React, { useState, useEffect } from 'react';
+// import {
+//   StyleSheet,
+//   View,
+//   Text,
+//   FlatList,
+//   SafeAreaView,
+//   TouchableOpacity,
+// } from 'react-native';
+// import MapView, { Marker } from '@mapmyindia/react-native-maps';
+// import Geolocation from '@react-native-community/geolocation';
+ 
+// const API_KEY = 'YOUR_API_KEY'; // Replace with your actual key
+ 
+// const NearByTemplesSeeAll = () => {
+//   const [region, setRegion] = useState({
+//     latitude: 0, // Initial location to be set to user's location
+//     longitude: 0,
+//     latitudeDelta: 0.02,
+//     longitudeDelta: 0.02,
+//   });
+//   const [temples, setTemples] = useState([]);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [error, setError] = useState(null);
+ 
+//   useEffect(() => {
+//     getLocation();
+//   }, []); // Get location on initial render
+ 
+//   const getLocation = () => {
+//     Geolocation.getCurrentPosition(
+//       (position) => {
+//         setRegion({
+//           latitude: position.coords.latitude,
+//           longitude: position.coords.longitude,
+//         });
+//         searchTemples();
+//       },
+//       (error) => {
+//         setError('Error getting location: ' + error.message);
+//       }
+//     );
+//   };
+ 
+//   const searchTemples = async () => {
+//     setIsLoading(true);
+//     setError(null);
+ 
+//     try {
+//       const response = await fetch(
+//         `https://api.mapmyindia.com/api/v1/places/nearbysearch/json?
+//           location=${region.latitude},${region.longitude}&
+//           radius=5000&
+//           type=religious_place&
+//           sub_type=temple&
+//           api_key=${API_KEY}`
+//       );
+ 
+//       if (!response.ok) {
+//         throw new Error('Network response was not ok');
+//       }
+ 
+//       const data = await response.json();
+ 
+//       if (data.results.length === 0) {
+//         setTemples([]);
+//         setError('No temples found in the specified radius.');
+//       } else {
+//         setTemples(data.results);
+//       }
+//     } catch (error) {
+//       setError('Error fetching temples: ' + error.message);
+//     } finally {
+//       setIsLoading(false);
+//     }
+//   };
+ 
+//   const renderTempleItem = ({ item }) => {
+//     return(
+//     <TouchableOpacity style={styles.templeItem}>
+//      <Text> {item.name}</Text>
+//       <Text>{item.address.formatted}</Text>
+//       <Text>Distance: {item.distance} meters</Text>
+//     </TouchableOpacity>
+//  ) };
+ 
+//   return (
+//     <SafeAreaView style={styles.container}>
+//       <MapView
+//         region={region}
+//         onRegionChange={setRegion}
+//         style={styles.map}
+//       >
+//         {temples.map((temple) => (
+//           <Marker
+//             key={temple.id}
+//             coordinate={{ latitude: temple.latitude, longitude: temple.longitude }}
+//             title={temple.name}
+//           />
+//         ))}
+//       </MapView>
+//       <FlatList
+//         data={temples}
+//         renderItem={renderTempleItem}
+//         keyExtractor={(item) => item.id}
+//         ListHeaderComponent={() => (
+//           <View style={styles.listHeader}>
+//             <Text style={styles.headerText}>Nearby Temples</Text>
+//           </View>
+//         )}
+//         ListFooterComponent={() => (
+//           <View style={styles.listFooter}>
+//             {isLoading && <Text>Loading...</Text>}
+//             {error && <Text>Error: {error}</Text>}
+//           </View>
+//         )}
+//       />
+//     </SafeAreaView>
+//   );
+// };
+ 
+// const styles = StyleSheet.create({
+//   // ... (Add your styling here)
+// });
+ 
+// export default NearByTemplesSeeAll;

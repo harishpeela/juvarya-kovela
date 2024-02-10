@@ -602,6 +602,7 @@ const App = () => {
           role: result?.data?.roles,
           id: result?.data?.id,
           primaryContact: result?.data?.primaryContact,
+          logo: result?.data?.media?.url ? result?.data?.media?.url : '',
         });
         setUserDetails({
           username: result?.data?.firstName + result?.data?.lastName,
@@ -609,6 +610,7 @@ const App = () => {
           role: result?.data?.roles,
           id: result?.data?.id,
           primaryContact: result?.data?.primaryContact,
+          logo: result?.data?.media?.url ? result?.data?.media?.url : '',
         });
       }
     } catch (error) {
