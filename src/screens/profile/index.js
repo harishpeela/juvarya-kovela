@@ -74,7 +74,7 @@ const Profile = ({navigation}) => {
   };
   useEffect(() => {
     Type();
-    GetCustProfilePic();
+    // GetCustProfilePic();
   }, []);
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
@@ -86,22 +86,22 @@ const Profile = ({navigation}) => {
       setIsCross(true);
     }
   };
-  const GetCustProfilePic = async () => {
-    setIsLoading(true);
-    console.log('21');
-    try {
-      let result = await GetProfilePic(userDetails?.email);
-      console.log('profilepic ===>', result?.data);
-      if (result) {
-        setProfPic(result?.data);
-        setIsLoading(false);
-      } else {
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.log('error in get profile picture', error);
-    }
-  };
+  // const GetCustProfilePic = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     let result = await GetProfilePic(userDetails?.email);
+  //     // console.log('profilepic ===>', result?.data);
+  //     if (result) {
+  //       setProfPic(result?.data);
+  //       setIsLoading(false);
+  //     } else {
+  //       setIsLoading(false);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in get profile picture', error);
+  //   }
+  // };
+
  
   const uploadPhoto = () => {
     try {
@@ -226,7 +226,7 @@ const Profile = ({navigation}) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{uri: image?.uri}}
+                source={{uri: userDetails?.logo}}
               />
             </View>
           ) : isLoading ? (
@@ -239,9 +239,9 @@ const Profile = ({navigation}) => {
               onPress={() => {
                 uploadPhoto();
               }}>
-              {profPic ? (
+              {userDetails?.logo ? (
                 <Image
-                  source={{uri: profPic?.url}}
+                  source={{uri: userDetails?.logo}}
                   style={styles.profileImage}
                 />
               ) : (
@@ -263,7 +263,6 @@ const Profile = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-          
               <Item
               svg={
                 <FontAwesome5
@@ -277,8 +276,6 @@ const Profile = ({navigation}) => {
                   navigation.navigate(allTexts.screenNames.myTamples);
                 }}
               />
-         
-          
             <Item
               svg={
                 <Icon
