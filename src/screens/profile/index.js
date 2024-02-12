@@ -38,11 +38,12 @@ import {
   AdminTemples,
   MyMemberships,
   MyDonations,
+  getUserInfoNew,
 } from '../../utils/api';
 const Profile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
-  console.log('userdetails', userDetails);
+  // console.log('userdetails', userDetails);
   const {
     constants: {role},
   } = allTexts;
@@ -60,8 +61,9 @@ const Profile = ({navigation}) => {
   const [loader, setLoader] = useState(false);
   const [myMemberships, setMyMemberships] = useState([]);
   const [MyDonationsList, setMyDonationsList] = useState([]);
+  const [custDetails, setCustDetails] = useState();
   const isDarkMode = useColorScheme() === 'dark';
- 
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -82,8 +84,12 @@ const Profile = ({navigation}) => {
     console.log('img===>', img)
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
+    console.log('updated', result?.data);
     if (result) {
       setIsCross(true);
+      currentCust();
+    } else {
+      console.log('something went wrong', result)
     }
   };
   // const GetCustProfilePic = async () => {
@@ -101,7 +107,11 @@ const Profile = ({navigation}) => {
   //     console.log('error in get profile picture', error);
   //   }
   // };
-
+const currentCust = async () => {
+  let result = await getUserInfoNew();
+  console.log('res of profile', result?.data);
+  setCustDetails(result?.data);
+}
  
   const uploadPhoto = () => {
     try {
@@ -166,12 +176,13 @@ const Profile = ({navigation}) => {
   };
   useEffect(() => {
     TempleAdmins();
+    currentCust();
   }, []);
  
   const MyMembershipsData = async () => {
     setLoader(true);
     let result = await MyMemberships(1, 0, 20);
-    console.log('result.date ====>', result.data);
+    // console.log('result.date ====>', result.data);
     if (result) {
       setMyMemberships(result?.data.data);
       setLoader(false);
@@ -183,12 +194,11 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
-  console.log('membership Data====>', myMemberships);
  
   const MyDonationsData = async () => {
     setLoader(true);
     let result = await MyDonations(35);
-    console.log('result.date ====kkk>', result?.data);
+    // console.log('result.date ====kkk>', result?.data);
     if (result) {
       setMyDonationsList(result?.data.data);
       setLoader(false);
@@ -200,7 +210,6 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
-  console.log('Donation Data====>', MyDonationsList);
  
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -226,7 +235,7 @@ const Profile = ({navigation}) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{uri: userDetails?.logo}}
+                source={{uri: image?.uri ? image?.uri : custDetails?.media?.url}}
               />
             </View>
           ) : isLoading ? (
@@ -239,9 +248,9 @@ const Profile = ({navigation}) => {
               onPress={() => {
                 uploadPhoto();
               }}>
-              {userDetails?.logo ? (
+              {custDetails?.media ? (
                 <Image
-                  source={{uri: userDetails?.logo}}
+                  source={{uri: custDetails?.media?.url}}
                   style={styles.profileImage}
                 />
               ) : (
