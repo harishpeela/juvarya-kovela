@@ -147,6 +147,7 @@ export const EventInput = ({
           style={{
             marginLeft: 15,
             width: '90%',
+            color: 'black'
           }}
           multiline={true}
           onChangeText={onChangeText}
@@ -317,6 +318,7 @@ export const EventInput3 = ({
         <TextInput
           value={value1}
           placeholder={placeholder}
+          placeholderTextColor={'gray'}
           style={{marginLeft: 5, width: '100%', flexDirection: 'row'}}
           editable={false}
         />

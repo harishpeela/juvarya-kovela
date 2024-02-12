@@ -48,6 +48,10 @@ const MyTemples = ({ navigation }) => {
     }
   };
 
+  const onSelect = data => {
+
+  };
+
   useEffect(() => {
     AdminTempleDetails();
   }, []);
