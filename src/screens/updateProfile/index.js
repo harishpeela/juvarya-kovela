@@ -64,6 +64,7 @@ const UpdateProfile = ({navigation}) => {
 
   const HandleCnfrm = datedata => {
     if (datedata) {
+      console.log('date', datedata);
       setToDate(datedata);
       HideDatePicker();
     }
@@ -90,7 +91,7 @@ const UpdateProfile = ({navigation}) => {
     };
     // console.log(payload, 'payload');
     if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
-      alert('please fill one filed');
+      alert('please fill at least one field');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
