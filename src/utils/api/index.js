@@ -36,6 +36,7 @@ const endpoints = {
   NEW_LIKES_COUNT: '/jtfeedreview/likes?feedId',
   NEW_FOLLOW_COUNT: '/jtfollower/count',
   NEW_FAVORITES: '/jtfollower/profile',
+  TEMPLE_DETAILS: 'jtprofile',
   NEW_GET_TEMPLESDETAILS_WITH_TEMPID: 'jtprofile',
   NEW_GET_MY_TEMPELS_LIST: 'jtfollower/customer?customerId',
   NEW_TEMPLE_ROLE_WITH_ID: 'jtprofile/customer-roles?profileId',
@@ -70,6 +71,7 @@ const endpoints = {
   DELETE_FEED: 'jtfeed/delete/feed?feedId',
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
+  UPDATE_PROFILE_PICTURE: '/picture/customer',
   TEMPLE_FOLLOWERS_LIST: '/jtfollower/profile?profileId',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
@@ -294,7 +296,7 @@ export const GetProfilePic = async mailId => {
 export const PostProfilePic = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
-      `${endpoints.CUSTOMER_PROFILE_PICTURE}`,
+      `${endpoints.UPDATE_PROFILE_PICTURE}`,
       data,
     );
     return result;
@@ -1065,6 +1067,15 @@ export const getDonationTypes = async (pgNo, pgSz) => {
     let result = await axiosNotifications.get(
       `${endpoints.DONATION_TYPES}?pageNo=${pgNo}&pageSize=${pgSz}`,
     );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getTempleProfileDetails = async (id) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.TEMPLE_DETAILS}/${id}`);
     return result;
   } catch (error) {
     return error;

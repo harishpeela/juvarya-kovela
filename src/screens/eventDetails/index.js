@@ -46,7 +46,7 @@ const EventDetails = ({navigation, route}) => {
           },
         ]);
       } else {
-        Alert.alert('Error', result?.data?.message, [
+        Alert.alert('Error', result?.data?.message || 'something went wrong', [
           {
             text: 'Ok',
             onPress: () =>

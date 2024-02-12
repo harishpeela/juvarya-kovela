@@ -37,7 +37,7 @@ const [donData, setDonData] = useState({});
   }, [data])
   return (
         <TouchableOpacity style={styles.container}>
-          <EntypoIcon name="cross" size={20} onPress={onPressDel} style={{position:'absolute' , top:5, right:5}}/>
+          <EntypoIcon name="cross" size={20} onPress={onPressDel} style={{position:'absolute' , top:5, right:5}} color={'black'}/>
           <Image
             source={{
               uri: donData?.url
