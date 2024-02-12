@@ -134,7 +134,7 @@ const CreateFeed = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} txt={'Upload Photo'} navigation={navigation} />
+        <TopBarcard back={true} txt={'Upload Photo'} navBack={() => navigation.goBack()}  navigation={navigation} />
       </View>
       <View style={{margin: 30}}>
         <View style={styles.uploadContainer}>
