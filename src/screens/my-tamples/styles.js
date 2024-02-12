@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinMedium,
   marginTop:'5%',
   fontSize:15,
+  textDecorationLine:'underline'
   // fontWeight:'bold'
   },
   searchbarContainer: {
