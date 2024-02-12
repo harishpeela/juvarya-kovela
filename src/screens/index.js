@@ -58,6 +58,7 @@ import ProfileMyMemberships from './profileMyMemberships';
 import Info from './Info';
 import Profile_Events from './profile-events';
 import Save_Highlight from './highlights-save';
+import CommunityTemple from './createCommunityTemple';
 export {
   CreatePost,
   Seemore,
@@ -119,4 +120,5 @@ export {
   Info,
   Profile_Events,
   Save_Highlight,
+  CommunityTemple
 };

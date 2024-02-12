@@ -79,6 +79,7 @@ const Profile = ({navigation}) => {
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
     let formdata = new FormData();
+    console.log('img===>', img)
     formdata.append('profilePicture', img);
     let result = await PostProfilePic(formdata);
     if (result) {
@@ -100,6 +101,7 @@ const Profile = ({navigation}) => {
   //     console.log('error in get profile picture', error);
   //   }
   // };
+
  
   const uploadPhoto = () => {
     try {
@@ -149,14 +151,17 @@ const Profile = ({navigation}) => {
   };
   const TempleAdmins = async () => {
     setLoader(true);
+    console.log('loader first', loader);
     let result = await AdminTemples();
-    // console.log('admins temples', result?.data);
+    console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
       setLoader(false);
+      console.log('loader second', loader);
     } else {
       setAdmin([]);
       setLoader(false);
+      console.log('loader third', loader);
     }
   };
   useEffect(() => {
@@ -166,7 +171,7 @@ const Profile = ({navigation}) => {
   const MyMembershipsData = async () => {
     setLoader(true);
     let result = await MyMemberships(1, 0, 20);
-    // console.log('result.date ====>', result.data);
+    console.log('result.date ====>', result.data);
     if (result) {
       setMyMemberships(result?.data.data);
       setLoader(false);
@@ -178,11 +183,12 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyMembershipsData();
   }, []);
+  console.log('membership Data====>', myMemberships);
  
   const MyDonationsData = async () => {
     setLoader(true);
     let result = await MyDonations(35);
-    // console.log('result.date ====kkk>', result?.data);
+    console.log('result.date ====kkk>', result?.data);
     if (result) {
       setMyDonationsList(result?.data.data);
       setLoader(false);
@@ -194,6 +200,7 @@ const Profile = ({navigation}) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
+  console.log('Donation Data====>', MyDonationsList);
  
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -242,7 +249,7 @@ const Profile = ({navigation}) => {
                   {/* <Icon name="camera" size={60} color={colors.orangeColor} /> */}
                   <Image
                     source={{
-                      uri: 'https://fanfun.s3.ap-south-1.amazonaws.com/17072837946261707283792539.jpg',
+                      uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                     }}
                     style={styles.profileImage}
                   />
@@ -256,9 +263,6 @@ const Profile = ({navigation}) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-            {/* {loader ? (
-              <Loader size={'small'} color={colors.orangeColor} />
-            ) : Admin || roleType === 'ROLE_ADMIN' ? ( */}
               <Item
               svg={
                 <FontAwesome5
@@ -272,9 +276,6 @@ const Profile = ({navigation}) => {
                   navigation.navigate(allTexts.screenNames.myTamples);
                 }}
               />
-            {/* ) : (
-              ''
-            )} */}
             <Item
               svg={
                 <Icon
