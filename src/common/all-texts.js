@@ -178,6 +178,7 @@ export const allTexts = {
     info:'Info',
     profileEvents: 'Profile_Events',
     savehighlight: 'Save_Highlight',
+    communityTemple:'Create_Community_Temple'
   },
   homeHeader: {
     welcome: 'Welcome ',

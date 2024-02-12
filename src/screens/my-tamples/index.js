@@ -1,30 +1,30 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable no-undef */
-/* eslint-disable react-hooks/exhaustive-deps */
-import {View, SafeAreaView, FlatList, Text, searchedText} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {BackHeader, Loader, SearchBar, BackgroundImage} from '../../components';
-import {styles} from './styles';
-import {allTexts, colors} from '../../common';
-import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
-import {FavTempleListCard} from '../../components';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import React, { useEffect, useState } from 'react';
+import { View, SafeAreaView, FlatList, Text } from 'react-native';
+import { BackHeader, Loader, SearchBar } from '../../components';
+import { styles } from './styles';
+import { allTexts, colors } from '../../common';
+import { getTempledetailsWithId, AdminTemples } from '../../utils/api';
+import { FavTempleListCard } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// import CreateCommunityTempleScreen from './CreateCommunityTempleScreen'; // Assuming you have a screen for creating community temples
 
-const MyTamples = ({navigation}) => {
+const MyTemples = ({ navigation }) => {
   const [templeList, setTempleList] = useState([]);
-  const [filteredArray, setfilteredArray] = useState([]);
+  const [filteredArray, setFilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [seracherdText, setSeracherdText] = useState('');
+  const [searchedText, setSearchedText] = useState('');
 
   const TempleDetails = async d => {
     try {
       let result = await getTempledetailsWithId(d?.id);
       if (result) {
-        let templesArray = {...d, ...result?.data};
+        let templesArray = { ...d, ...result?.data };
         console?.log('res ====><', templesArray);
         setTempleList(array => [...array, templesArray]);
-        setfilteredArray(array => [...array, templesArray]);
+        setFilteredArray(array => [...array, templesArray]);
         setLoading(false);
       } else {
         setLoading(false);
@@ -33,49 +33,42 @@ const MyTamples = ({navigation}) => {
       console.log('error in templedetails api is ==>', error);
     }
   };
+
   const AdminTempleDetails = async () => {
     setLoading(true);
     try {
       let result = await AdminTemples();
-      // console.log('result od admi temples', result?.data);
-      let adminData = result?.data;
+      let adminData = result?.data; 
       adminData.map(e => {
         TempleDetails(e);
       });
     } catch (error) {
+      setLoading(false);
       console.log('error in admin temples', error);
     }
   };
-  const onSelect = data => {
-    // setIsLiked(data?.selected);
-  };
+
   useEffect(() => {
     AdminTempleDetails();
   }, []);
+
   const performFilter = value => {
-    setfilteredArray(
+    setFilteredArray(
       templeList.filter(item =>
         item?.name?.toLowerCase().includes(value?.toLowerCase()),
       ),
     );
   };
+
   return (
     <SafeAreaView style={styles.wrapper}>
-      {/* <View style={styles.headerContainer}>
-        <BackHeader
-          onBackPress={() => {
-            navigation.goBack();
-          }}
-          txt={'My Temples'}
-        />
-      </View> */}
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarCard2 txt={'My Temples'} back={true} navigation={navigation}>
-          <View style={{...styles.searchContainer, marginTop: '-5%'}}>
+          <View style={{ ...styles.searchContainer, marginTop: '-5%' }}>
             <SearchBar
               value={searchedText}
               onTextChange={e => {
-                setSeracherdText(e);
+                setSearchedText(e);
                 SearchPopTemp(e);
               }}
               loading={false}
@@ -97,14 +90,14 @@ const MyTamples = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray?.length  ? (
+            filteredArray?.length ? (
               <FlatList
                 data={filteredArray}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={(item, index) => item?.id}
-                renderItem={({item, index}) => {
+                renderItem={({ item, index }) => {
                   if (item?.name) {
                     return (
                       <FavTempleListCard
@@ -128,14 +121,19 @@ const MyTamples = ({navigation}) => {
               />
             ) : (
               <View style={styles.loaderContainer}>
-              <FontAwesome5
-                name="gopuram"
-                size={50}
-                color={'orange'}
-              />
-              <Text style={styles.noAvailable}>{'No Temples Available'}</Text>
-            </View>
-             
+                <FontAwesome5
+                  name="gopuram"
+                  size={50}
+                  color={'orange'}
+                 
+                />
+                <Text
+                  style={styles.noAvailable}
+                  onPress={() => navigation.navigate(allTexts.screenNames.communityTemple)}
+                >
+                  {'Create Your Community Temple'}
+                </Text>
+              </View>
             ),
           ]
         )}
@@ -144,4 +142,4 @@ const MyTamples = ({navigation}) => {
   );
 };
 
-export default MyTamples;
+export default MyTemples;

@@ -93,7 +93,7 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={15} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FeatherIcon name="search" color={color} size={focused ? 28 : 23} />
-                  <Text style={{ color: color,fontSize:14 }}>Search</Text>
+                  <Text style={{ color: color,fontSize:14 }}>Search</Text> 
                 </View>
               ),
             }}
@@ -144,7 +144,7 @@ export default BottomTabBase = ({ navigation }) => {
                       <Entypo name='dot-single' size={20} color={colors.orangeColor} style={styles.dot} />
                   )}
                   <FontistoIcon name="heart-alt" color={color} size={focused ? 22 : 23} />
-                  <Text style={{ color: color ,fontSize:14}}>Favorites</Text>
+                  <Text style={{ color: color ,fontSize:14}}>Favourite</Text>
                 </View>
               ),
             }}
