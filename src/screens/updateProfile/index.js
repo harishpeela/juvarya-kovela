@@ -55,7 +55,7 @@ const UpdateProfile = ({navigation}) => {
   const [GV, setGV] = useState(false);
   const [PV, setPV] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [isRoleSelected, setIsRoleSelected] = useState('');
+  const [isRoleSelected, setIsRoleSelected] = useState();
   const [toDate, setToDate] = useState(new Date());
   const [DE, setDE] = useState(false);
   const [pinErr, setPinErr] = useState(false);
@@ -108,7 +108,6 @@ const UpdateProfile = ({navigation}) => {
       }
     }
   };
-
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
@@ -117,6 +116,7 @@ const UpdateProfile = ({navigation}) => {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
         setDob(dty?.dob);
+        setIsRoleSelected(dty?.gender);
       }
     } catch (error) {
       console.log('error in popular temples', error);
@@ -205,13 +205,15 @@ const UpdateProfile = ({navigation}) => {
                   }}
                   dropdownIconPosition="left"
                   defaultButtonText={
-                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
+                    currentCustomer?.gender ? currentCustomer?.gender  : 'gender'
                   }
+                  
                   dropdownStyle={{paddingTop: 10, borderRadius: 20}}
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
                     setGenderValue(e);
+                    // getCustomer();
                   }}
                   renderDropdownIcon={() => (
                     <View>
