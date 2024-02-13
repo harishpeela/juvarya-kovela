@@ -1095,3 +1095,12 @@ export const getTempleProfileDetails = async (id) => {
     return error;
   }
 };
+export const CreateCommunityTemple = async (data) => {
+  try {
+    let result = await axiosNewData.post(`${endpoints.CREATE_COMMUNITY_TEMPLE}`,
+    data);
+    return result;
+  } catch (error) {
+    console.log('error in community Temple', error);
+  }
+};

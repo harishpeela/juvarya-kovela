@@ -44,23 +44,11 @@ import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import { CreateCommunityTemple} from '../../utils/api';
 const CommunityTemple = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
-  const [gotraValue, setGotraValue] = useState('');
-  const [genderValue, setGenderValue] = useState('');
-  const [dropDownError, setDropDownError] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [pincode, setPincode] = useState('');
+
   const [eventError, setEventError] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
-  const [GV, setGV] = useState(false);
-  const [PV, setPV] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [isRoleSelected, setIsRoleSelected] = useState('');
   const [toDate, setToDate] = useState(new Date());
-  const [DE, setDE] = useState(false);
-  const [pinErr, setPinErr] = useState(false);
-  const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
   const [CommunityTemple, setCommunityTemple] = useState('');
   const [loader, setLoader] = useState(false);
@@ -68,7 +56,6 @@ const CommunityTemple = ({navigation}) => {
   const [descripton, setDescription] = useState('');
   const [DescriptionError, setDescriptionError] = useState(false);
   const [DateError, setDateError] = useState(false);
-
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -76,23 +63,17 @@ const CommunityTemple = ({navigation}) => {
     }
     
   };
-
-  console.log('todate',toDate)
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
-
   const HideDatePicker = () => {
     setDatePickerVisible(false);
     setDatePickerVisible(false);
   };
-  
-
+ 
   const CommunityTempleData = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'dd-MM-yyyy');
-
-
     let payload ={
       name: name,
       desciption: descripton,
@@ -103,7 +84,7 @@ const CommunityTemple = ({navigation}) => {
     if(name === ''){
       setEventError(true)
       console.log('name',name)
-    }  if(descripton === ''){
+    } if(descripton === ''){
       setDescriptionError(true)
       console.log('description',descripton)
     } else if (date === ''){
@@ -112,20 +93,19 @@ const CommunityTemple = ({navigation}) => {
     } else if(name && date && descripton){
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
-
-    }else{
+      if(result?.status === 200){
+        Alert.alert('Success', `Community temple was created successfully`, [
+          {
+            text: 'Ok',
+            onPress: () => navigation.navigate(allTexts.tabNames.profile),
+          },
+        ]);
+      }
+    } else{
       alert('Something went wrong')
-    }
-    
-
-    
-    
-    
+    } 
   };
  
-
-
-
   return (
     <ScrollView>
       <View style={styles.wrapper}>
@@ -158,7 +138,6 @@ const CommunityTemple = ({navigation}) => {
               lable={'Description'}
               placeholder={'About Temple'}
               height={150}
-
               onChangeText={e => {setDescription(e); setDescriptionError(false)}}
             />
              {DescriptionError  && (
@@ -171,7 +150,6 @@ const CommunityTemple = ({navigation}) => {
                 }}>
                 please enter Description
               </Text>
-            
             )}
             <View
               style={{
@@ -207,7 +185,6 @@ const CommunityTemple = ({navigation}) => {
                   onCancel={HideDatePicker}
                 />
               </View>
-              
               <View style={{width: '45%', right: 35, marginTop: 5}}>
                 {/* <EventInput
                   lable={'Pin Code'}
@@ -230,12 +207,11 @@ const CommunityTemple = ({navigation}) => {
                 onPress={() => CommunityTempleData()}
               />
             </View>
-            
           </View>
         </View>
       </View>
     </ScrollView>
   );
 };
-
+ 
 export default CommunityTemple;

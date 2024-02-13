@@ -55,7 +55,7 @@ const UpdateProfile = ({navigation}) => {
   const [GV, setGV] = useState(false);
   const [PV, setPV] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [isRoleSelected, setIsRoleSelected] = useState('');
+  const [isRoleSelected, setIsRoleSelected] = useState();
   const [toDate, setToDate] = useState(new Date());
   const [DE, setDE] = useState(false);
   const [pinErr, setPinErr] = useState(false);
@@ -69,7 +69,7 @@ const UpdateProfile = ({navigation}) => {
     if (datedata) {
       console.log('date', datedata);
       setToDate(datedata);
-
+      setDob(format(datedata, 'dd-MM-yyyy')); // Update the dob state with the selected date
       HideDatePicker();
     }
   };
@@ -95,12 +95,13 @@ const UpdateProfile = ({navigation}) => {
       zodiacSign: '',
       primaryContact: '',
     };
-    // console.log(payload, 'payload');
+    console.log(payload, 'payload');
     if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
       alert('please fill at least one field');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
+        console.log('date of birth', responce?.data);
         if (responce?.status === 200) {
           Alert.alert('Success', "Details Updated Successfully", [
             {
@@ -114,7 +115,6 @@ const UpdateProfile = ({navigation}) => {
       }
     }
   };
-
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
@@ -123,6 +123,7 @@ const UpdateProfile = ({navigation}) => {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
         setDob(dty?.dob);
+        setIsRoleSelected(dty?.gender);
       }
     } catch (error) {
       console.log('error in popular temples', error);
@@ -216,8 +217,9 @@ const UpdateProfile = ({navigation}) => {
                   }}
                   dropdownIconPosition="left"
                   defaultButtonText={
-                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
+                    currentCustomer?.gender ? currentCustomer?.gender  : 'gender'
                   }
+                  
                   dropdownStyle={{paddingTop: 10, borderRadius: 20}}
                   onSelect={e => {
                     setIsRoleSelected(e);
