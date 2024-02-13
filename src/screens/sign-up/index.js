@@ -117,7 +117,7 @@ const Signup = ({navigation}) => {
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}
         contentContainerStyle={styles.scrollContainer}>
-        <Text style={styles.signupText}>{sigup}</Text>
+        {/* <Text style={styles.signupText}>{sigup}</Text> */}
         <KovelaIcon />
         <Formik
           onSubmit={(values, formikActions) => {

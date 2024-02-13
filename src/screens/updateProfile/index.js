@@ -62,13 +62,19 @@ const UpdateProfile = ({navigation}) => {
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
 
-  const HandleCnfrm = datedata => {
+
+
+
+  const HandleCnfrm = (datedata) => {
     if (datedata) {
       console.log('date', datedata);
       setToDate(datedata);
+
       HideDatePicker();
     }
   };
+
+
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -96,7 +102,7 @@ const UpdateProfile = ({navigation}) => {
       try {
         let responce = await Update_Profile(payload);
         if (responce?.status === 200) {
-          Alert.alert('Success', responce?.data?.message, [
+          Alert.alert('Success', "Details Updated Successfully", [
             {
               text: 'Ok',
               onPress: () => navigation.goBack(),
@@ -188,6 +194,11 @@ const UpdateProfile = ({navigation}) => {
                 
                 <SelectDropdown
                   data={['Male', 'Female', 'Others']}
+                  defaultValue={isRoleSelected}
+                  onSelect={(e) => {
+                    setIsRoleSelected(e);
+                    setGV(true); // Set GV to true when gender is selected
+                  }}
                   buttonTextStyle={{
                     fontSize: 14,
                     marginRight: '70%',
@@ -211,7 +222,7 @@ const UpdateProfile = ({navigation}) => {
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
-                    setGenderValue(e);
+                    setGenderValue(true);
                   }}
                   renderDropdownIcon={() => (
                     <View>

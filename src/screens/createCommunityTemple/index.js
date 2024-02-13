@@ -64,8 +64,8 @@ const CommunityTemple = ({navigation}) => {
   const [dob, setDob] = useState(' ');
   const [CommunityTemple, setCommunityTemple] = useState('');
   const [loader, setLoader] = useState(false);
-  const [name, setName] = useState(false);
-  const [descripton, setDescription] = useState(false);
+  const [name, setName] = useState('');
+  const [descripton, setDescription] = useState('');
   const [DescriptionError, setDescriptionError] = useState(false);
   const [DateError, setDateError] = useState(false);
 
@@ -88,11 +88,11 @@ const CommunityTemple = ({navigation}) => {
   };
   
 
-
   const CommunityTempleData = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'dd-MM-yyyy');
-    
+
+
     let payload ={
       name: name,
       desciption: descripton,
@@ -103,7 +103,7 @@ const CommunityTemple = ({navigation}) => {
     if(name === ''){
       setEventError(true)
       console.log('name',name)
-    } else if(descripton === ''){
+    }  if(descripton === ''){
       setDescriptionError(true)
       console.log('description',descripton)
     } else if (date === ''){
@@ -113,24 +113,17 @@ const CommunityTemple = ({navigation}) => {
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
 
+    }else{
+      alert('Something went wrong')
     }
     
 
     
     
-    // if (result) {
-    //   setCommunityTemple(result?.data.data);
-    //   setLoader(false);
-    // } else {
-    //   setCommunityTemple([]);
-    //   setLoader(false);
-    // }
+    
   };
-  useEffect(() => {
-    CommunityTempleData();
-  }, []);
-  // console.log('CommunityTemple Data====>',CommunityTemple );
  
+
 
 
   return (
@@ -178,96 +171,8 @@ const CommunityTemple = ({navigation}) => {
                 }}>
                 please enter Description
               </Text>
-            )}
-
-
-
             
-            {/* <EventInput
-              placeholder={'Established Date'}
-             
-              height={50}
-              value={phone}
-              keyboardType={'numeric'}
-              onChangeText={text => {
-                setPhone(text);
-                setPV(false);
-              }}
-            /> */}
-            {/* <TouchableOpacity>
-              <View>
-                <Text
-                  style={{
-                    marginLeft: '8%',
-                    marginVertical: '2%',
-                    color: 'black',
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                  }}>
-                  Gender
-                </Text>
-                
-                <SelectDropdown
-                  data={['Male', 'Female', 'Others']}
-                  buttonTextStyle={{
-                    fontSize: 14,
-                    marginRight: '70%',
-                    color: colors.gray,
-                  }}
-                  defaultValue={isRoleSelected}
-                  buttonStyle={{
-                    backgroundColor: 'white',
-                    borderColor: 'black',
-                    borderWidth: 0.5,
-                    borderRadius: 8,
-                    height: 45,
-                    width: '84%',
-                    marginHorizontal: '8%',
-                  }}
-                  dropdownIconPosition="left"
-                  defaultButtonText={
-                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
-                  }
-                  dropdownStyle={{paddingTop: 10, borderRadius: 20}}
-                  onSelect={e => {
-                    setIsRoleSelected(e);
-                    setDropDownError(false);
-                    setGenderValue(e);
-                  }}
-                  renderDropdownIcon={() => (
-                    <View>
-                      {isRoleSelected === 'Male' && (
-                        <FontAwesome
-                          name="male"
-                          size={20}
-                          color={colors.orangeColor}
-                          style={{marginLeft: 2}}
-                        />
-                      )}
-                      {isRoleSelected === 'Female' && (
-                        <FontAwesome
-                          name="female"
-                          size={20}
-                          color={colors.orangeColor}
-                          style={{marginLeft: 2}}
-                        />
-                      )}
-                     
-                    </View>
-                  )}
-                />
-              </View>
-            </TouchableOpacity> */}
-            {/* <EventInput
-              lable={'Gotra'}
-              gotra={true}
-              placeholder={currentCustomer?.gothra ? currentCustomer?.gothra : 'gotra'}
-              height={50}
-              onChangeText={text => {
-                setGotraValue(text);
-              }}
-             
-            /> */}
+            )}
             <View
               style={{
                 flexDirection: 'row',

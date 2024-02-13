@@ -56,10 +56,10 @@ const MyTemples = ({ navigation }) => {
     AdminTempleDetails();
   }, []);
 
-  const onSelect = data => {
+  // const onSelect = data => {
    
-    // FollowandUnFollow(data?.selectedId);
-  };
+  //   // FollowandUnFollow(data?.selectedId);
+  // };
 
   const performFilter = value => {
     setFilteredArray(
