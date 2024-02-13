@@ -154,11 +154,10 @@ const ForgetPassword = () => {
       email: userEmail,
       password: values.password,
       otp: otpOutPut,
-    };
+    };      let result = await forgotPassword(payload);
     // console.log('forgot password payload', payload);
     try {
-      let result = await forgotPassword(payload);
-      if (result) {
+      if (result?.status === 200) {
         Snackbar.show({
           text: 'Password Created Successfully',
           backgroundColor: 'green',

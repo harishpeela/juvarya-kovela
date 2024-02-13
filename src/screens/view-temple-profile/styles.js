@@ -150,8 +150,8 @@ export const styles = StyleSheet.create({
   },
   ImagesContainer: {
     width: '100%',
-    borderTopWidth: 1,
-    borderTopColor: colors.gray2,
+    // borderTopWidth: 1,
+    // borderTopColor: colors.gray2,
     // paddingTop:'1%',
   },
   horizontalContainer: {
