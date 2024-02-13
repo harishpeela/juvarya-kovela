@@ -35,11 +35,11 @@ const CreateFeed = ({route, navigation}) => {
     if (image === null) {
       alert('please upload a image');
     } else if (titleName === '') {
-      alert('name must be entered');
+      alert('Enter Name');
     } else if (description === '') {
-      alert('description mast be entered');
+      alert('Enter Description');
     } else if (city === '') {
-      alert('city must be entered');
+      alert('Enter City');
     } else {
       NewFeed(id);
     }
@@ -134,7 +134,7 @@ const CreateFeed = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} txt={'Upload Photo'} navBack={() => navigation.goBack()}  navigation={navigation} />
+        <TopBarcard back={true} txt={'Upload Photo'} navBack={() =>navigation.goBack()} />
       </View>
       <View style={{margin: 30}}>
         <View style={styles.uploadContainer}>
@@ -165,7 +165,7 @@ const CreateFeed = ({route, navigation}) => {
           )}
         </View>
 
-        <View style={{marginHorizontal: 70, marginBottom: 20}}>
+        <View style={{marginHorizontal: 70,marginTop:'25%'}}>
           <PrimaryButton
             text={'Next'}
             bgColor={colors.orangeColor}

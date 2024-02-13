@@ -46,7 +46,7 @@ const UserProfileDonationsData = ({ navigation, route }) => {
       <View>
         <View style={{ minHeight: '15%', marginTop: '3%' }}>
           <TopBarCard2
-            txt={'User Donations'}
+            txt={'My Donations'}
             back={true}
             navigation={navigation}
             navMenu={navigation}>
@@ -72,7 +72,7 @@ const UserProfileDonationsData = ({ navigation, route }) => {
                 )}
               />
           ) : (
-            <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '50%' }}>
+            <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '60%' }}>
                 <FontAwesome5
                   name="donate"
                   size={50}
@@ -81,7 +81,7 @@ const UserProfileDonationsData = ({ navigation, route }) => {
                  
                 />
               <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: 'Poppins-Medium' }}>
-                No donations to display
+                No Donations To Display
               </Text>
             </View>
           )}
