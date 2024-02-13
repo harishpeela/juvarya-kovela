@@ -66,6 +66,7 @@ const UpdateProfile = ({navigation}) => {
     if (datedata) {
       console.log('date', datedata);
       setToDate(datedata);
+      setDob(format(datedata, 'dd-MM-yyyy')); // Update the dob state with the selected date
       HideDatePicker();
     }
   };
@@ -89,12 +90,13 @@ const UpdateProfile = ({navigation}) => {
       zodiacSign: '',
       primaryContact: '',
     };
-    // console.log(payload, 'payload');
+    console.log(payload, 'payload');
     if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
       alert('please fill at least one field');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
+        console.log('date of birth', responce?.data);
         if (responce?.status === 200) {
           Alert.alert('Success', responce?.data?.message, [
             {
@@ -213,7 +215,6 @@ const UpdateProfile = ({navigation}) => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
                     setGenderValue(e);
-                    // getCustomer();
                   }}
                   renderDropdownIcon={() => (
                     <View>
