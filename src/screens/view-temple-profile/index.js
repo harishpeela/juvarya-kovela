@@ -66,12 +66,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [donationLoader, setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
@@ -120,7 +120,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const TempleAddressDetails = async templeId => {
     try {
       let result = await TempleAddress(templeId);
-      // console.log('templeAddress', result?.data);
+      console.log('templeAddress=====>', result?.data);
       if (result) {
         const dty = result?.data || {};
         // console.log('dtyasmjb', dty);
@@ -199,12 +199,12 @@ const ViewTempleProfile = ({route, navigation}) => {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
         FollowingCount();
-        ToastAndroid.show(
-          `Successfully you are ${
-            !isFollow ? ' Following' : 'unFollwing'
-          } the temple !`,
-          ToastAndroid.SHORT,
-        );
+        // ToastAndroid.show(
+        //   `Successfully you are ${
+        //     !isFollow ? ' Following' : 'unFollwing'
+        //   } the temple !`,
+        //   ToastAndroid.SHORT,
+        // );
       } else {
         alert('something went wrong');
       }
@@ -278,9 +278,8 @@ const ViewTempleProfile = ({route, navigation}) => {
   };
 
   const templeDetails = async (id) => {
-    console.log('====>====================', id);
     let responce = await getTempleProfileDetails(id);
-    console.log('responce of temple details', responce?.data);
+    // console.log('responce of temple details', responce?.data);
     if(responce?.data){
       setTempProfileData(responce?.data);
     } else {
@@ -291,13 +290,13 @@ const ViewTempleProfile = ({route, navigation}) => {
   useEffect(() => {
     Type();
   }, []);
-
   const dontationValue = async id => {
     setDonationLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
       console.log('top donation', result?.data?.data[0]);
       if (result) {
+        console.log('dontion ====>', result?.data?.data[0]);
         setDonationValue(result?.data?.data[0]);
         setDonationLoader(false);
       } else {
@@ -407,7 +406,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 </View>
               </View>
             </View>
-           {tempProfileData?.addressDTO?.locality && (
+           {templeaddress?.jtProfileAddressDTO?.locality && (
              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '2%'}}>
                <EvilIcons
                  style={{color: colors.orangeColor, backgroundColor: 'white'}}
@@ -416,8 +415,8 @@ const ViewTempleProfile = ({route, navigation}) => {
                  color="white"
                />
                <Text style={{fontSize: 12, color: 'gray'}}>
-                 {tempProfileData?.addressDTO?.locality},{' '}
-                 {tempProfileData?.addressDTO?.postalCodeDTO?.city?.name}
+                 {templeaddress?.jtProfileAddressDTO?.locality},{' '}
+                 {templeaddress?.jtProfileAddressDTO?.postalCodeDTO?.city?.name}
                </Text>
              </View>
            )}
@@ -524,7 +523,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   }
                   id={donationValue?.email}
                   text={
-                    donationValue
+                    donationValue?.name
                       ? `Top donation by ${
                           donationValue?.donorName
                             ? donationValue?.donorName

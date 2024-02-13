@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
-import React, {useEffect, useState, useContext, useCallback} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Loader, SearchBar, BackgroundImage, TopBarcard} from '../../components';
 import {allTexts, colors} from '../../common';
-import { useFocusEffect } from '@react-navigation/native';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
@@ -26,14 +25,13 @@ const Favorite = ({navigation}) => {
     setLoading(true);
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
-      if (response?.data) {
+      if (response?.data?.totalItems === 0) {
+        setLoading(false);
+      } else if (response.data) {
         let data = response?.data?.data;
         data?.map(a => {
           TempleDetails(a);
         });
-      } else {
-        setLoading(false);
-
       }
     } catch (error) {
       console.log('error in mytemplesapi', error);
@@ -91,19 +89,11 @@ const Favorite = ({navigation}) => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
-  // useEffect(() => {
-  //   if (pageNo >= 0) {
-  //     getTemples(userDetails?.id, pageNo, 20);
-  //   }
-  // }, [pageNo]);
-  useFocusEffect(
-    useCallback(() => {
-      if (pageNo >= 0) {
-        getTemples(userDetails?.id, pageNo, 20);
-      }
-      return () => {};
-    }, [userDetails])
-  );
+  useEffect(() => {
+    if (pageNo >= 0) {
+      getTemples(userDetails?.id, pageNo, 20);
+    }
+  }, [pageNo]);
   return (
     <SafeAreaView
       style={{
@@ -139,39 +129,39 @@ const Favorite = ({navigation}) => {
           [
             filteredArray ? (
               <FlatList
-                data={filteredArray}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatListStyle}
-                keyboardShouldPersistTaps="handled"
-                // ListFooterComponent={renderLoder}
-                // onEndReached={() => loadMoreItems()}
-                onEndReachedThreshold={0.5}
-                decelerationRate={0.5}
-                keyExtractor={item => item?.id}
-                renderItem={({item}) => {
-                  if (item?.name) {
-                    return (
-                      <FavTempleListCard
-                        name={item.name}
-                        location={item.line1}
-                        date={item.creationTime}
-                        img={item?.jtProfileDTO?.logo}
-                        onPress={() => {
-                          navigation.navigate(
-                            allTexts.screenNames.viewtempleprofile,
-                            {
-                              data: item,
-                              onSelect: onSelect,
-                            },
-                          );
-                        }}
-                      />
-                    );
-                  }
-                }}
-              />
-             
+              data={filteredArray}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.flatListStyle}
+              keyboardShouldPersistTaps="handled"
+              // ListFooterComponent={renderLoder}
+              // onEndReached={() => loadMoreItems()}
+              onEndReachedThreshold={0.5}
+              decelerationRate={0.5}
+              keyExtractor={item => item?.id}
+              renderItem={({item}) => {
+                if (item?.name) {
+                  return (
+                    <FavTempleListCard
+                      name={item.name}
+                      location={item.line1}
+                      date={item.creationTime}
+                      img={item?.jtProfileDTO?.logo}
+                      onPress={() => {
+                        navigation.navigate(
+                          allTexts.screenNames.viewtempleprofile,
+                          {
+                            data: item,
+                            onSelect: onSelect,
+                          },
+                        );
+                      }}
+                    />
+                  );
+                }
+              }}
+            />
             ) : (
+
               <View style={styles.loaderContainer}>
               <FontAwesome5
               name="gopuram"
@@ -181,6 +171,7 @@ const Favorite = ({navigation}) => {
             />
             <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
           </View>
+              
             ),
           ]
         )}
@@ -188,5 +179,5 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
- 
+
 export default Favorite;
