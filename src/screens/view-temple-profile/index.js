@@ -323,9 +323,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                   style={styles.iconContainer}
                   onPress={() => {
                     console.log(
-                      
                       isFollow,
-                      
                       trfData?.jtProfile,
                     );
                     navigation.goBack();
