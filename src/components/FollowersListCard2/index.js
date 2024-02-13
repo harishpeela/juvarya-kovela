@@ -24,7 +24,7 @@ const FollowersListCard2 = ({
             source={{
               uri: img
                 ? img
-                : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+                : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
             }}
             style={styles.image}
           />
