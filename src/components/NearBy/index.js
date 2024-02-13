@@ -201,7 +201,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                  
                 />
                   <Text style={{fontSize: 18, color: 'orange',fontFamily:'Poppins-Medium'}}>
-                    No Temples to Display
+                    No Temples To Display
                   </Text>
                 </View>
               )}

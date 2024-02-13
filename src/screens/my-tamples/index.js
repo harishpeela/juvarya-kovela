@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, FlatList, Text } from 'react-native';
+import { View, SafeAreaView, FlatList, Text,onSelect } from 'react-native';
 import { BackHeader, Loader, SearchBar } from '../../components';
 import { styles } from './styles';
 import { allTexts, colors } from '../../common';
@@ -55,6 +55,11 @@ const MyTemples = ({ navigation }) => {
   useEffect(() => {
     AdminTempleDetails();
   }, []);
+
+  // const onSelect = data => {
+   
+  //   // FollowandUnFollow(data?.selectedId);
+  // };
 
   const performFilter = value => {
     setFilteredArray(

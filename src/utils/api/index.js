@@ -107,7 +107,7 @@ const endpoints = {
   EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
   EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
-  CREATE_COMMUNITY_TEMPLE:'jtprofile/create',
+  CREATE_COMMUNITY_TEMPLE:'jtprofile/create'
 };
 export const getInitialToken = async () => {
   try {
@@ -283,6 +283,19 @@ export const AdminTemples = async () => {
     console.log('error in temple admins', error);
   }
 };
+
+
+export const CreateCommunityTemple = async (data) => {
+  try {
+    let result = await axiosNewData.post(`${endpoints.CREATE_COMMUNITY_TEMPLE}`,
+    data);
+    return result;
+  } catch (error) {
+    console.log('error in community Temple', error);
+  }
+};
+
+
 export const GetProfilePic = async mailId => {
   try {
     let result = await axiosMultiPartFormData1.get(

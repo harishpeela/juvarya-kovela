@@ -50,19 +50,19 @@ const CommunityTemple = ({navigation}) => {
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [dob, setDob] = useState(' ');
+  const [CommunityTemple, setCommunityTemple] = useState('');
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState('');
   const [descripton, setDescription] = useState('');
   const [DescriptionError, setDescriptionError] = useState(false);
   const [DateError, setDateError] = useState(false);
- 
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
       HideDatePicker();
     }
+    
   };
- 
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -138,7 +138,6 @@ const CommunityTemple = ({navigation}) => {
               lable={'Description'}
               placeholder={'About Temple'}
               height={150}
- 
               onChangeText={e => {setDescription(e); setDescriptionError(false)}}
             />
              {DescriptionError  && (
@@ -151,7 +150,6 @@ const CommunityTemple = ({navigation}) => {
                 }}>
                 please enter Description
               </Text>
-           
             )}
             <View
               style={{
@@ -187,7 +185,6 @@ const CommunityTemple = ({navigation}) => {
                   onCancel={HideDatePicker}
                 />
               </View>
-             
               <View style={{width: '45%', right: 35, marginTop: 5}}>
                 {/* <EventInput
                   lable={'Pin Code'}
@@ -210,7 +207,6 @@ const CommunityTemple = ({navigation}) => {
                 onPress={() => CommunityTempleData()}
               />
             </View>
-           
           </View>
         </View>
       </View>
