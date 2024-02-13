@@ -39,6 +39,7 @@ import {
   TempleCommunity,
   TempleAddress,
   getProfileEvents,
+  getTempleProfileDetails,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileSeconTab, ProfileFourthTab} from '../../components';
@@ -65,12 +66,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  // console.log(
-  //   '<=============================>',
-  //   data,
-  //   // '<==============',
-  //   // userDetails,
-  // );
+  console.log(
+    '<=============================>',
+    data,
+    // '<==============',
+    // userDetails,
+  );
   const [loader, setloader] = useState(false);
   const [donationLoader, setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
@@ -94,6 +95,7 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [communityList, setCommunityList] = useState();
   const [templeaddress, setTempleAddress] = useState();
   const [events, setEvents] = useState([]);
+  const [tempProfileData, setTempProfileData] = useState();
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -121,7 +123,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       // console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || {};
-        console.log('dtyasmjb', dty);
+        // console.log('dtyasmjb', dty);
         setTempleAddress(dty);
       }
     } catch (error) {
@@ -145,6 +147,7 @@ const ViewTempleProfile = ({route, navigation}) => {
         // MemberShip(result?.jtProfile);
         TempleAddressDetails(result?.jtProfile);
         eventList(result?.jtProfile);
+        templeDetails(result?.jtProfile);
       } else {
       }
     } else {
@@ -184,10 +187,6 @@ const ViewTempleProfile = ({route, navigation}) => {
     const payload = {
       jtProfile: id,
       following: !isFollow,
-      // jtCustomer: userDetails?.id,
-      // type: 'ITEM',
-      // jtProfile: id,
-      // following: !isFollow,
     };
     try {
       setFollowBtnDisable(true);
@@ -207,7 +206,7 @@ const ViewTempleProfile = ({route, navigation}) => {
           ToastAndroid.SHORT,
         );
       } else {
-        alert('some thing went wrong');
+        alert('something went wrong');
       }
     } catch (error) {
       console.log('error in folow temples api in view profile page', error);
@@ -277,6 +276,18 @@ const ViewTempleProfile = ({route, navigation}) => {
       console.log('error in temple role api', error);
     }
   };
+
+  const templeDetails = async (id) => {
+    console.log('====>====================', id);
+    let responce = await getTempleProfileDetails(id);
+    console.log('responce of temple details', responce?.data);
+    if(responce?.data){
+      setTempProfileData(responce?.data);
+    } else {
+      alert('something went wrong please check');
+    }
+  }
+
   useEffect(() => {
     Type();
   }, []);
@@ -307,7 +318,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       <Pressable>
         <View style={styles.footerBackground}>
           <BackgroundImageAClass />
-          {data?.jtProfileDTO?.templeClass === 'c' && <BackgroundImageFlower />}
+          {tempProfileData?.templeClass === 'c' && <BackgroundImageFlower />}
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
@@ -348,9 +359,6 @@ const ViewTempleProfile = ({route, navigation}) => {
                     size={24}
                     color={isDarkMode ? 'black' : 'black'}
                   />
-                  <View style={styles.notificationNum}>
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>2</Text>
-                  </View>
                 </TouchableOpacity>
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
                   <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
@@ -364,7 +372,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             <View style={{alignSelf: 'center', marginTop: -15}}>
-              <ProfileImage profileImg={trfData} />
+              <ProfileImage profileImg={tempProfileData} />
             </View>
             <View
               style={{
@@ -373,8 +381,8 @@ const ViewTempleProfile = ({route, navigation}) => {
                 marginTop: '5%',
               }}>
               <Text style={{fontSize: 15}}>
-                {communityList?.communityDTO?.name
-                  ? communityList?.communityDTO?.name
+                {tempProfileData?.communityDTO?.name
+                  ? tempProfileData?.communityDTO?.name
                   : 'God Name'}
               </Text>
             </View>
@@ -394,15 +402,12 @@ const ViewTempleProfile = ({route, navigation}) => {
                     justifyContent: 'center',
                   }}>
                   <Text style={styles.titleHeader}>
-                    {/* {trfData?.name?.length < 25
-                      ? `${trfData?.name}`
-                      : `${trfData?.name?.substring(0, 25)}...`} */}
-                    {trfData?.name}
+                    {tempProfileData?.name}
                   </Text>
                 </View>
               </View>
             </View>
-           {templeaddress?.locality && (
+           {tempProfileData?.addressDTO?.locality && (
              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '2%'}}>
                <EvilIcons
                  style={{color: colors.orangeColor, backgroundColor: 'white'}}
@@ -410,14 +415,14 @@ const ViewTempleProfile = ({route, navigation}) => {
                  size={15}
                  color="white"
                />
-               <Text style={{fontSize: 12}}>
-                 {templeaddress?.locality},{' '}
-                 {templeaddress?.postalCodeDTO?.city?.name}
+               <Text style={{fontSize: 12, color: 'gray'}}>
+                 {tempProfileData?.addressDTO?.locality},{' '}
+                 {tempProfileData?.addressDTO?.postalCodeDTO?.city?.name}
                </Text>
              </View>
            )}
             <View style={{marginTop: 10}}>
-              {data?.seasonal ? (
+              {tempProfileData?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() =>
@@ -425,10 +430,10 @@ const ViewTempleProfile = ({route, navigation}) => {
                       id: trfData?.jtProfile,
                     })
                   }>
-                  <Text style={styles.seasonalText}> View Temple Crew</Text>
+                  <Text style={styles.seasonalText}>Temple Members</Text>
                 </TouchableOpacity>
               ) : (
-                <ProfileTimingTabs data={trfData} />
+                <ProfileTimingTabs data={tempProfileData} />
               )}
             </View>
             <View style={{marginLeft: 15}}>
@@ -470,7 +475,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <View
                   style={{
                     ...styles.followtab,
-                    justifyContent: trfData?.membershipsEnabled
+                    justifyContent: tempProfileData?.membershipsEnabled
                       ? 'space-evenly'
                       : 'space-evenly',
                   }}>
@@ -482,7 +487,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                  {trfData?.membershipsEnabled && (
+                  {tempProfileData?.membershipsEnabled && (
                     <DirectionsTabComp
                       role={
                         roleId === 'ROLE_ITEM_ADMIN' ||
@@ -627,7 +632,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.createfeed, {
                   data: data,
-                  classType: trfData?.templeClass,
+                  classType: tempProfileData?.templeClass,
                 });
                 setIsVisible(!isVisible);
               }}
@@ -643,7 +648,7 @@ const ViewTempleProfile = ({route, navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.profilememberships, {
-                  trfdata: trfData,
+                  trfdata: tempProfileData,
                   roleId: roleId,
                 });
               }}>

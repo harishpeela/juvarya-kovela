@@ -136,7 +136,7 @@ export default BottomTabBase = ({ navigation }) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.favorites}
-            component={GetFavScreen}
+            component={Favorite}
             options={{
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={!focused ? styles.container : styles.focusedContainer}>

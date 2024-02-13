@@ -67,7 +67,7 @@ export const TopBarcard = ({
                 />
                   </View>
                 )}
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.menuIcon}
                   onPress={() =>
                     navigation.navigate(allTexts.tabNames.profile)
@@ -78,7 +78,7 @@ export const TopBarcard = ({
                     color={colors.white}
                     style={{}}
                   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
               </TouchableOpacity>
             </View>
           )}

@@ -76,7 +76,7 @@ export const TempleListCard = ({
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
           data: post,
           onSelect: onSelect,
-        });
+        }, console.log('post ===<>', post));
       }}>
       <View style={{  alignItems: 'center', marginTop: 5, height: '70%',padding:3,marginTop:8}}>
         <Image
