@@ -27,11 +27,11 @@ const CreateFeedDescription = ({route, navigation}) => {
     if (image === null) {
       alert('please upload a image');
     } else if (titleName === '') {
-      alert('name must be entered');
+      alert('Enter Name');
     } else if (description === '') {
-      alert('description mast be entered');
+      alert('Enter Description');
     } else if (city === '') {
-      alert('city must be entered');
+      alert('Enter City');
     } else {
       NewFeed(id);
     }
@@ -112,7 +112,7 @@ const CreateFeedDescription = ({route, navigation}) => {
   return (
     <View>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} navigation={navigation} navBack={() => navigation.goBack()} txt={'Create Feed'} />
+        <TopBarcard back={true}  navBack={() =>navigation.goBack()} txt={'Create Feed'} />
       </View>
       <Image
         source={{uri: imageProp[0]?.uri}}
@@ -149,7 +149,7 @@ const CreateFeedDescription = ({route, navigation}) => {
           onFocus={() => Keyboard.dismiss()}
         />
 
-        <View style={{marginHorizontal: 50, marginTop: 20}}>
+        <View style={{marginHorizontal: 50, marginTop: 60}}>
           <PrimaryButton
             text={'Submit'}
             bgColor={colors.orangeColor}

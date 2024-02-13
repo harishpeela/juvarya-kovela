@@ -1,10 +1,9 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
 import {View, SafeAreaView, FlatList, Text, useColorScheme} from 'react-native';
-import React, {useEffect, useState, useContext, useCallback} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Loader, SearchBar, BackgroundImage, TopBarcard} from '../../components';
 import {allTexts, colors} from '../../common';
-import { useFocusEffect } from '@react-navigation/native';
 import {styles} from './style';
 import {GetMyTemples, getTempledetailsWithId} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
@@ -26,14 +25,13 @@ const Favorite = ({navigation}) => {
     setLoading(true);
     try {
       let response = await GetMyTemples(userid, pgno, pgsz);
-      if (response?.data) {
+      if (response?.data?.totalItems === 0) {
+        setLoading(false);
+      } else if (response.data) {
         let data = response?.data?.data;
         data?.map(a => {
           TempleDetails(a);
         });
-      } else {
-        setLoading(false);
-
       }
     } catch (error) {
       console.log('error in mytemplesapi', error);
@@ -91,19 +89,11 @@ const Favorite = ({navigation}) => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
-  // useEffect(() => {
-  //   if (pageNo >= 0) {
-  //     getTemples(userDetails?.id, pageNo, 20);
-  //   }
-  // }, [pageNo]);
-  useFocusEffect(
-    useCallback(() => {
-      if (pageNo >= 0) {
-        getTemples(userDetails?.id, pageNo, 20);
-      }
-      return () => {};
-    }, [userDetails])
-  );
+  useEffect(() => {
+    if (pageNo >= 0) {
+      getTemples(userDetails?.id, pageNo, 20);
+    }
+  }, [pageNo]);
   return (
     <SafeAreaView
       style={{
@@ -137,7 +127,17 @@ const Favorite = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray ? (
+            filteredArray?.length === 0 ? (
+              <View style={styles.loaderContainer}>
+                  <FontAwesome5
+                  name="gopuram"
+                  size={50}
+                  color={'orange'}
+                  style={{marginBottom:'5%'}}
+                />
+                <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
+              </View>
+            ) : (
               <FlatList
                 data={filteredArray}
                 showsVerticalScrollIndicator={false}
@@ -170,17 +170,6 @@ const Favorite = ({navigation}) => {
                   }
                 }}
               />
-             
-            ) : (
-              <View style={styles.loaderContainer}>
-              <FontAwesome5
-              name="gopuram"
-              size={50}
-              color={'orange'}
-              style={{marginBottom:'5%'}}
-            />
-            <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
-          </View>
             ),
           ]
         )}
@@ -188,5 +177,5 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
- 
+
 export default Favorite;

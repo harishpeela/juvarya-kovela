@@ -54,10 +54,10 @@ export const TempleListCard = ({
       console.log('77777777777', results?.data);
       if (results && results.status === 200) {
         ToastAndroid.show(
-          `Successfully you are  ${results?.data?.message === 'Success: following'
+          `  ${results?.data?.message === 'Success: following'
             ? 'Following'
-            : 'UnFollowing'
-          } the temple`,
+            : 'Unfollowing'
+          }  temple`,
           ToastAndroid.SHORT,
         );
       } else {

@@ -47,7 +47,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
       <View>
         <View style={{ minHeight: '15%', marginTop: '3%' }}>
           <TopBarCard2
-            txt={'User Memberships'}
+            txt={'My Memberships'}
             back={true}
             navigation={navigation}
             navMenu={navigation}>
@@ -75,7 +75,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
             <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '60%' }}>
               <AntDesign  style={{marginBottom:'5%'}} name="idcard" size={50} color={colors.orangeColor} />
               <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: 'Poppins-Medium' }}>
-                No Memberships to display
+                No Memberships To Display
               </Text>
             </View>
           )}

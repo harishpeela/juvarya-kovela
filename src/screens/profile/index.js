@@ -434,7 +434,7 @@ const currentCust = async () => {
             onPress={() => {
               updateProfilePicture(), setIsModal(false);
             }}>
-            <Text style={{color: 'white'}}> update profile Pictue</Text>
+            <Text style={{color: 'white'}}> update profile Picture</Text>
           </TouchableOpacity>
           <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
           <TouchableOpacity

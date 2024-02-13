@@ -114,7 +114,7 @@ const Signin = ({navigation}) => {
     <SafeAreaView style={styles.wrapper}>
       <StatusBar backgroundColor={'#FFAB0F'} translucent={true} />
       <View style={styles.signinTextContainer}>
-        <Text style={styles.signinText}>{login}</Text>
+        {/* <Text style={styles.signinText}>{login}</Text> */}
       </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
