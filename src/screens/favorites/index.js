@@ -139,37 +139,49 @@ const Favorite = ({navigation}) => {
               </View>
             ) : (
               <FlatList
-                data={filteredArray}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatListStyle}
-                keyboardShouldPersistTaps="handled"
-                // ListFooterComponent={renderLoder}
-                // onEndReached={() => loadMoreItems()}
-                onEndReachedThreshold={0.5}
-                decelerationRate={0.5}
-                keyExtractor={item => item?.id}
-                renderItem={({item}) => {
-                  if (item?.name) {
-                    return (
-                      <FavTempleListCard
-                        name={item.name}
-                        location={item.line1}
-                        date={item.creationTime}
-                        img={item?.jtProfileDTO?.logo}
-                        onPress={() => {
-                          navigation.navigate(
-                            allTexts.screenNames.viewtempleprofile,
-                            {
-                              data: item,
-                              onSelect: onSelect,
-                            },
-                          );
-                        }}
-                      />
-                    );
-                  }
-                }}
-              />
+              data={filteredArray}
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.flatListStyle}
+              keyboardShouldPersistTaps="handled"
+              // ListFooterComponent={renderLoder}
+              // onEndReached={() => loadMoreItems()}
+              onEndReachedThreshold={0.5}
+              decelerationRate={0.5}
+              keyExtractor={item => item?.id}
+              renderItem={({item}) => {
+                if (item?.name) {
+                  return (
+                    <FavTempleListCard
+                      name={item.name}
+                      location={item.line1}
+                      date={item.creationTime}
+                      img={item?.jtProfileDTO?.logo}
+                      onPress={() => {
+                        navigation.navigate(
+                          allTexts.screenNames.viewtempleprofile,
+                          {
+                            data: item,
+                            onSelect: onSelect,
+                          },
+                        );
+                      }}
+                    />
+                  );
+                }
+              }}
+            />
+            ) : (
+
+              <View style={styles.loaderContainer}>
+              <FontAwesome5
+              name="gopuram"
+              size={50}
+              color={'orange'}
+              style={{marginBottom:'5%'}}
+            />
+            <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
+          </View>
+              
             ),
           ]
         )}
@@ -177,5 +189,4 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
 export default Favorite;

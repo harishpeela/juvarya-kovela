@@ -8,7 +8,7 @@ export const FavTempleListCard = ({name, location, date, onPress, img}) => {
       <View style={styles.secondaryContainer}>
         <View>
           <Image
-            source={{uri: img ? img : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg'}}
+            source={{uri: img ? img : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png'}}
             style={{height: 70, width: 70, borderRadius: 70 / 2}}
           />
         </View>
