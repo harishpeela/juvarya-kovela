@@ -155,7 +155,7 @@ const UserFeedScreen = ({ navigation }) => {
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
             <FontAwesome size={30} style={{ marginBottom: '5%' }} />
-            <Text style={styles.nodatatext}>No items to display</Text>
+            <Text style={styles.nodatatext}>No Items To Display</Text>
           </View>
         ) : (
           <View style={{ marginTop: '70%' }}>

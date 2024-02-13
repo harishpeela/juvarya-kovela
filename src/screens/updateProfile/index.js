@@ -62,13 +62,19 @@ const UpdateProfile = ({navigation}) => {
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
 
-  const HandleCnfrm = datedata => {
+
+
+
+  const HandleCnfrm = (datedata) => {
     if (datedata) {
       console.log('date', datedata);
       setToDate(datedata);
+      setDob(format(datedata, 'dd-MM-yyyy')); // Update the dob state with the selected date
       HideDatePicker();
     }
   };
+
+
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -89,14 +95,15 @@ const UpdateProfile = ({navigation}) => {
       zodiacSign: '',
       primaryContact: '',
     };
-    // console.log(payload, 'payload');
+    console.log(payload, 'payload');
     if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
       alert('please fill at least one field');
     } else if (gotraValue || isRoleSelected || pincode) {
       try {
         let responce = await Update_Profile(payload);
+        console.log('date of birth', responce?.data);
         if (responce?.status === 200) {
-          Alert.alert('Success', responce?.data?.message, [
+          Alert.alert('Success', "Details Updated Successfully", [
             {
               text: 'Ok',
               onPress: () => navigation.goBack(),
@@ -188,6 +195,11 @@ const UpdateProfile = ({navigation}) => {
                 
                 <SelectDropdown
                   data={['Male', 'Female', 'Others']}
+                  defaultValue={isRoleSelected}
+                  onSelect={(e) => {
+                    setIsRoleSelected(e);
+                    setGV(true); // Set GV to true when gender is selected
+                  }}
                   buttonTextStyle={{
                     fontSize: 14,
                     marginRight: '70%',
@@ -212,8 +224,7 @@ const UpdateProfile = ({navigation}) => {
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
-                    setGenderValue(e);
-                    // getCustomer();
+                    setGenderValue(true);
                   }}
                   renderDropdownIcon={() => (
                     <View>
