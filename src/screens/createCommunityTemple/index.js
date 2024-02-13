@@ -28,6 +28,7 @@ import {Formik} from 'formik';
 import {UpdateProfileValidation} from '../../common/schemas';
 import {styles} from './styles'; // Update this import based on your project structure
 import {BackHeader, BackgroundImage} from '../../components';
+import { Loader } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
 import {
@@ -40,91 +41,71 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {EventInput2, EventInput3} from '../../components/eventCreateInput';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
-
+import { CreateCommunityTemple} from '../../utils/api';
 const CommunityTemple = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
-  const [gotraValue, setGotraValue] = useState('');
-  const [genderValue, setGenderValue] = useState('');
-  const [dropDownError, setDropDownError] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [pincode, setPincode] = useState('');
+
   const [eventError, setEventError] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
-  const [GV, setGV] = useState(false);
-  const [PV, setPV] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [isRoleSelected, setIsRoleSelected] = useState('');
   const [toDate, setToDate] = useState(new Date());
-  const [DE, setDE] = useState(false);
-  const [pinErr, setPinErr] = useState(false);
-  const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
-
+  const [loader, setLoader] = useState(false);
+  const [name, setName] = useState('');
+  const [descripton, setDescription] = useState('');
+  const [DescriptionError, setDescriptionError] = useState(false);
+  const [DateError, setDateError] = useState(false);
+ 
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
       HideDatePicker();
     }
   };
+ 
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
-
   const HideDatePicker = () => {
     setDatePickerVisible(false);
     setDatePickerVisible(false);
   };
-  const ProfileUpdate = async () => {
+ 
+  const CommunityTempleData = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'dd-MM-yyyy');
-    // console.log(formattedDate, '====<> date');
-    let payload = {
-      dob: formattedDate,
-      gender: isRoleSelected,
-      gothra: gotraValue,
-      whatsAppEnabled: true,
-      zodiacSign: '',
-      primaryContact: '',
-    };
-    // console.log(payload, 'payload');
-    if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
-      alert('please fill one filed');
-    } else if (gotraValue || isRoleSelected || pincode) {
-      try {
-        let responce = await Update_Profile(payload);
-        if (responce?.status === 200) {
-          Alert.alert('Success', responce?.data?.message, [
-            {
-              text: 'Ok',
-              onPress: () => navigation.goBack(),
-            },
-          ]);
-        }
-      } catch (error) {
-        console.error('Error fetching gender data:', error);
+    let payload ={
+      name: name,
+      desciption: descripton,
+      seasonal: true,
+      establishedOn:formattedDate
+  }
+    setLoader(true);
+    if(name === ''){
+      setEventError(true)
+      console.log('name',name)
+    } if(descripton === ''){
+      setDescriptionError(true)
+      console.log('description',descripton)
+    } else if (date === ''){
+      setDateError(true)
+      console.log('date',date)
+    } else if(name && date && descripton){
+      let result = await CreateCommunityTemple(payload);
+      console.log('result.date ====kkk>', result?.data);
+      if(result?.status === 200){
+        Alert.alert('Success', `Community temple was created successfully`, [
+          {
+            text: 'Ok',
+            onPress: () => navigation.navigate(allTexts.tabNames.profile),
+          },
+        ]);
       }
-    }
+    } else{
+      alert('Something went wrong')
+    } 
   };
-
-  const getCustomer = async () => {
-    try {
-      let result = await getUserInfoNew();
-      // console.log('templeAddress', result?.data);
-      if (result) {
-        const dty = result?.data || [];
-        setCurrentCustomer(dty);
-        setDob(dty?.dob);
-      }
-    } catch (error) {
-      console.log('error in popular temples', error);
-    }
-  };
-  useEffect(() => {
-    getCustomer();
-  }, []);
-
+ 
   return (
     <ScrollView>
       <View style={styles.wrapper}>
@@ -136,19 +117,19 @@ const CommunityTemple = ({navigation}) => {
         </View>
         <View style={{marginTop: '15%'}}>
           <View style={{bottom: '8%'}}>
-            <EventInput3
+            <EventInput
               lable={'Name'}
-              user={true}
               placeholder={'Enter your name'}
               height={50}
-              value={userDetails?.username}
+              onChangeText={e => {setName(e); setEventError(false)}}
             />
-            {eventError && (
+            {eventError  && (
               <Text
                 style={{
                   color: 'red',
-                  alignSelf: 'center',
+                  alignSelf: 'flex-start',
                   marginTop: '2%',
+                  marginLeft:'8%'
                 }}>
                 please enter Name
               </Text>
@@ -157,106 +138,48 @@ const CommunityTemple = ({navigation}) => {
               lable={'Description'}
               placeholder={'About Temple'}
               height={150}
-              
+ 
+              onChangeText={e => {setDescription(e); setDescriptionError(false)}}
             />
-            {/* <EventInput
-              placeholder={'Established Date'}
-             
-              height={50}
-              value={phone}
-              keyboardType={'numeric'}
-              onChangeText={text => {
-                setPhone(text);
-                setPV(false);
-              }}
-            /> */}
-            {/* <TouchableOpacity>
-              <View>
-                <Text
-                  style={{
-                    marginLeft: '8%',
-                    marginVertical: '2%',
-                    color: 'black',
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                  }}>
-                  Gender
-                </Text>
-                
-                <SelectDropdown
-                  data={['Male', 'Female', 'Others']}
-                  buttonTextStyle={{
-                    fontSize: 14,
-                    marginRight: '70%',
-                    color: colors.gray,
-                  }}
-                  defaultValue={isRoleSelected}
-                  buttonStyle={{
-                    backgroundColor: 'white',
-                    borderColor: 'black',
-                    borderWidth: 0.5,
-                    borderRadius: 8,
-                    height: 45,
-                    width: '84%',
-                    marginHorizontal: '8%',
-                  }}
-                  dropdownIconPosition="left"
-                  defaultButtonText={
-                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
-                  }
-                  dropdownStyle={{paddingTop: 10, borderRadius: 20}}
-                  onSelect={e => {
-                    setIsRoleSelected(e);
-                    setDropDownError(false);
-                    setGenderValue(e);
-                  }}
-                  renderDropdownIcon={() => (
-                    <View>
-                      {isRoleSelected === 'Male' && (
-                        <FontAwesome
-                          name="male"
-                          size={20}
-                          color={colors.orangeColor}
-                          style={{marginLeft: 2}}
-                        />
-                      )}
-                      {isRoleSelected === 'Female' && (
-                        <FontAwesome
-                          name="female"
-                          size={20}
-                          color={colors.orangeColor}
-                          style={{marginLeft: 2}}
-                        />
-                      )}
-                     
-                    </View>
-                  )}
-                />
-              </View>
-            </TouchableOpacity> */}
-            {/* <EventInput
-              lable={'Gotra'}
-              gotra={true}
-              placeholder={currentCustomer?.gothra ? currentCustomer?.gothra : 'gotra'}
-              height={50}
-              onChangeText={text => {
-                setGotraValue(text);
-              }}
-             
-            /> */}
+             {DescriptionError  && (
+              <Text
+                style={{
+                  color: 'red',
+                  alignSelf: 'flex-start',
+                  marginTop: '2%',
+                  marginLeft:'8%'
+                }}>
+                please enter Description
+              </Text>
+           
+            )}
             <View
               style={{
                 flexDirection: 'row',
                 marginLeft: '4%',
               }}>
               <View style={{width: '60%', marginTop: 5}}>
+                <View style={{width:'205%',marginLeft:-40}}>
                 <EventInput2
-                  lable={'Date of Establishment'}
+                  lable={'     Date of Establishment'}
                   height={50}
-                  value1={dob ? dob.slice(0, 10) : toDate?.toLocaleDateString()}
+                  value1={toDate ? format(toDate, 'dd-MM-yyyy') : ''}
                   calendar={true}
                   onPressCalendar={() => ShowDatePicker()}
+                 
                 />
+                 {DateError  && (
+              <Text
+                style={{
+                  color: 'red',
+                  alignSelf: 'flex-start',
+                  marginTop: '2%',
+                  marginLeft:'12%'
+                }}>
+                please Select Date
+              </Text>
+            )}
+                 </View>
                 <DateTimePickerModal
                   isVisible={datePickerVisible}
                   mode={date}
@@ -264,6 +187,7 @@ const CommunityTemple = ({navigation}) => {
                   onCancel={HideDatePicker}
                 />
               </View>
+             
               <View style={{width: '45%', right: 35, marginTop: 5}}>
                 {/* <EventInput
                   lable={'Pin Code'}
@@ -281,16 +205,17 @@ const CommunityTemple = ({navigation}) => {
             </View>
             <View style={{width: '80%', alignSelf: 'center', marginTop: '60%'}}>
               <PrimaryButton
-                text={'Update'}
+                text={'Submit'}
                 bgColor={colors.orangeColor}
-                onPress={() => ProfileUpdate()}
+                onPress={() => CommunityTempleData()}
               />
             </View>
+           
           </View>
         </View>
       </View>
     </ScrollView>
   );
 };
-
+ 
 export default CommunityTemple;

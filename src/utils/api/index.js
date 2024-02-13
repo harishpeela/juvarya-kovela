@@ -107,6 +107,7 @@ const endpoints = {
   EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
   EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
+  CREATE_COMMUNITY_TEMPLE:'jtprofile/create',
 };
 export const getInitialToken = async () => {
   try {
@@ -1079,5 +1080,14 @@ export const getTempleProfileDetails = async (id) => {
     return result;
   } catch (error) {
     return error;
+  }
+};
+export const CreateCommunityTemple = async (data) => {
+  try {
+    let result = await axiosNewData.post(`${endpoints.CREATE_COMMUNITY_TEMPLE}`,
+    data);
+    return result;
+  } catch (error) {
+    console.log('error in community Temple', error);
   }
 };
