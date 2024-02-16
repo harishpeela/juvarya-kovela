@@ -60,13 +60,8 @@ const Feeds = ({route, navigation}) => {
        back={true}
        txt={'Feeds'}
        navigation={navigation}
+       navBack={() => navigation.goBack()}
       />
-      </View>
-     
-      
-      <View>
-        
-        {/* <BackHeaderNew txt={'Posts'} onPress={() => navigation.goBack()} /> */}
       </View>
       
       {loader ? (

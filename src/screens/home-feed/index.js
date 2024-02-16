@@ -141,8 +141,9 @@ const UserFeedScreen = ({ navigation }) => {
                 isLikeTrue={item.like}
                 savedFeed={item.savedFeed}
                 isVisible={isVisible}
-                // onPressDots={() => setIsVisible(!isVisible)}
-                onPressDelete={() => DeleteFeedPost(item.id)}
+                onPressDots={() => setIsVisible(!isVisible)}
+                // onPressDelete={() => DeleteFeedPost(item.id)}
+                onPressDelete={() => {alert('under development'); setIsVisible(!isVisible)}}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                     data: item,

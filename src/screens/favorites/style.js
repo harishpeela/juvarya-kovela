@@ -22,10 +22,10 @@ export const styles = StyleSheet.create({
   },
   
   loaderContainer: {
-    height: '90%',
+    height: '60%',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:'-15%'
+    // marginTop:'-15%'
   },
   bellContainer: {
     height: 60,
@@ -40,5 +40,14 @@ export const styles = StyleSheet.create({
   bell: {marginLeft: 10, marginTop: 10},
   flatListStyle: {
     paddingBottom: 200,
+  },
+  loaderContainer1: {
+    height: '50%',
+    position: 'absolute',
+    alignItems: 'center',
+    // justifyContent: 'center',
+    // marginTop:'-15%'
+    left: '28%',
+    top: '100%'
   },
 });

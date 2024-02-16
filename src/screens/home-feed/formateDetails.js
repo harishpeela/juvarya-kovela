@@ -1,6 +1,6 @@
 export const Data = d => {
   let myDataDetails = {
-    name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name,
+    name: d?.jtProfileDTO?.name ? d?.jtProfileDTO?.name : d?.name ? d?.name : d?.profileDTO?.name,
     description: d?.jtProfileDTO?.desciption
       ? d?.jtProfileDTO?.description
       : d?.description || 'no description',
@@ -35,8 +35,8 @@ export const Data = d => {
       : d?.templeClass
       ? d?.templeClass
       : '',
-    jtProfile: d?.jtProfile ? d?.jtProfile : d?.id,
-    logo: d?.logo ? d?.logo : d?.jtProfileDTO?.logo,
+    jtProfile: d?.jtProfile ? d?.jtProfile : d?.profileDTO?.id? d?.profileDTO?.id : d?.id,
+    logo: d?.logo ? d?.logo : d?.jtProfileDTO?.logo ? d?.jtProfileDTO?.logo : d?.profileDTO?.logo,
     membershipsEnabled: d?.membershipsEnabled ? d?.membershipsEnabled : false,
   };
   return myDataDetails;

@@ -63,14 +63,16 @@ const FollowersMembership = ({ route, navigation }) => {
             <View>
               <SearchBar
                 placeHolder={'Search followers'}
+                showCrossPress={true}
                 onCrossPress={() => {
                   setSearchedText('');
-                  getTemples();
+                  TempleFolowers();
                 }}
                 onTextChange={e => {
                   setSearchedText(e);
                   handleSearch(e);
                 }}
+                value={searchedText}
               />
             </View>
           </View>
