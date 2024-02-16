@@ -1,7 +1,16 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, TouchableOpacity, ScrollView, Alert, useColorScheme } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  useColorScheme,
+} from 'react-native';
 import {
   AddEventImage,
   EventInput,
@@ -12,9 +21,9 @@ import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { CreateEvent } from '../../utils/api';
+import {CreateEvent} from '../../utils/api';
 
-const AddEvents = ({ navigation, route }) => {
+const AddEvents = ({navigation, route}) => {
   const {id} = route?.params || {};
   console.log('id ==>', id);
   const [date, setDate] = useState(new Date());
@@ -41,36 +50,35 @@ const AddEvents = ({ navigation, route }) => {
       setAE(true);
     } else if ((image, description, eventName, address)) {
       var formdata = new FormData();
-      formdata.append("name", eventName);
-       formdata.append("profileId", id);
-       img.forEach(element => {
-              formdata.append('files', element);
-            });
-       formdata.append("eventType", "EVENT");
-       formdata.append("description", description);
+      formdata.append('name', eventName);
+      formdata.append('profileId', id);
+      img.forEach(element => {
+        formdata.append('files', element);
+      });
+      formdata.append('eventType', 'EVENT');
+      formdata.append('description', description);
       console.log('payload', formdata);
       let result = await CreateEvent(formdata);
       console.log('result of save events', result?.data);
-          if (result?.data?.message === "save Event") {
-            Alert.alert('Success', `Event created successfully`, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
-          } 
-          else{
-            Alert.alert('error', result?.data?.message, [
-              {
-                text: 'Ok',
-                onPress: () =>
-                  navigation.navigate(allTexts.screenNames.eventsScreen),
-              },
-            ]);
-          }
+      if (result?.data?.message === 'save Event') {
+        Alert.alert('Success', `Event created successfully`, [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(allTexts.screenNames.eventsScreen),
+          },
+        ]);
+      } else {
+        Alert.alert('error', result?.data?.message, [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.navigate(allTexts.screenNames.eventsScreen),
+          },
+        ]);
+      }
     } else {
-      console.log('error')
+      console.log('error');
     }
   };
   const UpLoadPhoto = () => {
@@ -133,12 +141,10 @@ const AddEvents = ({ navigation, route }) => {
     setDatePickerVisible(false);
     setDatePickerVisible1(false);
   };
-  useEffect(() => {
-
-  }, [id]);
+  useEffect(() => {}, [id]);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <View style={{backgroundColor: '#FFAB0F', height: '30%'}}>
         <View
           style={{flexDirection: 'row', marginTop: '10%', marginLeft: '6%'}}>
           <TouchableOpacity
