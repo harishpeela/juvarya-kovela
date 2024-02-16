@@ -19,10 +19,10 @@ import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import {TopBarcard} from '../topBar1/topBarCard';
-import {NearByTempleClass} from '../../utils/api';
+import {NearByTempleClass, getNearByTemples} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
+export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -47,20 +47,21 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
         setLoader(false);
       }
     } catch (error) {
+      setLoader(false);
       console.log('error in popular temples', error);
     }
   };
 
   const NearByTemples = async () => {
-    setLoader(true);
-    let result = await NearByTempleClass('A', 0, 20);
-    // console.log('result.date ====>', result.data);
+    // setLoader(true);
+    let result = await getNearByTemples('VSP, AKP', 0, 20);
+    console.log('result.date ====>', result.data);
     if (result) {
       setNearByData(result?.data.data);
-      setLoader(false);
+      // setLoader(false);
     } else {
       setNearByData([]);
-      setLoader(false);
+      // setLoader(false);
     }
   };
   useEffect(() => {
@@ -80,6 +81,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
+
   useEffect(() => {}, [isFocused]);
   useEffect(() => {
     if (pageNo >= 0) {
@@ -109,6 +111,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
           <View style={styles.searchContainer}>
             <SearchBar
               value={searchedText}
+              showCrossPress={true}
               onTextChange={e => {
                 setSearchedText(e);
                 SearchPopTemp(e);
@@ -232,7 +235,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation, route}) => {
                   renderItem={({item, index}) => (
                     <NearByTemple
                       post={item}
-                      name={item.name}
+                      name={item?.profileDTO?.name}
                       templeId={item.templeClass}
                       isFollowingTrue={item?.follow}
                       pageNav={pageNav}

@@ -13,8 +13,8 @@ export const styles = StyleSheet.create({
     marginHorizontal: '4%',
     display: 'flex',
     flexDirection: 'column',
-    padding: 10,
-    marginBottom: '3%',
+    // padding: 10,
+    // marginBottom: '3%',
   },
   searchContainers: {
     margin: 5,
@@ -30,7 +30,8 @@ export const styles = StyleSheet.create({
     height: 100,
   },
   followersContainer: {
-    height: '100%',
+    // height: '100%',
+    marginBottom: 'auto'
   },
   sortContainer: {
     display: 'flex',

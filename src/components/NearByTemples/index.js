@@ -90,17 +90,17 @@ export const NearByTemple = ({
       <View style={{  alignItems: 'center', marginTop: 15, height: '70%',backgroundColor:'white'}}>
         <Image
           source={{
-            uri: post?.logo
-              ? post?.logo
+            uri: post?.profileDTO?.logo
+              ? post?.profileDTO?.logo
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
           style={{ height: '100%', width: 90, borderRadius: 15, resizeMode: 'cover' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 
-      <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginHorizontal: 15, marginVertical:5}}>
-        <Text  numberOfLines={1}>
-          {name?.length < 15 ? `${name}` : `${name?.substring(0, 10)}..`}
+      <View style={{justifyContent: 'center'}}>
+        <Text numberOfLines={1}style={{color: colors.black, fontWeight: 'bold'}}>
+          {name?.length < 10 ? `${name}` : `${name?.substring(0, 10)}..`}
         </Text>
        
       </View>
