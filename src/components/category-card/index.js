@@ -11,22 +11,26 @@ import {
   Alert,
   Modal,
 } from 'react-native';
-import { colors } from '../../common';
-import React, { useState, useRef, useMemo } from 'react';
-import { styles } from './styles';
-import { NewSaveFeed } from '../../utils/api';
+import {colors} from '../../common';
+import React, {useState, useRef, useMemo} from 'react';
+import {styles} from './styles';
+import {NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import { NewLikeOrUnlikeFeed, DeleteSavedFeed, DeleteFeedData } from '../../utils/api';
-import { FlatList } from 'react-native-gesture-handler';
-const { width } = Dimensions.get('window');
-import { DotsNation } from '../dotsNation';
-import { Loader } from '../loader';
+import {
+  NewLikeOrUnlikeFeed,
+  DeleteSavedFeed,
+  DeleteFeedData,
+} from '../../utils/api';
+import {FlatList} from 'react-native-gesture-handler';
+const {width} = Dimensions.get('window');
+import {DotsNation} from '../dotsNation';
+import {Loader} from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import '../../../languages/language';
-import RNFetchBlob from "rn-fetch-blob";
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import RNFetchBlob from 'rn-fetch-blob';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -37,14 +41,23 @@ export const UserFeedCompList = ({
   onSharePress,
   savedFeed,
   onPressDelete,
-  onPressDots
+  onPressDots,
 }) => {
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
   const [dotIndex, setIndex] = useState(0);
-  const [isVisible, setIsVisible ]= useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const isDarkMode = useColorScheme() === 'dark';
+  const [height, setHeight] = useState('');
+  const [width, setWidth] = useState('');
+
+  Image.getSize(post?.mediaList[0]?.url, (width, height) => {
+    setHeight(height), setWidth(width);
+  });
+  console.log('height', height);
+  console.log('width', width);
+  console.log(post?.mediaList[0]?.url);
 
   const likeUnLikeHandler = async () => {
     setIsLiked(!isLiked);
@@ -71,16 +84,10 @@ export const UserFeedCompList = ({
     let status = !saveFeed;
     if (status) {
       SaveFeedApi();
-      ToastAndroid.show(
-        'Saved',
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show('Saved', ToastAndroid.SHORT);
     } else {
       DeleteFeed();
-      ToastAndroid.show(
-        'Unsaved',
-        ToastAndroid.SHORT,
-      );
+      ToastAndroid.show('Unsaved', ToastAndroid.SHORT);
     }
   };
   const SaveFeedApi = async () => {
@@ -110,7 +117,7 @@ export const UserFeedCompList = ({
       },
     )(event);
   };
-  const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
+  const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
     setIndex(viewableItems[0]?.index);
   }).current;
 
@@ -120,7 +127,7 @@ export const UserFeedCompList = ({
 
   // const REMOTE_IMAGE_PATH = 'https://fanfun.s3.ap-south-1.amazonaws.com/17068733451971706873343586.jpg';
 
-  const downloadImageRemote = (REMOTE_IMAGE_PATH) => {
+  const downloadImageRemote = REMOTE_IMAGE_PATH => {
     console.log('REMOTE_IMAGE_PATH', REMOTE_IMAGE_PATH);
 
     let date = new Date();
@@ -128,38 +135,40 @@ export const UserFeedCompList = ({
     console.log('imgurl', image_URL);
     let ext = getExtention(image_URL);
     console.log('ext', ext);
-    ext = "." + ext[0];
+    ext = '.' + ext[0];
 
-    const { config, fs } = RNFetchBlob;
+    const {config, fs} = RNFetchBlob;
     let PictureDir = fs.dirs.PictureDir;
     let options = {
       fileCache: true,
       addAndroidDownloads: {
         useDownloadManager: true,
         notification: true,
-        path: PictureDir + "/image_" + Math.floor(date.getTime() + date.getSeconds() / 2) + ext,
-        description: "Image"
-      }
+        path:
+          PictureDir +
+          '/image_' +
+          Math.floor(date.getTime() + date.getSeconds() / 2) +
+          ext,
+        description: 'Image',
+      },
     };
     config(options)
-      .fetch("GET", image_URL)
+      .fetch('GET', image_URL)
       .then(res => {
-        console.log("res -> ", JSON.stringify(res));
-        Alert.alert("Alert", "image Downloaded successfully....!");
+        console.log('res -> ', JSON.stringify(res));
+        Alert.alert('Alert', 'image Downloaded successfully....!');
       });
   };
-  
+
   const getExtention = filename => {
     // To get the file extension
-    return /[.]/.exec(filename) ?
-             /[^.]+$/.exec(filename) : undefined;
+    return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
   };
-
 
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
-        <TouchableOpacity style={{ marginBottom: 5 }} onPress={onPressTitle}>
+        <TouchableOpacity style={{marginBottom: 5}} onPress={onPressTitle}>
           <Image
             source={{
               uri:
@@ -182,7 +191,16 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
-      <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => {setIsVisible(!isVisible); alert('under development')}} />
+      <Entypo
+        name="dots-three-vertical"
+        size={20}
+        color={colors.orangeColor}
+        style={{position: 'absolute', right: 10, top: 10}}
+        onPress={() => {
+          setIsVisible(!isVisible);
+          alert('under development');
+        }}
+      />
       {/* {isVisible && (
         <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
           onPress= { onPressDelete }>
@@ -202,22 +220,41 @@ export const UserFeedCompList = ({
           onScroll={handleOnScroll}
           onViewableItemsChanged={handleOnViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
-          keyExtractor={({ item, index }) => index}
-          renderItem={({ item, index }) => {
+          keyExtractor={({item, index}) => index}
+          renderItem={({item, index}) => {
             return (
               <View>
                 {!item?.uri ? (
                   <View>
-                    <Image
-                      source={{ uri: item?.url }}
+                    {width > height ? (
+                      <Image
+                        source={{uri: item?.url}}
+                        style={{
+                          flex: 1,
+                          width: Dimensions.get('window').width,
+                          height: 300,
+                        }}
+                      />
+                    ) : (
+                      <Image
+                        source={{uri: item?.url}}
+                        style={{
+                          flex: 1,
+                          height: Dimensions.get('window').height / 2 + 60,
+                          width: Dimensions.get('window').width,
+                        }}
+                      />
+                    )}
+                    {/* <Image
+                      source={{uri: item?.url}}
                       style={{
                         flex: 1,
-                        height: 350,
-                        width,
-                        resizeMode: 'contain',
+                        height: height >,
+                        width: width > 700 ? (Dimensions.get('window').width) : (),
+                        // resizeMode: 'contain',
                         backgroundColor: 'black',
                       }}
-                    />
+                    /> */}
                     {/* <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
                     {isVisible && (
                        <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10}}
@@ -265,18 +302,20 @@ export const UserFeedCompList = ({
               size={20}
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => downloadImageRemote(post?.mediaList[0]?.url)} style={{marginLeft: '5%'}}>
-            <AntDesign name='download' size={20} color={'black'} />
+          <TouchableOpacity
+            onPress={() => downloadImageRemote(post?.mediaList[0]?.url)}
+            style={{marginLeft: '5%'}}>
+            <AntDesign name="download" size={20} color={'black'} />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{ paddingHorizontal: 15 }}>
-        <Text style={{ ...styles.likes, color: isDarkMode ? 'gray' : 'gray' }}>
+      <View style={{paddingHorizontal: 15}}>
+        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
           {likeCount} Likes
         </Text>
       </View>
       <Text style={styles.username}>
-        <Text style={{ color: isDarkMode ? 'gray' : 'gray' }}>
+        <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
           {post?.description?.length < 50
             ? `${post?.description}`
             : `${post?.description?.substring(0, 50)}...`}
