@@ -77,7 +77,7 @@ const UserFeedScreen = ({ navigation }) => {
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: 'Yes',
           onPress: async () => {
             try {
               const result = await DeleteFeedData(id);
@@ -141,9 +141,8 @@ const UserFeedScreen = ({ navigation }) => {
                 isLikeTrue={item.like}
                 savedFeed={item.savedFeed}
                 isVisible={isVisible}
-                onPressDots={() => setIsVisible(!isVisible)}
-                // onPressDelete={() => DeleteFeedPost(item.id)}
-                onPressDelete={() => {alert('under development'); setIsVisible(!isVisible)}}
+                // onPressDots={() => setIsVisible(!isVisible)}
+                onPressDelete={() => DeleteFeedPost(item.id)}
                 onPressTitle={() => {
                   navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                     data: item,
