@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     width: 50,
     borderRadius: '50%',
   },
+  crossIconContainer: {position: 'absolute', right: -20, zIndex: 100},
   preViewImage: {
     height: 100,
     width: 100,
@@ -52,12 +53,10 @@ export const styles = StyleSheet.create({
     width: 100,
     borderRadius: 100 / 2,
     justifyContent: 'center',
-    bottom: '30%',
   },
   editProfile: {
     bottom: '50%',
     left: '62%',
-    // position: 'absolute',
   },
   keyBoardStyle: {
     margin: 10,
@@ -139,5 +138,24 @@ export const styles = StyleSheet.create({
     color: 'red',
     marginLeft: '10%',
     marginTop: 2,
+  },
+  loader: {
+    alignItems: 'center',
+    height: 100,
+    width: 100,
+    justifyContent: 'center',
+  },
+  uploadPic: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 3,
+    borderColor: colors.orangeColor,
+    borderRadius: 120 / 2,
+    padding: 1,
+  },
+  profileContainer: {
+    alignItems: 'center',
+    height: '15%',
+    alignContent: 'center',
   },
 });
