@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, FlatList, Text,onSelect } from 'react-native';
+import { View, SafeAreaView, FlatList, Text, TouchableOpacity } from 'react-native';
 import { BackHeader, Loader, SearchBar } from '../../components';
 import { styles } from './styles';
 import { allTexts, colors } from '../../common';
@@ -9,6 +9,7 @@ import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import FeatherIcon from 'react-native-vector-icons/Feather';
 // import CreateCommunityTempleScreen from './CreateCommunityTempleScreen'; // Assuming you have a screen for creating community temples
 
 const MyTemples = ({ navigation }) => {
@@ -72,8 +73,8 @@ const MyTemples = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarCard2 txt={'My Temples'} back={true} navigation={navigation}>
-          <View style={{ ...styles.searchContainer, marginTop: '-5%' }}>
+        <TopBarCard2 txt={'Your Community Temples'} marginLeft={'15%'} back={true} navigation={navigation}>
+        <View style={styles.searchContainers}>
             <SearchBar
               value={searchedText}
               onTextChange={e => {
@@ -81,6 +82,7 @@ const MyTemples = ({ navigation }) => {
                 SearchPopTemp(e);
               }}
               loading={false}
+              showCrossPress={true}
               onCrossPress={async () => {
                 setSearchedText('');
                 await PopularTemplesss(pageNo, 20);
@@ -88,6 +90,17 @@ const MyTemples = ({ navigation }) => {
               bgColor={colors.gray4}
               placeHolder={'Search'}
             />
+              <TouchableOpacity
+                onPress={() => 
+                    navigation.navigate(allTexts.screenNames.communityTemple)}
+                style={styles.plusContainer}>
+                <FeatherIcon
+                  style={styles.plusIcon}
+                  name="plus"
+                  size={30}
+                  color="white"
+                />
+              </TouchableOpacity>
           </View>
         </TopBarCard2>
       </View>

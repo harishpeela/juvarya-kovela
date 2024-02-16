@@ -103,19 +103,19 @@ const Favorite = ({navigation}) => {
       <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
           <View style={styles.searchbarContainer}>
-            <View>
               <SearchBar
                 placeHolder={'Search Favourites'}
+                showCrossPress={true}
                 onCrossPress={() => {
                   setSeracherdText('');
-                  getTemples();
+                  getTemples(userDetails?.id, pageNo, 20);
                 }}
                 onTextChange={e => {
                   setSeracherdText(e);
                   performFilter(e);
                 }}
+                value={seracherdText}
               />
-            </View>
           </View>
         </TopBarcard>
       </View>
@@ -127,17 +127,7 @@ const Favorite = ({navigation}) => {
           </View>
         ) : (
           [
-            filteredArray?.length === 0 ? (
-              <View style={styles.loaderContainer}>
-                  <FontAwesome5
-                  name="gopuram"
-                  size={50}
-                  color={'orange'}
-                  style={{marginBottom:'5%'}}
-                />
-                <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
-              </View>
-            ) : (
+            filteredArray ? (
               <FlatList
               data={filteredArray}
               showsVerticalScrollIndicator={false}
@@ -171,22 +161,24 @@ const Favorite = ({navigation}) => {
               }}
             />
             ) : (
-
-              <View style={styles.loaderContainer}>
-              <FontAwesome5
-              name="gopuram"
-              size={50}
-              color={'orange'}
-              style={{marginBottom:'5%'}}
-            />
-            <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
-          </View>
-              
+             ''
             ),
           ]
         )}
+         {(!filteredArray?.length && !loading ) &&(
+          <View style={styles.loaderContainer1}>
+          <FontAwesome5
+          name="gopuram"
+          size={50}
+          color={'orange'}
+          style={{marginBottom:'5%'}}
+        />
+        <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
+      </View>
+         )}
       </View>
     </SafeAreaView>
   );
 };
+
 export default Favorite;

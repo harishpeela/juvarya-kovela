@@ -77,8 +77,8 @@ const CommunityTemple = ({navigation}) => {
     let payload ={
       name: name,
       desciption: descripton,
-      seasonal: true,
-      establishedOn:formattedDate
+      // seasonal: true,
+      // establishedOn:formattedDate
   }
     setLoader(true);
     if(name === ''){
@@ -93,6 +93,7 @@ const CommunityTemple = ({navigation}) => {
     } else if(name && date && descripton){
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
+      console.log('status', result?.status);
       if(result?.status === 200){
         Alert.alert('Success', `Community temple was created successfully`, [
           {
@@ -102,7 +103,7 @@ const CommunityTemple = ({navigation}) => {
         ]);
       }
     } else{
-      alert('Something went wrong')
+      alert('something went wrong please try after some time')
     } 
   };
  
@@ -111,8 +112,8 @@ const CommunityTemple = ({navigation}) => {
       <View style={styles.wrapper}>
         <View style={{}}>
           <TopBarCard2
-            txt={'Create Temple'}
-            back={true}
+            txt={'Create Community Temple'}
+            back={true}marginLeft={'15%'}
             navigation={navigation}></TopBarCard2>
         </View>
         <View style={{marginTop: '15%'}}>

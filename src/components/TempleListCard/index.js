@@ -53,13 +53,14 @@ export const TempleListCard = ({
       let results = await FollowUnFollow(payload);
       console.log('77777777777', results?.data);
       if (results && results.status === 200) {
-        ToastAndroid.show(
-          `  ${results?.data?.message === 'Success: following'
-            ? 'Following'
-            : 'Unfollowing'
-          }  temple`,
-          ToastAndroid.SHORT,
-        );
+        // ToastAndroid.show(
+        //   `  ${results?.data?.message === 'Success: following'
+        //     ? 'Following'
+        //     : 'Unfollowing'
+        //   }  temple`,
+        //   ToastAndroid.SHORT,
+        // );
+        console.log('follow unfollow')
       } else {
       }
     } catch (error) {
