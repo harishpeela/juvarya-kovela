@@ -62,9 +62,10 @@ const endpoints = {
   TEMPLE_CREW: 'jtprofile/find/users',
   FEED: '/jtfeed/',
   EVENTS_LIST: 'jtevent/list',
+  EVENTS_SCREE_LIST: 'jtevent/upcoming/events',
   EVENT_SEARCH: 'jtevent/byName',
   EVENT_DETAILS: 'jtevent/details',
-  PROFILE_EVENTS: 'jtevent/upcoming/item',
+  PROFILE_EVENTS: 'jtevent/upcoming',
   EVENT_INTERESTED: 'jtInterestedEvents/save',
   EVENT_INTERESTED_COUNT: 'jtInterestedEvents/list',
   DELETE_SAVE_FEED: 'jtfeedtocustomer/delete?feedId',
@@ -107,7 +108,8 @@ const endpoints = {
   EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
   EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
-  CREATE_COMMUNITY_TEMPLE:'jtprofile/create'
+  CREATE_COMMUNITY_TEMPLE:'jtCommunityProfile/create',
+  NEAR_BY_TEMPLES: 'jtAddress/nearByTemples',
 };
 export const getInitialToken = async () => {
   try {
@@ -456,7 +458,16 @@ export const EventList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
-
+export const EventScreenList = async (pgno, pgSize) => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENTS_SCREE_LIST}?page=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
 export const EventSearch = async (txt) => {
   try {
     let result = await axiosEventsData1.get(
@@ -471,7 +482,7 @@ export const EventSearch = async (txt) => {
 export const getProfileEvents = async (pgno, pgSize, profId) => {
   try {
     let result = await axiosEventsData1.get(
-      `${endpoints.PROFILE_EVENTS}?page=${pgno}&pageSize=${pgSize}&profileId=${profId}`,
+      `${endpoints.PROFILE_EVENTS}?pageNo=${pgno}&pageSize=${pgSize}&itemId=${profId}`,
     );
     return result;
   } catch (error) {
@@ -1095,12 +1106,11 @@ export const getTempleProfileDetails = async (id) => {
     return error;
   }
 };
-export const CreateCommunityTemple = async (data) => {
+export const getNearByTemples = async (code, pgNo, pgSz) => {
   try {
-    let result = await axiosNewData.post(`${endpoints.CREATE_COMMUNITY_TEMPLE}`,
-    data);
+    let result = await axiosNotifications.get(`${endpoints.NEAR_BY_TEMPLES}?isoCode=${code}&pageNo=${pgNo}&pageSize=${pgSz}`);
     return result;
   } catch (error) {
-    console.log('error in community Temple', error);
+    return error;
   }
 };

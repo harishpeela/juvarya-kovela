@@ -133,6 +133,7 @@ const Seemore = ({navigation, route}) => {
               setSearchText(e);
               performFilter(e);
             }}
+            showCrossPress={true}
             onCrossPress={() => {
               setSearchText('');
               if (route?.params?.type === 1) {

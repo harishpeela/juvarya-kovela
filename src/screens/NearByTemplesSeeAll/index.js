@@ -19,16 +19,9 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 const NearByTemplesSeeAll = ({navigation, route}) => {
   const {data} = route?.params || {};
   const isDarkMode = useColorScheme() === 'dark';
-  const [popTemples, setPopTemples] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [apiPageNo, setApiPageNo] = useState(0);
-
-  // console.log('pop see all temples', popTemples);
 
   const onSelect = data => {
-   
-    // FollowandUnFollow(data?.selectedId);
-  };
+     };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
@@ -64,8 +57,8 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
                     source={{
-                      uri: item?.logo
-                        ? item?.logo
+                      uri: item?.profileDTO?.logo
+                        ? item?.profileDTO?.logo
                         : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                     }}
                     
@@ -73,7 +66,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                   />
                   <View style={{marginLeft: 10}}>
                     <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%'}}>
-                      {item.name}
+                      {item.profileDTO?.name}
                     </Text>
                     <Text
                       numberOfLines={2}

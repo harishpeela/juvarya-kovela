@@ -159,6 +159,7 @@ export const TopBarCard2 = ({
   navCreate,
   height,
   bData,
+  marginLeft
 }) => {
   return (
     <View style={styles.container}>
@@ -199,7 +200,7 @@ export const TopBarCard2 = ({
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                marginLeft: txt.length >= 12 ? '21%' : '23%',
+                marginLeft: marginLeft ? marginLeft : '23%',
                 color: 'white',
                 textAlign: 'center',
                 marginTop: 5,

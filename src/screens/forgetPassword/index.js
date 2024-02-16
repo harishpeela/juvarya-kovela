@@ -142,7 +142,6 @@ const ForgetPassword = () => {
       setTimeout(() => {
         setError(false);
       }, 5000);
-      console.log('Invalid email:', userEmail);
     }
   };
 
@@ -172,7 +171,12 @@ const ForgetPassword = () => {
           navigation.navigate(allTexts.screenNames.signin);
         }, 1500);
       } else {
-        setMemberShip(0);
+        Alert.alert('Error', 'Invalid OTP', [
+          {
+            text: 'Ok',
+            onPress: () =>  setModalVisible(false)
+          },
+        ]);
       }
     } catch (error) {
       Snackbar.show({
@@ -214,6 +218,7 @@ const ForgetPassword = () => {
           back={true}
           txt={'Forgot Password'}
           navigation={navigation}
+          onPress={() => navigation.goBack()}
         />
       </View>
       <TextInput
