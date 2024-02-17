@@ -8,19 +8,13 @@ import {
   ScrollView,
 } from 'react-native';
 import {format} from 'date-fns';
-import {
-  EventInput,
-  PrimaryButton,
-} from '../../components';
+import {EventInput, PrimaryButton} from '../../components';
 import {colors} from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {styles} from './styles'; // Update this import based on your project structure
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import {
-  Update_Profile,
-  getUserInfoNew,
-} from '../../utils/api';
+import {Update_Profile, getUserInfoNew} from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {EventInput2, EventInput3} from '../../components/eventCreateInput';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
@@ -44,14 +38,25 @@ const UpdateProfile = ({navigation}) => {
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
 
+  const dateSlice = dob.slice(0, 10);
+  const dateFormatValue = dateSlice.split('-').reverse().join('-');
+  console.log(dateFormatValue);
+
   const HandleCnfrm = datedata => {
     if (datedata) {
-      console.log('date', datedata);
       setToDate(datedata);
-      setDob(format(datedata, 'dd-MM-yyyy')); // Update the dob state with the selected date
+      setDob('');
       HideDatePicker();
     }
+    if (toDate > date) {
+      Alert.alert('Invalid Date');
+      setDob(dateFormatValue);
+    }
   };
+
+  const updatePincode = pincode.toString();
+  console.log('UpdatePincode', updatePincode);
+
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
@@ -62,7 +67,7 @@ const UpdateProfile = ({navigation}) => {
   };
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
-    var formattedDate = format(date, 'dd-MM-yyyy');
+    var formattedDate = format(date, 'MM-dd-yyyy');
     // console.log(formattedDate, '====<> date');
     let payload = {
       dob: formattedDate,
@@ -71,11 +76,13 @@ const UpdateProfile = ({navigation}) => {
       whatsAppEnabled: true,
       zodiacSign: '',
       primaryContact: '',
+      postalCode: pincode,
     };
     console.log(payload, 'payload');
-    if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
+    if (gotraValue === '' && pincode === '') {
       alert('please fill at least one field');
-    } else if (gotraValue || isRoleSelected || pincode) {
+    } else if (gotraValue || pincode) {
+      // console.log('============>', gotraValue, isRoleSelected, pincode);
       try {
         let responce = await Update_Profile(payload);
         console.log('date of birth', responce?.data);
@@ -95,12 +102,13 @@ const UpdateProfile = ({navigation}) => {
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
-      // console.log('templeAddress', result?.data);
+      console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
         setDob(dty?.dob);
         setIsRoleSelected(dty?.gender);
+        setPincode(dty?.postalCode);
       }
     } catch (error) {
       console.log('error in popular temples', error);
@@ -169,7 +177,7 @@ const UpdateProfile = ({navigation}) => {
                   }}>
                   Gender
                 </Text>
-                
+
                 <SelectDropdown
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
@@ -189,9 +197,8 @@ const UpdateProfile = ({navigation}) => {
                   }}
                   dropdownIconPosition="left"
                   defaultButtonText={
-                    currentCustomer?.gender ? currentCustomer?.gender  : 'gender'
+                    currentCustomer?.gender ? currentCustomer?.gender : 'gender'
                   }
-                  
                   dropdownStyle={{paddingTop: 10, borderRadius: 20}}
                   onSelect={e => {
                     setIsRoleSelected(e);
@@ -232,7 +239,9 @@ const UpdateProfile = ({navigation}) => {
             <EventInput
               lable={'Gotra'}
               gotra={true}
-              placeholder={currentCustomer?.gothra ? currentCustomer?.gothra : 'gotra'}
+              placeholder={
+                currentCustomer?.gothra ? currentCustomer?.gothra : 'gotra'
+              }
               height={50}
               onChangeText={text => {
                 setGotraValue(text);
@@ -250,29 +259,33 @@ const UpdateProfile = ({navigation}) => {
                 <EventInput2
                   lable={'Date of Birth'}
                   height={50}
-                  value1={dob ? dob.slice(0, 10) : toDate?.toLocaleDateString()}
+                  value1={dob ? dateFormatValue : toDate?.toLocaleDateString()}
                   calendar={true}
                   onPressCalendar={() => ShowDatePicker()}
                 />
                 <DateTimePickerModal
                   isVisible={datePickerVisible}
+                  dateFormat
                   mode={date}
                   onConfirm={HandleCnfrm}
                   onCancel={HideDatePicker}
                 />
               </View>
-              <View style={{width: '45%', right: 35, marginTop: 5}}>
+              <View style={{width: '43%', right: 35, marginTop: 5}}>
                 <EventInput
                   lable={'Pin Code'}
+                  // value={pincode}
                   pincode={true}
-                  placeholder={'Pincode'}
+                  value={
+                    currentCustomer?.postalCode ? updatePincode : 'Pincode '
+                  }
                   height={50}
                   onChangeText={text => {
                     setPincode(text);
                     setPinErr(false);
                   }}
                   maxLength={6}
-                  value={pincode}
+                  keyboardType="numeric"
                 />
               </View>
             </View>

@@ -95,14 +95,17 @@ const Signup = ({navigation}) => {
           navigation.navigate(otpScreen, otpPayload);
         } else if (response?.status == 403) {
           alert(response?.data?.message);
-        } else if (response){
+        } else if (response) {
           console.log('error in signup', response?.data, response?.status);
-          Alert.alert('USER ALREADY REGISTERED', 'Please check mobile number or email', [
-            {
-              text: 'Ok',
-              
-            },
-          ]);
+          Alert.alert(
+            'USER ALREADY REGISTERED',
+            'Please check mobile number or email',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+          );
         }
         action.setSubmitting(false);
       }
