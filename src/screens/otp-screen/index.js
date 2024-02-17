@@ -3,6 +3,7 @@
 import {View, Text, TouchableOpacity, Alert, StatusBar} from 'react-native';
 import React, {useRef, useEffect, useState, useContext} from 'react';
 import {allTexts, colors} from '../../common';
+import Snackbar from 'react-native-snackbar';
 import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
 import {PrimaryButton, TopBarcard} from '../../components';
@@ -114,6 +115,19 @@ const OTPScreen = ({navigation, route}) => {
   useEffect(() => {
     startTime(getDeadTime());
     setText();
+    alert('OTP Generated Successfully, check your spam folder if not received Email')
+    // setTimeout(() => {
+    //   Snackbar.show({
+    //     text: 'OTP Generated Successfully, check your spam folder if not received Email',
+    //     backgroundColor: 'green',
+    //     duration: 2000,
+    //     action: {
+    //       text: 'Ok',
+    //       textColor: 'white',
+    //       onPress: () => {},
+    //     },
+    //   });
+    // }, 2000);
   }, []);
 
   const UserRegisterHandler = async pOtp => {
