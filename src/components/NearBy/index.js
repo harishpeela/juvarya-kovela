@@ -141,41 +141,43 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
             <ScrollView style={{paddingLeft: 12}}>
               {searchedText === '' && (
                 <>
-                <View style={styles.upComingTextTab}>
-                <Text style={styles.popularTextContainer}>Popular Temples</Text>
-                <TouchableOpacity
-                  onPress={() => {
-                    seeallnav.navigate(allTexts.screenNames.seeall, {
-                      data: filteredList,
-                    });
-                  }}>
-                  <Text style={{color: colors.orangeColor, fontSize: 16}}>
-                    See all
-                  </Text>
-                </TouchableOpacity>
-              </View>
-                <FlatList
-                  data={filteredList}
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  keyboardShouldPersistTaps="handled"
-                  keyExtractor={({item, index}) => item?.id}
-                  renderItem={({item, index}) => (
-                    <TempleListCard
-                      post={item}
-                      templeId={item.id}
-                      isFollowingTrue={item?.follow}
-                      pageNav={pageNav}
-                      name={item?.name}
-                    />
-                  )}
-                  onEndReachedThreshold={0.5}
-                  decelerationRate={0.8}
-                />
+                  <View style={styles.upComingTextTab}>
+                    <Text style={styles.popularTextContainer}>
+                      Popular Temples
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() => {
+                        seeallnav.navigate(allTexts.screenNames.seeall, {
+                          data: filteredList,
+                        });
+                      }}>
+                      <Text style={{color: colors.orangeColor, fontSize: 16}}>
+                        See all
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <FlatList
+                    data={filteredList}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                    keyExtractor={({item, index}) => item?.id}
+                    renderItem={({item, index}) => (
+                      <TempleListCard
+                        post={item}
+                        templeId={item.id}
+                        isFollowingTrue={item?.follow}
+                        pageNav={pageNav}
+                        name={item?.name}
+                      />
+                    )}
+                    onEndReachedThreshold={0.5}
+                    decelerationRate={0.8}
+                  />
                 </>
               )}
             </ScrollView>
-            <ScrollView style={{height: searchedText ? '85%' : 0}}>
+            <ScrollView style={{height: searchedText ? '75%' : 0}}>
               {searchedText && filteredData ? (
                 <FlatList
                   data={filteredData}
@@ -195,15 +197,19 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                   decelerationRate={0.8}
                 />
               ) : (
-                <View style={{alignItems: 'center',marginTop:'50%'}}>
-                   <FontAwesome5
-                  name="gopuram"
-                  size={50}
-                  color={'orange'}
-                  style={{marginBottom:'5%'}}
-                 
-                />
-                  <Text style={{fontSize: 18, color: 'orange',fontFamily:'Poppins-Medium'}}>
+                <View style={{alignItems: 'center', marginTop: '50%'}}>
+                  <FontAwesome5
+                    name="gopuram"
+                    size={50}
+                    color={'orange'}
+                    style={{marginBottom: '5%'}}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: 'orange',
+                      fontFamily: 'Poppins-Medium',
+                    }}>
                     No Temples To Display
                   </Text>
                 </View>
