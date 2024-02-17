@@ -5,8 +5,8 @@ export const allTexts = {
   buttonTexts: {
     // place all your button texts here
     start: 'Start Now',
-    sigup: 'sign up',
-    login: 'Log in',
+    sigup: 'Sign Up',
+    login: 'Log In',
     follow: 'Follow',
     unFollow: 'Following',
     contactUs: 'Contact Us',
@@ -26,7 +26,7 @@ export const allTexts = {
     Addpoojari: 'Add Poojari',
     inputTitles: {
       username: 'userName',
-      fName: 'First name',
+      fName: 'First Name',
       phoneNo: 'Phone Number',
       lastName: 'Last Name',
       email: 'Email',
@@ -83,8 +83,8 @@ export const allTexts = {
     username: 'user Name',
   },
   paragraphs: {
-    alreadyAccount: 'Already have an account?',
-    dontHaveAccount: 'Don’t have an account ?',
+    alreadyAccount: 'Already have an account? ',
+    dontHaveAccount: 'Don’t have an account? ',
     splashDescription:
       'There are many destinations for your holiday schedule or healing for activities',
     loginDescription:
@@ -152,7 +152,7 @@ export const allTexts = {
     profilemembership: 'ProfileMembership',
     addMembershipDetails: 'AddMemebershipDetails',
     seeall: 'SeeAll',
-    nearByTempleSeeAll:'NearByTemplesSeeAll',
+    nearByTempleSeeAll: 'NearByTemplesSeeAll',
     feeds: 'Feeds',
     notification: 'Notifications',
     viewtempleprofile: 'ViewTempleProfile',
@@ -161,7 +161,7 @@ export const allTexts = {
     eventsScreen: 'EventsScreen',
     donationslist: 'DonationsList',
     eventDetails: 'EventDetails',
-    forgetPassword: 'ForgetPassword',
+    forgetPassword: 'ForgetPassword?',
     updateProfile: 'UpdateProfile',
     forgotPasswordOtpScreen: 'ForgotPassword',
     profilememberships: 'ProfileMemberShips',
@@ -172,13 +172,13 @@ export const allTexts = {
     createFeedDescription: 'CreateFeedDescription',
     editHightlights: 'EditHighlights',
     editInfo: 'EditInfo',
-    editContribute:'EditContribute',
-    profileDonations:'ProfileDonations',
-    profileMyMemberships:'ProfileMyMemberships',
-    info:'Info',
+    editContribute: 'EditContribute',
+    profileDonations: 'ProfileDonations',
+    profileMyMemberships: 'ProfileMyMemberships',
+    info: 'Info',
     profileEvents: 'Profile_Events',
     savehighlight: 'Save_Highlight',
-    communityTemple:'Create_Community_Temple'
+    communityTemple: 'Create_Community_Temple',
   },
   homeHeader: {
     welcome: 'Welcome ',

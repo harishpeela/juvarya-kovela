@@ -38,7 +38,10 @@ export const SearchBar = ({
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
             placeholder={placeHolder || 'Search temples'}
-            style={{...styles.field, color: isDarkMode ? colors.black : colors.black}}
+            style={{
+              ...styles.field,
+              color: isDarkMode ? colors.black : colors.black,
+            }}
             value={value}
             onSubmitEditing={onSubmit}
             autoCapitalize={false}
@@ -52,6 +55,7 @@ export const SearchBar = ({
                   name="x-circle"
                   color={colors.orangeColor}
                   size={25}
+                  style={{right: 10}}
                 />
               )}
             </>
