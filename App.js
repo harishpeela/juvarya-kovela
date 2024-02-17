@@ -57,7 +57,8 @@ import {
   Info,
   Profile_Events,
   Save_Highlight,
-  CommunityTemple
+  CommunityTemple,
+  Profile_Near_By_Temples,
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -134,7 +135,8 @@ const App = () => {
       info,
       profileEvents,
       savehighlight,
-      communityTemple
+      communityTemple,
+      profilenearbytemples,
     },
   } = allTexts;
 
@@ -583,6 +585,13 @@ const App = () => {
         <Stack.Screen
           name={createFeedDescription}
           component={CreateFeedDescription}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={profilenearbytemples}
+          component={Profile_Near_By_Temples}
           options={{
             headerShown: false,
           }}

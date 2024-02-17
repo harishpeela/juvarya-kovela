@@ -15,7 +15,7 @@ import {
   Loader,
 } from '../../components';
 import { allTexts, colors } from '../../common';
-import { PostProfilePic } from '../../utils/api';
+import { uploadTempleProfilePic } from '../../utils/api';
 import { styles } from './styles'; // Update this import based on your project structure
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
@@ -23,6 +23,7 @@ import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { CreateCommunityTemple } from '../../utils/api';
 import { launchImageLibrary } from 'react-native-image-picker';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const CommunityTemple = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -41,7 +42,7 @@ const CommunityTemple = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [custDetails, setCustDetails] = useState(null);
   const [isCross, setIsCross] = useState(true);
-
+  const [imgErr, setImgErr] = useState(false);
 
   const HandleCnfrm = datedata => {
     if (datedata) {
@@ -64,10 +65,12 @@ const CommunityTemple = ({ navigation }) => {
     let payload = {
       name: name,
       desciption: descripton,
-      // seasonal: true,
-      // establishedOn:formattedDate
+      establishedOn:formattedDate
     }
     setLoader(true);
+    if (image === null || image === undefined) {
+      setImgErr(true);
+    }
     if (name === '') {
       setEventError(true)
       console.log('name', name)
@@ -80,14 +83,31 @@ const CommunityTemple = ({ navigation }) => {
     } else if (name && date && descripton) {
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
-      console.log('status', result?.status);
+      console.log('status ===>', result?.status);
       if (result?.status === 200) {
-        Alert.alert('Success', `Community temple was created successfully`, [
-          {
-            text: 'Ok',
-            onPress: () => navigation.navigate(allTexts.tabNames.profile),
-          },
-        ]);
+        let data= result?.data;
+        let img = getImageObj(image);
+        let formdata = new FormData();
+        formdata.append('profilePicture', img);
+        let responce = await uploadTempleProfilePic(formdata, data?.id);
+        console.log('res', responce?.data);
+        if (responce?.status === 200) {
+          Alert.alert('Success', `Community Temple Was Created`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.tabNames.profile)
+            },
+          ]);
+        } else {
+          Alert.alert('Error', `Something went wrong`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.tabNames.profile)
+            },
+          ]);
+        }
       }
     } else {
       alert('something went wrong please try after some time')
@@ -109,6 +129,7 @@ const CommunityTemple = ({ navigation }) => {
   };
 
   const uploadPhoto = () => {
+    setImage(image)
     try {
       launchImageLibrary(
         {
@@ -123,6 +144,7 @@ const CommunityTemple = ({ navigation }) => {
             setImage(res?.assets[0]);
             setimageUploaded(false);
             setIsModal(true);
+            setImgErr(false);
           } else {
             console.log(res?.errorMessage);
           }
@@ -133,7 +155,6 @@ const CommunityTemple = ({ navigation }) => {
     }
   };
 
-  const Imgg = 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg';
   const getImageObj = img => {
     let newUri =
       Platform.OS === 'ios' ? img?.uri : img?.uri?.replace('file://', 'file:');
@@ -145,149 +166,148 @@ const CommunityTemple = ({ navigation }) => {
     return imageObj;
   };
   return (
-    <View style={{flex: 1}}>
-          <View style={{height: '15%'}}>
-          <TopBarCard2
-            txt={'Create Community Temple'}
-            back={true} marginLeft={'15%'}
-            navigation={navigation}></TopBarCard2>
-          </View>
-        <View style={styles.profileContainer}>
-          {image !== null ? (
-            <View style={styles.preViewImageContainer}>
-              {isCross && (
-                <View style={styles.crossIconContainer}>
-                  <EvilIcons
-                    onPress={() => {
-                      setImage(null);
-                      uploadPhoto();
-                    }}
-                    name="pencil"
-                    color={colors.orangeColor}
-                    size={25}
-                  />
-                </View>
-              )}
-              <Image
-                resizeMode="cover"
-                style={styles.preViewImage}
-                source={{ uri: image?.uri ? image?.uri : Imgg }}
-              />
-            </View>
-          ) : isLoading ? (
-            <View style={styles.loader}>
-              <Loader size={'small'} color={colors.orangeColor} />
-            </View>
-          ) : (
-            <TouchableOpacity
-              style={styles.uploadPic}
-              onPress={() => {
-                uploadPhoto();
-              }}>
-              {custDetails?.media ? (
-                <Image
-                  source={{ uri: custDetails?.media?.url }}
-                  style={styles.profileImage}
+    <View style={{ flex: 1 }}>
+      <View style={{ height: '15%' }}>
+        <TopBarCard2
+          txt={'Create Community Temple'}
+          back={true} marginLeft={'15%'}
+          navigation={navigation}></TopBarCard2>
+      </View>
+      <View style={styles.profileContainer}>
+        {image !== null ? (
+          <View style={styles.preViewImageContainer}>
+            {isCross && (
+              <View style={styles.crossIconContainer}>
+                <EvilIcons
+                  onPress={() => {
+                    setImage(null);
+                    uploadPhoto();
+                  }}
+                  name="pencil"
+                  color={colors.orangeColor}
+                  size={25}
                 />
-              ) : (
-                <View style={styles.profileImage}>
-                  <Image
+              </View>
+            )}
+            <Image
+              resizeMode="cover"
+              style={styles.preViewImage}
+              source={{ uri: image?.uri }}
+            />
+          </View>
+        ) : isLoading ? (
+          <View style={styles.loader}>
+            <Loader size={'small'} color={colors.orangeColor} />
+          </View>
+        ) : (
+          <TouchableOpacity
+            style={styles.uploadPic}
+            onPress={() => {
+              uploadPhoto();
+            }}>
+            {custDetails?.media ? (
+              <Image
+                source={{ uri: custDetails?.media?.url }}
+                style={styles.profileImage}
+              />
+            ) : (
+              <View style={styles.profileImage}>
+                <FontAwesome name='camera' size={60} color={colors.orangeColor} />
+                {/* <Image
                     source={{
                       uri: 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg',
                     }}
                     style={styles.profileImage}
-                  />
-                </View>
-              )}
-            </TouchableOpacity>
-          )}
-         {image ? (
-          ''
-         ) : (
-          <View>
-          <Text style={{fontSize: 18, fontWeight: 'bold', color: colors.black, marginTop: 10}}> Upload Image</Text>
-        </View>
-         )}
-        </View>
-          <View style={{ }}>
-            <EventInput
-              lable={'Name'}
-              placeholder={'Enter your name'}
-              height={50}
-              onChangeText={e => { setName(e); setEventError(false) }}
-            />
-            {eventError && (
-              <Text
-                style={{
-                  color: 'red',
-                  alignSelf: 'flex-start',
-                  marginTop: '2%',
-                  marginLeft: '8%'
-                }}>
-                please enter Name
-              </Text>
-            )}
-            <EventInput
-              lable={'Description'}
-              placeholder={'About Temple'}
-              height={150}
-              onChangeText={e => { setDescription(e); setDescriptionError(false) }}
-            />
-            {DescriptionError && (
-              <Text
-                style={{
-                  color: 'red',
-                  alignSelf: 'flex-start',
-                  marginTop: '2%',
-                  marginLeft: '8%'
-                }}>
-                please enter Description
-              </Text>
-            )}
-            <View
-              style={{
-                flexDirection: 'row',
-                marginLeft: '4%',
-              }}>
-              <View style={{ width: '60%', marginTop: 5 }}>
-                <View style={{ width: '205%', marginLeft: -40 }}>
-                  <EventInput2
-                    lable={'     Date of Establishment'}
-                    height={50}
-                    value1={toDate ? format(toDate, 'dd-MM-yyyy') : ''}
-                    calendar={true}
-                    onPressCalendar={() => ShowDatePicker()}
-
-                  />
-                  {DateError && (
-                    <Text
-                      style={{
-                        color: 'red',
-                        alignSelf: 'flex-start',
-                        marginTop: '2%',
-                        marginLeft: '12%'
-                      }}>
-                      please Select Date
-                    </Text>
-                  )}
-                </View>
-                <DateTimePickerModal
-                  isVisible={datePickerVisible}
-                  mode={date}
-                  onConfirm={HandleCnfrm}
-                  onCancel={HideDatePicker}
-                />
+                  /> */}
               </View>
-             
-            </View>
-            <View style={{ width: '80%', alignSelf: 'center', marginTop: '10%'}}>
-              <PrimaryButton
-                text={'Submit'}
-                bgColor={colors.orangeColor}
-                onPress={() => CommunityTempleData()}
-              />
-            </View>
+            )}
+          </TouchableOpacity>
+        )}
+        {imgErr &&
+          <View>
+            <Text style={{ fontSize: 12, color: 'red', marginTop: 10 }}> Upload Image</Text>
           </View>
+        }
+      </View>
+      <View style={{}}>
+        <EventInput
+          lable={'Name'}
+          placeholder={'Enter your name'}
+          height={50}
+          onChangeText={e => { setName(e); setEventError(false) }}
+        />
+        {eventError && (
+          <Text
+            style={{
+              color: 'red',
+              alignSelf: 'flex-start',
+              marginTop: '2%',
+              marginLeft: '8%'
+            }}>
+            please enter Name
+          </Text>
+        )}
+        <EventInput
+          lable={'Description'}
+          placeholder={'About Temple'}
+          height={150}
+          onChangeText={e => { setDescription(e); setDescriptionError(false) }}
+        />
+        {DescriptionError && (
+          <Text
+            style={{
+              color: 'red',
+              alignSelf: 'flex-start',
+              marginTop: '2%',
+              marginLeft: '8%'
+            }}>
+            please enter Description
+          </Text>
+        )}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginLeft: '4%',
+          }}>
+          <View style={{ width: '60%', marginTop: 5 }}>
+            <View style={{ width: '205%', marginLeft: -40 }}>
+              <EventInput2
+                lable={'     Date of Establishment'}
+                height={50}
+                value1={toDate ? format(toDate, 'dd-MM-yyyy') : ''}
+                calendar={true}
+                onPressCalendar={() => ShowDatePicker()}
+
+              />
+              {DateError && (
+                <Text
+                  style={{
+                    color: 'red',
+                    alignSelf: 'flex-start',
+                    marginTop: '2%',
+                    marginLeft: '12%'
+                  }}>
+                  please Select Date
+                </Text>
+              )}
+            </View>
+            <DateTimePickerModal
+              isVisible={datePickerVisible}
+              mode={date}
+              onConfirm={HandleCnfrm}
+              onCancel={HideDatePicker}
+            />
+          </View>
+
+        </View>
+        <View style={{ width: '80%', alignSelf: 'center', marginTop: '10%' }}>
+          <PrimaryButton
+            text={'Submit'}
+            bgColor={colors.orangeColor}
+            onPress={() => CommunityTempleData()}
+          />
+        </View>
+      </View>
     </View>
   );
 };

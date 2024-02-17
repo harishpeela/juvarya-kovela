@@ -108,8 +108,10 @@ const endpoints = {
   EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
   EVENTS_INFO:'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
-  CREATE_COMMUNITY_TEMPLE:'jtCommunityProfile/create',
+  CREATE_COMMUNITY_TEMPLE:'jtprofile/seasonal/create',
   NEAR_BY_TEMPLES: 'jtAddress/nearByTemples',
+  UPLOAD_TEMPLE_PROFILE_PIC: 'picture/profile',
+  PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile'
 };
 export const getInitialToken = async () => {
   try {
@@ -795,6 +797,17 @@ export const NewSaveFeed = async data => {
     return error;
   }
 };
+export const uploadTempleProfilePic = async (data, profileId) => {
+  try {
+    let result = await axiosNewDataSave.post(
+      `${endpoints.UPLOAD_TEMPLE_PROFILE_PIC}?profileId=${profileId}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
 export const NewLikeOrUnlikeFeed = async data => {
   try {
     let result = await axiosNewDataSave.post(
@@ -1109,6 +1122,14 @@ export const getTempleProfileDetails = async (id) => {
 export const getNearByTemples = async (code, pgNo, pgSz) => {
   try {
     let result = await axiosNotifications.get(`${endpoints.NEAR_BY_TEMPLES}?isoCode=${code}&pageNo=${pgNo}&pageSize=${pgSz}`);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getProfileNearByTemples = async (pgNo,pgSz,profId) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.PROFILE_NEAR_BY_TEMPLES}?page=${pgNo}&pageSize=${pgSz}&profileId=${profId}`);
     return result;
   } catch (error) {
     return error;
