@@ -79,7 +79,7 @@ const MyTemples = ({ navigation }) => {
               value={searchedText}
               onTextChange={e => {
                 setSearchedText(e);
-                SearchPopTemp(e);
+                // SearchPopTemp(e);
               }}
               loading={false}
               showCrossPress={true}
@@ -159,6 +159,9 @@ const MyTemples = ({ navigation }) => {
             ),
           ]
         )}
+        {(searchedText  && !filteredArray?.length) ? (
+          <Text style={{alignSelf: 'center', justifyContent: 'center', fontSize: 16, color: colors.orangeColor, marginTop: '3%'}}>No Temples To Display</Text>
+        ): ('')}
       </View>
     </SafeAreaView>
   );

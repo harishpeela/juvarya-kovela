@@ -30,10 +30,10 @@ export const PopularTemplesVerticalList = ({
     } else if (isLiked) {
       setIsLiked(!isLiked);
       followTemples(d);
-      ToastAndroid.show(
-        'successfully you are unfollowing the temple',
-        ToastAndroid.SHORT,
-      );
+      // ToastAndroid.show(
+      //   'successfully you are unfollowing the temple',
+      //   ToastAndroid.SHORT,
+      // );
     }
   };
   const followTemples = async d => {

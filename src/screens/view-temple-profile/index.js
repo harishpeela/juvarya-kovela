@@ -66,12 +66,12 @@ const ViewTempleProfile = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
   const {data} = route.params || {};
-  console.log(
-    '<=============================>',
-    data,
-    // '<==============',
-    // userDetails,
-  );
+  // console.log(
+  //   '<=============================>',
+  //   data,
+  //   // '<==============',
+  //   // userDetails,
+  // );
   const [loader, setloader] = useState(false);
   const [donationLoader, setDonationLoader] = useState(false);
   const [isFollow, setisFollow] = useState();
@@ -506,7 +506,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
-                        allTexts.screenNames.nearByTempleSeeAll,
+                        allTexts.screenNames.profilenearbytemples,{
+                          jtProfile: trfData?.jtProfile
+                        }
                       )
                     }
                   />

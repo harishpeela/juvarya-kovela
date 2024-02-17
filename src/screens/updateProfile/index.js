@@ -73,9 +73,9 @@ const UpdateProfile = ({navigation}) => {
       primaryContact: '',
     };
     console.log(payload, 'payload');
-    if (gotraValue === '' && isRoleSelected === '' && pincode === '') {
+    if (gotraValue === ''  && pincode === '') {
       alert('please fill at least one field');
-    } else if (gotraValue || isRoleSelected || pincode) {
+    } else if (gotraValue || pincode) {
       try {
         let responce = await Update_Profile(payload);
         console.log('date of birth', responce?.data);

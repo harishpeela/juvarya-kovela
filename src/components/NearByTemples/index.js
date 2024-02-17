@@ -67,11 +67,11 @@ export const NearByTemple = ({
         borderRadius: 20,
         margin: 5,
         backgroundColor: 'white',
-        height: 120,
-        width: 120,
+        height: 140,
+        width: 190,
         elevation: 4,
         shadowOpacity: 5,
-        padding: 8,
+        padding: 4,
       }}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
@@ -79,30 +79,31 @@ export const NearByTemple = ({
           onSelect: onSelect,
         });
       }}>
-         <TouchableOpacity style={{ position:'absolute',top:7,right:10}} onPress={() => FollowandUnFollow(templeId)}>
+         {/* <TouchableOpacity style={{ position:'absolute',top:7,right:10}} onPress={() => FollowandUnFollow(templeId)}>
           <Icon
             name={isLiked ? 'heart' : 'heart-o'}
             size={14}
             color={isLiked ? colors.red1 : colors.orangeColor}
             style={{ marginLeft:5}}
           />
-        </TouchableOpacity>
-      <View style={{  alignItems: 'center', marginTop: 15, height: '70%',backgroundColor:'white'}}>
+        </TouchableOpacity> */}
+      <View style={{  alignItems: 'center', marginTop: 5, height: '70%',backgroundColor:'white'}}>
         <Image
           source={{
             uri: post?.profileDTO?.logo
               ? post?.profileDTO?.logo
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
-          style={{ height: '100%', width: 90, borderRadius: 15, resizeMode: 'cover' }}
+          style={{ height: '100%', width: '90%', borderRadius: 15, resizeMode: 'cover' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 
-      <View style={{justifyContent: 'center'}}>
-        <Text numberOfLines={1}style={{color: colors.black, fontWeight: 'bold'}}>
-          {name?.length < 10 ? `${name}` : `${name?.substring(0, 10)}..`}
+      <View style={{ marginLeft: '5%', marginTop: '2%'}}>
+        <Text style={{color: colors.black, fontWeight: 'bold'}}>
+          {/* {name?.length < 10 ? `${name}` : `${name?.substring(0, 10)}..`} */}
+          {name}
         </Text>
-       
+        <Text style={{fontSize: 9, color: 'gray', fontWeight: 'bold'}}>{post?.locality}, {post?.postalCodeDTO?.city?.name} </Text>
       </View>
     </TouchableOpacity>
   );
