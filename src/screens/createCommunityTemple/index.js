@@ -126,7 +126,7 @@ const CommunityTemple = ({navigation}) => {
             {eventError  && (
               <Text
                 style={{
-                  color: 'red',
+                  color: 'orange',
                   alignSelf: 'flex-start',
                   marginTop: '2%',
                   marginLeft:'8%'
@@ -143,7 +143,7 @@ const CommunityTemple = ({navigation}) => {
              {DescriptionError  && (
               <Text
                 style={{
-                  color: 'red',
+                  color: 'orange',
                   alignSelf: 'flex-start',
                   marginTop: '2%',
                   marginLeft:'8%'

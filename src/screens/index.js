@@ -59,6 +59,7 @@ import Info from './Info';
 import Profile_Events from './profile-events';
 import Save_Highlight from './highlights-save';
 import CommunityTemple from './createCommunityTemple';
+import ToDoList from './To_Do_List';
 export {
   CreatePost,
   Seemore,
@@ -120,5 +121,6 @@ export {
   Info,
   Profile_Events,
   Save_Highlight,
-  CommunityTemple
+  CommunityTemple,
+  ToDoList
 };

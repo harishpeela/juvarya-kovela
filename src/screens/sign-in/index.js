@@ -186,7 +186,7 @@ const Signin = ({navigation}) => {
                     navigation.navigate(allTexts.screenNames.forgetPassword);
                   }}>
                   <View>
-                    <Text style={styles.forgotPassword}>Forgot Password</Text>
+                    <Text style={styles.forgotPassword}>Forgot Password ?</Text>
                   </View>
                 </TouchableOpacity>
               </View>

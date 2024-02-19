@@ -170,17 +170,17 @@ const Favorite = ({navigation}) => {
                 }
               }}
             />
-            ) : (
+          //   ) : (
 
-              <View style={styles.loaderContainer}>
-              <FontAwesome5
-              name="gopuram"
-              size={50}
-              color={'orange'}
-              style={{marginBottom:'5%'}}
-            />
-            <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
-          </View>
+          //     <View style={styles.loaderContainer}>
+          //     <FontAwesome5
+          //     name="gopuram"
+          //     size={50}
+          //     color={'orange'}
+          //     style={{marginBottom:'5%'}}
+          //   />
+          //   <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
+          // </View>
               
             ),
           ]

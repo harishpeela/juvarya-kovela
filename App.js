@@ -57,7 +57,8 @@ import {
   Info,
   Profile_Events,
   Save_Highlight,
-  CommunityTemple
+  CommunityTemple,
+  ToDoList
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -134,7 +135,8 @@ const App = () => {
       info,
       profileEvents,
       savehighlight,
-      communityTemple
+      communityTemple,
+      todoList,
     },
   } = allTexts;
 
@@ -218,6 +220,13 @@ const App = () => {
          <Stack.Screen
           name={communityTemple}
           component={CommunityTemple}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={todoList}
+          component={ToDoList}
           options={{
             headerShown: false,
           }}
