@@ -160,8 +160,6 @@ const Favorite = ({navigation}) => {
                 }
               }}
             />
-            ) : (
-             ''
             ),
           ]
         )}
