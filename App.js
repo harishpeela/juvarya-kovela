@@ -58,6 +58,7 @@ import {
   Profile_Events,
   Save_Highlight,
   CommunityTemple,
+  ToDoList
   Profile_Near_By_Temples,
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -136,6 +137,7 @@ const App = () => {
       profileEvents,
       savehighlight,
       communityTemple,
+      todoList,
       profilenearbytemples,
     },
   } = allTexts;
@@ -220,6 +222,13 @@ const App = () => {
          <Stack.Screen
           name={communityTemple}
           component={CommunityTemple}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={todoList}
+          component={ToDoList}
           options={{
             headerShown: false,
           }}

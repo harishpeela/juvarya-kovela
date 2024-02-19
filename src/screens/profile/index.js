@@ -272,6 +272,15 @@ const currentCust = async () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
+          {/* <Item
+              svg={
+                <AntDesign name="idcard" size={20} color={colors.black} />
+              }
+              text={t('ToDo List')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.todoList);
+              }}
+            /> */}
               <Item
               svg={
                 <FontAwesome5
