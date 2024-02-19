@@ -80,7 +80,8 @@ export const styles = StyleSheet.create({
     ntext: {
       fontWeight: 'bold',
       color: colors.orangeColor,
-      fontSize: 20
+      fontSize: 20,
+      fontFamily:'Poppins-Medium'
     }
   },
 });
