@@ -220,7 +220,7 @@ const ViewTempleProfile = ({route, navigation}) => {
     }
   };
   const getFollowValue = async id => {
-    setFollowVisible(true);
+    setFollowVisible(data?.profileDTO?.follow ? data?.profileDTO?.follow : true);
     let result = await NewGetFollowUmFollowById(id);
     if (result) {
       setFollowVisible(false);
@@ -317,7 +317,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       <Pressable>
         <View style={styles.footerBackground}>
           <BackgroundImageAClass />
-          {tempProfileData?.templeClass === 'c' && <BackgroundImageFlower />}
+          {trfData?.templeClass === 'c' && <BackgroundImageFlower />}
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
@@ -436,7 +436,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               )}
             </View>
             <View style={{marginLeft: 15}}>
-              <ProfileSeconTab nameData={trfData} title={trfData?.name} />
+              <ProfileSeconTab nameData={tempProfileData} title={tempProfileData?.description} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
                   <PostsComp
@@ -506,7 +506,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
-                        allTexts.screenNames.nearByTempleSeeAll,
+                        allTexts.screenNames.profilenearbytemples,{
+                          jtProfile: trfData?.jtProfile
+                        }
                       )
                     }
                   />

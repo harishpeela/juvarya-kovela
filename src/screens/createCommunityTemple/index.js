@@ -1,67 +1,55 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
-  ToastAndroid,
   useColorScheme,
   Text,
   Alert,
-  Image,
-  TouchableOpacity,
   ScrollView,
+  TouchableOpacity,
+  Image
 } from 'react-native';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import {
   EventInput,
-  EventInput1,
-  Input,
   PrimaryButton,
-  ProfileInfo,
-  TopBarcard,
+  Loader,
 } from '../../components';
-import {InputField} from '../../components/inputfield';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {allTexts, colors} from '../../common';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {Formik} from 'formik';
-import {UpdateProfileValidation} from '../../common/schemas';
-import {styles} from './styles'; // Update this import based on your project structure
-import {BackHeader, BackgroundImage} from '../../components';
-import { Loader } from '../../components';
-import ApplicationContext from '../../utils/context-api/Context';
-import SelectDropdown from 'react-native-select-dropdown';
-import {
-  GetCurrentCustomer,
-  Update_Profile,
-  getUserInfoNew,
-} from '../../utils/api';
-import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { allTexts, colors } from '../../common';
+import { uploadTempleProfilePic } from '../../utils/api';
+import { styles } from './styles'; // Update this import based on your project structure
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {EventInput2, EventInput3} from '../../components/eventCreateInput';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-import { CreateCommunityTemple} from '../../utils/api';
-const CommunityTemple = ({navigation}) => {
+import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { CreateCommunityTemple } from '../../utils/api';
+import { launchImageLibrary } from 'react-native-image-picker';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+const CommunityTemple = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const [eventError, setEventError] = useState(false);
   const [datePickerVisible, setDatePickerVisible] = useState(false);
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
-  const [dob, setDob] = useState(' ');
-  const [CommunityTemple, setCommunityTemple] = useState('');
   const [loader, setLoader] = useState(false);
   const [name, setName] = useState('');
   const [descripton, setDescription] = useState('');
   const [DescriptionError, setDescriptionError] = useState(false);
   const [DateError, setDateError] = useState(false);
+  const [image, setImage] = useState(null);
+  const [imageUploaded, setimageUploaded] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [custDetails, setCustDetails] = useState(null);
+  const [isCross, setIsCross] = useState(true);
+  const [imgErr, setImgErr] = useState(false);
+
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
       HideDatePicker();
     }
-    
+
   };
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
@@ -70,148 +58,258 @@ const CommunityTemple = ({navigation}) => {
     setDatePickerVisible(false);
     setDatePickerVisible(false);
   };
- 
+
   const CommunityTempleData = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'dd-MM-yyyy');
-    let payload ={
+    let payload = {
       name: name,
       desciption: descripton,
-      seasonal: true,
       establishedOn:formattedDate
-  }
+    }
     setLoader(true);
-    if(name === ''){
+    if (image === null || image === undefined) {
+      setImgErr(true);
+    }
+    if (name === '') {
       setEventError(true)
-      console.log('name',name)
-    } if(descripton === ''){
+      console.log('name', name)
+    } if (descripton === '') {
       setDescriptionError(true)
-      console.log('description',descripton)
-    } else if (date === ''){
+      console.log('description', descripton)
+    } else if (date === '') {
       setDateError(true)
-      console.log('date',date)
-    } else if(name && date && descripton){
+      console.log('date', date)
+    } else if (name && date && descripton) {
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
-      if(result?.status === 200){
-        Alert.alert('Success', `Community temple was created successfully`, [
-          {
-            text: 'Ok',
-            onPress: () => navigation.navigate(allTexts.tabNames.profile),
-          },
-        ]);
+      console.log('status ===>', result?.status);
+      if (result?.status === 200) {
+        let data= result?.data;
+        let img = getImageObj(image);
+        let formdata = new FormData();
+        formdata.append('profilePicture', img);
+        let responce = await uploadTempleProfilePic(formdata, data?.id);
+        console.log('res', responce?.data);
+        if (responce?.status === 200) {
+          Alert.alert('Success', `Community Temple Was Created`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.tabNames.profile)
+            },
+          ]);
+        } else {
+          Alert.alert('Error', `Something went wrong`, [
+            {
+              text: 'Ok',
+              onPress: () =>
+                navigation.navigate(allTexts.tabNames.profile)
+            },
+          ]);
+        }
       }
-    } else{
-      alert('Something went wrong')
-    } 
+    } else {
+      alert('something went wrong please try after some time')
+    }
   };
- 
+
+  const updateProfilePicture = async () => {
+    let img = getImageObj(image);
+    let formdata = new FormData();
+    console.log('img===>', img)
+    formdata.append('profilePicture', img);
+    let result = await PostProfilePic(formdata);
+    console.log('updated', result?.data);
+    if (result) {
+      setIsCross(true);
+    } else {
+      console.log('something went wrong', result)
+    }
+  };
+
+  const uploadPhoto = () => {
+    setImage(image)
+    try {
+      launchImageLibrary(
+        {
+          mediaType: 'photo',
+          saveToPhotos: true,
+          includeBase64: true,
+          // maxHeight: 1080,
+          // maxWidth: 1080,
+        },
+        res => {
+          if (!res?.didCancel && !res?.errorCode) {
+            setImage(res?.assets[0]);
+            setimageUploaded(false);
+            setIsModal(true);
+            setImgErr(false);
+          } else {
+            console.log(res?.errorMessage);
+          }
+        },
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const getImageObj = img => {
+    let newUri =
+      Platform.OS === 'ios' ? img?.uri : img?.uri?.replace('file://', 'file:');
+    let imageObj = {
+      uri: newUri,
+      name: `${Date.now()}.jpg`,
+      type: 'image/jpeg',
+    };
+    return imageObj;
+  };
   return (
-    <ScrollView>
-      <View style={styles.wrapper}>
-        <View style={{}}>
-          <TopBarCard2
-            txt={'Create Temple'}
-            back={true}
-            navigation={navigation}></TopBarCard2>
-        </View>
-        <View style={{marginTop: '15%'}}>
-          <View style={{bottom: '8%'}}>
-            <EventInput
-              lable={'Name'}
-              placeholder={'Enter your name'}
-              height={50}
-              onChangeText={e => {setName(e); setEventError(false)}}
-            />
-            {eventError  && (
-              <Text
-                style={{
-                  color: 'orange',
-                  alignSelf: 'flex-start',
-                  marginTop: '2%',
-                  marginLeft:'8%'
-                }}>
-                please enter Name
-              </Text>
-            )}
-            <EventInput
-              lable={'Description'}
-              placeholder={'About Temple'}
-              height={150}
-              onChangeText={e => {setDescription(e); setDescriptionError(false)}}
-            />
-             {DescriptionError  && (
-              <Text
-                style={{
-                  color: 'orange',
-                  alignSelf: 'flex-start',
-                  marginTop: '2%',
-                  marginLeft:'8%'
-                }}>
-                please enter Description
-              </Text>
-            )}
-            <View
-              style={{
-                flexDirection: 'row',
-                marginLeft: '4%',
-              }}>
-              <View style={{width: '60%', marginTop: 5}}>
-                <View style={{width:'205%',marginLeft:-40}}>
-                <EventInput2
-                  lable={'     Date of Establishment'}
-                  height={50}
-                  value1={toDate ? format(toDate, 'dd-MM-yyyy') : ''}
-                  calendar={true}
-                  onPressCalendar={() => ShowDatePicker()}
-                 
-                />
-                 {DateError  && (
-              <Text
-                style={{
-                  color: 'red',
-                  alignSelf: 'flex-start',
-                  marginTop: '2%',
-                  marginLeft:'12%'
-                }}>
-                please Select Date
-              </Text>
-            )}
-                 </View>
-                <DateTimePickerModal
-                  isVisible={datePickerVisible}
-                  mode={date}
-                  onConfirm={HandleCnfrm}
-                  onCancel={HideDatePicker}
-                />
-              </View>
-              <View style={{width: '45%', right: 35, marginTop: 5}}>
-                {/* <EventInput
-                  lable={'Pin Code'}
-                  pincode={true}
-                  placeholder={'Pincode'}
-                  height={50}
-                  onChangeText={text => {
-                    setPincode(text);
-                    setPinErr(false);
+    <View style={{ flex: 1 }}>
+      <View style={{ height: '15%' }}>
+        <TopBarCard2
+          txt={'Create Community Temple'}
+          back={true} marginLeft={'15%'}
+          navigation={navigation}></TopBarCard2>
+      </View>
+      <View style={styles.profileContainer}>
+        {image !== null ? (
+          <View style={styles.preViewImageContainer}>
+            {isCross && (
+              <View style={styles.crossIconContainer}>
+                <EvilIcons
+                  onPress={() => {
+                    setImage(null);
+                    uploadPhoto();
                   }}
-                  maxLength={6}
-                  value={pincode}
-                /> */}
+                  name="pencil"
+                  color={colors.orangeColor}
+                  size={25}
+                />
               </View>
-            </View>
-            <View style={{width: '80%', alignSelf: 'center', marginTop: '60%'}}>
-              <PrimaryButton
-                text={'Submit'}
-                bgColor={colors.orangeColor}
-                onPress={() => CommunityTempleData()}
-              />
-            </View>
+            )}
+            <Image
+              resizeMode="cover"
+              style={styles.preViewImage}
+              source={{ uri: image?.uri }}
+            />
           </View>
+        ) : isLoading ? (
+          <View style={styles.loader}>
+            <Loader size={'small'} color={colors.orangeColor} />
+          </View>
+        ) : (
+          <TouchableOpacity
+            style={styles.uploadPic}
+            onPress={() => {
+              uploadPhoto();
+            }}>
+            {custDetails?.media ? (
+              <Image
+                source={{ uri: custDetails?.media?.url }}
+                style={styles.profileImage}
+              />
+            ) : (
+              <View style={styles.profileImage}>
+                <FontAwesome name='camera' size={60} color={colors.orangeColor} />
+                {/* <Image
+                    source={{
+                      uri: 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg',
+                    }}
+                    style={styles.profileImage}
+                  /> */}
+              </View>
+            )}
+          </TouchableOpacity>
+        )}
+        {imgErr &&
+          <View>
+            <Text style={{ fontSize: 12, color: 'red', marginTop: 10 }}> Upload Image</Text>
+          </View>
+        }
+      </View>
+      <View style={{}}>
+        <EventInput
+          lable={'Name'}
+          placeholder={'Enter your name'}
+          height={50}
+          onChangeText={e => { setName(e); setEventError(false) }}
+        />
+        {eventError && (
+          <Text
+            style={{
+              color: 'red',
+              alignSelf: 'flex-start',
+              marginTop: '2%',
+              marginLeft: '8%'
+            }}>
+            please enter Name
+          </Text>
+        )}
+        <EventInput
+          lable={'Description'}
+          placeholder={'About Temple'}
+          height={150}
+          onChangeText={e => { setDescription(e); setDescriptionError(false) }}
+        />
+        {DescriptionError && (
+          <Text
+            style={{
+              color: 'red',
+              alignSelf: 'flex-start',
+              marginTop: '2%',
+              marginLeft: '8%'
+            }}>
+            please enter Description
+          </Text>
+        )}
+        <View
+          style={{
+            flexDirection: 'row',
+            marginLeft: '4%',
+          }}>
+          <View style={{ width: '60%', marginTop: 5 }}>
+            <View style={{ width: '205%', marginLeft: -40 }}>
+              <EventInput2
+                lable={'     Date of Establishment'}
+                height={50}
+                value1={toDate ? format(toDate, 'dd-MM-yyyy') : ''}
+                calendar={true}
+                onPressCalendar={() => ShowDatePicker()}
+
+              />
+              {DateError && (
+                <Text
+                  style={{
+                    color: 'red',
+                    alignSelf: 'flex-start',
+                    marginTop: '2%',
+                    marginLeft: '12%'
+                  }}>
+                  please Select Date
+                </Text>
+              )}
+            </View>
+            <DateTimePickerModal
+              isVisible={datePickerVisible}
+              mode={date}
+              onConfirm={HandleCnfrm}
+              onCancel={HideDatePicker}
+            />
+          </View>
+
+        </View>
+        <View style={{ width: '80%', alignSelf: 'center', marginTop: '10%' }}>
+          <PrimaryButton
+            text={'Submit'}
+            bgColor={colors.orangeColor}
+            onPress={() => CommunityTempleData()}
+          />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };
- 
+
 export default CommunityTemple;

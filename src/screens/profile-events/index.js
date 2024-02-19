@@ -94,6 +94,7 @@ const {id, data, role, roleItemType} = route?.params || {};
         >
           <View style={styles.searchContainers}>
             <SearchBar
+              showCrossPress={true}
               onTextChange={(e) => {
                 setSearchedText(e);
                 // SearchPopTemp(e);
@@ -154,7 +155,7 @@ const {id, data, role, roleItemType} = route?.params || {};
                 />
               ) : (
                 <View style={styles.noData}>
-                  <Text style={styles.noText}> No Data to display</Text>
+                  <Text style={styles.noText}> No Data To Display</Text>
                 </View>
               )}
             </>

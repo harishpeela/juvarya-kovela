@@ -10,15 +10,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { colors } from '../../common';
-export const ProfileDonationsCard = ({ data, navigation, onPressDel}) => {  
+export const ProfileDonationsCard = ({ data}) => {  
   return (
         <TouchableOpacity style={styles.container}>
-          {/* <EntypoIcon name="cross" size={20} onPress={onPressDel} style={{position:'absolute' , top:5, right:5}}/> */}
           <Image
             source={{
               uri: data?.url
                 ? data?.url
-                : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17055723004711705572300104.jpg',
+                : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
             }}
             style={{ height: 70, width: 70, borderRadius: 70 / 2 }}
           />

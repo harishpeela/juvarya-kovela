@@ -97,18 +97,19 @@ const ForgetPassword = () => {
       let result = await NewVerifyOTP(payload);
       if (result) {
         setOtp(Ootp);
-        setTimeout(() => {
-          Snackbar.show({
-            text: 'OTP Generated Successfully',
-            backgroundColor: 'green',
-            duration: 2000,
-            action: {
-              text: 'Ok',
-              textColor: 'white',
-              onPress: () => {},
-            },
-          });
-        }, 2000);
+        alert('OTP Generated Successfully, check your spam folder if not received Email');
+        // setTimeout(() => {
+        //   Snackbar.show({
+        //     // text: 'OTP Generated Successfully, check your spam folder if not received Email',
+        //     // backgroundColor: 'green',
+        //     // duration: 2000,
+        //     // action: {
+        //     //   text: 'Ok',
+        //     //   textColor: 'white',
+        //     //   onPress: () => {},
+        //     // },
+        //   });
+        // }, 2000);
       } else {
         setMemberShip(0);
       }
@@ -142,7 +143,6 @@ const ForgetPassword = () => {
       setTimeout(() => {
         setError(false);
       }, 5000);
-      console.log('Invalid email:', userEmail);
     }
   };
 
@@ -172,7 +172,12 @@ const ForgetPassword = () => {
           navigation.navigate(allTexts.screenNames.signin);
         }, 1500);
       } else {
-        setMemberShip(0);
+        Alert.alert('Error', 'Invalid OTP', [
+          {
+            text: 'Ok',
+            onPress: () =>  setModalVisible(false)
+          },
+        ]);
       }
     } catch (error) {
       Snackbar.show({
@@ -214,6 +219,7 @@ const ForgetPassword = () => {
           back={true}
           txt={'Forgot Password'}
           navigation={navigation}
+          onPress={() => navigation.goBack()}
         />
       </View>
       <TextInput

@@ -77,7 +77,7 @@ const UserFeedScreen = ({ navigation }) => {
           style: 'cancel',
         },
         {
-          text: 'OK',
+          text: 'Yes',
           onPress: async () => {
             try {
               const result = await DeleteFeedData(id);
