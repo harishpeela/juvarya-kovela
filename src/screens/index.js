@@ -123,6 +123,6 @@ export {
   Profile_Events,
   Save_Highlight,
   CommunityTemple,
-  ToDoList
+  ToDoList,
   Profile_Near_By_Temples,
 };
