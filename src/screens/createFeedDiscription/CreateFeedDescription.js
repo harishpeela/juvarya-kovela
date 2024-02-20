@@ -6,6 +6,7 @@ import {
   PrimaryButton,
   TopBarcard,
 } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import {allTexts, colors} from '../../common';
 import {Data} from '../home-feed/formateDetails';
 import {getAuthTokenDetails} from '../../utils/preferences/localStorage';
@@ -112,7 +113,7 @@ const CreateFeedDescription = ({route, navigation}) => {
   return (
     <View>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true}  navBack={() =>navigation.goBack()} txt={'Create Feed'} />
+        <TopBarCard2 back={true}  navBack={() =>navigation.goBack()} navigation={navigation} txt={'Create Feed'} />
       </View>
       <Image
         source={{uri: imageProp[0]?.uri}}
