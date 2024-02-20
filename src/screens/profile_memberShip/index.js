@@ -21,12 +21,12 @@ import {
   FollowersListCard3,
   TopBarcard,
 } from '../../components';
-import { MemberShipDetails, MembersList } from '../../utils/api';
+import { MemberShipList, MembersList } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
 import ApplicationContext from '../../utils/context-api/Context';
 const ProfileMembership = ({ route, navigation }) => {
-  const { id, roleId } = route.params || {};
+  const { trfdata, roleId } = route.params || {};
   const {userDetails} = useContext(ApplicationContext);
 const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
@@ -35,26 +35,27 @@ const isDarkMode = useColorScheme() === 'dark';
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
   const [roleType, setRoleType] = useState();
- 
-  const MembershipData = async () => {
+  const [membership, setMemberShipData] = useState();
+
+  const MembershipIdData = async () => {
+    // console.log('membershipid', trfdata?.jtProfile);
     setaLoader(true);
     try {
-      let result = await MembersList( id ,0, 100);
-      // console.log('res=====>', result?.data);
-      let responce = result?.data?.data;
-      if (responce) {
-        let dataList = responce.filter(item => item).map(({ invitedCustomer, membershipDto, membershipId }) => ({ membershipDto, invitedCustomer, membershipId }));
-        setaLoader(false);
-        setData(dataList);
-      } else {
-        setaLoader(false);
+      let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
+      console.log('res ==><><<>>', result?.data);
+      let data = result?.data?.data;
+      let id = data?.filter(item => item)?.map(({id}) => ({id}));
+      console.log('jknkjn.kjn.', id)
+      if(id){
+        setData(id);
+        setaLoader(false)
       }
     } catch (error) {
       console.log('error in membership details api', error);
       setaLoader(false);
-      alert(error);
     }
   };
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -65,7 +66,7 @@ const isDarkMode = useColorScheme() === 'dark';
     }
   };
   useEffect(() => {
-    MembershipData();
+    MembershipIdData();
     Type();
   }, []); 
   return (
@@ -101,7 +102,13 @@ const isDarkMode = useColorScheme() === 'dark';
         ) : (
           <View style={{ marginTop: '10%' }}>
             {data?.length ? (
-              <FollowersListCard3 data={data} navigation={navigation} />
+              <FlatList
+              data={data}
+                keyExtractor={({item, index}) => item?.id}
+                renderItem={({item, index}) => (
+                  <FollowersListCard3 data={item} navigation={navigation} />
+            )}
+              />
             ) : (
               <View
                 style={{

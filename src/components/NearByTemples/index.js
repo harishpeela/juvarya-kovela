@@ -100,8 +100,8 @@ export const NearByTemple = ({
 
       <View style={{ marginLeft: '5%', marginTop: '2%'}}>
         <Text style={{color: colors.black, fontWeight: 'bold'}}>
-          {/* {name?.length < 10 ? `${name}` : `${name?.substring(0, 10)}..`} */}
-          {name}
+          {name?.length < 20 ? `${name}` : `${name?.substring(0, 20)}..`}
+          {/* {name} */}
         </Text>
         <Text style={{fontSize: 9, color: 'gray', fontWeight: 'bold'}}>{post?.locality}, {post?.postalCodeDTO?.city?.name} </Text>
       </View>
