@@ -11,6 +11,9 @@ export const styles = StyleSheet.create({
         padding: "2%",
         borderRadius:5,
       },
+      textContainer:{
+      width:'95%'
+      },
       second: {
         width: 'auto',
         maxWidth:'65%',

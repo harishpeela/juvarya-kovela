@@ -58,7 +58,7 @@ import {
   Profile_Events,
   Save_Highlight,
   CommunityTemple,
-  ToDoList
+  ToDoList,
   Profile_Near_By_Temples,
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';

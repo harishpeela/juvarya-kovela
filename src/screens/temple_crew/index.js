@@ -7,12 +7,16 @@ import { Loader } from '../../components';
 import { colors } from '../../common';
 import { styles } from './styles';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-import { NewTempleCrew } from '../../utils/api';
+import { NewTempleCrew,GetProfilePic,getUserInfoNew } from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Entypo';
 const TempleCrew = ({ route, navigation }) => {
   const [loader, setLoader] = useState(false);
   const { id } = route.params || {};
   const [data, setData] = useState([]);
+  const [donationData, setDonationData] = useState([]);
+
+
+
 
   const infoData = [
     {
@@ -108,6 +112,27 @@ const TempleCrew = ({ route, navigation }) => {
     // },
   ]
 
+
+  const customerProfilePic = async (e) => {
+    console?.log('=====><', e)
+    try {
+      let result = await getUserInfoNew(e?.customerId);
+      console.log('profilepic', result?.data);
+      if (result?.status === 200) {
+        let responce = { ...e, ...result?.data };
+        console.log('responce===><', [responce]);
+        if (responce) {
+          setDonationData([responce])
+        }
+      } else {
+        setDonationData(e)
+      }
+    } catch (error) {
+      setDonationData(e)
+      console.log('error in profile pic api in donations', error);
+    }
+  };
+
   const templeCrewDetails = async () => {
     console.log('id in temple crew', id);
     setLoader(true);
@@ -117,6 +142,10 @@ const TempleCrew = ({ route, navigation }) => {
       if (result) {
         setData(result?.data?.customerRoles);
         setLoader(false);
+        let response = result?.data?.customerRoles;
+        response?.map(e => {
+          customerProfilePic(e)
+        })
       } else {
         setData([]);
         setLoader(false);
@@ -205,10 +234,10 @@ const TempleCrew = ({ route, navigation }) => {
           {loader ? (
             <Loader size={'small'} color={colors.orangeColor} />
           ) : (
-            data?.length ? (
+            donationData?.length ? (
               <FlatList
                 style={styles.list}
-                data={data}
+                data={donationData}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}
                 keyExtractor={(item, index) => item.id.toString()}

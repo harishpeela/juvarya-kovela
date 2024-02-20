@@ -1,18 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
-import {colors, fontFamily, fontSize} from '../../common';
-export const CrewCard = ({data, onPress}) => {
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { colors, fontFamily, fontSize } from '../../common';
+export const CrewCard = ({ data, onPress }) => {
+  console.log(data, '===============>')
   return (
     <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
       <View style={styles.secondaryContainer}>
         <View style={styles.listFirstItem}>
-          <View style={styles.bulletConatianer}>
-            <View style={styles.bullet} />
-          </View>
-          <View>
+          <View style={styles.crewContainer}>
+            <Image source={{uri:data?.media?.url}} height={50} width={50} style={{ color: 'black', marginRight: 20, height: 50, width: 50,borderColor:'black', borderWidth: 2, borderRadius: 100 }}>{data.url}</Image>
             <Text style={styles.itemHeading}>{data?.name}</Text>
-          </View>
+            </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -27,6 +26,9 @@ const styles = StyleSheet.create({
     borderColor: 'lightgray',
     borderWidth: 1,
   },
+  crewContainer:{
+  flexDirection:'row'
+  },
   secondaryContainer: {
     borderColor: 'blue',
     marginRight: 2,
@@ -36,10 +38,7 @@ const styles = StyleSheet.create({
   listFirstItem: {
     flexDirection: 'row',
     flex: 0.7,
-    marginLeft: '10%',
-  },
-  bulletConatianer: {
-    marginRight: 10,
+   
   },
   bullet: {
     marginTop: 10,
@@ -52,6 +51,7 @@ const styles = StyleSheet.create({
     color: colors.orangeColor,
     fontSize: fontSize.normal,
     fontFamily: fontFamily.popinMedium,
+    marginTop:'6%'
   },
   itemAdmin: {
     color: colors.black,

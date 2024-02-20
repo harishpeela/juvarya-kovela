@@ -160,6 +160,8 @@ const Favorite = ({navigation}) => {
                 }
               }}
             />
+            ) : (
+             ''
             ),
           ]
         )}
@@ -178,5 +180,4 @@ const Favorite = ({navigation}) => {
     </SafeAreaView>
   );
 };
-
 export default Favorite;
