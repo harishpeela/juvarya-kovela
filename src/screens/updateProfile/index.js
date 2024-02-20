@@ -54,7 +54,7 @@ const UpdateProfile = ({navigation}) => {
     }
   };
 
-  const updatePincode = pincode.toString();
+  const updatePincode = pincode?.toString();
   console.log('UpdatePincode', updatePincode);
 
   const ShowDatePicker = () => {

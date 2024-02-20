@@ -85,6 +85,8 @@ const UserFeedScreen = ({ navigation }) => {
                 console.log('Feed successfully deleted');
                 // Refresh feed list after deletion
                 listFeed(apiPageNo, apiPageSize);
+              } else{
+                alert('you are not allowed to delete this feed')
               }
             } catch (error) {
               console.log('error in deleting feed', error);
@@ -155,7 +157,7 @@ const UserFeedScreen = ({ navigation }) => {
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>
             <FontAwesome size={30} style={{ marginBottom: '5%' }} />
-            <Text style={styles.nodatatext}>No Items To Dsplay</Text>
+            <Text style={styles.nodatatext}>No Items To Display</Text>
           </View>
         ) : (
           <View style={{ marginTop: '70%' }}>
