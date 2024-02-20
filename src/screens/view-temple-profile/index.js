@@ -437,6 +437,11 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View>
             <View style={{marginLeft: 15}}>
               <ProfileSeconTab nameData={tempProfileData} title={tempProfileData?.description} />
+              {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
+               <TouchableOpacity style={{alignSelf: 'center', backgroundColor: colors.orangeColor, padding: 5, borderRadius: 10}}>
+                <Text style={{fontWeight: 'bold', color: 'white'}}> About </Text>
+               </TouchableOpacity>
+              ): ''}
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
                   <PostsComp
@@ -648,8 +653,8 @@ const ViewTempleProfile = ({route, navigation}) => {
             </View> */}
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate(allTexts.screenNames.profilememberships, {
-                  trfdata: tempProfileData,
+                navigation.navigate(allTexts.screenNames.profilemembership, {
+                  trfdata: trfData,
                   roleId: roleId,
                 });
               }}>

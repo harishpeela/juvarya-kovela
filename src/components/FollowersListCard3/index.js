@@ -6,19 +6,35 @@ import {
   Image,
   FlatList,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useMemo} from 'react';
 import {styles} from './styles';
-import {allTexts} from '../../common';
+import { MembersList } from '../../utils/api';
+import { set } from 'date-fns';
 
 const FollowersListCard3 = ({data, navigation}) => {
+  // console.log(data, '--0098>>??>')
+  const [state, setState] = useState();
+  const MembershipData = async () => {
+    console.log('data>id', data);
+    try {
+      let result = await MembersList( data?.id ,0, 100);
+      let responce = result?.data?.data;
+      console.log('responce ====>>', responce);
+      if(responce){
+        setState(responce);
+      }
+    } catch (error) {
+      console.log('error in membership details api', error);
+      alert(error);
+    }
+  };
+  useMemo(()=> {
+     MembershipData()
+  }, [data])
   return (
     <View>
-      <FlatList
-        data={data}
-        keyboardShouldPersistTaps="handled"
-        keyExtractor={({item, index}) => index?.toString()}
-        renderItem={({item, index}) => (
-          <TouchableOpacity
+          {state?.length ? (
+            <TouchableOpacity
             style={styles.listItemContainer}
             onPress={() => { alert('page under development')
               // navigation.navigate(allTexts.screenNames.membershipdetails, {
@@ -29,8 +45,8 @@ const FollowersListCard3 = ({data, navigation}) => {
               <View style={styles.imageContainer}>
                 <Image
                   source={{
-                    uri: item?.loggedInUser?.customerProfileUrl
-                      ? item?.loggedInUser?.customerProfileUrl
+                    uri: state[0]?.invitedCustomer?.customerProfileUrl
+                      ? state[0]?.invitedCustomer?.customerProfileUrl
                       : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                   }}
                   style={styles.image}
@@ -48,20 +64,19 @@ const FollowersListCard3 = ({data, navigation}) => {
                     numberOfLines={1}
                     ellipsizeMode="tail"
                     style={styles.firstName}>
-                    {item.invitedCustomer?.firstName}
+                    {state[0]?.invitedCustomer?.firstName}
                   </Text>
-                  <Text>MemberShip Id :{item?.membershipId} </Text>
+                  <Text>MemberShip Id :{state[0]?.membershipId} </Text>
                   <View style={styles.textContainer2}>
-                    <Text style={styles.premiumText}>
-                      {item?.membershipDto?.type}
-                    </Text>
+                    {/* <Text style={styles.premiumText}>
+                      {state[0]?.membershipDto?.type}
+                    </Text> */}
                   </View>
                 </View>
               </View>
             </View>
           </TouchableOpacity>
-        )}
-      />
+          ) : ''}
     </View>
   );
 };
