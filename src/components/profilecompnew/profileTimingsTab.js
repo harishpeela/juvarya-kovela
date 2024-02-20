@@ -3,7 +3,6 @@ import { View, Text, Image, StyleSheet } from 'react-native';
 import { colors } from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 export const ProfileTimingTabs = ({ data }) => {
-  console.log('1=====>');
   return (
     <View style={styles.container}>
       {data?.templeClass === 'A' || 'B' || 'C' ? (
