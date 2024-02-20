@@ -1,10 +1,18 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { TopBarCard2 } from '../../components/topBar1/topBarCard'
 
-const ToDoList = () => {
+
+
+const ToDoList = ({ navigation }) => {
   return (
-    <View style={{marginTop:50}}>
-      <Text>ToDoList</Text>
+    <View style={{ flex: 1 }}>
+      <View style={{ height: '15%' }}>
+        <TopBarCard2 back={true}
+          txt={'ToDoList'}
+          navigation={navigation}
+        />
+      </View>
     </View>
   )
 }
