@@ -61,6 +61,7 @@ import Save_Highlight from './highlights-save';
 import CommunityTemple from './createCommunityTemple';
 import ToDoList from './To_Do_List';
 import Profile_Near_By_Temples from './nearByTemples_Profile';
+import AboutTemple from './about-temple';
 export {
   CreatePost,
   Seemore,
@@ -123,6 +124,7 @@ export {
   Profile_Events,
   Save_Highlight,
   CommunityTemple,
-  ToDoList
+  ToDoList,
   Profile_Near_By_Temples,
+  AboutTemple,
 };

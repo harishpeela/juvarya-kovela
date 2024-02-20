@@ -60,6 +60,7 @@ import {
   CommunityTemple,
   ToDoList,
   Profile_Near_By_Temples,
+  AboutTemple,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -141,6 +142,7 @@ const App = () => {
       todoList,
       profilenearbytemples,
       templeClass,
+      abouttemple,
     },
   } = allTexts;
 
@@ -355,13 +357,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={home}
-          component={UserFeedScreen}
+        <Stack.Screen
+          name={abouttemple}
+          component={AboutTemple}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name={events}
           component={Events}

@@ -21,13 +21,13 @@ import {
   BackgroundImageFlower,
   EventCard,
 } from '../../components';
-import {styles} from './styles';
-import React, {useState, useEffect, useContext} from 'react';
+import { styles } from './styles';
+import React, { useState, useEffect, useContext } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {allTexts} from '../../common';
+import { allTexts } from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Data} from '../home-feed/formateDetails';
+import { Data } from '../home-feed/formateDetails';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {
   FollowUnFollow,
@@ -42,7 +42,7 @@ import {
   getTempleProfileDetails,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import {ProfileSeconTab, ProfileFourthTab} from '../../components';
+import { ProfileSeconTab, ProfileFourthTab } from '../../components';
 import {
   CommunityComp,
   FollowersComp,
@@ -53,19 +53,18 @@ import {
   ProfileTimingTabs,
   Danation_Add_Card,
 } from '../../components';
-import {ProfileImage} from '../../components';
-import {colors} from '../../common';
-import {PostsComp} from '../../components/profilecompnew/postsComp';
-import {SearchTempleRoleWithId} from '../../utils/api';
+import { ProfileImage } from '../../components';
+import { colors } from '../../common';
+import { PostsComp } from '../../components/profilecompnew/postsComp';
+import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NearByTempleComp from '../../components/NearByTempleComp';
-import {TEMPLE_ADDRESS} from '../../utils/api/api';
 
-const ViewTempleProfile = ({route, navigation}) => {
+const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
-  const {data} = route.params || {};
+  const { userDetails } = useContext(ApplicationContext);
+  const { data } = route.params || {};
   // console.log(
   //   '<=============================>',
   //   data,
@@ -84,7 +83,6 @@ const ViewTempleProfile = ({route, navigation}) => {
   const [roleId, setRoleId] = useState();
   const [roleLoader, setRoleLoader] = useState(true);
   const [posts, setPosts] = useState(false);
-  const [memberShip, setMemberShip] = useState(0);
   const [postsCount, setPostsCount] = useState(0);
   const [eventsLoader, setEventsLoader] = useState(false);
   const [eventsData, setEventsData] = useState();
@@ -237,7 +235,7 @@ const ViewTempleProfile = ({route, navigation}) => {
       let postsData = result?.data?.data;
       let urls = postsData
         ?.filter(item => item)
-        ?.map(({mediaList, id, jtProfile}) => ({mediaList, id, jtProfile}));
+        ?.map(({ mediaList, id, jtProfile }) => ({ mediaList, id, jtProfile }));
       if (urls) {
         let media = urls?.filter(item => item?.mediaList);
         setPostImages(media);
@@ -281,7 +279,6 @@ const ViewTempleProfile = ({route, navigation}) => {
 
   const templeDetails = async id => {
     let responce = await getTempleProfileDetails(id);
-    // console.log('responce of temple details', responce?.data);
     if (responce?.data) {
       setTempProfileData(responce?.data);
     } else {
@@ -323,7 +320,7 @@ const ViewTempleProfile = ({route, navigation}) => {
           <View style={styles.footerContainer}>
             <View style={styles.header}>
               <TouchableOpacity
-                style={{backgroundColor: 'white', borderRadius: 28 / 2}}
+                style={{ backgroundColor: 'white', borderRadius: 28 / 2 }}
                 onPress={() => {
                   navigation.goBack();
                   route?.params?.onSelect({
@@ -369,7 +366,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 )}
               </View>
             </View>
-            <View style={{alignSelf: 'center', marginTop: -15}}>
+            <View style={{ alignSelf: 'center', marginTop: -15 }}>
               <ProfileImage profileImg={tempProfileData} />
             </View>
             <View
@@ -378,7 +375,7 @@ const ViewTempleProfile = ({route, navigation}) => {
                 alignItems: 'center',
                 marginTop: '5%',
               }}>
-              <Text style={{fontSize: 15}}>
+              <Text style={{ fontSize: 15 }}>
                 {tempProfileData?.communityDTO?.name
                   ? tempProfileData?.communityDTO?.name
                   : 'God Name'}
@@ -406,15 +403,9 @@ const ViewTempleProfile = ({route, navigation}) => {
               </View>
             </View>
             {templeaddress?.jtProfileAddressDTO?.locality && (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop: '2%',
-                }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '2%' }}>
                 <EvilIcons
-                  style={{color: colors.orangeColor, backgroundColor: 'white'}}
+                  style={{ color: colors.orangeColor, backgroundColor: 'white' }}
                   name="location"
                   size={15}
                   color="white"
@@ -443,27 +434,8 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <ProfileTimingTabs data={tempProfileData} />
               )}
             </View>
-            <View style={{marginLeft: 15}}>
-              <ProfileSeconTab
-                nameData={tempProfileData}
-                title={tempProfileData?.description}
-              />
-              {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
-                <TouchableOpacity
-                  style={{
-                    alignSelf: 'center',
-                    backgroundColor: colors.orangeColor,
-                    padding: 5,
-                    borderRadius: 10,
-                  }}>
-                  <Text style={{fontWeight: 'bold', color: 'white'}}>
-                    {' '}
-                    About{' '}
-                  </Text>
-                </TouchableOpacity>
-              ) : (
-                ''
-              )}
+            <View style={{ marginLeft: 15 }}>
+              <ProfileSeconTab nameData={tempProfileData} title={tempProfileData?.description} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
                   <PostsComp
@@ -513,6 +485,13 @@ const ViewTempleProfile = ({route, navigation}) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
+                  {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
+                    <ContactTabcomp onPressContact={() => navigation.navigate(allTexts.screenNames.abouttemple, {
+                      jtProfile: trfData?.jtProfile,
+                      name: trfData?.name,
+                    })} />
+                  ) : ''}
+
                   {tempProfileData?.membershipsEnabled && (
                     <DirectionsTabComp
                       role={
@@ -533,10 +512,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
-                        allTexts.screenNames.profilenearbytemples,
-                        {
-                          jtProfile: trfData?.jtProfile,
-                        },
+                        allTexts.screenNames.profilenearbytemples, {
+                        jtProfile: trfData?.jtProfile
+                      }
                       )
                     }
                   />
@@ -554,11 +532,10 @@ const ViewTempleProfile = ({route, navigation}) => {
                   id={donationValue?.email}
                   text={
                     donationValue?.name
-                      ? `Top donation by ${
-                          donationValue?.donorName
-                            ? donationValue?.donorName
-                            : donationValue?.name
-                        }`
+                      ? `Top donation by ${donationValue?.donorName
+                        ? donationValue?.donorName
+                        : donationValue?.name
+                      }`
                       : 'No Donations Yet'
                   }
                   roleId={
@@ -598,9 +575,9 @@ const ViewTempleProfile = ({route, navigation}) => {
                 <FlatList
                   numColumns={3}
                   data={postImages}
-                  keyExtractor={({item, index}) => index}
+                  keyExtractor={({ item, index }) => index}
                   style={styles.ImagesContainer}
-                  renderItem={({item, index}) => (
+                  renderItem={({ item, index }) => (
                     <TempleProfile_PostsCard nav={navigation} item={item} />
                   )}
                 />
@@ -625,7 +602,7 @@ const ViewTempleProfile = ({route, navigation}) => {
               showsVerticalScrollIndicator={false}
               style={styles.contentDisplay}>
               {eventsLoader && (
-                <View style={{flex: 1}}>
+                <View style={{ flex: 1 }}>
                   <Loader color={colors.orangeColor} size={30} />
                 </View>
               )}

@@ -54,7 +54,7 @@ const UpdateProfile = ({navigation}) => {
     }
   };
 
-  const updatePincode = pincode.toString();
+  const updatePincode = pincode?.toString();
   console.log('UpdatePincode', updatePincode);
 
   const ShowDatePicker = () => {
@@ -276,7 +276,7 @@ const UpdateProfile = ({navigation}) => {
                   // value={pincode}
                   pincode={true}
                   value={
-                    currentCustomer?.postalCode ? updatePincode : 'Pincode '
+                    currentCustomer?.postalCode ? updatePincode : 'Pincode'
                   }
                   height={50}
                   onChangeText={text => {

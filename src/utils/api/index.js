@@ -113,6 +113,7 @@ const endpoints = {
   UPLOAD_TEMPLE_PROFILE_PIC: 'picture/profile',
   PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
   GET_TEMPLE_CLASS: 'jtProfileToProfile/list',
+  ABOUT_TEMPLE: 'jtProfileHistory/find/byProfile',
 };
 export const getInitialToken = async () => {
   try {
@@ -1145,6 +1146,14 @@ export const getTempleClassDetails = async (profileId, templeClass) => {
     let result = await axiosNotifications.get(
       `${endpoints.GET_TEMPLE_CLASS}/byProfile?page=0&pageSize=20&profileId=${profileId}&templeClass=${templeClass}`,
     );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getAboutTemple = async (profId) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.ABOUT_TEMPLE}/${profId}`);
     return result;
   } catch (error) {
     return error;
