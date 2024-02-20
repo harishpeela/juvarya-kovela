@@ -1,28 +1,43 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
-import { colors } from '../../common';
+import React, {useState} from 'react';
+import {View, Text, Image, StyleSheet, Pressable} from 'react-native';
+import {colors} from '../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-export const ProfileTimingTabs = ({ data }) => {
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {useNavigation} from '@react-navigation/native';
+export const ProfileTimingTabs = ({data, id}) => {
+  const [templeClass, setTempleClass] = useState(' ');
+  const navigation = useNavigation();
+  console.log('id-------->', data?.id);
+  console.log('templeclass========>', data?.templeClass);
   return (
     <View style={styles.container}>
-      {data?.templeClass === 'A' || 'B' || 'C' ? (
-        <View style={styles.toptemp}>
-          <Text
-            style={{
-              padding: 5,
-              width: 30,
-              textAlign: 'center',
-              marginRight: 10,
-              color: colors.white,
-              backgroundColor: colors.orangeColor,
-            }}>
-            {data?.templeClass}
-          </Text>
-          <Text style={{ color: colors.black, right: 10 }}> Top Temple</Text>
-        </View>
-      ) : (
-        ''
-      )}
+      <TouchableOpacity
+        style={{width: '110%', left: 20}}
+        onPress={() =>
+          navigation.navigate('TempleClass', {
+            id: data?.id,
+            templeclass: data?.templeClass,
+          })
+        }>
+        {data?.templeClass === 'A' || 'B' || 'C' ? (
+          <View style={styles.toptemp}>
+            <Text
+              style={{
+                padding: 4,
+                width: '20%',
+                textAlign: 'center',
+                marginRight: 10,
+                color: colors.white,
+                backgroundColor: colors.orangeColor,
+              }}>
+              {data?.templeClass}
+            </Text>
+            <Text style={{color: colors.black, right: 10}}> Top Temple</Text>
+          </View>
+        ) : (
+          ''
+        )}
+      </TouchableOpacity>
 
       <View style={styles.time}>
         <AntDesign name="clockcircleo" size={20} />
@@ -38,13 +53,15 @@ export const ProfileTimingTabs = ({ data }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 10,
+    alignItems: 'center',
+    padding: 4,
+    borderRadius: 5,
+    justifyContent: 'center',
   },
   toptemp: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '35%',
+    width: '60%',
     borderWidth: 0.5,
     padding: 2,
     borderRadius: 5,
