@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, FlatList, Text, TouchableOpacity } from 'react-native';
-import { BackHeader, Loader, SearchBar } from '../../components';
+import {Loader, SearchBar } from '../../components';
 import { styles } from './styles';
 import { allTexts, colors } from '../../common';
 import { getTempledetailsWithId, AdminTemples } from '../../utils/api';
 import { FavTempleListCard } from '../../components';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 // import CreateCommunityTempleScreen from './CreateCommunityTempleScreen'; // Assuming you have a screen for creating community temples
 

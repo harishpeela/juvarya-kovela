@@ -12,13 +12,13 @@ import RNRestart from 'react-native-restart';
 
 // ****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://Kovela.app/customer/api/';
-export const BASE = 'https://Kovela.app/media/';
-export const POPULARURL = 'https://Kovela.app/profile/';
-export const MEMBER_SHIP_URL = 'https://Kovela.app/membership';
-export const EVENTS_URL = 'https://Kovela.app/events/';
-export const DONATION_URL = 'https://Kovela.app/donations/';
-export const TEMPLE_ADDRESS = 'https://Kovela.app/customer/';
+export const BASEURL = 'https://kovela.app/customer/api/';
+export const BASE = 'https://kovela.app/media/';
+export const POPULARURL = 'https://kovela.app/profile/';
+export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
+export const EVENTS_URL = 'https://kovela.app/events/';
+export const DONATION_URL = 'https://kovela.app/donations/';
+export const TEMPLE_ADDRESS = 'https://kovela.app/customer/';
 
 
 let bearer_token = getAuthTokenDetails();
