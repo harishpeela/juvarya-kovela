@@ -283,6 +283,10 @@ export const EventInput3 = ({
   email,
   editable,
   user,
+  placeholderTextColor,
+  multiline,
+  numberOfLines,
+  edit,
 }) => {
   return (
     <View>
@@ -318,12 +322,76 @@ export const EventInput3 = ({
         <TextInput
           value={value1}
           placeholder={placeholder}
-          placeholderTextColor={'gray'}
-          style={{marginLeft: 5, width: '100%', flexDirection: 'row'}}
-          editable={false}
+          placeholderTextColor={placeholderTextColor ? placeholderTextColor : 'gray'}
+          style={{marginLeft: 5, width: '100%', flexDirection: 'row',}}
+          editable={edit ? edit : false}
+          multiline={multiline ? multiline : false }
+          scrollEnabled={true}
+          numberOfLines={numberOfLines ? numberOfLines : 1}
         />
       </View>
     </View>
   );
 };
 export default EventInput1;
+
+export const EventInput4 = ({
+  lable,
+  placeholder,
+  height,
+  value1,
+  email,
+  editable,
+  user,
+  placeholderTextColor,
+  multiline,
+  numberOfLines,
+  edit,
+  onChangeText,
+}) => {
+  return (
+    <View>
+      <Text style={styles.label}>{lable}</Text>
+      <View
+        style={{
+          ...styles.input,
+          height: height,
+          width: '84%',
+          flexDirection: email || user ? 'row' : 'column',
+          alignItems: email || user ? 'center' : 'flex-start',
+        }}>
+        {email && (
+          <TouchableOpacity>
+            <Fontisto
+              name="email"
+              size={20}
+              color={colors.orangeColor}
+              style={{marginLeft: 10,marginRight:5}}
+            />
+          </TouchableOpacity>
+        )}
+        {user && (
+          <TouchableOpacity>
+            <AntDesign
+              name="user"
+              size={20}
+              color={colors.orangeColor}
+              style={{marginLeft: 10}}
+            />
+          </TouchableOpacity>
+        )}
+        <TextInput
+          value={value1}
+          placeholder={placeholder}
+          placeholderTextColor={placeholderTextColor ? placeholderTextColor : 'gray'}
+          style={{marginLeft: 5, width: '100%'}}
+          editable={edit ? edit : false}
+          multiline={multiline ? multiline : false }
+          scrollEnabled={true}
+          numberOfLines={numberOfLines ? numberOfLines : 1}
+          onChangeText={onChangeText}
+        />
+      </View>
+    </View>
+  );
+};

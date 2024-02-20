@@ -111,7 +111,8 @@ const endpoints = {
   CREATE_COMMUNITY_TEMPLE:'jtprofile/seasonal/create',
   NEAR_BY_TEMPLES: 'jtAddress/nearByTemples',
   UPLOAD_TEMPLE_PROFILE_PIC: 'picture/profile',
-  PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile'
+  PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
+  ABOUT_TEMPLE: 'jtProfileHistory/find/byProfile',
 };
 export const getInitialToken = async () => {
   try {
@@ -1130,6 +1131,14 @@ export const getNearByTemples = async (code, pgNo, pgSz) => {
 export const getProfileNearByTemples = async (pgNo,pgSz,profId) => {
   try {
     let result = await axiosNotifications.get(`${endpoints.PROFILE_NEAR_BY_TEMPLES}?page=${pgNo}&pageSize=${pgSz}&profileId=${profId}`);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getAboutTemple = async (profId) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.ABOUT_TEMPLE}/${profId}`);
     return result;
   } catch (error) {
     return error;
