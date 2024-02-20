@@ -277,9 +277,12 @@ const currentCust = async () => {
                 <AntDesign name="idcard" size={20} color={colors.black} />
               }
               text={t('ToDo List')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.todoList);
-              }}
+              // onPress={() => {
+              //   navigation.navigate(allTexts.screenNames.todoList);
+              // }}
+              onPress={() =>
+                alert('Under Development')
+              }
             /> */}
               <Item
               svg={
