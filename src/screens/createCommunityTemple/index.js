@@ -225,7 +225,7 @@ const CommunityTemple = ({ navigation }) => {
         )}
         {imgErr &&
           <View>
-            <Text style={{ fontSize: 12, color: 'red', marginTop: 10 }}> Upload Image</Text>
+            <Text style={{ fontSize: 12, color: colors.orangeColor, marginTop: 10 }}> Upload Image</Text>
           </View>
         }
       </View>
@@ -239,7 +239,7 @@ const CommunityTemple = ({ navigation }) => {
         {eventError && (
           <Text
             style={{
-              color: 'red',
+              color: colors.orangeColor,
               alignSelf: 'flex-start',
               marginTop: '2%',
               marginLeft: '8%'
@@ -256,7 +256,7 @@ const CommunityTemple = ({ navigation }) => {
         {DescriptionError && (
           <Text
             style={{
-              color: 'red',
+              color: colors.orangeColor,
               alignSelf: 'flex-start',
               marginTop: '2%',
               marginLeft: '8%'
@@ -282,7 +282,7 @@ const CommunityTemple = ({ navigation }) => {
               {DateError && (
                 <Text
                   style={{
-                    color: 'red',
+                    color: colors.orangeColor,
                     alignSelf: 'flex-start',
                     marginTop: '2%',
                     marginLeft: '12%'

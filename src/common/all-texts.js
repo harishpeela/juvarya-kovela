@@ -181,6 +181,7 @@ export const allTexts = {
     communityTemple:'Create_Community_Temple',
     todoList:'To_Do_List',
     profilenearbytemples: 'Profile_Near_By_Temples',
+    abouttemple: 'AboutTemple',
   },
   homeHeader: {
     welcome: 'Welcome ',

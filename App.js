@@ -1,9 +1,9 @@
 /* eslint-disable no-new */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import { StatusBar } from 'react-native';
-import { LogBox, Text } from 'react-native';
-import { allTexts } from './src/common';
+import {StatusBar} from 'react-native';
+import {LogBox, Text} from 'react-native';
+import {allTexts} from './src/common';
 import {
   Splash,
   SignUp,
@@ -60,19 +60,21 @@ import {
   CommunityTemple,
   ToDoList,
   Profile_Near_By_Temples,
+  AboutTemple,
 } from './src/screens';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
   saveUserDetails,
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import { getHomeFeedList, getUserInfoNew } from './src/utils/api';
+import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 import CreateFeedDescription from './src/screens/createFeedDiscription/CreateFeedDescription';
+import TempleClass from './src/screens/templeCclass/TempleClass';
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -139,6 +141,8 @@ const App = () => {
       communityTemple,
       todoList,
       profilenearbytemples,
+      templeClass,
+      abouttemple,
     },
   } = allTexts;
 
@@ -210,7 +214,7 @@ const App = () => {
             headerShown: false,
           }}
         />
-        
+
         <Stack.Screen
           name={profile}
           component={Profile}
@@ -218,29 +222,29 @@ const App = () => {
             headerShown: false,
           }}
         />
-        
-         <Stack.Screen
+
+        <Stack.Screen
           name={communityTemple}
           component={CommunityTemple}
           options={{
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={todoList}
           component={ToDoList}
           options={{
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={profileEvents}
           component={Profile_Events}
           options={{
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={savehighlight}
           component={Save_Highlight}
           options={{
@@ -253,7 +257,6 @@ const App = () => {
           options={{
             headerShown: false,
           }}
-
         />
         <Stack.Screen
           name={mySavedPosts}
@@ -262,6 +265,14 @@ const App = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={templeClass}
+          component={TempleClass}
+          options={{
+            headerShown: false,
+          }}
+        />
+
         <Stack.Screen
           name={homeDetails}
           component={HomeCardDetails}
@@ -346,13 +357,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={home}
-          component={UserFeedScreen}
+        <Stack.Screen
+          name={abouttemple}
+          component={AboutTemple}
           options={{
             headerShown: false,
           }}
-        /> */}
+        />
         <Stack.Screen
           name={events}
           component={Events}
@@ -395,21 +406,21 @@ const App = () => {
             headerShown: false,
           }}
         />
-          <Stack.Screen
+        <Stack.Screen
           name={editHightlights}
           component={EditHighlights}
           options={{
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={editContribute}
           component={EditContribute}
           options={{
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={editInfo}
           component={EditInfo}
           options={{
@@ -598,7 +609,7 @@ const App = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={profilenearbytemples}
           component={Profile_Near_By_Temples}
           options={{
@@ -650,7 +661,7 @@ const App = () => {
       let response = await getHomeFeedList(0, 20);
       if (response && response?.status === 200) {
         const {
-          data: { jtFeeds },
+          data: {jtFeeds},
         } = response;
         getHomeFeedListData(jtFeeds);
       }
@@ -680,7 +691,11 @@ const App = () => {
         setId,
       }}>
       <SafeAreaProvider>
-        <StatusBar backgroundColor="#FFAB0F" barStyle="dark-content" translucent={true} />
+        <StatusBar
+          backgroundColor="#FFAB0F"
+          barStyle="dark-content"
+          translucent={true}
+        />
         <NavigationContainer>
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />
