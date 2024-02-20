@@ -104,14 +104,15 @@ const endpoints = {
   PROFILE_DONATIONS: 'jtDonation/user/donations/list',
   PROFILE_MEMBERSHIPS: 'jtProfileMembership/user/memberships',
   TEMPLE_COMMUNITY: 'jtprofile/',
-  EVENT_HIGHLIGHTS:'jtEventHighlights/save',
+  EVENT_HIGHLIGHTS: 'jtEventHighlights/save',
   EVENT_EDIT_HIGHLIGHTS: 'jtEventHighlights/update',
-  EVENTS_INFO:'jtEventInformation/list/byEvent',
+  EVENTS_INFO: 'jtEventInformation/list/byEvent',
   TEMPLE_ADDRESS: 'jtAddress/default',
-  CREATE_COMMUNITY_TEMPLE:'jtprofile/seasonal/create',
+  CREATE_COMMUNITY_TEMPLE: 'jtprofile/seasonal/create',
   NEAR_BY_TEMPLES: 'jtAddress/nearByTemples',
   UPLOAD_TEMPLE_PROFILE_PIC: 'picture/profile',
-  PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile'
+  PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
+  GET_TEMPLE_CLASS: 'jtProfileToProfile/list',
 };
 export const getInitialToken = async () => {
   try {
@@ -160,7 +161,7 @@ export const DonationsPost = async data => {
 };
 export const DonationsType = async type => {
   try {
-    let result = await axiosDonation.get(`${endpoints.DONATION_TYPE}/${type}`,);
+    let result = await axiosDonation.get(`${endpoints.DONATION_TYPE}/${type}`);
     return result;
   } catch (error) {
     console.log('error in login', error);
@@ -288,17 +289,17 @@ export const AdminTemples = async () => {
   }
 };
 
-
-export const CreateCommunityTemple = async (data) => {
+export const CreateCommunityTemple = async data => {
   try {
-    let result = await axiosNewData.post(`${endpoints.CREATE_COMMUNITY_TEMPLE}`,
-    data);
+    let result = await axiosNewData.post(
+      `${endpoints.CREATE_COMMUNITY_TEMPLE}`,
+      data,
+    );
     return result;
   } catch (error) {
     console.log('error in community Temple', error);
   }
 };
-
 
 export const GetProfilePic = async mailId => {
   try {
@@ -397,7 +398,6 @@ export const DeleteFeedData = async id => {
   }
 };
 
-
 export const GetsearchPopularTemples = async name => {
   try {
     let result = await axiosNewData.get(
@@ -470,7 +470,7 @@ export const EventScreenList = async (pgno, pgSize) => {
     console.log('error', error);
   }
 };
-export const EventSearch = async (txt) => {
+export const EventSearch = async txt => {
   try {
     let result = await axiosEventsData1.get(
       `${endpoints.EVENT_SEARCH}?eventName=${txt}`,
@@ -493,7 +493,10 @@ export const getProfileEvents = async (pgno, pgSize, profId) => {
 };
 export const IntrestedEvents = async data => {
   try {
-    let result = await axiosEventsData1.post(`${endpoints.EVENT_INTERESTED}`, data);
+    let result = await axiosEventsData1.post(
+      `${endpoints.EVENT_INTERESTED}`,
+      data,
+    );
     return result;
   } catch (error) {
     console.log('error', error);
@@ -533,8 +536,6 @@ export const CreateEvent = async payload => {
   }
 };
 
-
-
 export const Save_Event = async payload => {
   try {
     let result = await axiosEventsData1.post(
@@ -545,7 +546,7 @@ export const Save_Event = async payload => {
   } catch (error) {
     console.log('error', error);
   }
-};  
+};
 
 export const UpdateInfo = async payload => {
   try {
@@ -557,8 +558,7 @@ export const UpdateInfo = async payload => {
   } catch (error) {
     console.log('error', error);
   }
-};  
-
+};
 
 export const Event_Highlights = async eveId => {
   try {
@@ -571,7 +571,7 @@ export const Event_Highlights = async eveId => {
   }
 };
 
-export const Event_Info = async (eventId) => {
+export const Event_Info = async eventId => {
   try {
     let result = await axiosEventsData1.get(
       `${endpoints.EVENTS_INFO}?eventId=${eventId}`,
@@ -581,8 +581,6 @@ export const Event_Info = async (eventId) => {
     console.log('error', error);
   }
 };
-
-
 
 export const EventInterestedCount = async id => {
   try {
@@ -1111,9 +1109,11 @@ export const getDonationTypes = async (pgNo, pgSz) => {
   }
 };
 
-export const getTempleProfileDetails = async (id) => {
+export const getTempleProfileDetails = async id => {
   try {
-    let result = await axiosNotifications.get(`${endpoints.TEMPLE_DETAILS}/${id}`);
+    let result = await axiosNotifications.get(
+      `${endpoints.TEMPLE_DETAILS}/${id}`,
+    );
     return result;
   } catch (error) {
     return error;
@@ -1121,15 +1121,30 @@ export const getTempleProfileDetails = async (id) => {
 };
 export const getNearByTemples = async (code, pgNo, pgSz) => {
   try {
-    let result = await axiosNotifications.get(`${endpoints.NEAR_BY_TEMPLES}?isoCode=${code}&pageNo=${pgNo}&pageSize=${pgSz}`);
+    let result = await axiosNotifications.get(
+      `${endpoints.NEAR_BY_TEMPLES}?isoCode=${code}&pageNo=${pgNo}&pageSize=${pgSz}`,
+    );
     return result;
   } catch (error) {
     return error;
   }
 };
-export const getProfileNearByTemples = async (pgNo,pgSz,profId) => {
+export const getProfileNearByTemples = async (pgNo, pgSz, profId) => {
   try {
-    let result = await axiosNotifications.get(`${endpoints.PROFILE_NEAR_BY_TEMPLES}?page=${pgNo}&pageSize=${pgSz}&profileId=${profId}`);
+    let result = await axiosNotifications.get(
+      `${endpoints.PROFILE_NEAR_BY_TEMPLES}?page=${pgNo}&pageSize=${pgSz}&profileId=${profId}`,
+    );
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getTempleClassDetails = async (profileId, templeClass) => {
+  try {
+    let result = await axiosNotifications.get(
+      `${endpoints.GET_TEMPLE_CLASS}/byProfile?page=0&pageSize=20&profileId=${profileId}&templeClass=${templeClass}`,
+    );
     return result;
   } catch (error) {
     return error;
