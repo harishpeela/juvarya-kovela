@@ -82,13 +82,15 @@ export const styles = StyleSheet.create({
   },
   editPic: {
     backgroundColor: colors.orangeColor,
-    height: '8%',
-    width: '50%',
+    height: '6%',
+    width: '40%',
     position: 'absolute',
-    left: '25%',
+    left: '55%',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 10,
+    marginTop:10,
+    fontSize:10
   },
   loader: {
     alignItems: 'center',
