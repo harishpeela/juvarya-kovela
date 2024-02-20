@@ -13,6 +13,7 @@ import {allTexts, colors} from '../../common';
 import {styles} from './styles';
 import {
   BackHeaderNew,
+  EventInput,
   InputField,
   PrimaryButton,
   TopBarcard,
@@ -21,12 +22,14 @@ import {Create_Feed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Data} from '../home-feed/formateDetails';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 const CreateFeed = ({route, navigation}) => {
   const {data} = route.params || {};
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
   const [imageProp, setImageProp] = useState('');
+  const [description, setDescription] = useState('');
 
   console.log('data', data);
 
@@ -34,12 +37,8 @@ const CreateFeed = ({route, navigation}) => {
   const Valid = id => {
     if (image === null) {
       alert('please upload a image');
-    } else if (titleName === '') {
-      alert('Enter Name');
     } else if (description === '') {
       alert('Enter Description');
-    } else if (city === '') {
-      alert('Enter City');
     } else {
       NewFeed(id);
     }
@@ -94,7 +93,7 @@ const CreateFeed = ({route, navigation}) => {
             setImageProp(res.assets);
             console.log('jahbjabhs');
           } else {
-            navigation.goBack()
+            navigation.goBack();
             console.log(res.errorMessage, 'erro in image');
           }
         },
@@ -117,11 +116,14 @@ const CreateFeed = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    if (image === null) {
-      uploadPhoto();
+    uploadPhoto();
+    let result = Data(data);
+    if (result) {
+      setTrfData(result);
+    } else {
+      console.log('nope');
     }
-    
-  });
+  }, [data]);
 
   const imageSending = () => {
     setImageProp(image);
@@ -134,7 +136,7 @@ const CreateFeed = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarcard back={true} txt={'Upload Photo'} navBack={() =>navigation.goBack()} />
+        <TopBarCard2 back={true} txt={'Upload Photo'} navigation={navigation} />
       </View>
       <View style={{margin: 30}}>
         <View style={styles.uploadContainer}>
@@ -164,15 +166,24 @@ const CreateFeed = ({route, navigation}) => {
             </TouchableOpacity>
           )}
         </View>
-
-        <View style={{marginHorizontal: 70,marginTop:'25%'}}>
-          <PrimaryButton
-            text={'Next'}
-            bgColor={colors.orangeColor}
-            loading={loading}
-            // onPress={() => Valid(trfData?.jtProfile)}
-            onPress={() => imageSending()}
+        <View style={{bottom: '25%'}}>
+          <EventInput
+            lable={'Description'}
+            value={description}
+            height={100}
+            placeholder={'Description'}
+            onChangeText={e => setDescription(e)}
+            onFocus={() => Keyboard.dismiss()}
           />
+          <View style={{marginHorizontal: 50, marginTop: 30}}>
+            <PrimaryButton
+              text={'Submit'}
+              bgColor={colors.orangeColor}
+              loading={loading}
+              onPress={() => Valid(trfData?.jtProfile)}
+              onFocus={() => Keyboard.dismiss()}
+            />
+          </View>
         </View>
       </View>
     </SafeAreaView>
