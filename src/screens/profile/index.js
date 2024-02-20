@@ -227,7 +227,7 @@ const currentCust = async () => {
                       uploadPhoto();
                     }}
                     name="pencil"
-                    color={colors.orangeColor}
+                    color={colors.black}
                     size={25}
                   />
                 </View>
@@ -443,14 +443,14 @@ const currentCust = async () => {
             onPress={() => {
               updateProfilePicture(), setIsModal(false);
             }}>
-            <Text style={{color: 'white'}}> update profile Picture</Text>
+            <Text style={{color: 'white',fontSize:12}}> Update Profile Picture</Text>
           </TouchableOpacity>
           <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
           <TouchableOpacity
             onPress={() => {
               setImage(null), setIsModal(false), setIsCross(false);
             }}>
-            <Text style={{color: 'white'}}>Cancel</Text>
+            <Text style={{color: 'white',fontSize:12}}>Cancel</Text>
           </TouchableOpacity>
         </View>
       </Modal>
