@@ -58,6 +58,7 @@ import {
   Profile_Events,
   Save_Highlight,
   CommunityTemple,
+  ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
 } from './src/screens';
@@ -137,6 +138,7 @@ const App = () => {
       profileEvents,
       savehighlight,
       communityTemple,
+      todoList,
       profilenearbytemples,
       abouttemple,
     },
@@ -222,6 +224,13 @@ const App = () => {
          <Stack.Screen
           name={communityTemple}
           component={CommunityTemple}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={todoList}
+          component={ToDoList}
           options={{
             headerShown: false,
           }}

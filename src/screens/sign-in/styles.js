@@ -40,6 +40,7 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinBold,
     color: colors.orangeColor,
     paddingLeft: 50,
+    
   },
   signinTextContainer: {
     alignSelf: 'flex-start',

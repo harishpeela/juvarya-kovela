@@ -5,8 +5,8 @@ export const allTexts = {
   buttonTexts: {
     // place all your button texts here
     start: 'Start Now',
-    sigup: 'Sign Up',
-    login: 'Log In',
+    sigup: ' sign up',
+    login: 'Log in',
     follow: 'Follow',
     unFollow: 'Following',
     contactUs: 'Contact Us',
@@ -83,8 +83,8 @@ export const allTexts = {
     username: 'user Name',
   },
   paragraphs: {
-    alreadyAccount: 'Already have an account? ',
-    dontHaveAccount: 'Don’t have an account? ',
+    alreadyAccount: 'Already have an account ?',
+    dontHaveAccount: 'Don’t have an account?',
     splashDescription:
       'There are many destinations for your holiday schedule or healing for activities',
     loginDescription:
@@ -179,6 +179,7 @@ export const allTexts = {
     profileEvents: 'Profile_Events',
     savehighlight: 'Save_Highlight',
     communityTemple:'Create_Community_Temple',
+    todoList:'To_Do_List',
     profilenearbytemples: 'Profile_Near_By_Temples',
     abouttemple: 'AboutTemple',
   },
