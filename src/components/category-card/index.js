@@ -195,17 +195,16 @@ export const UserFeedCompList = ({
         style={{position: 'absolute', right: 10, top: 10}}
         onPress={() => {
           setIsVisible(!isVisible);
-          alert('under development');
         }}
       />
-      {/* {isVisible && (
+      {isVisible && (
         <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
           onPress= { onPressDelete }>
  
           <Text style={{ fontWeight: 'bold' }}> Delete</Text>
  
         </TouchableOpacity>
-      )} */}
+      )}
       <View>
         <FlatList
           data={post?.mediaList}
