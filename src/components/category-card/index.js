@@ -200,9 +200,7 @@ export const UserFeedCompList = ({
       {isVisible && (
         <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
           onPress= { onPressDelete }>
- 
           <Text style={{ fontWeight: 'bold' }}> Delete</Text>
- 
         </TouchableOpacity>
       )}
       <View>
