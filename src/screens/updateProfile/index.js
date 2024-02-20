@@ -38,8 +38,8 @@ const UpdateProfile = ({navigation}) => {
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
 
-  const dateSlice = dob.slice(0, 10);
-  const dateFormatValue = dateSlice.split('-').reverse().join('-');
+  const dateSlice = dob?.slice(0, 10);
+  const dateFormatValue = dateSlice?.split('-')?.reverse()?.join('-');
   console.log(dateFormatValue);
 
   const HandleCnfrm = datedata => {

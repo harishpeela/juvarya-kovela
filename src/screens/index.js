@@ -60,6 +60,7 @@ import Profile_Events from './profile-events';
 import Save_Highlight from './highlights-save';
 import CommunityTemple from './createCommunityTemple';
 import Profile_Near_By_Temples from './nearByTemples_Profile';
+import AboutTemple from './about-temple';
 export {
   CreatePost,
   Seemore,
@@ -123,4 +124,5 @@ export {
   Save_Highlight,
   CommunityTemple,
   Profile_Near_By_Temples,
+  AboutTemple,
 };

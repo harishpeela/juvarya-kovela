@@ -180,6 +180,7 @@ export const allTexts = {
     savehighlight: 'Save_Highlight',
     communityTemple:'Create_Community_Temple',
     profilenearbytemples: 'Profile_Near_By_Temples',
+    abouttemple: 'AboutTemple',
   },
   homeHeader: {
     welcome: 'Welcome ',
