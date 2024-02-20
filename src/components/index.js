@@ -100,7 +100,8 @@ import { NewBackHeader } from './new-back-header';
 import { Create_Event } from './create_event_component';
 import AddEventImage from './event-images-comp';
 import {EventInput, EventInput1} from './eventCreateInput';
-import {NearByTempleComp} from './NearByTempleComp'
+import {NearByTempleComp} from './NearByTempleComp';
+import { EventInput4 } from './eventCreateInput';
 
 export {
   Loader,
@@ -193,5 +194,6 @@ export {
   EventInput1,
   CrewCard,
   ProfileDonationsCard,
-  NearByTempleComp
+  NearByTempleComp,
+  EventInput4
 };

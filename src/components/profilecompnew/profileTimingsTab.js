@@ -27,10 +27,10 @@ export const ProfileTimingTabs = ({ data }) => {
 
       <View style={styles.time}>
         <AntDesign name="clockcircleo" size={20} />
-        <Text style={{ color: '#228C08' }}> Open Now</Text>
-        <Text style={{ color: colors.black, fontWeight: 'bold' }}>
+        <Text style={{ color: '#228C08', fontSize: 12, fontWeight: 'bold' }}> Open {data?.openingTime ? data?.openingTime : '9'} Am</Text>
+        <Text style={{ color: colors.red1, fontWeight: 'bold', fontSize: 12 }}>
           {' '}
-          • Closes 8 Pm
+          • Closes {data?.closingTime ? data?.closingTime : '8'} Pm
         </Text>
       </View>
     </View>

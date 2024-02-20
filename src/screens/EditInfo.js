@@ -18,7 +18,6 @@ import {TopBarCard2} from '../components/topBar1/topBarCard';
 
 const EditInfo = ({navigation, route}) => {
   const {data} = route.params || {};
-  console.log('info==================>>>>>>>>>>>>>>>>>>>>> screen', data);
 
   const [eventName, setEventName] = useState('');
   const [loader, setLoader] = useState(false);
