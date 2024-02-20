@@ -67,7 +67,7 @@ export const NearByTemple = ({
         borderRadius: 20,
         margin: 5,
         backgroundColor: 'white',
-        height: 140,
+        height: 160,
         width: 190,
         elevation: 4,
         shadowOpacity: 5,
