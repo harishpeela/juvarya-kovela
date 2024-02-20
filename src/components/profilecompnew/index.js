@@ -65,12 +65,19 @@ export const FolloUnfollowComp = ({
     </View>
   );
 };
+// export const ContactTabcomp = ({onPressContact}) => {
+//   return (
+//     <TouchableOpacity style={[styles.voidButton, styles.button]}>
+//       <BackgroundSmallFlowerCall />
+//       <Text style={styles.voidButtonText}>Call</Text>
+//     </TouchableOpacity>
+//   );
+// };
 
 export const ContactTabcomp = ({onPressContact}) => {
   return (
-    <TouchableOpacity style={[styles.voidButton, styles.button]}>
-      <BackgroundSmallFlowerCall />
-      <Text style={styles.voidButtonText}>Call</Text>
+    <TouchableOpacity style={[styles.voidButton, styles.button]} onPress={onPressContact}>
+      <Text style={styles.voidButtonText}>About</Text>
     </TouchableOpacity>
   );
 };
