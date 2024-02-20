@@ -153,7 +153,7 @@ export const UserFeedCompList = ({
       .fetch('GET', image_URL)
       .then(res => {
         console.log('res -> ', JSON.stringify(res));
-        Alert.alert('Alert', 'image Downloaded successfully....!');
+        Alert.alert('Alert', 'Image Downloaded successfully....!');
       });
   };
  
@@ -198,7 +198,7 @@ export const UserFeedCompList = ({
         }}
       />
       {isVisible && (
-        <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10 }}
+        <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'lightgrey', padding: 8, borderRadius: 10 }}
           onPress= { onPressDelete }>
           <Text style={{ fontWeight: 'bold' }}> Delete</Text>
         </TouchableOpacity>
