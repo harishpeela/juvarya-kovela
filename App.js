@@ -61,6 +61,8 @@ import {
   ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
+  TempleProfileToDoList,
+  MemberList,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -75,6 +77,7 @@ import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 import CreateFeedDescription from './src/screens/createFeedDiscription/CreateFeedDescription';
 import TempleClass from './src/screens/templeCclass/TempleClass';
+
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -143,6 +146,8 @@ const App = () => {
       profilenearbytemples,
       templeClass,
       abouttemple,
+      templeProfileToDoList,
+      memberlist
     },
   } = allTexts;
 
@@ -287,6 +292,13 @@ const App = () => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name={templeProfileToDoList}
+          component={TempleProfileToDoList}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={notification}
           component={Notifications}
@@ -420,7 +432,14 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+         <Stack.Screen
+          name={memberlist}
+          component={MemberList}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
           name={editInfo}
           component={EditInfo}
           options={{

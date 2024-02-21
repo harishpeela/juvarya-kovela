@@ -1,22 +1,86 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { CrewCard } from '../../components';
-import { Loader } from '../../components';
-import { colors } from '../../common';
+import React, { useState, useEffect, useContext } from 'react';
+import ApplicationContext from '../../utils/context-api/Context';
+import { View, Text, FlatList, Image, TouchableOpacity, useColorScheme } from 'react-native';
+import { Loader, FollowersListCard4 } from '../../components';
+import { colors, allTexts } from '../../common';
 import { styles } from './styles';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-import { NewTempleCrew,GetProfilePic,getUserInfoNew } from '../../utils/api';
-import Ionicons from 'react-native-vector-icons/Entypo';
+import {MemberShipList, MembersList } from '../../utils/api';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ioniconss from 'react-native-vector-icons/Entypo';
 const TempleCrew = ({ route, navigation }) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
+  const [noTextLoader, setTextLoader] = useState(false);
   const { id } = route.params || {};
   const [data, setData] = useState([]);
-  const [donationData, setDonationData] = useState([]);
+  const [donationData, setDonationData] = useState();
+  const [roleType, setRoleType] = useState();
+  const [membershipId, setMemberShipId] = useState();
 
 
-
+  const MembershipIdData = async () => {
+    // console.log('membershipid', trfdata?.jtProfile);
+    setLoader(true);
+    setTextLoader(true);
+    try {
+      let result = await MemberShipList(id, 0, 100);
+      console.log('res ==><><<>>', result?.data);
+      let data = result?.data?.data;
+      let ID = data?.filter(item => item)?.map(({id}) => ({id}));
+      console.log('jknkjn.kjn.', ID)
+      if(ID){
+        setData(ID);
+        setMemberShipId(ID);
+        MembershipData(ID[0]?.id)
+        setLoader(false)
+        setTextLoader(true);
+      } else{
+        alert('SomeThing went wrong')
+      }
+    } catch (error) {
+      console.log('error in membership details api', error);
+      setLoader(false);
+      setTextLoader(true);
+    }
+  };
+  const MembershipData = async (memId) => {
+    setTextLoader(true);
+    console.log('data>id', memId);
+    try {
+      let result = await MembersList( memId ,0, 10);
+      let responce = result?.data
+      console.log('===========responce ====>>', responce?.data);
+      if(responce){
+        console.log('resssdd', responce)
+        setDonationData(responce);
+        setTextLoader(false)
+      } else{
+        console.log('res====>>', responce)
+        setDonationData(undefined);
+        setTextLoader(false)
+      }
+    } catch (error) {
+      console.log('error in membership details api', error);
+      setTextLoader(false)
+      alert(error);
+    }
+  };
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    if (roleAdmin) {
+      setRoleType(roleAdmin);
+    } else{
+      setRoleType(roleAdmin);
+    }
+  };
+  useEffect(() => {
+    MembershipIdData();
+    Type();
+  }, []); 
 
   const infoData = [
     {
@@ -111,95 +175,35 @@ const TempleCrew = ({ route, navigation }) => {
     //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
     // },
   ]
-
-
-  const customerProfilePic = async (e) => {
-    console?.log('=====><', e)
-    try {
-      let result = await getUserInfoNew(e?.customerId);
-      console.log('profilepic', result?.data);
-      if (result?.status === 200) {
-        let responce = { ...e, ...result?.data };
-        console.log('responce===><', [responce]);
-        if (responce) {
-          setDonationData([responce])
-        }
-      } else {
-        setDonationData(e)
-      }
-    } catch (error) {
-      setDonationData(e)
-      console.log('error in profile pic api in donations', error);
-    }
-  };
-
-  const templeCrewDetails = async () => {
-    console.log('id in temple crew', id);
-    setLoader(true);
-    try {
-      let result = await NewTempleCrew(id, 0, 20);
-      console.log('result.date in temple crew', result?.data);
-      if (result) {
-        setData(result?.data?.customerRoles);
-        setLoader(false);
-        let response = result?.data?.customerRoles;
-        response?.map(e => {
-          customerProfilePic(e)
-        })
-      } else {
-        setData([]);
-        setLoader(false);
-      }
-    } catch (error) {
-      setLoader(false);
-      console.log('error in crew', error)
-    }
-  };
-  useEffect(() => {
-    templeCrewDetails();
-  }, []);
+console.log(donationData, 'jahsbxahbs');
   return (
     <View style={{ backgroundColor: 'white' }}>
-      <View style={{ minHeight: 120, marginTop: '3%' }}>
-        <TopBarCard2
-          txt={'Temple crew'}
-          isBell={true}
-          back={true}
-          navigation={navigation}
-          navBack={navigation}>
-          <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
-          </View>
-        </TopBarCard2>
-      </View>
-      <View style={{ marginLeft: '5%' }}>
-        {/* <FlatList
-         horizontal
-         showsHorizontalScrollIndicator={false}
-         data={infoData}
-         keyExtractor={({item}) => item?.id}
-        renderItem={({item}) => (
-            <View style={{alignItems: 'center'}}>
-              {item?.artistPic ? (
-                <TouchableOpacity style={{height: 70, width: 70, borderRadius: 100 /2, borderWidth: 2, flexDirection: 'row', overflow: 'hidden', margin: 2, borderColor: colors.orangeColor}}>
-                <Image source={{uri: item?.donarPic}} height={60} width={30} style={{height: 65, width: 30, overflow: 'hidden', marginRight: 2}} />
-                <Image source={{uri: item?.artistPic}} height={60} width={30} style={{height: 65, width: 30}} />
-              </TouchableOpacity>
-              ): (
-               
-                <TouchableOpacity style={{height: 70, width: 70, borderRadius: 100 /2, borderWidth: 2, margin: 2, alignItems: 'center', justifyContent: 'center', borderColor: colors.orangeColor}}>
-                   <Ionicons name="plus" size={25} color={'#FFA001'} />
-                   </TouchableOpacity>
-              )}
-              <Text> {item?.year}</Text>
+       <View style={styles.headerContainer}>
+            <TouchableOpacity  onPress={() => navigation.goBack()}>
+              <Ionicons
+                name="caret-back-circle"
+                size={36}
+                color={'#ffffff'}
+                style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
+              />
+            </TouchableOpacity>
+            <View>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
             </View>
-        )}
-        
-        /> */}
-
+                <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
+                  navigation.navigate(allTexts.screenNames.invitationScreen, {
+                    roleId: membershipId[0]?.id,
+                    id: id,
+                  })
+                }}>
+                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white}}>Invite</Text>
+                </TouchableOpacity>
+        </View>
+      <View style={{ marginLeft: '5%', marginTop: '5%' }}>
         <View style={{ flexDirection: 'row', alignItems: 'center' }}>
           <View style={{alignItems: 'center'}}>
             <TouchableOpacity style={{ height: 70, width: 70, borderRadius: 100 / 2, borderWidth: 2, margin: 2, alignItems: 'center', justifyContent: 'center', borderColor: colors.orangeColor }}>
-              <Ionicons name="plus" size={25} color={'#FFA001'} />
+              <Ioniconss name="plus" size={25} color={'#FFA001'} />
             </TouchableOpacity>
             <Text> {infoData[0]?.year}</Text>
           </View>
@@ -225,35 +229,43 @@ const TempleCrew = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
-
-
-
       </View>
-      <View style={styles.bodyContainer}>
-        <View style={styles.followersContainer}>
-          {loader ? (
+      <View style={{height: '80%'}}>
+      {loader ? (
+          <View>
             <Loader size={'small'} color={colors.orangeColor} />
-          ) : (
-            donationData?.length ? (
+          </View>
+        ) : (
+          <View style={{ marginTop: '10%' }}>
+            {data?.length ? (
               <FlatList
-                style={styles.list}
-                data={donationData}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles.flatListStyle}
-                keyExtractor={(item, index) => item.id.toString()}
-                renderItem={({ item }) => (
-                  <CrewCard
-                    data={item}
-                  />
-                )}
+              data={data}
+                keyExtractor={({item, index}) => item?.id}
+                renderItem={({item, index}) => (
+                  <FollowersListCard4 data={item} navigation={navigation} />
+            )}
               />
             ) : (
-              <View style={styles.noText}>
-                <Text style={styles.noText.ntext}> No Data To display</Text>
+              ''
+            )}
+          </View>
+        )}
+        {noTextLoader ? (
+           <View>
+           <Loader size={'small'} color={colors.white} />
+         </View>
+        ) : 
+        donationData?.data == undefined ? (
+          <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  marginTop: '50%',
+                }}>
+                <Text style={{color: colors.orangeColor}}> No Members For This Temple</Text>
               </View>
-            )
-          )}
-        </View>
+        ): ''
+        }
       </View>
     </View>
   );

@@ -39,7 +39,7 @@ const UpdatePassword = ({navigation}) => {
     try {
       let result = await NewUpdateUserPassword(payLoad);
       // console.log('result of update password', result?.data);
-      Alert.alert('Success', result?.data?.message, [
+      Alert.alert('Success', 'Password Updated Successfully', [
         {
           text: 'Ok',
           onPress: () => navigation.navigate(allTexts.tabNames.profile),
