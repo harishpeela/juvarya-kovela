@@ -87,6 +87,7 @@ import {Donation_Third_Tab} from './donation-comp/donation-third-tab/donation_th
 import Ellipsis from './ellipsis';
 import Sort from './sort';
 import FollowersListCard2 from './FollowersListCard2';
+import FollowersListCard4 from './followersListCard4';
 import EventCard from './EventCard';
 import EventCard2 from './EventCard2';
 import {Donations_list_Card} from './donation_list';
@@ -195,5 +196,6 @@ export {
   CrewCard,
   ProfileDonationsCard,
   NearByTempleComp,
-  EventInput4
+  EventInput4,
+  FollowersListCard4,
 };
