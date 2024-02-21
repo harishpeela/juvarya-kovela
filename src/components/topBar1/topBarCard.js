@@ -227,7 +227,7 @@ export const TopBarCard2 = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFAB0F',
+    backgroundColor: '#FFAA33',
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     marginBottom: 10,

@@ -486,14 +486,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                  {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
+                  {!tempProfileData?.seasonal && (
                     <ContactTabcomp onPressContact={() => navigation.navigate(allTexts.screenNames.abouttemple, {
                       jtProfile: trfData?.jtProfile,
                       name: trfData?.name,
                     })} />
-                  ) : ''}
-
-                  {tempProfileData?.membershipsEnabled && (
+                  )}
+                  {/* {tempProfileData?.membershipsEnabled && (
                     <DirectionsTabComp
                       role={
                         roleId === 'ROLE_ITEM_ADMIN' ||
@@ -509,7 +508,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                         );
                       }}
                     />
-                  )}
+                  )} */}
                   <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
@@ -662,7 +661,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
             </View> */}
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate(allTexts.screenNames.profilemembership, {
+                navigation.navigate(allTexts.screenNames.profilememberships, {
                   trfdata: trfData,
                   roleId: roleId,
                 });

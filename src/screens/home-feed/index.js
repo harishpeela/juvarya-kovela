@@ -86,7 +86,7 @@ const UserFeedScreen = ({ navigation }) => {
                 // Refresh feed list after deletion
                 listFeed(apiPageNo, apiPageSize);
               } else{
-                alert('you are not allowed to delete this feed')
+                alert('you are not a admin to delete this feed')
               }
             } catch (error) {
               console.log('error in deleting feed', error);

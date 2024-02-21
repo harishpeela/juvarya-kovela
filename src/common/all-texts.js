@@ -183,7 +183,8 @@ export const allTexts = {
     profilenearbytemples: 'Profile_Near_By_Temples',
     abouttemple: 'AboutTemple',
     templeClass:'TempleClass',
-    templeProfileToDoList:'TempleProfileToDoList'
+    templeProfileToDoList:'TempleProfileToDoList',
+    memberlist: 'MemberList',
   },
   homeHeader: {
     welcome: 'Welcome ',

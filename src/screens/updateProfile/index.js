@@ -101,7 +101,7 @@ const UpdateProfile = ({navigation}) => {
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
-      console.log('templeAddress', result?.data);
+      // console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setCurrentCustomer(dty);

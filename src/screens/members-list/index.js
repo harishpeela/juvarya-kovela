@@ -18,16 +18,15 @@ import {
   BackgroundImage,
   BackHeaderNew,
   Loader,
-  FollowersListCard3,
+  FollowersListCard4,
   TopBarcard,
 } from '../../components';
-import { MemberShipDetails, MembersList } from '../../utils/api';
+import { MemberShipList, MembersList } from '../../utils/api';
 import { styles } from './styles';
 import { colors, allTexts } from '../../common';
 import ApplicationContext from '../../utils/context-api/Context';
-const ProfileMembership = ({ route, navigation }) => {
-  const { id, roleId } = route.params || {};
-  console.log('id====', id);
+const MemberList = ({ route, navigation }) => {
+  const { trfdata, roleId } = route.params || {};
   const {userDetails} = useContext(ApplicationContext);
 const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
@@ -36,27 +35,27 @@ const isDarkMode = useColorScheme() === 'dark';
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
   const [roleType, setRoleType] = useState();
- 
-  const MembershipData = async () => {
+  const [membership, setMemberShipData] = useState();
+
+  const MembershipIdData = async () => {
+    // console.log('membershipid', trfdata?.jtProfile);
     setaLoader(true);
     try {
-      let result = await MembersList( id ,0, 100);
-      console.log('res=====>', result?.data);
-      let responce = result?.data?.data;
-      if (responce) {
-        let dataList = responce.filter(item => item).map(({ invitedCustomer, membershipDto, membershipId }) => ({ membershipDto, invitedCustomer, membershipId }));
-        console.log('dayta of members list', dataList);
-        setaLoader(false);
-        setData(dataList);
-      } else {
-        setaLoader(false);
+      let result = await MemberShipList(trfdata?.jtProfile, 0, 100);
+      console.log('res ==><><<>>', result?.data);
+      let data = result?.data?.data;
+      let id = data?.filter(item => item)?.map(({id}) => ({id}));
+      console.log('jknkjn.kjn.', id)
+      if(id){
+        setData(id);
+        setaLoader(false)
       }
     } catch (error) {
       console.log('error in membership details api', error);
       setaLoader(false);
-      alert(error);
     }
   };
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -67,10 +66,9 @@ const isDarkMode = useColorScheme() === 'dark';
     }
   };
   useEffect(() => {
-    MembershipData();
+    MembershipIdData();
     Type();
   }, []); 
-  console.log('data in memberslist', data);
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
@@ -84,13 +82,13 @@ const isDarkMode = useColorScheme() === 'dark';
               />
             </TouchableOpacity>
             <View>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
+            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20, marginLeft: '40%'}}> Members</Text>
             </View>
             {(roleId === 'ROLE_ITEM_ADMIN' || roleType) && (
-                <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
+                <TouchableOpacity style={{marginLeft: '8%'}} onPress={() => {
                   navigation.navigate(allTexts.screenNames.invitationScreen, {
                     roleId: roleId,
-                    id: id,
+                    // id: id,
                   })
                 }}>
                   <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white}}>Invite</Text>
@@ -104,7 +102,13 @@ const isDarkMode = useColorScheme() === 'dark';
         ) : (
           <View style={{ marginTop: '10%' }}>
             {data?.length ? (
-              <FollowersListCard3 data={data} navigation={navigation} />
+              <FlatList
+              data={data}
+                keyExtractor={({item, index}) => item?.id}
+                renderItem={({item, index}) => (
+                  <FollowersListCard4 data={item} navigation={navigation} />
+            )}
+              />
             ) : (
               <View
                 style={{
@@ -121,4 +125,4 @@ const isDarkMode = useColorScheme() === 'dark';
     </SafeAreaView>
   );
 };
-export default ProfileMembership;
+export default MemberList;
