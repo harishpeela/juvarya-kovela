@@ -182,6 +182,8 @@ export const allTexts = {
     todoList:'To_Do_List',
     profilenearbytemples: 'Profile_Near_By_Temples',
     abouttemple: 'AboutTemple',
+    templeClass:'TempleClass',
+    templeProfileToDoList:'TempleProfileToDoList'
   },
   homeHeader: {
     welcome: 'Welcome ',

@@ -60,6 +60,7 @@ import { SearchTempleRoleWithId } from '../../utils/api';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NearByTempleComp from '../../components/NearByTempleComp';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -518,6 +519,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       )
                     }
                   />
+                  <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.templeProfileToDoList)}>
+                  <Entypo
+                  name="add-to-list"
+                  size={25}
+                  style={{marginTop:10}}
+                />
+                  </TouchableOpacity>
+                 
                 </View>
               </View>
               {donationLoader ? (
