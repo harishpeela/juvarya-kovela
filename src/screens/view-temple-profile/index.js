@@ -218,7 +218,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
   const getFollowValue = async id => {
-    setFollowVisible(data?.profileDTO?.follow ? data?.profileDTO?.follow : true);
+    setFollowVisible(
+      data?.profileDTO?.follow ? data?.profileDTO?.follow : true,
+    );
     let result = await NewGetFollowUmFollowById(id);
     if (result) {
       setFollowVisible(false);
@@ -275,15 +277,14 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
-  const templeDetails = async (id) => {
+  const templeDetails = async id => {
     let responce = await getTempleProfileDetails(id);
-    console.log('responce of temple details', responce?.data);
     if (responce?.data) {
       setTempProfileData(responce?.data);
     } else {
       alert('something went wrong please check');
     }
-  }
+  };
 
   useEffect(() => {
     Type();
@@ -330,10 +331,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <TouchableOpacity
                   style={styles.iconContainer}
                   onPress={() => {
-                    console.log(
-                      isFollow,
-                      trfData?.jtProfile,
-                    );
+                    console.log(isFollow, trfData?.jtProfile);
                     navigation.goBack();
                     route?.params?.onSelect({
                       selected: isFollow,
@@ -412,13 +410,16 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   size={15}
                   color="white"
                 />
-                <Text style={{ fontSize: 12, color: 'gray' }}>
+                <Text style={{fontSize: 12, color: 'gray'}}>
                   {templeaddress?.jtProfileAddressDTO?.locality},{' '}
-                  {templeaddress?.jtProfileAddressDTO?.postalCodeDTO?.city?.name}
+                  {
+                    templeaddress?.jtProfileAddressDTO?.postalCodeDTO?.city
+                      ?.name
+                  }
                 </Text>
               </View>
             )}
-            <View style={{ marginTop: 10 }}>
+            <View style={{marginTop: 10}}>
               {tempProfileData?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
