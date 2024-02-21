@@ -5,10 +5,6 @@ import { GetProfileToDoList } from '../../utils/api';
 import { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 
-
-
-
-
 const ToDoList = ({ navigation }) => {
 
 const [data,setData] = useState([])
