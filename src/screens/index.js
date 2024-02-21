@@ -62,6 +62,7 @@ import CommunityTemple from './createCommunityTemple';
 import ToDoList from './To_Do_List';
 import Profile_Near_By_Temples from './nearByTemples_Profile';
 import AboutTemple from './about-temple';
+import MemberList from './members-list';
 export {
   CreatePost,
   Seemore,
@@ -127,4 +128,5 @@ export {
   ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
+  MemberList,
 };

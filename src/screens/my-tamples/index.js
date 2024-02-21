@@ -72,7 +72,7 @@ const MyTemples = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.wrapper}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarCard2 txt={'Your Community Temples'} marginLeft={'15%'} back={true} navigation={navigation}>
+        <TopBarCard2 txt={'Communities'} marginLeft={'15%'} back={true} navigation={navigation}>
         <View style={styles.searchContainers}>
             <SearchBar
               value={searchedText}

@@ -61,6 +61,7 @@ import {
   ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
+  MemberList,
 } from './src/screens';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
@@ -141,6 +142,7 @@ const App = () => {
       todoList,
       profilenearbytemples,
       abouttemple,
+      memberlist
     },
   } = allTexts;
 
@@ -407,6 +409,13 @@ const App = () => {
          <Stack.Screen
           name={editContribute}
           component={EditContribute}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={memberlist}
+          component={MemberList}
           options={{
             headerShown: false,
           }}
