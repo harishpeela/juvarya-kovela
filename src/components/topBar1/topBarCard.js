@@ -60,10 +60,10 @@ export const TopBarcard = ({
                 {img ? (
                   <Image source={{ uri: img?.url }} height={40} width={40} style={{ height: 30, width: 30, borderRadius: 80 / 2 }} />
                 ) : (
-                  <View style={{ height: 50, width: 50,justifyContent:'center',alignItems:'center', marginTop: -10 }}>
+                  <View style={{ height: 45, width: 45,justifyContent:'center',alignItems:'center', marginTop: -8 }}>
                     <EvilIcons
                       name="user"
-                      size={50}
+                      size={45}
                       color={colors.white}
 
                     />
@@ -227,7 +227,7 @@ export const TopBarCard2 = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFAB0F',
+    backgroundColor: '#FFAA33',
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
     marginBottom: 10,

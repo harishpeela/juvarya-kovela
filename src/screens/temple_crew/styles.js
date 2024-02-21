@@ -5,6 +5,17 @@ export const styles = StyleSheet.create({
   followersContainer: {
     borderWidth: 1,
   },
+  headerContainer: {
+    padding: 10,
+    backgroundColor:'#FFAB0F',
+    height:100,
+    width:'100%',
+    borderBottomLeftRadius:24,
+    borderBottomRightRadius:24,
+    flexDirection:'row',
+    alignItems:'center',
+    // justifyContent:'space-between'
+  },
   footerContainer: {
     paddingHorizontal: 30,
     paddingTop: 20,

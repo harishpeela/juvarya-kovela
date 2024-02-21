@@ -32,6 +32,7 @@ import {useTranslation} from 'react-i18next';
 import i18next, {resources} from '../../../languages/language';
 import lan from '../../../languages/lan.json';
 import {launchImageLibrary} from 'react-native-image-picker';
+import Entypo from 'react-native-vector-icons/Entypo';
 import {
   GetProfilePic,
   PostProfilePic,
@@ -272,18 +273,21 @@ const currentCust = async () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-          {/* <Item
+          <Item
               svg={
-                <AntDesign name="idcard" size={20} color={colors.black} />
+                <Entypo
+                name="list"
+                color={colors.black}
+                size={20}
+               
+              />
               }
               text={t('ToDo List')}
-              // onPress={() => {
-              //   navigation.navigate(allTexts.screenNames.todoList);
-              // }}
-              onPress={() =>
-                alert('Under Development')
-              }
-            /> */}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.todoList);
+              }}
+              
+            />
               <Item
               svg={
                 <FontAwesome5
@@ -292,7 +296,7 @@ const currentCust = async () => {
                   color={isDarkMode ? 'black' : 'black'}
                 />
               }
-                text={t('myTemple')}
+                text={t('Communities')}
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.myTamples);
                 }}

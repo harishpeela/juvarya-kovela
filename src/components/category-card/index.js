@@ -12,7 +12,8 @@ import {
   Modal,
 } from 'react-native';
 import {colors} from '../../common';
-import React, {useState, useRef, useMemo, useEffect} from 'react';
+import React, {useState, useRef, useMemo, useContext, useEffect} from 'react';
+import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './styles';
 import {NewSaveFeed} from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -42,7 +43,9 @@ export const UserFeedCompList = ({
   savedFeed,
   onPressDelete,
   onPressDots,
+  role_item_admin,
 }) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
@@ -51,7 +54,8 @@ export const UserFeedCompList = ({
   const isDarkMode = useColorScheme() === 'dark';
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
-
+  const [roleType, setRoleType] = useState();
+  
   const getImageSize = () => {
     if (post?.mediaList[0]?.url === ' ') {
       console.log('');
@@ -65,7 +69,7 @@ export const UserFeedCompList = ({
   useEffect(() => {
     getImageSize();
   }, []);
-
+ 
   const likeUnLikeHandler = async () => {
     setIsLiked(!isLiked);
     const payloadLike = {
@@ -171,7 +175,19 @@ export const UserFeedCompList = ({
     // To get the file extension
     return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
   };
-
+ 
+  const Type = () => {
+    let ROLES = userDetails?.role;
+    var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
+    if (roleAdmin) {
+      setRoleType('ROLE_ADMIN');
+    } else {
+      setRoleType(null);
+    }
+  };
+  useEffect(() => {
+    Type();
+  }, []);
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
@@ -198,15 +214,17 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
-      <Entypo
-        name="dots-three-vertical"
-        size={20}
-        color={colors.orangeColor}
-        style={{position: 'absolute', right: 10, top: 10}}
-        onPress={() => {
-          setIsVisible(!isVisible);
-        }}
-      />
+     {(roleType || role_item_admin) && (
+       <Entypo
+       name="dots-three-vertical"
+       size={20}
+       color={colors.orangeColor}
+       style={{position: 'absolute', right: 10, top: 10}}
+       onPress={() => {
+         setIsVisible(!isVisible);
+       }}
+     />
+     )}
       {isVisible && (
         <TouchableOpacity
           style={{
