@@ -61,6 +61,7 @@ import {
   ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
+  TempleProfileToDoList,
   MemberList,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -76,6 +77,7 @@ import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 import CreateFeedDescription from './src/screens/createFeedDiscription/CreateFeedDescription';
 import TempleClass from './src/screens/templeCclass/TempleClass';
+
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
 
@@ -144,6 +146,7 @@ const App = () => {
       profilenearbytemples,
       templeClass,
       abouttemple,
+      templeProfileToDoList,
       memberlist
     },
   } = allTexts;
@@ -285,6 +288,13 @@ const App = () => {
         <Stack.Screen
           name={donationslist}
           component={DonationsList}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={templeProfileToDoList}
+          component={TempleProfileToDoList}
           options={{
             headerShown: false,
           }}
