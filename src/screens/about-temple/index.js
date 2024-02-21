@@ -9,6 +9,7 @@ const AboutTemple = ({ navigation, route }) => {
     const [data, setData] = useState();
     const [description, setDescription] = useState();
     const [isVisible, setIsVisible] = useState(false);
+    const [loader, setLoader] = useState(false);
     const AboutTemple = async () => {
         let result = await getAboutTemple(jtProfile);
         // console.log('res of about temple', result?.data);

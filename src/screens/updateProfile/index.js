@@ -37,15 +37,32 @@ const UpdateProfile = ({navigation}) => {
   const [pinErr, setPinErr] = useState(false);
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
+  const [validDateOfBIrth, setValidDateOfBirth] = useState(' ');
+  console.log('dob=====>', dob);
 
-  const dateSlice = dob.slice(0, 10);
-  const dateFormatValue = dateSlice.split('-').reverse().join('-');
-  console.log(dateFormatValue);
+  const validDob = () => {
+    const propertyNames = Object.keys(currentCustomer);
+    console.log('propertyNames', propertyNames);
+    if (propertyNames.includes('dob')) {
+      setDob(currentCustomer?.dob);
+      // setDob(dob.split('-').reverse().join('-'));
+    } else {
+      setDob(toDate);
+    }
+  };
+
+  useEffect(() => {
+    validDob();
+  }, []);
+
+  // const dateSlice = dob.slice(0, 10);
+  // const dateFormatValue = dateSlice.split('-').reverse().join('-');
+  // console.log(dateFormatValue);
 
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
-      setDob('');
+      setDob(datedata);
       HideDatePicker();
     }
     if (toDate > date) {
@@ -55,7 +72,6 @@ const UpdateProfile = ({navigation}) => {
   };
 
   const updatePincode = pincode?.toString();
-  console.log('UpdatePincode', updatePincode);
 
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
@@ -68,7 +84,7 @@ const UpdateProfile = ({navigation}) => {
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'MM-dd-yyyy');
-    // console.log(formattedDate, '====<> date');
+    console.log('================>', formattedDate);
     let payload = {
       dob: formattedDate,
       gender: isRoleSelected,
@@ -79,7 +95,7 @@ const UpdateProfile = ({navigation}) => {
       postalCode: pincode,
     };
     console.log(payload, 'payload');
-    if (gotraValue === ''  && pincode === '') {
+    if (gotraValue === '' && pincode === '') {
       alert('please fill at least one field');
     } else if (gotraValue || pincode) {
       try {
@@ -101,7 +117,7 @@ const UpdateProfile = ({navigation}) => {
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
-      console.log('templeAddress', result?.data);
+      // console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
@@ -258,14 +274,14 @@ const UpdateProfile = ({navigation}) => {
                 <EventInput2
                   lable={'Date of Birth'}
                   height={50}
-                  value1={dob ? dateFormatValue : toDate?.toLocaleDateString()}
+                  value1={dob ? dob.substring(0, 10) : toDate}
                   calendar={true}
                   onPressCalendar={() => ShowDatePicker()}
                 />
                 <DateTimePickerModal
                   isVisible={datePickerVisible}
                   dateFormat
-                  mode={date}
+                  mode="date"
                   onConfirm={HandleCnfrm}
                   onCancel={HideDatePicker}
                 />
@@ -275,7 +291,7 @@ const UpdateProfile = ({navigation}) => {
                   lable={'Pin Code'}
                   // value={pincode}
                   pincode={true}
-                  value={
+                  placeholder={
                     currentCustomer?.postalCode ? updatePincode : 'Pincode'
                   }
                   height={50}

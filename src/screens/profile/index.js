@@ -296,7 +296,7 @@ const currentCust = async () => {
                   color={isDarkMode ? 'black' : 'black'}
                 />
               }
-                text={t('myTemple')}
+                text={t('Communities')}
                 onPress={() => {
                   navigation.navigate(allTexts.screenNames.myTamples);
                 }}

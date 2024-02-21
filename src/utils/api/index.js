@@ -114,6 +114,9 @@ const endpoints = {
   PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
   GET_TEMPLE_CLASS: 'jtProfileToProfile/list',
   ABOUT_TEMPLE: 'jtProfileHistory/find/byProfile',
+  PROFILE_TODO_LIST:'jttask/save',
+  GET_PROFILE_TODO_LIST:'jttask/customer/tasks'
+
 };
 export const getInitialToken = async () => {
   try {
@@ -409,6 +412,29 @@ export const GetsearchPopularTemples = async name => {
     console.log('error', error);
   }
 };
+
+export const profileToDoList = async data => {
+  try {
+    let result = await axiosNewData.post(
+      `${endpoints.PROFILE_TODO_LIST}`, data
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+export const GetProfileToDoList = async ( pgno, pgSize) => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.GET_PROFILE_TODO_LIST}?pageNo=${pgno}&pageSize=${pgSize}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
 export const GetMyTemples = async (custId, pgno, pgSize) => {
   try {
     let result = await axiosNewData1.get(

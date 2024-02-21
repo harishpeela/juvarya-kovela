@@ -4,7 +4,6 @@ import {
   useColorScheme,
   Text,
   Alert,
-  ScrollView,
   TouchableOpacity,
   Image
 } from 'react-native';
@@ -18,7 +17,7 @@ import { allTexts, colors } from '../../common';
 import { uploadTempleProfilePic } from '../../utils/api';
 import { styles } from './styles'; // Update this import based on your project structure
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
+import { EventInput2 } from '../../components/eventCreateInput';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { CreateCommunityTemple } from '../../utils/api';
 import { launchImageLibrary } from 'react-native-image-picker';
@@ -111,20 +110,6 @@ const CommunityTemple = ({ navigation }) => {
       }
     } else {
       alert('something went wrong please try after some time')
-    }
-  };
-
-  const updateProfilePicture = async () => {
-    let img = getImageObj(image);
-    let formdata = new FormData();
-    console.log('img===>', img)
-    formdata.append('profilePicture', img);
-    let result = await PostProfilePic(formdata);
-    console.log('updated', result?.data);
-    if (result) {
-      setIsCross(true);
-    } else {
-      console.log('something went wrong', result)
     }
   };
 

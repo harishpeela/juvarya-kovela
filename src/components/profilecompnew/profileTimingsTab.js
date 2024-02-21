@@ -12,37 +12,49 @@ export const ProfileTimingTabs = ({data, id}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity
-        style={{width: '110%', left: 20}}
         onPress={() =>
           navigation.navigate('TempleClass', {
             id: data?.id,
             templeclass: data?.templeClass,
           })
         }>
-        {data?.templeClass === 'A' || 'B' || 'C' ? (
-          <View style={styles.toptemp}>
-            <Text
-              style={{
-                padding: 4,
-                width: '20%',
-                textAlign: 'center',
-                marginRight: 10,
-                color: colors.white,
-                backgroundColor: colors.orangeColor,
-              }}>
-              {data?.templeClass}
-            </Text>
-            <Text style={{color: colors.black, right: 10}}> Top Temple</Text>
-          </View>
-        ) : (
-          ''
-        )}
+        <View
+          style={{
+            marginLeft: 20,
+            borderWidth: 0.5,
+            borderRadius: 5,
+            marginRight: 20,
+          }}>
+          {data?.templeClass === 'A' || 'B' || 'C' ? (
+            <View style={styles.toptemp}>
+              <Text
+                style={{
+                  padding: 5,
+                  textAlign: 'center',
+                  marginLeft: 5,
+                  color: colors.white,
+                  backgroundColor: colors.orangeColor,
+                }}>
+                {data?.templeClass}
+              </Text>
+              <Text style={{color: colors.black, left: 3, marginRight: 10}}>
+                {' '}
+                Top Temple
+              </Text>
+            </View>
+          ) : (
+            ''
+          )}
+        </View>
       </TouchableOpacity>
 
       <View style={styles.time}>
         <AntDesign name="clockcircleo" size={20} />
-        <Text style={{ color: '#228C08', fontSize: 12, fontWeight: 'bold' }}> Open {data?.openingTime ? data?.openingTime : '9'} Am</Text>
-        <Text style={{ color: colors.red1, fontWeight: 'bold', fontSize: 12 }}>
+        <Text style={{color: '#228C08', fontSize: 12, fontWeight: 'bold'}}>
+          {' '}
+          Open {data?.openingTime ? data?.openingTime : '9'} Am
+        </Text>
+        <Text style={{color: colors.red1, fontWeight: 'bold', fontSize: 12}}>
           {' '}
           • Closes {data?.closingTime ? data?.closingTime : '8'} Pm
         </Text>
@@ -61,8 +73,6 @@ const styles = StyleSheet.create({
   toptemp: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: '60%',
-    borderWidth: 0.5,
     padding: 2,
     borderRadius: 5,
     justifyContent: 'center',
@@ -74,5 +84,6 @@ const styles = StyleSheet.create({
     padding: 4,
     borderRadius: 5,
     justifyContent: 'center',
+    marginRight: 20,
   },
 });
