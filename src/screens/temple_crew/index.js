@@ -262,7 +262,7 @@ console.log(donationData, 'jahsbxahbs');
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text style={{color: colors.orangeColor}}> no memberships for this temple</Text>
+                <Text style={{color: colors.orangeColor}}> No Members For This Temple</Text>
               </View>
         ): ''
         }
@@ -271,13 +271,3 @@ console.log(donationData, 'jahsbxahbs');
   );
 };
 export default TempleCrew;
-//donationData?.data == undefined
-
-{/* <View
-                style={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginTop: '50%',
-                }}>
-                <Text style={{color: colors.orangeColor}}> no memberships for this temple</Text>
-              </View> */}
