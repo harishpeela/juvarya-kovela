@@ -127,7 +127,7 @@ export const TopBarcard = ({
           )}
           {isBell && (
             <TouchableOpacity
-              style={{ marginRight: '5%', flex: 1 }}
+              style={{ marginRight: '5%'}}
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.notification)
               }>

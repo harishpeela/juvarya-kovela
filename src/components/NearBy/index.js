@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -7,22 +7,24 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  RefreshControl,
 } from 'react-native';
-import {styles} from './styles';
-import {SearchBar} from '../searchbar';
-import {Loader} from '../loader';
+import { useFocusEffect } from '@react-navigation/native';
+import { styles } from './styles';
+import { SearchBar } from '../searchbar';
+import { Loader } from '../loader';
 
-import {allTexts, colors} from '../../common';
-import {TempleListCard} from '../TempleListCard';
-import {NearByTemple} from '../NearByTemples';
-import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
-import {PopularTemples, SearchPopularTemples} from '../../utils/api';
-import {useIsFocused} from '@react-navigation/native';
-import {TopBarcard} from '../topBar1/topBarCard';
-import {NearByTempleClass, getNearByTemples} from '../../utils/api';
+import { allTexts, colors } from '../../common';
+import { TempleListCard } from '../TempleListCard';
+import { NearByTemple } from '../NearByTemples';
+import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
+import { PopularTemples, SearchPopularTemples } from '../../utils/api';
+import { useIsFocused } from '@react-navigation/native';
+import { TopBarcard } from '../topBar1/topBarCard';
+import { NearByTempleClass, getNearByTemples } from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
+export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,6 +36,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   const [pageNo, setPageNo] = useState(0);
   const [filteredData, setFilteredData] = useState();
   const [NearByData, setNearByData] = useState();
+  const [refreshing, setRefreshing] = useState(true);
   const PopularTemplesss = async () => {
     setLoader(true);
     try {
@@ -45,9 +48,11 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         setfilteredArray(dty);
         setFilteredList(dty);
         setLoader(false);
+        setRefreshing(false);
       }
     } catch (error) {
       setLoader(false);
+      setRefreshing(false);
       console.log('error in popular temples', error);
     }
   };
@@ -82,12 +87,21 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
     setIsLoading(false);
   };
 
-  useEffect(() => {}, [isFocused]);
-  useEffect(() => {
-    if (pageNo >= 0) {
-      PopularTemplesss(0, 100);
-    }
-  }, [pageNo]);
+  useEffect(() => { }, [isFocused]);
+  // useEffect(() => {
+  //   if (pageNo >= 0) {
+  //     PopularTemplesss(0, 100);
+  //   }
+  // }, [pageNo]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (pageNo >= 0) {
+        PopularTemplesss(0, 100);
+      }
+      return () => { };
+    }, [])
+  );
   const SearchPopTemp = async txt => {
     try {
       let result = await SearchPopularTemples(txt);
@@ -100,10 +114,18 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
-    <View>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+    <ScrollView refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        onRefresh={() => {
+          setRefreshing(true);
+          PopularTemplesss(pageNo, 100);
+        }}
+      />
+    }>
+      <View style={{ minHeight: 160, marginTop: '3%' }}>
         <TopBarcard
-          txt={'Search'}
+          // txt={'Search'}
           menu={true}
           isBell={true}
           navigation={navigation}
@@ -138,7 +160,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
           </View>
         ) : (
           <>
-            <ScrollView style={{paddingLeft: 12}}>
+            <ScrollView style={{ paddingLeft: 12 }}>
               {searchedText === '' && (
                 <>
                   <View style={styles.upComingTextTab}>
@@ -151,7 +173,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                           data: filteredList,
                         });
                       }}>
-                      <Text style={{color: colors.orangeColor, fontSize: 16}}>
+                      <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
                         See all
                       </Text>
                     </TouchableOpacity>
@@ -161,8 +183,8 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
-                    keyExtractor={({item, index}) => item?.id}
-                    renderItem={({item, index}) => (
+                    keyExtractor={({ item, index }) => item?.id}
+                    renderItem={({ item, index }) => (
                       <TempleListCard
                         post={item}
                         templeId={item.id}
@@ -177,13 +199,13 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                 </>
               )}
             </ScrollView>
-            <ScrollView style={{height: searchedText ? '75%' : 0}}>
+            <ScrollView style={{ height: searchedText ? '75%' : 0 }}>
               {searchedText && filteredData ? (
                 <FlatList
                   data={filteredData}
                   keyboardShouldPersistTaps="handled"
-                  keyExtractor={({item, index}) => item?.id}
-                  renderItem={({item, index}) => (
+                  keyExtractor={({ item, index }) => item?.id}
+                  renderItem={({ item, index }) => (
                     <PopularTemplesVerticalList
                       post={item}
                       name={item.name}
@@ -197,12 +219,12 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                   decelerationRate={0.8}
                 />
               ) : (
-                <View style={{alignItems: 'center', marginTop: '50%'}}>
+                <View style={{ alignItems: 'center', marginTop: '50%' }}>
                   <FontAwesome5
                     name="gopuram"
                     size={50}
                     color={'orange'}
-                    style={{marginBottom: '5%'}}
+                    style={{ marginBottom: '5%' }}
                   />
                   <Text
                     style={{
@@ -224,21 +246,21 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                     data: NearByData,
                   });
                 }}>
-                <Text style={{color: colors.orangeColor, fontSize: 16}}>
+                <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
                   See all
                 </Text>
               </TouchableOpacity>
             </View>
 
-            <ScrollView style={{paddingLeft: 12}}>
+            <ScrollView style={{ paddingLeft: 12 }}>
               {searchedText === '' && (
                 <FlatList
                   data={NearByData}
                   horizontal
                   showsHorizontalScrollIndicator={false}
                   keyboardShouldPersistTaps="handled"
-                  keyExtractor={({item, index}) => item?.id}
-                  renderItem={({item, index}) => (
+                  keyExtractor={({ item, index }) => item?.id}
+                  renderItem={({ item, index }) => (
                     <NearByTemple
                       post={item}
                       name={item?.profileDTO?.name}
@@ -255,6 +277,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
           </>
         )}
       </>
-    </View>
+    </ScrollView>
   );
 };
