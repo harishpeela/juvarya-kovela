@@ -71,7 +71,7 @@ const EventsScreen = ({ navigation, route }) => {
         }}
       >
         <TopBarcard
-          txt={'Events'}
+          // txt={'Events'}
           menu={true}
           isBell={true}
           navigation={navigation}

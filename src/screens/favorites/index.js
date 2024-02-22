@@ -101,7 +101,8 @@ const Favorite = ({navigation}) => {
         // backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard txt={'Favourites'} isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
+        <TopBarcard  isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
+        {/* txt={'Favourites'} */}
           <View style={styles.searchbarContainer}>
               <SearchBar
                 placeHolder={'Search Favourites'}
