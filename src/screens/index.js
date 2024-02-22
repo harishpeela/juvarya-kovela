@@ -129,6 +129,6 @@ export {
   ToDoList,
   Profile_Near_By_Temples,
   AboutTemple,
-  TempleProfileToDoList
+  TempleProfileToDoList,
   MemberList,
 };

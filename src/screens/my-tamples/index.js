@@ -87,7 +87,7 @@ const MyTemples = ({ navigation }) => {
                 await PopularTemplesss(pageNo, 20);
               }}
               bgColor={colors.gray4}
-              placeHolder={'Search'}
+              placeHolder={'Search Your Community Temples'}
             />
               <TouchableOpacity
                 onPress={() => 

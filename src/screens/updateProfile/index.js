@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   useColorScheme,
@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {format} from 'date-fns';
-import {EventInput, PrimaryButton} from '../../components';
-import {colors} from '../../common';
+import { format } from 'date-fns';
+import { EventInput, PrimaryButton } from '../../components';
+import { colors } from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {styles} from './styles'; // Update this import based on your project structure
+import { styles } from './styles'; // Update this import based on your project structure
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import {Update_Profile, getUserInfoNew} from '../../utils/api';
+import { Update_Profile, getUserInfoNew } from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {EventInput2, EventInput3} from '../../components/eventCreateInput';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
-const UpdateProfile = ({navigation}) => {
+const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
+  const { userDetails } = useContext(ApplicationContext);
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
@@ -37,32 +37,15 @@ const UpdateProfile = ({navigation}) => {
   const [pinErr, setPinErr] = useState(false);
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
-  const [validDateOfBIrth, setValidDateOfBirth] = useState(' ');
-  console.log('dob=====>', dob);
 
-  const validDob = () => {
-    const propertyNames = Object.keys(currentCustomer);
-    console.log('propertyNames', propertyNames);
-    if (propertyNames.includes('dob')) {
-      setDob(currentCustomer?.dob);
-      // setDob(dob.split('-').reverse().join('-'));
-    } else {
-      setDob(toDate);
-    }
-  };
-
-  useEffect(() => {
-    validDob();
-  }, []);
-
-  // const dateSlice = dob.slice(0, 10);
-  // const dateFormatValue = dateSlice.split('-').reverse().join('-');
-  // console.log(dateFormatValue);
+  const dateSlice = dob.slice(0, 10);
+  const dateFormatValue = dateSlice.split('-').reverse().join('-');
+  console.log(dateFormatValue);
 
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
-      setDob(datedata);
+      setDob('');
       HideDatePicker();
     }
     if (toDate > date) {
@@ -72,6 +55,7 @@ const UpdateProfile = ({navigation}) => {
   };
 
   const updatePincode = pincode?.toString();
+  console.log('UpdatePincode', updatePincode);
 
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
@@ -84,7 +68,7 @@ const UpdateProfile = ({navigation}) => {
   const ProfileUpdate = async () => {
     var date = new Date(toDate);
     var formattedDate = format(date, 'MM-dd-yyyy');
-    console.log('================>', formattedDate);
+    // console.log(formattedDate, '====<> date');
     let payload = {
       dob: formattedDate,
       gender: isRoleSelected,
@@ -97,7 +81,7 @@ const UpdateProfile = ({navigation}) => {
     console.log(payload, 'payload');
     if (gotraValue === '' && pincode === '') {
       alert('please fill at least one field');
-    } else if (gotraValue || pincode) {
+    } else if (gotraValue || pincode || toDate) {
       try {
         let responce = await Update_Profile(payload);
         console.log('date of birth', responce?.data);
@@ -117,7 +101,7 @@ const UpdateProfile = ({navigation}) => {
   const getCustomer = async () => {
     try {
       let result = await getUserInfoNew();
-      // console.log('templeAddress', result?.data);
+      console.log('templeAddress', result?.data);
       if (result) {
         const dty = result?.data || [];
         setCurrentCustomer(dty);
@@ -142,8 +126,8 @@ const UpdateProfile = ({navigation}) => {
             back={true}
             navigation={navigation}></TopBarCard2>
         </View>
-        <View style={{marginTop: '15%'}}>
-          <View style={{bottom: '8%'}}>
+        <View style={{ marginTop: '15%' }}>
+          <View style={{ bottom: '8%' }}>
             <EventInput3
               lable={'Name'}
               user={true}
@@ -214,7 +198,7 @@ const UpdateProfile = ({navigation}) => {
                   defaultButtonText={
                     currentCustomer?.gender ? currentCustomer?.gender : 'gender'
                   }
-                  dropdownStyle={{paddingTop: 10, borderRadius: 20}}
+                  dropdownStyle={{ paddingTop: 10, borderRadius: 20 }}
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
@@ -227,7 +211,7 @@ const UpdateProfile = ({navigation}) => {
                           name="male"
                           size={20}
                           color={colors.orangeColor}
-                          style={{marginLeft: 2}}
+                          style={{ marginLeft: 2 }}
                         />
                       )}
                       {isRoleSelected === 'Female' && (
@@ -235,7 +219,7 @@ const UpdateProfile = ({navigation}) => {
                           name="female"
                           size={20}
                           color={colors.orangeColor}
-                          style={{marginLeft: 2}}
+                          style={{ marginLeft: 2 }}
                         />
                       )}
                       {/* {isRoleSelected === 'Others' && (
@@ -261,32 +245,34 @@ const UpdateProfile = ({navigation}) => {
               onChangeText={text => {
                 setGotraValue(text);
               }}
-              // value={
-              //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
-              // }
+            // value={
+            //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
+            // }
             />
             <View
               style={{
                 flexDirection: 'row',
                 marginLeft: '4%',
               }}>
-              <View style={{width: '60%', marginTop: 5}}>
-                <EventInput2
-                  lable={'Date of Birth'}
-                  height={50}
-                  value1={dob ? dob.substring(0, 10) : toDate}
-                  calendar={true}
-                  onPressCalendar={() => ShowDatePicker()}
-                />
+              <View style={{ width: '60%', marginTop: 5 }}>
+                <TouchableOpacity>
+                  <EventInput2
+                    lable={'Date of Birth'}
+                    height={50}
+                    value1={dob ? dateFormatValue : toDate?.toLocaleDateString()}
+                    calendar={true}
+                    onPressCalendar={() => ShowDatePicker()}
+                  />
+                </TouchableOpacity>
                 <DateTimePickerModal
                   isVisible={datePickerVisible}
                   dateFormat
-                  mode="date"
+                  mode={date}
                   onConfirm={HandleCnfrm}
                   onCancel={HideDatePicker}
                 />
               </View>
-              <View style={{width: '43%', right: 35, marginTop: 5}}>
+              <View style={{ width: '43%', right: 35, marginTop: 5 }}>
                 <EventInput
                   lable={'Pin Code'}
                   // value={pincode}
@@ -304,7 +290,7 @@ const UpdateProfile = ({navigation}) => {
                 />
               </View>
             </View>
-            <View style={{width: '80%', alignSelf: 'center', marginTop: 100}}>
+            <View style={{ width: '80%', alignSelf: 'center', marginTop: 100 }}>
               <PrimaryButton
                 text={'Update'}
                 bgColor={colors.orangeColor}
