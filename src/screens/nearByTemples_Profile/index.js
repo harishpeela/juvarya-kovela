@@ -37,7 +37,7 @@ const [data, setData] = useState([]);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarCard2 back={true} txt={'Near By Temples'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Nearby Temples'} navigation={navigation} />
       </View>
       {!data?.length ? (
         <View style={styles.loaderContainer}>
@@ -46,7 +46,6 @@ const [data, setData] = useState([]);
                   size={50}
                   color={'orange'}
                   style={{marginBottom:'5%'}}
-                 
                 />
                 <Text style={{fontFamily:'Poppins-Medium',color:'orange',fontSize:15}}>{'No Temples Available'}</Text>
         </View>

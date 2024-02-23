@@ -213,6 +213,7 @@ export const ProfileFourthTab = ({
               ...styles.controlPanel.item,
               borderBottomWidth: currentIndex === 4 ? 2 : 0,
               borderColor: currentIndex === 4 ? '#CC4501' : null,
+              marginRight: '5%'
             }}
             onPress={() => setCurrentIndex(4)}>
             <MaterialCommunityIcons
@@ -261,7 +262,7 @@ export const ProfileFourthTab = ({
             />
           </Pressable>
         )} */}
-        {templeDetails && (
+        {/* {templeDetails && (
           <Pressable
             style={{
               ...styles.controlPanel.item,
@@ -276,7 +277,7 @@ export const ProfileFourthTab = ({
               style={styles.Icon}
             />
           </Pressable>
-        )}
+        )} */}
       </View>
     </View>
   );
