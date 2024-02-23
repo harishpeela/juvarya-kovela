@@ -31,7 +31,6 @@ import {SaveFeedComp} from './savefeedcomp';
 import { CrewCard } from './crew-card-comp';
 import {ProfileDonationsCard} from './profileDonationsCard'
 
-
 import {
   NearBy,
   NearByMainTab,
@@ -59,6 +58,7 @@ import {
   CreateFeedTabComp,
   DirectionsTabComp,
   FolloUnfollowComp,
+  TempleCrewTabComp,
 } from './profilecompnew';
 import {ProfileImage} from './profilecompnew/profileImage';
 import {PopularTemplesVerticalList} from './popularVerticalFlatList';
@@ -198,4 +198,5 @@ export {
   NearByTempleComp,
   EventInput4,
   FollowersListCard4,
+  TempleCrewTabComp,
 };

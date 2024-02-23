@@ -91,10 +91,13 @@ const ForgetPassword = () => {
   const otpGeneration = async (email, Ootp) => {
     const payload = {
       otpType: 'FORGOT_PASSWORD',
-      emailAddress: email,
+      primaryContact: email,
     };
+
     try {
       let result = await NewVerifyOTP(payload);
+
+    console.log('res of otp', result?.data);
       if (result) {
         setOtp(Ootp);
         alert('OTP Generated Successfully, check your spam folder if not received Email');
@@ -128,17 +131,19 @@ const ForgetPassword = () => {
   };
 
   const validateEmail = text => {
-    const isValid = text.toLowerCase().endsWith('.com');
-    setValidEmail(isValid);
+    // const isValid = text.toLowerCase().endsWith('.com');
+    // setValidEmail(isValid);
     setUserEmail(text);
   };
 
   const onPressDone = Ootp => {
-    if (validEmail && userEmail !== '') {
+    if(userEmail === ''){
+      setError(true);
+    } else if (userEmail?.length === 10) {
       otpGeneration(userEmail, Ootp);
-      console.log('Email is valid:', userEmail);
+      console.log('mobile number is valid:', userEmail);
       setModalVisible(true);
-    } else {
+    } else if (userEmail?.length > 10 || userEmail?.length < 10){
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -147,11 +152,12 @@ const ForgetPassword = () => {
   };
 
   const userPasswordHandler = async values => {
+    console.log(values, 'values');
     let otpOutPut = otpInput?.current?.state?.otpText
       ?.toString()
       .replace(/,/g, '');
     const payload = {
-      email: userEmail,
+      primaryContact: userEmail,
       password: values.password,
       otp: otpOutPut,
     };      let result = await forgotPassword(payload);
@@ -159,7 +165,7 @@ const ForgetPassword = () => {
     try {
       if (result?.status === 200) {
         Snackbar.show({
-          text: 'Password Created Successfully',
+          text: 'Password Updated Successfully',
           backgroundColor: 'green',
           duration: 2000,
           action: {
@@ -224,15 +230,15 @@ const ForgetPassword = () => {
       </View>
       <TextInput
         style={styles.textinputContainer}
-        placeholder="Enter your email"
-        keyboardType="email-address"
+        placeholder="Enter your Mobile number"
+        keyboardType="numeric"
         onChangeText={validateEmail}
         value={userEmail}
         placeholderTextColor="black"
       />
       {error ? (
         <View style={styles.errorContainer}>
-          <Text style={styles.errorText}>Email is Not Valid</Text>
+          <Text style={styles.errorText}> please enter valid Mobile number</Text>
         </View>
       ) : (
         <></>
