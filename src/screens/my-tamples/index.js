@@ -33,22 +33,22 @@ const MyTemples = ({ navigation }) => {
     }
   };
 
-  // const AdminTempleDetails = async () => {
-  //   setLoading(true);
-  //   try {
-  //     let result = await AdminTemples();
-  //     let adminData = result?.data; 
-  //     adminData.map(e => {
-  //       TempleDetails(e);
-  //     });
-  //   } catch (error) {
-  //     setLoading(false);
-  //     console.log('error in admin temples', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   AdminTempleDetails();
-  // }, []);
+  const AdminTempleDetails = async () => {
+    setLoading(true);
+    try {
+      let result = await AdminTemples();
+      let adminData = result?.data; 
+      adminData.map(e => {
+        TempleDetails(e);
+      });
+    } catch (error) {
+      setLoading(false);
+      console.log('error in admin temples', error);
+    }
+  };
+  useEffect(() => {
+    AdminTempleDetails();
+  }, []);
 
 
   const onSelect = data => {

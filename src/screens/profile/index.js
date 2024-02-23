@@ -273,7 +273,7 @@ const currentCust = async () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.profileItemsHeader}>
           <View style={styles.profileItemsContainer}>
-          <Item
+          {/* <Item
               svg={
                 <Entypo
                 name="list"
@@ -287,7 +287,7 @@ const currentCust = async () => {
                 navigation.navigate(allTexts.screenNames.todoList);
               }}
               
-            />
+            /> */}
               <Item
               svg={
                 <FontAwesome5

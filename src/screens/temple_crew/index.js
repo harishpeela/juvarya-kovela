@@ -7,7 +7,7 @@ import { Loader, FollowersListCard4 } from '../../components';
 import { colors, allTexts } from '../../common';
 import { styles } from './styles';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-import {MemberShipList, MembersList } from '../../utils/api';
+import {MemberShipList, MembersList, getArtistDonar } from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Ioniconss from 'react-native-vector-icons/Entypo';
 const TempleCrew = ({ route, navigation }) => {
@@ -77,6 +77,7 @@ const TempleCrew = ({ route, navigation }) => {
       setRoleType(roleAdmin);
     }
   };
+  
   useEffect(() => {
     MembershipIdData();
     Type();
