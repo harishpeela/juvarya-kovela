@@ -72,7 +72,7 @@ export const TempleListCard = ({
   }, [isFollowingTrue, isFocused]);
   return (
     <TouchableOpacity
-      style={{borderRadius: 20, margin: 5, backgroundColor: 'white', height: 150, width: 250, elevation: 4, shadowOpacity: 5}}
+      style={{borderRadius: 20, margin: 5, backgroundColor: 'white', height: 150, width: 250, elevation: 4, shadowOpacity: 5,marginLeft:17}}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
           data: post,

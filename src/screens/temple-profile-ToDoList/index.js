@@ -18,6 +18,7 @@ const [description,setDescription] = useState(' ')
 const getToDo = async () =>{
   
   console.log('kkkkkkkkkkkkkkkkkkkkkkk',payload)
+  const payload = {description:description}
   
   const result = await profileToDoList(payload)
   if (result.status === 200){
@@ -41,25 +42,20 @@ const getToDo = async () =>{
 
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View style={{ height: '15%' }}>
         <TopBarCard2 back={true}
           txt={'Add ToDoList'}
           navigation={navigation}
+          marginLeft={'16%'}
         />
        
       </View>
-      {/* <EventInput
-       lable={'Temple Name'}
-       placeholder={'Temple Name'}
-       height={50}
-       onChangeText={(text)=>setTempleName(text)}
-      
-      /> */}
+     
       <EventInput
        lable={'Description'}
-       placeholder={'About Temple'}
-       height={450}
+       placeholder={'List Of Things To Be Done'}
+       height={550}
        onChangeText={(text)=>setDescription(text)}
       
       />

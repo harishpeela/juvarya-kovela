@@ -54,9 +54,9 @@ const AboutTemple = ({ navigation, route }) => {
         AboutTemple();
     }, []);
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 ,backgroundColor:'white'}}>
             <View style={{ height: '15%' }}>
-                <TopBarCard2 back={true} txt={'About Temple'} navigation={navigation} />
+                <TopBarCard2 back={true} txt={'About Temple'} navigation={navigation} marginLeft={'15%'}/>
             </View>
             <View>
                 <EventInput4

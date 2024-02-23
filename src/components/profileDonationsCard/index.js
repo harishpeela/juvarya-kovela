@@ -61,7 +61,12 @@ const styles = StyleSheet.create({
     elevation: 2,
     shadowColor: 'black',
     marginVertical: '1%',
-    width: '100%'
+    width: '100%',
+    borderRadius:10,
+    borderColor:'black',
+    borderWidth:0.3
+    
+  
 
   },
   rs: {

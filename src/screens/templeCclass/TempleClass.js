@@ -32,6 +32,7 @@ const TempleClass = ({route, navigation}) => {
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
+          marginLeft={'15%'}
           navBack={() => navigation.goBack()}
           navigation={navigation}
         />

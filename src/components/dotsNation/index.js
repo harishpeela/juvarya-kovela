@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-   margin:55,
+  //  margin:55,
+  //  backgroundColor:'black',
     justifyContent: 'center',
   },
 });
