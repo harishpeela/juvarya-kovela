@@ -24,11 +24,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bodyContainer: {
-    marginHorizontal: '4%',
+    // marginHorizontal: '4%',
     display: 'flex',
     flexDirection: 'column',
     // borderWidth:5,
     marginBottom:110,
+    backgroundColor:'white'
   },
   searchAndFilter: {
     display: 'flex',
@@ -72,5 +73,16 @@ export const styles = StyleSheet.create({
   },
   updateProfileTopCard:{
     height:100
+  },
+  searchbarContainer:{
+    bottom:'46%',
+    // width:100,
+    marginTop:'-3%',
+    // backgroundColor:'black',
+    marginLeft:'12%',
+   
+   
+    
   }
+
 });

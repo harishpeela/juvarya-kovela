@@ -4,13 +4,14 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: 'auto',
+    backgroundColor:'white'
   },
 
   imgCard: {
-    height: 140,
+    height: 120,
     width: '90%',
     alignSelf: 'center',
-    backgroundColor: colors.white,
+    backgroundColor: 'white',
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',

@@ -222,11 +222,11 @@ export const styles = StyleSheet.create({
     fontSize: 16,
   },
   iconContainer: {
-    height: 30,
-    width: 30,
+    height: 40,
+    width: 40,
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    // backgroundColor: 'black',
   },
 });

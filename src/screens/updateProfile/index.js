@@ -18,7 +18,6 @@ import { Update_Profile, getUserInfoNew } from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-
 const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
@@ -41,7 +40,6 @@ const UpdateProfile = ({ navigation }) => {
   const dateSlice = dob?.slice(0, 10);
   const dateFormatValue = dateSlice?.split('-').reverse().join('-');
   console.log(dateFormatValue);
-
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -53,14 +51,13 @@ const UpdateProfile = ({ navigation }) => {
       setDob(dateFormatValue);
     }
   };
-
+ 
   const updatePincode = pincode?.toString();
   console.log('UpdatePincode', updatePincode);
-
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };
-
+ 
   const HideDatePicker = () => {
     setDatePickerVisible(false);
     setDatePickerVisible(false);
@@ -116,7 +113,7 @@ const UpdateProfile = ({ navigation }) => {
   useEffect(() => {
     getCustomer();
   }, []);
-
+ 
   return (
     <ScrollView>
       <View style={styles.wrapper}>
@@ -124,7 +121,10 @@ const UpdateProfile = ({ navigation }) => {
           <TopBarCard2
             txt={'Update Profile'}
             back={true}
-            navigation={navigation}></TopBarCard2>
+            navigation={navigation}
+            marginLeft={'15%'}>
+            
+            </TopBarCard2>
         </View>
         <View style={{ marginTop: '15%' }}>
           <View style={{ bottom: '8%' }}>
@@ -176,7 +176,7 @@ const UpdateProfile = ({ navigation }) => {
                   }}>
                   Gender
                 </Text>
-
+ 
                 <SelectDropdown
                   data={['Male', 'Female', 'Others']}
                   buttonTextStyle={{
@@ -303,5 +303,5 @@ const UpdateProfile = ({ navigation }) => {
     </ScrollView>
   );
 };
-
+ 
 export default UpdateProfile;

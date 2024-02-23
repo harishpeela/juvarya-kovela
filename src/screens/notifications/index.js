@@ -35,13 +35,14 @@ const Notifications = ({navigation}) => {
     GetNotifications();
   }, []);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,backgroundColor:'white'}}>
       <View style={{}}>
         <View style={{minHeight: '15%'}}>
           <TopBarCard2
             txt={'Notifications'}
             // cancel={true}
             back={true}
+            marginLeft={'15%'}
            navigation={navigation}
             
           />

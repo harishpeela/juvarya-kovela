@@ -21,7 +21,7 @@ export const ProfileTimingTabs = ({data, id}) => {
         <View
           style={{
             marginLeft: 20,
-            borderWidth: 0.5,
+            borderWidth: 0.3,
             borderRadius: 5,
             marginRight: 20,
           }}>
@@ -52,11 +52,11 @@ export const ProfileTimingTabs = ({data, id}) => {
         <AntDesign name="clockcircleo" size={20} />
         <Text style={{color: '#228C08', fontSize: 12, fontWeight: 'bold'}}>
           {' '}
-          Open {data?.openingTime ? data?.openingTime : '9'} Am
+          Open {data?.openingTime ? data?.openingTime : '9'} AM
         </Text>
         <Text style={{color: colors.red1, fontWeight: 'bold', fontSize: 12}}>
           {' '}
-          • Closes {data?.closingTime ? data?.closingTime : '8'} Pm
+          • Closes {data?.closingTime ? data?.closingTime : '8'} PM
         </Text>
       </View>
     </View>
@@ -76,14 +76,20 @@ const styles = StyleSheet.create({
     padding: 2,
     borderRadius: 5,
     justifyContent: 'center',
+    width:145,
+    height:30,
+    
   },
   time: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 0.5,
+    borderWidth: 0.3,
     padding: 4,
     borderRadius: 5,
     justifyContent: 'center',
     marginRight: 20,
+    width:220,
+    height:30,
+   
   },
 });

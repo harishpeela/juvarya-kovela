@@ -67,6 +67,7 @@ const UpdatePassword = ({navigation}) => {
       <View style={{height: '15%'}}>
         <TopBarCard2
           back={true}
+          marginLeft={'15%'}
           txt={'Update Password'}
           navigation={navigation}
         />

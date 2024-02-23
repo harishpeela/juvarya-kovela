@@ -711,7 +711,7 @@ const App = () => {
       }}>
       <SafeAreaProvider>
         <StatusBar
-          backgroundColor="#FFAB0F"
+          backgroundColor="white"
           barStyle="dark-content"
           translucent={true}
         />

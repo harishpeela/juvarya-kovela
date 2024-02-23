@@ -98,24 +98,32 @@ const Favorite = ({navigation}) => {
     <SafeAreaView
       style={{
         ...styles.wrapper,
-        // backgroundColor: isDarkMode ? 'white' : 'white',
+        backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard  isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
-        {/* txt={'Favourites'} */}
+      <View  style={{minHeight: 100,flexDirection:'row'}}>
+        <TopBarcard isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
           <View style={styles.searchbarContainer}>
               <SearchBar
                 placeHolder={'Search Favourites'}
                 showCrossPress={true}
                 onCrossPress={() => {
                   setSeracherdText('');
-                  getTemples(userDetails?.id, pageNo, 20);
+                  // getTemples(userDetails?.id, pageNo, 20);
+                  searchEvent(e);
                 }}
                 onTextChange={e => {
                   setSeracherdText(e);
                   performFilter(e);
                 }}
                 value={seracherdText}
+                loading={false}
+              showCrossPress={true}
+              onCrossPress={() => {
+                setSearchedText('');
+                EventsList();
+              }}
+             
+             
               />
           </View>
         </TopBarcard>
