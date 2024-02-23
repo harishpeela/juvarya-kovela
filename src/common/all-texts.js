@@ -5,8 +5,8 @@ export const allTexts = {
   buttonTexts: {
     // place all your button texts here
     start: 'Start Now',
-    sigup: ' sign up',
-    login: 'Log in',
+    sigup: ' Sign Up',
+    login: 'Log In',
     follow: 'Follow',
     unFollow: 'Following',
     contactUs: 'Contact Us',
@@ -83,7 +83,7 @@ export const allTexts = {
     username: 'user Name',
   },
   paragraphs: {
-    alreadyAccount: 'Already have an account ?',
+    alreadyAccount: 'Already have an account?',
     dontHaveAccount: 'Don’t have an account?',
     splashDescription:
       'There are many destinations for your holiday schedule or healing for activities',

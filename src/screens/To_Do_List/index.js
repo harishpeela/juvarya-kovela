@@ -29,7 +29,7 @@ const [data,setData] = useState([])
     <View style={{ flex: 1 }}>
       <View style={{ height: '15%' }}>
         <TopBarCard2 back={true}
-          txt={'ToDoList'}
+          txt={'ToDo List'}
           navigation={navigation}
         />
       </View>

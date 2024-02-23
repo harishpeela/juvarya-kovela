@@ -14,7 +14,7 @@ const NearByTempleComp = ({onPress}) => {
         onPress={onPress}>
         {/* <BackgroundSmallFlowerUser /> */}
         <Text style={styles.voidButton1Text}>
-          Near By Temples
+          Nearby Temples
         </Text>
       </TouchableOpacity>
     );
