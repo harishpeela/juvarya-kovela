@@ -151,10 +151,10 @@ const CommunityTemple = ({ navigation }) => {
     return imageObj;
   };
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View style={{ height: '15%' }}>
         <TopBarCard2
-          txt={'Create Community Temple'}
+          txt={'Create Temple'}
           back={true} marginLeft={'15%'}
           navigation={navigation}></TopBarCard2>
       </View>

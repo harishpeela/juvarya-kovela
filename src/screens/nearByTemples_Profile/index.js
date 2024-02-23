@@ -37,7 +37,7 @@ const [data, setData] = useState([]);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarCard2 back={true} txt={'Nearby Temples'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Nearby Temples'} navigation={navigation} marginLeft={'13%'}/>
       </View>
       {!data?.length ? (
         <View style={styles.loaderContainer}>

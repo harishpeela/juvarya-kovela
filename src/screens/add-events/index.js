@@ -22,6 +22,7 @@ import {launchImageLibrary} from 'react-native-image-picker';
 import {allTexts, colors} from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {CreateEvent} from '../../utils/api';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
 const AddEvents = ({navigation, route}) => {
   const {id} = route?.params || {};
@@ -144,29 +145,15 @@ const AddEvents = ({navigation, route}) => {
   useEffect(() => {}, [id]);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{backgroundColor: '#FFAB0F', height: '30%'}}>
-        <View
-          style={{flexDirection: 'row', marginTop: '10%', marginLeft: '6%'}}>
-          <TouchableOpacity
-            style={styles.iconContainer}
-            onPress={() => navigation.goBack()}>
-            <Image
-              source={require('../../../assets/images/backarrow.png')}
-              style={{height: 10, width: 6}}
-            />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginHorizontal: '25%',
-              color: 'white',
-              alignSelf: 'center',
-            }}>
-            Add Event
-          </Text>
-        </View>
-        <View style={styles.imgCard}>
+      <View style={{backgroundColor: 'white', height: '25%'}}>
+        <View style={{height:200}}>
+        <TopBarCard2
+        back={true}
+        navigation={navigation}
+       
+        
+        />
+         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
             <Image
               source={require('../../../assets/images/cameranew.png')}
@@ -185,8 +172,11 @@ const AddEvents = ({navigation, route}) => {
           </View>
           {image && <AddEventImage data={image} />}
         </View>
+        </View>
+        
+       
       </View>
-      <ScrollView style={{marginTop: '3%'}}>
+      <ScrollView style={{marginTop: '3%',backgroundColor:'white'}}>
         <EventInput
           lable={'Event Name'}
           placeholder={'Event Name'}

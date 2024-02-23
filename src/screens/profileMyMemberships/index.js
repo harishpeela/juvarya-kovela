@@ -43,14 +43,15 @@ const ProfileMyMemberships = ({ navigation, route }) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
       <View>
         <View style={{ minHeight: '15%', marginTop: '3%' }}>
           <TopBarCard2
-            txt={'My Memberships'}
+            txt={'Memberships'}
             back={true}
             navigation={navigation}
-            navMenu={navigation}>
+            navMenu={navigation}
+            marginLeft={'15%'}>
             <View style={styles.searchContainer}>
             </View>
           </TopBarCard2>

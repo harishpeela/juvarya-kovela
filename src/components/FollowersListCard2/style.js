@@ -21,8 +21,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     alignItems: 'center',
-    borderBottomColor: 'black',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    // borderBottomColor: 'black',
+    // borderBottomWidth: StyleSheet.hairlineWidth,
   },
   imageContainer: {
     display: 'flex',

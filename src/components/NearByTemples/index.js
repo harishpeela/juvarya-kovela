@@ -67,7 +67,7 @@ export const NearByTemple = ({
         borderRadius: 20,
         margin: 5,
         backgroundColor: 'white',
-        height: 160,
+        height: 165,
         width: 190,
         elevation: 4,
         shadowOpacity: 5,
@@ -87,7 +87,7 @@ export const NearByTemple = ({
             style={{ marginLeft:5}}
           />
         </TouchableOpacity> */}
-      <View style={{  alignItems: 'center', marginTop: 5, height: '70%',backgroundColor:'white'}}>
+      <View style={{  alignItems: 'center', marginTop: 10, height: '70%',backgroundColor:'white'}}>
         <Image
           source={{
             uri: post?.profileDTO?.logo

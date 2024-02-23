@@ -205,7 +205,7 @@ export const UserFeedCompList = ({
           <Text
             style={{
               fontSize: 14,
-              fontWeight: 'bold',
+              fontWeight: '500',
               marginBottom: 10,
               textTransform: 'capitalize',
               color: isDarkMode ? 'black' : 'black',
@@ -345,7 +345,7 @@ export const UserFeedCompList = ({
         </Text>
       </View>
       <Text style={styles.username}>
-        <Text style={{color: isDarkMode ? 'gray' : 'gray'}}>
+        <Text style={{color: isDarkMode ? 'black' : 'black'}}>
           {post?.description?.length < 50
             ? `${post?.description}`
             : `${post?.description?.substring(0, 50)}...`}

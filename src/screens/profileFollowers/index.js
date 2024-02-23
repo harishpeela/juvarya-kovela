@@ -14,7 +14,7 @@ import { colors } from '../../common';
 import { styles } from './styles';
 import { Ellipsis } from '../../components';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { TopBarCard2, TopBarcard } from '../../components/topBar1/topBarCard';
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -57,24 +57,31 @@ const FollowersMembership = ({ route, navigation }) => {
 
   return (
     <View>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarCard2 txt={'Followers'} isBell={true} back={true} navBack={() => navigation.goBack()} navigation={navigation} >
-          <View style={{ ...styles.searchbarContainer, marginTop: '-5%' }}>
-            <View>
+      <View style={{ minHeight: 120, marginTop: '3%' ,backgroundColor:'white'}}>
+      <TopBarCard2  back={true}  navigation={navigation} navMenu={navigation} >
+          <View style={styles.searchbarContainer}>
               <SearchBar
-                placeHolder={'Search followers'}
+                placeHolder={'Search Followers'}
                 showCrossPress={true}
                 onCrossPress={() => {
                   setSearchedText('');
-                  TempleFolowers();
+                  // getTemples(userDetails?.id, pageNo, 20);
+                  searchEvent(e);
                 }}
                 onTextChange={e => {
                   setSearchedText(e);
-                  handleSearch(e);
+                  performFilter(e);
                 }}
                 value={searchedText}
+                loading={false}
+              showCrossPress={true}
+              onCrossPress={() => {
+                setSearchedText('');
+                EventsList();
+              }}
+             
+             
               />
-            </View>
           </View>
         </TopBarCard2>
       </View>

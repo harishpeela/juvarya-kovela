@@ -71,36 +71,8 @@ const MyTemples = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarCard2 txt={'Communities'} marginLeft={'15%'} back={true} navigation={navigation}>
-        <View style={styles.searchContainers}>
-            <SearchBar
-              value={searchedText}
-              onTextChange={e => {
-                setSearchedText(e);
-                // SearchPopTemp(e);
-              }}
-              loading={false}
-              showCrossPress={true}
-              onCrossPress={async () => {
-                setSearchedText('');
-                await PopularTemplesss(pageNo, 20);
-              }}
-              bgColor={colors.gray4}
-              placeHolder={'Search Your Community Temples'}
-            />
-              <TouchableOpacity
-                onPress={() => 
-                    navigation.navigate(allTexts.screenNames.communityTemple)}
-                style={styles.plusContainer}>
-                <FeatherIcon
-                  style={styles.plusIcon}
-                  name="plus"
-                  size={30}
-                  color="white"
-                />
-              </TouchableOpacity>
-          </View>
+      <View style={{ minHeight: 120, marginTop: '3%' }}>
+        <TopBarCard2 isPlus={true} txt={'Communities'} marginLeft={'15%'} back={true} navigation={navigation}>
         </TopBarCard2>
       </View>
 
