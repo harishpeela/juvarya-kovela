@@ -62,16 +62,14 @@ const EventsScreen = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
-          minHeight: 160,
-          marginTop: '3%',
-          marginBottom: '3%',
-        }}
+          minHeight: 80,
+          flexDirection:'row'
+         }}
       >
         <TopBarcard
-          txt={'Events'}
           menu={true}
           isBell={true}
           navigation={navigation}
@@ -109,7 +107,7 @@ const EventsScreen = ({ navigation, route }) => {
                     data={eventsData}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={styles.flatListStyle}
-                    style={{marginBottom: '49%'}}
+                    style={{marginBottom: '25%'}}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item }) => (
                       <EventCard2

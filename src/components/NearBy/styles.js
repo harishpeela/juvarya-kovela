@@ -53,5 +53,14 @@ export const styles = StyleSheet.create({
     fontSize: 24,
     textTransform: 'capitalize',
     fontWeight: 'bold',
+  },
+  searchContainers: {
+   
+    bottom:'45%',
+    width:1,
+    // backgroundColor:'black',
+    marginLeft:'10%'
+   
+    
   }
 });

@@ -3,6 +3,7 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
+    
   },
   headerContainer: {
     padding: 10,
@@ -34,6 +35,7 @@ export const styles = StyleSheet.create({
   },
   fieldContainer: {
     // marginTop: 30,
+   
     
   },
   buttonContainer: {

@@ -100,8 +100,8 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
-    <View>
-      <View style={{minHeight: 160, marginTop: '3%'}}>
+    <View style={{}}>
+      {/* <View style={{minHeight: 160, marginTop: '3%'}}>
         <TopBarcard
           txt={'Search'}
           menu={true}
@@ -126,19 +126,49 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
             />
           </View>
         </TopBarcard>
+      </View> */}
+           <View
+        style={{
+          flexDirection:'row',
+         }}
+      >
+        <TopBarcard
+          menu={true}
+          isBell={true}
+          navigation={navigation}
+          navMenu={navigation}
+        >
+          <View style={styles.searchContainers}>
+            <SearchBar
+              onTextChange={(e) => {
+                setSearchedText(e);
+                searchEvent(e);
+              }}
+              value={searchedText}
+              loading={false}
+              showCrossPress={true}
+              onCrossPress={() => {
+                setSearchedText('');
+                EventsList();
+              }}
+              bgColor={colors.white}
+              placeHolder={'Search Events'}
+            />
+          </View>
+        </TopBarcard>
       </View>
       <>
         {loader ? (
           <View
             style={{
-              height: '100%',
+              height: '110%',
               marginTop: '70%',
             }}>
             <Loader color={colors.orangeColor} />
           </View>
         ) : (
           <>
-            <ScrollView style={{paddingLeft: 12}}>
+            <ScrollView >
               {searchedText === '' && (
                 <>
                   <View style={styles.upComingTextTab}>

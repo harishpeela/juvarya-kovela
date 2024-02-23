@@ -24,6 +24,7 @@ const TempleClass = ({route, navigation}) => {
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
+          marginLeft={'15%'}
           navBack={() => navigation.goBack()}
           navigation={navigation}
         />
@@ -61,7 +62,7 @@ const TempleClass = ({route, navigation}) => {
               marginTop: '60%',
             }}>
             <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
-              No items to displayy
+              No items to display
             </Text>
           </View>
         )}

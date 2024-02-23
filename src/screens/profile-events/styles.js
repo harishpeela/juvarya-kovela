@@ -19,11 +19,12 @@ export const styles = StyleSheet.create({
   searchContainers: {
     margin: 5,
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: -20,
-    width: '80%',
-    marginLeft: 15,
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    marginTop: -60,
+    
+    marginLeft:'12%',
+    // backgroundColor:'red'
   },
 
   updateProfileTopCard: {
@@ -75,7 +76,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   plusIcon: {
-    color: colors.orangeColor,
+    color: colors.white,
+   
   },
   eventAndPlus: {
     flexDirection: 'row',
@@ -85,15 +87,16 @@ export const styles = StyleSheet.create({
   },
   notificationContainer: {},
   plusContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'orange',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
-    marginLeft: 10,
     textAlign: 'center',
     height: 30,
     width: 30,
-    marginRight: 10,
+    marginLeft: 60,
+    marginTop:-10
+
   },
   searchAndFilter: {
     display: 'flex',

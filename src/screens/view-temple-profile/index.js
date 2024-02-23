@@ -61,7 +61,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import NearByTempleComp from '../../components/NearByTempleComp';
 import Entypo from 'react-native-vector-icons/Entypo';
-
+ 
 const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
@@ -103,7 +103,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setisFollow(!isFollow);
     }
   };
-
+ 
   const CommunityTemple = async templeId => {
     try {
       let result = await TempleCommunity(templeId);
@@ -115,7 +115,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       console.log('error in popular temples', error);
     }
   };
-
+ 
   const TempleAddressDetails = async templeId => {
     try {
       let result = await TempleAddress(templeId);
@@ -129,7 +129,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       console.log('error in popular temples', error);
     }
   };
-
+ 
   useEffect(() => {
     let result = Data(data);
     if (result) {
@@ -139,7 +139,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
         getFollowValue(result?.jtProfile);
         Posts(result?.jtProfile);
         CommunityTemple(result?.jtProfile);
-
+ 
         TempleRoleSearchWithId(result?.jtProfile);
         followingCount(result?.jtProfile);
         dontationValue(result.jtProfile);
@@ -228,7 +228,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setisFollow(result?.data);
     }
   };
-
+ 
   const Posts = async id => {
     setloader(true);
     try {
@@ -277,7 +277,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       console.log('error in temple role api', error);
     }
   };
-
+ 
   const templeDetails = async id => {
     let responce = await getTempleProfileDetails(id);
     if (responce?.data) {
@@ -286,7 +286,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       alert('something went wrong please check');
     }
   };
-
+ 
   useEffect(() => {
     Type();
   }, []);
@@ -339,9 +339,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       selectedId: !isFollow ? trfData?.jtProfile : '',
                     });
                   }}>
-                  <Ionicons name="caret-back" size={25} color={'#FFA001'} />
+                  <Ionicons name='arrow-back-circle' size={39} color="orange" style={{marginLeft:2,marginTop:-1}}/>
                 </TouchableOpacity>
-
+ 
                 {/* )} */}
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>
@@ -368,7 +368,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               </View>
             </View>
             <View style={{ alignSelf: 'center', marginTop: -15 }}>
-              <ProfileImage profileImg={tempProfileData} />
+              <ProfileImage profileImg={trfData} />
             </View>
             <View
               style={{
@@ -518,13 +518,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       )
                     }
                   />
-                  <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.templeProfileToDoList)}>
+                  {/* <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.templeProfileToDoList)}>
                   <Entypo
                   name="add-to-list"
                   size={25}
                   style={{marginTop:10}}
                 />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                  
                 </View>
               </View>
@@ -641,7 +641,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
           style={styles.model}>
           <View style={styles.modalView}>
             <View style={styles.line} />
-
+ 
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate(allTexts.screenNames.createfeed, {
@@ -656,7 +656,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
             </TouchableOpacity>
             {/* <View style={styles.modalContent}>
               <Icon color={colors.black} name="people-outline" size={22} />
-
+ 
               <Text style={styles.modalContentText}>User groups</Text>
             </View> */}
             <TouchableOpacity
@@ -672,7 +672,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   name="account-box-outline"
                   size={22}
                 />
-
+ 
                 <Text style={styles.modalContentText}>Manage Memberships</Text>
               </View>
             </TouchableOpacity>
@@ -683,3 +683,4 @@ const ViewTempleProfile = ({ route, navigation }) => {
   );
 };
 export default ViewTempleProfile;
+ 

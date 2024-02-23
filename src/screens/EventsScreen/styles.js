@@ -11,19 +11,25 @@ export const styles = StyleSheet.create({
   },
   bodyContainer: {
     marginHorizontal: '4%',
+    // margin:1
     display: 'flex',
     flexDirection: 'column',
     // padding: 10,
     // marginBottom: '3%',
   },
   searchContainers: {
-    margin: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: -20,
-    width: '80%',
-    marginLeft: 15,
+    // flexDirection: 'row',
+    // alignItems: 'center',
+    // justifyContent: 'space-between',
+    // marginBottom:20,
+    bottom:'45%',
+    // // height:50,
+    // marginLeft:'10%',
+    width:1,
+    // backgroundColor:'black',
+    marginLeft:'10%'
+   
+    
   },
 
   updateProfileTopCard: {

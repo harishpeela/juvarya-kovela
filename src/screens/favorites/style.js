@@ -12,13 +12,12 @@ export const styles = StyleSheet.create({
   //   fontFamily: fontFamily.popinBold,
   // },
   searchbarContainer: {
-    margin: 5,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: -20,
-    width:'80%',
-    marginLeft:15,
+    
+    bottom:'45%',
+    width:1,
+    // backgroundColor:'black',
+    marginLeft:'10%'
+    
   },
   
   loaderContainer: {

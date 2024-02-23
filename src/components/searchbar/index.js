@@ -22,7 +22,7 @@ export const SearchBar = ({
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View>
+    <View style={{marginTop:-13}}>
       <View
         // eslint-disable-next-line no-sparse-arrays
         style={[
@@ -30,10 +30,10 @@ export const SearchBar = ({
           {backgroundColor: bgColor ? bgColor : colors.white},
           {borderWidth: brWidth ? brWidth : 0},
           {borderColor: brColor ? brColor : colors.white},
-          {height: srHeight ? srHeight : 30},
+          {height: srHeight ? srHeight :20},
         ]}>
         <View style={styles.iconContainer}>
-          <Icon name="search1" size={16} color={colors.gray} />
+          <Icon name="search1" size={16} color={colors.gray} style={{left:30,top:7}}/>
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}

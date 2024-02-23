@@ -14,6 +14,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {colors, allTexts } from '../../common';
 import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
 const modalStyles = {
   centeredView: {
@@ -78,16 +79,14 @@ const {id, data, role, roleItemType} = route?.params || {};
     <View style={{ flex: 1 }}>
       <View
         style={{
-          minHeight: 160,
+          minHeight: 120,
           marginTop: '3%',
           marginBottom: '3%',
         }}
       >
-        <TopBarcard
-          txt={'Temple Events'}
-        //   menu={true}
+        <TopBarCard2
           back={true}
-          isBell={true}
+          
           navBack={() => navigation.goBack()}
           navigation={navigation}
           navMenu={navigation}
@@ -105,7 +104,7 @@ const {id, data, role, roleItemType} = route?.params || {};
                 setSearchedText('');
                 await EventsList();
               }}
-              bgColor={colors.white}
+              // bgColor={colors.blue}
               placeHolder={'Search Events'}
             />
             {(role === 'ROLE_ITEM_ADMIN' || roleItemType === 'ROLE_ADMIN') && (
@@ -124,7 +123,7 @@ const {id, data, role, roleItemType} = route?.params || {};
               </TouchableOpacity>
             )}
           </View>
-        </TopBarcard>
+        </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>

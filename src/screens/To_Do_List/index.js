@@ -1,24 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native'
+import {StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { TopBarCard2 } from '../../components/topBar1/topBarCard'
 import { GetProfileToDoList } from '../../utils/api';
 import { useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
+import { styles } from './styles';
 
 const ToDoList = ({ navigation }) => {
-
-const [data,setData] = useState([])
-
+  const [data, setData] = useState([])
   const getToDoList = async () => {
-    try{
+    try {
       const result = await GetProfileToDoList(0, 100)
       setData(result?.data?.data)
     }
-    catch(error){
+    catch (error) {
       console.log(error)
     }
-    
-
   }
 
   useEffect(() => {
@@ -26,24 +23,27 @@ const [data,setData] = useState([])
   }, [])
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1,backgroundColor:'white' }}>
       <View style={{ height: '15%' }}>
         <TopBarCard2 back={true}
           txt={'ToDoList'}
           navigation={navigation}
+          marginLeft={'22%'}
         />
       </View>
+      <View style={{padding:10,marginBottom:40}}>
       <FlatList
-      data={data}
-      keyExtractor={({item,index}) =>index}
-      renderItem={({item})=>(
-      
-          <View style={{marginTop:50}}>
-            <Text>{item?.description}</Text>
+        data={data}
+        keyExtractor={({ item, index }) => index}
+        renderItem={({ item }) => (
+
+          <View style={styles.listItemContainer}>
+            <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:16}}>{`\u2022 ${item?.description}`}</Text>
           </View>
-        
-      )}
+
+        )}
       />
+      </View>
     </View>
   )
 }
