@@ -60,13 +60,13 @@ const OTPScreen = ({navigation, route}) => {
 
   let otpInput = useRef(null);
   const {
-    params: {otp, email, password, data},
+    params: {email, password, data},
   } = route || {};
   const setText = () => {
     otpInput?.current?.setValue('');
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
-
+console.log('data ==>', data);
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
@@ -115,7 +115,7 @@ const OTPScreen = ({navigation, route}) => {
   useEffect(() => {
     startTime(getDeadTime());
     setText();
-    alert('OTP Generated Successfully, check your spam folder if not received Email')
+    // alert('OTP Generated Successfully, check your spam folder if not received Email')
     // setTimeout(() => {
     //   Snackbar.show({
     //     text: 'OTP Generated Successfully, check your spam folder if not received Email',
@@ -141,15 +141,15 @@ const OTPScreen = ({navigation, route}) => {
     };
     try {
       let result = await NewRegistesrUser(registerPayload);
-      // console.log('gnjg', result, registerPayload);
+      console.log('gnjg', result, '---===>', registerPayload);
       if (result.status === 200) {
         signinHandler();
       } else {
-        console.log(result?.data?.message, 'error');
+        console.log(result?.data, 'error');
         Alert.alert('Kovela', result?.data?.message || 'Invalid OTP', [
           {
             text: 'Ok',
-            onPress: navigation.goBack(),
+            // onPress: navigation.goBack(),
           },
         ]);
       }
@@ -171,8 +171,8 @@ const OTPScreen = ({navigation, route}) => {
       </View>
       <View style={styles.topContainer}>
         <View style={styles.textContainer}>
-          <Text style={styles.heading}>{allTexts.headings.verfiyEmail}</Text>
-          <Text style={styles.detail}>Enter OTP sent to {data?.email}</Text>
+          <Text style={styles.heading}>{allTexts.headings.verfiyPhone}</Text>
+          <Text style={styles.detail}>Enter OTP sent to {data?.phone}</Text>
         </View>
       </View>
       <OTPTextInput

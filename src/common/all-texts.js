@@ -21,6 +21,7 @@ export const allTexts = {
   headings: {
     // place all your Heading texts here
     verfiyEmail: 'Verify your email Address',
+    verfiyPhone: 'Verify your Mobile Number',
     splashTitle: 'Start Explore your Best Temple',
     kovela: 'kovela',
     Addpoojari: 'Add Poojari',

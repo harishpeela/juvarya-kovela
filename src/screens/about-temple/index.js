@@ -5,6 +5,7 @@ import { TopBarCard2 } from "../../components/topBar1/topBarCard";
 import { EventInput4 } from "../../components";
 import { getAboutTemple, getEditAboutTemple, saveAboutTemple } from "../../utils/api";
 import { colors } from "../../common";
+import { ScrollView } from "react-native-gesture-handler";
 const AboutTemple = ({ navigation, route }) => {
     const { jtProfile, name } = route?.params || {};
     const [data, setData] = useState();
@@ -22,33 +23,33 @@ const AboutTemple = ({ navigation, route }) => {
             setData('');
         }
     }
-    const EditHistory = async () => {
-        if(data?.id){
-            let payload = {
-                id:data?.id,
-                profileId:jtProfile,
-                history:description
-            }
-            console.log('paylod', payload);
-            let result = await getEditAboutTemple(payload);
-            console.log('res of efit his', result?.data);
-            if(result?.status === 200){
-                alert('history edited')
-            }
-        } else if(!data?.id){
-            let payload = {
-                profileId:jtProfile,
-                history:description
-            }
-            console.log('paylod', payload);
-            let result = await saveAboutTemple(payload);
-            console.log('res of save his', result?.data);
-            if(result?.status === 200){
-                alert('history saved')
-            }
-        }
+    // const EditHistory = async () => {
+    //     if(data?.id){
+    //         let payload = {
+    //             id:data?.id,
+    //             profileId:jtProfile,
+    //             history:description
+    //         }
+    //         console.log('paylod', payload);
+    //         let result = await getEditAboutTemple(payload);
+    //         console.log('res of efit his', result?.data);
+    //         if(result?.status === 200){
+    //             alert('history edited')
+    //         }
+    //     } else if(!data?.id){
+    //         let payload = {
+    //             profileId:jtProfile,
+    //             history:description
+    //         }
+    //         console.log('paylod', payload);
+    //         let result = await saveAboutTemple(payload);
+    //         console.log('res of save his', result?.data);
+    //         if(result?.status === 200){
+    //             alert('history saved')
+    //         }
+    //     }
        
-    }
+    // }
     useEffect(() => {
         AboutTemple();
     }, []);
@@ -65,7 +66,13 @@ const AboutTemple = ({ navigation, route }) => {
                     value={name}
                     placeholderTextColor={'black'}
                 />
-                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                <Text style={{fontWeight: 'bold', color: colors.black, marginLeft: '8%', margin: 10, fontSize: 16 }}>Description</Text>
+                <ScrollView showsVerticalScrollIndicator={false} style={{borderWidth: 0.5, marginHorizontal: '8%', height: '40%', backgroundColor: colors.white, borderRadius: 10, paddingVertical: 10}}>
+                    <Text style={{color: 'black', margin: '4%'}}>
+                        {data?.history ? data?.history : 'History To Be Added'}
+                    </Text>
+                </ScrollView>
+                {/* <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                     {isVisible ? (
                         <EventInput4
                             lable={'Description'}
@@ -74,7 +81,7 @@ const AboutTemple = ({ navigation, route }) => {
                             value1={description}
                             multiline={true}
                             edit={true}
-                            onChangeText={e => setDescription(e)}
+                            // onChangeText={e => setDescription(e)}
                         />
                     ) : (
                         <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
@@ -89,10 +96,10 @@ const AboutTemple = ({ navigation, route }) => {
                             />
                         </TouchableOpacity>
                     )}
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.updatedBut} onPress={() => EditHistory()}>
+                </TouchableOpacity> */}
+                {/* <TouchableOpacity style={styles.updatedBut} onPress={() => EditHistory()}>
                     <Text style={styles.butText}> Update</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
             </View>
         </View>
