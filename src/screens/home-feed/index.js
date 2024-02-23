@@ -114,8 +114,7 @@ const UserFeedScreen = ({ navigation }) => {
   return (
     <View  style={{ flex: 1 }}>
       <View style={{ height: '15%' }}>
-        <TopBarcard menu={true} isBell={true} navigation={navigation} />
-        {/* txt={'Feeds'} */}
+        <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
       </View>
       <View style={{ marginBottom: '29%' }}>
         {homeFeedList?.length > 0 ? (
