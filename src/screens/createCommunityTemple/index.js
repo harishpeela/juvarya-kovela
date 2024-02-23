@@ -89,7 +89,7 @@ const CommunityTemple = ({ navigation }) => {
         let formdata = new FormData();
         formdata.append('profilePicture', img);
         let responce = await uploadTempleProfilePic(formdata, data?.id);
-        console.log('res', responce?.data);
+        console.log('res ==> commity', responce?.data);
         if (responce?.status === 200) {
           Alert.alert('Success', `Community Temple Was Created`, [
             {

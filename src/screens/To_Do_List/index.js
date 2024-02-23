@@ -26,7 +26,7 @@ const ToDoList = ({ navigation }) => {
     <View style={{ flex: 1,backgroundColor:'white' }}>
       <View style={{ height: '15%' }}>
         <TopBarCard2 back={true}
-          txt={'ToDoList'}
+          txt={'ToDo List'}
           navigation={navigation}
           marginLeft={'22%'}
         />

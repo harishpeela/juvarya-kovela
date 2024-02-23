@@ -3,23 +3,53 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { styles } from "./styles";
 import { TopBarCard2 } from "../../components/topBar1/topBarCard";
 import { EventInput4 } from "../../components";
-import { getAboutTemple } from "../../utils/api";
+import { getAboutTemple, getEditAboutTemple, saveAboutTemple } from "../../utils/api";
+import { colors } from "../../common";
+import { ScrollView } from "react-native-gesture-handler";
 const AboutTemple = ({ navigation, route }) => {
     const { jtProfile, name } = route?.params || {};
     const [data, setData] = useState();
     const [description, setDescription] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const [loader, setLoader] = useState(false);
+
     const AboutTemple = async () => {
         let result = await getAboutTemple(jtProfile);
-        // console.log('res of about temple', result?.data);
+        console.log('res of about temple', result?.data);
         if (result?.status === 200) {
             setData(result?.data);
+            setDescription(result?.data?.history);
         } else {
             setData('');
-            setDescription(result?.history);
         }
     }
+    // const EditHistory = async () => {
+    //     if(data?.id){
+    //         let payload = {
+    //             id:data?.id,
+    //             profileId:jtProfile,
+    //             history:description
+    //         }
+    //         console.log('paylod', payload);
+    //         let result = await getEditAboutTemple(payload);
+    //         console.log('res of efit his', result?.data);
+    //         if(result?.status === 200){
+    //             alert('history edited')
+    //         }
+    //     } else if(!data?.id){
+    //         let payload = {
+    //             profileId:jtProfile,
+    //             history:description
+    //         }
+    //         console.log('paylod', payload);
+    //         let result = await saveAboutTemple(payload);
+    //         console.log('res of save his', result?.data);
+    //         if(result?.status === 200){
+    //             alert('history saved')
+    //         }
+    //     }
+       
+    // }
     useEffect(() => {
         AboutTemple();
     }, []);
@@ -36,31 +66,41 @@ const AboutTemple = ({ navigation, route }) => {
                     value={name}
                     placeholderTextColor={'black'}
                 />
-                <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
+                <Text style={{fontWeight: 'bold', color: colors.black, marginLeft: '8%', margin: 10, fontSize: 16 }}>Description</Text>
+                <ScrollView showsVerticalScrollIndicator={false} style={{borderWidth: 0.5, marginHorizontal: '8%', height: '40%', backgroundColor: colors.white, borderRadius: 10, paddingVertical: 10}}>
+                    <Text style={{color: 'black', margin: '4%'}}>
+                        {data?.history ? data?.history : 'History To Be Added'}
+                    </Text>
+                </ScrollView>
+                {/* <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                     {isVisible ? (
                         <EventInput4
                             lable={'Description'}
-                            placeholder={data?.history}
+                            placeholder={data?.history ? data?.history : 'History to be added'}
                             height={200}
-                            value1={data?.history}
+                            value1={description}
                             multiline={true}
-                              edit={true}
-                            onChangeText={e => setDescription(e)}
+                            edit={true}
+                            // onChangeText={e => setDescription(e)}
                         />
                     ) : (
                         <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                             <EventInput4
-                            lable={'Description'}
-                            placeholder={data?.history}
-                            height={200}
-                            value1={data?.history}
-                            multiline={true}
-                            //   edit={true}
-                            onChangeText={e => setDescription(e)}
-                        />
-                            </TouchableOpacity>
+                                lable={'Description'}
+                                placeholder={data?.history ? data?.history : 'History to be added'}
+                                height={200}
+                                value1={description}
+                                multiline={true}
+                                edit={true}
+                                onChangeText={e => setDescription(e)}
+                            />
+                        </TouchableOpacity>
                     )}
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+                {/* <TouchableOpacity style={styles.updatedBut} onPress={() => EditHistory()}>
+                    <Text style={styles.butText}> Update</Text>
+                </TouchableOpacity> */}
+
             </View>
         </View>
     )

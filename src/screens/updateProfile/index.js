@@ -18,7 +18,6 @@ import { Update_Profile, getUserInfoNew } from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
- 
 const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
@@ -37,11 +36,10 @@ const UpdateProfile = ({ navigation }) => {
   const [pinErr, setPinErr] = useState(false);
   const [currentCustomer, setCurrentCustomer] = useState([]);
   const [dob, setDob] = useState(' ');
- 
-  const dateSlice = dob.slice(0, 10);
-  const dateFormatValue = dateSlice.split('-').reverse().join('-');
+
+  const dateSlice = dob?.slice(0, 10);
+  const dateFormatValue = dateSlice?.split('-').reverse().join('-');
   console.log(dateFormatValue);
- 
   const HandleCnfrm = datedata => {
     if (datedata) {
       setToDate(datedata);
@@ -56,7 +54,6 @@ const UpdateProfile = ({ navigation }) => {
  
   const updatePincode = pincode?.toString();
   console.log('UpdatePincode', updatePincode);
- 
   const ShowDatePicker = () => {
     setDatePickerVisible(true);
   };

@@ -52,6 +52,7 @@ import {
   DirectionsTabComp,
   ProfileTimingTabs,
   Danation_Add_Card,
+  TempleCrewTabComp,
 } from '../../components';
 import { ProfileImage } from '../../components';
 import { colors } from '../../common';
@@ -421,7 +422,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               </View>
             )}
             <View style={{marginTop: 10}}>
-              {tempProfileData?.seasonal ? (
+              {/* {tempProfileData?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
                   onPress={() =>
@@ -431,9 +432,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   }>
                   <Text style={styles.seasonalText}>Temple Members</Text>
                 </TouchableOpacity>
-              ) : (
+              ) : ( */}
                 <ProfileTimingTabs data={tempProfileData} />
-              )}
+              {/* )} */}
             </View>
             <View style={{ marginLeft: 15 }}>
               <ProfileSeconTab nameData={tempProfileData} title={tempProfileData?.description} />
@@ -492,6 +493,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       name: trfData?.name,
                     })} />
                   )}
+                  {tempProfileData?.seasonal ? (
+                    <TempleCrewTabComp onPressContact={() =>
+                      navigation.navigate('TempleCrew', {
+                        id: trfData?.jtProfile,
+                      })
+                    } />
+                  ) : ''}
                   {/* {tempProfileData?.membershipsEnabled && (
                     <DirectionsTabComp
                       role={
@@ -509,7 +517,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       }}
                     />
                   )} */}
-                  <NearByTempleComp
+                  {!tempProfileData?.seasonal && (
+                    <NearByTempleComp
                     onPress={() =>
                       navigation.navigate(
                         allTexts.screenNames.profilenearbytemples, {
@@ -518,6 +527,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       )
                     }
                   />
+                  )}
+                  
+
                   {/* <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.templeProfileToDoList)}>
                   <Entypo
                   name="add-to-list"

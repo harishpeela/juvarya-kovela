@@ -114,8 +114,11 @@ const endpoints = {
   PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
   GET_TEMPLE_CLASS: 'jtProfileToProfile/list',
   ABOUT_TEMPLE: 'jtProfileHistory/find/byProfile',
+  EDIT_ABOUT_TEMPLE: 'jtProfileHistory/update',
+  SAVE_ABOUT_TEMPLE: 'jtProfileHistory/save',
   PROFILE_TODO_LIST:'jttask/save',
-  GET_PROFILE_TODO_LIST:'jttask/customer/tasks'
+  GET_PROFILE_TODO_LIST:'jttask/customer/tasks',
+  ARTIST_DONAR: 'jtprofile/profileAndDonor',
 
 };
 export const getInitialToken = async () => {
@@ -1180,6 +1183,30 @@ export const getTempleClassDetails = async (profileId, templeClass) => {
 export const getAboutTemple = async (profId) => {
   try {
     let result = await axiosNotifications.get(`${endpoints.ABOUT_TEMPLE}/${profId}`);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getEditAboutTemple = async data => {
+  try {
+    let result = await axiosNotifications.put(`${endpoints.EDIT_ABOUT_TEMPLE}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const saveAboutTemple = async data => {
+  try {
+    let result = await axiosNotifications.post(`${endpoints.SAVE_ABOUT_TEMPLE}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getArtistDonar = async (profId, pgNo, pgSz) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.ARTIST_DONAR}?profileId=${profId}&pageNo=${pgNo}&pageSize=${pgSz}`,);
     return result;
   } catch (error) {
     return error;
