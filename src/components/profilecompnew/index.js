@@ -84,7 +84,7 @@ export const ContactTabcomp = ({onPressContact}) => {
 export const DirectionsTabComp = ({role, onPress}) => {
   return (
     <TouchableOpacity
-      style={[styles.voidButton1, styles.button]}
+      style={[styles.voidButton1, styles.button]} 
       onPress={onPress}>
       <BackgroundSmallFlowerUser />
       <Text style={styles.voidButton1Text}>
@@ -105,3 +105,11 @@ export const CreateFeedTabComp = ({roleId, onPlusPress}) => {
     </View>
   );
 };
+export const TempleCrewTabComp = ({onPressContact}) => {
+  return (
+    <TouchableOpacity style={[styles.voidButton2, styles.button]} onPress={onPressContact}>
+      <Text style={styles.voidButtonText}>Temple Members</Text>
+    </TouchableOpacity>
+  );
+};
+

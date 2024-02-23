@@ -15,6 +15,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  voidButton2: {
+    flexDirection: 'row',
+    height: 40,
+    width: 140,
+    borderRadius: 20,
+    marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   voidButtonText: {
     color: '#CC4501',
     fontSize: 14,

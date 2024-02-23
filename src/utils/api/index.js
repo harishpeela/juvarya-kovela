@@ -117,7 +117,8 @@ const endpoints = {
   EDIT_ABOUT_TEMPLE: 'jtProfileHistory/update',
   SAVE_ABOUT_TEMPLE: 'jtProfileHistory/save',
   PROFILE_TODO_LIST:'jttask/save',
-  GET_PROFILE_TODO_LIST:'jttask/customer/tasks'
+  GET_PROFILE_TODO_LIST:'jttask/customer/tasks',
+  ARTIST_DONAR: 'jtprofile/profileAndDonor',
 
 };
 export const getInitialToken = async () => {
@@ -1198,6 +1199,14 @@ export const getEditAboutTemple = async data => {
 export const saveAboutTemple = async data => {
   try {
     let result = await axiosNotifications.post(`${endpoints.SAVE_ABOUT_TEMPLE}`, data);
+    return result;
+  } catch (error) {
+    return error;
+  }
+};
+export const getArtistDonar = async (profId, pgNo, pgSz) => {
+  try {
+    let result = await axiosNotifications.get(`${endpoints.ARTIST_DONAR}?profileId=${profId}&pageNo=${pgNo}&pageSize=${pgSz}`,);
     return result;
   } catch (error) {
     return error;

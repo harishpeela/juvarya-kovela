@@ -62,7 +62,7 @@ const Signup = ({navigation}) => {
       password: data?.password,
     };
     let LogInPayload2 = {
-      primaryContact: data?.phone,
+      email: data?.email,
       password: data?.password,
     };
 
@@ -72,46 +72,59 @@ const Signup = ({navigation}) => {
       emailAddress: data?.email,
     };
     // console.log('payload otp', otpPayload);
-    try {
-      let response = await NewVerifyOTP(otpPayload);
-      // console.log('responce of otp', response?.data);
-      const {
-        data: {emailAddress, otp},
-      } = response || {};
-      console.log('Logdata', LogInPayload);
-      let result = await loginUser1(LogInPayload);
-      if (result?.status === 200) {
-        alert('user already registered');
-        action.setSubmitting(false);
-      } else {
-        // console.log('amsjhxvJAHSBX', response?.data, emailAddress);
-        if (response && emailAddress) {
-          let otpPayload = {
-            otp: '123456',
-            data,
-            primaryContact: data?.phone,
-            password: data?.confirmPassword,
-          };
-          navigation.navigate(otpScreen, otpPayload);
-        } else if (response?.status == 403) {
-          alert(response?.data?.message);
-        } else if (response) {
-          console.log('error in signup', response?.data, response?.status);
-          Alert.alert(
-            'USER ALREADY REGISTERED',
-            'Please check mobile number or email',
-            [
-              {
-                text: 'Ok',
-              },
-            ],
-          );
+    let resOfMob = await loginUser1(LogInPayload);
+    console.log('payloadmob=========>', resOfMob[0]?.Error);
+    let resOfEmail = await loginUser1(LogInPayload2);
+    console.log('payloademail=============>', resOfMob[0]?.Error);
+    if(resOfMob?.status === 200){
+      alert('mobile number already registered')
+      action.setSubmitting(false);
+    } else if(resOfEmail?.status === 200){
+      alert('email already registered')
+      action.setSubmitting(false);
+    } else {
+      // console.log('ajshbx,jhabs', resOfEmail?.status, resOfMob?.status)
+      try {
+        let response = await NewVerifyOTP(otpPayload);
+        console.log('responce of otp', response?.data);
+        const {
+          data: {emailAddress, otp},
+        } = response || {};
+        if(response?.status === 200){
+          if (response && emailAddress) {
+            let otpPayload = {
+              data,
+              primaryContact: data?.phone,
+              password: data?.confirmPassword,
+            };
+            navigation.navigate(otpScreen, otpPayload);
+          } else if (response?.status == 403) {
+            alert(response?.data?.message);
+          } else if (response) {
+            console.log('error in signup', response?.data, response?.status);
+            Alert.alert(
+              'USER ALREADY REGISTERED',
+              'Please check mobile number or email',
+              [
+                {
+                  text: 'Ok',
+                },
+              ],
+            );
+          }
+          action.setSubmitting(false);
         }
-        action.setSubmitting(false);
+      } catch (error) {
+        alert(error);
       }
-    } catch (error) {
-      alert(error);
-    }
+    } 
+    // else if(resOfEmail?.status === 400 || resOfMob?.status === 400) {
+    //   alert('please check your mobile number or email');
+    //   action.setSubmitting(false);
+    // } else {
+    //   alert('please check the details you entered')
+    // }
+    
   };
   return (
     <SafeAreaView style={styles.wrapper}>

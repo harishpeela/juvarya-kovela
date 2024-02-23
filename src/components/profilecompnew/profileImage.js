@@ -7,7 +7,7 @@ export const ProfileImage = ({profileImg}) => {
       return (
         <Image
           source={{
-            uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+            uri: 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
           }}
           style={styles.profileView}
         />
@@ -17,7 +17,7 @@ export const ProfileImage = ({profileImg}) => {
         <View style={styles.imgView}>
           <Image
             source={{
-              uri: profileImg?.logo,
+              uri: profileImg?.logo ? profileImg?.logo : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
             }}
             style={styles.profileView}
           />
