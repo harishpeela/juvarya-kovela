@@ -122,7 +122,7 @@ const UpdateProfile = ({ navigation }) => {
             txt={'Update Profile'}
             back={true}
             navigation={navigation}
-            marginLeft={'15%'}>
+            marginLeft={'18%'}>
             
             </TopBarCard2>
         </View>

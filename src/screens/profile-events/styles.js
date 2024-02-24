@@ -15,15 +15,17 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10,
     marginBottom: '3%',
+    
   },
   searchContainers: {
     margin: 5,
     flexDirection: 'row',
     // alignItems: 'center',
     // justifyContent: 'space-between',
-    marginTop: -60,
+    marginTop: '-13%',
     
-    marginLeft:'12%',
+    
+    marginLeft:'10%',
     // backgroundColor:'red'
   },
 
@@ -92,10 +94,11 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 100,
     textAlign: 'center',
-    height: 30,
-    width: 30,
-    marginLeft: 60,
-    marginTop:-10
+    height:32,
+    width:32,
+    marginLeft: '55%',
+    marginTop:'-11%',
+    marginLeft:'88%'
 
   },
   searchAndFilter: {
@@ -164,8 +167,9 @@ export const styles = StyleSheet.create({
     marginTop: '70%',
   },
   noText: {
-    fontSize: 20,
+    fontSize: 18,
     color: colors.orangeColor,
-    fontWeight: 'bold',
+    fontWeight: 'Normal',
+    fontFamily:'Poppins-Medium'
   },
 });

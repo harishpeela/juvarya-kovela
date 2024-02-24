@@ -65,7 +65,7 @@ const MySavedPosts = ({navigation}) => {
         <View style={{minHeight: '15%'}}>
           <TopBarCard2
             back={true}
-            marginLeft={'17%'}
+            marginLeft={'19%'}
             txt={'Saved Posts'}
             navigation={navigation}
             

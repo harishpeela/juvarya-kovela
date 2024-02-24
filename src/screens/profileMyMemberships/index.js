@@ -51,7 +51,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
             back={true}
             navigation={navigation}
             navMenu={navigation}
-            marginLeft={'15%'}>
+            marginLeft={'19%'}>
             <View style={styles.searchContainer}>
             </View>
           </TopBarCard2>
@@ -88,7 +88,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
         ) : (
           <View style={styles.noDataContainer}>
             <Text style={styles.noDataText}>
-              No donations Yet
+              No Donations Yet
             </Text>
           </View>
         )}

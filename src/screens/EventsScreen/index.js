@@ -126,7 +126,7 @@ const EventsScreen = ({ navigation, route }) => {
                size={50}
                style={{ marginBottom: '5%' }}
              />
-             <Text style={styles.noText}>No Events to Display</Text>
+             <Text style={styles.noText}>No Events To Display</Text>
            </View>
           )}
           {(!searchedEvents && searchedText) && (

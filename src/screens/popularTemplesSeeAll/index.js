@@ -66,7 +66,7 @@ const SeeAll = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarCard2 back={true} txt={'Popular Temples '} navigation={navigation} />
+        <TopBarCard2 marginLeft={'15%'} back={true} txt={'Popular Temples '} navigation={navigation} />
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
@@ -113,7 +113,7 @@ const SeeAll = ({navigation}) => {
         <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
           <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
             {' '}
-            No items to displayy
+            No Items To Display
           </Text>
         </View>
       )}

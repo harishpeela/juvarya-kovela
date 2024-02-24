@@ -22,25 +22,25 @@ export const SearchBar = ({
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={{marginTop:-13}}>
-      <View
+    <View style={{marginTop:-13,width:100}}>
+      {/* <View
         // eslint-disable-next-line no-sparse-arrays
         style={[
           styles.searchContainer,
-          {backgroundColor: bgColor ? bgColor : colors.white},
+          {backgroundColor: bgColor ? bgColor : colors.blue},
           {borderWidth: brWidth ? brWidth : 0},
           {borderColor: brColor ? brColor : colors.white},
-          {height: srHeight ? srHeight :20},
-        ]}>
+          {height: srHeight ? srHeight :20}, */}
+        {/* ]}> */}
         <View style={styles.iconContainer}>
-          <Icon name="search1" size={16} color={colors.gray} style={{left:30,top:7}}/>
+          {/* <Icon name="search1" size={16} color={colors.gray} style={{left:30,top:7}}/> */}
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
             placeholder={placeHolder || 'Search temples'}
             style={{
               ...styles.field,
-              color: isDarkMode ? colors.black : colors.black,
+              color: colors.gray
             }}
             value={value}
             onSubmitEditing={onSubmit}
@@ -54,8 +54,8 @@ export const SearchBar = ({
                   onPress={onCrossPress}
                   name="x-circle"
                   color={colors.orangeColor}
-                  size={25}
-                  style={{right: 10}}
+                  size={20}
+                  style={{marginLeft: '-18%',marginTop:'4%'}}
                 />
               )}
             </>
@@ -63,7 +63,7 @@ export const SearchBar = ({
             <></>
           )}
         </View>
-      </View>
+      {/* </View> */}
     </View>
   );
 };
