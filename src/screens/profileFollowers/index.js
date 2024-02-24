@@ -99,7 +99,7 @@ const FollowersMembership = ({ route, navigation }) => {
                     size={30}
                     style={{ marginBottom: '5%' }}
                   />
-                  <Text style={{fontSize:15,fontFamily:'Poppins-Medium',color:'orange'}}>No Followers yet</Text>
+                  <Text style={{fontSize:15,fontFamily:'Poppins-Medium',color:'orange'}}>No Followers Yet</Text>
                 </View>
               ) : (
                 <>

@@ -56,14 +56,14 @@ export const TopBarcard = ({
             marginHorizontal: 5,
           }}>
           {menu && (
-            <View style={{ marginLeft: 18, flex: 1 }}>
+            <View style={{ marginLeft: '1%', flex: 1 }}>
               <TouchableOpacity
                 onPress={() => navigation.navigate(allTexts.tabNames.profile)}
                 style={styles.userIcon}>
                 {img ? (
                   <Image source={{ uri: img?.url }} height={40} width={40} style={{ height: 30, width: 30, borderRadius: 80 / 2 }} />
                 ) : (
-                  <View style={{height: 45, width:45,marginTop:10,justifyContent:'center',alignItems:'center'}}>
+                  <View style={{height: 45, width:45,marginTop:5,justifyContent:'center',alignItems:'center'}}>
                     <EvilIcons
                       name="user"
                       size={50}
@@ -140,7 +140,7 @@ export const TopBarcard = ({
                 source={{uri:'https://www.iconsdb.com/icons/preview/orange/bell-xxl.png'}}
                 style={{ height: 30, width: 30, marginTop: '10%' }}
               /> */}
-          <View style={{marginTop:20}}>
+          <View style={{marginTop:16}}>
                <Feather
                     name="bell"
                     size={30}
@@ -204,7 +204,7 @@ export const TopBarCard2 = ({
                   data: bData,
                 };
               }}>
-             <Ionicons name='arrow-back-circle' size={39} color="orange" style={{marginLeft:2,marginTop:6}}/>
+             <Ionicons name='arrow-back-circle' size={42} color="orange" style={{marginLeft:2,marginTop:6}}/>
             </TouchableOpacity>
           )}
 
@@ -213,7 +213,8 @@ export const TopBarCard2 = ({
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                marginLeft: marginLeft ? marginLeft : '23%',
+                // marginLeft: marginLeft ? marginLeft : '25%',
+                marginLeft:'15%',
                 color: 'orange',
                 textAlign: 'center',
                 fontFamily:'Poppins-Medium',
@@ -294,10 +295,11 @@ const styles = StyleSheet.create({
   userIcon: {
     alignItems: 'center',
     borderRadius: 50,
-    // backgroundColor: 'white',
-    height: 40,
+    // backgroundColor: 'green',
+    height: 60,
     borderColor: 'white',
-    width: 40,
+    width: 60,
+   
     
   },
   menuIcon: {
@@ -322,8 +324,8 @@ plusIcon: {
     alignItems: 'center',
     borderRadius: 100,
     textAlign: 'center',
-    height: 30,
-    width: 30,
-    marginLeft: '20%',
+    height: 31,
+    width: 31,
+    marginLeft: '26%',
   },
 });

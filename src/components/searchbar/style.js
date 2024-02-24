@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     marginHorizontal: 10,   
     borderWidth:1,
     // marginTop:'23%',
+    
    
   
   },
@@ -16,24 +17,27 @@ export const styles = StyleSheet.create({
     color: colors.black,
     fontFamily: fontFamily.popinRegular,
     fontSize: 13,
-    height: 35,
+    height: 37,
     // borderWidth:0.5,
-    width:"120%",
+    width:"136%",
     borderRadius:10,
     textAlign:'center',
+    // marginTop:20,
     marginBottom:30,
     backgroundColor:'#FAFAFA',
-    padding:10
+    padding:10,
+    marginLeft:'17%'
   },
   iconContainer: {
     paddingLeft:8,
     flexDirection: 'row',
-    marginBottom:10,
+    marginTop:-17,
     borderRadius: 15,
     height:40,
     width:190,
-    marginLeft:6,
-    // backgroundColor:'black',
+    marginLeft:'3%',
+   
+    // backgroundColor:'red',
     
     borderRadius:24
   

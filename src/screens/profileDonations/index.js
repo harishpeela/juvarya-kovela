@@ -41,7 +41,7 @@ const UserProfileDonationsData = ({ navigation, route }) => {
             back={true}
             navigation={navigation}
             navMenu={navigation}
-            marginLeft={'18%'}
+            marginLeft={'22%'}
             >
             <View style={styles.searchContainer}>
             </View>

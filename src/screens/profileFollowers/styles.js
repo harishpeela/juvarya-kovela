@@ -77,9 +77,10 @@ export const styles = StyleSheet.create({
   searchbarContainer:{
     bottom:'46%',
     // width:100,
-    marginTop:'-3%',
+    marginTop:'-6%',
     // backgroundColor:'black',
     marginLeft:'12%',
+    marginTop:'-1%'
    
    
     
