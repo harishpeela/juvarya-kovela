@@ -63,7 +63,7 @@ export const styles = StyleSheet.create({
     borderColor: colors.gray,
     padding: 1,
     backgroundColor: 'white',
-    marginLeft: '5%',
+    marginLeft: '1%',
   },
   contentDisplay: {
     // borderWidth: 1,

@@ -123,36 +123,10 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         }}
       />
     }>
-      <View style={{ minHeight: 160, marginTop: '3%' }}>
-        <TopBarcard
-          // txt={'Search'}
-          menu={true}
-          isBell={true}
-          navigation={navigation}
-          navMenu={navigation}>
-          <View style={styles.searchContainer}>
-            <SearchBar
-              value={searchedText}
-              showCrossPress={true}
-              onTextChange={e => {
-                setSearchedText(e);
-                SearchPopTemp(e);
-              }}
-              loading={false}
-              onCrossPress={async () => {
-                setSearchedText('');
-                await PopularTemplesss(pageNo, 20);
-              }}
-              bgColor={colors.gray4}
-              placeHolder={'Search Temples'}
-            />
-          </View>
-        </TopBarcard>
-      </View> */}
-           <View
+      <View
         style={{
-          flexDirection:'row',
-         }}
+          flexDirection: 'row',
+        }}
       >
         <TopBarcard
           menu={true}
@@ -164,17 +138,17 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
             <SearchBar
               onTextChange={(e) => {
                 setSearchedText(e);
-                searchEvent(e);
+                SearchPopTemp(e);
               }}
               value={searchedText}
               loading={false}
               showCrossPress={true}
               onCrossPress={() => {
                 setSearchedText('');
-                EventsList();
+                PopularTemplesss();
               }}
               bgColor={colors.white}
-              placeHolder={'Search Events'}
+              placeHolder={'Search'}
             />
           </View>
         </TopBarcard>

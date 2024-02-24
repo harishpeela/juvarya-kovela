@@ -346,7 +346,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 {/* )} */}
               </TouchableOpacity>
               <View style={styles.menuAndAlert}>
-                <TouchableOpacity
+                {/* <TouchableOpacity
                   style={styles.bell}
                   onPress={() =>
                     navigation.navigate(allTexts.screenNames.notification)
@@ -356,7 +356,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     size={24}
                     color={isDarkMode ? 'black' : 'black'}
                   />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 {roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN' ? (
                   <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
                     <View style={styles.menu}>

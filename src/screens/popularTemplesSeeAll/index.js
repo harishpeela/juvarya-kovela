@@ -66,7 +66,7 @@ const SeeAll = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{minHeight: '15%'}}>
-        <TopBarCard2 back={true} txt={'All Temples'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Popular Temples '} navigation={navigation} />
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>
