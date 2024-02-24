@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     marginBottom:30,
     backgroundColor:'#FAFAFA',
     padding:10,
+    marginLeft:'17%'
   },
   iconContainer: {
     paddingLeft:8,
@@ -31,11 +32,6 @@ export const styles = StyleSheet.create({
     height:40,
     width:190,
     marginLeft:'3%',
-   
-    // backgroundColor:'red',
-    
     borderRadius:24
-  
-    
   },
 });

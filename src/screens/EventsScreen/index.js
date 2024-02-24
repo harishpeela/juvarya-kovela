@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -6,18 +6,18 @@ import {
   useColorScheme,
   Text,
 } from 'react-native';
-import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
-import { EventSearch } from '../../utils/api';
-import { EventList, EventScreenList } from '../../utils/api';
-import { colors } from '../../common';
-import { styles } from './styles';
+import {Loader, SearchBar, TopBarcard, EventCard2} from '../../components';
+import {EventSearch} from '../../utils/api';
+import {EventList, EventScreenList} from '../../utils/api';
+import {colors} from '../../common';
+import {styles} from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-const EventsScreen = ({ navigation, route }) => {
+const EventsScreen = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
-  const [searchedEvents, setSearchedEvents] = useState('')
+  const [searchedEvents, setSearchedEvents] = useState('');
   const [searchError, setSearchError] = useState(false); // New state variable
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -40,7 +40,7 @@ const EventsScreen = ({ navigation, route }) => {
     }
   };
 
-  const searchEvent = async (txt) => {
+  const searchEvent = async txt => {
     try {
       let result = await EventSearch(txt);
       // console.log('res of search', result?.data);
@@ -62,22 +62,20 @@ const EventsScreen = ({ navigation, route }) => {
   }, []);
 
   return (
-    <View style={{ flex: 1}}>
+    <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
           minHeight: 80,
-          flexDirection:'row'
-         }}
-      >
+          flexDirection: 'row',
+        }}>
         <TopBarcard
           menu={true}
           isBell={true}
           navigation={navigation}
-          navMenu={navigation}
-        >
+          navMenu={navigation}>
           <View style={styles.searchContainers}>
             <SearchBar
-              onTextChange={(e) => {
+              onTextChange={e => {
                 setSearchedText(e);
                 searchEvent(e);
               }}
@@ -97,51 +95,49 @@ const EventsScreen = ({ navigation, route }) => {
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-            <View style={{ marginTop: '70%' }}>
+            <View style={{marginTop: '70%'}}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : (
-                (searchedText === '' && eventsData) && (
-                  <FlatList
-                    numColumns={2}
-                    data={eventsData}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={styles.flatListStyle}
-                    style={{marginBottom: '25%'}}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => (
-                      <EventCard2
-                        navigation={navigation}
-                        data={item}
-                      />
-                    )}
-                  />
-                )
+            searchedText === '' &&
+            eventsData && (
+              <FlatList
+                numColumns={2}
+                data={eventsData}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.flatListStyle}
+                style={{marginBottom: '25%'}}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({item}) => (
+                  <EventCard2 navigation={navigation} data={item} />
+                )}
+              />
+            )
           )}
-          {(!eventsData && !searchedText) && (
-             <View style={styles.noData}>
-             <MaterialIcons
-               color={colors.orangeColor}
-               name="event"
-               size={50}
-               style={{ marginBottom: '5%' }}
-             />
-             <Text style={styles.noText}>No Events To Display</Text>
-           </View>
+          {!eventsData && !searchedText && (
+            <View style={styles.noData}>
+              <MaterialIcons
+                color={colors.orangeColor}
+                name="event"
+                size={50}
+                style={{marginBottom: '5%'}}
+              />
+              <Text style={styles.noText}>No Events To Display</Text>
+            </View>
           )}
-          {(!searchedEvents && searchedText) && (
-             <View style={styles.noData}>
-             <MaterialIcons
-               color={colors.orangeColor}
-               name="event"
-               size={50}
-               style={{ marginBottom: '5%' }}
-             />
-             <Text style={styles.noText}>No Such Events</Text>
-           </View>
+          {!searchedEvents && searchedText && (
+            <View style={styles.noData}>
+              <MaterialIcons
+                color={colors.orangeColor}
+                name="event"
+                size={50}
+                style={{marginBottom: '5%'}}
+              />
+              <Text style={styles.noText}>No Such Events</Text>
+            </View>
           )}
         </View>
-        {(searchedText && searchedEvents) ? (
+        {searchedText && searchedEvents ? (
           <FlatList
             numColumns={2}
             data={searchedEvents}
@@ -149,11 +145,8 @@ const EventsScreen = ({ navigation, route }) => {
             contentContainerStyle={styles.flatListStyle}
             style={{marginBottom: '49%'}}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <EventCard2
-                navigation={navigation}
-                data={item}
-              />
+            renderItem={({item}) => (
+              <EventCard2 navigation={navigation} data={item} />
             )}
           />
         ) : (
