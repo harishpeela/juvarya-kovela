@@ -28,8 +28,8 @@ import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
 import {SaveFeedComp} from './savefeedcomp';
-import { CrewCard } from './crew-card-comp';
-import {ProfileDonationsCard} from './profileDonationsCard'
+import {CrewCard} from './crew-card-comp';
+import {ProfileDonationsCard} from './profileDonationsCard';
 
 import {
   NearBy,
@@ -92,18 +92,17 @@ import EventCard from './EventCard';
 import EventCard2 from './EventCard2';
 import {Donations_list_Card} from './donation_list';
 import {MemberShipCard} from './membershipCard';
-import EventCard3 from './EventCard3'
-import Btn from './btn';
+import EventCard3 from './EventCard3';
 import TextInput2 from './TextInput2';
 import FollowersListCard3 from './FollowersListCard3';
-import { TopBarcard } from './topBar1/topBarCard';
-import { NewBackHeader } from './new-back-header';
-import { Create_Event } from './create_event_component';
+import {TopBarcard} from './topBar1/topBarCard';
+import {NewBackHeader} from './new-back-header';
+import {Create_Event} from './create_event_component';
 import AddEventImage from './event-images-comp';
 import {EventInput, EventInput1} from './eventCreateInput';
 import {NearByTempleComp} from './NearByTempleComp';
-import { EventInput4 } from './eventCreateInput';
-
+import {EventInput4} from './eventCreateInput';
+import {Artist_Donar_List_Card} from './artist-donar-listCard';
 export {
   Loader,
   SearchBar,
@@ -199,4 +198,5 @@ export {
   EventInput4,
   FollowersListCard4,
   TempleCrewTabComp,
+  Artist_Donar_List_Card,
 };

@@ -63,6 +63,7 @@ import {
   AboutTemple,
   TempleProfileToDoList,
   MemberList,
+  Artist_Donar_details_list,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -147,7 +148,8 @@ const App = () => {
       templeClass,
       abouttemple,
       templeProfileToDoList,
-      memberlist
+      memberlist,
+      artistdonardetailslist,
     },
   } = allTexts;
 
@@ -631,6 +633,13 @@ const App = () => {
         <Stack.Screen
           name={profilenearbytemples}
           component={Profile_Near_By_Temples}
+          options={{
+            headerShown: false,
+          }}
+        />
+          <Stack.Screen
+          name={artistdonardetailslist}
+          component={Artist_Donar_details_list}
           options={{
             headerShown: false,
           }}

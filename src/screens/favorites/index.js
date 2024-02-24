@@ -100,31 +100,27 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View  style={{minHeight: 100,flexDirection:'row'}}>
-        <TopBarcard isBell={true} menu={true}  navigation={navigation} navMenu={navigation} >
+      <View style={{minHeight: 100, flexDirection: 'row'}}>
+        <TopBarcard
+          isBell={true}
+          menu={true}
+          navigation={navigation}
+          navMenu={navigation}>
           <View style={styles.searchbarContainer}>
-              <SearchBar
-                placeHolder={'Search Favourites'}
-                showCrossPress={true}
-                onCrossPress={() => {
-                  setSeracherdText('');
-                  // getTemples(userDetails?.id, pageNo, 20);
-                  searchEvent(e);
-                }}
-                onTextChange={e => {
-                  setSeracherdText(e);
-                  performFilter(e);
-                }}
-                value={seracherdText}
-                loading={false}
+            <SearchBar
+              placeHolder={'Search Favourites'}
               showCrossPress={true}
-              onCrossPress={() => {
-                setSearchedText('');
-                EventsList();
+              onTextChange={e => {
+                setSeracherdText(e);
+                performFilter(e);
               }}
-             
-             
-              />
+              value={seracherdText}
+              loading={false}
+              onCrossPress={() => {
+                setSeracherdText('');
+                getTemples(userDetails?.id, pageNo, 20);
+              }}
+            />
           </View>
         </TopBarcard>
       </View>
@@ -138,53 +134,60 @@ const Favorite = ({navigation}) => {
           [
             filteredArray ? (
               <FlatList
-              data={filteredArray}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={styles.flatListStyle}
-              keyboardShouldPersistTaps="handled"
-              // ListFooterComponent={renderLoder}
-              // onEndReached={() => loadMoreItems()}
-              onEndReachedThreshold={0.5}
-              decelerationRate={0.5}
-              keyExtractor={item => item?.id}
-              renderItem={({item}) => {
-                if (item?.name) {
-                  return (
-                    <FavTempleListCard
-                      name={item.name}
-                      location={item.line1}
-                      date={item.creationTime}
-                      img={item?.jtProfileDTO?.logo}
-                      onPress={() => {
-                        navigation.navigate(
-                          allTexts.screenNames.viewtempleprofile,
-                          {
-                            data: item,
-                            onSelect: onSelect,
-                          },
-                        );
-                      }}
-                    />
-                  );
-                }
-              }}
-            />
+                data={filteredArray}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={styles.flatListStyle}
+                keyboardShouldPersistTaps="handled"
+                // ListFooterComponent={renderLoder}
+                // onEndReached={() => loadMoreItems()}
+                onEndReachedThreshold={0.5}
+                decelerationRate={0.5}
+                keyExtractor={item => item?.id}
+                renderItem={({item}) => {
+                  if (item?.name) {
+                    return (
+                      <FavTempleListCard
+                        name={item.name}
+                        location={item.line1}
+                        date={item.creationTime}
+                        img={item?.jtProfileDTO?.logo}
+                        onPress={() => {
+                          navigation.navigate(
+                            allTexts.screenNames.viewtempleprofile,
+                            {
+                              data: item,
+                              onSelect: onSelect,
+                            },
+                          );
+                        }}
+                      />
+                    );
+                  }
+                }}
+              />
             ) : (
-             ''
+              ''
             ),
           ]
         )}
-         {(!filteredArray?.length && !loading ) &&(
+        {!filteredArray?.length && !loading && (
           <View style={styles.loaderContainer1}>
-          <FontAwesome5
-          name="gopuram"
-          size={50}
-          color={'orange'}
-          style={{marginBottom:'5%'}}
-        />
-        <Text style={{fontSize:15,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>{'No Temples Available'}</Text>
-      </View>
-         )}
+            <FontAwesome5
+              name="gopuram"
+              size={50}
+              color={'orange'}
+              style={{marginBottom: '5%'}}
+            />
+            <Text
+              style={{
+                fontSize: 15,
+                color: colors.orangeColor,
+                fontFamily: 'Poppins-Medium',
+              }}>
+              {'No Temples Available'}
+            </Text>
+          </View>
+        )}
       </View>
     </SafeAreaView>
   );

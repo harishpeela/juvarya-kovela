@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -13,9 +13,9 @@ import {
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Icon from 'react-native-vector-icons/AntDesign';
-import { colors, fontFamily } from '../../../common';
+import {colors, fontFamily} from '../../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import { BackgroundSmallFlowerRs } from '../../backgroundFlower';
+import {BackgroundSmallFlowerRs} from '../../backgroundFlower';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 export const Donation_Second_Tab = ({
   VALUE,
@@ -41,9 +41,9 @@ export const Donation_Second_Tab = ({
         horizontal
         showsHorizontalScrollIndicator={false}
         data={Data}
-        keyExtractor={({ item, index }) => index}
-        style={{ alignSelf: 'center' }}
-        renderItem={({ item, index }) => (
+        keyExtractor={({item, index}) => index}
+        style={{alignSelf: 'center'}}
+        renderItem={({item, index}) => (
           <TouchableOpacity
             onPress={() => {
               setActiveIndex(index);
@@ -55,7 +55,7 @@ export const Donation_Second_Tab = ({
             }}>
             <Image
               source={require('../../../../assets/images/smallflower.png')}
-              style={{ marginLeft: 5 }}
+              style={{marginLeft: 5}}
             />
             <Text
               style={{
@@ -90,6 +90,7 @@ export const Donation_Second_Tab = ({
           keyboardType="number-pad"
           onChangeText={onChange}
           value={valueRs}
+          placeholderTextColor={colors.gray}
         />
       </View>
       <View style={styles.inputView}>
@@ -98,6 +99,7 @@ export const Donation_Second_Tab = ({
           style={styles.input}
           onChangeText={onChangeEmail}
           value={valueEmail}
+          placeholderTextColor={colors.gray}
         />
       </View>
       <View style={styles.inputView}>
@@ -106,10 +108,10 @@ export const Donation_Second_Tab = ({
           style={styles.input}
           onChangeText={onChangeName}
           value={valueName}
+          placeholderTextColor={colors.gray}
         />
       </View>
-      <View
-        style={styles.checkView}>
+      <View style={styles.checkView}>
         <Ionicons
           onPress={onPressCheck}
           name={isChecked ? 'checkbox' : 'square-outline'}
@@ -121,24 +123,28 @@ export const Donation_Second_Tab = ({
       </View>
       <View style={styles.border} />
       <View style={styles.donationUser}>
-        <Text style={{ color: colors.black, fontSize: 12 }}>
+        <Text style={{color: colors.black, fontSize: 12}}>
           Feature your profile on temple page just by donating an amount more
           than ₹201.
         </Text>
         <View style={styles.userDonView}>
           <ImageBackground
             source={require('../../../../assets/images/smallflower.png')}
-            imageStyle={{ height: 60, width: 60 }}
-            style={{ alignItems: 'center', width: 50 }}>
+            imageStyle={{height: 60, width: 60}}
+            style={{alignItems: 'center', width: 50}}>
             <Image
-              source={{uri: donurl ? donurl : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg'}}
+              source={{
+                uri: donurl
+                  ? donurl
+                  : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+              }}
               style={styles.userimg}
             />
           </ImageBackground>
-          <View style={{ marginLeft: '4%' }}>
+          <View style={{marginLeft: '4%'}}>
             <Text
-              style={{ color: colors.black, fontWeight: '500', fontSize: 12 }}>
-             {donationText}
+              style={{color: colors.black, fontWeight: '500', fontSize: 12}}>
+              {donationText}
             </Text>
             <TouchableOpacity style={styles.userTouch}>
               <Text style={styles.usertext}>
@@ -153,7 +159,7 @@ export const Donation_Second_Tab = ({
   );
 };
 const styles = StyleSheet.create({
-  choose: { margin: 10, fontSize: 18, fontWeight: 'bold', color: colors.black },
+  choose: {margin: 10, fontSize: 18, fontWeight: 'bold', color: colors.black},
   flatlist: {
     padding: 5,
     margin: 5,
@@ -162,7 +168,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginTop: 10,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.8,
     shadowRadius: 1,
   },
@@ -185,6 +191,7 @@ const styles = StyleSheet.create({
     marginLeft: 40,
     fontSize: 16,
     fontWeight: '400',
+    color: colors.black,
   },
   border: {
     borderWidth: 0.3,

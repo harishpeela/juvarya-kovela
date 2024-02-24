@@ -7,10 +7,6 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,   
     borderWidth:1,
-    // marginTop:'23%',
-    
-   
-  
   },
 
   field: {
@@ -36,11 +32,6 @@ export const styles = StyleSheet.create({
     height:40,
     width:190,
     marginLeft:'3%',
-   
-    // backgroundColor:'red',
-    
     borderRadius:24
-  
-    
   },
 });
