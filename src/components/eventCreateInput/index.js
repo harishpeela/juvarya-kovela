@@ -267,6 +267,7 @@ export const EventInput2 = ({
             marginLeft: 15,
             width: '50%',
             flexDirection: 'row',
+            color: 'gray',
           }}
           onChangeText={onChangeText}
         />

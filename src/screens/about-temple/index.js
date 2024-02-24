@@ -66,7 +66,7 @@ const AboutTemple = ({ navigation, route }) => {
                     value={name}
                     placeholderTextColor={'black'}
                 />
-                <Text style={{fontWeight: 'bold', color: colors.black, marginLeft: '8%', margin: 10, fontSize: 16 }}>Description</Text>
+                <Text style={{fontWeight: 'bold', color: colors.black, marginLeft: '8%', margin: 10, fontSize: 16 }}>History</Text>
                 <ScrollView showsVerticalScrollIndicator={false} style={{borderWidth: 0.5, marginHorizontal: '8%', height: '40%', backgroundColor: colors.white, borderRadius: 10, paddingVertical: 10}}>
                     <Text style={{color: 'black', margin: '4%'}}>
                         {data?.history ? data?.history : 'History To Be Added'}
