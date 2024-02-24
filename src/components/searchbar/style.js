@@ -7,10 +7,14 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,   
     borderWidth:1,
+<<<<<<< HEAD
     // marginTop:'23%',
     
    
   
+=======
+    // marginTop:'23%',  
+>>>>>>> 766f8fe (artist and donar)
   },
 
   field: {
@@ -26,7 +30,10 @@ export const styles = StyleSheet.create({
     marginBottom:30,
     backgroundColor:'#FAFAFA',
     padding:10,
+<<<<<<< HEAD
     marginLeft:'17%'
+=======
+>>>>>>> 766f8fe (artist and donar)
   },
   iconContainer: {
     paddingLeft:8,

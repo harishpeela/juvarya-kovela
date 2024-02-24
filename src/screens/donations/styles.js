@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import { colors } from '../../common';
 export const styles = StyleSheet.create({
   container: {backgroundColor: 'white', flex: 1},
   header: {minHeight: '10%'},
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     padding: 15,
     width: '90%',
     borderRadius: 10,
-    backgroundColor: '#CC4501',
+    backgroundColor: colors.orangeColor,
     alignItems: 'center',
     marginBottom: 30,
   },

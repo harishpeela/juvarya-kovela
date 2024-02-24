@@ -64,7 +64,7 @@ const SeeAll = ({navigation}) => {
   }, []);
   // console.log('pop see all temples', popTemples);
   return (
-    <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
+    <View style={{flex: 1}}>
       <View style={{minHeight: '15%'}}>
         <TopBarCard2 marginLeft={'15%'} back={true} txt={'Popular Temples '} navigation={navigation} />
       </View>
@@ -91,7 +91,7 @@ const SeeAll = ({navigation}) => {
                     source={{
                       uri: item?.logo
                         ? item?.logo
-                        : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+                        : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                     }}
                     style={{height: 60, width: 60, borderRadius: 70 / 2}}
                   />
