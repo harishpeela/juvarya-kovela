@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, FlatList, TouchableOpacity, Image} from 'react-native';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
-import { Artist_Donar_List_Card } from '../../components';
+import {Artist_Donar_List_Card} from '../../components';
 const Artist_Donar_details_list = ({route, navigation}) => {
   const {data} = route?.params || {};
-  console.log('data', data);
+  console.log('data ===', data);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{height: '15%'}}>
@@ -20,9 +20,7 @@ const Artist_Donar_details_list = ({route, navigation}) => {
           data={data}
           keyExtractor={({item, index}) => item?.year}
           style={{}}
-          renderItem={({item, index}) => (
-           <Artist_Donar_List_Card />
-          )}
+          renderItem={({item, index}) => <Artist_Donar_List_Card data={item} />}
         />
       </View>
     </View>
