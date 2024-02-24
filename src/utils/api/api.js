@@ -10,23 +10,15 @@ import Snackbar from 'react-native-snackbar';
 import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
 
-// ****   develop Api base urls   *** //
-// export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'https://fanfun.in/customer/api/';
-// export const BASE = 'https://fanfun.in/media/';
-// export const POPULARURL = 'https://fanfun.in/profile/';
-// export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
-// export const EVENTS_URL = 'https://fanfun.in/events/';
-// export const DONATION_URL = 'https://fanfun.in/donations/';
-// export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
+//****   develop Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://Kovela.app/customer/api/';
-export const BASE = 'https://Kovela.app/media/';
-export const POPULARURL = 'https://Kovela.app/profile/';
-export const MEMBER_SHIP_URL = 'https://Kovela.app/membership';
-export const EVENTS_URL = 'https://Kovela.app/events/';
-export const DONATION_URL = 'https://Kovela.app/donations/';
-export const TEMPLE_ADDRESS = 'https://Kovela.app/customer/';
+export const BASEURL = 'https://fanfun.in/customer/api/';
+export const BASE = 'https://fanfun.in/media/';
+export const POPULARURL = 'https://fanfun.in/profile/';
+export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
+export const EVENTS_URL = 'https://fanfun.in/events/';
+export const DONATION_URL = 'https://fanfun.in/donations/';
+export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
