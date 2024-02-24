@@ -7,10 +7,6 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,   
     borderWidth:1,
-    // marginTop:'23%',
-    
-   
-  
   },
 
   field: {
@@ -26,7 +22,6 @@ export const styles = StyleSheet.create({
     marginBottom:30,
     backgroundColor:'#FAFAFA',
     padding:10,
-    marginLeft:'17%'
   },
   iconContainer: {
     paddingLeft:8,

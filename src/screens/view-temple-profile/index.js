@@ -585,6 +585,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       <Feather
                         name="camera-off"
                         size={40}
+                        color={'black'}
                         style={styles.noPosts}
                       />
                       <Text style={styles.noPosts.text}>No Posts Yet</Text>

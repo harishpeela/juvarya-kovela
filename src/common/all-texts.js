@@ -163,7 +163,6 @@ export const allTexts = {
     donationslist: 'DonationsList',
     eventDetails: 'EventDetails',
     forgetPassword: 'ForgetPassword?',
-    updateProfile: 'UpdateProfile',
     forgotPasswordOtpScreen: 'ForgotPassword',
     profilememberships: 'ProfileMemberShips',
     invitationScreen: 'InvitationScreen',
@@ -186,6 +185,7 @@ export const allTexts = {
     templeClass:'TempleClass',
     templeProfileToDoList:'TempleProfileToDoList',
     memberlist: 'MemberList',
+    artistdonardetailslist: 'Artist_Donar_details_list',
   },
   homeHeader: {
     welcome: 'Welcome ',
