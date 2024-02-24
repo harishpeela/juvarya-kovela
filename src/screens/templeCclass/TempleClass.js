@@ -27,12 +27,12 @@ const TempleClass = ({route, navigation}) => {
   // console.log(templeClassDetails);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,backgroundColor:'white'}}>
       <View style={{height: '15%'}}>
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
-          marginLeft={'15%'}
+          marginLeft={'18%'}
           navBack={() => navigation.goBack()}
           navigation={navigation}
         />
@@ -73,7 +73,7 @@ const TempleClass = ({route, navigation}) => {
                 marginTop: '60%',
               }}>
               <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
-                No items to displayy
+              No Items To Display
               </Text>
             </View>
           )

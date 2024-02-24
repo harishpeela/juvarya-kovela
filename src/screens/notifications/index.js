@@ -73,7 +73,7 @@ const Notifications = ({navigation}) => {
                     size={30}
                     style={{ marginBottom: '5%',alignSelf:'center' }}
                   />
-                  <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:15}}>No Notifications yet </Text>
+                  <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:15}}>No Notifications Yet </Text>
             </View>
           )}
         </View>

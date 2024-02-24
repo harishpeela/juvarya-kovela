@@ -226,6 +226,7 @@ const ForgetPassword = () => {
           txt={'Forgot Password'}
           navigation={navigation}
           onPress={() => navigation.goBack()}
+          marginLeft={'16%'}
         />
       </View>
       <TextInput
