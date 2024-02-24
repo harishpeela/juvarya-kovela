@@ -76,17 +76,17 @@ const {id, data, role, roleItemType} = route?.params || {};
   useEffect(() => {
   }, [data]);
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
           minHeight: 120,
           marginTop: '3%',
           marginBottom: '3%',
         }}
-      >
+       >
         <TopBarCard2
           back={true}
-          
+         
           navBack={() => navigation.goBack()}
           navigation={navigation}
           navMenu={navigation}
@@ -107,7 +107,9 @@ const {id, data, role, roleItemType} = route?.params || {};
               // bgColor={colors.blue}
               placeHolder={'Search Events'}
             />
-            {(role === 'ROLE_ITEM_ADMIN' || roleItemType === 'ROLE_ADMIN') && (
+           
+          </View>
+          {(role === 'ROLE_ITEM_ADMIN' || roleItemType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 onPress={() => 
                     navigation.navigate(allTexts.screenNames.addevents, {
@@ -117,12 +119,11 @@ const {id, data, role, roleItemType} = route?.params || {};
                 <FeatherIcon
                   style={styles.plusIcon}
                   name="plus"
-                  size={30}
+                  size={27}
                   color="white"
                 />
               </TouchableOpacity>
             )}
-          </View>
         </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>

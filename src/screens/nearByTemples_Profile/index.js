@@ -93,7 +93,7 @@ const [data, setData] = useState([]);
         <View style={{alignItems: 'center', justifyContent: 'center', flex: 1}}>
           <Text style={{color: colors.orangeColor, fontWeight: 'bold'}}>
             {' '}
-            No items to displayy
+            No Items To Display
           </Text>
         </View>
       )}
