@@ -15,7 +15,6 @@ export const allTexts = {
     updateProfile: 'Update Profile',
     add: 'Add',
     addevents: 'Add Event',
-    updateProfile: 'Update Profile',
   },
 
   headings: {
