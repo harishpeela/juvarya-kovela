@@ -64,6 +64,7 @@ import Profile_Near_By_Temples from './nearByTemples_Profile';
 import AboutTemple from './about-temple';
 import TempleProfileToDoList from './temple-profile-ToDoList';
 import MemberList from './members-list';
+import Artist_Donar_details_list from './artist-donar-temple-members';
 export {
   CreatePost,
   Seemore,
@@ -131,4 +132,5 @@ export {
   AboutTemple,
   TempleProfileToDoList,
   MemberList,
+  Artist_Donar_details_list,
 };

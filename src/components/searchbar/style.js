@@ -7,9 +7,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     marginHorizontal: 10,   
     borderWidth:1,
-    // marginTop:'23%',
-   
-  
+    // marginTop:'23%',  
   },
 
   field: {
@@ -23,7 +21,7 @@ export const styles = StyleSheet.create({
     textAlign:'center',
     marginBottom:30,
     backgroundColor:'#FAFAFA',
-    padding:10
+    padding:10,
   },
   iconContainer: {
     paddingLeft:8,

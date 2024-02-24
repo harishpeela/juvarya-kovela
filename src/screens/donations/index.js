@@ -10,7 +10,13 @@ import {
   Donation_Third_Tab,
 } from '../../components';
 import ApplicationContext from '../../utils/context-api/Context';
-import {DonationsPost, getDonationTypes, getTopDonation, GetProfilePic, DonationsType} from '../../utils/api';
+import {
+  DonationsPost,
+  getDonationTypes,
+  getTopDonation,
+  GetProfilePic,
+  DonationsType,
+} from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 
@@ -26,29 +32,25 @@ const Donations = ({route, navigation}) => {
   const {data} = route.params || {};
   // console.log('data =====><', data);
   const [typeData, setTypeData] = useState();
-  const donTypes = async() => {
+  const donTypes = async () => {
     let result = await getDonationTypes(0, 100);
     // console.log('types of donations', result?.data);
-  }
+  };
   let Data = [
     {id: 1, rs: '101'},
     {id: 3, rs: '301'},
     {id: 5, rs: '501'},
   ];
-  let donationType = [
-    'FOOD',
-    'EVENT',
-    'PERMANENT',
-  ];
+  let donationType = ['FOOD', 'EVENT', 'PERMANENT'];
 
-  const donType = async (e) => {
+  const donType = async e => {
     // console.log('type', e);
     let result = await DonationsType(e);
-    console.log('res of donat6ype', result?.data)
-    if(result?.data){
+    console.log('res of donat6ype', result?.data);
+    if (result?.data) {
       setTypeData(result?.data);
     }
-  }
+  };
   const PostDonations = async () => {
     let payload = {
       donation: value,
@@ -66,26 +68,25 @@ const Donations = ({route, navigation}) => {
         alert('please enter amount');
       } else if (!dropValue) {
         alert('please select donation type');
-      } else if(email === '' ){
-        alert('please enter email')
-      } else if(name === ''){
-        alert('please enetr name')
-      }
-      else {
+      } else if (email === '') {
+        alert('please enter email');
+      } else if (name === '') {
+        alert('please enetr name');
+      } else {
         let result = await DonationsPost(payload);
         if (result) {
           console.log('message', result?.data);
           Alert.alert('Success', result?.data?.message, [
             {
               text: 'Ok',
-              onPress: () =>
-                {navigation.navigate(allTexts.screenNames.donationslist, {
+              onPress: () => {
+                navigation.navigate(allTexts.screenNames.donationslist, {
                   message: 200,
                   data: data,
                 });
-                console.log('logg')
+                console.log('logg');
                 // dontationValue();
-              }
+              },
             },
           ]);
         }
@@ -94,15 +95,15 @@ const Donations = ({route, navigation}) => {
       console.log('error in donations api', error);
     }
   };
-  const profilePic = async (e) => {
+  const profilePic = async e => {
     let responce = await GetProfilePic(e.email);
     // console.log('responce', responce.data);
-    if(responce){
-      let res = {...e, url: responce?.data?.url}
+    if (responce) {
+      let res = {...e, url: responce?.data?.url};
       setTopDonation(array => [...array, res]);
       setDonationLoader(false);
     }
-  }
+  };
   const dontationValue = async () => {
     let id = data?.jtProfile;
     setDonationLoader(true);
@@ -110,19 +111,19 @@ const Donations = ({route, navigation}) => {
     // console.log('donation card', result.data);
     if (result) {
       let res = result?.data?.data;
-      if(res){
-        res.map(e =>  {
+      if (res) {
+        res.map(e => {
           profilePic(e);
-        })
+        });
       }
     } else {
       setDonationLoader(false);
     }
   };
-useEffect(() => {
-  donTypes();
-  dontationValue();
-},[ ]);
+  useEffect(() => {
+    donTypes();
+    dontationValue();
+  }, []);
   return (
     <>
       <ScrollView style={styles.container}>
@@ -141,7 +142,10 @@ useEffect(() => {
               Data={Data}
               onChange={e => setValue(e)}
               dropData={donationType}
-              onSelect={e => {setDropValue(e); donType(e)}}
+              onSelect={e => {
+                setDropValue(e);
+                donType(e);
+              }}
               valueRs={value}
               onChangeEmail={e => setEmail(e)}
               valueEmail={email}
@@ -149,14 +153,30 @@ useEffect(() => {
               valueName={name}
               onPressCheck={() => setIsChecked(!isChecked)}
               isChecked={isChecked}
-              donationText={topDonation[0]?.donorName ? `top donation by ${topDonation[0]?.donorName}` : topDonation[0]?.name ? topDonation[0]?.name : 'No donations yet'}
+              donationText={
+                topDonation[0]?.donorName
+                  ? `top donation by ${topDonation[0]?.donorName}`
+                  : topDonation[0]?.name
+                    ? topDonation[0]?.name
+                    : 'No donations yet'
+              }
               // donationText={`top donation by ${topDonation[0]?.donorName ? topDonation[0]?.donorName : topDonation[0]?.name ? topDonation[0]?.name : 'no donations yet'}`}
               donurl={topDonation[0]?.url}
             />
           </View>
           <View style={{marginHorizontal: 10}}>
-            <Donation_Third_Tab url={typeData?.mediaList ? typeData?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1706881490111food donation.jpeg'}
-             description={typeData?.description ? typeData?.description : 'please select donation type'} />
+            <Donation_Third_Tab
+              url={
+                typeData?.mediaList
+                  ? typeData?.mediaList[0]?.url
+                  : 'https://fanfun.s3.ap-south-1.amazonaws.com/1706881490111food donation.jpeg'
+              }
+              description={
+                typeData?.description
+                  ? typeData?.description
+                  : 'please select donation type'
+              }
+            />
           </View>
         </View>
       </ScrollView>

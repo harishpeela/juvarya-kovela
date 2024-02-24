@@ -59,7 +59,7 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
                     source={{
                       uri: item?.profileDTO?.logo
                         ? item?.profileDTO?.logo
-                        : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
+                        : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                     }}
                     
                     style={{height: 60, width: 60, borderRadius: 70 / 2}}

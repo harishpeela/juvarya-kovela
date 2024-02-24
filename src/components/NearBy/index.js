@@ -37,6 +37,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   const [filteredData, setFilteredData] = useState();
   const [NearByData, setNearByData] = useState();
   const [refreshing, setRefreshing] = useState(true);
+  const [nearBy , setNearBy] = useState(true);
   const PopularTemplesss = async () => {
     setLoader(true);
     try {
@@ -117,6 +118,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     <ScrollView refreshControl={
       <RefreshControl
         refreshing={refreshing}
+        tintColor={'white'}
         onRefresh={() => {
           setRefreshing(true);
           PopularTemplesss(pageNo, 100);
@@ -139,6 +141,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               onTextChange={(e) => {
                 setSearchedText(e);
                 SearchPopTemp(e);
+                setNearBy(false)
               }}
               value={searchedText}
               loading={false}
@@ -146,6 +149,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               onCrossPress={() => {
                 setSearchedText('');
                 PopularTemplesss();
+                setNearBy(true)
               }}
               bgColor={colors.white}
               placeHolder={'Search'}
@@ -242,7 +246,9 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               )}
             </ScrollView>
 
-            <View style={styles.upComingTextTab}>
+            {nearBy ? (
+             <>
+              <View style={styles.upComingTextTab}>
               <Text style={styles.popularTextContainer}>Nearby Temples</Text>
               <TouchableOpacity
                 onPress={() => {
@@ -278,6 +284,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                 />
               )}
             </ScrollView>
+             </>
+            ) : ''}
           </>
         )}
       </>
