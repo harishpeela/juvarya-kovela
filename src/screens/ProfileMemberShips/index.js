@@ -44,7 +44,7 @@ const ProfileMemberShips = ({navigation, route}) => {
     Type();
   }, []);
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,backgroundColor:'white'}}>
       <View style={styles.header}>
         <TopBarCard2
           back={true}
@@ -86,14 +86,14 @@ const ProfileMemberShips = ({navigation, route}) => {
           <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Text
               style={{
-                fontSize: 15,
+                fontSize: 16,
                 color: colors.orangeColor,
 
                 marginTop: '50%',
                 fontFamily: 'Poppins-Medium',
               }}>
               {' '}
-              No Memberships available
+              No Memberships Available
             </Text>
           </View>
         )}

@@ -152,7 +152,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                 setNearBy(true)
               }}
               bgColor={colors.white}
-              placeHolder={'Search'}
+              placeHolder={'Search Temples'}
             />
           </View>
         </TopBarcard>
@@ -168,7 +168,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
           </View>
         ) : (
           <>
-            <ScrollView style={{ paddingLeft: 12 }}>
+            <ScrollView>
               {searchedText === '' && (
                 <>
                   <View style={styles.upComingTextTab}>

@@ -61,14 +61,28 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   plusContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: 'orange',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 100,
     marginLeft: 10,
     textAlign: 'center',
-    height: 30,
-    width: 30,
+    height: 32,
+    width: 32,
     marginRight: 10,
+    marginTop:'-21.5%',
+    marginLeft:'88.5%'
   },
+
+  searchbarContainer:{
+    bottom:'46%',
+    // width:100,
+    marginTop:'-6%',
+    // backgroundColor:'black',
+    marginLeft:'11%',
+    marginTop:'-1%'
+   
+   
+    
+  }
 });

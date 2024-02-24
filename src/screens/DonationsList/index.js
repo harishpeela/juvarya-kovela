@@ -93,34 +93,34 @@ const DonationsList = ({ navigation, route }) => {
     // console.log('display data', apiData);
 
     return (
-      <SafeAreaView style={{ flex: 1 }}>
-        <View>
-          <View style={{ minHeight: '19%', marginTop: '3%' }}>
-            <TopBarCard2
-              txt={'Donation List'}
-              back={true}
-              navigation={navigation}
-              navMenu={navigation}>
-              <View style={styles.searchContainer}>
-                <SearchBar
-                  value={searchedText}
-                  onTextChange={text => {
-                    setSearchedText(text);
-                    handleSearch(text);
-                  }}
-                  loading={loading}
-                  onCrossPress={() => {
-                    setSearchedText('');
-                    setFilteredData([]);
-                  }}
-                  placeHolder={'Search here'}
-                  style={styles.customSearch}
-                  showCrossPress={true}
-                  bgColor={colors.white}
-                  brColor={colors.gray2}
-                  brWidth={1}
-                />
-                <TouchableOpacity
+      <SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
+        <View style={{ minHeight: 120, marginTop: '1%' ,backgroundColor:'white'}}>
+      <TopBarCard2  back={true}  navigation={navigation} navMenu={navigation} >
+          <View style={styles.searchbarContainer}>
+              <SearchBar
+                placeHolder={'Search Donation'}
+                showCrossPress={true}
+                onCrossPress={() => {
+                  setSearchedText('');
+                  // getTemples(userDetails?.id, pageNo, 20);
+                  searchEvent(e);
+                }}
+                onTextChange={e => {
+                  setSearchedText(e);
+                  performFilter(e);
+                }}
+                value={searchedText}
+                loading={false}
+              showCrossPress={true}
+              onCrossPress={() => {
+                setSearchedText('');
+                EventsList();
+              }}
+              />
+               
+          </View>
+          <View>
+          <TouchableOpacity
                   onPress={() =>
                     navigation.navigate(allTexts.screenNames.donations, {
                       data: data,
@@ -130,15 +130,16 @@ const DonationsList = ({ navigation, route }) => {
                   <FeatherIcon
                     style={styles.plusIcon}
                     name="plus"
-                    size={30}
-                    color={colors.orangeColor}
+                    size={27}
+                    color={colors.white}
                   />
                 </TouchableOpacity>
-              </View>
-            </TopBarCard2>
           </View>
-        </View>
-        <View style={styles.bodyContainer}>
+
+        </TopBarCard2>
+        
+      </View>
+        <View >
           <View style={styles.followersContainer}>
             {loader ? (
               <View style={{ marginTop: '50%' }}>
@@ -157,7 +158,7 @@ const DonationsList = ({ navigation, route }) => {
                 />
               ) : (
                 <View style={{ alignItems: 'center', marginTop: '60%' }}>
-                  <Text style={{ color: colors.orangeColor, fontSize: 15 }}> No donations to display</Text>
+                  <Text style={{ fontFamily:'Poppins-Medium',fontWeight:'Normal',color: colors.orangeColor, fontSize: 16 }}> No Donations To Display</Text>
                 </View>
               ))}
           </View>
