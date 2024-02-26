@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     padding: 10,
-    backgroundColor:'#FFAB0F',
+    backgroundColor:'white',
     height:100,
     width:'100%',
     borderBottomLeftRadius:24,
