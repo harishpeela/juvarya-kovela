@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { View, SafeAreaView, FlatList, Text, TouchableOpacity } from 'react-native';
-import {Loader, SearchBar } from '../../components';
-import { styles } from './styles';
-import { allTexts, colors } from '../../common';
-import { getTempledetailsWithId, AdminTemples } from '../../utils/api';
-import { FavTempleListCard } from '../../components';
-import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  SafeAreaView,
+  FlatList,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
+import {Loader, SearchBar} from '../../components';
+import {styles} from './styles';
+import {allTexts, colors} from '../../common';
+import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
+import {FavTempleListCard} from '../../components';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 // import CreateCommunityTempleScreen from './CreateCommunityTempleScreen'; // Assuming you have a screen for creating community temples
 
-const MyTemples = ({ navigation }) => {
+const MyTemples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setFilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +26,7 @@ const MyTemples = ({ navigation }) => {
     try {
       let result = await getTempledetailsWithId(d?.id);
       if (result) {
-        let templesArray = { ...d, ...result?.data };
+        let templesArray = {...d, ...result?.data};
         console?.log('res ====><', templesArray);
         setTempleList(array => [...array, templesArray]);
         setFilteredArray(array => [...array, templesArray]);
@@ -37,7 +43,7 @@ const MyTemples = ({ navigation }) => {
     setLoading(true);
     try {
       let result = await AdminTemples();
-      let adminData = result?.data; 
+      let adminData = result?.data;
       adminData.map(e => {
         TempleDetails(e);
       });
@@ -50,17 +56,7 @@ const MyTemples = ({ navigation }) => {
     AdminTempleDetails();
   }, []);
 
-
-  const onSelect = data => {
-
-  };
-
- 
-  // const onSelect = data => {
-   
-  //   // FollowandUnFollow(data?.selectedId);
-  // };
-
+  const onSelect = data => {};
   const performFilter = value => {
     setFilteredArray(
       templeList.filter(item =>
@@ -71,9 +67,14 @@ const MyTemples = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={{ minHeight: 120, marginTop: '3%' }}>
-        <TopBarCard2 isPlus={true} txt={'Communities'} marginLeft={'15%'} back={true} navigation={navigation}>
-        </TopBarCard2>
+      <View style={{minHeight: 120, marginTop: '3%'}}>
+        <TopBarCard2
+          isPlus={true}
+          txt={'Communities'}
+          marginLeft={'15%'}
+          back={true}
+          navigation={navigation}
+        />
       </View>
 
       <View style={styles.cardContainer}>
@@ -90,7 +91,7 @@ const MyTemples = ({ navigation }) => {
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={(item, index) => item?.id}
-                renderItem={({ item, index }) => {
+                renderItem={({item, index}) => {
                   if (item?.name) {
                     return (
                       <FavTempleListCard
@@ -114,25 +115,32 @@ const MyTemples = ({ navigation }) => {
               />
             ) : (
               <View style={styles.loaderContainer}>
-                <FontAwesome5
-                  name="gopuram"
-                  size={50}
-                  color={'orange'}
-                 
-                />
+                <FontAwesome5 name="gopuram" size={50} color={'orange'} />
                 <Text
                   style={styles.noAvailable}
-                  onPress={() => navigation.navigate(allTexts.screenNames.communityTemple)}
-                >
+                  onPress={() =>
+                    navigation.navigate(allTexts.screenNames.communityTemple)
+                  }>
                   {'Create Your Community Temple'}
                 </Text>
               </View>
             ),
           ]
         )}
-        {(searchedText  && !filteredArray?.length) ? (
-          <Text style={{alignSelf: 'center', justifyContent: 'center', fontSize: 16, color: colors.orangeColor, marginTop: '3%'}}>No Temples To Display</Text>
-        ): ('')}
+        {searchedText && !filteredArray?.length ? (
+          <Text
+            style={{
+              alignSelf: 'center',
+              justifyContent: 'center',
+              fontSize: 16,
+              color: colors.orangeColor,
+              marginTop: '3%',
+            }}>
+            No Temples To Display
+          </Text>
+        ) : (
+          ''
+        )}
       </View>
     </SafeAreaView>
   );
