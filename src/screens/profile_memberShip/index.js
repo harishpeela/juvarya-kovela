@@ -77,14 +77,14 @@ const isDarkMode = useColorScheme() === 'dark';
           <View style={styles.headerContainer}>
             <TouchableOpacity  onPress={() => navigation.goBack()}>
               <Ionicons
-                name="caret-back-circle"
+                name="arrow-back-circle"
                 size={36}
-                color={'#ffffff'}
+                color={colors.orangeColor}
                 style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
               />
             </TouchableOpacity>
             <View>
-            <Text style={{color: colors.white, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
+            <Text style={{color: colors.orangeColor, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
             </View>
             {(roleId === 'ROLE_ITEM_ADMIN' || roleType) && (
                 <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
@@ -93,7 +93,7 @@ const isDarkMode = useColorScheme() === 'dark';
                     id: id,
                   })
                 }}>
-                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.white}}>Invite</Text>
+                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.orangeColor}}>Invite</Text>
                 </TouchableOpacity>
               )}
         </View>
