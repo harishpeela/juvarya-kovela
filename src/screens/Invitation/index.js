@@ -12,26 +12,30 @@ const InvitationScreen = ({navigation, route}) => {
   const [email, setEmail] = useState('');
   const [isValidEmail, setValidEmail] = useState();
   const [error, setError] = useState();
-  const {roleId, id} = route.params || {};
+  const {membershipId, id} = route.params || {};
+  console.log('id', id, 'roleId', membershipId);
   const MemberShipInviteApi = async () => {
     if (email === '') {
       setError(true);
     } else if (email.includes('.com')) {
       setError(false);
       let payload = {
-        id: id,
+        id: membershipId,
         email: email,
       };
       try {
         let result = await MemberShipInvite(payload);
         // console.log('result of invite api', result?.data);
         if (result.data?.message) {
+          console.log(result?.data, '--==------')
           Alert.alert('Success', result?.data?.message, [
             {
               text: 'Ok',
               onPress: () =>
-                navigation.navigate(allTexts.screenNames.profilememberships, {
-                  roleId: roleId,
+                navigation.navigate(allTexts.screenNames.templecrew, {
+                  roleId: membershipId,
+                  id: id,
+                  message: 200,
                 }),
             },
           ]);
@@ -67,7 +71,7 @@ const InvitationScreen = ({navigation, route}) => {
         <Ionicons
         name="caret-back-circle"
         size={36}
-        color={'#ffffff'}
+        color={colors.orangeColor}
         style={{alignSelf: 'flex-start', justifyContent: 'center'}}
       />
      

@@ -166,7 +166,7 @@ export const UserFeedCompList = ({
     config(options)
       .fetch('GET', image_URL)
       .then(res => {
-        console.log('res -> ', JSON.stringify(res));
+        console.log('res -> ', JSON?.stringify(res));
         Alert.alert('Alert', 'Image Downloaded successfully....!');
       });
   };
