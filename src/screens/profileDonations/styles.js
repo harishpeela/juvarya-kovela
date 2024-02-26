@@ -3,7 +3,8 @@ import {colors, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   CardContainer: {},
   followersContainer: {
-    height: '100%'
+    height: '100%',
+    alignItems: 'center',
   },
   footerContainer: {
     paddingHorizontal: 30,

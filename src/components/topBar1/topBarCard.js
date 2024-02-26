@@ -214,7 +214,7 @@ export const TopBarCard2 = ({
                 fontSize: 20,
                 fontWeight: 'bold',
                 // marginLeft: marginLeft ? marginLeft : '25%',
-                marginLeft:'15%',
+                marginLeft: marginLeft ? marginLeft : '15%',
                 color: 'orange',
                 textAlign: 'center',
                 fontFamily:'Poppins-Medium',
