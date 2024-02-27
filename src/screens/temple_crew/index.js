@@ -6,6 +6,7 @@ import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {Loader, FollowersListCard4} from '../../components';
 import {colors, allTexts} from '../../common';
 import {styles} from './styles';
+import { useIsFocused } from '@react-navigation/native';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import {MemberShipList, MembersList, getArtistDonar} from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -14,29 +15,32 @@ const TempleCrew = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [noTextLoader, setTextLoader] = useState(false);
-  const {id} = route.params || {};
+  const {id, message} = route.params || {};
   const [data, setData] = useState([]);
   const [donationData, setDonationData] = useState();
   const [roleType, setRoleType] = useState();
   const [membershipId, setMemberShipId] = useState();
   const [artistData, setArtistData] = useState();
+  const isFocused = useIsFocused();
 
   const MembershipIdData = async () => {
-    // console.log('membershipid', trfdata?.jtProfile);
     setLoader(true);
     setTextLoader(true);
     try {
       let result = await MemberShipList(id, 0, 100);
       console.log('res ==><><<>>', result?.data);
       let data = result?.data?.data;
+      setMemberShipId(data[0]?.id);
+      console.log(data[0]?.id, 'data[0]?.id')
       let ID = data?.filter(item => item)?.map(({id}) => ({id}));
       console.log('jknkjn.kjn.', ID);
       if (ID) {
         setData(ID);
-        setMemberShipId(ID);
-        MembershipData(ID[0]?.id);
         setLoader(false);
         setTextLoader(true);
+        // ID?.map(e => {
+        //   MembershipData(e);
+        // })
       } else {
         // alert('SomeThing went wrong')
         setLoader(false);
@@ -49,9 +53,9 @@ const TempleCrew = ({route, navigation}) => {
   };
   const MembershipData = async memId => {
     setTextLoader(true);
-    console.log('data>id', memId);
+    console.log('data>id', memId?.id);
     try {
-      let result = await MembersList(memId, 0, 10);
+      let result = await MembersList(memId?.id, 0, 10);
       let responce = result?.data;
       console.log('===========responce ====>>', responce?.data);
       if (responce) {
@@ -80,8 +84,8 @@ const TempleCrew = ({route, navigation}) => {
   };
 
   const artistDonar = async () => {
-    let responce = await getArtistDonar(10, 0, 100);
-    console.log('responce odf artist', responce?.data);
+    let responce = await getArtistDonar(id, 0, 100);
+    // console.log('responce odf artist', responce?.data);
     if (responce?.status === 200) {
       setArtistData(responce?.data);
     } else {
@@ -90,109 +94,24 @@ const TempleCrew = ({route, navigation}) => {
   };
 
   useEffect(() => {
-    MembershipIdData();
     Type();
     artistDonar();
   }, []);
-
-  const infoData = [
-    {
-      id: 1,
-      donarName: '',
-      artist: '',
-      year: '2024',
-      occation: 'dhussera',
-      donarPic: '',
-      artistPic: '',
-    },
-    {
-      id: 2,
-      donarName: 'Anil Adari',
-      artist: 'Satya prasad',
-      year: '2023',
-      occation: 'dhussera',
-      donarPic:
-        'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-      artistPic:
-        'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-    },
-    {
-      id: 3,
-      donarName: 'Mahesh doddi',
-      artist: 'Sivaji',
-      year: '2022',
-      occation: 'dhussera',
-      donarPic:
-        'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-      artistPic:
-        'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-    },
-    // {
-    //   id: 4,
-    //   donarName: 'siva kumar Dadi',
-    //   artist: 'durga naidu',
-    //   year: '2021',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-
-    // },
-    // {
-    //   id: 5,
-    //   donarName: 'Jagan sai Karri',
-    //   artist: 'chiranjeevi',
-    //   year: '2020',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-    // },
-    // {
-    //   id: 6,
-    //   donarName: 'vamsi chadaram',
-    //   artist: 'Prasad',
-    //   year: '2019',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-    // },
-    // {
-    //   id: 7,
-    //   donarName: 'Jagan sai Karri',
-    //   artist: 'chiranjeevi',
-    //   year: '2020',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-    // },
-    // {
-    //   id: 8,
-    //   donarName: 'vamsi chadaram',
-    //   artist: 'Prasad',
-    //   year: '2019',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-    // },
-    // {
-    //   id: 9,
-    //   donarName: 'Jagan sai Karri',
-    //   artist: 'chiranjeevi',
-    //   year: '2020',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066989814871706698976055.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067007931111706700787938.jpg',
-    // },
-    // {
-    //   id: 10,
-    //   donarName: 'vamsi chadaram',
-    //   artist: 'Prasad',
-    //   year: '2019',
-    //   occation: 'dhussera',
-    //   donarPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17066993216111706699316489.jpg',
-    //   artistPic: 'https://fanfun.s3.ap-south-1.amazonaws.com/17067010593281706701053788.jpg',
-    // },
-  ];
-  console.log(donationData, 'jahsbxahbs');
+  useEffect(() => {
+    if (message === 200 || message === undefined || isFocused) {
+      async function prepare() {
+        try {
+          new Promise(resolve => setTimeout(resolve, 2000));
+        } catch (e) {
+          console.warn(e);
+        } finally {
+          MembershipIdData();
+        }
+      }
+      prepare();
+    }
+  }, [isFocused]);
+  // console.log(donationData, 'jahsbxahbs');
   return (
     <View style={{backgroundColor: 'white'}}>
       <View style={styles.headerContainer}>
@@ -221,7 +140,7 @@ const TempleCrew = ({route, navigation}) => {
           style={{marginLeft: '5%'}}
           onPress={() => {
             navigation.navigate(allTexts.screenNames.invitationScreen, {
-              roleId: membershipId?.id ? membershipId[0]?.id : '',
+              membershipId: membershipId ? membershipId : '',
               id: id,
             });
           }}>
@@ -357,68 +276,6 @@ const TempleCrew = ({route, navigation}) => {
           )}
         </View>
       </View>
-      {/* <View
-        style={{
-          marginLeft: '5%',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <View style={{alignItems: 'center', justifyContent: 'center'}}>
-          <TouchableOpacity
-            style={{
-              height: 70,
-              width: 70,
-              borderRadius: 100 / 2,
-              borderWidth: 2,
-              margin: 2,
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderColor: colors.orangeColor,
-            }}>
-            <Ioniconss name="plus" size={25} color={colors.orangeColor} />
-          </TouchableOpacity>
-          <Text style={{color: 'black'}}> {infoData[0]?.year}</Text>
-        </View>
-        <FlatList
-          data={artistData}
-          horizontal
-          keyExtractor={({item, index}) => item?.year}
-          style={{}}
-          renderItem={({item, index}) => (
-            <View style={{alignItems: 'center', justifyContent: 'center'}}>
-              <TouchableOpacity
-                style={{
-                  height: 70,
-                  width: 70,
-                  borderRadius: 100 / 2,
-                  // borderWidth: 2,
-                  margin: 2,
-                  borderColor: colors.orangeColor,
-                  justifyContent: 'center',
-                }}>
-                <Image
-                  source={{
-                    uri: item?.artistDto?.artist?.customerProfileUrl
-                      ? item?.artistDto?.artist?.customerProfileUrl
-                      : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
-                  }}
-                  height={70}
-                  width={70}
-                  style={{
-                    height: 70,
-                    width: 70,
-                    overflow: 'hidden',
-                    marginRight: 2,
-                    borderRadius: 100 / 2,
-                  }}
-                />
-              </TouchableOpacity>
-              <Text style={{color: 'black'}}>{item?.year?.substring(6, 11)} </Text>
-            </View>
-          )}
-        />
-      </View> */}
       <View style={{height: '80%'}}>
         {loader ? (
           <View>

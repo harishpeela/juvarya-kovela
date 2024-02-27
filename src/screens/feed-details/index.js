@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from 'react';
 import {View, FlatList, SafeAreaView, ScrollView} from 'react-native';
 import {Loader, UserFeedCompList, TopBarcard} from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import {Feed, GetPosts} from '../../utils/api';
 import {allTexts, colors} from '../../common';
 const Feeds = ({route, navigation}) => {
@@ -55,11 +56,12 @@ const Feeds = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{height: 100}}>
-        <TopBarcard
+        <TopBarCard2
           back={true}
           txt={'Feeds'}
           navigation={navigation}
           navBack={() => navigation.goBack()}
+          marginLeft={'30%'}
         />
       </View>
 
