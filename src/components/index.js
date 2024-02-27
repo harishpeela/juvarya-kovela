@@ -103,6 +103,7 @@ import {EventInput, EventInput1} from './eventCreateInput';
 import {NearByTempleComp} from './NearByTempleComp';
 import {EventInput4} from './eventCreateInput';
 import {Artist_Donar_List_Card} from './artist-donar-listCard';
+import ReelsComponent from './reelsComp/reelsCompomnent';
 export {
   Loader,
   SearchBar,
@@ -199,4 +200,5 @@ export {
   FollowersListCard4,
   TempleCrewTabComp,
   Artist_Donar_List_Card,
+  ReelsComponent,
 };
