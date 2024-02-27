@@ -88,12 +88,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     setIsLoading(false);
   };
 
-  useEffect(() => { }, [isFocused]);
-  // useEffect(() => {
-  //   if (pageNo >= 0) {
-  //     PopularTemplesss(0, 100);
-  //   }
-  // }, [pageNo]);
+  useEffect(() => {}, [isFocused]);
 
   useFocusEffect(
     useCallback(() => {
@@ -118,10 +113,11 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     <ScrollView refreshControl={
       <RefreshControl
         refreshing={refreshing}
-        tintColor={'white'}
+        colors={["red", colors.orangeColor, "blue"]}
         onRefresh={() => {
           setRefreshing(true);
           PopularTemplesss(pageNo, 100);
+          setLoader(false)
         }}
       />
     }>
