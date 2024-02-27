@@ -6,7 +6,9 @@ import {
   Alert,
   StatusBar,
 } from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState, useEffect, useCallback} from 'react';
+import {useFocusEffect} from '@react-navigation/native';
+import RNRestart from 'react-native-restart';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -22,9 +24,43 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
+import Snackbar from 'react-native-snackbar';
+import NetInfo from '@react-native-community/netinfo';
 
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
+  const [isConnected, setIsConnected] = useState(' ');
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const NetWorkChecking = () => {
+    if (isConnected === false) {
+      Snackbar.show({
+        text: 'No Internet Connection',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: 'grey',
+        action: {
+          text: 'Reload',
+          textColor: 'White',
+          onPress: () => {
+            RNRestart.Restart();
+          },
+        },
+      });
+    }
+  };
+
+  useEffect(() => {
+    NetWorkChecking();
+  }, []);
 
   const {
     buttonTexts: {login, sigup},
@@ -92,7 +128,7 @@ const Signin = ({navigation}) => {
       try {
         let result = await loginUser1(payload);
         // console.log('result of login', result?.data);
-        if (result && result.status === 200) {
+        if (result && result.status === 200 && isConnected == true) {
           const {
             data: {accessToken, tokenType},
           } = result;
@@ -100,7 +136,7 @@ const Signin = ({navigation}) => {
           ApiData();
           setLoginDetails(accessToken);
           actions.setSubmitting(false);
-        } else {
+        } else if (isConnected == false) {
           actions.setSubmitting(false);
           Alert.alert('Error', 'Invalid Credentials');
         }
