@@ -1,4 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
+ /* eslint-disable react-native/no-inline-styles */
 import {
   View,
   Text,
@@ -55,7 +55,7 @@ export const UserFeedCompList = ({
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [roleType, setRoleType] = useState();
-  
+ 
   const getImageSize = () => {
     if (post?.mediaList[0]?.url === ' ') {
       console.log('');
@@ -65,7 +65,7 @@ export const UserFeedCompList = ({
       });
     }
   };
-
+ 
   useEffect(() => {
     getImageSize();
   }, []);
@@ -90,7 +90,7 @@ export const UserFeedCompList = ({
       setLikeCount(likes);
     }
   }, [likes]);
-
+ 
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
@@ -110,7 +110,7 @@ export const UserFeedCompList = ({
   const DeleteFeed = async () => {
     let result = await DeleteSavedFeed(id);
   };
-
+ 
   const scrollX = useRef(new Animated.Value(0)).current;
   const handleOnScroll = event => {
     Animated.event(
@@ -131,23 +131,23 @@ export const UserFeedCompList = ({
   const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
     setIndex(viewableItems[0]?.index);
   }).current;
-
+ 
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
   }).current;
-
+ 
   // const REMOTE_IMAGE_PATH = 'https://fanfun.s3.ap-south-1.amazonaws.com/17068733451971706873343586.jpg';
-
+ 
   const downloadImageRemote = REMOTE_IMAGE_PATH => {
     console.log('REMOTE_IMAGE_PATH', REMOTE_IMAGE_PATH);
-
+ 
     let date = new Date();
     let image_URL = REMOTE_IMAGE_PATH;
     console.log('imgurl', image_URL);
     let ext = getExtention(image_URL);
     console.log('ext', ext);
     ext = '.' + ext[0];
-
+ 
     const {config, fs} = RNFetchBlob;
     let PictureDir = fs.dirs.PictureDir;
     let options = {
@@ -170,7 +170,7 @@ export const UserFeedCompList = ({
         Alert.alert('Alert', 'Image Downloaded successfully....!');
       });
   };
-
+ 
   const getExtention = filename => {
     // To get the file extension
     return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
@@ -355,3 +355,4 @@ export const UserFeedCompList = ({
     </View>
   );
 };
+ 
