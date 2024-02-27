@@ -15,16 +15,17 @@ export const styles = StyleSheet.create({
         borderColor:colors.black},
     textInput:{
        marginLeft: 10,
+       color: colors.black
     },
     headingText:{
         marginRight:170,
         fontWeight:'bold',
-        color:'#ffffff',
+        color:colors.orangeColor,
         fontSize:20
     },
     headerContainer:{
         padding: 10,
-        backgroundColor:'#FFAB0F',
+        backgroundColor:colors.white,
         height:100,
         borderBottomLeftRadius:24,
         borderBottomRightRadius:24,

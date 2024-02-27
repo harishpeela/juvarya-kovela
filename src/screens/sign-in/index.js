@@ -112,7 +112,7 @@ const Signin = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar backgroundColor={'#FFAB0F'} translucent={true} />
+      <StatusBar backgroundColor={'white'} translucent={true} />
       <View style={styles.signinTextContainer}>
         {/* <Text style={styles.signinText}>{login}</Text> */}
       </View>

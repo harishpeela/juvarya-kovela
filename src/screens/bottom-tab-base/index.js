@@ -11,8 +11,10 @@ import {
   Search,
   TicketConfirmation,
   UserFeedScreen,
+  KovelaReels
 } from '..';
 import {Loader} from '../../components';
+import FontAwesome6 from 'react-native-vector-icons/MaterialIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
@@ -26,6 +28,8 @@ export default BottomTabBase = ({navigation}) => {
   const GetFavScreen = () => <Favorite navigation={navigation} />;
   const GetProfileScreen = () => <Profile navigation={navigation} />;
   const GetEventScreen = () => <EventsScreen navigation={navigation} />;
+  const GetReelsScreen = () => <KovelaReels navigation={navigation} />;
+
   const GetTicketConfirmScreen = () => (
     <TicketConfirmation navigation={navigation} />
   );
@@ -162,7 +166,7 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.favorites}
-            component={GetFavScreen}
+            component={GetReelsScreen}
             options={{
               tabBarIcon: ({color, size, focused}) => (
                 <View
@@ -175,12 +179,12 @@ export default BottomTabBase = ({navigation}) => {
                       style={styles.dot}
                     />
                   )}
-                  <FontistoIcon
-                    name="heart-alt"
+                  <FontAwesome6
+                    name="local-movies"
                     color={color}
                     size={focused ? 22 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Favourites</Text>
+                  <Text style={{color: color, fontSize: 14}}>Sprituals</Text>
                 </View>
               ),
             }}
