@@ -34,18 +34,23 @@ export const SearchBar = ({
         {/* ]}> */}
         <View style={styles.iconContainer}>
           {/* <Icon name="search1" size={16} color={colors.gray} style={{left:30,top:7}}/> */}
+          <View style={{flexDirection:'row',width:'100%'}}> 
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
             placeholder={placeHolder || 'Search temples'}
+            
             style={{
               ...styles.field,
-              color: colors.gray
+              color: colors.gray,
+              
             }}
             value={value}
             onSubmitEditing={onSubmit}
             autoCapitalize={false}
           />
+         
+          </View>
           {loading && <Loader size={25} color={colors.green2} />}
           {showCrossPress === true ? (
             <>
@@ -54,14 +59,15 @@ export const SearchBar = ({
                   onPress={onCrossPress}
                   name="x-circle"
                   color={colors.orangeColor}
-                  size={20}
-                  style={{marginLeft: '-18%',marginTop:'4%'}}
+                  size={15}
+                  style={{marginLeft: '55%',marginTop:'6%'}}
                 />
               )}
             </>
           ) : (
             <></>
           )}
+         
         </View>
       {/* </View> */}
     </View>
