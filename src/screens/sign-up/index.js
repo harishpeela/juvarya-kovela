@@ -9,7 +9,9 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import NetInfo from '@react-native-community/netinfo';
+import Snackbar from 'react-native-snackbar';
 import {InputField, PrimaryButton} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
@@ -32,6 +34,45 @@ export const KovelaIcon = () => (
 const Signup = ({navigation}) => {
   const [isChecked, setIsChecked] = useState(false);
   const [tcModal, setTcModal] = useState(false);
+  const [isConnected, setIsConnected] = useState(' ');
+  console.log(isConnected);
+
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener(state => {
+      setIsConnected(state.isConnected);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  const netWorkChecking = () => {
+    if (isConnected == false) {
+      Snackbar.show({
+        text: 'No Internet Connection',
+        duration: Snackbar.LENGTH_INDEFINITE,
+        backgroundColor: 'grey',
+        action: {
+          text: 'Reload',
+          textColor: 'White',
+          onPress: () => {
+            RNRestart.Restart();
+          },
+        },
+      });
+    } else {
+      Snackbar.show({
+        text: 'Internet Connected',
+        duration: Snackbar.LENGTH_SHORT,
+        backgroundColor: 'green',
+      });
+    }
+  };
+
+  useEffect(() => {
+    netWorkChecking();
+  });
   const {
     buttonTexts: {login, sigup},
     screenNames: {signin, otpScreen},
@@ -76,11 +117,11 @@ const Signup = ({navigation}) => {
     console.log('payloadmob=========>', resOfMob[0]?.Error);
     let resOfEmail = await loginUser1(LogInPayload2);
     console.log('payloademail=============>', resOfMob[0]?.Error);
-    if(resOfMob?.status === 200){
-      alert('mobile number already registered')
+    if (resOfMob?.status === 200) {
+      alert('mobile number already registered');
       action.setSubmitting(false);
-    } else if(resOfEmail?.status === 200){
-      alert('email already registered')
+    } else if (resOfEmail?.status === 200) {
+      alert('email already registered');
       action.setSubmitting(false);
     } else {
       // console.log('ajshbx,jhabs', resOfEmail?.status, resOfMob?.status)
@@ -90,7 +131,7 @@ const Signup = ({navigation}) => {
         const {
           data: {emailAddress, otp},
         } = response || {};
-        if(response?.status === 200){
+        if (response?.status === 200) {
           if (response && emailAddress) {
             let otpPayload = {
               data,
@@ -117,14 +158,13 @@ const Signup = ({navigation}) => {
       } catch (error) {
         alert(error);
       }
-    } 
+    }
     // else if(resOfEmail?.status === 400 || resOfMob?.status === 400) {
     //   alert('please check your mobile number or email');
     //   action.setSubmitting(false);
     // } else {
     //   alert('please check the details you entered')
     // }
-    
   };
   return (
     <SafeAreaView style={styles.wrapper}>
