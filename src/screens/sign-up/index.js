@@ -168,7 +168,7 @@ const Signup = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar backgroundColor={'#FFAB0F'} />
+      <StatusBar backgroundColor={'white'} />
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyBoardStyle}

@@ -65,6 +65,7 @@ import AboutTemple from './about-temple';
 import TempleProfileToDoList from './temple-profile-ToDoList';
 import MemberList from './members-list';
 import Artist_Donar_details_list from './artist-donar-temple-members';
+import KovelaReels from './reels';
 export {
   CreatePost,
   Seemore,
@@ -133,4 +134,5 @@ export {
   TempleProfileToDoList,
   MemberList,
   Artist_Donar_details_list,
+  KovelaReels,
 };

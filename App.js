@@ -64,6 +64,7 @@ import {
   TempleProfileToDoList,
   MemberList,
   Artist_Donar_details_list,
+  KovelaReels,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -150,6 +151,7 @@ const App = () => {
       templeProfileToDoList,
       memberlist,
       artistdonardetailslist,
+      kovelareels,
     },
   } = allTexts;
 
@@ -640,6 +642,13 @@ const App = () => {
           <Stack.Screen
           name={artistdonardetailslist}
           component={Artist_Donar_details_list}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={kovelareels}
+          component={KovelaReels}
           options={{
             headerShown: false,
           }}

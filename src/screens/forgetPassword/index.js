@@ -219,7 +219,7 @@ const ForgetPassword = () => {
         styles.container,
         {backgroundColor: isDarkMode ? 'white' : 'white'},
       ]}>
-      <StatusBar backgroundColor={'#FFAB0F'} />
+      <StatusBar backgroundColor={'white'} />
       <View style={{minHeight: '15%'}}>
         <TopBarCard2
           back={true}

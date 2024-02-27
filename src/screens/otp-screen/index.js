@@ -160,7 +160,7 @@ console.log('data ==>', data);
   };
   return (
     <View style={styles.wrapper}>
-      <StatusBar backgroundColor={'#FFAB0F'} />
+      <StatusBar backgroundColor={'white'} />
       <View style={{minHeight: '15%', marginTop: 20}}>
         <TopBarCard2
           back={true}
