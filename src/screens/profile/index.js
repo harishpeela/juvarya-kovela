@@ -380,7 +380,7 @@ const currentCust = async () => {
           )} */}
           <Item
               svg={
-                <AntDesign name="idcard" size={20} color={colors.black} />
+                <AntDesign name="hearto" size={20} color={colors.black} />
               }
               text={t('Favourites')}
               onPress={() => {

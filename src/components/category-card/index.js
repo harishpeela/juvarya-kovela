@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 
-/* eslint-disable react-native/no-inline-styles */
-=======
+
  /* eslint-disable react-native/no-inline-styles */
->>>>>>> caf945c0fdc8aaaf9474233d6af96946d9d6fad6
+
 import {
   View,
   Text,

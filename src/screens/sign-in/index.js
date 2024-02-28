@@ -24,43 +24,43 @@ import {
 import ApplicationContext from '../../utils/context-api/Context';
 import {PasswordField} from '../../components/inputfield';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
-import Snackbar from 'react-native-snackbar';
-import NetInfo from '@react-native-community/netinfo';
+// import Snackbar from 'react-native-snackbar';
+// import NetInfo from '@react-native-community/netinfo';
 
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
-  const [isConnected, setIsConnected] = useState(' ');
+  // const [isConnected, setIsConnected] = useState(' ');
 
-  useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener(state => {
-      setIsConnected(state.isConnected);
-    });
+  // useEffect(() => {
+  //   const unsubscribe = NetInfo.addEventListener(state => {
+  //     setIsConnected(state.isConnected);
+  //   });
 
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
-  const NetWorkChecking = () => {
-    if (isConnected === false) {
-      Snackbar.show({
-        text: 'No Internet Connection',
-        duration: Snackbar.LENGTH_INDEFINITE,
-        backgroundColor: 'grey',
-        action: {
-          text: 'Reload',
-          textColor: 'White',
-          onPress: () => {
-            RNRestart.Restart();
-          },
-        },
-      });
-    }
-  };
+  // const NetWorkChecking = () => {
+  //   if (isConnected === false) {
+  //     Snackbar.show({
+  //       text: 'No Internet Connection',
+  //       duration: Snackbar.LENGTH_INDEFINITE,
+  //       backgroundColor: 'grey',
+  //       action: {
+  //         text: 'Reload',
+  //         textColor: 'White',
+  //         onPress: () => {
+  //           RNRestart.Restart();
+  //         },
+  //       },
+  //     });
+  //   }
+  // };
 
-  useEffect(() => {
-    NetWorkChecking();
-  }, []);
+  // useEffect(() => {
+  //   NetWorkChecking();
+  // }, []);
 
   const {
     buttonTexts: {login, sigup},

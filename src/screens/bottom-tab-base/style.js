@@ -26,13 +26,28 @@ export const styles = StyleSheet.create({
     },
     focusedContainer: {
       height: 80,
-      width:90,
+      width:80,
       alignItems: 'center',
       borderRadius: 100,
       justifyContent: 'center',
       backgroundColor: 'white', 
       padding: 10,
-      marginBottom: 20
+      marginBottom: 20,
+      
+      
+    },
+    UserFeedFocusedContainer:{
+      height: 80,
+      width:80,
+      alignItems: 'center',
+      borderRadius: 100,
+      justifyContent: 'center',
+      backgroundColor: 'white', 
+      padding: 10,
+      marginBottom: 20,
+      borderWidth:0.5,
+      borderColor:'orange'
+      
     },
     mainContainer1:{
       // borderWidth:2
@@ -58,5 +73,6 @@ export const styles = StyleSheet.create({
     imageFocused: {
       height: 80,
       width: 80,
+      marginLeft:'1%'
     }
   });
