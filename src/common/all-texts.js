@@ -185,6 +185,7 @@ export const allTexts = {
     templeProfileToDoList:'TempleProfileToDoList',
     memberlist: 'MemberList',
     artistdonardetailslist: 'Artist_Donar_details_list',
+    kovelareels: 'KovelaReels',
   },
   homeHeader: {
     welcome: 'Welcome ',

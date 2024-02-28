@@ -10,17 +10,21 @@ const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
   console.log('itemdetails', itemDetails);
   const [feedData, setFeedData] = useState();
-  const [loader, setLoader] = useState();
+  const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
+  const [dataLoader, setDataLoader] = useState(false)
   const feedDetails = async () => {
-    console.log(itemDetails?.id, '----');
-    // setLoader(true);
+    // console.log(itemDetails?.id, '----');
+    setLoader(true);
+    setDataLoader(true);
     try {
       let result = await Feed(itemDetails.id);
       console.log('nab xa', result?.data);
-      if (result) {
+      if (result?.status === 200) {
         setFeedData(result?.data);
+        setLoader(false)
       } else {
+        setLoader(false)
       }
     } catch (error) {
       console.log('error in feed details ==>', error);
@@ -65,12 +69,14 @@ const Feeds = ({route, navigation}) => {
         />
       </View>
 
-      {loader ? (
+      {/* {loader ? (
         <Loader size={'medium'} color={colors.orangeColor} />
-      ) : (
+      ) : ( */}
         <ScrollView>
-          {console.log('feedsdata.like', feedData)}
-          <UserFeedCompList
+          {loader ? (
+            <Loader color={colors.orangeColor} />
+          ) : (
+            <UserFeedCompList
             id={feedData?.id}
             post={feedData}
             likes={feedData?.likesCount}
@@ -84,6 +90,7 @@ const Feeds = ({route, navigation}) => {
               })
             }
           />
+          )}
           <FlatList
             data={postsData}
             keyExtractor={({item, index}) => index}
@@ -110,7 +117,7 @@ const Feeds = ({route, navigation}) => {
             }
           />
         </ScrollView>
-      )}
+      {/* )} */}
     </SafeAreaView>
   );
 };

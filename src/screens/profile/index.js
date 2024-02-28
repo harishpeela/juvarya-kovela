@@ -378,6 +378,15 @@ const currentCust = async () => {
               }}
             />
           )} */}
+          <Item
+              svg={
+                <AntDesign name="idcard" size={20} color={colors.black} />
+              }
+              text={t('Favourites')}
+              onPress={() => {
+                navigation.navigate(allTexts.screenNames.favlist);
+              }}
+            />
           </View>
           <View style={styles.logoutbtnContainer}>
             <PrimaryButton
