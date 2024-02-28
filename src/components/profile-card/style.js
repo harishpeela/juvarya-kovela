@@ -6,17 +6,18 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginBottom: '10%',
   },
   nameText: {
     fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     color: colors.black,
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
   },
   emailText: {
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
     color: colors.orangeColor,
   },
-  noDobText: {fontSize: 12, color: colors.orangeColor, fontWeight: 'bold'}
+  noDobText: {fontSize: 12, color: colors.orangeColor, fontWeight: 'bold'},
 });
