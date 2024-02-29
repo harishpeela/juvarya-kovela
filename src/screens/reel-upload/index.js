@@ -9,6 +9,7 @@ import { allTexts, colors } from "../../common";
 import { Loader } from "../../components";
 import { launchImageLibrary } from "react-native-image-picker";
 import {EventInput} from "../../components/eventCreateInput";
+import RNFetchBlob from "rn-fetch-blob";
 const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
     const videoRef = useRef(null);
@@ -17,6 +18,19 @@ const ReelUpload = ({navigation, route}) => {
     const [description, setDescription] = useState('');
     const [isVideo, setIsVideo] = useState(false);
     const [loader, setLoader] = useState(false);
+    const [videoSize, setVideoSize] = useState(0);
+    const handleUpload = async (videoPath) => {
+        try {
+          const fileInfo = await RNFetchBlob.fs.stat(videoPath);
+          const fileSizeInBytes = fileInfo.size;
+    
+          setVideoSize(fileSizeInMB);
+    
+          // Your upload logic to the server goes here...
+        } catch (error) {
+          console.error(error);
+        }
+      };
     const onBuffer = buffer => {
         console.log('buffring', buffer);
       };
@@ -26,7 +40,7 @@ const ReelUpload = ({navigation, route}) => {
     
       const [mute, setMute] = useState(true);
     
-      const uploadVideo = () => {
+      const uploadVideo = async () => {
         try {
           launchImageLibrary(
             {
@@ -34,14 +48,19 @@ const ReelUpload = ({navigation, route}) => {
               require: 'video',
               includeBase64: true,
             },
-            res => {
+            res  =>  {
               if (!res?.didCancel) {
-                console.log('Image URI:', res?.assets[0]?.uri);
-                // setVideoRes(res?.assets[0]?.url);
+                console.log('Image URI:', res);
                 let video = getImageObj(res?.assets[0]?.uri);
-                console.log('video state', video);
-                setVideoRes(video)
-                setIsVideo(true)
+                let fileSizeInBytes = res?.assets[0]?.fileSize;
+                const fileSizeInMB = fileSizeInBytes / 1048576;
+                console.log('jhabskxja', fileSizeInMB);
+                if(fileSizeInMB > 50){
+                    alert('please upload video below 50mb')
+                } else{
+                    setVideoRes(video)
+                    setIsVideo(true)
+                }                
               } else {
                 console.log(res?.errorMessage);
               }
@@ -59,7 +78,7 @@ const ReelUpload = ({navigation, route}) => {
         const formdata = new FormData();
         formdata.append("description", description);
         formdata.append("jtProfile", "1" );
-        formdata.append('files', videoRes);
+        formdata.append('file', videoRes);
         console.log('formdata', formdata?._parts);
         if(!videoRes){
             alert('please upload video');
@@ -156,3 +175,11 @@ const ReelUpload = ({navigation, route}) => {
     )
 };
 export default ReelUpload;
+
+
+
+
+
+
+
+
