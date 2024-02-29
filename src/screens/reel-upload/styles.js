@@ -19,5 +19,15 @@ export const style = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         color: colors.white,
+    },
+    label: {
+        fontSize: 16,
+        color: colors.orangeColor,
+        fontWeight: 'bold'
+    },
+    input: {
+        borderBottomWidth: 0.5,
+        width: '90%',
+
     }
 })
