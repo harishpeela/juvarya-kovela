@@ -66,6 +66,7 @@ import {
   Artist_Donar_details_list,
   KovelaReels,
   NewUserProfile,
+  ArtistDonorScreen,
   ReelUpload,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
@@ -155,6 +156,7 @@ const App = () => {
       artistdonardetailslist,
       kovelareels,
       newuserprofile,
+      artistDonorScreen,
       reelupload,
     },
   } = allTexts;
@@ -253,6 +255,13 @@ const App = () => {
         <Stack.Screen
           name={profileEvents}
           component={Profile_Events}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={artistDonorScreen}
+          component={ArtistDonorScreen}
           options={{
             headerShown: false,
           }}

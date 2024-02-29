@@ -45,6 +45,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 18,
     textTransform: 'capitalize',
+    marginLeft:'-4%'
   },
   footerAction: {
     flexDirection: 'row',
