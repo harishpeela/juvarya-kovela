@@ -19,13 +19,11 @@ export const styles = StyleSheet.create({
     borderRadius: '50%',
   },
   header: {
-    // marginBottom: 20,
     marginTop: '7%',
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
-    // borderWidth:2,
     paddingHorizontal: '1.5%',
   },
   uploadContainer: {
