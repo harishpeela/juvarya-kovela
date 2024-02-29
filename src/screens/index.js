@@ -68,6 +68,7 @@ import Artist_Donar_details_list from './artist-donar-temple-members';
 import KovelaReels from './reels';
 import NewUserProfile from './newUserProfile/NewUserProfile';
 import ArtistDonorScreen from './artist_donor_screen';
+import ReelUpload from './reel-upload';
 export {
   CreatePost,
   Seemore,
@@ -138,5 +139,6 @@ export {
   Artist_Donar_details_list,
   KovelaReels,
   NewUserProfile,
-  ArtistDonorScreen
+  ArtistDonorScreen,
+  ReelUpload,
 };

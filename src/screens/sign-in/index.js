@@ -26,21 +26,20 @@ import {PasswordField} from '../../components/inputfield';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
- 
+
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
   const [isConnected, setIsConnected] = useState(' ');
- 
+  
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
     });
- 
     return () => {
       unsubscribe();
     };
   }, []);
- 
+
   const NetWorkChecking = () => {
     if (isConnected === false) {
       Snackbar.show({
@@ -233,5 +232,4 @@ const Signin = ({navigation}) => {
     </SafeAreaView>
   );
 };
- 
 export default Signin;
