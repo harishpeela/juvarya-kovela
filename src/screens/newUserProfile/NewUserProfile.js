@@ -9,12 +9,7 @@ import {
 } from 'react-native';
 import React, {useContext, useEffect, useState} from 'react';
 import {styles} from './styles';
-import {
-  EventCard,
-  ProfileFourthTab,
-  TempleProfile_PostsCard,
-  Terms_And_Conditions,
-} from '../../components';
+import {ProfileFourthTab, Terms_And_Conditions} from '../../components';
 import {BackgroundImageAClass, Loader} from '../../components';
 import {useTranslation} from 'react-i18next';
 import {allTexts} from '../../common';
