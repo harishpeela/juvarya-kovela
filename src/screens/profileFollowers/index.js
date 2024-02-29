@@ -90,9 +90,9 @@ const FollowersMembership = ({ route, navigation }) => {
                     name="user-unfollow"
                     color={'orange'}
                     size={30}
-                    style={{ marginBottom: '5%' }}
+                    style={{ marginBottom: '3%' }}
                   />
-                  <Text style={{fontSize:15,fontFamily:'Poppins-Medium',color:'orange'}}>No Followers Yet</Text>
+                  <Text style={{fontSize:16,fontFamily:'Poppins-Medium',color:'orange'}}>No Followers Yet</Text>
                 </View>
               ) : (
                 <>
@@ -129,7 +129,7 @@ const FollowersMembership = ({ route, navigation }) => {
                       )}
                     />
                   ) : searchedText && filteredData.length === 0 ? (
-                    <View style={styles.noDataContainer}>
+                    <View>
                       <View style={styles.noDataContainer}>
                         <SimpleLineIcons
 
