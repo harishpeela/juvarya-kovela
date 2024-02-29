@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
+    
   },
 });
 export const EventInput1 = ({
