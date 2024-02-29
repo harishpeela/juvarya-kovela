@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     height: 37,
     // borderWidth:0.5,
-    width:"136%",
+    width:"128%",
     borderRadius:10,
     textAlign:'center',
     // marginTop:20,

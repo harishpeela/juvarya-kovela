@@ -10,6 +10,7 @@ import {useIsFocused} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {FavTempleListCard} from '../../components';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 const Favorite = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
@@ -101,9 +102,9 @@ const Favorite = ({navigation}) => {
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
       <View style={{minHeight: 100, flexDirection: 'row'}}>
-        <TopBarcard
+        <TopBarCard2
           isBell={true}
-          menu={true}
+          back={true}
           navigation={navigation}
           navMenu={navigation}>
           <View style={styles.searchbarContainer}>
@@ -122,7 +123,7 @@ const Favorite = ({navigation}) => {
               }}
             />
           </View>
-        </TopBarcard>
+        </TopBarCard2>
       </View>
       {/* <View style={styles.headerContainer} /> */}
       <View style={styles.cardContainer}>

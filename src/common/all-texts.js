@@ -110,6 +110,7 @@ export const allTexts = {
     favorites: 'favorites',
     profile: 'profile',
     eventsScreen: 'EventsScreen',
+    kovelareels: 'KovelaReels',
   },
   screenTitles: {},
   screenNames: {
