@@ -120,6 +120,7 @@ const endpoints = {
   GET_PROFILE_TODO_LIST: 'jttask/customer/tasks',
   ARTIST_DONAR: 'jtprofile/profileAndDonor',
   REELS_LIST: 'jtreel/list',
+  SAVE_REEL: 'jtreel/create',
 };
 export const getInitialToken = async () => {
   try {
@@ -1227,6 +1228,17 @@ export const GetReels = async (pgNo, pgSz) => {
   try {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.REELS_LIST}?pageNo=${pgNo}&pageSize=${pgSz}`,
+    );
+    return result;
+  } catch (error) {
+    // console.log('error in profilepic get', error);
+  }
+};
+
+export const saveReels = async data => {
+  try {
+    let result = await axiosMultiPartFormData1.post(
+      `${endpoints.SAVE_REEL}`, data
     );
     return result;
   } catch (error) {
