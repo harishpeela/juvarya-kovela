@@ -10,7 +10,7 @@ import { getHomeFeedList, getNotifications, DeleteFeedData } from '../../utils/a
 import { UserFeedCompList } from '../../components';
 import { Loader } from '../../components';
 import { allTexts, colors } from '../../common';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
+import { FlatList } from 'react-native-gesture-handler';
 import Share from 'react-native-share';
 
 const UserFeedScreen = ({ navigation }) => {
