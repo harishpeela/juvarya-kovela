@@ -65,22 +65,15 @@ const FollowersMembership = ({ route, navigation }) => {
                 showCrossPress={true}
                 onCrossPress={() => {
                   setSearchedText('');
+                  TempleFolowers();
                   // getTemples(userDetails?.id, pageNo, 20);
-                  searchEvent(e);
                 }}
                 onTextChange={e => {
                   setSearchedText(e);
-                  performFilter(e);
+                  handleSearch(e);
                 }}
                 value={searchedText}
                 loading={false}
-              showCrossPress={true}
-              onCrossPress={() => {
-                setSearchedText('');
-                EventsList();
-              }}
-             
-             
               />
           </View>
         </TopBarCard2>
