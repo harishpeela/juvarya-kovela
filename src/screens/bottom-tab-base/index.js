@@ -147,7 +147,7 @@ export default BottomTabBase = ({navigation}) => {
               },
               tabBarIcon: ({color, size, focused}) => (
                 <View
-                  style={!focused ? styles.container : styles.focusedContainer}>
+                  style={!focused ? styles.container : styles.UserFeedFocusedContainer}>
                   {focused && (
                     <Entypo
                       name="dot-single"
@@ -173,7 +173,7 @@ export default BottomTabBase = ({navigation}) => {
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
                     <Entypo
-                      name="dot-single"
+                      name="heart"
                       size={20}
                       color={colors.orangeColor}
                       style={styles.dot}

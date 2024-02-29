@@ -123,7 +123,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     }>
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: 'row'
         }}
       >
         <TopBarcard

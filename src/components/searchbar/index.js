@@ -34,16 +34,20 @@ export const SearchBar = ({
         {/* ]}> */}
         <View style={styles.iconContainer}>
           {/* <Icon name="search1" size={16} color={colors.gray} style={{left:30,top:7}}/> */}
+
           <View style={{flexDirection:'row',width:'100%'}}>
+
           <TextInput
             onChangeText={onTextChange}
             placeholderTextColor={colors.gray}
             placeholder={placeHolder || 'Search temples'}
+
            
             style={{
               ...styles.field,
               color: colors.gray,
              
+
             }}
             value={value}
             onSubmitEditing={onSubmit}
@@ -60,7 +64,7 @@ export const SearchBar = ({
                   name="x-circle"
                   color={colors.orangeColor}
                   size={15}
-                  style={{marginLeft: '55%',marginTop:'6%'}}
+                  style={{marginLeft: '50%',marginTop:'6%'}}
                 />
               )}
             </>

@@ -117,10 +117,10 @@ const TempleCrew = ({route, navigation}) => {
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
-            name="caret-back-circle"
+            name="arrow-back-circle"
             size={36}
             color={colors.orangeColor}
-            style={{alignSelf: 'flex-start', justifyContent: 'center'}}
+            style={{alignSelf: 'flex-start', justifyContent: 'center',marginLeft:10}}
           />
         </TouchableOpacity>
         <View>
