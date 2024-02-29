@@ -66,6 +66,7 @@ import {
   Artist_Donar_details_list,
   KovelaReels,
   NewUserProfile,
+  ReelUpload,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -154,6 +155,7 @@ const App = () => {
       artistdonardetailslist,
       kovelareels,
       newuserprofile,
+      reelupload,
     },
   } = allTexts;
 
@@ -655,9 +657,16 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={kovelareels}
           component={KovelaReels}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
+         <Stack.Screen
+          name={reelupload}
+          component={ReelUpload}
           options={{
             headerShown: false,
           }}
