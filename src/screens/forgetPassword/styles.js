@@ -124,12 +124,15 @@ export const styles = StyleSheet.create({
   },
   errorContainer: {
     borderColor: 'red',
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    marginLeft:20
   },
   errorText: {
     color: 'red',
-    fontWeight: '500',
     fontSize: fontSize.small,
+    fontWeight:'normal',
+    justifyContent:'flex-start',
+    fontSize:10
   },
   overlay: {
     borderWidth: 2,

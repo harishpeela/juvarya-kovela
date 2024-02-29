@@ -67,9 +67,9 @@ const InvitationScreen = ({navigation, route}) => {
         /> */}
       </View>
       <View style={styles.headerContainer}>
-        <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={{marginLeft:10}} onPress={() => navigation.goBack()}>
         <Ionicons
-        name="caret-back-circle"
+        name="arrow-back-circle"
         size={36}
         color={colors.orangeColor}
         style={{alignSelf: 'flex-start', justifyContent: 'center'}}

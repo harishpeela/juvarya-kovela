@@ -34,6 +34,7 @@ const ForgetPassword = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [timer, setTimer] = useState('00');
   const [secLeft, setSecLeft] = useState(30);
+  const [resend, setResend] = useState(false);
   const [otp, setOtp] = useState('000000');
   let otpInput = useRef(null);
   const Ref = useRef(null);
@@ -100,7 +101,7 @@ const ForgetPassword = () => {
     console.log('res of otp', result?.data);
       if (result) {
         setOtp(Ootp);
-        alert('OTP Generated Successfully, check your spam folder if not received Email');
+        // alert('OTP Generated Successfully');
         // setTimeout(() => {
         //   Snackbar.show({
         //     // text: 'OTP Generated Successfully, check your spam folder if not received Email',
@@ -206,7 +207,10 @@ const ForgetPassword = () => {
 
   const resetHandler = () => {
     console.log('reset is trigerring here ');
+    setResend(true)
     otpGeneration();
+    const newTime = getDeadTime(true);
+    startTime(newTime);
   };
 
   const isChecked = true;
@@ -275,18 +279,19 @@ const ForgetPassword = () => {
                 }}
               />
               <View style={styles.timeContainer}>
-                {timer != '00:00' && (
+               {/* {console.log('timerrrrrrrrrrrrr',timer)} */}
+                {timer != '00:00' &&  (
                   <Text style={styles.expectOtp}>
                     Expect OTP in
                     <Text style={styles.black}>{` ${timer} seconds`}</Text>
                   </Text>
                 )}
-                {timer === '00:00' && (
+                {/* { resend &&  (
                   <Text style={styles.expectOtp}>
-                    Expect OTP in
+                    Expect OTP insuc
                     <Text style={styles.black}>{` ${timer} seconds`}</Text>
                   </Text>
-                )}
+                )} */}
 
                 <TouchableOpacity onPress={() => resetHandler()}>
                   <Text>Resend OTP</Text>
