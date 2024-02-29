@@ -13,7 +13,6 @@ const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
     const videoRef = useRef(null);
     const [videoRes, setVideoRes] = useState(null);
-    const [imgLoader, setImgLoader] = useState(false);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [description, setDescription] = useState('');
     const [isVideo, setIsVideo] = useState(false);
@@ -25,7 +24,7 @@ const ReelUpload = ({navigation, route}) => {
         console.log('error', error);
       };
     
-      const [mute, setMute] = useState(false);
+      const [mute, setMute] = useState(true);
     
     async function requestCameraPermission() {
         const granted = await PermissionsAndroid.request(
@@ -44,7 +43,6 @@ const ReelUpload = ({navigation, route}) => {
         }
       }
       const uploadVideo = () => {
-        setImgLoader(true);
         try {
           launchImageLibrary(
             {
@@ -56,15 +54,12 @@ const ReelUpload = ({navigation, route}) => {
               if (!res?.didCancel) {
                 console.log('Image URI:', res?.assets[0]?.uri);
                 // setVideoRes(res?.assets[0]?.url);
-                setImgLoader(false);
                 let video = getImageObj(res?.assets[0]?.uri);
                 console.log('video state', video);
                 setVideoRes(video)
                 setIsVideo(true)
-
               } else {
                 console.log(res?.errorMessage);
-                setImgLoader(false);
               }
             },
           );
@@ -94,6 +89,7 @@ const ReelUpload = ({navigation, route}) => {
       };
     
       const getImageObj = video => {
+        console.log('--=====---', video);
         let imageObj = {
           uri: video,
           name: 'myvideo.mp4',
@@ -101,7 +97,8 @@ const ReelUpload = ({navigation, route}) => {
         };
         return imageObj;
       };
-console.log('videiisjnns', isVideo);
+
+    console.log('isvideo', isVideo);
     return(
         <View style={style.container}>
             <View style={{height: '10%'}}>
@@ -110,7 +107,7 @@ console.log('videiisjnns', isVideo);
             {isVideo ? (
                 <TouchableOpacity
                 activeOpacity={0.9}
-                // onPress={() => setMute(!mute)}
+                onPress={() => setMute(!mute)}
                 style={{
                   width: '100%',
                   height: '40%',
@@ -150,7 +147,8 @@ console.log('videiisjnns', isVideo);
                 </TouchableOpacity>
             )}
             <View style={{marginTop: '5%'}}>
-                <EventInput lable={'Description'} value1={description} placeholder={'Please enter description'} editable={true} onChangeText={e => setDescription(e)} />
+                <Text> Description</Text>
+                {/* <EventInput lable={'Description'} value1={description} placeholder={'Please enter description'} editable={true} onChangeText={e => setDescription(e)} /> */}
             </View>
             
             <TouchableOpacity style={style.button} onPress={() => uploadVideoToServer()}>
