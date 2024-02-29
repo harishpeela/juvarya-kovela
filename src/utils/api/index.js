@@ -121,6 +121,7 @@ const endpoints = {
   ARTIST_DONAR: 'jtprofile/profileAndDonor',
   REELS_LIST: 'jtreel/list',
   SAVE_REEL: 'jtreel/create',
+  GET_ARTIST:'jtprofiletoartist/create',
 };
 export const getInitialToken = async () => {
   try {
@@ -428,6 +429,25 @@ export const profileToDoList = async data => {
     console.log('error', error);
   }
 };
+
+export const getNewArtist = async data => {
+  try {
+    let result = await axiosNewData.post(
+      `${endpoints.GET_ARTIST}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+
+
+
+
+
+
 export const GetProfileToDoList = async (pgno, pgSize) => {
   try {
     let result = await axiosNewData.get(

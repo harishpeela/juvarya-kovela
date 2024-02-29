@@ -16,6 +16,7 @@ const TempleCrew = ({route, navigation}) => {
   const [loader, setLoader] = useState(false);
   const [noTextLoader, setTextLoader] = useState(false);
   const {id, message} = route.params || {};
+  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',id)
   const [data, setData] = useState([]);
   const [donationData, setDonationData] = useState();
   const [roleType, setRoleType] = useState();
@@ -158,7 +159,7 @@ const TempleCrew = ({route, navigation}) => {
       <View style={{marginLeft: '5%'}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <View style={{alignItems: 'center'}}>
-            <TouchableOpacity
+            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.artistDonorScreen,{id:id})}
               style={{
                 height: 70,
                 width: 70,

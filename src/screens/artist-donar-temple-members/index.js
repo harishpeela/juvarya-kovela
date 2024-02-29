@@ -9,7 +9,7 @@ const Artist_Donar_details_list = ({route, navigation}) => {
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{height: '15%'}}>
         <TopBarCard2
-          txt={'Artist & Donar'}
+          txt={'Artist & Donor'}
           back={true}
           navigation={navigation}
           navBack={() => navigation.goBack()}
