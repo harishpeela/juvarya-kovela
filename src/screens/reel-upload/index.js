@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { saveReels } from "../../utils/api";
 import { TopBarCard2 } from "../../components/topBar1/topBarCard";
 import { style } from "./styles";
@@ -26,22 +26,6 @@ const ReelUpload = ({navigation, route}) => {
     
       const [mute, setMute] = useState(true);
     
-    async function requestCameraPermission() {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-          PermissionsAndroid.PERMISSIONS.GALLERY,
-          {
-            title: 'Camera Permission',
-            message: 'App needs camera access to take pictures.',
-          }
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log('Camera permission granted');
-          uploadVideo(); // Call your function to launch the camera
-        } else {
-          console.log('Camera permission denied');
-        }
-      }
       const uploadVideo = () => {
         try {
           launchImageLibrary(
@@ -77,7 +61,14 @@ const ReelUpload = ({navigation, route}) => {
         formdata.append("jtProfile", "1" );
         formdata.append('files', videoRes);
         console.log('formdata', formdata?._parts);
-        let responce = await saveReels(formdata)
+        if(!videoRes){
+            alert('please upload video');
+            setLoader(false);
+        } else if(description === ''){
+            alert('please add description');
+            setLoader(false);
+        } else{
+            let responce = await saveReels(formdata)
         console.log('responce', responce?.data?.message);
         if(responce?.data?.message === "Reel uploaded"){
             navigation.navigate(allTexts.tabNames.kovelareels);
@@ -86,10 +77,12 @@ const ReelUpload = ({navigation, route}) => {
             alert('something went wrong')
             setLoader(false);
         }
+        }
+        
       };
     
       const getImageObj = video => {
-        console.log('--=====---', video);
+        // console.log('--=====---', video);
         let imageObj = {
           uri: video,
           name: 'myvideo.mp4',
@@ -111,7 +104,7 @@ const ReelUpload = ({navigation, route}) => {
                 style={{
                   width: '100%',
                   height: '40%',
-                  backgroundColor: 'green'
+                //   backgroundColor: 'green'
                 }}>
                 <Video
                   videoRef={videoRef}
@@ -143,11 +136,12 @@ const ReelUpload = ({navigation, route}) => {
                   marginTop: '3%',
                 }}>
                     <Feather name="video" size={60} color={colors.orangeColor} />
-                    <Text style={{color: 'black', fontSize: 14}}>Please Upload Video </Text>
+                    <Text style={{color: 'black', fontSize: 14, color: colors.orangeColor}}>Please Upload Video </Text>
                 </TouchableOpacity>
             )}
-            <View style={{marginTop: '5%'}}>
-                <Text> Description</Text>
+            <View style={{marginTop: '5%', marginLeft: 20}}>
+                <Text style={style.label}> Description</Text>
+                <TextInput placeholder="Please enter description" onChangeText={e => setDescription(e)} style={style.input} multiline={true} />
                 {/* <EventInput lable={'Description'} value1={description} placeholder={'Please enter description'} editable={true} onChangeText={e => setDescription(e)} /> */}
             </View>
             
