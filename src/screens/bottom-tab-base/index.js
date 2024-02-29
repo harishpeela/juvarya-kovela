@@ -165,8 +165,8 @@ export default BottomTabBase = ({navigation}) => {
             }}
           />
           <Tab.Screen
-            name={allTexts.tabNames.favorites}
-            component={GetReelsScreen}
+            name={allTexts.tabNames.kovelareels}
+            component={KovelaReels}
             options={{
               tabBarIcon: ({color, size, focused}) => (
                 <View
