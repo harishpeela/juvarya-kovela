@@ -4,7 +4,7 @@ import {colors, fontFamily, fontSize} from '../../common';
 export const styles = StyleSheet.create({
   container: {
     height: '100%',
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#ffffff',
   },
   header: {
     marginTop: '10%',
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
     height: '6%',
     alignItems: 'center',
     alignContent: 'center',
-    backgroundColor: '#f1f1f1',
+    backgroundColor: 'white',
     borderWidth: 0,
   },
   button: {
@@ -347,7 +347,7 @@ export const styles = StyleSheet.create({
     borderBottomColor: colors.blue,
   },
   underline: {
-    borderStyle: 'dashed',
+    borderStyle:'dotted',
     borderWidth: 0.5,
     borderColor: colors.gray,
     marginVertical: 10,

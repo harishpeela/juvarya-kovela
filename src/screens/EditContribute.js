@@ -11,6 +11,7 @@ import {
   EventInput1
 } from '../components';
 import { styles } from './add-events/styles';
+import { TopBarCard2 } from '../components/topBar1/topBarCard';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -126,21 +127,16 @@ const isDarkMode = useColorScheme() === 'dark';
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../assets/images/backarrow.png')}
-              style={{ height: 10, width: 6 }} />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginHorizontal: '25%',
-              color: 'white',
-              alignSelf: 'center'
-            }}>
-            Edit Contribute
-          </Text>
+        <View>
+        
+        <View style={{minHeight: '25%'}}>
+        <TopBarCard2 
+        back={true}
+        txt={'Contribution'}
+        navigation={navigation}
+        marginLeft={'21%'}
+        />
+        </View>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
