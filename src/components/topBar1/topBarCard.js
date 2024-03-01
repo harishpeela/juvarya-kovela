@@ -52,8 +52,8 @@ export const TopBarcard = ({
           style={{
             flex: 1,
             flexDirection: 'row',
-            marginTop: '22%',
-            marginHorizontal: 5,
+            marginTop: '12%',
+            // marginHorizontal: 5,
           }}>
           {menu && (
             <View style={{marginLeft: '1%', flex: 1}}>
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
-    marginBottom: 10,
+    // marginBottom: 10,
     alignItems: 'flex-start',
     // justifyContent: 'center',
     flex: 1,

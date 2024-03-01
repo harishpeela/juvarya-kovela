@@ -317,10 +317,11 @@ const EventDetails = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{borderWidth: 0}}>
-        <View style={{minHeight: 130}}>
+        <View style={{minHeight: '15%'}}>
           <TopBarCard2
             txt={'Event Details'}
-            arrow={true}
+            back={true}
+            marginLeft={'15%'}
             onPress={() => navigation.goBack()}
           />
         </View>
