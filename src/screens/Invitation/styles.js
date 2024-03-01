@@ -31,7 +31,8 @@ export const styles = StyleSheet.create({
         borderBottomRightRadius:24,
         flexDirection:'row',
         alignItems:'center',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        marginTop:'5%'
     },
     subBtn: {
         backgroundColor: colors.orangeColor,

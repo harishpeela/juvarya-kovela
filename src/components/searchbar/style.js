@@ -15,14 +15,14 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     height: 37,
     // borderWidth:0.5,
-    width:"128%",
+    width:"120%",
     borderRadius:10,
     textAlign:'center',
     // marginTop:20,
     marginBottom:30,
     backgroundColor:'#FAFAFA',
     padding:10,
-    marginLeft:'17%'
+    marginLeft:'23%'
   },
   iconContainer: {
     paddingLeft:8,
@@ -32,6 +32,7 @@ export const styles = StyleSheet.create({
     height:40,
     width:190,
     marginLeft:'3%',
-    borderRadius:24
+    borderRadius:24,
+    
   },
 });

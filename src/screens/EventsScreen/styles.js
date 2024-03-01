@@ -22,14 +22,12 @@ export const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'space-between',
     // marginBottom:20,
-    bottom:'45%',
+    bottom: '45%',
     // // height:50,
     // marginLeft:'10%',
-    width:1,
+    width: 1,
     // backgroundColor:'black',
-    marginLeft:'10%'
-   
-    
+    marginLeft: '10%',
   },
 
   updateProfileTopCard: {
@@ -37,7 +35,7 @@ export const styles = StyleSheet.create({
   },
   followersContainer: {
     // height: '100%',
-    marginBottom: 'auto'
+    marginBottom: '15%',
   },
   sortContainer: {
     display: 'flex',
@@ -168,9 +166,8 @@ export const styles = StyleSheet.create({
     marginTop: '50%',
   },
   noText: {
-    fontSize:15,
+    fontSize: 15,
     color: colors.orangeColor,
-    fontFamily:'Poppins-Medium'
-   
+    fontFamily: 'Poppins-Medium',
   },
 });
