@@ -93,21 +93,6 @@ const Profile = ({navigation}) => {
       console.log('something went wrong', result)
     }
   };
-  // const GetCustProfilePic = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     let result = await GetProfilePic(userDetails?.email);
-  //     // console.log('profilepic ===>', result?.data);
-  //     if (result) {
-  //       setProfPic(result?.data);
-  //       setIsLoading(false);
-  //     } else {
-  //       setIsLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in get profile picture', error);
-  //   }
-  // };
 const currentCust = async () => {
   let result = await getUserInfoNew();
   console.log('res of profile', result?.data);
