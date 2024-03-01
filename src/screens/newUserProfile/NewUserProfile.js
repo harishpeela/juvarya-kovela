@@ -1,21 +1,28 @@
 import {
   StyleSheet,
+  FlatList,
   Text,
   View,
   Image,
   TouchableOpacity,
   Pressable,
   ScrollView,
+  Dimensions,
 } from 'react-native';
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useRef} from 'react';
 import {styles} from './styles';
-import {ProfileFourthTab, Terms_And_Conditions} from '../../components';
+import {
+  ProfileFourthTab,
+  TempleProfile_PostsCard,
+  Terms_And_Conditions,
+} from '../../components';
 import {BackgroundImageAClass, Loader} from '../../components';
 import {useTranslation} from 'react-i18next';
+
 import {allTexts} from '../../common';
 import {useColorScheme} from 'react-native';
 import {ProfileInfo} from '../../components';
-import {getUserInfoNew} from '../../utils/api';
+import {PostProfilePic, ShowReels, getUserInfoNew} from '../../utils/api';
 import {Modal} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -31,18 +38,34 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {MyDonations} from '../../utils/api';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import {PrimaryButton} from '../../components';
-
+import {launchImageLibrary} from 'react-native-image-picker';
 import ApplicationContext from '../../utils/context-api/Context';
 import {ProfileFifthTab} from '../../components/profilecomp';
+import Video from 'react-native-video';
 
 const NewUserProfile = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const {t} = useTranslation();
+  const videoRef = useRef(null);
+
+  const width = Dimensions.get('window').width;
+
+  const onBuffer = buffer => {
+    console.log('buffring', buffer);
+  };
+
+  const onError = error => {
+    console.log('error', error);
+  };
+
   // console.log('userdetails', userDetails);
   const {
     constants: {role},
   } = allTexts;
   const [roleType, setRoleType] = useState();
+  const [mute, setMute] = useState(true);
+
+  const [like, setLike] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isVIsibleModal, setIsVisibleModal] = useState(false);
   const [image, setImage] = useState(null);
@@ -61,6 +84,8 @@ const NewUserProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [roleId, setRoleId] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
+  const [userReels, setUserReels] = useState('');
+  const [currentFrame, setCurrentFrame] = useState('0');
 
   const Type = () => {
     let ROLES = userDetails?.role;
@@ -90,21 +115,23 @@ const NewUserProfile = ({navigation}) => {
       console.log('something went wrong', result);
     }
   };
-  // const GetCustProfilePic = async () => {
-  //   setIsLoading(true);
-  //   try {
-  //     let result = await GetProfilePic(userDetails?.email);
-  //     // console.log('profilepic ===>', result?.data);
-  //     if (result) {
-  //       setProfPic(result?.data);
-  //       setIsLoading(false);
-  //     } else {
-  //       setIsLoading(false);
-  //     }
-  //   } catch (error) {
-  //     console.log('error in get profile picture', error);
-  //   }
-  // };
+
+  const UserReels = async (pgNo, pgSize, bool) => {
+    const response = await ShowReels(pgNo, pgSize, bool);
+    if (response?.status === 200) {
+      setUserReels(response?.data?.data);
+      setLoader(false);
+    } else {
+      setLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    UserReels(0, 30, true);
+  }, []);
+
+  console.log(userReels);
+
   const currentCust = async () => {
     let result = await getUserInfoNew();
     console.log('res of profile', result?.data);
@@ -118,7 +145,7 @@ const NewUserProfile = ({navigation}) => {
           mediaType: 'photo',
           saveToPhotos: true,
           includeBase64: true,
-          // maxHeight: 1080,
+          // maxHeight: 1080,A
           // maxWidth: 1080,
         },
         res => {
@@ -261,7 +288,6 @@ const NewUserProfile = ({navigation}) => {
                   <EvilIcons
                     onPress={() => {
                       setImage(null);
-                      uploadPhoto();
                     }}
                     name="pencil"
                     color={colors.black}
@@ -284,9 +310,7 @@ const NewUserProfile = ({navigation}) => {
           ) : (
             <TouchableOpacity
               style={styles.uploadPic}
-              onPress={() => {
-                uploadPhoto();
-              }}>
+              onPress={() => uploadPhoto()}>
               {custDetails?.media ? (
                 <Image
                   source={{uri: custDetails?.media?.url}}
@@ -294,7 +318,7 @@ const NewUserProfile = ({navigation}) => {
                 />
               ) : (
                 <View style={styles.profileImage}>
-                  {/* <Icon name="camera" size={60} color={colors.orangeColor} /> */}
+                  <Icon name="camera" size={60} color={colors.orangeColor} />
                   <Image
                     source={{
                       uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
@@ -313,8 +337,34 @@ const NewUserProfile = ({navigation}) => {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
-        {currentIndex === 1 && (
-          // <EventCard />
+        {currentIndex === 1 || UserReels.length > 0 ? (
+          <View>
+            <FlatList
+              numColumns={3}
+              data={userReels}
+              style={{width: '100%'}}
+              keyExtractor={({item, index}) => index}
+              renderItem={({item, index}) => (
+                <Video
+                  videoRef={videoRef}
+                  onBuffer={onBuffer}
+                  poster="https://baconmockup.com/300/200/"
+                  onError={onError}
+                  repeat={false}
+                  source={{uri: item?.mediaList[0]?.url}}
+                  muted={mute}
+                  seek={40}
+                  paused={true}
+                  style={{
+                    width: width / 3,
+                    height: 100,
+                    backgroundColor: 'red',
+                  }}
+                />
+              )}
+            />
+          </View>
+        ) : (
           <View
             style={{
               justifyContent: 'center',
@@ -370,8 +420,8 @@ const NewUserProfile = ({navigation}) => {
                   />
                   <Item
                     svg={
-                      <Icon
-                        name="unlock"
+                      <FontAwesome5
+                        name="lock"
                         size={20}
                         color={isDarkMode ? 'black' : 'black'}
                       />
@@ -500,6 +550,29 @@ const NewUserProfile = ({navigation}) => {
             </ScrollView>
           </View>
         </Pressable>
+      </Modal>
+      <Modal
+        visible={isModal}
+        transparent={true}
+        onRequestClose={() => setIsModal(false)}>
+        <View style={styles.editPic}>
+          <TouchableOpacity
+            onPress={() => {
+              updateProfilePicture(), setIsModal(false);
+            }}>
+            <Text style={{color: 'white', fontSize: 12}}>
+              {' '}
+              Update Profile Picture
+            </Text>
+          </TouchableOpacity>
+          <View style={{borderWidth: 0.5, width: '100%', margin: 5}} />
+          <TouchableOpacity
+            onPress={() => {
+              setImage(null), setIsModal(false), setIsCross(false);
+            }}>
+            <Text style={{color: 'white', fontSize: 12}}>Cancel</Text>
+          </TouchableOpacity>
+        </View>
       </Modal>
     </View>
   );
