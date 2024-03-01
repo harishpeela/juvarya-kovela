@@ -48,7 +48,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         setLoading(false);
         setfilteredArray(dty);
         setFilteredList(dty);
-        console.log('>>>>>>>>>>>>>>',filteredList)
         setLoader(false);
         setRefreshing(false);
       }
@@ -111,17 +110,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
-    <ScrollView refreshControl={
-      <RefreshControl
-        refreshing={refreshing}
-        colors={[ colors.orangeColor]}
-        onRefresh={() => {
-          setRefreshing(true);
-          PopularTemplesss(pageNo, 100);
-          setLoader(false)
-        }}
-      />
-    }>
+    <View>
       <View
         style={{
           flexDirection: 'row',
@@ -156,7 +145,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       <ScrollView style={{height: '100%'}} refreshControl={
       <RefreshControl
         refreshing={refreshing}
-        colors={["red", colors.orangeColor, "blue"]}
+        colors={[colors.orangeColor]}
         onRefresh={() => {
           setRefreshing(true);
           PopularTemplesss(pageNo, 100);
@@ -308,7 +297,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         {nearBy ? (
              <>
               <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Nearby Temples</Text>
+              <Text style={styles.popularTextContainer}>Maha Shiva Ratri Temples</Text>
               <TouchableOpacity
                 onPress={() => {
                   seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {

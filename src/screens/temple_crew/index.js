@@ -16,7 +16,6 @@ const TempleCrew = ({route, navigation}) => {
   const [loader, setLoader] = useState(false);
   const [noTextLoader, setTextLoader] = useState(false);
   const {id, message} = route.params || {};
-  console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',id)
   const [data, setData] = useState([]);
   const [donationData, setDonationData] = useState();
   const [roleType, setRoleType] = useState();
@@ -29,21 +28,14 @@ const TempleCrew = ({route, navigation}) => {
     setTextLoader(true);
     try {
       let result = await MemberShipList(id, 0, 100);
-      console.log('res ==><><<>>', result?.data);
       let data = result?.data?.data;
       setMemberShipId(data[0]?.id);
-      console.log(data[0]?.id, 'data[0]?.id')
       let ID = data?.filter(item => item)?.map(({id}) => ({id}));
-      console.log('jknkjn.kjn.', ID);
       if (ID) {
         setData(ID);
         setLoader(false);
         setTextLoader(true);
-        // ID?.map(e => {
-        //   MembershipData(e);
-        // })
       } else {
-        // alert('SomeThing went wrong')
         setLoader(false);
       }
     } catch (error) {
@@ -58,13 +50,10 @@ const TempleCrew = ({route, navigation}) => {
     try {
       let result = await MembersList(memId?.id, 0, 10);
       let responce = result?.data;
-      console.log('===========responce ====>>', responce?.data);
       if (responce) {
-        console.log('resssdd', responce);
         setDonationData(responce);
         setTextLoader(false);
       } else {
-        console.log('res====>>', responce);
         setDonationData(undefined);
         setTextLoader(false);
       }
@@ -112,7 +101,6 @@ const TempleCrew = ({route, navigation}) => {
       prepare();
     }
   }, [isFocused]);
-  // console.log(donationData, 'jahsbxahbs');
   return (
     <View style={{backgroundColor: 'white',marginTop:'5%'}}>
       <View style={styles.headerContainer}>
