@@ -75,7 +75,7 @@ const SingleReel = ({item, index, currentIndex}) => {
           bottom: 0, //edited
           padding: 10,
         }}>
-        <View style={{}}>
+        <View style={{marginBottom: '20%'}}>
           <TouchableOpacity style={{width: 150}}>
             <View
               style={{width: 100, flexDirection: 'row', alignItems: 'center'}}>
@@ -88,7 +88,7 @@ const SingleReel = ({item, index, currentIndex}) => {
                   margin: 10,
                 }}>
                 <Image
-                  source={{uri: item?.postProfile ? item?.postProfile : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png'}}
+                  source={{uri: item?.user?.customerProfileUrl ? item?.user?.customerProfileUrl : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png'}}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -97,22 +97,22 @@ const SingleReel = ({item, index, currentIndex}) => {
                   }}
                 />
               </View>
-              <Text style={{color: 'white', fontSize: 16}}>{item?.title}</Text>
+              <Text style={{color: 'white', fontSize: 16}}>{item?.user?.firstName}</Text>
             </View>
           </TouchableOpacity>
           <Text style={{color: 'white', fontSize: 14, marginHorizontal: 10}}>
             {item?.description}
           </Text>
-          <View style={{flexDirection: 'row', padding: 10, marginBottom: '20%'}}>
+          {/* <View style={{flexDirection: 'row', padding: 10, marginBottom: '20%'}}>
             <Ionic
               name="ios-musical-note"
               style={{color: 'white', fontSize: 16}}
             />
             <Text style={{color: 'white'}}>Original Audio</Text>
-          </View>
+          </View> */}
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           position: 'absolute',
           bottom: 60, //edited
@@ -162,7 +162,7 @@ const SingleReel = ({item, index, currentIndex}) => {
             }}
           />
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };
