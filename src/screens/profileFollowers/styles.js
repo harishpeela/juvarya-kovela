@@ -28,8 +28,8 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     // borderWidth:5,
-    marginBottom:110,
-    backgroundColor:'white'
+    marginBottom: 110,
+    backgroundColor: 'white',
   },
   searchAndFilter: {
     display: 'flex',
@@ -39,9 +39,9 @@ export const styles = StyleSheet.create({
     marginTop: '5%',
     paddingHorizontal: '1%',
     justifyContent: 'space-between',
-    height:'7%',
-    width:'100%',
-    padding:'1%',
+    height: '7%',
+    width: '100%',
+    padding: '1%',
     alignContent: 'center',
     alignItems: 'center',
   },
@@ -58,33 +58,26 @@ export const styles = StyleSheet.create({
     height: '100%',
     // borderWidth:2,
   },
-  list: {
-    marginBottom: 240,
-  },
+  list: {},
   noDataContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '30%',
-    marginTop:'50%',
+    marginTop: '50%',
   },
   noDataText: {
     fontSize: 15,
     color: colors.orangeColor,
-    fontFamily:'Poppins-Medium'
+    fontFamily: 'Poppins-Medium',
   },
-  updateProfileTopCard:{
-    height:100
+  updateProfileTopCard: {
+    height: 100,
   },
-  searchbarContainer:{
-    bottom:'46%',
+  searchbarContainer: {
+    bottom: '46%',
     // width:100,
-    marginTop:'-6%',
+    marginTop: '-6%',
     // backgroundColor:'black',
-    marginLeft:'12%',
-    marginTop:'-1%'
-   
-   
-    
-  }
-
+    marginLeft: '12%',
+    marginTop: '-1%',
+  },
 });
