@@ -48,6 +48,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         setLoading(false);
         setfilteredArray(dty);
         setFilteredList(dty);
+        console.log('>>>>>>>>>>>>>>',filteredList)
         setLoader(false);
         setRefreshing(false);
       }
@@ -76,7 +77,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
 
   const renderLoder = () => {
     return loader ? (
-      <Text>no temples to Display</Text>
+      <Text>No Temples To Display</Text>
     ) : (
       <View style={{}}>
         <Loader size={'large'} color={colors.orangeColor} />
@@ -110,7 +111,21 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
+<<<<<<< HEAD
+    <ScrollView refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        colors={[ colors.orangeColor]}
+        onRefresh={() => {
+          setRefreshing(true);
+          PopularTemplesss(pageNo, 100);
+          setLoader(false)
+        }}
+      />
+    }>
+=======
     <View>
+>>>>>>> b6544c4347b5655e73dc38bfca8ed3c1c2aa42e8
       <View
         style={{
           flexDirection: 'row',
@@ -217,6 +232,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                       date={item.creationTime}
                       isFollowingTrue={isFollow}
                       pageNav={pageNav}
+                      description={item.description}
                     />
                   )}
                   onEndReachedThreshold={0.5}

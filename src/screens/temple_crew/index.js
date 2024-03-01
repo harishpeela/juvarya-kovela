@@ -114,7 +114,7 @@ const TempleCrew = ({route, navigation}) => {
   }, [isFocused]);
   // console.log(donationData, 'jahsbxahbs');
   return (
-    <View style={{backgroundColor: 'white'}}>
+    <View style={{backgroundColor: 'white',marginTop:'5%'}}>
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
