@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     width: '80%',
-    marginRight: 25,
+    // marginRight: 25,
   },
   itemText: {
     fontSize: 18,

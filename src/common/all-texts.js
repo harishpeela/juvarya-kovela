@@ -188,6 +188,8 @@ export const allTexts = {
     artistdonardetailslist: 'Artist_Donar_details_list',
     kovelareels: 'KovelaReels',
     newuserprofile: 'NewUserProfile',
+    artistDonorScreen:'ArtistDonorScreen',
+    reelupload: 'ReelUpload',
   },
   homeHeader: {
     welcome: 'Welcome ',

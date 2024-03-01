@@ -42,6 +42,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: 'black',
+    marginLeft: 3
   },
   nodataView: {
     flex: 1,
@@ -55,10 +56,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   searchContainers: {
-    bottom: '45%',
-    marginTop: '4%',
-    width: 1,
-    // backgroundColor:'black',
-    marginLeft: '10%',
-  },
+    bottom:'45%',
+    width:1,
+    marginLeft:'10%'    
+  }
 });

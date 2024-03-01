@@ -11,6 +11,7 @@ import {
   EventInput1
 } from '../../components';
 import { styles } from './styles';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
@@ -159,21 +160,16 @@ const Save_Highlight = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../../assets/images/backarrow.png')}
-              style={{ height: 10, width: 6 }} />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginHorizontal: '25%',
-              color: 'white',
-              alignSelf: 'center'
-            }}>
-            Edit Highlights
-          </Text>
+      <View>
+        
+        <View style={{minHeight: '45%'}}>
+        <TopBarCard2 
+        back={true}
+        txt={'Event HighLights'}
+        navigation={navigation}
+        marginLeft={'21%'}
+        />
+        </View>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
@@ -188,7 +184,7 @@ const Save_Highlight = ({ navigation, route }) => {
           )}
         </View>
       </View>
-      <ScrollView style={{ marginTop: '3%' }}>
+      <ScrollView style={{ backgroundColor:'white'}}>
         <EventInput lable={'Event Name'} placeholder={'Event Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
         {eventError && (
           <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>

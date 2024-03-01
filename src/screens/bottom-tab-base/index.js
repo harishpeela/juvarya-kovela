@@ -173,7 +173,7 @@ export default BottomTabBase = ({navigation}) => {
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
                     <Entypo
-                      name="heart"
+                      name="dot-single"
                       size={20}
                       color={colors.orangeColor}
                       style={styles.dot}
@@ -184,7 +184,7 @@ export default BottomTabBase = ({navigation}) => {
                     color={color}
                     size={focused ? 22 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Sprituals</Text>
+                  <Text style={{color: color, fontSize: 14}}>Spirituals</Text>
                 </View>
               ),
             }}

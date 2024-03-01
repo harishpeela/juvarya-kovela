@@ -48,6 +48,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         setLoading(false);
         setfilteredArray(dty);
         setFilteredList(dty);
+        console.log('>>>>>>>>>>>>>>',filteredList)
         setLoader(false);
         setRefreshing(false);
       }
@@ -76,7 +77,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
 
   const renderLoder = () => {
     return loader ? (
-      <Text>no temples to Display</Text>
+      <Text>No Temples To Display</Text>
     ) : (
       <View style={{}}>
         <Loader size={'large'} color={colors.orangeColor} />
@@ -110,22 +111,22 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
-    <ScrollView
-      refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          colors={['red', colors.orangeColor, 'blue']}
-          onRefresh={() => {
-            setRefreshing(true);
-            PopularTemplesss(pageNo, 100);
-            setLoader(false);
-          }}
-        />
-      }>
+    <ScrollView refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        colors={[ colors.orangeColor]}
+        onRefresh={() => {
+          setRefreshing(true);
+          PopularTemplesss(pageNo, 100);
+          setLoader(false)
+        }}
+      />
+    }>
       <View
         style={{
-          height: '20%',
-        }}>
+          flexDirection: 'row',
+        }}
+      >
         <TopBarcard
           menu={true}
           isBell={true}
@@ -152,7 +153,17 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
           </View>
         </TopBarcard>
       </View>
-      <>
+      <ScrollView style={{height: '100%'}} refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        colors={["red", colors.orangeColor, "blue"]}
+        onRefresh={() => {
+          setRefreshing(true);
+          PopularTemplesss(pageNo, 100);
+          setLoader(false)
+        }}
+      />
+    } >
         {loader ? (
           <View
             style={{
@@ -219,6 +230,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                       date={item.creationTime}
                       isFollowingTrue={isFollow}
                       pageNav={pageNav}
+                      description={item.description}
                     />
                   )}
                   onEndReachedThreshold={0.5}
@@ -292,7 +304,48 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
             )}
           </>
         )}
-      </>
-    </ScrollView>
+        <View>
+        {nearBy ? (
+             <>
+              <View style={styles.upComingTextTab}>
+              <Text style={styles.popularTextContainer}>Nearby Temples</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {
+                    data: NearByData,
+                  });
+                }}>
+                <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
+                  See all
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+              {searchedText === '' && (
+                <FlatList
+                  data={NearByData}
+                  horizontal
+                  style={{marginHorizontal: '4%'}}
+                  showsHorizontalScrollIndicator={false}
+                  keyboardShouldPersistTaps="handled"
+                  keyExtractor={({ item, index }) => item?.id}
+                  renderItem={({ item, index }) => (
+                    <NearByTemple
+                      post={item}
+                      name={item?.profileDTO?.name}
+                      templeId={item.templeClass}
+                      isFollowingTrue={item?.follow}
+                      pageNav={pageNav}
+                    />
+                  )}
+                  onEndReachedThreshold={0.5}
+                  decelerationRate={0.8}
+                />
+              )}
+             </>
+            ) : ''}
+        </View>
+      </ScrollView>
+    </View>
   );
 };

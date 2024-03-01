@@ -4,6 +4,8 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     marginLeft: 15,
-    fontSize: 20,
+    fontSize:16,
+    
+    
   },
 });

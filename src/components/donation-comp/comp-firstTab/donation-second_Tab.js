@@ -124,8 +124,8 @@ export const Donation_Second_Tab = ({
       <View style={styles.border} />
       <View style={styles.donationUser}>
         <Text style={{color: colors.black, fontSize: 12}}>
-          Feature your profile on temple page just by donating an amount more
-          than ₹201.
+          {/* Feature your profile on temple page just by donating an amount more
+          than ₹201. */}
         </Text>
         <View style={styles.userDonView}>
           <ImageBackground
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   userDonView: {
     flexDirection: 'row',
-    marginTop: 5,
+    marginTop: -10,
     alignItems: 'center',
   },
   usertext: {
