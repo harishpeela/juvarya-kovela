@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bodyContainer: {
-    marginHorizontal: '4%',
+    // marginHorizontal: '4%',
     // margin:1
     display: 'flex',
     flexDirection: 'column',
