@@ -56,16 +56,19 @@ export const SearchBar = ({
          
           </View>
           {loading && <Loader size={25} color={colors.green2} />}
+          
           {showCrossPress === true ? (
             <>
               {value !== '' && !loading && (
+              <View style={{backgroundColor:'#FAFAFA',height:37,borderRadius:10,width:50,marginLeft:30}}>
                 <Feather
                   onPress={onCrossPress}
                   name="x-circle"
                   color={colors.orangeColor}
                   size={15}
-                  style={{marginLeft: '50%',marginTop:'6%'}}
+                  style={{marginLeft: '35%',marginTop:'18%'}}
                 />
+                </View>
               )}
             </>
           ) : (

@@ -29,17 +29,17 @@ export const ProfileImage = ({profileImg}) => {
 };
 const styles = StyleSheet.create({
   profileView: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 120,
+    height: 120,
+    borderRadius: 100,
   },
   imgView: {
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderRadius: 90 / 2,
-    height: 90,
-    width: 90,
+    borderRadius: 100,
+    height: 120,
+    width:120,
     borderColor: '#CC4501',
   }
 });

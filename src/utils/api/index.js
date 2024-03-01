@@ -122,6 +122,7 @@ const endpoints = {
   REELS_LIST: 'jtreel/list',
   SAVE_REEL: 'jtreel/create',
   GET_ARTIST:'jtprofiletoartist/create',
+  GET_DONOR:'jtIdolDonation/save'
 };
 export const getInitialToken = async () => {
   try {
@@ -443,8 +444,17 @@ export const getNewArtist = async data => {
 };
 
 
-
-
+export const getNewDonor = async data => {
+  try {
+    let result = await axiosNewData.post(
+      `${endpoints.GET_DONOR}`,
+      data,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
 
 
 

@@ -155,7 +155,7 @@ const EventDetails = ({navigation, route}) => {
           })
         }>
         <Text style={{color: colors.blue}}>
-          + No Highlights here at this time
+          + No Highlights Here At This Time
         </Text>
       </TouchableOpacity>
     );
@@ -227,7 +227,7 @@ const EventDetails = ({navigation, route}) => {
             data: item,
           });
         }}>
-        <Text style={{color: colors.blue}}>+ No info here at this time</Text>
+        <Text style={{color: colors.blue}}>+ No Info Here At This Time</Text>
       </TouchableOpacity>
     );
   };
@@ -320,8 +320,8 @@ const EventDetails = ({navigation, route}) => {
         <View style={{minHeight: 130}}>
           <TopBarCard2
             txt={'Event Details'}
-            arrow={true}
-            onPress={() => navigation.goBack()}
+            back={true}
+            navigation={navigation}
           />
         </View>
         {item?.mediaList ? (
@@ -407,7 +407,7 @@ const EventDetails = ({navigation, route}) => {
                 onPress={() => setActiveTabIndex(index)}
                 style={{
                   backgroundColor:
-                    activeTabIndex === index ? colors.orangeColor : '#dddddd',
+                    activeTabIndex === index ? colors.orangeColor : colors.gray3,
                   borderRadius: 30,
                   paddingHorizontal: 15,
                   paddingVertical: 5,
@@ -415,7 +415,7 @@ const EventDetails = ({navigation, route}) => {
                 }}>
                 <Text
                   style={{
-                    color: activeTabIndex === index ? 'white' : 'grey',
+                    color: activeTabIndex === index ? 'white' : 'black',
                     fontWeight: '400',
                   }}>
                   {action.label}

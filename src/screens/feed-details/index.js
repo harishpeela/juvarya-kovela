@@ -62,7 +62,7 @@ const Feeds = ({route, navigation}) => {
       <View style={{height: 100}}>
         <TopBarCard2
           back={true}
-          txt={'Feeds'}
+          txt={'Posts'}
           navigation={navigation}
           navBack={() => navigation.goBack()}
           marginLeft={'30%'}
