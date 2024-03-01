@@ -12,6 +12,7 @@ import {EventInput} from "../../components/eventCreateInput";
 import RNFetchBlob from "rn-fetch-blob";
 const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
+    console.log('id in reels craetion', id)
     const videoRef = useRef(null);
     const [videoRes, setVideoRes] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,18 +20,7 @@ const ReelUpload = ({navigation, route}) => {
     const [isVideo, setIsVideo] = useState(false);
     const [loader, setLoader] = useState(false);
     const [videoSize, setVideoSize] = useState(0);
-    const handleUpload = async (videoPath) => {
-        try {
-          const fileInfo = await RNFetchBlob.fs.stat(videoPath);
-          const fileSizeInBytes = fileInfo.size;
-    
-          setVideoSize(fileSizeInMB);
-    
-          // Your upload logic to the server goes here...
-        } catch (error) {
-          console.error(error);
-        }
-      };
+   
     const onBuffer = buffer => {
         console.log('buffring', buffer);
       };
@@ -77,7 +67,7 @@ const ReelUpload = ({navigation, route}) => {
         // let video = getImageObj(videoUri);
         const formdata = new FormData();
         formdata.append("description", description);
-        formdata.append("jtProfile", "1" );
+        formdata.append("jtProfile", id ? id : '' );
         formdata.append('file', videoRes);
         console.log('formdata', formdata?._parts);
         if(!videoRes){
