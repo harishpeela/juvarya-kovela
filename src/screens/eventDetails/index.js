@@ -317,11 +317,16 @@ const EventDetails = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{borderWidth: 0}}>
-        <View style={{minHeight: 130}}>
+        <View style={{minHeight: '15%'}}>
           <TopBarCard2
             txt={'Event Details'}
             back={true}
+<<<<<<< HEAD
             navigation={navigation}
+=======
+            marginLeft={'15%'}
+            onPress={() => navigation.goBack()}
+>>>>>>> b6544c4347b5655e73dc38bfca8ed3c1c2aa42e8
           />
         </View>
         {item?.mediaList ? (

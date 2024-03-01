@@ -51,7 +51,7 @@ const SingleReel = ({item, index, currentIndex}) => {
           seek={40}
           style={{
             width: '100%',
-            height: '100%',
+            height: '95%',
             position: 'absolute',
           }}
         />
@@ -75,7 +75,7 @@ const SingleReel = ({item, index, currentIndex}) => {
           bottom: 0, //edited
           padding: 10,
         }}>
-        <View style={{}}>
+        <View style={{marginBottom: '20%'}}>
           <TouchableOpacity style={{width: 150}}>
             <View
               style={{width: 100, flexDirection: 'row', alignItems: 'center'}}>
@@ -103,16 +103,16 @@ const SingleReel = ({item, index, currentIndex}) => {
           <Text style={{color: 'white', fontSize: 14, marginHorizontal: 10}}>
             {item?.description}
           </Text>
-          <View style={{flexDirection: 'row', padding: 10, marginBottom: '20%'}}>
+          {/* <View style={{flexDirection: 'row', padding: 10, marginBottom: '20%'}}>
             <Ionic
               name="ios-musical-note"
               style={{color: 'white', fontSize: 16}}
             />
             <Text style={{color: 'white'}}>Original Audio</Text>
-          </View>
+          </View> */}
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           position: 'absolute',
           bottom: 60, //edited
@@ -162,7 +162,7 @@ const SingleReel = ({item, index, currentIndex}) => {
             }}
           />
         </View>
-      </View>
+      </View> */}
     </View>
   );
 };

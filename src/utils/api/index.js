@@ -121,6 +121,7 @@ const endpoints = {
   ARTIST_DONAR: 'jtprofile/profileAndDonor',
   REELS_LIST: 'jtreel/list',
   SAVE_REEL: 'jtreel/create',
+  USER_REEL: 'jtreel/list',
   GET_ARTIST:'jtprofiletoartist/create',
   GET_DONOR:'jtIdolDonation/save'
 };
@@ -1268,10 +1269,22 @@ export const GetReels = async (pgNo, pgSz) => {
 export const saveReels = async data => {
   try {
     let result = await axiosMultiPartFormData1.post(
-      `${endpoints.SAVE_REEL}`, data
+      `${endpoints.SAVE_REEL}`,
+      data,
     );
     return result;
   } catch (error) {
     // console.log('error in profilepic get', error);
+  }
+};
+
+export const ShowReels = async (pgNo, pgSize, bool) => {
+  try {
+    let result = await axiosMultiPartFormData1.get(
+      `${endpoints.USER_REEL}/bytype?pageNo=${pgNo}&pageSize=${pgSize}&templeFeed=${bool}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in userReels', error);
   }
 };

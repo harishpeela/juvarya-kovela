@@ -111,6 +111,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
+<<<<<<< HEAD
     <ScrollView refreshControl={
       <RefreshControl
         refreshing={refreshing}
@@ -122,9 +123,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         }}
       />
     }>
+=======
+    <View>
+>>>>>>> b6544c4347b5655e73dc38bfca8ed3c1c2aa42e8
       <View
         style={{
-          flexDirection: 'row'
+          flexDirection: 'row',
         }}
       >
         <TopBarcard
@@ -154,7 +158,17 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
           </View>
         </TopBarcard>
       </View>
-      <>
+      <ScrollView style={{height: '100%'}} refreshControl={
+      <RefreshControl
+        refreshing={refreshing}
+        colors={["red", colors.orangeColor, "blue"]}
+        onRefresh={() => {
+          setRefreshing(true);
+          PopularTemplesss(pageNo, 100);
+          setLoader(false)
+        }}
+      />
+    } >
         {loader ? (
           <View
             style={{
@@ -260,11 +274,53 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               </TouchableOpacity>
             </View>
 
-            <ScrollView style={{ paddingLeft: 12 }}>
               {searchedText === '' && (
                 <FlatList
                   data={NearByData}
                   horizontal
+                  showsHorizontalScrollIndicator={false}
+                  keyboardShouldPersistTaps="handled"
+                  style={{marginHorizontal: '4%'}}
+                  keyExtractor={({ item, index }) => item?.id}
+                  renderItem={({ item, index }) => (
+                    <NearByTemple
+                      post={item}
+                      name={item?.profileDTO?.name}
+                      templeId={item.templeClass}
+                      isFollowingTrue={item?.follow}
+                      pageNav={pageNav}
+                    />
+                  )}
+                  onEndReachedThreshold={0.5}
+                  decelerationRate={0.8}
+                />
+              )}
+             </>
+            ) : ''}
+          </>
+        )}
+        <View>
+        {nearBy ? (
+             <>
+              <View style={styles.upComingTextTab}>
+              <Text style={styles.popularTextContainer}>Nearby Temples</Text>
+              <TouchableOpacity
+                onPress={() => {
+                  seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {
+                    data: NearByData,
+                  });
+                }}>
+                <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
+                  See all
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+              {searchedText === '' && (
+                <FlatList
+                  data={NearByData}
+                  horizontal
+                  style={{marginHorizontal: '4%'}}
                   showsHorizontalScrollIndicator={false}
                   keyboardShouldPersistTaps="handled"
                   keyExtractor={({ item, index }) => item?.id}
@@ -281,12 +337,10 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                   decelerationRate={0.8}
                 />
               )}
-            </ScrollView>
              </>
             ) : ''}
-          </>
-        )}
-      </>
-    </ScrollView>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
