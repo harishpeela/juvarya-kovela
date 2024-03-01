@@ -51,7 +51,7 @@ const SingleReel = ({item, index, currentIndex}) => {
           seek={40}
           style={{
             width: '100%',
-            height: '100%',
+            height: '95%',
             position: 'absolute',
           }}
         />

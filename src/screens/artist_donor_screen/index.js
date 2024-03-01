@@ -5,7 +5,7 @@ import { colors } from '../../common';
 import SelectDropdown from 'react-native-select-dropdown';
 import { EventInput } from '../../components/eventCreateInput';
 import { PrimaryButton } from '../../components';
-import { getNewArtist } from '../../utils/api';
+import { getNewArtist , getNewDonor} from '../../utils/api';
 
 
  function ArtistForm({id}) {
@@ -26,7 +26,7 @@ import { getNewArtist } from '../../utils/api';
     console.log('artist>>>>>>>>>>>>>>>>>>>>>', payload);
    
     const result = await getNewArtist(payload);
-    console.log('result',result.data)
+    console.log('result',result?.data)
     // if (result.status === 200) {
     //   Alert.alert('Submitted Successfully !!!!!');
     // } else {
@@ -38,8 +38,8 @@ import { getNewArtist } from '../../utils/api';
       <ScrollView contentContainerStyle={{ flexGrow: 1}}>
         <View style={{marginTop:'35%'}}>
           <EventInput
-            lable={'Email or Mobile number'}
-            placeholder={'Enter Name'}
+            lable={'Email '}
+            placeholder={'Enter Email'}
             height={50}
             onChangeText={(e) => setEmail(e)}
             
@@ -54,7 +54,7 @@ import { getNewArtist } from '../../utils/api';
             <PrimaryButton
               text={'Submit'}
               bgColor={colors.orangeColor}
-              onPress={() =>Alert.alert('Page Under Development')}
+              onPress={() =>getArtist()}
             />
           </View>
         </View>
@@ -62,24 +62,55 @@ import { getNewArtist } from '../../utils/api';
     );
   }
   
-  function DonorForm() {
+  function DonorForm({id}) {
     const [date, setDate] = useState(new Date());
-    // const [email, setEmail] = useState(' ');
-  // const [associationYear, setAssociationYear] = useState(' ');
+    const [name, setName] = useState(' ');
+    const [profileId, setProfileId] = useState(' ');
+    const [email, setEmail] = useState(' ');
+    const [associationYear, setAssociationYear] = useState(' ');
+
+
+    const getDonor = async () => {
+      const payload = {
+        name:name,
+        profileId:id,
+        email: email,
+        associationYear:associationYear};
+  
+  
+      console.log('Donor>>>>>>>>>>>>>>>>>>>>>', payload);
+     
+      const result = await getNewDonor(payload);
+      console.log('result',result?.data)
+      // if (result.status === 200) {
+      //   Alert.alert('Submitted Successfully !!!!!');
+      // } else {
+      //   console.log('something went wrong');
+      // }
+    };
+
   
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View style={{marginTop:'35%'}}>
-          <EventInput
-            lable={'Email or Mobile number'}
+        <EventInput
+            lable={'Email '}
+            placeholder={'Enter Email '}
+            height={50}
+            onChangeText={(e) => setEmail(e)}
+            
+          />
+           <EventInput
+            lable={'Name'}
             placeholder={'Enter Name'}
             height={50}
-           
+            onChangeText={(e) => setName(e)}
             
           />
           <EventInput
             lable={'Year'}
             placeholder={'Enter Year'}
+            onChangeText={(e) => setAssociationYear(e)}
           />
           <View style={{ width: 200, alignSelf: 'center', marginTop: 20 }}>
             <PrimaryButton
@@ -102,7 +133,7 @@ export default function ArtistDonorScreen({ navigation,route }) {
   console.log('kkkkkkkkkkkkkk>>>>>>>>>>>',id)
   const roles = [
     { role: 'Artist', form: <ArtistForm id={id} /> },
-    { role: 'Donor', form: <DonorForm /> }
+    { role: 'Donor', form: <DonorForm id={id} /> }
   ];
   
  
@@ -111,7 +142,7 @@ export default function ArtistDonorScreen({ navigation,route }) {
 
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
-      <TouchableOpacity style={{ marginTop: 25 }} onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={{ marginTop: '10%' }} onPress={() => navigation.goBack()}>
         <Ionicons
           name="arrow-back-circle"
           size={36}

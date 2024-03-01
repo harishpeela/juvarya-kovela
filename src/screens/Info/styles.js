@@ -3,12 +3,11 @@ import {colors} from '../../common';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 'auto'
   },
   header: {
     height: 250,
     width: '100%',
-    backgroundColor: '#FFAB0F',
+    backgroundColor: 'white',
   },
   imgCard: {
     height: 140, 

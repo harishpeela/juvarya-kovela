@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: -20,
-    width:'80%',
-    marginLeft:15
+    width: '80%',
+    marginLeft: 15,
   },
   searchTextInput: {fontSize: 18, maxWidth: '75%'},
   upComingTextTab: {
@@ -42,6 +42,7 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '500',
     color: 'black',
+    marginLeft: 3
   },
   nodataView: {
     flex: 1,
@@ -55,12 +56,8 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   searchContainers: {
-   
     bottom:'45%',
     width:1,
-    // backgroundColor:'black',
-    marginLeft:'10%'
-   
-    
+    marginLeft:'10%'    
   }
 });

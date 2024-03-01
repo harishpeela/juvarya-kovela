@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   header: {
     height: 250,
     width: '100%',
-    backgroundColor: '#FFAB0F',
+    backgroundColor: 'white',
   },
   imgCard: {
     height: 140, 
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '5%'
+    marginTop: '-1%'
     
   },
   camera: {

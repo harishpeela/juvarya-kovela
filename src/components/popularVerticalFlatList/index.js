@@ -1,6 +1,5 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext} from 'react';
-import {styles} from './styles';
+import React, { useState, useContext } from 'react';
+import { styles } from './styles';
 import {
   ToastAndroid,
   TouchableOpacity,
@@ -8,34 +7,30 @@ import {
   View,
   Text,
 } from 'react-native';
-import {allTexts} from '../../common';
-import {colors} from '../../common';
+import { allTexts } from '../../common';
+import { colors } from '../../common';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ApplicationContext from '../../utils/context-api/Context';
-import {FollowUnFollow} from '../../utils/api';
+import { FollowUnFollow } from '../../utils/api';
+
+
 export const PopularTemplesVerticalList = ({
   name,
   post,
   pageNav,
   templeId,
   isFollowingTrue,
+  description
 }) => {
-  const {userDetails} = useContext(ApplicationContext);
+  const { userDetails } = useContext(ApplicationContext);
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
-  const [isFollow, setisFollow] = useState();
+  console.log('iiiiiiiiiiiiiiiiiiii',description)
+
   const FollowandUnFollow = d => {
     setIsLiked(!isLiked);
-    if (!isLiked) {
-      followTemples(d);
-    } else if (isLiked) {
-      setIsLiked(!isLiked);
-      followTemples(d);
-      // ToastAndroid.show(
-      //   'successfully you are unfollowing the temple',
-      //   ToastAndroid.SHORT,
-      // );
-    }
+    followTemples(d);
   };
+
   const followTemples = async d => {
     const payload = {
       jtCustomer: userDetails?.id,
@@ -48,15 +43,17 @@ export const PopularTemplesVerticalList = ({
       if (results && results.status === 200) {
         setIsLiked(!isLiked);
         ToastAndroid.show(
-          `Successfully you are${
-            !isFollow ? ' following' : ' unFollowing'
+          `Successfully you are ${
+            !isLiked ? 'following' : 'unFollowing'
           } temple!`,
           ToastAndroid.SHORT,
         );
       } else {
         if (results === undefined) {
           ToastAndroid.show(
-            'successfully you are following the temple',
+            `Successfully you are ${
+              !isLiked ? 'following' : 'unFollowing'
+            } temple!`,
             ToastAndroid.SHORT,
           );
           setIsLiked(!isLiked);
@@ -66,16 +63,21 @@ export const PopularTemplesVerticalList = ({
       console.log('error followTemples', error);
     }
   };
-  const onSelect = data => {
-    // setIsLiked(data?.selected);
-  };
+
+  const onSelect = data => {};
+
   return (
+    <View style={{flexDirection:'row'}}>
+    <View >
+
+   
     <TouchableOpacity
       style={{
         flex: 1,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        margin: 10,
+        marginTop: 10,
+        marginLeft:10
       }}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
@@ -89,33 +91,46 @@ export const PopularTemplesVerticalList = ({
             ? post?.logo
             : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
         }}
-        style={{height: '100%', width: '100%', borderRadius: 60}}
+        style={{
+          height:160,
+          width: 160,
+          borderRadius: 60,
+          flexDirection: 'row', 
+          alignItems: 'flex-end',
+          marginBottom:20
+          
+        }}
         imageStyle={{
           borderRadius: 20,
           height: '100%',
           width: '100%',
           resizeMode: 'stretch',
         }}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: '70%',
-          }}>
+        <View>
           <Text style={styles.textCard} numberOfLines={1}>
             {name.length < 10 ? `${name}` : `${name.substring(0, 10)}...`}
           </Text>
-          <TouchableOpacity onPress={() => FollowandUnFollow(templeId)}>
-            <Icon
-              name={isLiked ? 'heart' : 'heart-o'}
-              size={20}
-              color={isLiked ? colors.red1 : 'black'}
-              style={{marginRight: 20}}
-            />
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => FollowandUnFollow(templeId)}
+          style={{ marginBottom:2, marginLeft:12 }}>
+          <Icon
+            name={isLiked ? 'heart' : 'heart-o'}
+            size={15}
+            color={isLiked ? colors.red1 : 'black'}
+          />
+        </TouchableOpacity>
       </ImageBackground>
+      
     </TouchableOpacity>
+
+    </View>
+    <View style={{width:220,marginTop:10,marginLeft:10,marginRight:10}}>
+      <Text style={{color:'black',fontWeight:'bold'}}>
+      {name}
+      </Text>
+      <Text>{description}</Text>
+      </View>
+    </View>
   );
 };
