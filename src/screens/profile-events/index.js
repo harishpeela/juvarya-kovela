@@ -79,14 +79,13 @@ const {id, data, role, roleItemType} = route?.params || {};
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
-          minHeight: 120,
+          minHeight: 100,
           marginTop: '3%',
           marginBottom: '3%',
         }}
        >
         <TopBarCard2
           back={true}
-         
           navBack={() => navigation.goBack()}
           navigation={navigation}
           navMenu={navigation}
@@ -140,7 +139,7 @@ const {id, data, role, roleItemType} = route?.params || {};
                   data={data}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
-                  style={{ marginBottom: '46%' }}
+                  style={{ marginBottom: '35%' }}
                   keyExtractor={(item, index) => index.toString()}
                   renderItem={({ item }) => (
                     <EventCard2
