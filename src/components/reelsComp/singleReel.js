@@ -88,7 +88,7 @@ const SingleReel = ({item, index, currentIndex}) => {
                   margin: 10,
                 }}>
                 <Image
-                  source={{uri: item?.postProfile ? item?.postProfile : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png'}}
+                  source={{uri: item?.user?.customerProfileUrl ? item?.user?.customerProfileUrl : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png'}}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -97,7 +97,7 @@ const SingleReel = ({item, index, currentIndex}) => {
                   }}
                 />
               </View>
-              <Text style={{color: 'white', fontSize: 16}}>{item?.title}</Text>
+              <Text style={{color: 'white', fontSize: 16}}>{item?.user?.firstName}</Text>
             </View>
           </TouchableOpacity>
           <Text style={{color: 'white', fontSize: 14, marginHorizontal: 10}}>

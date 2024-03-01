@@ -57,7 +57,7 @@ const KovelaReels = ({navigation}) => {
           padding: 10,
         }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-          Spirituals
+         Spirituals
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.reelupload)}>
           <Feather name="camera" style={{ fontSize: 25, color: 'white' }} />
