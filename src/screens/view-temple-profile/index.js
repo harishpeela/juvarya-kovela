@@ -99,7 +99,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
-    } else if (!isFollow) {z
+    } else if (!isFollow) {
       followTemples(id);
       setisFollow(!isFollow);
     }
