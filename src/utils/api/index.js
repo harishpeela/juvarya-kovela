@@ -112,7 +112,7 @@ const endpoints = {
   NEAR_BY_TEMPLES: 'jtAddress/nearByTemples',
   UPLOAD_TEMPLE_PROFILE_PIC: 'picture/profile',
   PROFILE_NEAR_BY_TEMPLES: 'jtProfileToProfile/list/byProfile',
-  GET_TEMPLE_CLASS: 'jtProfileToProfile/list',
+  GET_TEMPLE_CLASS: 'jtprofile',
   ABOUT_TEMPLE: 'jtProfileHistory/find/byProfile',
   EDIT_ABOUT_TEMPLE: 'jtProfileHistory/update',
   SAVE_ABOUT_TEMPLE: 'jtProfileHistory/save',
@@ -1172,16 +1172,19 @@ export const getProfileNearByTemples = async (pgNo, pgSz, profId) => {
   }
 };
 
-export const getTempleClassDetails = async (profileId, templeClass) => {
+export const getTempleClassDetails = async (pgNo, pgSize, templeClass) => {
   try {
     let result = await axiosNotifications.get(
-      `${endpoints.GET_TEMPLE_CLASS}/byProfile?page=0&pageSize=20&profileId=${profileId}&templeClass=${templeClass}`,
+      `${endpoints.GET_TEMPLE_CLASS}/byTempleClass?pageNo=${pgNo}&pageSize=${pgSize}&templeClass=${templeClass}`,
     );
     return result;
   } catch (error) {
     return error;
   }
 };
+
+// https://kovela.app/profile/jtprofile/byTempleClass?pageNo=0&pageSize=200&templeClass=E
+
 export const getAboutTemple = async profId => {
   try {
     let result = await axiosNotifications.get(
