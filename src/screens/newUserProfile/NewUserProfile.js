@@ -42,7 +42,23 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import ApplicationContext from '../../utils/context-api/Context';
 import { ProfileFifthTab } from '../../components/profilecomp';
 import Video from 'react-native-video';
+import { Video_Player } from '../../components/video-thumbnail';
 const NewUserProfile = ({ navigation }) => {
+  const videos = [
+    {
+      id: 1,
+      title: 'Highlights',
+      videoUrl: 'https://fanfun.s3.ap-south-1.amazonaws.com/1709269123417myvideo.mp4',
+      thumbnailUrl: '', // Placeholder for generated thumbnail
+    },
+    {
+      id: 2,
+      title: 'Memories',
+      videoUrl: 'https://fanfun.s3.ap-south-1.amazonaws.com/17092995612801709299559358.jpg',
+      thumbnailUrl: '', // Placeholder for generated thumbnail
+    },
+    // Add more videos as needed
+  ];
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const { t } = useTranslation();
   const videoRef = useRef(null);
@@ -338,7 +354,7 @@ const NewUserProfile = ({ navigation }) => {
         />
         {currentIndex === 1 || UserReels.length > 0 ? (
           <View>
-            {/* <FlatList
+            <FlatList
               numColumns={3}
               data={userReels}
               style={{ width: '100%' }}
@@ -347,7 +363,7 @@ const NewUserProfile = ({ navigation }) => {
                 // <Video
                 //   videoRef={videoRef}
                 //   onBuffer={onBuffer}
-                //   poster={ item?.mediaList[0]?.url ? item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg'}
+                //   // poster={ item?.mediaList[0]?.url ? item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg'}
                 //   onError={onError}
                 //   repeat={false}
                 //   source={{uri: item?.mediaList[0]?.url}}
@@ -363,6 +379,8 @@ const NewUserProfile = ({ navigation }) => {
                 <Video
                   source={{ uri:  item?.mediaList[0]?.url}}
                   // style={{ width: 300, height: 200 }}
+                       videoRef={videoRef}
+
                   poster={item?.mediaList[0]?.url}
                   style={{
                          width: width / 3,
@@ -373,8 +391,9 @@ const NewUserProfile = ({ navigation }) => {
                     //  seek={40}
                     //  paused={true}
                 />
+                // <Video_Player key={item.id} video={item} />
               )}
-            /> */}
+            />
           </View>
         ) : (
           <View
