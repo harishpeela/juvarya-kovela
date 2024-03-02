@@ -367,7 +367,7 @@ const NewUserProfile = ({ navigation }) => {
                   onError={onError}
                   repeat={false}
                   source={{uri: item?.mediaList[0]?.url}}
-                  muted={() => setMute(!mute)}
+                  muted={mute}
                   seek={40}
                   paused={false}
                   style={{

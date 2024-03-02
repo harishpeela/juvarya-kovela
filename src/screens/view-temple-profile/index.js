@@ -118,6 +118,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const TempleAddressDetails = async templeId => {
+    console.log('tenpid', templeId);
     try {
       let result = await TempleAddress(templeId);
       console.log('templeAddress=====>', result?.data);
@@ -404,7 +405,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            {templeaddress?.jtProfileAddressDTO?.locality && (
+            {templeaddress?.locality && (
               <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '2%' }}>
                 <EvilIcons
                   style={{ color: colors.orangeColor, backgroundColor: 'white' }}
@@ -413,9 +414,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   color="white"
                 />
                 <Text style={{ fontSize: 12, color: 'gray' }}>
-                  {templeaddress?.jtProfileAddressDTO?.locality},{' '}
+                  {templeaddress?.locality},{' '}
                   {
-                    templeaddress?.jtProfileAddressDTO?.postalCodeDTO?.city
+                    templeaddress?.postalCodeDTO?.city
                       ?.name
                   }
                 </Text>
