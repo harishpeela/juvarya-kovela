@@ -25,6 +25,7 @@ const MyTemples = ({navigation}) => {
   const TempleDetails = async d => {
     try {
       let result = await getTempledetailsWithId(d?.id);
+      console.log('result?.res', result?.data)
       if (result) {
         let templesArray = {...d, ...result?.data};
         console?.log('res ====><', templesArray);
@@ -43,6 +44,7 @@ const MyTemples = ({navigation}) => {
     setLoading(true);
     try {
       let result = await AdminTemples();
+      console.log('admin', result?.data)
       let adminData = result?.data;
       adminData.map(e => {
         TempleDetails(e);
