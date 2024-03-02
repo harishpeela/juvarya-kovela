@@ -24,9 +24,9 @@ const FollowersMembership = ({ route, navigation }) => {
   const [loading, setLoading] = useState(false);
   let TempleFolowers = async () => {
     try {
-      let result = await TempleFollowersList(id);
-      if (result.status === 200) {
-        // console.log('data of temple followers', result?.data);
+      let result = await TempleFollowersList(0, 100, id);
+      if (result?.status === 200) {
+        console.log('data of temple followers', result?.data);
         setLoader(false);
         // if(result?.data?.data)
         if (result?.data?.data !== undefined) {
@@ -56,7 +56,7 @@ const FollowersMembership = ({ route, navigation }) => {
   };
 
   return (
-    <View>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{ minHeight: 120, marginTop: '3%' ,backgroundColor:'white'}}>
       <TopBarCard2  back={true}  navigation={navigation} navMenu={navigation} >
           <View style={styles.searchbarContainer}>

@@ -73,7 +73,7 @@ const endpoints = {
   NOTIFICATIONS: 'jtprofile/follower/notification',
   CUSTOMER_PROFILE_PICTURE: '/picture/customer?email',
   UPDATE_PROFILE_PICTURE: '/picture/customer',
-  TEMPLE_FOLLOWERS_LIST: '/jtfollower/profile?profileId',
+  TEMPLE_FOLLOWERS_LIST: '/jtfollower/profile',
   ADMIN_TEMPLES: 'jtprofile/admin/profiles',
   GET_POSTS: '/jtfeed/feedsOfProfile',
   GET_SEARCHED_POPULAR_TEMPELS: 'jtprofile/list',
@@ -123,7 +123,8 @@ const endpoints = {
   SAVE_REEL: 'jtreel/create',
   USER_REEL: 'jtreel/list',
   GET_ARTIST:'jtprofiletoartist/create',
-  GET_DONOR:'jtIdolDonation/save'
+  GET_DONOR:'jtIdolDonation/save',
+  EVENT_BY_COMMUNITY_ID: 'jtprofile/byCommunity',
 };
 export const getInitialToken = async () => {
   try {
@@ -356,10 +357,10 @@ export const Update_Profile = async data => {
     console.log('error in popular temples', error);
   }
 };
-export const TempleFollowersList = async id => {
+export const TempleFollowersList = async (pgNo, pgSz, id) => {
   try {
     let result = await axiosMultiPartFormData1.get(
-      `${endpoints.TEMPLE_FOLLOWERS_LIST}=${id}`,
+      `${endpoints.TEMPLE_FOLLOWERS_LIST}?pageNo=${pgNo}&pageSize=${pgSz}&profileId=${id}`,
     );
     return result;
   } catch (error) {
@@ -1285,6 +1286,17 @@ export const ShowReels = async (pgNo, pgSize, bool) => {
   try {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.USER_REEL}/bytype?pageNo=${pgNo}&pageSize=${pgSize}&templeFeed=${bool}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in userReels', error);
+  }
+};
+
+export const getEventByCommunityId = async (pgNo, pgSize, id) => {
+  try {
+    let result = await axiosNotifications.get(
+      `${endpoints.EVENT_BY_COMMUNITY_ID}?pageNo=${pgNo}&pageSize=${pgSize}&communityId=${id}`,
     );
     return result;
   } catch (error) {

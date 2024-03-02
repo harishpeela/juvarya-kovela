@@ -7,31 +7,24 @@ import { EventInput } from '../../components/eventCreateInput';
 import { PrimaryButton } from '../../components';
 import { getNewArtist , getNewDonor} from '../../utils/api';
 
-
  function ArtistForm({id}) {
    
-    const [date, setDate] = useState(new Date());
-    const [email, setEmail] = useState(' ');
-    // const [id, setId] = useState(' ');
+  const [email, setEmail] = useState(' ');
   const [associationYear, setAssociationYear] = useState(' ');
-
-    
+  
   const getArtist = async () => {
     const payload = {
       profileId:id,
       email: email,
       associationYear:associationYear};
-
-
-    console.log('artist>>>>>>>>>>>>>>>>>>>>>', payload);
    
     const result = await getNewArtist(payload);
     console.log('result',result?.data)
-    // if (result.status === 200) {
-    //   Alert.alert('Submitted Successfully !!!!!');
-    // } else {
-    //   console.log('something went wrong');
-    // }
+    if (result.status === 200) {
+      Alert.alert('Submitted Successfully !!!!!');
+    } else {
+      console.log('something went wrong');
+    }
   };
   
     return (
@@ -42,13 +35,11 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
             placeholder={'Enter Email'}
             height={50}
             onChangeText={(e) => setEmail(e)}
-            
           />
           <EventInput
             lable={'Year'}
             placeholder={'Enter Year'}
             onChangeText={(e) => setAssociationYear(e)}
-            
           />
           <View style={{ width: 200, alignSelf: 'center', marginTop: 20 }}>
             <PrimaryButton
@@ -69,7 +60,6 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
     const [email, setEmail] = useState(' ');
     const [associationYear, setAssociationYear] = useState(' ');
 
-
     const getDonor = async () => {
       const payload = {
         name:name,
@@ -77,18 +67,14 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
         email: email,
         associationYear:associationYear};
   
-  
-      console.log('Donor>>>>>>>>>>>>>>>>>>>>>', payload);
-     
-      const result = await getNewDonor(payload);
+        const result = await getNewDonor(payload);
       console.log('result',result?.data)
-      // if (result.status === 200) {
-      //   Alert.alert('Submitted Successfully !!!!!');
-      // } else {
-      //   console.log('something went wrong');
-      // }
+      if (result.status === 200) {
+        Alert.alert('Submitted Successfully !!!!!');
+      } else {
+        console.log('something went wrong');
+      }
     };
-
   
     return (
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -98,14 +84,12 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
             placeholder={'Enter Email '}
             height={50}
             onChangeText={(e) => setEmail(e)}
-            
           />
            <EventInput
             lable={'Name'}
             placeholder={'Enter Name'}
             height={50}
             onChangeText={(e) => setName(e)}
-            
           />
           <EventInput
             lable={'Year'}
@@ -117,7 +101,6 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
               text={'Submit'}
               bgColor={colors.orangeColor}
               onPress={() => getDonor()}
-             
             />
           </View>
         </View>
@@ -125,21 +108,14 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
     );
   }
 
-
-
 export default function ArtistDonorScreen({ navigation,route }) {
   const [selectedRole, setSelectedRole] = useState(null);
   const {id} = route.params || {}
-  console.log('kkkkkkkkkkkkkk>>>>>>>>>>>',id)
   const roles = [
     { role: 'Artist', form: <ArtistForm id={id} /> },
     { role: 'Donor', form: <DonorForm id={id} /> }
   ];
   
- 
-  
-  
-
   return (
     <View style={{ backgroundColor: 'white', flex: 1 }}>
       <TouchableOpacity style={{ marginTop: '10%' }} onPress={() => navigation.goBack()}>
@@ -178,7 +154,6 @@ export default function ArtistDonorScreen({ navigation,route }) {
       <View style={{ marginTop: 20 }}>
         {selectedRole && roles.find(item => item.role === selectedRole)?.form}
       </View>
-      
     </View>
   );
 }
