@@ -69,6 +69,7 @@ import KovelaReels from './reels';
 import NewUserProfile from './newUserProfile/NewUserProfile';
 import ArtistDonorScreen from './artist_donor_screen';
 import ReelUpload from './reel-upload';
+import Community_Events_Seeall from './comminity-events';
 export {
   CreatePost,
   Seemore,
@@ -141,4 +142,5 @@ export {
   NewUserProfile,
   ArtistDonorScreen,
   ReelUpload,
+  Community_Events_Seeall,
 };

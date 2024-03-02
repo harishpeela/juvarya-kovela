@@ -13,6 +13,7 @@ export const NearByTemple = ({
   pageNav,
   templeId,
   isFollowingTrue,
+  img,
 }) => {
   // console.log('NearByTemple component rendered at:', new Date().toLocaleTimeString());
   const [isLiked, setIsLiked] = useState(isFollowingTrue);
@@ -44,10 +45,9 @@ export const NearByTemple = ({
       console.log('77777777777', results?.data);
       if (results && results.status === 200) {
         ToastAndroid.show(
-          `Successfully you are  ${
-            results?.data?.message === 'Success: following'
-              ? 'Following'
-              : 'UnFollowing'
+          `Successfully you are  ${results?.data?.message === 'Success: following'
+            ? 'Following'
+            : 'UnFollowing'
           } the temple`,
           ToastAndroid.SHORT,
         );
@@ -79,7 +79,7 @@ export const NearByTemple = ({
           onSelect: onSelect,
         });
       }}>
-         {/* <TouchableOpacity style={{ position:'absolute',top:7,right:10}} onPress={() => FollowandUnFollow(templeId)}>
+      {/* <TouchableOpacity style={{ position:'absolute',top:7,right:10}} onPress={() => FollowandUnFollow(templeId)}>
           <Icon
             name={isLiked ? 'heart' : 'heart-o'}
             size={14}
@@ -87,23 +87,24 @@ export const NearByTemple = ({
             style={{ marginLeft:5}}
           />
         </TouchableOpacity> */}
-      <View style={{  alignItems: 'center', marginTop: 10, height: '70%',backgroundColor:'white'}}>
+      <View style={{ alignItems: 'center', marginTop: 10, height: '70%', backgroundColor: 'white' }}>
         <Image
           source={{
-            uri: post?.profileDTO?.logo
-              ? post?.profileDTO?.logo
+            uri: img ? img
               : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
           }}
           style={{ height: '100%', width: '90%', borderRadius: 15, resizeMode: 'cover' }}
           imageStyle={{ borderRadius: 20 }} />
       </View>
 
-      <View style={{ marginLeft: '5%', marginTop: '2%'}}>
-        <Text style={{color: colors.black, fontWeight: 'bold'}}>
+      <View style={{ marginLeft: '5%', marginTop: '2%' }}>
+        <Text style={{ color: colors.black, fontWeight: 'bold' }}>
           {name?.length < 20 ? `${name}` : `${name?.substring(0, 20)}..`}
           {/* {name} */}
         </Text>
-        <Text style={{fontSize: 9, color: 'gray', fontWeight: 'bold'}}>{post?.locality}, {post?.postalCodeDTO?.city?.name} </Text>
+        {post?.locality && (
+          <Text style={{ fontSize: 9, color: 'gray', fontWeight: 'bold' }}>{post?.locality}, {post?.postalCodeDTO?.city?.name} </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
