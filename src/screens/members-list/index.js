@@ -116,7 +116,7 @@ const isDarkMode = useColorScheme() === 'dark';
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text style={{color: isDarkMode ? 'black' : 'black'}}> no memberships for this temple</Text>
+                <Text style={{color: isDarkMode ? 'black' : 'black'}}> No Memberships For This Temple</Text>
               </View>
             )}
           </View>

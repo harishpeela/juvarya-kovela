@@ -72,6 +72,7 @@ export const NearByTemple = ({
         elevation: 4,
         shadowOpacity: 5,
         padding: 4,
+        
       }}
       onPress={() => {
         pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {

@@ -119,7 +119,7 @@ const TempleCrew = ({route, navigation}) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
             name="arrow-back-circle"
-            size={36}
+            size={39}
             color={colors.orangeColor}
             style={{alignSelf: 'flex-start', justifyContent: 'center',marginLeft:10}}
           />
