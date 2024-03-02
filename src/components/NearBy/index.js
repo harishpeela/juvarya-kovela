@@ -73,7 +73,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
 
   const eventsByCommunity = async () => {
-    let result = await getEventByCommunityId(0, 100, 3);
+    let result = await getEventByCommunityId(0, 100, 1);
     console.log('result of community id', result?.data);
     if(result?.status === 200){
       setEventCommunity(result?.data?.data);
