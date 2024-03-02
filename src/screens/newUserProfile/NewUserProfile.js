@@ -251,7 +251,7 @@ const NewUserProfile = ({ navigation }) => {
       <BackgroundImageAClass />
       <View style={styles.header}>
         <TouchableOpacity
-          style={{ borderRadius: 28 / 2 }}
+          style={{ borderRadius: 28 / 2 ,marginTop:12}}
           onPress={() => {
             navigation.goBack();
             route?.params?.onSelect({
