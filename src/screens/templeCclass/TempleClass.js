@@ -27,8 +27,8 @@ const TempleClass = ({route, navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '15%'}}>
+    <View style={{flex: 1,backgroundColor:'white'}}>
+      <View style={{height: '12%'}}>
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
@@ -49,13 +49,17 @@ const TempleClass = ({route, navigation}) => {
             renderItem={({item}) => (
               <View
                 style={{
-                  borderWidth: 1,
+                  borderWidth: 0.3,
                   display: 'flex',
                   flexDirection: 'row',
                   padding: 10,
                   marginHorizontal: 10,
                   borderRadius: 10,
                   marginVertical: 10,
+                  // marginBottom:-1,
+                  // backgroundColor:'red',
+                  
+                  
                 }}>
                 <Image
                   source={{
@@ -63,9 +67,9 @@ const TempleClass = ({route, navigation}) => {
                       ? item?.logo
                       : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                   }}
-                  style={{height: 60, width: 60, borderRadius: 70 / 2}}
+                  style={{height: 72, width: 72, borderRadius: 70 / 2}}
                 />
-                <Text style={{marginLeft: 20, marginTop: 20, color: 'black'}}>
+                <Text style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17}}>
                   {item?.name}
                 </Text>
               </View>

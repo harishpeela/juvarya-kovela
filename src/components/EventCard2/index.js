@@ -17,7 +17,7 @@ const EventCard2 = ({ navigation, data }) => {
           item: data,
         });
       }}>
-      <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 12 }}>
+      <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 15 }}>
         <AntDesign name={!isHearto ? 'hearto' : 'heart'} size={18} color={isHearto ? 'red' : 'gray'} />
       </TouchableOpacity>
       {data?.mediaList ? (
@@ -35,8 +35,10 @@ const EventCard2 = ({ navigation, data }) => {
         style={styles.Image}
       />
       )}
-      <Text style={[styles.festivalText]}>{data?.name?.length < 12 ? data?.name : `${data?.name?.substring(0, 12)} ...`}</Text>
-      <View style={{ borderRadius: 10, backgroundColor: colors.gray0, width: '80%', height: '20%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%' }}>
+      <View style={{marginTop:10,marginLeft:10,alignContent:'center'}}>
+      {/* <Text style={[styles.festivalText]}>{data?.name?.length < 12 ? data?.name : `${data?.name?.substring(0, 12)} ...`}</Text> */}
+      <Text style={[styles.festivalText]}>{data?.name}</Text>
+      <View style={{ borderRadius: 10, backgroundColor: colors.white, width: '100%', height: '40%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%',marginLeft:16 }}>
         <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
           <View style={{ backgroundColor: 'white', height: 16, width: 16, justifyContent: 'center', alignItems: 'center',borderRadius:3 }}>
             <FeatherIcon style={{ color: colors.orangeColor }} name="calendar" size={12} color="white" />
@@ -54,6 +56,8 @@ const EventCard2 = ({ navigation, data }) => {
         ) : (
           ''
         )}
+      </View>
+      
       </View>
     </TouchableOpacity>
   );

@@ -347,6 +347,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
              </>
             ) : ''}
       </ScrollView>
-    </View>
+    </ScrollView>
+    
   );
 };

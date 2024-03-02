@@ -4,17 +4,19 @@ import { Directions } from 'react-native-gesture-handler'
 
 export const styles = StyleSheet.create({
     container: {
-        height: 250,
+        height: 150,
+        width:'98%',
         marginHorizontal: "1%",
         marginVertical: "1%",
-        width: '48%',
-        elevation: 3,
+        // width: '48%',
+        // elevation:5,
         shadowColor: colors.black,
         borderColor:colors.black,
-        borderWidth:0.5,
+        borderWidth:0.4,
         backgroundColor: colors.white,
         // justifyContent: 'space-between',
         borderRadius: 24,
+        flexDirection:'row'
     },
     secondContainer: {
         flexDirection: 'row',
@@ -28,7 +30,7 @@ export const styles = StyleSheet.create({
         height: 120,
         width: 120,
         borderRadius: 120 / 2,
-        marginLeft: '15%',
+        marginLeft: '3%',
         marginTop: 15,
     },
     dateContainer: {
@@ -47,7 +49,9 @@ export const styles = StyleSheet.create({
         fontSize: fontSize.small,
         fontWeight: '50',
         alignSelf: 'center',
-        marginTop: '5%'
+        marginTop: '5%',
+        backgroundColor:'white',
+        marginLeft:15
     },
     locationAddressContainer: {
         marginTop: 5,

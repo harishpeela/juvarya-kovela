@@ -156,7 +156,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   }, []);
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
-    // console.log('result of events', result?.data);
+    console.log('result of events', result?.data);
     if (result?.data) {
       setEvents(result?.data);
     }

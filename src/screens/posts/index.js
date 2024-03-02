@@ -19,7 +19,7 @@ const Posts = ({navigation, route}) => {
       </View>
       {!posts?.length ? (
         <View style={styles.noposts}>
-          <Text style={styles.noposttext}> no posts to display</Text>
+          <Text style={styles.noposttext}> No Posts To Display</Text>
         </View>
       ) : (
         <FlatList

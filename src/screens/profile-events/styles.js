@@ -15,6 +15,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10,
     marginBottom: '3%',
+    // backgroundColor:'green'
     
   },
   searchContainers: {
