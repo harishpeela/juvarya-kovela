@@ -66,6 +66,7 @@ const NewUserProfile = ({ navigation }) => {
   const width = Dimensions.get('window').width;
 
   const onBuffer = buffer => {
+
     console.log('buffring', buffer);
   };
 
@@ -97,7 +98,6 @@ const NewUserProfile = ({ navigation }) => {
   const [MyDonationsList, setMyDonationsList] = useState([]);
   const [custDetails, setCustDetails] = useState();
   const isDarkMode = useColorScheme() === 'dark';
-  const [roleId, setRoleId] = useState();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [userReels, setUserReels] = useState('');
   const [currentFrame, setCurrentFrame] = useState('0');
@@ -113,9 +113,8 @@ const NewUserProfile = ({ navigation }) => {
   };
   useEffect(() => {
     Type();
-    // GetCustProfilePic();
   }, []);
-  
+
   const updateProfilePicture = async () => {
     let img = getImageObj(image);
     let formdata = new FormData();
@@ -353,48 +352,50 @@ const NewUserProfile = ({ navigation }) => {
           setCurrentIndex={setCurrentIndex}
         />
         {currentIndex === 1 || UserReels.length > 0 ? (
-          <View>
+          <ScrollView style={{ marginBottom: 10}}>
             <FlatList
               numColumns={3}
               data={userReels}
               style={{ width: '100%' }}
               keyExtractor={({ item, index }) => index}
               renderItem={({ item, index }) => (
+                <TouchableOpacity>
+                  <Video
+                  videoRef={videoRef}
+                  onBuffer={() => onBuffer()}
+                  // poster={ item?.mediaList[0]?.url ? item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg'}
+                  onError={onError}
+                  repeat={false}
+                  source={{uri: item?.mediaList[0]?.url}}
+                  muted={() => setMute(!mute)}
+                  seek={40}
+                  paused={false}
+                  style={{
+                    width: width / 2,
+                    height: 220,
+                    backgroundColor: 'red',
+                    margin: 2
+                  }}
+                />
+                </TouchableOpacity>
                 // <Video
+                //   source={{ uri: item?.mediaList[0]?.url }}
                 //   videoRef={videoRef}
-                //   onBuffer={onBuffer}
-                //   // poster={ item?.mediaList[0]?.url ? item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg'}
-                //   onError={onError}
-                //   repeat={false}
-                //   source={{uri: item?.mediaList[0]?.url}}
-                //   muted={mute}
-                //   seek={40}
-                //   paused={true}
+                //   // controls={true}
+                //   // poster={item?.mediaList[0]?.url}
                 //   style={{
                 //     width: width / 3,
-                //     height: 100,
+                //     height: 120,
                 //     backgroundColor: 'red',
                 //   }}
+                //   muted={mute}
+                //  seek={40}
+                //  paused={false}
+                //  extraData={item?.length}
                 // />
-                <Video
-                  source={{ uri:  item?.mediaList[0]?.url}}
-                  // style={{ width: 300, height: 200 }}
-                       videoRef={videoRef}
-
-                  poster={item?.mediaList[0]?.url}
-                  style={{
-                         width: width / 3,
-                         height: 120,
-                         backgroundColor: 'red',
-                       }}
-                  muted={mute}
-                    //  seek={40}
-                    //  paused={true}
-                />
-                // <Video_Player key={item.id} video={item} />
               )}
             />
-          </View>
+          </ScrollView>
         ) : (
           <View
             style={{
@@ -407,17 +408,6 @@ const NewUserProfile = ({ navigation }) => {
           </View>
         )}
 
-        {/* {currentIndex === 4 && (
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: '20%',
-            }}>
-            <Feather name="camera-off" size={40} style={styles.noPosts} />
-            <Text style={styles.noPosts}>No posts Yet</Text>
-          </View>
-        )} */}
       </View>
 
       <Modal

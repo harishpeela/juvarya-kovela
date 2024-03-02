@@ -99,7 +99,7 @@ export default BottomTabBase = ({navigation}) => {
           />
           <Tab.Screen
             name={allTexts.tabNames.search}
-            component={Search}
+            component={GetSearchScreen}
             options={{
               tabBarIcon: ({color, size, focused}) => (
                 <View
