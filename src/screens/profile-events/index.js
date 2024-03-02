@@ -135,7 +135,6 @@ const {id, data, role, roleItemType} = route?.params || {};
             <>
               {data?.length ? (
                 <FlatList
-                  numColumns={2}
                   data={data}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}

@@ -62,12 +62,12 @@ const EventsScreen = ({navigation, route}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-14%'}}>
       <View
         style={{
           // flexDirection: 'row',
           // height: 150,
-          height: '17%',
+          height: '11%',
         }}>
         <TopBarcard
           menu={true}
@@ -103,7 +103,7 @@ const EventsScreen = ({navigation, route}) => {
             searchedText === '' &&
             eventsData && (
               <FlatList
-                numColumns={2}
+                numColumns={1}
                 data={eventsData}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={styles.flatListStyle}

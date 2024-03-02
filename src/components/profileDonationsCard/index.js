@@ -48,14 +48,18 @@ export const ProfileDonationsCard = ({data}) => {
         <View
           style={{
             padding: 8,
-            elevation: 3,
+            // elevation: 2,
             width: 90,
             alignSelf: 'flex-end',
             alignItems: 'center',
-            shadowOpacity: 3,
+            // shadowOpacity: 3,
             shadowColor: 'gray',
-            borderWidth: 1,
+            borderWidth:0.2,
             borderColor: 'white',
+            marginRight:5,
+            borderRadius:4,
+            borderColor:'black'
+           
           }}>
           <Text style={styles.rs}>₹{data?.donation}</Text>
         </View>
