@@ -21,7 +21,7 @@ import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
 import {PopularTemples, SearchPopularTemples} from '../../utils/api';
 import {useIsFocused} from '@react-navigation/native';
 import {TopBarcard} from '../topBar1/topBarCard';
-import {NearByTempleClass, getNearByTemples} from '../../utils/api';
+import {NearByTempleClass, getNearByTemples, getEventByCommunityId} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
@@ -38,8 +38,9 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   const [NearByData, setNearByData] = useState();
   const [refreshing, setRefreshing] = useState(true);
   const [nearBy, setNearBy] = useState(true);
+  const [eventCommunity, setEventCommunity] = useState();
   const PopularTemplesss = async () => {
-    setLoader(true);
+    setLoader(false);
     try {
       let result = await PopularTemples(0, 100);
       // console.log('populattemples', result?.data);
@@ -48,7 +49,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         setLoading(false);
         setfilteredArray(dty);
         setFilteredList(dty);
-        console.log('>>>>>>>>>>>>>>',filteredList)
         setLoader(false);
         setRefreshing(false);
       }
@@ -71,9 +71,21 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       // setLoader(false);
     }
   };
+
+  const eventsByCommunity = async () => {
+    let result = await getEventByCommunityId(0, 100, 3);
+    console.log('result of community id', result?.data);
+    if(result?.status === 200){
+      setEventCommunity(result?.data?.data);
+    } else {
+      alert('no data')
+    }
+  }
+
   useEffect(() => {
     NearByTemples();
-  }, []);
+    eventsByCommunity();
+  }, [isFocused]);
 
   const renderLoder = () => {
     return loader ? (
@@ -89,8 +101,8 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
     setIsLoading(false);
   };
 
-  useEffect(() => {}, [isFocused]);
 
+  
   useFocusEffect(
     useCallback(() => {
       if (pageNo >= 0) {
@@ -111,17 +123,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   };
   // console.log('filtered array ===>', filteredArray);
   return (
-    <ScrollView refreshControl={
-      <RefreshControl
-        refreshing={refreshing}
-        colors={[ colors.orangeColor]}
-        onRefresh={() => {
-          setRefreshing(true);
-          PopularTemplesss(pageNo, 100);
-          setLoader(false)
-        }}
-      />
-    }>
+    <View>
       <View
         style={{
           flexDirection: 'row',
@@ -156,7 +158,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
       <ScrollView style={{height: '100%'}} refreshControl={
       <RefreshControl
         refreshing={refreshing}
-        colors={["red", colors.orangeColor, "blue"]}
+        colors={[colors.orangeColor]}
         onRefresh={() => {
           setRefreshing(true);
           PopularTemplesss(pageNo, 100);
@@ -167,14 +169,13 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
         {loader ? (
           <View
             style={{
-              height: '110%',
-              marginTop: '70%',
+              // height: '110%',
+              // marginTop: '70%',
             }}>
             <Loader color={colors.orangeColor} />
           </View>
         ) : (
           <>
-            <ScrollView style={{}}>
               {searchedText === '' && (
                 <>
                   <View style={styles.upComingTextTab}>
@@ -212,7 +213,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                   />
                 </>
               )}
-            </ScrollView>
             <ScrollView
               style={{
                 height: searchedText ? '75%' : 0,
@@ -255,10 +255,13 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                 </View>
               )}
             </ScrollView>
-
-            {nearBy ? (
+          </>
+        )}
+        <View>
+        </View>
+        {NearByData ? (
               <>
-                <ScrollView style={{paddingLeft: 12, bottom: 20}}>
+                <ScrollView style={{paddingLeft: 12}}>
                   <View style={styles.upComingTextTab}>
                     <Text style={styles.popularTextContainer}>
                       Nearby Temples
@@ -291,6 +294,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                           templeId={item.templeClass}
                           isFollowingTrue={item?.follow}
                           pageNav={pageNav}
+                          img={item?.profileDTO?.logo}
                         />
                       )}
                       onEndReachedThreshold={0.5}
@@ -302,17 +306,14 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
             ) : (
               ''
             )}
-          </>
-        )}
-        <View>
-        {nearBy ? (
+            {eventCommunity?.length ? (
              <>
               <View style={styles.upComingTextTab}>
-              <Text style={styles.popularTextContainer}>Nearby Temples</Text>
+              <Text style={styles.popularTextContainer}>Maha Shiva Ratri Temples</Text>
               <TouchableOpacity
                 onPress={() => {
-                  seeallnav.navigate(allTexts.screenNames.nearByTempleSeeAll, {
-                    data: NearByData,
+                  seeallnav.navigate(allTexts.screenNames.communityeventsseeall, {
+                    data: eventCommunity,
                   });
                 }}>
                 <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
@@ -323,7 +324,7 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
 
               {searchedText === '' && (
                 <FlatList
-                  data={NearByData}
+                  data={eventCommunity}
                   horizontal
                   style={{marginHorizontal: '4%'}}
                   showsHorizontalScrollIndicator={false}
@@ -332,9 +333,10 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
                   renderItem={({ item, index }) => (
                     <NearByTemple
                       post={item}
-                      name={item?.profileDTO?.name}
+                      name={item?.name}
                       templeId={item.templeClass}
                       isFollowingTrue={item?.follow}
+                      img={item?.logo}
                       pageNav={pageNav}
                     />
                   )}
@@ -344,7 +346,6 @@ export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
               )}
              </>
             ) : ''}
-        </View>
       </ScrollView>
     </View>
   );

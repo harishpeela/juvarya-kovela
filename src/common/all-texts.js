@@ -190,6 +190,7 @@ export const allTexts = {
     newuserprofile: 'NewUserProfile',
     artistDonorScreen:'ArtistDonorScreen',
     reelupload: 'ReelUpload',
+    communityeventsseeall: 'Community_Events_Seeall',
   },
   homeHeader: {
     welcome: 'Welcome ',

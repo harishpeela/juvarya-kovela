@@ -68,6 +68,7 @@ import {
   NewUserProfile,
   ArtistDonorScreen,
   ReelUpload,
+  Community_Events_Seeall,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -158,6 +159,7 @@ const App = () => {
       newuserprofile,
       artistDonorScreen,
       reelupload,
+      communityeventsseeall,
     },
   } = allTexts;
 
@@ -386,13 +388,13 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name={userFeedScreen}
           component={UserFeedScreen}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name={abouttemple}
           component={AboutTemple}
@@ -666,16 +668,16 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={kovelareels}
-          component={KovelaReels}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
          <Stack.Screen
           name={reelupload}
           component={ReelUpload}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={communityeventsseeall}
+          component={Community_Events_Seeall}
           options={{
             headerShown: false,
           }}
