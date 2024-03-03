@@ -131,4 +131,6 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     color: colors.gray4,
   },
+  iconContainer: {flex: 0.15},
+
 });
