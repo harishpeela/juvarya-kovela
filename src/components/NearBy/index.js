@@ -312,7 +312,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
             ) : (
               ''
             )}
-            {searchedText === '' ? (
+            {searchedText === '' && eventCommunity ? (
               <>
                 <View style={styles.upComingTextTab}>
                   <Text style={styles.popularTextContainer}>Maha Shiva Ratri Temples</Text>

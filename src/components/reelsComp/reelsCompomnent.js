@@ -5,6 +5,7 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import SingleReel from './singleReel';
 const ReelsComponent = ({videoData}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [mute, setMute] = useState(false);
   const handleChangeIndexValue = ({index}) => {
     setCurrentIndex(index);
   };
@@ -16,7 +17,7 @@ const ReelsComponent = ({videoData}) => {
       data={videoData}
       
       renderItem={({item, index}) => (
-        <SingleReel item={item} index={index} currentIndex={currentIndex} />
+        <SingleReel item={item} index={index} onPress={() =>setMute(!mute) } mute={mute} currentIndex={currentIndex} />
       )}
       keyExtractor={(item, index) => index}
     />
