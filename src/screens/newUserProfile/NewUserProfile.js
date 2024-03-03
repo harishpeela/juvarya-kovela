@@ -44,34 +44,26 @@ import { ProfileFifthTab } from '../../components/profilecomp';
 import Video from 'react-native-video';
 import { Video_Player } from '../../components/video-thumbnail';
 const NewUserProfile = ({ navigation }) => {
-  const videos = [
-    {
-      id: 1,
-      title: 'Highlights',
-      videoUrl: 'https://fanfun.s3.ap-south-1.amazonaws.com/1709269123417myvideo.mp4',
-      thumbnailUrl: '', // Placeholder for generated thumbnail
-    },
-    {
-      id: 2,
-      title: 'Memories',
-      videoUrl: 'https://fanfun.s3.ap-south-1.amazonaws.com/17092995612801709299559358.jpg',
-      thumbnailUrl: '', // Placeholder for generated thumbnail
-    },
-    // Add more videos as needed
-  ];
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
+  const [height, setHeight] = useState('');
+  const [widthh, setWidth] = useState('');
   const { t } = useTranslation();
   const videoRef = useRef(null);
-
   const width = Dimensions.get('window').width;
-
   const onBuffer = buffer => {
-
-    console.log('buffring', buffer);
   };
 
   const onError = error => {
-    console.log('error', error);
+  };
+
+  const getImageSize = () => {
+    if (post?.mediaList[0]?.url === ' ') {
+      console.log('');
+    } else {
+      Image.getSize(post?.mediaList[0]?.url, (width, height) => {
+        setHeight(height), setWidth(width);
+      });
+    }
   };
 
   // console.log('userdetails', userDetails);
@@ -147,9 +139,15 @@ const NewUserProfile = ({ navigation }) => {
   console.log('userreels=======>', userReels);
 
   const currentCust = async () => {
+    setIsLoading(true)
     let result = await getUserInfoNew();
     console.log('res of profile', result?.data);
-    setCustDetails(result?.data);
+    if(result?.status === 200){
+      setCustDetails(result?.data);
+      setIsLoading(false)
+    } else{
+      setIsLoading(false)
+    }
   };
 
   const uploadPhoto = () => {
@@ -260,7 +258,7 @@ const NewUserProfile = ({ navigation }) => {
             });
           }}>
           <TouchableOpacity
-            style={styles.iconContainer}
+            style={styles.e}
             onPress={() => {
               navigation.goBack();
             }}>
@@ -272,7 +270,6 @@ const NewUserProfile = ({ navigation }) => {
             />
           </TouchableOpacity>
 
-          {/* )} */}
         </TouchableOpacity>
         <View style={styles.menuAndAlert}>
           {/* <TouchableOpacity
@@ -332,13 +329,13 @@ const NewUserProfile = ({ navigation }) => {
                 />
               ) : (
                 <View style={styles.profileImage}>
-                  <Icon name="camera" size={60} color={colors.orangeColor} />
-                  <Image
+                  <Icon name="camera" size={60} color={colors.orangeColor}  />
+                  {/* <Image
                     source={{
                       uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
                     }}
                     style={styles.profileImage}
-                  />
+                  /> */}
                 </View>
               )}
             </TouchableOpacity>
@@ -352,31 +349,48 @@ const NewUserProfile = ({ navigation }) => {
           setCurrentIndex={setCurrentIndex}
         />
         {currentIndex === 1 || UserReels.length > 0 ? (
-          <ScrollView style={{ marginBottom: 10}}>
+          <ScrollView style={{ marginBottom: 10, height: '60%'}}>
             <FlatList
               numColumns={3}
               data={userReels}
-              style={{ width: '100%' }}
+              style={{  }}
               keyExtractor={({ item, index }) => index}
               renderItem={({ item, index }) => (
                 <TouchableOpacity>
-                  <Video
-                  videoRef={videoRef}
-                  onBuffer={() => onBuffer()}
-                  // poster={ item?.mediaList[0]?.url ? item?.mediaList[0]?.url : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707633657171Trinetra.jpg'}
-                  onError={onError}
-                  repeat={false}
-                  source={{uri: item?.mediaList[0]?.url}}
-                  muted={mute}
-                  seek={40}
-                  paused={false}
-                  style={{
-                    width: width / 2,
-                    height: 220,
-                    backgroundColor: 'red',
-                    margin: 2
-                  }}
-                />
+                  {widthh > height ? (
+                    <Video
+                    videoRef={videoRef}
+                    onBuffer={() => onBuffer()}
+                    onError={onError}
+                    repeat={false}
+                    source={{uri: item?.mediaList[0]?.url}}
+                    // muted={mute}
+                    seek={40}
+                    paused={false}
+                    style={{
+                      width: Dimensions.get('window').width / 2,
+                      height: 60,
+                      margin: 2
+                    }}
+                  />
+                  ) : (
+                    <Video
+                    videoRef={videoRef}
+                    onBuffer={() => onBuffer()}
+                    onError={onError}
+                    repeat={false}
+                    source={{uri: item?.mediaList[0]?.url}}
+                    muted={mute}
+                    seek={40}
+                    paused={false}
+                    style={{
+                      height: Dimensions.get('window').height / 6 + 60,
+                      width: Dimensions.get('window').width /  3,
+                      // backgroundColor: 'red',
+                      margin: 2,
+                    }}
+                  />
+                  )}
                 </TouchableOpacity>
                 // <Video
                 //   source={{ uri: item?.mediaList[0]?.url }}

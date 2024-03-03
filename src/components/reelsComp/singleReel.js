@@ -44,7 +44,7 @@ const SingleReel = ({item, index, currentIndex, onPress, mute}) => {
           videoRef={videoRef}
           onBuffer={onBuffer}
           onError={onError}
-          repeat={true}
+          repeat={false}
           resizeMode="cover"
           paused={currentIndex == index ? false : true}
           source={{uri: item?.mediaList[0]?.url}}
