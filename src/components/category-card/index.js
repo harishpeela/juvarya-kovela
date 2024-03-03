@@ -278,23 +278,6 @@ export const UserFeedCompList = ({
                         }}
                       />
                     )}
-                    {/* <Image
-                      source={{uri: item?.url}}
-                      style={{
-                        flex: 1,
-                        height: height >,
-                        width: width > 700 ? (Dimensions.get('window').width) : (),
-                        // resizeMode: 'contain',
-                        backgroundColor: 'black',
-                      }}
-                    /> */}
-                    {/* <Entypo name='dots-three-vertical' size={20} color={colors.orangeColor} style={{ position: 'absolute', right: 10, top: 10 }} onPress={() => setIsVisible(!isVisible)} />
-                    {isVisible && (
-                       <TouchableOpacity style={{ position: 'absolute', top: 15, right: 25, backgroundColor: 'white', padding: 10, borderRadius: 10}}
-                       onPress={() => {setIsVisible(!isVisible); downloadImageRemote(item?.url)}}>
-                       <Text style={{fontWeight: 'bold'}}> Download</Text>
-                     </TouchableOpacity>
-                    )} */}
                   </View>
                 ) : (
                   <Loader color={colors.orangeColor} size={'small'} />

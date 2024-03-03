@@ -17,9 +17,9 @@ const EventCard2 = ({ navigation, data }) => {
           item: data,
         });
       }}>
-      <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 15 }}>
+      {/* <TouchableOpacity onPress={() => setIsHearto(!isHearto)} style={{ position: 'absolute', right: 15, top: 15 }}>
         <AntDesign name={!isHearto ? 'hearto' : 'heart'} size={18} color={isHearto ? 'red' : 'gray'} />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {data?.mediaList ? (
        <Image
         source={{

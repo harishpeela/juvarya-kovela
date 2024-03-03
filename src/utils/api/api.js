@@ -13,22 +13,13 @@ import RNRestart from 'react-native-restart';
 
 // ****   production Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://fanfun.in/customer/api/';
-export const BASE = 'https://fanfun.in/media/';
-export const POPULARURL = 'https://fanfun.in/profile/';
-export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
-export const EVENTS_URL = 'https://fanfun.in/events/';
-export const DONATION_URL = 'https://fanfun.in/donations/';
-export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
-
-// export const BASE_URL = 'http://20.235.89.214:8082/api/';
-// export const BASEURL = 'https://kovela.app/customer/api/';
-// export const BASE = 'https://kovela.app/media/';
-// export const POPULARURL = 'https://kovela.app/profile/';
-// export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
-// export const EVENTS_URL = 'https://kovela.app/events/';
-// export const DONATION_URL = 'https://kovela.app/donations/';
-// export const TEMPLE_ADDRESS = 'https://kovela.app/customer/';
+export const BASEURL = 'https://kovela.app/customer/api/';
+export const BASE = 'https://kovela.app/media/';
+export const POPULARURL = 'https://kovela.app/profile/';
+export const MEMBER_SHIP_URL = 'https://kovela.app/membership/';
+export const EVENTS_URL = 'https://kovela.app/events/';
+export const DONATION_URL = 'https://kovela.app/donations/';
+export const TEMPLE_ADDRESS = 'https://kovela.app/customer/';
 
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
@@ -54,8 +45,6 @@ export const authAxiousForgotPassword = axios.create({
     'Content-Type': 'application/json',
   },
 });
-
-
 
 export const authAxiosAddTempId = axios.create({
   baseURL: BASE_URL,

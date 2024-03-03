@@ -221,9 +221,8 @@ export const TempleCommunity = async templeId => {
 
 export const TempleAddress = async templeId => {
   try {
-    let result = await axiousInstanceNew2.get(
+    let result = await axiosNewData.get(
       `${endpoints.TEMPLE_ADDRESS}/${templeId}`,
-      {},
     );
     return result;
   } catch (error) {

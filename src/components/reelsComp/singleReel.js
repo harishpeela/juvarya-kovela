@@ -5,7 +5,7 @@ import Ionic from 'react-native-vector-icons/Ionicons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 
-const SingleReel = ({item, index, currentIndex}) => {
+const SingleReel = ({item, index, currentIndex, onPress, mute}) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
 
@@ -18,7 +18,7 @@ const SingleReel = ({item, index, currentIndex}) => {
     console.log('error', error);
   };
 
-  const [mute, setMute] = useState(false);
+  // const [mute, setMute] = useState(false);
 
   const [like, setLike] = useState(item.isLike);
 
@@ -33,7 +33,8 @@ const SingleReel = ({item, index, currentIndex}) => {
       }}>
       <TouchableOpacity
         activeOpacity={0.9}
-        onPress={() => setMute(!mute)}
+        // onPress={() => setMute(!mute)}
+        onPress={onPress}
         style={{
           width: '100%',
           height: '100%',
@@ -43,7 +44,7 @@ const SingleReel = ({item, index, currentIndex}) => {
           videoRef={videoRef}
           onBuffer={onBuffer}
           onError={onError}
-          repeat={true}
+          repeat={false}
           resizeMode="cover"
           paused={currentIndex == index ? false : true}
           source={{uri: item?.mediaList[0]?.url}}

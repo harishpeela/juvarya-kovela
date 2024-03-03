@@ -279,6 +279,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     // borderWidth:0.2,
     // elevation:
+    marginTop: 3,
   },
   header: {
     flexDirection: 'row',
@@ -335,6 +336,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 31,
     width: 31,
-    marginLeft: '26%',
+    marginLeft: '23%',
   },
 });
