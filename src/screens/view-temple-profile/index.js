@@ -96,6 +96,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [templeaddress, setTempleAddress] = useState();
   const [events, setEvents] = useState([]);
   const [tempProfileData, setTempProfileData] = useState();
+  const [mainLoader, setMainLoader] = useState(false);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -294,6 +295,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   }, []);
   const dontationValue = async id => {
     setDonationLoader(true);
+    setMainLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
       console.log('top donation', result?.data?.data[0]);
@@ -301,17 +303,26 @@ const ViewTempleProfile = ({ route, navigation }) => {
         console.log('dontion ====>', result?.data?.data[0]);
         setDonationValue(result?.data?.data[0]);
         setDonationLoader(false);
+        setMainLoader(false);
       } else {
         setDonationValue([]);
         setDonationLoader(false);
+        setMainLoader(false);
       }
     } catch (error) {
       setDonationLoader(false);
       console.log('error in top donations api', error);
+      setMainLoader(false)
     }
   };
   return (
-    <ScrollView
+    <>
+    {mainLoader ? (
+      <View>
+        <Loader />
+      </View>
+    ) : (
+      <ScrollView
       style={{
         ...styles.maincontainer,
         backgroundColor: isDarkMode ? 'white' : 'white',
@@ -698,6 +709,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
         </Pressable>
       </Modal>
     </ScrollView>
+    )}
+    </>
   );
 };
 export default ViewTempleProfile;
