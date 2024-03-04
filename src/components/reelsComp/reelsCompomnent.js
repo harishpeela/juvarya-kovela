@@ -15,7 +15,6 @@ const ReelsComponent = ({videoData}) => {
       vertical={true}
       onChangeIndex={handleChangeIndexValue}
       data={videoData}
-      
       renderItem={({item, index}) => (
         <SingleReel item={item} index={index} onPress={() =>setMute(!mute) } mute={mute} currentIndex={currentIndex} />
       )}

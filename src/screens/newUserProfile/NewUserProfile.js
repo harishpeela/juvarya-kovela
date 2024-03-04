@@ -1,5 +1,4 @@
 import {
-  StyleSheet,
   FlatList,
   Text,
   View,
@@ -13,25 +12,21 @@ import React, { useContext, useEffect, useState, useRef } from 'react';
 import { styles } from './styles';
 import {
   ProfileFourthTab,
-  TempleProfile_PostsCard,
   Terms_And_Conditions,
 } from '../../components';
 import { BackgroundImageAClass, Loader } from '../../components';
 import { useTranslation } from 'react-i18next';
-
+import MaterialIconss from 'react-native-vector-icons/MaterialIcons';
 import { allTexts } from '../../common';
 import { useColorScheme } from 'react-native';
 import { ProfileInfo } from '../../components';
 import { PostProfilePic, ShowReels, getUserInfoNew } from '../../utils/api';
 import { Modal } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../../common';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
 import { Item } from '../../components';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -40,30 +35,17 @@ import { removeLoginSessionDetails } from '../../utils/preferences/localStorage'
 import { PrimaryButton } from '../../components';
 import { launchImageLibrary } from 'react-native-image-picker';
 import ApplicationContext from '../../utils/context-api/Context';
-import { ProfileFifthTab } from '../../components/profilecomp';
 import Video from 'react-native-video';
-import { Video_Player } from '../../components/video-thumbnail';
 const NewUserProfile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const [height, setHeight] = useState('');
   const [widthh, setWidth] = useState('');
   const { t } = useTranslation();
   const videoRef = useRef(null);
-  const width = Dimensions.get('window').width;
   const onBuffer = buffer => {
   };
 
   const onError = error => {
-  };
-
-  const getImageSize = () => {
-    if (post?.mediaList[0]?.url === ' ') {
-      console.log('');
-    } else {
-      Image.getSize(post?.mediaList[0]?.url, (width, height) => {
-        setHeight(height), setWidth(width);
-      });
-    }
   };
 
   // console.log('userdetails', userDetails);
@@ -72,7 +54,7 @@ const NewUserProfile = ({ navigation }) => {
   } = allTexts;
   const [roleType, setRoleType] = useState();
   const [mute, setMute] = useState(true);
-
+  const [modalMute, setModalMute] = useState(true)
   const [like, setLike] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isVIsibleModal, setIsVisibleModal] = useState(false);
@@ -93,6 +75,8 @@ const NewUserProfile = ({ navigation }) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [userReels, setUserReels] = useState('');
   const [currentFrame, setCurrentFrame] = useState('0');
+  const [isLoader, setIsLoader] = useState(false);
+  const [url, setUrl] = useState();
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -122,10 +106,17 @@ const NewUserProfile = ({ navigation }) => {
     }
   };
 
+
   const UserReels = async (pgNo, pgSize, bool) => {
     const response = await ShowReels(pgNo, pgSize, bool);
     if (response?.status === 200) {
       setUserReels(response?.data?.data);
+      let data = response?.data?.data;
+      if(data){
+        data?.map(e => {
+          generateThumbnail(data?.mediaList[0]?.url);
+        })
+      }
       setLoader(false);
     } else {
       setLoader(false);
@@ -136,16 +127,16 @@ const NewUserProfile = ({ navigation }) => {
     UserReels(0, 30, true);
   }, []);
 
-  console.log('userreels=======>', userReels);
+  // console.log('userreels=======>', userReels);
 
   const currentCust = async () => {
     setIsLoading(true)
     let result = await getUserInfoNew();
     console.log('res of profile', result?.data);
-    if(result?.status === 200){
+    if (result?.status === 200) {
       setCustDetails(result?.data);
       setIsLoading(false)
-    } else{
+    } else {
       setIsLoading(false)
     }
   };
@@ -244,12 +235,18 @@ const NewUserProfile = ({ navigation }) => {
   useEffect(() => {
     MyDonationsData();
   }, []);
+  const modal = (url) => {
+    setIsLoader(!isLoader)
+    setModalMute(false)
+    setUrl(url);
+  }
+
   return (
     <View style={styles.mainContainer}>
       <BackgroundImageAClass />
       <View style={styles.header}>
         <TouchableOpacity
-          style={{ borderRadius: 28 / 2 ,marginTop:12}}
+          style={{ borderRadius: 28 / 2, marginTop: 12 }}
           onPress={() => {
             navigation.goBack();
             route?.params?.onSelect({
@@ -329,7 +326,7 @@ const NewUserProfile = ({ navigation }) => {
                 />
               ) : (
                 <View style={styles.profileImage}>
-                  <Icon name="camera" size={60} color={colors.orangeColor}  />
+                  <Icon name="camera" size={60} color={colors.orangeColor} />
                   {/* <Image
                     source={{
                       uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
@@ -349,64 +346,33 @@ const NewUserProfile = ({ navigation }) => {
           setCurrentIndex={setCurrentIndex}
         />
         {currentIndex === 1 || UserReels.length > 0 ? (
-          <ScrollView style={{ marginBottom: 10, height: '60%'}}>
+          <ScrollView style={{ marginBottom: 10, height: '60%' }}>
             <FlatList
               numColumns={3}
               data={userReels}
-              style={{  }}
+              style={{}}
               keyExtractor={({ item, index }) => index}
               renderItem={({ item, index }) => (
-                <TouchableOpacity>
-                  {widthh > height ? (
-                    <Video
+                <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
+                  <Video
                     videoRef={videoRef}
                     onBuffer={() => onBuffer()}
                     onError={onError}
                     repeat={false}
-                    source={{uri: item?.mediaList[0]?.url}}
-                    // muted={mute}
-                    seek={40}
-                    paused={false}
-                    style={{
-                      width: Dimensions.get('window').width / 2,
-                      height: 60,
-                      margin: 2
-                    }}
-                  />
-                  ) : (
-                    <Video
-                    videoRef={videoRef}
-                    onBuffer={() => onBuffer()}
-                    onError={onError}
-                    repeat={false}
-                    source={{uri: item?.mediaList[0]?.url}}
+                    resizeMode='cover'
+                    source={{ uri: item?.mediaList[0]?.url }}
                     muted={mute}
-                    seek={40}
-                    paused={false}
+                    seek={80}
+                    paused={true}
+                    onChange
                     style={{
                       height: Dimensions.get('window').height / 6 + 60,
-                      width: Dimensions.get('window').width /  3,
+                      width: Dimensions.get('window').width / 3,
                       // backgroundColor: 'red',
                       margin: 2,
                     }}
                   />
-                  )}
                 </TouchableOpacity>
-                // <Video
-                //   source={{ uri: item?.mediaList[0]?.url }}
-                //   videoRef={videoRef}
-                //   // controls={true}
-                //   // poster={item?.mediaList[0]?.url}
-                //   style={{
-                //     width: width / 3,
-                //     height: 120,
-                //     backgroundColor: 'red',
-                //   }}
-                //   muted={mute}
-                //  seek={40}
-                //  paused={false}
-                //  extraData={item?.length}
-                // />
               )}
             />
           </ScrollView>
@@ -421,9 +387,7 @@ const NewUserProfile = ({ navigation }) => {
             <Text style={styles.noPosts}>No Reels Yet</Text>
           </View>
         )}
-
       </View>
-
       <Modal
         animationType={'slide'}
         transparent={true}
@@ -524,16 +488,6 @@ const NewUserProfile = ({ navigation }) => {
                       }}
                     />
                   )}
-
-                  {/* {(roleType === role.admin || roleType === role.agent) && (
-            <Item1
-              svg={require('../../../assets/images/priest.webp')}
-              text={t('poojari')}
-              onPress={() => {
-                navigation.navigate(allTexts.screenNames.poojari);
-              }}
-            />
-          )} */}
                   <Item
                     svg={
                       <AntDesign name="idcard" size={20} color={colors.black} />
@@ -607,6 +561,29 @@ const NewUserProfile = ({ navigation }) => {
             }}>
             <Text style={{ color: 'white', fontSize: 12 }}>Cancel</Text>
           </TouchableOpacity>
+        </View>
+      </Modal>
+      <Modal visible={isLoader} transparent={true}>
+        <View  style={{marginTop: '40%', marginVertical: '5%', marginHorizontal: '2%', borderRadius: 10, height: '60%'}}>
+          <MaterialIconss name='cancel' size={24} color={'black'} style={{alignSelf: 'flex-end'}} onPress={() => {setIsLoader(false); setModalMute(true)}} />
+        <Video
+          videoRef={videoRef}
+          onBuffer={() => onBuffer()}
+          onError={onError}
+          repeat={false}
+          resizeMode='cover'
+          source={{ uri: url }}
+          muted={modalMute}
+          seek={40}
+          paused={false}
+          style={{
+            height: '100%' ,
+            width: '100%',
+            margin: 2,
+            alignSelf: 'center',
+            borderRadius: 10
+          }}
+        />
         </View>
       </Modal>
     </View>
