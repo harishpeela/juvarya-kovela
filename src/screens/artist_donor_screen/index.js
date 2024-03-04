@@ -38,8 +38,9 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
           />
           <EventInput
             lable={'Year'}
-            placeholder={'Enter Year'}
+            placeholder={'Please Enter Year'}
             onChangeText={(e) => setAssociationYear(e)}
+            calendar={true}
           />
           <View style={{ width: 200, alignSelf: 'center', marginTop: 20 }}>
             <PrimaryButton
@@ -69,9 +70,10 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
   
         const result = await getNewDonor(payload);
       console.log('result',result?.data)
-      if (result.status === 200) {
-        Alert.alert('Submitted Successfully !!!!!');
+      if (result?.status === 200) {
+        Alert.alert(result?.data?.message || 'Donar Added');
       } else {
+        alert('something went wrong')
         console.log('something went wrong');
       }
     };
@@ -92,9 +94,11 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
             onChangeText={(e) => setName(e)}
           />
           <EventInput
-            lable={'Year'}
+            lable={'Please Enter Year'}
             placeholder={'Enter Year'}
             onChangeText={(e) => setAssociationYear(e)}
+            calendar={true}
+            // maxLength={4}
           />
           <View style={{ width: 200, alignSelf: 'center', marginTop: 20 }}>
             <PrimaryButton

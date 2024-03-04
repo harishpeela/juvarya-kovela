@@ -1,10 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {View, FlatList, SafeAreaView, ScrollView} from 'react-native';
+import {View, FlatList, SafeAreaView, ScrollView, Alert} from 'react-native';
 import {Loader, UserFeedCompList, TopBarcard} from '../../components';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-import {Feed, GetPosts} from '../../utils/api';
+import {Feed, GetPosts, DeleteFeedData} from '../../utils/api';
 import {allTexts, colors} from '../../common';
 const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
@@ -53,6 +53,37 @@ const Feeds = ({route, navigation}) => {
     }
     return arr;
   }
+  const DeleteFeedPost = async id => {
+    Alert.alert(
+      'Confirmation',
+      'Are you sure you want to delete this post?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: async () => {
+            try {
+              const result = await DeleteFeedData(id);
+              if (result && result.data) {
+                console.log('Feed successfully deleted');
+                // Refresh feed list after deletion
+                tempProfilefeeddetails();
+              } else{
+                alert('you are not a admin to delete this feed')
+              }
+            } catch (error) {
+              console.log('error in deleting feed', error);
+            }
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
   useEffect(() => {
     feedDetails();
     tempProfilefeeddetails();
@@ -83,6 +114,7 @@ const Feeds = ({route, navigation}) => {
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
             saveid={feedData?.id}
+            onPressDelete={() => {DeleteFeedPost(feedData?.id); setFeedData('')}}
             onPressTitle={() =>
               navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                 data: feedData,
@@ -103,6 +135,7 @@ const Feeds = ({route, navigation}) => {
                   isLikeTrue={item?.like}
                   savedFeed={item?.savedFeed}
                   saveid={item?.id}
+                  onPressDelete={() => DeleteFeedPost(item?.id)}
                   onPressTitle={() =>
                     navigation.navigate(
                       allTexts.screenNames.viewtempleprofile,

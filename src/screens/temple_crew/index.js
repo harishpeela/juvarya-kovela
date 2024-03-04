@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext, useCallback} from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {Loader, FollowersListCard4} from '../../components';
@@ -22,26 +23,28 @@ const TempleCrew = ({route, navigation}) => {
   const [membershipId, setMemberShipId] = useState();
   const [artistData, setArtistData] = useState();
   const isFocused = useIsFocused();
+  const [apiNo, setApiNo] = useState(0)
 
   const MembershipIdData = async () => {
     setLoader(true);
     setTextLoader(true);
     try {
       let result = await MemberShipList(id, 0, 100);
+      console.log('list data', result?.data)
       let data = result?.data?.data;
       setMemberShipId(data[0]?.id);
       let ID = data?.filter(item => item)?.map(({id}) => ({id}));
       if (ID) {
         setData(ID);
         setLoader(false);
-        setTextLoader(true);
+        setTextLoader(false);
       } else {
         setLoader(false);
       }
     } catch (error) {
       console.log('error in membership details api', error);
       setLoader(false);
-      setTextLoader(true);
+      setTextLoader(false);
     }
   };
   const MembershipData = async memId => {
@@ -75,7 +78,7 @@ const TempleCrew = ({route, navigation}) => {
 
   const artistDonar = async () => {
     let responce = await getArtistDonar(id, 0, 100);
-    // console.log('responce odf artist', responce?.data);
+    console.log('responce odf artist', responce?.data);
     if (responce?.status === 200) {
       setArtistData(responce?.data);
     } else {
@@ -101,6 +104,16 @@ const TempleCrew = ({route, navigation}) => {
       prepare();
     }
   }, [isFocused]);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (apiNo >= 0) {
+        artistDonar();
+      }
+      return () => {};
+    }, [])
+  );
+
   return (
     <View style={{backgroundColor: 'white',marginTop:'5%'}}>
       <View style={styles.headerContainer}>
@@ -243,6 +256,7 @@ const TempleCrew = ({route, navigation}) => {
                     allTexts.screenNames.artistdonardetailslist,
                     {
                       data: artistData,
+                      id: id
                     },
                   )
                 }
@@ -295,7 +309,7 @@ const TempleCrew = ({route, navigation}) => {
             )}
           </View>
         )}
-        {noTextLoader ? (
+        {/* {noTextLoader ? (
           <View>
             <Loader size={'small'} color={colors.white} />
           </View>
@@ -308,12 +322,12 @@ const TempleCrew = ({route, navigation}) => {
             }}>
             <Text style={{color: colors.orangeColor}}>
               {' '}
-              No Members For This Temple
+              No dMembers For This Temple
             </Text>
           </View>
         ) : (
           ''
-        )}
+        )} */}
       </View>
     </View>
   );
