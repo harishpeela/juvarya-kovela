@@ -8,19 +8,31 @@ import Feather from 'react-native-vector-icons/Feather';
 import { allTexts, colors } from "../../common";
 import { Loader } from "../../components";
 import { launchImageLibrary } from "react-native-image-picker";
-import {EventInput} from "../../components/eventCreateInput";
-import RNFetchBlob from "rn-fetch-blob";
+import { VideoThumbnails } from 'react-native-video-thumbnails';
 const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
     console.log('id in reels craetion', id)
     const videoRef = useRef(null);
     const [videoRes, setVideoRes] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [description, setDescription] = useState('');
     const [isVideo, setIsVideo] = useState(false);
     const [loader, setLoader] = useState(false);
-    const [videoSize, setVideoSize] = useState(0);
    
+    const generateThumbnail = async (url) => {
+      try {
+        const { uri } = await VideoThumbnails.getThumbnailAsync(
+          url,
+          {
+            time: 15000,
+          }
+        );
+        console.lo('============uri', uri);
+        setThumbNail({ image: uri });
+      } catch (e) {
+        console.warn(e);
+      }
+    };
+
     const onBuffer = buffer => {
         console.log('buffring', buffer);
       };
@@ -44,7 +56,6 @@ const ReelUpload = ({navigation, route}) => {
                 let video = getImageObj(res?.assets[0]?.uri);
                 let fileSizeInBytes = res?.assets[0]?.fileSize;
                 const fileSizeInMB = fileSizeInBytes / 1048576;
-                console.log('jhabskxja', fileSizeInMB);
                 if(fileSizeInMB > 50){
                     alert('please upload video below 50mb')
                 } else{
