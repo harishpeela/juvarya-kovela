@@ -41,7 +41,7 @@ const Donations = ({route, navigation}) => {
     {id: 3, rs: '301'},
     {id: 5, rs: '501'},
   ];
-  let donationType = ['FOOD', 'EVENT', 'PERMANENT'];
+  let donationType = ['Food', 'Event', 'Permanent'];
 
   const donType = async e => {
     // console.log('type', e);
@@ -65,18 +65,18 @@ const Donations = ({route, navigation}) => {
     console.log('payload', payload);
     try {
       if (value === '0' || value === undefined) {
-        alert('please enter amount');
+        alert('Please Enter Amount');
       } else if (!dropValue) {
-        alert('please select donation type');
+        alert('Please Select Donation Type');
       } else if (email === '') {
-        alert('please enter email');
+        alert('Please Enter Email');
       } else if (name === '') {
-        alert('please enetr name');
+        alert('Please Enter Name');
       } else {
         let result = await DonationsPost(payload);
         if (result) {
           console.log('message', result?.data);
-          Alert.alert('Success', result?.data?.message, [
+          Alert.alert('Success', 'Donation Saved', [
             {
               text: 'Ok',
               onPress: () => {
@@ -155,7 +155,7 @@ const Donations = ({route, navigation}) => {
               isChecked={isChecked}
               donationText={
                 topDonation[0]?.donorName
-                  ? `top donation by ${topDonation[0]?.donorName}`
+                  ? `Top Donation By ${topDonation[0]?.donorName}`
                   : topDonation[0]?.name
                     ? topDonation[0]?.name
                     : 'No donations yet'
@@ -174,7 +174,7 @@ const Donations = ({route, navigation}) => {
               description={
                 typeData?.description
                   ? typeData?.description
-                  : 'please select donation type'
+                  : 'Please Select Donation Type'
               }
             />
           </View>

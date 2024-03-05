@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { saveReels } from "../../utils/api";
 import { TopBarCard2 } from "../../components/topBar1/topBarCard";
-import { style } from "./styles";
+import { styles } from "./styles";
 import Video from "react-native-video";
 import Feather from 'react-native-vector-icons/Feather';
 import { allTexts, colors } from "../../common";
@@ -99,7 +99,7 @@ const ReelUpload = ({navigation, route}) => {
 
     console.log('isvideo', isVideo);
     return(
-        <View style={style.container}>
+        <View style={{flex:1,backgroundColor:'white'}}>
             <View style={{height: '10%'}}>
                 <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} marginLeft={'22%'} />
             </View>

@@ -29,6 +29,7 @@ const UserFeedScreen = ({ navigation }) => {
     setLoader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
+      console.log('data>>>>>>>>>>>>>....',result.data)
       if (result && result.status === 200) {
         setLoader(false);
         setHomeFeedList(result.data.jtFeeds);
@@ -111,6 +112,8 @@ const UserFeedScreen = ({ navigation }) => {
     }, [])
   );
 
+  console.log("data>>>>>>>>>>",)
+
   return (
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View style={{ height: '14%' }}>
@@ -133,26 +136,33 @@ const UserFeedScreen = ({ navigation }) => {
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps="handled"
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <UserFeedCompList
-                id={item.id}
-                post={item}
-                onSharePress={() => MyCustShare(item)}
-                saveid={item.id}
-                likes={item.likesCount}
-                isLikeTrue={item.like}
-                savedFeed={item.savedFeed}
-                isVisible={isVisible}
-                // onPressDots={() => setIsVisible(!isVisible)}
-                onPressDelete={() => DeleteFeedPost(item.id)}
-                onPressTitle={() => {
-                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                    data: item,
-                    onSelect: onSelect,
-                  });
-                }}
-              />
-            )}
+            renderItem={({ item }) => {
+              console.log("Created date>>>>>>>>>>>:", item.creationTime); 
+              return (
+                <UserFeedCompList
+                  id={item.id}
+                  post={item}
+                  onSharePress={() => MyCustShare(item)}
+                  saveid={item.id}
+                  likes={item.likesCount}
+                  isLikeTrue={item.like}
+                  savedFeed={item.savedFeed}
+                  isVisible={isVisible}
+                  onPressDelete={() => DeleteFeedPost(item.id)}
+                  onPressTitle={() => {
+                    navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                      data: item,
+                      onSelect: onSelect,
+                    });
+                  }}
+                >
+                  <Text style={{ fontSize: 12, color: 'black', marginTop: 5 }}>
+                    {item.creationTime}
+                  </Text>
+                </UserFeedCompList>
+              );
+            }}
+            
           />
         ) : !loader && !homeFeedList?.length > 0 ? (
           <View style={styles.nodataView}>

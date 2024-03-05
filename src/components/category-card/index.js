@@ -1,7 +1,5 @@
-
-
- /* eslint-disable react-native/no-inline-styles */
-
+/* eslint-disable react-native/no-inline-styles */
+import React, {useState, useRef, useMemo, useContext, useEffect} from 'react';
 import {
   View,
   Text,
@@ -14,11 +12,10 @@ import {
   Alert,
   Modal,
 } from 'react-native';
-import {colors} from '../../common';
-import React, {useState, useRef, useMemo, useContext, useEffect} from 'react';
 import ApplicationContext from '../../utils/context-api/Context';
-import {styles} from './styles';
-import {NewSaveFeed} from '../../utils/api';
+import { colors } from '../../common';
+import { styles } from './styles';
+import { NewSaveFeed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {
@@ -26,15 +23,16 @@ import {
   DeleteSavedFeed,
   DeleteFeedData,
 } from '../../utils/api';
-import {FlatList} from 'react-native-gesture-handler';
-const {width} = Dimensions.get('window');
-import {DotsNation} from '../dotsNation';
-import {Loader} from '../loader';
+import { FlatList } from 'react-native-gesture-handler';
+const { width } = Dimensions.get('window');
+import { DotsNation } from '../dotsNation';
+import { Loader } from '../loader';
 import HandsIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import '../../../languages/language';
 import RNFetchBlob from 'rn-fetch-blob';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import moment from 'moment';
+
 export const UserFeedCompList = ({
   post,
   isLikeTrue,
@@ -58,7 +56,8 @@ export const UserFeedCompList = ({
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [roleType, setRoleType] = useState();
- 
+  const [formattedCreationTime, setFormattedCreationTime] = useState('');
+
   const getImageSize = () => {
     if (post?.mediaList[0]?.url === ' ') {
       console.log('');
@@ -68,11 +67,36 @@ export const UserFeedCompList = ({
       });
     }
   };
- 
+
   useEffect(() => {
     getImageSize();
+    calculateTimeDifference(); 
   }, []);
- 
+
+  const calculateTimeDifference = () => {
+    const creationTime = moment(post?.creationTime);
+    const currentTime = moment();
+    const secondsDiff = currentTime.diff(creationTime, 'seconds');
+    const minutesDiff = currentTime.diff(creationTime, 'minutes');
+    const hoursDiff = currentTime.diff(creationTime, 'hours');
+    const daysDiff = currentTime.diff(creationTime, 'days');
+
+    if (secondsDiff < 60) {
+      setFormattedCreationTime(`${secondsDiff} seconds ago`);
+    } else if (minutesDiff < 60) {
+      setFormattedCreationTime(`${minutesDiff} minutes ago`);
+    } else if (hoursDiff < 24) {
+      setFormattedCreationTime(`${hoursDiff} hour ago`);
+    } else if (daysDiff === 1) {
+      setFormattedCreationTime(`1 day ago`);
+    } else if (daysDiff < 7) {
+      setFormattedCreationTime(`${daysDiff} days ago`);
+    } else {
+      setFormattedCreationTime(creationTime.format('MMM DD, YYYY'));
+    }
+  };
+
+
   const likeUnLikeHandler = async () => {
     setIsLiked(!isLiked);
     const payloadLike = {
@@ -88,12 +112,13 @@ export const UserFeedCompList = ({
       console.log(error);
     }
   };
+
   useMemo(() => {
     if (likes !== null) {
       setLikeCount(likes);
     }
   }, [likes]);
- 
+
   const FeedStatus = () => {
     let status = !saveFeed;
     if (status) {
@@ -104,17 +129,20 @@ export const UserFeedCompList = ({
       ToastAndroid.show('Unsaved', ToastAndroid.SHORT);
     }
   };
+
   const SaveFeedApi = async () => {
     let payload = {
       feedId: saveid,
     };
     let result = await NewSaveFeed(payload);
   };
+
   const DeleteFeed = async () => {
     let result = await DeleteSavedFeed(id);
   };
- 
+
   const scrollX = useRef(new Animated.Value(0)).current;
+
   const handleOnScroll = event => {
     Animated.event(
       [
@@ -131,27 +159,26 @@ export const UserFeedCompList = ({
       },
     )(event);
   };
-  const handleOnViewableItemsChanged = useRef(({viewableItems}) => {
+
+  const handleOnViewableItemsChanged = useRef(({ viewableItems }) => {
     setIndex(viewableItems[0]?.index);
   }).current;
- 
+
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,
   }).current;
- 
-  // const REMOTE_IMAGE_PATH = 'https://fanfun.s3.ap-south-1.amazonaws.com/17068733451971706873343586.jpg';
- 
+
   const downloadImageRemote = REMOTE_IMAGE_PATH => {
     console.log('REMOTE_IMAGE_PATH', REMOTE_IMAGE_PATH);
- 
+
     let date = new Date();
     let image_URL = REMOTE_IMAGE_PATH;
     console.log('imgurl', image_URL);
     let ext = getExtention(image_URL);
     console.log('ext', ext);
     ext = '.' + ext[0];
- 
-    const {config, fs} = RNFetchBlob;
+
+    const { config, fs } = RNFetchBlob;
     let PictureDir = fs.dirs.PictureDir;
     let options = {
       fileCache: true,
@@ -170,15 +197,14 @@ export const UserFeedCompList = ({
       .fetch('GET', image_URL)
       .then(res => {
         console.log('res -> ', JSON?.stringify(res));
-        Alert.alert('Alert', 'Image Downloaded successfully....!');
+        Alert.alert('Alert', 'Image Downloaded Successfully...!');
       });
   };
- 
+
   const getExtention = filename => {
-    // To get the file extension
     return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
   };
- 
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -188,13 +214,15 @@ export const UserFeedCompList = ({
       setRoleType(null);
     }
   };
+
   useEffect(() => {
     Type();
   }, []);
+
   return (
     <View style={styles.postContainer} key={post?.id}>
       <View style={styles.postHeader}>
-        <TouchableOpacity style={{marginBottom: 5}} onPress={onPressTitle}>
+        <TouchableOpacity style={{ marginBottom: 5 }} onPress={onPressTitle}>
           <Image
             source={{
               uri:
@@ -217,17 +245,17 @@ export const UserFeedCompList = ({
           </Text>
         </TouchableOpacity>
       </View>
-     {(roleType || role_item_admin) && (
-       <Entypo
-       name="dots-three-vertical"
-       size={20}
-       color={colors.orangeColor}
-       style={{position: 'absolute', right: 10, top: 10}}
-       onPress={() => {
-         setIsVisible(!isVisible);
-       }}
-     />
-     )}
+      {(roleType || role_item_admin) && (
+        <Entypo
+          name="dots-three-vertical"
+          size={20}
+          color={colors.orangeColor}
+          style={{ position: 'absolute', right: 10, top: 10 }}
+          onPress={() => {
+            setIsVisible(!isVisible);
+          }}
+        />
+      )}
       {isVisible && (
         <TouchableOpacity
           style={{
@@ -239,7 +267,7 @@ export const UserFeedCompList = ({
             borderRadius: 10,
           }}
           onPress={onPressDelete}>
-          <Text style={{fontWeight: 'bold'}}> Delete</Text>
+          <Text style={{ fontWeight: 'bold' }}> Delete</Text>
         </TouchableOpacity>
       )}
       <View>
@@ -253,15 +281,15 @@ export const UserFeedCompList = ({
           onScroll={handleOnScroll}
           onViewableItemsChanged={handleOnViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
-          keyExtractor={({item, index}) => index}
-          renderItem={({item, index}) => {
+          keyExtractor={({ item, index }) => index}
+          renderItem={({ item, index }) => {
             return (
               <View>
                 {!item?.uri ? (
                   <View>
                     {width > height ? (
                       <Image
-                        source={{uri: item?.url}}
+                        source={{ uri: item?.url }}
                         style={{
                           flex: 1,
                           width: Dimensions.get('window').width,
@@ -270,7 +298,7 @@ export const UserFeedCompList = ({
                       />
                     ) : (
                       <Image
-                        source={{uri: item?.url}}
+                        source={{ uri: item?.url }}
                         style={{
                           flex: 1,
                           height: Dimensions.get('window').height / 2 + 60,
@@ -288,7 +316,7 @@ export const UserFeedCompList = ({
         />
       </View>
       <View style={styles.postFooter}>
-        <TouchableOpacity onPress={() => likeUnLikeHandler()}>
+        <TouchableOpacity style={{marginLeft:'-2.9%'}} onPress={() => likeUnLikeHandler()}>
           <HandsIcon
             name={'hands-pray'}
             size={24}
@@ -320,25 +348,31 @@ export const UserFeedCompList = ({
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => downloadImageRemote(post?.mediaList[0]?.url)}
-            style={{marginLeft: '5%'}}>
+            style={{ marginLeft: '5%' }}>
             <AntDesign name="download" size={20} color={'black'} />
           </TouchableOpacity>
         </View>
       </View>
-      <View style={{paddingHorizontal: 15}}>
-        <Text style={{...styles.likes, color: isDarkMode ? 'gray' : 'gray'}}>
+      <View style={{ paddingHorizontal: 12 }}>
+        <Text
+          style={{
+            ...styles.likes,
+            color: isDarkMode ? 'gray' : 'gray',
+          }}>
           {likeCount} Likes
         </Text>
       </View>
       <Text style={styles.username}>
-        <Text style={{color: isDarkMode ? 'black' : 'black'}}>
+        <Text style={{fontFamily:'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
           {post?.description?.length < 50
             ? `${post?.description}`
             : `${post?.description?.substring(0, 50)}...`}
           {/* {post?.description} */}
         </Text>
       </Text>
+      <View style={{marginTop: 3, marginLeft: 12 }}>
+        <Text style={{fontFamily:'Poppins-Medium'}}>{formattedCreationTime}</Text>
+      </View>
     </View>
   );
 };
- 
