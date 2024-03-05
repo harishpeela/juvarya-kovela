@@ -22,6 +22,7 @@ import {FlatList} from 'react-native-gesture-handler';
 
 const EventDetails = ({navigation, route}) => {
   const {item} = route?.params || {};
+  console.log('item,', item);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
@@ -316,14 +317,14 @@ const EventDetails = ({navigation, route}) => {
 
   return (
     <View style={styles.container}>
-      <ScrollView style={{borderWidth: 0}}>
-        <View style={{height: '14%'}}>
+      <View style={{height: '10%'}}>
           <TopBarCard2
             txt={'Event Details'}
             back={true}
             navigation={navigation}
           />
         </View>
+      <ScrollView style={{borderWidth: 0}}>
         {item?.mediaList ? (
           <ImageBackground
             source={{uri: item?.mediaList[activeImgIndex]?.url}}
@@ -385,18 +386,20 @@ const EventDetails = ({navigation, route}) => {
               color="white"
             />
             <Text style={styles.dateText}>
-              {item?.creationTime.slice(0, 10)}
+              {item?.date?.slice(0, 10)}
             </Text>
           </View>
-          <View style={styles.locCon}>
-            <FontAwsIcon
-              style={styles.locIcon}
-              name="location-arrow"
-              size={20}
-              color="white"
-            />
-            <Text style={styles.locText}>Anakapalle</Text>
-          </View>
+         {item?.worldWide && (
+           <View style={styles.locCon}>
+           <FontAwsIcon
+             style={styles.locIcon}
+             name="location-arrow"
+             size={20}
+             color="white"
+           />
+           <Text style={styles.locText}>{'Across India'}</Text>
+         </View>
+         )}
         </View>
         <View style={styles.underline} />
         <View style={{flexDirection: 'row'}}>

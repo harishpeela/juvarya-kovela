@@ -403,11 +403,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 alignItems: 'center',
                 marginTop: '5%',
               }}>
-              <Text style={{ fontSize: 15 }}>
-                {tempProfileData?.communityDTO?.name
-                  ? tempProfileData?.communityDTO?.name
-                  : 'God Name'}
+                {tempProfileData?.communityDTO?.name && (
+                  <Text style={{ fontSize: 15, color: isDarkMode ? 'black' : 'black' }}>
+                {tempProfileData?.communityDTO?.name}
               </Text>
+                )}
+              
             </View>
             <View>
               <View

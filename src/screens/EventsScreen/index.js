@@ -65,8 +65,6 @@ const EventsScreen = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-16%'}}>
       <View
         style={{
-          // flexDirection: 'row',
-          // height: 150,
           height: '11%',
         }}>
         <TopBarcard
