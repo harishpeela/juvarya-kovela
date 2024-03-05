@@ -1,10 +1,10 @@
-import {SafeAreaView, StyleSheet, Text, View, Image} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {getTempleClassDetails} from '../../utils/api';
 import {Loader} from '../../components';
 import {TopBarCard2, TopBarcard} from '../../components/topBar1/topBarCard';
 import {FlatList} from 'react-native-gesture-handler';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 
 const TempleClass = ({route, navigation}) => {
   const [templeClassDetails, setTempleClassDetails] = useState([]);
@@ -13,13 +13,16 @@ const TempleClass = ({route, navigation}) => {
   const TopTempleClass = async (pgNo, pgSize, templeClass) => {
     setLoader(true);
     let result = await getTempleClassDetails(pgNo, pgSize, templeClass);
-    console.log('templeCLass', result);
+    console.log('templeCLass', result?.data);
     if (result?.status === 200) {
       setTempleClassDetails(result?.data?.data);
       setLoader(false);
     } else {
       setLoader(false);
     }
+  };
+  const onSelect = data => {
+    // setIsLiked(data?.selected);
   };
 
   useEffect(() => {
@@ -47,7 +50,11 @@ const TempleClass = ({route, navigation}) => {
             data={templeClassDetails}
             keyExtractor={({item, index}) => index}
             renderItem={({item}) => (
-              <View
+              <TouchableOpacity
+                onPress={() => navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                  data: item,
+                  onSelect: onSelect,
+                })}
                 style={{
                   borderWidth: 0.3,
                   display: 'flex',
@@ -56,10 +63,6 @@ const TempleClass = ({route, navigation}) => {
                   marginHorizontal: 10,
                   borderRadius: 10,
                   marginVertical: 10,
-                  // marginBottom:-1,
-                  // backgroundColor:'red',
-                  
-                  
                 }}>
                 <Image
                   source={{
@@ -72,7 +75,7 @@ const TempleClass = ({route, navigation}) => {
                 <Text style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17}}>
                   {item?.name}
                 </Text>
-              </View>
+              </TouchableOpacity>
             )}
           />
         ) : (

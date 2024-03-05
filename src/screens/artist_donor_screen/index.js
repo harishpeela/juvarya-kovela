@@ -54,7 +54,7 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
     );
   }
   
-  function DonorForm({id}) {
+  function DonorForm({id, navigation}) {
     const [date, setDate] = useState(new Date());
     const [name, setName] = useState(' ');
     const [profileId, setProfileId] = useState(' ');
@@ -72,6 +72,12 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
       console.log('result',result?.data)
       if (result?.status === 200) {
         Alert.alert(result?.data?.message || 'Donar Added');
+        Alert.alert('Kovela', result?.data?.message || 'Donar Added', [
+          {
+            text: 'Ok',
+            onPress: () => navigation.goBack(),
+          },
+        ]);
       } else {
         alert('something went wrong')
         console.log('something went wrong');
@@ -95,7 +101,7 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
           />
           <EventInput
             lable={'Please Enter Year'}
-            placeholder={'Enter Year'}
+            placeholder={'DD-MM-YYYY'}
             onChangeText={(e) => setAssociationYear(e)}
             calendar={true}
             // maxLength={4}
@@ -116,8 +122,8 @@ export default function ArtistDonorScreen({ navigation,route }) {
   const [selectedRole, setSelectedRole] = useState(null);
   const {id} = route.params || {}
   const roles = [
-    { role: 'Artist', form: <ArtistForm id={id} /> },
-    { role: 'Donor', form: <DonorForm id={id} /> }
+    { role: 'Artist', form: <ArtistForm id={id}  /> },
+    { role: 'Donor', form: <DonorForm id={id} navigation={navigation} /> }
   ];
   
   return (

@@ -25,6 +25,7 @@ export const styles = StyleSheet.create({
     margin: '4%',
     alignItems: 'center',
   },
+
   iconsearch: {
     marginHorizontal: 10,
   },
@@ -43,6 +44,12 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'black',
     marginLeft: 3
+  },
+  nearbyTextContainer: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: 'black',
+    marginLeft: -8
   },
   nodataView: {
     flex: 1,
