@@ -317,7 +317,7 @@ const EventDetails = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       <ScrollView style={{borderWidth: 0}}>
-        <View style={{minHeight: '15%'}}>
+        <View style={{height: '14%'}}>
           <TopBarCard2
             txt={'Event Details'}
             back={true}

@@ -18,7 +18,7 @@ const EventsScreen = ({navigation, route}) => {
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [searchedEvents, setSearchedEvents] = useState('');
-  const [searchError, setSearchError] = useState(false); // New state variable
+  const [searchError, setSearchError] = useState(false); 
   const isDarkMode = useColorScheme() === 'dark';
 
   const EventsList = async () => {
@@ -62,7 +62,7 @@ const EventsScreen = ({navigation, route}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-14%'}}>
+    <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-16%'}}>
       <View
         style={{
           // flexDirection: 'row',
