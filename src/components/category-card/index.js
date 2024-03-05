@@ -46,6 +46,7 @@ export const UserFeedCompList = ({
   onPressDots,
   role_item_admin,
 }) => {
+  const [formattedCreationTime, setFormattedCreationTime] = useState('');
   const {userDetails} = useContext(ApplicationContext);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
@@ -56,7 +57,7 @@ export const UserFeedCompList = ({
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [roleType, setRoleType] = useState();
-  const [formattedCreationTime, setFormattedCreationTime] = useState('');
+  
 
   const getImageSize = () => {
     if (post?.mediaList[0]?.url === ' ') {
@@ -80,13 +81,19 @@ export const UserFeedCompList = ({
     const minutesDiff = currentTime.diff(creationTime, 'minutes');
     const hoursDiff = currentTime.diff(creationTime, 'hours');
     const daysDiff = currentTime.diff(creationTime, 'days');
-
-    if (secondsDiff < 60) {
+  
+    if (secondsDiff === 1) {
+      setFormattedCreationTime(`${secondsDiff} second ago`);
+    } else if (secondsDiff < 60) {
       setFormattedCreationTime(`${secondsDiff} seconds ago`);
+    } else if (minutesDiff === 1) {
+      setFormattedCreationTime(`${minutesDiff} minute ago`);
     } else if (minutesDiff < 60) {
       setFormattedCreationTime(`${minutesDiff} minutes ago`);
-    } else if (hoursDiff < 24) {
+    } else if (hoursDiff === 1) {
       setFormattedCreationTime(`${hoursDiff} hour ago`);
+    } else if (hoursDiff < 24) {
+      setFormattedCreationTime(`${hoursDiff} hours ago`);
     } else if (daysDiff === 1) {
       setFormattedCreationTime(`1 day ago`);
     } else if (daysDiff < 7) {
@@ -95,6 +102,13 @@ export const UserFeedCompList = ({
       setFormattedCreationTime(creationTime.format('MMM DD, YYYY'));
     }
   };
+  
+  // Call calculateTimeDifference function on component mount and whenever post changes
+  useEffect(() => {
+    getImageSize();
+    calculateTimeDifference();
+  }, [post]);
+  
 
 
   const likeUnLikeHandler = async () => {
