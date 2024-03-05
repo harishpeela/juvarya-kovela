@@ -19,7 +19,7 @@ const DonationsList = ({navigation, route}) => {
   const [loading, setLoading] = useState(false);
   const [apiProfile, setApiprofile] = useState([]);
   const {data, message} = route.params || {};
-  // console.log('data.id', data);
+  console.log('data.id', data);
   const isFocused = useIsFocused();
 
   const DonationListApi = async () => {

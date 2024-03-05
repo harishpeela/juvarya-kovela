@@ -2,10 +2,14 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {colors, fontFamily, fontSize} from '../../common';
-export const FavTempleListCard = ({name, location, date, onPress, img}) => {
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+export const FavTempleListCard = ({name, location, date, onPress, img, seasonal, onPressDelete}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.listItemContainer}>
-      <View style={styles.secondaryContainer}>
+    <View style={styles.listItemContainer}>
+       {seasonal && (
+        <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{alignSelf:'flex-end'}} />
+      )}
+      <TouchableOpacity onPress={onPress} style={styles.secondaryContainer}>
         <View>
           <Image
             source={{
@@ -28,8 +32,8 @@ export const FavTempleListCard = ({name, location, date, onPress, img}) => {
             {/* <Text style={styles.itemLocation}>{`location-${location}`}</Text> */}
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 };
 const styles = StyleSheet.create({

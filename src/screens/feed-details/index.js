@@ -7,8 +7,8 @@ import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import {Feed, GetPosts, DeleteFeedData} from '../../utils/api';
 import {allTexts, colors} from '../../common';
 const Feeds = ({route, navigation}) => {
-  const {itemDetails} = route.params || {};
-  console.log('itemdetails', itemDetails);
+  const {itemDetails, role} = route.params || {};
+  console.log('itemdetails', itemDetails, 'role', role);
   const [feedData, setFeedData] = useState();
   const [loader, setLoader] = useState(false);
   const [postsData, setPostsData] = useState([]);
@@ -113,6 +113,7 @@ const Feeds = ({route, navigation}) => {
             likes={feedData?.likesCount}
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
+            role_item_admin={role}
             saveid={feedData?.id}
             onPressDelete={() => {DeleteFeedPost(feedData?.id); setFeedData('')}}
             onPressTitle={() =>
@@ -135,6 +136,7 @@ const Feeds = ({route, navigation}) => {
                   isLikeTrue={item?.like}
                   savedFeed={item?.savedFeed}
                   saveid={item?.id}
+                  role_item_admin={role}
                   onPressDelete={() => DeleteFeedPost(item?.id)}
                   onPressTitle={() =>
                     navigation.navigate(

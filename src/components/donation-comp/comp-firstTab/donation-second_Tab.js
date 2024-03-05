@@ -90,6 +90,7 @@ export const Donation_Second_Tab = ({
           keyboardType="number-pad"
           onChangeText={onChange}
           value={valueRs}
+          maxLength={30}
           placeholderTextColor={colors.gray}
         />
       </View>
@@ -192,6 +193,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: colors.black,
+    width: '100%',
   },
   border: {
     borderWidth: 0.3,

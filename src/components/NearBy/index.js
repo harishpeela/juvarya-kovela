@@ -62,7 +62,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   const NearByTemples = async () => {
     // setLoader(true);
     let result = await getNearByTemples('VSP, AKP', 0, 20);
-    console.log('result.date ====>', result.data);
+    // console.log('result.date ====>', result.data);
     if (result) {
       setNearByData(result?.data.data);
       // setLoader(false);
@@ -269,7 +269,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               <>
                 <ScrollView style={{ paddingLeft: 12 }}>
                   <View style={styles.upComingTextTab}>
-                    <Text style={styles.popularTextContainer}>
+                    <Text style={{...styles.nearbyTextContainer}}>
                       Nearby Temples
                     </Text>
                     <TouchableOpacity

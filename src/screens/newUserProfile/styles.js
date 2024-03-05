@@ -132,5 +132,12 @@ export const styles = StyleSheet.create({
     color: colors.gray4,
   },
   iconContainer: {flex: 0.15},
-
+  profileItemsContainer: {
+    width: '60%',
+    borderColor: 'red',
+  },
+  profileItemsHeader: {
+    marginLeft: 10
+    // borderWidth:2,
+  },
 });
