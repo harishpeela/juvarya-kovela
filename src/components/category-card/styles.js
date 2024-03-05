@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   },
   username: {
     fontWeight: 'bold',
-    marginLeft: '3%',
+    marginLeft: '2.9%',
     marginTop: 5,
     fontSize: 14,
     textTransform: 'capitalize',

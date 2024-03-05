@@ -6,6 +6,7 @@ import {Loader, UserFeedCompList, TopBarcard} from '../../components';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import {Feed, GetPosts, DeleteFeedData} from '../../utils/api';
 import {allTexts, colors} from '../../common';
+import Share from 'react-native-share';
 const Feeds = ({route, navigation}) => {
   const {itemDetails} = route.params || {};
   console.log('itemdetails', itemDetails);
@@ -53,6 +54,26 @@ const Feeds = ({route, navigation}) => {
     }
     return arr;
   }
+
+  const MyCustShare = async item => {
+    console.log('1', item);
+    const ShareOptions = {
+      message: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      URL: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      title: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+    };
+    const options = {
+      message: item.jtProfileDTO?.name,
+      URL: item.jtProfileDTO?.logo,
+      title: item.jtProfileDTO?.desciption,
+    };
+    try {
+      const shareResponce = await Share.open(ShareOptions, options);
+      return shareResponce;
+    } catch (error) {
+      console.log('error in share', error);
+    }
+  };
   const DeleteFeedPost = async id => {
     Alert.alert(
       'Confirmation',
@@ -93,7 +114,7 @@ const Feeds = ({route, navigation}) => {
       <View style={{height: 100}}>
         <TopBarCard2
           back={true}
-          txt={'Posts'}
+          txt={'Feeds'}
           navigation={navigation}
           navBack={() => navigation.goBack()}
           marginLeft={'30%'}
@@ -111,6 +132,7 @@ const Feeds = ({route, navigation}) => {
             id={feedData?.id}
             post={feedData}
             likes={feedData?.likesCount}
+            onSharePress={() => MyCustShare(feedData)}
             isLikeTrue={feedData?.like}
             savedFeed={feedData?.savedFeed}
             saveid={feedData?.id}

@@ -36,7 +36,7 @@ export const Donation_Second_Tab = ({
   const [activeIndex, setActiveIndex] = useState();
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <Text style={styles.choose}>Choose amount</Text>
+      <Text style={styles.choose}>Choose Amount</Text>
       <FlatList
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -250,6 +250,7 @@ const styles = StyleSheet.create({
   rememberMeText: {
     color: 'black',
     fontSize: 12,
+    textTransform:'capitalize'
   },
   checkIcon: {
     color: colors.orangeColor,

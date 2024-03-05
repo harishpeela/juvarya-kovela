@@ -66,6 +66,24 @@ const MyTemples = ({navigation}) => {
       ),
     );
   };
+  const MyCustShare = async item => {
+    const ShareOptions = {
+      message: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      URL: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+      title: 'https://play.google.com/store/apps/dev?id=7922971542322060805',
+    };
+    const options = {
+      message: item.jtProfileDTO?.name,
+      URL: item.jtProfileDTO?.logo,
+      title: item.jtProfileDTO?.desciption,
+    };
+    try {
+      const shareResponce = await Share.open(ShareOptions, options);
+      return shareResponce;
+    } catch (error) {
+      console.log('error in share', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.wrapper}>
@@ -99,7 +117,8 @@ const MyTemples = ({navigation}) => {
                       <FavTempleListCard
                         name={item.name}
                         location={item.line1}
-                        date={item.creationTime}
+                        date={item.creationTime}  
+                        onSharePress={() => MyCustShare(item)}                    
                         img={item?.logo}
                         onPress={() => {
                           navigation.navigate(
