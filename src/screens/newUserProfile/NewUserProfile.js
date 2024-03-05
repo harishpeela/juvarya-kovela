@@ -132,7 +132,7 @@ const NewUserProfile = ({ navigation }) => {
   const currentCust = async () => {
     setIsLoading(true)
     let result = await getUserInfoNew();
-    console.log('res of profile', result?.data);
+    // console.log('res of profile', result?.data);
     if (result?.status === 200) {
       setCustDetails(result?.data);
       setIsLoading(false)
@@ -188,7 +188,7 @@ const NewUserProfile = ({ navigation }) => {
     setLoader(true);
     console.log('loader first', loader);
     let result = await AdminTemples();
-    console.log('admins temples', result?.data);
+    // console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
       setLoader(false);
@@ -363,7 +363,7 @@ const NewUserProfile = ({ navigation }) => {
                     source={{ uri: item?.mediaList[0]?.url }}
                     muted={mute}
                     seek={80}
-                    paused={true}
+                    paused={false}
                     onChange
                     style={{
                       height: Dimensions.get('window').height / 6 + 60,
@@ -400,7 +400,6 @@ const NewUserProfile = ({ navigation }) => {
           style={styles.model}>
           <View style={styles.modalView}>
             <View style={styles.line} />
-            {/* {modal Links} */}
             <ScrollView>
               <View style={styles.profileItemsHeader}>
                 <View style={styles.profileItemsContainer}>

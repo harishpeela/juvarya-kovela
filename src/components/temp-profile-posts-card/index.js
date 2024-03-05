@@ -2,7 +2,7 @@
 import React from 'react';
 import {TouchableOpacity, Image, Dimensions} from 'react-native';
 import {allTexts} from '../../common';
-export const TempleProfile_PostsCard = ({item, nav}) => {
+export const TempleProfile_PostsCard = ({item, nav, role}) => {
   return (
     <TouchableOpacity
       style={{
@@ -12,6 +12,7 @@ export const TempleProfile_PostsCard = ({item, nav}) => {
       onPress={() =>
         nav.navigate(allTexts.screenNames.feeds, {
           itemDetails: item,
+          role: role
         })
       }>
       {item?.mediaList ? (

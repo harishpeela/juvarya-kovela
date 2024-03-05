@@ -3,11 +3,11 @@ import React from 'react';
 import {View, Image, Text, StyleSheet} from 'react-native';
 import {colors} from '../../../common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-export const Donation_first_Tab = ({title, rating}) => {
+export const Donation_first_Tab = ({title, rating, img}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../../assets/images/hanuman.png')}
+        source={{uri: img ? img : 'https://fanfun.s3.ap-south-1.amazonaws.com/1709365676652Trinetra.jpg' }}
         style={{height: 70, width: 70, borderRadius: 70 / 2}}
       />
       <View style={{marginLeft: 20}}>

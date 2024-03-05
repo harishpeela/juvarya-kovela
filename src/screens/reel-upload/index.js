@@ -8,7 +8,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import { allTexts, colors } from "../../common";
 import { Loader } from "../../components";
 import { launchImageLibrary } from "react-native-image-picker";
-import { VideoThumbnails } from 'react-native-video-thumbnails';
 const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
     console.log('id in reels craetion', id)
@@ -17,21 +16,7 @@ const ReelUpload = ({navigation, route}) => {
     const [description, setDescription] = useState('');
     const [isVideo, setIsVideo] = useState(false);
     const [loader, setLoader] = useState(false);
-   
-    const generateThumbnail = async (url) => {
-      try {
-        const { uri } = await VideoThumbnails.getThumbnailAsync(
-          url,
-          {
-            time: 15000,
-          }
-        );
-        console.lo('============uri', uri);
-        setThumbNail({ image: uri });
-      } catch (e) {
-        console.warn(e);
-      }
-    };
+
 
     const onBuffer = buffer => {
         console.log('buffring', buffer);
@@ -84,10 +69,12 @@ const ReelUpload = ({navigation, route}) => {
         if(!videoRes){
             alert('please upload video');
             setLoader(false);
-        } else if(description === ''){
-            alert('please add description');
-            setLoader(false);
-        } else{
+        } 
+        // else if(description === ''){
+        //     alert('please add description');
+        //     setLoader(false);
+        // } 
+        else{
             let responce = await saveReels(formdata)
         console.log('responce', responce?.data?.message);
         if(responce?.data?.message === "Reel uploaded"){
@@ -102,7 +89,6 @@ const ReelUpload = ({navigation, route}) => {
       };
     
       const getImageObj = video => {
-        // console.log('--=====---', video);
         let imageObj = {
           uri: video,
           name: 'myvideo.mp4',
@@ -115,7 +101,7 @@ const ReelUpload = ({navigation, route}) => {
     return(
         <View style={style.container}>
             <View style={{height: '10%'}}>
-                <TopBarCard2 back={true} txt={'Upload Reel'} navigation={navigation} marginLeft={'22%'} />
+                <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} marginLeft={'22%'} />
             </View>
             {isVideo ? (
                 <TouchableOpacity
@@ -169,7 +155,7 @@ const ReelUpload = ({navigation, route}) => {
                 {loader ? (
                     <Loader size={'small'} color={'white'} />
                 ) : (
-                    <Text style={style.butText}> Upload Reel</Text>
+                    <Text style={style.butText}>Upload</Text>
                 )}
             </TouchableOpacity>
         </View>

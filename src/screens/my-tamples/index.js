@@ -5,16 +5,16 @@ import {
   FlatList,
   Text,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {Loader, SearchBar} from '../../components';
 import {styles} from './styles';
 import {allTexts, colors} from '../../common';
-import {getTempledetailsWithId, AdminTemples} from '../../utils/api';
+import {AdminTemples, deleteCommunityTemple} from '../../utils/api';
 import {FavTempleListCard} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-// import CreateCommunityTempleScreen from './CreateCommunityTempleScreen'; // Assuming you have a screen for creating community temples
 
 const MyTemples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
@@ -22,23 +22,19 @@ const MyTemples = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [searchedText, setSearchedText] = useState('');
 
-  const TempleDetails = async d => {
-    try {
-      let result = await getTempledetailsWithId(d?.id);
-      console.log('result?.res', result?.data)
-      if (result) {
-        let templesArray = {...d, ...result?.data};
-        console?.log('res ====><', templesArray);
-        setTempleList(array => [...array, templesArray]);
-        setFilteredArray(array => [...array, templesArray]);
-        setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log('error in templedetails api is ==>', error);
-    }
-  };
+  const deleteSeasonal = (id) => {
+    console.log('=====', id)
+    Alert.alert('Alert', 'Are You Sure You Want To Delete This Temple ?', [
+      { text: 'Yes', onPress: async () => {
+        let responce = await deleteCommunityTemple(id);
+       console.log(responce?.data, 'responce of delete');
+       if(responce){
+        AdminTempleDetails();
+       }
+      }, style: 'destructive' },
+      { text: 'No', onPress: () => console.log('Cancel Pressed') },
+    ])
+  }
 
   const AdminTempleDetails = async () => {
     setLoading(true);
@@ -46,9 +42,13 @@ const MyTemples = ({navigation}) => {
       let result = await AdminTemples();
       console.log('admin', result?.data)
       let adminData = result?.data;
-      adminData.map(e => {
-        TempleDetails(e);
-      });
+      if(adminData){
+      setTempleList(adminData);
+      setFilteredArray(adminData);
+      setLoading(false);
+      } else(
+        alert('smethinhg went wrong')
+      )
     } catch (error) {
       setLoading(false);
       console.log('error in admin temples', error);
@@ -101,6 +101,8 @@ const MyTemples = ({navigation}) => {
                         location={item.line1}
                         date={item.creationTime}
                         img={item?.logo}
+                        seasonal={item?.seasonal}
+                        onPressDelete={() => deleteSeasonal(item?.id)}
                         onPress={() => {
                           navigation.navigate(
                             allTexts.screenNames.viewtempleprofile,
