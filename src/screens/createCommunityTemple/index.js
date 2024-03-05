@@ -218,8 +218,9 @@ const CommunityTemple = ({navigation}) => {
         )}
       </View>
       <View style={{}}>
+
         <EventInput
-          lable={'Name'}
+          lable={'Temple Name'}
           placeholder={'Enter Temple Name'}
           height={50}
           onChangeText={e => {
@@ -227,6 +228,7 @@ const CommunityTemple = ({navigation}) => {
             setEventError(false);
           }}
         />
+        
         {eventError && (
           <Text
             style={{

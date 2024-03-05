@@ -6,7 +6,7 @@ import {styles} from './styles';
 export const Loader = ({color, size, dynmicStyle}) => {
   return (
     <View style={[styles.container, dynmicStyle]}>
-      <ActivityIndicator size={size || 'large'} color={color || colors.blue} />
+      <ActivityIndicator size={size || 'large'} color={color || colors.orangeColor} />
     </View>
   );
 };
