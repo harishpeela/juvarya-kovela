@@ -22,13 +22,14 @@ import {
   EventCard,
 } from '../../components';
 import { styles } from './styles';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { allTexts } from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Data } from '../home-feed/formateDetails';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   FollowUnFollow,
   NewGetFollowUmFollowById,
@@ -156,6 +157,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setTrfData();
     }
   }, []);
+
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
     console.log('result of events', result?.data);
@@ -259,12 +261,15 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
   const TempleRoleSearchWithId = async profileId => {
+    console.log('profileId', profileId);
     let result = await SearchTempleRoleWithId(profileId);
+    console.log('profileId role', result?.data);
     try {
       if (result) {
         setRoleLoader(true);
         let val = result?.data?.roles;
         var roleAdmin = val?.indexOf('ROLE_ITEM_ADMIN') > -1;
+        console.log('role item', roleAdmin);
         if (roleAdmin) {
           setRoleId('ROLE_ITEM_ADMIN');
           setRoleLoader(false);
@@ -298,7 +303,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
     setMainLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
-      console.log('top donation', result?.data?.data[0]);
+      console.log('top donation', result?.data);
       if (result) {
         console.log('dontion ====>', result?.data?.data[0]);
         setDonationValue(result?.data?.data[0]);
@@ -315,6 +320,15 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setMainLoader(false)
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (trfData) {
+        Posts(trfData?.jtProfile)
+      }
+      return () => {};
+    }, [])
+  );
   return (
     <>
     {mainLoader ? (
@@ -499,13 +513,13 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     isFollow={isFollow}
                     shadow={true}
                   />
-                  {!tempProfileData?.seasonal && (
+                  {!trfData?.seasonal && (
                     <ContactTabcomp onPressContact={() => navigation.navigate(allTexts.screenNames.abouttemple, {
                       jtProfile: trfData?.jtProfile,
                       name: trfData?.name,
                     })} />
                   )}
-                  {tempProfileData?.seasonal ? (
+                  {trfData?.seasonal ? (
                     <TempleCrewTabComp onPressContact={() =>
                       navigation.navigate('TempleCrew', {
                         id: trfData?.jtProfile,
@@ -529,7 +543,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       }}
                     />
                   )} */}
-                  {!tempProfileData?.seasonal && (
+                  {!trfData?.seasonal && (
                     <NearByTempleComp
                       onPress={() =>
                         navigation.navigate(
@@ -540,8 +554,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                       }
                     />
                   )}
-
-
                   {/* <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.templeProfileToDoList)}>
                   <Entypo
                   name="add-to-list"
@@ -549,7 +561,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   style={{marginTop:10}}
                 />
                   </TouchableOpacity> */}
-
                 </View>
               </View>
               {donationLoader ? (
@@ -563,7 +574,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   }
                   id={donationValue?.email}
                   text={
-                    donationValue?.name
+                    donationValue?.donorName
                       ? `Top donation by ${donationValue?.donorName
                         ? donationValue?.donorName
                         : donationValue?.name
@@ -611,7 +622,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   keyExtractor={({ item, index }) => index}
                   style={styles.ImagesContainer}
                   renderItem={({ item, index }) => (
-                    <TempleProfile_PostsCard nav={navigation} item={item} />
+                    <TempleProfile_PostsCard nav={navigation} item={item} role={roleId} />
                   )}
                 />
               )}

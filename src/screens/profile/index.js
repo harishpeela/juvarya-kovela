@@ -95,7 +95,7 @@ const Profile = ({navigation}) => {
   };
 const currentCust = async () => {
   let result = await getUserInfoNew();
-  console.log('res of profile', result?.data);
+  // console.log('res of profile', result?.data);
   setCustDetails(result?.data);
 }
  
@@ -149,7 +149,7 @@ const currentCust = async () => {
     setLoader(true);
     console.log('loader first', loader);
     let result = await AdminTemples();
-    console.log('admins temples', result?.data);
+    // console.log('admins temples', result?.data);
     if (result?.status === 200) {
       setAdmin(result?.data);
       setLoader(false);

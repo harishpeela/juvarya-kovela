@@ -125,6 +125,7 @@ const endpoints = {
   GET_ARTIST:'jtprofiletoartist/create',
   GET_DONOR:'jtIdolDonation/save',
   EVENT_BY_COMMUNITY_ID: 'jtprofile/byCommunity',
+  DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
 };
 export const getInitialToken = async () => {
   try {
@@ -1296,6 +1297,17 @@ export const getEventByCommunityId = async (pgNo, pgSize, id) => {
   try {
     let result = await axiosNotifications.get(
       `${endpoints.EVENT_BY_COMMUNITY_ID}?pageNo=${pgNo}&pageSize=${pgSize}&communityId=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in userReels', error);
+  }
+};
+
+export const deleteCommunityTemple = async (id) => {
+  try {
+    let result = await axiosNotifications.delete(
+      `${endpoints.DELETE_COMMUNITY_TEMPLE}?profileId=${id}`,
     );
     return result;
   } catch (error) {

@@ -134,7 +134,7 @@ const Donations = ({route, navigation}) => {
             navigation={navigation}
           />
         </View>
-        <Donation_first_Tab title={data?.name} rating={'3.5 (18 rating)'} />
+        <Donation_first_Tab img={data?.logo} title={data?.name} rating={'3.5 (18 rating)'} />
         <View>
           <View style={styles.secondTab}>
             <Donation_Second_Tab

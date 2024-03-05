@@ -60,8 +60,8 @@ const AddEvents = ({navigation, route}) => {
       formdata.append('description', description);
       console.log('payload', formdata);
       let result = await CreateEvent(formdata);
-      console.log('result of save events', result?.data);
-      if (result?.data?.message === 'save Event') {
+      console.log('result of save events', result?.data, result?.status);
+      if (result?.status === 202) {
         Alert.alert('Success', `Event created successfully`, [
           {
             text: 'Ok',
