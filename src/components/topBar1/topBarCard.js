@@ -192,7 +192,7 @@ export const TopBarCard2 = ({
           style={{
             flex: 1,
             flexDirection: 'row',
-            marginTop: '22%',
+            marginTop: '15%',
             marginHorizontal: 1,
           }}>
           {arrow && (
@@ -275,7 +275,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     // justifyContent: 'center',
     flex: 1,
-    height: '80%',
+    height: '30%',
     borderColor: 'black',
     // borderWidth:0.2,
     // elevation:

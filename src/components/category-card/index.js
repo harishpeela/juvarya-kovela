@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useRef, useMemo, useContext, useEffect} from 'react';
+import React, { useState, useRef, useMemo, useContext, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import {
   Alert,
   Modal,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import { colors } from '../../common';
 import { styles } from './styles';
@@ -47,7 +48,7 @@ export const UserFeedCompList = ({
   role_item_admin,
 }) => {
   const [formattedCreationTime, setFormattedCreationTime] = useState('');
-  const {userDetails} = useContext(ApplicationContext);
+  const { userDetails } = useContext(ApplicationContext);
   const [isLiked, setIsLiked] = useState(isLikeTrue);
   const [likeCount, setLikeCount] = useState(likes);
   const [saveFeed, setSaveFeed] = useState(savedFeed);
@@ -57,7 +58,7 @@ export const UserFeedCompList = ({
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [roleType, setRoleType] = useState();
-  
+
 
   const getImageSize = () => {
     if (post?.mediaList[0]?.url === ' ') {
@@ -71,8 +72,9 @@ export const UserFeedCompList = ({
 
   useEffect(() => {
     getImageSize();
-    calculateTimeDifference(); 
-  }, []);
+    calculateTimeDifference()
+  }, [post]);
+
 
   const calculateTimeDifference = () => {
     const creationTime = moment(post?.creationTime);
@@ -81,7 +83,7 @@ export const UserFeedCompList = ({
     const minutesDiff = currentTime.diff(creationTime, 'minutes');
     const hoursDiff = currentTime.diff(creationTime, 'hours');
     const daysDiff = currentTime.diff(creationTime, 'days');
-  
+    console.log('timings', creationTime, 'currentTime', currentTime, 'secondsDiff', secondsDiff, 'minutesDiff', minutesDiff, 'hoursDiff', hoursDiff, 'daysDiff', daysDiff);
     if (secondsDiff === 1) {
       setFormattedCreationTime(`${secondsDiff} second ago`);
     } else if (secondsDiff < 60) {
@@ -90,7 +92,7 @@ export const UserFeedCompList = ({
       setFormattedCreationTime(`${minutesDiff} minute ago`);
     } else if (minutesDiff < 60) {
       setFormattedCreationTime(`${minutesDiff} minutes ago`);
-    } else if (hoursDiff === 1) {
+    } else if (minutesDiff === 1) {
       setFormattedCreationTime(`${hoursDiff} hour ago`);
     } else if (hoursDiff < 24) {
       setFormattedCreationTime(`${hoursDiff} hours ago`);
@@ -102,13 +104,13 @@ export const UserFeedCompList = ({
       setFormattedCreationTime(creationTime.format('MMM DD, YYYY'));
     }
   };
-  
+
   // Call calculateTimeDifference function on component mount and whenever post changes
   useEffect(() => {
     getImageSize();
     calculateTimeDifference();
   }, [post]);
-  
+
 
 
   const likeUnLikeHandler = async () => {
@@ -330,7 +332,7 @@ export const UserFeedCompList = ({
         />
       </View>
       <View style={styles.postFooter}>
-        <TouchableOpacity style={{marginLeft:'-2.9%'}} onPress={() => likeUnLikeHandler()}>
+        <TouchableOpacity style={{ marginLeft: '-2.9%' }} onPress={() => likeUnLikeHandler()}>
           <HandsIcon
             name={'hands-pray'}
             size={24}
@@ -377,15 +379,15 @@ export const UserFeedCompList = ({
         </Text>
       </View>
       <Text style={styles.username}>
-        <Text style={{fontFamily:'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
+        <Text style={{ fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
           {post?.description?.length < 50
             ? `${post?.description}`
             : `${post?.description?.substring(0, 50)}...`}
           {/* {post?.description} */}
         </Text>
       </Text>
-      <View style={{marginTop: 3, marginLeft: 12 }}>
-        <Text style={{fontFamily:'Poppins-Medium'}}>{formattedCreationTime}</Text>
+      <View style={{ marginTop: 3, marginLeft: 12 }}>
+        <Text style={{ fontFamily: 'Poppins-Medium' }}>{formattedCreationTime}</Text>
       </View>
     </View>
   );
