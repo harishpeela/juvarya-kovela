@@ -16,6 +16,7 @@ import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EVENTS_URL } from '../utils/api/api';
 import { getAuthTokenDetails } from '../utils/preferences/localStorage';
+import { TopBarCard2 } from '../components/topBar1/topBarCard';
 const EditHighlight = ({ navigation, route }) => {
   const {data} = route.params || {};
   // console.log('route===', data);
@@ -153,21 +154,13 @@ const EditHighlight = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flexDirection: 'row', marginTop: '10%', marginLeft: '6%' }}>
-          <TouchableOpacity style={styles.iconContainer} onPress={() => navigation.goBack()}>
-            <Image source={require('../../assets/images/backarrow.png')}
-              style={{ height: 10, width: 6 }} />
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginHorizontal: '25%',
-              color: 'white',
-              alignSelf: 'center'
-            }}>
-            Edit Highlights
-          </Text>
+      <View style={{height:'25%'}}>
+          <TopBarCard2
+            txt={'Edit HightLights'}
+            back={true}
+            navigation={navigation}
+            marginLeft={'18%'}
+          />
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>

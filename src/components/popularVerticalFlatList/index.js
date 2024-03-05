@@ -92,8 +92,8 @@ export const PopularTemplesVerticalList = ({
             : 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
         }}
         style={{
-          height:160,
-          width: 160,
+          height:100,
+          width: 100,
           borderRadius: 60,
           flexDirection: 'row', 
           alignItems: 'flex-end',
@@ -113,10 +113,10 @@ export const PopularTemplesVerticalList = ({
         </View>
         <TouchableOpacity
           onPress={() => FollowandUnFollow(templeId)}
-          style={{ marginBottom:2, marginLeft:12 }}>
+          style={{ marginBottom:2, marginLeft:-2 }}>
           <Icon
             name={isLiked ? 'heart' : 'heart-o'}
-            size={15}
+            size={10}
             color={isLiked ? colors.red1 : 'black'}
           />
         </TouchableOpacity>
@@ -125,7 +125,7 @@ export const PopularTemplesVerticalList = ({
     </TouchableOpacity>
 
     </View>
-    <View style={{width:220,marginTop:10,marginLeft:10,marginRight:10}}>
+    <View style={{width:220,marginTop:'5%',marginLeft:10,marginRight:10}}>
       <Text style={{color:'black',fontWeight:'bold'}}>
       {name}
       </Text>

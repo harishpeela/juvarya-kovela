@@ -5,7 +5,7 @@ import { Directions } from 'react-native-gesture-handler'
 export const styles = StyleSheet.create({
     container: {
         height: 150,
-        width:'98%',
+        width:'88%',
         marginHorizontal: "1%",
         marginVertical: "1%",
         // width: '48%',
@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.white,
         // justifyContent: 'space-between',
         borderRadius: 24,
-        flexDirection:'row'
+        flexDirection:'row',
+        marginLeft:'6%'
     },
     secondContainer: {
         flexDirection: 'row',
