@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     // marginTop:10
+    backgroundColor: 'white'
   },
   profileContainer: {
     // borderWidth:2,
