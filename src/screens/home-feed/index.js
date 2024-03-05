@@ -56,7 +56,7 @@ const UserFeedScreen = ({ navigation }) => {
       title: item.jtProfileDTO?.desciption,
     };
     try {
-      const shareResponce = await Share.open(ShareOptions, options);
+      const shareResponce = await Share?.open(ShareOptions, options);
       return shareResponce;
     } catch (error) {
       console.log('error in share', error);

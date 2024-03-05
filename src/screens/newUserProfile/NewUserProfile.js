@@ -106,17 +106,10 @@ const NewUserProfile = ({ navigation }) => {
     }
   };
 
-
   const UserReels = async (pgNo, pgSize, bool) => {
     const response = await ShowReels(pgNo, pgSize, bool);
     if (response?.status === 200) {
-      setUserReels(response?.data?.data);
-      let data = response?.data?.data;
-      if(data){
-        data?.map(e => {
-          generateThumbnail(data?.mediaList[0]?.url);
-        })
-      }
+      setUserReels(response?.data?.data);      
       setLoader(false);
     } else {
       setLoader(false);
@@ -126,8 +119,6 @@ const NewUserProfile = ({ navigation }) => {
   useEffect(() => {
     UserReels(0, 30, true);
   }, []);
-
-  // console.log('userreels=======>', userReels);
 
   const currentCust = async () => {
     setIsLoading(true)
