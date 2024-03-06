@@ -33,6 +33,7 @@ export const styles = StyleSheet.create({
         borderRadius: 120 / 2,
         marginLeft: '3%',
         marginTop: 15,
+        resizeMode: 'contain',
     },
     dateContainer: {
         borderRadius: 2,

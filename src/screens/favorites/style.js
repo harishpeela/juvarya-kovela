@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
     bottom:'45%',
     width:1,
     // backgroundColor:'black',
-    marginLeft:'10%'
+    marginLeft:'10%',
+    marginTop: '5%',
     
   },
   
