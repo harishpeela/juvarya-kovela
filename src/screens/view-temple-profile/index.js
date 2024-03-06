@@ -564,9 +564,11 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   </TouchableOpacity> */}
                 </View>
               </View>
-              {donationLoader ? (
+              <View style={{marginLeft:'-4%'}}>
+               {donationLoader ? (
                 <Loader size={'small'} color={colors.orangeColor} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
+               
                 <Danation_Add_Card
                   onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
@@ -589,6 +591,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
               ) : (
                 ''
               )}
+               </View>
+              
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}

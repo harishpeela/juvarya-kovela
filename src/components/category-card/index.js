@@ -387,7 +387,7 @@ export const UserFeedCompList = ({
         </Text>
       </Text>
       <View style={{ marginTop: 3, marginLeft: 12 }}>
-        <Text style={{ fontFamily: 'Poppins-Medium' }}>{formattedCreationTime}</Text>
+        <Text style={{ fontFamily: 'Poppins-Medium',fontSize:12 }}>{formattedCreationTime}</Text>
       </View>
     </View>
   );

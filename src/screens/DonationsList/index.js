@@ -49,7 +49,7 @@ const DonationsList = ({navigation, route}) => {
     }, 500);
   };
   const DeleteDonations = async id => {
-    Alert.alert('Are you sure', 'You want to delete this donation ?', [
+    Alert.alert('Are you sure', 'You want to delete this donation?', [
       {
         text: 'Yes',
         onPress: async () => {

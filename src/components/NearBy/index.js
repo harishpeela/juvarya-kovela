@@ -125,7 +125,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   return (
     <>
       {loader ? (
-        <View style={{flex: 1, alignItems: 'center', justifyContent:'center'}}>
+        <View style={{flex: 1,marginTop:'-3%'}}>
                   <Loader color={colors.orangeColor} size={'large'} />
         </View>
       ) : (

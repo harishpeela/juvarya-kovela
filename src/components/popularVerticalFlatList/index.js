@@ -74,6 +74,7 @@ export const PopularTemplesVerticalList = ({
     <TouchableOpacity
       style={{
         flex: 1,
+        flexDirection:'row',
         alignItems: 'flex-start',
         justifyContent: 'center',
         marginTop: 10,
@@ -122,15 +123,16 @@ export const PopularTemplesVerticalList = ({
         </TouchableOpacity>
       </ImageBackground>
       
-    </TouchableOpacity>
+    
+        <View style={{width:220,marginTop:'5%',marginLeft:10,marginRight:10}}>
+          <Text style={{color:'black',fontWeight:'bold'}}>
+          {name}
+          </Text>
+          <Text>{description}</Text>
+          </View>
+      </TouchableOpacity>
 
     </View>
-    <View style={{width:220,marginTop:'5%',marginLeft:10,marginRight:10}}>
-      <Text style={{color:'black',fontWeight:'bold'}}>
-      {name}
-      </Text>
-      <Text>{description}</Text>
-      </View>
     </View>
   );
 };
