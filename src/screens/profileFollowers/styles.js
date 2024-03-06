@@ -78,6 +78,6 @@ export const styles = StyleSheet.create({
     marginTop: '-6%',
     // backgroundColor:'black',
     marginLeft: '12%',
-    marginTop: '-1%',
+    marginTop: '4%',
   },
 });
