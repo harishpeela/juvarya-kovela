@@ -2,7 +2,7 @@ import React, {useEffect, useState, useRef} from "react";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { saveReels } from "../../utils/api";
 import { TopBarCard2 } from "../../components/topBar1/topBarCard";
-import { styles } from "./styles";
+import { style } from "./styles";
 import Video from "react-native-video";
 import Feather from 'react-native-vector-icons/Feather';
 import { allTexts, colors } from "../../common";
