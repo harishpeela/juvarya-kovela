@@ -119,7 +119,7 @@ const NewUserProfile = ({ navigation }) => {
   useEffect(() => {
     UserReels(0, 30, true);
   }, []);
-
+console.log('userReels', userReels);
   const currentCust = async () => {
     setIsLoading(true)
     let result = await getUserInfoNew();
