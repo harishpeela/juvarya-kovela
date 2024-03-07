@@ -25,7 +25,7 @@ const EventsScreen = ({navigation, route}) => {
     setLoader(true);
     try {
       let result = await EventScreenList(0, 200);
-      console.log('list of events', result?.data);
+      // console.log('list of events', result?.data);
       if (result.status === 200) {
         let filtering = result?.data?.data;
         // console.log('events screen data', filtering[0]);

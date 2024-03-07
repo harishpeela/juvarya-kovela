@@ -65,6 +65,7 @@ const MyTemples = ({navigation}) => {
         item?.name?.toLowerCase().includes(value?.toLowerCase()),
       ),
     );
+  
   };
   const MyCustShare = async item => {
     const ShareOptions = {
@@ -113,7 +114,7 @@ const MyTemples = ({navigation}) => {
                 keyExtractor={(item, index) => item?.id}
                 renderItem={({item, index}) => {
                   if (item?.name ) {
-                    console.log('kkkkkkkkkkk',item.description)
+                    console.log('kkkkkkkkkkk',item.name)
                     return (
                       <FavTempleListCard
                         name={item.name}
@@ -123,6 +124,7 @@ const MyTemples = ({navigation}) => {
                         onSharePress={() => MyCustShare(item)}                    
                         img={item?.logo}
                         seasonal={item?.seasonal}
+                        type={'Community Temple'}
                         onPressDelete={() => deleteSeasonal(item?.id)}
                         onPress={() => {
                           navigation.navigate(

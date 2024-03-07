@@ -130,9 +130,9 @@ const UpdateProfile = ({navigation}) => {
             <EventInput3
               lable={'Name'}
               user={true}
-              placeholder={userDetails?.username}
+              placeholder={userDetails?.username ? userDetails?.username : 'username'}
               height={50}
-              value={userDetails?.username}
+              value={userDetails?.username ? userDetails?.username : 'username'}
             />
             {eventError && (
               <Text

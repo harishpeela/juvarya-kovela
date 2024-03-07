@@ -50,11 +50,12 @@ const TempleClass = ({route, navigation}) => {
             data={templeClassDetails}
             keyExtractor={({item, index}) => index}
             renderItem={({item}) => (
+             
               <TouchableOpacity
-                onPress={() => navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                onPress={() => {navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                   data: item,
                   onSelect: onSelect,
-                })}
+                }); console.log('item===>', item)}}
                 style={{
                   borderWidth: 0.3,
                   display: 'flex',
