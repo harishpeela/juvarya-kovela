@@ -10,13 +10,12 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   bodyContainer: {
-    marginHorizontal: '4%',
+    // marginHorizontal: '4%',
     display: 'flex',
     flexDirection: 'column',
-    padding: 10,
+    // padding: 10,
     marginBottom: '3%',
-    // backgroundColor:'green'
-    
+    // backgroundColor:'green' 
   },
   searchContainers: {
     margin: 5,
@@ -24,8 +23,6 @@ export const styles = StyleSheet.create({
     // alignItems: 'center',
     // justifyContent: 'space-between',
     marginTop: '-13%',
-    
-    
     marginLeft:'10%',
     // backgroundColor:'red'
   },
