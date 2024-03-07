@@ -36,6 +36,7 @@
     "react-image-size": "^2.3.2",
     "react-native": "0.70.0",
     "react-native-base64": "^0.2.1",
+    "react-native-compressor": "^1.8.24",
     "react-native-create-thumbnail": "^2.0.0",
     "react-native-fast-image": "^8.6.1",
     "react-native-fs": "^2.20.0",

@@ -35,15 +35,17 @@ const EventCard2 = ({ navigation, data }) => {
         style={styles.Image}
       />
       )}
-      <View style={{marginTop:10,marginLeft:10,alignContent:'center'}}>
-      {/* <Text style={[styles.festivalText]}>{data?.name?.length < 12 ? data?.name : `${data?.name?.substring(0, 12)} ...`}</Text> */}
+      <View style={{marginTop:10,marginLeft:10,alignContent:'flex-start', justifyContent: 'flex-start',}}>
       <Text style={[styles.festivalText]}>{data?.name}</Text>
-      <View style={{ borderRadius: 10, backgroundColor: colors.white, width: '100%', height: '40%', alignSelf: 'center', justifyContent: 'center', marginTop: '10%',marginLeft:16 }}>
+      <View style={{ borderRadius: 10, backgroundColor: colors.white, width: '70%', height: '40%',  justifyContent: 'center', marginTop: '5%',marginLeft:16 }}>
+        {data?.worldWide || data?.countryWide || data?.cityWide && (
+                <Text style={{ fontSize: 12}}>{data?.cityWide ? 'Event' : data?.worldWide ? 'Festival' : data?.countryWide ? 'Festival': ''} </Text>
+
+        )}
         <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
           <View style={{ backgroundColor: 'white', height: 16, width: 16, justifyContent: 'center', alignItems: 'center',borderRadius:3 }}>
             <FeatherIcon style={{ color: colors.orangeColor }} name="calendar" size={12} color="white" />
           </View>
- 
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>{data?.creationTime.slice('0', '10')}</Text>
         </View>
         {(data?.countryWide || data?.worldWide ) ? (
@@ -57,7 +59,6 @@ const EventCard2 = ({ navigation, data }) => {
           ''
         )}
       </View>
-      
       </View>
     </TouchableOpacity>
   );

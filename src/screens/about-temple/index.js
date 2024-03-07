@@ -24,8 +24,6 @@ const AboutTemple = ({ navigation, route }) => {
         }
     }
 
-
-
     useEffect(() => {
         AboutTemple();
     }, []);
@@ -41,7 +39,7 @@ const AboutTemple = ({ navigation, route }) => {
                     </Text>
                 </ScrollView> */}
                 <ScrollView showsVerticalScrollIndicator style={{margin:10,borderWidth:0.2,padding:12,borderRadius:8}}>
-                <Text style={{fontSize:15,textAlign:'justify',fontFamily:'Poppins-Medium'}}>{data?.history ? data?.history : 'History To Be Added'}</Text>
+                <Text style={{fontSize:15, textAlign: 'justify',fontFamily:'Poppins-Medium'}}>{data?.history ? data?.history : 'History To Be Added'}</Text>
 
                
                 </ScrollView>

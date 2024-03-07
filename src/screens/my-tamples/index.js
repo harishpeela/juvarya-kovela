@@ -124,6 +124,7 @@ const MyTemples = ({navigation}) => {
                         onSharePress={() => MyCustShare(item)}                    
                         img={item?.logo}
                         seasonal={item?.seasonal}
+                        type={'Community Temple'}
                         onPressDelete={() => deleteSeasonal(item?.id)}
                         onPress={() => {
                           navigation.navigate(

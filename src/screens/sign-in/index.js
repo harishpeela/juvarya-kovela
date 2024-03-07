@@ -30,11 +30,12 @@ import NetInfo from '@react-native-community/netinfo';
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
   const [isConnected, setIsConnected] = useState(' ');
-  
+
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
     });
+
     return () => {
       unsubscribe();
     };
@@ -56,19 +57,19 @@ const Signin = ({navigation}) => {
       });
     }
   };
- 
+
   useEffect(() => {
     NetWorkChecking();
   }, []);
- 
+
   const {
     buttonTexts: {login, sigup},
     paragraphs: {dontHaveAccount},
     placeHolders: {emailPlace, passwordPlace},
   } = allTexts;
- 
+
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
- 
+
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
@@ -123,7 +124,7 @@ const Signin = ({navigation}) => {
         password: data.password,
       };
       // console.log('playload with mobile', payload);
- 
+
       try {
         let result = await loginUser1(payload);
         // console.log('result of login', result?.data);
@@ -144,7 +145,7 @@ const Signin = ({navigation}) => {
       }
     }
   };
- 
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} translucent={true} />
@@ -232,4 +233,5 @@ const Signin = ({navigation}) => {
     </SafeAreaView>
   );
 };
+
 export default Signin;

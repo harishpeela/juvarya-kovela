@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     marginBottom: -5,
     paddingHorizontal: 5,
     borderColor: colors.gray,
-    fontSize: 15,
+    fontSize: 12,
     color: colors.black,
     fontFamily: fontFamily.popinRegular,
     width: '100%',
