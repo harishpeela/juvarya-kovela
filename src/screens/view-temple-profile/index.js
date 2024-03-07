@@ -134,29 +134,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
-  // useEffect(() => {
-  //   let result = Data(data);
-  //   if (result) {
-  //     setTrfData(result);
-  //     console.log('trfdata', result);
-  //     if (result?.jtProfile) {
-  //       getFollowValue(result?.jtProfile);
-  //       Posts(result?.jtProfile);
-  //       CommunityTemple(result?.jtProfile);
-  //       TempleRoleSearchWithId(result?.jtProfile);
-  //       followingCount(result?.jtProfile);
-  //       dontationValue(result.jtProfile);
-  //       // MemberShip(result?.jtProfile);
-  //       TempleAddressDetails(result?.jtProfile);
-  //       eventList(result?.jtProfile);
-  //       templeDetails(result?.jtProfile);
-  //     } else {
-  //     }
-  //   } else {
-  //     setTrfData();
-  //   }
-  // }, []);
-
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
     console.log('result of events', result?.data);
@@ -696,7 +673,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
           {isModal && (
             <ContactModal isModal={isModal} setIsModal={setIsModal} />
           )}
-        </View>
       </Pressable>
       <Modal
         // animationType={'slide'}
