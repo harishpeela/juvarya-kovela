@@ -62,5 +62,33 @@ export const styles = StyleSheet.create({
     textAlign:'center',
    color:'orange',
     marginTop:'5%',
-  }
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: colors.gray,
+    borderRadius: 4,
+    height: 38,
+    width: 36,
+    fontSize: 14,
+    margin: 12,
+    borderBottomWidth: 1,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.white,
+  },
+  btnContainer: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  expectOtp: {
+    color: colors.green2,
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 10,
+    alignSelf: 'center',
+    marginBottom: 10,
+  },
+  black: {
+    color: colors.black,
+  },
 });

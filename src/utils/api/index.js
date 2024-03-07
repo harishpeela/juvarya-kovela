@@ -127,6 +127,7 @@ const endpoints = {
   EVENT_BY_COMMUNITY_ID: 'jtprofile/byCommunity',
   DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
   COMMUNITY_ID: 'jtdcommunities/list',
+  EVENT_INTRESETD_DETAILS:'jtInterestedEvents/interested?eventId', 
 };
 export const getInitialToken = async () => {
   try {
@@ -642,6 +643,17 @@ export const Event_Highlights = async eveId => {
   try {
     let result = await axiosEventsData1.get(
       `${endpoints.EVENTS_HIGHLIGHTS}/${eveId}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error', error);
+  }
+};
+
+export const getIntrestedEventById = async eveId => {
+  try {
+    let result = await axiosEventsData1.get(
+      `${endpoints.EVENT_INTRESETD_DETAILS}=${eveId}`,
     );
     return result;
   } catch (error) {

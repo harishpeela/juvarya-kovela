@@ -14,15 +14,12 @@ export const Artist_Donar_List_Card = ({data}) => {
           }}
           style={styles.img}
         />
-        <View style={{alignItems: 'center', marginTop: '5%'}}>
-          <Text style={styles.title}>Artist </Text>
-          <Text style={styles.name}>
-            {data?.artistDto?.artist?.firstName
-              ? data?.artistDto?.artist?.firstName
-              : 'No Artist'}{' '}
-          </Text>
+         <View style={{alignItems: 'center', marginTop: '5%'}}>
+          <Text style={styles.title}>Donar </Text>
+          <Text style={styles.name}>{data?.donarDto?.donar?.firstName} </Text>
           <Text> Year: {data?.year?.substring(6, 11)}</Text>
         </View>
+       
       </View>
       <View style={styles.viewCont}>
         <Image
@@ -33,9 +30,13 @@ export const Artist_Donar_List_Card = ({data}) => {
           }}
           style={styles.img}
         />
-        <View style={{alignItems: 'center', marginTop: '5%'}}>
-          <Text style={styles.title}>Donar </Text>
-          <Text style={styles.name}>{data?.donarDto?.donar?.firstName} </Text>
+         <View style={{alignItems: 'center', marginTop: '5%'}}>
+          <Text style={styles.title}>Artist </Text>
+          <Text style={styles.name}>
+            {data?.artistDto?.artist?.firstName
+              ? data?.artistDto?.artist?.firstName
+              : 'No Artist'}{' '}
+          </Text>
           <Text> Year: {data?.year?.substring(6, 11)}</Text>
         </View>
       </View>
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
     color: colors.black,
   },
   name: {
-    fontSize: 16,
+    fontSize: 13,
     color: colors.black,
     fontWeight: 'bold',
     textTransform: 'capitalize',

@@ -1,7 +1,7 @@
-import {View, Text, TextInput, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
-import {colors} from '../../common';
-import {styles} from './style';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { colors } from '../../common';
+import { styles } from './style';
 import PhoneIcon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -25,18 +25,18 @@ export const InputField = ({
         <Text
           style={[
             styles.title,
-            {color: titleColor ? titleColor : colors.darkBrown},
+            { color: titleColor ? titleColor : colors.darkBrown },
           ]}>
           {title}
         </Text>
         <View style={styles.fieldContainer}>
-{isUser && (
+          {isUser && (
             <View style={styles.imgContainer}>
               <PhoneIcon name="user" style={styles.image} size={20} />
-              
+
             </View>
           )}
-         
+
           <TextInput
             value={value}
             placeholderTextColor={colors.gray2}
@@ -44,6 +44,7 @@ export const InputField = ({
             style={styles.inputText}
             multiline={true}
             autoCapitalize='none'
+            // placeholder={placeholder}
             {...props}
           />
         </View>
@@ -69,7 +70,7 @@ export const InputField1 = ({
         <Text
           style={[
             styles.title,
-            {color: titleColor ? titleColor : colors.darkBrown},
+            { color: titleColor ? titleColor : colors.darkBrown },
           ]}>
           {title}
         </Text>
@@ -113,7 +114,7 @@ export const PasswordField = ({
         <Text
           style={[
             styles.title,
-            {color: titleColor ? titleColor : colors.darkBrown},
+            { color: titleColor ? titleColor : colors.darkBrown },
           ]}>
           {title}
         </Text>
@@ -135,11 +136,11 @@ export const PasswordField = ({
           />
           {value?.length > 0 && (
             <TouchableOpacity
-              style={{marginLeft: '-10%'}}
+              style={{ marginLeft: '-10%' }}
               onPress={() => setIsShowPassword(!isShowPassword)}>
               <MaterialCommunityIcon
                 name={!isShowPassword ? 'eye' : 'eye-off'}
-                style={{fontSize: 22,}}
+                style={{ fontSize: 22, }}
                 color={colors.orangeColor}
               />
             </TouchableOpacity>

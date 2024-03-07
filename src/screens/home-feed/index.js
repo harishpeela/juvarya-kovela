@@ -29,7 +29,7 @@ const UserFeedScreen = ({ navigation }) => {
     setLoader(true);
     try {
       let result = await getHomeFeedList(pgNo, pgSize);
-      console.log('data>>>>>>>>>>>>>....',result.data)
+      // console.log('data>>>>>>>>>>>>>....',result.data)
       if (result && result.status === 200) {
         setLoader(false);
         setHomeFeedList(result.data.jtFeeds);
@@ -112,7 +112,6 @@ const UserFeedScreen = ({ navigation }) => {
     }, [])
   );
 
-  console.log("data>>>>>>>>>>",)
 
   return (
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
@@ -137,7 +136,6 @@ const UserFeedScreen = ({ navigation }) => {
             keyboardShouldPersistTaps="handled"
             keyExtractor={(item, index) => index.toString()}
             renderItem={({ item }) => {
-              console.log("Created date>>>>>>>>>>>:", item.creationTime); 
               return (
                 <UserFeedCompList
                   id={item.id}

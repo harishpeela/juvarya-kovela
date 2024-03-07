@@ -83,35 +83,44 @@ const NewUserProfile = ({ navigation }) => {
   const [mediaLoader, setMediaLoader] = useState(false);
  
  
-  useEffect(() => {
+useEffect(() => {
+
     const fetchThumbnails = async () => {
-      setMediaLoader(true);
+
       const thumbnailData = [];
-      const batchSize = 3;
-      for (let i = 0; i < userReels?.length; i += batchSize) {
-        const batch = userReels?.slice(i, i + batchSize);
-        const batchPromises = batch.map(async (item) => {
-          try {
-            const thumbnail = await createThumbnail({
-              url: item?.mediaList[0]?.url,
-              timeStamp: 10,
-            });
-            return thumbnail.path;
-          } catch (error) {
-            console.error('Error generating thumbnail:', error);
-            return null;
-          }
-        });
-        const batchThumbnails = await Promise.all(batchPromises);
-        thumbnailData.push(...batchThumbnails);
+
+      for (const [index, item] of userReels.entries()) {
+
+        try {
+
+          const thumbnail = await createThumbnail({
+
+            url: item?.mediaList[0]?.url,
+
+            timeStamp: 10000,
+
+          });
+
+          thumbnailData[index] = { path: thumbnail.path, loaded: false };
+
+          setThumbnails([...thumbnailData]);
+
+        } catch (error) {
+
+          console.error('Error generating thumbnail:', error);
+          thumbnailData[index] = { path: null, loaded: false };
+          setThumbnails([...thumbnailData]);
+        }
       }
-      setThumbnails(thumbnailData);
-      setMediaLoader(false);
     };
  
     fetchThumbnails();
+
   }, [userReels]);
-console.log('thumbnails', thumbnails);
+
+
+
+console.log('thumbnails ==>', thumbnails);
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -298,17 +307,6 @@ console.log('thumbnails', thumbnails);
 
         </TouchableOpacity>
         <View style={styles.menuAndAlert}>
-          {/* <TouchableOpacity
-                  style={styles.bell}
-                  onPress={() =>
-                    navigation.navigate(allTexts.screenNames.notification)
-                  }>
-                  <FontAwesome
-                    name="bell-o"
-                    size={24}
-                    color={isDarkMode ? 'black' : 'black'}
-                  />
-                </TouchableOpacity> */}
           <TouchableOpacity onPress={() => setIsVisible(!isVisible)}>
             <View style={styles.menu}>
               <Feather name="menu" size={28} color={colors.black} />
@@ -356,12 +354,6 @@ console.log('thumbnails', thumbnails);
               ) : (
                 <View style={styles.profileImage}>
                   <Icon name="camera" size={60} color={colors.orangeColor} />
-                  {/* <Image
-                    source={{
-                      uri: 'https://s3.ap-south-1.amazonaws.com/kovela.app/17048660306221704866026953.jpg',
-                    }}
-                    style={styles.profileImage}
-                  /> */}
                 </View>
               )}
             </TouchableOpacity>
@@ -388,7 +380,7 @@ console.log('thumbnails', thumbnails);
             renderItem={({ item, index }) => (
               <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
                 <Image
-                  source={{ uri: thumbnails[index] }}
+                  source={{ uri: thumbnails[index]?.path }}
                   style={{
                     height: Dimensions.get('window').height / 6 + 60,
                     width: Dimensions.get('window').width / 3,
@@ -400,37 +392,6 @@ console.log('thumbnails', thumbnails);
           />
            )}
          </ScrollView>
-          //   <ScrollView style={{ marginBottom: 10, height: '60%' }}>
-          //   <FlatList
-          //     numColumns={3}
-          //     data={userReels}
-          //     style={{}}
-          //     keyExtractor={({ item, index }) => index}
-          //     renderItem={({ item, index }) => (
-          //       <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
-          //         {/* <Video
-          //           videoRef={videoRef}
-          //           onBuffer={() => onBuffer()}
-          //           onError={onError}
-          //           repeat={false}
-          //           resizeMode='cover'
-          //           source={{ uri: item?.mediaList[0]?.url }}
-          //           muted={mute}
-          //           seek={80}
-          //           paused={false}
-          //           onChange
-          //           style={{
-          //             height: Dimensions.get('window').height / 6 + 60,
-          //             width: Dimensions.get('window').width / 3,
-          //             // backgroundColor: 'red',
-          //             margin: 2,
-          //           }}
-          //         /> */}
-          //         <Video_Player video={item?.mediaList} mute={mute} />
-          //       </TouchableOpacity>
-          //     )}
-          //   />
-          // </ScrollView>
         ) : (
           <View
             style={{

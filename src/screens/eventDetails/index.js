@@ -17,8 +17,9 @@ import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
-import {IntrestedEvents, Event_Highlights, Event_Info} from '../../utils/api';
+import {IntrestedEvents, Event_Highlights, Event_Info, getIntrestedEventById} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
+import { setIn } from 'formik';
 
 const EventDetails = ({navigation, route}) => {
   const {item, role} = route?.params || {};
@@ -28,11 +29,15 @@ const EventDetails = ({navigation, route}) => {
   const [highlights, setHighlights] = useState([]);
   const [Info, setInfo] = useState([]);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
-const [roles, setRole] = useState(false);
+  const [roles, setRole] = useState(false);
+  const [intrested, setIntrested] = useState({});
+  const [intrest, setIntrest] = useState(false);
+
   const EventsIntrested = async () => {
+    setIntrest(!intrest)
     let payload = {
       eventId: item?.id,
-      interested: true,
+      interested: !intrest,
     };
     console.log('paload', payload);
     try {
@@ -42,16 +47,13 @@ const [roles, setRole] = useState(false);
         Alert.alert('Success', 'This event is added to your intrested events list', [
           {
             text: 'Ok',
-            // onPress: () =>
-            //   navigation.navigate(allTexts.tabNames.eventsScreen)
+            onPress: () =>  dataIntrested(),
           },
         ]);
       } else {
         Alert.alert('Error', result?.data?.message || 'something went wrong', [
           {
             text: 'Ok',
-            // onPress: () =>
-            //   navigation.navigate(allTexts.tabNames.eventsScreen)
           },
         ]);
       }
@@ -87,9 +89,19 @@ const [roles, setRole] = useState(false);
     }
   };
   // console.log("info ",Info)
+const dataIntrested = async() => {
+  let responce = await getIntrestedEventById(item?.id);
+  console.log('dataintredted', responce?.data);
+  if(responce?.status === 200){
+    setIntrested(responce?.data);
+  } else {
+    setIntrested('');
+  }
+}
 
   useEffect(() => {
     EventHighLights();
+    dataIntrested();
   }, []);
 
   useEffect(() => {
@@ -344,7 +356,7 @@ const [roles, setRole] = useState(false);
       activeTab: false,
     },
   ];
-
+console.log('intrested?.interested', intrested?.interested)
   return (
     <View style={styles.container}>
       <View style={{height: '10%'}}>
@@ -464,17 +476,24 @@ const [roles, setRole] = useState(false);
         </View>
         </>
        ) : (
-        <View style={{flex: 1, alignItems: 'center', marginTop: '40%'}}>
-          <Text style={{color: colors.orangeColor, fontSize: 20, textTransform: 'capitalize', fontFamily: 'semi-bold'}}>{item?.description} </Text>
+        <View style={{flex: 1, margin: '5%'}}>
+          <Text style={{color: colors.black, fontSize: 14,  fontFamily: 'semi-bold'}}>{item?.description} </Text>
         </View>
        )}
       </ScrollView>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity
+        {intrested?.interested ? (
+          <View
+          style={styles.button1}>
+          <Text style={styles.btnText}>Interested</Text>
+        </View>
+        ) : (
+          <TouchableOpacity
           style={styles.button}
           onPress={() => EventsIntrested()}>
           <Text style={styles.btnText}>Interested</Text>
         </TouchableOpacity>
+        )}
       </View>
     </View>
   );
