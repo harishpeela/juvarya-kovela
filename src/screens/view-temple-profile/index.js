@@ -68,7 +68,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
-  console.log('data', data);
   // console.log(
   //   '<=============================>',
   //   data,
@@ -144,7 +143,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
   //       getFollowValue(result?.jtProfile);
   //       Posts(result?.jtProfile);
   //       CommunityTemple(result?.jtProfile);
-
   //       TempleRoleSearchWithId(result?.jtProfile);
   //       followingCount(result?.jtProfile);
   //       dontationValue(result.jtProfile);
@@ -477,7 +475,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </Text>
               </View>
             )}
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 1}}>
               {/* {tempProfileData?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
@@ -598,6 +596,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {donationLoader ? (
                 <Loader size={'small'} color={colors.red1} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
+               
                 <Danation_Add_Card
                   onPress={() =>
                     navigation.navigate(allTexts?.screenNames?.donationslist, {
@@ -620,6 +619,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
               ) : (
                 ''
               )}
+               </View>
+              
               <ProfileFourthTab
                 currentIndex={currentIndex}
                 setCurrentIndex={setCurrentIndex}

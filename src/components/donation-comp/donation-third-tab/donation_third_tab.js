@@ -5,7 +5,7 @@ import {colors} from '../../../common';
 export const Donation_Third_Tab = ({description, url}) => {
   return (
     <View>
-      <Text style={styles.donTxt}>How Is Your Donation Used</Text>
+      <Text style={styles.donTxt}>How Is Your Donation Used?</Text>
       <Image
         source={{uri: url}}
         height={50}

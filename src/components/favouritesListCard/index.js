@@ -5,6 +5,7 @@ import { colors, fontFamily, fontSize } from '../../common';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 export const FavTempleListCard = ({ name, location, date, onPress, img, seasonal, onPressDelete, type }) => {
   return (
+  
     <View style={styles.listItemContainer}>
       <TouchableOpacity onPress={onPress} style={styles.secondaryContainer}>
         <View>

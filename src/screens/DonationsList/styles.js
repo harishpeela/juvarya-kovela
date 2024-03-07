@@ -70,17 +70,17 @@ export const styles = StyleSheet.create({
     height: 32,
     width: 32,
     marginRight: 10,
-    marginTop:'-21.5%',
+    marginTop:'-23%',
     marginLeft:'88.5%'
   },
 
   searchbarContainer:{
     bottom:'46%',
     // width:100,
-    marginTop:'-6%',
+    marginTop:'-7%',
     // backgroundColor:'black',
     marginLeft:'11%',
-    marginTop:'-1%'
+    marginTop:'4%'
    
    
     

@@ -23,8 +23,8 @@ const MyTemples = ({navigation}) => {
   const [searchedText, setSearchedText] = useState('');
 
   const deleteSeasonal = (id) => {
-    // console.log('=====', id)
-    Alert.alert('Alert', 'Are You Sure You Want To Delete This Temple ?', [
+    console.log('=====', id)
+    Alert.alert('Alert', 'Are You Sure You Want To Delete This Temple?', [
       { text: 'Yes', onPress: async () => {
         let responce = await deleteCommunityTemple(id);
       //  console.log(responce?.data, 'responce of delete');
@@ -65,6 +65,7 @@ const MyTemples = ({navigation}) => {
         item?.name?.toLowerCase().includes(value?.toLowerCase()),
       ),
     );
+  
   };
   const MyCustShare = async item => {
     const ShareOptions = {
@@ -112,10 +113,12 @@ const MyTemples = ({navigation}) => {
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={(item, index) => item?.id}
                 renderItem={({item, index}) => {
-                  if (item?.name) {
+                  if (item?.name ) {
+                    console.log('kkkkkkkkkkk',item.name)
                     return (
                       <FavTempleListCard
                         name={item.name}
+                        description={item.description}
                         location={item.line1}
                         date={item.creationTime}  
                         onSharePress={() => MyCustShare(item)}                    

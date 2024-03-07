@@ -50,6 +50,7 @@ const TempleClass = ({route, navigation}) => {
             data={templeClassDetails}
             keyExtractor={({item, index}) => index}
             renderItem={({item}) => (
+             
               <TouchableOpacity
                 onPress={() => {navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                   data: item,
