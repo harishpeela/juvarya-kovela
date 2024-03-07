@@ -38,7 +38,6 @@ export default BottomTabBase = ({navigation}) => {
   useEffect(() => {
     setFeedLength(homeFeedListData?.length);
   }, [homeFeedListData, navigation]);
-
   return (
     <SafeAreaView
       keyboardHidesTabBar={true}

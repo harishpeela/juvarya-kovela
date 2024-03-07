@@ -27,7 +27,7 @@ const MyTemples = ({navigation}) => {
     Alert.alert('Alert', 'Are You Sure You Want To Delete This Temple?', [
       { text: 'Yes', onPress: async () => {
         let responce = await deleteCommunityTemple(id);
-       console.log(responce?.data, 'responce of delete');
+      //  console.log(responce?.data, 'responce of delete');
        if(responce){
         AdminTempleDetails();
        }
@@ -46,9 +46,9 @@ const MyTemples = ({navigation}) => {
       setTempleList(adminData);
       setFilteredArray(adminData);
       setLoading(false);
-      } else(
-        alert('smething went wrong')
-      )
+      } else{
+        setLoading(false);
+      }
     } catch (error) {
       setLoading(false);
       console.log('error in admin temples', error);
@@ -100,7 +100,7 @@ const MyTemples = ({navigation}) => {
       <View style={styles.cardContainer}>
         {loading === true ? (
           <View style={styles.loaderContainer}>
-            <Loader color={colors.orangeColor} />
+            <Loader color={colors.green} />
           </View>
         ) : (
           [

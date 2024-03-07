@@ -36,6 +36,8 @@ import { PrimaryButton } from '../../components';
 import { launchImageLibrary } from 'react-native-image-picker';
 import ApplicationContext from '../../utils/context-api/Context';
 import Video from 'react-native-video';
+import { createThumbnail } from 'react-native-create-thumbnail';
+import { Video_Player } from '../../components/video-thumbnail';
 const NewUserProfile = ({ navigation }) => {
   const { userDetails, setLoginDetails } = useContext(ApplicationContext);
   const [height, setHeight] = useState('');
@@ -77,6 +79,39 @@ const NewUserProfile = ({ navigation }) => {
   const [currentFrame, setCurrentFrame] = useState('0');
   const [isLoader, setIsLoader] = useState(false);
   const [url, setUrl] = useState();
+  const [thumbnails, setThumbnails] = useState([]);
+  const [mediaLoader, setMediaLoader] = useState(false);
+ 
+ 
+  useEffect(() => {
+    const fetchThumbnails = async () => {
+      setMediaLoader(true);
+      const thumbnailData = [];
+      const batchSize = 3;
+      for (let i = 0; i < userReels?.length; i += batchSize) {
+        const batch = userReels?.slice(i, i + batchSize);
+        const batchPromises = batch.map(async (item) => {
+          try {
+            const thumbnail = await createThumbnail({
+              url: item?.mediaList[0]?.url,
+              timeStamp: 10,
+            });
+            return thumbnail.path;
+          } catch (error) {
+            console.error('Error generating thumbnail:', error);
+            return null;
+          }
+        });
+        const batchThumbnails = await Promise.all(batchPromises);
+        thumbnailData.push(...batchThumbnails);
+      }
+      setThumbnails(thumbnailData);
+      setMediaLoader(false);
+    };
+ 
+    fetchThumbnails();
+  }, [userReels]);
+console.log('thumbnails', thumbnails);
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
@@ -107,19 +142,22 @@ const NewUserProfile = ({ navigation }) => {
   };
 
   const UserReels = async (pgNo, pgSize, bool) => {
+    setMediaLoader(true);
     const response = await ShowReels(pgNo, pgSize, bool);
     if (response?.status === 200) {
-      setUserReels(response?.data?.data);      
+      setUserReels(response?.data?.data);
       setLoader(false);
+      setMediaLoader(false);
     } else {
       setLoader(false);
+      setMediaLoader(false);
     }
   };
 
   useEffect(() => {
     UserReels(0, 30, true);
   }, []);
-
+  console.log('userReels', userReels);
   const currentCust = async () => {
     setIsLoading(true)
     let result = await getUserInfoNew();
@@ -336,37 +374,63 @@ const NewUserProfile = ({ navigation }) => {
           currentIndex={currentIndex}
           setCurrentIndex={setCurrentIndex}
         />
-        {currentIndex === 1 || UserReels.length > 0 ? (
-          <ScrollView style={{ marginBottom: 10, height: '60%' }}>
+        {currentIndex === 1 || userReels?.length > 0 ? (
+         <ScrollView style={{ marginBottom: 10, height: '60%' }}>
+           {mediaLoader ? (
+            <View style={{}}>
+              <Loader size={'small'} color={colors.orangeColor} />
+            </View>
+           ) : (
             <FlatList
-              numColumns={3}
-              data={userReels}
-              style={{}}
-              keyExtractor={({ item, index }) => index}
-              renderItem={({ item, index }) => (
-                <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
-                  <Video
-                    videoRef={videoRef}
-                    onBuffer={() => onBuffer()}
-                    onError={onError}
-                    repeat={false}
-                    resizeMode='cover'
-                    source={{ uri: item?.mediaList[0]?.url }}
-                    muted={mute}
-                    seek={80}
-                    paused={false}
-                    onChange
-                    style={{
-                      height: Dimensions.get('window').height / 6 + 60,
-                      width: Dimensions.get('window').width / 3,
-                      // backgroundColor: 'red',
-                      margin: 2,
-                    }}
-                  />
-                </TouchableOpacity>
-              )}
-            />
-          </ScrollView>
+            numColumns={3}
+            data={userReels}
+            keyExtractor={({ item, index }) => index}
+            renderItem={({ item, index }) => (
+              <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
+                <Image
+                  source={{ uri: thumbnails[index] }}
+                  style={{
+                    height: Dimensions.get('window').height / 6 + 60,
+                    width: Dimensions.get('window').width / 3,
+                    margin: 2,
+                  }}
+                />
+              </TouchableOpacity>
+            )}
+          />
+           )}
+         </ScrollView>
+          //   <ScrollView style={{ marginBottom: 10, height: '60%' }}>
+          //   <FlatList
+          //     numColumns={3}
+          //     data={userReels}
+          //     style={{}}
+          //     keyExtractor={({ item, index }) => index}
+          //     renderItem={({ item, index }) => (
+          //       <TouchableOpacity onPress={() => modal(item?.mediaList[0]?.url)}>
+          //         {/* <Video
+          //           videoRef={videoRef}
+          //           onBuffer={() => onBuffer()}
+          //           onError={onError}
+          //           repeat={false}
+          //           resizeMode='cover'
+          //           source={{ uri: item?.mediaList[0]?.url }}
+          //           muted={mute}
+          //           seek={80}
+          //           paused={false}
+          //           onChange
+          //           style={{
+          //             height: Dimensions.get('window').height / 6 + 60,
+          //             width: Dimensions.get('window').width / 3,
+          //             // backgroundColor: 'red',
+          //             margin: 2,
+          //           }}
+          //         /> */}
+          //         <Video_Player video={item?.mediaList} mute={mute} />
+          //       </TouchableOpacity>
+          //     )}
+          //   />
+          // </ScrollView>
         ) : (
           <View
             style={{
@@ -554,26 +618,26 @@ const NewUserProfile = ({ navigation }) => {
         </View>
       </Modal>
       <Modal visible={isLoader} transparent={true}>
-        <View  style={{marginTop: '40%', marginVertical: '5%', marginHorizontal: '2%', borderRadius: 10, height: '60%'}}>
-          <MaterialIconss name='cancel' size={24} color={'black'} style={{alignSelf: 'flex-end'}} onPress={() => {setIsLoader(false); setModalMute(true)}} />
-        <Video
-          videoRef={videoRef}
-          onBuffer={() => onBuffer()}
-          onError={onError}
-          repeat={false}
-          resizeMode='cover'
-          source={{ uri: url }}
-          muted={modalMute}
-          seek={40}
-          paused={false}
-          style={{
-            height: '100%' ,
-            width: '100%',
-            margin: 2,
-            alignSelf: 'center',
-            borderRadius: 10
-          }}
-        />
+        <View style={{ marginTop: '40%', marginVertical: '5%', marginHorizontal: '2%', borderRadius: 10, height: '60%' }}>
+          <MaterialIconss name='cancel' size={24} color={'black'} style={{ alignSelf: 'flex-end' }} onPress={() => { setIsLoader(false); setModalMute(true) }} />
+          <Video
+            videoRef={videoRef}
+            onBuffer={() => onBuffer()}
+            onError={onError}
+            repeat={false}
+            resizeMode='cover'
+            source={{ uri: url }}
+            muted={modalMute}
+            seek={40}
+            paused={false}
+            style={{
+              height: '100%',
+              width: '100%',
+              margin: 2,
+              alignSelf: 'center',
+              borderRadius: 10
+            }}
+          />
         </View>
       </Modal>
     </View>
