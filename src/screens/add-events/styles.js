@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../common';
+import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -47,5 +47,19 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: colors.white,
     justifyContent: 'center',
+  },
+  DTextStyle: {
+    fontFamily: fontFamily.popinRegular,
+    fontSize: 15,
+    color: colors.black,
+    textTransform: 'uppercase',
+    fontWeight: '500',
+  },
+  DbuttonStyle: {
+    height: 45,
+    width: '85%',
+    borderRadius: 5,
+    backgroundColor: colors.gray4,
+    alignSelf: 'center',
   },
 });
