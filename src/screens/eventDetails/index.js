@@ -21,14 +21,14 @@ import {IntrestedEvents, Event_Highlights, Event_Info} from '../../utils/api';
 import {FlatList} from 'react-native-gesture-handler';
 
 const EventDetails = ({navigation, route}) => {
-  const {item} = route?.params || {};
-  console.log('item,', item);
+  const {item, role} = route?.params || {};
+  console.log('item', item);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
   const [Info, setInfo] = useState([]);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
-
+const [roles, setRole] = useState(false);
   const EventsIntrested = async () => {
     let payload = {
       eventId: item?.id,
@@ -42,16 +42,16 @@ const EventDetails = ({navigation, route}) => {
         Alert.alert('Success', 'This event is added to your intrested events list', [
           {
             text: 'Ok',
-            onPress: () =>
-              navigation.navigate(allTexts.tabNames.eventsScreen)
+            // onPress: () =>
+            //   navigation.navigate(allTexts.tabNames.eventsScreen)
           },
         ]);
       } else {
         Alert.alert('Error', result?.data?.message || 'something went wrong', [
           {
             text: 'Ok',
-            onPress: () =>
-              navigation.navigate(allTexts.tabNames.eventsScreen)
+            // onPress: () =>
+            //   navigation.navigate(allTexts.tabNames.eventsScreen)
           },
         ]);
       }
@@ -216,7 +216,8 @@ const EventDetails = ({navigation, route}) => {
         />
       </Card>
     ) : (
-      <TouchableOpacity
+      role ? (
+        <TouchableOpacity
         style={{
           justifyContent: 'center',
           alignItems: 'center',
@@ -230,6 +231,22 @@ const EventDetails = ({navigation, route}) => {
         }}>
         <Text style={{color: colors.blue}}>+ No Info Here At This Time</Text>
       </TouchableOpacity>
+      ) : (
+        <View
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '20%',
+        }}
+        onPress={() => {
+          setIsEditingInfo(false);
+          navigation.navigate(allTexts.screenNames.info, {
+            data: item,
+          });
+        }}>
+        <Text style={{color: colors.blue}}> No Info Here At This Time</Text>
+      </View>
+      )
     );
   };
 
@@ -278,22 +295,35 @@ const EventDetails = ({navigation, route}) => {
         </View>
       </Card>
     ) : (
+     role ? (
       <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '20%',
-        }}
-        onPress={() =>
-          navigation.navigate(allTexts.screenNames.editContribute)
-        }>
-        <Text style={{color: colors.blue}}>
-          + No contributes here at this time
-        </Text>
-      </TouchableOpacity>
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '20%',
+      }}
+      onPress={() =>
+        navigation.navigate(allTexts.screenNames.editContribute)
+      }>
+      <Text style={{color: colors.blue}}>
+        No contributes here at this time
+      </Text>
+    </TouchableOpacity>
+     ) : (
+      <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '20%',
+      }}
+      >
+      <Text style={{color: colors.blue}}>
+        + No contributes here at this time
+      </Text>
+    </View>
+     )
     );
   };
-
   const actionsArr = [
     {
       id: 1,
@@ -389,7 +419,7 @@ const EventDetails = ({navigation, route}) => {
               {item?.date?.slice(0, 10)}
             </Text>
           </View>
-         {item?.worldWide && (
+         {(item?.worldWide || item?.countryWide) && (
            <View style={styles.locCon}>
            <FontAwsIcon
              style={styles.locIcon}
@@ -397,12 +427,14 @@ const EventDetails = ({navigation, route}) => {
              size={20}
              color="white"
            />
-           <Text style={styles.locText}>{'Across India'}</Text>
+           <Text style={styles.locText}>{item?.worldWide ? 'Accross World' : item?.countryWide ? 'Accross India' : ''}</Text>
          </View>
          )}
         </View>
         <View style={styles.underline} />
-        <View style={{flexDirection: 'row'}}>
+       {(highlights?.length || Info[0]?.information) ? (
+        <>
+         <View style={{flexDirection: 'row'}}>
           {actionsArr.map((action, index) => {
             return (
               <TouchableOpacity
@@ -430,6 +462,12 @@ const EventDetails = ({navigation, route}) => {
         <View style={{margin: 10}}>
           {actionsArr[activeTabIndex].component()}
         </View>
+        </>
+       ) : (
+        <View style={{flex: 1, alignItems: 'center', marginTop: '40%'}}>
+          <Text style={{color: colors.orangeColor, fontSize: 20, textTransform: 'capitalize', fontFamily: 'semi-bold'}}>{item?.description} </Text>
+        </View>
+       )}
       </ScrollView>
       <View style={styles.buttonContainer}>
         <TouchableOpacity

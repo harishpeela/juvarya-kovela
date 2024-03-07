@@ -126,6 +126,7 @@ const endpoints = {
   GET_DONOR:'jtIdolDonation/save',
   EVENT_BY_COMMUNITY_ID: 'jtprofile/byCommunity',
   DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
+  COMMUNITY_ID: 'jtdcommunities/list',
 };
 export const getInitialToken = async () => {
   try {
@@ -137,7 +138,6 @@ export const getInitialToken = async () => {
 };
 
 export const loginUser1 = async data => {
-  console.log('login api develop', data, endpoints?.NEW_SIGN_IN);
   try {
     let result = await authAxiousInstance1.post(
       `${endpoints.NEW_SIGN_IN}`,
@@ -197,6 +197,21 @@ export const PopularTemples = async (pgNo, pgsize) => {
   try {
     let result = await axiosNewData.get(
       `${endpoints.NEW_POPULAR_TEMPLES}?pageNo=${pgNo}&pageSize=${pgsize}`,
+      {
+        // retry: 5,
+        // retryDelay: 3000,
+      },
+    );
+    return result;
+  } catch (error) {
+    console.log('error in popular temples', error);
+  }
+};
+
+export const getCommunityId = async () => {
+  try {
+    let result = await axiosNewData.get(
+      `${endpoints.COMMUNITY_ID}`,
       {
         // retry: 5,
         // retryDelay: 3000,

@@ -64,7 +64,7 @@ const KovelaReels = ({ navigation }) => {
         </TouchableOpacity>
       </View>
       {loader ? (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{alignItems: 'center' }}>
           <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
