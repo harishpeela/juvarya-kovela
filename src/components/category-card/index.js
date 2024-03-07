@@ -57,7 +57,7 @@ export const UserFeedCompList = ({
   const isDarkMode = useColorScheme() === 'dark';
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
-  const [roleType, setRoleType] = useState();
+  const [roleType, setRoleType] = useState('');
 
 
   const getImageSize = () => {

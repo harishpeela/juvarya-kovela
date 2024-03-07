@@ -120,7 +120,7 @@ const TempleCrew = ({route, navigation}) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
             name="arrow-back-circle"
-            size={39}
+            size={42}
             color={colors.orangeColor}
             style={{alignSelf: 'flex-start', justifyContent: 'center',marginLeft:10}}
           />
@@ -132,7 +132,7 @@ const TempleCrew = ({route, navigation}) => {
               fontWeight: 'normal',
               fontFamily: 'Poppins-Medium',
               fontSize: 20,
-              marginLeft: '40%',
+              marginLeft: '37%',
             }}>
             {' '}
             Members
@@ -301,7 +301,7 @@ const TempleCrew = ({route, navigation}) => {
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text style={{color: colors.orangeColor}}>
+                <Text style={{fontSize:17,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>
                   {' '}
                   No Members For This Temple
                 </Text>

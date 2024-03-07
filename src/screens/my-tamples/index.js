@@ -47,7 +47,7 @@ const MyTemples = ({navigation}) => {
       setFilteredArray(adminData);
       setLoading(false);
       } else(
-        alert('smethinhg went wrong')
+        alert('smething went wrong')
       )
     } catch (error) {
       setLoading(false);
@@ -112,10 +112,12 @@ const MyTemples = ({navigation}) => {
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={(item, index) => item?.id}
                 renderItem={({item, index}) => {
-                  if (item?.name) {
+                  if (item?.name ) {
+                    console.log('kkkkkkkkkkk',item.description)
                     return (
                       <FavTempleListCard
                         name={item.name}
+                        description={item.description}
                         location={item.line1}
                         date={item.creationTime}  
                         onSharePress={() => MyCustShare(item)}                    

@@ -70,7 +70,7 @@ const InvitationScreen = ({navigation, route}) => {
         <TouchableOpacity style={{marginLeft:10}} onPress={() => navigation.goBack()}>
         <Ionicons
         name="arrow-back-circle"
-        size={36}
+        size={42}
         color={colors.orangeColor}
         style={{alignSelf: 'flex-start', justifyContent: 'center'}}
       />
@@ -92,7 +92,7 @@ const InvitationScreen = ({navigation, route}) => {
         </View>
         {error && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>Email is Not valid </Text>
+            <Text style={styles.errorText}>Email Is Not Valid </Text>
           </View>
         )}
         {isValidEmail && (

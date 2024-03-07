@@ -157,6 +157,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
       setTrfData();
     }
   }, []);
+  
 
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);

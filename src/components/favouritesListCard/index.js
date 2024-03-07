@@ -3,8 +3,10 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native';
 import {colors, fontFamily, fontSize} from '../../common';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-export const FavTempleListCard = ({name, location, date, onPress, img, seasonal, onPressDelete}) => {
+export const FavTempleListCard = ({name,description, location, date, onPress, img, seasonal, onPressDelete}) => {
+  console.log('jjjjjjjjjj',description)
   return (
+  
     <View style={styles.listItemContainer}>
        {seasonal && (
         <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{alignSelf:'flex-end'}} />
@@ -26,10 +28,9 @@ export const FavTempleListCard = ({name, location, date, onPress, img, seasonal,
           </View>
           <View>
             <Text style={styles.itemHeading}>{name}</Text>
-            {/* <Text numberOfLines={1} style={styles.itemAdmin}>
-              Temple
-            </Text> */}
-            {/* <Text style={styles.itemLocation}>{`location-${location}`}</Text> */}
+            <Text style={{color:colors.gray6,fontSize:12}}>{description}</Text>
+             
+          
           </View>
         </View>
       </TouchableOpacity>
