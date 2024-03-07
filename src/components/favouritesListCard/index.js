@@ -9,7 +9,7 @@ export const FavTempleListCard = ({name,description, location, date, onPress, im
   
     <View style={styles.listItemContainer}>
        {seasonal && (
-        <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{alignSelf:'flex-end'}} />
+        <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{alignSelf:'flex-end',marginTop:40}} />
       )}
       <TouchableOpacity onPress={onPress} style={styles.secondaryContainer}>
         <View>
@@ -23,13 +23,10 @@ export const FavTempleListCard = ({name,description, location, date, onPress, im
           />
         </View>
         <View style={styles.listFirstItem}>
-          <View style={styles.bulletConatianer}>
-            {/* <View style={styles.bullet} /> */}
-          </View>
+     
           <View>
             <Text style={styles.itemHeading}>{name}</Text>
             <Text style={{color:colors.gray6,fontSize:12}}>{description}</Text>
-             
           
           </View>
         </View>
@@ -49,6 +46,7 @@ const styles = StyleSheet.create({
   secondaryContainer: {
     borderColor: 'blue',
     marginRight: 2,
+  
 
     flexDirection: 'row',
   },
