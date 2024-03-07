@@ -36,7 +36,7 @@ const [data, setData] = useState([]);
     }, []);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{minHeight: '15%'}}>
+      <View style={{height: '9%'}}>
         <TopBarCard2 back={true} txt={'Nearby Temples'} navigation={navigation} marginLeft={'13%'}/>
       </View>
       {!data?.length ? (
@@ -66,7 +66,7 @@ const [data, setData] = useState([]);
                         : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                     }}
                     
-                    style={{height: 60, width: 60, borderRadius: 70 / 2}}
+                    style={{height: 72, width: 72, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
                     <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%'}}>

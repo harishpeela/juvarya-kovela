@@ -153,7 +153,7 @@ const {id, data, role, roleItemType} = route?.params || {};
                 />
               ) : (
                 <View style={styles.noData}>
-                  <Text style={styles.noText}> No Data To Display</Text>
+                  <Text style={styles.noText}> No Events To Display</Text>
                 </View>
               )}
             </>

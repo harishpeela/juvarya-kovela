@@ -29,14 +29,14 @@ export const ProfileTimingTabs = ({data, id}) => {
             <View style={styles.toptemp}>
               <Text
                 style={{
-                  padding: 5,
+                  padding: 4,
                   textAlign: 'center',
                   marginLeft: 5,
                   color: colors.white,
                   backgroundColor: colors.orangeColor,
-                  height: 25,
-                  width: 25,
-                  fontSize: 14,
+                  // height: 25,
+                  // width: 25,
+                  fontSize: 12,
                   alignSelf: 'center',
                 }}>
                 {data?.templeClass}
@@ -53,7 +53,7 @@ export const ProfileTimingTabs = ({data, id}) => {
       </TouchableOpacity>
 
       <View style={styles.time}>
-        <AntDesign name="clockcircleo" size={18} color={'gray'} />
+        <AntDesign name="clockcircleo" size={15} color={'gray'} />
         <Text style={{color: '#228C08', fontSize: 12, fontWeight: 'bold'}}>
           {' '}
           Open {data?.openingTime ? data?.openingTime : '9'} AM
@@ -77,11 +77,12 @@ const styles = StyleSheet.create({
   toptemp: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 2,
+    padding: 4,
     borderRadius: 5,
     justifyContent: 'center',
     width: 145,
     height: 30,
+    marginRight:'-4%'
   },
   time: {
     flexDirection: 'row',
@@ -91,7 +92,9 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'center',
     marginRight: 20,
-    width: '58%',
+    // width: '58%',
     height: 30,
+    padding:4,
+    marginLeft:'5%'
   },
 });

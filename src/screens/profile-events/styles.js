@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     // alignItems: 'center',
     // justifyContent: 'space-between',
-    marginTop: '-13%',
+    marginTop: '-9.5%',
     marginLeft:'10%',
     // backgroundColor:'red'
   },
