@@ -46,12 +46,12 @@ const EventCard2 = ({ navigation, data }) => {
  
           <Text style={{ fontSize: 10, color: 'black', marginLeft: 10 }}>{data?.creationTime.slice('0', '10')}</Text>
         </View>
-        {data?.eventType ? (
+        {(data?.countryWide || data?.worldWide ) ? (
           <View style={{ flexDirection: 'row', alignItems: 'center', margin: 5 }}>
             <View style={{ backgroundColor: 'white', height: 15, width: 15, justifyContent: 'center', alignItems: 'center',borderRadius:3  }}>
               <EvilIcons style={{ color: colors.orangeColor, backgroundColor: 'white' }} name="location" size={12} color="white" />
-            </View>
-            <Text style={{ color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue }}>{data?.eventType}</Text>
+            </View> 
+            <Text style={{ color: colors.blue, fontSize: 10, marginLeft: 10, borderBottomWidth: 1, borderBottomColor: colors.blue }}>{data?.worldWide ? 'Accross World' : data?.countryWide ? 'Across India' : ''}</Text>
           </View>
         ) : (
           ''

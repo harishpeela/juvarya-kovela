@@ -198,7 +198,7 @@ export const EventInput1 = ({
           flexDirection: calendar || location ? 'row' : 'column',
           alignItems: calendar || location ? 'center' : 'flex-start',
         }}>
-        <TouchableOpacity onPress={onPressCalendar}>
+        {/* <TouchableOpacity onPress={onPressCalendar}>
           <FontAwesome
             name="calendar"
             size={20}
@@ -211,7 +211,7 @@ export const EventInput1 = ({
           placeholder={placeholder}
           style={{marginLeft: 5, width: '40%'}}
           onChangeText={onChangeText}
-        />
+        /> */}
 
         <TouchableOpacity onPress={onPressCalendar2}>
           <FontAwesome

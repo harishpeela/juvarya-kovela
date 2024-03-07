@@ -741,7 +741,6 @@ const App = () => {
       getFollowedTempleList();
     }
   }, [loginDetails]);
-
   return (
     <ApplicationContext.Provider
       value={{
