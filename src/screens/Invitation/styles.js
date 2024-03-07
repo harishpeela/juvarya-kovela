@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
         marginRight:170,
         fontWeight:'bold',
         color:colors.orangeColor,
-        fontSize:20
+        fontSize:25
     },
     headerContainer:{
         padding: 10,
@@ -38,9 +38,9 @@ export const styles = StyleSheet.create({
         backgroundColor: colors.orangeColor,
         elevation:2,
         marginTop:'8%',
-        paddingVertical:10,
+        paddingVertical:8,
         borderRadius:25,
-        width:'70%',
+        width:'30%',
         alignSelf:'center'
     },
     subBtnText: {
@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
         alignContent: 'center',
         alignSelf: 'center',
         textAlign: 'center',
-        fontSize:fontSize.h6
+        fontSize:18
     },
     email:{
         color:colors.black,
@@ -63,11 +63,14 @@ export const styles = StyleSheet.create({
         height:'100%'
     },
     errorContainer:{
-        alignItems:'center'
+        alignItems:'flex-start'
     },
     errorText:{
         color:'red',
-        fontWeight:'600'
+        fontWeight:'600',
+        marginLeft:'1%',
+        marginTop:'2%'
+    
     }
 
 })

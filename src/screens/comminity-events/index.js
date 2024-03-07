@@ -24,7 +24,7 @@ const Community_Events_Seeall = ({navigation, route}) => {
      };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{minHeight: '15%'}}>
+      <View style={{height: '9%'}}>
         <TopBarCard2 marginLeft={'16%'} back={true} txt={'Community temples'} navigation={navigation} />
       </View>
       {!data?.length > 0 ? (
@@ -62,10 +62,10 @@ const Community_Events_Seeall = ({navigation, route}) => {
                         : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                     }}
                     
-                    style={{height: 60, width: 60, borderRadius: 70 / 2}}
+                    style={{height: 72, width: 72, borderRadius: 70 / 2}}
                   />
                   <View style={{marginLeft: 10}}>
-                    <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%'}}>
+                    <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%',fontSize:17}}>
                       {item?.name}
                     </Text>
                     <Text

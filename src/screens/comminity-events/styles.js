@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgray',
     borderRadius: 10,
+    padding:10
   },
   updateProfileTopCard:{
     height:100,

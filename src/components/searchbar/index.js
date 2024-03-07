@@ -65,7 +65,7 @@ export const SearchBar = ({
                   onPress={onCrossPress}
                   name="x-circle"
                   color={colors.orangeColor}
-                  size={15}
+                  size={20}
                   style={{marginLeft: '35%',marginTop:'18%'}}
                 />
                 </View>
