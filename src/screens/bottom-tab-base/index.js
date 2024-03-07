@@ -44,7 +44,7 @@ export default BottomTabBase = ({navigation}) => {
       style={{flex: 1}}
       showsVerticalScrollIndicator={false}>
       {homeFeedListData === undefined ? (
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <View style={{flex: 1,marginTop:'3%'}}>
           <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
