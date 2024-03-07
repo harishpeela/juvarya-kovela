@@ -68,6 +68,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
+  console.log('dataaaaaaaaaaaa',data)
   // console.log(
   //   '<=============================>',
   //   data,
@@ -449,7 +450,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </Text>
               </View>
             )}
-            <View style={{ marginTop: 10 }}>
+            <View style={{ marginTop: 1}}>
               {/* {tempProfileData?.seasonal ? (
                 <TouchableOpacity
                   style={styles.seasonal}
