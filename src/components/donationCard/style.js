@@ -3,6 +3,7 @@ import { colors } from "../../common";
 
 export const styles = StyleSheet.create({
     container: {
+      flex: 1,
         flexDirection: 'row',
         marginTop: 30,
         justifyContent: 'space-between',

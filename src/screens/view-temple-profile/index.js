@@ -68,6 +68,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
   const { data } = route.params || {};
+  console.log('data', data);
   // console.log(
   //   '<=============================>',
   //   data,
@@ -134,29 +135,29 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
-  useEffect(() => {
-    let result = Data(data);
-    if (result) {
-      setTrfData(result);
-      console.log('trfdata', result);
-      if (result?.jtProfile) {
-        getFollowValue(result?.jtProfile);
-        Posts(result?.jtProfile);
-        CommunityTemple(result?.jtProfile);
+  // useEffect(() => {
+  //   let result = Data(data);
+  //   if (result) {
+  //     setTrfData(result);
+  //     console.log('trfdata', result);
+  //     if (result?.jtProfile) {
+  //       getFollowValue(result?.jtProfile);
+  //       Posts(result?.jtProfile);
+  //       CommunityTemple(result?.jtProfile);
 
-        TempleRoleSearchWithId(result?.jtProfile);
-        followingCount(result?.jtProfile);
-        dontationValue(result.jtProfile);
-        // MemberShip(result?.jtProfile);
-        TempleAddressDetails(result?.jtProfile);
-        eventList(result?.jtProfile);
-        templeDetails(result?.jtProfile);
-      } else {
-      }
-    } else {
-      setTrfData();
-    }
-  }, []);
+  //       TempleRoleSearchWithId(result?.jtProfile);
+  //       followingCount(result?.jtProfile);
+  //       dontationValue(result.jtProfile);
+  //       // MemberShip(result?.jtProfile);
+  //       TempleAddressDetails(result?.jtProfile);
+  //       eventList(result?.jtProfile);
+  //       templeDetails(result?.jtProfile);
+  //     } else {
+  //     }
+  //   } else {
+  //     setTrfData();
+  //   }
+  // }, []);
 
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
@@ -299,7 +300,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
     Type();
   }, []);
   const dontationValue = async id => {
-    setDonationLoader(true);
+    // setDonationLoader(true);
     setMainLoader(true);
     try {
       let result = await getTopDonation(id, 0, 20);
@@ -328,6 +329,34 @@ const ViewTempleProfile = ({ route, navigation }) => {
       }
       return () => {};
     }, [])
+  );
+  useFocusEffect(
+    useCallback(() => {
+      if (data) {
+        let result = Data(data);
+        if (result) {
+          setTrfData(result);
+          console.log('trfdata', result);
+          if (result?.jtProfile) {
+            getFollowValue(result?.jtProfile);
+            Posts(result?.jtProfile);
+            CommunityTemple(result?.jtProfile);
+    
+            TempleRoleSearchWithId(result?.jtProfile);
+            followingCount(result?.jtProfile);
+            dontationValue(result.jtProfile);
+            // MemberShip(result?.jtProfile);
+            TempleAddressDetails(result?.jtProfile);
+            eventList(result?.jtProfile);
+            templeDetails(result?.jtProfile);
+          } else {
+          }
+        } else {
+          setTrfData();
+        }
+      }
+      return () => {};
+    }, [data])
   );
   return (
     <>
@@ -460,7 +489,9 @@ const ViewTempleProfile = ({ route, navigation }) => {
                   <Text style={styles.seasonalText}>Temple Members</Text>
                 </TouchableOpacity>
               ) : ( */}
-              <ProfileTimingTabs data={tempProfileData} />
+             {!trfData?.seasonal && (
+               <ProfileTimingTabs data={tempProfileData} />
+             )}
               {/* )} */}
             </View>
             <View style={{ marginLeft: 15 }}>
@@ -565,7 +596,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </View>
               </View>
               {donationLoader ? (
-                <Loader size={'small'} color={colors.orangeColor} />
+                <Loader size={'small'} color={colors.red1} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
                 <Danation_Add_Card
                   onPress={() =>

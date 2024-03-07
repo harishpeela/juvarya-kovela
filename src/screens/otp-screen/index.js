@@ -8,7 +8,7 @@ import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
 import {PrimaryButton, TopBarcard} from '../../components';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {loginUser1, NewRegistesrUser, getUserInfoNew} from '../../utils/api';
+import {loginUser1, NewRegistesrUser, getUserInfoNew, NewVerifyOTP} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {
   saveLoginSessionDetails,

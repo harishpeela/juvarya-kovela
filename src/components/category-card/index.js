@@ -83,7 +83,6 @@ export const UserFeedCompList = ({
     const minutesDiff = currentTime.diff(creationTime, 'minutes');
     const hoursDiff = currentTime.diff(creationTime, 'hours');
     const daysDiff = currentTime.diff(creationTime, 'days');
-    console.log('timings', creationTime, 'currentTime', currentTime, 'secondsDiff', secondsDiff, 'minutesDiff', minutesDiff, 'hoursDiff', hoursDiff, 'daysDiff', daysDiff);
     if (secondsDiff === 1) {
       setFormattedCreationTime(`${secondsDiff} second ago`);
     } else if (secondsDiff < 60) {

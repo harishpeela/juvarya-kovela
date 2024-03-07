@@ -57,6 +57,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     elevation: 2,
   },
+  button1: {
+    width: '85%',
+    backgroundColor: colors.gray2,
+    alignSelf: 'center',
+    borderRadius: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 2,
+  },
   btnText: {
     color: colors.white,
     fontWeight: '400',
