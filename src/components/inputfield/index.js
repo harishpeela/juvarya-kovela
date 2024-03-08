@@ -44,7 +44,7 @@ export const InputField = ({
             style={styles.inputText}
             multiline={true}
             autoCapitalize='none'
-            // placeholder={placeholder}
+            placeholder={placeholder}
             {...props}
           />
         </View>

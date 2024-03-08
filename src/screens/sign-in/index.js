@@ -6,16 +6,17 @@ import {
   Alert,
   StatusBar,
 } from 'react-native';
-import React, {useContext, useState, useEffect, useCallback} from 'react';
+import React, {useContext, useState, useEffect, useRef} from 'react';
 import {useFocusEffect} from '@react-navigation/native';
 import RNRestart from 'react-native-restart';
 import {InputField, PrimaryButton} from '../../components';
+import OTPTextInput from 'react-native-otp-textinput';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {styles} from './styles.js';
 import {KovelaIcon} from '../sign-up/index.js';
-import {loginUser1, getUserInfoNew, getHomeFeedList} from '../../utils/api';
+import {loginUser1, getUserInfoNew, NewVerifyOTP} from '../../utils/api';
 import {LoginValidationSchema} from '../../common/schemas';
 import {
   saveLoginSessionDetails,
@@ -26,21 +27,84 @@ import {PasswordField} from '../../components/inputfield';
 import FontAwesome5Icon from 'react-native-vector-icons/FontAwesome5.js';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
-
 const Signin = ({navigation}) => {
   const [getHomeFeedListData] = useState([]);
   const [isConnected, setIsConnected] = useState(' ');
-
+  const [mobNum, setMobNum] = useState('');
+  const [timer, setTimer] = useState('00');
+  const [loading, setLoading] = useState(false);
+  const [isOtp, setIsOtp] = useState(false);
+  const [otp, setOtp] = useState('');
+  const Ref = useRef(null);
+ 
+  var secLeft = 30;
+  const getTimeRemaining = e => {
+    const total = Date.parse(e) - Date.parse(new Date());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    return {
+      total,
+      minutes,
+      seconds,
+    };
+  };
+  const startTimer = e => {
+    let {total, minutes, seconds} = getTimeRemaining(e);
+    if (total >= 0) {
+      setTimer(
+        (minutes > 9 ? minutes : '0' + minutes) +
+          ':' +
+          (seconds > 9 ? seconds : '0' + seconds),
+      );
+    }
+  };
+  const startTime = e => {
+    if (Ref.current) {
+      clearInterval(Ref.current);
+    }
+    const id = setInterval(() => {
+      startTimer(e);
+    }, 1000);
+    Ref.current = id;
+  };
+ 
+  const getDeadTime = () => {
+    let deadline = new Date();
+    deadline.setSeconds(deadline.getSeconds() + secLeft);
+    return deadline;
+  };
+ 
+  let otpInput = useRef(null);
+ 
+  const setText = () => {
+    otpInput?.current?.setValue('');
+  };
+  useEffect(() => {
+    startTime(getDeadTime());
+    setText();
+    // alert('OTP Generated Successfully, check your spam folder if not received Email')
+    // setTimeout(() => {
+    //   Snackbar.show({
+    //     text: 'OTP Generated Successfully, check your spam folder if not received Email',
+    //     backgroundColor: 'green',
+    //     duration: 2000,
+    //     action: {
+    //       text: 'Ok',
+    //       textColor: 'white',
+    //       onPress: () => {},
+    //     },
+    //   });
+    // }, 2000);
+  }, []);
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener(state => {
       setIsConnected(state.isConnected);
     });
-
     return () => {
       unsubscribe();
     };
   }, []);
-
+ 
   const NetWorkChecking = () => {
     if (isConnected === false) {
       Snackbar.show({
@@ -57,19 +121,33 @@ const Signin = ({navigation}) => {
       });
     }
   };
-
+ 
   useEffect(() => {
     NetWorkChecking();
   }, []);
-
-  const {
-    buttonTexts: {login, sigup},
-    paragraphs: {dontHaveAccount},
-    placeHolders: {emailPlace, passwordPlace},
-  } = allTexts;
-
+ 
+  const OtpTrigger = async () => {
+    setIsOtp(!isOtp);
+    let otpPayload = {
+      otpType: 'SIGNIN',
+      primaryContact: mobNum,
+    };
+    if(!mobNum === 10){
+      alert('please enter proper Mobile Number')
+    } else if(mobNum?.length === 10){
+ 
+      let response = await NewVerifyOTP(otpPayload);
+      console.log('responce of otp', response?.data);
+      if(response?.data){
+        setOtp(response?.data?.otp)
+      }
+      
+    }
+   
+  }
+ 
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
-
+ 
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
@@ -93,16 +171,16 @@ const Signin = ({navigation}) => {
       console.log('error in get current customer details api', error);
     }
   };
-  const signinHandler = async (data, actions) => {
-    if (data.email.length > 10) {
+  const signinHandler = async () => {
+    if (mobNum?.length === 10) {
       let payload = {
-        // primaryContact: data?.email,
-        email: data?.email,
-        password: data.password,
+        primaryContact: mobNum,
+        otp: otp,
       };
-      // console.log('playload with email', payload);
+      console.log('playload with email', payload);
       try {
         let result = await loginUser1(payload);
+        console.log('res', result?.data)
         if (result && result.status === 200) {
           const {
             data: {accessToken, tokenType},
@@ -110,42 +188,16 @@ const Signin = ({navigation}) => {
           await saveLoginSessionDetails(tokenType, accessToken);
           ApiData();
           setLoginDetails(accessToken);
-          actions.setSubmitting(false);
         } else {
-          actions.setSubmitting(false);
+          // actions.setSubmitting(false);
           Alert.alert('Error', 'Invalid Credentials');
         }
       } catch (error) {
-        actions.setSubmitting(false);
-      }
-    } else {
-      let payload = {
-        primaryContact: data?.email,
-        password: data.password,
-      };
-      // console.log('playload with mobile', payload);
-
-      try {
-        let result = await loginUser1(payload);
-        // console.log('result of login', result?.data);
-        if (result && result.status === 200 && isConnected == true) {
-          const {
-            data: {accessToken, tokenType},
-          } = result;
-          await saveLoginSessionDetails(tokenType, accessToken);
-          ApiData();
-          setLoginDetails(accessToken);
-          actions.setSubmitting(false);
-        } else if (isConnected == false) {
-          actions.setSubmitting(false);
-          Alert.alert('Error', 'Invalid Credentials');
-        }
-      } catch (error) {
-        actions.setSubmitting(false);
+        // actions.setSubmitting(false);
       }
     }
   };
-
+ 
   return (
     <SafeAreaView style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} translucent={true} />
@@ -157,81 +209,56 @@ const Signin = ({navigation}) => {
         style={styles.keyboardStyle}
         contentContainerStyle={styles.contentStyle}>
         <KovelaIcon />
-        <Formik
-          onSubmit={(values, formikActions) => {
-            const {email, password} = values;
-            signinHandler(values, formikActions);
-          }}
-          validationSchema={LoginValidationSchema}
-          initialValues={{
-            email: '',
-            password: '',
-          }}>
-          {({
-            errors,
-            touched,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-            values,
-          }) => {
-            return (
-              <View style={styles.inputContainer}>
+        <View style={styles.inputContainer}>
                 <InputField
-                  title={'Mobile or Email'}
+                  title={'Mobile Number'}
                   isFlag
-                  // keyboardType={'numeric'}
-                  placeholder={emailPlace}
-                  error={touched.email && errors.email}
-                  onBlur={handleBlur('email')}
-                  setState={handleChange('email')}
-                  maxLength={40}
+                
+                  value={mobNum}
+                  setState={e => setMobNum(e)}
+                  keyboardType={'numeric'}
+                  placeholder={'Enter Mobile Number'}
+                  maxLength={10}
                 />
-                <View style={{height: 20}} />
-                <View>
-                  <PasswordField
-                    value={values.password}
-                    title={'Password'}
-                    placeholder={passwordPlace}
-                    error={touched.password && errors.password}
-                    onBlur={handleBlur('password')}
-                    setState={handleChange('password')}
-                  />
-                </View>
+                <TouchableOpacity onPress={() => OtpTrigger()}>
+                <Text style={{color: colors.orangeColor, alignSelf: 'flex-end', fontWeight: 'bold'}}> Send OTP</Text>
+                </TouchableOpacity>
+                {isOtp && (
+                 <>
+                  <OTPTextInput
+                  ref={otpInput}
+                  inputCount={6}
+                  tintColor={colors.green2}
+                  textInputStyle={styles.textInput}
+                  containerStyle={{
+                    marginTop: 1,
+                  }}
+                />
+                <View style={styles.btnContainer}>
+                  {timer != '00:00' && (
+                    <Text style={styles.expectOtp}>
+                      Expect OTP in
+                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                    </Text>
+                  )}
+                  </View>
+                  <View style={{height: 20}} />
                 <View style={styles.btnContainer}>
                   <PrimaryButton
                     bgColor={colors.orangeColor}
-                    loading={isSubmitting}
-                    onPress={handleSubmit}
-                    text={login}
+                    // loading={isSubmitting}
+                    onPress={() => signinHandler()}
+                    text={'Submit'}
                     radius={25}
                   />
                 </View>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate(allTexts.screenNames.signup);
-                  }}>
-                  <Text style={styles.navLinkText}>
-                    {dontHaveAccount}
-                    <Text style={styles.login}>{sigup}</Text>
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate(allTexts.screenNames.forgetPassword);
-                  }}>
-                  <View>
-                    <Text style={styles.forgotPassword}>Forgot Password?</Text>
-                  </View>
-                </TouchableOpacity>
+                 </>
+                )}
+               
+               
               </View>
-            );
-          }}
-        </Formik>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 };
-
 export default Signin;
