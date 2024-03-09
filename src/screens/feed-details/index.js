@@ -111,7 +111,7 @@ const Feeds = ({route, navigation}) => {
   }, [itemDetails]);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: 100}}>
+      <View style={{height: 100, marginTop: '3%'}}>
         <TopBarCard2
           back={true}
           txt={'Feeds'}

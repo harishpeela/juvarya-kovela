@@ -154,8 +154,8 @@ const UserFeedScreen = ({ navigation }) => {
                     });
                   }}
                 >
-                  <Text style={{ fontSize: 12, color: 'black', marginTop: 5 }}>
-                    {item.creationTime}
+                  <Text style={{ fontSize: 12, color: 'black', marginTop: 2 }}>
+                    {item?.creationTime}
                   </Text>
                 </UserFeedCompList>
               );

@@ -265,7 +265,7 @@ export const EventInput2 = ({
           value={value1}
           placeholder={placeholder}
           style={{
-            marginLeft: 15,
+            marginLeft: 20,
             width: '50%',
             flexDirection: 'row',
             color: 'gray',

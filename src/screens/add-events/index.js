@@ -28,8 +28,8 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import { date } from 'yup';
 
 const AddEvents = ({ navigation, route }) => {
-  const { id } = route?.params || {};
-  console.log('id ==>', id);
+  const { id, roleType, role } = route?.params || {};
+  console.log('id ==>', id, role, roleType);
   const [date, setDate] = useState(new Date());
   const [toDate, setToDate] = useState(new Date());
   const [image, setImage] = useState(null);
