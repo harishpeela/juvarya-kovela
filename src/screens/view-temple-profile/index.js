@@ -97,7 +97,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   const [templeaddress, setTempleAddress] = useState();
   const [events, setEvents] = useState([]);
   const [tempProfileData, setTempProfileData] = useState();
-  const [mainLoader, setMainLoader] = useState(false);
+  const [mainLoader, setMainLoader] = useState(true);
   const FOLLOW = id => {
     if (isFollow) {
       followTemples(id);
@@ -107,6 +107,40 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
 
+
+  useFocusEffect(
+    useCallback(() => {
+      if (data) {
+        let result = Data(data);
+        console.log('123');
+        if (result) {
+          setTrfData(result);
+          // console.log('trfdata', result);
+          if (result?.jtProfile) {
+            getFollowValue(result?.jtProfile);
+            Posts(result?.jtProfile);
+            CommunityTemple(result?.jtProfile);
+    
+            TempleRoleSearchWithId(result?.jtProfile);
+            followingCount(result?.jtProfile);
+            dontationValue(result.jtProfile);
+            // MemberShip(result?.jtProfile);
+            TempleAddressDetails(result?.jtProfile);
+            eventList(result?.jtProfile);
+            templeDetails(result?.jtProfile);
+          } else {
+            // setMainLoader(false);
+          }
+        } else {
+          setTrfData();
+          // setMainLoader(false);
+        }
+      }
+      // return () => {};
+    }, [data])
+  );
+
+// console.log('tempProfileData', tempProfileData)
   const CommunityTemple = async templeId => {
     try {
       let result = await TempleCommunity(templeId);
@@ -120,10 +154,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const TempleAddressDetails = async templeId => {
-    console.log('tenpid', templeId);
+    // console.log('tenpid', templeId);
     try {
       let result = await TempleAddress(templeId);
-      console.log('templeAddress=====>', result?.data);
+      // console.log('templeAddress=====>', result?.data);
       if (result) {
         const dty = result?.data || {};
         // console.log('dtyasmjb', dty);
@@ -136,7 +170,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
 
   const eventList = async id => {
     let result = await getProfileEvents(0, 40, id);
-    console.log('result of events', result?.data);
+    // console.log('result of events', result?.data);
     if (result?.data) {
       setEvents(result?.data);
     }
@@ -171,10 +205,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
     try {
       setFollowBtnDisable(true);
       let results = await FollowUnFollow(payload);
-      console.log(
-        'result of follow temple in view temple profile',
-        results?.data,
-      );
+      // console.log(
+      //   'result of follow temple in view temple profile',
+      //   results?.data,
+      // );
       if (results && results.status === 200) {
         setisFollow(!isFollow);
         setFollowBtnDisable(false);
@@ -237,9 +271,8 @@ const ViewTempleProfile = ({ route, navigation }) => {
     }
   };
   const TempleRoleSearchWithId = async profileId => {
-    console.log('profileId', profileId);
     let result = await SearchTempleRoleWithId(profileId);
-    console.log('profileId role', result?.data);
+    // console.log('profileId role', result?.data);
     try {
       if (result) {
         setRoleLoader(true);
@@ -266,8 +299,10 @@ const ViewTempleProfile = ({ route, navigation }) => {
     let responce = await getTempleProfileDetails(id);
     if (responce?.data) {
       setTempProfileData(responce?.data);
+      setMainLoader(false);
     } else {
       alert('something went wrong please check');
+      setMainLoader(false);
     }
   };
 
@@ -275,25 +310,21 @@ const ViewTempleProfile = ({ route, navigation }) => {
     Type();
   }, []);
   const dontationValue = async id => {
-    // setDonationLoader(true);
-    setMainLoader(true);
+    // setDonationLoader(true)
     try {
       let result = await getTopDonation(id, 0, 20);
-      console.log('top donation', result?.data);
+      // console.log('top donation', result?.data);
       if (result) {
-        console.log('dontion ====>', result?.data?.data[0]);
+        // console.log('dontion ====>', result?.data?.data[0]);
         setDonationValue(result?.data?.data[0]);
         setDonationLoader(false);
-        setMainLoader(false);
       } else {
         setDonationValue([]);
         setDonationLoader(false);
-        setMainLoader(false);
       }
     } catch (error) {
       setDonationLoader(false);
       console.log('error in top donations api', error);
-      setMainLoader(false)
     }
   };
 
@@ -305,39 +336,12 @@ const ViewTempleProfile = ({ route, navigation }) => {
       return () => {};
     }, [])
   );
-  useFocusEffect(
-    useCallback(() => {
-      if (data) {
-        let result = Data(data);
-        if (result) {
-          setTrfData(result);
-          console.log('trfdata', result);
-          if (result?.jtProfile) {
-            getFollowValue(result?.jtProfile);
-            Posts(result?.jtProfile);
-            CommunityTemple(result?.jtProfile);
-    
-            TempleRoleSearchWithId(result?.jtProfile);
-            followingCount(result?.jtProfile);
-            dontationValue(result.jtProfile);
-            // MemberShip(result?.jtProfile);
-            TempleAddressDetails(result?.jtProfile);
-            eventList(result?.jtProfile);
-            templeDetails(result?.jtProfile);
-          } else {
-          }
-        } else {
-          setTrfData();
-        }
-      }
-      return () => {};
-    }, [data])
-  );
+  
   return (
     <>
     {mainLoader ? (
       <View>
-        <Loader />
+        <Loader size={'large'} color={colors.orangeColor} />
       </View>
     ) : (
       <ScrollView
@@ -363,7 +367,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 <TouchableOpacity
                   style={styles.iconContainer}
                   onPress={() => {
-                    console.log(isFollow, trfData?.jtProfile);
                     navigation.goBack();
                     route?.params?.onSelect({
                       selected: isFollow,
@@ -430,7 +433,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                     justifyContent: 'center',
                   }}>
                   <Text style={styles.titleHeader}>
-                    {tempProfileData?.name}
+                    {trfData?.name}
                   </Text>
                 </View>
               </View>
@@ -470,7 +473,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
               {/* )} */}
             </View>
             <View style={{ marginLeft: 15 }}>
-              <ProfileSeconTab nameData={tempProfileData} title={tempProfileData?.description} />
+              <ProfileSeconTab nameData={trfData} title={trfData?.description} />
               <View style={styles.firstTabView}>
                 <View style={styles.postsTab}>
                   <PostsComp
@@ -498,7 +501,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                         id: trfData?.jtProfile,
                         data: events?.data,
                         role: roleId,
-                        roleItemType: roleType,
+                        roleType: roleType,
                       })
                     }
                   />
@@ -571,7 +574,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
                 </View>
               </View>
               {donationLoader ? (
-                <Loader size={'small'} color={colors.red1} />
+                <Loader size={'small'} color={colors.orangeColor} />
               ) : roleType === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN' ? (
                
                 <Danation_Add_Card

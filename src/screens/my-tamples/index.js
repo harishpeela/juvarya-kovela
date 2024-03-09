@@ -24,7 +24,7 @@ const MyTemples = ({navigation}) => {
 
   const deleteSeasonal = (id) => {
     console.log('=====', id)
-    Alert.alert('Alert', 'Are You Sure You Want To Delete This Temple?', [
+    Alert.alert('Alert', ' Are you sure you want to delete the selected Temple?', [
       { text: 'Yes', onPress: async () => {
         let responce = await deleteCommunityTemple(id);
       //  console.log(responce?.data, 'responce of delete');
@@ -101,7 +101,7 @@ const MyTemples = ({navigation}) => {
       <View style={styles.cardContainer}>
         {loading === true ? (
           <View style={styles.loaderContainer}>
-            <Loader color={colors.green} />
+            <Loader color={colors.orangeColor} />
           </View>
         ) : (
           [

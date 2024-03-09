@@ -3,12 +3,11 @@ import {
   View,
   TouchableOpacity,
   FlatList,
-  useColorScheme,
   Text,
   Modal,
   Pressable,
 } from 'react-native';
-import { Loader, SearchBar, TopBarcard, EventCard2 } from '../../components';
+import { Loader, SearchBar, EventCard2 } from '../../components';
 import { EventList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {colors, allTexts } from '../../common';
@@ -46,7 +45,8 @@ const modalStyles = {
 };
 
 const Profile_Events = ({ navigation, route }) => {
-const {id, data, role, roleItemType} = route?.params || {};
+const {id, data, role, roleType} = route?.params || {};
+console.log('rolesss', role, 'roles', roleType);
   const { userDetails } = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -108,11 +108,12 @@ const {id, data, role, roleItemType} = route?.params || {};
             />
            
           </View>
-          {(role === 'ROLE_ITEM_ADMIN' || roleItemType === 'ROLE_ADMIN') && (
+          {(role === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 onPress={() => 
                     navigation.navigate(allTexts.screenNames.addevents, {
                         id: id,
+
                     })}
                 style={styles.plusContainer}>
                 <FeatherIcon
@@ -144,10 +145,8 @@ const {id, data, role, roleItemType} = route?.params || {};
                     <EventCard2
                       navigation={navigation}
                       data={item}
-                      // name={item.user.firstName}
-                      // img={item.user.url}
-                      // data={item.user}
-                      // donation={item.user.donation}
+                      role={roleType}
+                      roleId={role}
                     />
                   )}
                 />

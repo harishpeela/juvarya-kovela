@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
         alignItems:'flex-start'
     },
     errorText:{
-        color:'red',
+        color: colors.orangeColor,
         fontWeight:'600',
         marginLeft:'1%',
         marginTop:'2%'

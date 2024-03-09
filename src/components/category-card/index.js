@@ -12,6 +12,7 @@ import {
   Alert,
   Modal,
 } from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import { useFocusEffect } from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import { colors } from '../../common';
@@ -212,10 +213,13 @@ export const UserFeedCompList = ({
       .fetch('GET', image_URL)
       .then(res => {
         console.log('res -> ', JSON?.stringify(res));
-        Alert.alert('Alert', 'Image Downloaded Successfully...!');
+        // Alert.alert('Alert', 'Image Download Successfully');
+        Snackbar.show({
+          text: 'Image Download Successfully',
+          backgroundColor: colors.orangeColor,
+        });
       });
   };
-
   const getExtention = filename => {
     return /[.]/.exec(filename) ? /[^.]+$/.exec(filename) : undefined;
   };
@@ -377,16 +381,15 @@ export const UserFeedCompList = ({
           {likeCount} Likes
         </Text>
       </View>
-      <Text style={styles.username}>
-        <Text style={{ fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
-          {post?.description?.length < 50
-            ? `${post?.description}`
-            : `${post?.description?.substring(0, 50)}...`}
-          {/* {post?.description} */}
-        </Text>
+      {post?.description && (
+        <Text style={{...styles.username, fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
+        {post?.description?.length < 50
+          ? `${post?.description}`
+          : `${post?.description?.substring(0, 50)}...`}
       </Text>
-      <View style={{ marginTop: 3, marginLeft: 12 }}>
-        <Text style={{ fontFamily: 'Poppins-Medium',fontSize:12 }}>{formattedCreationTime}</Text>
+      )}
+      <View style={{marginLeft: 12 }}>
+        <Text style={{ fontFamily: 'Poppins-Medium',fontSize:8 }}>{formattedCreationTime}</Text>
       </View>
     </View>
   );

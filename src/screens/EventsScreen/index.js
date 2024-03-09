@@ -1,25 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
-  TouchableOpacity,
   FlatList,
   useColorScheme,
   Text,
 } from 'react-native';
 import {Loader, SearchBar, TopBarcard, EventCard2} from '../../components';
+import ApplicationContext from '../../utils/context-api/Context';
 import {EventSearch} from '../../utils/api';
-import {EventList, EventScreenList} from '../../utils/api';
+import {EventScreenList} from '../../utils/api';
 import {colors} from '../../common';
 import {styles} from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const EventsScreen = ({navigation, route}) => {
+  const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
   const [searchedEvents, setSearchedEvents] = useState('');
   const [searchError, setSearchError] = useState(false); 
   const isDarkMode = useColorScheme() === 'dark';
+  const [role, setRole] = useState(userDetails?.role[1]);
 
   const EventsList = async () => {
     setLoader(true);
@@ -48,7 +50,6 @@ const EventsScreen = ({navigation, route}) => {
         setSearchError(true);
       } else {
         setSearchError(false);
-        // Update eventsData state only when there is data
         setSearchedEvents(result?.data?.data);
       }
     } catch (error) {
@@ -108,7 +109,7 @@ const EventsScreen = ({navigation, route}) => {
                 style={{marginBottom: '25%'}}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({item}) => (
-                  <EventCard2 navigation={navigation} data={item} />
+                  <EventCard2 navigation={navigation} data={item} role={role} />
                 )}
               />
             )

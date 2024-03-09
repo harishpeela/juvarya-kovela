@@ -24,7 +24,7 @@ export const FavTempleListCard = ({ name, location, date, onPress, img, seasonal
             <Text style={styles.itemLocation}>{type}</Text>
           </View>
           {seasonal && (
-            <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{ marginLeft: '50%' }} />
+            <MaterialCommunityIcons name='delete' size={24} onPress={onPressDelete} color={colors.orangeColor} style={{ position: 'absolute', left: '120%' }} />
           )}
         </View>
       </TouchableOpacity>
@@ -33,7 +33,6 @@ export const FavTempleListCard = ({ name, location, date, onPress, img, seasonal
 };
 const styles = StyleSheet.create({
   listItemContainer: {
-    // backgroundColor: '#f7dbc1',
     borderRadius: 10,
     padding: 12,
     margin: 10,

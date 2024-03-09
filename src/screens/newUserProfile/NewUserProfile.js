@@ -373,6 +373,7 @@ console.log('thumbnails ==>', thumbnails);
               <Loader size={'small'} color={colors.orangeColor} />
             </View>
            ) : (
+           userReels?.length ? (
             <FlatList
             numColumns={3}
             data={userReels}
@@ -390,6 +391,11 @@ console.log('thumbnails ==>', thumbnails);
               </TouchableOpacity>
             )}
           />
+           ) : (
+            <View style={{alignItems: 'center', marginTop: '30%'}}>
+              <Text style={{color: colors.orangeColor, fontFamily: 'semi-bold'}}> No Data to Display</Text>
+            </View>
+           )
            )}
          </ScrollView>
         ) : (

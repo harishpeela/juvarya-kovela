@@ -58,7 +58,7 @@ const CommunityTemple = ({navigation}) => {
     var formattedDate = format(date, 'dd-MM-yyyy');
     let payload = {
       name: name,
-      desciption: descripton,
+      description: descripton,
       establishedOn: formattedDate,
     };
     setLoader(true);
@@ -76,6 +76,7 @@ const CommunityTemple = ({navigation}) => {
       setDateError(true);
       console.log('date', date);
     } else if (name && date && descripton && image) {
+      console.log('payload', payload);
       let result = await CreateCommunityTemple(payload);
       console.log('result.date ====kkk>', result?.data);
       console.log('status ===>', result?.status);
@@ -221,7 +222,7 @@ const CommunityTemple = ({navigation}) => {
 
         <EventInput
           lable={'Temple Name'}
-          placeholder={'Enter Temple Name'}
+          placeholder={'Please Enter Name'}
           height={50}
           onChangeText={e => {
             setName(e);
@@ -242,7 +243,7 @@ const CommunityTemple = ({navigation}) => {
         )}
         <EventInput
           lable={'Description'}
-          placeholder={'About Temple'}
+          placeholder={'Please Enter Description'}
           height={150}
           onChangeText={e => {
             setDescription(e);

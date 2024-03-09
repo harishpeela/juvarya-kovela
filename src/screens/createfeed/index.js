@@ -37,9 +37,11 @@ const CreateFeed = ({route, navigation}) => {
   const Valid = id => {
     if (image === null) {
       alert('please upload a image');
-    } else if (description === '') {
-      alert('Enter Description');
-    } else {
+    } 
+    // else if (description === '') {
+    //   alert('Enter Description');
+    // } 
+    else {
       NewFeed(id);
     }
   };
@@ -56,7 +58,7 @@ const CreateFeed = ({route, navigation}) => {
     console.log('formdata', formdata);
     let result = await Create_Feed(formdata);
     console.log('res of feed', result?.data);
-    if (result?.data?.message === 'Feed Created') {
+    if (result?.status === 202) {
       Alert.alert('Success', `${result?.data?.message} Successfully`, [
         {
           text: 'Ok',
@@ -135,7 +137,7 @@ const CreateFeed = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: '15%'}}>
+      <View style={{minHeight: '15%', marginTop: '3%'}}>
         <TopBarCard2 back={true} txt={'Upload Photo'} navigation={navigation} marginLeft={'15%'} />
       </View>
       <View style={{margin: 30}}>

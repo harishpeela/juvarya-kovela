@@ -24,7 +24,7 @@ const Community_Events_Seeall = ({navigation, route}) => {
      };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{height: '9%'}}>
+      <View style={{height: '9%', marginTop: '3%'}}>
         <TopBarCard2 marginLeft={'16%'} back={true} txt={'Community temples'} navigation={navigation} />
       </View>
       {!data?.length > 0 ? (
