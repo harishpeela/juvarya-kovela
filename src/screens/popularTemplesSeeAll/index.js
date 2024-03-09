@@ -65,7 +65,7 @@ const SeeAll = ({navigation}) => {
   // console.log('pop see all temples', popTemples);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '9%'}}>
+      <View style={{height: '9%', marginTop: '3%'}}>
         <TopBarCard2 marginLeft={'15%'} back={true} txt={'Popular Temples '} navigation={navigation} />
       </View>
       {!popTemples?.length > 0 ? (

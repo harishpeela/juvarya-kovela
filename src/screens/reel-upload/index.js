@@ -41,7 +41,7 @@ const ReelUpload = ({navigation, route}) => {
                 let video = getImageObj(res?.assets[0]?.uri);
                 let fileSizeInBytes = res?.assets[0]?.fileSize;
                 const fileSizeInMB = fileSizeInBytes / 1048576;
-                if(fileSizeInMB > 50){
+                if(fileSizeInMB > 20){
                     alert('please upload video below 50mb')
                 } else{
                     setVideoRes(video)
@@ -100,7 +100,7 @@ const ReelUpload = ({navigation, route}) => {
     console.log('isvideo', isVideo);
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
-            <View style={{height: '10%'}}>
+            <View style={{height: '10%', marginTop: '3%'}}>
                 <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} marginLeft={'22%'} />
             </View>
             {isVideo ? (

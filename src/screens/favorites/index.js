@@ -101,7 +101,7 @@ const Favorite = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{minHeight: 100, flexDirection: 'row'}}>
+      <View style={{minHeight: 100, flexDirection: 'row', marginTop: '3%'}}>
         <TopBarCard2
           isBell={true}
           back={true}

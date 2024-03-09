@@ -6,15 +6,15 @@ import { ReelsComponent, Loader } from '../../components';
 import { GetReels, saveReels } from '../../utils/api';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { allTexts } from '../../common';
-const KovelaReels = ({navigation}) => {
+import { allTexts, colors } from '../../common';
+const KovelaReels = ({ navigation }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const [videoData, setVideoData] = useState();
   const [loader, setLoader] = useState(false)
   const [pgNo, setPgNo] = useState(0);
   const [pgSz, setPgSz] = useState(30);
- 
+
   const reelsData = async (pgNo, pgSz) => {
     setLoader(true)
     let result = await GetReels(pgNo, pgSz);
@@ -57,14 +57,16 @@ const KovelaReels = ({navigation}) => {
           padding: 10,
         }}>
         <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'white' }}>
-          Reels
+          Spirituals
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.reelupload)}>
           <Feather name="camera" style={{ fontSize: 25, color: 'white' }} />
         </TouchableOpacity>
       </View>
       {loader ? (
-        <Loader />
+        <View style={{flex: 1, alignItems: 'center' }}>
+          <Loader size={'large'} color={colors.orangeColor} />
+        </View>
       ) : (
         <ReelsComponent videoData={videoData} />
       )}

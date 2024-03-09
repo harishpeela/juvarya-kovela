@@ -117,7 +117,7 @@ const UpdateProfile = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.wrapper}>
-        <View style={{}}>
+        <View style={{marginTop: '3%'}}>
           <TopBarCard2
             txt={'Update Profile'}
             back={true}
