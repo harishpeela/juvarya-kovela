@@ -56,15 +56,7 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      {/* <View style={styles.updateProfileTopCard}>
-        <TopBarcard
-          back={true}
-          txt={'updatePassword'}
-          navBack={navigation}
-        />
-      </View> */}
-
-      <View style={{height: '15%'}}>
+      <View style={{height: '15%', marginTop: '3%'}}>
         <TopBarCard2
           back={true}
           marginLeft={'15%'}

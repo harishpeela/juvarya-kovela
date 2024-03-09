@@ -5,7 +5,7 @@ import { Directions } from 'react-native-gesture-handler'
 export const styles = StyleSheet.create({
     container: {
         height: 150,
-        width:'88%',
+        width:'90%',
         marginHorizontal: "1%",
         marginVertical: "1%",
         // width: '48%',
@@ -50,10 +50,8 @@ export const styles = StyleSheet.create({
         color: colors.black,
         fontSize: fontSize.small,
         fontWeight: '50',
-        alignSelf: 'center',
         marginTop: '5%',
         backgroundColor:'white',
-        marginLeft:15
     },
     locationAddressContainer: {
         marginTop: 5,

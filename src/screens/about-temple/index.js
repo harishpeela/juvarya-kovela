@@ -29,7 +29,7 @@ const AboutTemple = ({ navigation, route }) => {
     }, []);
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={{ height: '15%' }}>
+            <View style={{ height: '15%', marginTop: '3%' }}>
                 <TopBarCard2 back={true} txt={'History'} navigation={navigation} marginLeft={'27%'} />
             </View>
             <View>

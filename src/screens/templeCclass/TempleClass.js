@@ -31,7 +31,7 @@ const TempleClass = ({route, navigation}) => {
 
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={{height: '12%'}}>
+      <View style={{height: '12%', marginTop: '3%'}}>
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
@@ -40,7 +40,7 @@ const TempleClass = ({route, navigation}) => {
           navigation={navigation}
         />
       </View>
-      <View>
+      <View style={{flex: 1}}>
         {loader ? (
           <View style={{marginTop: '60%'}}>
             <Loader size={'large'} color={colors.orangeColor} />
@@ -73,7 +73,7 @@ const TempleClass = ({route, navigation}) => {
                   }}
                   style={{height: 72, width: 72, borderRadius: 70 / 2}}
                 />
-                <Text style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17}}>
+                <Text numberOfLines={2} style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17, maxWidth: '80%'}}>
                   {item?.name}
                 </Text>
               </TouchableOpacity>

@@ -43,7 +43,7 @@ export default BottomTabBase = ({navigation}) => {
       keyboardHidesTabBar={true}
       style={{flex: 1}}
       showsVerticalScrollIndicator={false}>
-      {homeFeedListData === undefined ? (
+      {!homeFeedListData === undefined ? (
         <View style={{flex: 1,marginTop:'3%'}}>
           <Loader size={'large'} color={colors.orangeColor} />
         </View>

@@ -22,8 +22,8 @@ import {FlatList} from 'react-native-gesture-handler';
 import { setIn } from 'formik';
 
 const EventDetails = ({navigation, route}) => {
-  const {item, role} = route?.params || {};
-  console.log('item', item);
+  const {item, role, roleId} = route?.params || {};
+  console.log('item', roleId, role);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
@@ -88,7 +88,6 @@ const EventDetails = ({navigation, route}) => {
       console.log('error in event Info screen api', error);
     }
   };
-  // console.log("info ",Info)
 const dataIntrested = async() => {
   let responce = await getIntrestedEventById(item?.id);
   console.log('dataintredted', responce?.data);
@@ -115,7 +114,8 @@ const dataIntrested = async() => {
         keyExtractor={({item, index}) => index}
         renderItem={({item, index}) => (
           <Card style={styles.highLightCard}>
-            <TouchableOpacity
+            {(role === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN')  &&(
+              <TouchableOpacity
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.editHightlights, {
                   data: item,
@@ -133,6 +133,7 @@ const dataIntrested = async() => {
               }}>
               <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
             </TouchableOpacity>
+            )}
             <View style={{flexDirection: 'row'}}>
               <Image
                 source={{
@@ -359,7 +360,7 @@ const dataIntrested = async() => {
 console.log('intrested?.interested', intrested?.interested)
   return (
     <View style={styles.container}>
-      <View style={{height: '10%'}}>
+      <View style={{height: '10%', marginTop: '3%'}}>
           <TopBarCard2
             txt={'Event Details'}
             back={true}

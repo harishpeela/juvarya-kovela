@@ -36,7 +36,7 @@ const [data, setData] = useState([]);
     }, []);
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{height: '9%'}}>
+      <View style={{height: '9%', marginTop: '3%'}}>
         <TopBarCard2 back={true} txt={'Nearby Temples'} navigation={navigation} marginLeft={'13%'}/>
       </View>
       {!data?.length ? (
