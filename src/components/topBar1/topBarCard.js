@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -10,8 +10,10 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { getNotifications } from '../../utils/api';
 // import { GetProfilePic } from '../../utils/api';
 // import ApplicationContext from '../../utils/context-api/Context';
+
 export const TopBarcard = ({
   txtColor,
   onPress,
@@ -45,6 +47,32 @@ export const TopBarcard = ({
   // useEffect(() => {
   //   ProfilePic();
   // })
+  const [notificationsCount, setNotificationCount] = useState(0);
+
+  const GetNotificationsCount = async () => {
+    try {
+      let result = await getNotifications();
+      let Data = result?.data?.customerRoles;
+      let mapping = Data?.filter(item => item)?.map(({notifications}) => ({
+        notifications,
+      }));
+      let FilteredData = mapping[0]?.notifications;
+      if(FilteredData?.length > 10){
+        setNotificationCount("9+");
+      }
+      else{
+        setNotificationCount(FilteredData?.length);
+      }
+     
+    } catch (error) {
+      console.log('error in notifications while fetching for notifications count on topBarCard ', error);
+    }
+  };
+
+  useEffect(() => {
+    GetNotificationsCount();
+  }, []);
+  console.log(notificationsCount?.length, " notifications data");
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -155,6 +183,18 @@ export const TopBarcard = ({
               /> */}
               <View style={{marginTop: 16}}>
                 <Feather name="bell" size={30} color={colors.orangeColor} />
+                {
+                  notificationsCount !== 0 && (
+                    <>
+                    <View style={styles.notificationsCount}>
+                  <Text style={styles.notificationCountNumber}>
+                    {notificationsCount}
+                  </Text>
+                  </View>
+                    </>
+                  ) 
+                }
+                
               </View>
             </TouchableOpacity>
           )}
@@ -338,4 +378,21 @@ const styles = StyleSheet.create({
     width: 31,
     marginLeft: '23%',
   },
+  notificationsCount:{
+    borderWidth:1,
+    borderColor:colors.orangeColor,
+    backgroundColor:"white",
+    borderRadius:10,
+    height:18,
+    width:18,
+    alignItems:"center",
+    justifyContent:'center',
+    position:"absolute",
+    top:-5,
+    left:15
+  },
+  notificationCountNumber:{
+    color:colors.orangeColor,
+    fontSize:10
+  }
 });
