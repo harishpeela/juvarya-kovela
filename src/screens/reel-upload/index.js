@@ -41,7 +41,7 @@ const ReelUpload = ({navigation, route}) => {
                 let video = getImageObj(res?.assets[0]?.uri);
                 let fileSizeInBytes = res?.assets[0]?.fileSize;
                 const fileSizeInMB = fileSizeInBytes / 1048576;
-                if(fileSizeInMB > 20){
+                if(fileSizeInMB > 50){
                     alert('please upload video below 50mb')
                 } else{
                     setVideoRes(video)
