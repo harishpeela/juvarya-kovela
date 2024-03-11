@@ -97,7 +97,7 @@ const ReelUpload = ({navigation, route}) => {
         return imageObj;
       };
 
-    console.log('isvideo', isVideo);
+    console.log('isvideo', isVideo, loader);
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
             <View style={{height: '10%', marginTop: '3%'}}>

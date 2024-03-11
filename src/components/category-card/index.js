@@ -59,6 +59,7 @@ export const UserFeedCompList = ({
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [roleType, setRoleType] = useState('');
+  const [shortDescription, longDescription] = useState(false);
 
 
   const getImageSize = () => {
@@ -382,14 +383,34 @@ export const UserFeedCompList = ({
         </Text>
       </View>
       {post?.description && (
-        <Text style={{...styles.username, fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black' }}>
-        {post?.description?.length < 50
-          ? `${post?.description}`
-          : `${post?.description?.substring(0, 50)}...`}
-      </Text>
+        <View>
+          {shortDescription ? (
+            <View style={{  }}>
+              <Text style={{ ...styles.username, fontSize: 10, fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black', }}>
+                {`${post?.description}` }
+              </Text>
+              <TouchableOpacity style={{marginLeft: 10}} onPress={() => longDescription(false)}>
+                <Text style={{ fontSize: 10, color: colors.gray2, fontWeight: 'bold', fontFamily: 'Poppins-Medium' }}> show less</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Text style={{ ...styles.username, fontSize: 14, fontFamily: 'Poppins-Medium', color: isDarkMode ? 'black' : 'black', }}>
+                {
+                  `${post?.description?.substring(0, 44)}`}
+              </Text>
+              {post?.description?.length > 44 && (
+                <TouchableOpacity style={{ marginTop: 5 }} onPress={() => longDescription(true)}>
+                <Text style={{ fontSize: 10, color: colors.gray2, fontWeight: '600', fontFamily: 'Poppins-Medium' }}> show more</Text>
+              </TouchableOpacity>
+              )}
+            </View>
+          )}
+
+        </View>
       )}
-      <View style={{marginLeft: 12 }}>
-        <Text style={{ fontFamily: 'Poppins-Medium',fontSize:8 }}>{formattedCreationTime}</Text>
+      <View style={{ marginLeft: 12 }}>
+        <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 8 }}>{formattedCreationTime}</Text>
       </View>
     </View>
   );
