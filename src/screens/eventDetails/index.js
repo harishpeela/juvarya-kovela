@@ -7,23 +7,24 @@ import {
   ImageBackground,
   Alert,
 } from 'react-native';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-import React, {useState, useEffect} from 'react';
-import {colors, allTexts} from '../../common';
-import {styles} from './styles';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import React, { useState, useEffect } from 'react';
+import { colors, allTexts } from '../../common';
+import { styles } from './styles';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import F5Icon from 'react-native-vector-icons/FontAwesome5';
 import FontisoIcon from 'react-native-vector-icons/Fontisto';
 import FontAwsIcon from 'react-native-vector-icons/FontAwesome';
 import Card from '../../common/Card';
-import {IntrestedEvents, Event_Highlights, Event_Info, getIntrestedEventById} from '../../utils/api';
-import {FlatList} from 'react-native-gesture-handler';
+import { IntrestedEvents, Event_Highlights, Event_Info, getIntrestedEventById } from '../../utils/api';
+import { FlatList } from 'react-native-gesture-handler';
 import { setIn } from 'formik';
 
-const EventDetails = ({navigation, route}) => {
-  const {item, role, roleId} = route?.params || {};
-  console.log('item', roleId, role);
+const EventDetails = ({ navigation, route }) => {
+  const { item, role, roleId } = route?.params || {};
+  // console.log('item', roleId, role);
+  console.log(item?.mediaList?.length);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
   const [highlights, setHighlights] = useState([]);
@@ -43,11 +44,11 @@ const EventDetails = ({navigation, route}) => {
     try {
       let result = await IntrestedEvents(payload);
       console.log('res of intresred', result?.data);
-      if(result?.status === 200){
+      if (result?.status === 200) {
         Alert.alert('Success', 'This event is added to your intrested events list', [
           {
             text: 'Ok',
-            onPress: () =>  dataIntrested(),
+            onPress: () => dataIntrested(),
           },
         ]);
       } else {
@@ -88,15 +89,15 @@ const EventDetails = ({navigation, route}) => {
       console.log('error in event Info screen api', error);
     }
   };
-const dataIntrested = async() => {
-  let responce = await getIntrestedEventById(item?.id);
-  console.log('dataintredted', responce?.data);
-  if(responce?.status === 200){
-    setIntrested(responce?.data);
-  } else {
-    setIntrested('');
+  const dataIntrested = async () => {
+    let responce = await getIntrestedEventById(item?.id);
+    console.log('dataintredted', responce?.data);
+    if (responce?.status === 200) {
+      setIntrested(responce?.data);
+    } else {
+      setIntrested('');
+    }
   }
-}
 
   useEffect(() => {
     EventHighLights();
@@ -111,30 +112,30 @@ const dataIntrested = async() => {
     return highlights?.length ? (
       <FlatList
         data={highlights}
-        keyExtractor={({item, index}) => index}
-        renderItem={({item, index}) => (
+        keyExtractor={({ item, index }) => index}
+        renderItem={({ item, index }) => (
           <Card style={styles.highLightCard}>
-            {(role === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN')  &&(
+            {(role === 'ROLE_ADMIN' || roleId === 'ROLE_ITEM_ADMIN') && (
               <TouchableOpacity
-              onPress={() =>
-                navigation.navigate(allTexts.screenNames.editHightlights, {
-                  data: item,
-                })
-              }
-              style={{
-                marginLeft: '94%',
-                marginBottom: '-3%',
-                backgroundColor: 'orange',
-                height: 25,
-                width: 25,
-                borderRadius: 20,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
-            </TouchableOpacity>
+                onPress={() =>
+                  navigation.navigate(allTexts.screenNames.editHightlights, {
+                    data: item,
+                  })
+                }
+                style={{
+                  marginLeft: '94%',
+                  marginBottom: '-3%',
+                  backgroundColor: 'orange',
+                  height: 25,
+                  width: 25,
+                  borderRadius: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <EntypoIcon name="edit" size={13} style={{ color: 'white' }} />
+              </TouchableOpacity>
             )}
-            <View style={{flexDirection: 'row'}}>
+            <View style={{ flexDirection: 'row' }}>
               <Image
                 source={{
                   uri: item?.mediaList
@@ -143,12 +144,12 @@ const dataIntrested = async() => {
                 }}
                 style={styles.img1}
               />
-              <View style={{marginLeft: 10}}>
+              <View style={{ marginLeft: 10 }}>
                 <Text style={styles.tab3}>{item?.highLight} </Text>
                 <Text
                   numberOfLines={2}
                   ellipsizeMode="tail"
-                  style={{width: 250}}>
+                  style={{ width: 250 }}>
                   {item?.description}
                 </Text>
               </View>
@@ -168,7 +169,7 @@ const dataIntrested = async() => {
             id: item?.id,
           })
         }>
-        <Text style={{color: colors.blue}}>
+        <Text style={{ color: colors.blue }}>
           + No Highlights Here At This Time
         </Text>
       </TouchableOpacity>
@@ -188,12 +189,12 @@ const dataIntrested = async() => {
         </View>
         <FlatList
           showsVerticalScrollIndicator={false}
-          style={{flex: 1, height: 100}}
+          style={{ flex: 1, height: 100 }}
           data={Info}
-          keyExtractor={({item, index}) => index}
-          renderItem={({item, index}) => (
+          keyExtractor={({ item, index }) => index}
+          renderItem={({ item, index }) => (
             <View>
-              <View style={{flexDirection: 'row', width: 100}}>
+              <View style={{ flexDirection: 'row', width: 100 }}>
                 <Text
                   style={{
                     color: 'black',
@@ -203,7 +204,7 @@ const dataIntrested = async() => {
                   }}>
                   {'\u2B24'}
                 </Text>
-                <Text numberOfLines={2} style={{width: 210, fontSize: 15}}>
+                <Text numberOfLines={2} style={{ width: 210, fontSize: 15 }}>
                   {item?.information}
                 </Text>
                 <TouchableOpacity
@@ -221,7 +222,7 @@ const dataIntrested = async() => {
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <EntypoIcon name="edit" size={10} style={{color: 'black'}} />
+                  <EntypoIcon name="edit" size={10} style={{ color: 'black' }} />
                 </TouchableOpacity>
               </View>
             </View>
@@ -231,34 +232,34 @@ const dataIntrested = async() => {
     ) : (
       role ? (
         <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '20%',
-        }}
-        onPress={() => {
-          setIsEditingInfo(false);
-          navigation.navigate(allTexts.screenNames.info, {
-            data: item,
-          });
-        }}>
-        <Text style={{color: colors.blue}}>+ No Info Here At This Time</Text>
-      </TouchableOpacity>
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '20%',
+          }}
+          onPress={() => {
+            setIsEditingInfo(false);
+            navigation.navigate(allTexts.screenNames.info, {
+              data: item,
+            });
+          }}>
+          <Text style={{ color: colors.blue }}>+ No Info Here At This Time</Text>
+        </TouchableOpacity>
       ) : (
         <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '20%',
-        }}
-        onPress={() => {
-          setIsEditingInfo(false);
-          navigation.navigate(allTexts.screenNames.info, {
-            data: item,
-          });
-        }}>
-        <Text style={{color: colors.blue}}> No Info Here At This Time</Text>
-      </View>
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '20%',
+          }}
+          onPress={() => {
+            setIsEditingInfo(false);
+            navigation.navigate(allTexts.screenNames.info, {
+              data: item,
+            });
+          }}>
+          <Text style={{ color: colors.blue }}> No Info Here At This Time</Text>
+        </View>
       )
     );
   };
@@ -290,51 +291,51 @@ const dataIntrested = async() => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <EntypoIcon name="edit" size={13} style={{color: 'white'}} />
+            <EntypoIcon name="edit" size={13} style={{ color: 'white' }} />
           </View>
         </View>
-        <View style={{marginTop: 30}}>
+        <View style={{ marginTop: 30 }}>
           <Image
             style={styles.tab1Img}
             source={require('../../../assets/images/tempimg1.jpg')}
           />
         </View>
-        <View style={{alignItems: 'center'}}>
+        <View style={{ alignItems: 'center' }}>
           <Text style={styles.tab1Text}>Holi Festival</Text>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <AntDesignIcon name="heart" size={15} color={colors.orangeColor} />
             <Text style={styles.tab1Name}>Shiva prasad</Text>
           </View>
         </View>
       </Card>
     ) : (
-     role ? (
-      <TouchableOpacity
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '20%',
-      }}
-      onPress={() =>
-        navigation.navigate(allTexts.screenNames.editContribute)
-      }>
-      <Text style={{color: colors.blue}}>
-        No contributes here at this time
-      </Text>
-    </TouchableOpacity>
-     ) : (
-      <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: '20%',
-      }}
-      >
-      <Text style={{color: colors.blue}}>
-        + No contributes here at this time
-      </Text>
-    </View>
-     )
+      role ? (
+        <TouchableOpacity
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '20%',
+          }}
+          onPress={() =>
+            navigation.navigate(allTexts.screenNames.editContribute)
+          }>
+          <Text style={{ color: colors.blue }}>
+            No contributes here at this time
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <View
+          style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: '20%',
+          }}
+        >
+          <Text style={{ color: colors.blue }}>
+            + No contributes here at this time
+          </Text>
+        </View>
+      )
     );
   };
   const actionsArr = [
@@ -357,37 +358,82 @@ const dataIntrested = async() => {
       activeTab: false,
     },
   ];
-console.log('intrested?.interested', intrested?.interested)
+  console.log('intrested?.interested', intrested?.interested)
   return (
     <View style={styles.container}>
-      <View style={{height: '10%', marginTop: '3%'}}>
-          <TopBarCard2
-            txt={'Event Details'}
-            back={true}
-            navigation={navigation}
-          />
-        </View>
-      <ScrollView style={{borderWidth: 0}}>
+      <View style={{ height: '10%', marginTop: '3%' }}>
+        <TopBarCard2
+          txt={'Event Details'}
+          back={true}
+          navigation={navigation}
+        />
+      </View>
+      <ScrollView style={{ borderWidth: 0 }}>
         {item?.mediaList ? (
           <ImageBackground
-            source={{uri: item?.mediaList[activeImgIndex]?.url}}
+            source={{ uri: item?.mediaList[activeImgIndex]?.url }}
             style={styles.bgImg}
             imageStyle={styles.bgImg1}>
             <View style={styles.bgContainer}>
-              <AntDesignIcon
-                name="left"
-                size={20}
-                color="white"
-                disabled={activeImgIndex === 0}
-                onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
-              />
-              <AntDesignIcon
-                name="right"
-                size={20}
-                color="white"
-                disabled={activeImgIndex === item?.mediaList?.length - 1}
-                onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
-              />
+              {item?.mediaList?.length === 1 || undefined ? (<></>) : (<>
+                {activeImgIndex === 0 ? (<><AntDesignIcon
+                  name="left"
+                  size={0}
+                  color="white"
+                  disabled={activeImgIndex === 0}
+                  onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+                />
+                  <AntDesignIcon
+                    name="right"
+                    size={20}
+                    color="white"
+                    disabled={activeImgIndex === item?.mediaList?.length - 1}
+                    onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
+                  /></>) : (<>
+                    {activeImgIndex === item?.mediaList?.length - 1 ? (<>
+                      <AntDesignIcon
+                        name="left"
+                        size={20}
+                        color="white"
+                        disabled={activeImgIndex === 0}
+                        onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+                      /></>) : (
+                      <>
+                        <AntDesignIcon
+                          name="left"
+                          size={20}
+                          color="white"
+                          disabled={activeImgIndex === 0}
+                          onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+                        />
+                        <AntDesignIcon
+                          name="right"
+                          size={20}
+                          color="white"
+                          disabled={activeImgIndex === item?.mediaList?.length - 1}
+                          onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
+                        /></>
+
+                    )}
+                  </>)}
+                {console.log(activeImgIndex, 'activeImgIndex')}
+                {/* <AntDesignIcon
+                  name="left"
+                  size={20}
+                  color="white"
+                  disabled={activeImgIndex === 0}
+                  onPress={() => setActiveImgIndex(imgIndex => imgIndex - 1)}
+                />
+                <AntDesignIcon
+                  name="right"
+                  size={20}
+                  color="white"
+                  disabled={activeImgIndex === item?.mediaList?.length - 1}
+                  onPress={() => setActiveImgIndex(imgIndex => imgIndex + 1)}
+                /> */}
+              </>
+              )}
+
             </View>
             <View style={styles.multiImgs}>
               {item?.mediaList?.map((url, index) => {
@@ -397,8 +443,8 @@ console.log('intrested?.interested', intrested?.interested)
                     onPress={() => setActiveImgIndex(index)}
                     key={url?.id?.toString()}>
                     <Image
-                      source={{uri: url?.url}}
-                      style={{height: 50, width: 50, borderRadius: 10}}
+                      source={{ uri: url?.url }}
+                      style={{ height: 50, width: 50, borderRadius: 10 }}
                     />
                   </TouchableOpacity>
                 );
@@ -421,7 +467,7 @@ console.log('intrested?.interested', intrested?.interested)
           </View>
         </View>
         <View style={styles.dateCon}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <FontisoIcon
               style={styles.dateIcon}
               name="date"
@@ -432,68 +478,68 @@ console.log('intrested?.interested', intrested?.interested)
               {item?.date?.slice(0, 10)}
             </Text>
           </View>
-         {(item?.worldWide || item?.countryWide) && (
-           <View style={styles.locCon}>
-           <FontAwsIcon
-             style={styles.locIcon}
-             name="location-arrow"
-             size={20}
-             color="white"
-           />
-           <Text style={styles.locText}>{item?.worldWide ? 'Accross World' : item?.countryWide ? 'Accross India' : ''}</Text>
-         </View>
-         )}
+          {(item?.worldWide || item?.countryWide) && (
+            <View style={styles.locCon}>
+              <FontAwsIcon
+                style={styles.locIcon}
+                name="location-arrow"
+                size={20}
+                color="white"
+              />
+              <Text style={styles.locText}>{item?.worldWide ? 'Accross World' : item?.countryWide ? 'Accross India' : ''}</Text>
+            </View>
+          )}
         </View>
         <View style={styles.underline} />
-       {(highlights?.length || Info[0]?.information) ? (
-        <>
-         <View style={{flexDirection: 'row'}}>
-          {actionsArr.map((action, index) => {
-            return (
-              <TouchableOpacity
-                key={action?.id?.toString()}
-                onPress={() => setActiveTabIndex(index)}
-                style={{
-                  backgroundColor:
-                    activeTabIndex === index ? colors.orangeColor : colors.gray3,
-                  borderRadius: 30,
-                  paddingHorizontal: 15,
-                  paddingVertical: 5,
-                  marginHorizontal: 10,
-                }}>
-                <Text
-                  style={{
-                    color: activeTabIndex === index ? 'white' : 'black',
-                    fontWeight: '400',
-                  }}>
-                  {action.label}
-                </Text>
-              </TouchableOpacity>
-            );
-          })}
-        </View>
-        <View style={{margin: 10}}>
-          {actionsArr[activeTabIndex].component()}
-        </View>
-        </>
-       ) : (
-        <View style={{flex: 1, margin: '5%'}}>
-          <Text style={{color: colors.black, fontSize: 14,  fontFamily: 'semi-bold'}}>{item?.description} </Text>
-        </View>
-       )}
+        {(highlights?.length || Info[0]?.information) ? (
+          <>
+            <View style={{ flexDirection: 'row' }}>
+              {actionsArr.map((action, index) => {
+                return (
+                  <TouchableOpacity
+                    key={action?.id?.toString()}
+                    onPress={() => setActiveTabIndex(index)}
+                    style={{
+                      backgroundColor:
+                        activeTabIndex === index ? colors.orangeColor : colors.gray3,
+                      borderRadius: 30,
+                      paddingHorizontal: 15,
+                      paddingVertical: 5,
+                      marginHorizontal: 10,
+                    }}>
+                    <Text
+                      style={{
+                        color: activeTabIndex === index ? 'white' : 'black',
+                        fontWeight: '400',
+                      }}>
+                      {action.label}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+            <View style={{ margin: 10 }}>
+              {actionsArr[activeTabIndex].component()}
+            </View>
+          </>
+        ) : (
+          <View style={{ flex: 1, margin: '5%' }}>
+            <Text style={{ color: colors.black, fontSize: 14, fontFamily: 'semi-bold' }}>{item?.description} </Text>
+          </View>
+        )}
       </ScrollView>
       <View style={styles.buttonContainer}>
         {intrested?.interested ? (
           <View
-          style={styles.button1}>
-          <Text style={styles.btnText}>Interested</Text>
-        </View>
+            style={styles.button1}>
+            <Text style={styles.btnText}>Interested</Text>
+          </View>
         ) : (
           <TouchableOpacity
-          style={styles.button}
-          onPress={() => EventsIntrested()}>
-          <Text style={styles.btnText}>Interested</Text>
-        </TouchableOpacity>
+            style={styles.button}
+            onPress={() => EventsIntrested()}>
+            <Text style={styles.btnText}>Interested</Text>
+          </TouchableOpacity>
         )}
       </View>
     </View>

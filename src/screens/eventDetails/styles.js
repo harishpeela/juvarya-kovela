@@ -307,7 +307,7 @@ export const styles = StyleSheet.create({
   bgContainer: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    alignItems: 'center',
+    top:"30%",
     flex: 1,
   },
   multiImgs: {
