@@ -100,8 +100,8 @@ const ReelUpload = ({navigation, route}) => {
     console.log('isvideo', isVideo);
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
-            <View style={{height: '10%', marginTop: '3%'}}>
-                <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} marginLeft={'22%'} />
+            <View style={{height: 70, marginTop: '3%'}}>
+                <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} />
             </View>
             {isVideo ? (
                 <TouchableOpacity

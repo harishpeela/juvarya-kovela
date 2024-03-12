@@ -40,14 +40,13 @@ const UserProfileDonationsData = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: '15%', marginTop: '3%'}}>
+      <View style={{minHeight: 70, marginTop: '3%'}}>
         <TopBarCard2
           txt={'Donations'}
           back={true}
           navigation={navigation}
           navMenu={navigation}
-          marginLeft={'24%'}>
-          <View style={styles.searchContainer}></View>
+          >
         </TopBarCard2>
       </View>
       <View style={styles.followersContainer}>
