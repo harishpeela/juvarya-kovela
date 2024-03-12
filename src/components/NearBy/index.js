@@ -132,7 +132,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         <ScrollView>
           <View
             style={{
-              flexDirection: 'row',
+             marginTop:'5%'
             }}
           >
             <TopBarcard
@@ -140,7 +140,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               isBell={true}
               navigation={navigation}
               navMenu={navigation}>
-              <View style={styles.searchContainers}>
+              <View>
                 <SearchBar
                   onTextChange={e => {
                     setSearchedText(e);
