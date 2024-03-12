@@ -134,7 +134,6 @@ const isDarkMode = useColorScheme() === 'dark';
         back={true}
         txt={'Contribution'}
         navigation={navigation}
-        marginLeft={'21%'}
         />
         </View>
         </View>

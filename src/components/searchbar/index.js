@@ -22,7 +22,7 @@ export const SearchBar = ({
 }) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={{marginTop:-13,width:100}}>
+    <View style={{width:100}}>
       {/* <View
         // eslint-disable-next-line no-sparse-arrays
         style={[

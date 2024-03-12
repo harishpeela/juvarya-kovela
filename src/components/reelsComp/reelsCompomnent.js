@@ -1,101 +1,21 @@
 
-// import React, {useState} from 'react';
-// import SwiperFlatList from 'react-native-swiper-flatlist';
-// // import { videoData } from './Database';
-// import SingleReel from './singleReel';
-// const ReelsComponent = ({videoData}) => {
-//   const [currentIndex, setCurrentIndex] = useState(0);
-//   const [mute, setMute] = useState(false);
-//   const handleChangeIndexValue = ({index}) => {
-//     setCurrentIndex(index);
-//   };
-
-//   return (
-//         <SwiperFlatList
-//       vertical={true}
-//       onChangeIndex={handleChangeIndexValue}
-//       data={videoData}
-//       renderItem={({item, index}) => (
-//         <SingleReel item={item} index={index} onPress={() =>setMute(!mute) } mute={mute} currentIndex={currentIndex} />
-//       )}
-//       keyExtractor={(item, index) => index}
-//     />
-//   );
-// };
-
-// export default ReelsComponent;
-
-
-
-// import React, { useRef, useState } from 'react';
-
-// import SwiperFlatList from 'react-native-swiper-flatlist';
-
-// import SingleReel from './singleReel';
- 
-// const ReelsComponent = ({ videoData }) => {
-
-//   const swiperRef = useRef(null);
-
-//   const [autoplayIndex, setAutoplayIndex] = useState(0);
- 
-//   const handleMomentumScrollEnd = (event, state, context) => {
-
-//     if (state.index === autoplayIndex) {
-
-//       setAutoplayIndex(state.index + 1);
-
-//       swiperRef.current.scrollToIndex({ index: state.index + 1 });
-
-//     }
-
-//   };
- 
-//   return (
-
-//     <SwiperFlatList
-
-//       ref={swiperRef}
-
-//       vertical={true}
-
-//       data={videoData}
-
-//       renderItem={({ item }) => <SingleReel item={item} />}
-
-//       keyExtractor={(item, index) => index.toString()}
-
-//       index={0} 
-
-//       autoplayDelay={0}
-
-//       autoplayLoop={false} 
-
-//       autoplay={true} 
-
-//       autoplayInterval={5000} 
-
-//       onMomentumScrollEnd={handleMomentumScrollEnd}
-
-//     />
-
-//   );
-
-// };
- 
-// export default ReelsComponent;
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import SingleReel from './singleReel';
+import RNFS from 'react-native-fs';
+import { createThumbnail } from 'react-native-create-thumbnail';
+import { err } from 'react-native-svg/lib/typescript/xml';
 
 const ReelsComponent = ({ videoData }) => {
-  console.log('video data', videoData);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mute, setMute] = useState(false);
   const [nextVideoIndex, setNextVideoIndex] = useState(1);
   const [nextVideoUrl, setNextVideoUrl] = useState(null);
+  const [nextDownloadedVideoURL, setNextDownloadedVideoURL] = useState(null);
+  const [ tempURL , setTempURL] = useState(null);
+  const [ tempThumbnailURL , setTempThumbnailURL] = useState(null);
+  const [thumbnails, setThumbnails] = useState(null);
 
   useEffect(() => {
     if (nextVideoIndex < videoData?.length) {
@@ -104,28 +24,79 @@ const ReelsComponent = ({ videoData }) => {
         setNextVideoUrl(url);
       }
     }
-  }, [currentIndex]);
+    setNextDownloadedVideoURL(tempURL);
+    // setThumbnails(tempThumbnailURL && tempThumbnailURL.path)
+  }, [currentIndex,nextVideoIndex]);
 
-  const handleChangeIndexValue = ({ index }) => {
+  useEffect(() => {
+    const prefetchNextVideo = async () => { 
+      if (currentIndex >= 0) {
+        try {
+          const timestamp = new Date().getTime(); 
+          const cachedVideoPath = `${RNFS.CachesDirectoryPath}/nextVideo_${timestamp}.mp4`;
+          const options = {
+            fromUrl: currentIndex == 0 ? videoData[1]?.mediaList[0]?.url :nextVideoUrl,
+            toFile: cachedVideoPath,
+            background: true,
+            progressDivider: 1,
+          };
+          const download = RNFS.downloadFile(options);
+          download.promise.then(res => {
+            if (res.statusCode === 200) {
+              setTempURL(cachedVideoPath);
+            }
+          }).catch(error => {
+            console.log('Download error:', error);
+          });
+
+          // // ThumbNail
+          //   const thumbnail = await createThumbnail({
+          //     url: currentIndex == 0 ? videoData[1]?.mediaList[0]?.url :nextVideoUrl,
+          //     timeStamp: 500,
+          //   });
+          //   const thumbnailData = { path: thumbnail.path, loaded: false };
+          //   setTempThumbnailURL(thumbnailData || null)
+        } catch (error) {
+          console.log('Error prefetching next video:', error.message)
+        }
+
+      }
+    };
+    prefetchNextVideo();
+  }, [currentIndex,nextVideoIndex]);
+
+  const handleChangeIndexValue = useCallback(({ index }) => {
     setCurrentIndex(index);
     setNextVideoIndex(index + 1);
+  }, []);
+
+  const renderItem = ({ item, index }) => {
+    return videoData && videoData?.length === 1 && item && item?.mediaList ? 
+      <SingleReel
+        item={item}
+        index={index}
+        mute={mute}
+        currentIndex={currentIndex}
+        thumbnail={thumbnails}
+      />
+    : 
+      <SingleReel
+        item={item}
+        index={index}
+        mute={mute}
+        currentIndex={currentIndex}
+        nextVideoUrl={videoData[nextVideoIndex]?.mediaList ? videoData[nextVideoIndex]?.mediaList[0]?.url : ''}
+        nextDownloadedVideoPlayURL={nextDownloadedVideoURL}
+        thumbnail={thumbnails}
+      />
   };
+
   return (
     <SwiperFlatList
       vertical={true}
       onChangeIndex={handleChangeIndexValue}
       data={videoData}
-      renderItem={({ item, index }) => (
-       item && item?.mediaList && (
-        <SingleReel
-        item={item}
-        index={index}
-        mute={mute}
-        currentIndex={currentIndex}
-        nextVideoUrl={index === nextVideoIndex ? nextVideoUrl : null}
-      />
-       )
-      )}
+      renderItem={renderItem}
       keyExtractor={(item, index) => index.toString()}
     />
   );

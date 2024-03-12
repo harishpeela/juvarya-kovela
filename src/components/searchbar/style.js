@@ -21,17 +21,13 @@ export const styles = StyleSheet.create({
     // marginTop:20,
     marginBottom:30,
     backgroundColor:'#FAFAFA',
-    padding:10,
-    marginLeft:'23%'
+    padding:10
   },
   iconContainer: {
-    paddingLeft:8,
     flexDirection: 'row',
-    marginTop:-17,
     borderRadius: 15,
     height:40,
     width:190,
-    marginLeft:'3%',
     borderRadius:24,
     
   },
