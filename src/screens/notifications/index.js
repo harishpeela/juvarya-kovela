@@ -17,6 +17,7 @@ const Notifications = ({navigation}) => {
   const GetNotifications = async () => {
     try {
       let result = await getNotifications();
+      console.log('res of noti', result?.data?.notifications)
       let Data = result?.data?.customerRoles;
       let mapping = Data?.filter(item => item)?.map(({notifications}) => ({
         notifications,
@@ -37,7 +38,7 @@ const Notifications = ({navigation}) => {
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
       <View style={{}}>
-        <View style={{minHeight: '15%'}}>
+        <View style={{height: '10%'}}>
           <TopBarCard2
             txt={'Notifications'}
             // cancel={true}

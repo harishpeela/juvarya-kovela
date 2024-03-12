@@ -63,12 +63,14 @@ export const UserFeedCompList = ({
 
 
   const getImageSize = () => {
-    if (post?.mediaList[0]?.url === ' ') {
-      console.log('');
-    } else {
+    if (post?.mediaList === '') {
+      console.log('empty');
+    } else if(post?.mediaList){
       Image.getSize(post?.mediaList[0]?.url, (width, height) => {
         setHeight(height), setWidth(width);
       });
+    } else{
+      // alert('something went wrong')
     }
   };
 

@@ -67,7 +67,7 @@ const ReelUpload = ({navigation, route}) => {
         formdata.append('file', videoRes);
         console.log('formdata', formdata?._parts);
         if(!videoRes){
-            alert('please upload video');
+            alert('Please Upload Video');
             setLoader(false);
         } 
         // else if(description === ''){

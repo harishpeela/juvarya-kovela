@@ -10,8 +10,8 @@ export const NotificationCard = ({ data, name }) => {
         <View style={styles.imgView}>
           <Image
             source={{
-              uri: data?.jtCustomer?.customerProfileUrl
-                ? data?.jtCustomer?.customerProfileUrl
+              uri: data?.jtProfileDTO?.logo
+                ? data?.jtProfileDTO?.logo
                 : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/16956203647841695620364843.jpg',
             }}
             style={styles.img}
@@ -23,7 +23,7 @@ export const NotificationCard = ({ data, name }) => {
             textTransform: 'uppercase',
             fontWeight: 'bold',
           }}>{data?.jtCustomer?.firstName} </Text>
-          <Text style={{...styles.description, color: isDarkMode ? 'black' : 'black'}}>{data?.jtProfileDTO?.desciption} </Text>
+          <Text style={{...styles.description, color: isDarkMode ? 'black' : 'black'}}>{data?.jtProfileDTO?.description} </Text>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
           <View style={styles.typeView}>
           <Text
