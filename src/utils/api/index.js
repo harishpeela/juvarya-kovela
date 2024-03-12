@@ -15,7 +15,6 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
-  axiousInstanceNew2,
 } from './api';
 
 const endpoints = {
@@ -276,18 +275,6 @@ export const NewTempleCrew = async (id, pgNo, pgSz) => {
     console.log('error in temple crew', error);
   }
 };
-// export const NearByTemple = async (id) => {
-//   try {
-//     let result = await axiosNewData.get(`${endpoints.NearByTemple}?profileId=${id}`, {
-//       // retry: 5,
-//       // retryDelay: 3000,
-//     });
-//     return result;
-//   } catch (error) {
-//     console.log('error in popular temples', error);
-//   }
-// };
-
 export const SearchPopularTemples = async txt => {
   try {
     let result = await axiosNewData.get(

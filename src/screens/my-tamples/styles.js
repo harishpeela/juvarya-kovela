@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   loaderContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '40%'
+    marginTop: '-33%'
   },
   bellContainer: {
     height: 60,

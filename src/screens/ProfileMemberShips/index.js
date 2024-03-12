@@ -61,9 +61,9 @@ const ProfileMemberShips = ({navigation, route}) => {
         />
       </View>
       <View
-        style={{marginTop: '2%', marginHorizontal: '2%', marginBottom: '10%'}}>
+        style={{marginTop: '2%' , flex:1}}>
         {loader ? (
-          <View style={{marginTop: '70%'}}>
+          <View style={{marginTop: '-30%'}}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : membership?.length ? (

@@ -50,7 +50,7 @@ const Notifications = ({navigation}) => {
         </View>
         <View style={{marginBottom:'68%'}}>
           {loader ? (
-            <View style={{marginTop: '60%'}}>
+            <View style={{marginTop: '-32%'}}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : notificationdata?.length ? (
