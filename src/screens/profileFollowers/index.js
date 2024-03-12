@@ -26,7 +26,7 @@ const FollowersMembership = ({ route, navigation }) => {
     try {
       let result = await TempleFollowersList(0, 100, id);
       if (result?.status === 200) {
-        console.log('data of temple followers', result?.data);
+        console.log('data of temple followers', result?.data?.data[0]);
         setLoader(false);
         // if(result?.data?.data)
         if (result?.data?.data !== undefined) {
@@ -81,7 +81,9 @@ const FollowersMembership = ({ route, navigation }) => {
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-            <Loader size={'large'} color={colors.orangeColor} />
+             <View style={{marginTop: '-32%'}}>
+             <Loader size={'large'} color={colors.orangeColor} />
+           </View>
           ) : (
             <>
               {followersList.length === 0 && searchedText === '' ? (

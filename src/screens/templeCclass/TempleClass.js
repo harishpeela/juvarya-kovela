@@ -41,7 +41,7 @@ const TempleClass = ({route, navigation}) => {
       </View>
       <View style={{flex: 1}}>
         {loader ? (
-          <View style={{marginTop: '60%'}}>
+          <View style={{marginTop: '-30%'}}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : templeClassDetails?.length ? (

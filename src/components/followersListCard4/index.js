@@ -17,7 +17,7 @@ const FollowersListCard4 = ({ data, navigation }) => {
     try {
       let result = await MembersList(data?.id, 0, 100);
       let responce = result?.data?.data;
-      console.log('=====responce ====>>', responce);
+      // console.log('=====responce ====>>', responce);
       if (responce) {
         setState(responce);
       }
@@ -39,9 +39,6 @@ const FollowersListCard4 = ({ data, navigation }) => {
               style={styles.listItemContainer}
               onPress={() => {
                 alert('page under development')
-                // navigation.navigate(allTexts.screenNames.membershipdetails, {
-                //   data: item,
-                // })
               }}>
               <View style={styles.cardContainer}>
                 <View style={styles.imageContainer}>
@@ -66,7 +63,7 @@ const FollowersListCard4 = ({ data, navigation }) => {
                       numberOfLines={1}
                       ellipsizeMode="tail"
                       style={styles.firstName}>
-                      {item?.invitedCustomer?.firstName}
+                      {item?.invitedCustomer?.fullName}
                     </Text>
                     {/* <Text>MemberShip Id :{state[0]?.membershipId} </Text> */}
                     <View style={styles.textContainer2}>
