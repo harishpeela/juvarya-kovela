@@ -67,7 +67,7 @@ const ReelUpload = ({navigation, route}) => {
         formdata.append('file', videoRes);
         console.log('formdata', formdata?._parts);
         if(!videoRes){
-            alert('please upload video');
+            alert('Please Upload Video');
             setLoader(false);
         } 
         // else if(description === ''){
@@ -97,7 +97,7 @@ const ReelUpload = ({navigation, route}) => {
         return imageObj;
       };
 
-    console.log('isvideo', isVideo);
+    console.log('isvideo', isVideo, loader);
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
             <View style={{height: 70, marginTop: '3%'}}>

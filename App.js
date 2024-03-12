@@ -2,33 +2,24 @@
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
-import {LogBox, Text} from 'react-native';
+import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
 import {
-  Splash,
   SignUp,
   Signin,
   BottomTabBase,
   OTPScreen,
   HomeCardDetails,
-  UserFeedScreen,
   UpdatePassword,
   MyTamples,
   Service,
-  Seemore,
   Poojari,
   Events,
   Favorite,
-  Occasions,
   Manage,
   AddEvents,
-  NearByProducts,
   NearByServices,
-  ViewProfile,
-  Menu,
-  AddTempleNew,
   CreateFeed,
-  Profile,
   Posts,
   FollowersMembership,
   ProfileMembership,
@@ -39,8 +30,6 @@ import {
   Notifications,
   ViewTempleProfile,
   Donations,
-  MemberShip,
-  EventsScreen,
   DonationsList,
   EventDetails,
   ForgetPassword,
@@ -64,7 +53,6 @@ import {
   TempleProfileToDoList,
   MemberList,
   Artist_Donar_details_list,
-  KovelaReels,
   NewUserProfile,
   ArtistDonorScreen,
   ReelUpload,
@@ -93,29 +81,19 @@ const App = () => {
       signin,
       otpScreen,
       signup,
-      splash,
       bottomTab,
       homeDetails,
       updatePassword,
       myTamples,
       addTample,
       service,
-      seemore,
       poojari,
       events,
       favlist,
-      occasions,
       manage,
       addevents,
-      nearByProducts,
       nearByServices,
-      viewProfile,
-      menu,
-      addtemplenew,
       createfeed,
-      userFeedScreen,
-      feed,
-      profile,
       mySavedPosts,
       posts,
       followersmembership,
@@ -127,13 +105,10 @@ const App = () => {
       notification,
       viewtempleprofile,
       donations,
-      memberShip,
-      eventsScreen,
       donationslist,
       forgetPassword,
       updateProfile,
       eventDetails,
-      createEvent,
       profilememberships,
       invitationScreen,
       membershipdetails,
@@ -155,7 +130,6 @@ const App = () => {
       templeProfileToDoList,
       memberlist,
       artistdonardetailslist,
-      kovelareels,
       newuserprofile,
       artistDonorScreen,
       reelupload,
@@ -181,14 +155,6 @@ const App = () => {
   const AuthStack = () => {
     return (
       <Stack.Navigator>
-        {/* <Stack.Screen
-          name={splash}
-          component={Splash}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
-
         <Stack.Screen
           name={signin}
           component={Signin}
@@ -196,7 +162,6 @@ const App = () => {
             headerShown: false,
           }}
         />
-
         <Stack.Screen
           name={signup}
           component={SignUp}
@@ -231,15 +196,6 @@ const App = () => {
             headerShown: false,
           }}
         />
-
-        <Stack.Screen
-          name={profile}
-          component={Profile}
-          options={{
-            headerShown: false,
-          }}
-        />
-
         <Stack.Screen
           name={communityTemple}
           component={CommunityTemple}
@@ -375,26 +331,12 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={seemore}
-          component={Seemore}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name={poojari}
           component={Poojari}
           options={{
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={userFeedScreen}
-          component={UserFeedScreen}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen
           name={abouttemple}
           component={AboutTemple}
@@ -417,26 +359,12 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={occasions}
-          component={Occasions}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name={manage}
           component={Manage}
           options={{
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={calender}
-          component={Calender}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen
           name={addevents}
           component={AddEvents}
@@ -473,36 +401,8 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={nearByProducts}
-          component={NearByProducts}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name={nearByServices}
           component={NearByServices}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={viewProfile}
-          component={ViewProfile}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={menu}
-          component={Menu}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name={addtemplenew}
-          component={AddTempleNew}
           options={{
             headerShown: false,
           }}
@@ -585,13 +485,6 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name={feed}
-          component={Feeds}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
           name={viewtempleprofile}
           component={ViewTempleProfile}
           options={{
@@ -605,20 +498,6 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={eventsScreen}
-          component={EventsScreen}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
-        <Stack.Screen
-          name={memberShip}
-          component={MemberShip}
-          options={{
-            headerShown: false,
-          }}
-        />
         <Stack.Screen
           name={eventDetails}
           component={EventDetails}
@@ -626,13 +505,6 @@ const App = () => {
             headerShown: false,
           }}
         />
-        {/* <Stack.Screen
-          name={createEvent}
-          component={CreateEvent}
-          options={{
-            headerShown: false,
-          }}
-        /> */}
         <Stack.Screen
           name={profilememberships}
           component={ProfileMemberShips}

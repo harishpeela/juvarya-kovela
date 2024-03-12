@@ -15,7 +15,6 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
-  axiousInstanceNew2,
 } from './api';
 
 const endpoints = {
@@ -128,6 +127,7 @@ const endpoints = {
   DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
   COMMUNITY_ID: 'jtdcommunities/list',
   EVENT_INTRESETD_DETAILS:'jtInterestedEvents/interested?eventId', 
+  ARTIST: 'customer/nearbyartists',
 };
 export const getInitialToken = async () => {
   try {
@@ -275,18 +275,6 @@ export const NewTempleCrew = async (id, pgNo, pgSz) => {
     console.log('error in temple crew', error);
   }
 };
-// export const NearByTemple = async (id) => {
-//   try {
-//     let result = await axiosNewData.get(`${endpoints.NearByTemple}?profileId=${id}`, {
-//       // retry: 5,
-//       // retryDelay: 3000,
-//     });
-//     return result;
-//   } catch (error) {
-//     console.log('error in popular temples', error);
-//   }
-// };
-
 export const SearchPopularTemples = async txt => {
   try {
     let result = await axiosNewData.get(
@@ -333,6 +321,17 @@ export const GetProfilePic = async mailId => {
   try {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.CUSTOMER_PROFILE_PICTURE}=${mailId}`,
+    );
+    return result;
+  } catch (error) {
+    // console.log('error in profilepic get', error);
+  }
+};
+
+export const GetArtist = async (pgNo,pgSz,custId) => {
+  try {
+    let result = await axiousInstanceNew1.get(
+      `${endpoints.ARTIST}?pageNo=${pgNo}&pageSize=${pgSz}&isoCodes=531001,531002&userId=${custId}&type=ARTIST`,
     );
     return result;
   } catch (error) {

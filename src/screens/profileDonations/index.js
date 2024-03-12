@@ -51,7 +51,9 @@ const UserProfileDonationsData = ({navigation, route}) => {
       </View>
       <View style={styles.followersContainer}>
         {loader ? (
-          <Loader size={'large'} color={colors.orangeColor} />
+           <View style={{marginTop: '-30%'}}>
+            <Loader size={'large'} color={colors.orangeColor} />
+          </View>
         ) : searchedText === '' && allUserProfileDonationData?.length > 0 ? (
           <FlatList
             data={allUserProfileDonationData}

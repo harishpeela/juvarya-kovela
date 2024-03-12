@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     height: '90%',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop:"-67%"
   },
   card: {
     margin: 3,
