@@ -21,7 +21,7 @@ import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
 import { PopularTemples, SearchPopularTemples } from '../../utils/api';
 import { useIsFocused } from '@react-navigation/native';
 import { TopBarcard } from '../topBar1/topBarCard';
-import { NearByTempleClass, getNearByTemples, getEventByCommunityId } from '../../utils/api';
+import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
@@ -73,12 +73,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   };
 
   const eventsByCommunity = async () => {
-    let result = await getEventByCommunityId(0, 100, 3);
-    // console.log('result of community id', result?.data);
+    let result = await GetArtist(0, 100, 3);
+    console.log('result of community id', result?.data);
     if (result?.status === 200) {
       setEventCommunity(result?.data?.data);
     } else {
-      alert('no data')
+      // alert('no data')
     }
   }
 

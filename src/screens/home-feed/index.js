@@ -119,7 +119,10 @@ const UserFeedScreen = ({ navigation }) => {
         <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
       </View>
       <View style={{ marginBottom: '29%' }}>
-        {homeFeedList?.length > 0 ? (
+        {loader ? (
+          <Loader size={'large'} color={colors.orangeColor} />
+        ) : 
+        homeFeedList?.length > 0 ? (
           <FlatList
             data={homeFeedList}
             refreshControl={
@@ -171,7 +174,7 @@ const UserFeedScreen = ({ navigation }) => {
           <View style={{ marginTop: '70%' }}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
-        )}
+        )}        
       </View>
     </View>
   );

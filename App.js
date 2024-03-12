@@ -2,7 +2,7 @@
 import React, {useEffect, useState} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {StatusBar} from 'react-native';
-import {LogBox, Text} from 'react-native';
+import {LogBox} from 'react-native';
 import {allTexts} from './src/common';
 import {
   Splash,
