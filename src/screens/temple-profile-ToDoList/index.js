@@ -24,12 +24,11 @@ export default function TempleProfileToDoList({navigation}) {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '15%'}}>
+      <View style={{height: 70}}>
         <TopBarCard2
           back={true}
           txt={'Add ToDoList'}
           navigation={navigation}
-          marginLeft={'16%'}
         />
       </View>
 
