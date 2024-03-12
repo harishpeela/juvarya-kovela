@@ -1,13 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import {allTexts, colors} from '../../common';
+import { allTexts, colors } from '../../common';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 // import { GetProfilePic } from '../../utils/api';
@@ -32,31 +32,12 @@ export const TopBarcard = ({
   navCreate,
   height,
 }) => {
-  // const {userDetails} = useContext(ApplicationContext);
   const [img, setImg] = useState(null);
-  // const ProfilePic = async () => {
-  //   let result = await GetProfilePic(userDetails?.email);
-  //   if(result?.data){
-  //     setImg(result?.data);
-  //   } else {
-  //     setImg(null);
-  //   }
-  // };
-  // useEffect(() => {
-  //   ProfilePic();
-  // })
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            marginTop: '12%',
-            // marginHorizontal: 5,
-          }}>
+        <View style={{ flex: 0.15 }}>
           {menu && (
-            <View style={{marginLeft: '1%', flex: 1}}>
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate(allTexts.screenNames.newuserprofile)
@@ -64,47 +45,24 @@ export const TopBarcard = ({
                 style={styles.userIcon}>
                 {img ? (
                   <Image
-                    source={{uri: img?.url}}
+                    source={{ uri: img?.url }}
                     height={40}
                     width={40}
-                    style={{height: 30, width: 30, borderRadius: 80 / 2}}
                   />
                 ) : (
-                  <View
-                    style={{
-                      height: 45,
-                      width: 45,
-                      marginTop: 5,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}>
                     <EvilIcons
                       name="user"
                       size={50}
                       color={colors.orangeColor}
                     />
-                  </View>
                 )}
-                {/* <TouchableOpacity
-                  style={styles.menuIcon}
-                  onPress={() =>
-                    navigation.navigate(allTexts.tabNames.profile)
-                  }>
-                  <Feather
-                    name="menu"
-                    size={13}
-                    color={colors.white}
-                    style={{}}
-                  />
-                </TouchableOpacity> */}
               </TouchableOpacity>
-            </View>
           )}
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{height: 10, width: 6}}
+                style={{ height: 10, width: 10 }}
               />
             </TouchableOpacity>
           )}
@@ -112,7 +70,7 @@ export const TopBarcard = ({
             <TouchableOpacity style={styles.iconContainer} onPress={navBack}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{height: 10, width: 6}}
+                style={{ height: 10, width: 10 }}
               />
             </TouchableOpacity>
           )}
@@ -127,33 +85,30 @@ export const TopBarcard = ({
               />
             </TouchableOpacity>
           )}
+        </View>
+        <View style={{ flex: 0.7 }}>
           {txt && (
             <Text
               style={{
                 fontSize: 20,
-                flex: 10,
                 fontWeight: 'Normal',
-                marginLeft: '1%',
                 color: 'orange',
                 textAlign: 'center',
-                marginTop: 15,
                 fontFamily: 'Poppins-Medium',
                 // backgroundColor: 'red',
               }}>
               {txt}
             </Text>
           )}
+          {children}
+        </View>
+        <View style={{ flex: 0.15 }}>
           {isBell && (
             <TouchableOpacity
-              style={{marginBottom: -50, marginRight: 20}}
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.notification)
               }>
-              {/* <Image
-                source={{uri:'https://www.iconsdb.com/icons/preview/orange/bell-xxl.png'}}
-                style={{ height: 30, width: 30, marginTop: '10%' }}
-              /> */}
-              <View style={{marginTop: 16}}>
+              <View>
                 <Feather name="bell" size={30} color={colors.orangeColor} />
               </View>
             </TouchableOpacity>
@@ -165,7 +120,6 @@ export const TopBarcard = ({
           )}
         </View>
       </View>
-      {children}
     </View>
   );
 };
@@ -188,18 +142,12 @@ export const TopBarCard2 = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View
-          style={{
-            flex: 1,
-            flexDirection: 'row',
-            marginTop: '15%',
-            marginHorizontal: 1,
-          }}>
+        <View style={{ flex: 0.15 }}>
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{height: 10, width: 6}}
+                style={{ height: 10, width: 10 }}
               />
             </TouchableOpacity>
           )}
@@ -208,43 +156,42 @@ export const TopBarCard2 = ({
               style={styles.iconContainer}
               onPress={() => {
                 navigation.goBack(),
-                  {
-                    data: bData,
-                  };
+                {
+                  data: bData,
+                };
               }}>
               <Ionicons
                 name="arrow-back-circle"
-                size={42}
+                size={40}
                 color="orange"
-                style={{marginLeft: 2, marginTop: 6}}
               />
             </TouchableOpacity>
           )}
-
+        </View>
+        <View style={{ flex: 0.7 }}>
           {txt && (
             <Text
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                // marginLeft: marginLeft ? marginLeft : '25%',
-                marginLeft: marginLeft ? marginLeft : '15%',
                 color: 'orange',
                 textAlign: 'center',
                 fontFamily: 'Poppins-Medium',
                 fontWeight: 'Normal',
-                marginTop: 5,
-                // backgroundColor: 'red',
               }}>
               {txt}
             </Text>
           )}
+          {children}
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
             <TouchableOpacity
-              style={{flex: 1, marginLeft: '10%', marginTop: 2}}
+              style={{ flex: 1, marginLeft: '10%', marginTop: 2 }}
               onPress={navCreate}>
               <Text style={styles.joinText}>Create</Text>
             </TouchableOpacity>
           )}
+        </View>
+        <View style={{ flex: 0.15 }}>
           {isPlus && (
             <TouchableOpacity
               onPress={() =>
@@ -261,7 +208,6 @@ export const TopBarCard2 = ({
           )}
         </View>
       </View>
-      {children}
     </View>
   );
 };
@@ -269,40 +215,40 @@ export const TopBarCard2 = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    // marginBottom: 10,
-    alignItems: 'flex-start',
-    // justifyContent: 'center',
     flex: 1,
-    height: '30%',
-    borderColor: 'black',
-    // borderWidth:0.2,
-    // elevation:
-    marginTop: 3,
+    height: 70,
+    justifyContent: 'center',
+    // borderColor: 'black',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
   },
   header: {
+    flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    marginHorizontal: '2%',
+  },
+  children: {
+    flex: 0.70,
   },
   iconContainer: {
     height: 50,
     width: 50,
-    borderRadius: 100,
+    borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: 'orange',
-    marginLeft: 10,
-    marginTop: -10,
   },
   joinText: {
     color: colors.white,
     fontWeight: '900',
     fontSize: 18,
     textAlign: 'center',
-    top: 5,
   },
   userIcon: {
     alignItems: 'center',
@@ -332,10 +278,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'orange',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 100,
+    borderRadius: 25,
     textAlign: 'center',
-    height: 31,
-    width: 31,
-    marginLeft: '23%',
+    height: 30,
+    width: 30,
   },
 });

@@ -66,14 +66,14 @@ const EventsScreen = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-16%'}}>
       <View
         style={{
-          height: '11%',
+          marginTop:'5%', height:60,
         }}>
         <TopBarcard
           menu={true}
           isBell={true}
           navigation={navigation}
           navMenu={navigation}>
-          <View style={styles.searchContainers}>
+          <View >
             <SearchBar
               onTextChange={e => {
                 setSearchedText(e);
