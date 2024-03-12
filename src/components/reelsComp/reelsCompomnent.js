@@ -4,10 +4,10 @@ import SwiperFlatList from 'react-native-swiper-flatlist';
 import SingleReel from './singleReel';
 import RNFS from 'react-native-fs';
 import { createThumbnail } from 'react-native-create-thumbnail';
-import { err } from 'react-native-svg/lib/typescript/xml';
 
 const ReelsComponent = ({ videoData }) => {
 
+  
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mute, setMute] = useState(false);
   const [nextVideoIndex, setNextVideoIndex] = useState(1);
@@ -16,7 +16,7 @@ const ReelsComponent = ({ videoData }) => {
   const [ tempURL , setTempURL] = useState(null);
   const [ tempThumbnailURL , setTempThumbnailURL] = useState(null);
   const [thumbnails, setThumbnails] = useState(null);
-
+  console.log('videoData------->', videoData,currentIndex,nextVideoIndex,nextDownloadedVideoURL,nextVideoUrl)
   useEffect(() => {
     if (nextVideoIndex < videoData?.length) {
       const url = videoData[nextVideoIndex]?.mediaList ? videoData[nextVideoIndex]?.mediaList[0]?.url : '';
@@ -26,14 +26,15 @@ const ReelsComponent = ({ videoData }) => {
     }
     setNextDownloadedVideoURL(tempURL);
     // setThumbnails(tempThumbnailURL && tempThumbnailURL.path)
-  }, [currentIndex,nextVideoIndex]);
+  }, [currentIndex]);
 
   useEffect(() => {
     const prefetchNextVideo = async () => { 
       if (currentIndex >= 0) {
+        console.log('nextVIdoIndex--------->',currentIndex, nextVideoIndex, )
         try {
           const timestamp = new Date().getTime(); 
-          const cachedVideoPath = `${RNFS.CachesDirectoryPath}/nextVideo_${timestamp}.mp4`;
+          const cachedVideoPath = `${RNFS.CachesDirectoryPath}/nextVideo_${nextVideoIndex}_${timestamp}.mp4`;
           const options = {
             fromUrl: currentIndex == 0 ? videoData[1]?.mediaList[0]?.url :nextVideoUrl,
             toFile: cachedVideoPath,
@@ -63,7 +64,7 @@ const ReelsComponent = ({ videoData }) => {
       }
     };
     prefetchNextVideo();
-  }, [currentIndex,nextVideoIndex]);
+  }, [currentIndex]);
 
   const handleChangeIndexValue = useCallback(({ index }) => {
     setCurrentIndex(index);
