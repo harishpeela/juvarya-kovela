@@ -37,20 +37,18 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={{}}>
-        <View style={{height: '10%'}}>
+        <View style={{height: '10%', marginTop: '3%'}}>
           <TopBarCard2
             txt={'Notifications'}
             // cancel={true}
             back={true}
             marginLeft={'15%'}
            navigation={navigation}
-            
           />
         </View>
-        <View style={{marginBottom:'68%'}}>
+        <View style={{flex: 1}}>
           {loader ? (
-            <View style={{marginTop: '-32%'}}>
+            <View style={{}}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : notificationdata?.length ? (
@@ -66,7 +64,7 @@ const Notifications = ({navigation}) => {
               style={{
                 alignSelf: 'center',
                 justifyContent: 'center',
-                marginTop: '50%',
+                // marginTop: '50%',
               }}>
                <FontAwesome
                     name="bell-slash"
@@ -78,7 +76,6 @@ const Notifications = ({navigation}) => {
             </View>
           )}
         </View>
-      </View>
     </View>
   );
 };
