@@ -74,7 +74,7 @@ const MySavedPosts = ({navigation}) => {
         <View style={{height: '85%'}}>
           {loading ? (
             <View>
-              <View style={{marginTop: '60%'}}>
+              <View style={{marginTop: '-36%'}}>
                 <Loader color={colors.orangeColor} size={'large'} />
               </View>
             </View>
