@@ -23,7 +23,7 @@ import { useIsFocused } from '@react-navigation/native';
 import { TopBarcard } from '../topBar1/topBarCard';
 import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
+import { Artist_Search } from '../artist_search';
 export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
@@ -301,6 +301,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                           isFollowingTrue={item?.follow}
                           pageNav={pageNav}
                           img={item?.profileDTO?.logo}
+                          onPress={() => {
+                            pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
+                              data: post,
+                              onSelect: onSelect,
+                            });
+                          }}
                         />
                       )}
                       onEndReachedThreshold={0.5}
@@ -315,7 +321,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
             {searchedText === '' && eventCommunity ? (
               <>
                 <View style={styles.upComingTextTab}>
-                  <Text style={styles.popularTextContainer}>Maha Shiva Ratri Temples</Text>
+                  <Text style={styles.popularTextContainer}>Artist</Text>
                   <TouchableOpacity
                     onPress={() => {
                       seeallnav.navigate(allTexts.screenNames.communityeventsseeall, {
@@ -337,13 +343,11 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                     keyboardShouldPersistTaps="handled"
                     keyExtractor={({ item, index }) => item?.id}
                     renderItem={({ item, index }) => (
-                      <NearByTemple
-                        post={item}
-                        name={item?.name}
-                        templeId={item.templeClass}
-                        isFollowingTrue={item?.follow}
+                      <Artist_Search
+                        name={item?.fullName}
                         img={item?.logo}
-                        pageNav={pageNav}
+                        type={item?.type}
+                        onPress={() => alert('page under development')}
                       />
                     )}
                     onEndReachedThreshold={0.5}

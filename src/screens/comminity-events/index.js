@@ -25,7 +25,7 @@ const Community_Events_Seeall = ({navigation, route}) => {
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
       <View style={{height: '9%', marginTop: '3%'}}>
-        <TopBarCard2 marginLeft={'16%'} back={true} txt={'Community temples'} navigation={navigation} />
+        <TopBarCard2 marginLeft={'30%'} back={true} txt={'Artist'} navigation={navigation} />
       </View>
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>
@@ -47,12 +47,7 @@ const Community_Events_Seeall = ({navigation, route}) => {
             renderItem={({item, index}) => (
               <TouchableOpacity
                 style={styles.card}
-                onPress={
-                  () => 
-                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                    data: item,
-                    onSelect: onSelect
-                  })
+                onPress={() => alert('page under development')
                 }>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
                   <Image
@@ -66,7 +61,7 @@ const Community_Events_Seeall = ({navigation, route}) => {
                   />
                   <View style={{marginLeft: 10}}>
                     <Text style={{color: isDarkMode ? 'black' : 'orange',marginTop:'10%',fontSize:17}}>
-                      {item?.name}
+                      {item?.fullName}
                     </Text>
                     <Text
                       numberOfLines={2}

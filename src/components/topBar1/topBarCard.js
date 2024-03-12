@@ -72,7 +72,6 @@ export const TopBarcard = ({
   useEffect(() => {
     GetNotificationsCount();
   }, []);
-  console.log(notificationsCount?.length, " notifications data");
   return (
     <View style={styles.container}>
       <View style={styles.header}>
