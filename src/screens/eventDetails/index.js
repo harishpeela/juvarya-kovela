@@ -358,7 +358,6 @@ const EventDetails = ({ navigation, route }) => {
       activeTab: false,
     },
   ];
-  console.log('intrested?.interested', intrested?.interested)
   return (
     <View style={styles.container}>
       <View style={{ height: '10%', marginTop: '3%' }}>

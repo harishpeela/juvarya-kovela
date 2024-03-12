@@ -9,10 +9,8 @@ export const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignContent: 'center',
     alignItems: 'center',
-    // borderWidth:2,
   },
   followersListCard: {
-    // borderWidth: 2,
   },
   listItemContainer: {
     borderRadius: 10,
@@ -21,8 +19,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     alignItems: 'center',
-    // borderBottomColor: 'black',
-    // borderBottomWidth: StyleSheet.hairlineWidth,
   },
   imageContainer: {
     display: 'flex',
@@ -51,7 +47,7 @@ export const styles = StyleSheet.create({
   },
   firstName: {
     fontSize: fontSize.small,
-    color: colors.black,
+    color: colors.orangeColor,
     marginBottom: '3%',
   },
   textContainer: {

@@ -66,7 +66,7 @@ const FollowersListCard4 = ({ data, navigation }) => {
                       numberOfLines={1}
                       ellipsizeMode="tail"
                       style={styles.firstName}>
-                      {item?.invitedCustomer?.firstName}
+                      {item?.invitedCustomer?.fullName}
                     </Text>
                     {/* <Text>MemberShip Id :{state[0]?.membershipId} </Text> */}
                     <View style={styles.textContainer2}>

@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         borderColor:colors.black},
     textInput:{
        marginLeft: 10,
-       color: colors.black
+       color: colors.black,
     },
     headingText:{
         marginRight:170,
