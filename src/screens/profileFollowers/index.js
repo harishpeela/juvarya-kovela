@@ -81,7 +81,9 @@ const FollowersMembership = ({ route, navigation }) => {
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-            <Loader size={'large'} color={colors.orangeColor} />
+             <View style={{marginTop: '-32%'}}>
+             <Loader size={'large'} color={colors.orangeColor} />
+           </View>
           ) : (
             <>
               {followersList.length === 0 && searchedText === '' ? (

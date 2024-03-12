@@ -130,7 +130,7 @@ const DonationsList = ({navigation, route}) => {
       <View>
         <View style={styles.followersContainer}>
           {loader ? (
-            <View style={{marginTop: '50%'}}>
+            <View style={{marginTop: '-30%'}}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : searchedText === '' && apiData?.length ? (
