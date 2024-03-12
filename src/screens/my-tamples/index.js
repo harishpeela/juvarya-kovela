@@ -88,7 +88,7 @@ const MyTemples = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={{minHeight: 120, marginTop: '3%'}}>
+      <View style={{minHeight: 50, marginTop: '3%'}}>
         <TopBarCard2
           isPlus={true}
           txt={'Communities'}

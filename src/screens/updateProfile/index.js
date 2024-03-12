@@ -122,7 +122,6 @@ const UpdateProfile = ({navigation}) => {
             txt={'Update Profile'}
             back={true}
             navigation={navigation}
-            marginLeft={'18%'}
           />
         </View>
         <View style={{marginTop: '15%'}}>

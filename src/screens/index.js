@@ -15,7 +15,6 @@ import Seemore from './seemore';
 import CreatePost from './create-post';
 import Poojari from './poojari';
 import Events from './events';
-import Occasions from './occasions';
 import Manage from './manage';
 import Calender from './calander';
 import AddEvents from './add-events';
@@ -88,7 +87,6 @@ export {
   TicketConfirmation,
   Poojari,
   Events,
-  Occasions,
   Manage,
   Calender,
   AddEvents,

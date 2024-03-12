@@ -101,13 +101,13 @@ const Favorite = ({ navigation }) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{ minHeight: 100, flexDirection: 'row', marginTop: '3%' }}>
+      <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
         <TopBarCard2
           isBell={true}
           back={true}
           navigation={navigation}
           navMenu={navigation}>
-          <View style={styles.searchbarContainer}>
+          <View >
             <SearchBar
               placeHolder={'Search Favourites'}
               showCrossPress={true}

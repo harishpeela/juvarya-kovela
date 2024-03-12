@@ -62,10 +62,4 @@ export const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: 'bold',
   },
-  searchContainers: {
-    // bottom:'45%',
-    width:1,
-    marginLeft:'10%' ,
-    marginTop: '4%'   
-  }
 });
