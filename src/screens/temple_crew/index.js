@@ -47,25 +47,7 @@ const TempleCrew = ({route, navigation}) => {
       setTextLoader(false);
     }
   };
-  const MembershipData = async memId => {
-    setTextLoader(true);
-    console.log('data>id', memId?.id);
-    try {
-      let result = await MembersList(memId?.id, 0, 10);
-      let responce = result?.data;
-      if (responce) {
-        setDonationData(responce);
-        setTextLoader(false);
-      } else {
-        setDonationData(undefined);
-        setTextLoader(false);
-      }
-    } catch (error) {
-      console.log('error in membership details api', error);
-      setTextLoader(false);
-      alert(error);
-    }
-  };
+
   const Type = () => {
     let ROLES = userDetails?.role;
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
