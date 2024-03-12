@@ -245,6 +245,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
   };
 
   const Posts = async id => {
+    console.log('id ======posts', id);
     setloader(true);
     try {
       let result = await GetPosts(id, 0, 100);

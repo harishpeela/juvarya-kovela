@@ -128,6 +128,7 @@ const endpoints = {
   DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
   COMMUNITY_ID: 'jtdcommunities/list',
   EVENT_INTRESETD_DETAILS:'jtInterestedEvents/interested?eventId', 
+  ARTIST: 'customer/nearbyartists',
 };
 export const getInitialToken = async () => {
   try {
@@ -333,6 +334,17 @@ export const GetProfilePic = async mailId => {
   try {
     let result = await axiosMultiPartFormData1.get(
       `${endpoints.CUSTOMER_PROFILE_PICTURE}=${mailId}`,
+    );
+    return result;
+  } catch (error) {
+    // console.log('error in profilepic get', error);
+  }
+};
+
+export const GetArtist = async (pgNo,pgSz,custId) => {
+  try {
+    let result = await axiousInstanceNew1.get(
+      `${endpoints.ARTIST}?pageNo=${pgNo}&pageSize=${pgSz}&isoCodes=531001,531002&userId=${custId}&type=ARTIST`,
     );
     return result;
   } catch (error) {

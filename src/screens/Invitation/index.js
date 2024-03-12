@@ -1,4 +1,4 @@
-import {Alert, Text, TextInput, TouchableOpacity, View, useColorScheme} from 'react-native';
+import {Alert, Keyboard, Text, TextInput, TouchableOpacity, View, useColorScheme} from 'react-native';
 import React, {useState} from 'react';
 import {BackHeaderNew, BackgroundImage} from '../../components';
 import {styles} from './styles';
@@ -9,19 +9,18 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const InvitationScreen = ({navigation, route}) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const [email, setEmail] = useState('');
-  const [isValidEmail, setValidEmail] = useState();
+  const [mobileNumber, setMobileNumber] = useState('');
   const [error, setError] = useState();
   const {membershipId, id} = route.params || {};
   console.log('id', id, 'roleId', membershipId);
   const MemberShipInviteApi = async () => {
-    if (email === '') {
+    if (mobileNumber?.length != 10) {
       setError(true);
-    } else if (email.includes('.com')) {
+    } else if (mobileNumber?.length === 10) {
       setError(false);
       let payload = {
         id: membershipId,
-        email: email,
+        mobileNumber: mobileNumber
       };
       try {
         let result = await MemberShipInvite(payload);
@@ -49,22 +48,12 @@ const InvitationScreen = ({navigation, route}) => {
       }
     } else {
       setError(false);
-      setValidEmail(true);
     }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.Header}>
-        {/* <BackHeaderNew
-          onPress={() => {
-            navigation.goBack();
-          }}
-          txtColor={colors.black}
-          txt={'Inviation'}
-          isArrow={true}
-          isPlus={false}
-        /> */}
       </View>
       <View style={styles.headerContainer}>
         <TouchableOpacity style={{marginLeft:10}} onPress={() => navigation.goBack()}>
@@ -82,22 +71,18 @@ const InvitationScreen = ({navigation, route}) => {
         {/* <Text style={styles.email}>Enter User Email</Text> */}
         <View style={styles.input}>
         <TextInput
-          style={[styles.textInput, !isValidEmail && styles.invalidInput]}
-          placeholder="Enter the Email"
-          onChangeText={e => setEmail(e)}
+          style={[styles.textInput]}
+          placeholder="Enter the Mobile Number"
+          onChangeText={e => {setMobileNumber(e), setError(false)}}
           maxLength={35}
-          value={email}
+          value={mobileNumber}
+          keyboardType='numeric'
           placeholderTextColor={isDarkMode ? 'black' : 'black'}
         />
         </View>
         {error && (
           <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>Email Is Not Valid </Text>
-          </View>
-        )}
-        {isValidEmail && (
-          <View style={styles.errorContainer}>
-            <Text style={styles.errorText}>please enter a valid Email </Text>
+            <Text style={styles.errorText}> Please enter a valid Mobile Number </Text>
           </View>
         )}
       </View>
