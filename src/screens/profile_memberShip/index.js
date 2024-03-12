@@ -28,19 +28,19 @@ import ApplicationContext from '../../utils/context-api/Context';
 const ProfileMembership = ({ route, navigation }) => {
   const { id, roleId } = route.params || {};
   console.log('id====', id);
-  const {userDetails} = useContext(ApplicationContext);
-const isDarkMode = useColorScheme() === 'dark';
+  const { userDetails } = useContext(ApplicationContext);
+  const isDarkMode = useColorScheme() === 'dark';
   const [data, setData] = useState([]);
   const [loader, setaLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [followersList, setFollowersList] = useState([]);
   const [filteredData, setFilteredData] = useState();
   const [roleType, setRoleType] = useState();
- 
+
   const MembershipData = async () => {
     setaLoader(true);
     try {
-      let result = await MembersList( id ,0, 100);
+      let result = await MembersList(id, 0, 100);
       console.log('res=====>', result?.data);
       let responce = result?.data?.data;
       if (responce) {
@@ -62,44 +62,44 @@ const isDarkMode = useColorScheme() === 'dark';
     var roleAdmin = ROLES?.indexOf('ROLE_ADMIN') > -1;
     if (roleAdmin) {
       setRoleType(roleAdmin);
-    } else{
+    } else {
       setRoleType(roleAdmin);
     }
   };
   useEffect(() => {
     MembershipData();
     Type();
-  }, []); 
+  }, []);
   console.log('data in memberslist', data);
   return (
     <SafeAreaView>
       <View style={styles.mainContainer}>
-          <View style={styles.headerContainer}>
-            <TouchableOpacity  onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="arrow-back-circle"
-                size={36}
-                color={colors.orangeColor}
-                style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
-              />
+        <View style={styles.headerContainer}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons
+              name="arrow-back-circle"
+              size={36}
+              color={colors.orangeColor}
+              style={{ alignSelf: 'flex-start', justifyContent: 'center' }}
+            />
+          </TouchableOpacity>
+          <View>
+            <Text style={{ color: colors.orangeColor, fontWeight: 'bold', fontSize: 20, marginLeft: '35%' }}> Members List</Text>
+          </View>
+          {(roleId === 'ROLE_ITEM_ADMIN' || roleType) && (
+            <TouchableOpacity style={{ marginLeft: '10%' }} onPress={() => {
+              navigation.navigate(allTexts.screenNames.invitationScreen, {
+                roleId: roleId,
+                id: id,
+              })
+            }}>
+              <Text style={{ fontSize: 20, fontWeight: 'bold', color: colors.orangeColor }}>Invite</Text>
             </TouchableOpacity>
-            <View>
-            <Text style={{color: colors.orangeColor, fontWeight: 'bold', fontSize: 20, marginLeft: '35%'}}> Members List</Text>
-            </View>
-            {(roleId === 'ROLE_ITEM_ADMIN' || roleType) && (
-                <TouchableOpacity style={{marginLeft: '10%'}} onPress={() => {
-                  navigation.navigate(allTexts.screenNames.invitationScreen, {
-                    roleId: roleId,
-                    id: id,
-                  })
-                }}>
-                  <Text style={{ fontSize:20,fontWeight:'bold', color: colors.orangeColor}}>Invite</Text>
-                </TouchableOpacity>
-              )}
+          )}
         </View>
         {loader ? (
-          <View>
-            <Loader size={'small'} color={colors.orangeColor} />
+          <View style={{ marginTop: '-25%' }}>
+            <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : (
           <View style={{ marginTop: '10%' }}>
@@ -112,7 +112,7 @@ const isDarkMode = useColorScheme() === 'dark';
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text style={{color: isDarkMode ? 'black' : 'black'}}> No Memberships For This Temple</Text>
+                <Text style={{ color: isDarkMode ? 'black' : 'black' }}> No Memberships For This Temple</Text>
               </View>
             )}
           </View>

@@ -45,7 +45,7 @@ const MemberShip = ({route, navigation}) => {
     }, 500);
   };
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
       <View style={styles.followersHeader}>
         <BackHeaderNew
           txt={`${followersList?.length} Followers`}

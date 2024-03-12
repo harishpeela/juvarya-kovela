@@ -11,7 +11,7 @@ export const MemberShipCard = ({ data, onPress, txt, nav, roleId }) => {
       <FlatList
         data={data}
         keyboardShouldPersistTaps="handled"
-        style={{marginBottom: '32%'}}
+        style={{}}
         keyExtractor={({ item, index }) => index}
         showsVerticalScrollIndicator={false}
         renderItem={({ item, index }) => (

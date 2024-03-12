@@ -369,8 +369,8 @@ console.log('thumbnails ==>', thumbnails);
         {currentIndex === 1 || userReels?.length > 0 ? (
          <ScrollView style={{ marginBottom: 10, height: '60%' }}>
            {mediaLoader ? (
-            <View style={{}}>
-              <Loader size={'small'} color={colors.orangeColor} />
+            <View style={{  }}>
+              <Loader style={{}} size={'small'} color={colors.orangeColor} />
             </View>
            ) : (
            userReels?.length ? (

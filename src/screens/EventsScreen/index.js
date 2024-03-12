@@ -95,7 +95,7 @@ const EventsScreen = ({navigation, route}) => {
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-            <View style={{marginTop: '70%'}}>
+            <View style={{marginTop: '-26%'}}>
               <Loader size={'large'} color={colors.orangeColor} />
             </View>
           ) : (
