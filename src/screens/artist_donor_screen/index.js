@@ -71,7 +71,7 @@ import { getNewArtist , getNewDonor} from '../../utils/api';
         const result = await getNewDonor(payload);
       console.log('result',result?.data)
       if (result?.status === 200) {
-        Alert.alert(result?.data?.message || 'Donar Added');
+        // Alert.alert(result?.data?.message || 'Donar Added');
         Alert.alert('Kovela', result?.data?.message || 'Donar Added', [
           {
             text: 'Ok',
