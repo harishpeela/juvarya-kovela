@@ -37,15 +37,15 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-        <View style={{height: '10%', marginTop: '3%'}}>
-          <TopBarCard2
-            txt={'Notifications'}
-            // cancel={true}
-            back={true}
-            marginLeft={'15%'}
-           navigation={navigation}
-          />
-        </View>
+        <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Notifications'}
+          back={true}
+          navigation={navigation}
+          navMenu={navigation}
+          >
+        </TopBarCard2>
+      </View>
         <View style={{flex: 1}}>
           {loader ? (
             <View style={{}}>

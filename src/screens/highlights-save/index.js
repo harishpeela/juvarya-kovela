@@ -20,7 +20,7 @@ import { EVENTS_URL } from '../../utils/api/api';
 import { getAuthTokenDetails } from '../../utils/preferences/localStorage';
 import { id } from 'date-fns/locale';
 const Save_Highlight = ({ navigation, route }) => {
-  const {id} = route.params || {};
+  const { id } = route.params || {};
   const [date, setDate] = useState(new Date());
   const [loader, setLoader] = useState(false);
   const [toDate, setToDate] = useState(new Date());
@@ -57,43 +57,43 @@ const Save_Highlight = ({ navigation, route }) => {
       redirect: 'follow'
     };
 
-    if(img === null || img === ''){
+    if (img === null || img === '') {
       alert('please upload image')
     }
     if (eventName === '') {
-     alert('please fill event name')
+      alert('please fill event name')
     } if (description === '') {
       alert('please fill description')
     }
     else if (image, description, eventName) {
       fetch(`${EVENTS_URL}jtEventHighlights/save`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        if (result) {
-          Alert.alert('Success', `hightlights created successfully`, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.eventsScreen),
-            },
-          ]);
-        } else {
-          Alert.alert('error', `some thing went wrong try again`, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.eventsScreen),
-            },
-          ]);
-        }
-      })
-      .catch(error => console.log('error', error));
+        .then(response => response.json())
+        .then(result => {
+          if (result) {
+            Alert.alert('Success', `hightlights created successfully`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          } else {
+            Alert.alert('error', `some thing went wrong try again`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
+        })
+        .catch(error => console.log('error', error));
     } else {
       alert('some thing went wrong try again');
       console.log('error')
     }
 
-    
+
   };
 
   const UpLoadPhoto = () => {
@@ -160,16 +160,13 @@ const Save_Highlight = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <View>
-        
-        <View style={{minHeight: '45%'}}>
-        <TopBarCard2 
-        back={true}
-        txt={'Event HighLights'}
-        navigation={navigation}
-        marginLeft={'21%'}
-        />
-        </View>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
+          <TopBarCard2
+            txt={'Event HighLights'}
+            back={true}
+            navigation={navigation}
+          >
+          </TopBarCard2>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
@@ -184,7 +181,7 @@ const Save_Highlight = ({ navigation, route }) => {
           )}
         </View>
       </View>
-      <ScrollView style={{ backgroundColor:'white'}}>
+      <ScrollView style={{ backgroundColor: 'white' }}>
         <EventInput lable={'Event Name'} placeholder={'Event Name'} height={50} onChangeText={(e) => setEventName(e)} value={eventName} />
         {eventError && (
           <Text style={{ color: 'red', alignSelf: 'center', marginTop: '2%' }}>

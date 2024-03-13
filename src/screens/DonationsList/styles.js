@@ -70,8 +70,8 @@ export const styles = StyleSheet.create({
     height: 32,
     width: 32,
     marginRight: 10,
-    marginTop:'-23%',
-    marginLeft:'88.5%'
+    marginTop:'-13%',
+    marginLeft:'95.5%'
   },
 
   searchbarContainer:{

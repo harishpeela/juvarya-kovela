@@ -56,34 +56,37 @@ const FollowersMembership = ({ route, navigation }) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{ minHeight: 120, marginTop: '3%' ,backgroundColor:'white'}}>
-      <TopBarCard2  back={true}  navigation={navigation} navMenu={navigation} >
-          <View style={styles.searchbarContainer}>
-              <SearchBar
-                placeHolder={'Search Followers'}
-                showCrossPress={true}
-                onCrossPress={() => {
-                  setSearchedText('');
-                  TempleFolowers();
-                  // getTemples(userDetails?.id, pageNo, 20);
-                }}
-                onTextChange={e => {
-                  setSearchedText(e);
-                  handleSearch(e);
-                }}
-                value={searchedText}
-                loading={false}
-              />
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, flexDirection: 'row', marginTop: '5%' }}>
+        <TopBarCard2
+          back={true}
+          navigation={navigation}
+          navMenu={navigation}>
+          <View >
+            <SearchBar
+              placeHolder={'Search Followers'}
+              showCrossPress={true}
+              onTextChange={e => {
+                setSearchedText(e);
+                handleSearch(e);
+              }}
+              value={searchedText}
+              loading={false}
+              onCrossPress={() => {
+                setSearchedText('');
+                TempleFolowers();
+                // getTemples(userDetails?.id, pageNo, 20);
+              }}
+            />
           </View>
         </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
           {loader ? (
-             <View style={{marginTop: '-32%'}}>
-             <Loader size={'large'} color={colors.orangeColor} />
-           </View>
+            <View style={{ marginTop: '-32%' }}>
+              <Loader size={'large'} color={colors.orangeColor} />
+            </View>
           ) : (
             <>
               {followersList.length === 0 && searchedText === '' ? (
@@ -94,7 +97,7 @@ const FollowersMembership = ({ route, navigation }) => {
                     size={30}
                     style={{ marginBottom: '3%' }}
                   />
-                  <Text style={{fontSize:16,fontFamily:'Poppins-Medium',color:'orange'}}>No Followers Yet</Text>
+                  <Text style={{ fontSize: 16, fontFamily: 'Poppins-Medium', color: 'orange' }}>No Followers Yet</Text>
                 </View>
               ) : (
                 <>
@@ -140,7 +143,7 @@ const FollowersMembership = ({ route, navigation }) => {
                           size={30}
                           style={{ marginBottom: '5%' }}
                         />
-                        <Text style={{fontFamily:'Poppins-Medium',fontSize:15,color:'orange'}}>No Followers Found</Text>
+                        <Text style={{ fontFamily: 'Poppins-Medium', fontSize: 15, color: 'orange' }}>No Followers Found</Text>
                       </View>
                     </View>
                   ) : null}

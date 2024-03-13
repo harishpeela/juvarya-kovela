@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
@@ -9,8 +9,8 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import {allTexts, colors} from '../../common';
-import {styles} from './styles';
+import { allTexts, colors } from '../../common';
+import { styles } from './styles';
 import {
   BackHeaderNew,
   EventInput,
@@ -18,13 +18,13 @@ import {
   PrimaryButton,
   TopBarcard,
 } from '../../components';
-import {Create_Feed} from '../../utils/api';
+import { Create_Feed } from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {launchImageLibrary} from 'react-native-image-picker';
-import {Data} from '../home-feed/formateDetails';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-const CreateFeed = ({route, navigation}) => {
-  const {data} = route.params || {};
+import { launchImageLibrary } from 'react-native-image-picker';
+import { Data } from '../home-feed/formateDetails';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+const CreateFeed = ({ route, navigation }) => {
+  const { data } = route.params || {};
   const [image, setImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const [imageUpload, setimageUploaded] = useState(false);
@@ -37,7 +37,7 @@ const CreateFeed = ({route, navigation}) => {
   const Valid = id => {
     if (image === null) {
       alert('please upload a image');
-    } 
+    }
     // else if (description === '') {
     //   alert('Enter Description');
     // } 
@@ -136,11 +136,17 @@ const CreateFeed = ({route, navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: '15%', marginTop: '3%'}}>
-        <TopBarCard2 back={true} txt={'Upload Photo'} navigation={navigation} marginLeft={'15%'} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
+        <TopBarCard2
+          txt={'Upload Photo'}
+          back={true}
+          navigation={navigation}
+
+        >
+        </TopBarCard2>
       </View>
-      <View style={{margin: 30}}>
+      <View style={{ margin: 30 }}>
         <View style={styles.uploadContainer}>
           {image !== null ? (
             <View style={styles.preViewImageContainer}>
@@ -157,7 +163,7 @@ const CreateFeed = ({route, navigation}) => {
               <Image
                 resizeMode="cover"
                 style={styles.preViewImage}
-                source={{uri: image[0]?.uri}}
+                source={{ uri: image[0]?.uri }}
               />
             </View>
           ) : (
@@ -168,7 +174,7 @@ const CreateFeed = ({route, navigation}) => {
             </TouchableOpacity>
           )}
         </View>
-        <View style={{bottom: '25%'}}>
+        <View style={{ bottom: '25%' }}>
           <EventInput
             lable={'Description'}
             value={description}
@@ -177,7 +183,7 @@ const CreateFeed = ({route, navigation}) => {
             onChangeText={e => setDescription(e)}
             onFocus={() => Keyboard.dismiss()}
           />
-          <View style={{marginHorizontal: 50, marginTop: 30}}>
+          <View style={{ marginHorizontal: 50, marginTop: 30 }}>
             <PrimaryButton
               text={'Submit'}
               bgColor={colors.orangeColor}

@@ -8,26 +8,26 @@ import {
   Image,
   Text,
 } from 'react-native';
-import React, {useContext} from 'react';
-import {PrimaryButton} from '../../components';
-import {PasswordField} from '../../components/inputfield';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {allTexts, colors} from '../../common';
-import {Formik} from 'formik';
-import {UpdatePasswordValidation} from '../../common/schemas';
-import {styles} from './style';
-import {BackHeader} from '../../components';
-import {NewUpdateUserPassword} from '../../utils/api';
-import {TopBarcard} from '../../components';
+import React, { useContext } from 'react';
+import { PrimaryButton } from '../../components';
+import { PasswordField } from '../../components/inputfield';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { allTexts, colors } from '../../common';
+import { Formik } from 'formik';
+import { UpdatePasswordValidation } from '../../common/schemas';
+import { styles } from './style';
+import { BackHeader } from '../../components';
+import { NewUpdateUserPassword } from '../../utils/api';
+import { TopBarcard } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-const UpdatePassword = ({navigation}) => {
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+const UpdatePassword = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {
-    buttonTexts: {updatePassword},
-    placeHolders: {confirmPasswordPlace, passwordPlace},
+    buttonTexts: { updatePassword },
+    placeHolders: { confirmPasswordPlace, passwordPlace },
     headings: {
-      inputTitles: {currentPassword, Newpassword, confirmPassword},
+      inputTitles: { currentPassword, Newpassword, confirmPassword },
     },
   } = allTexts;
   const PasswordUpdate = async (values, formikActions) => {
@@ -56,13 +56,13 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 70, marginTop: '3%'}}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
-          back={true}
-          marginLeft={'15%'}
           txt={'Update Password'}
+          back={true}
           navigation={navigation}
-        />
+        >
+        </TopBarCard2>
       </View>
 
       <KeyboardAwareScrollView

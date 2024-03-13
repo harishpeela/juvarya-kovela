@@ -128,14 +128,14 @@ const isDarkMode = useColorScheme() === 'dark';
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View>
-        
-        <View style={{minHeight: '25%'}}>
-        <TopBarCard2 
-        back={true}
-        txt={'Contribution'}
-        navigation={navigation}
-        />
-        </View>
+        <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Contribution'}
+          back={true}
+          navigation={navigation}
+          >
+        </TopBarCard2>
+      </View>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>

@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import { TopBarCard2 } from '../../components/topBar1/topBarCard'
 import { GetProfileToDoList } from '../../utils/api';
@@ -23,26 +23,27 @@ const ToDoList = ({ navigation }) => {
   }, [])
 
   return (
-    <View style={{ flex: 1,backgroundColor:'white' }}>
-      <View style={{ height: '15%' }}>
-        <TopBarCard2 back={true}
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
+        <TopBarCard2
           txt={'ToDo List'}
+          back={true}
           navigation={navigation}
-          marginLeft={'22%'}
-        />
+        >
+        </TopBarCard2>
       </View>
-      <View style={{padding:10,marginBottom:40}}>
-      <FlatList
-        data={data}
-        keyExtractor={({ item, index }) => index}
-        renderItem={({ item }) => (
+      <View style={{ padding: 10, marginBottom: 40 }}>
+        <FlatList
+          data={data}
+          keyExtractor={({ item, index }) => index}
+          renderItem={({ item }) => (
 
-          <View style={styles.listItemContainer}>
-            <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:16}}>{`\u2022 ${item?.description}`}</Text>
-          </View>
+            <View style={styles.listItemContainer}>
+              <Text style={{ color: 'orange', fontFamily: 'Poppins-Medium', fontSize: 16 }}>{`\u2022 ${item?.description}`}</Text>
+            </View>
 
-        )}
-      />
+          )}
+        />
       </View>
     </View>
   )

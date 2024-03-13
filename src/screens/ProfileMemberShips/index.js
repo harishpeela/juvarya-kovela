@@ -1,15 +1,15 @@
-import {Text, View, TouchableOpacity} from 'react-native';
-import React, {useState, useEffect, useContext} from 'react';
-import {MemberShipCard, TopBarcard} from '../../components';
-import {allTexts, colors} from '../../common';
-import {styles} from './styles';
-import {MemberShipList} from '../../utils/api';
+import { Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { MemberShipCard, TopBarcard } from '../../components';
+import { allTexts, colors } from '../../common';
+import { styles } from './styles';
+import { MemberShipList } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
-import {Loader} from '../../components';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-const ProfileMemberShips = ({navigation, route}) => {
-  const {userDetails} = useContext(ApplicationContext);
-  const {roleId, trfdata} = route.params || {};
+import { Loader } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+const ProfileMemberShips = ({ navigation, route }) => {
+  const { userDetails } = useContext(ApplicationContext);
+  const { roleId, trfdata } = route.params || {};
   const [loader, setLoader] = useState();
   const [membership, setMemberShipData] = useState([]);
   const [roleType, setRoleType] = useState();
@@ -44,12 +44,13 @@ const ProfileMemberShips = ({navigation, route}) => {
     Type();
   }, []);
   return (
-    <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={styles.header}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
-          back={true}
           txt={'Memberships'}
+          back={true}
           navigation={navigation}
+          navMenu={navigation}
           roleId={roleId}
           roleType={roleType}
           navCreate={() => {
@@ -58,12 +59,13 @@ const ProfileMemberShips = ({navigation, route}) => {
               jtProfileId: trfdata?.jtProfile,
             });
           }}
-        />
+        >
+        </TopBarCard2>
       </View>
       <View
-        style={{marginTop: '2%' , flex:1}}>
+        style={{ marginTop: '2%', flex: 1 }}>
         {loader ? (
-          <View style={{marginTop: '-30%'}}>
+          <View style={{ marginTop: '-30%' }}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : membership?.length ? (
@@ -76,14 +78,14 @@ const ProfileMemberShips = ({navigation, route}) => {
                 : 'Join Now'
             }
             nav={navigation}
-            // onPress={() =>
-            //   navigation.navigate(allTexts.screenNames.profilemembership, {
-            //     roleId: roleId,
-            //   })
-            // }
+          // onPress={() =>
+          //   navigation.navigate(allTexts.screenNames.profilemembership, {
+          //     roleId: roleId,
+          //   })
+          // }
           />
         ) : (
-          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
             <Text
               style={{
                 fontSize: 16,

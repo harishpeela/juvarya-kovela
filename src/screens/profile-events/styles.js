@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     width:32,
     marginLeft: '55%',
     marginTop:'-11%',
-    marginLeft:'88%'
+    marginLeft:'95%'
 
   },
   searchAndFilter: {

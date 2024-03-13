@@ -48,14 +48,13 @@ const EditInfo = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={{minHeight: '15%'}}>
-          <TopBarCard2
-            back={true}
-            txt={'Edit Information'}
-            navigation={navigation}
-          />
-        </View>
+      <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Edit Information'}
+          back={true}
+          navigation={navigation}
+          >
+        </TopBarCard2>
       </View>
       <ScrollView style={{marginTop: '3%'}}>
         <EventInput

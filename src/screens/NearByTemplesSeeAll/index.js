@@ -24,8 +24,13 @@ const NearByTemplesSeeAll = ({navigation, route}) => {
      };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{height: '9%', marginTop: '3%'}}>
-        <TopBarCard2 marginLeft={'16%'} back={true} txt={'Nearby Temples'} navigation={navigation} />
+      <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Nearby Temples'}
+          back={true}
+          navigation={navigation}
+          >
+        </TopBarCard2>
       </View>
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>

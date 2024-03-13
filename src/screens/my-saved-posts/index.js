@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -7,18 +7,18 @@ import {
   FlatList,
   useColorScheme,
 } from 'react-native';
-import {Loader} from '../../components';
-import {styles} from './styles';
+import { Loader } from '../../components';
+import { styles } from './styles';
 import Feather from 'react-native-vector-icons/Feather';
-import {getSavedPostsList, Feed} from '../../utils/api';
-import {SaveFeedComp} from '../../components';
-import {allTexts, colors} from '../../common';
-import {TopBarcard} from '../../components';
+import { getSavedPostsList, Feed } from '../../utils/api';
+import { SaveFeedComp } from '../../components';
+import { allTexts, colors } from '../../common';
+import { TopBarcard } from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const MySavedPosts = ({navigation}) => {
+const MySavedPosts = ({ navigation }) => {
   const [loading, setLoading] = useState(true);
   const [filteredArray, setfilteredArray] = useState([]);
   const isDarkMode = useColorScheme() === 'dark';
@@ -47,7 +47,7 @@ const MySavedPosts = ({navigation}) => {
   const FeedDetails = async id => {
     let result = await Feed(id?.feedId);
     let data = result?.data || {};
-    let savefFeeds = {...id, ...data};
+    let savefFeeds = { ...id, ...data };
     if (result) {
       setfilteredArray(array => [...array, savefFeeds]);
       setLoading(false);
@@ -60,21 +60,20 @@ const MySavedPosts = ({navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1, backgroundColor: colors.white}}>
+    <View style={{ flex: 1, backgroundColor: colors.white }}>
       <View style={styles.footerBackground}>
-        <View style={{minHeight: '15%', marginTop: '3%'}}>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
           <TopBarCard2
-            back={true}
-            marginLeft={'19%'}
             txt={'Saved Posts'}
+            back={true}
             navigation={navigation}
-            
-          />
+          >
+          </TopBarCard2>
         </View>
-        <View style={{height: '85%'}}>
+        <View style={{ height: '85%' }}>
           {loading ? (
             <View>
-              <View style={{marginTop: '-36%'}}>
+              <View style={{ marginTop: '-36%' }}>
                 <Loader color={colors.orangeColor} size={'large'} />
               </View>
             </View>
@@ -85,7 +84,7 @@ const MySavedPosts = ({navigation}) => {
               contentContainerStyle={styles.flatListStyle}
               keyboardShouldPersistTaps="handled"
               keyExtractor={item => item?.id}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <SaveFeedComp
                   post={item}
                   likes={item?.feedDTO?.likesCount}
@@ -104,23 +103,23 @@ const MySavedPosts = ({navigation}) => {
               )}
             />
           ) : (
-            <View style={{alignItems: 'center', marginTop: '60%'}}>
+            <View style={{ alignItems: 'center', marginTop: '60%' }}>
               {loading ? (
-                <View style={{marginTop: '60%'}}>
+                <View style={{ marginTop: '60%' }}>
                   <Loader size={'small'} color={colors.orangeColor} />
                 </View>
               ) : (
                 <View>
-                   <FontAwesome5
-                  name="save"
-                  size={50}
-                  color={'orange'}
-                  style={{marginLeft:'10%',marginBottom:'5%'}}
-                />
-                <Text style={{color: colors.orangeColor,fontFamily:'Poppins-Medium', fontSize: 15}}>
-                  {' '}
-                  No Saved Posts
-                </Text>
+                  <FontAwesome5
+                    name="save"
+                    size={50}
+                    color={'orange'}
+                    style={{ marginLeft: '10%', marginBottom: '5%' }}
+                  />
+                  <Text style={{ color: colors.orangeColor, fontFamily: 'Poppins-Medium', fontSize: 15 }}>
+                    {' '}
+                    No Saved Posts
+                  </Text>
                 </View>
               )}
             </View>

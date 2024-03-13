@@ -18,7 +18,7 @@ import { EVENTS_URL } from '../utils/api/api';
 import { getAuthTokenDetails } from '../utils/preferences/localStorage';
 import { TopBarCard2 } from '../components/topBar1/topBarCard';
 const EditHighlight = ({ navigation, route }) => {
-  const {data} = route.params || {};
+  const { data } = route.params || {};
   // console.log('route===', data);
   const [date, setDate] = useState(new Date());
   const [loader, setLoader] = useState(false);
@@ -50,44 +50,44 @@ const EditHighlight = ({ navigation, route }) => {
       redirect: 'follow'
     };
 
-    if(img === null || img === ''){
+    if (img === null || img === '') {
       alert('please upload image')
     }
     if (eventName === '') {
-     alert('please fill event name')
+      alert('please fill event name')
     } if (description === '') {
       alert('please fill description')
     }
     else if (image, description, eventName) {
       fetch(`${EVENTS_URL}jtEventHighlights/update`, requestOptions)
-      .then(response => response.json())
-      .then(result => {
-        console.log('result of edit high', result);
-        if (result) {
-          Alert.alert('Success', result?.message, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.eventsScreen),
-            },
-          ]);
-        } else {
-          Alert.alert('error', `some thing went wrong try again`, [
-            {
-              text: 'Ok',
-              onPress: () =>
-                navigation.navigate(allTexts.screenNames.eventsScreen),
-            },
-          ]);
-        }
-      })
-      .catch(error => console.log('error', error));
+        .then(response => response.json())
+        .then(result => {
+          console.log('result of edit high', result);
+          if (result) {
+            Alert.alert('Success', result?.message, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          } else {
+            Alert.alert('error', `some thing went wrong try again`, [
+              {
+                text: 'Ok',
+                onPress: () =>
+                  navigation.navigate(allTexts.screenNames.eventsScreen),
+              },
+            ]);
+          }
+        })
+        .catch(error => console.log('error', error));
     } else {
       alert('some thing went wrong try again');
       console.log('error')
     }
 
-    
+
   };
 
   const UpLoadPhoto = () => {
@@ -154,13 +154,13 @@ const EditHighlight = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <View style={{height:'25%'}}>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
           <TopBarCard2
             txt={'Edit HightLights'}
             back={true}
             navigation={navigation}
-            marginLeft={'18%'}
-          />
+          >
+          </TopBarCard2>
         </View>
         <View style={styles.imgCard}>
           <TouchableOpacity style={{}} onPress={() => UpLoadPhoto()}>
@@ -172,7 +172,7 @@ const EditHighlight = ({ navigation, route }) => {
           </View>
           {data?.mediaList ? (
             <AddEventImage data={data?.mediaList} />
-          ):(
+          ) : (
             <AddEventImage data={image} />
           )}
         </View>

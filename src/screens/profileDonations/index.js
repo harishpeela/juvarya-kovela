@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -7,21 +7,21 @@ import {
   TouchableOpacity,
   FlatList,
 } from 'react-native';
-import {ProfileDonationsData} from '../../utils/api';
-import {ProfileDonationsCard} from '../../components';
-import {styles} from './styles';
+import { ProfileDonationsData } from '../../utils/api';
+import { ProfileDonationsCard } from '../../components';
+import { styles } from './styles';
 
-import {allTexts, colors} from '../../common';
-import {Loader} from '../../components';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { allTexts, colors } from '../../common';
+import { Loader } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-const UserProfileDonationsData = ({navigation, route}) => {
+const UserProfileDonationsData = ({ navigation, route }) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [allUserProfileDonationData, setAllUserProfileDonationData] =
     useState('');
-  const {data} = route.params || {};
+  const { data } = route.params || {};
 
   const MyDonationsData = async () => {
     setLoader(true);
@@ -39,19 +39,19 @@ const UserProfileDonationsData = ({navigation, route}) => {
     MyDonationsData();
   }, []);
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: 70, marginTop: '3%'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
           txt={'Donations'}
           back={true}
           navigation={navigation}
           navMenu={navigation}
-          >
+        >
         </TopBarCard2>
       </View>
       <View style={styles.followersContainer}>
         {loader ? (
-           <View style={{marginTop: '-30%'}}>
+          <View style={{ marginTop: '-30%' }}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : searchedText === '' && allUserProfileDonationData?.length > 0 ? (
@@ -59,9 +59,9 @@ const UserProfileDonationsData = ({navigation, route}) => {
             data={allUserProfileDonationData}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps={'handled'}
-            keyExtractor={({item, index}) => index}
-            style={{marginBottom: '35%'}}
-            renderItem={({item, index}) => (
+            keyExtractor={({ item, index }) => index}
+            style={{ marginBottom: '35%' }}
+            renderItem={({ item, index }) => (
               <ProfileDonationsCard data={item} navigation={navigation} />
             )}
           />
@@ -77,7 +77,7 @@ const UserProfileDonationsData = ({navigation, route}) => {
               name="donate"
               size={50}
               color={'orange'}
-              style={{marginBottom: '5%'}}
+              style={{ marginBottom: '5%' }}
             />
             <Text
               style={{

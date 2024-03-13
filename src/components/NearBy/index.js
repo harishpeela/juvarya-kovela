@@ -130,37 +130,32 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         </View>
       ) : (
         <ScrollView>
-          <View
-            style={{
-             marginTop:'5%'
-            }}
-          >
-            <TopBarcard
-              menu={true}
-              isBell={true}
-              navigation={navigation}
-              navMenu={navigation}>
-              <View>
-                <SearchBar
-                  onTextChange={e => {
-                    setSearchedText(e);
-                    SearchPopTemp(e);
-                    setNearBy(false);
-                  }}
-                  value={searchedText}
-                  loading={false}
-                  showCrossPress={true}
-                  onCrossPress={() => {
-                    setSearchedText('');
-                    PopularTemplesss();
-                    setNearBy(true);
-                  }}
-                  bgColor={colors.white}
-                  placeHolder={'Search Temples'}
-                />
-              </View>
-            </TopBarcard>
+          <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
+        <TopBarcard
+          isBell={true}
+          menu={true}
+          navigation={navigation}
+          navMenu={navigation}>
+          <View >
+            <SearchBar
+              placeHolder={'Search Temples'}
+              showCrossPress={true}
+              onTextChange={e => {
+                setSearchedText(e);
+                SearchPopTemp(e);
+                setNearBy(false);
+              }}
+              value={searchedText}
+              loading={false}
+              onCrossPress={() => {
+                setSearchedText('');
+                PopularTemplesss();
+                setNearBy(true);
+              }}
+            />
           </View>
+        </TopBarcard>
+      </View>
           <ScrollView style={{ height: '100%' }} refreshControl={
             <RefreshControl
               refreshing={refreshing}

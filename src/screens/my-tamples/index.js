@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   SafeAreaView,
@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {Loader, SearchBar} from '../../components';
-import {styles} from './styles';
-import {allTexts, colors} from '../../common';
-import {AdminTemples, deleteCommunityTemple} from '../../utils/api';
-import {FavTempleListCard} from '../../components';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { Loader, SearchBar } from '../../components';
+import { styles } from './styles';
+import { allTexts, colors } from '../../common';
+import { AdminTemples, deleteCommunityTemple } from '../../utils/api';
+import { FavTempleListCard } from '../../components';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 
-const MyTemples = ({navigation}) => {
+const MyTemples = ({ navigation }) => {
   const [templeList, setTempleList] = useState([]);
   const [filteredArray, setFilteredArray] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -25,13 +25,15 @@ const MyTemples = ({navigation}) => {
   const deleteSeasonal = (id) => {
     console.log('=====', id)
     Alert.alert('Alert', ' Are you sure you want to delete the selected Temple?', [
-      { text: 'Yes', onPress: async () => {
-        let responce = await deleteCommunityTemple(id);
-      //  console.log(responce?.data, 'responce of delete');
-       if(responce){
-        AdminTempleDetails();
-       }
-      }, style: 'destructive' },
+      {
+        text: 'Yes', onPress: async () => {
+          let responce = await deleteCommunityTemple(id);
+          //  console.log(responce?.data, 'responce of delete');
+          if (responce) {
+            AdminTempleDetails();
+          }
+        }, style: 'destructive'
+      },
       { text: 'No', onPress: () => console.log('Cancel Pressed') },
     ])
   }
@@ -42,11 +44,11 @@ const MyTemples = ({navigation}) => {
       let result = await AdminTemples();
       console.log('admin', result?.data)
       let adminData = result?.data;
-      if(adminData){
-      setTempleList(adminData);
-      setFilteredArray(adminData);
-      setLoading(false);
-      } else{
+      if (adminData) {
+        setTempleList(adminData);
+        setFilteredArray(adminData);
+        setLoading(false);
+      } else {
         setLoading(false);
       }
     } catch (error) {
@@ -58,14 +60,14 @@ const MyTemples = ({navigation}) => {
     AdminTempleDetails();
   }, []);
 
-  const onSelect = data => {};
+  const onSelect = data => { };
   const performFilter = value => {
     setFilteredArray(
       templeList.filter(item =>
         item?.name?.toLowerCase().includes(value?.toLowerCase()),
       ),
     );
-  
+
   };
   const MyCustShare = async item => {
     const ShareOptions = {
@@ -88,14 +90,14 @@ const MyTemples = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={{minHeight: 50, marginTop: '3%'}}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
-          isPlus={true}
           txt={'Communities'}
-          marginLeft={'15%'}
           back={true}
           navigation={navigation}
-        />
+          isPlus={true}
+        >
+        </TopBarCard2>
       </View>
 
       <View style={styles.cardContainer}>
@@ -112,16 +114,16 @@ const MyTemples = ({navigation}) => {
                 contentContainerStyle={styles.flatListStyle}
                 keyboardShouldPersistTaps="handled"
                 keyExtractor={(item, index) => item?.id}
-                renderItem={({item, index}) => {
-                  if (item?.name ) {
-                    console.log('kkkkkkkkkkk',item.name)
+                renderItem={({ item, index }) => {
+                  if (item?.name) {
+                    console.log('kkkkkkkkkkk', item.name)
                     return (
                       <FavTempleListCard
                         name={item.name}
                         description={item.description}
                         location={item.line1}
-                        date={item.creationTime}  
-                        onSharePress={() => MyCustShare(item)}                    
+                        date={item.creationTime}
+                        onSharePress={() => MyCustShare(item)}
                         img={item?.logo}
                         seasonal={item?.seasonal}
                         type={'Community Temple'}

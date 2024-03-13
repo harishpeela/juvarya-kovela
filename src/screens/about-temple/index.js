@@ -33,8 +33,13 @@ const AboutTemple = ({ navigation, route }) => {
     }, []);
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={{ height: '15%', marginTop: '3%' }}>
-                <TopBarCard2 back={true} txt={'History'} navigation={navigation} marginLeft={'27%'} />
+            <View style={{ minHeight: 70, marginTop: '3%' }}>
+                <TopBarCard2
+                    txt={'History'}
+                    back={true}
+                    navigation={navigation}
+                >
+                </TopBarCard2>
             </View>
             <View>
                 {/* <ScrollView showsVerticalScrollIndicator={false} style={{ borderWidth: 0.5, marginHorizontal: '8%', backgroundColor: colors.white, borderRadius: 10, paddingVertical: 10 }}>

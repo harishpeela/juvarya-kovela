@@ -22,13 +22,13 @@ const Artist_Donar_details_list = ({route, navigation}) => {
   }, [])
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '15%'}}>
+      <View style={{minHeight: 70, marginTop: '3%'}}>
         <TopBarCard2
           txt={'Artist & Donor'}
           back={true}
           navigation={navigation}
-          navBack={() => navigation.goBack()}
-        />
+          >
+        </TopBarCard2>
       </View>
       <ScrollView style={{marginHorizontal: '5%'}}>
         <FlatList

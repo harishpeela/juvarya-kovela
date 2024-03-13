@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   StyleSheet,
   Text,
@@ -10,20 +10,20 @@ import {
   useColorScheme,
   StatusBar,
 } from 'react-native';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {allTexts, colors} from '../../common';
-import {useState} from 'react';
-import {NewVerifyOTP, forgotPassword} from '../../utils/api';
-import {styles} from './styles';
-import {Pressable} from 'react-native';
+import { allTexts, colors } from '../../common';
+import { useState } from 'react';
+import { NewVerifyOTP, forgotPassword } from '../../utils/api';
+import { styles } from './styles';
+import { Pressable } from 'react-native';
 import OTPTextInput from 'react-native-otp-textinput';
-import {Formik} from 'formik';
-import {forgotPasswordSchema} from '../../common/schemas';
-import {PasswordField} from '../../components/inputfield';
-import {PrimaryButton} from '../../components';
+import { Formik } from 'formik';
+import { forgotPasswordSchema } from '../../common/schemas';
+import { PasswordField } from '../../components/inputfield';
+import { PrimaryButton } from '../../components';
 import Snackbar from 'react-native-snackbar';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
 const ForgetPassword = () => {
   const navigation = useNavigation();
@@ -51,12 +51,12 @@ const ForgetPassword = () => {
   };
 
   const startTimer = e => {
-    let {total, minutes, seconds} = getTimeRemaining(e);
+    let { total, minutes, seconds } = getTimeRemaining(e);
     if (total >= 0) {
       setTimer(
         (minutes > 9 ? minutes : '0' + minutes) +
-          ':' +
-          (seconds > 9 ? seconds : '0' + seconds),
+        ':' +
+        (seconds > 9 ? seconds : '0' + seconds),
       );
     }
   };
@@ -98,7 +98,7 @@ const ForgetPassword = () => {
     try {
       let result = await NewVerifyOTP(payload);
 
-    console.log('res of otp', result?.data);
+      console.log('res of otp', result?.data);
       if (result) {
         setOtp(Ootp);
         // alert('OTP Generated Successfully');
@@ -125,7 +125,7 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => {},
+          onPress: () => { },
         },
       });
     }
@@ -138,13 +138,13 @@ const ForgetPassword = () => {
   };
 
   const onPressDone = Ootp => {
-    if(userEmail === ''){
+    if (userEmail === '') {
       setError(true);
     } else if (userEmail?.length === 10) {
       otpGeneration(userEmail, Ootp);
       console.log('mobile number is valid:', userEmail);
       setModalVisible(true);
-    } else if (userEmail?.length > 10 || userEmail?.length < 10){
+    } else if (userEmail?.length > 10 || userEmail?.length < 10) {
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -161,7 +161,7 @@ const ForgetPassword = () => {
       primaryContact: userEmail,
       password: values.password,
       otp: otpOutPut,
-    };      let result = await forgotPassword(payload);
+    }; let result = await forgotPassword(payload);
     // console.log('forgot password payload', payload);
     try {
       if (result?.status === 200) {
@@ -182,7 +182,7 @@ const ForgetPassword = () => {
         Alert.alert('Error', 'Invalid OTP', [
           {
             text: 'Ok',
-            onPress: () =>  setModalVisible(false)
+            onPress: () => setModalVisible(false)
           },
         ]);
       }
@@ -194,7 +194,7 @@ const ForgetPassword = () => {
         action: {
           text: 'Ok',
           textColor: 'white',
-          onPress: () => {},
+          onPress: () => { },
         },
       });
     }
@@ -221,17 +221,17 @@ const ForgetPassword = () => {
     <View
       style={[
         styles.container,
-        {backgroundColor: isDarkMode ? 'white' : 'white'},
+        { backgroundColor: isDarkMode ? 'white' : 'white' },
       ]}>
       <StatusBar backgroundColor={'white'} />
-      <View style={{minHeight: '15%'}}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
-          back={true}
           txt={'Forgot Password'}
+          back={true}
           navigation={navigation}
           onPress={() => navigation.goBack()}
-          marginLeft={'16%'}
-        />
+        >
+        </TopBarCard2>
       </View>
       <TextInput
         style={styles.textinputContainer}
@@ -279,8 +279,8 @@ const ForgetPassword = () => {
                 }}
               />
               <View style={styles.timeContainer}>
-               {/* {console.log('timerrrrrrrrrrrrr',timer)} */}
-                {timer != '00:00' &&  (
+                {/* {console.log('timerrrrrrrrrrrrr',timer)} */}
+                {timer != '00:00' && (
                   <Text style={styles.expectOtp}>
                     Expect OTP in
                     <Text style={styles.black}>{` ${timer} seconds`}</Text>

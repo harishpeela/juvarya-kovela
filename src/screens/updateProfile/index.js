@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   useColorScheme,
@@ -7,20 +7,20 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {format} from 'date-fns';
-import {EventInput, PrimaryButton} from '../../components';
-import {colors} from '../../common';
+import { format } from 'date-fns';
+import { EventInput, PrimaryButton } from '../../components';
+import { colors } from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {styles} from './styles'; // Update this import based on your project structure
+import { styles } from './styles'; // Update this import based on your project structure
 import ApplicationContext from '../../utils/context-api/Context';
 import SelectDropdown from 'react-native-select-dropdown';
-import {Update_Profile, getUserInfoNew} from '../../utils/api';
+import { Update_Profile, getUserInfoNew } from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {EventInput2, EventInput3} from '../../components/eventCreateInput';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-const UpdateProfile = ({navigation}) => {
+import { EventInput2, EventInput3 } from '../../components/eventCreateInput';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+const UpdateProfile = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {userDetails} = useContext(ApplicationContext);
+  const { userDetails } = useContext(ApplicationContext);
   const [gotraValue, setGotraValue] = useState('');
   const [genderValue, setGenderValue] = useState('');
   const [dropDownError, setDropDownError] = useState('');
@@ -117,15 +117,16 @@ const UpdateProfile = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.wrapper}>
-        <View style={{marginTop: '3%'}}>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
           <TopBarCard2
             txt={'Update Profile'}
             back={true}
             navigation={navigation}
-          />
+          >
+          </TopBarCard2>
         </View>
-        <View style={{marginTop: '15%'}}>
-          <View style={{bottom: '8%'}}>
+        <View style={{ marginTop: '15%' }}>
+          <View style={{ bottom: '8%' }}>
             <EventInput3
               lable={'Name'}
               user={true}
@@ -196,7 +197,7 @@ const UpdateProfile = ({navigation}) => {
                   defaultButtonText={
                     currentCustomer?.gender ? currentCustomer?.gender : 'gender'
                   }
-                  dropdownStyle={{paddingTop: 10, borderRadius: 20}}
+                  dropdownStyle={{ paddingTop: 10, borderRadius: 20 }}
                   onSelect={e => {
                     setIsRoleSelected(e);
                     setDropDownError(false);
@@ -209,7 +210,7 @@ const UpdateProfile = ({navigation}) => {
                           name="male"
                           size={20}
                           color={colors.orangeColor}
-                          style={{marginLeft: 2}}
+                          style={{ marginLeft: 2 }}
                         />
                       )}
                       {isRoleSelected === 'Female' && (
@@ -217,7 +218,7 @@ const UpdateProfile = ({navigation}) => {
                           name="female"
                           size={20}
                           color={colors.orangeColor}
-                          style={{marginLeft: 2}}
+                          style={{ marginLeft: 2 }}
                         />
                       )}
                       {/* {isRoleSelected === 'Others' && (
@@ -243,16 +244,16 @@ const UpdateProfile = ({navigation}) => {
               onChangeText={text => {
                 setGotraValue(text);
               }}
-              // value={
-              //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
-              // }
+            // value={
+            //   currentCustomer?.gothra ? currentCustomer?.gothra : gotraValue
+            // }
             />
             <View
               style={{
                 flexDirection: 'row',
                 marginLeft: '4%',
               }}>
-              <View style={{width: '60%', marginTop: 5}}>
+              <View style={{ width: '60%', marginTop: 5 }}>
                 <TouchableOpacity>
                   <EventInput2
                     lable={'Date of Birth'}
@@ -272,7 +273,7 @@ const UpdateProfile = ({navigation}) => {
                   onCancel={HideDatePicker}
                 />
               </View>
-              <View style={{width: '43%', right: 35, marginTop: 5}}>
+              <View style={{ width: '43%', right: 35, marginTop: 5 }}>
                 <EventInput
                   lable={'Pin Code'}
                   // value={pincode}
@@ -290,7 +291,7 @@ const UpdateProfile = ({navigation}) => {
                 />
               </View>
             </View>
-            <View style={{width: '80%', alignSelf: 'center', marginTop: 100}}>
+            <View style={{ width: '80%', alignSelf: 'center', marginTop: 100 }}>
               <PrimaryButton
                 text={'Update'}
                 bgColor={colors.orangeColor}

@@ -81,14 +81,13 @@ const Info = ({navigation, route}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <View style={{minHeight: '15%',backgroundColor:'white'}}>
-          <TopBarCard2
-            back={true}
-            txt={'Event Information'}
-            navigation={navigation}
-          />
-        </View>
+      <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Event Information'}
+          back={true}
+          navigation={navigation}
+          >
+        </TopBarCard2>
       </View>
       <ScrollView style={{backgroundColor:'white'}}>
         <EventInput

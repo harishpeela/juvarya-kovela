@@ -77,23 +77,16 @@ console.log('rolesss', role, 'roles', roleType);
   }, [data]);
   return (
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
-      <View
-        style={{
-          minHeight: 100,
-          marginTop: '3%',
-          marginBottom: '3%',
-        }}
-       >
+      <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
         <TopBarCard2
           back={true}
-          navBack={() => navigation.goBack()}
           navigation={navigation}
-          navMenu={navigation}
-        >
-          <View style={styles.searchContainers}>
+          navMenu={navigation}>
+          <View >
             <SearchBar
+              placeHolder={'Search Events'}
               showCrossPress={true}
-              onTextChange={(e) => {
+              onTextChange={e => {
                 setSearchedText(e);
                 // SearchPopTemp(e);
               }}
@@ -103,10 +96,7 @@ console.log('rolesss', role, 'roles', roleType);
                 setSearchedText('');
                 await EventsList();
               }}
-              // bgColor={colors.blue}
-              placeHolder={'Search Events'}
             />
-           
           </View>
           {(role === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity

@@ -1,6 +1,6 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -12,17 +12,17 @@ import {
 } from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {BackgroundImage, BackHeaderNew} from '../../components';
-import {styles} from './styles';
+import { BackgroundImage, BackHeaderNew } from '../../components';
+import { styles } from './styles';
 import Snackbar from 'react-native-snackbar';
-import {MemberShipCreate} from '../../utils/api';
+import { MemberShipCreate } from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {allTexts, colors} from '../../common';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { allTexts, colors } from '../../common';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
-const AddMemebershipDetails = ({route, navigation}) => {
+const AddMemebershipDetails = ({ route, navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const {jtProfileId, roleId} = route.params || {};
+  const { jtProfileId, roleId } = route.params || {};
   const [memType, setMemType] = useState('');
   const [typeError, setTypeError] = useState(false);
   const [memberShipError, setMemberShipError] = useState(false);
@@ -63,7 +63,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
             onPress: () => console.log('OK Pressed'),
           },
         ],
-        {cancelable: false},
+        { cancelable: false },
       );
     }
   };
@@ -90,21 +90,22 @@ const AddMemebershipDetails = ({route, navigation}) => {
   let donationType = ['BASIC', 'Primium'];
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
       <View>
         {/* <BackHeaderNew
           txt={'Add Membership'}
           onPress={() => navigation.goBack()}
           isArrow={true}
         /> */}
-        <View style={{minHeight: '15%'}}>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
           <TopBarCard2
-            back={true}
             txt={'Add Membership'}
+            back={true}
             navigation={navigation}
-          />
+          >
+          </TopBarCard2>
         </View>
-        <View style={{marginTop: '35%', padding: '5%'}}>
+        <View style={{ marginTop: '35%', padding: '5%' }}>
           <SelectDropdown
             data={donationType}
             defaultValue={memType}
@@ -119,7 +120,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
             )}
           />
           {typeError && (
-            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>
+            <Text style={{ alignSelf: 'center', color: colors.orangeColor }}>
               please select type{' '}
             </Text>
           )}
@@ -134,7 +135,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
             placeholderTextColor={isDarkMode ? 'black' : 'black'}
           />
           {memberShipError && (
-            <Text style={{alignSelf: 'center', color: colors.orangeColor}}>
+            <Text style={{ alignSelf: 'center', color: colors.orangeColor }}>
               please select type{' '}
             </Text>
           )}

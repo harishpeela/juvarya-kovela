@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   View,
   useColorScheme,
@@ -7,19 +7,19 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {format} from 'date-fns';
-import {EventInput, PrimaryButton, Loader} from '../../components';
-import {allTexts, colors} from '../../common';
-import {uploadTempleProfilePic} from '../../utils/api';
-import {styles} from './styles'; // Update this import based on your project structure
+import { format } from 'date-fns';
+import { EventInput, PrimaryButton, Loader } from '../../components';
+import { allTexts, colors } from '../../common';
+import { uploadTempleProfilePic } from '../../utils/api';
+import { styles } from './styles'; // Update this import based on your project structure
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {EventInput2} from '../../components/eventCreateInput';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
-import {CreateCommunityTemple} from '../../utils/api';
-import {launchImageLibrary} from 'react-native-image-picker';
+import { EventInput2 } from '../../components/eventCreateInput';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { CreateCommunityTemple } from '../../utils/api';
+import { launchImageLibrary } from 'react-native-image-picker';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-const CommunityTemple = ({navigation}) => {
+const CommunityTemple = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
 
   const [eventError, setEventError] = useState(false);
@@ -145,14 +145,14 @@ const CommunityTemple = ({navigation}) => {
     return imageObj;
   };
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '15%'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
           txt={'Create Temple'}
           back={true}
-          marginLeft={'15%'}
           navigation={navigation}
-        />
+        >
+        </TopBarCard2>
       </View>
       <View style={styles.profileContainer}>
         {image !== null ? (
@@ -173,7 +173,7 @@ const CommunityTemple = ({navigation}) => {
             <Image
               resizeMode="cover"
               style={styles.preViewImage}
-              source={{uri: image?.uri}}
+              source={{ uri: image?.uri }}
             />
           </View>
         ) : isLoading ? (
@@ -188,7 +188,7 @@ const CommunityTemple = ({navigation}) => {
             }}>
             {custDetails?.media ? (
               <Image
-                source={{uri: custDetails?.media?.url}}
+                source={{ uri: custDetails?.media?.url }}
                 style={styles.profileImage}
               />
             ) : (
@@ -211,7 +211,7 @@ const CommunityTemple = ({navigation}) => {
         {imgErr && (
           <View>
             <Text
-              style={{fontSize: 12, color: colors.orangeColor, marginTop: 10}}>
+              style={{ fontSize: 12, color: colors.orangeColor, marginTop: 10 }}>
               {' '}
               Upload Image
             </Text>
@@ -229,7 +229,7 @@ const CommunityTemple = ({navigation}) => {
             setEventError(false);
           }}
         />
-        
+
         {eventError && (
           <Text
             style={{
@@ -266,8 +266,8 @@ const CommunityTemple = ({navigation}) => {
             flexDirection: 'row',
             marginLeft: '4%',
           }}>
-          <View style={{width: '60%', marginTop: 5}}>
-            <View style={{width: '205%', marginLeft: -40}}>
+          <View style={{ width: '60%', marginTop: 5 }}>
+            <View style={{ width: '205%', marginLeft: -40 }}>
               <EventInput2
                 lable={'     Date of Establishment'}
                 height={50}
@@ -295,7 +295,7 @@ const CommunityTemple = ({navigation}) => {
             />
           </View>
         </View>
-        <View style={{width: '80%', alignSelf: 'center', marginTop: '10%'}}>
+        <View style={{ width: '80%', alignSelf: 'center', marginTop: '10%' }}>
           <PrimaryButton
             text={'Submit'}
             bgColor={colors.orangeColor}

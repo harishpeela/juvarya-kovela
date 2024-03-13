@@ -64,30 +64,26 @@ const EventsScreen = ({navigation, route}) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-16%'}}>
-      <View
-        style={{
-          marginTop:'5%', height:60,
-        }}>
+      <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
         <TopBarcard
-          menu={true}
           isBell={true}
+          menu={true}
           navigation={navigation}
           navMenu={navigation}>
           <View >
             <SearchBar
+              placeHolder={'Search Events'}
+              showCrossPress={true}
               onTextChange={e => {
                 setSearchedText(e);
                 searchEvent(e);
               }}
               value={searchedText}
               loading={false}
-              showCrossPress={true}
               onCrossPress={() => {
                 setSearchedText('');
                 EventsList();
               }}
-              bgColor={colors.white}
-              placeHolder={'Search Events'}
             />
           </View>
         </TopBarcard>

@@ -1,8 +1,8 @@
 /* eslint-disable no-alert */
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useContext, useEffect} from 'react';
-import {View, TouchableOpacity, Text, ScrollView, Alert} from 'react-native';
-import {styles} from './styles';
+import React, { useState, useContext, useEffect } from 'react';
+import { View, TouchableOpacity, Text, ScrollView, Alert } from 'react-native';
+import { styles } from './styles';
 import {
   BackHeaderNew,
   Donation_first_Tab,
@@ -17,10 +17,10 @@ import {
   GetProfilePic,
   DonationsType,
 } from '../../utils/api';
-import {allTexts} from '../../common';
-import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { allTexts } from '../../common';
+import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 
-const Donations = ({route, navigation}) => {
+const Donations = ({ route, navigation }) => {
   const [value, setValue] = useState(value);
   const [dropValue, setDropValue] = useState();
   const [name, setName] = useState('');
@@ -28,8 +28,8 @@ const Donations = ({route, navigation}) => {
   const [isChecked, setIsChecked] = useState(true);
   const [topDonation, setTopDonation] = useState([]);
   const [donationLoader, setDonationLoader] = useState(false);
-  const {userDetails} = useContext(ApplicationContext);
-  const {data} = route.params || {};
+  const { userDetails } = useContext(ApplicationContext);
+  const { data } = route.params || {};
   // console.log('data =====><', data);
   const [typeData, setTypeData] = useState();
   const donTypes = async () => {
@@ -37,9 +37,9 @@ const Donations = ({route, navigation}) => {
     // console.log('types of donations', result?.data);
   };
   let Data = [
-    {id: 1, rs: '101'},
-    {id: 3, rs: '301'},
-    {id: 5, rs: '501'},
+    { id: 1, rs: '101' },
+    { id: 3, rs: '301' },
+    { id: 5, rs: '501' },
   ];
   let donationType = ['Food', 'Event', 'Permanent'];
 
@@ -99,7 +99,7 @@ const Donations = ({route, navigation}) => {
     let responce = await GetProfilePic(e.email);
     // console.log('responce', responce.data);
     if (responce) {
-      let res = {...e, url: responce?.data?.url};
+      let res = { ...e, url: responce?.data?.url };
       setTopDonation(array => [...array, res]);
       setDonationLoader(false);
     }
@@ -127,12 +127,13 @@ const Donations = ({route, navigation}) => {
   return (
     <>
       <ScrollView style={styles.container}>
-        <View style={styles.header}>
+        <View style={{ minHeight: 70, marginTop: '3%' }}>
           <TopBarCard2
-            back={true}
             txt={'Add Donation'}
+            back={true}
             navigation={navigation}
-          />
+          >
+          </TopBarCard2>
         </View>
         <Donation_first_Tab img={data?.logo} title={data?.name} rating={'3.5 (18 rating)'} />
         <View>
@@ -164,7 +165,7 @@ const Donations = ({route, navigation}) => {
               donurl={topDonation[0]?.url}
             />
           </View>
-          <View style={{marginHorizontal: 10}}>
+          <View style={{ marginHorizontal: 10 }}>
             <Donation_Third_Tab
               url={
                 typeData?.mediaList

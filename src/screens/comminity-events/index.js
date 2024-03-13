@@ -24,8 +24,13 @@ const Community_Events_Seeall = ({navigation, route}) => {
      };
   return (
     <View style={{flex: 1, backgroundColor: isDarkMode ? 'white' : 'white'}}>
-      <View style={{height: '9%', marginTop: '3%'}}>
-        <TopBarCard2 marginLeft={'30%'} back={true} txt={'Artist'} navigation={navigation} />
+      <View style={{minHeight: 70, marginTop: '3%'}}>
+        <TopBarCard2
+          txt={'Artist'}
+          back={true}
+          navigation={navigation}
+          >
+        </TopBarCard2>
       </View>
       {!data?.length > 0 ? (
         <View style={styles.loaderContainer}>

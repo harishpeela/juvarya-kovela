@@ -360,12 +360,13 @@ const EventDetails = ({ navigation, route }) => {
   ];
   return (
     <View style={styles.container}>
-      <View style={{ height: '10%', marginTop: '3%' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
           txt={'Event Details'}
           back={true}
           navigation={navigation}
-        />
+        >
+        </TopBarCard2>
       </View>
       <ScrollView style={{ borderWidth: 0 }}>
         {item?.mediaList ? (

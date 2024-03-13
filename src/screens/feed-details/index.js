@@ -115,14 +115,15 @@ const Feeds = ({ route, navigation }) => {
   }, [itemDetails]);
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-      <View style={{ height: 100, marginTop: '3%' }}>
+      
+      <View style={{minHeight: 70, marginTop: '3%'}}>
         <TopBarCard2
-          back={true}
           txt={'Feeds'}
+          back={true}
           navigation={navigation}
-          navBack={() => navigation.goBack()}
-          marginLeft={'30%'}
-        />
+          navMenu={navigation}
+          >
+        </TopBarCard2>
       </View>
       <ScrollView>
         {loader ? (

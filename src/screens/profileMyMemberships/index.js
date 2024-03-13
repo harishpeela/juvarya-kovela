@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import { ProfileMembershipsData} from '../../utils/api';
+import { ProfileMembershipsData } from '../../utils/api';
 import {
   BackHeaderNew,
   Donations_list_Card,
@@ -43,18 +43,15 @@ const ProfileMyMemberships = ({ navigation, route }) => {
 
 
   return (
-    <SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
-      <View>
-        <View style={{ minHeight: 70, marginTop: '3%' }}>
-          <TopBarCard2
-            txt={'Memberships'}
-            back={true}
-            navigation={navigation}
-            navMenu={navigation}
-      >
-      
-          </TopBarCard2>
-        </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
+        <TopBarCard2
+          txt={'Memberships'}
+          back={true}
+          navigation={navigation}
+          navMenu={navigation}
+        >
+        </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>
         <View style={styles.followersContainer}>
@@ -62,18 +59,18 @@ const ProfileMyMemberships = ({ navigation, route }) => {
             <Loader size={'large'} color={colors.orangeColor} />
           ) : searchedText === '' && allUserMyMemberships.length > 0 ? (
             <FlatList
-                data={allUserMyMemberships}
-                showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps={'handled'}
-                keyExtractor={({ item, index }) => index}
-                style={{}}
-                renderItem={({ item, index }) => (
-                  <ProfileMembershipCard data={item} navigation={navigation} />
-                )}
-              />
+              data={allUserMyMemberships}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps={'handled'}
+              keyExtractor={({ item, index }) => index}
+              style={{}}
+              renderItem={({ item, index }) => (
+                <ProfileMembershipCard data={item} navigation={navigation} />
+              )}
+            />
           ) : (
             <View style={{ display: 'flex', alignItems: 'center', flexDirection: 'column', marginTop: '60%' }}>
-              <AntDesign  style={{marginBottom:'5%'}} name="idcard" size={50} color={colors.orangeColor} />
+              <AntDesign style={{ marginBottom: '5%' }} name="idcard" size={50} color={colors.orangeColor} />
               <Text style={{ color: colors.orangeColor, fontSize: 15, fontFamily: 'Poppins-Medium' }}>
                 No Memberships To Display
               </Text>

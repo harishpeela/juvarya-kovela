@@ -90,23 +90,26 @@ const DonationsList = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: 120, marginTop: '1%', backgroundColor: 'white'}}>
-        <TopBarCard2 back={true} navigation={navigation} navMenu={navigation}>
-          <View style={styles.searchbarContainer}>
+      <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
+        <TopBarCard2
+          back={true}
+          navigation={navigation}
+          navMenu={navigation}>
+          <View >
             <SearchBar
               placeHolder={'Search Donation'}
               showCrossPress={true}
-              onCrossPress={() => {
-                setSearchedText('');
-                // getTemples(userDetails?.id, pageNo, 20);
-                DonationListApi();
-              }}
               onTextChange={e => {
                 setSearchedText(e);
                 handleSearch(e);
               }}
               value={searchedText}
               loading={false}
+              onCrossPress={() => {
+                setSearchedText('');
+                // getTemples(userDetails?.id, pageNo, 20);
+                DonationListApi();
+              }}
             />
           </View>
           <View>

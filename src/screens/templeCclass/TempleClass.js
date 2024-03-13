@@ -1,14 +1,14 @@
-import {SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
-import React, {useEffect, useState} from 'react';
-import {getTempleClassDetails} from '../../utils/api';
-import {Loader} from '../../components';
-import {TopBarCard2, TopBarcard} from '../../components/topBar1/topBarCard';
-import {FlatList} from 'react-native-gesture-handler';
-import {allTexts, colors} from '../../common';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { getTempleClassDetails } from '../../utils/api';
+import { Loader } from '../../components';
+import { TopBarCard2, TopBarcard } from '../../components/topBar1/topBarCard';
+import { FlatList } from 'react-native-gesture-handler';
+import { allTexts, colors } from '../../common';
 
-const TempleClass = ({route, navigation}) => {
+const TempleClass = ({ route, navigation }) => {
   const [templeClassDetails, setTempleClassDetails] = useState([]);
-  const {id, templeclass} = route.params || {};
+  const { id, templeclass } = route.params || {};
   const [loader, setLoader] = useState(false);
   const TopTempleClass = async (pgNo, pgSize, templeClass) => {
     setLoader(true);
@@ -30,31 +30,33 @@ const TempleClass = ({route, navigation}) => {
   }, []);
 
   return (
-    <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={{height: 70, marginTop: '3%'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
+      <View style={{ minHeight: 70, marginTop: '3%' }}>
         <TopBarCard2
-          back={true}
           txt={'Temple Class'}
-          navBack={() => navigation.goBack()}
+          back={true}
           navigation={navigation}
-        />
+        >
+        </TopBarCard2>
       </View>
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {loader ? (
-          <View style={{marginTop: '-30%'}}>
+          <View style={{ marginTop: '-30%' }}>
             <Loader size={'large'} color={colors.orangeColor} />
           </View>
         ) : templeClassDetails?.length ? (
           <FlatList
             data={templeClassDetails}
-            keyExtractor={({item, index}) => index}
-            renderItem={({item}) => (
-             
+            keyExtractor={({ item, index }) => index}
+            renderItem={({ item }) => (
+
               <TouchableOpacity
-                onPress={() => {navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                  data: item,
-                  onSelect: onSelect,
-                }); console.log('item===>', item)}}
+                onPress={() => {
+                  navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                    data: item,
+                    onSelect: onSelect,
+                  }); console.log('item===>', item)
+                }}
                 style={{
                   borderWidth: 0.3,
                   display: 'flex',
@@ -70,9 +72,9 @@ const TempleClass = ({route, navigation}) => {
                       ? item?.logo
                       : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
                   }}
-                  style={{height: 72, width: 72, borderRadius: 70 / 2}}
+                  style={{ height: 72, width: 72, borderRadius: 70 / 2 }}
                 />
-                <Text numberOfLines={2} style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17, maxWidth: '80%'}}>
+                <Text numberOfLines={2} style={{ marginLeft: 20, marginTop: 20, color: 'black', fontSize: 17, maxWidth: '80%' }}>
                   {item?.name}
                 </Text>
               </TouchableOpacity>
