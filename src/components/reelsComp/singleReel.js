@@ -15,16 +15,13 @@ const SingleReel = ({ item, index, currentIndex, mute, nextDownloadedVideoPlayUR
   useEffect(() => {
     setIsLoading(true);
   }, []);
-
   const onBuffer = buffer => {
     setIsBuffering(buffer.isBuffering);
   };
-
   const onError = error => {
     console.log('Error loading video:', error);
     setIsBuffering(false);
   };
-
   const onLoad = () => {
     setIsBuffering(false);
   };
