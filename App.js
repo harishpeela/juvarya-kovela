@@ -1,9 +1,9 @@
 /* eslint-disable no-new */
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import SplashScreen from 'react-native-splash-screen';
-import {StatusBar} from 'react-native';
-import {LogBox} from 'react-native';
-import {allTexts} from './src/common';
+import { StatusBar } from 'react-native';
+import { LogBox } from 'react-native';
+import { allTexts } from './src/common';
 import {
   SignUp,
   Signin,
@@ -58,19 +58,22 @@ import {
   ReelUpload,
   Community_Events_Seeall,
 } from './src/screens';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import {
   getAuthTokenDetails,
   saveUserDetails,
 } from './src/utils/preferences/localStorage';
 import ApplicationContext from './src/utils/context-api/Context';
 import AddTample from './src/screens/add-temple';
-import {getHomeFeedList, getUserInfoNew} from './src/utils/api';
+import { getHomeFeedList, getUserInfoNew } from './src/utils/api';
 import MySavedPosts from './src/screens/my-saved-posts';
 import CreateFeedDescription from './src/screens/createFeedDiscription/CreateFeedDescription';
 import TempleClass from './src/screens/templeCclass/TempleClass';
+import {Provider} from 'react-redux';
+import {persistor, store} from './src/redux/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -153,6 +156,7 @@ const App = () => {
     prepare();
   }, []);
   const AuthStack = () => {
+    console.log('AAAAAAAAAAAAAAAA')
     return (
       <Stack.Navigator>
         <Stack.Screen
@@ -217,7 +221,7 @@ const App = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={artistDonorScreen}
           component={ArtistDonorScreen}
           options={{
@@ -540,14 +544,14 @@ const App = () => {
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={reelupload}
           component={ReelUpload}
           options={{
             headerShown: false,
           }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name={communityeventsseeall}
           component={Community_Events_Seeall}
           options={{
@@ -569,6 +573,7 @@ const App = () => {
     setLoginDetails(authDetails);
   };
 
+  console.log('loginDetails--->',loginDetails)
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
@@ -599,7 +604,7 @@ const App = () => {
       let response = await getHomeFeedList(0, 20);
       if (response && response?.status === 200) {
         const {
-          data: {jtFeeds},
+          data: { jtFeeds },
         } = response;
         getHomeFeedListData(jtFeeds);
       }
@@ -614,34 +619,39 @@ const App = () => {
     }
   }, [loginDetails]);
   return (
-    <ApplicationContext.Provider
-      value={{
-        loginDetails,
-        setLoginDetails,
-        userDetails,
-        setUserDetails,
-        favoriteList,
-        setFavoriteList,
-        homeFeedListData,
-        getHomeFeedListData,
-        id,
-        setId,
-      }}>
-      <SafeAreaProvider>
-        <StatusBar
-          backgroundColor="white"
-          barStyle="dark-content"
-          translucent={true}
-        />
-        <NavigationContainer>
-          {loginDetails === null || loginDetails === '' ? (
-            <AuthStack />
-          ) : (
-            <HomeStack />
-          )}
-        </NavigationContainer>
-      </SafeAreaProvider>
-    </ApplicationContext.Provider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor}>
+
+        <ApplicationContext.Provider
+          value={{
+            loginDetails,
+            setLoginDetails,
+            userDetails,
+            setUserDetails,
+            favoriteList,
+            setFavoriteList,
+            homeFeedListData,
+            getHomeFeedListData,
+            id,
+            setId,
+          }}>
+          <SafeAreaProvider>
+            <StatusBar
+              backgroundColor="white"
+              barStyle="dark-content"
+              translucent={true}
+            />
+            <NavigationContainer>
+              {loginDetails === null || loginDetails === '' ? (
+                <AuthStack />
+              ) : (
+                <HomeStack />
+              )}
+            </NavigationContainer>
+          </SafeAreaProvider>
+        </ApplicationContext.Provider>
+      </PersistGate>
+    </Provider>
   );
 };
 
