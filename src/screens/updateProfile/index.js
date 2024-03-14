@@ -18,6 +18,7 @@ import {Update_Profile, getUserInfoNew} from '../../utils/api';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {EventInput2, EventInput3} from '../../components/eventCreateInput';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const UpdateProfile = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {userDetails} = useContext(ApplicationContext);
@@ -117,7 +118,7 @@ const UpdateProfile = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.wrapper}>
-        <View style={{minHeight: 60,marginTop: '3%'}}>
+        <View style={{height: 60,marginTop: statusBarHeight}}>
           <TopBarCard2
             txt={'Update Profile'}
             back={true}

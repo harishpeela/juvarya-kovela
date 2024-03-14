@@ -15,6 +15,7 @@ import {FavTempleListCard} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import { statusBarHeight } from '../../utils/config/config';
 
 const MyTemples = ({navigation}) => {
   const [templeList, setTempleList] = useState([]);
@@ -88,7 +89,7 @@ const MyTemples = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.wrapper}>
-      <View style={{minHeight: 60, marginTop: '3%'}}>
+      <View style={{height: 60, marginTop: statusBarHeight}}>
         <TopBarCard2
           isPlus={true}
           txt={'Communities'}

@@ -19,6 +19,7 @@ import {CreateCommunityTemple} from '../../utils/api';
 import {launchImageLibrary} from 'react-native-image-picker';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { statusBarHeight } from '../../utils/config/config';
 const CommunityTemple = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
 
@@ -146,7 +147,7 @@ const CommunityTemple = ({navigation}) => {
   };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height:60 , marginTop: '3%',}}>
+      <View style={{height:60 , marginTop: statusBarHeight}}>
         <TopBarCard2
           txt={'Create Temple'}
           back={true}

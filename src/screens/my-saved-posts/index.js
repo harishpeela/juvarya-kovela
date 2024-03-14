@@ -17,6 +17,7 @@ import {TopBarcard} from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { statusBarHeight } from '../../utils/config/config';
 
 const MySavedPosts = ({navigation}) => {
   const [loading, setLoading] = useState(true);
@@ -62,7 +63,7 @@ const MySavedPosts = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: colors.white}}>
       <View style={styles.footerBackground}>
-        <View style={{minHeight: 60, marginTop: '3%'}}>
+        <View style={{height: 60, marginTop: statusBarHeight}}>
           <TopBarCard2
             back={true}
             txt={'Saved Posts'}

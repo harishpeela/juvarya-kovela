@@ -12,6 +12,7 @@ import {EventScreenList} from '../../utils/api';
 import {colors} from '../../common';
 import {styles} from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { statusBarHeight } from '../../utils/config/config';
 
 const EventsScreen = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
@@ -66,7 +67,7 @@ const EventsScreen = ({navigation, route}) => {
     <View style={{flex: 1, backgroundColor: 'white',marginBottom:'-16%'}}>
       <View
         style={{
-          marginTop:'5%', height:60,
+          marginTop:statusBarHeight, height:60,
         }}>
         <TopBarcard
           menu={true}

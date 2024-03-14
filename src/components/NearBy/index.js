@@ -24,6 +24,7 @@ import { TopBarcard } from '../topBar1/topBarCard';
 import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Artist_Search } from '../artist_search';
+import { statusBarHeight } from '../../utils/config/config';
 export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
@@ -132,7 +133,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
         <ScrollView>
           <View
             style={{
-             marginTop:'5%'
+             marginTop: statusBarHeight,
+             height: 60,
             }}
           >
             <TopBarcard

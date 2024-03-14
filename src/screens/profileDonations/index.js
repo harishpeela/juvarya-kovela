@@ -15,6 +15,7 @@ import {allTexts, colors} from '../../common';
 import {Loader} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import { statusBarHeight } from '../../utils/config/config';
 
 const UserProfileDonationsData = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
@@ -40,7 +41,7 @@ const UserProfileDonationsData = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: 60, marginTop: '3%'}}>
+      <View style={{height: 60, marginTop: statusBarHeight}}>
         <TopBarCard2
           txt={'Donations'}
           back={true}
