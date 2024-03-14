@@ -59,7 +59,7 @@ export const endpoints = {
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   MEMBERS_LIST: '/jtProfileMembership/profile/members?membershipId',
   TEMPLE_CREW: 'jtprofile/find/users',
-  FEED: '/jtfeed/',
+  FEED: '/jtfeed',
   EVENTS_LIST: 'jtevent/list',
   EVENTS_SCREE_LIST: 'jtevent/upcoming/events',
   EVENT_SEARCH: 'jtevent/byName',

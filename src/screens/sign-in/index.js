@@ -17,6 +17,7 @@ import { styles } from './styles.js';
 import { KovelaIcon } from '../sign-up/index.js';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
+import ApplicationContext from '../../utils/context-api/Context';
 import { useTriggerOtpMutation ,useSignInMutation, useLazyGetCustomerDataQuery } from '../../redux/services/authService.tsx';
 import {useAppDispatch} from '../../redux/reduxHooks';
 import { loginAction, userDataAction } from '../../redux/slices/authSlice.ts';
@@ -125,6 +126,7 @@ const Signin = ({ navigation }) => {
       doTriggerOtp(otpPayload)
       .unwrap()
       .then(response => {
+        console.log('otpRes--->', response)
           setOtp(response?.otp)
       })
       .catch(error => {
@@ -133,7 +135,7 @@ const Signin = ({ navigation }) => {
     
     }
   }
-
+const {setLoginDetails} = useContext(ApplicationContext);
 const signinHandler = async () => {
     if (mobNum?.length === 10) {
       let signInPlayload = {
@@ -145,6 +147,7 @@ const signinHandler = async () => {
         .unwrap()
         .then(response => {
           dispatch(loginAction({ token: response.accessToken, role: response.roles?.[0], tokenType: response.tokenType }));
+          setLoginDetails(response.accessToken);
           customerDetails()
           .unwrap()
           .then(response=>{
