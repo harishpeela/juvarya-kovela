@@ -62,10 +62,9 @@ const MySavedPosts = ({navigation}) => {
   return (
     <View style={{flex: 1, backgroundColor: colors.white}}>
       <View style={styles.footerBackground}>
-        <View style={{minHeight: '15%', marginTop: '3%'}}>
+        <View style={{minHeight: 60, marginTop: '3%'}}>
           <TopBarCard2
             back={true}
-            marginLeft={'19%'}
             txt={'Saved Posts'}
             navigation={navigation}
             

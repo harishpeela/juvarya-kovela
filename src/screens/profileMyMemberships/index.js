@@ -45,7 +45,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
       <View>
-        <View style={{ minHeight: 70, marginTop: '3%' }}>
+        <View style={{ minHeight: 60, marginTop: '3%' }}>
           <TopBarCard2
             txt={'Memberships'}
             back={true}
