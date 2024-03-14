@@ -74,7 +74,7 @@ export const TopBarcard = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15 }}>
+        <View style={{ flex: 0.15,alignItems:'center' }}>
           {menu && (
               <TouchableOpacity
                 onPress={() =>
@@ -90,7 +90,7 @@ export const TopBarcard = ({
                 ) : (
                     <EvilIcons
                       name="user"
-                      size={50}
+                      size={45}
                       color={colors.orangeColor}
                     />
                 )}
@@ -124,7 +124,7 @@ export const TopBarcard = ({
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.7 }}>
+        <View style={{ flex: 0.7, }}>
           {txt && (
             <Text
               style={{
@@ -140,7 +140,7 @@ export const TopBarcard = ({
           )}
           {children}
         </View>
-        <View style={{ flex: 0.15 }}>
+        <View style={{ flex: 0.15, alignItems:'center' }}>
           {isBell && (
             <TouchableOpacity
               onPress={() =>
@@ -192,7 +192,7 @@ export const TopBarCard2 = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15 }}>
+        <View style={{ flex: 0.15, alignItems:'center'  }}>
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
@@ -241,7 +241,7 @@ export const TopBarCard2 = ({
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.15 }}>
+        <View style={{ flex: 0.15 , alignItems:'center' }}>
           {isPlus && (
             <TouchableOpacity
               onPress={() =>
@@ -266,15 +266,13 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    height: 70,
-    justifyContent: 'center',
-    // borderColor: 'black',
+    height: 60,
     elevation: 2,
     shadowColor: '#000',
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.5,
     shadowRadius: 2,
     shadowOffset: {
-      width: 0,
+      width: 1,
       height: 2,
     },
   },
@@ -282,7 +280,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: '2%',
+    marginTop:'3%'
   },
   children: {
     flex: 0.70,
@@ -302,11 +300,11 @@ const styles = StyleSheet.create({
   },
   userIcon: {
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: 25,
     // backgroundColor: 'green',
-    height: 60,
+    height: 45,
     borderColor: 'white',
-    width: 60,
+    width: 45,
   },
   menuIcon: {
     borderWidth: 2,
@@ -316,9 +314,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'gray',
     height: 20,
     width: 20,
-    left: 15,
     padding: 1,
-    top: -15,
   },
 
   plusIcon: {

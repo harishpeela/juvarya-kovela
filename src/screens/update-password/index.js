@@ -56,10 +56,9 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 70, marginTop: '3%'}}>
+      <View style={{height: 60, marginTop: '3%'}}>
         <TopBarCard2
           back={true}
-          marginLeft={'15%'}
           txt={'Update Password'}
           navigation={navigation}
         />

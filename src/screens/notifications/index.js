@@ -38,14 +38,11 @@ const Notifications = ({navigation}) => {
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
       <View style={{}}>
-        <View style={{height: '10%'}}>
+        <View style={{height:60, marginTop:'3%'}}>
           <TopBarCard2
             txt={'Notifications'}
-            // cancel={true}
             back={true}
-            marginLeft={'15%'}
-           navigation={navigation}
-            
+           navigation={navigation}   
           />
         </View>
         <View style={{marginBottom:'68%'}}>

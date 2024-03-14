@@ -6,8 +6,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
     width: '100%',
-    paddingVertical: 10,
-    // paddingHorizontal: 10,
   },
   searchContainers: {
     margin: 5,
@@ -50,7 +48,7 @@ export const styles = StyleSheet.create({
   loaderContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '-33%'
+    marginTop: '3%'
   },
   bellContainer: {
     height: 60,

@@ -146,11 +146,10 @@ const CommunityTemple = ({navigation}) => {
   };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '15%'}}>
+      <View style={{height:60 , marginTop: '3%',}}>
         <TopBarCard2
           txt={'Create Temple'}
           back={true}
-          marginLeft={'15%'}
           navigation={navigation}
         />
       </View>
