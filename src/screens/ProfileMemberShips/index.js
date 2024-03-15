@@ -46,7 +46,7 @@ const ProfileMemberShips = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={{height:80, marginTop:statusBarHeight}}>
+      <View style={{height:60, marginTop:statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Memberships'}

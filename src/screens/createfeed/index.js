@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Data} from '../home-feed/formateDetails';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const CreateFeed = ({route, navigation}) => {
   const {data} = route.params || {};
   const [image, setImage] = useState(null);
@@ -137,8 +138,8 @@ const CreateFeed = ({route, navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: '15%', marginTop: '3%'}}>
-        <TopBarCard2 back={true} txt={'Upload Photo'} navigation={navigation} marginLeft={'15%'} />
+      <View style={{height:60, marginTop: statusBarHeight}}>
+        <TopBarCard2 back={true} txt={'Upload Photo'} navigation={navigation}/>
       </View>
       <View style={{margin: 30}}>
         <View style={styles.uploadContainer}>

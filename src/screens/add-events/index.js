@@ -26,6 +26,7 @@ import { CreateEvent, getCommunityId } from '../../utils/api';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { date } from 'yup';
+import { statusBarHeight } from '../../utils/config/config';
 
 const AddEvents = ({ navigation, route }) => {
   const { id, roleType, role } = route?.params || {};
@@ -179,12 +180,14 @@ console.log('tidate', date)
   }, [id]);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ backgroundColor: 'white', height: '25%' }}>
-        <View style={{ height: 200 }}>
+      <View style={{ backgroundColor: 'white' }}>
+        <View >
+        <View style={{height:60, marginTop:statusBarHeight}}>
           <TopBarCard2
             back={true}
             navigation={navigation}
           />
+        </View>
           <TouchableOpacity onPress={() => UpLoadPhoto()} style={styles.imgCard}>
             <View style={{}}>
               <Image
