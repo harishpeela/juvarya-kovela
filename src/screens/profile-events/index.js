@@ -14,6 +14,7 @@ import {colors, allTexts } from '../../common';
 import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const modalStyles = {
   centeredView: {
@@ -79,9 +80,8 @@ console.log('rolesss', role, 'roles', roleType);
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
-          minHeight: 100,
-          marginTop: '3%',
-          marginBottom: '3%',
+          height: 60,
+          marginTop: statusBarHeight
         }}
        >
         <TopBarCard2
@@ -89,8 +89,9 @@ console.log('rolesss', role, 'roles', roleType);
           navBack={() => navigation.goBack()}
           navigation={navigation}
           navMenu={navigation}
+          isPlus={true}
         >
-          <View style={styles.searchContainers}>
+          <View>
             <SearchBar
               showCrossPress={true}
               onTextChange={(e) => {

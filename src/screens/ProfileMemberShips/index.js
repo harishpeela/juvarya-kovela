@@ -7,6 +7,7 @@ import {MemberShipList} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {Loader} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const ProfileMemberShips = ({navigation, route}) => {
   const {userDetails} = useContext(ApplicationContext);
   const {roleId, trfdata} = route.params || {};
@@ -45,7 +46,7 @@ const ProfileMemberShips = ({navigation, route}) => {
   }, []);
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={styles.header}>
+      <View style={{height:80, marginTop:statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Memberships'}

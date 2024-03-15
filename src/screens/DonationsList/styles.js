@@ -64,25 +64,15 @@ export const styles = StyleSheet.create({
     backgroundColor: 'orange',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 100,
-    marginLeft: 10,
+    borderRadius: 15,
     textAlign: 'center',
-    height: 32,
-    width: 32,
+    height: 30,
+    width: 30,
     marginRight: 10,
-    marginTop:'-23%',
-    marginLeft:'88.5%'
   },
 
-  searchbarContainer:{
-    bottom:'46%',
-    // width:100,
-    marginTop:'-7%',
-    // backgroundColor:'black',
-    marginLeft:'11%',
-    marginTop:'4%'
-   
-   
-    
+  searchbarContainer:{     
+      flexDirection:'row',
+      alignItems:'center',
   }
 });

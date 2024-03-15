@@ -218,7 +218,7 @@ export const TopBarCard2 = ({
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.7 }}>
+        <View style={{ flex: 0.7}}>
           {txt && (
             <Text
               style={{
@@ -233,15 +233,14 @@ export const TopBarCard2 = ({
             </Text>
           )}
           {children}
+        </View>
+        <View style={{ flex: 0.15}}>
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
             <TouchableOpacity
-              style={{ flex: 1, marginLeft: '10%', marginTop: 2 }}
               onPress={navCreate}>
               <Text style={styles.joinText}>Create</Text>
             </TouchableOpacity>
           )}
-        </View>
-        <View style={{ flex: 0.15 , alignItems:'center' }}>
           {isPlus && (
             <TouchableOpacity
               onPress={() =>
@@ -293,10 +292,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   joinText: {
-    color: colors.white,
-    fontWeight: '900',
+    color: colors.orangeColor,
+    fontWeight: 'bold',
     fontSize: 18,
-    textAlign: 'center',
   },
   userIcon: {
     alignItems: 'center',
