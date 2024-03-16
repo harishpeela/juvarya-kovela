@@ -16,6 +16,7 @@ import { launchImageLibrary } from 'react-native-image-picker';
 import { allTexts, colors } from '../common';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { Save_Event } from '../utils/api';
+import { statusBarHeight } from '../utils/config/config';
 const EditContribute = ({ navigation, route }) => {
   console.log('events screen')
   const [date, setDate] = useState(new Date());
@@ -129,7 +130,7 @@ const isDarkMode = useColorScheme() === 'dark';
       <View style={styles.header}>
         <View>
         
-        <View style={{minHeight: '25%'}}>
+        <View style={{height:60, marginTop:statusBarHeight}}>
         <TopBarCard2 
         back={true}
         txt={'Contribution'}
