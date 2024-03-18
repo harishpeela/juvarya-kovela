@@ -17,7 +17,7 @@ import {
   axiosDonation,
 } from './api';
 
-const endpoints = {
+export const endpoints = {
   NEW_SIGN_IN: 'auth/signin',
   NEAR_BY_TEMPLE: 'jtprofile/byTempleClass',
   NEW_SIGN_UP: 'auth/signup',
@@ -59,7 +59,7 @@ const endpoints = {
   MEMBER_SHIP_CREATE: 'jtProfileMembership/create',
   MEMBERS_LIST: '/jtProfileMembership/profile/members?membershipId',
   TEMPLE_CREW: 'jtprofile/find/users',
-  FEED: '/jtfeed/',
+  FEED: '/jtfeed',
   EVENTS_LIST: 'jtevent/list',
   EVENTS_SCREE_LIST: 'jtevent/upcoming/events',
   EVENT_SEARCH: 'jtevent/byName',
@@ -205,7 +205,7 @@ export const PopularTemples = async (pgNo, pgsize) => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples9', error);
+    console.log('error in popular temples1', error);
   }
 };
 
@@ -220,7 +220,7 @@ export const getCommunityId = async () => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples10', error);
+    console.log('error in popular temples2', error);
   }
 };
 
@@ -258,7 +258,7 @@ export const NearByTempleClass = async (classType, pgno, pgsize) => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples11', error);
+    console.log('error in popular temples3', error);
   }
 };
 export const NewTempleCrew = async (id, pgNo, pgSz) => {
@@ -369,7 +369,7 @@ export const Update_Profile = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples12', error);
+    console.log('error in popular temples4', error);
   }
 };
 export const TempleFollowersList = async (pgNo, pgSz, id) => {

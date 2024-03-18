@@ -56,7 +56,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     } catch (error) {
       setLoader(false);
       setRefreshing(false);
-      console.log('error in popular temples', error);
+      console.log('error in popular temples5', error);
     }
   };
 

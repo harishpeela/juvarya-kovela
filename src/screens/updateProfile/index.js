@@ -108,7 +108,7 @@ const UpdateProfile = ({navigation}) => {
         setPincode(dty?.postalCode);
       }
     } catch (error) {
-      console.log('error in popular temples', error);
+      console.log('error in popular temples6', error);
     }
   };
   useEffect(() => {

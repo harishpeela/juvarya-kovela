@@ -149,7 +149,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
         setCommunityList(dty);
       }
     } catch (error) {
-      console.log('error in popular temples', error);
+      console.log('error in popular temples7', error);
     }
   };
 
@@ -164,7 +164,7 @@ const ViewTempleProfile = ({ route, navigation }) => {
         setTempleAddress(dty);
       }
     } catch (error) {
-      console.log('error in popular temples', error);
+      console.log('error in popular temples8', error);
     }
   };
 
