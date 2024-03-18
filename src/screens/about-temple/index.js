@@ -49,8 +49,7 @@ const AboutTemple = ({ navigation, route }) => {
 
                 </>) : (<>
                     <ScrollView showsVerticalScrollIndicator style={{ margin: 10, borderWidth: 0.2, padding: 12, borderRadius: 8 }}>
-
-                        <Text style={{ fontSize: 15, textAlign: 'justify', fontFamily: 'Poppins-Medium' }}>{data?.history ? data?.history : 'History To Be Added'}</Text>
+                        <Text style={{ fontSize: 15, textAlign: 'justify', fontFamily: 'Poppins-Medium', color: colors.gray2 }}>{data?.history ? data?.history : 'History To Be Added'}</Text>
                     </ScrollView>
                 </>)}
             </View>
