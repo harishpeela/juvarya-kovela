@@ -76,6 +76,7 @@ const Notifications = ({navigation}) => {
             </View>
           )}
         </View>
+        </View>
     </View>
   );
 };
