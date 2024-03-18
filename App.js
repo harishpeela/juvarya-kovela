@@ -57,6 +57,7 @@ import {
   ArtistDonorScreen,
   ReelUpload,
   Community_Events_Seeall,
+  Store,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -134,6 +135,7 @@ const App = () => {
       artistDonorScreen,
       reelupload,
       communityeventsseeall,
+      store
     },
   } = allTexts;
 
@@ -550,6 +552,13 @@ const App = () => {
          <Stack.Screen
           name={communityeventsseeall}
           component={Community_Events_Seeall}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={store}
+          component={Store}
           options={{
             headerShown: false,
           }}

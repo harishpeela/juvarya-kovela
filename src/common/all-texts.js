@@ -191,6 +191,7 @@ export const allTexts = {
     artistDonorScreen:'ArtistDonorScreen',
     reelupload: 'ReelUpload',
     communityeventsseeall: 'Community_Events_Seeall',
+    store:'Store'
   },
   homeHeader: {
     welcome: 'Welcome ',

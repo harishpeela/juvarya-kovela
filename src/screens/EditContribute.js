@@ -129,8 +129,7 @@ const isDarkMode = useColorScheme() === 'dark';
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View>
-        
-        <View style={{height:60, marginTop:statusBarHeight}}>
+        <View style={{height:60, marginTop:statusBarHeight }}>
         <TopBarCard2 
         back={true}
         txt={'Contribution'}
