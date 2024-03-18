@@ -15,6 +15,7 @@ import {
   axiosEventsData1,
   axiosNotifications,
   axiosDonation,
+  axiosLocalHost,
 } from './api';
 
 const endpoints = {
@@ -128,6 +129,7 @@ const endpoints = {
   COMMUNITY_ID: 'jtdcommunities/list',
   EVENT_INTRESETD_DETAILS:'jtInterestedEvents/interested?eventId', 
   ARTIST: 'customer/nearbyartists',
+  STORE_LOCALHOST: 'v1/product/store/products?',
 };
 export const getInitialToken = async () => {
   try {
@@ -1334,6 +1336,17 @@ export const deleteCommunityTemple = async (id) => {
   try {
     let result = await axiosNotifications.delete(
       `${endpoints.DELETE_COMMUNITY_TEMPLE}?profileId=${id}`,
+    );
+    return result;
+  } catch (error) {
+    console.log('error in userReels', error);
+  }
+};
+
+export const localHostStore = async (id) => {
+  try {
+    let result = await axiosLocalHost.get(
+      `${endpoints.STORE_LOCALHOST}?storeId=${id}&pageNo=0&pageSize=100`,
     );
     return result;
   } catch (error) {

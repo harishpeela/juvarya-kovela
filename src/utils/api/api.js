@@ -20,7 +20,7 @@ export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
 export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
 export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
-
+export const LOCAL_HOST = 'http://4.240.68.49:8080/api/';
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
@@ -71,6 +71,19 @@ export const axiosMultiPartFormData1 = axios.create({
   },
 });
 axiosMultiPartFormData1.interceptors.request.use(async function (config) {
+  let token = await getAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
+
+export const axiosLocalHost = axios.create({
+  baseURL: LOCAL_HOST,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosLocalHost.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   // console.log('Sending req with this token', token);
   config.headers.Authorization = token;
