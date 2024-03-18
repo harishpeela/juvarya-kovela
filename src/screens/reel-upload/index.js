@@ -8,6 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { allTexts, colors } from "../../common";
 import { Loader } from "../../components";
 import { launchImageLibrary } from "react-native-image-picker";
+import { statusBarHeight } from "../../utils/config/config";
 const ReelUpload = ({navigation, route}) => {
     const {id} = route.params || {};
     console.log('id in reels craetion', id)
@@ -100,7 +101,7 @@ const ReelUpload = ({navigation, route}) => {
     console.log('isvideo', isVideo, loader);
     return(
         <View style={{flex:1,backgroundColor:'white'}}>
-            <View style={{height: 70, marginTop: '3%'}}>
+            <View style={{height: 60, marginTop: statusBarHeight}}>
                 <TopBarCard2 back={true} txt={'Upload Spiritual'} navigation={navigation} />
             </View>
             {isVideo ? (

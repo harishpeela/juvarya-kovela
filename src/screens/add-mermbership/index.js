@@ -19,6 +19,7 @@ import {MemberShipCreate} from '../../utils/api';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {allTexts, colors} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const AddMemebershipDetails = ({route, navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -97,7 +98,7 @@ const AddMemebershipDetails = ({route, navigation}) => {
           onPress={() => navigation.goBack()}
           isArrow={true}
         /> */}
-        <View style={{minHeight: '15%'}}>
+        <View style={{height:60, marginTop: statusBarHeight}}>
           <TopBarCard2
             back={true}
             txt={'Add Membership'}

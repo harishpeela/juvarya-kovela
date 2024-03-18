@@ -15,6 +15,7 @@ import { styles } from './styles';
 import { Ellipsis } from '../../components';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { TopBarCard2, TopBarcard } from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -57,16 +58,15 @@ const FollowersMembership = ({ route, navigation }) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{ minHeight: 120, marginTop: '3%' ,backgroundColor:'white'}}>
+      <View style={{ height: 60, marginTop: statusBarHeight,backgroundColor:'white'}}>
       <TopBarCard2  back={true}  navigation={navigation} navMenu={navigation} >
-          <View style={styles.searchbarContainer}>
+          <View>
               <SearchBar
                 placeHolder={'Search Followers'}
                 showCrossPress={true}
                 onCrossPress={() => {
                   setSearchedText('');
                   TempleFolowers();
-                  // getTemples(userDetails?.id, pageNo, 20);
                 }}
                 onTextChange={e => {
                   setSearchedText(e);

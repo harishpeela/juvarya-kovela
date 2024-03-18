@@ -15,6 +15,7 @@ import { Loader } from '../../components';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { ProfileMembershipCard } from '../../components/profileMembershipCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const ProfileMyMemberships = ({ navigation, route }) => {
   const [loader, setLoader] = useState(false);
@@ -45,7 +46,7 @@ const ProfileMyMemberships = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1 ,backgroundColor:'white'}}>
       <View>
-        <View style={{ minHeight: 70, marginTop: '3%' }}>
+        <View style={{ height: 60, marginTop: statusBarHeight }}>
           <TopBarCard2
             txt={'Memberships'}
             back={true}

@@ -6,7 +6,7 @@ import { EventInput4, Loader } from "../../components";
 import { getAboutTemple, getEditAboutTemple, saveAboutTemple } from "../../utils/api";
 import { colors } from "../../common";
 import { ScrollView } from "react-native-gesture-handler";
-import { color } from "react-native-reanimated";
+import { statusBarHeight } from "../../utils/config/config";
 const AboutTemple = ({ navigation, route }) => {
     const { jtProfile, name } = route?.params || {};
     const [data, setData] = useState();
@@ -33,7 +33,7 @@ const AboutTemple = ({ navigation, route }) => {
     }, []);
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <View style={{ height: '15%', marginTop: '3%' }}>
+            <View style={{ height:60, marginTop: statusBarHeight }}>
                 <TopBarCard2 back={true} txt={'History'} navigation={navigation} marginLeft={'27%'} />
             </View>
             <View>
