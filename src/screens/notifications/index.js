@@ -9,6 +9,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -37,13 +38,12 @@ const Notifications = ({navigation}) => {
   }, []);
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-        <View style={{height: '10%', marginTop: '3%'}}>
+      <View style={{}}>
+        <View style={{height:60, marginTop: statusBarHeight}}>
           <TopBarCard2
             txt={'Notifications'}
-            // cancel={true}
             back={true}
-            marginLeft={'15%'}
-           navigation={navigation}
+           navigation={navigation}   
           />
         </View>
         <View style={{flex: 1}}>

@@ -11,6 +11,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import {FlatList} from 'react-native-gesture-handler';
 import {deleteDonations} from '../../utils/api';
+import { statusBarHeight } from '../../utils/config/config';
 const DonationsList = ({navigation, route}) => {
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
@@ -90,9 +91,10 @@ const DonationsList = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{minHeight: 120, marginTop: '1%', backgroundColor: 'white'}}>
+      <View style={{height: 60, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} navigation={navigation} navMenu={navigation}>
           <View style={styles.searchbarContainer}>
+            <View>
             <SearchBar
               placeHolder={'Search Donation'}
               showCrossPress={true}
@@ -109,7 +111,7 @@ const DonationsList = ({navigation, route}) => {
               loading={false}
             />
           </View>
-          <View>
+          <View style={{marginLeft:'3%'}}>
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate(allTexts.screenNames.donations, {
@@ -124,6 +126,7 @@ const DonationsList = ({navigation, route}) => {
                 color={colors.white}
               />
             </TouchableOpacity>
+          </View>
           </View>
         </TopBarCard2>
       </View>

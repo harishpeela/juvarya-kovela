@@ -21,6 +21,7 @@ import {NewUpdateUserPassword} from '../../utils/api';
 import {TopBarcard} from '../../components';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const UpdatePassword = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const {
@@ -56,10 +57,9 @@ const UpdatePassword = ({navigation}) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{height: 70, marginTop: '3%'}}>
+      <View style={{height: 60, marginTop:  statusBarHeight}}>
         <TopBarCard2
           back={true}
-          marginLeft={'15%'}
           txt={'Update Password'}
           navigation={navigation}
         />

@@ -17,6 +17,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { EVENTS_URL } from '../utils/api/api';
 import { getAuthTokenDetails } from '../utils/preferences/localStorage';
 import { TopBarCard2 } from '../components/topBar1/topBarCard';
+import { statusBarHeight } from '../utils/config/config';
 const EditHighlight = ({ navigation, route }) => {
   const {data} = route.params || {};
   // console.log('route===', data);
@@ -154,7 +155,7 @@ const EditHighlight = ({ navigation, route }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-      <View style={{height:'25%'}}>
+      <View style={{height:60 , marginTop:statusBarHeight}}>
           <TopBarCard2
             txt={'Edit HightLights'}
             back={true}

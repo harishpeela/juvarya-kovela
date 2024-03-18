@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import { colors } from '../../common';
 export const styles = StyleSheet.create({
   container: {backgroundColor: 'white', flex: 1},
-  header: {minHeight: '10%', marginTop: '3%'},
+  header: {he: '10%', marginTop: '3%'},
   secondTab: {
     backgroundColor: '#FFF3E5',
     margin: 10,

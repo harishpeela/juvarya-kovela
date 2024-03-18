@@ -157,5 +157,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     height: '15%',
     alignContent: 'center',
+    marginTop:'2%',
   },
 });
