@@ -205,7 +205,7 @@ export const PopularTemples = async (pgNo, pgsize) => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in popular temples9', error);
   }
 };
 
@@ -220,7 +220,7 @@ export const getCommunityId = async () => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in popular temples10', error);
   }
 };
 
@@ -258,7 +258,7 @@ export const NearByTempleClass = async (classType, pgno, pgsize) => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in popular temples11', error);
   }
 };
 export const NewTempleCrew = async (id, pgNo, pgSz) => {
@@ -369,7 +369,7 @@ export const Update_Profile = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error in popular temples', error);
+    console.log('error in popular temples12', error);
   }
 };
 export const TempleFollowersList = async (pgNo, pgSz, id) => {

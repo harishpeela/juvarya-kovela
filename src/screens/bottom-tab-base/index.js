@@ -1,60 +1,62 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
-import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, Image} from 'react-native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {colors, allTexts} from './../../common/index';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView, View, Text, Image } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { colors, allTexts } from './../../common/index';
 import {
   EventsScreen,
-  Favorite,
   Profile,
   Search,
-  TicketConfirmation,
   UserFeedScreen,
   KovelaReels
 } from '..';
-import {Loader} from '../../components';
+import { Loader } from '../../components';
 import FontAwesome6 from 'react-native-vector-icons/MaterialIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import FontistoIcon from 'react-native-vector-icons/Fontisto';
-import ApplicationContext from '../../utils/context-api/Context';
-import {styles} from './style';
+import { styles } from './style';
 import Entypo from 'react-native-vector-icons/Entypo';
-const Tab = createBottomTabNavigator();
-export default BottomTabBase = ({navigation}) => {
-  // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
-  const GetSearchScreen = () => <Search navigation={navigation} />;
-  const GetFavScreen = () => <Favorite navigation={navigation} />;
-  const GetProfileScreen = () => <Profile navigation={navigation} />;
-  const GetEventScreen = () => <EventsScreen navigation={navigation} />;
-  const GetReelsScreen = () => <KovelaReels navigation={navigation} />;
+import { useAppSelector } from '../../redux/reduxHooks';
 
-  const GetTicketConfirmScreen = () => (
-    <TicketConfirmation navigation={navigation} />
-  );
-  const {homeFeedListData} = useContext(ApplicationContext);
-  const [feedLength, setFeedLength] = useState(0);
+const Tab = createBottomTabNavigator();
+
+export default BottomTabBase = ({ navigation }) => {
+  // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
+  // const GetSearchScreen = () => <Search navigation={navigation} />;
+  // const GetFavScreen = () => <Favorite navigation={navigation} />;
+  // const GetProfileScreen = () => <Profile navigation={navigation} />;
+  // const GetEventScreen = () => <EventsScreen navigation={navigation} />;
+  // const GetReelsScreen = () => <KovelaReels navigation={navigation} />;
+
+  const [homeFeedListData, setHomeFeedListData] = useState(null);
+
+  //Redux hooks
+  const homeFeed = useAppSelector(state => state.homeFeed) || null;
+  const getHomeFeedData = async () => {
+    setHomeFeedListData(homeFeed && homeFeed.homeFeedData);
+  }
   useEffect(() => {
-    setFeedLength(homeFeedListData?.length);
-  }, [homeFeedListData, navigation]);
+    getHomeFeedData();
+  }, [homeFeed]);
+
   return (
     <SafeAreaView
       keyboardHidesTabBar={true}
-      style={{flex: 1}}
+      style={{ flex: 1 }}
       showsVerticalScrollIndicator={false}>
-      {homeFeedListData === undefined ? (
-        <View style={{flex: 1,marginTop:'3%'}}>
+      {homeFeedListData === null ? (
+        <View style={{ flex: 1, marginTop: '3%' }}>
           <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
         <Tab.Navigator
           backBehavior={'history'}
           screenOptions={{
-            tabBarStyle: {innerHeight: '5%'},
+            tabBarStyle: { innerHeight: '5%' },
           }}
           initialRouteName={
-            homeFeedListData?.length
+            homeFeed && homeFeed?.homeFeedData?.length
               ? allTexts.tabNames.home
               : allTexts.tabNames.search
           }
@@ -73,9 +75,9 @@ export default BottomTabBase = ({navigation}) => {
           }}>
           <Tab.Screen
             name={allTexts.screenNames.eventsScreen}
-            component={GetEventScreen}
+            component={EventsScreen}
             options={{
-              tabBarIcon: ({color, size, focused}) => (
+              tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
@@ -91,7 +93,7 @@ export default BottomTabBase = ({navigation}) => {
                     color={color}
                     size={focused ? 28 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Events</Text>
+                  <Text style={{ color: color, fontSize: 14 }}>Events</Text>
                 </View>
               ),
             }}
@@ -100,7 +102,7 @@ export default BottomTabBase = ({navigation}) => {
             name={allTexts.tabNames.search}
             component={Search}
             options={{
-              tabBarIcon: ({color, size, focused}) => (
+              tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
@@ -116,27 +118,11 @@ export default BottomTabBase = ({navigation}) => {
                     color={color}
                     size={focused ? 28 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Search</Text>
+                  <Text style={{ color: color, fontSize: 14 }}>Search</Text>
                 </View>
               ),
             }}
           />
-          {/* <Tab.Screen
-            name={allTexts.tabNames.ticket}
-            component={TicketConfirmation}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <MaterialIcon
-                    name="ticket-confirmation-outline"
-                    color={color}
-                    size={30}
-                  />
-                </>
-              ),
-            }}
-          /> */}
-
           <Tab.Screen
             name={allTexts.tabNames.home}
             component={UserFeedScreen}
@@ -144,7 +130,7 @@ export default BottomTabBase = ({navigation}) => {
               tabBarStyle: {
                 height: 200,
               },
-              tabBarIcon: ({color, size, focused}) => (
+              tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={!focused ? styles.container : styles.UserFeedFocusedContainer}>
                   {focused && (
@@ -167,7 +153,7 @@ export default BottomTabBase = ({navigation}) => {
             name={allTexts.tabNames.kovelareels}
             component={KovelaReels}
             options={{
-              tabBarIcon: ({color, size, focused}) => (
+              tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
@@ -183,16 +169,16 @@ export default BottomTabBase = ({navigation}) => {
                     color={color}
                     size={focused ? 22 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Spirituals</Text>
+                  <Text style={{ color: color, fontSize: 14 }}>Spirituals</Text>
                 </View>
               ),
             }}
           />
           <Tab.Screen
             name={allTexts.tabNames.profile}
-            component={GetProfileScreen}
+            component={Profile}
             options={{
-              tabBarIcon: ({color, size, focused}) => (
+              tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={!focused ? styles.container : styles.focusedContainer}>
                   {focused && (
@@ -208,7 +194,7 @@ export default BottomTabBase = ({navigation}) => {
                     color={color}
                     size={focused ? 28 : 23}
                   />
-                  <Text style={{color: color, fontSize: 14}}>Profile</Text>
+                  <Text style={{ color: color, fontSize: 14 }}>Profile</Text>
                 </View>
               ),
             }}

@@ -25,6 +25,7 @@ const UserFeedScreen = ({ navigation }) => {
 
   const isDarkMode = useColorScheme() === 'dark';
 
+  console.log('BBBBBBBBBBBBBBBBBBBB')
   const listFeed = async (pgNo, pgSize) => {
     setLoader(true);
     try {

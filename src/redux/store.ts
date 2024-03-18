@@ -4,17 +4,21 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Import all reducers here
 import authSlice from './slices/authSlice';
+import homeFeedSlice from './slices/homeFeedSlice';
 import { authService } from './services/authService';
+import { homeFeedService } from './services/homeFeedService';
 
 const rootReducers = combineReducers({
   auth: authSlice,
+  homeFeed:homeFeedSlice,
   [authService.reducerPath]: authService.reducer,
+  [homeFeedService.reducerPath]: homeFeedService.reducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  whitelist: ['auth', 'cart', 'address'],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);
@@ -26,6 +30,7 @@ export const store = configureStore({
       serializableCheck: false,
     }).concat(
       authService.middleware,
+      homeFeedService.middleware
     ),
 });
 

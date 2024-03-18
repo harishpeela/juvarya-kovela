@@ -7,7 +7,7 @@ import { endpoints } from '../../api';
 // Define a service using a base URL and expected endpoints
 
 export const homeFeedService = createApi({
-  reducerPath: 'authService',
+  reducerPath: 'homeFeedService',
   baseQuery: fetchBaseQuery({
     baseUrl: BASE,
     prepareHeaders: (headers, {getState, endpoint}) => {

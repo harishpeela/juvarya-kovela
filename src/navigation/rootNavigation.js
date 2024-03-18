@@ -59,17 +59,14 @@ import {
   Community_Events_Seeall,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
-import {
-  getAuthTokenDetails,
-} from '../utils/preferences/localStorage';
 import ApplicationContext from '../utils/context-api/Context';
 import AddTample from '../screens/add-temple';
-import { getHomeFeedList, getUserInfoNew } from '../utils/api';
 import MySavedPosts from '../screens/my-saved-posts';
 import CreateFeedDescription from '../screens/createFeedDiscription/CreateFeedDescription';
 import TempleClass from '../screens/templeCclass/TempleClass';
-import {useAppSelector} from '../redux/reduxHooks';
+import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
 import { useLazyGetHomeFeedDataQuery } from '../redux/services/homeFeedService';
+import { homeFeedAction } from '../redux/slices/homeFeedSlice';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -136,8 +133,35 @@ const rootNavigation = () => {
     },
   } = allTexts;
 
+  const [getHomeFeed] = useLazyGetHomeFeedDataQuery()
+  const dispatch = useAppDispatch();
+
+  const getFollowedTempleList = async () => {
+
+    try {
+      let data = {
+        pageNo: 0,
+        pageSize: 20,
+      };
+      console.log('DDDDDDDDDDDDDDDDDDDDDD')
+      getHomeFeed(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            dispatch(homeFeedAction(response.jtFeeds));
+          } else {
+            console.log('Error: Response is undefined');
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+        });
+    } catch (error) {
+      console.log('error1--->', error);
+    }
+  };
   useEffect(() => {
-    getLoginDetails();
+    getFollowedTempleList();
   }, []);
 
   useEffect(() => {
@@ -152,6 +176,7 @@ const rootNavigation = () => {
     }
     prepare();
   }, []);
+
 
   const AuthStack = () => {
     return (
@@ -561,70 +586,23 @@ const rootNavigation = () => {
 
   const Stack = createStackNavigator();
   const [loginDetails, setLoginDetails] = useState(null);
-  const [userDetails, setUserDetails] = useState({});
-  const [favoriteList, setFavoriteList] = useState([]);
-  const [homeFeedListData, getHomeFeedListData] = useState();
-  const [id, setId] = useState();
-  const getLoginDetails = async () => {
-    let authDetails = await getAuthTokenDetails();
-    setLoginDetails(authDetails);
-  };
+  
   //Redux hooks
   const authState = useAppSelector(state => state.auth);
-  const [getHomeFeed, { data, error }]  = useLazyGetHomeFeedDataQuery()
 
-  console.log('loginDetails--->',authState)
-
-  const getFollowedTempleList = () => {
-    try {
-      // let response = await getHomeFeedList(0, 20);
-      // if (response && response?.status === 200) {
-      //   const {
-      //     data: { jtFeeds },
-      //   } = response;
-      //   getHomeFeedListData(jtFeeds);
-      // }
-      let data = {
-  pageNo: 0,
-  pageSize: 20,
-};
-      getHomeFeed(data)
-      .unwrap()
-      .then(response => {
-        console.log('feed Data--->', response);
-        // Ensure that response is not undefined before accessing its properties
-        if (response) {
-          // getHomeFeedListData(response);
-        } else {
-          console.log('Error: Response is undefined');
-        }
-      })
-      .catch(error => {
-        console.log('feederror--->', error);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  const getLoginDetails = () => {
+    setLoginDetails(authState.token || null);
   };
+
   useEffect(() => {
-    if (loginDetails != null && loginDetails != '') {
-      getFollowedTempleList();
-    }
-  }, [loginDetails]);
+    getLoginDetails();
+  }, []);
 
   return (
         <ApplicationContext.Provider
           value={{
             loginDetails,
-            setLoginDetails,
-            userDetails,
-            setUserDetails,
-            favoriteList,
-            setFavoriteList,
-            homeFeedListData,
-            getHomeFeedListData,
-            id,
-            setId,
+            setLoginDetails
           }}>
               {loginDetails === null || loginDetails === '' ? (
                 <AuthStack />
