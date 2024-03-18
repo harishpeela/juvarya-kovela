@@ -14,6 +14,7 @@ import {colors, allTexts } from '../../common';
 import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const modalStyles = {
   centeredView: {
@@ -79,9 +80,9 @@ console.log('rolesss', role, 'roles', roleType);
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
         style={{
-          minHeight: 100,
-          marginTop: '3%',
-          marginBottom: '3%',
+          height: 60,
+          marginTop: statusBarHeight,
+
         }}
        >
         <TopBarCard2
@@ -89,8 +90,9 @@ console.log('rolesss', role, 'roles', roleType);
           navBack={() => navigation.goBack()}
           navigation={navigation}
           navMenu={navigation}
+          // isPlus={true}
         >
-          <View style={styles.searchContainers}>
+          <View style={{flexDirection:'row'}}>
             <SearchBar
               showCrossPress={true}
               onTextChange={(e) => {
@@ -106,24 +108,22 @@ console.log('rolesss', role, 'roles', roleType);
               // bgColor={colors.blue}
               placeHolder={'Search Events'}
             />
-           
-          </View>
           {(role === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
               <TouchableOpacity
                 onPress={() => 
                     navigation.navigate(allTexts.screenNames.addevents, {
                         id: id,
-
                     })}
                 style={styles.plusContainer}>
                 <FeatherIcon
                   style={styles.plusIcon}
                   name="plus"
-                  size={27}
+                  size={30}
                   color="white"
                 />
               </TouchableOpacity>
             )}
+                 </View>
         </TopBarCard2>
       </View>
       <View style={styles.bodyContainer}>

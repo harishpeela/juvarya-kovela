@@ -3,7 +3,6 @@ import {colors, fontFamily} from '../../common';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: 'auto',
     backgroundColor:'white'
   },
 

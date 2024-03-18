@@ -19,6 +19,7 @@ import {
 } from '../../utils/api';
 import {allTexts} from '../../common';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const Donations = ({route, navigation}) => {
   const [value, setValue] = useState(value);
@@ -125,17 +126,16 @@ const Donations = ({route, navigation}) => {
     dontationValue();
   }, []);
   return (
-    <>
-      <ScrollView style={styles.container}>
-        <View style={styles.header}>
+      <View style={styles.container}>
+        <View style={{height:60, marginTop:statusBarHeight}}>
           <TopBarCard2
             back={true}
             txt={'Add Donation'}
             navigation={navigation}
           />
         </View>
+        <ScrollView style={{marginTop:'2%'}}>
         <Donation_first_Tab img={data?.logo} title={data?.name} rating={'3.5 (18 rating)'} />
-        <View>
           <View style={styles.secondTab}>
             <Donation_Second_Tab
               VALUE={a => setValue(a)}
@@ -178,12 +178,12 @@ const Donations = ({route, navigation}) => {
               }
             />
           </View>
-        </View>
-      </ScrollView>
+  
       <TouchableOpacity style={styles.button} onPress={() => PostDonations()}>
         <Text style={styles.butText}> Donate ₹ {value} </Text>
       </TouchableOpacity>
-    </>
+   </ScrollView>
+      </View>
   );
 };
 export default Donations;

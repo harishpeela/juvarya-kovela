@@ -11,6 +11,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import { FavTempleListCard } from '../../components';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const Favorite = ({ navigation }) => {
   const isDarkMode = useColorScheme() === 'dark';
   const { userDetails } = useContext(ApplicationContext);
@@ -101,7 +102,7 @@ const Favorite = ({ navigation }) => {
         ...styles.wrapper,
         backgroundColor: isDarkMode ? 'white' : 'white',
       }}>
-      <View style={{minHeight: 70, flexDirection: 'row', marginTop: '5%'}}>
+      <View style={{height: 60,marginTop: statusBarHeight}}>
         <TopBarCard2
           isBell={true}
           back={true}

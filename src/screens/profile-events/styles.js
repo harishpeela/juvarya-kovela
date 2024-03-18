@@ -88,16 +88,11 @@ export const styles = StyleSheet.create({
   notificationContainer: {},
   plusContainer: {
     backgroundColor: 'orange',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 100,
-    textAlign: 'center',
-    height:32,
-    width:32,
-    marginLeft: '55%',
-    marginTop:'-11%',
-    marginLeft:'88%'
-
+    alignSelf:'center',
+    borderRadius: 15,
+    height:30,
+    width:30,
+    marginLeft:'3%',
   },
   searchAndFilter: {
     display: 'flex',
