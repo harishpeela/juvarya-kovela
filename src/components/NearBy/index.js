@@ -21,11 +21,14 @@ import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
 import { PopularTemples, SearchPopularTemples } from '../../utils/api';
 import { useIsFocused } from '@react-navigation/native';
 import { TopBarcard } from '../topBar1/topBarCard';
-import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist} from '../../utils/api';
+import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist } from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Artist_Search } from '../artist_search';
 import { statusBarHeight } from '../../utils/config/config';
+import { useLazyGetPopularTempleDataQuery } from '../../redux/services/searchService';
+
 export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
+
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -40,19 +43,36 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   const [refreshing, setRefreshing] = useState(true);
   const [nearBy, setNearBy] = useState(true);
   const [eventCommunity, setEventCommunity] = useState();
-  const PopularTemplesss = async () => {
+
+
+  //RTK Query
+  const [getPopularTemple] = useLazyGetPopularTempleDataQuery();
+  const [getNearByTemple] = useLazyGetPopularTempleDataQuery();
+
+  const PopularTemples = () => {
+    console.log('LLLLLLLLLLLLLL')
     setLoader(true);
     try {
-      let result = await PopularTemples(0, 100);
-      // console.log('populattemples', result?.data);
-      if (result) {
-        const dty = result?.data?.data || [];
-        setLoading(false);
-        setfilteredArray(dty);
-        setFilteredList(dty);
-        setLoader(false);
-        setRefreshing(false);
-      }
+      let data = {
+        pageNo: 0,
+        pageSize: 100,
+      };
+      getPopularTemple(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setLoading(false);
+            setfilteredArray(response.data);
+            setFilteredList(response.data);
+            setLoader(false);
+            setRefreshing(false);
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+          setLoader(false);
+          setRefreshing(false);
+        });
     } catch (error) {
       setLoader(false);
       setRefreshing(false);
@@ -60,8 +80,30 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     }
   };
 
+  // const PopularTemples = async () => {
+  //   console.log('LLLLLLLLLLLLLL')
+  //   setLoader(true);
+  //   try {
+  //     let result = await PopularTemples(0, 100);
+  //     // console.log('populattemples', result?.data);
+  //     if (result) {
+  //       const dty = result?.data?.data || [];
+  //       setLoading(false);
+  //       setfilteredArray(dty);
+  //       setFilteredList(dty);
+  //       setLoader(false);
+  //       setRefreshing(false);
+  //     }
+  //   } catch (error) {
+  //     setLoader(false);
+  //     setRefreshing(false);
+  //     console.log('error in popular temples5', error);
+  //   }
+  // };
+
   const NearByTemples = async () => {
-    // setLoader(true);
+    console.log('MMMMMMMMMMMM')
+    setLoader(true);
     let result = await getNearByTemples('VSP, AKP', 0, 20);
     // console.log('result.date ====>', result.data);
     if (result) {
@@ -74,6 +116,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   };
 
   const eventsByCommunity = async () => {
+    console.log('NNNNNNNNNNNNNNnn')
     let result = await GetArtist(0, 100, 3);
     console.log('result of community id', result?.data);
     if (result?.status === 200) {
@@ -83,10 +126,19 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     }
   }
 
-  useEffect(() => {
-    NearByTemples();
-    eventsByCommunity();
-  }, [isFocused]);
+  useFocusEffect(
+    useCallback(() => {
+      if (pageNo >= 0) {
+        PopularTemples(0, 100);
+      }
+      return () => { };
+    }, []),
+  );
+
+  // useEffect(() => {
+  //   NearByTemples();
+  //   eventsByCommunity();
+  // }, [isFocused]);
 
   const renderLoder = () => {
     return loader ? (
@@ -104,15 +156,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
 
 
 
-  useFocusEffect(
-    useCallback(() => {
-      if (pageNo >= 0) {
-        PopularTemplesss(0, 100);
-      }
-      return () => { };
-    }, []),
-  );
   const SearchPopTemp = async txt => {
+    console.log('ooooooooooooooooooo')
     try {
       let result = await SearchPopularTemples(txt);
       if (result?.status === 200) {
@@ -126,15 +171,15 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   return (
     <>
       {loader ? (
-        <View style={{flex: 1,marginTop:'-3%'}}>
-                  <Loader color={colors.orangeColor} size={'large'} />
+        <View style={{ flex: 1, marginTop: '-3%' }}>
+          <Loader color={colors.orangeColor} size={'large'} />
         </View>
       ) : (
         <ScrollView>
           <View
             style={{
-             marginTop: statusBarHeight,
-             height: 60,
+              marginTop: statusBarHeight,
+              height: 60,
             }}
           >
             <TopBarcard
@@ -154,7 +199,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                   showCrossPress={true}
                   onCrossPress={() => {
                     setSearchedText('');
-                    PopularTemplesss();
+                    PopularTemples();
                     setNearBy(true);
                   }}
                   bgColor={colors.white}
@@ -169,7 +214,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               colors={[colors.orangeColor]}
               onRefresh={() => {
                 setRefreshing(true);
-                PopularTemplesss(pageNo, 100);
+                PopularTemples(pageNo, 100);
                 setLoader(false)
               }}
             />
@@ -271,7 +316,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               <>
                 <ScrollView style={{ paddingLeft: 12 }}>
                   <View style={styles.upComingTextTab}>
-                    <Text style={{...styles.nearbyTextContainer}}>
+                    <Text style={{ ...styles.nearbyTextContainer }}>
                       Nearby Temples
                     </Text>
                     <TouchableOpacity

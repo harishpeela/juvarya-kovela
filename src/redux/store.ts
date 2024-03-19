@@ -7,12 +7,16 @@ import authSlice from './slices/authSlice';
 import homeFeedSlice from './slices/homeFeedSlice';
 import { authService } from './services/authService';
 import { homeFeedService } from './services/homeFeedService';
+import { notificationService } from './services/notificationService';
+import { searchService } from './services/searchService';
 
 const rootReducers = combineReducers({
   auth: authSlice,
   homeFeed:homeFeedSlice,
   [authService.reducerPath]: authService.reducer,
   [homeFeedService.reducerPath]: homeFeedService.reducer,
+  [notificationService.reducerPath]: notificationService.reducer,
+  [searchService.reducerPath]:searchService.reducer,
 });
 
 const persistConfig = {
@@ -30,7 +34,9 @@ export const store = configureStore({
       serializableCheck: false,
     }).concat(
       authService.middleware,
-      homeFeedService.middleware
+      homeFeedService.middleware,
+      notificationService.middleware,
+      searchService.middleware,
     ),
 });
 

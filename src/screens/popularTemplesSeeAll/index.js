@@ -16,6 +16,7 @@ import {allTexts, colors} from '../../common';
 import {PopularTemples} from '../../utils/api';
 import {Loader} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   const [popTemples, setPopTemples] = useState([]);
@@ -65,8 +66,8 @@ const SeeAll = ({navigation}) => {
   // console.log('pop see all temples', popTemples);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={{height: '9%', marginTop: '3%'}}>
-        <TopBarCard2 marginLeft={'15%'} back={true} txt={'Popular Temples '} navigation={navigation} />
+      <View style={{height: 60, marginTop: statusBarHeight}}>
+        <TopBarCard2  back={true} txt={'Popular Temples '} navigation={navigation} />
       </View>
       {!popTemples?.length > 0 ? (
         <View style={styles.loaderContainer}>

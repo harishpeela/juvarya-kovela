@@ -1,15 +1,15 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {BASE} from '../../api/api';
+import {POPULARURL} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
 
 // Define a service using a base URL and expected endpoints
 
-export const homeFeedService = createApi({
-  reducerPath: 'homeFeedService',
+export const notificationService = createApi({
+  reducerPath: 'notificationService',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE,
+    baseUrl: POPULARURL,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -20,13 +20,13 @@ export const homeFeedService = createApi({
     },
   }),
   endpoints: builder => ({
-    getHomeFeedData: builder.query<any, { pageNo: number; pageSize: number }>({
-      query: ({ pageNo, pageSize }) => `${endpoints.GET_HOME_FEED_LIST}?pageNo=${pageNo}&pageSize=${pageSize}`
+    getNotificationData: builder.query<any,any>({
+      query: () => endpoints.NOTIFICATIONS
     })
   })
 
 });
 
 export const {
-  useLazyGetHomeFeedDataQuery,
-} = homeFeedService;
+  useLazyGetNotificationDataQuery,
+} = notificationService;

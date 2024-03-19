@@ -1,22 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect, useCallback } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import { View, RefreshControl, Text, useColorScheme, Alert } from 'react-native';
 import { TopBarcard } from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
-import { getHomeFeedList, getNotifications, DeleteFeedData } from '../../utils/api';
+import { DeleteFeedData } from '../../utils/api';
 import { UserFeedCompList } from '../../components';
 import { Loader } from '../../components';
 import { allTexts, colors } from '../../common';
 import { FlatList } from 'react-native-gesture-handler';
 import Share from 'react-native-share';
 import { statusBarHeight } from '../../utils/config/config';
+import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks';
+import { useLazyGetHomeFeedDataQuery } from '../../redux/services/homeFeedService';
+import { homeFeedAction } from '../../redux/slices/homeFeedSlice';
+
 
 const UserFeedScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
-  const [homeFeedList, setHomeFeedList] = useState([]);
+  const [homeFeedList, setHomeFeedList] = useState(null);
   const [refreshing, setRefreshing] = useState(true);
   const [apiPageNo, setApiPageNo] = useState(0);
   const [apiPageSize, setApiPageSize] = useState(20);
@@ -25,24 +28,51 @@ const UserFeedScreen = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const isDarkMode = useColorScheme() === 'dark';
+  console.log('homeFeedList---->',homeFeedList);
 
-  console.log('BBBBBBBBBBBBBBBBBBBB')
-  const listFeed = async (pgNo, pgSize) => {
-    setLoader(true);
+  //Redux hooks
+  const homeFeed = useAppSelector(state => state.homeFeed) || null;
+  const [getHomeFeed] = useLazyGetHomeFeedDataQuery()
+  const dispatch = useAppDispatch();
+
+  const getHomeFeedData = () => {
+    if (homeFeed && homeFeed.homeFeedData) {
+    setHomeFeedList(homeFeed && homeFeed.homeFeedData);
+    setLoader(false);
+    setIsLoading(false);
+    setRefreshing(false);
+    }else {
+      setLoader(false);
+      setRefreshing(false);
+    }
+  }
+
+  useEffect(() => {
+    getHomeFeedData();
+  }, [homeFeed]);
+
+
+  const listFeed = async (pageNo = 0, pageSize =20) => {
     try {
-      let result = await getHomeFeedList(pgNo, pgSize);
-      // console.log('data>>>>>>>>>>>>>....',result.data)
-      if (result && result.status === 200) {
-        setLoader(false);
-        setHomeFeedList(result.data.jtFeeds);
-        setIsLoading(false);
-        setRefreshing(false);
-      } else {
-        setLoader(false);
-        setRefreshing(false);
-      }
+      let data = {
+        pageNo: pageNo,
+        pageSize: pageSize,
+      };
+      getHomeFeed(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setHomeFeedList(response.jtFeeds);
+            dispatch(homeFeedAction(response.jtFeeds));
+          } else {
+            console.log('Error: Response is undefined');
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+        });
     } catch (error) {
-      console.log('error in listFeed', error);
+      console.log('error1--->', error);
     }
   };
 
@@ -86,7 +116,6 @@ const UserFeedScreen = ({ navigation }) => {
               const result = await DeleteFeedData(id);
               if (result && result.data) {
                 console.log('Feed successfully deleted');
-                // Refresh feed list after deletion
                 listFeed(apiPageNo, apiPageSize);
               } else{
                 alert('you are not a admin to delete this feed')
@@ -100,20 +129,6 @@ const UserFeedScreen = ({ navigation }) => {
       { cancelable: false }
     );
   };
-
-  // useEffect(() => {
-  //   GetNotifications();
-  // }, []);
-
-  useFocusEffect(
-    useCallback(() => {
-      if (apiPageNo >= 0) {
-        listFeed(apiPageNo, apiPageSize);
-      }
-      return () => {};
-    }, [])
-  );
-
 
   return (
     <View style={{ flex: 1 ,backgroundColor:'white'}}>

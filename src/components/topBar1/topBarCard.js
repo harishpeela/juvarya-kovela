@@ -1,18 +1,15 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Entypo from 'react-native-vector-icons/Entypo';
-import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import { allTexts, colors } from '../../common';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getNotifications } from '../../utils/api';
-// import { GetProfilePic } from '../../utils/api';
-// import ApplicationContext from '../../utils/context-api/Context';
+import { useAppDispatch } from '../../redux/reduxHooks';
+import { useLazyGetNotificationDataQuery } from '../../redux/services/notificationService';
+
 
 export const TopBarcard = ({
   txtColor,
@@ -35,66 +32,62 @@ export const TopBarcard = ({
   height,
 }) => {
   const [img, setImg] = useState(null);
-  // const ProfilePic = async () => {
-  //   let result = await GetProfilePic(userDetails?.email);
-  //   if(result?.data){
-  //     setImg(result?.data);
-  //   } else {
-  //     setImg(null);
-  //   }
-  // };
-  // useEffect(() => {
-  //   ProfilePic();
-  // })
   const [notificationsCount, setNotificationCount] = useState(0);
+  const [getNotification] = useLazyGetNotificationDataQuery()
 
   const GetNotificationsCount = async () => {
     try {
-      let result = await getNotifications();
-      let Data = result?.data?.customerRoles;
-      let mapping = Data?.filter(item => item)?.map(({notifications}) => ({
-        notifications,
-      }));
-      let FilteredData = mapping[0]?.notifications;
-      if(FilteredData?.length > 10){
-        setNotificationCount("9+");
-      }
-      else{
-        setNotificationCount(FilteredData?.length);
-      }
-     
+      getNotification()
+        .unwrap()
+        .then(response => {
+          let Data = response?.customerRoles;
+          let mapping = Data?.filter(item => item)?.map(({ notifications }) => ({
+            notifications,
+          }));
+          let FilteredData = mapping[0]?.notifications;
+          if (FilteredData?.length > 10) {
+            setNotificationCount("9+");
+          }
+          else {
+            setNotificationCount(FilteredData?.length);
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+        });
     } catch (error) {
-      console.log('error in notifications while fetching for notifications count on topBarCard ', error);
+      console.log('error notifications count on topBarCard ', error);
     }
   };
 
   useEffect(() => {
     GetNotificationsCount();
   }, []);
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15,alignItems:'center' }}>
+        <View style={{ flex: 0.15, alignItems: 'center' }}>
           {menu && (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.newuserprofile)
-                }
-                style={styles.userIcon}>
-                {img ? (
-                  <Image
-                    source={{ uri: img?.url }}
-                    height={40}
-                    width={40}
-                  />
-                ) : (
-                    <EvilIcons
-                      name="user"
-                      size={45}
-                      color={colors.orangeColor}
-                    />
-                )}
-              </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.newuserprofile)
+              }
+              style={styles.userIcon}>
+              {img ? (
+                <Image
+                  source={{ uri: img?.url }}
+                  height={40}
+                  width={40}
+                />
+              ) : (
+                <EvilIcons
+                  name="user"
+                  size={45}
+                  color={colors.orangeColor}
+                />
+              )}
+            </TouchableOpacity>
           )}
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
@@ -140,7 +133,7 @@ export const TopBarcard = ({
           )}
           {children}
         </View>
-        <View style={{ flex: 0.15, alignItems:'center' }}>
+        <View style={{ flex: 0.15, alignItems: 'center' }}>
           {isBell && (
             <TouchableOpacity
               onPress={() =>
@@ -151,15 +144,15 @@ export const TopBarcard = ({
                 {
                   notificationsCount !== 0 && (
                     <>
-                    <View style={styles.notificationsCount}>
-                  <Text style={styles.notificationCountNumber}>
-                    {notificationsCount}
-                  </Text>
-                  </View>
+                      <View style={styles.notificationsCount}>
+                        <Text style={styles.notificationCountNumber}>
+                          {notificationsCount}
+                        </Text>
+                      </View>
                     </>
-                  ) 
+                  )
                 }
-                
+
               </View>
             </TouchableOpacity>
           )}
@@ -192,7 +185,7 @@ export const TopBarCard2 = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15, alignItems:'center'  }}>
+        <View style={{ flex: 0.15, alignItems: 'center' }}>
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
@@ -218,7 +211,7 @@ export const TopBarCard2 = ({
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.7}}>
+        <View style={{ flex: 0.7 }}>
           {txt && (
             <Text
               style={{
@@ -234,7 +227,7 @@ export const TopBarCard2 = ({
           )}
           {children}
         </View>
-        <View style={{ flex: 0.15}}>
+        <View style={{ flex: 0.15 }}>
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
             <TouchableOpacity
               onPress={navCreate}>
@@ -279,7 +272,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:'3%'
+    marginTop: '3%'
   },
   children: {
     flex: 0.70,
@@ -327,21 +320,21 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
   },
-  notificationsCount:{
-    borderWidth:1,
-    borderColor:colors.orangeColor,
-    backgroundColor:"white",
-    borderRadius:10,
-    height:18,
-    width:18,
-    alignItems:"center",
-    justifyContent:'center',
-    position:"absolute",
-    top:-5,
-    left:15
+  notificationsCount: {
+    borderWidth: 1,
+    borderColor: colors.orangeColor,
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: 18,
+    width: 18,
+    alignItems: "center",
+    justifyContent: 'center',
+    position: "absolute",
+    top: -5,
+    left: 15
   },
-  notificationCountNumber:{
-    color:colors.orangeColor,
-    fontSize:10
+  notificationCountNumber: {
+    color: colors.orangeColor,
+    fontSize: 10
   }
 });

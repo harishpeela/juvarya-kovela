@@ -22,18 +22,11 @@ import { useAppSelector } from '../../redux/reduxHooks';
 const Tab = createBottomTabNavigator();
 
 export default BottomTabBase = ({ navigation }) => {
-  // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
-  // const GetSearchScreen = () => <Search navigation={navigation} />;
-  // const GetFavScreen = () => <Favorite navigation={navigation} />;
-  // const GetProfileScreen = () => <Profile navigation={navigation} />;
-  // const GetEventScreen = () => <EventsScreen navigation={navigation} />;
-  // const GetReelsScreen = () => <KovelaReels navigation={navigation} />;
-
   const [homeFeedListData, setHomeFeedListData] = useState(null);
 
   //Redux hooks
   const homeFeed = useAppSelector(state => state.homeFeed) || null;
-  const getHomeFeedData = async () => {
+  const getHomeFeedData = () => {
     setHomeFeedListData(homeFeed && homeFeed.homeFeedData);
   }
   useEffect(() => {
