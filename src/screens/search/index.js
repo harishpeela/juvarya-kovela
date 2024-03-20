@@ -3,6 +3,7 @@ import {View, useColorScheme} from 'react-native';
 import React from 'react';
 import {PopularTemplesList} from '../../components';
 
+
 const Search = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
   return (

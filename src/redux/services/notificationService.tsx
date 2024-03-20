@@ -4,7 +4,6 @@ import {RootState} from '../store';
 import { endpoints } from '../../api';
 
 
-// Define a service using a base URL and expected endpoints
 
 export const notificationService = createApi({
   reducerPath: 'notificationService',

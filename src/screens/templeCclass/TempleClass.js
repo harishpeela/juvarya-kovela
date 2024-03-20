@@ -10,6 +10,7 @@ const TempleClass = ({route, navigation}) => {
   const [templeClassDetails, setTempleClassDetails] = useState([]);
   const {id, templeclass} = route.params || {};
   const [loader, setLoader] = useState(false);
+  console.log('AAAAAAAAAAAAAAAA')
   const TopTempleClass = async (pgNo, pgSize, templeClass) => {
     setLoader(true);
     let result = await getTempleClassDetails(pgNo, pgSize, templeClass);
@@ -102,3 +103,4 @@ const TempleClass = ({route, navigation}) => {
 };
 
 export default TempleClass;
+

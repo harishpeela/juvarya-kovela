@@ -17,26 +17,43 @@ import {PopularTemples} from '../../utils/api';
 import {Loader} from '../../components';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import { statusBarHeight } from '../../utils/config/config';
+import { useLazyGetPopularTempleDataQuery } from '../../redux/services/searchService';
+
 const SeeAll = ({navigation}) => {
   const isDarkMode = useColorScheme() === 'dark';
+
   const [popTemples, setPopTemples] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [apiPageNo, setApiPageNo] = useState(0);
-  const PopularSeeAllTemples = async (pgNo, pgToNo) => {
+
+
+  const [getPopularTemple] = useLazyGetPopularTempleDataQuery();
+
+  const PopularSeeAllTemples = (pgNo, pgToNo) => {
     setIsLoading(true);
     try {
-      let result = await PopularTemples(pgNo, pgToNo);
-      // console.log('see all', result?.data);
-      if (result.status === 200) {
-        let PopData = result?.data?.data;
-        setPopTemples([...popTemples, ...PopData]);
-        setIsLoading(false);
-      }
+      let data = {
+        pageNo: pgNo,
+        pageSize: pgToNo,
+      };
+      getPopularTemple(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setIsLoading(false);
+            let templeData = response?.data
+            setPopTemples([...popTemples, ...templeData]);
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+          setIsLoading(false);
+        });
     } catch (error) {
-      console.log('error in see all popular temples api', error);
+      setIsLoading(false);
+      console.log('error in popular temples5', error);
     }
   };
-
   const renderLoder = () => {
     return !isLoading ? (
       <Text style={{alignSelf: 'center', marginBottom: '5%', color: 'black'}}>
@@ -98,9 +115,6 @@ const SeeAll = ({navigation}) => {
                   />
                   <View style={{marginLeft: 10}}>
                     <Text style={{color: colors.orangeColor}}>{item.name}</Text>
-                    {/* <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
-                        {item.description}{' '}
-                      </Text> */}
                   </View>
                 </View>
               </TouchableOpacity>

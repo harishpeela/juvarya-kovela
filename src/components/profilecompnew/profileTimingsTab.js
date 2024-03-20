@@ -5,7 +5,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {useNavigation} from '@react-navigation/native';
 export const ProfileTimingTabs = ({data, id}) => {
-  const [templeClass, setTempleClass] = useState(' ');
+
   const navigation = useNavigation();
   console.log('id-------->', data?.id);
   console.log('templeclass========>', data?.templeClass);
@@ -105,3 +105,4 @@ const styles = StyleSheet.create({
     marginRight:'0.5%'
   },
 });
+

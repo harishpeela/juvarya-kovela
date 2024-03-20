@@ -1,5 +1,5 @@
-import {configureStore, combineReducers} from '@reduxjs/toolkit';
-import {persistReducer, persistStore} from 'redux-persist';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { persistReducer, persistStore } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //Import all reducers here
@@ -8,15 +8,21 @@ import homeFeedSlice from './slices/homeFeedSlice';
 import { authService } from './services/authService';
 import { homeFeedService } from './services/homeFeedService';
 import { notificationService } from './services/notificationService';
-import { searchService } from './services/searchService';
+import { searchService, searchService2 } from './services/searchService';
+import { templeProfileService, templeProfileService2, templeProfileService3, templeProfileService4 } from './services/templeProfileService';
 
 const rootReducers = combineReducers({
   auth: authSlice,
-  homeFeed:homeFeedSlice,
+  homeFeed: homeFeedSlice,
   [authService.reducerPath]: authService.reducer,
   [homeFeedService.reducerPath]: homeFeedService.reducer,
   [notificationService.reducerPath]: notificationService.reducer,
-  [searchService.reducerPath]:searchService.reducer,
+  [searchService.reducerPath]: searchService.reducer,
+  [searchService2.reducerPath]: searchService2.reducer,
+  [templeProfileService.reducerPath]: templeProfileService.reducer,
+  [templeProfileService2.reducerPath]: templeProfileService2.reducer,
+  [templeProfileService3.reducerPath]: templeProfileService3.reducer,
+  [templeProfileService4.reducerPath]: templeProfileService4.reducer,
 });
 
 const persistConfig = {
@@ -37,12 +43,14 @@ export const store = configureStore({
       homeFeedService.middleware,
       notificationService.middleware,
       searchService.middleware,
+      searchService2.middleware,
+      templeProfileService.middleware,
+      templeProfileService2.middleware,
+      templeProfileService3.middleware,
+      templeProfileService4.middleware,
     ),
 });
 
 export const persistor = persistStore(store);
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

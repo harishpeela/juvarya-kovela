@@ -28,7 +28,6 @@ const UserFeedScreen = ({ navigation }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const isDarkMode = useColorScheme() === 'dark';
-  console.log('homeFeedList---->',homeFeedList);
 
   //Redux hooks
   const homeFeed = useAppSelector(state => state.homeFeed) || null;

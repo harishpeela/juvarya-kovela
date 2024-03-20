@@ -25,7 +25,9 @@ import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist }
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { Artist_Search } from '../artist_search';
 import { statusBarHeight } from '../../utils/config/config';
-import { useLazyGetPopularTempleDataQuery } from '../../redux/services/searchService';
+import { useLazyGetPopularTempleDataQuery, useLazyGetNearByTempleDataQuery, useLazyGetEventsByCommunityQuery, useLazySearchPopularTempleDataQuery } from '../../redux/services/searchService';
+
+
 
 export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
 
@@ -47,10 +49,11 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
 
   //RTK Query
   const [getPopularTemple] = useLazyGetPopularTempleDataQuery();
-  const [getNearByTemple] = useLazyGetPopularTempleDataQuery();
+  const [getNearByTemple] = useLazyGetNearByTempleDataQuery();
+  const [getEventByCommunityId] = useLazyGetEventsByCommunityQuery();
+  const [searchPopulatTemple]= useLazySearchPopularTempleDataQuery();
 
   const PopularTemples = () => {
-    console.log('LLLLLLLLLLLLLL')
     setLoader(true);
     try {
       let data = {
@@ -80,51 +83,92 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     }
   };
 
-  // const PopularTemples = async () => {
-  //   console.log('LLLLLLLLLLLLLL')
-  //   setLoader(true);
-  //   try {
-  //     let result = await PopularTemples(0, 100);
-  //     // console.log('populattemples', result?.data);
-  //     if (result) {
-  //       const dty = result?.data?.data || [];
-  //       setLoading(false);
-  //       setfilteredArray(dty);
-  //       setFilteredList(dty);
-  //       setLoader(false);
-  //       setRefreshing(false);
-  //     }
-  //   } catch (error) {
-  //     setLoader(false);
-  //     setRefreshing(false);
-  //     console.log('error in popular temples5', error);
-  //   }
-  // };
-
-  const NearByTemples = async () => {
-    console.log('MMMMMMMMMMMM')
+  const nearByTemple = () => {
     setLoader(true);
-    let result = await getNearByTemples('VSP, AKP', 0, 20);
-    // console.log('result.date ====>', result.data);
-    if (result) {
-      setNearByData(result?.data.data);
-      // setLoader(false);
-    } else {
-      setNearByData([]);
-      // setLoader(false);
+    try {
+      let data = {
+        code: 'VSP, AKP',
+        pageNo: 0,
+        pageSize: 20,
+      }
+      getNearByTemple(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setLoading(false)
+            setNearByData(response.data)
+            setLoader(false);
+          }
+        })
+        .catch(error => {
+          setLoader(false);
+          console.log('error', error)
+        })
+    } catch (error) {
+      setLoader(false);
+      console.log('error in nearby temples', error);
+    }
+  }
+
+  const eventsByCommunity = () => {
+    setLoader(true);
+    try {
+      let data = {
+        pageNo: 0,
+        pageSize: 100,
+        customerId: 3
+      }
+      getEventByCommunityId(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setEventCommunity(response.data)
+            setLoader(false);
+          }
+        })
+        .catch(error => {
+          setLoader(false);
+          console.log('error', error)
+        })
+    } catch (error) {
+      setLoader(false);
+      console.log(error)
     }
   };
 
-  const eventsByCommunity = async () => {
-    console.log('NNNNNNNNNNNNNNnn')
-    let result = await GetArtist(0, 100, 3);
-    console.log('result of community id', result?.data);
-    if (result?.status === 200) {
-      setEventCommunity(result?.data?.data);
-    } else {
-      // alert('no data')
+  const SearchPopTemp = txt => {
+    setLoader(true);
+    try {
+      searchPopulatTemple(txt)
+        .unwrap()
+        .then(response => {
+          console.log('search ==========>', response)
+          if (response) {
+            setFilteredData(response.data)
+            setLoader(false);
+          }
+        })
+        .catch(error => {
+          setLoader(false);
+          console.log('error', error)
+        })
+    } catch (error) {
+      console.log('error in search pop temp', error);
     }
-  }
+  };
+
+  // const SearchPopTemp = async txt => {
+  //   console.log('ooooooooooooooooooo')
+  //   try {
+  //     let result = await SearchPopularTemples(txt);
+  //     if (result?.status === 200) {
+  //       setFilteredData(result?.data?.data);
+  //     }
+  //   } catch (error) {
+  //     console.log('error in search pop temp', error);
+  //   }
+  // };
+  // console.log('filtered array ===>', filteredArray);
 
   useFocusEffect(
     useCallback(() => {
@@ -135,10 +179,10 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     }, []),
   );
 
-  // useEffect(() => {
-  //   NearByTemples();
-  //   eventsByCommunity();
-  // }, [isFocused]);
+  useEffect(() => {
+    nearByTemple();
+    eventsByCommunity();
+  }, []);
 
   const renderLoder = () => {
     return loader ? (
@@ -153,21 +197,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     setPageNo(pageNo + 1);
     setIsLoading(false);
   };
-
-
-
-  const SearchPopTemp = async txt => {
-    console.log('ooooooooooooooooooo')
-    try {
-      let result = await SearchPopularTemples(txt);
-      if (result?.status === 200) {
-        setFilteredData(result?.data?.data);
-      }
-    } catch (error) {
-      console.log('error in search pop temp', error);
-    }
-  };
-  // console.log('filtered array ===>', filteredArray);
+ 
+ 
   return (
     <>
       {loader ? (
