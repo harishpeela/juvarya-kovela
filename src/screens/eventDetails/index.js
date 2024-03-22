@@ -20,10 +20,11 @@ import Card from '../../common/Card';
 import { IntrestedEvents, Event_Highlights, Event_Info, getIntrestedEventById } from '../../utils/api';
 import { FlatList } from 'react-native-gesture-handler';
 import { setIn } from 'formik';
+import { statusBarHeight } from '../../utils/config/config';
 
 const EventDetails = ({ navigation, route }) => {
   const { item, role, roleId } = route?.params || {};
-  // console.log('item', roleId, role);
+
   console.log(item?.mediaList?.length);
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeImgIndex, setActiveImgIndex] = useState(0);
@@ -360,7 +361,7 @@ const EventDetails = ({ navigation, route }) => {
   ];
   return (
     <View style={styles.container}>
-      <View style={{ height: '10%', marginTop: '3%' }}>
+      <View style={{ height: 60, marginTop: statusBarHeight }}>
         <TopBarCard2
           txt={'Event Details'}
           back={true}

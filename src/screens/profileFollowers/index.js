@@ -16,6 +16,8 @@ import { Ellipsis } from '../../components';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import { TopBarCard2, TopBarcard } from '../../components/topBar1/topBarCard';
 import { statusBarHeight } from '../../utils/config/config';
+import { useLazyGetTempleFollowersListQuery } from '../../redux/services/templeProfileService';
+
 const FollowersMembership = ({ route, navigation }) => {
   const [followersList, setFollowersList] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -23,24 +25,31 @@ const FollowersMembership = ({ route, navigation }) => {
   const [filteredData, setFilteredData] = useState(followersList);
   const { id } = route.params || {};
   const [loading, setLoading] = useState(false);
-  let TempleFolowers = async () => {
-    try {
-      let result = await TempleFollowersList(0, 100, id);
-      if (result?.status === 200) {
-        console.log('data of temple followers', result?.data?.data[0]);
-        setLoader(false);
-        // if(result?.data?.data)
-        if (result?.data?.data !== undefined) {
-          setFollowersList(result?.data?.data);
-        }
-      } else {
-        setLoader(false);
-      }
-    } catch (error) {
-      console.log('error in temple folowers', error);
-    }
-  };
 
+  const [templeFollowersList]=useLazyGetTempleFollowersListQuery()
+
+  let TempleFolowers = async () => {
+    setLoader(true)
+      let data = {
+        pageNo: 0,
+        pageSize: 100,
+        profileId: id
+      };
+      templeFollowersList(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            setLoader(false);
+            setFollowersList(response.data)
+          } else {
+            setLoader(false);
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+          setLoader(false);
+      });
+    }
   useEffect(() => {
     TempleFolowers();
   }, [route]);

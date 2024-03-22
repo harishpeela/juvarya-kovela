@@ -5,23 +5,35 @@ import {Loader} from '../../components';
 import {TopBarCard2, TopBarcard} from '../../components/topBar1/topBarCard';
 import {FlatList} from 'react-native-gesture-handler';
 import {allTexts, colors} from '../../common';
+import {statusBarHeight} from '../../utils/config/config'
+import { useLazyGetTempleClassQuery } from '../../redux/services/templeProfileService';
 
 const TempleClass = ({route, navigation}) => {
   const [templeClassDetails, setTempleClassDetails] = useState([]);
   const {id, templeclass} = route.params || {};
   const [loader, setLoader] = useState(false);
-  console.log('AAAAAAAAAAAAAAAA')
-  const TopTempleClass = async (pgNo, pgSize, templeClass) => {
+
+  const[ getTempleClass] = useLazyGetTempleClassQuery();
+
+  const TopTempleClass = async (pageNo, pageSize, templeclass) => {
     setLoader(true);
-    let result = await getTempleClassDetails(pgNo, pgSize, templeClass);
-    console.log('templeCLass', result?.data);
-    if (result?.status === 200) {
-      setTempleClassDetails(result?.data?.data);
-      setLoader(false);
-    } else {
-      setLoader(false);
+    let data = {
+      templeclass: templeclass,
+      pageNo: pageNo,
+      pageSize: pageSize,
     }
+    getTempleClass(data)
+      .unwrap()
+      .then(response => {
+        setTempleClassDetails(response.data);
+        setLoader(false);
+      }
+      )
+      .catch(error => {
+        setLoader(false);
+      })
   };
+
   const onSelect = data => {
     // setIsLiked(data?.selected);
   };
@@ -32,7 +44,7 @@ const TempleClass = ({route, navigation}) => {
 
   return (
     <View style={{flex: 1,backgroundColor:'white'}}>
-      <View style={{height: 70, marginTop: '3%'}}>
+      <View style={{height: 60, marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Temple Class'}
@@ -55,7 +67,7 @@ const TempleClass = ({route, navigation}) => {
                 onPress={() => {navigation.navigate(allTexts.screenNames.viewtempleprofile, {
                   data: item,
                   onSelect: onSelect,
-                }); console.log('item===>', item)}}
+                })}}
                 style={{
                   borderWidth: 0.3,
                   display: 'flex',

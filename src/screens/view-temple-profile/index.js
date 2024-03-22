@@ -131,8 +131,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
           getFollowValue(result?.jtProfile);
           followingCount(result?.jtProfile);
         }
-      } else {
-        setTrfData();
       }
     }
   }, [data])
@@ -296,7 +294,6 @@ const ViewTempleProfile = ({ route, navigation }) => {
     getTempleDonation(data)
       .unwrap()
       .then(response => {
-        console.log('temple Donataion Res------->', response)
         if (response) {
           setDonationValue(response?.data[0]);
           setDonationLoader(false);

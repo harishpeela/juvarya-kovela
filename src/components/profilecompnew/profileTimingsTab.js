@@ -7,8 +7,6 @@ import {useNavigation} from '@react-navigation/native';
 export const ProfileTimingTabs = ({data, id}) => {
 
   const navigation = useNavigation();
-  console.log('id-------->', data?.id);
-  console.log('templeclass========>', data?.templeClass);
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -44,7 +42,6 @@ export const ProfileTimingTabs = ({data, id}) => {
                 {data?.templeClass}
               </Text>
               <Text style={{color: colors.black,marginLeft:'3%'}}>
-                
                 Top Temple
               </Text>
             </View>

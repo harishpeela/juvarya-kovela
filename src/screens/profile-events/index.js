@@ -15,67 +15,48 @@ import { styles } from './styles';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import { TopBarCard2 } from '../../components/topBar1/topBarCard';
 import { statusBarHeight } from '../../utils/config/config';
+import { useLazyGetEventListQuery } from '../../redux/services/templeProfileService';
 
-const modalStyles = {
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    marginTop: '-39%',
-    marginRight: '-35%',
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: 35,
-    height: '50%',
-    width: '50%',
-    alignItems: 'center',
-    color:'black',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-};
+
 
 const Profile_Events = ({ navigation, route }) => {
 const {id, data, role, roleType} = route?.params || {};
 console.log('rolesss', role, 'roles', roleType);
-  const { userDetails } = useContext(ApplicationContext);
+
   const [loader, setLoader] = useState(false);
   const [searchedText, setSearchedText] = useState('');
   const [eventsData, setEventsData] = useState([]);
-  const [eventsLoader, setEventsLoader] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedTemple, setSelectedTemple] = useState(null);
 
-  const EventsList = async () => {
-    setLoader(true);
-    try {
-      let result = await EventList(0, 200);
-      // console.log('list of events', result?.data);
-      if (result.status === 200) {
-        let filtering = result?.data?.data;
-        setEventsData(result?.data?.data);
-        setLoader(false);
-      } else {
-        setLoader(false);
-      }
-    } catch (error) {
-      console.log('error in events list', error);
-      setLoader(false);
-    }
-  };
+  const [getEventList] = useLazyGetEventListQuery();
 
-  useEffect(() => {
-  }, [data]);
+  const eventsListData = () => {
+    setLoader(true)
+    let data = {
+      pageNo: 0,
+      pageSize: 200,
+    };
+    getEventList(data)
+      .unwrap()
+      .then(response => {
+        if (response) {
+          setLoader(false);
+          setEventsData(response.data)
+        } else {
+          setLoader(false);
+        }
+      })
+      .catch(error => {
+        console.log('error===>', error);
+        setLoader(false);
+    });
+  };
+ 
+  useEffect(()=>{
+    eventsListData()
+  },[])
+
   return (
     <View style={{ flex: 1 ,backgroundColor:'white'}}>
       <View
@@ -101,9 +82,9 @@ console.log('rolesss', role, 'roles', roleType);
               }}
               value={searchedText}
               loading={false}
-              onCrossPress={async () => {
+              onCrossPress={() => {
                 setSearchedText('');
-                await EventsList();
+                eventsListData();
               }}
               // bgColor={colors.blue}
               placeHolder={'Search Events'}
@@ -136,6 +117,7 @@ console.log('rolesss', role, 'roles', roleType);
             <>
               {data?.length ? (
                 <FlatList
+                  // data={eventsData ? eventsData : data}
                   data={data}
                   showsVerticalScrollIndicator={false}
                   contentContainerStyle={styles.flatListStyle}
@@ -194,4 +176,32 @@ console.log('rolesss', role, 'roles', roleType);
   );
 };
 
+const modalStyles = {
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    marginTop: '-39%',
+    marginRight: '-35%',
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 35,
+    height: '50%',
+    width: '50%',
+    alignItems: 'center',
+    color:'black',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+};
 export default Profile_Events;

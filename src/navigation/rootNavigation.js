@@ -136,7 +136,7 @@ const rootNavigation = () => {
   const [getHomeFeed] = useLazyGetHomeFeedDataQuery()
   const dispatch = useAppDispatch();
 
-  const getFollowedTempleList = async () => {
+  const getFollowedTempleList = () => {
 
     try {
       let data = {

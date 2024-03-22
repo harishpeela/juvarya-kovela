@@ -36,6 +36,9 @@ export const templeProfileService = createApi({
     getTempleCommunity: builder.query<any, any>({
       query: (profileId) => `${endpoints.TEMPLE_COMMUNITY}/${profileId}`,
     }),
+    getTempleClass: builder.query<any, { pageNo: number; pageSize: number; templeclass: number }>({
+      query: ({ pageNo, pageSize, templeclass }) => `${endpoints.GET_TEMPLE_CLASS}/byTempleClass?pageNo=${pageNo}&pageSize=${pageSize}&templeClass=${templeclass}`,
+    }),
   }),
 });
 
@@ -51,6 +54,9 @@ export const templeProfileService2 = createApi({
     }),
     getNewFollowCount: builder.query<any, any>({
       query: (profileId) => `${endpoints.NEW_FOLLOW_COUNT}/${profileId}`,
+    }),
+    getTempleFollowersList: builder.query<any, { pageNo: number; pageSize: number; profileId: number }>({
+      query: ({ pageNo, pageSize, profileId }) => `${endpoints.TEMPLE_FOLLOWERS_LIST}?pageNo=${pageNo}&pageSize=${pageSize}&profileId=${profileId}`
     }),
   }),
 });
@@ -72,6 +78,9 @@ export const templeProfileService4 = createApi({
     getProfileEvents: builder.query<any, { pageNo: number; pageSize: number; profileId: number }>({
       query: ({ pageNo, pageSize, profileId }) => `${endpoints.PROFILE_EVENTS}?pageNo=${pageNo}&pageSize=${pageSize}&itemId=${profileId}`,
     }),
+    getEventList:builder.query<any, { pageNo: number; pageSize: number }>({
+      query: ({ pageNo, pageSize }) =>  `${endpoints.EVENTS_LIST}?&page=${pageNo}&pageSize=${pageSize}`
+    }),
   }),
 });
 
@@ -80,8 +89,14 @@ export const {
   useLazyGetTempleDetailsQuery,
   useLazyGetTempleAddressQuery,
   useLazyGetTempleCommunityQuery,
+  useLazyGetTempleClassQuery,
 } = templeProfileService
 
-export const { useLazyGetTemplePostsQuery, useLazyGetNewFollowUnFollowByIdQuery, useLazyGetNewFollowCountQuery } = templeProfileService2
+export const { useLazyGetTemplePostsQuery,
+  useLazyGetNewFollowUnFollowByIdQuery,
+  useLazyGetNewFollowCountQuery,
+  useLazyGetTempleFollowersListQuery
+} = templeProfileService2
+
 export const { useLazyGetTempleDonationQuery } = templeProfileService3
-export const { useLazyGetProfileEventsQuery } = templeProfileService4
+export const { useLazyGetProfileEventsQuery, useLazyGetEventListQuery } = templeProfileService4
