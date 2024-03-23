@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinRegular,
     fontSize: 16,
     height: 40,
-    width:"100%",
+    width:"93%",
     borderRadius:20,
     textAlign:'center',
     backgroundColor:'#F6F6F6',

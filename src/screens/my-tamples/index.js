@@ -25,7 +25,7 @@ const MyTemples = ({navigation}) => {
 
   const deleteSeasonal = (id) => {
     console.log('=====', id)
-    Alert.alert('Alert', ' Are you sure you want to delete the selected Temple?', [
+    Alert.alert('Alert', 'Are you sure you want to delete the selected Temple?', [
       { text: 'Yes', onPress: async () => {
         let responce = await deleteCommunityTemple(id);
       //  console.log(responce?.data, 'responce of delete');

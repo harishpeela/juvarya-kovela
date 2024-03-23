@@ -122,12 +122,12 @@ const endpoints = {
   REELS_LIST: 'jtreel/list',
   SAVE_REEL: 'jtreel/create',
   USER_REEL: 'jtreel/list',
-  GET_ARTIST:'jtprofiletoartist/create',
-  GET_DONOR:'jtIdolDonation/save',
+  GET_ARTIST: 'jtprofiletoartist/create',
+  GET_DONOR: 'jtIdolDonation/save',
   EVENT_BY_COMMUNITY_ID: 'jtprofile/byCommunity',
   DELETE_COMMUNITY_TEMPLE: 'jtprofile/delete/profile',
   COMMUNITY_ID: 'jtdcommunities/list',
-  EVENT_INTRESETD_DETAILS:'jtInterestedEvents/interested?eventId', 
+  EVENT_INTRESETD_DETAILS: 'jtInterestedEvents/interested?eventId',
   ARTIST: 'customer/nearbyartists',
   STORE_LOCALHOST: 'v1/product/store/products?',
 };
@@ -458,7 +458,7 @@ export const getNewArtist = async data => {
     );
     return result;
   } catch (error) {
-    console.log('error', error);
+    console.log('error in new artist', error);
   }
 };
 
