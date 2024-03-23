@@ -58,6 +58,8 @@ import {
   ReelUpload,
   Community_Events_Seeall,
   Store,
+  Details_Screen,
+  AddArtist,
 } from './src/screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
@@ -135,7 +137,9 @@ const App = () => {
       artistDonorScreen,
       reelupload,
       communityeventsseeall,
-      store
+      store,
+      detailsscreen,
+      addartist,
     },
   } = allTexts;
 
@@ -191,6 +195,13 @@ const App = () => {
   const HomeStack = () => {
     return (
       <Stack.Navigator initialRouteName={bottomTab}>
+        <Stack.Screen
+          name={detailsscreen}
+          component={Details_Screen}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
@@ -563,6 +574,13 @@ const App = () => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name={addartist}
+          component={AddArtist}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -646,7 +664,9 @@ const App = () => {
           {loginDetails === null || loginDetails === '' ? (
             <AuthStack />
           ) : (
-            <HomeStack />
+            <>
+              <HomeStack />
+            </>
           )}
         </NavigationContainer>
       </SafeAreaProvider>
