@@ -7,10 +7,10 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
-import { allTexts, colors } from '../../common';
+import {allTexts, colors} from '../../common';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { getNotifications } from '../../utils/api';
+import {getNotifications} from '../../utils/api';
 // import { GetProfilePic } from '../../utils/api';
 // import ApplicationContext from '../../utils/context-api/Context';
 
@@ -35,17 +35,6 @@ export const TopBarcard = ({
   height,
 }) => {
   const [img, setImg] = useState(null);
-  // const ProfilePic = async () => {
-  //   let result = await GetProfilePic(userDetails?.email);
-  //   if(result?.data){
-  //     setImg(result?.data);
-  //   } else {
-  //     setImg(null);
-  //   }
-  // };
-  // useEffect(() => {
-  //   ProfilePic();
-  // })
   const [notificationsCount, setNotificationCount] = useState(0);
 
   const GetNotificationsCount = async () => {
@@ -56,15 +45,16 @@ export const TopBarcard = ({
         notifications,
       }));
       let FilteredData = mapping[0]?.notifications;
-      if(FilteredData?.length > 10){
-        setNotificationCount("9+");
-      }
-      else{
+      if (FilteredData?.length > 10) {
+        setNotificationCount('9+');
+      } else {
         setNotificationCount(FilteredData?.length);
       }
-     
     } catch (error) {
-      console.log('error in notifications while fetching for notifications count on topBarCard ', error);
+      console.log(
+        'error in notifications while fetching for notifications count on topBarCard ',
+        error,
+      );
     }
   };
 
@@ -74,33 +64,25 @@ export const TopBarcard = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15,alignItems:'center' }}>
+        <View style={{flex: 0.15, alignItems: 'center'}}>
           {menu && (
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.newuserprofile)
-                }
-                style={styles.userIcon}>
-                {img ? (
-                  <Image
-                    source={{ uri: img?.url }}
-                    height={40}
-                    width={40}
-                  />
-                ) : (
-                    <EvilIcons
-                      name="user"
-                      size={45}
-                      color={colors.orangeColor}
-                    />
-                )}
-              </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(allTexts.screenNames.newuserprofile)
+              }
+              style={styles.userIcon}>
+              {img ? (
+                <Image source={{uri: img?.url}} height={40} width={40} />
+              ) : (
+                <EvilIcons name="user" size={45} color={colors.orangeColor} />
+              )}
+            </TouchableOpacity>
           )}
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{ height: 10, width: 10 }}
+                style={{height: 10, width: 10}}
               />
             </TouchableOpacity>
           )}
@@ -108,7 +90,7 @@ export const TopBarcard = ({
             <TouchableOpacity style={styles.iconContainer} onPress={navBack}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{ height: 10, width: 10 }}
+                style={{height: 10, width: 10}}
               />
             </TouchableOpacity>
           )}
@@ -124,7 +106,7 @@ export const TopBarcard = ({
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.7, }}>
+        <View style={{flex: 0.7}}>
           {txt && (
             <Text
               style={{
@@ -140,7 +122,7 @@ export const TopBarcard = ({
           )}
           {children}
         </View>
-        <View style={{ flex: 0.15, alignItems:'center' }}>
+        <View style={{flex: 0.15, alignItems: 'center'}}>
           {isBell && (
             <TouchableOpacity
               onPress={() =>
@@ -148,18 +130,15 @@ export const TopBarcard = ({
               }>
               <View>
                 <Feather name="bell" size={30} color={colors.orangeColor} />
-                {
-                  notificationsCount !== 0 && (
-                    <>
+                {notificationsCount !== 0 && (
+                  <>
                     <View style={styles.notificationsCount}>
-                  <Text style={styles.notificationCountNumber}>
-                    {notificationsCount}
-                  </Text>
-                  </View>
-                    </>
-                  ) 
-                }
-                
+                      <Text style={styles.notificationCountNumber}>
+                        {notificationsCount}
+                      </Text>
+                    </View>
+                  </>
+                )}
               </View>
             </TouchableOpacity>
           )}
@@ -192,12 +171,12 @@ export const TopBarCard2 = ({
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={{ flex: 0.15, alignItems:'center'  }}>
+        <View style={{flex: 0.15, alignItems: 'center'}}>
           {arrow && (
             <TouchableOpacity style={styles.iconContainer} onPress={onPress}>
               <Image
                 source={require('../../../assets/images/backarrow.png')}
-                style={{ height: 10, width: 10 }}
+                style={{height: 10, width: 10}}
               />
             </TouchableOpacity>
           )}
@@ -206,19 +185,15 @@ export const TopBarCard2 = ({
               style={styles.iconContainer}
               onPress={() => {
                 navigation.goBack(),
-                {
-                  data: bData,
-                };
+                  {
+                    data: bData,
+                  };
               }}>
-              <Ionicons
-                name="arrow-back-circle"
-                size={40}
-                color="orange"
-              />
+              <Ionicons name="arrow-back-circle" size={40} color="orange" />
             </TouchableOpacity>
           )}
         </View>
-        <View style={{ flex: 0.7}}>
+        <View style={{flex: 0.7}}>
           {txt && (
             <Text
               style={{
@@ -234,10 +209,9 @@ export const TopBarCard2 = ({
           )}
           {children}
         </View>
-        <View style={{ flex: 0.15}}>
+        <View style={{flex: 0.15}}>
           {(roleId === 'ROLE_ITEM_ADMIN' || roleType === 'ROLE_ADMIN') && (
-            <TouchableOpacity
-              onPress={navCreate}>
+            <TouchableOpacity onPress={navCreate}>
               <Text style={styles.joinText}>Create</Text>
             </TouchableOpacity>
           )}
@@ -279,10 +253,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop:'3%'
+    marginTop: '3%',
   },
   children: {
-    flex: 0.70,
+    flex: 0.7,
   },
   iconContainer: {
     height: 50,
@@ -327,21 +301,21 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
   },
-  notificationsCount:{
-    borderWidth:1,
-    borderColor:colors.orangeColor,
-    backgroundColor:"white",
-    borderRadius:10,
-    height:18,
-    width:18,
-    alignItems:"center",
-    justifyContent:'center',
-    position:"absolute",
-    top:-5,
-    left:15
+  notificationsCount: {
+    borderWidth: 1,
+    borderColor: colors.orangeColor,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    height: 18,
+    width: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    top: -5,
+    left: 15,
   },
-  notificationCountNumber:{
-    color:colors.orangeColor,
-    fontSize:10
-  }
+  notificationCountNumber: {
+    color: colors.orangeColor,
+    fontSize: 10,
+  },
 });

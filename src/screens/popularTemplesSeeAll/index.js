@@ -95,11 +95,8 @@ const SeeAll = ({navigation}) => {
                     }}
                     style={{height: 72, width: 72, borderRadius: 70 / 2}}
                   />
-                  <View style={{marginLeft: 10}}>
-                    <Text style={{color: colors.orangeColor}}>{item.name}</Text>
-                    {/* <Text numberOfLines={2} style={{ maxWidth: '90%', color: isDarkMode ? 'black' : 'black' }}>
-                        {item.description}{' '}
-                      </Text> */}
+                  <View style={{marginLeft: 10, width: '90%'}}>
+                    <Text numberOfLines={2} style={{color: colors.orangeColor}}>{item.name}</Text>
                   </View>
                 </View>
               </TouchableOpacity>
