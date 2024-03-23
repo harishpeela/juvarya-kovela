@@ -25,6 +25,8 @@ import {styles} from './style';
 import {TopBarcard, EventInput} from '../../components';
 import {getUserInfoNew, Update_Profile} from '../../utils/api';
 import Entypo from 'react-native-vector-icons/Entypo';
+
+
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   const [newSignUp, setNewSignUp] = useState();

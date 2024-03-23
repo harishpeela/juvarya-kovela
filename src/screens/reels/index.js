@@ -14,6 +14,7 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {allTexts, colors} from '../../common';
 import RNFS from 'react-native-fs';
+import { useAppSelector } from '../../redux/reduxHooks';
 
 const KovelaReels = ({navigation}) => {
   const windowWidth = Dimensions.get('window').width;
@@ -68,7 +69,6 @@ const KovelaReels = ({navigation}) => {
   const reelsData = async (pgNo, pgSz) => {
     setLoader(true);
     let result = await GetReels(pgNo, pgSz);
-    console.log('reels', result?.data);
     if (result?.status === 200) {
       const videos = result.data.data;
       await Promise.all(videos.map(addLocalVideoStoragePath));
@@ -79,15 +79,16 @@ const KovelaReels = ({navigation}) => {
     }
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      if (pgNo >= 0) {
-        reelsData(pgNo, pgSz);
-      }
-      return () => {};
-    }, []),
-  );
-
+  //Redux hooks
+  const reels = useAppSelector(state => state.reelsFeed);
+  
+  useEffect(() => {
+    if (pgNo >= 0) {
+      if (reels && reels?.reelsFeedData) {
+        setVideoData(reels?.reelsFeedData)
+      } else reelsData(pgNo, pgSz);
+    }
+  }, [reels]);
   return (
     <View
       style={{
