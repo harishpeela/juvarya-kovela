@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {colors} from '../../common';
 import Ioniconss from 'react-native-vector-icons/Entypo';
 export const Artist_Donar_List_Card = ({data, onPressArtist, onPressPlus}) => {
-  console.log('dara', data);
+  // console.log('dara', data);
   return (
     <View style={styles.container}>
       <View
