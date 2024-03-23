@@ -21,6 +21,8 @@ import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
 import Entypo from 'react-native-vector-icons/Entypo';
+
+
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
   // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;

@@ -1,3 +1,5 @@
+
+import RNFS from 'react-native-fs';
 import {
   authAxiousInstance,
   axiousInstance,
