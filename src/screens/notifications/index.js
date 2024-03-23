@@ -8,8 +8,8 @@ import {HeaderComponent} from '../../components/header_comp/HeaderComponent';
 import {FlatList} from 'react-native-gesture-handler';
 import {colors} from '../../common';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { TopBarCard2 } from '../../components/topBar1/topBarCard';
-import { statusBarHeight } from '../../utils/config/config';
+import {TopBarCard2} from '../../components/topBar1/topBarCard';
+import {statusBarHeight} from '../../utils/config/config';
 const Notifications = ({navigation}) => {
   const [notificationdata, setNotificationData] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -18,7 +18,8 @@ const Notifications = ({navigation}) => {
   const GetNotifications = async () => {
     try {
       let result = await getNotifications();
-      console.log('res of noti', result?.data?.notifications)
+      console.log('res of noti', result?.data?.customerRoles);
+      console.log('res of notification data', result?.data);
       let Data = result?.data?.customerRoles;
       let mapping = Data?.filter(item => item)?.map(({notifications}) => ({
         notifications,
@@ -36,17 +37,19 @@ const Notifications = ({navigation}) => {
   useEffect(() => {
     GetNotifications();
   }, []);
+  console.log('filterd', notificationdata);
+
   return (
-    <View style={{flex: 1,backgroundColor:'white'}}>
+    <View style={{flex: 1, backgroundColor: 'white'}}>
       <View style={{}}>
-        <View style={{height:60, marginTop: statusBarHeight}}>
+        <View style={{height: 60, marginTop: statusBarHeight}}>
           <TopBarCard2
             txt={'Notifications'}
             back={true}
-           navigation={navigation}   
+            navigation={navigation}
           />
         </View>
-        <View style={{flex: 1}}>
+        <View style={{}}>
           {loader ? (
             <View style={{}}>
               <Loader size={'large'} color={colors.orangeColor} />
@@ -64,19 +67,26 @@ const Notifications = ({navigation}) => {
               style={{
                 alignSelf: 'center',
                 justifyContent: 'center',
-                // marginTop: '50%',
+                marginTop: '50%',
               }}>
-               <FontAwesome
-                    name="bell-slash"
-                    color={'orange'}
-                    size={30}
-                    style={{ marginBottom: '5%',alignSelf:'center' }}
-                  />
-                  <Text style={{color:'orange',fontFamily:'Poppins-Medium',fontSize:15}}>No Notifications Yet </Text>
+              <FontAwesome
+                name="bell-slash"
+                color={'orange'}
+                size={30}
+                style={{marginBottom: '5%', alignSelf: 'center'}}
+              />
+              <Text
+                style={{
+                  color: 'orange',
+                  fontFamily: 'Poppins-Medium',
+                  fontSize: 15,
+                }}>
+                No Notifications Yet{' '}
+              </Text>
             </View>
           )}
         </View>
-        </View>
+      </View>
     </View>
   );
 };

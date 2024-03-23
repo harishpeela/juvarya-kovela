@@ -1,4 +1,3 @@
-
 // import React, { useState, useEffect, useCallback } from 'react';
 // import SwiperFlatList from 'react-native-swiper-flatlist';
 // import SingleReel from './singleReel';
@@ -6,7 +5,6 @@
 // import { createThumbnail } from 'react-native-create-thumbnail';
 
 // const ReelsComponent = ({ videoData }) => {
-
 
 //   const [currentIndex, setCurrentIndex] = useState(0);
 //   const [mute, setMute] = useState(false);
@@ -27,11 +25,11 @@
 //   }, [currentIndex]);
 
 //   useEffect(() => {
-//     const prefetchNextVideo = async () => { 
+//     const prefetchNextVideo = async () => {
 //       if (currentIndex >= 0) {
 //         console.log('nextVIdoIndex--------->',currentIndex, nextVideoIndex, )
 //         try {
-//           const timestamp = new Date().getTime(); 
+//           const timestamp = new Date().getTime();
 //           const cachedVideoPath = `${RNFS.CachesDirectoryPath}/nextVideo_${nextVideoIndex}_${timestamp}.mp4`;
 //           const options = {
 //             fromUrl: currentIndex == 0 ? videoData[1]?.mediaList[0]?.url :nextVideoUrl,
@@ -63,7 +61,7 @@
 //   }, []);
 
 //   const renderItem = ({ item, index }) => {
-//     return videoData && videoData?.length === 1 && item && item?.mediaList ? 
+//     return videoData && videoData?.length === 1 && item && item?.mediaList ?
 //       <SingleReel
 //         item={item}
 //         index={index}
@@ -71,7 +69,7 @@
 //         currentIndex={currentIndex}
 //         thumbnail={thumbnails}
 //       />
-//     : 
+//     :
 //       <SingleReel
 //         item={item}
 //         index={index}
@@ -96,14 +94,13 @@
 
 // export default ReelsComponent;
 
-
-import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Text, View, Dimensions, ActivityIndicator } from 'react-native';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
+import {Text, View, Dimensions, ActivityIndicator} from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import Video from 'react-native-video';
 import { useIsFocused } from '@react-navigation/native';
 
-const ReelsComponent = ({ videoData }) => {
+const ReelsComponent = ({videoData}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [mute, setMute] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -111,7 +108,6 @@ const ReelsComponent = ({ videoData }) => {
   const windowHeight = Dimensions.get('window').height;
   const videoRef = useRef(null);
   const isFocused = useIsFocused();
-
   const handleChangeIndexValue = useCallback(({ index }) => {
     setCurrentIndex(index);
     setLoading(true);
@@ -120,7 +116,7 @@ const ReelsComponent = ({ videoData }) => {
   const onLoad = () => {
     setLoading(false);
   };
-
+  
   const renderVideoItem = (item, index) => {
     const videoURL = item?.localVideoStoragePath || item?.mediaList[0]?.url;
     return (
@@ -133,7 +129,7 @@ const ReelsComponent = ({ videoData }) => {
           alignItems: 'center',
           flex: 1,
         }}>
-        {currentIndex === index &&
+        {currentIndex === index && (
           <>
             <Video
               ref={videoRef}
@@ -151,18 +147,30 @@ const ReelsComponent = ({ videoData }) => {
               key={index}
             />
           </>
-        }
-        {loading && <ActivityIndicator style={{ position: 'absolute' }} size="large" color="white" />}
+        )}
+        {loading && (
+          <ActivityIndicator
+            style={{position: 'absolute'}}
+            size="large"
+            color="white"
+          />
+        )}
       </View>
     );
   };
 
+  useEffect(() => {
+    if (!isFocused) {
+      videoRef.current?.pause?.();
+      videoRef.current?.setVolume?.(0);
+    }
+  }, [isFocused]);
   return (
     <SwiperFlatList
       vertical={true}
       onChangeIndex={handleChangeIndexValue}
       data={videoData}
-      renderItem={({ item, index }) => renderVideoItem(item, index)}
+      renderItem={({item, index}) => renderVideoItem(item, index)}
       keyExtractor={(item, index) => index.toString()}
     />
   );

@@ -1,17 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useContext, useCallback} from 'react';
-import { useFocusEffect } from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native';
 import ApplicationContext from '../../utils/context-api/Context';
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
 import {Loader, FollowersListCard4} from '../../components';
 import {colors, allTexts} from '../../common';
 import {styles} from './styles';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {TopBarCard2} from '../../components/topBar1/topBarCard';
 import {MemberShipList, MembersList, getArtistDonar} from '../../utils/api';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Ioniconss from 'react-native-vector-icons/Entypo';
+import {Artist_Donar_List_Card} from '../../components';
 const TempleCrew = ({route, navigation}) => {
   const {userDetails} = useContext(ApplicationContext);
   const [loader, setLoader] = useState(false);
@@ -23,14 +24,14 @@ const TempleCrew = ({route, navigation}) => {
   const [membershipId, setMemberShipId] = useState();
   const [artistData, setArtistData] = useState();
   const isFocused = useIsFocused();
-  const [apiNo, setApiNo] = useState(0)
+  const [apiNo, setApiNo] = useState(0);
 
   const MembershipIdData = async () => {
     setLoader(true);
     setTextLoader(true);
     try {
       let result = await MemberShipList(id, 0, 100);
-      console.log('list data', result?.data)
+      console.log('list data', result?.data);
       let data = result?.data?.data;
       setMemberShipId(data[0]?.id);
       let ID = data?.filter(item => item)?.map(({id}) => ({id}));
@@ -93,18 +94,22 @@ const TempleCrew = ({route, navigation}) => {
         artistDonar();
       }
       return () => {};
-    }, [])
+    }, []),
   );
 
   return (
-    <View style={{backgroundColor: 'white',marginTop:'5%'}}>
+    <View style={{backgroundColor: 'white', marginTop: '5%'}}>
       <View style={styles.headerContainer}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons
             name="arrow-back-circle"
             size={42}
             color={colors.orangeColor}
-            style={{alignSelf: 'flex-start', justifyContent: 'center',marginLeft:10}}
+            style={{
+              alignSelf: 'flex-start',
+              justifyContent: 'center',
+              marginLeft: 10,
+            }}
           />
         </TouchableOpacity>
         <View>
@@ -139,125 +144,80 @@ const TempleCrew = ({route, navigation}) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <View style={{marginLeft: '5%'}}>
+      <View style={{}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <View style={{alignItems: 'center'}}>
-            <TouchableOpacity onPress={() =>navigation.navigate(allTexts.screenNames.artistDonorScreen,{id:id})}
-              style={{
-                height: 70,
-                width: 70,
-                borderRadius: 100 / 2,
-                borderWidth: 2,
-                margin: 2,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderColor: colors.orangeColor,
-              }}>
-              <Ioniconss name="plus" size={25} color={colors.orangeColor} />
-            </TouchableOpacity>
-            <Text style={{color: 'black'}}> 2025</Text>
-          </View>
-
-          {artistData?.length && (
+          {artistData?.length ? (
             <>
-              <View style={{alignItems: 'center'}}>
-                <TouchableOpacity
-                  style={{
-                    height: 70,
-                    width: 70,
-                    borderRadius: 100 / 2,
-                    borderWidth: 2,
-                    flexDirection: 'row',
-                    overflow: 'hidden',
-                    margin: 2,
-                    borderColor: colors.orangeColor,
-                  }}>
-                  <Image
-                    source={{
-                      uri: artistData[0]?.artistDto?.artist?.customerProfileUrl
-                        ? artistData[0]?.artistDto?.artist?.customerProfileUrl
-                        : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
-                    }}
-                    height={60}
-                    width={30}
-                    style={{
-                      height: 65,
-                      width: 65,
-                      borderRadius: 100 / 2,
-                      overflow: 'hidden',
-                      marginRight: 2,
-                    }}
-                  />
-                </TouchableOpacity>
-
-                <Text style={{color: 'black'}}>
-                  {artistData[0]?.year?.substring(6, 11)}
-                </Text>
-              </View>
-              <View style={{alignItems: 'center'}}>
-                <TouchableOpacity
-                  style={{
-                    height: 70,
-                    width: 70,
-                    borderRadius: 100 / 2,
-                    borderWidth: 2,
-                    flexDirection: 'row',
-                    overflow: 'hidden',
-                    margin: 2,
-                    borderColor: colors.orangeColor,
-                  }}>
-                  <Image
-                    source={{
-                      uri: artistData[0]?.donarDto?.donar?.customerProfileUrl
-                        ? artistData[0]?.donarDto?.donar?.customerProfileUrl
-                        : 'https://fanfun.s3.ap-south-1.amazonaws.com/1707819684948noimg.png',
-                    }}
-                    height={60}
-                    width={30}
-                    style={{
-                      height: 65,
-                      width: 65,
-                      overflow: 'hidden',
-                      marginRight: 2,
-                      borderRadius: 100 / 2,
-                    }}
-                  />
-                </TouchableOpacity>
-                <Text style={{color: 'black'}}>
-                  {' '}
-                  {artistData[0]?.year?.substring(6, 11)}
-                </Text>
+              <View style={{width: '100%'}}>
+                <Artist_Donar_List_Card
+                  onPressPlus={() =>
+                    navigation.navigate(
+                      allTexts.screenNames.artistDonorScreen,
+                      {
+                        id: id,
+                      },
+                    )
+                  }
+                  onPressArtist={() =>
+                    navigation.navigate(
+                      allTexts.screenNames.artistDonorScreen,
+                      {
+                        id: id,
+                      },
+                    )
+                  }
+                  data={artistData[0]}
+                />
               </View>
             </>
-          )}
-          {artistData?.length && (
-            <View>
+          ) : (
+            <View style={{alignItems: 'center', marginLeft: '5%'}}>
               <TouchableOpacity
                 onPress={() =>
-                  navigation.navigate(
-                    allTexts.screenNames.artistdonardetailslist,
-                    {
-                      data: artistData,
-                      id: id
-                    },
-                  )
+                  navigation.navigate(allTexts.screenNames.artistDonorScreen, {
+                    id: id,
+                  })
                 }
                 style={{
+                  height: 70,
+                  width: 70,
+                  borderRadius: 100 / 2,
+                  borderWidth: 2,
+                  margin: 2,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  marginLeft: '30%',
+                  borderColor: colors.orangeColor,
                 }}>
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    color: colors.orangeColor,
-                    fontSize: 16,
-                  }}>
-                  {' '}
-                  See all
-                </Text>
+                <Ioniconss name="plus" size={25} color={colors.orangeColor} />
               </TouchableOpacity>
+              <Text style={{color: 'black'}}> 2025</Text>
             </View>
+          )}
+          {artistData?.length && (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate(
+                  allTexts.screenNames.artistdonardetailslist,
+                  {
+                    data: artistData,
+                    id: id,
+                  },
+                )
+              }
+              style={{
+                position: 'absolute',
+                right: 15,
+              }}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  color: colors.orangeColor,
+                  fontSize: 16,
+                }}>
+                {' '}
+                See all
+              </Text>
+            </TouchableOpacity>
           )}
         </View>
       </View>
@@ -283,7 +243,12 @@ const TempleCrew = ({route, navigation}) => {
                   alignItems: 'center',
                   marginTop: '50%',
                 }}>
-                <Text style={{fontSize:17,color: colors.orangeColor,fontFamily:'Poppins-Medium'}}>
+                <Text
+                  style={{
+                    fontSize: 17,
+                    color: colors.orangeColor,
+                    fontFamily: 'Poppins-Medium',
+                  }}>
                   {' '}
                   No Members For This Temple
                 </Text>

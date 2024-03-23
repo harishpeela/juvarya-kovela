@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {
   View,
   Text,
@@ -9,23 +9,28 @@ import {
   TextInput,
   RefreshControl,
 } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { styles } from './styles';
-import { SearchBar } from '../searchbar';
-import { Loader } from '../loader';
+import {useFocusEffect} from '@react-navigation/native';
+import {styles} from './styles';
+import {SearchBar} from '../searchbar';
+import {Loader} from '../loader';
 
-import { allTexts, colors } from '../../common';
-import { TempleListCard } from '../TempleListCard';
-import { NearByTemple } from '../NearByTemples';
-import { PopularTemplesVerticalList } from '../popularVerticalFlatList';
-import { PopularTemples, SearchPopularTemples } from '../../utils/api';
-import { useIsFocused } from '@react-navigation/native';
-import { TopBarcard } from '../topBar1/topBarCard';
-import { NearByTempleClass, getNearByTemples, getEventByCommunityId, GetArtist} from '../../utils/api';
+import {allTexts, colors} from '../../common';
+import {TempleListCard} from '../TempleListCard';
+import {NearByTemple} from '../NearByTemples';
+import {PopularTemplesVerticalList} from '../popularVerticalFlatList';
+import {PopularTemples, SearchPopularTemples} from '../../utils/api';
+import {useIsFocused} from '@react-navigation/native';
+import {TopBarcard} from '../topBar1/topBarCard';
+import {
+  NearByTempleClass,
+  getNearByTemples,
+  getEventByCommunityId,
+  GetArtist,
+} from '../../utils/api';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { Artist_Search } from '../artist_search';
-import { statusBarHeight } from '../../utils/config/config';
-export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
+import {Artist_Search} from '../artist_search';
+import {statusBarHeight} from '../../utils/config/config';
+export const PopularTemplesList = ({pageNav, seeallnav, navigation}) => {
   let isFocused = useIsFocused();
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -81,7 +86,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     } else {
       // alert('no data')
     }
-  }
+  };
 
   useEffect(() => {
     NearByTemples();
@@ -102,14 +107,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
     setIsLoading(false);
   };
 
-
-
   useFocusEffect(
     useCallback(() => {
       if (pageNo >= 0) {
         PopularTemplesss(0, 100);
       }
-      return () => { };
+      return () => {};
     }, []),
   );
   const SearchPopTemp = async txt => {
@@ -126,17 +129,16 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
   return (
     <>
       {loader ? (
-        <View style={{flex: 1,marginTop:'-3%'}}>
-                  <Loader color={colors.orangeColor} size={'large'} />
+        <View style={{flex: 1, marginTop: '-3%'}}>
+          <Loader color={colors.orangeColor} size={'large'} />
         </View>
       ) : (
         <ScrollView>
           <View
             style={{
-             marginTop: statusBarHeight,
-             height: 60,
-            }}
-          >
+              marginTop: statusBarHeight,
+              height: 60,
+            }}>
             <TopBarcard
               menu={true}
               isBell={true}
@@ -163,23 +165,27 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
               </View>
             </TopBarcard>
           </View>
-          <ScrollView style={{ height: '100%' }} refreshControl={
-            <RefreshControl
-              refreshing={refreshing}
-              colors={[colors.orangeColor]}
-              onRefresh={() => {
-                setRefreshing(true);
-                PopularTemplesss(pageNo, 100);
-                setLoader(false)
-              }}
-            />
-          } >
+          <ScrollView
+            style={{height: '100%'}}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                colors={[colors.orangeColor]}
+                onRefresh={() => {
+                  setRefreshing(true);
+                  PopularTemplesss(pageNo, 100);
+                  setLoader(false);
+                }}
+              />
+            }>
             {loader ? (
               <View
-                style={{
-                  // height: '110%',
-                  // marginTop: '70%',
-                }}>
+                style={
+                  {
+                    // height: '110%',
+                    // marginTop: '70%',
+                  }
+                }>
                 <Loader color={colors.orangeColor} />
               </View>
             ) : (
@@ -196,7 +202,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                             data: filteredList,
                           });
                         }}>
-                        <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
+                        <Text style={{color: colors.orangeColor, fontSize: 16}}>
                           See all
                         </Text>
                       </TouchableOpacity>
@@ -206,8 +212,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                       horizontal
                       showsHorizontalScrollIndicator={false}
                       keyboardShouldPersistTaps="handled"
-                      keyExtractor={({ item, index }) => item?.id}
-                      renderItem={({ item, index }) => (
+                      keyExtractor={({item, index}) => item?.id}
+                      renderItem={({item, index}) => (
                         <TempleListCard
                           post={item}
                           templeId={item.id}
@@ -229,8 +235,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                     <FlatList
                       data={filteredData}
                       keyboardShouldPersistTaps="handled"
-                      keyExtractor={({ item, index }) => item?.id}
-                      renderItem={({ item, index }) => (
+                      keyExtractor={({item, index}) => item?.id}
+                      renderItem={({item, index}) => (
                         <PopularTemplesVerticalList
                           post={item}
                           name={item.name}
@@ -245,12 +251,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                       decelerationRate={0.8}
                     />
                   ) : (
-                    <View style={{ alignItems: 'center', marginTop: '50%' }}>
+                    <View style={{alignItems: 'center', marginTop: '50%'}}>
                       <FontAwesome5
                         name="gopuram"
                         size={50}
                         color={'orange'}
-                        style={{ marginBottom: '5%' }}
+                        style={{marginBottom: '5%'}}
                       />
                       <Text
                         style={{
@@ -265,11 +271,10 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                 </ScrollView>
               </>
             )}
-            <View>
-            </View>
+            <View />
             {searchedText === '' ? (
               <>
-                <ScrollView style={{ paddingLeft: 12 }}>
+                <ScrollView style={{paddingLeft: 12}}>
                   <View style={styles.upComingTextTab}>
                     <Text style={{...styles.nearbyTextContainer}}>
                       Nearby Temples
@@ -283,7 +288,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                           },
                         );
                       }}>
-                      <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
+                      <Text style={{color: colors.orangeColor, fontSize: 16}}>
                         See all
                       </Text>
                     </TouchableOpacity>
@@ -294,8 +299,8 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                       horizontal
                       showsHorizontalScrollIndicator={false}
                       keyboardShouldPersistTaps="handled"
-                      keyExtractor={({ item, index }) => item?.id}
-                      renderItem={({ item, index }) => (
+                      keyExtractor={({item, index}) => item?.id}
+                      renderItem={({item, index}) => (
                         <NearByTemple
                           post={item}
                           name={item?.profileDTO?.name}
@@ -304,10 +309,13 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                           pageNav={pageNav}
                           img={item?.profileDTO?.logo}
                           onPress={() => {
-                            pageNav?.navigate(allTexts.screenNames.viewtempleprofile, {
-                              data: post,
-                              onSelect: onSelect,
-                            });
+                            pageNav?.navigate(
+                              allTexts.screenNames.viewtempleprofile,
+                              {
+                                data: post,
+                                onSelect: onSelect,
+                              },
+                            );
                           }}
                         />
                       )}
@@ -326,11 +334,14 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                   <Text style={styles.popularTextContainer}>Artist</Text>
                   <TouchableOpacity
                     onPress={() => {
-                      seeallnav.navigate(allTexts.screenNames.communityeventsseeall, {
-                        data: eventCommunity,
-                      });
+                      seeallnav.navigate(
+                        allTexts.screenNames.communityeventsseeall,
+                        {
+                          data: eventCommunity,
+                        },
+                      );
                     }}>
-                    <Text style={{ color: colors.orangeColor, fontSize: 16 }}>
+                    <Text style={{color: colors.orangeColor, fontSize: 16}}>
                       See all
                     </Text>
                   </TouchableOpacity>
@@ -340,16 +351,18 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                   <FlatList
                     data={eventCommunity}
                     horizontal
-                    style={{ marginHorizontal: '4%' }}
+                    style={{marginHorizontal: '4%'}}
                     showsHorizontalScrollIndicator={false}
                     keyboardShouldPersistTaps="handled"
-                    keyExtractor={({ item, index }) => item?.id}
-                    renderItem={({ item, index }) => (
+                    keyExtractor={({item, index}) => item?.id}
+                    renderItem={({item, index}) => (
                       <Artist_Search
                         name={item?.fullName}
                         img={item?.logo}
                         type={item?.type}
-                        onPress={() => navigation.navigate(allTexts.screenNames.store)}
+                        onPress={() =>
+                          navigation.navigate(allTexts.screenNames.store)
+                        }
                       />
                     )}
                     onEndReachedThreshold={0.5}
@@ -357,11 +370,12 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                   />
                 )}
               </>
-            ) : ''}
+            ) : (
+              ''
+            )}
           </ScrollView>
         </ScrollView>
       )}
     </>
-
   );
 };

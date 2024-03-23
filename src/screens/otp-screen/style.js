@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   detail: {
-    color: colors.gray,
+    color: colors.orangeColor,
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
     textAlign: 'center',
@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   expectOtp: {
-    color: colors.green2,
+    color: colors.orangeColor,
     fontFamily: fontFamily.popinRegular,
     fontSize: 10,
     alignSelf: 'center',
