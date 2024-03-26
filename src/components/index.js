@@ -20,6 +20,7 @@ import {SaveFeedComp} from './savefeedcomp';
 import {CrewCard} from './crew-card-comp';
 import {ProfileDonationsCard} from './profileDonationsCard';
 import { Artist_Search} from './artist_search';
+import { Store_SignUp } from './store_signUp_comp';
 import {
   NearBy,
   NearByMainTab,
@@ -182,4 +183,5 @@ export {
   ReelsComponent,
   Artist_Search,
   Store_Comp,
+  Store_SignUp
 };
