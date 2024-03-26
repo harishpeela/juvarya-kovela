@@ -40,7 +40,6 @@ export const styles = StyleSheet.create({
     fontFamily: fontFamily.popinBold,
     color: colors.orangeColor,
     paddingLeft: 50,
-    
   },
   signinTextContainer: {
     alignSelf: 'flex-start',
@@ -59,9 +58,9 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   forgotPassword: {
-    textAlign:'center',
-   color:'orange',
-    marginTop:'5%',
+    textAlign: 'center',
+    color: 'orange',
+    marginTop: '5%',
   },
   textInput: {
     borderWidth: 1,
@@ -90,5 +89,14 @@ export const styles = StyleSheet.create({
   },
   black: {
     color: colors.black,
+  },
+  button: {
+    width: '90%',
+    alignItems: 'center',
+    marginTop: '30%',
+    alignSelf: 'center',
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: colors.orangeColor
   },
 });

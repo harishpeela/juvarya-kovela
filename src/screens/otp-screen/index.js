@@ -8,8 +8,14 @@ import OTPTextInput from 'react-native-otp-textinput';
 import {styles} from './style';
 import {PrimaryButton, TopBarcard} from '../../components';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {loginUser1, NewRegistesrUser, getUserInfoNew, NewVerifyOTP} from '../../utils/api';
+import {
+  loginUser1,
+  NewRegistesrUser,
+  getUserInfoNew,
+  NewVerifyOTP,
+} from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
+import {statusBarHeight} from '../../utils/config/config';
 import {
   saveLoginSessionDetails,
   saveUserDetails,
@@ -60,13 +66,13 @@ const OTPScreen = ({navigation, route}) => {
 
   let otpInput = useRef(null);
   const {
-    params: {email, password, data},
+    params: {mobNum, otp},
   } = route || {};
+  // console.log('mobnum', mobNum, otp);
   const setText = () => {
     otpInput?.current?.setValue('');
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
-console.log('data ==>', data);
   const ApiData = async () => {
     let result = await getUserInfoNew();
     try {
@@ -90,26 +96,37 @@ console.log('data ==>', data);
       console.log('error in get current customer details api', error);
     }
   };
-  const signinHandler = async () => {
-    let payload = {
-      primaryContact: data?.phone,
-      password: password,
-    };
-    try {
-      let result = await loginUser1(payload);
-      // console.log('result', result);
-      if (result && result.status === 200) {
-        const {
-          data: {accessToken, tokenType},
-        } = result;
-        await saveLoginSessionDetails(tokenType, accessToken);
-        await ApiData();
-        setLoginDetails(accessToken);
-        setLoading(false);
+  const signinHandler = async otpOutPut => {
+    // if(otpOutPut != otp){
+    //   alert('otp Not matched')
+    // }
+    console.log('oto', otpOutPut);
+    if(otpOutPut?.length != 6){
+      alert('please fill otp');
+    }
+   else if (otpOutPut?.length === 6) {
+      let payload = {
+        primaryContact: mobNum,
+        otp: otpOutPut,
+      };
+      console.log('playload with email', payload);
+      try {
+        let result = await loginUser1(payload);
+        console.log('res', result?.data);
+        if (result && result.status === 200) {
+          const {
+            data: {accessToken, tokenType},
+          } = result;
+          await saveLoginSessionDetails(tokenType, accessToken);
+          ApiData();
+          setLoginDetails(accessToken);
+        } else {
+          // actions.setSubmitting(false);
+          Alert.alert('Error', 'Invalid OTP');
+        }
+      } catch (error) {
+        console.log('error', error);
       }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
     }
   };
   useEffect(() => {
@@ -129,39 +146,10 @@ console.log('data ==>', data);
     //   });
     // }, 2000);
   }, []);
-
-  const UserRegisterHandler = async pOtp => {
-    let registerPayload = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      primaryContact: data.phone,
-      email: data?.email?.toLowerCase(),
-      password: data?.password,
-      otp: pOtp,
-    };
-    try {
-      let result = await NewRegistesrUser(registerPayload);
-      console.log('gnjg', result, '---===>', registerPayload);
-      if (result.status === 200) {
-        signinHandler();
-      } else {
-        console.log(result?.data, 'error');
-        Alert.alert('Kovela', result?.data?.message || 'Invalid OTP', [
-          {
-            text: 'Ok',
-            // onPress: navigation.goBack(),
-          },
-        ]);
-      }
-    } catch (error) {
-      console.log('error', error);
-      alert(error);
-    }
-  };
   return (
     <View style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} />
-      <View style={{minHeight: '15%', marginTop: 20}}>
+      <View style={{height: 60, marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Confirm OTP'}
@@ -172,13 +160,13 @@ console.log('data ==>', data);
       <View style={styles.topContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.heading}>{allTexts.headings.verfiyPhone}</Text>
-          <Text style={styles.detail}>Enter OTP sent to {data?.phone}</Text>
+          <Text style={styles.detail}>Enter OTP sent to {mobNum}</Text>
         </View>
       </View>
       <OTPTextInput
         ref={otpInput}
         inputCount={6}
-        tintColor={colors.green2}
+        tintColor={colors.orangeColor}
         textInputStyle={styles.textInput}
         containerStyle={{
           marginTop: 1,
@@ -201,7 +189,9 @@ console.log('data ==>', data);
                 ?.toString()
                 .replace(/,/g, '');
               if (otpOutPut !== '') {
-                UserRegisterHandler(otpOutPut);
+                signinHandler(otpOutPut);
+              } else {
+                alert('please fill otp');
               }
             }}
           />

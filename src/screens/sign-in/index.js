@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import {
   View,
   Text,
@@ -121,58 +122,37 @@ const Signin = ({navigation}) => {
       });
     }
   };
- 
+
   useEffect(() => {
     NetWorkChecking();
   }, []);
- 
+
   const OtpTrigger = async () => {
-    setIsOtp(!isOtp);
     let otpPayload = {
       otpType: 'SIGNIN',
       primaryContact: mobNum,
     };
-    if(!mobNum === 10){
-      alert('please enter proper Mobile Number')
-    } else if(mobNum?.length === 10){
-
+    if (mobNum?.length != 10) {
+      alert('please enter valid Mobile Number');
+    } else if (mobNum?.length === 10) {
       let response = await NewVerifyOTP(otpPayload);
       console.log('responce of otp', response?.data);
-      if(response?.data){
-        setOtp(response?.data?.otp)
-      }
-      
-    }
-   
-  }
- 
-  const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
- 
-  const ApiData = async () => {
-    let result = await getUserInfoNew();
-    try {
-      if (result) {
-        saveUserDetails({
-          username: result?.data?.firstName + result?.data?.lastName,
-          email: result.data?.email,
-          role: result?.data?.roles,
-          id: result?.data?.id,
-          primaryContact: result?.data?.primaryContact,
-        });
-        setUserDetails({
-          username: result?.data?.firstName + result?.data?.lastName,
-          email: result.data?.email,
-          role: result?.data?.roles,
-          id: result?.data?.id,
-          primaryContact: result?.data?.primaryContact,
+      if (response?.data) {
+        navigation.navigate(allTexts.screenNames.otpScreen, {
+          mobNum: mobNum,
+          otp: response?.data?.otp,
         });
       }
-    } catch (error) {
-      console.log('error in get current customer details api', error);
     }
   };
-  const signinHandler = async () => {
-    if (mobNum?.length === 10) {
+
+  const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
+
+  const signinHandler = async otpOutPut => {
+    console.log('otp', otp, otpOutPut);
+    if (otpOutPut != otp) {
+      alert('otp mismatched');
+    } else if (mobNum?.length === 10) {
       let payload = {
         primaryContact: mobNum,
         otp: otp,
@@ -180,7 +160,7 @@ const Signin = ({navigation}) => {
       console.log('playload with email', payload);
       try {
         let result = await loginUser1(payload);
-        console.log('res', result?.data)
+        console.log('res', result?.data);
         if (result && result.status === 200) {
           const {
             data: {accessToken, tokenType},
@@ -195,9 +175,9 @@ const Signin = ({navigation}) => {
       } catch (error) {
         // actions.setSubmitting(false);
       }
-    } 
+    }
   };
- 
+
   return (
     <SafeAreaView style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} translucent={true} />
@@ -210,53 +190,67 @@ const Signin = ({navigation}) => {
         contentContainerStyle={styles.contentStyle}>
         <KovelaIcon />
         <View style={styles.inputContainer}>
-                <InputField
-                  title={'Mobile Number'}
-                  isFlag
-                
-                  value={mobNum}
-                  setState={e => setMobNum(e)}
-                  keyboardType={'numeric'}
-                  placeholder={'Enter Mobile Number'}
-                  maxLength={10}
-                />
-                <TouchableOpacity onPress={() => OtpTrigger()}>
-                <Text style={{color: colors.orangeColor, alignSelf: 'flex-end', fontWeight: 'bold'}}> Send OTP</Text>
-                </TouchableOpacity>
-                {isOtp && (
-                 <>
-                  <OTPTextInput
-                  ref={otpInput}
-                  inputCount={6}
-                  tintColor={colors.green2}
-                  textInputStyle={styles.textInput}
-                  containerStyle={{
-                    marginTop: 1,
-                  }}
-                />
-                <View style={styles.btnContainer}>
-                  {timer != '00:00' && (
-                    <Text style={styles.expectOtp}>
-                      Expect OTP in
-                      <Text style={styles.black}>{` ${timer} seconds`}</Text>
-                    </Text>
-                  )}
-                  </View>
-                  <View style={{height: 20}} />
-                <View style={styles.btnContainer}>
-                  <PrimaryButton
-                    bgColor={colors.orangeColor}
-                    // loading={isSubmitting}
-                    onPress={() => signinHandler()}
-                    text={'Submit'}
-                    radius={25}
-                  />
-                </View>
-                 </>
+          <InputField
+            title={'Mobile Number'}
+            isFlag
+            value={mobNum}
+            setState={e => setMobNum(e)}
+            keyboardType={'numeric'}
+            placeholder={'Enter Mobile Number'}
+            maxLength={10}
+          />
+
+          {/* {isOtp && (
+            <>
+              <OTPTextInput
+                ref={otpInput}
+                inputCount={6}
+                tintColor={colors.green2}
+                textInputStyle={styles.textInput}
+                containerStyle={{
+                  marginTop: 1,
+                }}
+              />
+              <View style={styles.btnContainer}>
+                {timer != '00:00' && (
+                  <Text style={styles.expectOtp}>
+                    Expect OTP in
+                    <Text style={styles.black}>{` ${timer} seconds`}</Text>
+                  </Text>
                 )}
-               
-               
               </View>
+              <View style={{height: 20}} />
+              <View style={styles.btnContainer}>
+                <PrimaryButton
+                  bgColor={colors.orangeColor}
+                  // loading={isSubmitting}
+                  // onPress={() => signinHandler()}
+                  onPress={() => {
+                    let otpOutPut = otpInput?.current?.state?.otpText
+                      ?.toString()
+                      .replace(/,/g, '');
+                    if (otpOutPut !== '') {
+                      signinHandler(otpOutPut);
+                    }
+                  }}
+                  text={'Submit'}
+                  radius={25}
+                />
+              </View>
+            </>
+          )} */}
+          <TouchableOpacity style={styles.button} onPress={() => OtpTrigger()}>
+            <Text
+              style={{
+                color: colors.white,
+                fontWeight: 'bold',
+                fontSize: 20,
+              }}>
+              {' '}
+              Send OTP
+            </Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

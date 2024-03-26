@@ -72,7 +72,7 @@ const TempleClass = ({route, navigation}) => {
                   }}
                   style={{height: 72, width: 72, borderRadius: 70 / 2}}
                 />
-                <Text numberOfLines={2} style={{marginLeft: 20, marginTop: 20, color: 'black',fontSize:17, maxWidth: '80%'}}>
+                <Text numberOfLines={2} style={{marginLeft: 20, marginTop: 20, color: colors.orangeColor,fontSize:17, maxWidth: '80%'}}>
                   {item?.name}
                 </Text>
               </TouchableOpacity>

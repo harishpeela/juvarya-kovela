@@ -11,7 +11,8 @@ import {
   Search,
   TicketConfirmation,
   UserFeedScreen,
-  KovelaReels
+  KovelaReels,
+  Details_Screen,
 } from '..';
 import {Loader} from '../../components';
 import FontAwesome6 from 'react-native-vector-icons/MaterialIcons';
@@ -20,9 +21,59 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
+import {getUserInfoNew, Update_Profile} from '../../utils/api';
 import Entypo from 'react-native-vector-icons/Entypo';
 const Tab = createBottomTabNavigator();
 export default BottomTabBase = ({navigation}) => {
+  const [newSignUp, setNewSignUp] = useState();
+  const [loader, setLoader] = useState(false);
+  const userInfo = async () => {
+    setLoader(true);
+    let responce = await getUserInfoNew();
+    console.log('responce ==>><<>>', responce?.data);
+    if (responce?.status === 200 && responce?.data) {
+      setNewSignUp(responce?.data);
+      setLoader(false);
+    } else {
+      setNewSignUp('');
+      setLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    userInfo();
+  }, []);
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+  const [address, setAddress] = useState('');
+  const onSubmit = async () => {
+    if (fullName === '') {
+      alert('please fill first name');
+    } else if (email === '') {
+      alert('please fill email address');
+    } else if (!email.includes('@gmail.com')) {
+      alert('please enter valid email id');
+    } else if (fullName && email) {
+      console.log('navihation', navigation);
+      let payload = {
+        primaryContact: newSignUp?.primaryContact,
+        dob: '',
+        gender: '',
+        zodiacSign: '',
+        // "postalCode": 531031,
+        fullName: fullName,
+        email: email,
+      };
+      console.log('palyload', payload);
+      let result = await Update_Profile(payload);
+      console.log('res od upate profile', result?.data);
+      if (result?.status === 200) {
+        setNewSignUp('');
+      } else {
+        alert('somethig went wrong');
+      }
+    }
+  };
   // const GetHomeScreen = () => <UserFeedScreen navigation={navigation} />;
   const GetSearchScreen = () => <Search navigation={navigation} />;
   const GetFavScreen = () => <Favorite navigation={navigation} />;
@@ -43,8 +94,19 @@ export default BottomTabBase = ({navigation}) => {
       keyboardHidesTabBar={true}
       style={{flex: 1}}
       showsVerticalScrollIndicator={false}>
-      {homeFeedListData === undefined ? (
-        <View style={{flex: 1,marginTop:'3%'}}>
+      {loader ? (
+        <View>
+          <Loader size={'large'} color={colors.orangeColor} />
+        </View>
+      ) : newSignUp?.newUser ? (
+        <Details_Screen
+          navigation={navigation}
+          onChangeemail={e => setEmail(e)}
+          onChangename={e => setFullName(e)}
+          onPress={() => onSubmit()}
+        />
+      ) : homeFeedListData === undefined ? (
+        <View style={{flex: 1, marginTop: '3%'}}>
           <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : (
@@ -61,10 +123,7 @@ export default BottomTabBase = ({navigation}) => {
           tabBarOptions={{
             style: {
               height: '8%',
-              // width: '95%',
               flexDirection: 'row',
-              // marginBottom: '2%',
-              // borderRadius: 15,
               alignSelf: 'center',
             },
             activeTintColor: colors.orangeColor,
@@ -122,20 +181,20 @@ export default BottomTabBase = ({navigation}) => {
             }}
           />
           {/* <Tab.Screen
-            name={allTexts.tabNames.ticket}
-            component={TicketConfirmation}
-            options={{
-              tabBarIcon: ({color, size}) => (
-                <>
-                  <MaterialIcon
-                    name="ticket-confirmation-outline"
-                    color={color}
-                    size={30}
-                  />
-                </>
-              ),
-            }}
-          /> */}
+                name={allTexts.tabNames.ticket}
+                component={TicketConfirmation}
+                options={{
+                  tabBarIcon: ({color, size}) => (
+                    <>
+                      <MaterialIcon
+                        name="ticket-confirmation-outline"
+                        color={color}
+                        size={30}
+                      />
+                    </>
+                  ),
+                }}
+              /> */}
 
           <Tab.Screen
             name={allTexts.tabNames.home}
@@ -146,7 +205,11 @@ export default BottomTabBase = ({navigation}) => {
               },
               tabBarIcon: ({color, size, focused}) => (
                 <View
-                  style={!focused ? styles.container : styles.UserFeedFocusedContainer}>
+                  style={
+                    !focused
+                      ? styles.container
+                      : styles.UserFeedFocusedContainer
+                  }>
                   {focused && (
                     <Entypo
                       name="dot-single"

@@ -69,6 +69,9 @@ import NewUserProfile from './newUserProfile/NewUserProfile';
 import ArtistDonorScreen from './artist_donor_screen';
 import ReelUpload from './reel-upload';
 import Community_Events_Seeall from './comminity-events';
+import Store from './store';
+import Details_Screen from './details_screen';
+import AddArtist from './add-artist';
 export {
   CreatePost,
   Seemore,
@@ -141,4 +144,7 @@ export {
   ArtistDonorScreen,
   ReelUpload,
   Community_Events_Seeall,
+  Store,
+  Details_Screen,
+  AddArtist, 
 };

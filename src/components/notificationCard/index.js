@@ -3,6 +3,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image, useColorScheme } from 'react-native';
 import { colors } from '../../common';
 export const NotificationCard = ({ data, name }) => {
+  console.log('data====>>', data);
   const isDarkMode = useColorScheme() === 'dark';
   return (
     <TouchableOpacity style={styles.contatainer}>
