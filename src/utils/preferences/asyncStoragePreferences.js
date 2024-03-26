@@ -8,7 +8,36 @@ export const storeValue = async (key, value) => {
     return false;
   }
 };
+export const storeleafValue = async (key, value) => {
+  try {
+    await AsyncStorage.setItem(key, value.toString());
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
 export const getValue = async key => {
+  try {
+    const value = await AsyncStorage.getItem(key);
+    if (value !== null) {
+      return {
+        value: value,
+        error: null,
+      };
+    } else {
+      return {
+        value: null,
+        error: 'Not Found',
+      };
+    }
+  } catch (e) {
+    return {
+      value: null,
+      error: 'Exception' + e,
+    };
+  }
+};
+export const getLeafValue = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
     if (value !== null) {

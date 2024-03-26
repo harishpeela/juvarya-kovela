@@ -3,8 +3,11 @@ import {ImageBackground, Image, TouchableOpacity} from 'react-native';
 import React, {useEffect, useContext} from 'react';
 import {allTexts} from '../../common';
 import {styles} from './styles';
-import {getInitialToken} from '../../utils/api';
-import {saveClientCredentials} from '../../utils/preferences/localStorage';
+import {getInitialToken, getInitialTokenBroadLeaf} from '../../utils/api';
+import {
+  saveClientCredentials,
+  saveBraodLeafClientCredentials,
+} from '../../utils/preferences/localStorage';
 
 const Splash = ({navigation}) => {
   const {
@@ -18,6 +21,7 @@ const Splash = ({navigation}) => {
   const GenerateAuthToken = async () => {
     try {
       let result = await getInitialToken();
+      console.log('authtoken', result);
       if (result.status === 200) {
         const {
           data: {access_token, token_type},
@@ -28,6 +32,7 @@ const Splash = ({navigation}) => {
       console.log(error);
     }
   };
+
   return (
     <ImageBackground
       resizeMode="cover"
