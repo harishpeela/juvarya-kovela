@@ -1,3 +1,4 @@
+import RNFS from 'react-native-fs';
 import {
   authAxiousInstance,
   axiousInstance,
@@ -16,7 +17,9 @@ import {
   axiosNotifications,
   axiosDonation,
   axiosLocalHost,
+  axiosbroadleaf,
 } from './api';
+import {relativeTimeRounding} from 'moment';
 
 const endpoints = {
   NEW_SIGN_IN: 'auth/signin',
@@ -130,10 +133,25 @@ const endpoints = {
   EVENT_INTRESETD_DETAILS: 'jtInterestedEvents/interested?eventId',
   ARTIST: 'customer/nearbyartists',
   STORE_LOCALHOST: 'v1/product/store/products?',
+  BROAD_LEAF_SIGN_IN: 'v1/auth/signin',
+  // BROAD_LEAF_GENERATE_AUTH_TOKEN:
+  //   'v1/oauth/token?grant_type=client_credentials',
 };
 export const getInitialToken = async () => {
   try {
     let result = await authAxiousInstance.post(`${endpoints.GENERATE_TOKEN}`);
+    return result;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const signIn = async data => {
+  try {
+    let result = await axiosbroadleaf.post(
+      `${endpoints.BROAD_LEAF_SIGN_IN}`,
+      data,
+    );
     return result;
   } catch (error) {
     return error.response.data;
@@ -213,13 +231,10 @@ export const PopularTemples = async (pgNo, pgsize) => {
 
 export const getCommunityId = async () => {
   try {
-    let result = await axiosNewData.get(
-      `${endpoints.COMMUNITY_ID}`,
-      {
-        // retry: 5,
-        // retryDelay: 3000,
-      },
-    );
+    let result = await axiosNewData.get(`${endpoints.COMMUNITY_ID}`, {
+      // retry: 5,
+      // retryDelay: 3000,
+    });
     return result;
   } catch (error) {
     console.log('error in popular temples', error);
@@ -330,7 +345,7 @@ export const GetProfilePic = async mailId => {
   }
 };
 
-export const GetArtist = async (pgNo,pgSz,custId) => {
+export const GetArtist = async (pgNo, pgSz, custId) => {
   try {
     let result = await axiousInstanceNew1.get(
       `${endpoints.ARTIST}?pageNo=${pgNo}&pageSize=${pgSz}&isoCodes=531001,531002&userId=${custId}&type=ARTIST`,
@@ -452,30 +467,21 @@ export const profileToDoList = async data => {
 
 export const getNewArtist = async data => {
   try {
-    let result = await axiosNewData.post(
-      `${endpoints.GET_ARTIST}`,
-      data,
-    );
+    let result = await axiosNewData.post(`${endpoints.GET_ARTIST}`, data);
     return result;
   } catch (error) {
     console.log('error in new artist', error);
   }
 };
 
-
 export const getNewDonor = async data => {
   try {
-    let result = await axiosNewData.post(
-      `${endpoints.GET_DONOR}`,
-      data,
-    );
+    let result = await axiosNewData.post(`${endpoints.GET_DONOR}`, data);
     return result;
   } catch (error) {
     console.log('error', error);
   }
 };
-
-
 
 export const GetProfileToDoList = async (pgno, pgSize) => {
   try {
@@ -1332,7 +1338,7 @@ export const getEventByCommunityId = async (pgNo, pgSize, id) => {
   }
 };
 
-export const deleteCommunityTemple = async (id) => {
+export const deleteCommunityTemple = async id => {
   try {
     let result = await axiosNotifications.delete(
       `${endpoints.DELETE_COMMUNITY_TEMPLE}?profileId=${id}`,
@@ -1343,7 +1349,7 @@ export const deleteCommunityTemple = async (id) => {
   }
 };
 
-export const localHostStore = async (id) => {
+export const localHostStore = async id => {
   try {
     let result = await axiosLocalHost.get(
       `${endpoints.STORE_LOCALHOST}?storeId=${id}&pageNo=0&pageSize=100`,

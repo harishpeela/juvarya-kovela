@@ -2,14 +2,14 @@ import axios from 'axios';
 import base64 from 'react-native-base64';
 import {
   getAuthTokenDetails,
+  getBroadLeafAuthTokenDetails,
   getClientCredentials,
   removeLoginSessionDetails,
   saveUserDetails,
 } from '../preferences/localStorage';
 import Snackbar from 'react-native-snackbar';
-import { allTexts } from '../../common';
+import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
-
 
 // ****   production Api base urls   *** //
 export const BASE_URL = 'http://20.235.89.214:8082/api/';
@@ -21,6 +21,9 @@ export const EVENTS_URL = 'https://fanfun.in/events/';
 export const DONATION_URL = 'https://fanfun.in/donations/';
 export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
 export const LOCAL_HOST = 'http://4.240.68.49:8080/api/';
+export const BROADLEAF_AUTH = 'http://4.240.68.49:8080/api/v1/oauth/token';
+export const BROADLEAF_SIGIN = 'http://4.240.68.49:8080/api/';
+
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
@@ -29,6 +32,21 @@ export const authAxiousInstance = axios.create({
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic' + base64.encode('skillrat-client:skillrat@2021'),
+  },
+});
+
+export const authBroadLeafInstance = axios.create({
+  baseURL: BROADLEAF_AUTH,
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    Authorization: {
+      // headers: {
+      Username: 'skillrat-client',
+      Password: 'skillrat@2021',
+      // }
+    },
   },
 });
 
@@ -76,7 +94,18 @@ axiosMultiPartFormData1.interceptors.request.use(async function (config) {
   config.headers.Authorization = token;
   return config;
 });
-
+export const axiosbroadleaf = axios.create({
+  baseURL: BROADLEAF_SIGIN,
+  headers: {
+    Authorization: bearer_token,
+  },
+});
+axiosbroadleaf.interceptors.request.use(async function (config) {
+  let token = await getBroadLeafAuthTokenDetails();
+  // console.log('Sending req with this token', token);
+  config.headers.Authorization = token;
+  return config;
+});
 export const axiosLocalHost = axios.create({
   baseURL: LOCAL_HOST,
   headers: {
@@ -167,13 +196,13 @@ export const axiosNewData1 = axios.create({
   headers: {
     Authorization: bearer_token,
   },
-})
+});
 
 axiosNewData1.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   config.headers.Authorization = token;
   return config;
-})
+});
 
 export const axiousInstanceNew = axios.create({
   baseURL: BASEURL,
@@ -204,8 +233,7 @@ axiousInstance.interceptors.request.use(async function (config) {
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-})
-
+});
 
 export const axiosMultiPartFormData = axios.create({
   baseURL: BASE_URL,
@@ -215,15 +243,14 @@ export const axiosMultiPartFormData = axios.create({
     'Access-Control-Allow-Origin': '*',
     Authorization: 'Basic ' + base64.encode('skillrat-client:skillrat@2021'),
   },
-})
-
+});
 
 axiosMultiPartFormData.interceptors.request.use(async function (config) {
   let token = await getAuthTokenDetails();
   let clientToken = await getClientCredentials();
   config.headers.Authorization = token || clientToken.clientToken;
   return config;
-})
+});
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
@@ -240,12 +267,12 @@ axiousInstance.interceptors.response.use(
     }
     return Promise.reject(error);
   },
-)
+);
 
 axiousInstance.interceptors.response.use(
   response => response,
   async error => {
-    const { config, message } = error;
+    const {config, message} = error;
     if (!config || !config.retry) {
       return Promise.reject(error);
     }
@@ -266,9 +293,9 @@ axiousInstance.interceptors.response.use(
       action: {
         text: 'Try again',
         textColor: 'green',
-        onPress: () => { },
+        onPress: () => {},
       },
     });
     return delayRetryRequest.then(() => axios(config));
   },
-)
+);

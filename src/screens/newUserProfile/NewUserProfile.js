@@ -224,7 +224,6 @@ console.log('thumbnails ==>', thumbnails);
   };
   const TempleAdmins = async () => {
     setLoader(true);
-    console.log('loader first', loader);
     let result = await AdminTemples();
     // console.log('admins temples', result?.data);
     if (result?.status === 200) {

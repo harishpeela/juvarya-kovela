@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-undef */
 import React, {useContext, useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, Image, TouchableOpacity} from 'react-native';
+import {SafeAreaView, View, Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {colors, allTexts} from './../../common/index';
 import {
@@ -15,14 +15,12 @@ import {
   Details_Screen,
 } from '..';
 import {Loader} from '../../components';
-import {statusBarHeight} from '../../utils/config/config';
 import FontAwesome6 from 'react-native-vector-icons/MaterialIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FontistoIcon from 'react-native-vector-icons/Fontisto';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './style';
-import {TopBarcard, EventInput} from '../../components';
 import {getUserInfoNew, Update_Profile} from '../../utils/api';
 import Entypo from 'react-native-vector-icons/Entypo';
 const Tab = createBottomTabNavigator();
@@ -41,6 +39,7 @@ export default BottomTabBase = ({navigation}) => {
       setLoader(false);
     }
   };
+
   useEffect(() => {
     userInfo();
   }, []);
@@ -97,7 +96,7 @@ export default BottomTabBase = ({navigation}) => {
       showsVerticalScrollIndicator={false}>
       {loader ? (
         <View>
-          <Loader size={'large'} color={colors.white} />
+          <Loader size={'large'} color={colors.orangeColor} />
         </View>
       ) : newSignUp?.newUser ? (
         <Details_Screen

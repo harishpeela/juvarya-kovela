@@ -100,7 +100,11 @@ const OTPScreen = ({navigation, route}) => {
     // if(otpOutPut != otp){
     //   alert('otp Not matched')
     // }
-    if (otpOutPut?.length === 6) {
+    console.log('oto', otpOutPut);
+    if(otpOutPut?.length != 6){
+      alert('please fill otp');
+    }
+   else if (otpOutPut?.length === 6) {
       let payload = {
         primaryContact: mobNum,
         otp: otpOutPut,
@@ -186,6 +190,8 @@ const OTPScreen = ({navigation, route}) => {
                 .replace(/,/g, '');
               if (otpOutPut !== '') {
                 signinHandler(otpOutPut);
+              } else {
+                alert('please fill otp');
               }
             }}
           />

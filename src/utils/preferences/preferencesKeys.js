@@ -16,4 +16,6 @@ export const PreferencesKeys = {
   searchedKeywords: 'historyKeyWords',
   userDetails: 'userDetails',
   quantity: 'quantity',
+  clientCredentials: 'client_credentials',
+  BasicAuth: 'Basic Auth', 
 };

@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   btnContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   expectOtp: {
     color: colors.orangeColor,
