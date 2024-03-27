@@ -10,10 +10,13 @@ import { homeFeedService } from './services/homeFeedService';
 import { notificationService } from './services/notificationService';
 import { searchService, searchService2 } from './services/searchService';
 import { templeProfileService, templeProfileService2, templeProfileService3, templeProfileService4 } from './services/templeProfileService';
+import reelsFeedSlice from './slices/reelsFeedSlice';
+import { reelsFeedService } from './services/reelsFeedService';
 
 const rootReducers = combineReducers({
   auth: authSlice,
   homeFeed: homeFeedSlice,
+  reelsFeed: reelsFeedSlice,
   [authService.reducerPath]: authService.reducer,
   [homeFeedService.reducerPath]: homeFeedService.reducer,
   [notificationService.reducerPath]: notificationService.reducer,
@@ -23,6 +26,7 @@ const rootReducers = combineReducers({
   [templeProfileService2.reducerPath]: templeProfileService2.reducer,
   [templeProfileService3.reducerPath]: templeProfileService3.reducer,
   [templeProfileService4.reducerPath]: templeProfileService4.reducer,
+  [reelsFeedService.reducerPath]: reelsFeedService.reducer,
 });
 
 const persistConfig = {
@@ -48,6 +52,7 @@ export const store = configureStore({
       templeProfileService2.middleware,
       templeProfileService3.middleware,
       templeProfileService4.middleware,
+      reelsFeedService.middleware,
     ),
 });
 

@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, RefreshControl, Text, useColorScheme, Alert } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { View, RefreshControl, Text, useColorScheme, Alert, AppState } from 'react-native';
 import { TopBarcard } from '../../components';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import styles from './styles';
@@ -12,7 +13,8 @@ import { allTexts, colors } from '../../common';
 import { FlatList } from 'react-native-gesture-handler';
 import Share from 'react-native-share';
 import { statusBarHeight } from '../../utils/config/config';
-import { useAppSelector, useAppDispatch } from '../../redux/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks';
+import RNFS from 'react-native-fs';
 import { useLazyGetHomeFeedDataQuery } from '../../redux/services/homeFeedService';
 import { homeFeedAction } from '../../redux/slices/homeFeedSlice';
 
@@ -26,9 +28,38 @@ const UserFeedScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [noData, setNoData] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [appState, setAppState] = useState(AppState.currentState);
+  const localVideoData = useAppSelector(state => state.reelsFeed.reelsFeedData);
 
-  const isDarkMode = useColorScheme() === 'dark';
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState) => {
+      if (appState === 'active' && nextAppState === 'background') {
+        clearLocalStorage();
+      }
+      setAppState(nextAppState);
+    };
+    const appStateSubscription = AppState.addEventListener('change', handleAppStateChange);
+    return () => {
+      appStateSubscription.remove();
+    };
+  }, [appState]);
 
+  const clearLocalStorage = async () => {
+    if (localVideoData && localVideoData.length > 0) {
+      console.log('entering intoLocal Storage')
+      try {
+        const pathsToDelete = localVideoData
+          .filter(video => video.localVideoStoragePath)
+          .map(video => video.localVideoStoragePath);
+        const unlinkPromises = pathsToDelete.map(path => RNFS.unlink(path));
+        await Promise.all(unlinkPromises);
+        console.log('Local storage cleared');
+      } catch (error) {
+        console.error('Error clearing local storage:', error);
+      }
+    }
+  };
+  
   //Redux hooks
   const homeFeed = useAppSelector(state => state.homeFeed) || null;
   const [getHomeFeed] = useLazyGetHomeFeedDataQuery()
@@ -116,7 +147,7 @@ const UserFeedScreen = ({ navigation }) => {
               if (result && result.data) {
                 console.log('Feed successfully deleted');
                 listFeed(apiPageNo, apiPageSize);
-              } else{
+              } else {
                 alert('you are not a admin to delete this feed')
               }
             } catch (error) {
@@ -130,67 +161,67 @@ const UserFeedScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1 ,backgroundColor:'white'}}>
+    <View style={{ flex: 1, backgroundColor: 'white' }}>
       <View style={{ height: 60, marginTop: statusBarHeight }}>
         <TopBarcard menu={true} txt={'Feeds'} isBell={true} navigation={navigation} />
       </View>
       <View style={{ marginBottom: '29%' }}>
         {loader ? (
           <Loader size={'large'} color={colors.orangeColor} />
-        ) : 
-        homeFeedList?.length > 0 ? (
-          <FlatList
-            data={homeFeedList}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={() => {
-                  setRefreshing(true);
-                  listFeed(apiPageNo, apiPageSize);
-                }}
-              />
-            }
-            contentContainerStyle={styles.flatListStyle}
-            showsVerticalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => {
-              return (
-                <UserFeedCompList
-                  id={item.id}
-                  post={item}
-                  onSharePress={() => MyCustShare(item)}
-                  saveid={item.id}
-                  likes={item.likesCount}
-                  isLikeTrue={item.like}
-                  savedFeed={item.savedFeed}
-                  isVisible={isVisible}
-                  onPressDelete={() => DeleteFeedPost(item.id)}
-                  onPressTitle={() => {
-                    navigation.navigate(allTexts.screenNames.viewtempleprofile, {
-                      data: item,
-                      onSelect: onSelect,
-                    });
+        ) :
+          homeFeedList?.length > 0 ? (
+            <FlatList
+              data={homeFeedList}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={() => {
+                    setRefreshing(true);
+                    listFeed(apiPageNo, apiPageSize);
                   }}
-                >
-                  <Text style={{ fontSize: 12, color: 'black', marginTop: 2 }}>
-                    {item?.creationTime}
-                  </Text>
-                </UserFeedCompList>
-              );
-            }}
-            
-          />
-        ) : !loader && !homeFeedList?.length > 0 ? (
-          <View style={styles.nodataView}>
-            <FontAwesome size={30} style={{ marginBottom: '5%' }} />
-            <Text style={styles.nodatatext}>No Items To Display</Text>
-          </View>
-        ) : (
-          <View style={{ marginTop: '70%' }}>
-            <Loader size={'large'} color={colors.orangeColor} />
-          </View>
-        )}        
+                />
+              }
+              contentContainerStyle={styles.flatListStyle}
+              showsVerticalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => {
+                return (
+                  <UserFeedCompList
+                    id={item.id}
+                    post={item}
+                    onSharePress={() => MyCustShare(item)}
+                    saveid={item.id}
+                    likes={item.likesCount}
+                    isLikeTrue={item.like}
+                    savedFeed={item.savedFeed}
+                    isVisible={isVisible}
+                    onPressDelete={() => DeleteFeedPost(item.id)}
+                    onPressTitle={() => {
+                      navigation.navigate(allTexts.screenNames.viewtempleprofile, {
+                        data: item,
+                        onSelect: onSelect,
+                      });
+                    }}
+                  >
+                    <Text style={{ fontSize: 12, color: 'black', marginTop: 2 }}>
+                      {item?.creationTime}
+                    </Text>
+                  </UserFeedCompList>
+                );
+              }}
+
+            />
+          ) : !loader && !homeFeedList?.length > 0 ? (
+            <View style={styles.nodataView}>
+              <FontAwesome size={30} style={{ marginBottom: '5%' }} />
+              <Text style={styles.nodatatext}>No Items To Display</Text>
+            </View>
+          ) : (
+            <View style={{ marginTop: '70%' }}>
+              <Loader size={'large'} color={colors.orangeColor} />
+            </View>
+          )}
       </View>
     </View>
   );

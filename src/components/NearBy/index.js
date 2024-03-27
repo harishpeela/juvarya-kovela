@@ -425,7 +425,7 @@ export const PopularTemplesList = ({ pageNav, seeallnav, navigation }) => {
                         name={item?.fullName}
                         img={item?.logo}
                         type={item?.type}
-                        onPress={() => alert('page under development')}
+                        onPress={() => navigation.navigate(allTexts.screenNames.store)}
                       />
                     )}
                     onEndReachedThreshold={0.5}

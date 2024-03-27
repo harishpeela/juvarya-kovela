@@ -101,6 +101,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Text, View, Dimensions, ActivityIndicator } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import Video from 'react-native-video';
+import { useIsFocused } from '@react-navigation/native';
 
 const ReelsComponent = ({ videoData }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -109,8 +110,8 @@ const ReelsComponent = ({ videoData }) => {
   const windowWidth = Dimensions.get('window').width;
   const windowHeight = Dimensions.get('window').height;
   const videoRef = useRef(null);
+  const isFocused = useIsFocused();
 
-  console.log('videoData--->', videoData)
   const handleChangeIndexValue = useCallback(({ index }) => {
     setCurrentIndex(index);
     setLoading(true);
@@ -139,7 +140,8 @@ const ReelsComponent = ({ videoData }) => {
               repeat={false}
               resizeMode="cover"
               source={{ uri: videoURL }}
-              muted={mute}
+              paused={isFocused ? false : true}
+              muted={isFocused ? mute : true}
               style={{
                 width: '100%',
                 height: '100%',

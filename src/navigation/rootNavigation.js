@@ -1,3 +1,4 @@
+
 /* eslint-disable no-new */
 import React, { useEffect, useState } from 'react';
 import SplashScreen from 'react-native-splash-screen';
@@ -135,47 +136,6 @@ const rootNavigation = () => {
 
   const [getHomeFeed] = useLazyGetHomeFeedDataQuery()
   const dispatch = useAppDispatch();
-
-  const getFollowedTempleList = () => {
-
-    try {
-      let data = {
-        pageNo: 0,
-        pageSize: 20,
-      };
-      getHomeFeed(data)
-        .unwrap()
-        .then(response => {
-          if (response) {
-            dispatch(homeFeedAction(response.jtFeeds));
-          } else {
-            console.log('Error: Response is undefined');
-          }
-        })
-        .catch(error => {
-          console.log('error--->', error);
-        });
-    } catch (error) {
-      console.log('error1--->', error);
-    }
-  };
-  useEffect(() => {
-    getFollowedTempleList();
-  }, []);
-
-  useEffect(() => {
-    async function prepare() {
-      try {
-        new Promise(resolve => setTimeout(resolve, 2000));
-      } catch (e) {
-        console.warn(e);
-      } finally {
-        SplashScreen.hide();
-      }
-    }
-    prepare();
-  }, []);
-
 
   const AuthStack = () => {
     return (
@@ -583,6 +543,46 @@ const rootNavigation = () => {
     );
   };
 
+  const getFollowedTempleList = () => {
+
+    try {
+      let data = {
+        pageNo: 0,
+        pageSize: 20,
+      };
+      getHomeFeed(data)
+        .unwrap()
+        .then(response => {
+          if (response) {
+            dispatch(homeFeedAction(response.jtFeeds));
+          } else {
+            console.log('Error: Response is undefined');
+          }
+        })
+        .catch(error => {
+          console.log('error--->', error);
+        });
+    } catch (error) {
+      console.log('error1--->', error);
+    }
+  };
+  useEffect(() => {
+    getFollowedTempleList();
+  }, []);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        new Promise(resolve => setTimeout(resolve, 2000));
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        SplashScreen.hide();
+      }
+    }
+    prepare();
+  }, []);
+
   const Stack = createStackNavigator();
   const [loginDetails, setLoginDetails] = useState(null);
   
@@ -593,10 +593,42 @@ const rootNavigation = () => {
     setLoginDetails(authState.token || null);
   };
 
+    const addLocalVideoStoragePath = async (video) => {
+    try {
+      const timestamp = new Date().getTime();
+      const cachedVideoPath = `${RNFS.CachesDirectoryPath}/${video.id}_${timestamp}.mp4`;
+      const options = {
+        fromUrl: video.mediaList?.[0]?.url || '',
+        toFile: cachedVideoPath,
+        background: true,
+        progressDivider: 1,
+      };
+      const downloadTask = RNFS.downloadFile(options);
+      const res = await downloadTask.promise;
+      if (res.statusCode === 200) {
+        video.localVideoStoragePath = cachedVideoPath;
+        dispatch(addVideoToFeed(video))
+      } else {
+        console.error('Error downloading video:', video.id);
+      }
+    } catch (error) {
+      console.error('Error prefetching next video:', error.message);
+    }
+  };
+
+  const reelsData = async (pgNo, pgSz) => {
+    let result = await GetReels(pgNo, pgSz);
+    if (result?.status === 200) {
+      const videos = result.data.data;
+      await Promise.all(videos.map(addLocalVideoStoragePath))
+    } 
+  };
+
   useEffect(() => {
     getLoginDetails();
+    reelsData(0,30)
   }, []);
-
+  
   return (
         <ApplicationContext.Provider
           value={{
