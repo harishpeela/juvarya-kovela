@@ -65,9 +65,12 @@ import AddTample from '../screens/add-temple';
 import MySavedPosts from '../screens/my-saved-posts';
 import CreateFeedDescription from '../screens/createFeedDiscription/CreateFeedDescription';
 import TempleClass from '../screens/templeCclass/TempleClass';
+import { GetReels } from '../utils/api';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
 import { useLazyGetHomeFeedDataQuery } from '../redux/services/homeFeedService';
 import { homeFeedAction } from '../redux/slices/homeFeedSlice';
+import RNFS from 'react-native-fs';
+import { addVideoToFeed } from '../redux/slices/reelsFeedSlice';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
